@@ -56,6 +56,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDefaultValue_Handler<CurrentDateTimeDefaultValue> OnGetDefaultValue_CurrentDateTimeDefaultValue;
+		// CanExec
+		public static event CanExecMethodEventHandler<CurrentDateTimeDefaultValue> OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExec;
+
+        [EventBasedMethod("OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExec")]
+        public override bool GetDefaultValueCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExec != null)
+				{
+					OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultValueCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CurrentDateTimeDefaultValue> OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExecReason;
+
+        [EventBasedMethod("OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExecReason")]
+        public override string GetDefaultValueCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExecReason != null)
+				{
+					OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultValueCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

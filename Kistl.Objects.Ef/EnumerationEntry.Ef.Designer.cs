@@ -825,6 +825,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<EnumerationEntry> OnGetLabel_EnumerationEntry;
+		// CanExec
+		public static event CanExecMethodEventHandler<EnumerationEntry> OnGetLabel_EnumerationEntry_CanExec;
+
+        [EventBasedMethod("OnGetLabel_EnumerationEntry_CanExec")]
+        public virtual bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_EnumerationEntry_CanExec != null)
+				{
+					OnGetLabel_EnumerationEntry_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<EnumerationEntry> OnGetLabel_EnumerationEntry_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_EnumerationEntry_CanExecReason")]
+        public virtual string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_EnumerationEntry_CanExecReason != null)
+				{
+					OnGetLabel_EnumerationEntry_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

@@ -53,6 +53,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint_CanExec;
+
+        [EventBasedMethod("OnGetErrorText_MethodInvocationConstraint_CanExec")]
+        public override bool GetErrorTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetErrorText_MethodInvocationConstraint_CanExec != null)
+				{
+					OnGetErrorText_MethodInvocationConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint_CanExecReason;
+
+        [EventBasedMethod("OnGetErrorText_MethodInvocationConstraint_CanExecReason")]
+        public override string GetErrorTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetErrorText_MethodInvocationConstraint_CanExecReason != null)
+				{
+					OnGetErrorText_MethodInvocationConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -74,6 +115,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint_CanExec;
+
+        [EventBasedMethod("OnIsValid_MethodInvocationConstraint_CanExec")]
+        public override bool IsValidCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnIsValid_MethodInvocationConstraint_CanExec != null)
+				{
+					OnIsValid_MethodInvocationConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint_CanExecReason;
+
+        [EventBasedMethod("OnIsValid_MethodInvocationConstraint_CanExecReason")]
+        public override string IsValidCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnIsValid_MethodInvocationConstraint_CanExecReason != null)
+				{
+					OnIsValid_MethodInvocationConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

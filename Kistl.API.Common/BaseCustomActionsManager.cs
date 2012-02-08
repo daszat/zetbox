@@ -284,6 +284,24 @@ namespace Kistl.App.Extensions
             }
         }
 
+        private EventBasedMethodAttribute FindEventBasedMethodAttribute(Method method, string execSuffix, Type implType)
+        {
+            var pi = implType.FindProperty(method.Name + execSuffix).SingleOrDefault();
+            if (pi == null)
+            {
+                Log.WarnFormat(
+                    "Couldn't find method '{0}.{1}'\n",
+                    method.ObjectClass.Name,
+                    method.Name + execSuffix);
+                return null;
+            }
+            else
+            {
+                // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                return (EventBasedMethodAttribute)pi.GetCustomAttributes(typeof(EventBasedMethodAttribute), false).SingleOrDefault();
+            }
+        }
+
         private void CreateInvokeInfos(DataType dt, Type implType)
         {
             if (implType == null) throw new ArgumentNullException("implType");
@@ -297,23 +315,30 @@ namespace Kistl.App.Extensions
                 // New style
                 foreach (var method in GetAllMethods(objClass))
                 {
-                    var key = new MethodKey(objClass.Module.Namespace, objClass.Name, method.Name);
-                    if (_reflectedMethods.ContainsKey(key))
+                    foreach (var methodSuffix in new[] { string.Empty, "CanExec", "CanExecReason" })
                     {
-                        var methodInfos = _reflectedMethods[key];
-
-                        // May be null on Methods without events like server side invocatiaons or "embedded" methods
-                        // or null if not found
-                        var attr = FindEventBasedMethodAttribute(method, implType);
-                        if (attr != null)
+                        var key = new MethodKey(objClass.Module.Namespace, objClass.Name, method.Name + methodSuffix);
+                        if (_reflectedMethods.ContainsKey(key))
                         {
-                            foreach (var mi in methodInfos)
-                            {
-                                CreateInvokeInfo(implType, mi, attr.EventName);
-                            }
-                        }
+                            var methodInfos = _reflectedMethods[key];
 
-                        _attachedMethods[key] = true;
+                            // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                            // or null if not found
+                            EventBasedMethodAttribute attr;
+                            if(string.IsNullOrEmpty(methodSuffix))
+                                attr = FindEventBasedMethodAttribute(method, implType); // The Method
+                            else
+                                attr = FindEventBasedMethodAttribute(method, methodSuffix, implType); // For can execute & reason
+                            if (attr != null)
+                            {
+                                foreach (var mi in methodInfos)
+                                {
+                                    CreateInvokeInfo(implType, mi, attr.EventName);
+                                }
+                            }
+
+                            _attachedMethods[key] = true;
+                        }
                     }
                 }
             }

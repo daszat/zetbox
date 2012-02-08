@@ -336,6 +336,47 @@ namespace Kistl.App.Test
         }
         public delegate void TestMethod_Handler<T>(T obj, DateTime DateTimeParamForTestMethod);
         public static event TestMethod_Handler<TestObjClass> OnTestMethod_TestObjClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<TestObjClass> OnTestMethod_TestObjClass_CanExec;
+
+        [EventBasedMethod("OnTestMethod_TestObjClass_CanExec")]
+        public virtual bool TestMethodCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnTestMethod_TestObjClass_CanExec != null)
+				{
+					OnTestMethod_TestObjClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<TestObjClass> OnTestMethod_TestObjClass_CanExecReason;
+
+        [EventBasedMethod("OnTestMethod_TestObjClass_CanExecReason")]
+        public virtual string TestMethodCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnTestMethod_TestObjClass_CanExecReason != null)
+				{
+					OnTestMethod_TestObjClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

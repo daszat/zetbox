@@ -114,6 +114,47 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<YearFilterConfiguration> OnCreateFilterModel_YearFilterConfiguration;
+		// CanExec
+		public static event CanExecMethodEventHandler<YearFilterConfiguration> OnCreateFilterModel_YearFilterConfiguration_CanExec;
+
+        [EventBasedMethod("OnCreateFilterModel_YearFilterConfiguration_CanExec")]
+        public override bool CreateFilterModelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateFilterModel_YearFilterConfiguration_CanExec != null)
+				{
+					OnCreateFilterModel_YearFilterConfiguration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.CreateFilterModelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<YearFilterConfiguration> OnCreateFilterModel_YearFilterConfiguration_CanExecReason;
+
+        [EventBasedMethod("OnCreateFilterModel_YearFilterConfiguration_CanExecReason")]
+        public override string CreateFilterModelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateFilterModel_YearFilterConfiguration_CanExecReason != null)
+				{
+					OnCreateFilterModel_YearFilterConfiguration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.CreateFilterModelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -135,6 +176,47 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<YearFilterConfiguration> OnGetLabel_YearFilterConfiguration;
+		// CanExec
+		public static event CanExecMethodEventHandler<YearFilterConfiguration> OnGetLabel_YearFilterConfiguration_CanExec;
+
+        [EventBasedMethod("OnGetLabel_YearFilterConfiguration_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_YearFilterConfiguration_CanExec != null)
+				{
+					OnGetLabel_YearFilterConfiguration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<YearFilterConfiguration> OnGetLabel_YearFilterConfiguration_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_YearFilterConfiguration_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_YearFilterConfiguration_CanExecReason != null)
+				{
+					OnGetLabel_YearFilterConfiguration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

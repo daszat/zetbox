@@ -740,6 +740,47 @@ namespace Kistl.App.Projekte
         }
         public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Kistl.App.Projekte.Auftrag TestObjectParameter, string TestString);
         public static event TestMethodForParameter_Handler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter;
+		// CanExec
+		public static event CanExecMethodEventHandler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter_CanExec;
+
+        [EventBasedMethod("OnTestMethodForParameter_Mitarbeiter_CanExec")]
+        public virtual bool TestMethodForParameterCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnTestMethodForParameter_Mitarbeiter_CanExec != null)
+				{
+					OnTestMethodForParameter_Mitarbeiter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter_CanExecReason;
+
+        [EventBasedMethod("OnTestMethodForParameter_Mitarbeiter_CanExecReason")]
+        public virtual string TestMethodForParameterCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnTestMethodForParameter_Mitarbeiter_CanExecReason != null)
+				{
+					OnTestMethodForParameter_Mitarbeiter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

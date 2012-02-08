@@ -811,6 +811,47 @@ namespace Kistl.App.Projekte
         }
         public delegate void RechnungErstellen_Handler<T>(T obj);
         public static event RechnungErstellen_Handler<Auftrag> OnRechnungErstellen_Auftrag;
+		// CanExec
+		public static event CanExecMethodEventHandler<Auftrag> OnRechnungErstellen_Auftrag_CanExec;
+
+        [EventBasedMethod("OnRechnungErstellen_Auftrag_CanExec")]
+        public virtual bool RechnungErstellenCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnRechnungErstellen_Auftrag_CanExec != null)
+				{
+					OnRechnungErstellen_Auftrag_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Auftrag> OnRechnungErstellen_Auftrag_CanExecReason;
+
+        [EventBasedMethod("OnRechnungErstellen_Auftrag_CanExecReason")]
+        public virtual string RechnungErstellenCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnRechnungErstellen_Auftrag_CanExecReason != null)
+				{
+					OnRechnungErstellen_Auftrag_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

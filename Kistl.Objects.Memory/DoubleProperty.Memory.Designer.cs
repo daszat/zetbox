@@ -53,6 +53,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<DoubleProperty> OnGetElementTypeString_DoubleProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DoubleProperty> OnGetElementTypeString_DoubleProperty_CanExec;
+
+        [EventBasedMethod("OnGetElementTypeString_DoubleProperty_CanExec")]
+        public override bool GetElementTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetElementTypeString_DoubleProperty_CanExec != null)
+				{
+					OnGetElementTypeString_DoubleProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetElementTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DoubleProperty> OnGetElementTypeString_DoubleProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetElementTypeString_DoubleProperty_CanExecReason")]
+        public override string GetElementTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetElementTypeString_DoubleProperty_CanExecReason != null)
+				{
+					OnGetElementTypeString_DoubleProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetElementTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -74,6 +115,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DoubleProperty> OnGetLabel_DoubleProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DoubleProperty> OnGetLabel_DoubleProperty_CanExec;
+
+        [EventBasedMethod("OnGetLabel_DoubleProperty_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_DoubleProperty_CanExec != null)
+				{
+					OnGetLabel_DoubleProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DoubleProperty> OnGetLabel_DoubleProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_DoubleProperty_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_DoubleProperty_CanExecReason != null)
+				{
+					OnGetLabel_DoubleProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -95,6 +177,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<DoubleProperty> OnGetName_DoubleProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DoubleProperty> OnGetName_DoubleProperty_CanExec;
+
+        [EventBasedMethod("OnGetName_DoubleProperty_CanExec")]
+        public override bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_DoubleProperty_CanExec != null)
+				{
+					OnGetName_DoubleProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetNameCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DoubleProperty> OnGetName_DoubleProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetName_DoubleProperty_CanExecReason")]
+        public override string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_DoubleProperty_CanExecReason != null)
+				{
+					OnGetName_DoubleProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetNameCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -116,6 +239,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<DoubleProperty> OnGetPropertyType_DoubleProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DoubleProperty> OnGetPropertyType_DoubleProperty_CanExec;
+
+        [EventBasedMethod("OnGetPropertyType_DoubleProperty_CanExec")]
+        public override bool GetPropertyTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetPropertyType_DoubleProperty_CanExec != null)
+				{
+					OnGetPropertyType_DoubleProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DoubleProperty> OnGetPropertyType_DoubleProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetPropertyType_DoubleProperty_CanExecReason")]
+        public override string GetPropertyTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetPropertyType_DoubleProperty_CanExecReason != null)
+				{
+					OnGetPropertyType_DoubleProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -137,6 +301,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<DoubleProperty> OnGetPropertyTypeString_DoubleProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DoubleProperty> OnGetPropertyTypeString_DoubleProperty_CanExec;
+
+        [EventBasedMethod("OnGetPropertyTypeString_DoubleProperty_CanExec")]
+        public override bool GetPropertyTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetPropertyTypeString_DoubleProperty_CanExec != null)
+				{
+					OnGetPropertyTypeString_DoubleProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DoubleProperty> OnGetPropertyTypeString_DoubleProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetPropertyTypeString_DoubleProperty_CanExecReason")]
+        public override string GetPropertyTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetPropertyTypeString_DoubleProperty_CanExecReason != null)
+				{
+					OnGetPropertyTypeString_DoubleProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

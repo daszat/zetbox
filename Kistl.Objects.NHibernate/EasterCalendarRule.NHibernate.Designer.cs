@@ -114,6 +114,47 @@ namespace Kistl.App.Calendar
             return e.Result;
         }
         public static event AppliesTo_Handler<EasterCalendarRule> OnAppliesTo_EasterCalendarRule;
+		// CanExec
+		public static event CanExecMethodEventHandler<EasterCalendarRule> OnAppliesTo_EasterCalendarRule_CanExec;
+
+        [EventBasedMethod("OnAppliesTo_EasterCalendarRule_CanExec")]
+        public override bool AppliesToCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAppliesTo_EasterCalendarRule_CanExec != null)
+				{
+					OnAppliesTo_EasterCalendarRule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.AppliesToCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<EasterCalendarRule> OnAppliesTo_EasterCalendarRule_CanExecReason;
+
+        [EventBasedMethod("OnAppliesTo_EasterCalendarRule_CanExecReason")]
+        public override string AppliesToCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAppliesTo_EasterCalendarRule_CanExecReason != null)
+				{
+					OnAppliesTo_EasterCalendarRule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.AppliesToCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

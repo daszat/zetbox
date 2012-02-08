@@ -969,6 +969,47 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         }
         public delegate void CreateMappingReport_Handler<T>(T obj);
         public static event CreateMappingReport_Handler<SourceTable> OnCreateMappingReport_SourceTable;
+		// CanExec
+		public static event CanExecMethodEventHandler<SourceTable> OnCreateMappingReport_SourceTable_CanExec;
+
+        [EventBasedMethod("OnCreateMappingReport_SourceTable_CanExec")]
+        public virtual bool CreateMappingReportCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateMappingReport_SourceTable_CanExec != null)
+				{
+					OnCreateMappingReport_SourceTable_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<SourceTable> OnCreateMappingReport_SourceTable_CanExecReason;
+
+        [EventBasedMethod("OnCreateMappingReport_SourceTable_CanExecReason")]
+        public virtual string CreateMappingReportCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateMappingReport_SourceTable_CanExecReason != null)
+				{
+					OnCreateMappingReport_SourceTable_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -990,6 +1031,47 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         }
         public delegate void CreateObjectClass_Handler<T>(T obj);
         public static event CreateObjectClass_Handler<SourceTable> OnCreateObjectClass_SourceTable;
+		// CanExec
+		public static event CanExecMethodEventHandler<SourceTable> OnCreateObjectClass_SourceTable_CanExec;
+
+        [EventBasedMethod("OnCreateObjectClass_SourceTable_CanExec")]
+        public virtual bool CreateObjectClassCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateObjectClass_SourceTable_CanExec != null)
+				{
+					OnCreateObjectClass_SourceTable_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<SourceTable> OnCreateObjectClass_SourceTable_CanExecReason;
+
+        [EventBasedMethod("OnCreateObjectClass_SourceTable_CanExecReason")]
+        public virtual string CreateObjectClassCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateObjectClass_SourceTable_CanExecReason != null)
+				{
+					OnCreateObjectClass_SourceTable_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

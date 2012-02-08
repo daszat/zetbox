@@ -749,6 +749,47 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public delegate void GetOffDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetOffDays_Handler<Calendar> OnGetOffDays_Calendar;
+		// CanExec
+		public static event CanExecMethodEventHandler<Calendar> OnGetOffDays_Calendar_CanExec;
+
+        [EventBasedMethod("OnGetOffDays_Calendar_CanExec")]
+        public virtual bool GetOffDaysCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetOffDays_Calendar_CanExec != null)
+				{
+					OnGetOffDays_Calendar_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Calendar> OnGetOffDays_Calendar_CanExecReason;
+
+        [EventBasedMethod("OnGetOffDays_Calendar_CanExecReason")]
+        public virtual string GetOffDaysCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetOffDays_Calendar_CanExecReason != null)
+				{
+					OnGetOffDays_Calendar_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -771,6 +812,47 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public delegate void GetWorkingDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetWorkingDays_Handler<Calendar> OnGetWorkingDays_Calendar;
+		// CanExec
+		public static event CanExecMethodEventHandler<Calendar> OnGetWorkingDays_Calendar_CanExec;
+
+        [EventBasedMethod("OnGetWorkingDays_Calendar_CanExec")]
+        public virtual bool GetWorkingDaysCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetWorkingDays_Calendar_CanExec != null)
+				{
+					OnGetWorkingDays_Calendar_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Calendar> OnGetWorkingDays_Calendar_CanExecReason;
+
+        [EventBasedMethod("OnGetWorkingDays_Calendar_CanExecReason")]
+        public virtual string GetWorkingDaysCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetWorkingDays_Calendar_CanExecReason != null)
+				{
+					OnGetWorkingDays_Calendar_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -793,6 +875,47 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public delegate void GetWorkingHours_Handler<T>(T obj, MethodReturnEventArgs<decimal> ret, DateTime from, DateTime until);
         public static event GetWorkingHours_Handler<Calendar> OnGetWorkingHours_Calendar;
+		// CanExec
+		public static event CanExecMethodEventHandler<Calendar> OnGetWorkingHours_Calendar_CanExec;
+
+        [EventBasedMethod("OnGetWorkingHours_Calendar_CanExec")]
+        public virtual bool GetWorkingHoursCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetWorkingHours_Calendar_CanExec != null)
+				{
+					OnGetWorkingHours_Calendar_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Calendar> OnGetWorkingHours_Calendar_CanExecReason;
+
+        [EventBasedMethod("OnGetWorkingHours_Calendar_CanExecReason")]
+        public virtual string GetWorkingHoursCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetWorkingHours_Calendar_CanExecReason != null)
+				{
+					OnGetWorkingHours_Calendar_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

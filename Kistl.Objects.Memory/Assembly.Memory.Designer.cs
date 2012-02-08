@@ -616,6 +616,47 @@ namespace Kistl.App.Base
         }
         public delegate void RegenerateTypeRefs_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
         public static event RegenerateTypeRefs_Handler<Assembly> OnRegenerateTypeRefs_Assembly;
+		// CanExec
+		public static event CanExecMethodEventHandler<Assembly> OnRegenerateTypeRefs_Assembly_CanExec;
+
+        [EventBasedMethod("OnRegenerateTypeRefs_Assembly_CanExec")]
+        public virtual bool RegenerateTypeRefsCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnRegenerateTypeRefs_Assembly_CanExec != null)
+				{
+					OnRegenerateTypeRefs_Assembly_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Assembly> OnRegenerateTypeRefs_Assembly_CanExecReason;
+
+        [EventBasedMethod("OnRegenerateTypeRefs_Assembly_CanExecReason")]
+        public virtual string RegenerateTypeRefsCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnRegenerateTypeRefs_Assembly_CanExecReason != null)
+				{
+					OnRegenerateTypeRefs_Assembly_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

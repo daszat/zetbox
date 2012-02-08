@@ -161,6 +161,83 @@ this.WriteObjects("        public delegate void ",  delegateName , "<T>(T obj, "
 
 #line 125 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        public static event ",  delegateName , "<",  dt.Name , "> ",  eventName , ";\r\n");
+#line 127 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+if(index == 0) {
+	// Only for first overload
+
+#line 130 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("		// CanExec\r\n");
+#line 132 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+var eventName_CanExec = eventName + "_CanExec";
+
+#line 134 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("		public static event CanExecMethodEventHandler<",  dt.Name , "> ",  eventName_CanExec , ";\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        [EventBasedMethod(\"",  eventName_CanExec , "\")]\r\n");
+this.WriteObjects("        ",  GetModifiers() , " bool ",  m.Name , "CanExec\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("			get \r\n");
+this.WriteObjects("			{\r\n");
+this.WriteObjects("				var e = new MethodReturnEventArgs<bool>();\r\n");
+this.WriteObjects("				if (",  eventName_CanExec , " != null)\r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("					",  eventName_CanExec , "(this, e);\r\n");
+this.WriteObjects("				}\r\n");
+this.WriteObjects("				else\r\n");
+this.WriteObjects("				{\r\n");
+#line 148 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+if (m.ObjectClass == dt || !(dt is ObjectClass)) { 
+#line 149 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("					e.Result = true;\r\n");
+#line 150 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+} else { 
+#line 151 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("					e.Result = base.",  m.Name , "CanExec;\r\n");
+#line 152 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+} 
+#line 153 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("				}\r\n");
+this.WriteObjects("				return e.Result;\r\n");
+this.WriteObjects("			}\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("		// CanExecReason\r\n");
+#line 160 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+var eventName_CanExecReason = eventName + "_CanExecReason";
+
+#line 162 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("		public static event CanExecReasonMethodEventHandler<",  dt.Name , "> ",  eventName_CanExecReason , ";\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        [EventBasedMethod(\"",  eventName_CanExecReason , "\")]\r\n");
+this.WriteObjects("        ",  GetModifiers() , " string ",  m.Name , "CanExecReason\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("			get \r\n");
+this.WriteObjects("			{\r\n");
+this.WriteObjects("				var e = new MethodReturnEventArgs<string>();\r\n");
+this.WriteObjects("				if (",  eventName_CanExecReason , " != null)\r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("					",  eventName_CanExecReason , "(this, e);\r\n");
+this.WriteObjects("				}\r\n");
+this.WriteObjects("				else\r\n");
+this.WriteObjects("				{\r\n");
+#line 176 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+if (m.ObjectClass == dt || !(dt is ObjectClass)) { 
+#line 177 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("					e.Result = string.Empty;\r\n");
+#line 178 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+} else { 
+#line 179 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("					e.Result = base.",  m.Name , "CanExecReason;\r\n");
+#line 180 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+} 
+#line 181 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+this.WriteObjects("				}\r\n");
+this.WriteObjects("				return e.Result;\r\n");
+this.WriteObjects("			}\r\n");
+this.WriteObjects("        }\r\n");
+#line 185 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
+} // Only for first overload 
+#line 186 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

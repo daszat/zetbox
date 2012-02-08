@@ -164,6 +164,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<DecimalProperty> OnGetElementTypeString_DecimalProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalProperty> OnGetElementTypeString_DecimalProperty_CanExec;
+
+        [EventBasedMethod("OnGetElementTypeString_DecimalProperty_CanExec")]
+        public override bool GetElementTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetElementTypeString_DecimalProperty_CanExec != null)
+				{
+					OnGetElementTypeString_DecimalProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetElementTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalProperty> OnGetElementTypeString_DecimalProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetElementTypeString_DecimalProperty_CanExecReason")]
+        public override string GetElementTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetElementTypeString_DecimalProperty_CanExecReason != null)
+				{
+					OnGetElementTypeString_DecimalProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetElementTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -185,6 +226,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DecimalProperty> OnGetLabel_DecimalProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalProperty> OnGetLabel_DecimalProperty_CanExec;
+
+        [EventBasedMethod("OnGetLabel_DecimalProperty_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_DecimalProperty_CanExec != null)
+				{
+					OnGetLabel_DecimalProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalProperty> OnGetLabel_DecimalProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_DecimalProperty_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_DecimalProperty_CanExecReason != null)
+				{
+					OnGetLabel_DecimalProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -206,6 +288,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<DecimalProperty> OnGetName_DecimalProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalProperty> OnGetName_DecimalProperty_CanExec;
+
+        [EventBasedMethod("OnGetName_DecimalProperty_CanExec")]
+        public override bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_DecimalProperty_CanExec != null)
+				{
+					OnGetName_DecimalProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetNameCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalProperty> OnGetName_DecimalProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetName_DecimalProperty_CanExecReason")]
+        public override string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_DecimalProperty_CanExecReason != null)
+				{
+					OnGetName_DecimalProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetNameCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -227,6 +350,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<DecimalProperty> OnGetPropertyType_DecimalProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalProperty> OnGetPropertyType_DecimalProperty_CanExec;
+
+        [EventBasedMethod("OnGetPropertyType_DecimalProperty_CanExec")]
+        public override bool GetPropertyTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetPropertyType_DecimalProperty_CanExec != null)
+				{
+					OnGetPropertyType_DecimalProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalProperty> OnGetPropertyType_DecimalProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetPropertyType_DecimalProperty_CanExecReason")]
+        public override string GetPropertyTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetPropertyType_DecimalProperty_CanExecReason != null)
+				{
+					OnGetPropertyType_DecimalProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -248,6 +412,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<DecimalProperty> OnGetPropertyTypeString_DecimalProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalProperty> OnGetPropertyTypeString_DecimalProperty_CanExec;
+
+        [EventBasedMethod("OnGetPropertyTypeString_DecimalProperty_CanExec")]
+        public override bool GetPropertyTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetPropertyTypeString_DecimalProperty_CanExec != null)
+				{
+					OnGetPropertyTypeString_DecimalProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalProperty> OnGetPropertyTypeString_DecimalProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetPropertyTypeString_DecimalProperty_CanExecReason")]
+        public override string GetPropertyTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetPropertyTypeString_DecimalProperty_CanExecReason != null)
+				{
+					OnGetPropertyTypeString_DecimalProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

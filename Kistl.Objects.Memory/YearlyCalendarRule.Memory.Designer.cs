@@ -53,6 +53,47 @@ namespace Kistl.App.Calendar
             return e.Result;
         }
         public static event AppliesTo_Handler<YearlyCalendarRule> OnAppliesTo_YearlyCalendarRule;
+		// CanExec
+		public static event CanExecMethodEventHandler<YearlyCalendarRule> OnAppliesTo_YearlyCalendarRule_CanExec;
+
+        [EventBasedMethod("OnAppliesTo_YearlyCalendarRule_CanExec")]
+        public override bool AppliesToCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAppliesTo_YearlyCalendarRule_CanExec != null)
+				{
+					OnAppliesTo_YearlyCalendarRule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.AppliesToCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<YearlyCalendarRule> OnAppliesTo_YearlyCalendarRule_CanExecReason;
+
+        [EventBasedMethod("OnAppliesTo_YearlyCalendarRule_CanExecReason")]
+        public override string AppliesToCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAppliesTo_YearlyCalendarRule_CanExecReason != null)
+				{
+					OnAppliesTo_YearlyCalendarRule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.AppliesToCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

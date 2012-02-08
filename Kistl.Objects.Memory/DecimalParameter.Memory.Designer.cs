@@ -53,6 +53,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DecimalParameter> OnGetLabel_DecimalParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalParameter> OnGetLabel_DecimalParameter_CanExec;
+
+        [EventBasedMethod("OnGetLabel_DecimalParameter_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_DecimalParameter_CanExec != null)
+				{
+					OnGetLabel_DecimalParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalParameter> OnGetLabel_DecimalParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_DecimalParameter_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_DecimalParameter_CanExecReason != null)
+				{
+					OnGetLabel_DecimalParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -74,6 +115,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<DecimalParameter> OnGetParameterType_DecimalParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalParameter> OnGetParameterType_DecimalParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterType_DecimalParameter_CanExec")]
+        public override bool GetParameterTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterType_DecimalParameter_CanExec != null)
+				{
+					OnGetParameterType_DecimalParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalParameter> OnGetParameterType_DecimalParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterType_DecimalParameter_CanExecReason")]
+        public override string GetParameterTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterType_DecimalParameter_CanExecReason != null)
+				{
+					OnGetParameterType_DecimalParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -95,6 +177,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<DecimalParameter> OnGetParameterTypeString_DecimalParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalParameter> OnGetParameterTypeString_DecimalParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterTypeString_DecimalParameter_CanExec")]
+        public override bool GetParameterTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterTypeString_DecimalParameter_CanExec != null)
+				{
+					OnGetParameterTypeString_DecimalParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalParameter> OnGetParameterTypeString_DecimalParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterTypeString_DecimalParameter_CanExecReason")]
+        public override string GetParameterTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterTypeString_DecimalParameter_CanExecReason != null)
+				{
+					OnGetParameterTypeString_DecimalParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

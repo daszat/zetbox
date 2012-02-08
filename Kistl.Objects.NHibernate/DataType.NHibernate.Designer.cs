@@ -1093,6 +1093,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
         public static event GetDataType_Handler<DataType> OnGetDataType_DataType;
+		// CanExec
+		public static event CanExecMethodEventHandler<DataType> OnGetDataType_DataType_CanExec;
+
+        [EventBasedMethod("OnGetDataType_DataType_CanExec")]
+        public virtual bool GetDataTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataType_DataType_CanExec != null)
+				{
+					OnGetDataType_DataType_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DataType> OnGetDataType_DataType_CanExecReason;
+
+        [EventBasedMethod("OnGetDataType_DataType_CanExecReason")]
+        public virtual string GetDataTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataType_DataType_CanExecReason != null)
+				{
+					OnGetDataType_DataType_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -1115,6 +1156,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
+		// CanExec
+		public static event CanExecMethodEventHandler<DataType> OnGetDataTypeString_DataType_CanExec;
+
+        [EventBasedMethod("OnGetDataTypeString_DataType_CanExec")]
+        public virtual bool GetDataTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataTypeString_DataType_CanExec != null)
+				{
+					OnGetDataTypeString_DataType_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DataType> OnGetDataTypeString_DataType_CanExecReason;
+
+        [EventBasedMethod("OnGetDataTypeString_DataType_CanExecReason")]
+        public virtual string GetDataTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataTypeString_DataType_CanExecReason != null)
+				{
+					OnGetDataTypeString_DataType_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -1136,6 +1218,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public delegate void ImplementInterfaces_Handler<T>(T obj);
         public static event ImplementInterfaces_Handler<DataType> OnImplementInterfaces_DataType;
+		// CanExec
+		public static event CanExecMethodEventHandler<DataType> OnImplementInterfaces_DataType_CanExec;
+
+        [EventBasedMethod("OnImplementInterfaces_DataType_CanExec")]
+        public virtual bool ImplementInterfacesCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnImplementInterfaces_DataType_CanExec != null)
+				{
+					OnImplementInterfaces_DataType_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DataType> OnImplementInterfaces_DataType_CanExecReason;
+
+        [EventBasedMethod("OnImplementInterfaces_DataType_CanExecReason")]
+        public virtual string ImplementInterfacesCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnImplementInterfaces_DataType_CanExecReason != null)
+				{
+					OnImplementInterfaces_DataType_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

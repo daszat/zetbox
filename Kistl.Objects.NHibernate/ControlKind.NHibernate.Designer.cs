@@ -416,6 +416,47 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<ControlKind> OnGetName_ControlKind;
+		// CanExec
+		public static event CanExecMethodEventHandler<ControlKind> OnGetName_ControlKind_CanExec;
+
+        [EventBasedMethod("OnGetName_ControlKind_CanExec")]
+        public virtual bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_ControlKind_CanExec != null)
+				{
+					OnGetName_ControlKind_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ControlKind> OnGetName_ControlKind_CanExecReason;
+
+        [EventBasedMethod("OnGetName_ControlKind_CanExecReason")]
+        public virtual string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_ControlKind_CanExecReason != null)
+				{
+					OnGetName_ControlKind_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

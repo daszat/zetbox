@@ -64,6 +64,47 @@ namespace at.dasz.DocumentManagement
             return e.Result;
         }
         public static event HandleBlobChange_Handler<DynamicFile> OnHandleBlobChange_DynamicFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<DynamicFile> OnHandleBlobChange_DynamicFile_CanExec;
+
+        [EventBasedMethod("OnHandleBlobChange_DynamicFile_CanExec")]
+        public override bool HandleBlobChangeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnHandleBlobChange_DynamicFile_CanExec != null)
+				{
+					OnHandleBlobChange_DynamicFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.HandleBlobChangeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DynamicFile> OnHandleBlobChange_DynamicFile_CanExecReason;
+
+        [EventBasedMethod("OnHandleBlobChange_DynamicFile_CanExecReason")]
+        public override string HandleBlobChangeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnHandleBlobChange_DynamicFile_CanExecReason != null)
+				{
+					OnHandleBlobChange_DynamicFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.HandleBlobChangeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -84,6 +125,47 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Open_Handler<DynamicFile> OnOpen_DynamicFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<DynamicFile> OnOpen_DynamicFile_CanExec;
+
+        [EventBasedMethod("OnOpen_DynamicFile_CanExec")]
+        public override bool OpenCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnOpen_DynamicFile_CanExec != null)
+				{
+					OnOpen_DynamicFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.OpenCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DynamicFile> OnOpen_DynamicFile_CanExecReason;
+
+        [EventBasedMethod("OnOpen_DynamicFile_CanExecReason")]
+        public override string OpenCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnOpen_DynamicFile_CanExecReason != null)
+				{
+					OnOpen_DynamicFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.OpenCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -104,6 +186,47 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Upload_Handler<DynamicFile> OnUpload_DynamicFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<DynamicFile> OnUpload_DynamicFile_CanExec;
+
+        [EventBasedMethod("OnUpload_DynamicFile_CanExec")]
+        public override bool UploadCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnUpload_DynamicFile_CanExec != null)
+				{
+					OnUpload_DynamicFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.UploadCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DynamicFile> OnUpload_DynamicFile_CanExecReason;
+
+        [EventBasedMethod("OnUpload_DynamicFile_CanExecReason")]
+        public override string UploadCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnUpload_DynamicFile_CanExecReason != null)
+				{
+					OnUpload_DynamicFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.UploadCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

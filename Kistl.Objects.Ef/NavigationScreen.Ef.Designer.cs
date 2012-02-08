@@ -56,6 +56,47 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetDefaultViewModel_Handler<NavigationScreen> OnGetDefaultViewModel_NavigationScreen;
+		// CanExec
+		public static event CanExecMethodEventHandler<NavigationScreen> OnGetDefaultViewModel_NavigationScreen_CanExec;
+
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationScreen_CanExec")]
+        public override bool GetDefaultViewModelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDefaultViewModel_NavigationScreen_CanExec != null)
+				{
+					OnGetDefaultViewModel_NavigationScreen_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultViewModelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<NavigationScreen> OnGetDefaultViewModel_NavigationScreen_CanExecReason;
+
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationScreen_CanExecReason")]
+        public override string GetDefaultViewModelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDefaultViewModel_NavigationScreen_CanExecReason != null)
+				{
+					OnGetDefaultViewModel_NavigationScreen_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultViewModelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

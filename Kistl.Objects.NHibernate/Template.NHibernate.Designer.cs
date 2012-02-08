@@ -363,6 +363,47 @@ namespace Kistl.App.GUI
         }
         public delegate void PrepareDefault_Handler<T>(T obj, Kistl.App.Base.ObjectClass cls);
         public static event PrepareDefault_Handler<Template> OnPrepareDefault_Template;
+		// CanExec
+		public static event CanExecMethodEventHandler<Template> OnPrepareDefault_Template_CanExec;
+
+        [EventBasedMethod("OnPrepareDefault_Template_CanExec")]
+        public virtual bool PrepareDefaultCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnPrepareDefault_Template_CanExec != null)
+				{
+					OnPrepareDefault_Template_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Template> OnPrepareDefault_Template_CanExecReason;
+
+        [EventBasedMethod("OnPrepareDefault_Template_CanExecReason")]
+        public virtual string PrepareDefaultCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnPrepareDefault_Template_CanExecReason != null)
+				{
+					OnPrepareDefault_Template_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

@@ -110,6 +110,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDefaultValue_Handler<BoolDefaultValue> OnGetDefaultValue_BoolDefaultValue;
+		// CanExec
+		public static event CanExecMethodEventHandler<BoolDefaultValue> OnGetDefaultValue_BoolDefaultValue_CanExec;
+
+        [EventBasedMethod("OnGetDefaultValue_BoolDefaultValue_CanExec")]
+        public override bool GetDefaultValueCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDefaultValue_BoolDefaultValue_CanExec != null)
+				{
+					OnGetDefaultValue_BoolDefaultValue_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultValueCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<BoolDefaultValue> OnGetDefaultValue_BoolDefaultValue_CanExecReason;
+
+        [EventBasedMethod("OnGetDefaultValue_BoolDefaultValue_CanExecReason")]
+        public override string GetDefaultValueCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDefaultValue_BoolDefaultValue_CanExecReason != null)
+				{
+					OnGetDefaultValue_BoolDefaultValue_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultValueCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

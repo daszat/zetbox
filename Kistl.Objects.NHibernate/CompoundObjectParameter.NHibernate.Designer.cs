@@ -151,6 +151,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<CompoundObjectParameter> OnGetLabel_CompoundObjectParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectParameter> OnGetLabel_CompoundObjectParameter_CanExec;
+
+        [EventBasedMethod("OnGetLabel_CompoundObjectParameter_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_CompoundObjectParameter_CanExec != null)
+				{
+					OnGetLabel_CompoundObjectParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectParameter> OnGetLabel_CompoundObjectParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_CompoundObjectParameter_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_CompoundObjectParameter_CanExecReason != null)
+				{
+					OnGetLabel_CompoundObjectParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -172,6 +213,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<CompoundObjectParameter> OnGetParameterType_CompoundObjectParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectParameter> OnGetParameterType_CompoundObjectParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterType_CompoundObjectParameter_CanExec")]
+        public override bool GetParameterTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterType_CompoundObjectParameter_CanExec != null)
+				{
+					OnGetParameterType_CompoundObjectParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectParameter> OnGetParameterType_CompoundObjectParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterType_CompoundObjectParameter_CanExecReason")]
+        public override string GetParameterTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterType_CompoundObjectParameter_CanExecReason != null)
+				{
+					OnGetParameterType_CompoundObjectParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -193,6 +275,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<CompoundObjectParameter> OnGetParameterTypeString_CompoundObjectParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectParameter> OnGetParameterTypeString_CompoundObjectParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterTypeString_CompoundObjectParameter_CanExec")]
+        public override bool GetParameterTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterTypeString_CompoundObjectParameter_CanExec != null)
+				{
+					OnGetParameterTypeString_CompoundObjectParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectParameter> OnGetParameterTypeString_CompoundObjectParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterTypeString_CompoundObjectParameter_CanExecReason")]
+        public override string GetParameterTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterTypeString_CompoundObjectParameter_CanExecReason != null)
+				{
+					OnGetParameterTypeString_CompoundObjectParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

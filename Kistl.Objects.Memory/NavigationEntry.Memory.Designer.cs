@@ -902,6 +902,47 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         }
         public delegate void GetDefaultViewModel_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, Kistl.API.IKistlContext dataCtx, System.Object parent);
         public static event GetDefaultViewModel_Handler<NavigationEntry> OnGetDefaultViewModel_NavigationEntry;
+		// CanExec
+		public static event CanExecMethodEventHandler<NavigationEntry> OnGetDefaultViewModel_NavigationEntry_CanExec;
+
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationEntry_CanExec")]
+        public virtual bool GetDefaultViewModelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDefaultViewModel_NavigationEntry_CanExec != null)
+				{
+					OnGetDefaultViewModel_NavigationEntry_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<NavigationEntry> OnGetDefaultViewModel_NavigationEntry_CanExecReason;
+
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationEntry_CanExecReason")]
+        public virtual string GetDefaultViewModelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDefaultViewModel_NavigationEntry_CanExecReason != null)
+				{
+					OnGetDefaultViewModel_NavigationEntry_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

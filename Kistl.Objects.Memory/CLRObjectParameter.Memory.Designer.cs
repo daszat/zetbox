@@ -143,6 +143,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<CLRObjectParameter> OnGetLabel_CLRObjectParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<CLRObjectParameter> OnGetLabel_CLRObjectParameter_CanExec;
+
+        [EventBasedMethod("OnGetLabel_CLRObjectParameter_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_CLRObjectParameter_CanExec != null)
+				{
+					OnGetLabel_CLRObjectParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CLRObjectParameter> OnGetLabel_CLRObjectParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_CLRObjectParameter_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_CLRObjectParameter_CanExecReason != null)
+				{
+					OnGetLabel_CLRObjectParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -164,6 +205,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterType_CLRObjectParameter_CanExec")]
+        public override bool GetParameterTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterType_CLRObjectParameter_CanExec != null)
+				{
+					OnGetParameterType_CLRObjectParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterType_CLRObjectParameter_CanExecReason")]
+        public override string GetParameterTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterType_CLRObjectParameter_CanExecReason != null)
+				{
+					OnGetParameterType_CLRObjectParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -185,6 +267,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterTypeString_CLRObjectParameter_CanExec")]
+        public override bool GetParameterTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterTypeString_CLRObjectParameter_CanExec != null)
+				{
+					OnGetParameterTypeString_CLRObjectParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterTypeString_CLRObjectParameter_CanExecReason")]
+        public override string GetParameterTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterTypeString_CLRObjectParameter_CanExecReason != null)
+				{
+					OnGetParameterTypeString_CLRObjectParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

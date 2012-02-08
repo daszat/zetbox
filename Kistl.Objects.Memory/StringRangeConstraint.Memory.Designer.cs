@@ -155,6 +155,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint_CanExec;
+
+        [EventBasedMethod("OnGetErrorText_StringRangeConstraint_CanExec")]
+        public override bool GetErrorTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetErrorText_StringRangeConstraint_CanExec != null)
+				{
+					OnGetErrorText_StringRangeConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint_CanExecReason;
+
+        [EventBasedMethod("OnGetErrorText_StringRangeConstraint_CanExecReason")]
+        public override string GetErrorTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetErrorText_StringRangeConstraint_CanExecReason != null)
+				{
+					OnGetErrorText_StringRangeConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -176,6 +217,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<StringRangeConstraint> OnIsValid_StringRangeConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<StringRangeConstraint> OnIsValid_StringRangeConstraint_CanExec;
+
+        [EventBasedMethod("OnIsValid_StringRangeConstraint_CanExec")]
+        public override bool IsValidCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnIsValid_StringRangeConstraint_CanExec != null)
+				{
+					OnIsValid_StringRangeConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<StringRangeConstraint> OnIsValid_StringRangeConstraint_CanExecReason;
+
+        [EventBasedMethod("OnIsValid_StringRangeConstraint_CanExecReason")]
+        public override string IsValidCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnIsValid_StringRangeConstraint_CanExecReason != null)
+				{
+					OnIsValid_StringRangeConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

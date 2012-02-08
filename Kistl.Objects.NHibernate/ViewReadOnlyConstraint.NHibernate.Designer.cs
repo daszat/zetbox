@@ -64,6 +64,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<ViewReadOnlyConstraint> OnGetErrorText_ViewReadOnlyConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<ViewReadOnlyConstraint> OnGetErrorText_ViewReadOnlyConstraint_CanExec;
+
+        [EventBasedMethod("OnGetErrorText_ViewReadOnlyConstraint_CanExec")]
+        public override bool GetErrorTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetErrorText_ViewReadOnlyConstraint_CanExec != null)
+				{
+					OnGetErrorText_ViewReadOnlyConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ViewReadOnlyConstraint> OnGetErrorText_ViewReadOnlyConstraint_CanExecReason;
+
+        [EventBasedMethod("OnGetErrorText_ViewReadOnlyConstraint_CanExecReason")]
+        public override string GetErrorTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetErrorText_ViewReadOnlyConstraint_CanExecReason != null)
+				{
+					OnGetErrorText_ViewReadOnlyConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -85,6 +126,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<ViewReadOnlyConstraint> OnIsValid_ViewReadOnlyConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<ViewReadOnlyConstraint> OnIsValid_ViewReadOnlyConstraint_CanExec;
+
+        [EventBasedMethod("OnIsValid_ViewReadOnlyConstraint_CanExec")]
+        public override bool IsValidCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnIsValid_ViewReadOnlyConstraint_CanExec != null)
+				{
+					OnIsValid_ViewReadOnlyConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ViewReadOnlyConstraint> OnIsValid_ViewReadOnlyConstraint_CanExecReason;
+
+        [EventBasedMethod("OnIsValid_ViewReadOnlyConstraint_CanExecReason")]
+        public override string IsValidCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnIsValid_ViewReadOnlyConstraint_CanExecReason != null)
+				{
+					OnIsValid_ViewReadOnlyConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

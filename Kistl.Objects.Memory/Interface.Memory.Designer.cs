@@ -53,6 +53,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDataType_Handler<Interface> OnGetDataType_Interface;
+		// CanExec
+		public static event CanExecMethodEventHandler<Interface> OnGetDataType_Interface_CanExec;
+
+        [EventBasedMethod("OnGetDataType_Interface_CanExec")]
+        public override bool GetDataTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataType_Interface_CanExec != null)
+				{
+					OnGetDataType_Interface_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Interface> OnGetDataType_Interface_CanExecReason;
+
+        [EventBasedMethod("OnGetDataType_Interface_CanExecReason")]
+        public override string GetDataTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataType_Interface_CanExecReason != null)
+				{
+					OnGetDataType_Interface_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -74,6 +115,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDataTypeString_Handler<Interface> OnGetDataTypeString_Interface;
+		// CanExec
+		public static event CanExecMethodEventHandler<Interface> OnGetDataTypeString_Interface_CanExec;
+
+        [EventBasedMethod("OnGetDataTypeString_Interface_CanExec")]
+        public override bool GetDataTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataTypeString_Interface_CanExec != null)
+				{
+					OnGetDataTypeString_Interface_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Interface> OnGetDataTypeString_Interface_CanExecReason;
+
+        [EventBasedMethod("OnGetDataTypeString_Interface_CanExecReason")]
+        public override string GetDataTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataTypeString_Interface_CanExecReason != null)
+				{
+					OnGetDataTypeString_Interface_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -94,6 +176,47 @@ namespace Kistl.App.Base
             }
         }
         public static event ImplementInterfaces_Handler<Interface> OnImplementInterfaces_Interface;
+		// CanExec
+		public static event CanExecMethodEventHandler<Interface> OnImplementInterfaces_Interface_CanExec;
+
+        [EventBasedMethod("OnImplementInterfaces_Interface_CanExec")]
+        public override bool ImplementInterfacesCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnImplementInterfaces_Interface_CanExec != null)
+				{
+					OnImplementInterfaces_Interface_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Interface> OnImplementInterfaces_Interface_CanExecReason;
+
+        [EventBasedMethod("OnImplementInterfaces_Interface_CanExecReason")]
+        public override string ImplementInterfacesCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnImplementInterfaces_Interface_CanExecReason != null)
+				{
+					OnImplementInterfaces_Interface_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

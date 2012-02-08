@@ -930,6 +930,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetEnd_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.App.Base.ObjectReferenceProperty prop);
         public static event GetEnd_Handler<Relation> OnGetEnd_Relation;
+		// CanExec
+		public static event CanExecMethodEventHandler<Relation> OnGetEnd_Relation_CanExec;
+
+        [EventBasedMethod("OnGetEnd_Relation_CanExec")]
+        public virtual bool GetEndCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetEnd_Relation_CanExec != null)
+				{
+					OnGetEnd_Relation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Relation> OnGetEnd_Relation_CanExecReason;
+
+        [EventBasedMethod("OnGetEnd_Relation_CanExecReason")]
+        public virtual string GetEndCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetEnd_Relation_CanExecReason != null)
+				{
+					OnGetEnd_Relation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -952,6 +993,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetEndFromRole_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.API.RelationEndRole role);
         public static event GetEndFromRole_Handler<Relation> OnGetEndFromRole_Relation;
+		// CanExec
+		public static event CanExecMethodEventHandler<Relation> OnGetEndFromRole_Relation_CanExec;
+
+        [EventBasedMethod("OnGetEndFromRole_Relation_CanExec")]
+        public virtual bool GetEndFromRoleCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetEndFromRole_Relation_CanExec != null)
+				{
+					OnGetEndFromRole_Relation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Relation> OnGetEndFromRole_Relation_CanExecReason;
+
+        [EventBasedMethod("OnGetEndFromRole_Relation_CanExecReason")]
+        public virtual string GetEndFromRoleCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetEndFromRole_Relation_CanExecReason != null)
+				{
+					OnGetEndFromRole_Relation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -974,6 +1056,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetEntryInterfaceType_Handler<T>(T obj, MethodReturnEventArgs<Kistl.API.InterfaceType> ret);
         public static event GetEntryInterfaceType_Handler<Relation> OnGetEntryInterfaceType_Relation;
+		// CanExec
+		public static event CanExecMethodEventHandler<Relation> OnGetEntryInterfaceType_Relation_CanExec;
+
+        [EventBasedMethod("OnGetEntryInterfaceType_Relation_CanExec")]
+        public virtual bool GetEntryInterfaceTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetEntryInterfaceType_Relation_CanExec != null)
+				{
+					OnGetEntryInterfaceType_Relation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Relation> OnGetEntryInterfaceType_Relation_CanExecReason;
+
+        [EventBasedMethod("OnGetEntryInterfaceType_Relation_CanExecReason")]
+        public virtual string GetEntryInterfaceTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetEntryInterfaceType_Relation_CanExecReason != null)
+				{
+					OnGetEntryInterfaceType_Relation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -996,6 +1119,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetOtherEnd_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.App.Base.RelationEnd relEnd);
         public static event GetOtherEnd_Handler<Relation> OnGetOtherEnd_Relation;
+		// CanExec
+		public static event CanExecMethodEventHandler<Relation> OnGetOtherEnd_Relation_CanExec;
+
+        [EventBasedMethod("OnGetOtherEnd_Relation_CanExec")]
+        public virtual bool GetOtherEndCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetOtherEnd_Relation_CanExec != null)
+				{
+					OnGetOtherEnd_Relation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Relation> OnGetOtherEnd_Relation_CanExecReason;
+
+        [EventBasedMethod("OnGetOtherEnd_Relation_CanExecReason")]
+        public virtual string GetOtherEndCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetOtherEnd_Relation_CanExecReason != null)
+				{
+					OnGetOtherEnd_Relation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -1018,6 +1182,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetRelationType_Handler<T>(T obj, MethodReturnEventArgs<Kistl.API.RelationType> ret);
         public static event GetRelationType_Handler<Relation> OnGetRelationType_Relation;
+		// CanExec
+		public static event CanExecMethodEventHandler<Relation> OnGetRelationType_Relation_CanExec;
+
+        [EventBasedMethod("OnGetRelationType_Relation_CanExec")]
+        public virtual bool GetRelationTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetRelationType_Relation_CanExec != null)
+				{
+					OnGetRelationType_Relation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Relation> OnGetRelationType_Relation_CanExecReason;
+
+        [EventBasedMethod("OnGetRelationType_Relation_CanExecReason")]
+        public virtual string GetRelationTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetRelationType_Relation_CanExecReason != null)
+				{
+					OnGetRelationType_Relation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -1040,6 +1245,47 @@ namespace Kistl.App.Base
         }
         public delegate void NeedsPositionStorage_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Kistl.API.RelationEndRole endRole);
         public static event NeedsPositionStorage_Handler<Relation> OnNeedsPositionStorage_Relation;
+		// CanExec
+		public static event CanExecMethodEventHandler<Relation> OnNeedsPositionStorage_Relation_CanExec;
+
+        [EventBasedMethod("OnNeedsPositionStorage_Relation_CanExec")]
+        public virtual bool NeedsPositionStorageCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnNeedsPositionStorage_Relation_CanExec != null)
+				{
+					OnNeedsPositionStorage_Relation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Relation> OnNeedsPositionStorage_Relation_CanExecReason;
+
+        [EventBasedMethod("OnNeedsPositionStorage_Relation_CanExecReason")]
+        public virtual string NeedsPositionStorageCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnNeedsPositionStorage_Relation_CanExecReason != null)
+				{
+					OnNeedsPositionStorage_Relation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -1061,6 +1307,47 @@ namespace Kistl.App.Base
         }
         public delegate void SwapRelationEnds_Handler<T>(T obj);
         public static event SwapRelationEnds_Handler<Relation> OnSwapRelationEnds_Relation;
+		// CanExec
+		public static event CanExecMethodEventHandler<Relation> OnSwapRelationEnds_Relation_CanExec;
+
+        [EventBasedMethod("OnSwapRelationEnds_Relation_CanExec")]
+        public virtual bool SwapRelationEndsCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnSwapRelationEnds_Relation_CanExec != null)
+				{
+					OnSwapRelationEnds_Relation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Relation> OnSwapRelationEnds_Relation_CanExecReason;
+
+        [EventBasedMethod("OnSwapRelationEnds_Relation_CanExecReason")]
+        public virtual string SwapRelationEndsCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnSwapRelationEnds_Relation_CanExecReason != null)
+				{
+					OnSwapRelationEnds_Relation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

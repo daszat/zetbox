@@ -883,6 +883,47 @@ namespace Kistl.App.Base
         }
         public delegate void AsType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret, bool throwOnError);
         public static event AsType_Handler<TypeRef> OnAsType_TypeRef;
+		// CanExec
+		public static event CanExecMethodEventHandler<TypeRef> OnAsType_TypeRef_CanExec;
+
+        [EventBasedMethod("OnAsType_TypeRef_CanExec")]
+        public virtual bool AsTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAsType_TypeRef_CanExec != null)
+				{
+					OnAsType_TypeRef_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<TypeRef> OnAsType_TypeRef_CanExecReason;
+
+        [EventBasedMethod("OnAsType_TypeRef_CanExecReason")]
+        public virtual string AsTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAsType_TypeRef_CanExecReason != null)
+				{
+					OnAsType_TypeRef_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -905,6 +946,47 @@ namespace Kistl.App.Base
         }
         public delegate void ToTypeName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event ToTypeName_Handler<TypeRef> OnToTypeName_TypeRef;
+		// CanExec
+		public static event CanExecMethodEventHandler<TypeRef> OnToTypeName_TypeRef_CanExec;
+
+        [EventBasedMethod("OnToTypeName_TypeRef_CanExec")]
+        public virtual bool ToTypeNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnToTypeName_TypeRef_CanExec != null)
+				{
+					OnToTypeName_TypeRef_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<TypeRef> OnToTypeName_TypeRef_CanExecReason;
+
+        [EventBasedMethod("OnToTypeName_TypeRef_CanExecReason")]
+        public virtual string ToTypeNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnToTypeName_TypeRef_CanExecReason != null)
+				{
+					OnToTypeName_TypeRef_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -926,6 +1008,47 @@ namespace Kistl.App.Base
         }
         public delegate void UpdateParent_Handler<T>(T obj);
         public static event UpdateParent_Handler<TypeRef> OnUpdateParent_TypeRef;
+		// CanExec
+		public static event CanExecMethodEventHandler<TypeRef> OnUpdateParent_TypeRef_CanExec;
+
+        [EventBasedMethod("OnUpdateParent_TypeRef_CanExec")]
+        public virtual bool UpdateParentCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnUpdateParent_TypeRef_CanExec != null)
+				{
+					OnUpdateParent_TypeRef_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<TypeRef> OnUpdateParent_TypeRef_CanExecReason;
+
+        [EventBasedMethod("OnUpdateParent_TypeRef_CanExecReason")]
+        public virtual string UpdateParentCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnUpdateParent_TypeRef_CanExecReason != null)
+				{
+					OnUpdateParent_TypeRef_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -947,6 +1070,47 @@ namespace Kistl.App.Base
         }
         public delegate void UpdateToStringCache_Handler<T>(T obj);
         public static event UpdateToStringCache_Handler<TypeRef> OnUpdateToStringCache_TypeRef;
+		// CanExec
+		public static event CanExecMethodEventHandler<TypeRef> OnUpdateToStringCache_TypeRef_CanExec;
+
+        [EventBasedMethod("OnUpdateToStringCache_TypeRef_CanExec")]
+        public virtual bool UpdateToStringCacheCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnUpdateToStringCache_TypeRef_CanExec != null)
+				{
+					OnUpdateToStringCache_TypeRef_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<TypeRef> OnUpdateToStringCache_TypeRef_CanExecReason;
+
+        [EventBasedMethod("OnUpdateToStringCache_TypeRef_CanExecReason")]
+        public virtual string UpdateToStringCacheCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnUpdateToStringCache_TypeRef_CanExecReason != null)
+				{
+					OnUpdateToStringCache_TypeRef_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

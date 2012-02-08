@@ -349,6 +349,47 @@ namespace Kistl.App.GUI
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Icon> OnGetName_Icon;
+		// CanExec
+		public static event CanExecMethodEventHandler<Icon> OnGetName_Icon_CanExec;
+
+        [EventBasedMethod("OnGetName_Icon_CanExec")]
+        public virtual bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_Icon_CanExec != null)
+				{
+					OnGetName_Icon_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Icon> OnGetName_Icon_CanExecReason;
+
+        [EventBasedMethod("OnGetName_Icon_CanExecReason")]
+        public virtual string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_Icon_CanExecReason != null)
+				{
+					OnGetName_Icon_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -370,6 +411,47 @@ namespace Kistl.App.GUI
         }
         public delegate void Open_Handler<T>(T obj);
         public static event Open_Handler<Icon> OnOpen_Icon;
+		// CanExec
+		public static event CanExecMethodEventHandler<Icon> OnOpen_Icon_CanExec;
+
+        [EventBasedMethod("OnOpen_Icon_CanExec")]
+        public virtual bool OpenCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnOpen_Icon_CanExec != null)
+				{
+					OnOpen_Icon_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Icon> OnOpen_Icon_CanExecReason;
+
+        [EventBasedMethod("OnOpen_Icon_CanExecReason")]
+        public virtual string OpenCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnOpen_Icon_CanExecReason != null)
+				{
+					OnOpen_Icon_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -391,6 +473,47 @@ namespace Kistl.App.GUI
         }
         public delegate void Upload_Handler<T>(T obj);
         public static event Upload_Handler<Icon> OnUpload_Icon;
+		// CanExec
+		public static event CanExecMethodEventHandler<Icon> OnUpload_Icon_CanExec;
+
+        [EventBasedMethod("OnUpload_Icon_CanExec")]
+        public virtual bool UploadCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnUpload_Icon_CanExec != null)
+				{
+					OnUpload_Icon_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Icon> OnUpload_Icon_CanExecReason;
+
+        [EventBasedMethod("OnUpload_Icon_CanExecReason")]
+        public virtual string UploadCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnUpload_Icon_CanExecReason != null)
+				{
+					OnUpload_Icon_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

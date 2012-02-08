@@ -143,6 +143,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDefaultValue_Handler<EnumDefaultValue> OnGetDefaultValue_EnumDefaultValue;
+		// CanExec
+		public static event CanExecMethodEventHandler<EnumDefaultValue> OnGetDefaultValue_EnumDefaultValue_CanExec;
+
+        [EventBasedMethod("OnGetDefaultValue_EnumDefaultValue_CanExec")]
+        public override bool GetDefaultValueCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDefaultValue_EnumDefaultValue_CanExec != null)
+				{
+					OnGetDefaultValue_EnumDefaultValue_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultValueCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<EnumDefaultValue> OnGetDefaultValue_EnumDefaultValue_CanExecReason;
+
+        [EventBasedMethod("OnGetDefaultValue_EnumDefaultValue_CanExecReason")]
+        public override string GetDefaultValueCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDefaultValue_EnumDefaultValue_CanExecReason != null)
+				{
+					OnGetDefaultValue_EnumDefaultValue_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultValueCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

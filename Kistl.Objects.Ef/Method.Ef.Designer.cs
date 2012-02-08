@@ -1189,6 +1189,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         }
         public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<Method> OnGetLabel_Method;
+		// CanExec
+		public static event CanExecMethodEventHandler<Method> OnGetLabel_Method_CanExec;
+
+        [EventBasedMethod("OnGetLabel_Method_CanExec")]
+        public virtual bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_Method_CanExec != null)
+				{
+					OnGetLabel_Method_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Method> OnGetLabel_Method_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_Method_CanExecReason")]
+        public virtual string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_Method_CanExecReason != null)
+				{
+					OnGetLabel_Method_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -1211,6 +1252,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         }
         public delegate void GetReturnParameter_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.BaseParameter> ret);
         public static event GetReturnParameter_Handler<Method> OnGetReturnParameter_Method;
+		// CanExec
+		public static event CanExecMethodEventHandler<Method> OnGetReturnParameter_Method_CanExec;
+
+        [EventBasedMethod("OnGetReturnParameter_Method_CanExec")]
+        public virtual bool GetReturnParameterCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetReturnParameter_Method_CanExec != null)
+				{
+					OnGetReturnParameter_Method_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Method> OnGetReturnParameter_Method_CanExecReason;
+
+        [EventBasedMethod("OnGetReturnParameter_Method_CanExecReason")]
+        public virtual string GetReturnParameterCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetReturnParameter_Method_CanExecReason != null)
+				{
+					OnGetReturnParameter_Method_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

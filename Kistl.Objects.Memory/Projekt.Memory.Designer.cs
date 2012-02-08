@@ -678,6 +678,47 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         }
         public delegate void GetSummaryReport_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, string title, Kistl.App.Base.DateTimeRange range);
         public static event GetSummaryReport_Handler<Projekt> OnGetSummaryReport_Projekt;
+		// CanExec
+		public static event CanExecMethodEventHandler<Projekt> OnGetSummaryReport_Projekt_CanExec;
+
+        [EventBasedMethod("OnGetSummaryReport_Projekt_CanExec")]
+        public virtual bool GetSummaryReportCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetSummaryReport_Projekt_CanExec != null)
+				{
+					OnGetSummaryReport_Projekt_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Projekt> OnGetSummaryReport_Projekt_CanExecReason;
+
+        [EventBasedMethod("OnGetSummaryReport_Projekt_CanExecReason")]
+        public virtual string GetSummaryReportCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetSummaryReport_Projekt_CanExecReason != null)
+				{
+					OnGetSummaryReport_Projekt_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

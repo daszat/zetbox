@@ -155,6 +155,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint_CanExec;
+
+        [EventBasedMethod("OnGetErrorText_IntegerRangeConstraint_CanExec")]
+        public override bool GetErrorTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetErrorText_IntegerRangeConstraint_CanExec != null)
+				{
+					OnGetErrorText_IntegerRangeConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint_CanExecReason;
+
+        [EventBasedMethod("OnGetErrorText_IntegerRangeConstraint_CanExecReason")]
+        public override string GetErrorTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetErrorText_IntegerRangeConstraint_CanExecReason != null)
+				{
+					OnGetErrorText_IntegerRangeConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -176,6 +217,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint_CanExec;
+
+        [EventBasedMethod("OnIsValid_IntegerRangeConstraint_CanExec")]
+        public override bool IsValidCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnIsValid_IntegerRangeConstraint_CanExec != null)
+				{
+					OnIsValid_IntegerRangeConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint_CanExecReason;
+
+        [EventBasedMethod("OnIsValid_IntegerRangeConstraint_CanExecReason")]
+        public override string IsValidCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnIsValid_IntegerRangeConstraint_CanExecReason != null)
+				{
+					OnIsValid_IntegerRangeConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

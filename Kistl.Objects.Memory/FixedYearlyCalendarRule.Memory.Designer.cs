@@ -155,6 +155,47 @@ namespace Kistl.App.Calendar
             return e.Result;
         }
         public static event AppliesTo_Handler<FixedYearlyCalendarRule> OnAppliesTo_FixedYearlyCalendarRule;
+		// CanExec
+		public static event CanExecMethodEventHandler<FixedYearlyCalendarRule> OnAppliesTo_FixedYearlyCalendarRule_CanExec;
+
+        [EventBasedMethod("OnAppliesTo_FixedYearlyCalendarRule_CanExec")]
+        public override bool AppliesToCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAppliesTo_FixedYearlyCalendarRule_CanExec != null)
+				{
+					OnAppliesTo_FixedYearlyCalendarRule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.AppliesToCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<FixedYearlyCalendarRule> OnAppliesTo_FixedYearlyCalendarRule_CanExecReason;
+
+        [EventBasedMethod("OnAppliesTo_FixedYearlyCalendarRule_CanExecReason")]
+        public override string AppliesToCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAppliesTo_FixedYearlyCalendarRule_CanExecReason != null)
+				{
+					OnAppliesTo_FixedYearlyCalendarRule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.AppliesToCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

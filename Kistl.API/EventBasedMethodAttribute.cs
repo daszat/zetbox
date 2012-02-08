@@ -12,7 +12,7 @@ namespace Kistl.API
     /// connect such methods to their MethodInvocations by managing the named 
     /// Event.
     /// </summary>
-    [global::System.AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+    [global::System.AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public sealed class EventBasedMethodAttribute
         : Attribute
     {

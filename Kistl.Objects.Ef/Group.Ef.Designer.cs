@@ -330,6 +330,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Group> OnGetName_Group;
+		// CanExec
+		public static event CanExecMethodEventHandler<Group> OnGetName_Group_CanExec;
+
+        [EventBasedMethod("OnGetName_Group_CanExec")]
+        public virtual bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_Group_CanExec != null)
+				{
+					OnGetName_Group_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Group> OnGetName_Group_CanExecReason;
+
+        [EventBasedMethod("OnGetName_Group_CanExecReason")]
+        public virtual string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_Group_CanExecReason != null)
+				{
+					OnGetName_Group_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

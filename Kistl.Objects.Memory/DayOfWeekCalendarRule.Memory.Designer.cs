@@ -104,6 +104,47 @@ namespace Kistl.App.Calendar
             return e.Result;
         }
         public static event AppliesTo_Handler<DayOfWeekCalendarRule> OnAppliesTo_DayOfWeekCalendarRule;
+		// CanExec
+		public static event CanExecMethodEventHandler<DayOfWeekCalendarRule> OnAppliesTo_DayOfWeekCalendarRule_CanExec;
+
+        [EventBasedMethod("OnAppliesTo_DayOfWeekCalendarRule_CanExec")]
+        public override bool AppliesToCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAppliesTo_DayOfWeekCalendarRule_CanExec != null)
+				{
+					OnAppliesTo_DayOfWeekCalendarRule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.AppliesToCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DayOfWeekCalendarRule> OnAppliesTo_DayOfWeekCalendarRule_CanExecReason;
+
+        [EventBasedMethod("OnAppliesTo_DayOfWeekCalendarRule_CanExecReason")]
+        public override string AppliesToCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAppliesTo_DayOfWeekCalendarRule_CanExecReason != null)
+				{
+					OnAppliesTo_DayOfWeekCalendarRule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.AppliesToCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

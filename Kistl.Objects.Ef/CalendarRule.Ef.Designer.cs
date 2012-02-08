@@ -967,6 +967,47 @@ namespace Kistl.App.Calendar
         }
         public delegate void AppliesTo_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, DateTime date);
         public static event AppliesTo_Handler<CalendarRule> OnAppliesTo_CalendarRule;
+		// CanExec
+		public static event CanExecMethodEventHandler<CalendarRule> OnAppliesTo_CalendarRule_CanExec;
+
+        [EventBasedMethod("OnAppliesTo_CalendarRule_CanExec")]
+        public virtual bool AppliesToCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAppliesTo_CalendarRule_CanExec != null)
+				{
+					OnAppliesTo_CalendarRule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CalendarRule> OnAppliesTo_CalendarRule_CanExecReason;
+
+        [EventBasedMethod("OnAppliesTo_CalendarRule_CanExecReason")]
+        public virtual string AppliesToCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAppliesTo_CalendarRule_CanExecReason != null)
+				{
+					OnAppliesTo_CalendarRule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

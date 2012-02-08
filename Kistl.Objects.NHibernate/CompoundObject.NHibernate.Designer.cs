@@ -151,6 +151,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDataType_Handler<CompoundObject> OnGetDataType_CompoundObject;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnGetDataType_CompoundObject_CanExec;
+
+        [EventBasedMethod("OnGetDataType_CompoundObject_CanExec")]
+        public override bool GetDataTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataType_CompoundObject_CanExec != null)
+				{
+					OnGetDataType_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetDataType_CompoundObject_CanExecReason;
+
+        [EventBasedMethod("OnGetDataType_CompoundObject_CanExecReason")]
+        public override string GetDataTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataType_CompoundObject_CanExecReason != null)
+				{
+					OnGetDataType_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -172,6 +213,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDataTypeString_Handler<CompoundObject> OnGetDataTypeString_CompoundObject;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnGetDataTypeString_CompoundObject_CanExec;
+
+        [EventBasedMethod("OnGetDataTypeString_CompoundObject_CanExec")]
+        public override bool GetDataTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataTypeString_CompoundObject_CanExec != null)
+				{
+					OnGetDataTypeString_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetDataTypeString_CompoundObject_CanExecReason;
+
+        [EventBasedMethod("OnGetDataTypeString_CompoundObject_CanExecReason")]
+        public override string GetDataTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataTypeString_CompoundObject_CanExecReason != null)
+				{
+					OnGetDataTypeString_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -192,6 +274,47 @@ namespace Kistl.App.Base
             }
         }
         public static event ImplementInterfaces_Handler<CompoundObject> OnImplementInterfaces_CompoundObject;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnImplementInterfaces_CompoundObject_CanExec;
+
+        [EventBasedMethod("OnImplementInterfaces_CompoundObject_CanExec")]
+        public override bool ImplementInterfacesCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnImplementInterfaces_CompoundObject_CanExec != null)
+				{
+					OnImplementInterfaces_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnImplementInterfaces_CompoundObject_CanExecReason;
+
+        [EventBasedMethod("OnImplementInterfaces_CompoundObject_CanExecReason")]
+        public override string ImplementInterfacesCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnImplementInterfaces_CompoundObject_CanExecReason != null)
+				{
+					OnImplementInterfaces_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

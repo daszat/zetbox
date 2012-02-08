@@ -626,6 +626,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetStream_Handler<T>(T obj, MethodReturnEventArgs<System.IO.Stream> ret);
         public static event GetStream_Handler<Blob> OnGetStream_Blob;
+		// CanExec
+		public static event CanExecMethodEventHandler<Blob> OnGetStream_Blob_CanExec;
+
+        [EventBasedMethod("OnGetStream_Blob_CanExec")]
+        public virtual bool GetStreamCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetStream_Blob_CanExec != null)
+				{
+					OnGetStream_Blob_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Blob> OnGetStream_Blob_CanExecReason;
+
+        [EventBasedMethod("OnGetStream_Blob_CanExecReason")]
+        public virtual string GetStreamCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetStream_Blob_CanExecReason != null)
+				{
+					OnGetStream_Blob_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -647,6 +688,47 @@ namespace Kistl.App.Base
         }
         public delegate void Open_Handler<T>(T obj);
         public static event Open_Handler<Blob> OnOpen_Blob;
+		// CanExec
+		public static event CanExecMethodEventHandler<Blob> OnOpen_Blob_CanExec;
+
+        [EventBasedMethod("OnOpen_Blob_CanExec")]
+        public virtual bool OpenCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnOpen_Blob_CanExec != null)
+				{
+					OnOpen_Blob_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Blob> OnOpen_Blob_CanExecReason;
+
+        [EventBasedMethod("OnOpen_Blob_CanExecReason")]
+        public virtual string OpenCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnOpen_Blob_CanExecReason != null)
+				{
+					OnOpen_Blob_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

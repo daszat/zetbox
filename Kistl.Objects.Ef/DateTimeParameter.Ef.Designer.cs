@@ -125,6 +125,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DateTimeParameter> OnGetLabel_DateTimeParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<DateTimeParameter> OnGetLabel_DateTimeParameter_CanExec;
+
+        [EventBasedMethod("OnGetLabel_DateTimeParameter_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_DateTimeParameter_CanExec != null)
+				{
+					OnGetLabel_DateTimeParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DateTimeParameter> OnGetLabel_DateTimeParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_DateTimeParameter_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_DateTimeParameter_CanExecReason != null)
+				{
+					OnGetLabel_DateTimeParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -146,6 +187,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<DateTimeParameter> OnGetParameterType_DateTimeParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<DateTimeParameter> OnGetParameterType_DateTimeParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterType_DateTimeParameter_CanExec")]
+        public override bool GetParameterTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterType_DateTimeParameter_CanExec != null)
+				{
+					OnGetParameterType_DateTimeParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DateTimeParameter> OnGetParameterType_DateTimeParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterType_DateTimeParameter_CanExecReason")]
+        public override string GetParameterTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterType_DateTimeParameter_CanExecReason != null)
+				{
+					OnGetParameterType_DateTimeParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -167,6 +249,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<DateTimeParameter> OnGetParameterTypeString_DateTimeParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<DateTimeParameter> OnGetParameterTypeString_DateTimeParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterTypeString_DateTimeParameter_CanExec")]
+        public override bool GetParameterTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterTypeString_DateTimeParameter_CanExec != null)
+				{
+					OnGetParameterTypeString_DateTimeParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DateTimeParameter> OnGetParameterTypeString_DateTimeParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterTypeString_DateTimeParameter_CanExecReason")]
+        public override string GetParameterTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterTypeString_DateTimeParameter_CanExecReason != null)
+				{
+					OnGetParameterTypeString_DateTimeParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetParameterTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

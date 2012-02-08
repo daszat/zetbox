@@ -53,6 +53,47 @@ namespace at.dasz.DocumentManagement
             return e.Result;
         }
         public static event HandleBlobChange_Handler<ImportedFile> OnHandleBlobChange_ImportedFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<ImportedFile> OnHandleBlobChange_ImportedFile_CanExec;
+
+        [EventBasedMethod("OnHandleBlobChange_ImportedFile_CanExec")]
+        public override bool HandleBlobChangeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnHandleBlobChange_ImportedFile_CanExec != null)
+				{
+					OnHandleBlobChange_ImportedFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.HandleBlobChangeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnHandleBlobChange_ImportedFile_CanExecReason;
+
+        [EventBasedMethod("OnHandleBlobChange_ImportedFile_CanExecReason")]
+        public override string HandleBlobChangeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnHandleBlobChange_ImportedFile_CanExecReason != null)
+				{
+					OnHandleBlobChange_ImportedFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.HandleBlobChangeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -75,6 +116,47 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeDocument_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.Document> ret);
         public static event MakeDocument_Handler<ImportedFile> OnMakeDocument_ImportedFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<ImportedFile> OnMakeDocument_ImportedFile_CanExec;
+
+        [EventBasedMethod("OnMakeDocument_ImportedFile_CanExec")]
+        public virtual bool MakeDocumentCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnMakeDocument_ImportedFile_CanExec != null)
+				{
+					OnMakeDocument_ImportedFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnMakeDocument_ImportedFile_CanExecReason;
+
+        [EventBasedMethod("OnMakeDocument_ImportedFile_CanExecReason")]
+        public virtual string MakeDocumentCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnMakeDocument_ImportedFile_CanExecReason != null)
+				{
+					OnMakeDocument_ImportedFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -97,6 +179,47 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeDynamicFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.DynamicFile> ret);
         public static event MakeDynamicFile_Handler<ImportedFile> OnMakeDynamicFile_ImportedFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<ImportedFile> OnMakeDynamicFile_ImportedFile_CanExec;
+
+        [EventBasedMethod("OnMakeDynamicFile_ImportedFile_CanExec")]
+        public virtual bool MakeDynamicFileCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnMakeDynamicFile_ImportedFile_CanExec != null)
+				{
+					OnMakeDynamicFile_ImportedFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnMakeDynamicFile_ImportedFile_CanExecReason;
+
+        [EventBasedMethod("OnMakeDynamicFile_ImportedFile_CanExecReason")]
+        public virtual string MakeDynamicFileCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnMakeDynamicFile_ImportedFile_CanExecReason != null)
+				{
+					OnMakeDynamicFile_ImportedFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -119,6 +242,47 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeStaticFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.StaticFile> ret);
         public static event MakeStaticFile_Handler<ImportedFile> OnMakeStaticFile_ImportedFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<ImportedFile> OnMakeStaticFile_ImportedFile_CanExec;
+
+        [EventBasedMethod("OnMakeStaticFile_ImportedFile_CanExec")]
+        public virtual bool MakeStaticFileCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnMakeStaticFile_ImportedFile_CanExec != null)
+				{
+					OnMakeStaticFile_ImportedFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnMakeStaticFile_ImportedFile_CanExecReason;
+
+        [EventBasedMethod("OnMakeStaticFile_ImportedFile_CanExecReason")]
+        public virtual string MakeStaticFileCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnMakeStaticFile_ImportedFile_CanExecReason != null)
+				{
+					OnMakeStaticFile_ImportedFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -139,6 +303,47 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Open_Handler<ImportedFile> OnOpen_ImportedFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<ImportedFile> OnOpen_ImportedFile_CanExec;
+
+        [EventBasedMethod("OnOpen_ImportedFile_CanExec")]
+        public override bool OpenCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnOpen_ImportedFile_CanExec != null)
+				{
+					OnOpen_ImportedFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.OpenCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnOpen_ImportedFile_CanExecReason;
+
+        [EventBasedMethod("OnOpen_ImportedFile_CanExecReason")]
+        public override string OpenCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnOpen_ImportedFile_CanExecReason != null)
+				{
+					OnOpen_ImportedFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.OpenCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -159,6 +364,47 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Upload_Handler<ImportedFile> OnUpload_ImportedFile;
+		// CanExec
+		public static event CanExecMethodEventHandler<ImportedFile> OnUpload_ImportedFile_CanExec;
+
+        [EventBasedMethod("OnUpload_ImportedFile_CanExec")]
+        public override bool UploadCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnUpload_ImportedFile_CanExec != null)
+				{
+					OnUpload_ImportedFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.UploadCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnUpload_ImportedFile_CanExecReason;
+
+        [EventBasedMethod("OnUpload_ImportedFile_CanExecReason")]
+        public override string UploadCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnUpload_ImportedFile_CanExecReason != null)
+				{
+					OnUpload_ImportedFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.UploadCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

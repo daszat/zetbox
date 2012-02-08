@@ -904,6 +904,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<BaseParameter> OnGetLabel_BaseParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<BaseParameter> OnGetLabel_BaseParameter_CanExec;
+
+        [EventBasedMethod("OnGetLabel_BaseParameter_CanExec")]
+        public virtual bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_BaseParameter_CanExec != null)
+				{
+					OnGetLabel_BaseParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<BaseParameter> OnGetLabel_BaseParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_BaseParameter_CanExecReason")]
+        public virtual string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_BaseParameter_CanExecReason != null)
+				{
+					OnGetLabel_BaseParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -926,6 +967,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
         public static event GetParameterType_Handler<BaseParameter> OnGetParameterType_BaseParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<BaseParameter> OnGetParameterType_BaseParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterType_BaseParameter_CanExec")]
+        public virtual bool GetParameterTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterType_BaseParameter_CanExec != null)
+				{
+					OnGetParameterType_BaseParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<BaseParameter> OnGetParameterType_BaseParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterType_BaseParameter_CanExecReason")]
+        public virtual string GetParameterTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterType_BaseParameter_CanExecReason != null)
+				{
+					OnGetParameterType_BaseParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -948,6 +1030,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
+		// CanExec
+		public static event CanExecMethodEventHandler<BaseParameter> OnGetParameterTypeString_BaseParameter_CanExec;
+
+        [EventBasedMethod("OnGetParameterTypeString_BaseParameter_CanExec")]
+        public virtual bool GetParameterTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetParameterTypeString_BaseParameter_CanExec != null)
+				{
+					OnGetParameterTypeString_BaseParameter_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<BaseParameter> OnGetParameterTypeString_BaseParameter_CanExecReason;
+
+        [EventBasedMethod("OnGetParameterTypeString_BaseParameter_CanExecReason")]
+        public virtual string GetParameterTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetParameterTypeString_BaseParameter_CanExecReason != null)
+				{
+					OnGetParameterTypeString_BaseParameter_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

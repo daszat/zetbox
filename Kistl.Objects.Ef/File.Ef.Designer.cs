@@ -622,6 +622,47 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Blob> ret, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob);
         public static event HandleBlobChange_Handler<File> OnHandleBlobChange_File;
+		// CanExec
+		public static event CanExecMethodEventHandler<File> OnHandleBlobChange_File_CanExec;
+
+        [EventBasedMethod("OnHandleBlobChange_File_CanExec")]
+        public virtual bool HandleBlobChangeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnHandleBlobChange_File_CanExec != null)
+				{
+					OnHandleBlobChange_File_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<File> OnHandleBlobChange_File_CanExecReason;
+
+        [EventBasedMethod("OnHandleBlobChange_File_CanExecReason")]
+        public virtual string HandleBlobChangeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnHandleBlobChange_File_CanExecReason != null)
+				{
+					OnHandleBlobChange_File_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -643,6 +684,47 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void Open_Handler<T>(T obj);
         public static event Open_Handler<File> OnOpen_File;
+		// CanExec
+		public static event CanExecMethodEventHandler<File> OnOpen_File_CanExec;
+
+        [EventBasedMethod("OnOpen_File_CanExec")]
+        public virtual bool OpenCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnOpen_File_CanExec != null)
+				{
+					OnOpen_File_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<File> OnOpen_File_CanExecReason;
+
+        [EventBasedMethod("OnOpen_File_CanExecReason")]
+        public virtual string OpenCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnOpen_File_CanExecReason != null)
+				{
+					OnOpen_File_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -664,6 +746,47 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void Upload_Handler<T>(T obj);
         public static event Upload_Handler<File> OnUpload_File;
+		// CanExec
+		public static event CanExecMethodEventHandler<File> OnUpload_File_CanExec;
+
+        [EventBasedMethod("OnUpload_File_CanExec")]
+        public virtual bool UploadCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnUpload_File_CanExec != null)
+				{
+					OnUpload_File_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<File> OnUpload_File_CanExecReason;
+
+        [EventBasedMethod("OnUpload_File_CanExecReason")]
+        public virtual string UploadCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnUpload_File_CanExecReason != null)
+				{
+					OnUpload_File_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

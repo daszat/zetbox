@@ -259,6 +259,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetCodeTemplate_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetCodeTemplate_Handler<ConstraintInvocation> OnGetCodeTemplate_ConstraintInvocation;
+		// CanExec
+		public static event CanExecMethodEventHandler<ConstraintInvocation> OnGetCodeTemplate_ConstraintInvocation_CanExec;
+
+        [EventBasedMethod("OnGetCodeTemplate_ConstraintInvocation_CanExec")]
+        public virtual bool GetCodeTemplateCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetCodeTemplate_ConstraintInvocation_CanExec != null)
+				{
+					OnGetCodeTemplate_ConstraintInvocation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ConstraintInvocation> OnGetCodeTemplate_ConstraintInvocation_CanExecReason;
+
+        [EventBasedMethod("OnGetCodeTemplate_ConstraintInvocation_CanExecReason")]
+        public virtual string GetCodeTemplateCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetCodeTemplate_ConstraintInvocation_CanExecReason != null)
+				{
+					OnGetCodeTemplate_ConstraintInvocation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -281,6 +322,47 @@ namespace Kistl.App.Base
         }
         public delegate void GetMemberName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetMemberName_Handler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation;
+		// CanExec
+		public static event CanExecMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExec;
+
+        [EventBasedMethod("OnGetMemberName_ConstraintInvocation_CanExec")]
+        public virtual bool GetMemberNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetMemberName_ConstraintInvocation_CanExec != null)
+				{
+					OnGetMemberName_ConstraintInvocation_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExecReason;
+
+        [EventBasedMethod("OnGetMemberName_ConstraintInvocation_CanExecReason")]
+        public virtual string GetMemberNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetMemberName_ConstraintInvocation_CanExecReason != null)
+				{
+					OnGetMemberName_ConstraintInvocation_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

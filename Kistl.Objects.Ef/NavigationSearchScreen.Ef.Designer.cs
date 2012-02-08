@@ -1208,6 +1208,47 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetDefaultViewModel_Handler<NavigationSearchScreen> OnGetDefaultViewModel_NavigationSearchScreen;
+		// CanExec
+		public static event CanExecMethodEventHandler<NavigationSearchScreen> OnGetDefaultViewModel_NavigationSearchScreen_CanExec;
+
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationSearchScreen_CanExec")]
+        public override bool GetDefaultViewModelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDefaultViewModel_NavigationSearchScreen_CanExec != null)
+				{
+					OnGetDefaultViewModel_NavigationSearchScreen_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultViewModelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<NavigationSearchScreen> OnGetDefaultViewModel_NavigationSearchScreen_CanExecReason;
+
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationSearchScreen_CanExecReason")]
+        public override string GetDefaultViewModelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDefaultViewModel_NavigationSearchScreen_CanExecReason != null)
+				{
+					OnGetDefaultViewModel_NavigationSearchScreen_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDefaultViewModelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

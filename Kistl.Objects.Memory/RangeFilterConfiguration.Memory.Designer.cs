@@ -53,6 +53,47 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<RangeFilterConfiguration> OnCreateFilterModel_RangeFilterConfiguration;
+		// CanExec
+		public static event CanExecMethodEventHandler<RangeFilterConfiguration> OnCreateFilterModel_RangeFilterConfiguration_CanExec;
+
+        [EventBasedMethod("OnCreateFilterModel_RangeFilterConfiguration_CanExec")]
+        public override bool CreateFilterModelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateFilterModel_RangeFilterConfiguration_CanExec != null)
+				{
+					OnCreateFilterModel_RangeFilterConfiguration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.CreateFilterModelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<RangeFilterConfiguration> OnCreateFilterModel_RangeFilterConfiguration_CanExecReason;
+
+        [EventBasedMethod("OnCreateFilterModel_RangeFilterConfiguration_CanExecReason")]
+        public override string CreateFilterModelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateFilterModel_RangeFilterConfiguration_CanExecReason != null)
+				{
+					OnCreateFilterModel_RangeFilterConfiguration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.CreateFilterModelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -74,6 +115,47 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<RangeFilterConfiguration> OnGetLabel_RangeFilterConfiguration;
+		// CanExec
+		public static event CanExecMethodEventHandler<RangeFilterConfiguration> OnGetLabel_RangeFilterConfiguration_CanExec;
+
+        [EventBasedMethod("OnGetLabel_RangeFilterConfiguration_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_RangeFilterConfiguration_CanExec != null)
+				{
+					OnGetLabel_RangeFilterConfiguration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<RangeFilterConfiguration> OnGetLabel_RangeFilterConfiguration_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_RangeFilterConfiguration_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_RangeFilterConfiguration_CanExecReason != null)
+				{
+					OnGetLabel_RangeFilterConfiguration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

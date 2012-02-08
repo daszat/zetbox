@@ -64,6 +64,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<InitOnlyConstraint> OnGetErrorText_InitOnlyConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<InitOnlyConstraint> OnGetErrorText_InitOnlyConstraint_CanExec;
+
+        [EventBasedMethod("OnGetErrorText_InitOnlyConstraint_CanExec")]
+        public override bool GetErrorTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetErrorText_InitOnlyConstraint_CanExec != null)
+				{
+					OnGetErrorText_InitOnlyConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<InitOnlyConstraint> OnGetErrorText_InitOnlyConstraint_CanExecReason;
+
+        [EventBasedMethod("OnGetErrorText_InitOnlyConstraint_CanExecReason")]
+        public override string GetErrorTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetErrorText_InitOnlyConstraint_CanExecReason != null)
+				{
+					OnGetErrorText_InitOnlyConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -85,6 +126,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<InitOnlyConstraint> OnIsValid_InitOnlyConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<InitOnlyConstraint> OnIsValid_InitOnlyConstraint_CanExec;
+
+        [EventBasedMethod("OnIsValid_InitOnlyConstraint_CanExec")]
+        public override bool IsValidCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnIsValid_InitOnlyConstraint_CanExec != null)
+				{
+					OnIsValid_InitOnlyConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<InitOnlyConstraint> OnIsValid_InitOnlyConstraint_CanExecReason;
+
+        [EventBasedMethod("OnIsValid_InitOnlyConstraint_CanExecReason")]
+        public override string IsValidCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnIsValid_InitOnlyConstraint_CanExecReason != null)
+				{
+					OnIsValid_InitOnlyConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

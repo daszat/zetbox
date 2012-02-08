@@ -560,6 +560,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         }
         public delegate void CreateDefaultMethods_Handler<T>(T obj);
         public static event CreateDefaultMethods_Handler<ObjectClass> OnCreateDefaultMethods_ObjectClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnCreateDefaultMethods_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnCreateDefaultMethods_ObjectClass_CanExec")]
+        public virtual bool CreateDefaultMethodsCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateDefaultMethods_ObjectClass_CanExec != null)
+				{
+					OnCreateDefaultMethods_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnCreateDefaultMethods_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnCreateDefaultMethods_ObjectClass_CanExecReason")]
+        public virtual string CreateDefaultMethodsCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateDefaultMethods_ObjectClass_CanExecReason != null)
+				{
+					OnCreateDefaultMethods_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -582,6 +623,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         }
         public delegate void CreateMethod_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Method> ret);
         public static event CreateMethod_Handler<ObjectClass> OnCreateMethod_ObjectClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnCreateMethod_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnCreateMethod_ObjectClass_CanExec")]
+        public virtual bool CreateMethodCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateMethod_ObjectClass_CanExec != null)
+				{
+					OnCreateMethod_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnCreateMethod_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnCreateMethod_ObjectClass_CanExecReason")]
+        public virtual string CreateMethodCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateMethod_ObjectClass_CanExecReason != null)
+				{
+					OnCreateMethod_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -604,6 +686,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         }
         public delegate void CreateRelation_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Relation> ret);
         public static event CreateRelation_Handler<ObjectClass> OnCreateRelation_ObjectClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnCreateRelation_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnCreateRelation_ObjectClass_CanExec")]
+        public virtual bool CreateRelationCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateRelation_ObjectClass_CanExec != null)
+				{
+					OnCreateRelation_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnCreateRelation_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnCreateRelation_ObjectClass_CanExecReason")]
+        public virtual string CreateRelationCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateRelation_ObjectClass_CanExecReason != null)
+				{
+					OnCreateRelation_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -625,6 +748,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             return e.Result;
         }
         public static event GetDataType_Handler<ObjectClass> OnGetDataType_ObjectClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnGetDataType_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnGetDataType_ObjectClass_CanExec")]
+        public override bool GetDataTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataType_ObjectClass_CanExec != null)
+				{
+					OnGetDataType_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnGetDataType_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnGetDataType_ObjectClass_CanExecReason")]
+        public override string GetDataTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataType_ObjectClass_CanExecReason != null)
+				{
+					OnGetDataType_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -646,6 +810,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             return e.Result;
         }
         public static event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnGetDataTypeString_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnGetDataTypeString_ObjectClass_CanExec")]
+        public override bool GetDataTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataTypeString_ObjectClass_CanExec != null)
+				{
+					OnGetDataTypeString_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnGetDataTypeString_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnGetDataTypeString_ObjectClass_CanExecReason")]
+        public override string GetDataTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataTypeString_ObjectClass_CanExecReason != null)
+				{
+					OnGetDataTypeString_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -668,6 +873,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         }
         public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IEnumerable<Kistl.App.Base.Method>> ret);
         public static event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnGetInheritedMethods_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnGetInheritedMethods_ObjectClass_CanExec")]
+        public virtual bool GetInheritedMethodsCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetInheritedMethods_ObjectClass_CanExec != null)
+				{
+					OnGetInheritedMethods_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnGetInheritedMethods_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnGetInheritedMethods_ObjectClass_CanExecReason")]
+        public virtual string GetInheritedMethodsCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetInheritedMethods_ObjectClass_CanExecReason != null)
+				{
+					OnGetInheritedMethods_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -690,6 +936,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<ObjectClass> OnGetName_ObjectClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnGetName_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnGetName_ObjectClass_CanExec")]
+        public virtual bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_ObjectClass_CanExec != null)
+				{
+					OnGetName_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnGetName_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnGetName_ObjectClass_CanExecReason")]
+        public virtual string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_ObjectClass_CanExecReason != null)
+				{
+					OnGetName_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -710,6 +997,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             }
         }
         public static event ImplementInterfaces_Handler<ObjectClass> OnImplementInterfaces_ObjectClass;
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnImplementInterfaces_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnImplementInterfaces_ObjectClass_CanExec")]
+        public override bool ImplementInterfacesCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnImplementInterfaces_ObjectClass_CanExec != null)
+				{
+					OnImplementInterfaces_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnImplementInterfaces_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnImplementInterfaces_ObjectClass_CanExecReason")]
+        public override string ImplementInterfacesCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnImplementInterfaces_ObjectClass_CanExecReason != null)
+				{
+					OnImplementInterfaces_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

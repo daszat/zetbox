@@ -824,6 +824,47 @@ namespace Kistl.App.GUI
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<ViewModelDescriptor> OnGetName_ViewModelDescriptor;
+		// CanExec
+		public static event CanExecMethodEventHandler<ViewModelDescriptor> OnGetName_ViewModelDescriptor_CanExec;
+
+        [EventBasedMethod("OnGetName_ViewModelDescriptor_CanExec")]
+        public virtual bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_ViewModelDescriptor_CanExec != null)
+				{
+					OnGetName_ViewModelDescriptor_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ViewModelDescriptor> OnGetName_ViewModelDescriptor_CanExecReason;
+
+        [EventBasedMethod("OnGetName_ViewModelDescriptor_CanExecReason")]
+        public virtual string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_ViewModelDescriptor_CanExecReason != null)
+				{
+					OnGetName_ViewModelDescriptor_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

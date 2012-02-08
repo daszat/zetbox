@@ -251,6 +251,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<CompoundObjectProperty> OnGetElementTypeString_CompoundObjectProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetElementTypeString_CompoundObjectProperty_CanExec;
+
+        [EventBasedMethod("OnGetElementTypeString_CompoundObjectProperty_CanExec")]
+        public override bool GetElementTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetElementTypeString_CompoundObjectProperty_CanExec != null)
+				{
+					OnGetElementTypeString_CompoundObjectProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetElementTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectProperty> OnGetElementTypeString_CompoundObjectProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetElementTypeString_CompoundObjectProperty_CanExecReason")]
+        public override string GetElementTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetElementTypeString_CompoundObjectProperty_CanExecReason != null)
+				{
+					OnGetElementTypeString_CompoundObjectProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetElementTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -272,6 +313,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<CompoundObjectProperty> OnGetLabel_CompoundObjectProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetLabel_CompoundObjectProperty_CanExec;
+
+        [EventBasedMethod("OnGetLabel_CompoundObjectProperty_CanExec")]
+        public override bool GetLabelCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabel_CompoundObjectProperty_CanExec != null)
+				{
+					OnGetLabel_CompoundObjectProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectProperty> OnGetLabel_CompoundObjectProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetLabel_CompoundObjectProperty_CanExecReason")]
+        public override string GetLabelCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabel_CompoundObjectProperty_CanExecReason != null)
+				{
+					OnGetLabel_CompoundObjectProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetLabelCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -293,6 +375,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<CompoundObjectProperty> OnGetName_CompoundObjectProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetName_CompoundObjectProperty_CanExec;
+
+        [EventBasedMethod("OnGetName_CompoundObjectProperty_CanExec")]
+        public override bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_CompoundObjectProperty_CanExec != null)
+				{
+					OnGetName_CompoundObjectProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetNameCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectProperty> OnGetName_CompoundObjectProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetName_CompoundObjectProperty_CanExecReason")]
+        public override string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_CompoundObjectProperty_CanExecReason != null)
+				{
+					OnGetName_CompoundObjectProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetNameCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -314,6 +437,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<CompoundObjectProperty> OnGetPropertyType_CompoundObjectProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetPropertyType_CompoundObjectProperty_CanExec;
+
+        [EventBasedMethod("OnGetPropertyType_CompoundObjectProperty_CanExec")]
+        public override bool GetPropertyTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetPropertyType_CompoundObjectProperty_CanExec != null)
+				{
+					OnGetPropertyType_CompoundObjectProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectProperty> OnGetPropertyType_CompoundObjectProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetPropertyType_CompoundObjectProperty_CanExecReason")]
+        public override string GetPropertyTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetPropertyType_CompoundObjectProperty_CanExecReason != null)
+				{
+					OnGetPropertyType_CompoundObjectProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -335,6 +499,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<CompoundObjectProperty> OnGetPropertyTypeString_CompoundObjectProperty;
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetPropertyTypeString_CompoundObjectProperty_CanExec;
+
+        [EventBasedMethod("OnGetPropertyTypeString_CompoundObjectProperty_CanExec")]
+        public override bool GetPropertyTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetPropertyTypeString_CompoundObjectProperty_CanExec != null)
+				{
+					OnGetPropertyTypeString_CompoundObjectProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectProperty> OnGetPropertyTypeString_CompoundObjectProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetPropertyTypeString_CompoundObjectProperty_CanExecReason")]
+        public override string GetPropertyTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetPropertyTypeString_CompoundObjectProperty_CanExecReason != null)
+				{
+					OnGetPropertyTypeString_CompoundObjectProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetPropertyTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

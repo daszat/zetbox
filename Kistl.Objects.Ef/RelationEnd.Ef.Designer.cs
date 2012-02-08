@@ -1115,6 +1115,47 @@ namespace Kistl.App.Base
         }
         public delegate void CreateNavigator_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.ObjectReferenceProperty> ret);
         public static event CreateNavigator_Handler<RelationEnd> OnCreateNavigator_RelationEnd;
+		// CanExec
+		public static event CanExecMethodEventHandler<RelationEnd> OnCreateNavigator_RelationEnd_CanExec;
+
+        [EventBasedMethod("OnCreateNavigator_RelationEnd_CanExec")]
+        public virtual bool CreateNavigatorCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateNavigator_RelationEnd_CanExec != null)
+				{
+					OnCreateNavigator_RelationEnd_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<RelationEnd> OnCreateNavigator_RelationEnd_CanExecReason;
+
+        [EventBasedMethod("OnCreateNavigator_RelationEnd_CanExecReason")]
+        public virtual string CreateNavigatorCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateNavigator_RelationEnd_CanExecReason != null)
+				{
+					OnCreateNavigator_RelationEnd_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

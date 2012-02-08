@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.API;
+using Kistl.App.Base;
 
 namespace at.dasz.DocumentManagement
 {
@@ -10,13 +11,25 @@ namespace at.dasz.DocumentManagement
     public static class StaticFileActions
     {
         [Invocation]
-        public static void HandleBlobChange(at.dasz.DocumentManagement.StaticFile obj, MethodReturnEventArgs<Kistl.App.Base.Blob> e, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+        public static void HandleBlobChange(StaticFile obj, MethodReturnEventArgs<Blob> e, Blob oldBlob, Blob newBlob)
         {
             if (oldBlob != null && newBlob != oldBlob)
             {
                 throw new InvalidOperationException("Changing blob on static files is not allowed");
             }
             e.Result = newBlob;
+        }
+
+        [Invocation]
+        public static void UploadCanExec(StaticFile obj, MethodReturnEventArgs<bool> e)
+        {
+            e.Result = obj.Blob == null;
+        }
+
+        [Invocation]
+        public static void UploadCanExecReason(StaticFile obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "Changing blob on static files is not allowed";
         }
     }
 }

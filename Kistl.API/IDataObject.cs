@@ -397,6 +397,24 @@ namespace Kistl.API
     public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e);
 
     // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
+    // <summary>
+    // Delegate for the CanExec methods
+    // </summary>
+    //<typeparam name="T">Type of the implementing Object.</typeparam>
+    //<param name="obj">Object that has fired this Event.</param>
+    //<param name="e">Method return Arguments.</param>
+    public delegate void CanExecMethodEventHandler<T>(T obj, MethodReturnEventArgs<bool> e);
+
+    // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
+    // <summary>
+    // Delegate for the CanExecReason methods
+    // </summary>
+    //<typeparam name="T">Type of the implementing Object.</typeparam>
+    //<param name="obj">Object that has fired this Event.</param>
+    //<param name="e">Method return Arguments.</param>
+    public delegate void CanExecReasonMethodEventHandler<T>(T obj, MethodReturnEventArgs<string> e);
+
+    // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
     //<summary>
     //Handler for custom save events. TODO: Außer SetObject hat's noch niemand implementiert.
     //</summary>

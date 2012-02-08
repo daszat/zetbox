@@ -53,6 +53,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<NotNullableConstraint> OnGetErrorText_NotNullableConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<NotNullableConstraint> OnGetErrorText_NotNullableConstraint_CanExec;
+
+        [EventBasedMethod("OnGetErrorText_NotNullableConstraint_CanExec")]
+        public override bool GetErrorTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetErrorText_NotNullableConstraint_CanExec != null)
+				{
+					OnGetErrorText_NotNullableConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<NotNullableConstraint> OnGetErrorText_NotNullableConstraint_CanExecReason;
+
+        [EventBasedMethod("OnGetErrorText_NotNullableConstraint_CanExecReason")]
+        public override string GetErrorTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetErrorText_NotNullableConstraint_CanExecReason != null)
+				{
+					OnGetErrorText_NotNullableConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetErrorTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -74,6 +115,47 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<NotNullableConstraint> OnIsValid_NotNullableConstraint;
+		// CanExec
+		public static event CanExecMethodEventHandler<NotNullableConstraint> OnIsValid_NotNullableConstraint_CanExec;
+
+        [EventBasedMethod("OnIsValid_NotNullableConstraint_CanExec")]
+        public override bool IsValidCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnIsValid_NotNullableConstraint_CanExec != null)
+				{
+					OnIsValid_NotNullableConstraint_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<NotNullableConstraint> OnIsValid_NotNullableConstraint_CanExecReason;
+
+        [EventBasedMethod("OnIsValid_NotNullableConstraint_CanExecReason")]
+        public override string IsValidCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnIsValid_NotNullableConstraint_CanExecReason != null)
+				{
+					OnIsValid_NotNullableConstraint_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.IsValidCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

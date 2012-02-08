@@ -617,6 +617,47 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         }
         public delegate void CreateMappingReport_Handler<T>(T obj);
         public static event CreateMappingReport_Handler<MigrationProject> OnCreateMappingReport_MigrationProject;
+		// CanExec
+		public static event CanExecMethodEventHandler<MigrationProject> OnCreateMappingReport_MigrationProject_CanExec;
+
+        [EventBasedMethod("OnCreateMappingReport_MigrationProject_CanExec")]
+        public virtual bool CreateMappingReportCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateMappingReport_MigrationProject_CanExec != null)
+				{
+					OnCreateMappingReport_MigrationProject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MigrationProject> OnCreateMappingReport_MigrationProject_CanExecReason;
+
+        [EventBasedMethod("OnCreateMappingReport_MigrationProject_CanExecReason")]
+        public virtual string CreateMappingReportCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateMappingReport_MigrationProject_CanExecReason != null)
+				{
+					OnCreateMappingReport_MigrationProject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -638,6 +679,47 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         }
         public delegate void UpdateFromSourceSchema_Handler<T>(T obj);
         public static event UpdateFromSourceSchema_Handler<MigrationProject> OnUpdateFromSourceSchema_MigrationProject;
+		// CanExec
+		public static event CanExecMethodEventHandler<MigrationProject> OnUpdateFromSourceSchema_MigrationProject_CanExec;
+
+        [EventBasedMethod("OnUpdateFromSourceSchema_MigrationProject_CanExec")]
+        public virtual bool UpdateFromSourceSchemaCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnUpdateFromSourceSchema_MigrationProject_CanExec != null)
+				{
+					OnUpdateFromSourceSchema_MigrationProject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<MigrationProject> OnUpdateFromSourceSchema_MigrationProject_CanExecReason;
+
+        [EventBasedMethod("OnUpdateFromSourceSchema_MigrationProject_CanExecReason")]
+        public virtual string UpdateFromSourceSchemaCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnUpdateFromSourceSchema_MigrationProject_CanExecReason != null)
+				{
+					OnUpdateFromSourceSchema_MigrationProject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

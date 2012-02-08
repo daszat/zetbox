@@ -1183,6 +1183,47 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         }
         public delegate void CreateProperty_Handler<T>(T obj);
         public static event CreateProperty_Handler<SourceColumn> OnCreateProperty_SourceColumn;
+		// CanExec
+		public static event CanExecMethodEventHandler<SourceColumn> OnCreateProperty_SourceColumn_CanExec;
+
+        [EventBasedMethod("OnCreateProperty_SourceColumn_CanExec")]
+        public virtual bool CreatePropertyCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateProperty_SourceColumn_CanExec != null)
+				{
+					OnCreateProperty_SourceColumn_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<SourceColumn> OnCreateProperty_SourceColumn_CanExecReason;
+
+        [EventBasedMethod("OnCreateProperty_SourceColumn_CanExecReason")]
+        public virtual string CreatePropertyCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateProperty_SourceColumn_CanExecReason != null)
+				{
+					OnCreateProperty_SourceColumn_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

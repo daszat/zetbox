@@ -147,6 +147,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             return e.Result;
         }
         public static event GetDataType_Handler<Enumeration> OnGetDataType_Enumeration;
+		// CanExec
+		public static event CanExecMethodEventHandler<Enumeration> OnGetDataType_Enumeration_CanExec;
+
+        [EventBasedMethod("OnGetDataType_Enumeration_CanExec")]
+        public override bool GetDataTypeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataType_Enumeration_CanExec != null)
+				{
+					OnGetDataType_Enumeration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Enumeration> OnGetDataType_Enumeration_CanExecReason;
+
+        [EventBasedMethod("OnGetDataType_Enumeration_CanExecReason")]
+        public override string GetDataTypeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataType_Enumeration_CanExecReason != null)
+				{
+					OnGetDataType_Enumeration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -168,6 +209,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             return e.Result;
         }
         public static event GetDataTypeString_Handler<Enumeration> OnGetDataTypeString_Enumeration;
+		// CanExec
+		public static event CanExecMethodEventHandler<Enumeration> OnGetDataTypeString_Enumeration_CanExec;
+
+        [EventBasedMethod("OnGetDataTypeString_Enumeration_CanExec")]
+        public override bool GetDataTypeStringCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDataTypeString_Enumeration_CanExec != null)
+				{
+					OnGetDataTypeString_Enumeration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Enumeration> OnGetDataTypeString_Enumeration_CanExecReason;
+
+        [EventBasedMethod("OnGetDataTypeString_Enumeration_CanExecReason")]
+        public override string GetDataTypeStringCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDataTypeString_Enumeration_CanExecReason != null)
+				{
+					OnGetDataTypeString_Enumeration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDataTypeStringCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -190,6 +272,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public delegate void GetEntryByName_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> ret, string name);
         public static event GetEntryByName_Handler<Enumeration> OnGetEntryByName_Enumeration;
+		// CanExec
+		public static event CanExecMethodEventHandler<Enumeration> OnGetEntryByName_Enumeration_CanExec;
+
+        [EventBasedMethod("OnGetEntryByName_Enumeration_CanExec")]
+        public virtual bool GetEntryByNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetEntryByName_Enumeration_CanExec != null)
+				{
+					OnGetEntryByName_Enumeration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Enumeration> OnGetEntryByName_Enumeration_CanExecReason;
+
+        [EventBasedMethod("OnGetEntryByName_Enumeration_CanExecReason")]
+        public virtual string GetEntryByNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetEntryByName_Enumeration_CanExecReason != null)
+				{
+					OnGetEntryByName_Enumeration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -212,6 +335,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public delegate void GetEntryByValue_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> ret, int val);
         public static event GetEntryByValue_Handler<Enumeration> OnGetEntryByValue_Enumeration;
+		// CanExec
+		public static event CanExecMethodEventHandler<Enumeration> OnGetEntryByValue_Enumeration_CanExec;
+
+        [EventBasedMethod("OnGetEntryByValue_Enumeration_CanExec")]
+        public virtual bool GetEntryByValueCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetEntryByValue_Enumeration_CanExec != null)
+				{
+					OnGetEntryByValue_Enumeration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Enumeration> OnGetEntryByValue_Enumeration_CanExecReason;
+
+        [EventBasedMethod("OnGetEntryByValue_Enumeration_CanExecReason")]
+        public virtual string GetEntryByValueCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetEntryByValue_Enumeration_CanExecReason != null)
+				{
+					OnGetEntryByValue_Enumeration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -234,6 +398,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public delegate void GetLabelByName_Handler<T>(T obj, MethodReturnEventArgs<string> ret, string name);
         public static event GetLabelByName_Handler<Enumeration> OnGetLabelByName_Enumeration;
+		// CanExec
+		public static event CanExecMethodEventHandler<Enumeration> OnGetLabelByName_Enumeration_CanExec;
+
+        [EventBasedMethod("OnGetLabelByName_Enumeration_CanExec")]
+        public virtual bool GetLabelByNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabelByName_Enumeration_CanExec != null)
+				{
+					OnGetLabelByName_Enumeration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Enumeration> OnGetLabelByName_Enumeration_CanExecReason;
+
+        [EventBasedMethod("OnGetLabelByName_Enumeration_CanExecReason")]
+        public virtual string GetLabelByNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabelByName_Enumeration_CanExecReason != null)
+				{
+					OnGetLabelByName_Enumeration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -256,6 +461,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public delegate void GetLabelByValue_Handler<T>(T obj, MethodReturnEventArgs<string> ret, int val);
         public static event GetLabelByValue_Handler<Enumeration> OnGetLabelByValue_Enumeration;
+		// CanExec
+		public static event CanExecMethodEventHandler<Enumeration> OnGetLabelByValue_Enumeration_CanExec;
+
+        [EventBasedMethod("OnGetLabelByValue_Enumeration_CanExec")]
+        public virtual bool GetLabelByValueCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetLabelByValue_Enumeration_CanExec != null)
+				{
+					OnGetLabelByValue_Enumeration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Enumeration> OnGetLabelByValue_Enumeration_CanExecReason;
+
+        [EventBasedMethod("OnGetLabelByValue_Enumeration_CanExecReason")]
+        public virtual string GetLabelByValueCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetLabelByValue_Enumeration_CanExecReason != null)
+				{
+					OnGetLabelByValue_Enumeration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
@@ -276,6 +522,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             }
         }
         public static event ImplementInterfaces_Handler<Enumeration> OnImplementInterfaces_Enumeration;
+		// CanExec
+		public static event CanExecMethodEventHandler<Enumeration> OnImplementInterfaces_Enumeration_CanExec;
+
+        [EventBasedMethod("OnImplementInterfaces_Enumeration_CanExec")]
+        public override bool ImplementInterfacesCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnImplementInterfaces_Enumeration_CanExec != null)
+				{
+					OnImplementInterfaces_Enumeration_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Enumeration> OnImplementInterfaces_Enumeration_CanExecReason;
+
+        [EventBasedMethod("OnImplementInterfaces_Enumeration_CanExecReason")]
+        public override string ImplementInterfacesCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnImplementInterfaces_Enumeration_CanExecReason != null)
+				{
+					OnImplementInterfaces_Enumeration_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ImplementInterfacesCanExecReason;
+				}
+				return e.Result;
+			}
+        }
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         public override Type GetImplementedInterface()

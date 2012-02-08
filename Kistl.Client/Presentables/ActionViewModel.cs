@@ -54,11 +54,22 @@ namespace Kistl.Client.Presentables
                         Method.GetLabel(), 
                         Method.Description, 
                         Execute,
-                        null, null
+                        CanExecute, 
+                        GetReason
                     );
                 }
                 return _ExecuteCommand;
             }
+        }
+
+        public bool CanExecute()
+        {
+            return Object.GetPropertyValue<bool>(Method.Name + "CanExec");
+        }
+
+        public string GetReason()
+        {
+            return Object.GetPropertyValue<string>(Method.Name + "CanExecReason");
         }
 
         /// <summary>
