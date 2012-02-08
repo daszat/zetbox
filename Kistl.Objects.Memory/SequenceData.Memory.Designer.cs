@@ -85,7 +85,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.SequenceData, int> OnCurrentNumber_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.SequenceData, int> OnCurrentNumber_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.SequenceData> OnCurrentNumber_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.SequenceData> OnCurrentNumber_IsValid;
 
         /// <summary>
         /// 
@@ -192,7 +192,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.SequenceData, Kistl.App.Base.Sequence> OnSequence_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.SequenceData, Kistl.App.Base.Sequence> OnSequence_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.SequenceData> OnSequence_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.SequenceData> OnSequence_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -267,18 +267,18 @@ namespace Kistl.App.Base
                         new Guid("e557569b-1ed8-49a6-959e-0a6bc3ffa591"),
                         "CurrentNumber",
                         null,
-                        obj => ((SequenceDataMemoryImpl)obj).CurrentNumber,
+                        obj => obj.CurrentNumber,
                         (obj, val) => obj.CurrentNumber = val,
-						obj => ((SequenceDataMemoryImpl)obj).OnCurrentNumber_IsValid), 
+						obj => OnCurrentNumber_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<SequenceData, Kistl.App.Base.Sequence>(
                         lazyCtx,
                         new Guid("98a20549-d4ff-4caf-bae2-10951b04c6f1"),
                         "Sequence",
                         null,
-                        obj => ((SequenceDataMemoryImpl)obj).Sequence,
+                        obj => obj.Sequence,
                         (obj, val) => obj.Sequence = val,
-						obj => ((SequenceDataMemoryImpl)obj).OnSequence_IsValid), 
+						obj => OnSequence_IsValid), 
                     // position columns
                 };
             }

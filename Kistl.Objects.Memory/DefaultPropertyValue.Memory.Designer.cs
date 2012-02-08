@@ -123,7 +123,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -189,7 +189,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -280,7 +280,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -346,7 +346,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -412,7 +412,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnExportGuid_IsValid;
 
         /// <summary>
         /// Property where the default value is set
@@ -520,7 +520,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnProperty_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnProperty_IsValid;
 
         /// <summary>
         /// GetDefaultValue
@@ -542,6 +542,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetDefaultValue_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret);
         public static event GetDefaultValue_Handler<DefaultPropertyValue> OnGetDefaultValue_DefaultPropertyValue;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DefaultPropertyValue> OnGetDefaultValue_DefaultPropertyValue_CanExec;
 
@@ -583,7 +584,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -693,54 +694,54 @@ namespace Kistl.App.Base
                         new Guid("c33da8b7-beba-43e5-a9e8-a8d51c6a3443"),
                         "ChangedBy",
                         null,
-                        obj => ((DefaultPropertyValueMemoryImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((DefaultPropertyValueMemoryImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DefaultPropertyValue, DateTime>(
                         lazyCtx,
                         new Guid("0f199917-c51d-4f4e-9c59-663a274c79a0"),
                         "ChangedOn",
                         null,
-                        obj => ((DefaultPropertyValueMemoryImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((DefaultPropertyValueMemoryImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DefaultPropertyValue, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("68c4fa75-42bd-4d51-b74d-a074ea17e242"),
                         "CreatedBy",
                         null,
-                        obj => ((DefaultPropertyValueMemoryImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((DefaultPropertyValueMemoryImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DefaultPropertyValue, DateTime>(
                         lazyCtx,
                         new Guid("4ace0c4f-58d7-4656-b263-9adae69a6b06"),
                         "CreatedOn",
                         null,
-                        obj => ((DefaultPropertyValueMemoryImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((DefaultPropertyValueMemoryImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DefaultPropertyValue, Guid>(
                         lazyCtx,
                         new Guid("e672de1a-e0f4-4613-9d1f-121ba543c2ec"),
                         "ExportGuid",
                         null,
-                        obj => ((DefaultPropertyValueMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((DefaultPropertyValueMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DefaultPropertyValue, Kistl.App.Base.Property>(
                         lazyCtx,
                         new Guid("a2451b2f-2430-4de4-81a6-3d5ac9f0138f"),
                         "Property",
                         null,
-                        obj => ((DefaultPropertyValueMemoryImpl)obj).Property,
+                        obj => obj.Property,
                         (obj, val) => obj.Property = val,
-						obj => ((DefaultPropertyValueMemoryImpl)obj).OnProperty_IsValid), 
+						obj => OnProperty_IsValid), 
                     // position columns
                 };
             }

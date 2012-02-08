@@ -123,7 +123,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -189,7 +189,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -280,7 +280,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -346,7 +346,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Description of this Module
@@ -399,7 +399,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -465,7 +465,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnExportGuid_IsValid;
 
         /// <summary>
         /// Name des Moduls
@@ -518,7 +518,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnName_IsValid;
 
         /// <summary>
         /// CLR Namespace des Moduls
@@ -571,7 +571,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnNamespace_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnNamespace_IsValid;
 
         /// <summary>
         /// Name of the database schema
@@ -624,7 +624,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnSchemaName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnSchemaName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Module> OnSchemaName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Module> OnSchemaName_IsValid;
 
         /// <summary>
         /// 
@@ -646,6 +646,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Module> OnGetName_Module;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Module> OnGetName_Module_CanExec;
 
@@ -687,7 +688,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -783,81 +784,81 @@ namespace Kistl.App.Base
                         new Guid("d1cad06b-040e-417c-8e43-67fa2e861649"),
                         "ChangedBy",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((ModuleMemoryImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Module, DateTime>(
                         lazyCtx,
                         new Guid("75aedd67-e42d-461d-9263-c301d15b54f0"),
                         "ChangedOn",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((ModuleMemoryImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Module, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("7b76322d-c8cd-4845-9cb4-b77f572692be"),
                         "CreatedBy",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((ModuleMemoryImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Module, DateTime>(
                         lazyCtx,
                         new Guid("c6370ff5-115a-441d-a688-28297c9e46f8"),
                         "CreatedOn",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((ModuleMemoryImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Module, string>(
                         lazyCtx,
                         new Guid("79408b86-1731-42ad-89b2-ed5c567fbf8a"),
                         "Description",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((ModuleMemoryImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Module, Guid>(
                         lazyCtx,
                         new Guid("75e3db82-220c-474e-973a-ceb65fd8386d"),
                         "ExportGuid",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((ModuleMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Module, string>(
                         lazyCtx,
                         new Guid("63facb30-d8f7-42f6-8c14-85933d5f94b8"),
                         "Name",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((ModuleMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Module, string>(
                         lazyCtx,
                         new Guid("36d2b9e7-d6b9-4a9c-a363-7e059a637919"),
                         "Namespace",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).Namespace,
+                        obj => obj.Namespace,
                         (obj, val) => obj.Namespace = val,
-						obj => ((ModuleMemoryImpl)obj).OnNamespace_IsValid), 
+						obj => OnNamespace_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Module, string>(
                         lazyCtx,
                         new Guid("247ecea2-c8f7-4b30-9c16-8c02128413c8"),
                         "SchemaName",
                         null,
-                        obj => ((ModuleMemoryImpl)obj).SchemaName,
+                        obj => obj.SchemaName,
                         (obj, val) => obj.SchemaName = val,
-						obj => ((ModuleMemoryImpl)obj).OnSchemaName_IsValid), 
+						obj => OnSchemaName_IsValid), 
                     // position columns
                 };
             }

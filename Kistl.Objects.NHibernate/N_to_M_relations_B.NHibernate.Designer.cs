@@ -74,7 +74,7 @@ namespace Kistl.App.Test
 		// ignored, but required for Serialization
         private bool ASide_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_B> OnASide_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_B> OnASide_IsValid;
 
         /// <summary>
         /// 
@@ -126,7 +126,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.N_to_M_relations_B, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.N_to_M_relations_B, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_B> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_B> OnName_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -180,16 +180,16 @@ namespace Kistl.App.Test
                         null,
                         obj => obj.ASide,
                         null, // lists are read-only properties
-                        obj => ((N_to_M_relations_BNHibernateImpl)obj).OnASide_IsValid), 
+                        obj => OnASide_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<N_to_M_relations_B, string>(
                         lazyCtx,
                         new Guid("80ec9efe-c73b-4554-a145-064a32f225b8"),
                         "Name",
                         null,
-                        obj => ((N_to_M_relations_BNHibernateImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((N_to_M_relations_BNHibernateImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }

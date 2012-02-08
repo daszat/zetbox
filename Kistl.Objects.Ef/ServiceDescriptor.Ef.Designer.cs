@@ -140,7 +140,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -209,7 +209,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -314,7 +314,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -383,7 +383,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnCreatedOn_IsValid;
 
         /// <summary>
         /// 
@@ -454,7 +454,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.DeploymentRestriction?> OnDeploymentRestriction_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.DeploymentRestriction?> OnDeploymentRestriction_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnDeploymentRestriction_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnDeploymentRestriction_IsValid;
 
         /// <summary>
         /// 
@@ -510,7 +510,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -579,7 +579,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -685,7 +685,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -791,7 +791,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.TypeRef> OnTypeRef_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ServiceDescriptor, Kistl.App.Base.TypeRef> OnTypeRef_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnTypeRef_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ServiceDescriptor> OnTypeRef_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -875,81 +875,81 @@ namespace Kistl.App.Base
                         new Guid("fd0c9acd-7148-4148-85fd-1725eb67ae2a"),
                         "ChangedBy",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ServiceDescriptor, DateTime>(
                         lazyCtx,
                         new Guid("9052e01a-1c9a-4c3b-8921-c27d21ec9957"),
                         "ChangedOn",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ServiceDescriptor, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("a9513975-0033-4704-881f-dd7fef4ea0fa"),
                         "CreatedBy",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ServiceDescriptor, DateTime>(
                         lazyCtx,
                         new Guid("39ecc961-645e-4323-aef4-30420f601a93"),
                         "CreatedOn",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ServiceDescriptor, Kistl.App.Base.DeploymentRestriction?>(
                         lazyCtx,
                         new Guid("0ddea895-aca0-41ff-ada3-37e99100d081"),
                         "DeploymentRestriction",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).DeploymentRestriction,
+                        obj => obj.DeploymentRestriction,
                         (obj, val) => obj.DeploymentRestriction = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnDeploymentRestriction_IsValid), 
+						obj => OnDeploymentRestriction_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ServiceDescriptor, string>(
                         lazyCtx,
                         new Guid("10e8c65c-ca0f-4ed6-b830-457117c30c42"),
                         "Description",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ServiceDescriptor, Guid>(
                         lazyCtx,
                         new Guid("93a1fd7b-b7ba-475a-a9bd-7ddaeb1ccc14"),
                         "ExportGuid",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ServiceDescriptor, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("db221b79-f50b-4243-8591-e03d31b3a24f"),
                         "Module",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ServiceDescriptor, Kistl.App.Base.TypeRef>(
                         lazyCtx,
                         new Guid("2f31a3e7-cead-480a-a515-54da212b45dc"),
                         "TypeRef",
                         null,
-                        obj => ((ServiceDescriptorEfImpl)obj).TypeRef,
+                        obj => obj.TypeRef,
                         (obj, val) => obj.TypeRef = val,
-						obj => ((ServiceDescriptorEfImpl)obj).OnTypeRef_IsValid), 
+						obj => OnTypeRef_IsValid), 
                     // position columns
                 };
             }

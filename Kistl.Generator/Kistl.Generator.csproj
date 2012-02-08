@@ -262,6 +262,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\MethodCanExec.cs" />
+    <Compile Include="Templates\ObjectClasses\MethodCanExec.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MethodCanExec.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\ReloadOneReference.cs">
       <DependentUpon>ReloadOneReference.cst</DependentUpon>
     </Compile>
@@ -595,6 +601,10 @@
     <None Include="Templates\ObjectClasses\Method.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Method.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\MethodCanExec.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>MethodCanExec.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\ObjectClasses\ReloadOneReference.cst">
       <Generator>Arebis Template Processor</Generator>

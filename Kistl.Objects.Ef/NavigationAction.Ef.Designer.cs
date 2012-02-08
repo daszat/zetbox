@@ -56,6 +56,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetDefaultViewModel_Handler<NavigationAction> OnGetDefaultViewModel_NavigationAction;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<NavigationAction> OnGetDefaultViewModel_NavigationAction_CanExec;
 
@@ -97,7 +98,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

@@ -155,6 +155,8 @@
     <Compile Include="KistlBase\ObjectReferencePropertyActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="KistlBase\RelationEndActions.cs" />
+    <Compile Include="Projekte\ProjektActions.cs" />
+    <Compile Include="Projekte\TaskActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">

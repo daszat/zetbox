@@ -85,7 +85,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParentChild, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.RequiredParentChild, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParentChild> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.RequiredParentChild> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -192,7 +192,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParentChild, Kistl.App.Test.RequiredParent> OnParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.RequiredParentChild, Kistl.App.Test.RequiredParent> OnParent_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParentChild> OnParent_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.RequiredParentChild> OnParent_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -267,18 +267,18 @@ namespace Kistl.App.Test
                         new Guid("82dc687e-3915-4f03-9a1f-75e42fcbe7cd"),
                         "Name",
                         null,
-                        obj => ((RequiredParentChildMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((RequiredParentChildMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<RequiredParentChild, Kistl.App.Test.RequiredParent>(
                         lazyCtx,
                         new Guid("09fb9f88-7a59-4dae-8cad-9fbab99f32c3"),
                         "Parent",
                         null,
-                        obj => ((RequiredParentChildMemoryImpl)obj).Parent,
+                        obj => obj.Parent,
                         (obj, val) => obj.Parent = val,
-						obj => ((RequiredParentChildMemoryImpl)obj).OnParent_IsValid), 
+						obj => OnParent_IsValid), 
                     // position columns
                 };
             }

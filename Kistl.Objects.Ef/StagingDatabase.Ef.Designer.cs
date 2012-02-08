@@ -140,7 +140,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -209,7 +209,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnChangedOn_IsValid;
 
         /// <summary>
         /// 
@@ -265,7 +265,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, string> OnConnectionStringKey_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, string> OnConnectionStringKey_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnConnectionStringKey_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnConnectionStringKey_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -370,7 +370,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -439,7 +439,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnCreatedOn_IsValid;
 
         /// <summary>
         /// 
@@ -495,7 +495,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -564,7 +564,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -682,7 +682,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, ZBox.App.SchemaMigration.MigrationProject> OnMigrationProject_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, ZBox.App.SchemaMigration.MigrationProject> OnMigrationProject_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnMigrationProject_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnMigrationProject_IsValid;
 
         /// <summary>
         /// 
@@ -738,7 +738,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, string> OnOriginConnectionStringKey_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, string> OnOriginConnectionStringKey_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnOriginConnectionStringKey_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnOriginConnectionStringKey_IsValid;
 
         /// <summary>
         /// 
@@ -794,7 +794,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, string> OnSchema_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.StagingDatabase, string> OnSchema_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnSchema_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnSchema_IsValid;
 
         /// <summary>
         /// 
@@ -851,7 +851,7 @@ namespace ZBox.App.SchemaMigration
 
 public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingDatabase> OnSourceTables_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnSourceTables_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.StagingDatabase> OnSourceTables_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -928,90 +928,90 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
                         new Guid("ee3476a8-1715-4dc2-a2b2-13e4a2a27e10"),
                         "ChangedBy",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, DateTime>(
                         lazyCtx,
                         new Guid("16652536-fb87-4b1b-866e-ec2fb68a8ae2"),
                         "ChangedOn",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, string>(
                         lazyCtx,
                         new Guid("6aa09a38-a4be-4095-bf8d-9799bd56a14d"),
                         "ConnectionStringKey",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).ConnectionStringKey,
+                        obj => obj.ConnectionStringKey,
                         (obj, val) => obj.ConnectionStringKey = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnConnectionStringKey_IsValid), 
+						obj => OnConnectionStringKey_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("9db15b1e-a55e-444c-9fa7-9dd66d9b13f6"),
                         "CreatedBy",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, DateTime>(
                         lazyCtx,
                         new Guid("d402f8a4-dc92-4041-a295-50257057e656"),
                         "CreatedOn",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, string>(
                         lazyCtx,
                         new Guid("157ecaf4-3ee5-4d78-8148-ab936de50523"),
                         "Description",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, Guid>(
                         lazyCtx,
                         new Guid("6bc56e55-16c4-4c94-8c20-12861844e053"),
                         "ExportGuid",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, ZBox.App.SchemaMigration.MigrationProject>(
                         lazyCtx,
                         new Guid("8edc845c-6d39-45f7-ae28-434f0a1ef503"),
                         "MigrationProject",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).MigrationProject,
+                        obj => obj.MigrationProject,
                         (obj, val) => obj.MigrationProject = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnMigrationProject_IsValid), 
+						obj => OnMigrationProject_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, string>(
                         lazyCtx,
                         new Guid("f82f3e1f-3275-4fcf-a362-71f7175f40f1"),
                         "OriginConnectionStringKey",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).OriginConnectionStringKey,
+                        obj => obj.OriginConnectionStringKey,
                         (obj, val) => obj.OriginConnectionStringKey = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnOriginConnectionStringKey_IsValid), 
+						obj => OnOriginConnectionStringKey_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StagingDatabase, string>(
                         lazyCtx,
                         new Guid("601a0dc6-ec58-4092-a53c-c902fcc85379"),
                         "Schema",
                         null,
-                        obj => ((StagingDatabaseEfImpl)obj).Schema,
+                        obj => obj.Schema,
                         (obj, val) => obj.Schema = val,
-						obj => ((StagingDatabaseEfImpl)obj).OnSchema_IsValid), 
+						obj => OnSchema_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<StagingDatabase, ICollection<ZBox.App.SchemaMigration.SourceTable>>(
                         lazyCtx,
@@ -1020,7 +1020,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
                         null,
                         obj => obj.SourceTables,
                         null, // lists are read-only properties
-                        obj => ((StagingDatabaseEfImpl)obj).OnSourceTables_IsValid), 
+                        obj => OnSourceTables_IsValid), 
                     // position columns
                 };
             }

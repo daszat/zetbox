@@ -73,7 +73,7 @@ namespace Kistl.App.Test
 
 public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> OnChildren_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParent> OnChildren_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.RequiredParent> OnChildren_IsValid;
 
         /// <summary>
         /// dummy property
@@ -126,7 +126,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParent, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.RequiredParent, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParent> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.RequiredParent> OnName_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -179,16 +179,16 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
                         null,
                         obj => obj.Children,
                         null, // lists are read-only properties
-                        obj => ((RequiredParentMemoryImpl)obj).OnChildren_IsValid), 
+                        obj => OnChildren_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<RequiredParent, string>(
                         lazyCtx,
                         new Guid("22abc57e-581f-49f1-8eff-747e126a6480"),
                         "Name",
                         null,
-                        obj => ((RequiredParentMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((RequiredParentMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }

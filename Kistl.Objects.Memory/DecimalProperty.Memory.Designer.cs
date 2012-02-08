@@ -85,7 +85,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DecimalProperty, int> OnPrecision_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DecimalProperty, int> OnPrecision_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DecimalProperty> OnPrecision_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DecimalProperty> OnPrecision_IsValid;
 
         /// <summary>
         /// The maximum number of decimal digits that can be stored to the right of the decimal point.
@@ -138,7 +138,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DecimalProperty> OnScale_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DecimalProperty> OnScale_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -159,6 +159,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<DecimalProperty> OnGetElementTypeString_DecimalProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DecimalProperty> OnGetElementTypeString_DecimalProperty_CanExec;
 
@@ -200,7 +201,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -221,6 +222,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DecimalProperty> OnGetLabel_DecimalProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DecimalProperty> OnGetLabel_DecimalProperty_CanExec;
 
@@ -262,7 +264,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -283,6 +285,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<DecimalProperty> OnGetName_DecimalProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DecimalProperty> OnGetName_DecimalProperty_CanExec;
 
@@ -324,7 +327,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -345,6 +348,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<DecimalProperty> OnGetPropertyType_DecimalProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DecimalProperty> OnGetPropertyType_DecimalProperty_CanExec;
 
@@ -386,7 +390,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -407,6 +411,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<DecimalProperty> OnGetPropertyTypeString_DecimalProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DecimalProperty> OnGetPropertyTypeString_DecimalProperty_CanExec;
 
@@ -448,7 +453,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -500,18 +505,18 @@ namespace Kistl.App.Base
                         new Guid("35dd7765-0e26-4195-b687-ce814560ba34"),
                         "Precision",
                         null,
-                        obj => ((DecimalPropertyMemoryImpl)obj).Precision,
+                        obj => obj.Precision,
                         (obj, val) => obj.Precision = val,
-						obj => ((DecimalPropertyMemoryImpl)obj).OnPrecision_IsValid), 
+						obj => OnPrecision_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DecimalProperty, int>(
                         lazyCtx,
                         new Guid("fba03086-8a2b-4c25-b83f-df63933b62fe"),
                         "Scale",
                         null,
-                        obj => ((DecimalPropertyMemoryImpl)obj).Scale,
+                        obj => obj.Scale,
                         (obj, val) => obj.Scale = val,
-						obj => ((DecimalPropertyMemoryImpl)obj).OnScale_IsValid), 
+						obj => OnScale_IsValid), 
                     // position columns
                 };
             }

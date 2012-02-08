@@ -54,7 +54,7 @@
                         null,
                         obj => obj.<%= propertyName %>,
                         null, // lists are read-only properties
-                        obj => ((<%= implName %>)obj).On<%= propertyName %>_IsValid), 
+                        obj => On<%= propertyName %>_IsValid), 
 <%          } else if (property is CalculatedObjectReferenceProperty) { %>
                     // property is CalculatedObjectReferenceProperty
                     new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString() %>>(
@@ -64,7 +64,7 @@
                         null,
                         obj => obj.<%= propertyName %>,
                         null, // CalculatedObjectReferenceProperty is a read-only property
-						obj => ((<%= implName %>)obj).On<%= propertyName %>_IsValid),  
+						obj => On<%= propertyName %>_IsValid),  
 <%          } else { %>
 <%              var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; %>
                     // else
@@ -73,13 +73,13 @@
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",
                         null,
-                        obj => ((<%= implName %>)obj).<%= propertyName %>,
+                        obj => obj.<%= propertyName %>,
 <%              if(isReadonly) { %>
                         null, // calculated property
-						obj => ((<%= implName %>)obj).On<%= propertyName %>_IsValid), 
+						obj => On<%= propertyName %>_IsValid), 
 <%              } else { %>
                         (obj, val) => obj.<%= propertyName %> = val,
-						obj => ((<%= implName %>)obj).On<%= propertyName %>_IsValid), 
+						obj => On<%= propertyName %>_IsValid), 
 <%              } %>
 <%          } %>
 <%      } %>

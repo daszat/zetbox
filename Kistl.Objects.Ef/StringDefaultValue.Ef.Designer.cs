@@ -91,7 +91,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringDefaultValue, string> OnDefaultValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StringDefaultValue, string> OnDefaultValue_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.StringDefaultValue> OnDefaultValue_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.StringDefaultValue> OnDefaultValue_IsValid;
 
         /// <summary>
         /// GetDefaultValue
@@ -112,6 +112,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDefaultValue_Handler<StringDefaultValue> OnGetDefaultValue_StringDefaultValue;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<StringDefaultValue> OnGetDefaultValue_StringDefaultValue_CanExec;
 
@@ -153,7 +154,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -203,9 +204,9 @@ namespace Kistl.App.Base
                         new Guid("88d7ba7d-6a5e-48b9-8464-c0308f6dabb6"),
                         "DefaultValue",
                         null,
-                        obj => ((StringDefaultValueEfImpl)obj).DefaultValue,
+                        obj => obj.DefaultValue,
                         (obj, val) => obj.DefaultValue = val,
-						obj => ((StringDefaultValueEfImpl)obj).OnDefaultValue_IsValid), 
+						obj => OnDefaultValue_IsValid), 
                     // position columns
                 };
             }

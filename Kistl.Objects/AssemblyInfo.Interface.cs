@@ -9,4 +9,4 @@
 [assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
 // [assembly: System.CLSCompliantAttribute(true)] // TODO: needs PositionSuffix without underscore and naming columns differently
 [assembly: System.CLSCompliantAttribute(true)]
-[assembly: Kistl.API.KistlGeneratedVersion("a73b5fc6-eee8-4e90-aa34-dc01fddf6967")]
+[assembly: Kistl.API.KistlGeneratedVersion("ecd3b05a-6099-4362-b2d1-f67388b0c6bd")]

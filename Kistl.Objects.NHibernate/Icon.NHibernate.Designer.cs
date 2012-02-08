@@ -133,7 +133,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Blob> OnBlob_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Blob> OnBlob_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnBlob_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnBlob_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -205,7 +205,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnExportGuid_IsValid;
 
         /// <summary>
         /// Filename of the Icon
@@ -257,7 +257,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnIconFile_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnIconFile_IsValid;
 
         /// <summary>
         /// 
@@ -346,7 +346,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -368,6 +368,7 @@ namespace Kistl.App.GUI
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Icon> OnGetName_Icon;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Icon> OnGetName_Icon_CanExec;
 
@@ -409,7 +410,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -430,6 +431,7 @@ namespace Kistl.App.GUI
         }
         public delegate void Open_Handler<T>(T obj);
         public static event Open_Handler<Icon> OnOpen_Icon;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Icon> OnOpen_Icon_CanExec;
 
@@ -471,7 +473,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -492,6 +494,7 @@ namespace Kistl.App.GUI
         }
         public delegate void Upload_Handler<T>(T obj);
         public static event Upload_Handler<Icon> OnUpload_Icon;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Icon> OnUpload_Icon_CanExec;
 
@@ -533,7 +536,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -631,36 +634,36 @@ namespace Kistl.App.GUI
                         new Guid("f4dfb868-260d-450b-84b8-833dac4d25ee"),
                         "Blob",
                         null,
-                        obj => ((IconNHibernateImpl)obj).Blob,
+                        obj => obj.Blob,
                         (obj, val) => obj.Blob = val,
-						obj => ((IconNHibernateImpl)obj).OnBlob_IsValid), 
+						obj => OnBlob_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Icon, Guid>(
                         lazyCtx,
                         new Guid("6ce563d7-28e8-4806-bdd1-84c220a6c3ca"),
                         "ExportGuid",
                         null,
-                        obj => ((IconNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((IconNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Icon, string>(
                         lazyCtx,
                         new Guid("cdbdfc01-5faa-416b-960f-2eb220f268fe"),
                         "IconFile",
                         null,
-                        obj => ((IconNHibernateImpl)obj).IconFile,
+                        obj => obj.IconFile,
                         (obj, val) => obj.IconFile = val,
-						obj => ((IconNHibernateImpl)obj).OnIconFile_IsValid), 
+						obj => OnIconFile_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Icon, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("052273ac-706a-446b-bb86-83c726ee66d6"),
                         "Module",
                         null,
-                        obj => ((IconNHibernateImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((IconNHibernateImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // position columns
                 };
             }

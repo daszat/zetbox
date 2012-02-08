@@ -43,5 +43,10 @@
         }
 <%
     }
+
+if(index == 0) {
+	// Only for first overload
+	Kistl.Generator.Templates.ObjectClasses.MethodCanExec.Call(Host, ctx, dt, m, eventName);
+}
 %>
         // END <%= this.GetType() %>

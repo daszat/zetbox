@@ -132,7 +132,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationProperty> OnEnumeration_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationProperty> OnEnumeration_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -153,6 +153,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<EnumerationProperty> OnGetElementTypeString_EnumerationProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumerationProperty> OnGetElementTypeString_EnumerationProperty_CanExec;
 
@@ -194,7 +195,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -215,6 +216,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<EnumerationProperty> OnGetLabel_EnumerationProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumerationProperty> OnGetLabel_EnumerationProperty_CanExec;
 
@@ -256,7 +258,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -277,6 +279,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<EnumerationProperty> OnGetName_EnumerationProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumerationProperty> OnGetName_EnumerationProperty_CanExec;
 
@@ -318,7 +321,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -339,6 +342,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<EnumerationProperty> OnGetPropertyType_EnumerationProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumerationProperty> OnGetPropertyType_EnumerationProperty_CanExec;
 
@@ -380,7 +384,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -401,6 +405,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<EnumerationProperty> OnGetPropertyTypeString_EnumerationProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumerationProperty> OnGetPropertyTypeString_EnumerationProperty_CanExec;
 
@@ -442,7 +447,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -520,9 +525,9 @@ namespace Kistl.App.Base
                         new Guid("1144c061-3610-495f-b8b4-951058bb0c23"),
                         "Enumeration",
                         null,
-                        obj => ((EnumerationPropertyNHibernateImpl)obj).Enumeration,
+                        obj => obj.Enumeration,
                         (obj, val) => obj.Enumeration = val,
-						obj => ((EnumerationPropertyNHibernateImpl)obj).OnEnumeration_IsValid), 
+						obj => OnEnumeration_IsValid), 
                     // position columns
                 };
             }

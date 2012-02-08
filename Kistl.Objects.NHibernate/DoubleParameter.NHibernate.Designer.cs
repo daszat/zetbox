@@ -64,6 +64,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DoubleParameter> OnGetLabel_DoubleParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DoubleParameter> OnGetLabel_DoubleParameter_CanExec;
 
@@ -105,7 +106,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -126,6 +127,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<DoubleParameter> OnGetParameterType_DoubleParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DoubleParameter> OnGetParameterType_DoubleParameter_CanExec;
 
@@ -167,7 +169,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -188,6 +190,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<DoubleParameter> OnGetParameterTypeString_DoubleParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DoubleParameter> OnGetParameterTypeString_DoubleParameter_CanExec;
 
@@ -229,7 +232,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

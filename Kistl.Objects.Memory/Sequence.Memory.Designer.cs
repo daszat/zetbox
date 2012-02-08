@@ -123,7 +123,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -189,7 +189,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -280,7 +280,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -346,7 +346,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCreatedOn_IsValid;
 
         /// <summary>
         /// The current number of this Sequence. This is calculated from the Data and initialises this, if not available.
@@ -370,7 +370,7 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int?> OnCurrentNumber_Getter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCurrentNumber_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCurrentNumber_IsValid;
 
         /// <summary>
         /// 
@@ -477,7 +477,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.SequenceData> OnData_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.SequenceData> OnData_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnData_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnData_IsValid;
 
         /// <summary>
         /// 
@@ -530,7 +530,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -596,7 +596,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnExportGuid_IsValid;
 
         /// <summary>
         /// Set to true if the sequence is guaranteed to be continous
@@ -649,7 +649,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, bool> OnIsContinuous_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, bool> OnIsContinuous_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnIsContinuous_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnIsContinuous_IsValid;
 
         /// <summary>
         /// 
@@ -741,7 +741,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -763,6 +763,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Sequence> OnGetName_Sequence;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Sequence> OnGetName_Sequence_CanExec;
 
@@ -804,7 +805,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -922,90 +923,90 @@ namespace Kistl.App.Base
                         new Guid("77650ba6-bbbf-468b-9f8d-78ecd3fb0082"),
                         "ChangedBy",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((SequenceMemoryImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, DateTime>(
                         lazyCtx,
                         new Guid("848cbb55-071f-4fc7-a9ef-75d5335cf2d7"),
                         "ChangedOn",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((SequenceMemoryImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("25398df8-0005-4143-bc94-2c363d18ba40"),
                         "CreatedBy",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((SequenceMemoryImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, DateTime>(
                         lazyCtx,
                         new Guid("542c6ac2-7e06-4b29-b2af-273863cd177b"),
                         "CreatedOn",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((SequenceMemoryImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, int?>(
                         lazyCtx,
                         new Guid("62988bcd-bf1d-441f-95a1-3b9d58e08ad3"),
                         "CurrentNumber",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).CurrentNumber,
+                        obj => obj.CurrentNumber,
                         null, // calculated property
-						obj => ((SequenceMemoryImpl)obj).OnCurrentNumber_IsValid), 
+						obj => OnCurrentNumber_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, Kistl.App.Base.SequenceData>(
                         lazyCtx,
                         new Guid("70836ae1-4b54-45e2-a0c6-d1a39c480631"),
                         "Data",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).Data,
+                        obj => obj.Data,
                         (obj, val) => obj.Data = val,
-						obj => ((SequenceMemoryImpl)obj).OnData_IsValid), 
+						obj => OnData_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, string>(
                         lazyCtx,
                         new Guid("1ddfb0a8-182c-417a-aa58-88a0d6ba091c"),
                         "Description",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((SequenceMemoryImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, Guid>(
                         lazyCtx,
                         new Guid("97795b28-a750-456b-880c-210b0564462e"),
                         "ExportGuid",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((SequenceMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, bool>(
                         lazyCtx,
                         new Guid("013ee98f-1e4e-4d80-a7c1-b75d10c61cff"),
                         "IsContinuous",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).IsContinuous,
+                        obj => obj.IsContinuous,
                         (obj, val) => obj.IsContinuous = val,
-						obj => ((SequenceMemoryImpl)obj).OnIsContinuous_IsValid), 
+						obj => OnIsContinuous_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Sequence, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("8ddc8653-3535-4f35-b9ab-6adb05894649"),
                         "Module",
                         null,
-                        obj => ((SequenceMemoryImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((SequenceMemoryImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // position columns
                 };
             }

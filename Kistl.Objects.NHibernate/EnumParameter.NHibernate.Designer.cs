@@ -132,7 +132,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumParameter, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumParameter, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumParameter> OnEnumeration_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumParameter> OnEnumeration_IsValid;
 
         /// <summary>
         /// 
@@ -153,6 +153,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<EnumParameter> OnGetLabel_EnumParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumParameter> OnGetLabel_EnumParameter_CanExec;
 
@@ -194,7 +195,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -215,6 +216,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<EnumParameter> OnGetParameterType_EnumParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumParameter> OnGetParameterType_EnumParameter_CanExec;
 
@@ -256,7 +258,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -277,6 +279,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<EnumParameter> OnGetParameterTypeString_EnumParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumParameter> OnGetParameterTypeString_EnumParameter_CanExec;
 
@@ -318,7 +321,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -396,9 +399,9 @@ namespace Kistl.App.Base
                         new Guid("b5212dc9-376e-4414-a400-d994779fda18"),
                         "Enumeration",
                         null,
-                        obj => ((EnumParameterNHibernateImpl)obj).Enumeration,
+                        obj => obj.Enumeration,
                         (obj, val) => obj.Enumeration = val,
-						obj => ((EnumParameterNHibernateImpl)obj).OnEnumeration_IsValid), 
+						obj => OnEnumeration_IsValid), 
                     // position columns
                 };
             }

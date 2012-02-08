@@ -133,7 +133,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -205,7 +205,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnChangedOn_IsValid;
 
         /// <summary>
         /// 
@@ -242,7 +242,7 @@ namespace Kistl.App.Base
         private bool Constraints_was_eagerLoaded = false;
 public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstraints_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnConstraints_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnConstraints_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -329,7 +329,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -401,7 +401,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Standard Icon wenn IIcon nicht implementiert ist
@@ -490,7 +490,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.Icon> OnDefaultIcon_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.Icon> OnDefaultIcon_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnDefaultIcon_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnDefaultIcon_IsValid;
 
         /// <summary>
         /// Description of this DataType
@@ -542,7 +542,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -614,7 +614,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnExportGuid_IsValid;
 
         /// <summary>
         /// Interfaces der Objektklasse
@@ -645,7 +645,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 		// ignored, but required for Serialization
         private bool ImplementsInterfaces_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnImplementsInterfaces_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnImplementsInterfaces_IsValid;
 
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
@@ -682,7 +682,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
         private bool Methods_was_eagerLoaded = false;
 public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethods_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnMethods_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnMethods_IsValid;
 
         /// <summary>
         /// Modul der Objektklasse
@@ -771,7 +771,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnModule_IsValid;
 
         /// <summary>
         /// Der Name der Objektklasse
@@ -823,7 +823,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnName_IsValid;
 
         /// <summary>
         /// Eigenschaften der Objektklasse
@@ -860,7 +860,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
         private bool Properties_was_eagerLoaded = false;
 public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProperties_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnProperties_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnProperties_IsValid;
 
         /// <summary>
         /// Optional requested ControlKind
@@ -949,7 +949,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.ControlKind> OnRequestedKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.ControlKind> OnRequestedKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnRequestedKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnRequestedKind_IsValid;
 
         /// <summary>
         /// 
@@ -1001,7 +1001,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnShowIconInLists_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnShowIconInLists_IsValid;
 
         /// <summary>
         /// 
@@ -1053,7 +1053,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnShowIdInLists_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnShowIdInLists_IsValid;
 
         /// <summary>
         /// 
@@ -1105,7 +1105,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DataType> OnShowNameInLists_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DataType> OnShowNameInLists_IsValid;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -1127,6 +1127,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
         public static event GetDataType_Handler<DataType> OnGetDataType_DataType;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DataType> OnGetDataType_DataType_CanExec;
 
@@ -1168,7 +1169,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
@@ -1190,6 +1191,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DataType> OnGetDataTypeString_DataType_CanExec;
 
@@ -1231,7 +1233,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Implements all available interfaces as Properties and Methods
@@ -1252,6 +1254,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public delegate void ImplementInterfaces_Handler<T>(T obj);
         public static event ImplementInterfaces_Handler<DataType> OnImplementInterfaces_DataType;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DataType> OnImplementInterfaces_DataType_CanExec;
 
@@ -1293,7 +1296,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -1445,18 +1448,18 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         new Guid("c007156e-5bb3-4c4e-8cb3-5823892a893b"),
                         "ChangedBy",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, DateTime>(
                         lazyCtx,
                         new Guid("1bd4a5bc-ef42-4bc0-bf5e-162dea22d91e"),
                         "ChangedOn",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<DataType, ICollection<Kistl.App.Base.InstanceConstraint>>(
                         lazyCtx,
@@ -1465,52 +1468,52 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         null,
                         obj => obj.Constraints,
                         null, // lists are read-only properties
-                        obj => ((DataTypeNHibernateImpl)obj).OnConstraints_IsValid), 
+                        obj => OnConstraints_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("5c2ec701-9e7e-4340-a463-4fc2b8204f5d"),
                         "CreatedBy",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, DateTime>(
                         lazyCtx,
                         new Guid("6ab4d1f6-1989-489b-a733-1c449fad773d"),
                         "CreatedOn",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, Kistl.App.GUI.Icon>(
                         lazyCtx,
                         new Guid("b1402cda-de87-4b2a-bd65-a950b8dd7a9f"),
                         "DefaultIcon",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).DefaultIcon,
+                        obj => obj.DefaultIcon,
                         (obj, val) => obj.DefaultIcon = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnDefaultIcon_IsValid), 
+						obj => OnDefaultIcon_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, string>(
                         lazyCtx,
                         new Guid("2cffd4f2-cb84-4f39-9bd1-19fd2e160bad"),
                         "Description",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, Guid>(
                         lazyCtx,
                         new Guid("1fdb011e-2098-4077-b5e9-dd2eeafa727c"),
                         "ExportGuid",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<DataType, ICollection<Kistl.App.Base.Interface>>(
                         lazyCtx,
@@ -1519,7 +1522,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         null,
                         obj => obj.ImplementsInterfaces,
                         null, // lists are read-only properties
-                        obj => ((DataTypeNHibernateImpl)obj).OnImplementsInterfaces_IsValid), 
+                        obj => OnImplementsInterfaces_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<DataType, ICollection<Kistl.App.Base.Method>>(
                         lazyCtx,
@@ -1528,25 +1531,25 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         null,
                         obj => obj.Methods,
                         null, // lists are read-only properties
-                        obj => ((DataTypeNHibernateImpl)obj).OnMethods_IsValid), 
+                        obj => OnMethods_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("4e1fb30b-e528-4968-95b0-f3a38eafe643"),
                         "Module",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, string>(
                         lazyCtx,
                         new Guid("083bbf12-aac6-4f5f-802a-d3701550bc84"),
                         "Name",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<DataType, IList<Kistl.App.Base.Property>>(
                         lazyCtx,
@@ -1555,43 +1558,43 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         null,
                         obj => obj.Properties,
                         null, // lists are read-only properties
-                        obj => ((DataTypeNHibernateImpl)obj).OnProperties_IsValid), 
+                        obj => OnProperties_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("bd244ed4-5c39-4783-a03d-7bb31a8884fc"),
                         "RequestedKind",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).RequestedKind,
+                        obj => obj.RequestedKind,
                         (obj, val) => obj.RequestedKind = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnRequestedKind_IsValid), 
+						obj => OnRequestedKind_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, bool>(
                         lazyCtx,
                         new Guid("d5b0ff20-10c1-40ce-b18e-9846dc5d0b60"),
                         "ShowIconInLists",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).ShowIconInLists,
+                        obj => obj.ShowIconInLists,
                         (obj, val) => obj.ShowIconInLists = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnShowIconInLists_IsValid), 
+						obj => OnShowIconInLists_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, bool>(
                         lazyCtx,
                         new Guid("220925a1-ed82-4b08-a3fa-af31bda7f40e"),
                         "ShowIdInLists",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).ShowIdInLists,
+                        obj => obj.ShowIdInLists,
                         (obj, val) => obj.ShowIdInLists = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnShowIdInLists_IsValid), 
+						obj => OnShowIdInLists_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DataType, bool>(
                         lazyCtx,
                         new Guid("60e64ab1-830d-4c20-9d2e-17049738e9c4"),
                         "ShowNameInLists",
                         null,
-                        obj => ((DataTypeNHibernateImpl)obj).ShowNameInLists,
+                        obj => obj.ShowNameInLists,
                         (obj, val) => obj.ShowNameInLists = val,
-						obj => ((DataTypeNHibernateImpl)obj).OnShowNameInLists_IsValid), 
+						obj => OnShowNameInLists_IsValid), 
                     // position columns
                 };
             }

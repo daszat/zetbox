@@ -64,6 +64,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DecimalParameter> OnGetLabel_DecimalParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DecimalParameter> OnGetLabel_DecimalParameter_CanExec;
 
@@ -105,7 +106,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -126,6 +127,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<DecimalParameter> OnGetParameterType_DecimalParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DecimalParameter> OnGetParameterType_DecimalParameter_CanExec;
 
@@ -167,7 +169,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -188,6 +190,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<DecimalParameter> OnGetParameterTypeString_DecimalParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DecimalParameter> OnGetParameterTypeString_DecimalParameter_CanExec;
 
@@ -229,7 +232,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

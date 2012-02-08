@@ -104,7 +104,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ConstraintInvocation, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ConstraintInvocation, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnExportGuid_IsValid;
 
         /// <summary>
         /// The type implementing this invocation
@@ -210,7 +210,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ConstraintInvocation, Kistl.App.Base.TypeRef> OnImplementor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ConstraintInvocation, Kistl.App.Base.TypeRef> OnImplementor_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnImplementor_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnImplementor_IsValid;
 
         /// <summary>
         /// Name des implementierenden Members
@@ -266,7 +266,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ConstraintInvocation, string> OnMemberName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ConstraintInvocation, string> OnMemberName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnMemberName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnMemberName_IsValid;
 
         /// <summary>
         /// 
@@ -288,6 +288,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetCodeTemplate_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetCodeTemplate_Handler<ConstraintInvocation> OnGetCodeTemplate_ConstraintInvocation;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ConstraintInvocation> OnGetCodeTemplate_ConstraintInvocation_CanExec;
 
@@ -329,7 +330,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -351,6 +352,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetMemberName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetMemberName_Handler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ConstraintInvocation> OnGetMemberName_ConstraintInvocation_CanExec;
 
@@ -392,7 +394,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -452,27 +454,27 @@ namespace Kistl.App.Base
                         new Guid("06d4a536-d9c4-487f-9861-ac15429e42de"),
                         "ExportGuid",
                         null,
-                        obj => ((ConstraintInvocationEfImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((ConstraintInvocationEfImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ConstraintInvocation, Kistl.App.Base.TypeRef>(
                         lazyCtx,
                         new Guid("4b8486d5-2c48-4485-9824-d0a4a8bbbbca"),
                         "Implementor",
                         null,
-                        obj => ((ConstraintInvocationEfImpl)obj).Implementor,
+                        obj => obj.Implementor,
                         (obj, val) => obj.Implementor = val,
-						obj => ((ConstraintInvocationEfImpl)obj).OnImplementor_IsValid), 
+						obj => OnImplementor_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ConstraintInvocation, string>(
                         lazyCtx,
                         new Guid("fd6ac977-3eab-4b2c-952a-2a1ad043b99a"),
                         "MemberName",
                         null,
-                        obj => ((ConstraintInvocationEfImpl)obj).MemberName,
+                        obj => obj.MemberName,
                         (obj, val) => obj.MemberName = val,
-						obj => ((ConstraintInvocationEfImpl)obj).OnMemberName_IsValid), 
+						obj => OnMemberName_IsValid), 
                     // position columns
                 };
             }

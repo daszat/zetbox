@@ -91,7 +91,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.One_to_N_relations_N, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.One_to_N_relations_N, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_N> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_N> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -208,7 +208,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.One_to_N_relations_N, Kistl.App.Test.One_to_N_relations_One> OnOneSide_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.One_to_N_relations_N, Kistl.App.Test.One_to_N_relations_One> OnOneSide_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_N> OnOneSide_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_N> OnOneSide_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -264,18 +264,18 @@ namespace Kistl.App.Test
                         new Guid("1b96dcd0-bf73-4855-84e5-7f8b1621672a"),
                         "Name",
                         null,
-                        obj => ((One_to_N_relations_NEfImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((One_to_N_relations_NEfImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<One_to_N_relations_N, Kistl.App.Test.One_to_N_relations_One>(
                         lazyCtx,
                         new Guid("598a1fc0-442e-436f-8dab-c04112c1709e"),
                         "OneSide",
                         null,
-                        obj => ((One_to_N_relations_NEfImpl)obj).OneSide,
+                        obj => obj.OneSide,
                         (obj, val) => obj.OneSide = val,
-						obj => ((One_to_N_relations_NEfImpl)obj).OnOneSide_IsValid), 
+						obj => OnOneSide_IsValid), 
                     // position columns
                 };
             }

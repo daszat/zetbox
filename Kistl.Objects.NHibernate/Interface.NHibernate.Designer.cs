@@ -64,6 +64,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDataType_Handler<Interface> OnGetDataType_Interface;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Interface> OnGetDataType_Interface_CanExec;
 
@@ -105,7 +106,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
@@ -126,6 +127,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDataTypeString_Handler<Interface> OnGetDataTypeString_Interface;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Interface> OnGetDataTypeString_Interface_CanExec;
 
@@ -167,7 +169,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Implements all available interfaces as Properties and Methods
@@ -187,6 +189,7 @@ namespace Kistl.App.Base
             }
         }
         public static event ImplementInterfaces_Handler<Interface> OnImplementInterfaces_Interface;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Interface> OnImplementInterfaces_Interface_CanExec;
 
@@ -228,7 +231,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

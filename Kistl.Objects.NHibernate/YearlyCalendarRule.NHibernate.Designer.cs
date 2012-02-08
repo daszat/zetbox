@@ -64,6 +64,7 @@ namespace Kistl.App.Calendar
             return e.Result;
         }
         public static event AppliesTo_Handler<YearlyCalendarRule> OnAppliesTo_YearlyCalendarRule;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<YearlyCalendarRule> OnAppliesTo_YearlyCalendarRule_CanExec;
 
@@ -105,7 +106,7 @@ namespace Kistl.App.Calendar
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

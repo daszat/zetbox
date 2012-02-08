@@ -95,7 +95,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnHasPersistentOrder_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnHasPersistentOrder_IsValid;
 
         /// <summary>
         /// Suggested implementors role name. If empty, class name will be used
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnImplementorRoleName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnImplementorRoleName_IsValid;
 
         /// <summary>
         /// Whether or not this property placeholder is list valued
@@ -199,7 +199,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnIsList_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnIsList_IsValid;
 
         /// <summary>
         /// Suggested role name for the referenced item
@@ -251,7 +251,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnItemRoleName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnItemRoleName_IsValid;
 
         /// <summary>
         /// The ObjectClass that is referenced by this placeholder
@@ -340,7 +340,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnReferencedObjectClass_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnReferencedObjectClass_IsValid;
 
         /// <summary>
         /// Suggested verb for the new relation
@@ -392,7 +392,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnVerb_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty> OnVerb_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -413,6 +413,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<ObjectReferencePlaceholderProperty> OnGetElementTypeString_ObjectReferencePlaceholderProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferencePlaceholderProperty> OnGetElementTypeString_ObjectReferencePlaceholderProperty_CanExec;
 
@@ -454,7 +455,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -475,6 +476,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<ObjectReferencePlaceholderProperty> OnGetLabel_ObjectReferencePlaceholderProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferencePlaceholderProperty> OnGetLabel_ObjectReferencePlaceholderProperty_CanExec;
 
@@ -516,7 +518,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -537,6 +539,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<ObjectReferencePlaceholderProperty> OnGetName_ObjectReferencePlaceholderProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferencePlaceholderProperty> OnGetName_ObjectReferencePlaceholderProperty_CanExec;
 
@@ -578,7 +581,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -599,6 +602,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<ObjectReferencePlaceholderProperty> OnGetPropertyType_ObjectReferencePlaceholderProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferencePlaceholderProperty> OnGetPropertyType_ObjectReferencePlaceholderProperty_CanExec;
 
@@ -640,7 +644,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -661,6 +665,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<ObjectReferencePlaceholderProperty> OnGetPropertyTypeString_ObjectReferencePlaceholderProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferencePlaceholderProperty> OnGetPropertyTypeString_ObjectReferencePlaceholderProperty_CanExec;
 
@@ -702,7 +707,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -785,54 +790,54 @@ namespace Kistl.App.Base
                         new Guid("7e52aa2a-aa3a-4f5b-8171-c6c2f364108b"),
                         "HasPersistentOrder",
                         null,
-                        obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).HasPersistentOrder,
+                        obj => obj.HasPersistentOrder,
                         (obj, val) => obj.HasPersistentOrder = val,
-						obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).OnHasPersistentOrder_IsValid), 
+						obj => OnHasPersistentOrder_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectReferencePlaceholderProperty, string>(
                         lazyCtx,
                         new Guid("b5fa31d8-ad30-4aeb-b5a0-8b4b117b1d29"),
                         "ImplementorRoleName",
                         null,
-                        obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).ImplementorRoleName,
+                        obj => obj.ImplementorRoleName,
                         (obj, val) => obj.ImplementorRoleName = val,
-						obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).OnImplementorRoleName_IsValid), 
+						obj => OnImplementorRoleName_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectReferencePlaceholderProperty, bool>(
                         lazyCtx,
                         new Guid("52692870-0bd4-47b6-99dc-eb8bf4238f24"),
                         "IsList",
                         null,
-                        obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).IsList,
+                        obj => obj.IsList,
                         (obj, val) => obj.IsList = val,
-						obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).OnIsList_IsValid), 
+						obj => OnIsList_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectReferencePlaceholderProperty, string>(
                         lazyCtx,
                         new Guid("06d56d44-bc5f-428b-a6b5-4348573425f9"),
                         "ItemRoleName",
                         null,
-                        obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).ItemRoleName,
+                        obj => obj.ItemRoleName,
                         (obj, val) => obj.ItemRoleName = val,
-						obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).OnItemRoleName_IsValid), 
+						obj => OnItemRoleName_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("41da7ae6-aff7-44cf-83be-6150bf7578fd"),
                         "ReferencedObjectClass",
                         null,
-                        obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).ReferencedObjectClass,
+                        obj => obj.ReferencedObjectClass,
                         (obj, val) => obj.ReferencedObjectClass = val,
-						obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).OnReferencedObjectClass_IsValid), 
+						obj => OnReferencedObjectClass_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectReferencePlaceholderProperty, string>(
                         lazyCtx,
                         new Guid("dd98c4f1-bf83-4d9a-8885-546457fc6591"),
                         "Verb",
                         null,
-                        obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).Verb,
+                        obj => obj.Verb,
                         (obj, val) => obj.Verb = val,
-						obj => ((ObjectReferencePlaceholderPropertyNHibernateImpl)obj).OnVerb_IsValid), 
+						obj => OnVerb_IsValid), 
                     // position columns
                 };
             }

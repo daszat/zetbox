@@ -56,6 +56,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint_CanExec;
 
@@ -97,7 +98,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -118,6 +119,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint_CanExec;
 
@@ -159,7 +161,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

@@ -124,7 +124,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, Kistl.App.Base.CompoundObject> OnCompoundObjectDefinition_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectProperty, Kistl.App.Base.CompoundObject> OnCompoundObjectDefinition_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnCompoundObjectDefinition_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnCompoundObjectDefinition_IsValid;
 
         /// <summary>
         /// Whether or not the list has a persistent ordering of elements
@@ -177,7 +177,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnHasPersistentOrder_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnHasPersistentOrder_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnHasPersistentOrder_IsValid;
 
         /// <summary>
         /// Whether or not this CompoundObject property is list valued
@@ -230,7 +230,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnIsList_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnIsList_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnIsList_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnIsList_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -251,6 +251,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<CompoundObjectProperty> OnGetElementTypeString_CompoundObjectProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetElementTypeString_CompoundObjectProperty_CanExec;
 
@@ -292,7 +293,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -313,6 +314,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<CompoundObjectProperty> OnGetLabel_CompoundObjectProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetLabel_CompoundObjectProperty_CanExec;
 
@@ -354,7 +356,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -375,6 +377,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<CompoundObjectProperty> OnGetName_CompoundObjectProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetName_CompoundObjectProperty_CanExec;
 
@@ -416,7 +419,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -437,6 +440,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<CompoundObjectProperty> OnGetPropertyType_CompoundObjectProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetPropertyType_CompoundObjectProperty_CanExec;
 
@@ -478,7 +482,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -499,6 +503,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<CompoundObjectProperty> OnGetPropertyTypeString_CompoundObjectProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetPropertyTypeString_CompoundObjectProperty_CanExec;
 
@@ -540,7 +545,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -619,27 +624,27 @@ namespace Kistl.App.Base
                         new Guid("0d78c157-c106-4728-9af2-7992da7c935d"),
                         "CompoundObjectDefinition",
                         null,
-                        obj => ((CompoundObjectPropertyMemoryImpl)obj).CompoundObjectDefinition,
+                        obj => obj.CompoundObjectDefinition,
                         (obj, val) => obj.CompoundObjectDefinition = val,
-						obj => ((CompoundObjectPropertyMemoryImpl)obj).OnCompoundObjectDefinition_IsValid), 
+						obj => OnCompoundObjectDefinition_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<CompoundObjectProperty, bool>(
                         lazyCtx,
                         new Guid("7c806f25-d85e-4d9f-b082-0cdaa7b60790"),
                         "HasPersistentOrder",
                         null,
-                        obj => ((CompoundObjectPropertyMemoryImpl)obj).HasPersistentOrder,
+                        obj => obj.HasPersistentOrder,
                         (obj, val) => obj.HasPersistentOrder = val,
-						obj => ((CompoundObjectPropertyMemoryImpl)obj).OnHasPersistentOrder_IsValid), 
+						obj => OnHasPersistentOrder_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<CompoundObjectProperty, bool>(
                         lazyCtx,
                         new Guid("8a861113-a48a-40c5-bdec-6ceafef86f48"),
                         "IsList",
                         null,
-                        obj => ((CompoundObjectPropertyMemoryImpl)obj).IsList,
+                        obj => obj.IsList,
                         (obj, val) => obj.IsList = val,
-						obj => ((CompoundObjectPropertyMemoryImpl)obj).OnIsList_IsValid), 
+						obj => OnIsList_IsValid), 
                     // position columns
                 };
             }

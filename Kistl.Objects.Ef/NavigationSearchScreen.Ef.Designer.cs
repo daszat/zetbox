@@ -91,7 +91,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowAddNew_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowAddNew_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnAllowAddNew_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnAllowAddNew_IsValid;
 
         /// <summary>
         /// 
@@ -147,7 +147,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowDelete_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowDelete_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnAllowDelete_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnAllowDelete_IsValid;
 
         /// <summary>
         /// 
@@ -203,7 +203,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowSelectColumns_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowSelectColumns_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnAllowSelectColumns_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnAllowSelectColumns_IsValid;
 
         /// <summary>
         /// 
@@ -259,7 +259,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowUserFilter_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowUserFilter_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnAllowUserFilter_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnAllowUserFilter_IsValid;
 
         /// <summary>
         /// 
@@ -315,7 +315,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnEnableAutoFilter_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnEnableAutoFilter_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnEnableAutoFilter_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnEnableAutoFilter_IsValid;
 
         /// <summary>
         /// 
@@ -371,7 +371,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, string> OnInitialSort_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, string> OnInitialSort_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnInitialSort_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnInitialSort_IsValid;
 
         /// <summary>
         /// 
@@ -442,7 +442,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ListSortDirection?> OnInitialSortDirection_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ListSortDirection?> OnInitialSortDirection_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnInitialSortDirection_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnInitialSortDirection_IsValid;
 
         /// <summary>
         /// 
@@ -498,7 +498,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnIsEditable_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnIsEditable_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnIsEditable_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnIsEditable_IsValid;
 
         /// <summary>
         /// 
@@ -554,7 +554,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnIsMultiselect_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnIsMultiselect_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnIsMultiselect_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnIsMultiselect_IsValid;
 
         /// <summary>
         /// 
@@ -660,7 +660,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedEditorKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedEditorKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnRequestedEditorKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnRequestedEditorKind_IsValid;
 
         /// <summary>
         /// 
@@ -766,7 +766,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedWorkspaceKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedWorkspaceKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnRequestedWorkspaceKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnRequestedWorkspaceKind_IsValid;
 
         /// <summary>
         /// 
@@ -822,7 +822,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnRespectRequiredFilter_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnRespectRequiredFilter_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnRespectRequiredFilter_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnRespectRequiredFilter_IsValid;
 
         /// <summary>
         /// 
@@ -878,7 +878,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowFilter_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowFilter_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnShowFilter_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnShowFilter_IsValid;
 
         /// <summary>
         /// 
@@ -934,7 +934,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowMasterDetail_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowMasterDetail_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnShowMasterDetail_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnShowMasterDetail_IsValid;
 
         /// <summary>
         /// 
@@ -990,7 +990,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnShowOpenCommand_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnShowOpenCommand_IsValid;
 
         /// <summary>
         /// 
@@ -1046,7 +1046,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnShowRefreshCommand_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnShowRefreshCommand_IsValid;
 
         /// <summary>
         /// 
@@ -1152,7 +1152,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.Base.ObjectClass> OnType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.Base.ObjectClass> OnType_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnType_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnType_IsValid;
 
         /// <summary>
         /// 
@@ -1223,7 +1223,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnViewMethod_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationSearchScreen> OnViewMethod_IsValid;
 
         /// <summary>
         /// 
@@ -1244,6 +1244,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetDefaultViewModel_Handler<NavigationSearchScreen> OnGetDefaultViewModel_NavigationSearchScreen;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<NavigationSearchScreen> OnGetDefaultViewModel_NavigationSearchScreen_CanExec;
 
@@ -1285,7 +1286,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -1376,162 +1377,162 @@ namespace Kistl.App.GUI
                         new Guid("e21de4ba-0ee2-446c-9758-3ca35c2f1845"),
                         "AllowAddNew",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).AllowAddNew,
+                        obj => obj.AllowAddNew,
                         (obj, val) => obj.AllowAddNew = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnAllowAddNew_IsValid), 
+						obj => OnAllowAddNew_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("965b1750-5b17-458f-8824-b42df92d4635"),
                         "AllowDelete",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).AllowDelete,
+                        obj => obj.AllowDelete,
                         (obj, val) => obj.AllowDelete = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnAllowDelete_IsValid), 
+						obj => OnAllowDelete_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("372dd9f8-3a34-473d-9c1b-b0712623abe0"),
                         "AllowSelectColumns",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).AllowSelectColumns,
+                        obj => obj.AllowSelectColumns,
                         (obj, val) => obj.AllowSelectColumns = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnAllowSelectColumns_IsValid), 
+						obj => OnAllowSelectColumns_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("54ddf503-c60a-4cc8-a8cc-80ab682dfc02"),
                         "AllowUserFilter",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).AllowUserFilter,
+                        obj => obj.AllowUserFilter,
                         (obj, val) => obj.AllowUserFilter = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnAllowUserFilter_IsValid), 
+						obj => OnAllowUserFilter_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("720bda5a-7bfd-4594-8571-a6ebeea074e7"),
                         "EnableAutoFilter",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).EnableAutoFilter,
+                        obj => obj.EnableAutoFilter,
                         (obj, val) => obj.EnableAutoFilter = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnEnableAutoFilter_IsValid), 
+						obj => OnEnableAutoFilter_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, string>(
                         lazyCtx,
                         new Guid("632994f1-9e97-4045-b2e8-92aa12ac80be"),
                         "InitialSort",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).InitialSort,
+                        obj => obj.InitialSort,
                         (obj, val) => obj.InitialSort = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnInitialSort_IsValid), 
+						obj => OnInitialSort_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, Kistl.App.GUI.ListSortDirection?>(
                         lazyCtx,
                         new Guid("b43b05fe-e036-44b1-a8a6-43f4826df116"),
                         "InitialSortDirection",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).InitialSortDirection,
+                        obj => obj.InitialSortDirection,
                         (obj, val) => obj.InitialSortDirection = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnInitialSortDirection_IsValid), 
+						obj => OnInitialSortDirection_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("0e71d44f-2373-4cfe-b902-c49373761cbe"),
                         "IsEditable",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).IsEditable,
+                        obj => obj.IsEditable,
                         (obj, val) => obj.IsEditable = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnIsEditable_IsValid), 
+						obj => OnIsEditable_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("6e27c254-f0b6-45df-97b3-053636864df8"),
                         "IsMultiselect",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).IsMultiselect,
+                        obj => obj.IsMultiselect,
                         (obj, val) => obj.IsMultiselect = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnIsMultiselect_IsValid), 
+						obj => OnIsMultiselect_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("80987e44-841a-4d56-88d2-92c28efb70a1"),
                         "RequestedEditorKind",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).RequestedEditorKind,
+                        obj => obj.RequestedEditorKind,
                         (obj, val) => obj.RequestedEditorKind = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnRequestedEditorKind_IsValid), 
+						obj => OnRequestedEditorKind_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("e0a94b30-5225-45e6-9dfc-c88dbf0648f5"),
                         "RequestedWorkspaceKind",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).RequestedWorkspaceKind,
+                        obj => obj.RequestedWorkspaceKind,
                         (obj, val) => obj.RequestedWorkspaceKind = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnRequestedWorkspaceKind_IsValid), 
+						obj => OnRequestedWorkspaceKind_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("9323c1cf-f8d6-4b29-b854-41ceb509b57e"),
                         "RespectRequiredFilter",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).RespectRequiredFilter,
+                        obj => obj.RespectRequiredFilter,
                         (obj, val) => obj.RespectRequiredFilter = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnRespectRequiredFilter_IsValid), 
+						obj => OnRespectRequiredFilter_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("055fd120-c058-436b-9f9e-e6a2a0fec2e5"),
                         "ShowFilter",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).ShowFilter,
+                        obj => obj.ShowFilter,
                         (obj, val) => obj.ShowFilter = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnShowFilter_IsValid), 
+						obj => OnShowFilter_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("c7978c7d-92cc-46a4-a8e8-bd9c24597dda"),
                         "ShowMasterDetail",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).ShowMasterDetail,
+                        obj => obj.ShowMasterDetail,
                         (obj, val) => obj.ShowMasterDetail = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnShowMasterDetail_IsValid), 
+						obj => OnShowMasterDetail_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("84a66c05-9f95-475e-aa9d-a341a0de0ba6"),
                         "ShowOpenCommand",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).ShowOpenCommand,
+                        obj => obj.ShowOpenCommand,
                         (obj, val) => obj.ShowOpenCommand = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnShowOpenCommand_IsValid), 
+						obj => OnShowOpenCommand_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, bool?>(
                         lazyCtx,
                         new Guid("13e637ea-d461-46da-a153-ae8af5b0b724"),
                         "ShowRefreshCommand",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).ShowRefreshCommand,
+                        obj => obj.ShowRefreshCommand,
                         (obj, val) => obj.ShowRefreshCommand = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnShowRefreshCommand_IsValid), 
+						obj => OnShowRefreshCommand_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("0bbea63f-f609-4fc2-848e-7464bef87fb4"),
                         "Type",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).Type,
+                        obj => obj.Type,
                         (obj, val) => obj.Type = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnType_IsValid), 
+						obj => OnType_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?>(
                         lazyCtx,
                         new Guid("3b671e20-eb7e-4f24-b183-19bdf2666651"),
                         "ViewMethod",
                         null,
-                        obj => ((NavigationSearchScreenEfImpl)obj).ViewMethod,
+                        obj => obj.ViewMethod,
                         (obj, val) => obj.ViewMethod = val,
-						obj => ((NavigationSearchScreenEfImpl)obj).OnViewMethod_IsValid), 
+						obj => OnViewMethod_IsValid), 
                     // position columns
                 };
             }

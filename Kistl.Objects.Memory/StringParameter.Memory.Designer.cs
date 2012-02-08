@@ -53,6 +53,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<StringParameter> OnGetLabel_StringParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<StringParameter> OnGetLabel_StringParameter_CanExec;
 
@@ -94,7 +95,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -115,6 +116,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<StringParameter> OnGetParameterType_StringParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<StringParameter> OnGetParameterType_StringParameter_CanExec;
 
@@ -156,7 +158,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -177,6 +179,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<StringParameter> OnGetParameterTypeString_StringParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<StringParameter> OnGetParameterTypeString_StringParameter_CanExec;
 
@@ -218,7 +221,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

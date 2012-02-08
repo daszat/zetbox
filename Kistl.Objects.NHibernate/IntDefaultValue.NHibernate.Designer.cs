@@ -95,7 +95,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IntDefaultValue, int> OnIntValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.IntDefaultValue, int> OnIntValue_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.IntDefaultValue> OnIntValue_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.IntDefaultValue> OnIntValue_IsValid;
 
         /// <summary>
         /// GetDefaultValue
@@ -116,6 +116,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDefaultValue_Handler<IntDefaultValue> OnGetDefaultValue_IntDefaultValue;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<IntDefaultValue> OnGetDefaultValue_IntDefaultValue_CanExec;
 
@@ -157,7 +158,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -209,9 +210,9 @@ namespace Kistl.App.Base
                         new Guid("c876dece-3b67-4302-88ef-313ba9ce62ae"),
                         "IntValue",
                         null,
-                        obj => ((IntDefaultValueNHibernateImpl)obj).IntValue,
+                        obj => obj.IntValue,
                         (obj, val) => obj.IntValue = val,
-						obj => ((IntDefaultValueNHibernateImpl)obj).OnIntValue_IsValid), 
+						obj => OnIntValue_IsValid), 
                     // position columns
                 };
             }

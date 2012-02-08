@@ -133,7 +133,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -205,7 +205,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -292,7 +292,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -364,7 +364,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Deployment restrictions for this assembly
@@ -416,7 +416,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.DeploymentRestriction> OnDeploymentRestrictions_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.DeploymentRestriction> OnDeploymentRestrictions_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnDeploymentRestrictions_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnDeploymentRestrictions_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -488,7 +488,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnExportGuid_IsValid;
 
         /// <summary>
         /// Module
@@ -577,7 +577,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnModule_IsValid;
 
         /// <summary>
         /// Full Assemblyname eg. MyActions, Version=1.0.0.0
@@ -629,7 +629,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Assembly> OnName_IsValid;
 
         /// <summary>
         /// Regenerates the stored list of TypeRefs from the loaded assembly
@@ -651,6 +651,7 @@ namespace Kistl.App.Base
         }
         public delegate void RegenerateTypeRefs_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
         public static event RegenerateTypeRefs_Handler<Assembly> OnRegenerateTypeRefs_Assembly;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Assembly> OnRegenerateTypeRefs_Assembly_CanExec;
 
@@ -692,7 +693,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -805,72 +806,72 @@ namespace Kistl.App.Base
                         new Guid("cb31759a-597a-4277-a963-c914a07312e7"),
                         "ChangedBy",
                         null,
-                        obj => ((AssemblyNHibernateImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((AssemblyNHibernateImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Assembly, DateTime>(
                         lazyCtx,
                         new Guid("5e74f538-9961-4b5c-a770-b92b75fb898a"),
                         "ChangedOn",
                         null,
-                        obj => ((AssemblyNHibernateImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((AssemblyNHibernateImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Assembly, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("819fd217-def6-49d1-8239-bbc7451e95f6"),
                         "CreatedBy",
                         null,
-                        obj => ((AssemblyNHibernateImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((AssemblyNHibernateImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Assembly, DateTime>(
                         lazyCtx,
                         new Guid("c6350562-d385-41b5-afc9-89024a38ceba"),
                         "CreatedOn",
                         null,
-                        obj => ((AssemblyNHibernateImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((AssemblyNHibernateImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Assembly, Kistl.App.Base.DeploymentRestriction>(
                         lazyCtx,
                         new Guid("8458ea0d-04ca-48db-88ed-7d36e7e93b58"),
                         "DeploymentRestrictions",
                         null,
-                        obj => ((AssemblyNHibernateImpl)obj).DeploymentRestrictions,
+                        obj => obj.DeploymentRestrictions,
                         (obj, val) => obj.DeploymentRestrictions = val,
-						obj => ((AssemblyNHibernateImpl)obj).OnDeploymentRestrictions_IsValid), 
+						obj => OnDeploymentRestrictions_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Assembly, Guid>(
                         lazyCtx,
                         new Guid("9c1ddbcf-24b9-47cb-a27d-043fc47e4002"),
                         "ExportGuid",
                         null,
-                        obj => ((AssemblyNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((AssemblyNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Assembly, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("8d579192-717e-4f2c-90ed-1c066255e270"),
                         "Module",
                         null,
-                        obj => ((AssemblyNHibernateImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((AssemblyNHibernateImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Assembly, string>(
                         lazyCtx,
                         new Guid("9a9dbd59-6816-4d25-9ef2-da84b96bf454"),
                         "Name",
                         null,
-                        obj => ((AssemblyNHibernateImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((AssemblyNHibernateImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }

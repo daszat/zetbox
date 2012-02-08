@@ -95,7 +95,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnDay_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnDay_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.FixedYearlyCalendarRule> OnDay_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.FixedYearlyCalendarRule> OnDay_IsValid;
 
         /// <summary>
         /// 
@@ -147,7 +147,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.FixedYearlyCalendarRule> OnMonth_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.FixedYearlyCalendarRule> OnMonth_IsValid;
 
         /// <summary>
         /// Checks if the Rule applies to the given date
@@ -168,6 +168,7 @@ namespace Kistl.App.Calendar
             return e.Result;
         }
         public static event AppliesTo_Handler<FixedYearlyCalendarRule> OnAppliesTo_FixedYearlyCalendarRule;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<FixedYearlyCalendarRule> OnAppliesTo_FixedYearlyCalendarRule_CanExec;
 
@@ -209,7 +210,7 @@ namespace Kistl.App.Calendar
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -262,18 +263,18 @@ namespace Kistl.App.Calendar
                         new Guid("7d16cd01-93ce-44d2-bb69-ac06f5b61aaf"),
                         "Day",
                         null,
-                        obj => ((FixedYearlyCalendarRuleNHibernateImpl)obj).Day,
+                        obj => obj.Day,
                         (obj, val) => obj.Day = val,
-						obj => ((FixedYearlyCalendarRuleNHibernateImpl)obj).OnDay_IsValid), 
+						obj => OnDay_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<FixedYearlyCalendarRule, int>(
                         lazyCtx,
                         new Guid("43be3542-1b21-4423-aeb4-f9e411b2453f"),
                         "Month",
                         null,
-                        obj => ((FixedYearlyCalendarRuleNHibernateImpl)obj).Month,
+                        obj => obj.Month,
                         (obj, val) => obj.Month = val,
-						obj => ((FixedYearlyCalendarRuleNHibernateImpl)obj).OnMonth_IsValid), 
+						obj => OnMonth_IsValid), 
                     // position columns
                 };
             }

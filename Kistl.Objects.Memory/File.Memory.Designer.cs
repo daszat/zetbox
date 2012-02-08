@@ -124,7 +124,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnBlob_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnBlob_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -215,7 +215,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -281,7 +281,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -372,7 +372,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -438,7 +438,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -504,7 +504,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExportGuid_IsValid;
 
         /// <summary>
         /// Filename
@@ -557,7 +557,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
 
         /// <summary>
         /// Handles the change of the current blob
@@ -579,6 +579,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Blob> ret, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob);
         public static event HandleBlobChange_Handler<File> OnHandleBlobChange_File;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnHandleBlobChange_File_CanExec;
 
@@ -620,7 +621,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
@@ -641,6 +642,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void Open_Handler<T>(T obj);
         public static event Open_Handler<File> OnOpen_File;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnOpen_File_CanExec;
 
@@ -682,7 +684,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
@@ -703,6 +705,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void Upload_Handler<T>(T obj);
         public static event Upload_Handler<File> OnUpload_File;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnUpload_File_CanExec;
 
@@ -744,7 +747,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -855,63 +858,63 @@ namespace at.dasz.DocumentManagement
                         new Guid("ef5addda-340f-4a87-83c9-3ee419519343"),
                         "Blob",
                         null,
-                        obj => ((FileMemoryImpl)obj).Blob,
+                        obj => obj.Blob,
                         (obj, val) => obj.Blob = val,
-						obj => ((FileMemoryImpl)obj).OnBlob_IsValid), 
+						obj => OnBlob_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<File, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c22516f3-b897-4827-a025-27d1515aadcd"),
                         "ChangedBy",
                         null,
-                        obj => ((FileMemoryImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((FileMemoryImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<File, DateTime>(
                         lazyCtx,
                         new Guid("c144678d-632d-4a83-8041-280d674f4453"),
                         "ChangedOn",
                         null,
-                        obj => ((FileMemoryImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((FileMemoryImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<File, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("dc8da15a-a432-43fd-b93f-9b3530ce3144"),
                         "CreatedBy",
                         null,
-                        obj => ((FileMemoryImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((FileMemoryImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<File, DateTime>(
                         lazyCtx,
                         new Guid("e1892507-375b-4b52-ab20-16095dfc3514"),
                         "CreatedOn",
                         null,
-                        obj => ((FileMemoryImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((FileMemoryImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<File, Guid>(
                         lazyCtx,
                         new Guid("91566b41-879d-4e72-b48b-9677cc156649"),
                         "ExportGuid",
                         null,
-                        obj => ((FileMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((FileMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<File, string>(
                         lazyCtx,
                         new Guid("1c5f2bea-9915-4634-8ff9-5fd6f0871704"),
                         "Name",
                         null,
-                        obj => ((FileMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((FileMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }

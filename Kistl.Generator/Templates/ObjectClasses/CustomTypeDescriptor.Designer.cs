@@ -82,7 +82,7 @@ this.WriteObjects("                        \"",  propertyName , "\",\r\n");
 this.WriteObjects("                        null,\r\n");
 this.WriteObjects("                        obj => obj.",  propertyName , ",\r\n");
 this.WriteObjects("                        null, // lists are read-only properties\r\n");
-this.WriteObjects("                        obj => ((",  implName , ")obj).On",  propertyName , "_IsValid), \r\n");
+this.WriteObjects("                        obj => On",  propertyName , "_IsValid), \r\n");
 #line 58 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } else if (property is CalculatedObjectReferenceProperty) { 
 #line 59 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
@@ -94,7 +94,7 @@ this.WriteObjects("                        \"",  propertyName , "\",\r\n");
 this.WriteObjects("                        null,\r\n");
 this.WriteObjects("                        obj => obj.",  propertyName , ",\r\n");
 this.WriteObjects("                        null, // CalculatedObjectReferenceProperty is a read-only property\r\n");
-this.WriteObjects("						obj => ((",  implName , ")obj).On",  propertyName , "_IsValid),  \r\n");
+this.WriteObjects("						obj => On",  propertyName , "_IsValid),  \r\n");
 #line 68 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } else { 
 #line 69 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
@@ -106,17 +106,17 @@ this.WriteObjects("                        lazyCtx,\r\n");
 this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("                        \"",  propertyName , "\",\r\n");
 this.WriteObjects("                        null,\r\n");
-this.WriteObjects("                        obj => ((",  implName , ")obj).",  propertyName , ",\r\n");
+this.WriteObjects("                        obj => obj.",  propertyName , ",\r\n");
 #line 77 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 if(isReadonly) { 
 #line 78 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                        null, // calculated property\r\n");
-this.WriteObjects("						obj => ((",  implName , ")obj).On",  propertyName , "_IsValid), \r\n");
+this.WriteObjects("						obj => On",  propertyName , "_IsValid), \r\n");
 #line 80 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } else { 
 #line 81 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                        (obj, val) => obj.",  propertyName , " = val,\r\n");
-this.WriteObjects("						obj => ((",  implName , ")obj).On",  propertyName , "_IsValid), \r\n");
+this.WriteObjects("						obj => On",  propertyName , "_IsValid), \r\n");
 #line 83 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } 
 #line 84 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"

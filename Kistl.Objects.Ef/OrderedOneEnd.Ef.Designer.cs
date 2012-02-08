@@ -92,7 +92,7 @@ namespace Kistl.App.Test
 
 public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.OrderedOneEnd> OnNEnds_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.OrderedOneEnd> OnNEnds_IsValid;
 
         /// <summary>
         /// 
@@ -148,7 +148,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
 		public static event PropertyPreSetterHandler<Kistl.App.Test.OrderedOneEnd, int?> OnSomeInt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.OrderedOneEnd, int?> OnSomeInt_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.OrderedOneEnd> OnSomeInt_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.OrderedOneEnd> OnSomeInt_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -200,16 +200,16 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
                         null,
                         obj => obj.NEnds,
                         null, // lists are read-only properties
-                        obj => ((OrderedOneEndEfImpl)obj).OnNEnds_IsValid), 
+                        obj => OnNEnds_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<OrderedOneEnd, int?>(
                         lazyCtx,
                         new Guid("1062a9d3-b936-42b8-99ba-2353087cbce1"),
                         "SomeInt",
                         null,
-                        obj => ((OrderedOneEndEfImpl)obj).SomeInt,
+                        obj => obj.SomeInt,
                         (obj, val) => obj.SomeInt = val,
-						obj => ((OrderedOneEndEfImpl)obj).OnSomeInt_IsValid), 
+						obj => OnSomeInt_IsValid), 
                     // position columns
                 };
             }

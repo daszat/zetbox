@@ -124,7 +124,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObject, Kistl.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObject, Kistl.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObject> OnDefaultPropertyViewModelDescriptor_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CompoundObject> OnDefaultPropertyViewModelDescriptor_IsValid;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -145,6 +145,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDataType_Handler<CompoundObject> OnGetDataType_CompoundObject;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObject> OnGetDataType_CompoundObject_CanExec;
 
@@ -186,7 +187,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
@@ -207,6 +208,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDataTypeString_Handler<CompoundObject> OnGetDataTypeString_CompoundObject;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObject> OnGetDataTypeString_CompoundObject_CanExec;
 
@@ -248,7 +250,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Implements all available interfaces as Properties and Methods
@@ -268,6 +270,7 @@ namespace Kistl.App.Base
             }
         }
         public static event ImplementInterfaces_Handler<CompoundObject> OnImplementInterfaces_CompoundObject;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObject> OnImplementInterfaces_CompoundObject_CanExec;
 
@@ -309,7 +312,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -386,9 +389,9 @@ namespace Kistl.App.Base
                         new Guid("908757d2-053b-40c5-89f8-9e5f79b5fe83"),
                         "DefaultPropertyViewModelDescriptor",
                         null,
-                        obj => ((CompoundObjectMemoryImpl)obj).DefaultPropertyViewModelDescriptor,
+                        obj => obj.DefaultPropertyViewModelDescriptor,
                         (obj, val) => obj.DefaultPropertyViewModelDescriptor = val,
-						obj => ((CompoundObjectMemoryImpl)obj).OnDefaultPropertyViewModelDescriptor_IsValid), 
+						obj => OnDefaultPropertyViewModelDescriptor_IsValid), 
                     // position columns
                 };
             }

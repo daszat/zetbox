@@ -64,6 +64,7 @@ namespace Kistl.App.Calendar
             return e.Result;
         }
         public static event AppliesTo_Handler<CommonCalendarRule> OnAppliesTo_CommonCalendarRule;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CommonCalendarRule> OnAppliesTo_CommonCalendarRule_CanExec;
 
@@ -105,7 +106,7 @@ namespace Kistl.App.Calendar
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

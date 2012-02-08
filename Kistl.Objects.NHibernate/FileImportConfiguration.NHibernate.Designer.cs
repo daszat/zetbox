@@ -133,7 +133,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -205,7 +205,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -292,7 +292,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -364,7 +364,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -436,7 +436,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnExportGuid_IsValid;
 
         /// <summary>
         /// Restricts this configuration to a specific identity
@@ -523,7 +523,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnIdentity_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnIdentity_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnIdentity_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnIdentity_IsValid;
 
         /// <summary>
         /// Restricts this configuration to a specific machine
@@ -575,7 +575,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnMachineName_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnMachineName_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnMachineName_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnMachineName_IsValid;
 
         /// <summary>
         /// Pickup directory for the file import service. Env Variables can be used with %VARIABLE%. e.g. %HOMEPATH%\MyPickupDir
@@ -627,7 +627,7 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnPickupDirectory_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnPickupDirectory_PostSetter;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnPickupDirectory_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnPickupDirectory_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -737,72 +737,72 @@ namespace at.dasz.DocumentManagement
                         new Guid("533d8049-92ac-4100-b94f-661e5dbf5c74"),
                         "ChangedBy",
                         null,
-                        obj => ((FileImportConfigurationNHibernateImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((FileImportConfigurationNHibernateImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<FileImportConfiguration, DateTime>(
                         lazyCtx,
                         new Guid("4dfd754a-6c10-4fb0-851d-b11e05a55abc"),
                         "ChangedOn",
                         null,
-                        obj => ((FileImportConfigurationNHibernateImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((FileImportConfigurationNHibernateImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<FileImportConfiguration, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("afb941f3-1f6a-427a-9d45-f04b1a8440b1"),
                         "CreatedBy",
                         null,
-                        obj => ((FileImportConfigurationNHibernateImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((FileImportConfigurationNHibernateImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<FileImportConfiguration, DateTime>(
                         lazyCtx,
                         new Guid("66be2bc9-c3a2-4411-9a53-6e07548d10ab"),
                         "CreatedOn",
                         null,
-                        obj => ((FileImportConfigurationNHibernateImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((FileImportConfigurationNHibernateImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<FileImportConfiguration, Guid>(
                         lazyCtx,
                         new Guid("1034a145-8bfa-470f-8345-555b9c5087cb"),
                         "ExportGuid",
                         null,
-                        obj => ((FileImportConfigurationNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((FileImportConfigurationNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<FileImportConfiguration, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("4762392e-1902-43ef-a023-9d57047892d9"),
                         "Identity",
                         null,
-                        obj => ((FileImportConfigurationNHibernateImpl)obj).Identity,
+                        obj => obj.Identity,
                         (obj, val) => obj.Identity = val,
-						obj => ((FileImportConfigurationNHibernateImpl)obj).OnIdentity_IsValid), 
+						obj => OnIdentity_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<FileImportConfiguration, string>(
                         lazyCtx,
                         new Guid("f30f0053-0d08-4119-9775-284b6dee6bfd"),
                         "MachineName",
                         null,
-                        obj => ((FileImportConfigurationNHibernateImpl)obj).MachineName,
+                        obj => obj.MachineName,
                         (obj, val) => obj.MachineName = val,
-						obj => ((FileImportConfigurationNHibernateImpl)obj).OnMachineName_IsValid), 
+						obj => OnMachineName_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<FileImportConfiguration, string>(
                         lazyCtx,
                         new Guid("cd085ad4-58a4-43be-90b4-4988b728903b"),
                         "PickupDirectory",
                         null,
-                        obj => ((FileImportConfigurationNHibernateImpl)obj).PickupDirectory,
+                        obj => obj.PickupDirectory,
                         (obj, val) => obj.PickupDirectory = val,
-						obj => ((FileImportConfigurationNHibernateImpl)obj).OnPickupDirectory_IsValid), 
+						obj => OnPickupDirectory_IsValid), 
                     // position columns
                 };
             }

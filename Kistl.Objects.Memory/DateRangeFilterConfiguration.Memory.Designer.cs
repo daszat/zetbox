@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentMonthDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentMonthDefault_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentMonthDefault_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentMonthDefault_IsValid;
 
         /// <summary>
         /// 
@@ -138,7 +138,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentQuaterDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentQuaterDefault_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentQuaterDefault_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentQuaterDefault_IsValid;
 
         /// <summary>
         /// 
@@ -191,7 +191,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentYearDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentYearDefault_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentYearDefault_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentYearDefault_IsValid;
 
         /// <summary>
         /// 
@@ -212,6 +212,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<DateRangeFilterConfiguration> OnCreateFilterModel_DateRangeFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DateRangeFilterConfiguration> OnCreateFilterModel_DateRangeFilterConfiguration_CanExec;
 
@@ -253,7 +254,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -274,6 +275,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<DateRangeFilterConfiguration> OnGetLabel_DateRangeFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DateRangeFilterConfiguration> OnGetLabel_DateRangeFilterConfiguration_CanExec;
 
@@ -315,7 +317,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -368,27 +370,27 @@ namespace Kistl.App.GUI
                         new Guid("c38eda0e-59b7-4e37-9d16-5f4fb7ae0b2d"),
                         "IsCurrentMonthDefault",
                         null,
-                        obj => ((DateRangeFilterConfigurationMemoryImpl)obj).IsCurrentMonthDefault,
+                        obj => obj.IsCurrentMonthDefault,
                         (obj, val) => obj.IsCurrentMonthDefault = val,
-						obj => ((DateRangeFilterConfigurationMemoryImpl)obj).OnIsCurrentMonthDefault_IsValid), 
+						obj => OnIsCurrentMonthDefault_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DateRangeFilterConfiguration, bool?>(
                         lazyCtx,
                         new Guid("edb97f39-355d-4a87-9aa1-ad9eccafb369"),
                         "IsCurrentQuaterDefault",
                         null,
-                        obj => ((DateRangeFilterConfigurationMemoryImpl)obj).IsCurrentQuaterDefault,
+                        obj => obj.IsCurrentQuaterDefault,
                         (obj, val) => obj.IsCurrentQuaterDefault = val,
-						obj => ((DateRangeFilterConfigurationMemoryImpl)obj).OnIsCurrentQuaterDefault_IsValid), 
+						obj => OnIsCurrentQuaterDefault_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<DateRangeFilterConfiguration, bool?>(
                         lazyCtx,
                         new Guid("8f9bbaf8-4624-49d9-9b49-878142189cf7"),
                         "IsCurrentYearDefault",
                         null,
-                        obj => ((DateRangeFilterConfigurationMemoryImpl)obj).IsCurrentYearDefault,
+                        obj => obj.IsCurrentYearDefault,
                         (obj, val) => obj.IsCurrentYearDefault = val,
-						obj => ((DateRangeFilterConfigurationMemoryImpl)obj).OnIsCurrentYearDefault_IsValid), 
+						obj => OnIsCurrentYearDefault_IsValid), 
                     // position columns
                 };
             }

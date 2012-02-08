@@ -85,7 +85,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestStudent, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestStudent, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -110,7 +110,7 @@ namespace Kistl.App.Test
 
 		private ObservableBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Testbogen;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnTestbogen_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnTestbogen_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -161,9 +161,9 @@ namespace Kistl.App.Test
                         new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141"),
                         "Name",
                         null,
-                        obj => ((TestStudentMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((TestStudentMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<TestStudent, ICollection<Kistl.App.Test.Fragebogen>>(
                         lazyCtx,
@@ -172,7 +172,7 @@ namespace Kistl.App.Test
                         null,
                         obj => obj.Testbogen,
                         null, // lists are read-only properties
-                        obj => ((TestStudentMemoryImpl)obj).OnTestbogen_IsValid), 
+                        obj => OnTestbogen_IsValid), 
                     // position columns
                 };
             }

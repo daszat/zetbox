@@ -153,7 +153,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.DataType> OnConstrained_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.DataType> OnConstrained_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnConstrained_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnConstrained_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -222,7 +222,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnExportGuid_IsValid;
 
         /// <summary>
         /// The reason of this constraint
@@ -278,7 +278,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnReason_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnReason_IsValid;
 
         /// <summary>
         /// 
@@ -300,6 +300,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, Kistl.API.IDataObject constrainedObject);
         public static event GetErrorText_Handler<InstanceConstraint> OnGetErrorText_InstanceConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<InstanceConstraint> OnGetErrorText_InstanceConstraint_CanExec;
 
@@ -341,7 +342,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -363,6 +364,7 @@ namespace Kistl.App.Base
         }
         public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Kistl.API.IDataObject constrainedObject);
         public static event IsValid_Handler<InstanceConstraint> OnIsValid_InstanceConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<InstanceConstraint> OnIsValid_InstanceConstraint_CanExec;
 
@@ -404,7 +406,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -464,27 +466,27 @@ namespace Kistl.App.Base
                         new Guid("d89723fc-1050-45a1-9b74-5575a677bc2b"),
                         "Constrained",
                         null,
-                        obj => ((InstanceConstraintEfImpl)obj).Constrained,
+                        obj => obj.Constrained,
                         (obj, val) => obj.Constrained = val,
-						obj => ((InstanceConstraintEfImpl)obj).OnConstrained_IsValid), 
+						obj => OnConstrained_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<InstanceConstraint, Guid>(
                         lazyCtx,
                         new Guid("8ef28076-900c-4294-920c-5d0d91e925bb"),
                         "ExportGuid",
                         null,
-                        obj => ((InstanceConstraintEfImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((InstanceConstraintEfImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<InstanceConstraint, string>(
                         lazyCtx,
                         new Guid("83be7495-e0e0-48fc-872a-70de9c0f7a88"),
                         "Reason",
                         null,
-                        obj => ((InstanceConstraintEfImpl)obj).Reason,
+                        obj => obj.Reason,
                         (obj, val) => obj.Reason = val,
-						obj => ((InstanceConstraintEfImpl)obj).OnReason_IsValid), 
+						obj => OnReason_IsValid), 
                     // position columns
                 };
             }

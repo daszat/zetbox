@@ -133,7 +133,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultDisplayKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultDisplayKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultDisplayKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultDisplayKind_IsValid;
 
         /// <summary>
         /// The default ControlKind to use for this Presentable.
@@ -222,7 +222,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultEditorKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultEditorKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultEditorKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultEditorKind_IsValid;
 
         /// <summary>
         /// The default ControlKind to use for displaying this Presentable readonly in a GridCell. Defaults to DefaultDisplayKind.
@@ -311,7 +311,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellDisplayKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellDisplayKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultGridCellDisplayKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultGridCellDisplayKind_IsValid;
 
         /// <summary>
         /// The default ControlKind for displaying this model in a GridCell in editing mode. Defaults to DefaultKind.
@@ -400,7 +400,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellEditorKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellEditorKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultGridCellEditorKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultGridCellEditorKind_IsValid;
 
         /// <summary>
         /// .The default ControlKind for displaying this model in a GridCell befor editing starts. Defaults to DefaultGridCellDisplayKind.
@@ -489,7 +489,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellPreEditorKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellPreEditorKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultGridCellPreEditorKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDefaultGridCellPreEditorKind_IsValid;
 
         /// <summary>
         /// describe this ViewModel
@@ -541,7 +541,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -613,7 +613,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -702,7 +702,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -733,7 +733,7 @@ namespace Kistl.App.GUI
 		// ignored, but required for Serialization
         private bool SecondaryControlKinds_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_IsValid;
 
         /// <summary>
         /// The described CLR class&amp;apos; reference
@@ -822,7 +822,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnViewModelRef_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewModelDescriptor> OnViewModelRef_IsValid;
 
         /// <summary>
         /// 
@@ -844,6 +844,7 @@ namespace Kistl.App.GUI
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<ViewModelDescriptor> OnGetName_ViewModelDescriptor;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ViewModelDescriptor> OnGetName_ViewModelDescriptor_CanExec;
 
@@ -885,7 +886,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -1073,72 +1074,72 @@ namespace Kistl.App.GUI
                         new Guid("067ed744-cd2c-4c8b-9829-cf7d0b16df60"),
                         "DefaultDisplayKind",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).DefaultDisplayKind,
+                        obj => obj.DefaultDisplayKind,
                         (obj, val) => obj.DefaultDisplayKind = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnDefaultDisplayKind_IsValid), 
+						obj => OnDefaultDisplayKind_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("b535115c-b847-479d-bdea-a7994ae6eeca"),
                         "DefaultEditorKind",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).DefaultEditorKind,
+                        obj => obj.DefaultEditorKind,
                         (obj, val) => obj.DefaultEditorKind = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnDefaultEditorKind_IsValid), 
+						obj => OnDefaultEditorKind_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("20fb1478-5e20-48e3-b418-c101397d15d1"),
                         "DefaultGridCellDisplayKind",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).DefaultGridCellDisplayKind,
+                        obj => obj.DefaultGridCellDisplayKind,
                         (obj, val) => obj.DefaultGridCellDisplayKind = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnDefaultGridCellDisplayKind_IsValid), 
+						obj => OnDefaultGridCellDisplayKind_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("7a093e89-a9ea-46ca-aeb6-cd3a1740714a"),
                         "DefaultGridCellEditorKind",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).DefaultGridCellEditorKind,
+                        obj => obj.DefaultGridCellEditorKind,
                         (obj, val) => obj.DefaultGridCellEditorKind = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnDefaultGridCellEditorKind_IsValid), 
+						obj => OnDefaultGridCellEditorKind_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("6c744476-35e0-4cef-a221-f02abc81566c"),
                         "DefaultGridCellPreEditorKind",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).DefaultGridCellPreEditorKind,
+                        obj => obj.DefaultGridCellPreEditorKind,
                         (obj, val) => obj.DefaultGridCellPreEditorKind = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnDefaultGridCellPreEditorKind_IsValid), 
+						obj => OnDefaultGridCellPreEditorKind_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, string>(
                         lazyCtx,
                         new Guid("93e25648-50f9-40d8-8753-e5dadab68e1d"),
                         "Description",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, Guid>(
                         lazyCtx,
                         new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"),
                         "ExportGuid",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("0b7135d3-dedc-4091-a0c4-690c1b4a2b6d"),
                         "Module",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, ICollection<Kistl.App.GUI.ControlKind>>(
                         lazyCtx,
@@ -1147,16 +1148,16 @@ namespace Kistl.App.GUI
                         null,
                         obj => obj.SecondaryControlKinds,
                         null, // lists are read-only properties
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).OnSecondaryControlKinds_IsValid), 
+                        obj => OnSecondaryControlKinds_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, Kistl.App.Base.TypeRef>(
                         lazyCtx,
                         new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
                         "ViewModelRef",
                         null,
-                        obj => ((ViewModelDescriptorNHibernateImpl)obj).ViewModelRef,
+                        obj => obj.ViewModelRef,
                         (obj, val) => obj.ViewModelRef = val,
-						obj => ((ViewModelDescriptorNHibernateImpl)obj).OnViewModelRef_IsValid), 
+						obj => OnViewModelRef_IsValid), 
                     // position columns
                 };
             }

@@ -140,7 +140,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Template> OnDisplayedTypeAssembly_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Template> OnDisplayedTypeAssembly_IsValid;
 
         /// <summary>
         /// FullName of the Type that is displayed with this Template
@@ -196,7 +196,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Template> OnDisplayedTypeFullName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Template> OnDisplayedTypeFullName_IsValid;
 
         /// <summary>
         /// a short name to identify this Template to the user
@@ -252,7 +252,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Template> OnDisplayName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Template> OnDisplayName_IsValid;
 
         /// <summary>
         /// The main menu for this Template
@@ -302,7 +302,7 @@ namespace Kistl.App.GUI
         }
         private BSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl, EntityCollection<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl>> _Menu;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Template> OnMenu_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Template> OnMenu_IsValid;
 
         /// <summary>
         /// The visual representation of this Template
@@ -407,7 +407,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Template> OnVisualTree_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Template> OnVisualTree_IsValid;
 
         /// <summary>
         /// 
@@ -428,6 +428,7 @@ namespace Kistl.App.GUI
         }
         public delegate void PrepareDefault_Handler<T>(T obj, Kistl.App.Base.ObjectClass cls);
         public static event PrepareDefault_Handler<Template> OnPrepareDefault_Template;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Template> OnPrepareDefault_Template_CanExec;
 
@@ -469,7 +470,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -532,27 +533,27 @@ namespace Kistl.App.GUI
                         new Guid("c81105da-97e4-4685-af88-792c68e55a17"),
                         "DisplayedTypeAssembly",
                         null,
-                        obj => ((TemplateEfImpl)obj).DisplayedTypeAssembly,
+                        obj => obj.DisplayedTypeAssembly,
                         (obj, val) => obj.DisplayedTypeAssembly = val,
-						obj => ((TemplateEfImpl)obj).OnDisplayedTypeAssembly_IsValid), 
+						obj => OnDisplayedTypeAssembly_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Template, string>(
                         lazyCtx,
                         new Guid("4b683aa1-45a9-4c5e-80e7-0ff30f5b798c"),
                         "DisplayedTypeFullName",
                         null,
-                        obj => ((TemplateEfImpl)obj).DisplayedTypeFullName,
+                        obj => obj.DisplayedTypeFullName,
                         (obj, val) => obj.DisplayedTypeFullName = val,
-						obj => ((TemplateEfImpl)obj).OnDisplayedTypeFullName_IsValid), 
+						obj => OnDisplayedTypeFullName_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Template, string>(
                         lazyCtx,
                         new Guid("4fc51781-b0fe-495c-91a1-90e484345515"),
                         "DisplayName",
                         null,
-                        obj => ((TemplateEfImpl)obj).DisplayName,
+                        obj => obj.DisplayName,
                         (obj, val) => obj.DisplayName = val,
-						obj => ((TemplateEfImpl)obj).OnDisplayName_IsValid), 
+						obj => OnDisplayName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<Template, ICollection<Kistl.App.GUI.Visual>>(
                         lazyCtx,
@@ -561,16 +562,16 @@ namespace Kistl.App.GUI
                         null,
                         obj => obj.Menu,
                         null, // lists are read-only properties
-                        obj => ((TemplateEfImpl)obj).OnMenu_IsValid), 
+                        obj => OnMenu_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Template, Kistl.App.GUI.Visual>(
                         lazyCtx,
                         new Guid("5d2880a4-716a-4bdc-aaa9-379c006e7ed4"),
                         "VisualTree",
                         null,
-                        obj => ((TemplateEfImpl)obj).VisualTree,
+                        obj => obj.VisualTree,
                         (obj, val) => obj.VisualTree = val,
-						obj => ((TemplateEfImpl)obj).OnVisualTree_IsValid), 
+						obj => OnVisualTree_IsValid), 
                     // position columns
                 };
             }

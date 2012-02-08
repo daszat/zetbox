@@ -95,7 +95,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnLarge_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnLarge_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnLarge_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnLarge_IsValid;
 
         /// <summary>
         /// 
@@ -147,7 +147,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnNoScale_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnNoScale_IsValid;
 
         /// <summary>
         /// 
@@ -199,7 +199,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnSmallDecimal_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnSmallDecimal_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnSmallDecimal_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnSmallDecimal_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -253,27 +253,27 @@ namespace Kistl.App.Test
                         new Guid("14a1eeb9-26b1-4913-bae1-228edfd1c9de"),
                         "Large",
                         null,
-                        obj => ((TestDecimalNHibernateImpl)obj).Large,
+                        obj => obj.Large,
                         (obj, val) => obj.Large = val,
-						obj => ((TestDecimalNHibernateImpl)obj).OnLarge_IsValid), 
+						obj => OnLarge_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<TestDecimal, decimal?>(
                         lazyCtx,
                         new Guid("dbad0130-bfb8-4475-afb8-e26f1124395b"),
                         "NoScale",
                         null,
-                        obj => ((TestDecimalNHibernateImpl)obj).NoScale,
+                        obj => obj.NoScale,
                         (obj, val) => obj.NoScale = val,
-						obj => ((TestDecimalNHibernateImpl)obj).OnNoScale_IsValid), 
+						obj => OnNoScale_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<TestDecimal, decimal?>(
                         lazyCtx,
                         new Guid("734795e4-4e0f-4175-b153-e465acafd609"),
                         "SmallDecimal",
                         null,
-                        obj => ((TestDecimalNHibernateImpl)obj).SmallDecimal,
+                        obj => obj.SmallDecimal,
                         (obj, val) => obj.SmallDecimal = val,
-						obj => ((TestDecimalNHibernateImpl)obj).OnSmallDecimal_IsValid), 
+						obj => OnSmallDecimal_IsValid), 
                     // position columns
                 };
             }

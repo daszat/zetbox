@@ -98,7 +98,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Group, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Group, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Group> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Group> OnExportGuid_IsValid;
 
         /// <summary>
         /// Identities are member of this group
@@ -123,7 +123,7 @@ namespace Kistl.App.Base
 
 		private ObservableASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Member;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Group> OnMember_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Group> OnMember_IsValid;
 
         /// <summary>
         /// Module is optional. Use it only when you need a Group to be exportable
@@ -215,7 +215,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Group, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Group, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Group> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Group> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -268,7 +268,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Group, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Group, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Group> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Group> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -290,6 +290,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetName_Handler<Group> OnGetName_Group;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Group> OnGetName_Group_CanExec;
 
@@ -331,7 +332,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -410,9 +411,9 @@ namespace Kistl.App.Base
                         new Guid("c776e87f-2b95-466e-848e-0ce195f4bd73"),
                         "ExportGuid",
                         null,
-                        obj => ((GroupMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((GroupMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<Group, ICollection<Kistl.App.Base.Identity>>(
                         lazyCtx,
@@ -421,25 +422,25 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Member,
                         null, // lists are read-only properties
-                        obj => ((GroupMemoryImpl)obj).OnMember_IsValid), 
+                        obj => OnMember_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Group, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("8da2dab4-81c9-4659-9f25-c6b5177ba26d"),
                         "Module",
                         null,
-                        obj => ((GroupMemoryImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((GroupMemoryImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Group, string>(
                         lazyCtx,
                         new Guid("99c320b1-0003-4e2d-aa98-9a215d80988b"),
                         "Name",
                         null,
-                        obj => ((GroupMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((GroupMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }

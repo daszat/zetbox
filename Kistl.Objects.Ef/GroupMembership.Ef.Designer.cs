@@ -141,7 +141,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.GroupMembership, Kistl.App.Base.Group> OnGroup_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.GroupMembership, Kistl.App.Base.Group> OnGroup_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.GroupMembership> OnGroup_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.GroupMembership> OnGroup_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -199,9 +199,9 @@ namespace Kistl.App.Base
                         new Guid("da080b07-15d2-4cdf-bc1c-df776e094a75"),
                         "Group",
                         null,
-                        obj => ((GroupMembershipEfImpl)obj).Group,
+                        obj => obj.Group,
                         (obj, val) => obj.Group = val,
-						obj => ((GroupMembershipEfImpl)obj).OnGroup_IsValid), 
+						obj => OnGroup_IsValid), 
                     // position columns
                 };
             }

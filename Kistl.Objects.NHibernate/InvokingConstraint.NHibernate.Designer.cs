@@ -132,7 +132,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.InvokingConstraint> OnGetErrorTextInvocation_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.InvokingConstraint> OnGetErrorTextInvocation_IsValid;
 
         /// <summary>
         /// 
@@ -221,7 +221,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnIsValidInvocation_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnIsValidInvocation_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.InvokingConstraint> OnIsValidInvocation_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.InvokingConstraint> OnIsValidInvocation_IsValid;
 
         /// <summary>
         /// 
@@ -242,6 +242,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<InvokingConstraint> OnGetErrorText_InvokingConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<InvokingConstraint> OnGetErrorText_InvokingConstraint_CanExec;
 
@@ -283,7 +284,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -304,6 +305,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<InvokingConstraint> OnIsValid_InvokingConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<InvokingConstraint> OnIsValid_InvokingConstraint_CanExec;
 
@@ -345,7 +347,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -441,18 +443,18 @@ namespace Kistl.App.Base
                         new Guid("3b5d70f7-b6fd-4e39-b912-5a644a5de716"),
                         "GetErrorTextInvocation",
                         null,
-                        obj => ((InvokingConstraintNHibernateImpl)obj).GetErrorTextInvocation,
+                        obj => obj.GetErrorTextInvocation,
                         (obj, val) => obj.GetErrorTextInvocation = val,
-						obj => ((InvokingConstraintNHibernateImpl)obj).OnGetErrorTextInvocation_IsValid), 
+						obj => OnGetErrorTextInvocation_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<InvokingConstraint, Kistl.App.Base.ConstraintInvocation>(
                         lazyCtx,
                         new Guid("3c98da56-1c21-4849-87b1-81bf72d17e70"),
                         "IsValidInvocation",
                         null,
-                        obj => ((InvokingConstraintNHibernateImpl)obj).IsValidInvocation,
+                        obj => obj.IsValidInvocation,
                         (obj, val) => obj.IsValidInvocation = val,
-						obj => ((InvokingConstraintNHibernateImpl)obj).OnIsValidInvocation_IsValid), 
+						obj => OnIsValidInvocation_IsValid), 
                     // position columns
                 };
             }

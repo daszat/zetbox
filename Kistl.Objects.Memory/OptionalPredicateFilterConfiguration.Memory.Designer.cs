@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration, string> OnPredicate_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration, string> OnPredicate_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration> OnPredicate_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration> OnPredicate_IsValid;
 
         /// <summary>
         /// 
@@ -106,6 +106,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<OptionalPredicateFilterConfiguration> OnCreateFilterModel_OptionalPredicateFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<OptionalPredicateFilterConfiguration> OnCreateFilterModel_OptionalPredicateFilterConfiguration_CanExec;
 
@@ -147,7 +148,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -168,6 +169,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<OptionalPredicateFilterConfiguration> OnGetLabel_OptionalPredicateFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<OptionalPredicateFilterConfiguration> OnGetLabel_OptionalPredicateFilterConfiguration_CanExec;
 
@@ -209,7 +211,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -260,9 +262,9 @@ namespace Kistl.App.GUI
                         new Guid("bcc5a62f-9401-4b88-9cd9-2b33be6fa81a"),
                         "Predicate",
                         null,
-                        obj => ((OptionalPredicateFilterConfigurationMemoryImpl)obj).Predicate,
+                        obj => obj.Predicate,
                         (obj, val) => obj.Predicate = val,
-						obj => ((OptionalPredicateFilterConfigurationMemoryImpl)obj).OnPredicate_IsValid), 
+						obj => OnPredicate_IsValid), 
                     // position columns
                 };
             }

@@ -53,6 +53,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<BoolParameter> OnGetLabel_BoolParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<BoolParameter> OnGetLabel_BoolParameter_CanExec;
 
@@ -94,7 +95,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -115,6 +116,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<BoolParameter> OnGetParameterType_BoolParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<BoolParameter> OnGetParameterType_BoolParameter_CanExec;
 
@@ -156,7 +158,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -177,6 +179,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<BoolParameter> OnGetParameterTypeString_BoolParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<BoolParameter> OnGetParameterTypeString_BoolParameter_CanExec;
 
@@ -218,7 +221,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

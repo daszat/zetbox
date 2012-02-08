@@ -39,7 +39,7 @@ namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
         {
             if (m.InvokeOnServer == true)
             {
-                ObjectClasses.InvokeServerMethod.Call(Host, ctx, this.DataType, m, index);
+                ObjectClasses.InvokeServerMethod.Call(Host, ctx, this.DataType, m, index);                
             }
             else
             {

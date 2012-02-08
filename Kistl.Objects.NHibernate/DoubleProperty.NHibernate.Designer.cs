@@ -64,6 +64,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<DoubleProperty> OnGetElementTypeString_DoubleProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DoubleProperty> OnGetElementTypeString_DoubleProperty_CanExec;
 
@@ -105,7 +106,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -126,6 +127,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DoubleProperty> OnGetLabel_DoubleProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DoubleProperty> OnGetLabel_DoubleProperty_CanExec;
 
@@ -167,7 +169,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -188,6 +190,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<DoubleProperty> OnGetName_DoubleProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DoubleProperty> OnGetName_DoubleProperty_CanExec;
 
@@ -229,7 +232,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -250,6 +253,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<DoubleProperty> OnGetPropertyType_DoubleProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DoubleProperty> OnGetPropertyType_DoubleProperty_CanExec;
 
@@ -291,7 +295,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -312,6 +316,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<DoubleProperty> OnGetPropertyTypeString_DoubleProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DoubleProperty> OnGetPropertyTypeString_DoubleProperty_CanExec;
 
@@ -353,7 +358,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

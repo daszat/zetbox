@@ -74,7 +74,7 @@ namespace at.dasz.DocumentManagement
 		// ignored, but required for Serialization
         private bool Revisions_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
 
         /// <summary>
         /// Handles the change of the current blob
@@ -95,6 +95,7 @@ namespace at.dasz.DocumentManagement
             return e.Result;
         }
         public static event HandleBlobChange_Handler<Document> OnHandleBlobChange_Document;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Document> OnHandleBlobChange_Document_CanExec;
 
@@ -136,7 +137,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
@@ -156,6 +157,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Open_Handler<Document> OnOpen_Document;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Document> OnOpen_Document_CanExec;
 
@@ -197,7 +199,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
@@ -217,6 +219,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Upload_Handler<Document> OnUpload_Document;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Document> OnUpload_Document_CanExec;
 
@@ -258,7 +261,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -311,7 +314,7 @@ namespace at.dasz.DocumentManagement
                         null,
                         obj => obj.Revisions,
                         null, // lists are read-only properties
-                        obj => ((DocumentNHibernateImpl)obj).OnRevisions_IsValid), 
+                        obj => OnRevisions_IsValid), 
                     // position columns
                 };
             }

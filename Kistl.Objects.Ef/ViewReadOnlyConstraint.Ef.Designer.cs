@@ -56,6 +56,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<ViewReadOnlyConstraint> OnGetErrorText_ViewReadOnlyConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ViewReadOnlyConstraint> OnGetErrorText_ViewReadOnlyConstraint_CanExec;
 
@@ -97,7 +98,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -118,6 +119,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<ViewReadOnlyConstraint> OnIsValid_ViewReadOnlyConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ViewReadOnlyConstraint> OnIsValid_ViewReadOnlyConstraint_CanExec;
 
@@ -159,7 +161,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

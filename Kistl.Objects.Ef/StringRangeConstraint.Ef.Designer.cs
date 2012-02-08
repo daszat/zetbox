@@ -91,7 +91,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.StringRangeConstraint> OnMaxLength_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.StringRangeConstraint> OnMaxLength_IsValid;
 
         /// <summary>
         /// The minimal length of this StringProperty
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.StringRangeConstraint> OnMinLength_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.StringRangeConstraint> OnMinLength_IsValid;
 
         /// <summary>
         /// 
@@ -168,6 +168,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint_CanExec;
 
@@ -209,7 +210,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -230,6 +231,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<StringRangeConstraint> OnIsValid_StringRangeConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<StringRangeConstraint> OnIsValid_StringRangeConstraint_CanExec;
 
@@ -271,7 +273,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -322,18 +324,18 @@ namespace Kistl.App.Base
                         new Guid("17aa679d-72d0-480e-9bd9-b37f4eba1d68"),
                         "MaxLength",
                         null,
-                        obj => ((StringRangeConstraintEfImpl)obj).MaxLength,
+                        obj => obj.MaxLength,
                         (obj, val) => obj.MaxLength = val,
-						obj => ((StringRangeConstraintEfImpl)obj).OnMaxLength_IsValid), 
+						obj => OnMaxLength_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<StringRangeConstraint, int>(
                         lazyCtx,
                         new Guid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6"),
                         "MinLength",
                         null,
-                        obj => ((StringRangeConstraintEfImpl)obj).MinLength,
+                        obj => obj.MinLength,
                         (obj, val) => obj.MinLength = val,
-						obj => ((StringRangeConstraintEfImpl)obj).OnMinLength_IsValid), 
+						obj => OnMinLength_IsValid), 
                     // position columns
                 };
             }

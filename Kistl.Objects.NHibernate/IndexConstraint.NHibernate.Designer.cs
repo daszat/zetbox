@@ -116,7 +116,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IndexConstraint, bool> OnIsUnique_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.IndexConstraint, bool> OnIsUnique_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.IndexConstraint> OnIsUnique_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.IndexConstraint> OnIsUnique_IsValid;
 
         /// <summary>
         /// 
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 		// ignored, but required for Serialization
         private bool Properties_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.IndexConstraint> OnProperties_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.IndexConstraint> OnProperties_IsValid;
 
         /// <summary>
         /// 
@@ -168,6 +168,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<IndexConstraint> OnGetErrorText_IndexConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<IndexConstraint> OnGetErrorText_IndexConstraint_CanExec;
 
@@ -209,7 +210,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -230,6 +231,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<IndexConstraint> OnIsValid_IndexConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<IndexConstraint> OnIsValid_IndexConstraint_CanExec;
 
@@ -271,7 +273,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -323,9 +325,9 @@ namespace Kistl.App.Base
                         new Guid("2cc6e028-e01f-4879-bda8-78d459c0eaf4"),
                         "IsUnique",
                         null,
-                        obj => ((IndexConstraintNHibernateImpl)obj).IsUnique,
+                        obj => obj.IsUnique,
                         (obj, val) => obj.IsUnique = val,
-						obj => ((IndexConstraintNHibernateImpl)obj).OnIsUnique_IsValid), 
+						obj => OnIsUnique_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<IndexConstraint, ICollection<Kistl.App.Base.Property>>(
                         lazyCtx,
@@ -334,7 +336,7 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Properties,
                         null, // lists are read-only properties
-                        obj => ((IndexConstraintNHibernateImpl)obj).OnProperties_IsValid), 
+                        obj => OnProperties_IsValid), 
                     // position columns
                 };
             }

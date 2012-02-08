@@ -123,7 +123,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -189,7 +189,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnChangedOn_IsValid;
 
         /// <summary>
         /// The property to be constrained
@@ -297,7 +297,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnConstrainedProperty_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnConstrainedProperty_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -388,7 +388,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -454,7 +454,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -520,7 +520,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnExportGuid_IsValid;
 
         /// <summary>
         /// The reason of this constraint
@@ -573,7 +573,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, string> OnReason_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, string> OnReason_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnReason_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Constraint> OnReason_IsValid;
 
         /// <summary>
         /// 
@@ -595,6 +595,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedObject, System.Object constrainedValue);
         public static event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Constraint> OnGetErrorText_Constraint_CanExec;
 
@@ -636,7 +637,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -658,6 +659,7 @@ namespace Kistl.App.Base
         }
         public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedObject, System.Object constrainedValue);
         public static event IsValid_Handler<Constraint> OnIsValid_Constraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Constraint> OnIsValid_Constraint_CanExec;
 
@@ -699,7 +701,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -810,63 +812,63 @@ namespace Kistl.App.Base
                         new Guid("b7d3d6d2-6c34-4599-846d-2df3dbf8eda8"),
                         "ChangedBy",
                         null,
-                        obj => ((ConstraintMemoryImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((ConstraintMemoryImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Constraint, DateTime>(
                         lazyCtx,
                         new Guid("90d7ec21-a775-46f0-8a30-ef25088dd5eb"),
                         "ChangedOn",
                         null,
-                        obj => ((ConstraintMemoryImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((ConstraintMemoryImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Constraint, Kistl.App.Base.Property>(
                         lazyCtx,
                         new Guid("438b9307-fb40-4afe-a66f-a5762c41e14b"),
                         "ConstrainedProperty",
                         null,
-                        obj => ((ConstraintMemoryImpl)obj).ConstrainedProperty,
+                        obj => obj.ConstrainedProperty,
                         (obj, val) => obj.ConstrainedProperty = val,
-						obj => ((ConstraintMemoryImpl)obj).OnConstrainedProperty_IsValid), 
+						obj => OnConstrainedProperty_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Constraint, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("51cb0dfc-4156-4dcf-a409-57d0029b4cbb"),
                         "CreatedBy",
                         null,
-                        obj => ((ConstraintMemoryImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((ConstraintMemoryImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Constraint, DateTime>(
                         lazyCtx,
                         new Guid("a24ba1ea-4ad5-4ffd-bf24-c0f2df4b8e0c"),
                         "CreatedOn",
                         null,
-                        obj => ((ConstraintMemoryImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((ConstraintMemoryImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Constraint, Guid>(
                         lazyCtx,
                         new Guid("8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1"),
                         "ExportGuid",
                         null,
-                        obj => ((ConstraintMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((ConstraintMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Constraint, string>(
                         lazyCtx,
                         new Guid("49f759b3-de60-4cee-be06-c712e901c24e"),
                         "Reason",
                         null,
-                        obj => ((ConstraintMemoryImpl)obj).Reason,
+                        obj => obj.Reason,
                         (obj, val) => obj.Reason = val,
-						obj => ((ConstraintMemoryImpl)obj).OnReason_IsValid), 
+						obj => OnReason_IsValid), 
                     // position columns
                 };
             }

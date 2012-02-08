@@ -64,6 +64,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<SinglePropertyFilterConfiguration> OnCreateFilterModel_SinglePropertyFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<SinglePropertyFilterConfiguration> OnCreateFilterModel_SinglePropertyFilterConfiguration_CanExec;
 
@@ -105,7 +106,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -126,6 +127,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<SinglePropertyFilterConfiguration> OnGetLabel_SinglePropertyFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<SinglePropertyFilterConfiguration> OnGetLabel_SinglePropertyFilterConfiguration_CanExec;
 
@@ -167,7 +169,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

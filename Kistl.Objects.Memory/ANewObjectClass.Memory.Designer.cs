@@ -85,7 +85,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.ANewObjectClass> OnTestString_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.ANewObjectClass> OnTestString_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -136,9 +136,9 @@ namespace Kistl.App.Test
                         new Guid("e7371fa9-cd18-4cdc-91c3-a73c0984a019"),
                         "TestString",
                         null,
-                        obj => ((ANewObjectClassMemoryImpl)obj).TestString,
+                        obj => obj.TestString,
                         (obj, val) => obj.TestString = val,
-						obj => ((ANewObjectClassMemoryImpl)obj).OnTestString_IsValid), 
+						obj => OnTestString_IsValid), 
                     // position columns
                 };
             }

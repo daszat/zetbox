@@ -123,7 +123,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -189,7 +189,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -280,7 +280,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -346,7 +346,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Description of this Enumeration Entry
@@ -399,7 +399,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnDescription_IsValid;
 
         /// <summary>
         /// Übergeordnete Enumeration
@@ -533,7 +533,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnEnumeration_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnEnumeration_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -599,7 +599,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -652,7 +652,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnLabel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnLabel_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnLabel_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnLabel_IsValid;
 
         /// <summary>
         /// CLR name of this entry
@@ -705,7 +705,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnName_IsValid;
 
         /// <summary>
         /// The CLR value of this entry
@@ -758,7 +758,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnValue_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumerationEntry> OnValue_IsValid;
 
         /// <summary>
         /// 
@@ -780,6 +780,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetLabel_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
         public static event GetLabel_Handler<EnumerationEntry> OnGetLabel_EnumerationEntry;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumerationEntry> OnGetLabel_EnumerationEntry_CanExec;
 
@@ -821,7 +822,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -936,90 +937,90 @@ namespace Kistl.App.Base
                         new Guid("6f71765b-503a-4ad3-a07b-cea9f2930a84"),
                         "ChangedBy",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, DateTime>(
                         lazyCtx,
                         new Guid("2a1f2193-427f-497b-9f24-8154d789b77b"),
                         "ChangedOn",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("d8f94106-ec4f-4604-aaff-8e2f5b4019ba"),
                         "CreatedBy",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, DateTime>(
                         lazyCtx,
                         new Guid("e0091bc7-656a-46fd-a1ff-b542b10a4472"),
                         "CreatedOn",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, string>(
                         lazyCtx,
                         new Guid("3366c523-0593-4a29-978f-5ac8a4f15eca"),
                         "Description",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, Kistl.App.Base.Enumeration>(
                         lazyCtx,
                         new Guid("115c3bfb-72fd-46f2-81fe-74ce1cfa1874"),
                         "Enumeration",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).Enumeration,
+                        obj => obj.Enumeration,
                         (obj, val) => obj.Enumeration = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnEnumeration_IsValid), 
+						obj => OnEnumeration_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, Guid>(
                         lazyCtx,
                         new Guid("9cee8923-5189-4e1e-b752-a87be1968491"),
                         "ExportGuid",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, string>(
                         lazyCtx,
                         new Guid("feb0b203-5f83-4b9b-848c-a3e4ee895055"),
                         "Label",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).Label,
+                        obj => obj.Label,
                         (obj, val) => obj.Label = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnLabel_IsValid), 
+						obj => OnLabel_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, string>(
                         lazyCtx,
                         new Guid("1c1e497b-294f-442e-8793-478b298d4aba"),
                         "Name",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<EnumerationEntry, int>(
                         lazyCtx,
                         new Guid("2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa"),
                         "Value",
                         null,
-                        obj => ((EnumerationEntryMemoryImpl)obj).Value,
+                        obj => obj.Value,
                         (obj, val) => obj.Value = val,
-						obj => ((EnumerationEntryMemoryImpl)obj).OnValue_IsValid), 
+						obj => OnValue_IsValid), 
                     // position columns
                     // rel: Enumeration has EnumerationEntries (55bd59b8-ad37-4837-b066-d505f86316fe)
                     // rel.B.Type == cls && rel.B.HasPersistentOrder

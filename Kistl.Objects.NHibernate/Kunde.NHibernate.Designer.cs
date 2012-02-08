@@ -98,7 +98,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnAdresse_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnAdresse_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -185,7 +185,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -257,7 +257,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -344,7 +344,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -416,7 +416,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnCreatedOn_IsValid;
 
         /// <summary>
         /// EMails des Kunden - können mehrere sein
@@ -459,7 +459,7 @@ namespace Kistl.App.Projekte
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMails_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnEMails_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnEMails_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -531,7 +531,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnExportGuid_IsValid;
 
         /// <summary>
         /// Name des Kunden
@@ -583,7 +583,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnKundenname_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnKundenname_IsValid;
 
         /// <summary>
         /// Land
@@ -635,7 +635,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnLand_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnLand_IsValid;
 
         /// <summary>
         /// Ort
@@ -687,7 +687,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnOrt_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnOrt_IsValid;
 
         /// <summary>
         /// Postleitzahl
@@ -739,7 +739,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnPLZ_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Kunde> OnPLZ_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -840,45 +840,45 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         new Guid("7ba07561-15f4-495a-b2eb-59006e4210e5"),
                         "Adresse",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).Adresse,
+                        obj => obj.Adresse,
                         (obj, val) => obj.Adresse = val,
-						obj => ((KundeNHibernateImpl)obj).OnAdresse_IsValid), 
+						obj => OnAdresse_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("d2148600-ebba-4782-8379-a8b03a31362b"),
                         "ChangedBy",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((KundeNHibernateImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, DateTime>(
                         lazyCtx,
                         new Guid("028ff0b0-1beb-486d-b400-bfe3cdf73c5f"),
                         "ChangedOn",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((KundeNHibernateImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("acc46d95-0f07-40cd-b2b1-79d093d6e7b4"),
                         "CreatedBy",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((KundeNHibernateImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, DateTime>(
                         lazyCtx,
                         new Guid("1c23561e-07d4-4363-8ceb-3b13f3125634"),
                         "CreatedOn",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((KundeNHibernateImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<Kunde, ICollection<string>>(
                         lazyCtx,
@@ -887,52 +887,52 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         null,
                         obj => obj.EMails,
                         null, // lists are read-only properties
-                        obj => ((KundeNHibernateImpl)obj).OnEMails_IsValid), 
+                        obj => OnEMails_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, Guid>(
                         lazyCtx,
                         new Guid("01f74ef3-9369-4e29-a811-293fc27f7c27"),
                         "ExportGuid",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((KundeNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, string>(
                         lazyCtx,
                         new Guid("2817a845-b2d5-43ed-b0f1-5a6692a62183"),
                         "Kundenname",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).Kundenname,
+                        obj => obj.Kundenname,
                         (obj, val) => obj.Kundenname = val,
-						obj => ((KundeNHibernateImpl)obj).OnKundenname_IsValid), 
+						obj => OnKundenname_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, string>(
                         lazyCtx,
                         new Guid("c01afb40-9f28-494f-9058-9d0eca79a125"),
                         "Land",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).Land,
+                        obj => obj.Land,
                         (obj, val) => obj.Land = val,
-						obj => ((KundeNHibernateImpl)obj).OnLand_IsValid), 
+						obj => OnLand_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, string>(
                         lazyCtx,
                         new Guid("5281cbe0-8f63-4a2d-bb9e-2ee04588202d"),
                         "Ort",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).Ort,
+                        obj => obj.Ort,
                         (obj, val) => obj.Ort = val,
-						obj => ((KundeNHibernateImpl)obj).OnOrt_IsValid), 
+						obj => OnOrt_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Kunde, string>(
                         lazyCtx,
                         new Guid("cafb4b93-4a1a-4753-8ec0-c65936a0d129"),
                         "PLZ",
                         null,
-                        obj => ((KundeNHibernateImpl)obj).PLZ,
+                        obj => obj.PLZ,
                         (obj, val) => obj.PLZ = val,
-						obj => ((KundeNHibernateImpl)obj).OnPLZ_IsValid), 
+						obj => OnPLZ_IsValid), 
                     // position columns
                 };
             }

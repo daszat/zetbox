@@ -85,7 +85,7 @@ namespace Kistl.App.Test
         }
         private BSideCollectionWrapper<Kistl.App.Test.N_to_M_relations_A, Kistl.App.Test.N_to_M_relations_B, Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl, EntityCollection<Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>> _BSide;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_A> OnBSide_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_A> OnBSide_IsValid;
 
         /// <summary>
         /// 
@@ -141,7 +141,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.N_to_M_relations_A, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.N_to_M_relations_A, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_A> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_A> OnName_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -193,16 +193,16 @@ namespace Kistl.App.Test
                         null,
                         obj => obj.BSide,
                         null, // lists are read-only properties
-                        obj => ((N_to_M_relations_AEfImpl)obj).OnBSide_IsValid), 
+                        obj => OnBSide_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<N_to_M_relations_A, string>(
                         lazyCtx,
                         new Guid("084ec7c9-1623-43f1-9afc-e61f934df963"),
                         "Name",
                         null,
-                        obj => ((N_to_M_relations_AEfImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((N_to_M_relations_AEfImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }

@@ -95,7 +95,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CurrentSchema> OnSchema_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CurrentSchema> OnSchema_IsValid;
 
         /// <summary>
         /// Version number of this schema
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CurrentSchema> OnVersion_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CurrentSchema> OnVersion_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -200,18 +200,18 @@ namespace Kistl.App.Base
                         new Guid("175143b9-dd09-4b49-a633-e9cdb508c4c5"),
                         "Schema",
                         null,
-                        obj => ((CurrentSchemaNHibernateImpl)obj).Schema,
+                        obj => obj.Schema,
                         (obj, val) => obj.Schema = val,
-						obj => ((CurrentSchemaNHibernateImpl)obj).OnSchema_IsValid), 
+						obj => OnSchema_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CurrentSchema, int>(
                         lazyCtx,
                         new Guid("193c24c4-5a42-418e-8ed8-6e1689beca50"),
                         "Version",
                         null,
-                        obj => ((CurrentSchemaNHibernateImpl)obj).Version,
+                        obj => obj.Version,
                         (obj, val) => obj.Version = val,
-						obj => ((CurrentSchemaNHibernateImpl)obj).OnVersion_IsValid), 
+						obj => OnVersion_IsValid), 
                     // position columns
                 };
             }

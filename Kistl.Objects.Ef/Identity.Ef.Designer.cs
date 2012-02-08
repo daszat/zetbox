@@ -91,7 +91,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnDisplayName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Identity> OnDisplayName_IsValid;
 
         /// <summary>
         /// Identites are member of groups
@@ -141,7 +141,7 @@ namespace Kistl.App.Base
         }
         private BSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>> _Groups;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnGroups_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Identity> OnGroups_IsValid;
 
         /// <summary>
         /// Password of a generic identity
@@ -197,7 +197,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnPassword_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Identity> OnPassword_IsValid;
 
         /// <summary>
         /// Username of a generic identity
@@ -253,7 +253,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnUserName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Identity> OnUserName_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -305,9 +305,9 @@ namespace Kistl.App.Base
                         new Guid("f93e6dbb-a704-460c-8183-ce8b1c2c47a2"),
                         "DisplayName",
                         null,
-                        obj => ((IdentityEfImpl)obj).DisplayName,
+                        obj => obj.DisplayName,
                         (obj, val) => obj.DisplayName = val,
-						obj => ((IdentityEfImpl)obj).OnDisplayName_IsValid), 
+						obj => OnDisplayName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<Identity, ICollection<Kistl.App.Base.Group>>(
                         lazyCtx,
@@ -316,25 +316,25 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Groups,
                         null, // lists are read-only properties
-                        obj => ((IdentityEfImpl)obj).OnGroups_IsValid), 
+                        obj => OnGroups_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Identity, string>(
                         lazyCtx,
                         new Guid("0d499610-99e3-42cc-b71b-49ed1a356355"),
                         "Password",
                         null,
-                        obj => ((IdentityEfImpl)obj).Password,
+                        obj => obj.Password,
                         (obj, val) => obj.Password = val,
-						obj => ((IdentityEfImpl)obj).OnPassword_IsValid), 
+						obj => OnPassword_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Identity, string>(
                         lazyCtx,
                         new Guid("a4ce1f5f-311b-4510-8817-4cca40f0bf0f"),
                         "UserName",
                         null,
-                        obj => ((IdentityEfImpl)obj).UserName,
+                        obj => obj.UserName,
                         (obj, val) => obj.UserName = val,
-						obj => ((IdentityEfImpl)obj).OnUserName_IsValid), 
+						obj => OnUserName_IsValid), 
                     // position columns
                 };
             }

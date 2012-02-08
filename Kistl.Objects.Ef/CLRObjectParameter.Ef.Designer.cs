@@ -141,7 +141,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CLRObjectParameter> OnType_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CLRObjectParameter> OnType_IsValid;
 
         /// <summary>
         /// 
@@ -162,6 +162,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<CLRObjectParameter> OnGetLabel_CLRObjectParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CLRObjectParameter> OnGetLabel_CLRObjectParameter_CanExec;
 
@@ -203,7 +204,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -224,6 +225,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter_CanExec;
 
@@ -265,7 +267,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -286,6 +288,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter_CanExec;
 
@@ -327,7 +330,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -385,9 +388,9 @@ namespace Kistl.App.Base
                         new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd"),
                         "Type",
                         null,
-                        obj => ((CLRObjectParameterEfImpl)obj).Type,
+                        obj => obj.Type,
                         (obj, val) => obj.Type = val,
-						obj => ((CLRObjectParameterEfImpl)obj).OnType_IsValid), 
+						obj => OnType_IsValid), 
                     // position columns
                 };
             }

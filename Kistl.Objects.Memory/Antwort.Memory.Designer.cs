@@ -85,7 +85,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, string> OnFrage_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, string> OnFrage_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFrage_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFrage_IsValid;
 
         /// <summary>
         /// Workaround for Case 1376
@@ -218,7 +218,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, Kistl.App.Test.Fragebogen> OnFragebogen_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, Kistl.App.Test.Fragebogen> OnFragebogen_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFragebogen_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFragebogen_IsValid;
 
         /// <summary>
         /// 
@@ -271,7 +271,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFragenNummer_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFragenNummer_IsValid;
 
         /// <summary>
         /// 
@@ -324,7 +324,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnGegebeneAntwort_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnGegebeneAntwort_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -402,36 +402,36 @@ namespace Kistl.App.Test
                         new Guid("311cb474-be7d-4e6b-b803-379e6523720c"),
                         "Frage",
                         null,
-                        obj => ((AntwortMemoryImpl)obj).Frage,
+                        obj => obj.Frage,
                         (obj, val) => obj.Frage = val,
-						obj => ((AntwortMemoryImpl)obj).OnFrage_IsValid), 
+						obj => OnFrage_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Antwort, Kistl.App.Test.Fragebogen>(
                         lazyCtx,
                         new Guid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82"),
                         "Fragebogen",
                         null,
-                        obj => ((AntwortMemoryImpl)obj).Fragebogen,
+                        obj => obj.Fragebogen,
                         (obj, val) => obj.Fragebogen = val,
-						obj => ((AntwortMemoryImpl)obj).OnFragebogen_IsValid), 
+						obj => OnFragebogen_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Antwort, int>(
                         lazyCtx,
                         new Guid("87a005fa-6249-4aab-b90e-b50c97487c09"),
                         "FragenNummer",
                         null,
-                        obj => ((AntwortMemoryImpl)obj).FragenNummer,
+                        obj => obj.FragenNummer,
                         (obj, val) => obj.FragenNummer = val,
-						obj => ((AntwortMemoryImpl)obj).OnFragenNummer_IsValid), 
+						obj => OnFragenNummer_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Antwort, int?>(
                         lazyCtx,
                         new Guid("bbddff1f-943e-48cb-b097-377040280f0a"),
                         "GegebeneAntwort",
                         null,
-                        obj => ((AntwortMemoryImpl)obj).GegebeneAntwort,
+                        obj => obj.GegebeneAntwort,
                         (obj, val) => obj.GegebeneAntwort = val,
-						obj => ((AntwortMemoryImpl)obj).OnGegebeneAntwort_IsValid), 
+						obj => OnGegebeneAntwort_IsValid), 
                     // position columns
                     // rel: Ein_Fragebogen enthaelt gute_Antworten (0f425937-0d1e-4887-ae65-a162b45fc93e)
                     // rel.B.Type == cls && rel.B.HasPersistentOrder

@@ -95,7 +95,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.One_to_N_relations_One, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.One_to_N_relations_One, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_One> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_One> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -130,7 +130,7 @@ namespace Kistl.App.Test
         private OneNRelationList<Kistl.App.Test.One_to_N_relations_N> _NSide;
 public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_One> OnNSide_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_One> OnNSide_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -182,9 +182,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
                         new Guid("eea22954-2845-4b34-a721-358469fd0740"),
                         "Name",
                         null,
-                        obj => ((One_to_N_relations_OneNHibernateImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((One_to_N_relations_OneNHibernateImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<One_to_N_relations_One, ICollection<Kistl.App.Test.One_to_N_relations_N>>(
                         lazyCtx,
@@ -193,7 +193,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
                         null,
                         obj => obj.NSide,
                         null, // lists are read-only properties
-                        obj => ((One_to_N_relations_OneNHibernateImpl)obj).OnNSide_IsValid), 
+                        obj => OnNSide_IsValid), 
                     // position columns
                 };
             }

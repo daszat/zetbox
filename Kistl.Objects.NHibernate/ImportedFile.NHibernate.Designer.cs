@@ -64,6 +64,7 @@ namespace at.dasz.DocumentManagement
             return e.Result;
         }
         public static event HandleBlobChange_Handler<ImportedFile> OnHandleBlobChange_ImportedFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnHandleBlobChange_ImportedFile_CanExec;
 
@@ -105,7 +106,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Converts the imported file to a document
@@ -127,6 +128,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeDocument_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.Document> ret);
         public static event MakeDocument_Handler<ImportedFile> OnMakeDocument_ImportedFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnMakeDocument_ImportedFile_CanExec;
 
@@ -168,7 +170,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -190,6 +192,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeDynamicFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.DynamicFile> ret);
         public static event MakeDynamicFile_Handler<ImportedFile> OnMakeDynamicFile_ImportedFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnMakeDynamicFile_ImportedFile_CanExec;
 
@@ -231,7 +234,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -253,6 +256,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeStaticFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.StaticFile> ret);
         public static event MakeStaticFile_Handler<ImportedFile> OnMakeStaticFile_ImportedFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnMakeStaticFile_ImportedFile_CanExec;
 
@@ -294,7 +298,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
@@ -314,6 +318,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Open_Handler<ImportedFile> OnOpen_ImportedFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnOpen_ImportedFile_CanExec;
 
@@ -355,7 +360,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
@@ -375,6 +380,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Upload_Handler<ImportedFile> OnUpload_ImportedFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnUpload_ImportedFile_CanExec;
 
@@ -416,7 +422,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

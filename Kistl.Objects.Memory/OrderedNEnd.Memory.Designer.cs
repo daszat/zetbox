@@ -165,7 +165,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.OrderedNEnd, Kistl.App.Test.OrderedOneEnd> OnOneEnd_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.OrderedNEnd, Kistl.App.Test.OrderedOneEnd> OnOneEnd_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.OrderedNEnd> OnOneEnd_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.OrderedNEnd> OnOneEnd_IsValid;
 
         /// <summary>
         /// 
@@ -218,7 +218,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.OrderedNEnd, int?> OnOtherInt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.OrderedNEnd, int?> OnOtherInt_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.OrderedNEnd> OnOtherInt_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.OrderedNEnd> OnOtherInt_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -294,18 +294,18 @@ namespace Kistl.App.Test
                         new Guid("40b1123f-b73d-4b33-ae0c-c65fe2c2c19c"),
                         "OneEnd",
                         null,
-                        obj => ((OrderedNEndMemoryImpl)obj).OneEnd,
+                        obj => obj.OneEnd,
                         (obj, val) => obj.OneEnd = val,
-						obj => ((OrderedNEndMemoryImpl)obj).OnOneEnd_IsValid), 
+						obj => OnOneEnd_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<OrderedNEnd, int?>(
                         lazyCtx,
                         new Guid("7d5ffa69-671a-4e88-ab4b-e805d635fb9e"),
                         "OtherInt",
                         null,
-                        obj => ((OrderedNEndMemoryImpl)obj).OtherInt,
+                        obj => obj.OtherInt,
                         (obj, val) => obj.OtherInt = val,
-						obj => ((OrderedNEndMemoryImpl)obj).OnOtherInt_IsValid), 
+						obj => OnOtherInt_IsValid), 
                     // position columns
                     // rel: OneEnd hasMany NEnds (d3b1b2d8-7ef6-4693-bbc1-b60a8352beee)
                     // rel.B.Type == cls && rel.B.HasPersistentOrder

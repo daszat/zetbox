@@ -67,7 +67,12 @@ this.WriteObjects("        }\r\n");
 #line 45 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 }
 
-#line 47 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+if(index == 0) {
+	// Only for first overload
+	Kistl.Generator.Templates.ObjectClasses.MethodCanExec.Call(Host, ctx, dt, m, eventName);
+}
+
+#line 52 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

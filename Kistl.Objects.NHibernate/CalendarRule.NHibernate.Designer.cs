@@ -159,7 +159,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Calendar.Calendar> OnCalendar_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Calendar.Calendar> OnCalendar_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCalendar_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCalendar_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -246,7 +246,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -318,7 +318,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -405,7 +405,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -477,7 +477,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -549,7 +549,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnExportGuid_IsValid;
 
         /// <summary>
         /// True if the day is a working day, regardless of the working hours. E.g. Saturday is a working day (in Austria), but most people aktually don&apos;t work.
@@ -621,7 +621,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, bool> OnIsWorkingDay_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, bool> OnIsWorkingDay_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnIsWorkingDay_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnIsWorkingDay_IsValid;
 
         /// <summary>
         /// Optional member of a module
@@ -710,7 +710,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnModule_IsValid;
 
         /// <summary>
         /// The name of the Rule
@@ -762,7 +762,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnName_IsValid;
 
         /// <summary>
         /// Optional valid from date
@@ -814,7 +814,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidFrom_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidFrom_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnValidFrom_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnValidFrom_IsValid;
 
         /// <summary>
         /// Optional valid until date
@@ -866,7 +866,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidUntil_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidUntil_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnValidUntil_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnValidUntil_IsValid;
 
         /// <summary>
         /// The amount of working hours. 0 if it&apos;s a free day.
@@ -918,7 +918,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, decimal> OnWorkingHours_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, decimal> OnWorkingHours_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnWorkingHours_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnWorkingHours_IsValid;
 
         /// <summary>
         /// Checks if the Rule applies to the given date
@@ -940,6 +940,7 @@ namespace Kistl.App.Calendar
         }
         public delegate void AppliesTo_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, DateTime date);
         public static event AppliesTo_Handler<CalendarRule> OnAppliesTo_CalendarRule;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CalendarRule> OnAppliesTo_CalendarRule_CanExec;
 
@@ -981,7 +982,7 @@ namespace Kistl.App.Calendar
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -1115,108 +1116,108 @@ namespace Kistl.App.Calendar
                         new Guid("115c1d4c-ddd3-4d33-ae74-a6b676fc0dfa"),
                         "Calendar",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).Calendar,
+                        obj => obj.Calendar,
                         (obj, val) => obj.Calendar = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnCalendar_IsValid), 
+						obj => OnCalendar_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("a14bfc87-c65e-4111-8245-3fbb31189392"),
                         "ChangedBy",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, DateTime>(
                         lazyCtx,
                         new Guid("ddab18cc-3278-4ac5-8a76-25d23b1cb7be"),
                         "ChangedOn",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("0556d238-5f1e-4f01-b7b1-13f562726942"),
                         "CreatedBy",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, DateTime>(
                         lazyCtx,
                         new Guid("d61d2a16-f80d-449f-9850-0301a43fdc71"),
                         "CreatedOn",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, Guid>(
                         lazyCtx,
                         new Guid("c730faff-a917-4f89-9a49-b65374cb4de1"),
                         "ExportGuid",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, bool>(
                         lazyCtx,
                         new Guid("09cfc4e1-c106-46ec-825d-31226d8df335"),
                         "IsWorkingDay",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).IsWorkingDay,
+                        obj => obj.IsWorkingDay,
                         (obj, val) => obj.IsWorkingDay = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnIsWorkingDay_IsValid), 
+						obj => OnIsWorkingDay_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("7fc947a4-09c5-433b-a26e-5014663e3931"),
                         "Module",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, string>(
                         lazyCtx,
                         new Guid("88bd31d8-6963-49ed-8ac8-31d438744eef"),
                         "Name",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, DateTime?>(
                         lazyCtx,
                         new Guid("940552fc-7cb1-4512-9096-54c3e70f7a1f"),
                         "ValidFrom",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).ValidFrom,
+                        obj => obj.ValidFrom,
                         (obj, val) => obj.ValidFrom = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnValidFrom_IsValid), 
+						obj => OnValidFrom_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, DateTime?>(
                         lazyCtx,
                         new Guid("4fced9a6-fe27-44a2-a21d-17a09c720588"),
                         "ValidUntil",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).ValidUntil,
+                        obj => obj.ValidUntil,
                         (obj, val) => obj.ValidUntil = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnValidUntil_IsValid), 
+						obj => OnValidUntil_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<CalendarRule, decimal>(
                         lazyCtx,
                         new Guid("20370deb-580a-44e6-b201-f5740ee5e330"),
                         "WorkingHours",
                         null,
-                        obj => ((CalendarRuleNHibernateImpl)obj).WorkingHours,
+                        obj => obj.WorkingHours,
                         (obj, val) => obj.WorkingHours = val,
-						obj => ((CalendarRuleNHibernateImpl)obj).OnWorkingHours_IsValid), 
+						obj => OnWorkingHours_IsValid), 
                     // position columns
                 };
             }

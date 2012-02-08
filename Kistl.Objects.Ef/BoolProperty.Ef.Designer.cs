@@ -141,7 +141,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnFalseIcon_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnFalseIcon_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnFalseIcon_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnFalseIcon_IsValid;
 
         /// <summary>
         /// A string to describe the &quot;false&quot; value to the user.
@@ -197,7 +197,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnFalseLabel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, string> OnFalseLabel_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnFalseLabel_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnFalseLabel_IsValid;
 
         /// <summary>
         /// 
@@ -303,7 +303,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnNullIcon_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnNullIcon_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnNullIcon_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnNullIcon_IsValid;
 
         /// <summary>
         /// A string to describe the &quot;null&quot; value to the user.
@@ -359,7 +359,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnNullLabel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, string> OnNullLabel_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnNullLabel_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnNullLabel_IsValid;
 
         /// <summary>
         /// 
@@ -465,7 +465,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnTrueIcon_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnTrueIcon_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnTrueIcon_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnTrueIcon_IsValid;
 
         /// <summary>
         /// A string to describe the &quot;true&quot; value to the user.
@@ -521,7 +521,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnTrueLabel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, string> OnTrueLabel_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnTrueLabel_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnTrueLabel_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -542,6 +542,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<BoolProperty> OnGetElementTypeString_BoolProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<BoolProperty> OnGetElementTypeString_BoolProperty_CanExec;
 
@@ -583,7 +584,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -604,6 +605,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<BoolProperty> OnGetLabel_BoolProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<BoolProperty> OnGetLabel_BoolProperty_CanExec;
 
@@ -645,7 +647,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -666,6 +668,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<BoolProperty> OnGetName_BoolProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<BoolProperty> OnGetName_BoolProperty_CanExec;
 
@@ -707,7 +710,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -728,6 +731,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<BoolProperty> OnGetPropertyType_BoolProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<BoolProperty> OnGetPropertyType_BoolProperty_CanExec;
 
@@ -769,7 +773,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -790,6 +794,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<BoolProperty> OnGetPropertyTypeString_BoolProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<BoolProperty> OnGetPropertyTypeString_BoolProperty_CanExec;
 
@@ -831,7 +836,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -910,54 +915,54 @@ namespace Kistl.App.Base
                         new Guid("784846d0-2eea-4966-b63d-72a0f13b418b"),
                         "FalseIcon",
                         null,
-                        obj => ((BoolPropertyEfImpl)obj).FalseIcon,
+                        obj => obj.FalseIcon,
                         (obj, val) => obj.FalseIcon = val,
-						obj => ((BoolPropertyEfImpl)obj).OnFalseIcon_IsValid), 
+						obj => OnFalseIcon_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<BoolProperty, string>(
                         lazyCtx,
                         new Guid("09381f52-98e2-4dea-9855-7358e5f9cdae"),
                         "FalseLabel",
                         null,
-                        obj => ((BoolPropertyEfImpl)obj).FalseLabel,
+                        obj => obj.FalseLabel,
                         (obj, val) => obj.FalseLabel = val,
-						obj => ((BoolPropertyEfImpl)obj).OnFalseLabel_IsValid), 
+						obj => OnFalseLabel_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<BoolProperty, Kistl.App.GUI.Icon>(
                         lazyCtx,
                         new Guid("62454172-467d-4c8e-8f1a-a959946d3fdb"),
                         "NullIcon",
                         null,
-                        obj => ((BoolPropertyEfImpl)obj).NullIcon,
+                        obj => obj.NullIcon,
                         (obj, val) => obj.NullIcon = val,
-						obj => ((BoolPropertyEfImpl)obj).OnNullIcon_IsValid), 
+						obj => OnNullIcon_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<BoolProperty, string>(
                         lazyCtx,
                         new Guid("55fae41e-499d-40e3-b386-9839ec8b1d0a"),
                         "NullLabel",
                         null,
-                        obj => ((BoolPropertyEfImpl)obj).NullLabel,
+                        obj => obj.NullLabel,
                         (obj, val) => obj.NullLabel = val,
-						obj => ((BoolPropertyEfImpl)obj).OnNullLabel_IsValid), 
+						obj => OnNullLabel_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<BoolProperty, Kistl.App.GUI.Icon>(
                         lazyCtx,
                         new Guid("bb8fd69f-437a-45d5-a169-64c9586bfc1d"),
                         "TrueIcon",
                         null,
-                        obj => ((BoolPropertyEfImpl)obj).TrueIcon,
+                        obj => obj.TrueIcon,
                         (obj, val) => obj.TrueIcon = val,
-						obj => ((BoolPropertyEfImpl)obj).OnTrueIcon_IsValid), 
+						obj => OnTrueIcon_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<BoolProperty, string>(
                         lazyCtx,
                         new Guid("f7da0495-3d3f-48c5-8fba-95a317ca7949"),
                         "TrueLabel",
                         null,
-                        obj => ((BoolPropertyEfImpl)obj).TrueLabel,
+                        obj => obj.TrueLabel,
                         (obj, val) => obj.TrueLabel = val,
-						obj => ((BoolPropertyEfImpl)obj).OnTrueLabel_IsValid), 
+						obj => OnTrueLabel_IsValid), 
                     // position columns
                 };
             }

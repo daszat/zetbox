@@ -95,7 +95,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnDisplayName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Identity> OnDisplayName_IsValid;
 
         /// <summary>
         /// Identites are member of groups
@@ -126,7 +126,7 @@ namespace Kistl.App.Base
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnGroups_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Identity> OnGroups_IsValid;
 
         /// <summary>
         /// Password of a generic identity
@@ -178,7 +178,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnPassword_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Identity> OnPassword_IsValid;
 
         /// <summary>
         /// Username of a generic identity
@@ -230,7 +230,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnUserName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Identity> OnUserName_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -284,9 +284,9 @@ namespace Kistl.App.Base
                         new Guid("f93e6dbb-a704-460c-8183-ce8b1c2c47a2"),
                         "DisplayName",
                         null,
-                        obj => ((IdentityNHibernateImpl)obj).DisplayName,
+                        obj => obj.DisplayName,
                         (obj, val) => obj.DisplayName = val,
-						obj => ((IdentityNHibernateImpl)obj).OnDisplayName_IsValid), 
+						obj => OnDisplayName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<Identity, ICollection<Kistl.App.Base.Group>>(
                         lazyCtx,
@@ -295,25 +295,25 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Groups,
                         null, // lists are read-only properties
-                        obj => ((IdentityNHibernateImpl)obj).OnGroups_IsValid), 
+                        obj => OnGroups_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Identity, string>(
                         lazyCtx,
                         new Guid("0d499610-99e3-42cc-b71b-49ed1a356355"),
                         "Password",
                         null,
-                        obj => ((IdentityNHibernateImpl)obj).Password,
+                        obj => obj.Password,
                         (obj, val) => obj.Password = val,
-						obj => ((IdentityNHibernateImpl)obj).OnPassword_IsValid), 
+						obj => OnPassword_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Identity, string>(
                         lazyCtx,
                         new Guid("a4ce1f5f-311b-4510-8817-4cca40f0bf0f"),
                         "UserName",
                         null,
-                        obj => ((IdentityNHibernateImpl)obj).UserName,
+                        obj => obj.UserName,
                         (obj, val) => obj.UserName = val,
-						obj => ((IdentityNHibernateImpl)obj).OnUserName_IsValid), 
+						obj => OnUserName_IsValid), 
                     // position columns
                 };
             }

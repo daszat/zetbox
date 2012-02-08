@@ -95,7 +95,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnEagerLoading_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnEagerLoading_IsValid;
 
         /// <summary>
         /// Simple objects are inline editable in lists. Use this property to override this default. If true, the referenced instances are editable in lists, otherwise not.
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool?> OnIsInlineEditable_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool?> OnIsInlineEditable_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnIsInlineEditable_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnIsInlineEditable_IsValid;
 
         /// <summary>
         /// The RelationEnd describing this Property
@@ -252,7 +252,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnRelationEnd_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnRelationEnd_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -273,6 +273,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<ObjectReferenceProperty> OnGetElementTypeString_ObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetElementTypeString_ObjectReferenceProperty_CanExec;
 
@@ -314,7 +315,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -336,6 +337,7 @@ namespace Kistl.App.Base
         }
         public delegate void GetIsList_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
         public static event GetIsList_Handler<ObjectReferenceProperty> OnGetIsList_ObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetIsList_ObjectReferenceProperty_CanExec;
 
@@ -377,7 +379,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -398,6 +400,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<ObjectReferenceProperty> OnGetLabel_ObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetLabel_ObjectReferenceProperty_CanExec;
 
@@ -439,7 +442,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -460,6 +463,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<ObjectReferenceProperty> OnGetName_ObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetName_ObjectReferenceProperty_CanExec;
 
@@ -501,7 +505,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -522,6 +526,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<ObjectReferenceProperty> OnGetPropertyType_ObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetPropertyType_ObjectReferenceProperty_CanExec;
 
@@ -563,7 +568,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -584,6 +589,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty_CanExec;
 
@@ -625,7 +631,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -705,27 +711,27 @@ namespace Kistl.App.Base
                         new Guid("373f0036-42d6-41e2-a2a4-74462537f426"),
                         "EagerLoading",
                         null,
-                        obj => ((ObjectReferencePropertyNHibernateImpl)obj).EagerLoading,
+                        obj => obj.EagerLoading,
                         (obj, val) => obj.EagerLoading = val,
-						obj => ((ObjectReferencePropertyNHibernateImpl)obj).OnEagerLoading_IsValid), 
+						obj => OnEagerLoading_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectReferenceProperty, bool?>(
                         lazyCtx,
                         new Guid("f7183d87-8cc8-4703-b148-02db9f5bf9bc"),
                         "IsInlineEditable",
                         null,
-                        obj => ((ObjectReferencePropertyNHibernateImpl)obj).IsInlineEditable,
+                        obj => obj.IsInlineEditable,
                         (obj, val) => obj.IsInlineEditable = val,
-						obj => ((ObjectReferencePropertyNHibernateImpl)obj).OnIsInlineEditable_IsValid), 
+						obj => OnIsInlineEditable_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectReferenceProperty, Kistl.App.Base.RelationEnd>(
                         lazyCtx,
                         new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0"),
                         "RelationEnd",
                         null,
-                        obj => ((ObjectReferencePropertyNHibernateImpl)obj).RelationEnd,
+                        obj => obj.RelationEnd,
                         (obj, val) => obj.RelationEnd = val,
-						obj => ((ObjectReferencePropertyNHibernateImpl)obj).OnRelationEnd_IsValid), 
+						obj => OnRelationEnd_IsValid), 
                     // position columns
                 };
             }

@@ -91,7 +91,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Enumeration> OnAreFlags_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Enumeration> OnAreFlags_IsValid;
 
         /// <summary>
         /// Einträge der Enumeration
@@ -148,7 +148,7 @@ namespace Kistl.App.Base
 
 public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.Enumeration> OnEnumerationEntries_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.Enumeration> OnEnumerationEntries_IsValid;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -169,6 +169,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             return e.Result;
         }
         public static event GetDataType_Handler<Enumeration> OnGetDataType_Enumeration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Enumeration> OnGetDataType_Enumeration_CanExec;
 
@@ -210,7 +211,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
@@ -231,6 +232,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             return e.Result;
         }
         public static event GetDataTypeString_Handler<Enumeration> OnGetDataTypeString_Enumeration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Enumeration> OnGetDataTypeString_Enumeration_CanExec;
 
@@ -272,7 +274,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -294,6 +296,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public delegate void GetEntryByName_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> ret, string name);
         public static event GetEntryByName_Handler<Enumeration> OnGetEntryByName_Enumeration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Enumeration> OnGetEntryByName_Enumeration_CanExec;
 
@@ -335,7 +338,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -357,6 +360,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public delegate void GetEntryByValue_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> ret, int val);
         public static event GetEntryByValue_Handler<Enumeration> OnGetEntryByValue_Enumeration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Enumeration> OnGetEntryByValue_Enumeration_CanExec;
 
@@ -398,7 +402,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -420,6 +424,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public delegate void GetLabelByName_Handler<T>(T obj, MethodReturnEventArgs<string> ret, string name);
         public static event GetLabelByName_Handler<Enumeration> OnGetLabelByName_Enumeration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Enumeration> OnGetLabelByName_Enumeration_CanExec;
 
@@ -461,7 +466,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -483,6 +488,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public delegate void GetLabelByValue_Handler<T>(T obj, MethodReturnEventArgs<string> ret, int val);
         public static event GetLabelByValue_Handler<Enumeration> OnGetLabelByValue_Enumeration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Enumeration> OnGetLabelByValue_Enumeration_CanExec;
 
@@ -524,7 +530,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Implements all available interfaces as Properties and Methods
@@ -544,6 +550,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             }
         }
         public static event ImplementInterfaces_Handler<Enumeration> OnImplementInterfaces_Enumeration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Enumeration> OnImplementInterfaces_Enumeration_CanExec;
 
@@ -585,7 +592,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -635,9 +642,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
                         new Guid("1ef92eea-d8b3-4f95-a694-9ca09ceff0e5"),
                         "AreFlags",
                         null,
-                        obj => ((EnumerationEfImpl)obj).AreFlags,
+                        obj => obj.AreFlags,
                         (obj, val) => obj.AreFlags = val,
-						obj => ((EnumerationEfImpl)obj).OnAreFlags_IsValid), 
+						obj => OnAreFlags_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<Enumeration, IList<Kistl.App.Base.EnumerationEntry>>(
                         lazyCtx,
@@ -646,7 +653,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
                         null,
                         obj => obj.EnumerationEntries,
                         null, // lists are read-only properties
-                        obj => ((EnumerationEfImpl)obj).OnEnumerationEntries_IsValid), 
+                        obj => OnEnumerationEntries_IsValid), 
                     // position columns
                 };
             }

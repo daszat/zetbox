@@ -126,61 +126,6 @@
 <% 
 if(index == 0) {
 	// Only for first overload
-%>
-		// CanExec
-<%
-		var eventName_CanExec = eventName + "_CanExec";
-%>
-		public static event CanExecMethodEventHandler<<%= dt.Name %>> <%= eventName_CanExec %>;
-
-        [EventBasedMethod("<%= eventName_CanExec %>")]
-        <%= GetModifiers() %> bool <%= m.Name %>CanExec
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<bool>();
-				if (<%= eventName_CanExec %> != null)
-				{
-					<%= eventName_CanExec %>(this, e);
-				}
-				else
-				{
-<%      if (m.ObjectClass == dt || !(dt is ObjectClass)) { %>
-					e.Result = true;
-<%      } else { %>
-					e.Result = base.<%= m.Name %>CanExec;
-<%      } %>
-				}
-				return e.Result;
-			}
-        }
-
-		// CanExecReason
-<%
-		var eventName_CanExecReason = eventName + "_CanExecReason";
-%>
-		public static event CanExecReasonMethodEventHandler<<%= dt.Name %>> <%= eventName_CanExecReason %>;
-
-        [EventBasedMethod("<%= eventName_CanExecReason %>")]
-        <%= GetModifiers() %> string <%= m.Name %>CanExecReason
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<string>();
-				if (<%= eventName_CanExecReason %> != null)
-				{
-					<%= eventName_CanExecReason %>(this, e);
-				}
-				else
-				{
-<%      if (m.ObjectClass == dt || !(dt is ObjectClass)) { %>
-					e.Result = string.Empty;
-<%      } else { %>
-					e.Result = base.<%= m.Name %>CanExecReason;
-<%      } %>
-				}
-				return e.Result;
-			}
-        }
-<% } // Only for first overload %>
+	MethodCanExec.Call(Host, ctx, dt, m, eventName);
+} 
         // END <%= this.GetType() %>

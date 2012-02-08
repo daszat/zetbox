@@ -53,6 +53,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDefaultValue_Handler<CurrentDateTimeDefaultValue> OnGetDefaultValue_CurrentDateTimeDefaultValue;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CurrentDateTimeDefaultValue> OnGetDefaultValue_CurrentDateTimeDefaultValue_CanExec;
 
@@ -94,7 +95,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

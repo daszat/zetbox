@@ -73,7 +73,7 @@ namespace Kistl.App.Projekte
 
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAuftraege_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAuftraege_IsValid;
 
         /// <summary>
         /// 
@@ -126,7 +126,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAufwandGes_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAufwandGes_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -217,7 +217,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -283,7 +283,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -374,7 +374,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -440,7 +440,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -506,7 +506,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnExportGuid_IsValid;
 
         /// <summary>
         /// Bitte geben Sie den Kundennamen ein
@@ -559,7 +559,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, string> OnKundenname_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, string> OnKundenname_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnKundenname_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnKundenname_IsValid;
 
         /// <summary>
         /// 
@@ -584,7 +584,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 
 		private ObservableBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Mitarbeiter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnMitarbeiter_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnMitarbeiter_IsValid;
 
         /// <summary>
         /// Projektname
@@ -637,7 +637,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -678,7 +678,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTasks_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnTasks_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnTasks_IsValid;
 
         /// <summary>
         /// 
@@ -700,6 +700,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         }
         public delegate void GetSummaryReport_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, string title, Kistl.App.Base.DateTimeRange range);
         public static event GetSummaryReport_Handler<Projekt> OnGetSummaryReport_Projekt;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Projekt> OnGetSummaryReport_Projekt_CanExec;
 
@@ -741,7 +742,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -838,70 +839,70 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         null,
                         obj => obj.Auftraege,
                         null, // lists are read-only properties
-                        obj => ((ProjektMemoryImpl)obj).OnAuftraege_IsValid), 
+                        obj => OnAuftraege_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, double?>(
                         lazyCtx,
                         new Guid("a26cec7d-1e5c-44f5-9c56-92af595739eb"),
                         "AufwandGes",
                         null,
-                        obj => ((ProjektMemoryImpl)obj).AufwandGes,
+                        obj => obj.AufwandGes,
                         (obj, val) => obj.AufwandGes = val,
-						obj => ((ProjektMemoryImpl)obj).OnAufwandGes_IsValid), 
+						obj => OnAufwandGes_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("2fe9d894-c359-412f-b787-d3ed3a26a0a2"),
                         "ChangedBy",
                         null,
-                        obj => ((ProjektMemoryImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((ProjektMemoryImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, DateTime>(
                         lazyCtx,
                         new Guid("d1f821b0-5991-44a7-9c4d-8be66834ea9c"),
                         "ChangedOn",
                         null,
-                        obj => ((ProjektMemoryImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((ProjektMemoryImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("fbe34f93-21ec-470a-b9d4-6e4664729466"),
                         "CreatedBy",
                         null,
-                        obj => ((ProjektMemoryImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((ProjektMemoryImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, DateTime>(
                         lazyCtx,
                         new Guid("7119febf-e750-411f-a4f2-5a2181e45dc7"),
                         "CreatedOn",
                         null,
-                        obj => ((ProjektMemoryImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((ProjektMemoryImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, Guid>(
                         lazyCtx,
                         new Guid("df36d615-9f6e-4075-ae1c-8c5cd8a4ef91"),
                         "ExportGuid",
                         null,
-                        obj => ((ProjektMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((ProjektMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, string>(
                         lazyCtx,
                         new Guid("cd6be045-d1bd-4086-b848-c83249f5ca9b"),
                         "Kundenname",
                         null,
-                        obj => ((ProjektMemoryImpl)obj).Kundenname,
+                        obj => obj.Kundenname,
                         (obj, val) => obj.Kundenname = val,
-						obj => ((ProjektMemoryImpl)obj).OnKundenname_IsValid), 
+						obj => OnKundenname_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<Projekt, IList<Kistl.App.Projekte.Mitarbeiter>>(
                         lazyCtx,
@@ -910,16 +911,16 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         null,
                         obj => obj.Mitarbeiter,
                         null, // lists are read-only properties
-                        obj => ((ProjektMemoryImpl)obj).OnMitarbeiter_IsValid), 
+                        obj => OnMitarbeiter_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, string>(
                         lazyCtx,
                         new Guid("b5482479-fd14-4990-86f4-49872e2eeeb8"),
                         "Name",
                         null,
-                        obj => ((ProjektMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((ProjektMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<Projekt, ICollection<Kistl.App.Projekte.Task>>(
                         lazyCtx,
@@ -928,7 +929,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         null,
                         obj => obj.Tasks,
                         null, // lists are read-only properties
-                        obj => ((ProjektMemoryImpl)obj).OnTasks_IsValid), 
+                        obj => OnTasks_IsValid), 
                     // position columns
                 };
             }

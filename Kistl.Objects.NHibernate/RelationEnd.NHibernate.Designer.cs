@@ -151,7 +151,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnAParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnAParent_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnAParent_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnAParent_IsValid;
 
         /// <summary>
         /// The Relation using this RelationEnd as B
@@ -256,7 +256,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnBParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnBParent_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnBParent_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnBParent_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -343,7 +343,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -415,7 +415,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -502,7 +502,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -574,7 +574,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -646,7 +646,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnExportGuid_IsValid;
 
         /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
@@ -698,7 +698,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnHasPersistentOrder_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnHasPersistentOrder_IsValid;
 
         /// <summary>
         /// Specifies how many instances may occur on this end of the relation.
@@ -750,7 +750,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnMultiplicity_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnMultiplicity_IsValid;
 
         /// <summary>
         /// The ORP to navigate FROM this end of the relation. MAY be null.
@@ -855,7 +855,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnNavigator_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnNavigator_IsValid;
 
         /// <summary>
         /// the parent relation
@@ -879,7 +879,7 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnParent_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnParent_IsValid;
 
         /// <summary>
         /// This end&amp;apos;s role name in the relation
@@ -931,7 +931,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnRoleName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnRoleName_IsValid;
 
         /// <summary>
         /// Specifies which type this End of the relation has. MUST NOT be null.
@@ -1020,7 +1020,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnType_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnType_IsValid;
 
         /// <summary>
         /// 
@@ -1042,6 +1042,7 @@ namespace Kistl.App.Base
         }
         public delegate void CreateNavigator_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.ObjectReferenceProperty> ret);
         public static event CreateNavigator_Handler<RelationEnd> OnCreateNavigator_RelationEnd;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<RelationEnd> OnCreateNavigator_RelationEnd_CanExec;
 
@@ -1083,7 +1084,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -1224,90 +1225,90 @@ namespace Kistl.App.Base
                         new Guid("dd6057d0-78bb-4242-9670-ec6c09bd4d92"),
                         "AParent",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).AParent,
+                        obj => obj.AParent,
                         (obj, val) => obj.AParent = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnAParent_IsValid), 
+						obj => OnAParent_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, Kistl.App.Base.Relation>(
                         lazyCtx,
                         new Guid("521ea0ba-ae3b-4a60-ae28-f366b3ee78f1"),
                         "BParent",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).BParent,
+                        obj => obj.BParent,
                         (obj, val) => obj.BParent = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnBParent_IsValid), 
+						obj => OnBParent_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c399fef1-ad60-47a1-9639-76cec4ee8ca2"),
                         "ChangedBy",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, DateTime>(
                         lazyCtx,
                         new Guid("7bd41ad1-05c8-4822-a620-0883eb62516d"),
                         "ChangedOn",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("21b529c8-f295-4950-be49-a17c88ce6d8d"),
                         "CreatedBy",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, DateTime>(
                         lazyCtx,
                         new Guid("ea92fd80-01b6-49b9-8426-77257b2bd37b"),
                         "CreatedOn",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, Guid>(
                         lazyCtx,
                         new Guid("4bbe4a44-dc99-4455-9c03-ae78903fcee2"),
                         "ExportGuid",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, bool>(
                         lazyCtx,
                         new Guid("edd8d122-7b58-4bbb-bf00-33caa8b69cc2"),
                         "HasPersistentOrder",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).HasPersistentOrder,
+                        obj => obj.HasPersistentOrder,
                         (obj, val) => obj.HasPersistentOrder = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnHasPersistentOrder_IsValid), 
+						obj => OnHasPersistentOrder_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, Kistl.App.Base.Multiplicity>(
                         lazyCtx,
                         new Guid("cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd"),
                         "Multiplicity",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).Multiplicity,
+                        obj => obj.Multiplicity,
                         (obj, val) => obj.Multiplicity = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnMultiplicity_IsValid), 
+						obj => OnMultiplicity_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, Kistl.App.Base.ObjectReferenceProperty>(
                         lazyCtx,
                         new Guid("6b25eaab-f746-47ec-a91e-f92ec6fccada"),
                         "Navigator",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).Navigator,
+                        obj => obj.Navigator,
                         (obj, val) => obj.Navigator = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnNavigator_IsValid), 
+						obj => OnNavigator_IsValid), 
                     // property is CalculatedObjectReferenceProperty
                     new PropertyDescriptorNHibernateImpl<RelationEnd, Kistl.App.Base.Relation>(
                         lazyCtx,
@@ -1316,25 +1317,25 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Parent,
                         null, // CalculatedObjectReferenceProperty is a read-only property
-						obj => ((RelationEndNHibernateImpl)obj).OnParent_IsValid),  
+						obj => OnParent_IsValid),  
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, string>(
                         lazyCtx,
                         new Guid("b32efbfc-5212-44e7-b25f-f4724b63cbee"),
                         "RoleName",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).RoleName,
+                        obj => obj.RoleName,
                         (obj, val) => obj.RoleName = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnRoleName_IsValid), 
+						obj => OnRoleName_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("d4bfc4e0-6b57-49f0-91fd-b0de428484e0"),
                         "Type",
                         null,
-                        obj => ((RelationEndNHibernateImpl)obj).Type,
+                        obj => obj.Type,
                         (obj, val) => obj.Type = val,
-						obj => ((RelationEndNHibernateImpl)obj).OnType_IsValid), 
+						obj => OnType_IsValid), 
                     // position columns
                 };
             }

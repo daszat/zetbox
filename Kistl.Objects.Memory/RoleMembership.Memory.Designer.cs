@@ -57,7 +57,7 @@ namespace Kistl.App.Base
 
 		private ObservableBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>> _Relations;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.RoleMembership> OnRelations_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.RoleMembership> OnRelations_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -109,7 +109,7 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Relations,
                         null, // lists are read-only properties
-                        obj => ((RoleMembershipMemoryImpl)obj).OnRelations_IsValid), 
+                        obj => OnRelations_IsValid), 
                     // position columns
                 };
             }

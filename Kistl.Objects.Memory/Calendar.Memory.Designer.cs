@@ -140,7 +140,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, Kistl.App.Calendar.Calendar> OnBaseCalendar_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.Calendar, Kistl.App.Calendar.Calendar> OnBaseCalendar_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnBaseCalendar_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnBaseCalendar_IsValid;
 
         /// <summary>
         /// 
@@ -181,7 +181,7 @@ namespace Kistl.App.Calendar
 
 public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCalendarRules_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnCalendarRules_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnCalendarRules_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -272,7 +272,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.Calendar, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -338,7 +338,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.Calendar, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnChangedOn_IsValid;
 
         /// <summary>
         /// 
@@ -379,7 +379,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
 
 public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnChildCalendar_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnChildCalendar_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnChildCalendar_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -470,7 +470,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.Calendar, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -536,7 +536,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.Calendar, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -602,7 +602,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.Calendar, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnExportGuid_IsValid;
 
         /// <summary>
         /// Optional member of a module
@@ -694,7 +694,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.Calendar, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -747,7 +747,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.Calendar, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.Calendar> OnName_IsValid;
 
         /// <summary>
         /// Gets the number of free days between two dates
@@ -769,6 +769,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public delegate void GetOffDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetOffDays_Handler<Calendar> OnGetOffDays_Calendar;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Calendar> OnGetOffDays_Calendar_CanExec;
 
@@ -810,7 +811,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Get the number of working days between two dates
@@ -832,6 +833,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public delegate void GetWorkingDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetWorkingDays_Handler<Calendar> OnGetWorkingDays_Calendar;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Calendar> OnGetWorkingDays_Calendar_CanExec;
 
@@ -873,7 +875,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the amount of working hours between two dates
@@ -895,6 +897,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public delegate void GetWorkingHours_Handler<T>(T obj, MethodReturnEventArgs<decimal> ret, DateTime from, DateTime until);
         public static event GetWorkingHours_Handler<Calendar> OnGetWorkingHours_Calendar;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Calendar> OnGetWorkingHours_Calendar_CanExec;
 
@@ -936,7 +939,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -1065,9 +1068,9 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         new Guid("17a8fbd3-5a42-4cf6-9517-0adf4142f4fe"),
                         "BaseCalendar",
                         null,
-                        obj => ((CalendarMemoryImpl)obj).BaseCalendar,
+                        obj => obj.BaseCalendar,
                         (obj, val) => obj.BaseCalendar = val,
-						obj => ((CalendarMemoryImpl)obj).OnBaseCalendar_IsValid), 
+						obj => OnBaseCalendar_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<Calendar, ICollection<Kistl.App.Calendar.CalendarRule>>(
                         lazyCtx,
@@ -1076,25 +1079,25 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         null,
                         obj => obj.CalendarRules,
                         null, // lists are read-only properties
-                        obj => ((CalendarMemoryImpl)obj).OnCalendarRules_IsValid), 
+                        obj => OnCalendarRules_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Calendar, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("34eb524b-3f24-4972-b0e5-a64c9f27838a"),
                         "ChangedBy",
                         null,
-                        obj => ((CalendarMemoryImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((CalendarMemoryImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Calendar, DateTime>(
                         lazyCtx,
                         new Guid("486810c7-c031-4c86-ad86-7b88530008ca"),
                         "ChangedOn",
                         null,
-                        obj => ((CalendarMemoryImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((CalendarMemoryImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<Calendar, ICollection<Kistl.App.Calendar.Calendar>>(
                         lazyCtx,
@@ -1103,52 +1106,52 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         null,
                         obj => obj.ChildCalendar,
                         null, // lists are read-only properties
-                        obj => ((CalendarMemoryImpl)obj).OnChildCalendar_IsValid), 
+                        obj => OnChildCalendar_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Calendar, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("d567d5a4-3be0-44f1-af91-046180218a38"),
                         "CreatedBy",
                         null,
-                        obj => ((CalendarMemoryImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((CalendarMemoryImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Calendar, DateTime>(
                         lazyCtx,
                         new Guid("b81a61fa-b991-4928-8390-d529abc42e72"),
                         "CreatedOn",
                         null,
-                        obj => ((CalendarMemoryImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((CalendarMemoryImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Calendar, Guid>(
                         lazyCtx,
                         new Guid("45599fa5-a838-4a1e-b9f1-4031dea7f4e7"),
                         "ExportGuid",
                         null,
-                        obj => ((CalendarMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((CalendarMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Calendar, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("82affab5-a5b2-45ca-a29c-6b7dc0f31190"),
                         "Module",
                         null,
-                        obj => ((CalendarMemoryImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((CalendarMemoryImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Calendar, string>(
                         lazyCtx,
                         new Guid("49cdf3fb-639f-4c20-b9ca-9af1bbe0d4d7"),
                         "Name",
                         null,
-                        obj => ((CalendarMemoryImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((CalendarMemoryImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }

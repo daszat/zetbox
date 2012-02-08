@@ -91,7 +91,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, double?> OnAufwand_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, double?> OnAufwand_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnAufwand_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnAufwand_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -196,7 +196,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -265,7 +265,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -370,7 +370,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -439,7 +439,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Enddatum
@@ -495,7 +495,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnDatumBis_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnDatumBis_IsValid;
 
         /// <summary>
         /// Start Datum
@@ -551,7 +551,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnDatumVon_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnDatumVon_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -620,7 +620,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnExportGuid_IsValid;
 
         /// <summary>
         /// Taskname
@@ -676,7 +676,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnName_IsValid;
 
         /// <summary>
         /// Verknüpfung zum Projekt
@@ -794,7 +794,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnProjekt_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnProjekt_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -871,90 +871,90 @@ namespace Kistl.App.Projekte
                         new Guid("a28f7536-9b8a-49ca-bc97-d28e1c2c4d3e"),
                         "Aufwand",
                         null,
-                        obj => ((TaskEfImpl)obj).Aufwand,
+                        obj => obj.Aufwand,
                         (obj, val) => obj.Aufwand = val,
-						obj => ((TaskEfImpl)obj).OnAufwand_IsValid), 
+						obj => OnAufwand_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("3b21f893-b3d5-4074-99ef-bc8eb2afb240"),
                         "ChangedBy",
                         null,
-                        obj => ((TaskEfImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((TaskEfImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, DateTime>(
                         lazyCtx,
                         new Guid("3d472d60-ab48-4957-b4c4-8a16bf2f8484"),
                         "ChangedOn",
                         null,
-                        obj => ((TaskEfImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((TaskEfImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("64585678-f5fe-4e4e-b2a6-7f67f5444972"),
                         "CreatedBy",
                         null,
-                        obj => ((TaskEfImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((TaskEfImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, DateTime>(
                         lazyCtx,
                         new Guid("10f730ed-fade-456d-89a4-f2ab99526705"),
                         "CreatedOn",
                         null,
-                        obj => ((TaskEfImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((TaskEfImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, DateTime?>(
                         lazyCtx,
                         new Guid("2b705496-388a-43a8-82e8-b17b652a55fc"),
                         "DatumBis",
                         null,
-                        obj => ((TaskEfImpl)obj).DatumBis,
+                        obj => obj.DatumBis,
                         (obj, val) => obj.DatumBis = val,
-						obj => ((TaskEfImpl)obj).OnDatumBis_IsValid), 
+						obj => OnDatumBis_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, DateTime?>(
                         lazyCtx,
                         new Guid("1485a7b7-c4d5-456a-a18a-0c409c3eca8e"),
                         "DatumVon",
                         null,
-                        obj => ((TaskEfImpl)obj).DatumVon,
+                        obj => obj.DatumVon,
                         (obj, val) => obj.DatumVon = val,
-						obj => ((TaskEfImpl)obj).OnDatumVon_IsValid), 
+						obj => OnDatumVon_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, Guid>(
                         lazyCtx,
                         new Guid("1c8414ef-f164-4f7e-a7bf-5fca894aa4f4"),
                         "ExportGuid",
                         null,
-                        obj => ((TaskEfImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((TaskEfImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, string>(
                         lazyCtx,
                         new Guid("91595e02-411c-40f2-ab83-4cced76e954d"),
                         "Name",
                         null,
-                        obj => ((TaskEfImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((TaskEfImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Task, Kistl.App.Projekte.Projekt>(
                         lazyCtx,
                         new Guid("5545ba8a-3e89-4b22-bd66-c12f3622ace0"),
                         "Projekt",
                         null,
-                        obj => ((TaskEfImpl)obj).Projekt,
+                        obj => obj.Projekt,
                         (obj, val) => obj.Projekt = val,
-						obj => ((TaskEfImpl)obj).OnProjekt_IsValid), 
+						obj => OnProjekt_IsValid), 
                     // position columns
                 };
             }

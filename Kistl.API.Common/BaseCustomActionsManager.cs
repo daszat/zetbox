@@ -364,6 +364,7 @@ namespace Kistl.App.Extensions
                 CreatePropertyInvocations(implType, prop, PropertyInvocationType.Getter);
                 CreatePropertyInvocations(implType, prop, PropertyInvocationType.PreSetter);
                 CreatePropertyInvocations(implType, prop, PropertyInvocationType.PostSetter);
+                CreatePropertyIsValidInvocations(implType, prop);
             }
         }
 
@@ -393,6 +394,21 @@ namespace Kistl.App.Extensions
                 foreach (var mi in methodInfos)
                 {
                     CreateInvokeInfo(implType, mi, string.Format(CultureInfo.InvariantCulture, "On{0}_{1}", prop.Name, invocationType));
+                }
+                _attachedMethods[key] = true;
+            }
+        }
+
+        private void CreatePropertyIsValidInvocations(Type implType, Property prop)
+        {
+            string methodPrefix = "isValid_";
+            var key = new MethodKey(prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, string.Format("{0}{1}", methodPrefix, prop.Name));
+            if (_reflectedMethods.ContainsKey(key))
+            {
+                var methodInfos = _reflectedMethods[key];
+                foreach (var mi in methodInfos)
+                {
+                    CreateInvokeInfo(implType, mi, string.Format(CultureInfo.InvariantCulture, "On{0}_IsValid", prop.Name));
                 }
                 _attachedMethods[key] = true;
             }

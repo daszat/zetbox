@@ -124,7 +124,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumDefaultValue, Kistl.App.Base.EnumerationEntry> OnEnumValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumDefaultValue, Kistl.App.Base.EnumerationEntry> OnEnumValue_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.EnumDefaultValue> OnEnumValue_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.EnumDefaultValue> OnEnumValue_IsValid;
 
         /// <summary>
         /// GetDefaultValue
@@ -145,6 +145,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetDefaultValue_Handler<EnumDefaultValue> OnGetDefaultValue_EnumDefaultValue;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<EnumDefaultValue> OnGetDefaultValue_EnumDefaultValue_CanExec;
 
@@ -186,7 +187,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -263,9 +264,9 @@ namespace Kistl.App.Base
                         new Guid("d072423b-f723-4342-8111-79fb563c8ab4"),
                         "EnumValue",
                         null,
-                        obj => ((EnumDefaultValueMemoryImpl)obj).EnumValue,
+                        obj => obj.EnumValue,
                         (obj, val) => obj.EnumValue = val,
-						obj => ((EnumDefaultValueMemoryImpl)obj).OnEnumValue_IsValid), 
+						obj => OnEnumValue_IsValid), 
                     // position columns
                 };
             }

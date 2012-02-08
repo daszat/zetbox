@@ -85,7 +85,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DateTimeParameter, Kistl.App.Base.DateTimeStyles?> OnDateTimeStyle_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DateTimeParameter, Kistl.App.Base.DateTimeStyles?> OnDateTimeStyle_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.DateTimeParameter> OnDateTimeStyle_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.DateTimeParameter> OnDateTimeStyle_IsValid;
 
         /// <summary>
         /// 
@@ -106,6 +106,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<DateTimeParameter> OnGetLabel_DateTimeParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DateTimeParameter> OnGetLabel_DateTimeParameter_CanExec;
 
@@ -147,7 +148,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -168,6 +169,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<DateTimeParameter> OnGetParameterType_DateTimeParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DateTimeParameter> OnGetParameterType_DateTimeParameter_CanExec;
 
@@ -209,7 +211,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -230,6 +232,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<DateTimeParameter> OnGetParameterTypeString_DateTimeParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DateTimeParameter> OnGetParameterTypeString_DateTimeParameter_CanExec;
 
@@ -271,7 +274,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -322,9 +325,9 @@ namespace Kistl.App.Base
                         new Guid("0d0f2e67-cfa2-4463-aaf2-2ce0e6d11fa0"),
                         "DateTimeStyle",
                         null,
-                        obj => ((DateTimeParameterMemoryImpl)obj).DateTimeStyle,
+                        obj => obj.DateTimeStyle,
                         (obj, val) => obj.DateTimeStyle = val,
-						obj => ((DateTimeParameterMemoryImpl)obj).OnDateTimeStyle_IsValid), 
+						obj => OnDateTimeStyle_IsValid), 
                     // position columns
                 };
             }

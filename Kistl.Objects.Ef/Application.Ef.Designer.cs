@@ -140,7 +140,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -209,7 +209,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -314,7 +314,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -383,7 +383,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnCreatedOn_IsValid;
 
         /// <summary>
         /// 
@@ -439,7 +439,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -508,7 +508,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -614,7 +614,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -670,7 +670,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -776,7 +776,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, Kistl.App.GUI.NavigationScreen> OnRootScreen_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, Kistl.App.GUI.NavigationScreen> OnRootScreen_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnRootScreen_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnRootScreen_IsValid;
 
         /// <summary>
         /// 
@@ -882,7 +882,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Application, Kistl.App.GUI.ViewModelDescriptor> OnWorkspaceViewModel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Application, Kistl.App.GUI.ViewModelDescriptor> OnWorkspaceViewModel_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.Application> OnWorkspaceViewModel_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.Application> OnWorkspaceViewModel_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -975,90 +975,90 @@ namespace Kistl.App.GUI
                         new Guid("3a6ec182-98d9-472d-99a1-d1db671ccbb2"),
                         "ChangedBy",
                         null,
-                        obj => ((ApplicationEfImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((ApplicationEfImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, DateTime>(
                         lazyCtx,
                         new Guid("fc8b67d5-ab20-41bd-93f5-3833b72a51d4"),
                         "ChangedOn",
                         null,
-                        obj => ((ApplicationEfImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((ApplicationEfImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("61e96002-da83-40a1-85cd-825044ba4605"),
                         "CreatedBy",
                         null,
-                        obj => ((ApplicationEfImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((ApplicationEfImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, DateTime>(
                         lazyCtx,
                         new Guid("2bc68e86-956a-4f34-b875-6d99eea35129"),
                         "CreatedOn",
                         null,
-                        obj => ((ApplicationEfImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((ApplicationEfImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, string>(
                         lazyCtx,
                         new Guid("24fabe2c-de1d-4b67-970d-748a73c5e17d"),
                         "Description",
                         null,
-                        obj => ((ApplicationEfImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((ApplicationEfImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, Guid>(
                         lazyCtx,
                         new Guid("533c27c0-9fac-44e9-a7a1-60c10cf35bdc"),
                         "ExportGuid",
                         null,
-                        obj => ((ApplicationEfImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((ApplicationEfImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("7bff4a39-c54c-43be-b276-6ab1ff5026db"),
                         "Module",
                         null,
-                        obj => ((ApplicationEfImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((ApplicationEfImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, string>(
                         lazyCtx,
                         new Guid("70bec122-0345-457c-9426-52168e033df1"),
                         "Name",
                         null,
-                        obj => ((ApplicationEfImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((ApplicationEfImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, Kistl.App.GUI.NavigationScreen>(
                         lazyCtx,
                         new Guid("2232a206-1192-4937-8314-701073215cdb"),
                         "RootScreen",
                         null,
-                        obj => ((ApplicationEfImpl)obj).RootScreen,
+                        obj => obj.RootScreen,
                         (obj, val) => obj.RootScreen = val,
-						obj => ((ApplicationEfImpl)obj).OnRootScreen_IsValid), 
+						obj => OnRootScreen_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
                         new Guid("25e50509-3b29-46b1-9bdb-17a0bd2963c2"),
                         "WorkspaceViewModel",
                         null,
-                        obj => ((ApplicationEfImpl)obj).WorkspaceViewModel,
+                        obj => obj.WorkspaceViewModel,
                         (obj, val) => obj.WorkspaceViewModel = val,
-						obj => ((ApplicationEfImpl)obj).OnWorkspaceViewModel_IsValid), 
+						obj => OnWorkspaceViewModel_IsValid), 
                     // position columns
                 };
             }

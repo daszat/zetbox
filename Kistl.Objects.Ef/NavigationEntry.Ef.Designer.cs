@@ -140,7 +140,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -209,7 +209,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnChangedOn_IsValid;
 
         /// <summary>
         /// 
@@ -266,7 +266,7 @@ namespace Kistl.App.GUI
 
 public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> OnChildren_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnChildren_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnChildren_IsValid;
 
         /// <summary>
         /// Color of the ViewScreen or default color if empty
@@ -322,7 +322,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, string> OnColor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, string> OnColor_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnColor_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnColor_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -427,7 +427,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -496,7 +496,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -565,7 +565,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -616,7 +616,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         private BSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl, EntityCollection<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>> _Groups;
         private bool Groups_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnGroups_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnGroups_IsValid;
 
         /// <summary>
         /// 
@@ -722,7 +722,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -869,7 +869,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntry> OnParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntry> OnParent_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnParent_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnParent_IsValid;
 
         /// <summary>
         /// The title of this screen
@@ -925,7 +925,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, string> OnTitle_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, string> OnTitle_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnTitle_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnTitle_IsValid;
 
         /// <summary>
         /// 
@@ -1031,7 +1031,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.ViewModelDescriptor> OnViewModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.ViewModelDescriptor> OnViewModelDescriptor_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnViewModelDescriptor_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.NavigationEntry> OnViewModelDescriptor_IsValid;
 
         /// <summary>
         /// 
@@ -1053,6 +1053,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         }
         public delegate void GetDefaultViewModel_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, Kistl.API.IKistlContext dataCtx, System.Object parent);
         public static event GetDefaultViewModel_Handler<NavigationEntry> OnGetDefaultViewModel_NavigationEntry;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<NavigationEntry> OnGetDefaultViewModel_NavigationEntry_CanExec;
 
@@ -1094,7 +1095,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -1188,18 +1189,18 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                         new Guid("5a54e4f1-4118-4cc7-b8a1-e2f25a9ac9df"),
                         "ChangedBy",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((NavigationEntryEfImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, DateTime>(
                         lazyCtx,
                         new Guid("3fb6b366-facc-44e1-aadb-0b6417e4b53e"),
                         "ChangedOn",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((NavigationEntryEfImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<NavigationEntry, IList<Kistl.App.GUI.NavigationEntry>>(
                         lazyCtx,
@@ -1208,43 +1209,43 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                         null,
                         obj => obj.Children,
                         null, // lists are read-only properties
-                        obj => ((NavigationEntryEfImpl)obj).OnChildren_IsValid), 
+                        obj => OnChildren_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, string>(
                         lazyCtx,
                         new Guid("39d7ecec-c192-4353-bfaa-941b5e877745"),
                         "Color",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).Color,
+                        obj => obj.Color,
                         (obj, val) => obj.Color = val,
-						obj => ((NavigationEntryEfImpl)obj).OnColor_IsValid), 
+						obj => OnColor_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("f688a7e1-6833-4e78-ac7d-4dfd74242867"),
                         "CreatedBy",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((NavigationEntryEfImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, DateTime>(
                         lazyCtx,
                         new Guid("22b4d7f0-40cb-40a7-a421-2fffa59ccb94"),
                         "CreatedOn",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((NavigationEntryEfImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, Guid>(
                         lazyCtx,
                         new Guid("9c987946-8816-48a6-bd21-b1120c3a78b4"),
                         "ExportGuid",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((NavigationEntryEfImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<NavigationEntry, ICollection<Kistl.App.Base.Group>>(
                         lazyCtx,
@@ -1253,43 +1254,43 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                         null,
                         obj => obj.Groups,
                         null, // lists are read-only properties
-                        obj => ((NavigationEntryEfImpl)obj).OnGroups_IsValid), 
+                        obj => OnGroups_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("e45868e3-9638-4259-a908-16cb3f1d515d"),
                         "Module",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((NavigationEntryEfImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, Kistl.App.GUI.NavigationEntry>(
                         lazyCtx,
                         new Guid("0d3e3599-3cf7-4025-8848-597194c3dc2f"),
                         "Parent",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).Parent,
+                        obj => obj.Parent,
                         (obj, val) => obj.Parent = val,
-						obj => ((NavigationEntryEfImpl)obj).OnParent_IsValid), 
+						obj => OnParent_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, string>(
                         lazyCtx,
                         new Guid("3d5d6b12-ab8a-4bda-8487-6f987cee1fae"),
                         "Title",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).Title,
+                        obj => obj.Title,
                         (obj, val) => obj.Title = val,
-						obj => ((NavigationEntryEfImpl)obj).OnTitle_IsValid), 
+						obj => OnTitle_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<NavigationEntry, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
                         new Guid("60c43bca-219a-4346-859a-b2979a9f71a5"),
                         "ViewModelDescriptor",
                         null,
-                        obj => ((NavigationEntryEfImpl)obj).ViewModelDescriptor,
+                        obj => obj.ViewModelDescriptor,
                         (obj, val) => obj.ViewModelDescriptor = val,
-						obj => ((NavigationEntryEfImpl)obj).OnViewModelDescriptor_IsValid), 
+						obj => OnViewModelDescriptor_IsValid), 
                     // position columns
                     // rel: Parent navigates_to Children (45cc7d94-b50d-4a2f-9351-d96e508027d8)
                     // rel.B.Type == cls && rel.B.HasPersistentOrder

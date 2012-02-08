@@ -95,20 +95,17 @@ namespace Kistl.API
         {
             if (isValid != null)
             {
-                var args = new PropertyIsValidEventArgs();
                 var e = isValid(self);
                 if (e != null)
                 {
+                    var args = new PropertyIsValidEventArgs();
                     e(self, args);
+                    return new[] { args }
+                        .Where(i => !i.IsValid)
+                        .Select(i => i.Error).ToArray();
                 }
-                return new[] { args }
-                    .Where(i => !i.IsValid)
-                    .Select(i => i.Error).ToArray();
             }
-            else
-            {
-                return NoErrors;
-            }
+            return NoErrors;
         }
     }
 

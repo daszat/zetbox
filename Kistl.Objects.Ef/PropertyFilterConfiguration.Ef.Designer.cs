@@ -153,7 +153,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.PropertyFilterConfiguration, Kistl.App.Base.Property> OnProperty_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.PropertyFilterConfiguration, Kistl.App.Base.Property> OnProperty_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.PropertyFilterConfiguration> OnProperty_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.PropertyFilterConfiguration> OnProperty_IsValid;
 
         /// <summary>
         /// 
@@ -174,6 +174,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<PropertyFilterConfiguration> OnCreateFilterModel_PropertyFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<PropertyFilterConfiguration> OnCreateFilterModel_PropertyFilterConfiguration_CanExec;
 
@@ -215,7 +216,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -236,6 +237,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<PropertyFilterConfiguration> OnGetLabel_PropertyFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<PropertyFilterConfiguration> OnGetLabel_PropertyFilterConfiguration_CanExec;
 
@@ -277,7 +279,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -335,9 +337,9 @@ namespace Kistl.App.GUI
                         new Guid("384208e7-eb27-41f1-ac12-b05822c0a2ad"),
                         "Property",
                         null,
-                        obj => ((PropertyFilterConfigurationEfImpl)obj).Property,
+                        obj => obj.Property,
                         (obj, val) => obj.Property = val,
-						obj => ((PropertyFilterConfigurationEfImpl)obj).OnProperty_IsValid), 
+						obj => OnProperty_IsValid), 
                     // position columns
                 };
             }

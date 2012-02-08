@@ -59,7 +59,7 @@ namespace Kistl.App.Base
 		
 		private bool Inputs_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CalculatedObjectReferenceProperty> OnInputs_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CalculatedObjectReferenceProperty> OnInputs_IsValid;
 
         /// <summary>
         /// the referenced class of objects
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CalculatedObjectReferenceProperty> OnReferencedClass_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CalculatedObjectReferenceProperty> OnReferencedClass_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -172,6 +172,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<CalculatedObjectReferenceProperty> OnGetElementTypeString_CalculatedObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CalculatedObjectReferenceProperty> OnGetElementTypeString_CalculatedObjectReferenceProperty_CanExec;
 
@@ -213,7 +214,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -234,6 +235,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<CalculatedObjectReferenceProperty> OnGetLabel_CalculatedObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CalculatedObjectReferenceProperty> OnGetLabel_CalculatedObjectReferenceProperty_CanExec;
 
@@ -275,7 +277,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -296,6 +298,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<CalculatedObjectReferenceProperty> OnGetName_CalculatedObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CalculatedObjectReferenceProperty> OnGetName_CalculatedObjectReferenceProperty_CanExec;
 
@@ -337,7 +340,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -358,6 +361,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<CalculatedObjectReferenceProperty> OnGetPropertyType_CalculatedObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CalculatedObjectReferenceProperty> OnGetPropertyType_CalculatedObjectReferenceProperty_CanExec;
 
@@ -399,7 +403,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -420,6 +424,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<CalculatedObjectReferenceProperty> OnGetPropertyTypeString_CalculatedObjectReferenceProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CalculatedObjectReferenceProperty> OnGetPropertyTypeString_CalculatedObjectReferenceProperty_CanExec;
 
@@ -461,7 +466,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -540,16 +545,16 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Inputs,
                         null, // lists are read-only properties
-                        obj => ((CalculatedObjectReferencePropertyMemoryImpl)obj).OnInputs_IsValid), 
+                        obj => OnInputs_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("cd62d769-0752-4a72-832f-5935ece1198b"),
                         "ReferencedClass",
                         null,
-                        obj => ((CalculatedObjectReferencePropertyMemoryImpl)obj).ReferencedClass,
+                        obj => obj.ReferencedClass,
                         (obj, val) => obj.ReferencedClass = val,
-						obj => ((CalculatedObjectReferencePropertyMemoryImpl)obj).OnReferencedClass_IsValid), 
+						obj => OnReferencedClass_IsValid), 
                     // position columns
                 };
             }

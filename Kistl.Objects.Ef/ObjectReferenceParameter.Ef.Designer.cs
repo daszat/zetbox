@@ -141,7 +141,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceParameter, Kistl.App.Base.ObjectClass> OnObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceParameter, Kistl.App.Base.ObjectClass> OnObjectClass_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceParameter> OnObjectClass_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceParameter> OnObjectClass_IsValid;
 
         /// <summary>
         /// 
@@ -162,6 +162,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<ObjectReferenceParameter> OnGetLabel_ObjectReferenceParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceParameter> OnGetLabel_ObjectReferenceParameter_CanExec;
 
@@ -203,7 +204,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -224,6 +225,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<ObjectReferenceParameter> OnGetParameterType_ObjectReferenceParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceParameter> OnGetParameterType_ObjectReferenceParameter_CanExec;
 
@@ -265,7 +267,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -286,6 +288,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<ObjectReferenceParameter> OnGetParameterTypeString_ObjectReferenceParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectReferenceParameter> OnGetParameterTypeString_ObjectReferenceParameter_CanExec;
 
@@ -327,7 +330,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -385,9 +388,9 @@ namespace Kistl.App.Base
                         new Guid("9bd64c60-7282-47f0-8069-528a175fcc92"),
                         "ObjectClass",
                         null,
-                        obj => ((ObjectReferenceParameterEfImpl)obj).ObjectClass,
+                        obj => obj.ObjectClass,
                         (obj, val) => obj.ObjectClass = val,
-						obj => ((ObjectReferenceParameterEfImpl)obj).OnObjectClass_IsValid), 
+						obj => OnObjectClass_IsValid), 
                     // position columns
                 };
             }

@@ -95,7 +95,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Company, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Company, string> OnName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.Company> OnName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.Company> OnName_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -147,9 +147,9 @@ namespace Kistl.App.Test
                         new Guid("4a038e35-fffb-4ba7-8009-1954c317a799"),
                         "Name",
                         null,
-                        obj => ((CompanyNHibernateImpl)obj).Name,
+                        obj => obj.Name,
                         (obj, val) => obj.Name = val,
-						obj => ((CompanyNHibernateImpl)obj).OnName_IsValid), 
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }

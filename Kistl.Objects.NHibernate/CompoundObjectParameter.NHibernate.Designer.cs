@@ -132,7 +132,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectParameter, Kistl.App.Base.CompoundObject> OnCompoundObject_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectParameter, Kistl.App.Base.CompoundObject> OnCompoundObject_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectParameter> OnCompoundObject_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectParameter> OnCompoundObject_IsValid;
 
         /// <summary>
         /// 
@@ -153,6 +153,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<CompoundObjectParameter> OnGetLabel_CompoundObjectParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObjectParameter> OnGetLabel_CompoundObjectParameter_CanExec;
 
@@ -194,7 +195,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -215,6 +216,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterType_Handler<CompoundObjectParameter> OnGetParameterType_CompoundObjectParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObjectParameter> OnGetParameterType_CompoundObjectParameter_CanExec;
 
@@ -256,7 +258,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
@@ -277,6 +279,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetParameterTypeString_Handler<CompoundObjectParameter> OnGetParameterTypeString_CompoundObjectParameter;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<CompoundObjectParameter> OnGetParameterTypeString_CompoundObjectParameter_CanExec;
 
@@ -318,7 +321,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -396,9 +399,9 @@ namespace Kistl.App.Base
                         new Guid("43d03fec-b595-46d0-b5d5-cf4c5d21fda7"),
                         "CompoundObject",
                         null,
-                        obj => ((CompoundObjectParameterNHibernateImpl)obj).CompoundObject,
+                        obj => obj.CompoundObject,
                         (obj, val) => obj.CompoundObject = val,
-						obj => ((CompoundObjectParameterNHibernateImpl)obj).OnCompoundObject_IsValid), 
+						obj => OnCompoundObject_IsValid), 
                     // position columns
                 };
             }

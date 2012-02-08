@@ -56,6 +56,7 @@ namespace at.dasz.DocumentManagement
             return e.Result;
         }
         public static event HandleBlobChange_Handler<DynamicFile> OnHandleBlobChange_DynamicFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DynamicFile> OnHandleBlobChange_DynamicFile_CanExec;
 
@@ -97,7 +98,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
@@ -117,6 +118,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Open_Handler<DynamicFile> OnOpen_DynamicFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DynamicFile> OnOpen_DynamicFile_CanExec;
 
@@ -158,7 +160,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
@@ -178,6 +180,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Upload_Handler<DynamicFile> OnUpload_DynamicFile;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DynamicFile> OnUpload_DynamicFile_CanExec;
 
@@ -219,7 +222,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {

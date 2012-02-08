@@ -140,7 +140,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ObjectClassFilterConfiguration, Kistl.App.Base.ObjectClass> OnObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ObjectClassFilterConfiguration, Kistl.App.Base.ObjectClass> OnObjectClass_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ObjectClassFilterConfiguration> OnObjectClass_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ObjectClassFilterConfiguration> OnObjectClass_IsValid;
 
         /// <summary>
         /// 
@@ -161,6 +161,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<ObjectClassFilterConfiguration> OnCreateFilterModel_ObjectClassFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectClassFilterConfiguration> OnCreateFilterModel_ObjectClassFilterConfiguration_CanExec;
 
@@ -202,7 +203,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -223,6 +224,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<ObjectClassFilterConfiguration> OnGetLabel_ObjectClassFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ObjectClassFilterConfiguration> OnGetLabel_ObjectClassFilterConfiguration_CanExec;
 
@@ -264,7 +266,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -341,9 +343,9 @@ namespace Kistl.App.GUI
                         new Guid("c7da5741-f172-4e04-b7fa-94bb1eaf2471"),
                         "ObjectClass",
                         null,
-                        obj => ((ObjectClassFilterConfigurationMemoryImpl)obj).ObjectClass,
+                        obj => obj.ObjectClass,
                         (obj, val) => obj.ObjectClass = val,
-						obj => ((ObjectClassFilterConfigurationMemoryImpl)obj).OnObjectClass_IsValid), 
+						obj => OnObjectClass_IsValid), 
                     // position columns
                 };
             }

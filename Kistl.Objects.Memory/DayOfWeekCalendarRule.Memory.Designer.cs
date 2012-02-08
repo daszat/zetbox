@@ -85,7 +85,7 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.DayOfWeekCalendarRule, Kistl.App.Base.DayOfWeek> OnDayOfWeek_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.DayOfWeekCalendarRule, Kistl.App.Base.DayOfWeek> OnDayOfWeek_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Calendar.DayOfWeekCalendarRule> OnDayOfWeek_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Calendar.DayOfWeekCalendarRule> OnDayOfWeek_IsValid;
 
         /// <summary>
         /// Checks if the Rule applies to the given date
@@ -106,6 +106,7 @@ namespace Kistl.App.Calendar
             return e.Result;
         }
         public static event AppliesTo_Handler<DayOfWeekCalendarRule> OnAppliesTo_DayOfWeekCalendarRule;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DayOfWeekCalendarRule> OnAppliesTo_DayOfWeekCalendarRule_CanExec;
 
@@ -147,7 +148,7 @@ namespace Kistl.App.Calendar
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -198,9 +199,9 @@ namespace Kistl.App.Calendar
                         new Guid("8755ff98-63d1-4a74-b0e3-da08a81f7f4e"),
                         "DayOfWeek",
                         null,
-                        obj => ((DayOfWeekCalendarRuleMemoryImpl)obj).DayOfWeek,
+                        obj => obj.DayOfWeek,
                         (obj, val) => obj.DayOfWeek = val,
-						obj => ((DayOfWeekCalendarRuleMemoryImpl)obj).OnDayOfWeek_IsValid), 
+						obj => OnDayOfWeek_IsValid), 
                     // position columns
                 };
             }

@@ -124,7 +124,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnControlKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnControlKind_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnControlKind_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnControlKind_IsValid;
 
         /// <summary>
         /// The control implementing this View
@@ -216,7 +216,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnControlRef_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnControlRef_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -282,7 +282,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -374,7 +374,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnModule_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnModule_IsValid;
 
         /// <summary>
         /// A View supports one or more ViewModels
@@ -401,7 +401,7 @@ namespace Kistl.App.GUI
 		
 		private bool SupportedViewModels_was_eagerLoaded = false;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;
 
         /// <summary>
         /// Which toolkit provides this View
@@ -454,7 +454,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnToolkit_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnToolkit_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -569,36 +569,36 @@ namespace Kistl.App.GUI
                         new Guid("7720b38c-64af-4607-bc73-d015af6612e3"),
                         "ControlKind",
                         null,
-                        obj => ((ViewDescriptorMemoryImpl)obj).ControlKind,
+                        obj => obj.ControlKind,
                         (obj, val) => obj.ControlKind = val,
-						obj => ((ViewDescriptorMemoryImpl)obj).OnControlKind_IsValid), 
+						obj => OnControlKind_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<ViewDescriptor, Kistl.App.Base.TypeRef>(
                         lazyCtx,
                         new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3"),
                         "ControlRef",
                         null,
-                        obj => ((ViewDescriptorMemoryImpl)obj).ControlRef,
+                        obj => obj.ControlRef,
                         (obj, val) => obj.ControlRef = val,
-						obj => ((ViewDescriptorMemoryImpl)obj).OnControlRef_IsValid), 
+						obj => OnControlRef_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<ViewDescriptor, Guid>(
                         lazyCtx,
                         new Guid("94140a56-9fed-4d65-8c2c-cb8e658dff96"),
                         "ExportGuid",
                         null,
-                        obj => ((ViewDescriptorMemoryImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((ViewDescriptorMemoryImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<ViewDescriptor, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("25da3568-f362-4441-841e-7c163b10b983"),
                         "Module",
                         null,
-                        obj => ((ViewDescriptorMemoryImpl)obj).Module,
+                        obj => obj.Module,
                         (obj, val) => obj.Module = val,
-						obj => ((ViewDescriptorMemoryImpl)obj).OnModule_IsValid), 
+						obj => OnModule_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<ViewDescriptor, ICollection<Kistl.App.Base.TypeRef>>(
                         lazyCtx,
@@ -607,16 +607,16 @@ namespace Kistl.App.GUI
                         null,
                         obj => obj.SupportedViewModels,
                         null, // lists are read-only properties
-                        obj => ((ViewDescriptorMemoryImpl)obj).OnSupportedViewModels_IsValid), 
+                        obj => OnSupportedViewModels_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<ViewDescriptor, Kistl.App.GUI.Toolkit>(
                         lazyCtx,
                         new Guid("2a798728-d79d-471f-be51-1f488beb8dc1"),
                         "Toolkit",
                         null,
-                        obj => ((ViewDescriptorMemoryImpl)obj).Toolkit,
+                        obj => obj.Toolkit,
                         (obj, val) => obj.Toolkit = val,
-						obj => ((ViewDescriptorMemoryImpl)obj).OnToolkit_IsValid), 
+						obj => OnToolkit_IsValid), 
                     // position columns
                 };
             }

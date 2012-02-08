@@ -91,7 +91,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.MonthFilterConfiguration, bool?> OnIsCurrentMonthDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.MonthFilterConfiguration, bool?> OnIsCurrentMonthDefault_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.MonthFilterConfiguration> OnIsCurrentMonthDefault_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.MonthFilterConfiguration> OnIsCurrentMonthDefault_IsValid;
 
         /// <summary>
         /// 
@@ -112,6 +112,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<MonthFilterConfiguration> OnCreateFilterModel_MonthFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<MonthFilterConfiguration> OnCreateFilterModel_MonthFilterConfiguration_CanExec;
 
@@ -153,7 +154,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -174,6 +175,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<MonthFilterConfiguration> OnGetLabel_MonthFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<MonthFilterConfiguration> OnGetLabel_MonthFilterConfiguration_CanExec;
 
@@ -215,7 +217,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -265,9 +267,9 @@ namespace Kistl.App.GUI
                         new Guid("363661ad-85ce-4bc2-b249-c3cce65a1971"),
                         "IsCurrentMonthDefault",
                         null,
-                        obj => ((MonthFilterConfigurationEfImpl)obj).IsCurrentMonthDefault,
+                        obj => obj.IsCurrentMonthDefault,
                         (obj, val) => obj.IsCurrentMonthDefault = val,
-						obj => ((MonthFilterConfigurationEfImpl)obj).OnIsCurrentMonthDefault_IsValid), 
+						obj => OnIsCurrentMonthDefault_IsValid), 
                     // position columns
                 };
             }

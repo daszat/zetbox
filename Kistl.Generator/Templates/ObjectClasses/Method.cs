@@ -27,7 +27,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
             string indexSuffix = index == 0 ? String.Empty : index.ToString();
             string eventName = "On" + m.Name + indexSuffix + "_" + implementor.Name;
 
-            host.CallTemplate("ObjectClasses.Method", ctx, implementor, m, index, indexSuffix, eventName);
+            Call(host, ctx, implementor, m, index, indexSuffix, eventName);
         }
 
         protected virtual IEnumerable<string> GetMethodAttributes()

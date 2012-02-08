@@ -91,7 +91,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.IntegerRangeConstraint> OnMax_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.IntegerRangeConstraint> OnMax_IsValid;
 
         /// <summary>
         /// The smallest value accepted by this constraint
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.IntegerRangeConstraint> OnMin_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.IntegerRangeConstraint> OnMin_IsValid;
 
         /// <summary>
         /// 
@@ -168,6 +168,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetErrorText_Handler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint_CanExec;
 
@@ -209,7 +210,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -230,6 +231,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event IsValid_Handler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint_CanExec;
 
@@ -271,7 +273,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -322,18 +324,18 @@ namespace Kistl.App.Base
                         new Guid("dff43695-5b93-4378-a01d-94a82d29dcef"),
                         "Max",
                         null,
-                        obj => ((IntegerRangeConstraintEfImpl)obj).Max,
+                        obj => obj.Max,
                         (obj, val) => obj.Max = val,
-						obj => ((IntegerRangeConstraintEfImpl)obj).OnMax_IsValid), 
+						obj => OnMax_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<IntegerRangeConstraint, int>(
                         lazyCtx,
                         new Guid("8afdbf66-c979-4c09-8872-1a44aa1dbf72"),
                         "Min",
                         null,
-                        obj => ((IntegerRangeConstraintEfImpl)obj).Min,
+                        obj => obj.Min,
                         (obj, val) => obj.Min = val,
-						obj => ((IntegerRangeConstraintEfImpl)obj).OnMin_IsValid), 
+						obj => OnMin_IsValid), 
                     // position columns
                 };
             }

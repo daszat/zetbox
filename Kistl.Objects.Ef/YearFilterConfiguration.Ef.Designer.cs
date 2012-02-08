@@ -91,7 +91,7 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.YearFilterConfiguration, bool?> OnIsCurrentYearDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.YearFilterConfiguration, bool?> OnIsCurrentYearDefault_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.GUI.YearFilterConfiguration> OnIsCurrentYearDefault_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.GUI.YearFilterConfiguration> OnIsCurrentYearDefault_IsValid;
 
         /// <summary>
         /// 
@@ -112,6 +112,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event CreateFilterModel_Handler<YearFilterConfiguration> OnCreateFilterModel_YearFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<YearFilterConfiguration> OnCreateFilterModel_YearFilterConfiguration_CanExec;
 
@@ -153,7 +154,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -174,6 +175,7 @@ namespace Kistl.App.GUI
             return e.Result;
         }
         public static event GetLabel_Handler<YearFilterConfiguration> OnGetLabel_YearFilterConfiguration;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<YearFilterConfiguration> OnGetLabel_YearFilterConfiguration_CanExec;
 
@@ -215,7 +217,7 @@ namespace Kistl.App.GUI
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -265,9 +267,9 @@ namespace Kistl.App.GUI
                         new Guid("495159f4-a983-4a2a-a8f1-2291647673fd"),
                         "IsCurrentYearDefault",
                         null,
-                        obj => ((YearFilterConfigurationEfImpl)obj).IsCurrentYearDefault,
+                        obj => obj.IsCurrentYearDefault,
                         (obj, val) => obj.IsCurrentYearDefault = val,
-						obj => ((YearFilterConfigurationEfImpl)obj).OnIsCurrentYearDefault_IsValid), 
+						obj => OnIsCurrentYearDefault_IsValid), 
                     // position columns
                 };
             }

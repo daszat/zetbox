@@ -95,7 +95,7 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, DateTime?> OnBirthday_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestCustomObject, DateTime?> OnBirthday_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnBirthday_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnBirthday_IsValid;
 
         /// <summary>
         /// 
@@ -152,7 +152,7 @@ namespace Kistl.App.Test
 
 public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnMubBlah_List_Nav_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnMubBlah_List_Nav_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnMubBlah_List_Nav_IsValid;
 
         /// <summary>
         /// 
@@ -269,7 +269,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMubBlah_Nav_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMubBlah_Nav_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnMubBlah_Nav_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnMubBlah_Nav_IsValid;
 
         /// <summary>
         /// 
@@ -319,7 +319,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         }
         private ASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl, EntityCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>> _MuhBlah_ManyList_Nav;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_IsValid;
 
         /// <summary>
         /// 
@@ -436,7 +436,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMuhBlah_One_Nav_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMuhBlah_One_Nav_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnMuhBlah_One_Nav_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnMuhBlah_One_Nav_IsValid;
 
         /// <summary>
         /// Person&amp;apos;s Name
@@ -492,7 +492,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnPersonName_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnPersonName_IsValid;
 
         /// <summary>
         /// 
@@ -548,7 +548,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             }
         }
            // END Kistl.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumberMobile_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumberMobile_IsValid;
 
         /// <summary>
         /// 
@@ -606,7 +606,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             }
         }
            // END Kistl.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumberOffice_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumberOffice_IsValid;
 
         /// <summary>
         /// 
@@ -653,7 +653,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         private EfValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl, EntityCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>> _PhoneNumbersOther;
 public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -733,9 +733,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                         new Guid("bdcf86b8-4c47-4c50-b340-d9323344c7f0"),
                         "Birthday",
                         null,
-                        obj => ((TestCustomObjectEfImpl)obj).Birthday,
+                        obj => obj.Birthday,
                         (obj, val) => obj.Birthday = val,
-						obj => ((TestCustomObjectEfImpl)obj).OnBirthday_IsValid), 
+						obj => OnBirthday_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<TestCustomObject, ICollection<Kistl.App.Test.Muhblah>>(
                         lazyCtx,
@@ -744,16 +744,16 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                         null,
                         obj => obj.MubBlah_List_Nav,
                         null, // lists are read-only properties
-                        obj => ((TestCustomObjectEfImpl)obj).OnMubBlah_List_Nav_IsValid), 
+                        obj => OnMubBlah_List_Nav_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<TestCustomObject, Kistl.App.Test.Muhblah>(
                         lazyCtx,
                         new Guid("3251497d-5214-4e42-976e-f36c3d9541de"),
                         "MubBlah_Nav",
                         null,
-                        obj => ((TestCustomObjectEfImpl)obj).MubBlah_Nav,
+                        obj => obj.MubBlah_Nav,
                         (obj, val) => obj.MubBlah_Nav = val,
-						obj => ((TestCustomObjectEfImpl)obj).OnMubBlah_Nav_IsValid), 
+						obj => OnMubBlah_Nav_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<TestCustomObject, ICollection<Kistl.App.Test.Muhblah>>(
                         lazyCtx,
@@ -762,43 +762,43 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                         null,
                         obj => obj.MuhBlah_ManyList_Nav,
                         null, // lists are read-only properties
-                        obj => ((TestCustomObjectEfImpl)obj).OnMuhBlah_ManyList_Nav_IsValid), 
+                        obj => OnMuhBlah_ManyList_Nav_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<TestCustomObject, Kistl.App.Test.Muhblah>(
                         lazyCtx,
                         new Guid("e7b207d3-5d25-4716-85b3-564f10eac210"),
                         "MuhBlah_One_Nav",
                         null,
-                        obj => ((TestCustomObjectEfImpl)obj).MuhBlah_One_Nav,
+                        obj => obj.MuhBlah_One_Nav,
                         (obj, val) => obj.MuhBlah_One_Nav = val,
-						obj => ((TestCustomObjectEfImpl)obj).OnMuhBlah_One_Nav_IsValid), 
+						obj => OnMuhBlah_One_Nav_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<TestCustomObject, string>(
                         lazyCtx,
                         new Guid("bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd"),
                         "PersonName",
                         null,
-                        obj => ((TestCustomObjectEfImpl)obj).PersonName,
+                        obj => obj.PersonName,
                         (obj, val) => obj.PersonName = val,
-						obj => ((TestCustomObjectEfImpl)obj).OnPersonName_IsValid), 
+						obj => OnPersonName_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject>(
                         lazyCtx,
                         new Guid("05e41070-e88a-4270-ab1c-94cd2e7d41d1"),
                         "PhoneNumberMobile",
                         null,
-                        obj => ((TestCustomObjectEfImpl)obj).PhoneNumberMobile,
+                        obj => obj.PhoneNumberMobile,
                         (obj, val) => obj.PhoneNumberMobile = val,
-						obj => ((TestCustomObjectEfImpl)obj).OnPhoneNumberMobile_IsValid), 
+						obj => OnPhoneNumberMobile_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject>(
                         lazyCtx,
                         new Guid("465e10ec-4e5e-4e8f-831f-44562dd0d68b"),
                         "PhoneNumberOffice",
                         null,
-                        obj => ((TestCustomObjectEfImpl)obj).PhoneNumberOffice,
+                        obj => obj.PhoneNumberOffice,
                         (obj, val) => obj.PhoneNumberOffice = val,
-						obj => ((TestCustomObjectEfImpl)obj).OnPhoneNumberOffice_IsValid), 
+						obj => OnPhoneNumberOffice_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<TestCustomObject, ICollection<Kistl.App.Test.TestPhoneCompoundObject>>(
                         lazyCtx,
@@ -807,7 +807,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                         null,
                         obj => obj.PhoneNumbersOther,
                         null, // lists are read-only properties
-                        obj => ((TestCustomObjectEfImpl)obj).OnPhoneNumbersOther_IsValid), 
+                        obj => OnPhoneNumbersOther_IsValid), 
                     // position columns
                 };
             }

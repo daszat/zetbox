@@ -91,7 +91,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnHasPersistentOrder_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnHasPersistentOrder_IsValid;
 
         /// <summary>
         /// If true, a property getter will be invoked to get the properties value. No Backingstore is generated, thus there is no setter.
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsCalculated_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsCalculated_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnIsCalculated_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnIsCalculated_IsValid;
 
         /// <summary>
         /// 
@@ -203,7 +203,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnIsList_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnIsList_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -224,6 +224,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetElementTypeString_Handler<ValueTypeProperty> OnGetElementTypeString_ValueTypeProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ValueTypeProperty> OnGetElementTypeString_ValueTypeProperty_CanExec;
 
@@ -265,7 +266,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -286,6 +287,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetLabel_Handler<ValueTypeProperty> OnGetLabel_ValueTypeProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ValueTypeProperty> OnGetLabel_ValueTypeProperty_CanExec;
 
@@ -327,7 +329,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -348,6 +350,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetName_Handler<ValueTypeProperty> OnGetName_ValueTypeProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ValueTypeProperty> OnGetName_ValueTypeProperty_CanExec;
 
@@ -389,7 +392,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -410,6 +413,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyType_Handler<ValueTypeProperty> OnGetPropertyType_ValueTypeProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ValueTypeProperty> OnGetPropertyType_ValueTypeProperty_CanExec;
 
@@ -451,7 +455,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
@@ -472,6 +476,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
         public static event GetPropertyTypeString_Handler<ValueTypeProperty> OnGetPropertyTypeString_ValueTypeProperty;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ValueTypeProperty> OnGetPropertyTypeString_ValueTypeProperty_CanExec;
 
@@ -513,7 +518,7 @@ namespace Kistl.App.Base
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -565,27 +570,27 @@ namespace Kistl.App.Base
                         new Guid("b62c7fee-bb67-46a6-b481-81554e788aa0"),
                         "HasPersistentOrder",
                         null,
-                        obj => ((ValueTypePropertyEfImpl)obj).HasPersistentOrder,
+                        obj => obj.HasPersistentOrder,
                         (obj, val) => obj.HasPersistentOrder = val,
-						obj => ((ValueTypePropertyEfImpl)obj).OnHasPersistentOrder_IsValid), 
+						obj => OnHasPersistentOrder_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ValueTypeProperty, bool>(
                         lazyCtx,
                         new Guid("2eed845e-887d-4230-8410-0b442ba7724b"),
                         "IsCalculated",
                         null,
-                        obj => ((ValueTypePropertyEfImpl)obj).IsCalculated,
+                        obj => obj.IsCalculated,
                         (obj, val) => obj.IsCalculated = val,
-						obj => ((ValueTypePropertyEfImpl)obj).OnIsCalculated_IsValid), 
+						obj => OnIsCalculated_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ValueTypeProperty, bool>(
                         lazyCtx,
                         new Guid("b2bd1528-c22f-4e12-b80f-f8234a2c0831"),
                         "IsList",
                         null,
-                        obj => ((ValueTypePropertyEfImpl)obj).IsList,
+                        obj => obj.IsList,
                         (obj, val) => obj.IsList = val,
-						obj => ((ValueTypePropertyEfImpl)obj).OnIsList_IsValid), 
+						obj => OnIsList_IsValid), 
                     // position columns
                 };
             }

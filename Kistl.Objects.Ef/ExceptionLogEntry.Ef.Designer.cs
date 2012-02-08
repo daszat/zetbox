@@ -91,7 +91,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, DateTime> OnDate_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ExceptionLogEntry, DateTime> OnDate_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnDate_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnDate_IsValid;
 
         /// <summary>
         /// 
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnException_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnException_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnException_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnException_IsValid;
 
         /// <summary>
         /// 
@@ -203,7 +203,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnLevel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnLevel_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnLevel_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnLevel_IsValid;
 
         /// <summary>
         /// 
@@ -259,7 +259,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnLogger_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnLogger_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnLogger_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnLogger_IsValid;
 
         /// <summary>
         /// 
@@ -315,7 +315,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnMessage_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnMessage_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnMessage_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnMessage_IsValid;
 
         /// <summary>
         /// 
@@ -371,7 +371,7 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnThread_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnThread_PostSetter;
 
-        public event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnThread_IsValid;
+        public static event PropertyIsValidHandler<Kistl.App.Base.ExceptionLogEntry> OnThread_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -426,54 +426,54 @@ namespace Kistl.App.Base
                         new Guid("e093679e-1939-4a7d-97db-e48b5103062a"),
                         "Date",
                         null,
-                        obj => ((ExceptionLogEntryEfImpl)obj).Date,
+                        obj => obj.Date,
                         (obj, val) => obj.Date = val,
-						obj => ((ExceptionLogEntryEfImpl)obj).OnDate_IsValid), 
+						obj => OnDate_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ExceptionLogEntry, string>(
                         lazyCtx,
                         new Guid("203915b1-5bbf-49ff-864b-b66098b39481"),
                         "Exception",
                         null,
-                        obj => ((ExceptionLogEntryEfImpl)obj).Exception,
+                        obj => obj.Exception,
                         (obj, val) => obj.Exception = val,
-						obj => ((ExceptionLogEntryEfImpl)obj).OnException_IsValid), 
+						obj => OnException_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ExceptionLogEntry, string>(
                         lazyCtx,
                         new Guid("f8becad3-4bb8-47b2-b30c-1c7fc94eac12"),
                         "Level",
                         null,
-                        obj => ((ExceptionLogEntryEfImpl)obj).Level,
+                        obj => obj.Level,
                         (obj, val) => obj.Level = val,
-						obj => ((ExceptionLogEntryEfImpl)obj).OnLevel_IsValid), 
+						obj => OnLevel_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ExceptionLogEntry, string>(
                         lazyCtx,
                         new Guid("fdf063e0-66f9-421d-9e60-e6aa9fa73d8e"),
                         "Logger",
                         null,
-                        obj => ((ExceptionLogEntryEfImpl)obj).Logger,
+                        obj => obj.Logger,
                         (obj, val) => obj.Logger = val,
-						obj => ((ExceptionLogEntryEfImpl)obj).OnLogger_IsValid), 
+						obj => OnLogger_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ExceptionLogEntry, string>(
                         lazyCtx,
                         new Guid("d80639ab-d40f-41db-a51f-c1a71440654e"),
                         "Message",
                         null,
-                        obj => ((ExceptionLogEntryEfImpl)obj).Message,
+                        obj => obj.Message,
                         (obj, val) => obj.Message = val,
-						obj => ((ExceptionLogEntryEfImpl)obj).OnMessage_IsValid), 
+						obj => OnMessage_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ExceptionLogEntry, string>(
                         lazyCtx,
                         new Guid("24ab22e0-7dd3-4535-9abd-a94102f9ca80"),
                         "Thread",
                         null,
-                        obj => ((ExceptionLogEntryEfImpl)obj).Thread,
+                        obj => obj.Thread,
                         (obj, val) => obj.Thread = val,
-						obj => ((ExceptionLogEntryEfImpl)obj).OnThread_IsValid), 
+						obj => OnThread_IsValid), 
                     // position columns
                 };
             }

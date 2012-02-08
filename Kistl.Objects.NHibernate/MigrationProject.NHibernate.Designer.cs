@@ -133,7 +133,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -205,7 +205,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, DateTime> OnChangedOn_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -292,7 +292,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -364,7 +364,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, DateTime> OnCreatedOn_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnCreatedOn_IsValid;
 
         /// <summary>
         /// 
@@ -416,7 +416,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnDescription_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnDescription_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnDescription_IsValid;
 
         /// <summary>
         /// 
@@ -505,7 +505,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Module> OnDestinationModule_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Module> OnDestinationModule_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnDestinationModule_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnDestinationModule_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -577,7 +577,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Guid> OnExportGuid_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -612,7 +612,7 @@ namespace ZBox.App.SchemaMigration
         private OneNRelationList<ZBox.App.SchemaMigration.StagingDatabase> _StagingDatabases;
 public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.MigrationProject> OnStagingDatabases_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnStagingDatabases_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationProject> OnStagingDatabases_IsValid;
 
         /// <summary>
         /// Creates a mapping report
@@ -633,6 +633,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         }
         public delegate void CreateMappingReport_Handler<T>(T obj);
         public static event CreateMappingReport_Handler<MigrationProject> OnCreateMappingReport_MigrationProject;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<MigrationProject> OnCreateMappingReport_MigrationProject_CanExec;
 
@@ -674,7 +675,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -695,6 +696,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         }
         public delegate void UpdateFromSourceSchema_Handler<T>(T obj);
         public static event UpdateFromSourceSchema_Handler<MigrationProject> OnUpdateFromSourceSchema_MigrationProject;
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<MigrationProject> OnUpdateFromSourceSchema_MigrationProject_CanExec;
 
@@ -736,7 +738,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.Method
+        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -848,63 +850,63 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
                         new Guid("339fa8af-5760-4e31-a112-5aa29e7a0d28"),
                         "ChangedBy",
                         null,
-                        obj => ((MigrationProjectNHibernateImpl)obj).ChangedBy,
+                        obj => obj.ChangedBy,
                         (obj, val) => obj.ChangedBy = val,
-						obj => ((MigrationProjectNHibernateImpl)obj).OnChangedBy_IsValid), 
+						obj => OnChangedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<MigrationProject, DateTime>(
                         lazyCtx,
                         new Guid("133f7c7e-fcf4-4e90-b6e9-f3500dfcf1b9"),
                         "ChangedOn",
                         null,
-                        obj => ((MigrationProjectNHibernateImpl)obj).ChangedOn,
+                        obj => obj.ChangedOn,
                         (obj, val) => obj.ChangedOn = val,
-						obj => ((MigrationProjectNHibernateImpl)obj).OnChangedOn_IsValid), 
+						obj => OnChangedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<MigrationProject, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("e11cb99e-3e4b-4c96-ba62-42b6a66618f3"),
                         "CreatedBy",
                         null,
-                        obj => ((MigrationProjectNHibernateImpl)obj).CreatedBy,
+                        obj => obj.CreatedBy,
                         (obj, val) => obj.CreatedBy = val,
-						obj => ((MigrationProjectNHibernateImpl)obj).OnCreatedBy_IsValid), 
+						obj => OnCreatedBy_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<MigrationProject, DateTime>(
                         lazyCtx,
                         new Guid("51ceaa28-d616-464b-8c6b-aadf7461aa4d"),
                         "CreatedOn",
                         null,
-                        obj => ((MigrationProjectNHibernateImpl)obj).CreatedOn,
+                        obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
-						obj => ((MigrationProjectNHibernateImpl)obj).OnCreatedOn_IsValid), 
+						obj => OnCreatedOn_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<MigrationProject, string>(
                         lazyCtx,
                         new Guid("17634aec-04e4-40f8-a585-51989e5cd95f"),
                         "Description",
                         null,
-                        obj => ((MigrationProjectNHibernateImpl)obj).Description,
+                        obj => obj.Description,
                         (obj, val) => obj.Description = val,
-						obj => ((MigrationProjectNHibernateImpl)obj).OnDescription_IsValid), 
+						obj => OnDescription_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<MigrationProject, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("ed7a3291-b69b-42f3-9b60-dd06e374f856"),
                         "DestinationModule",
                         null,
-                        obj => ((MigrationProjectNHibernateImpl)obj).DestinationModule,
+                        obj => obj.DestinationModule,
                         (obj, val) => obj.DestinationModule = val,
-						obj => ((MigrationProjectNHibernateImpl)obj).OnDestinationModule_IsValid), 
+						obj => OnDestinationModule_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<MigrationProject, Guid>(
                         lazyCtx,
                         new Guid("0851878a-0753-425e-a053-c4642ce3f28b"),
                         "ExportGuid",
                         null,
-                        obj => ((MigrationProjectNHibernateImpl)obj).ExportGuid,
+                        obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
-						obj => ((MigrationProjectNHibernateImpl)obj).OnExportGuid_IsValid), 
+						obj => OnExportGuid_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<MigrationProject, ICollection<ZBox.App.SchemaMigration.StagingDatabase>>(
                         lazyCtx,
@@ -913,7 +915,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
                         null,
                         obj => obj.StagingDatabases,
                         null, // lists are read-only properties
-                        obj => ((MigrationProjectNHibernateImpl)obj).OnStagingDatabases_IsValid), 
+                        obj => OnStagingDatabases_IsValid), 
                     // position columns
                 };
             }

@@ -91,7 +91,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnDestination_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnDestination_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnDestination_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnDestination_IsValid;
 
         /// <summary>
         /// The number of rows in the destination
@@ -147,7 +147,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnDestinationRows_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnDestinationRows_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnDestinationRows_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnDestinationRows_IsValid;
 
         /// <summary>
         /// The source of the migration step
@@ -203,7 +203,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnSource_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnSource_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnSource_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnSource_IsValid;
 
         /// <summary>
         /// The number of rows in this source
@@ -259,7 +259,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnSourceRows_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnSourceRows_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnSourceRows_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnSourceRows_IsValid;
 
         /// <summary>
         /// When the logentry was written
@@ -315,7 +315,7 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, DateTime> OnTimestamp_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, DateTime> OnTimestamp_PostSetter;
 
-        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnTimestamp_IsValid;
+        public static event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnTimestamp_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -369,45 +369,45 @@ namespace ZBox.App.SchemaMigration
                         new Guid("bad56a8d-e23e-47e3-8545-ee4c2689aab8"),
                         "Destination",
                         null,
-                        obj => ((MigrationLogEfImpl)obj).Destination,
+                        obj => obj.Destination,
                         (obj, val) => obj.Destination = val,
-						obj => ((MigrationLogEfImpl)obj).OnDestination_IsValid), 
+						obj => OnDestination_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<MigrationLog, int>(
                         lazyCtx,
                         new Guid("6b2ac709-a61b-4d22-96e6-e36f4bcbce84"),
                         "DestinationRows",
                         null,
-                        obj => ((MigrationLogEfImpl)obj).DestinationRows,
+                        obj => obj.DestinationRows,
                         (obj, val) => obj.DestinationRows = val,
-						obj => ((MigrationLogEfImpl)obj).OnDestinationRows_IsValid), 
+						obj => OnDestinationRows_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<MigrationLog, string>(
                         lazyCtx,
                         new Guid("fd0e1581-c4f0-476e-af24-2905e4aa377d"),
                         "Source",
                         null,
-                        obj => ((MigrationLogEfImpl)obj).Source,
+                        obj => obj.Source,
                         (obj, val) => obj.Source = val,
-						obj => ((MigrationLogEfImpl)obj).OnSource_IsValid), 
+						obj => OnSource_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<MigrationLog, int>(
                         lazyCtx,
                         new Guid("52a3ddb3-c724-4427-a2e1-95bbf347906a"),
                         "SourceRows",
                         null,
-                        obj => ((MigrationLogEfImpl)obj).SourceRows,
+                        obj => obj.SourceRows,
                         (obj, val) => obj.SourceRows = val,
-						obj => ((MigrationLogEfImpl)obj).OnSourceRows_IsValid), 
+						obj => OnSourceRows_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<MigrationLog, DateTime>(
                         lazyCtx,
                         new Guid("9e3a70c6-04f9-4464-93c9-68c1eec6b94f"),
                         "Timestamp",
                         null,
-                        obj => ((MigrationLogEfImpl)obj).Timestamp,
+                        obj => obj.Timestamp,
                         (obj, val) => obj.Timestamp = val,
-						obj => ((MigrationLogEfImpl)obj).OnTimestamp_IsValid), 
+						obj => OnTimestamp_IsValid), 
                     // position columns
                 };
             }
