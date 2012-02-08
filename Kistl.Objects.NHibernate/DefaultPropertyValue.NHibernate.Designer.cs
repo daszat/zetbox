@@ -133,6 +133,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -202,6 +204,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -288,6 +292,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -358,6 +364,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime> OnCreatedOn_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnCreatedOn_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -427,6 +435,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnExportGuid_IsValid;
 
         /// <summary>
         /// Property where the default value is set
@@ -530,6 +540,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.DefaultPropertyValue> OnProperty_IsValid;
 
         /// <summary>
         /// GetDefaultValue
@@ -698,53 +710,59 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValueNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValue, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c33da8b7-beba-43e5-a9e8-a8d51c6a3443"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((DefaultPropertyValueNHibernateImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((DefaultPropertyValueNHibernateImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValueNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValue, DateTime>(
                         lazyCtx,
                         new Guid("0f199917-c51d-4f4e-9c59-663a274c79a0"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((DefaultPropertyValueNHibernateImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((DefaultPropertyValueNHibernateImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValueNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValue, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("68c4fa75-42bd-4d51-b74d-a074ea17e242"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((DefaultPropertyValueNHibernateImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((DefaultPropertyValueNHibernateImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValueNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValue, DateTime>(
                         lazyCtx,
                         new Guid("4ace0c4f-58d7-4656-b263-9adae69a6b06"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((DefaultPropertyValueNHibernateImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((DefaultPropertyValueNHibernateImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValueNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValue, Guid>(
                         lazyCtx,
                         new Guid("e672de1a-e0f4-4613-9d1f-121ba543c2ec"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((DefaultPropertyValueNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((DefaultPropertyValueNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValueNHibernateImpl, Kistl.App.Base.Property>(
+                    new PropertyDescriptorNHibernateImpl<DefaultPropertyValue, Kistl.App.Base.Property>(
                         lazyCtx,
                         new Guid("a2451b2f-2430-4de4-81a6-3d5ac9f0138f"),
                         "Property",
                         null,
-                        obj => obj.Property,
-                        (obj, val) => obj.Property = val),
+                        obj => ((DefaultPropertyValueNHibernateImpl)obj).Property,
+                        (obj, val) => obj.Property = val,
+						obj => ((DefaultPropertyValueNHibernateImpl)obj).OnProperty_IsValid), 
                     // position columns
                 };
             }

@@ -91,6 +91,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.YearFilterConfiguration, bool?> OnIsCurrentYearDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.YearFilterConfiguration, bool?> OnIsCurrentYearDefault_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.YearFilterConfiguration> OnIsCurrentYearDefault_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -258,13 +260,14 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<YearFilterConfigurationEfImpl, bool?>(
+                    new PropertyDescriptorEfImpl<YearFilterConfiguration, bool?>(
                         lazyCtx,
                         new Guid("495159f4-a983-4a2a-a8f1-2291647673fd"),
                         "IsCurrentYearDefault",
                         null,
-                        obj => obj.IsCurrentYearDefault,
-                        (obj, val) => obj.IsCurrentYearDefault = val),
+                        obj => ((YearFilterConfigurationEfImpl)obj).IsCurrentYearDefault,
+                        (obj, val) => obj.IsCurrentYearDefault = val,
+						obj => ((YearFilterConfigurationEfImpl)obj).OnIsCurrentYearDefault_IsValid), 
                     // position columns
                 };
             }

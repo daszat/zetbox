@@ -80,6 +80,8 @@ namespace Kistl.App.Test
         private bool Antworten_was_eagerLoaded = false;
 public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntworten_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Fragebogen> OnAntworten_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -130,6 +132,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Fragebogen, int?> OnBogenNummer_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Fragebogen, int?> OnBogenNummer_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Fragebogen> OnBogenNummer_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -158,6 +162,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 		private NHibernateASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl> _Student;
 		// ignored, but required for Serialization
         private bool Student_was_eagerLoaded = false;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.Fragebogen> OnStudent_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -204,29 +210,32 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<FragebogenNHibernateImpl, IList<Kistl.App.Test.Antwort>>(
+                    new PropertyDescriptorNHibernateImpl<Fragebogen, IList<Kistl.App.Test.Antwort>>(
                         lazyCtx,
                         new Guid("e8f20c02-abea-4c91-850f-c321adfd46f0"),
                         "Antworten",
                         null,
                         obj => obj.Antworten,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((FragebogenNHibernateImpl)obj).OnAntworten_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FragebogenNHibernateImpl, int?>(
+                    new PropertyDescriptorNHibernateImpl<Fragebogen, int?>(
                         lazyCtx,
                         new Guid("b65f1a91-e063-4054-a2e7-d5dc0292e3fc"),
                         "BogenNummer",
                         null,
-                        obj => obj.BogenNummer,
-                        (obj, val) => obj.BogenNummer = val),
+                        obj => ((FragebogenNHibernateImpl)obj).BogenNummer,
+                        (obj, val) => obj.BogenNummer = val,
+						obj => ((FragebogenNHibernateImpl)obj).OnBogenNummer_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<FragebogenNHibernateImpl, ICollection<Kistl.App.Test.TestStudent>>(
+                    new PropertyDescriptorNHibernateImpl<Fragebogen, ICollection<Kistl.App.Test.TestStudent>>(
                         lazyCtx,
                         new Guid("3a91e745-0dd2-4f31-864e-eaf657ddb577"),
                         "Student",
                         null,
                         obj => obj.Student,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((FragebogenNHibernateImpl)obj).OnStudent_IsValid), 
                     // position columns
                 };
             }

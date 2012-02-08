@@ -85,6 +85,8 @@ namespace Kistl.App.Test
         }
         private BSideCollectionWrapper<Kistl.App.Test.N_to_M_relations_A, Kistl.App.Test.N_to_M_relations_B, Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl, EntityCollection<Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>> _BSide;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_A> OnBSide_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -139,6 +141,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.N_to_M_relations_A, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.N_to_M_relations_A, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.N_to_M_relations_A> OnName_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(N_to_M_relations_A);
@@ -182,21 +186,23 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<N_to_M_relations_AEfImpl, ICollection<Kistl.App.Test.N_to_M_relations_B>>(
+                    new PropertyDescriptorEfImpl<N_to_M_relations_A, ICollection<Kistl.App.Test.N_to_M_relations_B>>(
                         lazyCtx,
                         new Guid("3afe0378-20f3-46f9-8391-da25414716ff"),
                         "BSide",
                         null,
                         obj => obj.BSide,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((N_to_M_relations_AEfImpl)obj).OnBSide_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<N_to_M_relations_AEfImpl, string>(
+                    new PropertyDescriptorEfImpl<N_to_M_relations_A, string>(
                         lazyCtx,
                         new Guid("084ec7c9-1623-43f1-9afc-e61f934df963"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((N_to_M_relations_AEfImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((N_to_M_relations_AEfImpl)obj).OnName_IsValid), 
                     // position columns
                 };
             }

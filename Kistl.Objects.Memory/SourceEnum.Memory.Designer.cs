@@ -123,6 +123,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceEnum, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceEnum, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceEnum> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -186,6 +188,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceEnum, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceEnum, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceEnum, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceEnum> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -276,6 +280,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceEnum, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceEnum, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceEnum> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -339,6 +345,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceEnum, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceEnum, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceEnum, DateTime> OnCreatedOn_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceEnum> OnCreatedOn_IsValid;
 
         /// <summary>
         /// 
@@ -430,6 +438,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceEnum, Kistl.App.Base.EnumerationEntry> OnDestinationValue_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceEnum, Kistl.App.Base.EnumerationEntry> OnDestinationValue_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceEnum> OnDestinationValue_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -493,6 +503,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceEnum, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceEnum, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceEnum, Guid> OnExportGuid_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceEnum> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -600,6 +612,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceEnum, ZBox.App.SchemaMigration.SourceColumn> OnSourceColumn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceEnum, ZBox.App.SchemaMigration.SourceColumn> OnSourceColumn_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceEnum> OnSourceColumn_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -650,6 +664,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceEnum, string> OnSourceValue_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceEnum, string> OnSourceValue_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceEnum, string> OnSourceValue_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceEnum> OnSourceValue_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -773,69 +789,77 @@ namespace ZBox.App.SchemaMigration
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceEnumMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<SourceEnum, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("55366c31-0051-4be7-a3ac-66e783f68780"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((SourceEnumMemoryImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((SourceEnumMemoryImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceEnumMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<SourceEnum, DateTime>(
                         lazyCtx,
                         new Guid("9fefd927-1080-44d0-80ae-8afacf6620d3"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((SourceEnumMemoryImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((SourceEnumMemoryImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceEnumMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<SourceEnum, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("ab0d1cc0-622f-49d9-8dfa-d9461e50b4d6"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((SourceEnumMemoryImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((SourceEnumMemoryImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceEnumMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<SourceEnum, DateTime>(
                         lazyCtx,
                         new Guid("4b5066bd-3dac-4520-87f0-4548f3bff8e4"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((SourceEnumMemoryImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((SourceEnumMemoryImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceEnumMemoryImpl, Kistl.App.Base.EnumerationEntry>(
+                    new PropertyDescriptorMemoryImpl<SourceEnum, Kistl.App.Base.EnumerationEntry>(
                         lazyCtx,
                         new Guid("0d29a48f-6791-4640-be97-7e93d246a389"),
                         "DestinationValue",
                         null,
-                        obj => obj.DestinationValue,
-                        (obj, val) => obj.DestinationValue = val),
+                        obj => ((SourceEnumMemoryImpl)obj).DestinationValue,
+                        (obj, val) => obj.DestinationValue = val,
+						obj => ((SourceEnumMemoryImpl)obj).OnDestinationValue_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceEnumMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<SourceEnum, Guid>(
                         lazyCtx,
                         new Guid("ecac7622-18c7-4364-b109-c390cb911ce5"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((SourceEnumMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((SourceEnumMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceEnumMemoryImpl, ZBox.App.SchemaMigration.SourceColumn>(
+                    new PropertyDescriptorMemoryImpl<SourceEnum, ZBox.App.SchemaMigration.SourceColumn>(
                         lazyCtx,
                         new Guid("b7195fb9-e6da-493f-b1be-9465e4d9d5ae"),
                         "SourceColumn",
                         null,
-                        obj => obj.SourceColumn,
-                        (obj, val) => obj.SourceColumn = val),
+                        obj => ((SourceEnumMemoryImpl)obj).SourceColumn,
+                        (obj, val) => obj.SourceColumn = val,
+						obj => ((SourceEnumMemoryImpl)obj).OnSourceColumn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceEnumMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<SourceEnum, string>(
                         lazyCtx,
                         new Guid("885a90e0-62e0-426a-a3b5-64dca3a38d18"),
                         "SourceValue",
                         null,
-                        obj => obj.SourceValue,
-                        (obj, val) => obj.SourceValue = val),
+                        obj => ((SourceEnumMemoryImpl)obj).SourceValue,
+                        (obj, val) => obj.SourceValue = val,
+						obj => ((SourceEnumMemoryImpl)obj).OnSourceValue_IsValid), 
                     // position columns
                 };
             }

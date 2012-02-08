@@ -95,6 +95,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParentChild, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.RequiredParentChild, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParentChild> OnName_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -203,6 +205,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParentChild, Kistl.App.Test.RequiredParent> OnParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.RequiredParentChild, Kistl.App.Test.RequiredParent> OnParent_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParentChild> OnParent_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(RequiredParentChild);
@@ -272,21 +276,23 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<RequiredParentChildNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<RequiredParentChild, string>(
                         lazyCtx,
                         new Guid("82dc687e-3915-4f03-9a1f-75e42fcbe7cd"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((RequiredParentChildNHibernateImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((RequiredParentChildNHibernateImpl)obj).OnName_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<RequiredParentChildNHibernateImpl, Kistl.App.Test.RequiredParent>(
+                    new PropertyDescriptorNHibernateImpl<RequiredParentChild, Kistl.App.Test.RequiredParent>(
                         lazyCtx,
                         new Guid("09fb9f88-7a59-4dae-8cad-9fbab99f32c3"),
                         "Parent",
                         null,
-                        obj => obj.Parent,
-                        (obj, val) => obj.Parent = val),
+                        obj => ((RequiredParentChildNHibernateImpl)obj).Parent,
+                        (obj, val) => obj.Parent = val,
+						obj => ((RequiredParentChildNHibernateImpl)obj).OnParent_IsValid), 
                     // position columns
                 };
             }

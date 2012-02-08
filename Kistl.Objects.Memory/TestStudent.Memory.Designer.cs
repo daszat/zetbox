@@ -85,6 +85,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestStudent, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestStudent, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnName_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -107,6 +109,8 @@ namespace Kistl.App.Test
 		}
 
 		private ObservableBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Testbogen;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnTestbogen_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -152,21 +156,23 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<TestStudentMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<TestStudent, string>(
                         lazyCtx,
                         new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((TestStudentMemoryImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((TestStudentMemoryImpl)obj).OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<TestStudentMemoryImpl, ICollection<Kistl.App.Test.Fragebogen>>(
+                    new PropertyDescriptorMemoryImpl<TestStudent, ICollection<Kistl.App.Test.Fragebogen>>(
                         lazyCtx,
                         new Guid("f330d95b-372d-4302-b4d1-73afc5fa71de"),
                         "Testbogen",
                         null,
                         obj => obj.Testbogen,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((TestStudentMemoryImpl)obj).OnTestbogen_IsValid), 
                     // position columns
                 };
             }

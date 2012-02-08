@@ -57,6 +57,8 @@ namespace Kistl.App.GUI
 
 		private ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>> _Children;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.Visual> OnChildren_IsValid;
+
         /// <summary>
         /// The context menu for this Visual
         /// </summary>
@@ -79,6 +81,8 @@ namespace Kistl.App.GUI
 		}
 
 		private ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>> _ContextMenu;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.Visual> OnContextMenu_IsValid;
 
         /// <summary>
         /// A short description of the utility of this visual
@@ -130,6 +134,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.Visual, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Visual, string> OnDescription_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.Visual> OnDescription_IsValid;
 
         /// <summary>
         /// The Method whose return value shoud be displayed
@@ -220,6 +226,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.Visual> OnMethod_IsValid;
+
         /// <summary>
         /// The Property to display
         /// </summary>
@@ -309,6 +317,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.Visual> OnProperty_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(Visual);
@@ -392,45 +402,50 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<VisualMemoryImpl, ICollection<Kistl.App.GUI.Visual>>(
+                    new PropertyDescriptorMemoryImpl<Visual, ICollection<Kistl.App.GUI.Visual>>(
                         lazyCtx,
                         new Guid("9f69c3bd-e274-4639-b30c-8d2a9599917b"),
                         "Children",
                         null,
                         obj => obj.Children,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((VisualMemoryImpl)obj).OnChildren_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<VisualMemoryImpl, ICollection<Kistl.App.GUI.Visual>>(
+                    new PropertyDescriptorMemoryImpl<Visual, ICollection<Kistl.App.GUI.Visual>>(
                         lazyCtx,
                         new Guid("7b18f26e-0f3f-4554-b469-1029bd4ca10b"),
                         "ContextMenu",
                         null,
                         obj => obj.ContextMenu,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((VisualMemoryImpl)obj).OnContextMenu_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<VisualMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<Visual, string>(
                         lazyCtx,
                         new Guid("8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d"),
                         "Description",
                         null,
-                        obj => obj.Description,
-                        (obj, val) => obj.Description = val),
+                        obj => ((VisualMemoryImpl)obj).Description,
+                        (obj, val) => obj.Description = val,
+						obj => ((VisualMemoryImpl)obj).OnDescription_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<VisualMemoryImpl, Kistl.App.Base.Method>(
+                    new PropertyDescriptorMemoryImpl<Visual, Kistl.App.Base.Method>(
                         lazyCtx,
                         new Guid("0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1"),
                         "Method",
                         null,
-                        obj => obj.Method,
-                        (obj, val) => obj.Method = val),
+                        obj => ((VisualMemoryImpl)obj).Method,
+                        (obj, val) => obj.Method = val,
+						obj => ((VisualMemoryImpl)obj).OnMethod_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<VisualMemoryImpl, Kistl.App.Base.Property>(
+                    new PropertyDescriptorMemoryImpl<Visual, Kistl.App.Base.Property>(
                         lazyCtx,
                         new Guid("a432e3ff-61ed-4726-8559-f34516181065"),
                         "Property",
                         null,
-                        obj => obj.Property,
-                        (obj, val) => obj.Property = val),
+                        obj => ((VisualMemoryImpl)obj).Property,
+                        (obj, val) => obj.Property = val,
+						obj => ((VisualMemoryImpl)obj).OnProperty_IsValid), 
                     // position columns
                 };
             }

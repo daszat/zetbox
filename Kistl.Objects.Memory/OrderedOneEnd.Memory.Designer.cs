@@ -73,6 +73,8 @@ namespace Kistl.App.Test
 
 public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.OrderedOneEnd> OnNEnds_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -124,6 +126,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
 		public static event PropertyPreSetterHandler<Kistl.App.Test.OrderedOneEnd, int?> OnSomeInt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.OrderedOneEnd, int?> OnSomeInt_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.OrderedOneEnd> OnSomeInt_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(OrderedOneEnd);
@@ -168,21 +172,23 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<OrderedOneEndMemoryImpl, IList<Kistl.App.Test.OrderedNEnd>>(
+                    new PropertyDescriptorMemoryImpl<OrderedOneEnd, IList<Kistl.App.Test.OrderedNEnd>>(
                         lazyCtx,
                         new Guid("7b7a227b-462a-4923-bda6-15264f0af841"),
                         "NEnds",
                         null,
                         obj => obj.NEnds,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((OrderedOneEndMemoryImpl)obj).OnNEnds_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<OrderedOneEndMemoryImpl, int?>(
+                    new PropertyDescriptorMemoryImpl<OrderedOneEnd, int?>(
                         lazyCtx,
                         new Guid("1062a9d3-b936-42b8-99ba-2353087cbce1"),
                         "SomeInt",
                         null,
-                        obj => obj.SomeInt,
-                        (obj, val) => obj.SomeInt = val),
+                        obj => ((OrderedOneEndMemoryImpl)obj).SomeInt,
+                        (obj, val) => obj.SomeInt = val,
+						obj => ((OrderedOneEndMemoryImpl)obj).OnSomeInt_IsValid), 
                     // position columns
                 };
             }

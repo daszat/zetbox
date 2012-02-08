@@ -85,6 +85,8 @@ namespace at.dasz.DocumentManagement
         }
         private BSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>> _Revisions;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
+
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
@@ -311,13 +313,14 @@ namespace at.dasz.DocumentManagement
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<DocumentEfImpl, IList<Kistl.App.Base.Blob>>(
+                    new PropertyDescriptorEfImpl<Document, IList<Kistl.App.Base.Blob>>(
                         lazyCtx,
                         new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
                         "Revisions",
                         null,
                         obj => obj.Revisions,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((DocumentEfImpl)obj).OnRevisions_IsValid), 
                     // position columns
                 };
             }

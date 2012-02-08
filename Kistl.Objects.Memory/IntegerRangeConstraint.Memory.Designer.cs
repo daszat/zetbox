@@ -85,6 +85,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.IntegerRangeConstraint> OnMax_IsValid;
+
         /// <summary>
         /// The smallest value accepted by this constraint
         /// </summary>
@@ -135,6 +137,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.IntegerRangeConstraint> OnMin_IsValid;
 
         /// <summary>
         /// 
@@ -305,21 +309,23 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<IntegerRangeConstraintMemoryImpl, int>(
+                    new PropertyDescriptorMemoryImpl<IntegerRangeConstraint, int>(
                         lazyCtx,
                         new Guid("dff43695-5b93-4378-a01d-94a82d29dcef"),
                         "Max",
                         null,
-                        obj => obj.Max,
-                        (obj, val) => obj.Max = val),
+                        obj => ((IntegerRangeConstraintMemoryImpl)obj).Max,
+                        (obj, val) => obj.Max = val,
+						obj => ((IntegerRangeConstraintMemoryImpl)obj).OnMax_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<IntegerRangeConstraintMemoryImpl, int>(
+                    new PropertyDescriptorMemoryImpl<IntegerRangeConstraint, int>(
                         lazyCtx,
                         new Guid("8afdbf66-c979-4c09-8872-1a44aa1dbf72"),
                         "Min",
                         null,
-                        obj => obj.Min,
-                        (obj, val) => obj.Min = val),
+                        obj => ((IntegerRangeConstraintMemoryImpl)obj).Min,
+                        (obj, val) => obj.Min = val,
+						obj => ((IntegerRangeConstraintMemoryImpl)obj).OnMin_IsValid), 
                     // position columns
                 };
             }

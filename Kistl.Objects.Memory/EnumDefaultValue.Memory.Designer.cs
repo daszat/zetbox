@@ -124,6 +124,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumDefaultValue, Kistl.App.Base.EnumerationEntry> OnEnumValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumDefaultValue, Kistl.App.Base.EnumerationEntry> OnEnumValue_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.EnumDefaultValue> OnEnumValue_IsValid;
+
         /// <summary>
         /// GetDefaultValue
         /// </summary>
@@ -256,13 +258,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<EnumDefaultValueMemoryImpl, Kistl.App.Base.EnumerationEntry>(
+                    new PropertyDescriptorMemoryImpl<EnumDefaultValue, Kistl.App.Base.EnumerationEntry>(
                         lazyCtx,
                         new Guid("d072423b-f723-4342-8111-79fb563c8ab4"),
                         "EnumValue",
                         null,
-                        obj => obj.EnumValue,
-                        (obj, val) => obj.EnumValue = val),
+                        obj => ((EnumDefaultValueMemoryImpl)obj).EnumValue,
+                        (obj, val) => obj.EnumValue = val,
+						obj => ((EnumDefaultValueMemoryImpl)obj).OnEnumValue_IsValid), 
                     // position columns
                 };
             }

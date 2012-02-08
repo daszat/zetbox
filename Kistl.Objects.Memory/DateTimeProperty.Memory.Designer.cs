@@ -85,6 +85,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DateTimeProperty, Kistl.App.Base.DateTimeStyles?> OnDateTimeStyle_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DateTimeProperty, Kistl.App.Base.DateTimeStyles?> OnDateTimeStyle_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.DateTimeProperty> OnDateTimeStyle_IsValid;
+
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
@@ -439,13 +441,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<DateTimePropertyMemoryImpl, Kistl.App.Base.DateTimeStyles?>(
+                    new PropertyDescriptorMemoryImpl<DateTimeProperty, Kistl.App.Base.DateTimeStyles?>(
                         lazyCtx,
                         new Guid("76b04254-3911-4753-ba11-cb1af074b056"),
                         "DateTimeStyle",
                         null,
-                        obj => obj.DateTimeStyle,
-                        (obj, val) => obj.DateTimeStyle = val),
+                        obj => ((DateTimePropertyMemoryImpl)obj).DateTimeStyle,
+                        (obj, val) => obj.DateTimeStyle = val,
+						obj => ((DateTimePropertyMemoryImpl)obj).OnDateTimeStyle_IsValid), 
                     // position columns
                 };
             }

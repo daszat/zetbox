@@ -91,6 +91,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParentChild, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.RequiredParentChild, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParentChild> OnName_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -206,6 +208,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParentChild, Kistl.App.Test.RequiredParent> OnParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.RequiredParentChild, Kistl.App.Test.RequiredParent> OnParent_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParentChild> OnParent_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(RequiredParentChild);
@@ -255,21 +259,23 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<RequiredParentChildEfImpl, string>(
+                    new PropertyDescriptorEfImpl<RequiredParentChild, string>(
                         lazyCtx,
                         new Guid("82dc687e-3915-4f03-9a1f-75e42fcbe7cd"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((RequiredParentChildEfImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((RequiredParentChildEfImpl)obj).OnName_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<RequiredParentChildEfImpl, Kistl.App.Test.RequiredParent>(
+                    new PropertyDescriptorEfImpl<RequiredParentChild, Kistl.App.Test.RequiredParent>(
                         lazyCtx,
                         new Guid("09fb9f88-7a59-4dae-8cad-9fbab99f32c3"),
                         "Parent",
                         null,
-                        obj => obj.Parent,
-                        (obj, val) => obj.Parent = val),
+                        obj => ((RequiredParentChildEfImpl)obj).Parent,
+                        (obj, val) => obj.Parent = val,
+						obj => ((RequiredParentChildEfImpl)obj).OnParent_IsValid), 
                     // position columns
                 };
             }

@@ -124,6 +124,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, Kistl.App.Base.CompoundObject> OnCompoundObjectDefinition_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectProperty, Kistl.App.Base.CompoundObject> OnCompoundObjectDefinition_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnCompoundObjectDefinition_IsValid;
+
         /// <summary>
         /// Whether or not the list has a persistent ordering of elements
         /// </summary>
@@ -175,6 +177,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnHasPersistentOrder_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnHasPersistentOrder_IsValid;
+
         /// <summary>
         /// Whether or not this CompoundObject property is list valued
         /// </summary>
@@ -225,6 +229,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnIsList_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnIsList_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectProperty> OnIsList_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -608,29 +614,32 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<CompoundObjectPropertyMemoryImpl, Kistl.App.Base.CompoundObject>(
+                    new PropertyDescriptorMemoryImpl<CompoundObjectProperty, Kistl.App.Base.CompoundObject>(
                         lazyCtx,
                         new Guid("0d78c157-c106-4728-9af2-7992da7c935d"),
                         "CompoundObjectDefinition",
                         null,
-                        obj => obj.CompoundObjectDefinition,
-                        (obj, val) => obj.CompoundObjectDefinition = val),
+                        obj => ((CompoundObjectPropertyMemoryImpl)obj).CompoundObjectDefinition,
+                        (obj, val) => obj.CompoundObjectDefinition = val,
+						obj => ((CompoundObjectPropertyMemoryImpl)obj).OnCompoundObjectDefinition_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<CompoundObjectPropertyMemoryImpl, bool>(
+                    new PropertyDescriptorMemoryImpl<CompoundObjectProperty, bool>(
                         lazyCtx,
                         new Guid("7c806f25-d85e-4d9f-b082-0cdaa7b60790"),
                         "HasPersistentOrder",
                         null,
-                        obj => obj.HasPersistentOrder,
-                        (obj, val) => obj.HasPersistentOrder = val),
+                        obj => ((CompoundObjectPropertyMemoryImpl)obj).HasPersistentOrder,
+                        (obj, val) => obj.HasPersistentOrder = val,
+						obj => ((CompoundObjectPropertyMemoryImpl)obj).OnHasPersistentOrder_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<CompoundObjectPropertyMemoryImpl, bool>(
+                    new PropertyDescriptorMemoryImpl<CompoundObjectProperty, bool>(
                         lazyCtx,
                         new Guid("8a861113-a48a-40c5-bdec-6ceafef86f48"),
                         "IsList",
                         null,
-                        obj => obj.IsList,
-                        (obj, val) => obj.IsList = val),
+                        obj => ((CompoundObjectPropertyMemoryImpl)obj).IsList,
+                        (obj, val) => obj.IsList = val,
+						obj => ((CompoundObjectPropertyMemoryImpl)obj).OnIsList_IsValid), 
                     // position columns
                 };
             }

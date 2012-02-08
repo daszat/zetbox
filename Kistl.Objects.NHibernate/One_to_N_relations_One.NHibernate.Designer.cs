@@ -95,6 +95,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.One_to_N_relations_One, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.One_to_N_relations_One, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_One> OnName_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -127,6 +129,8 @@ namespace Kistl.App.Test
     
         private OneNRelationList<Kistl.App.Test.One_to_N_relations_N> _NSide;
 public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_One> OnNSide_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -173,21 +177,23 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<One_to_N_relations_OneNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<One_to_N_relations_One, string>(
                         lazyCtx,
                         new Guid("eea22954-2845-4b34-a721-358469fd0740"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((One_to_N_relations_OneNHibernateImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((One_to_N_relations_OneNHibernateImpl)obj).OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<One_to_N_relations_OneNHibernateImpl, ICollection<Kistl.App.Test.One_to_N_relations_N>>(
+                    new PropertyDescriptorNHibernateImpl<One_to_N_relations_One, ICollection<Kistl.App.Test.One_to_N_relations_N>>(
                         lazyCtx,
                         new Guid("00c825ba-6df2-4739-8074-2a85aae274a4"),
                         "NSide",
                         null,
                         obj => obj.NSide,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((One_to_N_relations_OneNHibernateImpl)obj).OnNSide_IsValid), 
                     // position columns
                 };
             }

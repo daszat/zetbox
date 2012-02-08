@@ -148,6 +148,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.PropertyFilterConfiguration, Kistl.App.Base.Property> OnProperty_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.PropertyFilterConfiguration, Kistl.App.Base.Property> OnProperty_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.PropertyFilterConfiguration> OnProperty_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -343,13 +345,14 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<PropertyFilterConfigurationNHibernateImpl, Kistl.App.Base.Property>(
+                    new PropertyDescriptorNHibernateImpl<PropertyFilterConfiguration, Kistl.App.Base.Property>(
                         lazyCtx,
                         new Guid("384208e7-eb27-41f1-ac12-b05822c0a2ad"),
                         "Property",
                         null,
-                        obj => obj.Property,
-                        (obj, val) => obj.Property = val),
+                        obj => ((PropertyFilterConfigurationNHibernateImpl)obj).Property,
+                        (obj, val) => obj.Property = val,
+						obj => ((PropertyFilterConfigurationNHibernateImpl)obj).OnProperty_IsValid), 
                     // position columns
                 };
             }

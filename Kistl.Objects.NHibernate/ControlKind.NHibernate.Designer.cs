@@ -79,6 +79,8 @@ namespace Kistl.App.GUI
         private OneNRelationList<Kistl.App.GUI.ControlKind> _ChildControlKinds;
 public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChildControlKinds_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.ControlKind> OnChildControlKinds_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -148,6 +150,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
 		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.ControlKind> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -236,6 +240,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.Base.Module> OnModule_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.ControlKind> OnModule_IsValid;
+
         /// <summary>
         /// Name of this ControlKind
         /// </summary>
@@ -285,6 +291,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
 		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, string> OnName_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.ControlKind> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -395,6 +403,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
 		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind> OnParent_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind> OnParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind> OnParent_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.ControlKind> OnParent_IsValid;
 
         /// <summary>
         /// 
@@ -550,45 +560,50 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<ControlKindNHibernateImpl, ICollection<Kistl.App.GUI.ControlKind>>(
+                    new PropertyDescriptorNHibernateImpl<ControlKind, ICollection<Kistl.App.GUI.ControlKind>>(
                         lazyCtx,
                         new Guid("bf073bb5-eaa8-4e3d-b019-60b47ba6a088"),
                         "ChildControlKinds",
                         null,
                         obj => obj.ChildControlKinds,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((ControlKindNHibernateImpl)obj).OnChildControlKinds_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ControlKindNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<ControlKind, Guid>(
                         lazyCtx,
                         new Guid("758d8eba-b458-4cd4-98a8-e08713912654"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((ControlKindNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((ControlKindNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ControlKindNHibernateImpl, Kistl.App.Base.Module>(
+                    new PropertyDescriptorNHibernateImpl<ControlKind, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("e4cf2c2d-be50-4954-a43c-b8df2dedecec"),
                         "Module",
                         null,
-                        obj => obj.Module,
-                        (obj, val) => obj.Module = val),
+                        obj => ((ControlKindNHibernateImpl)obj).Module,
+                        (obj, val) => obj.Module = val,
+						obj => ((ControlKindNHibernateImpl)obj).OnModule_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ControlKindNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<ControlKind, string>(
                         lazyCtx,
                         new Guid("438ab847-c5d1-4072-9449-96e3d4e92b1f"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((ControlKindNHibernateImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((ControlKindNHibernateImpl)obj).OnName_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ControlKindNHibernateImpl, Kistl.App.GUI.ControlKind>(
+                    new PropertyDescriptorNHibernateImpl<ControlKind, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("5d75bf4f-29dd-4d00-8e4f-b40a1b9ad92c"),
                         "Parent",
                         null,
-                        obj => obj.Parent,
-                        (obj, val) => obj.Parent = val),
+                        obj => ((ControlKindNHibernateImpl)obj).Parent,
+                        (obj, val) => obj.Parent = val,
+						obj => ((ControlKindNHibernateImpl)obj).OnParent_IsValid), 
                     // position columns
                 };
             }

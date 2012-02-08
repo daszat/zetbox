@@ -124,6 +124,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.InvokingConstraint> OnGetErrorTextInvocation_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -213,6 +215,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnIsValidInvocation_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnIsValidInvocation_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnIsValidInvocation_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.InvokingConstraint> OnIsValidInvocation_IsValid;
 
         /// <summary>
         /// 
@@ -426,21 +430,23 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<InvokingConstraintMemoryImpl, Kistl.App.Base.ConstraintInvocation>(
+                    new PropertyDescriptorMemoryImpl<InvokingConstraint, Kistl.App.Base.ConstraintInvocation>(
                         lazyCtx,
                         new Guid("3b5d70f7-b6fd-4e39-b912-5a644a5de716"),
                         "GetErrorTextInvocation",
                         null,
-                        obj => obj.GetErrorTextInvocation,
-                        (obj, val) => obj.GetErrorTextInvocation = val),
+                        obj => ((InvokingConstraintMemoryImpl)obj).GetErrorTextInvocation,
+                        (obj, val) => obj.GetErrorTextInvocation = val,
+						obj => ((InvokingConstraintMemoryImpl)obj).OnGetErrorTextInvocation_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<InvokingConstraintMemoryImpl, Kistl.App.Base.ConstraintInvocation>(
+                    new PropertyDescriptorMemoryImpl<InvokingConstraint, Kistl.App.Base.ConstraintInvocation>(
                         lazyCtx,
                         new Guid("3c98da56-1c21-4849-87b1-81bf72d17e70"),
                         "IsValidInvocation",
                         null,
-                        obj => obj.IsValidInvocation,
-                        (obj, val) => obj.IsValidInvocation = val),
+                        obj => ((InvokingConstraintMemoryImpl)obj).IsValidInvocation,
+                        (obj, val) => obj.IsValidInvocation = val,
+						obj => ((InvokingConstraintMemoryImpl)obj).OnIsValidInvocation_IsValid), 
                     // position columns
                 };
             }

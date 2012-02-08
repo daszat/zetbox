@@ -92,6 +92,15 @@ namespace Kistl.Generator.Templates
             {
                 throw new ArgumentOutOfRangeException("p", String.Format("unknown property type '{0}'", p.GetType().ToString()));
             }
+
+            ApplyPropertyIsValidEvent(p);
+        }
+
+        protected virtual void ApplyPropertyIsValidEvent(Property p)
+        {
+            this.WriteLine();
+            this.WriteObjects("        public event PropertyIsValidHandler<", p.ObjectClass.GetDataTypeString(), "> On", p.Name, "_IsValid;");
+            this.WriteLine();
         }
 
         protected virtual void ApplyPropertyEvents(Property p, bool isReadOnly)

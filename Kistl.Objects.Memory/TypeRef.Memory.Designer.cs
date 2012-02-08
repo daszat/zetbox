@@ -124,6 +124,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.Assembly> OnAssembly_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.Assembly> OnAssembly_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnAssembly_IsValid;
+
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -213,6 +215,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -276,6 +280,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.TypeRef, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -366,6 +372,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -430,6 +438,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, DateTime> OnCreatedOn_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnCreatedOn_IsValid;
+
         /// <summary>
         /// If the TypeRef could not be found in the containing assembly this property is set to true, otherwise to null
         /// </summary>
@@ -480,6 +490,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.TypeRef, bool?> OnDeleted_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, bool?> OnDeleted_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, bool?> OnDeleted_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnDeleted_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -545,6 +557,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnExportGuid_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -596,6 +610,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, string> OnFullName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, string> OnFullName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnFullName_IsValid;
+
         /// <summary>
         /// list of type arguments
         /// </summary>
@@ -620,6 +636,8 @@ namespace Kistl.App.Base
 		private ObservableBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>> _GenericArguments;
 		
 		private bool GenericArguments_was_eagerLoaded = false;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnGenericArguments_IsValid;
 
         /// <summary>
         /// The TypeRef of the BaseClass of the referenced Type
@@ -711,6 +729,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef> OnParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef> OnParent_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnParent_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -761,6 +781,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.TypeRef, string> OnToStringCache_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, string> OnToStringCache_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, string> OnToStringCache_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.TypeRef> OnToStringCache_IsValid;
 
         /// <summary>
         /// get the referenced &lt;see cref=&quot;Type&quot;/&gt;
@@ -1136,93 +1158,104 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, Kistl.App.Base.Assembly>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, Kistl.App.Base.Assembly>(
                         lazyCtx,
                         new Guid("885bfa97-3d43-48bb-a0aa-1049298714ff"),
                         "Assembly",
                         null,
-                        obj => obj.Assembly,
-                        (obj, val) => obj.Assembly = val),
+                        obj => ((TypeRefMemoryImpl)obj).Assembly,
+                        (obj, val) => obj.Assembly = val,
+						obj => ((TypeRefMemoryImpl)obj).OnAssembly_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("eaca4d2e-f9e9-4328-92fc-20ba96f59933"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((TypeRefMemoryImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((TypeRefMemoryImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, DateTime>(
                         lazyCtx,
                         new Guid("e6dcca07-a7f3-4ca7-9763-95e1124ffb25"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((TypeRefMemoryImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((TypeRefMemoryImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("8e862e5e-bc66-479a-9482-edd3a3355db3"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((TypeRefMemoryImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((TypeRefMemoryImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, DateTime>(
                         lazyCtx,
                         new Guid("d769345e-341e-488d-90c3-821a8b35b4f7"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((TypeRefMemoryImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((TypeRefMemoryImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, bool?>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, bool?>(
                         lazyCtx,
                         new Guid("aa1a4c98-2ae0-45d9-a343-7db43ca6430e"),
                         "Deleted",
                         null,
-                        obj => obj.Deleted,
-                        (obj, val) => obj.Deleted = val),
+                        obj => ((TypeRefMemoryImpl)obj).Deleted,
+                        (obj, val) => obj.Deleted = val,
+						obj => ((TypeRefMemoryImpl)obj).OnDeleted_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, Guid>(
                         lazyCtx,
                         new Guid("48430be7-e17f-48ad-ac8b-7f9cb5341318"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((TypeRefMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((TypeRefMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, string>(
                         lazyCtx,
                         new Guid("e418e513-e623-4a8f-bcbd-8572a29b7c82"),
                         "FullName",
                         null,
-                        obj => obj.FullName,
-                        (obj, val) => obj.FullName = val),
+                        obj => ((TypeRefMemoryImpl)obj).FullName,
+                        (obj, val) => obj.FullName = val,
+						obj => ((TypeRefMemoryImpl)obj).OnFullName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, IList<Kistl.App.Base.TypeRef>>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, IList<Kistl.App.Base.TypeRef>>(
                         lazyCtx,
                         new Guid("443e3370-b1f4-46e8-9779-1a8d9ba1c8a6"),
                         "GenericArguments",
                         null,
                         obj => obj.GenericArguments,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((TypeRefMemoryImpl)obj).OnGenericArguments_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, Kistl.App.Base.TypeRef>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, Kistl.App.Base.TypeRef>(
                         lazyCtx,
                         new Guid("f7ed21a0-9a41-40eb-b3ab-b35591f2edd7"),
                         "Parent",
                         null,
-                        obj => obj.Parent,
-                        (obj, val) => obj.Parent = val),
+                        obj => ((TypeRefMemoryImpl)obj).Parent,
+                        (obj, val) => obj.Parent = val,
+						obj => ((TypeRefMemoryImpl)obj).OnParent_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<TypeRefMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<TypeRef, string>(
                         lazyCtx,
                         new Guid("7887ad1c-654c-46fb-b7eb-bde9de04184a"),
                         "ToStringCache",
                         null,
-                        obj => obj.ToStringCache,
-                        (obj, val) => obj.ToStringCache = val),
+                        obj => ((TypeRefMemoryImpl)obj).ToStringCache,
+                        (obj, val) => obj.ToStringCache = val,
+						obj => ((TypeRefMemoryImpl)obj).OnToStringCache_IsValid), 
                     // position columns
                 };
             }

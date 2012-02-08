@@ -95,6 +95,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnEagerLoading_IsValid;
+
         /// <summary>
         /// Simple objects are inline editable in lists. Use this property to override this default. If true, the referenced instances are editable in lists, otherwise not.
         /// </summary>
@@ -144,6 +146,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool?> OnIsInlineEditable_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool?> OnIsInlineEditable_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool?> OnIsInlineEditable_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnIsInlineEditable_IsValid;
 
         /// <summary>
         /// The RelationEnd describing this Property
@@ -247,6 +251,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnRelationEnd_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -694,29 +700,32 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<ObjectReferencePropertyNHibernateImpl, bool>(
+                    new PropertyDescriptorNHibernateImpl<ObjectReferenceProperty, bool>(
                         lazyCtx,
                         new Guid("373f0036-42d6-41e2-a2a4-74462537f426"),
                         "EagerLoading",
                         null,
-                        obj => obj.EagerLoading,
-                        (obj, val) => obj.EagerLoading = val),
+                        obj => ((ObjectReferencePropertyNHibernateImpl)obj).EagerLoading,
+                        (obj, val) => obj.EagerLoading = val,
+						obj => ((ObjectReferencePropertyNHibernateImpl)obj).OnEagerLoading_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ObjectReferencePropertyNHibernateImpl, bool?>(
+                    new PropertyDescriptorNHibernateImpl<ObjectReferenceProperty, bool?>(
                         lazyCtx,
                         new Guid("f7183d87-8cc8-4703-b148-02db9f5bf9bc"),
                         "IsInlineEditable",
                         null,
-                        obj => obj.IsInlineEditable,
-                        (obj, val) => obj.IsInlineEditable = val),
+                        obj => ((ObjectReferencePropertyNHibernateImpl)obj).IsInlineEditable,
+                        (obj, val) => obj.IsInlineEditable = val,
+						obj => ((ObjectReferencePropertyNHibernateImpl)obj).OnIsInlineEditable_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ObjectReferencePropertyNHibernateImpl, Kistl.App.Base.RelationEnd>(
+                    new PropertyDescriptorNHibernateImpl<ObjectReferenceProperty, Kistl.App.Base.RelationEnd>(
                         lazyCtx,
                         new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0"),
                         "RelationEnd",
                         null,
-                        obj => obj.RelationEnd,
-                        (obj, val) => obj.RelationEnd = val),
+                        obj => ((ObjectReferencePropertyNHibernateImpl)obj).RelationEnd,
+                        (obj, val) => obj.RelationEnd = val,
+						obj => ((ObjectReferencePropertyNHibernateImpl)obj).OnRelationEnd_IsValid), 
                     // position columns
                 };
             }

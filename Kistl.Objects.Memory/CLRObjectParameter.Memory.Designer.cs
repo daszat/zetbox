@@ -124,6 +124,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.CLRObjectParameter> OnType_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -380,13 +382,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<CLRObjectParameterMemoryImpl, Kistl.App.Base.TypeRef>(
+                    new PropertyDescriptorMemoryImpl<CLRObjectParameter, Kistl.App.Base.TypeRef>(
                         lazyCtx,
                         new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd"),
                         "Type",
                         null,
-                        obj => obj.Type,
-                        (obj, val) => obj.Type = val),
+                        obj => ((CLRObjectParameterMemoryImpl)obj).Type,
+                        (obj, val) => obj.Type = val,
+						obj => ((CLRObjectParameterMemoryImpl)obj).OnType_IsValid), 
                     // position columns
                 };
             }

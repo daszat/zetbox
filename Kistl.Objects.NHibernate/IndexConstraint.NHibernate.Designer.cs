@@ -116,6 +116,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IndexConstraint, bool> OnIsUnique_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.IndexConstraint, bool> OnIsUnique_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.IndexConstraint> OnIsUnique_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -144,6 +146,8 @@ namespace Kistl.App.Base
 		private NHibernateBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl> _Properties;
 		// ignored, but required for Serialization
         private bool Properties_was_eagerLoaded = false;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.IndexConstraint> OnProperties_IsValid;
 
         /// <summary>
         /// 
@@ -314,21 +318,23 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<IndexConstraintNHibernateImpl, bool>(
+                    new PropertyDescriptorNHibernateImpl<IndexConstraint, bool>(
                         lazyCtx,
                         new Guid("2cc6e028-e01f-4879-bda8-78d459c0eaf4"),
                         "IsUnique",
                         null,
-                        obj => obj.IsUnique,
-                        (obj, val) => obj.IsUnique = val),
+                        obj => ((IndexConstraintNHibernateImpl)obj).IsUnique,
+                        (obj, val) => obj.IsUnique = val,
+						obj => ((IndexConstraintNHibernateImpl)obj).OnIsUnique_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<IndexConstraintNHibernateImpl, ICollection<Kistl.App.Base.Property>>(
+                    new PropertyDescriptorNHibernateImpl<IndexConstraint, ICollection<Kistl.App.Base.Property>>(
                         lazyCtx,
                         new Guid("3e4bfd37-1037-472b-a5d7-2c20a777e6fd"),
                         "Properties",
                         null,
                         obj => obj.Properties,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((IndexConstraintNHibernateImpl)obj).OnProperties_IsValid), 
                     // position columns
                 };
             }

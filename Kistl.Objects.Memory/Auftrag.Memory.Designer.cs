@@ -85,6 +85,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnAuftragsname_IsValid;
+
         /// <summary>
         /// Wert in EUR des Auftrages
         /// </summary>
@@ -135,6 +137,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnAuftragswert_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -225,6 +229,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -288,6 +294,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -378,6 +386,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -442,6 +452,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime> OnCreatedOn_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnCreatedOn_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -505,6 +517,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Guid> OnExportGuid_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnExportGuid_IsValid;
 
         /// <summary>
         /// Kunde des Projektes
@@ -596,6 +610,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnKunde_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -685,6 +701,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnMitarbeiter_IsValid;
 
         /// <summary>
         /// Projekt zum Auftrag
@@ -791,6 +809,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Auftrag> OnProjekt_IsValid;
 
         /// <summary>
         /// Testmethode zum Erstellen von Rechnungen mit Word
@@ -995,85 +1015,95 @@ namespace Kistl.App.Projekte
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, string>(
                         lazyCtx,
                         new Guid("aaffed82-1f4c-4c0f-a52d-3ca4dbdefe94"),
                         "Auftragsname",
                         null,
-                        obj => obj.Auftragsname,
-                        (obj, val) => obj.Auftragsname = val),
+                        obj => ((AuftragMemoryImpl)obj).Auftragsname,
+                        (obj, val) => obj.Auftragsname = val,
+						obj => ((AuftragMemoryImpl)obj).OnAuftragsname_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, double?>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, double?>(
                         lazyCtx,
                         new Guid("f252395f-7867-4299-9965-66f7a7b8f3c5"),
                         "Auftragswert",
                         null,
-                        obj => obj.Auftragswert,
-                        (obj, val) => obj.Auftragswert = val),
+                        obj => ((AuftragMemoryImpl)obj).Auftragswert,
+                        (obj, val) => obj.Auftragswert = val,
+						obj => ((AuftragMemoryImpl)obj).OnAuftragswert_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("d4f4c039-5e30-4ec4-a3b9-c0a7b1dbcf49"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((AuftragMemoryImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((AuftragMemoryImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, DateTime>(
                         lazyCtx,
                         new Guid("555ea249-ed09-4b17-8a48-7f3bc3d682f8"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((AuftragMemoryImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((AuftragMemoryImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("dc10da4b-f23f-4fad-8a44-a733f27bd21f"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((AuftragMemoryImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((AuftragMemoryImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, DateTime>(
                         lazyCtx,
                         new Guid("95d413ad-0815-4fd0-89e4-455c6f6e0321"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((AuftragMemoryImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((AuftragMemoryImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, Guid>(
                         lazyCtx,
                         new Guid("9e6faf9c-4636-403b-94fa-98c789806793"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((AuftragMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((AuftragMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, Kistl.App.Projekte.Kunde>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, Kistl.App.Projekte.Kunde>(
                         lazyCtx,
                         new Guid("57c977da-c113-4ce6-9484-3828f74c4193"),
                         "Kunde",
                         null,
-                        obj => obj.Kunde,
-                        (obj, val) => obj.Kunde = val),
+                        obj => ((AuftragMemoryImpl)obj).Kunde,
+                        (obj, val) => obj.Kunde = val,
+						obj => ((AuftragMemoryImpl)obj).OnKunde_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, Kistl.App.Projekte.Mitarbeiter>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, Kistl.App.Projekte.Mitarbeiter>(
                         lazyCtx,
                         new Guid("5b57288b-835a-459e-8532-9f47e17ab2b5"),
                         "Mitarbeiter",
                         null,
-                        obj => obj.Mitarbeiter,
-                        (obj, val) => obj.Mitarbeiter = val),
+                        obj => ((AuftragMemoryImpl)obj).Mitarbeiter,
+                        (obj, val) => obj.Mitarbeiter = val,
+						obj => ((AuftragMemoryImpl)obj).OnMitarbeiter_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, Kistl.App.Projekte.Projekt>(
+                    new PropertyDescriptorMemoryImpl<Auftrag, Kistl.App.Projekte.Projekt>(
                         lazyCtx,
                         new Guid("a0ad574a-356b-4962-a98d-c305b1289154"),
                         "Projekt",
                         null,
-                        obj => obj.Projekt,
-                        (obj, val) => obj.Projekt = val),
+                        obj => ((AuftragMemoryImpl)obj).Projekt,
+                        (obj, val) => obj.Projekt = val,
+						obj => ((AuftragMemoryImpl)obj).OnProjekt_IsValid), 
                     // position columns
                 };
             }

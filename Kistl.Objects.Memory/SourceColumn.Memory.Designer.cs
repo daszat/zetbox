@@ -123,6 +123,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -187,6 +189,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, DateTime> OnChangedOn_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnChangedOn_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -237,6 +241,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnComment_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnComment_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnComment_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnComment_IsValid;
 
         /// <summary>
         /// In some cases, when joining across source tables, nulls should be compared as equals, instead of not. This is especially true, when &quot;null&quot; is used as a domain value.
@@ -301,6 +307,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool> OnCompareNulls_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool> OnCompareNulls_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool> OnCompareNulls_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnCompareNulls_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -391,6 +399,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -455,6 +465,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, DateTime> OnCreatedOn_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnCreatedOn_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -505,6 +517,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.ColumnType> OnDbType_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.ColumnType> OnDbType_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.ColumnType> OnDbType_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnDbType_IsValid;
 
         /// <summary>
         /// 
@@ -557,6 +571,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnDescription_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnDescription_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -581,6 +597,8 @@ namespace ZBox.App.SchemaMigration
 		private ObservableBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>> _DestinationProperty;
 		
 		private bool DestinationProperty_was_eagerLoaded = false;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnDestinationProperty_IsValid;
 
         /// <summary>
         /// 
@@ -620,6 +638,8 @@ namespace ZBox.App.SchemaMigration
         private OneNRelationList<ZBox.App.SchemaMigration.SourceEnum> _EnumEntries;
 
 public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnEnumEntries_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -685,6 +705,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnExportGuid_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -736,6 +758,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool?> OnIsNullable_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool?> OnIsNullable_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnIsNullable_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -786,6 +810,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnName_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -893,6 +919,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumn> OnReferences_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumn> OnReferences_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnReferences_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -931,6 +959,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         private OneNRelationList<ZBox.App.SchemaMigration.SourceColumn> _Referers;
 
 public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnReferers_IsValid;
 
         /// <summary>
         /// 
@@ -982,6 +1012,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, int?> OnSize_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, int?> OnSize_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, int?> OnSize_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnSize_IsValid;
 
         /// <summary>
         /// 
@@ -1089,6 +1121,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceTable> OnSourceTable_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceTable> OnSourceTable_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnSourceTable_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -1139,6 +1173,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.MappingStatus?> OnStatus_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.MappingStatus?> OnStatus_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.MappingStatus?> OnStatus_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceColumn> OnStatus_IsValid;
 
         /// <summary>
         /// 
@@ -1331,149 +1367,167 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("4f2f1af0-f33b-4d98-89bb-2a386e11a29a"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((SourceColumnMemoryImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, DateTime>(
                         lazyCtx,
                         new Guid("ddd4df6a-e085-45fe-b900-f3995dcb1845"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((SourceColumnMemoryImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, string>(
                         lazyCtx,
                         new Guid("66bcca34-2297-4e06-84e8-ff19c5d4af35"),
                         "Comment",
                         null,
-                        obj => obj.Comment,
-                        (obj, val) => obj.Comment = val),
+                        obj => ((SourceColumnMemoryImpl)obj).Comment,
+                        (obj, val) => obj.Comment = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnComment_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, bool>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, bool>(
                         lazyCtx,
                         new Guid("09607800-4b5c-4d8a-a0cf-b508986c2f17"),
                         "CompareNulls",
                         null,
-                        obj => obj.CompareNulls,
-                        (obj, val) => obj.CompareNulls = val),
+                        obj => ((SourceColumnMemoryImpl)obj).CompareNulls,
+                        (obj, val) => obj.CompareNulls = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnCompareNulls_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("6c0d8f0c-2937-4d6a-972a-299c085e8b5d"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((SourceColumnMemoryImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, DateTime>(
                         lazyCtx,
                         new Guid("bb5f31d0-072d-45ec-a455-0234ccc31867"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((SourceColumnMemoryImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, ZBox.App.SchemaMigration.ColumnType>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, ZBox.App.SchemaMigration.ColumnType>(
                         lazyCtx,
                         new Guid("78873431-d503-4192-b658-5c5bc6442180"),
                         "DbType",
                         null,
-                        obj => obj.DbType,
-                        (obj, val) => obj.DbType = val),
+                        obj => ((SourceColumnMemoryImpl)obj).DbType,
+                        (obj, val) => obj.DbType = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnDbType_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, string>(
                         lazyCtx,
                         new Guid("6273444e-5309-4481-8d2a-99a7a8a1b059"),
                         "Description",
                         null,
-                        obj => obj.Description,
-                        (obj, val) => obj.Description = val),
+                        obj => ((SourceColumnMemoryImpl)obj).Description,
+                        (obj, val) => obj.Description = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnDescription_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, IList<Kistl.App.Base.Property>>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, IList<Kistl.App.Base.Property>>(
                         lazyCtx,
                         new Guid("38dce431-bb65-44c5-b67a-1f28202e51d9"),
                         "DestinationProperty",
                         null,
                         obj => obj.DestinationProperty,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((SourceColumnMemoryImpl)obj).OnDestinationProperty_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, ICollection<ZBox.App.SchemaMigration.SourceEnum>>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, ICollection<ZBox.App.SchemaMigration.SourceEnum>>(
                         lazyCtx,
                         new Guid("a040ea6b-c105-4815-815b-e36f0778e4cb"),
                         "EnumEntries",
                         null,
                         obj => obj.EnumEntries,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((SourceColumnMemoryImpl)obj).OnEnumEntries_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, Guid>(
                         lazyCtx,
                         new Guid("52ba9fcd-dbeb-42da-9146-6f40976c1c83"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((SourceColumnMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, bool?>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, bool?>(
                         lazyCtx,
                         new Guid("817ccb79-7051-4b09-8386-941a21575bfc"),
                         "IsNullable",
                         null,
-                        obj => obj.IsNullable,
-                        (obj, val) => obj.IsNullable = val),
+                        obj => ((SourceColumnMemoryImpl)obj).IsNullable,
+                        (obj, val) => obj.IsNullable = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnIsNullable_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, string>(
                         lazyCtx,
                         new Guid("a27f7d36-fd56-4271-bac0-88e22bc65027"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((SourceColumnMemoryImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnName_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, ZBox.App.SchemaMigration.SourceColumn>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, ZBox.App.SchemaMigration.SourceColumn>(
                         lazyCtx,
                         new Guid("4d6faa25-d610-4e23-b12f-7ee4c78da70b"),
                         "References",
                         null,
-                        obj => obj.References,
-                        (obj, val) => obj.References = val),
+                        obj => ((SourceColumnMemoryImpl)obj).References,
+                        (obj, val) => obj.References = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnReferences_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, ICollection<ZBox.App.SchemaMigration.SourceColumn>>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, ICollection<ZBox.App.SchemaMigration.SourceColumn>>(
                         lazyCtx,
                         new Guid("71bed80f-57ec-4038-a9a4-9aabc0c2f60d"),
                         "Referers",
                         null,
                         obj => obj.Referers,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((SourceColumnMemoryImpl)obj).OnReferers_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, int?>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, int?>(
                         lazyCtx,
                         new Guid("5a1dc7f1-7743-4603-9b65-1b31ca17d55d"),
                         "Size",
                         null,
-                        obj => obj.Size,
-                        (obj, val) => obj.Size = val),
+                        obj => ((SourceColumnMemoryImpl)obj).Size,
+                        (obj, val) => obj.Size = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnSize_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, ZBox.App.SchemaMigration.SourceTable>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, ZBox.App.SchemaMigration.SourceTable>(
                         lazyCtx,
                         new Guid("d1dca069-f6b5-4da1-beee-a51853c109ba"),
                         "SourceTable",
                         null,
-                        obj => obj.SourceTable,
-                        (obj, val) => obj.SourceTable = val),
+                        obj => ((SourceColumnMemoryImpl)obj).SourceTable,
+                        (obj, val) => obj.SourceTable = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnSourceTable_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<SourceColumnMemoryImpl, ZBox.App.SchemaMigration.MappingStatus?>(
+                    new PropertyDescriptorMemoryImpl<SourceColumn, ZBox.App.SchemaMigration.MappingStatus?>(
                         lazyCtx,
                         new Guid("bba3aa19-0097-4692-b649-d51fbc626182"),
                         "Status",
                         null,
-                        obj => obj.Status,
-                        (obj, val) => obj.Status = val),
+                        obj => ((SourceColumnMemoryImpl)obj).Status,
+                        (obj, val) => obj.Status = val,
+						obj => ((SourceColumnMemoryImpl)obj).OnStatus_IsValid), 
                     // position columns
                 };
             }

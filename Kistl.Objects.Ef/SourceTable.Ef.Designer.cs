@@ -140,6 +140,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -207,6 +209,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, DateTime> OnChangedOn_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnChangedOn_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -260,6 +264,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnComment_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnComment_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnComment_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnComment_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -364,6 +370,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -431,6 +439,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, DateTime> OnCreatedOn_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnCreatedOn_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -484,6 +494,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnDescription_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnDescription_IsValid;
 
         /// <summary>
         /// 
@@ -589,6 +601,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.ObjectClass> OnDestinationObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.ObjectClass> OnDestinationObjectClass_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnDestinationObjectClass_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -656,6 +670,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnExportGuid_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -709,6 +725,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, string> OnName_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -764,6 +782,8 @@ namespace ZBox.App.SchemaMigration
 
 
 public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTable> OnSourceColumn_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnSourceColumn_IsValid;
 
         /// <summary>
         /// 
@@ -881,6 +901,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, ZBox.App.SchemaMigration.StagingDatabase> OnStagingDatabase_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, ZBox.App.SchemaMigration.StagingDatabase> OnStagingDatabase_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnStagingDatabase_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -949,6 +971,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceTable, ZBox.App.SchemaMigration.MappingStatus?> OnStatus_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, ZBox.App.SchemaMigration.MappingStatus?> OnStatus_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, ZBox.App.SchemaMigration.MappingStatus?> OnStatus_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.SourceTable> OnStatus_IsValid;
 
         /// <summary>
         /// Creates a mapping report
@@ -1153,101 +1177,113 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<SourceTable, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("1156b3eb-af9b-4a44-8ed3-e64fa3fbb251"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((SourceTableEfImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((SourceTableEfImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, DateTime>(
+                    new PropertyDescriptorEfImpl<SourceTable, DateTime>(
                         lazyCtx,
                         new Guid("42040e80-e6a4-4d19-959f-033080669059"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((SourceTableEfImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((SourceTableEfImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, string>(
+                    new PropertyDescriptorEfImpl<SourceTable, string>(
                         lazyCtx,
                         new Guid("86a05242-c667-4181-a7a7-1d50d20f9d0f"),
                         "Comment",
                         null,
-                        obj => obj.Comment,
-                        (obj, val) => obj.Comment = val),
+                        obj => ((SourceTableEfImpl)obj).Comment,
+                        (obj, val) => obj.Comment = val,
+						obj => ((SourceTableEfImpl)obj).OnComment_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<SourceTable, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c32e650b-4c12-4eeb-9f93-46df426e38de"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((SourceTableEfImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((SourceTableEfImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, DateTime>(
+                    new PropertyDescriptorEfImpl<SourceTable, DateTime>(
                         lazyCtx,
                         new Guid("0a19a3eb-ffa2-4eef-861f-824cc327ab27"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((SourceTableEfImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((SourceTableEfImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, string>(
+                    new PropertyDescriptorEfImpl<SourceTable, string>(
                         lazyCtx,
                         new Guid("8b93e1d4-1e2a-44a8-91c3-0c71541934c6"),
                         "Description",
                         null,
-                        obj => obj.Description,
-                        (obj, val) => obj.Description = val),
+                        obj => ((SourceTableEfImpl)obj).Description,
+                        (obj, val) => obj.Description = val,
+						obj => ((SourceTableEfImpl)obj).OnDescription_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, Kistl.App.Base.ObjectClass>(
+                    new PropertyDescriptorEfImpl<SourceTable, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("ec638748-894e-4e61-b618-7d8fbacec2fe"),
                         "DestinationObjectClass",
                         null,
-                        obj => obj.DestinationObjectClass,
-                        (obj, val) => obj.DestinationObjectClass = val),
+                        obj => ((SourceTableEfImpl)obj).DestinationObjectClass,
+                        (obj, val) => obj.DestinationObjectClass = val,
+						obj => ((SourceTableEfImpl)obj).OnDestinationObjectClass_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, Guid>(
+                    new PropertyDescriptorEfImpl<SourceTable, Guid>(
                         lazyCtx,
                         new Guid("7f6f277e-78fa-4955-925c-554a6cfd466a"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((SourceTableEfImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((SourceTableEfImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, string>(
+                    new PropertyDescriptorEfImpl<SourceTable, string>(
                         lazyCtx,
                         new Guid("f01c1095-cf9b-41f5-b89c-532a86a78cc5"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((SourceTableEfImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((SourceTableEfImpl)obj).OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, ICollection<ZBox.App.SchemaMigration.SourceColumn>>(
+                    new PropertyDescriptorEfImpl<SourceTable, ICollection<ZBox.App.SchemaMigration.SourceColumn>>(
                         lazyCtx,
                         new Guid("0e435261-9490-4fbb-8268-f7f1f6607d2c"),
                         "SourceColumn",
                         null,
                         obj => obj.SourceColumn,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((SourceTableEfImpl)obj).OnSourceColumn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, ZBox.App.SchemaMigration.StagingDatabase>(
+                    new PropertyDescriptorEfImpl<SourceTable, ZBox.App.SchemaMigration.StagingDatabase>(
                         lazyCtx,
                         new Guid("d57c1138-b611-44b6-bd30-9b6d6a91cbed"),
                         "StagingDatabase",
                         null,
-                        obj => obj.StagingDatabase,
-                        (obj, val) => obj.StagingDatabase = val),
+                        obj => ((SourceTableEfImpl)obj).StagingDatabase,
+                        (obj, val) => obj.StagingDatabase = val,
+						obj => ((SourceTableEfImpl)obj).OnStagingDatabase_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<SourceTableEfImpl, ZBox.App.SchemaMigration.MappingStatus?>(
+                    new PropertyDescriptorEfImpl<SourceTable, ZBox.App.SchemaMigration.MappingStatus?>(
                         lazyCtx,
                         new Guid("6029f896-82fd-4372-8cfd-76ca7e31ebf6"),
                         "Status",
                         null,
-                        obj => obj.Status,
-                        (obj, val) => obj.Status = val),
+                        obj => ((SourceTableEfImpl)obj).Status,
+                        (obj, val) => obj.Status = val,
+						obj => ((SourceTableEfImpl)obj).OnStatus_IsValid), 
                     // position columns
                 };
             }

@@ -133,6 +133,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Blob> OnBlob_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Blob> OnBlob_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnBlob_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -203,6 +205,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnExportGuid_IsValid;
+
         /// <summary>
         /// Filename of the Icon
         /// </summary>
@@ -252,6 +256,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnIconFile_IsValid;
 
         /// <summary>
         /// 
@@ -339,6 +345,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.Icon> OnModule_IsValid;
 
         /// <summary>
         /// 
@@ -618,37 +626,41 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<IconNHibernateImpl, Kistl.App.Base.Blob>(
+                    new PropertyDescriptorNHibernateImpl<Icon, Kistl.App.Base.Blob>(
                         lazyCtx,
                         new Guid("f4dfb868-260d-450b-84b8-833dac4d25ee"),
                         "Blob",
                         null,
-                        obj => obj.Blob,
-                        (obj, val) => obj.Blob = val),
+                        obj => ((IconNHibernateImpl)obj).Blob,
+                        (obj, val) => obj.Blob = val,
+						obj => ((IconNHibernateImpl)obj).OnBlob_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<IconNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<Icon, Guid>(
                         lazyCtx,
                         new Guid("6ce563d7-28e8-4806-bdd1-84c220a6c3ca"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((IconNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((IconNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<IconNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<Icon, string>(
                         lazyCtx,
                         new Guid("cdbdfc01-5faa-416b-960f-2eb220f268fe"),
                         "IconFile",
                         null,
-                        obj => obj.IconFile,
-                        (obj, val) => obj.IconFile = val),
+                        obj => ((IconNHibernateImpl)obj).IconFile,
+                        (obj, val) => obj.IconFile = val,
+						obj => ((IconNHibernateImpl)obj).OnIconFile_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<IconNHibernateImpl, Kistl.App.Base.Module>(
+                    new PropertyDescriptorNHibernateImpl<Icon, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("052273ac-706a-446b-bb86-83c726ee66d6"),
                         "Module",
                         null,
-                        obj => obj.Module,
-                        (obj, val) => obj.Module = val),
+                        obj => ((IconNHibernateImpl)obj).Module,
+                        (obj, val) => obj.Module = val,
+						obj => ((IconNHibernateImpl)obj).OnModule_IsValid), 
                     // position columns
                 };
             }

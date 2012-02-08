@@ -140,6 +140,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnAParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnAParent_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnAParent_IsValid;
+
         /// <summary>
         /// The Relation using this RelationEnd as B
         /// </summary>
@@ -246,6 +248,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnBParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnBParent_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnBParent_IsValid;
+
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -335,6 +339,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -398,6 +404,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -488,6 +496,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -551,6 +561,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, DateTime> OnCreatedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -616,6 +628,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnExportGuid_IsValid;
+
         /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
         /// </summary>
@@ -667,6 +681,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnHasPersistentOrder_IsValid;
+
         /// <summary>
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
@@ -717,6 +733,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnMultiplicity_IsValid;
 
         /// <summary>
         /// The ORP to navigate FROM this end of the relation. MAY be null.
@@ -824,6 +842,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnNavigator_IsValid;
+
         /// <summary>
         /// the parent relation
         /// </summary>
@@ -845,6 +865,8 @@ namespace Kistl.App.Base
         }
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnParent_IsValid;
 
         /// <summary>
         /// This end&amp;apos;s role name in the relation
@@ -896,6 +918,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnRoleName_IsValid;
 
         /// <summary>
         /// Specifies which type this End of the relation has. MUST NOT be null.
@@ -986,6 +1010,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnType_IsValid;
 
         /// <summary>
         /// 
@@ -1183,109 +1209,122 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Kistl.App.Base.Relation>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Kistl.App.Base.Relation>(
                         lazyCtx,
                         new Guid("dd6057d0-78bb-4242-9670-ec6c09bd4d92"),
                         "AParent",
                         null,
-                        obj => obj.AParent,
-                        (obj, val) => obj.AParent = val),
+                        obj => ((RelationEndMemoryImpl)obj).AParent,
+                        (obj, val) => obj.AParent = val,
+						obj => ((RelationEndMemoryImpl)obj).OnAParent_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Kistl.App.Base.Relation>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Kistl.App.Base.Relation>(
                         lazyCtx,
                         new Guid("521ea0ba-ae3b-4a60-ae28-f366b3ee78f1"),
                         "BParent",
                         null,
-                        obj => obj.BParent,
-                        (obj, val) => obj.BParent = val),
+                        obj => ((RelationEndMemoryImpl)obj).BParent,
+                        (obj, val) => obj.BParent = val,
+						obj => ((RelationEndMemoryImpl)obj).OnBParent_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c399fef1-ad60-47a1-9639-76cec4ee8ca2"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((RelationEndMemoryImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((RelationEndMemoryImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, DateTime>(
                         lazyCtx,
                         new Guid("7bd41ad1-05c8-4822-a620-0883eb62516d"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((RelationEndMemoryImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((RelationEndMemoryImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("21b529c8-f295-4950-be49-a17c88ce6d8d"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((RelationEndMemoryImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((RelationEndMemoryImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, DateTime>(
                         lazyCtx,
                         new Guid("ea92fd80-01b6-49b9-8426-77257b2bd37b"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((RelationEndMemoryImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((RelationEndMemoryImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Guid>(
                         lazyCtx,
                         new Guid("4bbe4a44-dc99-4455-9c03-ae78903fcee2"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((RelationEndMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((RelationEndMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, bool>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, bool>(
                         lazyCtx,
                         new Guid("edd8d122-7b58-4bbb-bf00-33caa8b69cc2"),
                         "HasPersistentOrder",
                         null,
-                        obj => obj.HasPersistentOrder,
-                        (obj, val) => obj.HasPersistentOrder = val),
+                        obj => ((RelationEndMemoryImpl)obj).HasPersistentOrder,
+                        (obj, val) => obj.HasPersistentOrder = val,
+						obj => ((RelationEndMemoryImpl)obj).OnHasPersistentOrder_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Kistl.App.Base.Multiplicity>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Kistl.App.Base.Multiplicity>(
                         lazyCtx,
                         new Guid("cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd"),
                         "Multiplicity",
                         null,
-                        obj => obj.Multiplicity,
-                        (obj, val) => obj.Multiplicity = val),
+                        obj => ((RelationEndMemoryImpl)obj).Multiplicity,
+                        (obj, val) => obj.Multiplicity = val,
+						obj => ((RelationEndMemoryImpl)obj).OnMultiplicity_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Kistl.App.Base.ObjectReferenceProperty>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Kistl.App.Base.ObjectReferenceProperty>(
                         lazyCtx,
                         new Guid("6b25eaab-f746-47ec-a91e-f92ec6fccada"),
                         "Navigator",
                         null,
-                        obj => obj.Navigator,
-                        (obj, val) => obj.Navigator = val),
+                        obj => ((RelationEndMemoryImpl)obj).Navigator,
+                        (obj, val) => obj.Navigator = val,
+						obj => ((RelationEndMemoryImpl)obj).OnNavigator_IsValid), 
                     // property is CalculatedObjectReferenceProperty
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Kistl.App.Base.Relation>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Kistl.App.Base.Relation>(
                         lazyCtx,
                         new Guid("3273a95a-1156-4ce2-b0d6-8957b4637320"),
                         "Parent",
                         null,
                         obj => obj.Parent,
-                        null), // CalculatedObjectReferenceProperty is a read-only property
+                        null, // CalculatedObjectReferenceProperty is a read-only property
+						obj => ((RelationEndMemoryImpl)obj).OnParent_IsValid),  
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, string>(
                         lazyCtx,
                         new Guid("b32efbfc-5212-44e7-b25f-f4724b63cbee"),
                         "RoleName",
                         null,
-                        obj => obj.RoleName,
-                        (obj, val) => obj.RoleName = val),
+                        obj => ((RelationEndMemoryImpl)obj).RoleName,
+                        (obj, val) => obj.RoleName = val,
+						obj => ((RelationEndMemoryImpl)obj).OnRoleName_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RelationEndMemoryImpl, Kistl.App.Base.ObjectClass>(
+                    new PropertyDescriptorMemoryImpl<RelationEnd, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("d4bfc4e0-6b57-49f0-91fd-b0de428484e0"),
                         "Type",
                         null,
-                        obj => obj.Type,
-                        (obj, val) => obj.Type = val),
+                        obj => ((RelationEndMemoryImpl)obj).Type,
+                        (obj, val) => obj.Type = val,
+						obj => ((RelationEndMemoryImpl)obj).OnType_IsValid), 
                     // position columns
                 };
             }

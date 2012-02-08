@@ -95,6 +95,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnHasPersistentOrder_IsValid;
+
         /// <summary>
         /// If true, a property getter will be invoked to get the properties value. No Backingstore is generated, thus there is no setter.
         /// </summary>
@@ -145,6 +147,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsCalculated_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsCalculated_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnIsCalculated_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -194,6 +198,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.ValueTypeProperty> OnIsList_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -552,29 +558,32 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<ValueTypePropertyNHibernateImpl, bool>(
+                    new PropertyDescriptorNHibernateImpl<ValueTypeProperty, bool>(
                         lazyCtx,
                         new Guid("b62c7fee-bb67-46a6-b481-81554e788aa0"),
                         "HasPersistentOrder",
                         null,
-                        obj => obj.HasPersistentOrder,
-                        (obj, val) => obj.HasPersistentOrder = val),
+                        obj => ((ValueTypePropertyNHibernateImpl)obj).HasPersistentOrder,
+                        (obj, val) => obj.HasPersistentOrder = val,
+						obj => ((ValueTypePropertyNHibernateImpl)obj).OnHasPersistentOrder_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ValueTypePropertyNHibernateImpl, bool>(
+                    new PropertyDescriptorNHibernateImpl<ValueTypeProperty, bool>(
                         lazyCtx,
                         new Guid("2eed845e-887d-4230-8410-0b442ba7724b"),
                         "IsCalculated",
                         null,
-                        obj => obj.IsCalculated,
-                        (obj, val) => obj.IsCalculated = val),
+                        obj => ((ValueTypePropertyNHibernateImpl)obj).IsCalculated,
+                        (obj, val) => obj.IsCalculated = val,
+						obj => ((ValueTypePropertyNHibernateImpl)obj).OnIsCalculated_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ValueTypePropertyNHibernateImpl, bool>(
+                    new PropertyDescriptorNHibernateImpl<ValueTypeProperty, bool>(
                         lazyCtx,
                         new Guid("b2bd1528-c22f-4e12-b80f-f8234a2c0831"),
                         "IsList",
                         null,
-                        obj => obj.IsList,
-                        (obj, val) => obj.IsList = val),
+                        obj => ((ValueTypePropertyNHibernateImpl)obj).IsList,
+                        (obj, val) => obj.IsList = val,
+						obj => ((ValueTypePropertyNHibernateImpl)obj).OnIsList_IsValid), 
                     // position columns
                 };
             }

@@ -12,8 +12,6 @@ namespace Kistl.DalProvider.Ef
     public sealed class PropertyDescriptorEfImpl<TComponent, TProperty>
          : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {
-        private static readonly string[] NoErrors = new string[] { };
-
         private readonly Func<IFrozenContext> _lazyCtx;
         private readonly Guid? _propertyGuid;
 
@@ -23,8 +21,9 @@ namespace Kistl.DalProvider.Ef
             string name,
             Attribute[] attrs,
             Func<TComponent, TProperty> getter,
-            Action<TComponent, TProperty> setter)
-            : base(name, attrs, getter, setter)
+            Action<TComponent, TProperty> setter,
+            Func<TComponent, PropertyIsValidHandler<TComponent>> isValid)
+            : base(name, attrs, getter, setter, isValid)
         {
             _lazyCtx = lazyCtx;
             _propertyGuid = propertyGuid;
@@ -35,8 +34,9 @@ namespace Kistl.DalProvider.Ef
             string name,
             Attribute[] attrs,
             Func<TComponent, TProperty> getter,
-            Action<TComponent, TProperty> setter)
-            : base(name, attrs, getter, setter)
+            Action<TComponent, TProperty> setter,
+            Func<TComponent, PropertyIsValidHandler<TComponent>> isValid)
+            : base(name, attrs, getter, setter, isValid)
         {
             _propertyGuid = propertyGuid;
         }
@@ -53,6 +53,7 @@ namespace Kistl.DalProvider.Ef
                     .Constraints
                     .Where(c => !c.IsValid(self, val))
                     .Select(c => c.GetErrorText(self, val))
+                    .Concat(TryExecuteIsValidEvent(self))
                     .ToArray();
             }
             else

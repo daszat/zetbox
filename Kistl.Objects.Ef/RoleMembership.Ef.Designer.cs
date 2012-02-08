@@ -85,6 +85,8 @@ namespace Kistl.App.Base
         }
         private BSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>> _Relations;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RoleMembership> OnRelations_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(RoleMembership);
@@ -127,13 +129,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<RoleMembershipEfImpl, IList<Kistl.App.Base.Relation>>(
+                    new PropertyDescriptorEfImpl<RoleMembership, IList<Kistl.App.Base.Relation>>(
                         lazyCtx,
                         new Guid("fb799900-1a5b-4b62-a445-5dae8febdd28"),
                         "Relations",
                         null,
                         obj => obj.Relations,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((RoleMembershipEfImpl)obj).OnRelations_IsValid), 
                     // position columns
                 };
             }

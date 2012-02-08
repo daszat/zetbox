@@ -95,6 +95,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.One_to_N_relations_N, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.One_to_N_relations_N, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_N> OnName_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -203,6 +205,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.One_to_N_relations_N, Kistl.App.Test.One_to_N_relations_One> OnOneSide_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.One_to_N_relations_N, Kistl.App.Test.One_to_N_relations_One> OnOneSide_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.One_to_N_relations_N> OnOneSide_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(One_to_N_relations_N);
@@ -272,21 +276,23 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<One_to_N_relations_NNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<One_to_N_relations_N, string>(
                         lazyCtx,
                         new Guid("1b96dcd0-bf73-4855-84e5-7f8b1621672a"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((One_to_N_relations_NNHibernateImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((One_to_N_relations_NNHibernateImpl)obj).OnName_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<One_to_N_relations_NNHibernateImpl, Kistl.App.Test.One_to_N_relations_One>(
+                    new PropertyDescriptorNHibernateImpl<One_to_N_relations_N, Kistl.App.Test.One_to_N_relations_One>(
                         lazyCtx,
                         new Guid("598a1fc0-442e-436f-8dab-c04112c1709e"),
                         "OneSide",
                         null,
-                        obj => obj.OneSide,
-                        (obj, val) => obj.OneSide = val),
+                        obj => ((One_to_N_relations_NNHibernateImpl)obj).OneSide,
+                        (obj, val) => obj.OneSide = val,
+						obj => ((One_to_N_relations_NNHibernateImpl)obj).OnOneSide_IsValid), 
                     // position columns
                 };
             }

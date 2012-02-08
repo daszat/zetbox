@@ -133,6 +133,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -202,6 +204,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -288,6 +292,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -357,6 +363,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, DateTime> OnCreatedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -428,6 +436,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnExportGuid_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -477,6 +487,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, string> OnLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, string> OnLabel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, string> OnLabel_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnLabel_IsValid;
 
         /// <summary>
         /// 
@@ -565,6 +577,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.Base.Module> OnModule_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnModule_IsValid;
+
         /// <summary>
         /// Overrides the default behaviour. If true the filter will be immediately applied
         /// </summary>
@@ -614,6 +628,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnRefreshOnFilterChanged_IsValid;
 
         /// <summary>
         /// Overrides the default kind of the configured ViewModelDescriptor
@@ -702,6 +718,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.GUI.ControlKind> OnRequestedKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.GUI.ControlKind> OnRequestedKind_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnRequestedKind_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -751,6 +769,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, bool> OnRequired_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, bool> OnRequired_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, bool> OnRequired_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnRequired_IsValid;
 
         /// <summary>
         /// 
@@ -838,6 +858,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.GUI.ViewModelDescriptor> OnViewModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.GUI.ViewModelDescriptor> OnViewModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.FilterConfiguration, Kistl.App.GUI.ViewModelDescriptor> OnViewModelDescriptor_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.FilterConfiguration> OnViewModelDescriptor_IsValid;
 
         /// <summary>
         /// 
@@ -1108,93 +1130,104 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("af2483a8-8ded-4a98-8df1-ee89d4bb7723"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, DateTime>(
                         lazyCtx,
                         new Guid("a3fbe0af-79e9-4117-9c95-6676938b40b2"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c5fce446-a10d-4d7b-a006-77efd93615ae"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, DateTime>(
                         lazyCtx,
                         new Guid("38b9d11b-926d-438d-b06d-f35dd6592055"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, Guid>(
                         lazyCtx,
                         new Guid("569d3c7a-69e7-4eb2-818c-5990bd6e02d9"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, string>(
                         lazyCtx,
                         new Guid("f61fc911-989b-4dff-81e7-df00fd8497ba"),
                         "Label",
                         null,
-                        obj => obj.Label,
-                        (obj, val) => obj.Label = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).Label,
+                        (obj, val) => obj.Label = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnLabel_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, Kistl.App.Base.Module>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("7635940d-d16c-4795-b5a0-1f445a3c5d6c"),
                         "Module",
                         null,
-                        obj => obj.Module,
-                        (obj, val) => obj.Module = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).Module,
+                        (obj, val) => obj.Module = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnModule_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, bool?>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, bool?>(
                         lazyCtx,
                         new Guid("ede29e7c-6aa4-48d4-9737-811fae5d26d4"),
                         "RefreshOnFilterChanged",
                         null,
-                        obj => obj.RefreshOnFilterChanged,
-                        (obj, val) => obj.RefreshOnFilterChanged = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).RefreshOnFilterChanged,
+                        (obj, val) => obj.RefreshOnFilterChanged = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnRefreshOnFilterChanged_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, Kistl.App.GUI.ControlKind>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("afd2747f-9165-425e-946f-aed748ca5703"),
                         "RequestedKind",
                         null,
-                        obj => obj.RequestedKind,
-                        (obj, val) => obj.RequestedKind = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).RequestedKind,
+                        (obj, val) => obj.RequestedKind = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnRequestedKind_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, bool>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, bool>(
                         lazyCtx,
                         new Guid("9e23e6a1-8e4f-48c5-ae83-9dae82c6b796"),
                         "Required",
                         null,
-                        obj => obj.Required,
-                        (obj, val) => obj.Required = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).Required,
+                        (obj, val) => obj.Required = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnRequired_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfigurationNHibernateImpl, Kistl.App.GUI.ViewModelDescriptor>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
                         new Guid("5776e14c-4bf4-4388-8a5b-2e81b232bf8f"),
                         "ViewModelDescriptor",
                         null,
-                        obj => obj.ViewModelDescriptor,
-                        (obj, val) => obj.ViewModelDescriptor = val),
+                        obj => ((FilterConfigurationNHibernateImpl)obj).ViewModelDescriptor,
+                        (obj, val) => obj.ViewModelDescriptor = val,
+						obj => ((FilterConfigurationNHibernateImpl)obj).OnViewModelDescriptor_IsValid), 
                     // position columns
                 };
             }

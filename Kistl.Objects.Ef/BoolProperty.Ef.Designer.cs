@@ -141,6 +141,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnFalseIcon_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnFalseIcon_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnFalseIcon_IsValid;
+
         /// <summary>
         /// A string to describe the &quot;false&quot; value to the user.
         /// </summary>
@@ -194,6 +196,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.BoolProperty, string> OnFalseLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnFalseLabel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, string> OnFalseLabel_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnFalseLabel_IsValid;
 
         /// <summary>
         /// 
@@ -299,6 +303,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnNullIcon_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnNullIcon_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnNullIcon_IsValid;
+
         /// <summary>
         /// A string to describe the &quot;null&quot; value to the user.
         /// </summary>
@@ -352,6 +358,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.BoolProperty, string> OnNullLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnNullLabel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, string> OnNullLabel_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnNullLabel_IsValid;
 
         /// <summary>
         /// 
@@ -457,6 +465,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnTrueIcon_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, Kistl.App.GUI.Icon> OnTrueIcon_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnTrueIcon_IsValid;
+
         /// <summary>
         /// A string to describe the &quot;true&quot; value to the user.
         /// </summary>
@@ -510,6 +520,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.BoolProperty, string> OnTrueLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnTrueLabel_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.BoolProperty, string> OnTrueLabel_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.BoolProperty> OnTrueLabel_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -893,53 +905,59 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<BoolPropertyEfImpl, Kistl.App.GUI.Icon>(
+                    new PropertyDescriptorEfImpl<BoolProperty, Kistl.App.GUI.Icon>(
                         lazyCtx,
                         new Guid("784846d0-2eea-4966-b63d-72a0f13b418b"),
                         "FalseIcon",
                         null,
-                        obj => obj.FalseIcon,
-                        (obj, val) => obj.FalseIcon = val),
+                        obj => ((BoolPropertyEfImpl)obj).FalseIcon,
+                        (obj, val) => obj.FalseIcon = val,
+						obj => ((BoolPropertyEfImpl)obj).OnFalseIcon_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<BoolPropertyEfImpl, string>(
+                    new PropertyDescriptorEfImpl<BoolProperty, string>(
                         lazyCtx,
                         new Guid("09381f52-98e2-4dea-9855-7358e5f9cdae"),
                         "FalseLabel",
                         null,
-                        obj => obj.FalseLabel,
-                        (obj, val) => obj.FalseLabel = val),
+                        obj => ((BoolPropertyEfImpl)obj).FalseLabel,
+                        (obj, val) => obj.FalseLabel = val,
+						obj => ((BoolPropertyEfImpl)obj).OnFalseLabel_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<BoolPropertyEfImpl, Kistl.App.GUI.Icon>(
+                    new PropertyDescriptorEfImpl<BoolProperty, Kistl.App.GUI.Icon>(
                         lazyCtx,
                         new Guid("62454172-467d-4c8e-8f1a-a959946d3fdb"),
                         "NullIcon",
                         null,
-                        obj => obj.NullIcon,
-                        (obj, val) => obj.NullIcon = val),
+                        obj => ((BoolPropertyEfImpl)obj).NullIcon,
+                        (obj, val) => obj.NullIcon = val,
+						obj => ((BoolPropertyEfImpl)obj).OnNullIcon_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<BoolPropertyEfImpl, string>(
+                    new PropertyDescriptorEfImpl<BoolProperty, string>(
                         lazyCtx,
                         new Guid("55fae41e-499d-40e3-b386-9839ec8b1d0a"),
                         "NullLabel",
                         null,
-                        obj => obj.NullLabel,
-                        (obj, val) => obj.NullLabel = val),
+                        obj => ((BoolPropertyEfImpl)obj).NullLabel,
+                        (obj, val) => obj.NullLabel = val,
+						obj => ((BoolPropertyEfImpl)obj).OnNullLabel_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<BoolPropertyEfImpl, Kistl.App.GUI.Icon>(
+                    new PropertyDescriptorEfImpl<BoolProperty, Kistl.App.GUI.Icon>(
                         lazyCtx,
                         new Guid("bb8fd69f-437a-45d5-a169-64c9586bfc1d"),
                         "TrueIcon",
                         null,
-                        obj => obj.TrueIcon,
-                        (obj, val) => obj.TrueIcon = val),
+                        obj => ((BoolPropertyEfImpl)obj).TrueIcon,
+                        (obj, val) => obj.TrueIcon = val,
+						obj => ((BoolPropertyEfImpl)obj).OnTrueIcon_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<BoolPropertyEfImpl, string>(
+                    new PropertyDescriptorEfImpl<BoolProperty, string>(
                         lazyCtx,
                         new Guid("f7da0495-3d3f-48c5-8fba-95a317ca7949"),
                         "TrueLabel",
                         null,
-                        obj => obj.TrueLabel,
-                        (obj, val) => obj.TrueLabel = val),
+                        obj => ((BoolPropertyEfImpl)obj).TrueLabel,
+                        (obj, val) => obj.TrueLabel = val,
+						obj => ((BoolPropertyEfImpl)obj).OnTrueLabel_IsValid), 
                     // position columns
                 };
             }

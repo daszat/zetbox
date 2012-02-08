@@ -141,6 +141,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.EnumerationProperty> OnEnumeration_IsValid;
+
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
@@ -502,13 +504,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<EnumerationPropertyEfImpl, Kistl.App.Base.Enumeration>(
+                    new PropertyDescriptorEfImpl<EnumerationProperty, Kistl.App.Base.Enumeration>(
                         lazyCtx,
                         new Guid("1144c061-3610-495f-b8b4-951058bb0c23"),
                         "Enumeration",
                         null,
-                        obj => obj.Enumeration,
-                        (obj, val) => obj.Enumeration = val),
+                        obj => ((EnumerationPropertyEfImpl)obj).Enumeration,
+                        (obj, val) => obj.Enumeration = val,
+						obj => ((EnumerationPropertyEfImpl)obj).OnEnumeration_IsValid), 
                     // position columns
                 };
             }

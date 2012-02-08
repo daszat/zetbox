@@ -156,6 +156,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.DataType> OnConstrained_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.DataType> OnConstrained_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnConstrained_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -226,6 +228,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnExportGuid_IsValid;
+
         /// <summary>
         /// The reason of this constraint
         /// </summary>
@@ -275,6 +279,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnReason_IsValid;
 
         /// <summary>
         /// 
@@ -475,29 +481,32 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<InstanceConstraintNHibernateImpl, Kistl.App.Base.DataType>(
+                    new PropertyDescriptorNHibernateImpl<InstanceConstraint, Kistl.App.Base.DataType>(
                         lazyCtx,
                         new Guid("d89723fc-1050-45a1-9b74-5575a677bc2b"),
                         "Constrained",
                         null,
-                        obj => obj.Constrained,
-                        (obj, val) => obj.Constrained = val),
+                        obj => ((InstanceConstraintNHibernateImpl)obj).Constrained,
+                        (obj, val) => obj.Constrained = val,
+						obj => ((InstanceConstraintNHibernateImpl)obj).OnConstrained_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<InstanceConstraintNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<InstanceConstraint, Guid>(
                         lazyCtx,
                         new Guid("8ef28076-900c-4294-920c-5d0d91e925bb"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((InstanceConstraintNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((InstanceConstraintNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<InstanceConstraintNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<InstanceConstraint, string>(
                         lazyCtx,
                         new Guid("83be7495-e0e0-48fc-872a-70de9c0f7a88"),
                         "Reason",
                         null,
-                        obj => obj.Reason,
-                        (obj, val) => obj.Reason = val),
+                        obj => ((InstanceConstraintNHibernateImpl)obj).Reason,
+                        (obj, val) => obj.Reason = val,
+						obj => ((InstanceConstraintNHibernateImpl)obj).OnReason_IsValid), 
                     // position columns
                 };
             }

@@ -91,6 +91,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentMonthDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentMonthDefault_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentMonthDefault_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -145,6 +147,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentQuaterDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentQuaterDefault_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentQuaterDefault_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -198,6 +202,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentYearDefault_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentYearDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentYearDefault_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.DateRangeFilterConfiguration> OnIsCurrentYearDefault_IsValid;
 
         /// <summary>
         /// 
@@ -368,29 +374,32 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<DateRangeFilterConfigurationEfImpl, bool?>(
+                    new PropertyDescriptorEfImpl<DateRangeFilterConfiguration, bool?>(
                         lazyCtx,
                         new Guid("c38eda0e-59b7-4e37-9d16-5f4fb7ae0b2d"),
                         "IsCurrentMonthDefault",
                         null,
-                        obj => obj.IsCurrentMonthDefault,
-                        (obj, val) => obj.IsCurrentMonthDefault = val),
+                        obj => ((DateRangeFilterConfigurationEfImpl)obj).IsCurrentMonthDefault,
+                        (obj, val) => obj.IsCurrentMonthDefault = val,
+						obj => ((DateRangeFilterConfigurationEfImpl)obj).OnIsCurrentMonthDefault_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<DateRangeFilterConfigurationEfImpl, bool?>(
+                    new PropertyDescriptorEfImpl<DateRangeFilterConfiguration, bool?>(
                         lazyCtx,
                         new Guid("edb97f39-355d-4a87-9aa1-ad9eccafb369"),
                         "IsCurrentQuaterDefault",
                         null,
-                        obj => obj.IsCurrentQuaterDefault,
-                        (obj, val) => obj.IsCurrentQuaterDefault = val),
+                        obj => ((DateRangeFilterConfigurationEfImpl)obj).IsCurrentQuaterDefault,
+                        (obj, val) => obj.IsCurrentQuaterDefault = val,
+						obj => ((DateRangeFilterConfigurationEfImpl)obj).OnIsCurrentQuaterDefault_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<DateRangeFilterConfigurationEfImpl, bool?>(
+                    new PropertyDescriptorEfImpl<DateRangeFilterConfiguration, bool?>(
                         lazyCtx,
                         new Guid("8f9bbaf8-4624-49d9-9b49-878142189cf7"),
                         "IsCurrentYearDefault",
                         null,
-                        obj => obj.IsCurrentYearDefault,
-                        (obj, val) => obj.IsCurrentYearDefault = val),
+                        obj => ((DateRangeFilterConfigurationEfImpl)obj).IsCurrentYearDefault,
+                        (obj, val) => obj.IsCurrentYearDefault = val,
+						obj => ((DateRangeFilterConfigurationEfImpl)obj).OnIsCurrentYearDefault_IsValid), 
                     // position columns
                 };
             }

@@ -91,6 +91,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringDefaultValue, string> OnDefaultValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StringDefaultValue, string> OnDefaultValue_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.StringDefaultValue> OnDefaultValue_IsValid;
+
         /// <summary>
         /// GetDefaultValue
         /// </summary>
@@ -196,13 +198,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<StringDefaultValueEfImpl, string>(
+                    new PropertyDescriptorEfImpl<StringDefaultValue, string>(
                         lazyCtx,
                         new Guid("88d7ba7d-6a5e-48b9-8464-c0308f6dabb6"),
                         "DefaultValue",
                         null,
-                        obj => obj.DefaultValue,
-                        (obj, val) => obj.DefaultValue = val),
+                        obj => ((StringDefaultValueEfImpl)obj).DefaultValue,
+                        (obj, val) => obj.DefaultValue = val,
+						obj => ((StringDefaultValueEfImpl)obj).OnDefaultValue_IsValid), 
                     // position columns
                 };
             }

@@ -95,6 +95,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.CurrentSchema> OnSchema_IsValid;
+
         /// <summary>
         /// Version number of this schema
         /// </summary>
@@ -145,6 +147,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.CurrentSchema> OnVersion_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(CurrentSchema);
@@ -191,21 +195,23 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<CurrentSchemaNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<CurrentSchema, string>(
                         lazyCtx,
                         new Guid("175143b9-dd09-4b49-a633-e9cdb508c4c5"),
                         "Schema",
                         null,
-                        obj => obj.Schema,
-                        (obj, val) => obj.Schema = val),
+                        obj => ((CurrentSchemaNHibernateImpl)obj).Schema,
+                        (obj, val) => obj.Schema = val,
+						obj => ((CurrentSchemaNHibernateImpl)obj).OnSchema_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<CurrentSchemaNHibernateImpl, int>(
+                    new PropertyDescriptorNHibernateImpl<CurrentSchema, int>(
                         lazyCtx,
                         new Guid("193c24c4-5a42-418e-8ed8-6e1689beca50"),
                         "Version",
                         null,
-                        obj => obj.Version,
-                        (obj, val) => obj.Version = val),
+                        obj => ((CurrentSchemaNHibernateImpl)obj).Version,
+                        (obj, val) => obj.Version = val,
+						obj => ((CurrentSchemaNHibernateImpl)obj).OnVersion_IsValid), 
                     // position columns
                 };
             }

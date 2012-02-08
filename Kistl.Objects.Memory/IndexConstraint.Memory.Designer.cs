@@ -98,6 +98,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IndexConstraint, bool> OnIsUnique_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.IndexConstraint, bool> OnIsUnique_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.IndexConstraint> OnIsUnique_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -120,6 +122,8 @@ namespace Kistl.App.Base
 		}
 
 		private ObservableBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>> _Properties;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.IndexConstraint> OnProperties_IsValid;
 
         /// <summary>
         /// 
@@ -289,21 +293,23 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<IndexConstraintMemoryImpl, bool>(
+                    new PropertyDescriptorMemoryImpl<IndexConstraint, bool>(
                         lazyCtx,
                         new Guid("2cc6e028-e01f-4879-bda8-78d459c0eaf4"),
                         "IsUnique",
                         null,
-                        obj => obj.IsUnique,
-                        (obj, val) => obj.IsUnique = val),
+                        obj => ((IndexConstraintMemoryImpl)obj).IsUnique,
+                        (obj, val) => obj.IsUnique = val,
+						obj => ((IndexConstraintMemoryImpl)obj).OnIsUnique_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<IndexConstraintMemoryImpl, ICollection<Kistl.App.Base.Property>>(
+                    new PropertyDescriptorMemoryImpl<IndexConstraint, ICollection<Kistl.App.Base.Property>>(
                         lazyCtx,
                         new Guid("3e4bfd37-1037-472b-a5d7-2c20a777e6fd"),
                         "Properties",
                         null,
                         obj => obj.Properties,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((IndexConstraintMemoryImpl)obj).OnProperties_IsValid), 
                     // position columns
                 };
             }

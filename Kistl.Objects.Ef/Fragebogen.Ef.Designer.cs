@@ -94,6 +94,8 @@ namespace Kistl.App.Test
 
 public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntworten_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Fragebogen> OnAntworten_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -148,6 +150,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Fragebogen, int?> OnBogenNummer_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Fragebogen, int?> OnBogenNummer_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Fragebogen> OnBogenNummer_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -196,6 +200,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         }
         private ASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Student;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Fragebogen> OnStudent_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(Fragebogen);
@@ -239,29 +245,32 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<FragebogenEfImpl, IList<Kistl.App.Test.Antwort>>(
+                    new PropertyDescriptorEfImpl<Fragebogen, IList<Kistl.App.Test.Antwort>>(
                         lazyCtx,
                         new Guid("e8f20c02-abea-4c91-850f-c321adfd46f0"),
                         "Antworten",
                         null,
                         obj => obj.Antworten,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((FragebogenEfImpl)obj).OnAntworten_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<FragebogenEfImpl, int?>(
+                    new PropertyDescriptorEfImpl<Fragebogen, int?>(
                         lazyCtx,
                         new Guid("b65f1a91-e063-4054-a2e7-d5dc0292e3fc"),
                         "BogenNummer",
                         null,
-                        obj => obj.BogenNummer,
-                        (obj, val) => obj.BogenNummer = val),
+                        obj => ((FragebogenEfImpl)obj).BogenNummer,
+                        (obj, val) => obj.BogenNummer = val,
+						obj => ((FragebogenEfImpl)obj).OnBogenNummer_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<FragebogenEfImpl, ICollection<Kistl.App.Test.TestStudent>>(
+                    new PropertyDescriptorEfImpl<Fragebogen, ICollection<Kistl.App.Test.TestStudent>>(
                         lazyCtx,
                         new Guid("3a91e745-0dd2-4f31-864e-eaf657ddb577"),
                         "Student",
                         null,
                         obj => obj.Student,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((FragebogenEfImpl)obj).OnStudent_IsValid), 
                     // position columns
                 };
             }

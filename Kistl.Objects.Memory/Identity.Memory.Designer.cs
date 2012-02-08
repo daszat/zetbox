@@ -85,6 +85,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnDisplayName_IsValid;
+
         /// <summary>
         /// Identites are member of groups
         /// </summary>
@@ -107,6 +109,8 @@ namespace Kistl.App.Base
 		}
 
 		private ObservableBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Groups;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnGroups_IsValid;
 
         /// <summary>
         /// Password of a generic identity
@@ -159,6 +163,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnPassword_IsValid;
+
         /// <summary>
         /// Username of a generic identity
         /// </summary>
@@ -210,6 +216,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Identity> OnUserName_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(Identity);
@@ -256,37 +264,41 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<IdentityMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<Identity, string>(
                         lazyCtx,
                         new Guid("f93e6dbb-a704-460c-8183-ce8b1c2c47a2"),
                         "DisplayName",
                         null,
-                        obj => obj.DisplayName,
-                        (obj, val) => obj.DisplayName = val),
+                        obj => ((IdentityMemoryImpl)obj).DisplayName,
+                        (obj, val) => obj.DisplayName = val,
+						obj => ((IdentityMemoryImpl)obj).OnDisplayName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<IdentityMemoryImpl, ICollection<Kistl.App.Base.Group>>(
+                    new PropertyDescriptorMemoryImpl<Identity, ICollection<Kistl.App.Base.Group>>(
                         lazyCtx,
                         new Guid("5f534204-f0d5-4d6f-8efa-7ff248580ba3"),
                         "Groups",
                         null,
                         obj => obj.Groups,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((IdentityMemoryImpl)obj).OnGroups_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<IdentityMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<Identity, string>(
                         lazyCtx,
                         new Guid("0d499610-99e3-42cc-b71b-49ed1a356355"),
                         "Password",
                         null,
-                        obj => obj.Password,
-                        (obj, val) => obj.Password = val),
+                        obj => ((IdentityMemoryImpl)obj).Password,
+                        (obj, val) => obj.Password = val,
+						obj => ((IdentityMemoryImpl)obj).OnPassword_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<IdentityMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<Identity, string>(
                         lazyCtx,
                         new Guid("a4ce1f5f-311b-4510-8817-4cca40f0bf0f"),
                         "UserName",
                         null,
-                        obj => obj.UserName,
-                        (obj, val) => obj.UserName = val),
+                        obj => ((IdentityMemoryImpl)obj).UserName,
+                        (obj, val) => obj.UserName = val,
+						obj => ((IdentityMemoryImpl)obj).OnUserName_IsValid), 
                     // position columns
                 };
             }

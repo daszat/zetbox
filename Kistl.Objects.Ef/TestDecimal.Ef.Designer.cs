@@ -91,6 +91,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnLarge_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnLarge_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnLarge_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -144,6 +146,8 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnNoScale_IsValid;
 
         /// <summary>
         /// 
@@ -199,6 +203,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnSmallDecimal_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnSmallDecimal_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestDecimal> OnSmallDecimal_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(TestDecimal);
@@ -244,29 +250,32 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<TestDecimalEfImpl, decimal?>(
+                    new PropertyDescriptorEfImpl<TestDecimal, decimal?>(
                         lazyCtx,
                         new Guid("14a1eeb9-26b1-4913-bae1-228edfd1c9de"),
                         "Large",
                         null,
-                        obj => obj.Large,
-                        (obj, val) => obj.Large = val),
+                        obj => ((TestDecimalEfImpl)obj).Large,
+                        (obj, val) => obj.Large = val,
+						obj => ((TestDecimalEfImpl)obj).OnLarge_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<TestDecimalEfImpl, decimal?>(
+                    new PropertyDescriptorEfImpl<TestDecimal, decimal?>(
                         lazyCtx,
                         new Guid("dbad0130-bfb8-4475-afb8-e26f1124395b"),
                         "NoScale",
                         null,
-                        obj => obj.NoScale,
-                        (obj, val) => obj.NoScale = val),
+                        obj => ((TestDecimalEfImpl)obj).NoScale,
+                        (obj, val) => obj.NoScale = val,
+						obj => ((TestDecimalEfImpl)obj).OnNoScale_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<TestDecimalEfImpl, decimal?>(
+                    new PropertyDescriptorEfImpl<TestDecimal, decimal?>(
                         lazyCtx,
                         new Guid("734795e4-4e0f-4175-b153-e465acafd609"),
                         "SmallDecimal",
                         null,
-                        obj => obj.SmallDecimal,
-                        (obj, val) => obj.SmallDecimal = val),
+                        obj => ((TestDecimalEfImpl)obj).SmallDecimal,
+                        (obj, val) => obj.SmallDecimal = val,
+						obj => ((TestDecimalEfImpl)obj).OnSmallDecimal_IsValid), 
                     // position columns
                 };
             }

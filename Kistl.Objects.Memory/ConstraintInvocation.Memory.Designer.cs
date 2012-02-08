@@ -98,6 +98,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ConstraintInvocation, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ConstraintInvocation, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnExportGuid_IsValid;
+
         /// <summary>
         /// The type implementing this invocation
         /// </summary>
@@ -188,6 +190,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ConstraintInvocation, Kistl.App.Base.TypeRef> OnImplementor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ConstraintInvocation, Kistl.App.Base.TypeRef> OnImplementor_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnImplementor_IsValid;
+
         /// <summary>
         /// Name des implementierenden Members
         /// </summary>
@@ -238,6 +242,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ConstraintInvocation, string> OnMemberName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ConstraintInvocation, string> OnMemberName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ConstraintInvocation, string> OnMemberName_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.ConstraintInvocation> OnMemberName_IsValid;
 
         /// <summary>
         /// 
@@ -437,29 +443,32 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<ConstraintInvocationMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<ConstraintInvocation, Guid>(
                         lazyCtx,
                         new Guid("06d4a536-d9c4-487f-9861-ac15429e42de"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((ConstraintInvocationMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((ConstraintInvocationMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<ConstraintInvocationMemoryImpl, Kistl.App.Base.TypeRef>(
+                    new PropertyDescriptorMemoryImpl<ConstraintInvocation, Kistl.App.Base.TypeRef>(
                         lazyCtx,
                         new Guid("4b8486d5-2c48-4485-9824-d0a4a8bbbbca"),
                         "Implementor",
                         null,
-                        obj => obj.Implementor,
-                        (obj, val) => obj.Implementor = val),
+                        obj => ((ConstraintInvocationMemoryImpl)obj).Implementor,
+                        (obj, val) => obj.Implementor = val,
+						obj => ((ConstraintInvocationMemoryImpl)obj).OnImplementor_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<ConstraintInvocationMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<ConstraintInvocation, string>(
                         lazyCtx,
                         new Guid("fd6ac977-3eab-4b2c-952a-2a1ad043b99a"),
                         "MemberName",
                         null,
-                        obj => obj.MemberName,
-                        (obj, val) => obj.MemberName = val),
+                        obj => ((ConstraintInvocationMemoryImpl)obj).MemberName,
+                        (obj, val) => obj.MemberName = val,
+						obj => ((ConstraintInvocationMemoryImpl)obj).OnMemberName_IsValid), 
                     // position columns
                 };
             }

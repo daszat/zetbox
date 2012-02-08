@@ -92,6 +92,8 @@ namespace Kistl.App.Base
 
 public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnAccessControlList_IsValid;
+
         /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
@@ -208,6 +210,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnBaseObjectClass_IsValid;
+
         /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
@@ -312,6 +316,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnDefaultViewModelDescriptor_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -367,6 +373,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
 
 public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnFilterConfigurations_IsValid;
+
         /// <summary>
         /// Class is abstract
         /// </summary>
@@ -420,6 +428,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnIsAbstract_IsValid;
 
         /// <summary>
         /// if true then all Instances appear in FozenContext.
@@ -475,6 +485,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnIsFrozenObject_IsValid;
+
         /// <summary>
         /// Setting this to true marks the instances of this class as &amp;quot;simple.&amp;quot; At first this will only mean that they&apos;ll be displayed inline.
         /// </summary>
@@ -528,6 +540,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnIsSimpleObject_IsValid;
 
         /// <summary>
         /// Liste der vererbten Klassen
@@ -584,6 +598,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 
 public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSubClasses_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnSubClasses_IsValid;
+
         /// <summary>
         /// Tabellenname in der Datenbank
         /// </summary>
@@ -637,6 +653,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnTableName_IsValid;
 
         /// <summary>
         /// Creates, if needed, all default  Methods
@@ -1201,77 +1219,86 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, ICollection<Kistl.App.Base.AccessControl>>(
+                    new PropertyDescriptorEfImpl<ObjectClass, ICollection<Kistl.App.Base.AccessControl>>(
                         lazyCtx,
                         new Guid("4514093c-0a1f-4644-b4a6-3389f1ca7aa8"),
                         "AccessControlList",
                         null,
                         obj => obj.AccessControlList,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((ObjectClassEfImpl)obj).OnAccessControlList_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, Kistl.App.Base.ObjectClass>(
+                    new PropertyDescriptorEfImpl<ObjectClass, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714"),
                         "BaseObjectClass",
                         null,
-                        obj => obj.BaseObjectClass,
-                        (obj, val) => obj.BaseObjectClass = val),
+                        obj => ((ObjectClassEfImpl)obj).BaseObjectClass,
+                        (obj, val) => obj.BaseObjectClass = val,
+						obj => ((ObjectClassEfImpl)obj).OnBaseObjectClass_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, Kistl.App.GUI.ViewModelDescriptor>(
+                    new PropertyDescriptorEfImpl<ObjectClass, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
                         new Guid("11adedb9-d32a-4da9-b986-0534e65df760"),
                         "DefaultViewModelDescriptor",
                         null,
-                        obj => obj.DefaultViewModelDescriptor,
-                        (obj, val) => obj.DefaultViewModelDescriptor = val),
+                        obj => ((ObjectClassEfImpl)obj).DefaultViewModelDescriptor,
+                        (obj, val) => obj.DefaultViewModelDescriptor = val,
+						obj => ((ObjectClassEfImpl)obj).OnDefaultViewModelDescriptor_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, ICollection<Kistl.App.GUI.ObjectClassFilterConfiguration>>(
+                    new PropertyDescriptorEfImpl<ObjectClass, ICollection<Kistl.App.GUI.ObjectClassFilterConfiguration>>(
                         lazyCtx,
                         new Guid("bd526c1f-a6ac-40b6-8f81-66aaf553129f"),
                         "FilterConfigurations",
                         null,
                         obj => obj.FilterConfigurations,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((ObjectClassEfImpl)obj).OnFilterConfigurations_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, bool>(
+                    new PropertyDescriptorEfImpl<ObjectClass, bool>(
                         lazyCtx,
                         new Guid("e9d1402e-3580-4084-8836-c44844683191"),
                         "IsAbstract",
                         null,
-                        obj => obj.IsAbstract,
-                        (obj, val) => obj.IsAbstract = val),
+                        obj => ((ObjectClassEfImpl)obj).IsAbstract,
+                        (obj, val) => obj.IsAbstract = val,
+						obj => ((ObjectClassEfImpl)obj).OnIsAbstract_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, bool>(
+                    new PropertyDescriptorEfImpl<ObjectClass, bool>(
                         lazyCtx,
                         new Guid("13c33710-ea02-4621-ad50-294a1f36b07d"),
                         "IsFrozenObject",
                         null,
-                        obj => obj.IsFrozenObject,
-                        (obj, val) => obj.IsFrozenObject = val),
+                        obj => ((ObjectClassEfImpl)obj).IsFrozenObject,
+                        (obj, val) => obj.IsFrozenObject = val,
+						obj => ((ObjectClassEfImpl)obj).OnIsFrozenObject_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, bool>(
+                    new PropertyDescriptorEfImpl<ObjectClass, bool>(
                         lazyCtx,
                         new Guid("edc853d3-0d02-4492-9159-c548c7713e9b"),
                         "IsSimpleObject",
                         null,
-                        obj => obj.IsSimpleObject,
-                        (obj, val) => obj.IsSimpleObject = val),
+                        obj => ((ObjectClassEfImpl)obj).IsSimpleObject,
+                        (obj, val) => obj.IsSimpleObject = val,
+						obj => ((ObjectClassEfImpl)obj).OnIsSimpleObject_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, ICollection<Kistl.App.Base.ObjectClass>>(
+                    new PropertyDescriptorEfImpl<ObjectClass, ICollection<Kistl.App.Base.ObjectClass>>(
                         lazyCtx,
                         new Guid("0914de6e-966c-46fc-9359-e4da6c3608b1"),
                         "SubClasses",
                         null,
                         obj => obj.SubClasses,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((ObjectClassEfImpl)obj).OnSubClasses_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ObjectClassEfImpl, string>(
+                    new PropertyDescriptorEfImpl<ObjectClass, string>(
                         lazyCtx,
                         new Guid("2a5e5111-199c-4dce-8369-ce35ee741568"),
                         "TableName",
                         null,
-                        obj => obj.TableName,
-                        (obj, val) => obj.TableName = val),
+                        obj => ((ObjectClassEfImpl)obj).TableName,
+                        (obj, val) => obj.TableName = val,
+						obj => ((ObjectClassEfImpl)obj).OnTableName_IsValid), 
                     // position columns
                 };
             }

@@ -140,6 +140,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.DataType> OnConstrained_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.DataType> OnConstrained_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnConstrained_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -204,6 +206,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnExportGuid_IsValid;
+
         /// <summary>
         /// The reason of this constraint
         /// </summary>
@@ -254,6 +258,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.InstanceConstraint> OnReason_IsValid;
 
         /// <summary>
         /// 
@@ -453,29 +459,32 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<InstanceConstraintMemoryImpl, Kistl.App.Base.DataType>(
+                    new PropertyDescriptorMemoryImpl<InstanceConstraint, Kistl.App.Base.DataType>(
                         lazyCtx,
                         new Guid("d89723fc-1050-45a1-9b74-5575a677bc2b"),
                         "Constrained",
                         null,
-                        obj => obj.Constrained,
-                        (obj, val) => obj.Constrained = val),
+                        obj => ((InstanceConstraintMemoryImpl)obj).Constrained,
+                        (obj, val) => obj.Constrained = val,
+						obj => ((InstanceConstraintMemoryImpl)obj).OnConstrained_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<InstanceConstraintMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<InstanceConstraint, Guid>(
                         lazyCtx,
                         new Guid("8ef28076-900c-4294-920c-5d0d91e925bb"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((InstanceConstraintMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((InstanceConstraintMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<InstanceConstraintMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<InstanceConstraint, string>(
                         lazyCtx,
                         new Guid("83be7495-e0e0-48fc-872a-70de9c0f7a88"),
                         "Reason",
                         null,
-                        obj => obj.Reason,
-                        (obj, val) => obj.Reason = val),
+                        obj => ((InstanceConstraintMemoryImpl)obj).Reason,
+                        (obj, val) => obj.Reason = val,
+						obj => ((InstanceConstraintMemoryImpl)obj).OnReason_IsValid), 
                     // position columns
                 };
             }

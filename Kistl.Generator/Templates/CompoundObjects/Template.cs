@@ -83,5 +83,10 @@ namespace Kistl.Generator.Templates.CompoundObjects
             base.ApplyClassTailTemplate();
             DefaultMethods.Call(Host, ctx, this.DataType);
         }
+
+        protected override void ApplyPropertyIsValidEvent(Property p)
+        {
+            // No CustomTypeDescriptor, no events
+        }
     }
 }

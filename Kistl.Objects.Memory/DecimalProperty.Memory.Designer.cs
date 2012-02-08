@@ -85,6 +85,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DecimalProperty, int> OnPrecision_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DecimalProperty, int> OnPrecision_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.DecimalProperty> OnPrecision_IsValid;
+
         /// <summary>
         /// The maximum number of decimal digits that can be stored to the right of the decimal point.
         /// </summary>
@@ -135,6 +137,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.DecimalProperty> OnScale_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -491,21 +495,23 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<DecimalPropertyMemoryImpl, int>(
+                    new PropertyDescriptorMemoryImpl<DecimalProperty, int>(
                         lazyCtx,
                         new Guid("35dd7765-0e26-4195-b687-ce814560ba34"),
                         "Precision",
                         null,
-                        obj => obj.Precision,
-                        (obj, val) => obj.Precision = val),
+                        obj => ((DecimalPropertyMemoryImpl)obj).Precision,
+                        (obj, val) => obj.Precision = val,
+						obj => ((DecimalPropertyMemoryImpl)obj).OnPrecision_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<DecimalPropertyMemoryImpl, int>(
+                    new PropertyDescriptorMemoryImpl<DecimalProperty, int>(
                         lazyCtx,
                         new Guid("fba03086-8a2b-4c25-b83f-df63933b62fe"),
                         "Scale",
                         null,
-                        obj => obj.Scale,
-                        (obj, val) => obj.Scale = val),
+                        obj => ((DecimalPropertyMemoryImpl)obj).Scale,
+                        (obj, val) => obj.Scale = val,
+						obj => ((DecimalPropertyMemoryImpl)obj).OnScale_IsValid), 
                     // position columns
                 };
             }

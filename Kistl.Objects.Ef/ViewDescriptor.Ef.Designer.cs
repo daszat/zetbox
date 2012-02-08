@@ -141,6 +141,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnControlKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnControlKind_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnControlKind_IsValid;
+
         /// <summary>
         /// The control implementing this View
         /// </summary>
@@ -245,6 +247,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnControlRef_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -311,6 +315,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -416,6 +422,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnModule_IsValid;
+
         /// <summary>
         /// A View supports one or more ViewModels
         /// </summary>
@@ -464,6 +472,8 @@ namespace Kistl.App.GUI
         }
         private BSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl, EntityCollection<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>> _SupportedViewModels;
         private bool SupportedViewModels_was_eagerLoaded = false;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;
 
         /// <summary>
         /// Which toolkit provides this View
@@ -533,6 +543,8 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.GUI.ViewDescriptor> OnToolkit_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -605,53 +617,59 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<ViewDescriptorEfImpl, Kistl.App.GUI.ControlKind>(
+                    new PropertyDescriptorEfImpl<ViewDescriptor, Kistl.App.GUI.ControlKind>(
                         lazyCtx,
                         new Guid("7720b38c-64af-4607-bc73-d015af6612e3"),
                         "ControlKind",
                         null,
-                        obj => obj.ControlKind,
-                        (obj, val) => obj.ControlKind = val),
+                        obj => ((ViewDescriptorEfImpl)obj).ControlKind,
+                        (obj, val) => obj.ControlKind = val,
+						obj => ((ViewDescriptorEfImpl)obj).OnControlKind_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ViewDescriptorEfImpl, Kistl.App.Base.TypeRef>(
+                    new PropertyDescriptorEfImpl<ViewDescriptor, Kistl.App.Base.TypeRef>(
                         lazyCtx,
                         new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3"),
                         "ControlRef",
                         null,
-                        obj => obj.ControlRef,
-                        (obj, val) => obj.ControlRef = val),
+                        obj => ((ViewDescriptorEfImpl)obj).ControlRef,
+                        (obj, val) => obj.ControlRef = val,
+						obj => ((ViewDescriptorEfImpl)obj).OnControlRef_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ViewDescriptorEfImpl, Guid>(
+                    new PropertyDescriptorEfImpl<ViewDescriptor, Guid>(
                         lazyCtx,
                         new Guid("94140a56-9fed-4d65-8c2c-cb8e658dff96"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((ViewDescriptorEfImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((ViewDescriptorEfImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ViewDescriptorEfImpl, Kistl.App.Base.Module>(
+                    new PropertyDescriptorEfImpl<ViewDescriptor, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("25da3568-f362-4441-841e-7c163b10b983"),
                         "Module",
                         null,
-                        obj => obj.Module,
-                        (obj, val) => obj.Module = val),
+                        obj => ((ViewDescriptorEfImpl)obj).Module,
+                        (obj, val) => obj.Module = val,
+						obj => ((ViewDescriptorEfImpl)obj).OnModule_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<ViewDescriptorEfImpl, ICollection<Kistl.App.Base.TypeRef>>(
+                    new PropertyDescriptorEfImpl<ViewDescriptor, ICollection<Kistl.App.Base.TypeRef>>(
                         lazyCtx,
                         new Guid("4698cfda-6b1d-4cd7-8350-630a1adab1a8"),
                         "SupportedViewModels",
                         null,
                         obj => obj.SupportedViewModels,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((ViewDescriptorEfImpl)obj).OnSupportedViewModels_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ViewDescriptorEfImpl, Kistl.App.GUI.Toolkit>(
+                    new PropertyDescriptorEfImpl<ViewDescriptor, Kistl.App.GUI.Toolkit>(
                         lazyCtx,
                         new Guid("2a798728-d79d-471f-be51-1f488beb8dc1"),
                         "Toolkit",
                         null,
-                        obj => obj.Toolkit,
-                        (obj, val) => obj.Toolkit = val),
+                        obj => ((ViewDescriptorEfImpl)obj).Toolkit,
+                        (obj, val) => obj.Toolkit = val,
+						obj => ((ViewDescriptorEfImpl)obj).OnToolkit_IsValid), 
                     // position columns
                 };
             }

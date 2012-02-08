@@ -123,6 +123,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AbstractModuleMember, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AbstractModuleMember, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.AbstractModuleMember> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -186,6 +188,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.AbstractModuleMember, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AbstractModuleMember, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AbstractModuleMember, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.AbstractModuleMember> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -276,6 +280,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AbstractModuleMember, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AbstractModuleMember, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.AbstractModuleMember> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -340,6 +346,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AbstractModuleMember, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AbstractModuleMember, DateTime> OnCreatedOn_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.AbstractModuleMember> OnCreatedOn_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -403,6 +411,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.AbstractModuleMember, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AbstractModuleMember, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AbstractModuleMember, Guid> OnExportGuid_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.AbstractModuleMember> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -493,6 +503,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.AbstractModuleMember, Kistl.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AbstractModuleMember, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AbstractModuleMember, Kistl.App.Base.Module> OnModule_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.AbstractModuleMember> OnModule_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -597,53 +609,59 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<AbstractModuleMemberMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<AbstractModuleMember, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("a8914567-8d6d-45d6-81a0-99b86f16da5b"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((AbstractModuleMemberMemoryImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((AbstractModuleMemberMemoryImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AbstractModuleMemberMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<AbstractModuleMember, DateTime>(
                         lazyCtx,
                         new Guid("e97d5203-ee5e-403e-aa96-2453150fea67"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((AbstractModuleMemberMemoryImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((AbstractModuleMemberMemoryImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AbstractModuleMemberMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<AbstractModuleMember, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("b157f222-4a23-4ef6-9454-68e87168d0dc"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((AbstractModuleMemberMemoryImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((AbstractModuleMemberMemoryImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AbstractModuleMemberMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<AbstractModuleMember, DateTime>(
                         lazyCtx,
                         new Guid("dd92e8c6-6a54-4f25-b8ca-3b7900c8ea71"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((AbstractModuleMemberMemoryImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((AbstractModuleMemberMemoryImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AbstractModuleMemberMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<AbstractModuleMember, Guid>(
                         lazyCtx,
                         new Guid("a81fffa3-a110-4a81-bc00-c7055b4f11fe"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((AbstractModuleMemberMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((AbstractModuleMemberMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<AbstractModuleMemberMemoryImpl, Kistl.App.Base.Module>(
+                    new PropertyDescriptorMemoryImpl<AbstractModuleMember, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("c0f5ea39-eb21-44d4-a59c-cf0e31e4543c"),
                         "Module",
                         null,
-                        obj => obj.Module,
-                        (obj, val) => obj.Module = val),
+                        obj => ((AbstractModuleMemberMemoryImpl)obj).Module,
+                        (obj, val) => obj.Module = val,
+						obj => ((AbstractModuleMemberMemoryImpl)obj).OnModule_IsValid), 
                     // position columns
                 };
             }

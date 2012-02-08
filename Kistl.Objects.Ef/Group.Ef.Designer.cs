@@ -104,6 +104,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Group, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Group, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Group> OnExportGuid_IsValid;
+
         /// <summary>
         /// Identities are member of this group
         /// </summary>
@@ -151,6 +153,8 @@ namespace Kistl.App.Base
             }
         }
         private ASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>> _Member;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.Group> OnMember_IsValid;
 
         /// <summary>
         /// Module is optional. Use it only when you need a Group to be exportable
@@ -256,6 +260,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Group, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Group, Kistl.App.Base.Module> OnModule_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Group> OnModule_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -309,6 +315,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Group, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Group, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Group, string> OnName_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.Group> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -426,37 +434,41 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<GroupEfImpl, Guid>(
+                    new PropertyDescriptorEfImpl<Group, Guid>(
                         lazyCtx,
                         new Guid("c776e87f-2b95-466e-848e-0ce195f4bd73"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((GroupEfImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((GroupEfImpl)obj).OnExportGuid_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<GroupEfImpl, ICollection<Kistl.App.Base.Identity>>(
+                    new PropertyDescriptorEfImpl<Group, ICollection<Kistl.App.Base.Identity>>(
                         lazyCtx,
                         new Guid("f60308a5-a502-4641-aa19-f895e701778c"),
                         "Member",
                         null,
                         obj => obj.Member,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((GroupEfImpl)obj).OnMember_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<GroupEfImpl, Kistl.App.Base.Module>(
+                    new PropertyDescriptorEfImpl<Group, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("8da2dab4-81c9-4659-9f25-c6b5177ba26d"),
                         "Module",
                         null,
-                        obj => obj.Module,
-                        (obj, val) => obj.Module = val),
+                        obj => ((GroupEfImpl)obj).Module,
+                        (obj, val) => obj.Module = val,
+						obj => ((GroupEfImpl)obj).OnModule_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<GroupEfImpl, string>(
+                    new PropertyDescriptorEfImpl<Group, string>(
                         lazyCtx,
                         new Guid("99c320b1-0003-4e2d-aa98-9a215d80988b"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((GroupEfImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((GroupEfImpl)obj).OnName_IsValid), 
                     // position columns
                 };
             }

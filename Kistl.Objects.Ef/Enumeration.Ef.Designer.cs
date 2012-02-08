@@ -91,6 +91,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Enumeration> OnAreFlags_IsValid;
+
         /// <summary>
         /// Einträge der Enumeration
         /// </summary>
@@ -145,6 +147,8 @@ namespace Kistl.App.Base
 
 
 public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.Enumeration> OnEnumerationEntries_IsValid;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -626,21 +630,23 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<EnumerationEfImpl, bool>(
+                    new PropertyDescriptorEfImpl<Enumeration, bool>(
                         lazyCtx,
                         new Guid("1ef92eea-d8b3-4f95-a694-9ca09ceff0e5"),
                         "AreFlags",
                         null,
-                        obj => obj.AreFlags,
-                        (obj, val) => obj.AreFlags = val),
+                        obj => ((EnumerationEfImpl)obj).AreFlags,
+                        (obj, val) => obj.AreFlags = val,
+						obj => ((EnumerationEfImpl)obj).OnAreFlags_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<EnumerationEfImpl, IList<Kistl.App.Base.EnumerationEntry>>(
+                    new PropertyDescriptorEfImpl<Enumeration, IList<Kistl.App.Base.EnumerationEntry>>(
                         lazyCtx,
                         new Guid("1619c8a7-b969-4c05-851c-7a2545cda484"),
                         "EnumerationEntries",
                         null,
                         obj => obj.EnumerationEntries,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((EnumerationEfImpl)obj).OnEnumerationEntries_IsValid), 
                     // position columns
                 };
             }

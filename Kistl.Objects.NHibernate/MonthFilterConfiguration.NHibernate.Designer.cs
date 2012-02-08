@@ -95,6 +95,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.MonthFilterConfiguration, bool?> OnIsCurrentMonthDefault_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.MonthFilterConfiguration, bool?> OnIsCurrentMonthDefault_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.MonthFilterConfiguration> OnIsCurrentMonthDefault_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -264,13 +266,14 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<MonthFilterConfigurationNHibernateImpl, bool?>(
+                    new PropertyDescriptorNHibernateImpl<MonthFilterConfiguration, bool?>(
                         lazyCtx,
                         new Guid("363661ad-85ce-4bc2-b249-c3cce65a1971"),
                         "IsCurrentMonthDefault",
                         null,
-                        obj => obj.IsCurrentMonthDefault,
-                        (obj, val) => obj.IsCurrentMonthDefault = val),
+                        obj => ((MonthFilterConfigurationNHibernateImpl)obj).IsCurrentMonthDefault,
+                        (obj, val) => obj.IsCurrentMonthDefault = val,
+						obj => ((MonthFilterConfigurationNHibernateImpl)obj).OnIsCurrentMonthDefault_IsValid), 
                     // position columns
                 };
             }

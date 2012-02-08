@@ -85,6 +85,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnDay_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnDay_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.FixedYearlyCalendarRule> OnDay_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -135,6 +137,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyGetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Calendar.FixedYearlyCalendarRule> OnMonth_IsValid;
 
         /// <summary>
         /// Checks if the Rule applies to the given date
@@ -243,21 +247,23 @@ namespace Kistl.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<FixedYearlyCalendarRuleMemoryImpl, int>(
+                    new PropertyDescriptorMemoryImpl<FixedYearlyCalendarRule, int>(
                         lazyCtx,
                         new Guid("7d16cd01-93ce-44d2-bb69-ac06f5b61aaf"),
                         "Day",
                         null,
-                        obj => obj.Day,
-                        (obj, val) => obj.Day = val),
+                        obj => ((FixedYearlyCalendarRuleMemoryImpl)obj).Day,
+                        (obj, val) => obj.Day = val,
+						obj => ((FixedYearlyCalendarRuleMemoryImpl)obj).OnDay_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<FixedYearlyCalendarRuleMemoryImpl, int>(
+                    new PropertyDescriptorMemoryImpl<FixedYearlyCalendarRule, int>(
                         lazyCtx,
                         new Guid("43be3542-1b21-4423-aeb4-f9e411b2453f"),
                         "Month",
                         null,
-                        obj => obj.Month,
-                        (obj, val) => obj.Month = val),
+                        obj => ((FixedYearlyCalendarRuleMemoryImpl)obj).Month,
+                        (obj, val) => obj.Month = val,
+						obj => ((FixedYearlyCalendarRuleMemoryImpl)obj).OnMonth_IsValid), 
                     // position columns
                 };
             }

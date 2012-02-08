@@ -91,6 +91,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.ANewObjectClass> OnTestString_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(ANewObjectClass);
@@ -134,13 +136,14 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<ANewObjectClassEfImpl, string>(
+                    new PropertyDescriptorEfImpl<ANewObjectClass, string>(
                         lazyCtx,
                         new Guid("e7371fa9-cd18-4cdc-91c3-a73c0984a019"),
                         "TestString",
                         null,
-                        obj => obj.TestString,
-                        (obj, val) => obj.TestString = val),
+                        obj => ((ANewObjectClassEfImpl)obj).TestString,
+                        (obj, val) => obj.TestString = val,
+						obj => ((ANewObjectClassEfImpl)obj).OnTestString_IsValid), 
                     // position columns
                 };
             }

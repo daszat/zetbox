@@ -91,6 +91,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Muhblah> OnTestBool_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -146,6 +148,8 @@ namespace Kistl.App.Test
 
 public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCustomObjects_List_Nav_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Muhblah> OnTestCustomObjects_List_Nav_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -193,6 +197,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             }
         }
         private BSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl, EntityCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>> _TestCustomObjects_ManyList_Nav;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.Muhblah> OnTestCustomObjects_ManyList_Nav_IsValid;
 
         /// <summary>
         /// 
@@ -309,6 +315,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Muhblah> OnTestCustomObjects_Nav_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -424,6 +432,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_One_Nav_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_One_Nav_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Muhblah> OnTestCustomObjects_One_Nav_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -477,6 +487,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.Muhblah> OnTestDateTime_IsValid;
 
         /// <summary>
         /// 
@@ -547,6 +559,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Muhblah> OnTestEnum_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -600,6 +614,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.Muhblah> OnTestString_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -659,69 +675,77 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<MuhblahEfImpl, bool?>(
+                    new PropertyDescriptorEfImpl<Muhblah, bool?>(
                         lazyCtx,
                         new Guid("9206e71e-85ea-4d74-85ea-59ee2484ed2a"),
                         "TestBool",
                         null,
-                        obj => obj.TestBool,
-                        (obj, val) => obj.TestBool = val),
+                        obj => ((MuhblahEfImpl)obj).TestBool,
+                        (obj, val) => obj.TestBool = val,
+						obj => ((MuhblahEfImpl)obj).OnTestBool_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<MuhblahEfImpl, ICollection<Kistl.App.Test.TestCustomObject>>(
+                    new PropertyDescriptorEfImpl<Muhblah, ICollection<Kistl.App.Test.TestCustomObject>>(
                         lazyCtx,
                         new Guid("1f944324-673f-4f14-94c8-dc570ea3022d"),
                         "TestCustomObjects_List_Nav",
                         null,
                         obj => obj.TestCustomObjects_List_Nav,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((MuhblahEfImpl)obj).OnTestCustomObjects_List_Nav_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<MuhblahEfImpl, ICollection<Kistl.App.Test.TestCustomObject>>(
+                    new PropertyDescriptorEfImpl<Muhblah, ICollection<Kistl.App.Test.TestCustomObject>>(
                         lazyCtx,
                         new Guid("a3ad7340-4dc1-488c-bc9a-29ac931b1f0d"),
                         "TestCustomObjects_ManyList_Nav",
                         null,
                         obj => obj.TestCustomObjects_ManyList_Nav,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((MuhblahEfImpl)obj).OnTestCustomObjects_ManyList_Nav_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MuhblahEfImpl, Kistl.App.Test.TestCustomObject>(
+                    new PropertyDescriptorEfImpl<Muhblah, Kistl.App.Test.TestCustomObject>(
                         lazyCtx,
                         new Guid("aabd7cb7-c45e-43c9-97fd-76e50c310ab3"),
                         "TestCustomObjects_Nav",
                         null,
-                        obj => obj.TestCustomObjects_Nav,
-                        (obj, val) => obj.TestCustomObjects_Nav = val),
+                        obj => ((MuhblahEfImpl)obj).TestCustomObjects_Nav,
+                        (obj, val) => obj.TestCustomObjects_Nav = val,
+						obj => ((MuhblahEfImpl)obj).OnTestCustomObjects_Nav_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MuhblahEfImpl, Kistl.App.Test.TestCustomObject>(
+                    new PropertyDescriptorEfImpl<Muhblah, Kistl.App.Test.TestCustomObject>(
                         lazyCtx,
                         new Guid("42c6bc2f-0428-488a-b928-539c4c6e3e65"),
                         "TestCustomObjects_One_Nav",
                         null,
-                        obj => obj.TestCustomObjects_One_Nav,
-                        (obj, val) => obj.TestCustomObjects_One_Nav = val),
+                        obj => ((MuhblahEfImpl)obj).TestCustomObjects_One_Nav,
+                        (obj, val) => obj.TestCustomObjects_One_Nav = val,
+						obj => ((MuhblahEfImpl)obj).OnTestCustomObjects_One_Nav_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MuhblahEfImpl, DateTime?>(
+                    new PropertyDescriptorEfImpl<Muhblah, DateTime?>(
                         lazyCtx,
                         new Guid("c5a66e0b-1fdb-45e4-b9e4-2ae4ee35a201"),
                         "TestDateTime",
                         null,
-                        obj => obj.TestDateTime,
-                        (obj, val) => obj.TestDateTime = val),
+                        obj => ((MuhblahEfImpl)obj).TestDateTime,
+                        (obj, val) => obj.TestDateTime = val,
+						obj => ((MuhblahEfImpl)obj).OnTestDateTime_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MuhblahEfImpl, Kistl.App.Test.TestEnum>(
+                    new PropertyDescriptorEfImpl<Muhblah, Kistl.App.Test.TestEnum>(
                         lazyCtx,
                         new Guid("1a5484e4-4be0-4641-9c25-1aa30d1c0e7a"),
                         "TestEnum",
                         null,
-                        obj => obj.TestEnum,
-                        (obj, val) => obj.TestEnum = val),
+                        obj => ((MuhblahEfImpl)obj).TestEnum,
+                        (obj, val) => obj.TestEnum = val,
+						obj => ((MuhblahEfImpl)obj).OnTestEnum_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MuhblahEfImpl, string>(
+                    new PropertyDescriptorEfImpl<Muhblah, string>(
                         lazyCtx,
                         new Guid("e9516350-fa66-426b-808a-bd8a5f432427"),
                         "TestString",
                         null,
-                        obj => obj.TestString,
-                        (obj, val) => obj.TestString = val),
+                        obj => ((MuhblahEfImpl)obj).TestString,
+                        (obj, val) => obj.TestString = val,
+						obj => ((MuhblahEfImpl)obj).OnTestString_IsValid), 
                     // position columns
                 };
             }

@@ -133,6 +133,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Blob> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -202,6 +204,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Blob, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.Blob> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -288,6 +292,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Blob> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -357,6 +363,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Blob, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, DateTime> OnCreatedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.Blob> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -428,6 +436,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Blob> OnExportGuid_IsValid;
+
         /// <summary>
         /// MimeType of this Blob
         /// </summary>
@@ -477,6 +487,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Blob, string> OnMimeType_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnMimeType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, string> OnMimeType_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.Blob> OnMimeType_IsValid;
 
         /// <summary>
         /// Original file name of this blob
@@ -528,6 +540,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnOriginalName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, string> OnOriginalName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.Blob> OnOriginalName_IsValid;
+
         /// <summary>
         /// Relative Path + Filename to the client/server document storage location. Readonly on client side.
         /// </summary>
@@ -577,6 +591,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Blob, string> OnStoragePath_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnStoragePath_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, string> OnStoragePath_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.Blob> OnStoragePath_IsValid;
 
         /// <summary>
         /// Returnes the document stream
@@ -792,69 +808,77 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<BlobNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<Blob, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("ba5667b5-4306-42cb-8833-45932490ffe0"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((BlobNHibernateImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((BlobNHibernateImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<BlobNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<Blob, DateTime>(
                         lazyCtx,
                         new Guid("bd06a19d-16a6-4234-a1cd-79d09e317d92"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((BlobNHibernateImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((BlobNHibernateImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<BlobNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<Blob, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("1125d9cf-dcc5-4e70-9a3b-308b2f84ddb6"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((BlobNHibernateImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((BlobNHibernateImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<BlobNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<Blob, DateTime>(
                         lazyCtx,
                         new Guid("9cc23a89-9bc3-4feb-bc56-82c696be80ba"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((BlobNHibernateImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((BlobNHibernateImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<BlobNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<Blob, Guid>(
                         lazyCtx,
                         new Guid("0e39b312-faa7-4ee4-92a4-41773ccbd394"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((BlobNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((BlobNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<BlobNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<Blob, string>(
                         lazyCtx,
                         new Guid("182a7118-5123-4d5f-b623-205e38573e8e"),
                         "MimeType",
                         null,
-                        obj => obj.MimeType,
-                        (obj, val) => obj.MimeType = val),
+                        obj => ((BlobNHibernateImpl)obj).MimeType,
+                        (obj, val) => obj.MimeType = val,
+						obj => ((BlobNHibernateImpl)obj).OnMimeType_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<BlobNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<Blob, string>(
                         lazyCtx,
                         new Guid("c1f449e2-9532-4093-8667-6ba5f7372892"),
                         "OriginalName",
                         null,
-                        obj => obj.OriginalName,
-                        (obj, val) => obj.OriginalName = val),
+                        obj => ((BlobNHibernateImpl)obj).OriginalName,
+                        (obj, val) => obj.OriginalName = val,
+						obj => ((BlobNHibernateImpl)obj).OnOriginalName_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<BlobNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<Blob, string>(
                         lazyCtx,
                         new Guid("bd8eaefd-0684-4c05-a6b5-6f4d97017e6c"),
                         "StoragePath",
                         null,
-                        obj => obj.StoragePath,
-                        (obj, val) => obj.StoragePath = val),
+                        obj => ((BlobNHibernateImpl)obj).StoragePath,
+                        (obj, val) => obj.StoragePath = val,
+						obj => ((BlobNHibernateImpl)obj).OnStoragePath_IsValid), 
                     // position columns
                 };
             }

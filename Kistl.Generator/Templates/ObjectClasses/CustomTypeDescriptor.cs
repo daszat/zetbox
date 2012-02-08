@@ -11,12 +11,12 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
     public partial class CustomTypeDescriptor
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ObjectClass cls, string implName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ObjectClass cls, string ifName, string implName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             string propertyDescriptorName = host.Settings["propertydescriptorname"];
-            host.CallTemplate("ObjectClasses.CustomTypeDescriptor", ctx, cls, implName, propertyDescriptorName);
+            host.CallTemplate("ObjectClasses.CustomTypeDescriptor", ctx, cls, ifName, implName, propertyDescriptorName);
         }
     }
 }

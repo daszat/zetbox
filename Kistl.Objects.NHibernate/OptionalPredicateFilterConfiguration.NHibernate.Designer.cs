@@ -95,6 +95,8 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration, string> OnPredicate_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration, string> OnPredicate_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration> OnPredicate_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -264,13 +266,14 @@ namespace Kistl.App.GUI
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<OptionalPredicateFilterConfigurationNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<OptionalPredicateFilterConfiguration, string>(
                         lazyCtx,
                         new Guid("bcc5a62f-9401-4b88-9cd9-2b33be6fa81a"),
                         "Predicate",
                         null,
-                        obj => obj.Predicate,
-                        (obj, val) => obj.Predicate = val),
+                        obj => ((OptionalPredicateFilterConfigurationNHibernateImpl)obj).Predicate,
+                        (obj, val) => obj.Predicate = val,
+						obj => ((OptionalPredicateFilterConfigurationNHibernateImpl)obj).OnPredicate_IsValid), 
                     // position columns
                 };
             }

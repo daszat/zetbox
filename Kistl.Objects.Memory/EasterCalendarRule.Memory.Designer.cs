@@ -85,6 +85,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.EasterCalendarRule, int?> OnOffset_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.EasterCalendarRule, int?> OnOffset_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.EasterCalendarRule> OnOffset_IsValid;
+
         /// <summary>
         /// Checks if the Rule applies to the given date
         /// </summary>
@@ -191,13 +193,14 @@ namespace Kistl.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<EasterCalendarRuleMemoryImpl, int?>(
+                    new PropertyDescriptorMemoryImpl<EasterCalendarRule, int?>(
                         lazyCtx,
                         new Guid("0fdcab86-001e-429d-af31-a5d0df5e6c75"),
                         "Offset",
                         null,
-                        obj => obj.Offset,
-                        (obj, val) => obj.Offset = val),
+                        obj => ((EasterCalendarRuleMemoryImpl)obj).Offset,
+                        (obj, val) => obj.Offset = val,
+						obj => ((EasterCalendarRuleMemoryImpl)obj).OnOffset_IsValid), 
                     // position columns
                 };
             }

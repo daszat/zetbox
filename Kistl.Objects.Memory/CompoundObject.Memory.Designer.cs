@@ -124,6 +124,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObject, Kistl.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObject, Kistl.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObject> OnDefaultPropertyViewModelDescriptor_IsValid;
+
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
@@ -379,13 +381,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<CompoundObjectMemoryImpl, Kistl.App.GUI.ViewModelDescriptor>(
+                    new PropertyDescriptorMemoryImpl<CompoundObject, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
                         new Guid("908757d2-053b-40c5-89f8-9e5f79b5fe83"),
                         "DefaultPropertyViewModelDescriptor",
                         null,
-                        obj => obj.DefaultPropertyViewModelDescriptor,
-                        (obj, val) => obj.DefaultPropertyViewModelDescriptor = val),
+                        obj => ((CompoundObjectMemoryImpl)obj).DefaultPropertyViewModelDescriptor,
+                        (obj, val) => obj.DefaultPropertyViewModelDescriptor = val,
+						obj => ((CompoundObjectMemoryImpl)obj).OnDefaultPropertyViewModelDescriptor_IsValid), 
                     // position columns
                 };
             }

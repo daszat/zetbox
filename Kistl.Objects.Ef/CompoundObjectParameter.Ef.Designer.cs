@@ -141,6 +141,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectParameter, Kistl.App.Base.CompoundObject> OnCompoundObject_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectParameter, Kistl.App.Base.CompoundObject> OnCompoundObject_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.CompoundObjectParameter> OnCompoundObject_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -378,13 +380,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<CompoundObjectParameterEfImpl, Kistl.App.Base.CompoundObject>(
+                    new PropertyDescriptorEfImpl<CompoundObjectParameter, Kistl.App.Base.CompoundObject>(
                         lazyCtx,
                         new Guid("43d03fec-b595-46d0-b5d5-cf4c5d21fda7"),
                         "CompoundObject",
                         null,
-                        obj => obj.CompoundObject,
-                        (obj, val) => obj.CompoundObject = val),
+                        obj => ((CompoundObjectParameterEfImpl)obj).CompoundObject,
+                        (obj, val) => obj.CompoundObject = val,
+						obj => ((CompoundObjectParameterEfImpl)obj).OnCompoundObject_IsValid), 
                     // position columns
                 };
             }

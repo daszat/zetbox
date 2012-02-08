@@ -106,6 +106,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.DayOfWeekCalendarRule, Kistl.App.Base.DayOfWeek> OnDayOfWeek_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.DayOfWeekCalendarRule, Kistl.App.Base.DayOfWeek> OnDayOfWeek_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.DayOfWeekCalendarRule> OnDayOfWeek_IsValid;
+
         /// <summary>
         /// Checks if the Rule applies to the given date
         /// </summary>
@@ -211,13 +213,14 @@ namespace Kistl.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<DayOfWeekCalendarRuleEfImpl, Kistl.App.Base.DayOfWeek>(
+                    new PropertyDescriptorEfImpl<DayOfWeekCalendarRule, Kistl.App.Base.DayOfWeek>(
                         lazyCtx,
                         new Guid("8755ff98-63d1-4a74-b0e3-da08a81f7f4e"),
                         "DayOfWeek",
                         null,
-                        obj => obj.DayOfWeek,
-                        (obj, val) => obj.DayOfWeek = val),
+                        obj => ((DayOfWeekCalendarRuleEfImpl)obj).DayOfWeek,
+                        (obj, val) => obj.DayOfWeek = val,
+						obj => ((DayOfWeekCalendarRuleEfImpl)obj).OnDayOfWeek_IsValid), 
                     // position columns
                 };
             }

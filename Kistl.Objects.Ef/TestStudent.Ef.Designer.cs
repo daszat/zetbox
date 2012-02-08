@@ -91,6 +91,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestStudent, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestStudent, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnName_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -139,6 +141,8 @@ namespace Kistl.App.Test
         }
         private BSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Testbogen;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnTestbogen_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(TestStudent);
@@ -182,21 +186,23 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<TestStudentEfImpl, string>(
+                    new PropertyDescriptorEfImpl<TestStudent, string>(
                         lazyCtx,
                         new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((TestStudentEfImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((TestStudentEfImpl)obj).OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<TestStudentEfImpl, ICollection<Kistl.App.Test.Fragebogen>>(
+                    new PropertyDescriptorEfImpl<TestStudent, ICollection<Kistl.App.Test.Fragebogen>>(
                         lazyCtx,
                         new Guid("f330d95b-372d-4302-b4d1-73afc5fa71de"),
                         "Testbogen",
                         null,
                         obj => obj.Testbogen,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((TestStudentEfImpl)obj).OnTestbogen_IsValid), 
                     // position columns
                 };
             }

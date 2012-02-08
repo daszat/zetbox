@@ -12,6 +12,7 @@
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
+<%@ Parameter Name="ifName" Type="string" %>
 <%@ Parameter Name="implName" Type="string" %>
 <%@ Parameter Name="propertyDescriptorName" Type="string" %>
         #region <%= this.GetType() %>
@@ -46,35 +47,39 @@
             {
 %>
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.GetPropertyTypeString() %>>(
+                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString() %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",
                         null,
                         obj => obj.<%= propertyName %>,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((<%= implName %>)obj).On<%= propertyName %>_IsValid), 
 <%          } else if (property is CalculatedObjectReferenceProperty) { %>
                     // property is CalculatedObjectReferenceProperty
-                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.GetPropertyTypeString() %>>(
+                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString() %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",
                         null,
                         obj => obj.<%= propertyName %>,
-                        null), // CalculatedObjectReferenceProperty is a read-only property
+                        null, // CalculatedObjectReferenceProperty is a read-only property
+						obj => ((<%= implName %>)obj).On<%= propertyName %>_IsValid),  
 <%          } else { %>
 <%              var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; %>
                     // else
-                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.GetPropertyTypeString() %>>(
+                    new <%= propertyDescriptorName %><<%= ifName %>, <%= property.GetPropertyTypeString() %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",
                         null,
-                        obj => obj.<%= propertyName %>,
+                        obj => ((<%= implName %>)obj).<%= propertyName %>,
 <%              if(isReadonly) { %>
-                        null), // calculated property
+                        null, // calculated property
+						obj => ((<%= implName %>)obj).On<%= propertyName %>_IsValid), 
 <%              } else { %>
-                        (obj, val) => obj.<%= propertyName %> = val),
+                        (obj, val) => obj.<%= propertyName %> = val,
+						obj => ((<%= implName %>)obj).On<%= propertyName %>_IsValid), 
 <%              } %>
 <%          } %>
 <%      } %>
@@ -105,7 +110,8 @@
                         "<%= posColumnName %>",
                         null,
                         obj => obj.<%= posColumnName %>,
-                        (obj, val) => obj.<%= posColumnName %> = val),
+                        (obj, val) => obj.<%= posColumnName %> = val,
+						null),
 <%
                 }
 
@@ -120,7 +126,8 @@
                         "<%= posColumnName %>",
                         null,
                         obj => obj.<%= posColumnName %>,
-                        (obj, val) => obj.<%= posColumnName %> = val),
+                        (obj, val) => obj.<%= posColumnName %> = val,
+						null),
 <%
                 }
             }

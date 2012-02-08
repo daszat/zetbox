@@ -135,6 +135,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnBlob_IsValid;
+
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -220,6 +222,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -289,6 +293,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -375,6 +381,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -444,6 +452,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PostSetter;
+
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -515,6 +525,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExportGuid_IsValid;
+
         /// <summary>
         /// Filename
         /// </summary>
@@ -564,6 +576,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PostSetter;
+
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
 
         /// <summary>
         /// Handles the change of the current blob
@@ -857,61 +871,68 @@ namespace at.dasz.DocumentManagement
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<FileNHibernateImpl, Kistl.App.Base.Blob>(
+                    new PropertyDescriptorNHibernateImpl<File, Kistl.App.Base.Blob>(
                         lazyCtx,
                         new Guid("ef5addda-340f-4a87-83c9-3ee419519343"),
                         "Blob",
                         null,
-                        obj => obj.Blob,
-                        (obj, val) => obj.Blob = val),
+                        obj => ((FileNHibernateImpl)obj).Blob,
+                        (obj, val) => obj.Blob = val,
+						obj => ((FileNHibernateImpl)obj).OnBlob_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FileNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<File, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c22516f3-b897-4827-a025-27d1515aadcd"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((FileNHibernateImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((FileNHibernateImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FileNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<File, DateTime>(
                         lazyCtx,
                         new Guid("c144678d-632d-4a83-8041-280d674f4453"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((FileNHibernateImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((FileNHibernateImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FileNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<File, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("dc8da15a-a432-43fd-b93f-9b3530ce3144"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((FileNHibernateImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((FileNHibernateImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FileNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<File, DateTime>(
                         lazyCtx,
                         new Guid("e1892507-375b-4b52-ab20-16095dfc3514"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((FileNHibernateImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((FileNHibernateImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FileNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<File, Guid>(
                         lazyCtx,
                         new Guid("91566b41-879d-4e72-b48b-9677cc156649"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((FileNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((FileNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FileNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<File, string>(
                         lazyCtx,
                         new Guid("1c5f2bea-9915-4634-8ff9-5fd6f0871704"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((FileNHibernateImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((FileNHibernateImpl)obj).OnName_IsValid), 
                     // position columns
                 };
             }

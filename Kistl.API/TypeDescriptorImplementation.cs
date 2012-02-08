@@ -1,6 +1,7 @@
 namespace Kistl.API
 {
     using System;
+    using System.Linq;
     using System.ComponentModel;
     using System.Collections.Generic;
 
@@ -13,14 +14,19 @@ namespace Kistl.API
     public class BaseCustomPropertyDescriptor<TComponent, TProperty>
         : PropertyDescriptor, IValidatingPropertyDescriptor
     {
+        protected static readonly string[] NoErrors = new string[] { };
+
         protected readonly Func<TComponent, TProperty> getter;
         protected readonly Action<TComponent, TProperty> setter;
+
+        protected readonly Func<TComponent, PropertyIsValidHandler<TComponent>> isValid;
 
         public BaseCustomPropertyDescriptor(
             string name,
             Attribute[] attrs,
             Func<TComponent, TProperty> getter,
-            Action<TComponent, TProperty> setter)
+            Action<TComponent, TProperty> setter,
+            Func<TComponent, PropertyIsValidHandler<TComponent>> isValid)
             : base(name, attrs)
         {
             if (getter == null) { throw new ArgumentNullException("getter"); }
@@ -28,6 +34,7 @@ namespace Kistl.API
 
             this.getter = getter;
             this.setter = setter;
+            this.isValid = isValid;
         }
 
         public override bool CanResetValue(object component)
@@ -83,6 +90,26 @@ namespace Kistl.API
         }
 
         #endregion
+
+        protected string[] TryExecuteIsValidEvent(TComponent self)
+        {
+            if (isValid != null)
+            {
+                var args = new PropertyIsValidEventArgs();
+                var e = isValid(self);
+                if (e != null)
+                {
+                    e(self, args);
+                }
+                return new[] { args }
+                    .Where(i => !i.IsValid)
+                    .Select(i => i.Error).ToArray();
+            }
+            else
+            {
+                return NoErrors;
+            }
+        }
     }
 
     public class CustomEventDescriptor<TComponent>

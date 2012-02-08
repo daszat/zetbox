@@ -81,6 +81,8 @@ namespace Kistl.App.Projekte
         private OneNRelationList<Kistl.App.Projekte.Auftrag> _Auftraege;
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAuftraege_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -130,6 +132,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAufwandGes_IsValid;
 
         /// <summary>
         /// Identity which changed this object
@@ -216,6 +220,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -285,6 +291,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -371,6 +379,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -440,6 +450,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnCreatedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -511,6 +523,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnExportGuid_IsValid;
+
         /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
@@ -561,6 +575,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, string> OnKundenname_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, string> OnKundenname_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnKundenname_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -589,6 +605,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		private NHibernateBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Mitarbeiter;
 		// ignored, but required for Serialization
         private bool Mitarbeiter_was_eagerLoaded = false;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnMitarbeiter_IsValid;
 
         /// <summary>
         /// Projektname
@@ -640,6 +658,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnName_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -672,6 +692,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
     
         private OneNRelationList<Kistl.App.Projekte.Task> _Tasks;
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTasks_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnTasks_IsValid;
 
         /// <summary>
         /// 
@@ -825,93 +847,104 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, ICollection<Kistl.App.Projekte.Auftrag>>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, ICollection<Kistl.App.Projekte.Auftrag>>(
                         lazyCtx,
                         new Guid("30a1d8b6-4db5-45a0-a9a8-531472a9107e"),
                         "Auftraege",
                         null,
                         obj => obj.Auftraege,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((ProjektNHibernateImpl)obj).OnAuftraege_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, double?>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, double?>(
                         lazyCtx,
                         new Guid("a26cec7d-1e5c-44f5-9c56-92af595739eb"),
                         "AufwandGes",
                         null,
-                        obj => obj.AufwandGes,
-                        (obj, val) => obj.AufwandGes = val),
+                        obj => ((ProjektNHibernateImpl)obj).AufwandGes,
+                        (obj, val) => obj.AufwandGes = val,
+						obj => ((ProjektNHibernateImpl)obj).OnAufwandGes_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("2fe9d894-c359-412f-b787-d3ed3a26a0a2"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((ProjektNHibernateImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((ProjektNHibernateImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, DateTime>(
                         lazyCtx,
                         new Guid("d1f821b0-5991-44a7-9c4d-8be66834ea9c"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((ProjektNHibernateImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((ProjektNHibernateImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("fbe34f93-21ec-470a-b9d4-6e4664729466"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((ProjektNHibernateImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((ProjektNHibernateImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, DateTime>(
                         lazyCtx,
                         new Guid("7119febf-e750-411f-a4f2-5a2181e45dc7"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((ProjektNHibernateImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((ProjektNHibernateImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, Guid>(
                         lazyCtx,
                         new Guid("df36d615-9f6e-4075-ae1c-8c5cd8a4ef91"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((ProjektNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((ProjektNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, string>(
                         lazyCtx,
                         new Guid("cd6be045-d1bd-4086-b848-c83249f5ca9b"),
                         "Kundenname",
                         null,
-                        obj => obj.Kundenname,
-                        (obj, val) => obj.Kundenname = val),
+                        obj => ((ProjektNHibernateImpl)obj).Kundenname,
+                        (obj, val) => obj.Kundenname = val,
+						obj => ((ProjektNHibernateImpl)obj).OnKundenname_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, IList<Kistl.App.Projekte.Mitarbeiter>>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, IList<Kistl.App.Projekte.Mitarbeiter>>(
                         lazyCtx,
                         new Guid("3e60fe29-ac50-4232-bbeb-af023ede02f6"),
                         "Mitarbeiter",
                         null,
                         obj => obj.Mitarbeiter,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((ProjektNHibernateImpl)obj).OnMitarbeiter_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, string>(
                         lazyCtx,
                         new Guid("b5482479-fd14-4990-86f4-49872e2eeeb8"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((ProjektNHibernateImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((ProjektNHibernateImpl)obj).OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<ProjektNHibernateImpl, ICollection<Kistl.App.Projekte.Task>>(
+                    new PropertyDescriptorNHibernateImpl<Projekt, ICollection<Kistl.App.Projekte.Task>>(
                         lazyCtx,
                         new Guid("f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f"),
                         "Tasks",
                         null,
                         obj => obj.Tasks,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((ProjektNHibernateImpl)obj).OnTasks_IsValid), 
                     // position columns
                 };
             }

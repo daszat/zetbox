@@ -85,6 +85,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.StringRangeConstraint> OnMaxLength_IsValid;
+
         /// <summary>
         /// The minimal length of this StringProperty
         /// </summary>
@@ -135,6 +137,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.StringRangeConstraint> OnMinLength_IsValid;
 
         /// <summary>
         /// 
@@ -305,21 +309,23 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<StringRangeConstraintMemoryImpl, int?>(
+                    new PropertyDescriptorMemoryImpl<StringRangeConstraint, int?>(
                         lazyCtx,
                         new Guid("17aa679d-72d0-480e-9bd9-b37f4eba1d68"),
                         "MaxLength",
                         null,
-                        obj => obj.MaxLength,
-                        (obj, val) => obj.MaxLength = val),
+                        obj => ((StringRangeConstraintMemoryImpl)obj).MaxLength,
+                        (obj, val) => obj.MaxLength = val,
+						obj => ((StringRangeConstraintMemoryImpl)obj).OnMaxLength_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<StringRangeConstraintMemoryImpl, int>(
+                    new PropertyDescriptorMemoryImpl<StringRangeConstraint, int>(
                         lazyCtx,
                         new Guid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6"),
                         "MinLength",
                         null,
-                        obj => obj.MinLength,
-                        (obj, val) => obj.MinLength = val),
+                        obj => ((StringRangeConstraintMemoryImpl)obj).MinLength,
+                        (obj, val) => obj.MinLength = val,
+						obj => ((StringRangeConstraintMemoryImpl)obj).OnMinLength_IsValid), 
                     // position columns
                 };
             }

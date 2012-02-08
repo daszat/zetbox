@@ -148,7 +148,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
             base.ApplyClassTailTemplate();
             ApplyUpdateParentTemplate();
             ReloadReferences.Call(Host, ctx, this.DataType);
-            CustomTypeDescriptor.Call(Host, ctx, this.ObjectClass, this.GetTypeName());
+            CustomTypeDescriptor.Call(Host, ctx, this.ObjectClass, DataType.Name, GetTypeName());
             DefaultMethods.Call(Host, ctx, this.DataType);
         }
 

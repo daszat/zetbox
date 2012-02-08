@@ -86,6 +86,8 @@ namespace Kistl.App.Base
         private BSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>> _Inputs;
         private bool Inputs_was_eagerLoaded = false;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.CalculatedObjectReferenceProperty> OnInputs_IsValid;
+
         /// <summary>
         /// the referenced class of objects
         /// </summary>
@@ -189,6 +191,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.CalculatedObjectReferenceProperty> OnReferencedClass_IsValid;
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -551,21 +555,23 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<CalculatedObjectReferencePropertyEfImpl, ICollection<Kistl.App.Base.Property>>(
+                    new PropertyDescriptorEfImpl<CalculatedObjectReferenceProperty, ICollection<Kistl.App.Base.Property>>(
                         lazyCtx,
                         new Guid("bfda6511-087d-4381-9780-1f76f3abcffe"),
                         "Inputs",
                         null,
                         obj => obj.Inputs,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((CalculatedObjectReferencePropertyEfImpl)obj).OnInputs_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalculatedObjectReferencePropertyEfImpl, Kistl.App.Base.ObjectClass>(
+                    new PropertyDescriptorEfImpl<CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("cd62d769-0752-4a72-832f-5935ece1198b"),
                         "ReferencedClass",
                         null,
-                        obj => obj.ReferencedClass,
-                        (obj, val) => obj.ReferencedClass = val),
+                        obj => ((CalculatedObjectReferencePropertyEfImpl)obj).ReferencedClass,
+                        (obj, val) => obj.ReferencedClass = val,
+						obj => ((CalculatedObjectReferencePropertyEfImpl)obj).OnReferencedClass_IsValid), 
                     // position columns
                 };
             }

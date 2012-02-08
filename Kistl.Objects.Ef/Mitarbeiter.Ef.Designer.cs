@@ -140,6 +140,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -206,6 +208,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -310,6 +314,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -376,6 +382,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnCreatedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -444,6 +452,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnExportGuid_IsValid;
+
         /// <summary>
         /// Herzlichen Glückwunsch zum Geburtstag
         /// </summary>
@@ -497,6 +507,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnGeburtstag_IsValid;
 
         /// <summary>
         /// 
@@ -601,6 +613,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnIdentity_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnIdentity_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnIdentity_IsValid;
+
         /// <summary>
         /// Vorname Nachname
         /// </summary>
@@ -655,6 +669,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnName_IsValid;
+
         /// <summary>
         /// Projekte des/der Mitarbeiters/Mitarbeiterin für die er/sie Verantwortlich ist
         /// </summary>
@@ -702,6 +718,8 @@ namespace Kistl.App.Projekte
             }
         }
         private ASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> _Projekte;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnProjekte_IsValid;
 
         /// <summary>
         /// NNNN TTMMYY
@@ -757,6 +775,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnSVNr_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnSVNr_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnSVNr_IsValid;
+
         /// <summary>
         /// +43 123 12345678
         /// </summary>
@@ -810,6 +830,8 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnTelefonNummer_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnTelefonNummer_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnTelefonNummer_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Projekte.Mitarbeiter> OnTelefonNummer_IsValid;
 
         /// <summary>
         /// 
@@ -941,93 +963,104 @@ namespace Kistl.App.Projekte
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("08945d72-d667-40b0-9993-05f2d8df0d0f"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((MitarbeiterEfImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((MitarbeiterEfImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, DateTime>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, DateTime>(
                         lazyCtx,
                         new Guid("45650670-a031-4f4b-8ac9-adb825b3a255"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((MitarbeiterEfImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((MitarbeiterEfImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("4d49fec0-85be-4302-b88b-57005b0a9dd7"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((MitarbeiterEfImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((MitarbeiterEfImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, DateTime>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, DateTime>(
                         lazyCtx,
                         new Guid("ced272ca-9998-49a9-8056-b1efe012909c"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((MitarbeiterEfImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((MitarbeiterEfImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, Guid>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, Guid>(
                         lazyCtx,
                         new Guid("fc57ee0f-1ba5-445c-9007-a5ec1507cf39"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((MitarbeiterEfImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((MitarbeiterEfImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, DateTime?>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, DateTime?>(
                         lazyCtx,
                         new Guid("b10bf288-1252-49c3-9129-cfabb1637c47"),
                         "Geburtstag",
                         null,
-                        obj => obj.Geburtstag,
-                        (obj, val) => obj.Geburtstag = val),
+                        obj => ((MitarbeiterEfImpl)obj).Geburtstag,
+                        (obj, val) => obj.Geburtstag = val,
+						obj => ((MitarbeiterEfImpl)obj).OnGeburtstag_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("5e148730-ec8a-4349-bcf7-e59cef2ce29f"),
                         "Identity",
                         null,
-                        obj => obj.Identity,
-                        (obj, val) => obj.Identity = val),
+                        obj => ((MitarbeiterEfImpl)obj).Identity,
+                        (obj, val) => obj.Identity = val,
+						obj => ((MitarbeiterEfImpl)obj).OnIdentity_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, string>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, string>(
                         lazyCtx,
                         new Guid("5aab79fd-3083-4ce1-a558-ed1449ecddce"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((MitarbeiterEfImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((MitarbeiterEfImpl)obj).OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, IList<Kistl.App.Projekte.Projekt>>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, IList<Kistl.App.Projekte.Projekt>>(
                         lazyCtx,
                         new Guid("1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c"),
                         "Projekte",
                         null,
                         obj => obj.Projekte,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((MitarbeiterEfImpl)obj).OnProjekte_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, string>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, string>(
                         lazyCtx,
                         new Guid("505988c4-dd50-4a0f-be21-a360b25e7d7d"),
                         "SVNr",
                         null,
-                        obj => obj.SVNr,
-                        (obj, val) => obj.SVNr = val),
+                        obj => ((MitarbeiterEfImpl)obj).SVNr,
+                        (obj, val) => obj.SVNr = val,
+						obj => ((MitarbeiterEfImpl)obj).OnSVNr_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MitarbeiterEfImpl, string>(
+                    new PropertyDescriptorEfImpl<Mitarbeiter, string>(
                         lazyCtx,
                         new Guid("73230333-f975-4f0b-9dd3-e850b48d9c13"),
                         "TelefonNummer",
                         null,
-                        obj => obj.TelefonNummer,
-                        (obj, val) => obj.TelefonNummer = val),
+                        obj => ((MitarbeiterEfImpl)obj).TelefonNummer,
+                        (obj, val) => obj.TelefonNummer = val,
+						obj => ((MitarbeiterEfImpl)obj).OnTelefonNummer_IsValid), 
                     // position columns
                 };
             }

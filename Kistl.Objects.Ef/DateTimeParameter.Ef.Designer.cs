@@ -106,6 +106,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DateTimeParameter, Kistl.App.Base.DateTimeStyles?> OnDateTimeStyle_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DateTimeParameter, Kistl.App.Base.DateTimeStyles?> OnDateTimeStyle_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.DateTimeParameter> OnDateTimeStyle_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -335,13 +337,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<DateTimeParameterEfImpl, Kistl.App.Base.DateTimeStyles?>(
+                    new PropertyDescriptorEfImpl<DateTimeParameter, Kistl.App.Base.DateTimeStyles?>(
                         lazyCtx,
                         new Guid("0d0f2e67-cfa2-4463-aaf2-2ce0e6d11fa0"),
                         "DateTimeStyle",
                         null,
-                        obj => obj.DateTimeStyle,
-                        (obj, val) => obj.DateTimeStyle = val),
+                        obj => ((DateTimeParameterEfImpl)obj).DateTimeStyle,
+                        (obj, val) => obj.DateTimeStyle = val,
+						obj => ((DateTimeParameterEfImpl)obj).OnDateTimeStyle_IsValid), 
                     // position columns
                 };
             }

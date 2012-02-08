@@ -153,6 +153,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Calendar.Calendar> OnCalendar_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Calendar.Calendar> OnCalendar_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCalendar_IsValid;
+
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -256,6 +258,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -322,6 +326,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -426,6 +432,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -492,6 +500,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime> OnCreatedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -560,6 +570,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Guid> OnExportGuid_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnExportGuid_IsValid;
+
         /// <summary>
         /// True if the day is a working day, regardless of the working hours. E.g. Saturday is a working day (in Austria), but most people aktually don&apos;t work.
         /// </summary>
@@ -626,6 +638,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, bool> OnIsWorkingDay_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, bool> OnIsWorkingDay_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, bool> OnIsWorkingDay_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnIsWorkingDay_IsValid;
 
         /// <summary>
         /// Optional member of a module
@@ -731,6 +745,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, Kistl.App.Base.Module> OnModule_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnModule_IsValid;
+
         /// <summary>
         /// The name of the Rule
         /// </summary>
@@ -784,6 +800,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, string> OnName_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnName_IsValid;
 
         /// <summary>
         /// Optional valid from date
@@ -839,6 +857,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidFrom_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidFrom_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnValidFrom_IsValid;
+
         /// <summary>
         /// Optional valid until date
         /// </summary>
@@ -893,6 +913,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidUntil_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidUntil_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnValidUntil_IsValid;
+
         /// <summary>
         /// The amount of working hours. 0 if it&apos;s a free day.
         /// </summary>
@@ -946,6 +968,8 @@ namespace Kistl.App.Calendar
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, decimal> OnWorkingHours_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, decimal> OnWorkingHours_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Calendar.CalendarRule, decimal> OnWorkingHours_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Calendar.CalendarRule> OnWorkingHours_IsValid;
 
         /// <summary>
         /// Checks if the Rule applies to the given date
@@ -1090,101 +1114,113 @@ namespace Kistl.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, Kistl.App.Calendar.Calendar>(
+                    new PropertyDescriptorEfImpl<CalendarRule, Kistl.App.Calendar.Calendar>(
                         lazyCtx,
                         new Guid("115c1d4c-ddd3-4d33-ae74-a6b676fc0dfa"),
                         "Calendar",
                         null,
-                        obj => obj.Calendar,
-                        (obj, val) => obj.Calendar = val),
+                        obj => ((CalendarRuleEfImpl)obj).Calendar,
+                        (obj, val) => obj.Calendar = val,
+						obj => ((CalendarRuleEfImpl)obj).OnCalendar_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<CalendarRule, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("a14bfc87-c65e-4111-8245-3fbb31189392"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((CalendarRuleEfImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((CalendarRuleEfImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, DateTime>(
+                    new PropertyDescriptorEfImpl<CalendarRule, DateTime>(
                         lazyCtx,
                         new Guid("ddab18cc-3278-4ac5-8a76-25d23b1cb7be"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((CalendarRuleEfImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((CalendarRuleEfImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<CalendarRule, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("0556d238-5f1e-4f01-b7b1-13f562726942"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((CalendarRuleEfImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((CalendarRuleEfImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, DateTime>(
+                    new PropertyDescriptorEfImpl<CalendarRule, DateTime>(
                         lazyCtx,
                         new Guid("d61d2a16-f80d-449f-9850-0301a43fdc71"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((CalendarRuleEfImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((CalendarRuleEfImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, Guid>(
+                    new PropertyDescriptorEfImpl<CalendarRule, Guid>(
                         lazyCtx,
                         new Guid("c730faff-a917-4f89-9a49-b65374cb4de1"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((CalendarRuleEfImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((CalendarRuleEfImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, bool>(
+                    new PropertyDescriptorEfImpl<CalendarRule, bool>(
                         lazyCtx,
                         new Guid("09cfc4e1-c106-46ec-825d-31226d8df335"),
                         "IsWorkingDay",
                         null,
-                        obj => obj.IsWorkingDay,
-                        (obj, val) => obj.IsWorkingDay = val),
+                        obj => ((CalendarRuleEfImpl)obj).IsWorkingDay,
+                        (obj, val) => obj.IsWorkingDay = val,
+						obj => ((CalendarRuleEfImpl)obj).OnIsWorkingDay_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, Kistl.App.Base.Module>(
+                    new PropertyDescriptorEfImpl<CalendarRule, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("7fc947a4-09c5-433b-a26e-5014663e3931"),
                         "Module",
                         null,
-                        obj => obj.Module,
-                        (obj, val) => obj.Module = val),
+                        obj => ((CalendarRuleEfImpl)obj).Module,
+                        (obj, val) => obj.Module = val,
+						obj => ((CalendarRuleEfImpl)obj).OnModule_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, string>(
+                    new PropertyDescriptorEfImpl<CalendarRule, string>(
                         lazyCtx,
                         new Guid("88bd31d8-6963-49ed-8ac8-31d438744eef"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((CalendarRuleEfImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((CalendarRuleEfImpl)obj).OnName_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, DateTime?>(
+                    new PropertyDescriptorEfImpl<CalendarRule, DateTime?>(
                         lazyCtx,
                         new Guid("940552fc-7cb1-4512-9096-54c3e70f7a1f"),
                         "ValidFrom",
                         null,
-                        obj => obj.ValidFrom,
-                        (obj, val) => obj.ValidFrom = val),
+                        obj => ((CalendarRuleEfImpl)obj).ValidFrom,
+                        (obj, val) => obj.ValidFrom = val,
+						obj => ((CalendarRuleEfImpl)obj).OnValidFrom_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, DateTime?>(
+                    new PropertyDescriptorEfImpl<CalendarRule, DateTime?>(
                         lazyCtx,
                         new Guid("4fced9a6-fe27-44a2-a21d-17a09c720588"),
                         "ValidUntil",
                         null,
-                        obj => obj.ValidUntil,
-                        (obj, val) => obj.ValidUntil = val),
+                        obj => ((CalendarRuleEfImpl)obj).ValidUntil,
+                        (obj, val) => obj.ValidUntil = val,
+						obj => ((CalendarRuleEfImpl)obj).OnValidUntil_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<CalendarRuleEfImpl, decimal>(
+                    new PropertyDescriptorEfImpl<CalendarRule, decimal>(
                         lazyCtx,
                         new Guid("20370deb-580a-44e6-b201-f5740ee5e330"),
                         "WorkingHours",
                         null,
-                        obj => obj.WorkingHours,
-                        (obj, val) => obj.WorkingHours = val),
+                        obj => ((CalendarRuleEfImpl)obj).WorkingHours,
+                        (obj, val) => obj.WorkingHours = val,
+						obj => ((CalendarRuleEfImpl)obj).OnWorkingHours_IsValid), 
                     // position columns
                 };
             }

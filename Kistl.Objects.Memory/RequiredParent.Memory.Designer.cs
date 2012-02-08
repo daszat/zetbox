@@ -73,6 +73,8 @@ namespace Kistl.App.Test
 
 public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> OnChildren_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParent> OnChildren_IsValid;
+
         /// <summary>
         /// dummy property
         /// </summary>
@@ -124,6 +126,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParent, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.RequiredParent, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.RequiredParent> OnName_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(RequiredParent);
@@ -168,21 +172,23 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<RequiredParentMemoryImpl, ICollection<Kistl.App.Test.RequiredParentChild>>(
+                    new PropertyDescriptorMemoryImpl<RequiredParent, ICollection<Kistl.App.Test.RequiredParentChild>>(
                         lazyCtx,
                         new Guid("e452deb2-1f35-4b7c-9adc-1f904dfbfc6d"),
                         "Children",
                         null,
                         obj => obj.Children,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((RequiredParentMemoryImpl)obj).OnChildren_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<RequiredParentMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<RequiredParent, string>(
                         lazyCtx,
                         new Guid("22abc57e-581f-49f1-8eff-747e126a6480"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((RequiredParentMemoryImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((RequiredParentMemoryImpl)obj).OnName_IsValid), 
                     // position columns
                 };
             }

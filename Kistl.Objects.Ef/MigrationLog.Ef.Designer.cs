@@ -91,6 +91,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnDestination_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnDestination_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnDestination_IsValid;
+
         /// <summary>
         /// The number of rows in the destination
         /// </summary>
@@ -144,6 +146,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnDestinationRows_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnDestinationRows_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnDestinationRows_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnDestinationRows_IsValid;
 
         /// <summary>
         /// The source of the migration step
@@ -199,6 +203,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnSource_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnSource_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnSource_IsValid;
+
         /// <summary>
         /// The number of rows in this source
         /// </summary>
@@ -252,6 +258,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnSourceRows_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnSourceRows_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnSourceRows_PostSetter;
+
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnSourceRows_IsValid;
 
         /// <summary>
         /// When the logentry was written
@@ -307,6 +315,8 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, DateTime> OnTimestamp_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationLog, DateTime> OnTimestamp_PostSetter;
 
+        public event PropertyIsValidHandler<ZBox.App.SchemaMigration.MigrationLog> OnTimestamp_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(MigrationLog);
@@ -354,45 +364,50 @@ namespace ZBox.App.SchemaMigration
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<MigrationLogEfImpl, string>(
+                    new PropertyDescriptorEfImpl<MigrationLog, string>(
                         lazyCtx,
                         new Guid("bad56a8d-e23e-47e3-8545-ee4c2689aab8"),
                         "Destination",
                         null,
-                        obj => obj.Destination,
-                        (obj, val) => obj.Destination = val),
+                        obj => ((MigrationLogEfImpl)obj).Destination,
+                        (obj, val) => obj.Destination = val,
+						obj => ((MigrationLogEfImpl)obj).OnDestination_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MigrationLogEfImpl, int>(
+                    new PropertyDescriptorEfImpl<MigrationLog, int>(
                         lazyCtx,
                         new Guid("6b2ac709-a61b-4d22-96e6-e36f4bcbce84"),
                         "DestinationRows",
                         null,
-                        obj => obj.DestinationRows,
-                        (obj, val) => obj.DestinationRows = val),
+                        obj => ((MigrationLogEfImpl)obj).DestinationRows,
+                        (obj, val) => obj.DestinationRows = val,
+						obj => ((MigrationLogEfImpl)obj).OnDestinationRows_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MigrationLogEfImpl, string>(
+                    new PropertyDescriptorEfImpl<MigrationLog, string>(
                         lazyCtx,
                         new Guid("fd0e1581-c4f0-476e-af24-2905e4aa377d"),
                         "Source",
                         null,
-                        obj => obj.Source,
-                        (obj, val) => obj.Source = val),
+                        obj => ((MigrationLogEfImpl)obj).Source,
+                        (obj, val) => obj.Source = val,
+						obj => ((MigrationLogEfImpl)obj).OnSource_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MigrationLogEfImpl, int>(
+                    new PropertyDescriptorEfImpl<MigrationLog, int>(
                         lazyCtx,
                         new Guid("52a3ddb3-c724-4427-a2e1-95bbf347906a"),
                         "SourceRows",
                         null,
-                        obj => obj.SourceRows,
-                        (obj, val) => obj.SourceRows = val),
+                        obj => ((MigrationLogEfImpl)obj).SourceRows,
+                        (obj, val) => obj.SourceRows = val,
+						obj => ((MigrationLogEfImpl)obj).OnSourceRows_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<MigrationLogEfImpl, DateTime>(
+                    new PropertyDescriptorEfImpl<MigrationLog, DateTime>(
                         lazyCtx,
                         new Guid("9e3a70c6-04f9-4464-93c9-68c1eec6b94f"),
                         "Timestamp",
                         null,
-                        obj => obj.Timestamp,
-                        (obj, val) => obj.Timestamp = val),
+                        obj => ((MigrationLogEfImpl)obj).Timestamp,
+                        (obj, val) => obj.Timestamp = val,
+						obj => ((MigrationLogEfImpl)obj).OnTimestamp_IsValid), 
                     // position columns
                 };
             }

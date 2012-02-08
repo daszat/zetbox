@@ -74,6 +74,8 @@ namespace Kistl.App.Base
 		// ignored, but required for Serialization
         private bool Relations_was_eagerLoaded = false;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.RoleMembership> OnRelations_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(RoleMembership);
@@ -118,13 +120,14 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<RoleMembershipNHibernateImpl, IList<Kistl.App.Base.Relation>>(
+                    new PropertyDescriptorNHibernateImpl<RoleMembership, IList<Kistl.App.Base.Relation>>(
                         lazyCtx,
                         new Guid("fb799900-1a5b-4b62-a445-5dae8febdd28"),
                         "Relations",
                         null,
                         obj => obj.Relations,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((RoleMembershipNHibernateImpl)obj).OnRelations_IsValid), 
                     // position columns
                 };
             }

@@ -91,6 +91,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, string> OnFrage_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, string> OnFrage_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFrage_IsValid;
+
         /// <summary>
         /// Workaround for Case 1376
         /// </summary>
@@ -235,6 +237,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, Kistl.App.Test.Fragebogen> OnFragebogen_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, Kistl.App.Test.Fragebogen> OnFragebogen_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFragebogen_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -288,6 +292,8 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnFragenNummer_IsValid;
 
         /// <summary>
         /// 
@@ -343,6 +349,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.Antwort> OnGegebeneAntwort_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(Antwort);
@@ -395,37 +403,41 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<AntwortEfImpl, string>(
+                    new PropertyDescriptorEfImpl<Antwort, string>(
                         lazyCtx,
                         new Guid("311cb474-be7d-4e6b-b803-379e6523720c"),
                         "Frage",
                         null,
-                        obj => obj.Frage,
-                        (obj, val) => obj.Frage = val),
+                        obj => ((AntwortEfImpl)obj).Frage,
+                        (obj, val) => obj.Frage = val,
+						obj => ((AntwortEfImpl)obj).OnFrage_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<AntwortEfImpl, Kistl.App.Test.Fragebogen>(
+                    new PropertyDescriptorEfImpl<Antwort, Kistl.App.Test.Fragebogen>(
                         lazyCtx,
                         new Guid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82"),
                         "Fragebogen",
                         null,
-                        obj => obj.Fragebogen,
-                        (obj, val) => obj.Fragebogen = val),
+                        obj => ((AntwortEfImpl)obj).Fragebogen,
+                        (obj, val) => obj.Fragebogen = val,
+						obj => ((AntwortEfImpl)obj).OnFragebogen_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<AntwortEfImpl, int>(
+                    new PropertyDescriptorEfImpl<Antwort, int>(
                         lazyCtx,
                         new Guid("87a005fa-6249-4aab-b90e-b50c97487c09"),
                         "FragenNummer",
                         null,
-                        obj => obj.FragenNummer,
-                        (obj, val) => obj.FragenNummer = val),
+                        obj => ((AntwortEfImpl)obj).FragenNummer,
+                        (obj, val) => obj.FragenNummer = val,
+						obj => ((AntwortEfImpl)obj).OnFragenNummer_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<AntwortEfImpl, int?>(
+                    new PropertyDescriptorEfImpl<Antwort, int?>(
                         lazyCtx,
                         new Guid("bbddff1f-943e-48cb-b097-377040280f0a"),
                         "GegebeneAntwort",
                         null,
-                        obj => obj.GegebeneAntwort,
-                        (obj, val) => obj.GegebeneAntwort = val),
+                        obj => ((AntwortEfImpl)obj).GegebeneAntwort,
+                        (obj, val) => obj.GegebeneAntwort = val,
+						obj => ((AntwortEfImpl)obj).OnGegebeneAntwort_IsValid), 
                     // position columns
                     // rel: Ein_Fragebogen enthaelt gute_Antworten (0f425937-0d1e-4887-ae65-a162b45fc93e)
                     // rel.B.Type == cls && rel.B.HasPersistentOrder
@@ -435,7 +447,8 @@ namespace Kistl.App.Test
                         "gute_Antworten_pos",
                         null,
                         obj => obj.gute_Antworten_pos,
-                        (obj, val) => obj.gute_Antworten_pos = val),
+                        (obj, val) => obj.gute_Antworten_pos = val,
+						null),
                 };
             }
         }

@@ -95,6 +95,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestStudent, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestStudent, string> OnName_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnName_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -123,6 +125,8 @@ namespace Kistl.App.Test
 		private NHibernateBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl> _Testbogen;
 		// ignored, but required for Serialization
         private bool Testbogen_was_eagerLoaded = false;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.TestStudent> OnTestbogen_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -169,21 +173,23 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<TestStudentNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<TestStudent, string>(
                         lazyCtx,
                         new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((TestStudentNHibernateImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((TestStudentNHibernateImpl)obj).OnName_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<TestStudentNHibernateImpl, ICollection<Kistl.App.Test.Fragebogen>>(
+                    new PropertyDescriptorNHibernateImpl<TestStudent, ICollection<Kistl.App.Test.Fragebogen>>(
                         lazyCtx,
                         new Guid("f330d95b-372d-4302-b4d1-73afc5fa71de"),
                         "Testbogen",
                         null,
                         obj => obj.Testbogen,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((TestStudentNHibernateImpl)obj).OnTestbogen_IsValid), 
                     // position columns
                 };
             }

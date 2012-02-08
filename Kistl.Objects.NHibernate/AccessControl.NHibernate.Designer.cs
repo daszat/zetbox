@@ -133,6 +133,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -202,6 +204,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.AccessControl, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -288,6 +292,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -358,6 +364,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, DateTime> OnCreatedOn_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnCreatedOn_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -407,6 +415,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.AccessControl, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, string> OnDescription_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnDescription_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -477,6 +487,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.AccessControl, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, Guid> OnExportGuid_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -565,6 +577,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.Module> OnModule_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnModule_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -614,6 +628,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.AccessControl, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, string> OnName_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -725,6 +741,8 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.ObjectClass> OnObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.ObjectClass> OnObjectClass_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnObjectClass_IsValid;
+
         /// <summary>
         /// 
         /// </summary>
@@ -774,6 +792,8 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessRights?> OnRights_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessRights?> OnRights_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessRights?> OnRights_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Base.AccessControl> OnRights_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -900,85 +920,95 @@ namespace Kistl.App.Base
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c8d556ec-a0b9-4491-95ee-91a1f2018faa"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((AccessControlNHibernateImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, DateTime>(
                         lazyCtx,
                         new Guid("f4b0c109-cc3f-4e19-bb83-64c111cf033c"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((AccessControlNHibernateImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("823a4364-94ba-478e-94d3-9591b9c2f9cf"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((AccessControlNHibernateImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, DateTime>(
                         lazyCtx,
                         new Guid("602524ad-2be2-4350-9195-015bc8ac4c8b"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((AccessControlNHibernateImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, string>(
                         lazyCtx,
                         new Guid("cb4f9bf4-97dc-4b0f-8a30-7e85b37eca69"),
                         "Description",
                         null,
-                        obj => obj.Description,
-                        (obj, val) => obj.Description = val),
+                        obj => ((AccessControlNHibernateImpl)obj).Description,
+                        (obj, val) => obj.Description = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnDescription_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, Guid>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, Guid>(
                         lazyCtx,
                         new Guid("6f7351e4-a2e3-487a-be50-05a8089e1080"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((AccessControlNHibernateImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, Kistl.App.Base.Module>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, Kistl.App.Base.Module>(
                         lazyCtx,
                         new Guid("bebc90f3-d8cb-4224-96dc-b477db5bf321"),
                         "Module",
                         null,
-                        obj => obj.Module,
-                        (obj, val) => obj.Module = val),
+                        obj => ((AccessControlNHibernateImpl)obj).Module,
+                        (obj, val) => obj.Module = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnModule_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, string>(
                         lazyCtx,
                         new Guid("07846156-f853-4f95-ae6f-09dad6c4d71d"),
                         "Name",
                         null,
-                        obj => obj.Name,
-                        (obj, val) => obj.Name = val),
+                        obj => ((AccessControlNHibernateImpl)obj).Name,
+                        (obj, val) => obj.Name = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnName_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, Kistl.App.Base.ObjectClass>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, Kistl.App.Base.ObjectClass>(
                         lazyCtx,
                         new Guid("b2d2a5df-4e4e-490b-84ca-982b0b732e7e"),
                         "ObjectClass",
                         null,
-                        obj => obj.ObjectClass,
-                        (obj, val) => obj.ObjectClass = val),
+                        obj => ((AccessControlNHibernateImpl)obj).ObjectClass,
+                        (obj, val) => obj.ObjectClass = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnObjectClass_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<AccessControlNHibernateImpl, Kistl.App.Base.AccessRights?>(
+                    new PropertyDescriptorNHibernateImpl<AccessControl, Kistl.App.Base.AccessRights?>(
                         lazyCtx,
                         new Guid("11235aeb-9610-471c-82f9-ba5738baca2e"),
                         "Rights",
                         null,
-                        obj => obj.Rights,
-                        (obj, val) => obj.Rights = val),
+                        obj => ((AccessControlNHibernateImpl)obj).Rights,
+                        (obj, val) => obj.Rights = val,
+						obj => ((AccessControlNHibernateImpl)obj).OnRights_IsValid), 
                     // position columns
                 };
             }

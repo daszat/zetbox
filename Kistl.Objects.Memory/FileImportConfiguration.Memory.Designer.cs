@@ -123,6 +123,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnChangedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -186,6 +188,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnChangedOn_PostSetter;
+
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -276,6 +280,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnCreatedBy_IsValid;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -340,6 +346,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnCreatedOn_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnCreatedOn_IsValid;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -403,6 +411,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Guid> OnExportGuid_PostSetter;
+
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnExportGuid_IsValid;
 
         /// <summary>
         /// Restricts this configuration to a specific identity
@@ -493,6 +503,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnIdentity_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Kistl.App.Base.Identity> OnIdentity_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnIdentity_IsValid;
+
         /// <summary>
         /// Restricts this configuration to a specific machine
         /// </summary>
@@ -544,6 +556,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnMachineName_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnMachineName_PostSetter;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnMachineName_IsValid;
+
         /// <summary>
         /// Pickup directory for the file import service. Env Variables can be used with %VARIABLE%. e.g. %HOMEPATH%\MyPickupDir
         /// </summary>
@@ -594,6 +608,8 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnPickupDirectory_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnPickupDirectory_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnPickupDirectory_PostSetter;
+
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.FileImportConfiguration> OnPickupDirectory_IsValid;
 
         public override Type GetImplementedInterface()
         {
@@ -697,69 +713,77 @@ namespace at.dasz.DocumentManagement
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<FileImportConfigurationMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<FileImportConfiguration, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("533d8049-92ac-4100-b94f-661e5dbf5c74"),
                         "ChangedBy",
                         null,
-                        obj => obj.ChangedBy,
-                        (obj, val) => obj.ChangedBy = val),
+                        obj => ((FileImportConfigurationMemoryImpl)obj).ChangedBy,
+                        (obj, val) => obj.ChangedBy = val,
+						obj => ((FileImportConfigurationMemoryImpl)obj).OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<FileImportConfigurationMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<FileImportConfiguration, DateTime>(
                         lazyCtx,
                         new Guid("4dfd754a-6c10-4fb0-851d-b11e05a55abc"),
                         "ChangedOn",
                         null,
-                        obj => obj.ChangedOn,
-                        (obj, val) => obj.ChangedOn = val),
+                        obj => ((FileImportConfigurationMemoryImpl)obj).ChangedOn,
+                        (obj, val) => obj.ChangedOn = val,
+						obj => ((FileImportConfigurationMemoryImpl)obj).OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<FileImportConfigurationMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<FileImportConfiguration, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("afb941f3-1f6a-427a-9d45-f04b1a8440b1"),
                         "CreatedBy",
                         null,
-                        obj => obj.CreatedBy,
-                        (obj, val) => obj.CreatedBy = val),
+                        obj => ((FileImportConfigurationMemoryImpl)obj).CreatedBy,
+                        (obj, val) => obj.CreatedBy = val,
+						obj => ((FileImportConfigurationMemoryImpl)obj).OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<FileImportConfigurationMemoryImpl, DateTime>(
+                    new PropertyDescriptorMemoryImpl<FileImportConfiguration, DateTime>(
                         lazyCtx,
                         new Guid("66be2bc9-c3a2-4411-9a53-6e07548d10ab"),
                         "CreatedOn",
                         null,
-                        obj => obj.CreatedOn,
-                        (obj, val) => obj.CreatedOn = val),
+                        obj => ((FileImportConfigurationMemoryImpl)obj).CreatedOn,
+                        (obj, val) => obj.CreatedOn = val,
+						obj => ((FileImportConfigurationMemoryImpl)obj).OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<FileImportConfigurationMemoryImpl, Guid>(
+                    new PropertyDescriptorMemoryImpl<FileImportConfiguration, Guid>(
                         lazyCtx,
                         new Guid("1034a145-8bfa-470f-8345-555b9c5087cb"),
                         "ExportGuid",
                         null,
-                        obj => obj.ExportGuid,
-                        (obj, val) => obj.ExportGuid = val),
+                        obj => ((FileImportConfigurationMemoryImpl)obj).ExportGuid,
+                        (obj, val) => obj.ExportGuid = val,
+						obj => ((FileImportConfigurationMemoryImpl)obj).OnExportGuid_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<FileImportConfigurationMemoryImpl, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorMemoryImpl<FileImportConfiguration, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("4762392e-1902-43ef-a023-9d57047892d9"),
                         "Identity",
                         null,
-                        obj => obj.Identity,
-                        (obj, val) => obj.Identity = val),
+                        obj => ((FileImportConfigurationMemoryImpl)obj).Identity,
+                        (obj, val) => obj.Identity = val,
+						obj => ((FileImportConfigurationMemoryImpl)obj).OnIdentity_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<FileImportConfigurationMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<FileImportConfiguration, string>(
                         lazyCtx,
                         new Guid("f30f0053-0d08-4119-9775-284b6dee6bfd"),
                         "MachineName",
                         null,
-                        obj => obj.MachineName,
-                        (obj, val) => obj.MachineName = val),
+                        obj => ((FileImportConfigurationMemoryImpl)obj).MachineName,
+                        (obj, val) => obj.MachineName = val,
+						obj => ((FileImportConfigurationMemoryImpl)obj).OnMachineName_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<FileImportConfigurationMemoryImpl, string>(
+                    new PropertyDescriptorMemoryImpl<FileImportConfiguration, string>(
                         lazyCtx,
                         new Guid("cd085ad4-58a4-43be-90b4-4988b728903b"),
                         "PickupDirectory",
                         null,
-                        obj => obj.PickupDirectory,
-                        (obj, val) => obj.PickupDirectory = val),
+                        obj => ((FileImportConfigurationMemoryImpl)obj).PickupDirectory,
+                        (obj, val) => obj.PickupDirectory = val,
+						obj => ((FileImportConfigurationMemoryImpl)obj).OnPickupDirectory_IsValid), 
                     // position columns
                 };
             }

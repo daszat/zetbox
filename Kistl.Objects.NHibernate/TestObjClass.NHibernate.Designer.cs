@@ -95,6 +95,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestObjClass> OnMyIntProperty_IsValid;
+
         /// <summary>
         /// testtest
         /// </summary>
@@ -180,6 +182,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestObjClass> OnObjectProp_IsValid;
+
         /// <summary>
         /// String Property
         /// </summary>
@@ -230,6 +234,8 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PostSetter;
 
+        public event PropertyIsValidHandler<Kistl.App.Test.TestObjClass> OnStringProp_IsValid;
+
         /// <summary>
         /// Test Enumeration Property
         /// </summary>
@@ -279,6 +285,8 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PostSetter;
+
+        public event PropertyIsValidHandler<Kistl.App.Test.TestObjClass> OnTestEnumProp_IsValid;
 
         /// <summary>
         /// testmethod
@@ -413,37 +421,41 @@ namespace Kistl.App.Test
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<TestObjClassNHibernateImpl, int?>(
+                    new PropertyDescriptorNHibernateImpl<TestObjClass, int?>(
                         lazyCtx,
                         new Guid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf"),
                         "MyIntProperty",
                         null,
-                        obj => obj.MyIntProperty,
-                        (obj, val) => obj.MyIntProperty = val),
+                        obj => ((TestObjClassNHibernateImpl)obj).MyIntProperty,
+                        (obj, val) => obj.MyIntProperty = val,
+						obj => ((TestObjClassNHibernateImpl)obj).OnMyIntProperty_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<TestObjClassNHibernateImpl, Kistl.App.Projekte.Kunde>(
+                    new PropertyDescriptorNHibernateImpl<TestObjClass, Kistl.App.Projekte.Kunde>(
                         lazyCtx,
                         new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f"),
                         "ObjectProp",
                         null,
-                        obj => obj.ObjectProp,
-                        (obj, val) => obj.ObjectProp = val),
+                        obj => ((TestObjClassNHibernateImpl)obj).ObjectProp,
+                        (obj, val) => obj.ObjectProp = val,
+						obj => ((TestObjClassNHibernateImpl)obj).OnObjectProp_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<TestObjClassNHibernateImpl, string>(
+                    new PropertyDescriptorNHibernateImpl<TestObjClass, string>(
                         lazyCtx,
                         new Guid("c9a3769e-7a53-4e1d-b894-72dc1b4e9aea"),
                         "StringProp",
                         null,
-                        obj => obj.StringProp,
-                        (obj, val) => obj.StringProp = val),
+                        obj => ((TestObjClassNHibernateImpl)obj).StringProp,
+                        (obj, val) => obj.StringProp = val,
+						obj => ((TestObjClassNHibernateImpl)obj).OnStringProp_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<TestObjClassNHibernateImpl, Kistl.App.Test.TestEnum>(
+                    new PropertyDescriptorNHibernateImpl<TestObjClass, Kistl.App.Test.TestEnum>(
                         lazyCtx,
                         new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a"),
                         "TestEnumProp",
                         null,
-                        obj => obj.TestEnumProp,
-                        (obj, val) => obj.TestEnumProp = val),
+                        obj => ((TestObjClassNHibernateImpl)obj).TestEnumProp,
+                        (obj, val) => obj.TestEnumProp = val,
+						obj => ((TestObjClassNHibernateImpl)obj).OnTestEnumProp_IsValid), 
                     // position columns
                 };
             }

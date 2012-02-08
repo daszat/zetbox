@@ -74,6 +74,8 @@ namespace at.dasz.DocumentManagement
 		// ignored, but required for Serialization
         private bool Revisions_was_eagerLoaded = false;
 
+        public event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
+
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
@@ -302,13 +304,14 @@ namespace at.dasz.DocumentManagement
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<DocumentNHibernateImpl, IList<Kistl.App.Base.Blob>>(
+                    new PropertyDescriptorNHibernateImpl<Document, IList<Kistl.App.Base.Blob>>(
                         lazyCtx,
                         new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
                         "Revisions",
                         null,
                         obj => obj.Revisions,
-                        null), // lists are read-only properties
+                        null, // lists are read-only properties
+                        obj => ((DocumentNHibernateImpl)obj).OnRevisions_IsValid), 
                     // position columns
                 };
             }

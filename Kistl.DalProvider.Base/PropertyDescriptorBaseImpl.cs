@@ -11,7 +11,6 @@ namespace Kistl.DalProvider.Base
     public class PropertyDescriptorBaseImpl<TComponent, TProperty>
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {
-        private static readonly string[] NoErrors = new string[] { };
         private readonly Property _property;
 
         public PropertyDescriptorBaseImpl(
@@ -20,8 +19,9 @@ namespace Kistl.DalProvider.Base
             string name,
             Attribute[] attrs,
             Func<TComponent, TProperty> getter,
-            Action<TComponent, TProperty> setter)
-            : base(name, attrs, getter, setter)
+            Action<TComponent, TProperty> setter,
+            Func<TComponent, PropertyIsValidHandler<TComponent>> isValid)
+            : base(name, attrs, getter, setter, isValid)
         {
             if (lazyCtx == null) { throw new ArgumentNullException("lazyCtx"); }
 
@@ -45,6 +45,7 @@ namespace Kistl.DalProvider.Base
                     .Constraints
                     .Where(c => !c.IsValid(self, val))
                     .Select(c => c.GetErrorText(self, val))
+                    .Concat(TryExecuteIsValidEvent(self))
                     .ToArray();
             }
             else
