@@ -15788,16 +15788,6 @@
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>Properties</KistlBase:TableName>
   </KistlBase:ObjectClass>
-  <KistlBase:Enumeration ExportGuid="a05a5bcf-c952-4017-947e-6a63b2464739">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.033282Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
-    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Name>PropertyInvocationType</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <KistlBase:AreFlags>false</KistlBase:AreFlags>
-  </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="c83424ff-71bd-449a-81c7-4b6439fa28c6">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.029281Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-09-07T11:39:17Z</KistlBase:CreatedOn>
@@ -22562,33 +22552,6 @@
     <KistlBase:EnumerationEntries_pos>100</KistlBase:EnumerationEntries_pos>
     <KistlBase:Name>ZeroOrOne</KistlBase:Name>
     <KistlBase:Value>1</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="301127f7-9756-4e0b-9bb3-0b09f406f790">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.868043Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
-    <KistlBase:Description>Property getter</KistlBase:Description>
-    <KistlBase:Enumeration>a05a5bcf-c952-4017-947e-6a63b2464739</KistlBase:Enumeration>
-    <KistlBase:EnumerationEntries_pos>300</KistlBase:EnumerationEntries_pos>
-    <KistlBase:Name>Getter</KistlBase:Name>
-    <KistlBase:Value>1</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="363f0344-a7b6-4b6e-ac5a-cc14fdff8710">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.870043Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
-    <KistlBase:Description>After a property is set</KistlBase:Description>
-    <KistlBase:Enumeration>a05a5bcf-c952-4017-947e-6a63b2464739</KistlBase:Enumeration>
-    <KistlBase:EnumerationEntries_pos>100</KistlBase:EnumerationEntries_pos>
-    <KistlBase:Name>PostSetter</KistlBase:Name>
-    <KistlBase:Value>3</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="766f8126-5aff-46c9-9c60-1f153f966239">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.873044Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
-    <KistlBase:Description>Before a property is set</KistlBase:Description>
-    <KistlBase:Enumeration>a05a5bcf-c952-4017-947e-6a63b2464739</KistlBase:Enumeration>
-    <KistlBase:EnumerationEntries_pos>200</KistlBase:EnumerationEntries_pos>
-    <KistlBase:Name>PreSetter</KistlBase:Name>
-    <KistlBase:Value>2</KistlBase:Value>
   </KistlBase:EnumerationEntry>
   <KistlBase:EnumerationEntry ExportGuid="566a6de1-1494-4039-9f88-efa3472eca14">
     <KistlBase:ChangedOn>2011-08-05T10:31:08.874044Z</KistlBase:ChangedOn>

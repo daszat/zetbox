@@ -246,7 +246,6 @@
     <Compile Include="ListSortDirection.Interface.Designer.cs" />
     <Compile Include="MappingStatus.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />
-    <Compile Include="PropertyInvocationType.Interface.Designer.cs" />
     <Compile Include="StorageType.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />
