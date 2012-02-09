@@ -1087,37 +1087,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<EnumerationEntry> OnToString_EnumerationEntry;
 
-        [EventBasedMethod("OnPreSave_EnumerationEntry")]
+        [EventBasedMethod("OnNotifyPreSave_EnumerationEntry")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_EnumerationEntry != null) OnPreSave_EnumerationEntry(this);
+            if (OnNotifyPreSave_EnumerationEntry != null) OnNotifyPreSave_EnumerationEntry(this);
         }
-        public static event ObjectEventHandler<EnumerationEntry> OnPreSave_EnumerationEntry;
+        public static event ObjectEventHandler<EnumerationEntry> OnNotifyPreSave_EnumerationEntry;
 
-        [EventBasedMethod("OnPostSave_EnumerationEntry")]
+        [EventBasedMethod("OnNotifyPostSave_EnumerationEntry")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_EnumerationEntry != null) OnPostSave_EnumerationEntry(this);
+            if (OnNotifyPostSave_EnumerationEntry != null) OnNotifyPostSave_EnumerationEntry(this);
         }
-        public static event ObjectEventHandler<EnumerationEntry> OnPostSave_EnumerationEntry;
+        public static event ObjectEventHandler<EnumerationEntry> OnNotifyPostSave_EnumerationEntry;
 
-        [EventBasedMethod("OnCreated_EnumerationEntry")]
+        [EventBasedMethod("OnNotifyCreated_EnumerationEntry")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_EnumerationEntry != null) OnCreated_EnumerationEntry(this);
+            if (OnNotifyCreated_EnumerationEntry != null) OnNotifyCreated_EnumerationEntry(this);
         }
-        public static event ObjectEventHandler<EnumerationEntry> OnCreated_EnumerationEntry;
+        public static event ObjectEventHandler<EnumerationEntry> OnNotifyCreated_EnumerationEntry;
 
-        [EventBasedMethod("OnDeleting_EnumerationEntry")]
+        [EventBasedMethod("OnNotifyDeleting_EnumerationEntry")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_EnumerationEntry != null) OnDeleting_EnumerationEntry(this);
+            if (OnNotifyDeleting_EnumerationEntry != null) OnNotifyDeleting_EnumerationEntry(this);
         }
-        public static event ObjectEventHandler<EnumerationEntry> OnDeleting_EnumerationEntry;
+        public static event ObjectEventHandler<EnumerationEntry> OnNotifyDeleting_EnumerationEntry;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

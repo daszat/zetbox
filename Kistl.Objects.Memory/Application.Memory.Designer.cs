@@ -1054,37 +1054,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Application> OnToString_Application;
 
-        [EventBasedMethod("OnPreSave_Application")]
+        [EventBasedMethod("OnNotifyPreSave_Application")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Application != null) OnPreSave_Application(this);
+            if (OnNotifyPreSave_Application != null) OnNotifyPreSave_Application(this);
         }
-        public static event ObjectEventHandler<Application> OnPreSave_Application;
+        public static event ObjectEventHandler<Application> OnNotifyPreSave_Application;
 
-        [EventBasedMethod("OnPostSave_Application")]
+        [EventBasedMethod("OnNotifyPostSave_Application")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Application != null) OnPostSave_Application(this);
+            if (OnNotifyPostSave_Application != null) OnNotifyPostSave_Application(this);
         }
-        public static event ObjectEventHandler<Application> OnPostSave_Application;
+        public static event ObjectEventHandler<Application> OnNotifyPostSave_Application;
 
-        [EventBasedMethod("OnCreated_Application")]
+        [EventBasedMethod("OnNotifyCreated_Application")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Application != null) OnCreated_Application(this);
+            if (OnNotifyCreated_Application != null) OnNotifyCreated_Application(this);
         }
-        public static event ObjectEventHandler<Application> OnCreated_Application;
+        public static event ObjectEventHandler<Application> OnNotifyCreated_Application;
 
-        [EventBasedMethod("OnDeleting_Application")]
+        [EventBasedMethod("OnNotifyDeleting_Application")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Application != null) OnDeleting_Application(this);
+            if (OnNotifyDeleting_Application != null) OnNotifyDeleting_Application(this);
         }
-        public static event ObjectEventHandler<Application> OnDeleting_Application;
+        public static event ObjectEventHandler<Application> OnNotifyDeleting_Application;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

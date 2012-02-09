@@ -341,21 +341,13 @@ namespace Kistl.App.Extensions
                         }
                     }
                 }
+                CreateDefaultMethodInvocations(implType, dt, "NotifyPreSave");
+                CreateDefaultMethodInvocations(implType, dt, "NotifyPostSave");
+                CreateDefaultMethodInvocations(implType, dt, "NotifyCreated");
+                CreateDefaultMethodInvocations(implType, dt, "NotifyDeleting");
             }
 
-            if (dt is CompoundObject)
-            {
-                var key = new MethodKey(dt.Module.Namespace, dt.Name, "ToString");
-                if (_reflectedMethods.ContainsKey(key))
-                {
-                    var methodInfos = _reflectedMethods[key];
-                    foreach (var mi in methodInfos)
-                    {
-                        CreateInvokeInfo(implType, mi, string.Format(CultureInfo.InvariantCulture, "OnToString_{0}", dt.Name));
-                    }
-                    _attachedMethods[key] = true;
-                }
-            }
+            CreateDefaultMethodInvocations(implType, dt, "ToString");
 
             // Reflected Properties
             // New style
@@ -365,6 +357,20 @@ namespace Kistl.App.Extensions
                 CreatePropertyInvocations(implType, prop, "preSet_", "PreSetter");
                 CreatePropertyInvocations(implType, prop, "postSet_", "PostSetter");
                 CreatePropertyInvocations(implType, prop, "isValid_", "IsValid");
+            }
+        }
+
+        private void CreateDefaultMethodInvocations(Type implType, DataType dt, string methodName)
+        {
+            var key = new MethodKey(dt.Module.Namespace, dt.Name, methodName);
+            if (_reflectedMethods.ContainsKey(key))
+            {
+                var methodInfos = _reflectedMethods[key];
+                foreach (var mi in methodInfos)
+                {
+                    CreateInvokeInfo(implType, mi, string.Format(CultureInfo.InvariantCulture, "On{0}_{1}", methodName, dt.Name));
+                }
+                _attachedMethods[key] = true;
             }
         }
 

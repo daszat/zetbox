@@ -293,37 +293,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<MonthFilterConfiguration> OnToString_MonthFilterConfiguration;
 
-        [EventBasedMethod("OnPreSave_MonthFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_MonthFilterConfiguration")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_MonthFilterConfiguration != null) OnPreSave_MonthFilterConfiguration(this);
+            if (OnNotifyPreSave_MonthFilterConfiguration != null) OnNotifyPreSave_MonthFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<MonthFilterConfiguration> OnPreSave_MonthFilterConfiguration;
+        public static event ObjectEventHandler<MonthFilterConfiguration> OnNotifyPreSave_MonthFilterConfiguration;
 
-        [EventBasedMethod("OnPostSave_MonthFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_MonthFilterConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_MonthFilterConfiguration != null) OnPostSave_MonthFilterConfiguration(this);
+            if (OnNotifyPostSave_MonthFilterConfiguration != null) OnNotifyPostSave_MonthFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<MonthFilterConfiguration> OnPostSave_MonthFilterConfiguration;
+        public static event ObjectEventHandler<MonthFilterConfiguration> OnNotifyPostSave_MonthFilterConfiguration;
 
-        [EventBasedMethod("OnCreated_MonthFilterConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_MonthFilterConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_MonthFilterConfiguration != null) OnCreated_MonthFilterConfiguration(this);
+            if (OnNotifyCreated_MonthFilterConfiguration != null) OnNotifyCreated_MonthFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<MonthFilterConfiguration> OnCreated_MonthFilterConfiguration;
+        public static event ObjectEventHandler<MonthFilterConfiguration> OnNotifyCreated_MonthFilterConfiguration;
 
-        [EventBasedMethod("OnDeleting_MonthFilterConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_MonthFilterConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_MonthFilterConfiguration != null) OnDeleting_MonthFilterConfiguration(this);
+            if (OnNotifyDeleting_MonthFilterConfiguration != null) OnNotifyDeleting_MonthFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<MonthFilterConfiguration> OnDeleting_MonthFilterConfiguration;
+        public static event ObjectEventHandler<MonthFilterConfiguration> OnNotifyDeleting_MonthFilterConfiguration;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

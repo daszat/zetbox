@@ -862,37 +862,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ObjectReferencePlaceholderProperty> OnToString_ObjectReferencePlaceholderProperty;
 
-        [EventBasedMethod("OnPreSave_ObjectReferencePlaceholderProperty")]
+        [EventBasedMethod("OnNotifyPreSave_ObjectReferencePlaceholderProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ObjectReferencePlaceholderProperty != null) OnPreSave_ObjectReferencePlaceholderProperty(this);
+            if (OnNotifyPreSave_ObjectReferencePlaceholderProperty != null) OnNotifyPreSave_ObjectReferencePlaceholderProperty(this);
         }
-        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnPreSave_ObjectReferencePlaceholderProperty;
+        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnNotifyPreSave_ObjectReferencePlaceholderProperty;
 
-        [EventBasedMethod("OnPostSave_ObjectReferencePlaceholderProperty")]
+        [EventBasedMethod("OnNotifyPostSave_ObjectReferencePlaceholderProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ObjectReferencePlaceholderProperty != null) OnPostSave_ObjectReferencePlaceholderProperty(this);
+            if (OnNotifyPostSave_ObjectReferencePlaceholderProperty != null) OnNotifyPostSave_ObjectReferencePlaceholderProperty(this);
         }
-        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnPostSave_ObjectReferencePlaceholderProperty;
+        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnNotifyPostSave_ObjectReferencePlaceholderProperty;
 
-        [EventBasedMethod("OnCreated_ObjectReferencePlaceholderProperty")]
+        [EventBasedMethod("OnNotifyCreated_ObjectReferencePlaceholderProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ObjectReferencePlaceholderProperty != null) OnCreated_ObjectReferencePlaceholderProperty(this);
+            if (OnNotifyCreated_ObjectReferencePlaceholderProperty != null) OnNotifyCreated_ObjectReferencePlaceholderProperty(this);
         }
-        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnCreated_ObjectReferencePlaceholderProperty;
+        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnNotifyCreated_ObjectReferencePlaceholderProperty;
 
-        [EventBasedMethod("OnDeleting_ObjectReferencePlaceholderProperty")]
+        [EventBasedMethod("OnNotifyDeleting_ObjectReferencePlaceholderProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ObjectReferencePlaceholderProperty != null) OnDeleting_ObjectReferencePlaceholderProperty(this);
+            if (OnNotifyDeleting_ObjectReferencePlaceholderProperty != null) OnNotifyDeleting_ObjectReferencePlaceholderProperty(this);
         }
-        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnDeleting_ObjectReferencePlaceholderProperty;
+        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnNotifyDeleting_ObjectReferencePlaceholderProperty;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

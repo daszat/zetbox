@@ -692,38 +692,38 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Icon> OnToString_Icon;
 
-        [EventBasedMethod("OnPreSave_Icon")]
+        [EventBasedMethod("OnNotifyPreSave_Icon")]
         public override void NotifyPreSave()
         {
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_Icon != null) OnPreSave_Icon(this);
+            if (OnNotifyPreSave_Icon != null) OnNotifyPreSave_Icon(this);
         }
-        public static event ObjectEventHandler<Icon> OnPreSave_Icon;
+        public static event ObjectEventHandler<Icon> OnNotifyPreSave_Icon;
 
-        [EventBasedMethod("OnPostSave_Icon")]
+        [EventBasedMethod("OnNotifyPostSave_Icon")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Icon != null) OnPostSave_Icon(this);
+            if (OnNotifyPostSave_Icon != null) OnNotifyPostSave_Icon(this);
         }
-        public static event ObjectEventHandler<Icon> OnPostSave_Icon;
+        public static event ObjectEventHandler<Icon> OnNotifyPostSave_Icon;
 
-        [EventBasedMethod("OnCreated_Icon")]
+        [EventBasedMethod("OnNotifyCreated_Icon")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Icon != null) OnCreated_Icon(this);
+            if (OnNotifyCreated_Icon != null) OnNotifyCreated_Icon(this);
         }
-        public static event ObjectEventHandler<Icon> OnCreated_Icon;
+        public static event ObjectEventHandler<Icon> OnNotifyCreated_Icon;
 
-        [EventBasedMethod("OnDeleting_Icon")]
+        [EventBasedMethod("OnNotifyDeleting_Icon")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Icon != null) OnDeleting_Icon(this);
+            if (OnNotifyDeleting_Icon != null) OnNotifyDeleting_Icon(this);
         }
-        public static event ObjectEventHandler<Icon> OnDeleting_Icon;
+        public static event ObjectEventHandler<Icon> OnNotifyDeleting_Icon;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

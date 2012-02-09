@@ -1183,37 +1183,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ViewModelDescriptor> OnToString_ViewModelDescriptor;
 
-        [EventBasedMethod("OnPreSave_ViewModelDescriptor")]
+        [EventBasedMethod("OnNotifyPreSave_ViewModelDescriptor")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ViewModelDescriptor != null) OnPreSave_ViewModelDescriptor(this);
+            if (OnNotifyPreSave_ViewModelDescriptor != null) OnNotifyPreSave_ViewModelDescriptor(this);
         }
-        public static event ObjectEventHandler<ViewModelDescriptor> OnPreSave_ViewModelDescriptor;
+        public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyPreSave_ViewModelDescriptor;
 
-        [EventBasedMethod("OnPostSave_ViewModelDescriptor")]
+        [EventBasedMethod("OnNotifyPostSave_ViewModelDescriptor")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ViewModelDescriptor != null) OnPostSave_ViewModelDescriptor(this);
+            if (OnNotifyPostSave_ViewModelDescriptor != null) OnNotifyPostSave_ViewModelDescriptor(this);
         }
-        public static event ObjectEventHandler<ViewModelDescriptor> OnPostSave_ViewModelDescriptor;
+        public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyPostSave_ViewModelDescriptor;
 
-        [EventBasedMethod("OnCreated_ViewModelDescriptor")]
+        [EventBasedMethod("OnNotifyCreated_ViewModelDescriptor")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ViewModelDescriptor != null) OnCreated_ViewModelDescriptor(this);
+            if (OnNotifyCreated_ViewModelDescriptor != null) OnNotifyCreated_ViewModelDescriptor(this);
         }
-        public static event ObjectEventHandler<ViewModelDescriptor> OnCreated_ViewModelDescriptor;
+        public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyCreated_ViewModelDescriptor;
 
-        [EventBasedMethod("OnDeleting_ViewModelDescriptor")]
+        [EventBasedMethod("OnNotifyDeleting_ViewModelDescriptor")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ViewModelDescriptor != null) OnDeleting_ViewModelDescriptor(this);
+            if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
         }
-        public static event ObjectEventHandler<ViewModelDescriptor> OnDeleting_ViewModelDescriptor;
+        public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyDeleting_ViewModelDescriptor;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

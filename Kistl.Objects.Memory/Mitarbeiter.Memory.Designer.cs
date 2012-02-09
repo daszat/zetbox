@@ -1036,37 +1036,37 @@ namespace Kistl.App.Projekte
         }
         public static event ToStringHandler<Mitarbeiter> OnToString_Mitarbeiter;
 
-        [EventBasedMethod("OnPreSave_Mitarbeiter")]
+        [EventBasedMethod("OnNotifyPreSave_Mitarbeiter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Mitarbeiter != null) OnPreSave_Mitarbeiter(this);
+            if (OnNotifyPreSave_Mitarbeiter != null) OnNotifyPreSave_Mitarbeiter(this);
         }
-        public static event ObjectEventHandler<Mitarbeiter> OnPreSave_Mitarbeiter;
+        public static event ObjectEventHandler<Mitarbeiter> OnNotifyPreSave_Mitarbeiter;
 
-        [EventBasedMethod("OnPostSave_Mitarbeiter")]
+        [EventBasedMethod("OnNotifyPostSave_Mitarbeiter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Mitarbeiter != null) OnPostSave_Mitarbeiter(this);
+            if (OnNotifyPostSave_Mitarbeiter != null) OnNotifyPostSave_Mitarbeiter(this);
         }
-        public static event ObjectEventHandler<Mitarbeiter> OnPostSave_Mitarbeiter;
+        public static event ObjectEventHandler<Mitarbeiter> OnNotifyPostSave_Mitarbeiter;
 
-        [EventBasedMethod("OnCreated_Mitarbeiter")]
+        [EventBasedMethod("OnNotifyCreated_Mitarbeiter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Mitarbeiter != null) OnCreated_Mitarbeiter(this);
+            if (OnNotifyCreated_Mitarbeiter != null) OnNotifyCreated_Mitarbeiter(this);
         }
-        public static event ObjectEventHandler<Mitarbeiter> OnCreated_Mitarbeiter;
+        public static event ObjectEventHandler<Mitarbeiter> OnNotifyCreated_Mitarbeiter;
 
-        [EventBasedMethod("OnDeleting_Mitarbeiter")]
+        [EventBasedMethod("OnNotifyDeleting_Mitarbeiter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Mitarbeiter != null) OnDeleting_Mitarbeiter(this);
+            if (OnNotifyDeleting_Mitarbeiter != null) OnNotifyDeleting_Mitarbeiter(this);
         }
-        public static event ObjectEventHandler<Mitarbeiter> OnDeleting_Mitarbeiter;
+        public static event ObjectEventHandler<Mitarbeiter> OnNotifyDeleting_Mitarbeiter;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

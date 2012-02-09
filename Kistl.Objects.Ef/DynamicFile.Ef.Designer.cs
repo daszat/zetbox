@@ -270,37 +270,37 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<DynamicFile> OnToString_DynamicFile;
 
-        [EventBasedMethod("OnPreSave_DynamicFile")]
+        [EventBasedMethod("OnNotifyPreSave_DynamicFile")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DynamicFile != null) OnPreSave_DynamicFile(this);
+            if (OnNotifyPreSave_DynamicFile != null) OnNotifyPreSave_DynamicFile(this);
         }
-        public static event ObjectEventHandler<DynamicFile> OnPreSave_DynamicFile;
+        public static event ObjectEventHandler<DynamicFile> OnNotifyPreSave_DynamicFile;
 
-        [EventBasedMethod("OnPostSave_DynamicFile")]
+        [EventBasedMethod("OnNotifyPostSave_DynamicFile")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DynamicFile != null) OnPostSave_DynamicFile(this);
+            if (OnNotifyPostSave_DynamicFile != null) OnNotifyPostSave_DynamicFile(this);
         }
-        public static event ObjectEventHandler<DynamicFile> OnPostSave_DynamicFile;
+        public static event ObjectEventHandler<DynamicFile> OnNotifyPostSave_DynamicFile;
 
-        [EventBasedMethod("OnCreated_DynamicFile")]
+        [EventBasedMethod("OnNotifyCreated_DynamicFile")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DynamicFile != null) OnCreated_DynamicFile(this);
+            if (OnNotifyCreated_DynamicFile != null) OnNotifyCreated_DynamicFile(this);
         }
-        public static event ObjectEventHandler<DynamicFile> OnCreated_DynamicFile;
+        public static event ObjectEventHandler<DynamicFile> OnNotifyCreated_DynamicFile;
 
-        [EventBasedMethod("OnDeleting_DynamicFile")]
+        [EventBasedMethod("OnNotifyDeleting_DynamicFile")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DynamicFile != null) OnDeleting_DynamicFile(this);
+            if (OnNotifyDeleting_DynamicFile != null) OnNotifyDeleting_DynamicFile(this);
         }
-        public static event ObjectEventHandler<DynamicFile> OnDeleting_DynamicFile;
+        public static event ObjectEventHandler<DynamicFile> OnNotifyDeleting_DynamicFile;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

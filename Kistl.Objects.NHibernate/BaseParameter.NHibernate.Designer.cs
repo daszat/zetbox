@@ -1356,7 +1356,7 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<BaseParameter> OnToString_BaseParameter;
 
-        [EventBasedMethod("OnPreSave_BaseParameter")]
+        [EventBasedMethod("OnNotifyPreSave_BaseParameter")]
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
@@ -1364,33 +1364,33 @@ namespace Kistl.App.Base
             FetchExportGuidOrDefault();
             FetchIsNullableOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_BaseParameter != null) OnPreSave_BaseParameter(this);
+            if (OnNotifyPreSave_BaseParameter != null) OnNotifyPreSave_BaseParameter(this);
         }
-        public static event ObjectEventHandler<BaseParameter> OnPreSave_BaseParameter;
+        public static event ObjectEventHandler<BaseParameter> OnNotifyPreSave_BaseParameter;
 
-        [EventBasedMethod("OnPostSave_BaseParameter")]
+        [EventBasedMethod("OnNotifyPostSave_BaseParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_BaseParameter != null) OnPostSave_BaseParameter(this);
+            if (OnNotifyPostSave_BaseParameter != null) OnNotifyPostSave_BaseParameter(this);
         }
-        public static event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
+        public static event ObjectEventHandler<BaseParameter> OnNotifyPostSave_BaseParameter;
 
-        [EventBasedMethod("OnCreated_BaseParameter")]
+        [EventBasedMethod("OnNotifyCreated_BaseParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_BaseParameter != null) OnCreated_BaseParameter(this);
+            if (OnNotifyCreated_BaseParameter != null) OnNotifyCreated_BaseParameter(this);
         }
-        public static event ObjectEventHandler<BaseParameter> OnCreated_BaseParameter;
+        public static event ObjectEventHandler<BaseParameter> OnNotifyCreated_BaseParameter;
 
-        [EventBasedMethod("OnDeleting_BaseParameter")]
+        [EventBasedMethod("OnNotifyDeleting_BaseParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_BaseParameter != null) OnDeleting_BaseParameter(this);
+            if (OnNotifyDeleting_BaseParameter != null) OnNotifyDeleting_BaseParameter(this);
         }
-        public static event ObjectEventHandler<BaseParameter> OnDeleting_BaseParameter;
+        public static event ObjectEventHandler<BaseParameter> OnNotifyDeleting_BaseParameter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

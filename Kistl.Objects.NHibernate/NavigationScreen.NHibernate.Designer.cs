@@ -179,37 +179,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<NavigationScreen> OnToString_NavigationScreen;
 
-        [EventBasedMethod("OnPreSave_NavigationScreen")]
+        [EventBasedMethod("OnNotifyPreSave_NavigationScreen")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_NavigationScreen != null) OnPreSave_NavigationScreen(this);
+            if (OnNotifyPreSave_NavigationScreen != null) OnNotifyPreSave_NavigationScreen(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnPreSave_NavigationScreen;
+        public static event ObjectEventHandler<NavigationScreen> OnNotifyPreSave_NavigationScreen;
 
-        [EventBasedMethod("OnPostSave_NavigationScreen")]
+        [EventBasedMethod("OnNotifyPostSave_NavigationScreen")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_NavigationScreen != null) OnPostSave_NavigationScreen(this);
+            if (OnNotifyPostSave_NavigationScreen != null) OnNotifyPostSave_NavigationScreen(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnPostSave_NavigationScreen;
+        public static event ObjectEventHandler<NavigationScreen> OnNotifyPostSave_NavigationScreen;
 
-        [EventBasedMethod("OnCreated_NavigationScreen")]
+        [EventBasedMethod("OnNotifyCreated_NavigationScreen")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_NavigationScreen != null) OnCreated_NavigationScreen(this);
+            if (OnNotifyCreated_NavigationScreen != null) OnNotifyCreated_NavigationScreen(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnCreated_NavigationScreen;
+        public static event ObjectEventHandler<NavigationScreen> OnNotifyCreated_NavigationScreen;
 
-        [EventBasedMethod("OnDeleting_NavigationScreen")]
+        [EventBasedMethod("OnNotifyDeleting_NavigationScreen")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_NavigationScreen != null) OnDeleting_NavigationScreen(this);
+            if (OnNotifyDeleting_NavigationScreen != null) OnNotifyDeleting_NavigationScreen(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnDeleting_NavigationScreen;
+        public static event ObjectEventHandler<NavigationScreen> OnNotifyDeleting_NavigationScreen;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

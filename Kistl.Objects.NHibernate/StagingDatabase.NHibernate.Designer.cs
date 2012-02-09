@@ -1027,40 +1027,40 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         }
         public static event ToStringHandler<StagingDatabase> OnToString_StagingDatabase;
 
-        [EventBasedMethod("OnPreSave_StagingDatabase")]
+        [EventBasedMethod("OnNotifyPreSave_StagingDatabase")]
         public override void NotifyPreSave()
         {
             FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_StagingDatabase != null) OnPreSave_StagingDatabase(this);
+            if (OnNotifyPreSave_StagingDatabase != null) OnNotifyPreSave_StagingDatabase(this);
         }
-        public static event ObjectEventHandler<StagingDatabase> OnPreSave_StagingDatabase;
+        public static event ObjectEventHandler<StagingDatabase> OnNotifyPreSave_StagingDatabase;
 
-        [EventBasedMethod("OnPostSave_StagingDatabase")]
+        [EventBasedMethod("OnNotifyPostSave_StagingDatabase")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_StagingDatabase != null) OnPostSave_StagingDatabase(this);
+            if (OnNotifyPostSave_StagingDatabase != null) OnNotifyPostSave_StagingDatabase(this);
         }
-        public static event ObjectEventHandler<StagingDatabase> OnPostSave_StagingDatabase;
+        public static event ObjectEventHandler<StagingDatabase> OnNotifyPostSave_StagingDatabase;
 
-        [EventBasedMethod("OnCreated_StagingDatabase")]
+        [EventBasedMethod("OnNotifyCreated_StagingDatabase")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_StagingDatabase != null) OnCreated_StagingDatabase(this);
+            if (OnNotifyCreated_StagingDatabase != null) OnNotifyCreated_StagingDatabase(this);
         }
-        public static event ObjectEventHandler<StagingDatabase> OnCreated_StagingDatabase;
+        public static event ObjectEventHandler<StagingDatabase> OnNotifyCreated_StagingDatabase;
 
-        [EventBasedMethod("OnDeleting_StagingDatabase")]
+        [EventBasedMethod("OnNotifyDeleting_StagingDatabase")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_StagingDatabase != null) OnDeleting_StagingDatabase(this);
+            if (OnNotifyDeleting_StagingDatabase != null) OnNotifyDeleting_StagingDatabase(this);
         }
-        public static event ObjectEventHandler<StagingDatabase> OnDeleting_StagingDatabase;
+        public static event ObjectEventHandler<StagingDatabase> OnNotifyDeleting_StagingDatabase;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

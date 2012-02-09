@@ -974,40 +974,40 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         }
         public static event ToStringHandler<Projekt> OnToString_Projekt;
 
-        [EventBasedMethod("OnPreSave_Projekt")]
+        [EventBasedMethod("OnNotifyPreSave_Projekt")]
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_Projekt != null) OnPreSave_Projekt(this);
+            if (OnNotifyPreSave_Projekt != null) OnNotifyPreSave_Projekt(this);
         }
-        public static event ObjectEventHandler<Projekt> OnPreSave_Projekt;
+        public static event ObjectEventHandler<Projekt> OnNotifyPreSave_Projekt;
 
-        [EventBasedMethod("OnPostSave_Projekt")]
+        [EventBasedMethod("OnNotifyPostSave_Projekt")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Projekt != null) OnPostSave_Projekt(this);
+            if (OnNotifyPostSave_Projekt != null) OnNotifyPostSave_Projekt(this);
         }
-        public static event ObjectEventHandler<Projekt> OnPostSave_Projekt;
+        public static event ObjectEventHandler<Projekt> OnNotifyPostSave_Projekt;
 
-        [EventBasedMethod("OnCreated_Projekt")]
+        [EventBasedMethod("OnNotifyCreated_Projekt")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Projekt != null) OnCreated_Projekt(this);
+            if (OnNotifyCreated_Projekt != null) OnNotifyCreated_Projekt(this);
         }
-        public static event ObjectEventHandler<Projekt> OnCreated_Projekt;
+        public static event ObjectEventHandler<Projekt> OnNotifyCreated_Projekt;
 
-        [EventBasedMethod("OnDeleting_Projekt")]
+        [EventBasedMethod("OnNotifyDeleting_Projekt")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Projekt != null) OnDeleting_Projekt(this);
+            if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
         }
-        public static event ObjectEventHandler<Projekt> OnDeleting_Projekt;
+        public static event ObjectEventHandler<Projekt> OnNotifyDeleting_Projekt;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

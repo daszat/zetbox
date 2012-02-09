@@ -209,37 +209,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ClientReadOnlyConstraint> OnToString_ClientReadOnlyConstraint;
 
-        [EventBasedMethod("OnPreSave_ClientReadOnlyConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_ClientReadOnlyConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ClientReadOnlyConstraint != null) OnPreSave_ClientReadOnlyConstraint(this);
+            if (OnNotifyPreSave_ClientReadOnlyConstraint != null) OnNotifyPreSave_ClientReadOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<ClientReadOnlyConstraint> OnPreSave_ClientReadOnlyConstraint;
+        public static event ObjectEventHandler<ClientReadOnlyConstraint> OnNotifyPreSave_ClientReadOnlyConstraint;
 
-        [EventBasedMethod("OnPostSave_ClientReadOnlyConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_ClientReadOnlyConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ClientReadOnlyConstraint != null) OnPostSave_ClientReadOnlyConstraint(this);
+            if (OnNotifyPostSave_ClientReadOnlyConstraint != null) OnNotifyPostSave_ClientReadOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<ClientReadOnlyConstraint> OnPostSave_ClientReadOnlyConstraint;
+        public static event ObjectEventHandler<ClientReadOnlyConstraint> OnNotifyPostSave_ClientReadOnlyConstraint;
 
-        [EventBasedMethod("OnCreated_ClientReadOnlyConstraint")]
+        [EventBasedMethod("OnNotifyCreated_ClientReadOnlyConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ClientReadOnlyConstraint != null) OnCreated_ClientReadOnlyConstraint(this);
+            if (OnNotifyCreated_ClientReadOnlyConstraint != null) OnNotifyCreated_ClientReadOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<ClientReadOnlyConstraint> OnCreated_ClientReadOnlyConstraint;
+        public static event ObjectEventHandler<ClientReadOnlyConstraint> OnNotifyCreated_ClientReadOnlyConstraint;
 
-        [EventBasedMethod("OnDeleting_ClientReadOnlyConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_ClientReadOnlyConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ClientReadOnlyConstraint != null) OnDeleting_ClientReadOnlyConstraint(this);
+            if (OnNotifyDeleting_ClientReadOnlyConstraint != null) OnNotifyDeleting_ClientReadOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<ClientReadOnlyConstraint> OnDeleting_ClientReadOnlyConstraint;
+        public static event ObjectEventHandler<ClientReadOnlyConstraint> OnNotifyDeleting_ClientReadOnlyConstraint;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

@@ -241,37 +241,37 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<EasterCalendarRule> OnToString_EasterCalendarRule;
 
-        [EventBasedMethod("OnPreSave_EasterCalendarRule")]
+        [EventBasedMethod("OnNotifyPreSave_EasterCalendarRule")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_EasterCalendarRule != null) OnPreSave_EasterCalendarRule(this);
+            if (OnNotifyPreSave_EasterCalendarRule != null) OnNotifyPreSave_EasterCalendarRule(this);
         }
-        public static event ObjectEventHandler<EasterCalendarRule> OnPreSave_EasterCalendarRule;
+        public static event ObjectEventHandler<EasterCalendarRule> OnNotifyPreSave_EasterCalendarRule;
 
-        [EventBasedMethod("OnPostSave_EasterCalendarRule")]
+        [EventBasedMethod("OnNotifyPostSave_EasterCalendarRule")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_EasterCalendarRule != null) OnPostSave_EasterCalendarRule(this);
+            if (OnNotifyPostSave_EasterCalendarRule != null) OnNotifyPostSave_EasterCalendarRule(this);
         }
-        public static event ObjectEventHandler<EasterCalendarRule> OnPostSave_EasterCalendarRule;
+        public static event ObjectEventHandler<EasterCalendarRule> OnNotifyPostSave_EasterCalendarRule;
 
-        [EventBasedMethod("OnCreated_EasterCalendarRule")]
+        [EventBasedMethod("OnNotifyCreated_EasterCalendarRule")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_EasterCalendarRule != null) OnCreated_EasterCalendarRule(this);
+            if (OnNotifyCreated_EasterCalendarRule != null) OnNotifyCreated_EasterCalendarRule(this);
         }
-        public static event ObjectEventHandler<EasterCalendarRule> OnCreated_EasterCalendarRule;
+        public static event ObjectEventHandler<EasterCalendarRule> OnNotifyCreated_EasterCalendarRule;
 
-        [EventBasedMethod("OnDeleting_EasterCalendarRule")]
+        [EventBasedMethod("OnNotifyDeleting_EasterCalendarRule")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_EasterCalendarRule != null) OnDeleting_EasterCalendarRule(this);
+            if (OnNotifyDeleting_EasterCalendarRule != null) OnNotifyDeleting_EasterCalendarRule(this);
         }
-        public static event ObjectEventHandler<EasterCalendarRule> OnDeleting_EasterCalendarRule;
+        public static event ObjectEventHandler<EasterCalendarRule> OnNotifyDeleting_EasterCalendarRule;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

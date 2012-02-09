@@ -1269,40 +1269,40 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         }
         public static event ToStringHandler<SourceTable> OnToString_SourceTable;
 
-        [EventBasedMethod("OnPreSave_SourceTable")]
+        [EventBasedMethod("OnNotifyPreSave_SourceTable")]
         public override void NotifyPreSave()
         {
             FetchExportGuidOrDefault();
             FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_SourceTable != null) OnPreSave_SourceTable(this);
+            if (OnNotifyPreSave_SourceTable != null) OnNotifyPreSave_SourceTable(this);
         }
-        public static event ObjectEventHandler<SourceTable> OnPreSave_SourceTable;
+        public static event ObjectEventHandler<SourceTable> OnNotifyPreSave_SourceTable;
 
-        [EventBasedMethod("OnPostSave_SourceTable")]
+        [EventBasedMethod("OnNotifyPostSave_SourceTable")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_SourceTable != null) OnPostSave_SourceTable(this);
+            if (OnNotifyPostSave_SourceTable != null) OnNotifyPostSave_SourceTable(this);
         }
-        public static event ObjectEventHandler<SourceTable> OnPostSave_SourceTable;
+        public static event ObjectEventHandler<SourceTable> OnNotifyPostSave_SourceTable;
 
-        [EventBasedMethod("OnCreated_SourceTable")]
+        [EventBasedMethod("OnNotifyCreated_SourceTable")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_SourceTable != null) OnCreated_SourceTable(this);
+            if (OnNotifyCreated_SourceTable != null) OnNotifyCreated_SourceTable(this);
         }
-        public static event ObjectEventHandler<SourceTable> OnCreated_SourceTable;
+        public static event ObjectEventHandler<SourceTable> OnNotifyCreated_SourceTable;
 
-        [EventBasedMethod("OnDeleting_SourceTable")]
+        [EventBasedMethod("OnNotifyDeleting_SourceTable")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_SourceTable != null) OnDeleting_SourceTable(this);
+            if (OnNotifyDeleting_SourceTable != null) OnNotifyDeleting_SourceTable(this);
         }
-        public static event ObjectEventHandler<SourceTable> OnDeleting_SourceTable;
+        public static event ObjectEventHandler<SourceTable> OnNotifyDeleting_SourceTable;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

@@ -307,37 +307,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<RequiredParentChild> OnToString_RequiredParentChild;
 
-        [EventBasedMethod("OnPreSave_RequiredParentChild")]
+        [EventBasedMethod("OnNotifyPreSave_RequiredParentChild")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_RequiredParentChild != null) OnPreSave_RequiredParentChild(this);
+            if (OnNotifyPreSave_RequiredParentChild != null) OnNotifyPreSave_RequiredParentChild(this);
         }
-        public static event ObjectEventHandler<RequiredParentChild> OnPreSave_RequiredParentChild;
+        public static event ObjectEventHandler<RequiredParentChild> OnNotifyPreSave_RequiredParentChild;
 
-        [EventBasedMethod("OnPostSave_RequiredParentChild")]
+        [EventBasedMethod("OnNotifyPostSave_RequiredParentChild")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_RequiredParentChild != null) OnPostSave_RequiredParentChild(this);
+            if (OnNotifyPostSave_RequiredParentChild != null) OnNotifyPostSave_RequiredParentChild(this);
         }
-        public static event ObjectEventHandler<RequiredParentChild> OnPostSave_RequiredParentChild;
+        public static event ObjectEventHandler<RequiredParentChild> OnNotifyPostSave_RequiredParentChild;
 
-        [EventBasedMethod("OnCreated_RequiredParentChild")]
+        [EventBasedMethod("OnNotifyCreated_RequiredParentChild")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_RequiredParentChild != null) OnCreated_RequiredParentChild(this);
+            if (OnNotifyCreated_RequiredParentChild != null) OnNotifyCreated_RequiredParentChild(this);
         }
-        public static event ObjectEventHandler<RequiredParentChild> OnCreated_RequiredParentChild;
+        public static event ObjectEventHandler<RequiredParentChild> OnNotifyCreated_RequiredParentChild;
 
-        [EventBasedMethod("OnDeleting_RequiredParentChild")]
+        [EventBasedMethod("OnNotifyDeleting_RequiredParentChild")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_RequiredParentChild != null) OnDeleting_RequiredParentChild(this);
+            if (OnNotifyDeleting_RequiredParentChild != null) OnNotifyDeleting_RequiredParentChild(this);
         }
-        public static event ObjectEventHandler<RequiredParentChild> OnDeleting_RequiredParentChild;
+        public static event ObjectEventHandler<RequiredParentChild> OnNotifyDeleting_RequiredParentChild;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

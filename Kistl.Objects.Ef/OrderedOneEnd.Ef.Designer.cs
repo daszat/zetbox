@@ -238,37 +238,37 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         }
         public static event ToStringHandler<OrderedOneEnd> OnToString_OrderedOneEnd;
 
-        [EventBasedMethod("OnPreSave_OrderedOneEnd")]
+        [EventBasedMethod("OnNotifyPreSave_OrderedOneEnd")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_OrderedOneEnd != null) OnPreSave_OrderedOneEnd(this);
+            if (OnNotifyPreSave_OrderedOneEnd != null) OnNotifyPreSave_OrderedOneEnd(this);
         }
-        public static event ObjectEventHandler<OrderedOneEnd> OnPreSave_OrderedOneEnd;
+        public static event ObjectEventHandler<OrderedOneEnd> OnNotifyPreSave_OrderedOneEnd;
 
-        [EventBasedMethod("OnPostSave_OrderedOneEnd")]
+        [EventBasedMethod("OnNotifyPostSave_OrderedOneEnd")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_OrderedOneEnd != null) OnPostSave_OrderedOneEnd(this);
+            if (OnNotifyPostSave_OrderedOneEnd != null) OnNotifyPostSave_OrderedOneEnd(this);
         }
-        public static event ObjectEventHandler<OrderedOneEnd> OnPostSave_OrderedOneEnd;
+        public static event ObjectEventHandler<OrderedOneEnd> OnNotifyPostSave_OrderedOneEnd;
 
-        [EventBasedMethod("OnCreated_OrderedOneEnd")]
+        [EventBasedMethod("OnNotifyCreated_OrderedOneEnd")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_OrderedOneEnd != null) OnCreated_OrderedOneEnd(this);
+            if (OnNotifyCreated_OrderedOneEnd != null) OnNotifyCreated_OrderedOneEnd(this);
         }
-        public static event ObjectEventHandler<OrderedOneEnd> OnCreated_OrderedOneEnd;
+        public static event ObjectEventHandler<OrderedOneEnd> OnNotifyCreated_OrderedOneEnd;
 
-        [EventBasedMethod("OnDeleting_OrderedOneEnd")]
+        [EventBasedMethod("OnNotifyDeleting_OrderedOneEnd")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_OrderedOneEnd != null) OnDeleting_OrderedOneEnd(this);
+            if (OnNotifyDeleting_OrderedOneEnd != null) OnNotifyDeleting_OrderedOneEnd(this);
         }
-        public static event ObjectEventHandler<OrderedOneEnd> OnDeleting_OrderedOneEnd;
+        public static event ObjectEventHandler<OrderedOneEnd> OnNotifyDeleting_OrderedOneEnd;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

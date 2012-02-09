@@ -301,37 +301,37 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<FixedYearlyCalendarRule> OnToString_FixedYearlyCalendarRule;
 
-        [EventBasedMethod("OnPreSave_FixedYearlyCalendarRule")]
+        [EventBasedMethod("OnNotifyPreSave_FixedYearlyCalendarRule")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_FixedYearlyCalendarRule != null) OnPreSave_FixedYearlyCalendarRule(this);
+            if (OnNotifyPreSave_FixedYearlyCalendarRule != null) OnNotifyPreSave_FixedYearlyCalendarRule(this);
         }
-        public static event ObjectEventHandler<FixedYearlyCalendarRule> OnPreSave_FixedYearlyCalendarRule;
+        public static event ObjectEventHandler<FixedYearlyCalendarRule> OnNotifyPreSave_FixedYearlyCalendarRule;
 
-        [EventBasedMethod("OnPostSave_FixedYearlyCalendarRule")]
+        [EventBasedMethod("OnNotifyPostSave_FixedYearlyCalendarRule")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_FixedYearlyCalendarRule != null) OnPostSave_FixedYearlyCalendarRule(this);
+            if (OnNotifyPostSave_FixedYearlyCalendarRule != null) OnNotifyPostSave_FixedYearlyCalendarRule(this);
         }
-        public static event ObjectEventHandler<FixedYearlyCalendarRule> OnPostSave_FixedYearlyCalendarRule;
+        public static event ObjectEventHandler<FixedYearlyCalendarRule> OnNotifyPostSave_FixedYearlyCalendarRule;
 
-        [EventBasedMethod("OnCreated_FixedYearlyCalendarRule")]
+        [EventBasedMethod("OnNotifyCreated_FixedYearlyCalendarRule")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_FixedYearlyCalendarRule != null) OnCreated_FixedYearlyCalendarRule(this);
+            if (OnNotifyCreated_FixedYearlyCalendarRule != null) OnNotifyCreated_FixedYearlyCalendarRule(this);
         }
-        public static event ObjectEventHandler<FixedYearlyCalendarRule> OnCreated_FixedYearlyCalendarRule;
+        public static event ObjectEventHandler<FixedYearlyCalendarRule> OnNotifyCreated_FixedYearlyCalendarRule;
 
-        [EventBasedMethod("OnDeleting_FixedYearlyCalendarRule")]
+        [EventBasedMethod("OnNotifyDeleting_FixedYearlyCalendarRule")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_FixedYearlyCalendarRule != null) OnDeleting_FixedYearlyCalendarRule(this);
+            if (OnNotifyDeleting_FixedYearlyCalendarRule != null) OnNotifyDeleting_FixedYearlyCalendarRule(this);
         }
-        public static event ObjectEventHandler<FixedYearlyCalendarRule> OnDeleting_FixedYearlyCalendarRule;
+        public static event ObjectEventHandler<FixedYearlyCalendarRule> OnNotifyDeleting_FixedYearlyCalendarRule;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

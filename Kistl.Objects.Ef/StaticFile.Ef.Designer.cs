@@ -270,37 +270,37 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<StaticFile> OnToString_StaticFile;
 
-        [EventBasedMethod("OnPreSave_StaticFile")]
+        [EventBasedMethod("OnNotifyPreSave_StaticFile")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_StaticFile != null) OnPreSave_StaticFile(this);
+            if (OnNotifyPreSave_StaticFile != null) OnNotifyPreSave_StaticFile(this);
         }
-        public static event ObjectEventHandler<StaticFile> OnPreSave_StaticFile;
+        public static event ObjectEventHandler<StaticFile> OnNotifyPreSave_StaticFile;
 
-        [EventBasedMethod("OnPostSave_StaticFile")]
+        [EventBasedMethod("OnNotifyPostSave_StaticFile")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_StaticFile != null) OnPostSave_StaticFile(this);
+            if (OnNotifyPostSave_StaticFile != null) OnNotifyPostSave_StaticFile(this);
         }
-        public static event ObjectEventHandler<StaticFile> OnPostSave_StaticFile;
+        public static event ObjectEventHandler<StaticFile> OnNotifyPostSave_StaticFile;
 
-        [EventBasedMethod("OnCreated_StaticFile")]
+        [EventBasedMethod("OnNotifyCreated_StaticFile")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_StaticFile != null) OnCreated_StaticFile(this);
+            if (OnNotifyCreated_StaticFile != null) OnNotifyCreated_StaticFile(this);
         }
-        public static event ObjectEventHandler<StaticFile> OnCreated_StaticFile;
+        public static event ObjectEventHandler<StaticFile> OnNotifyCreated_StaticFile;
 
-        [EventBasedMethod("OnDeleting_StaticFile")]
+        [EventBasedMethod("OnNotifyDeleting_StaticFile")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_StaticFile != null) OnDeleting_StaticFile(this);
+            if (OnNotifyDeleting_StaticFile != null) OnNotifyDeleting_StaticFile(this);
         }
-        public static event ObjectEventHandler<StaticFile> OnDeleting_StaticFile;
+        public static event ObjectEventHandler<StaticFile> OnNotifyDeleting_StaticFile;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

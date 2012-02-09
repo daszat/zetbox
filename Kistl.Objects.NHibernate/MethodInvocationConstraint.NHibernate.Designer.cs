@@ -219,37 +219,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<MethodInvocationConstraint> OnToString_MethodInvocationConstraint;
 
-        [EventBasedMethod("OnPreSave_MethodInvocationConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_MethodInvocationConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_MethodInvocationConstraint != null) OnPreSave_MethodInvocationConstraint(this);
+            if (OnNotifyPreSave_MethodInvocationConstraint != null) OnNotifyPreSave_MethodInvocationConstraint(this);
         }
-        public static event ObjectEventHandler<MethodInvocationConstraint> OnPreSave_MethodInvocationConstraint;
+        public static event ObjectEventHandler<MethodInvocationConstraint> OnNotifyPreSave_MethodInvocationConstraint;
 
-        [EventBasedMethod("OnPostSave_MethodInvocationConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_MethodInvocationConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_MethodInvocationConstraint != null) OnPostSave_MethodInvocationConstraint(this);
+            if (OnNotifyPostSave_MethodInvocationConstraint != null) OnNotifyPostSave_MethodInvocationConstraint(this);
         }
-        public static event ObjectEventHandler<MethodInvocationConstraint> OnPostSave_MethodInvocationConstraint;
+        public static event ObjectEventHandler<MethodInvocationConstraint> OnNotifyPostSave_MethodInvocationConstraint;
 
-        [EventBasedMethod("OnCreated_MethodInvocationConstraint")]
+        [EventBasedMethod("OnNotifyCreated_MethodInvocationConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_MethodInvocationConstraint != null) OnCreated_MethodInvocationConstraint(this);
+            if (OnNotifyCreated_MethodInvocationConstraint != null) OnNotifyCreated_MethodInvocationConstraint(this);
         }
-        public static event ObjectEventHandler<MethodInvocationConstraint> OnCreated_MethodInvocationConstraint;
+        public static event ObjectEventHandler<MethodInvocationConstraint> OnNotifyCreated_MethodInvocationConstraint;
 
-        [EventBasedMethod("OnDeleting_MethodInvocationConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_MethodInvocationConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_MethodInvocationConstraint != null) OnDeleting_MethodInvocationConstraint(this);
+            if (OnNotifyDeleting_MethodInvocationConstraint != null) OnNotifyDeleting_MethodInvocationConstraint(this);
         }
-        public static event ObjectEventHandler<MethodInvocationConstraint> OnDeleting_MethodInvocationConstraint;
+        public static event ObjectEventHandler<MethodInvocationConstraint> OnNotifyDeleting_MethodInvocationConstraint;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

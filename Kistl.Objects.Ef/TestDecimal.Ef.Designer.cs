@@ -304,37 +304,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<TestDecimal> OnToString_TestDecimal;
 
-        [EventBasedMethod("OnPreSave_TestDecimal")]
+        [EventBasedMethod("OnNotifyPreSave_TestDecimal")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_TestDecimal != null) OnPreSave_TestDecimal(this);
+            if (OnNotifyPreSave_TestDecimal != null) OnNotifyPreSave_TestDecimal(this);
         }
-        public static event ObjectEventHandler<TestDecimal> OnPreSave_TestDecimal;
+        public static event ObjectEventHandler<TestDecimal> OnNotifyPreSave_TestDecimal;
 
-        [EventBasedMethod("OnPostSave_TestDecimal")]
+        [EventBasedMethod("OnNotifyPostSave_TestDecimal")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_TestDecimal != null) OnPostSave_TestDecimal(this);
+            if (OnNotifyPostSave_TestDecimal != null) OnNotifyPostSave_TestDecimal(this);
         }
-        public static event ObjectEventHandler<TestDecimal> OnPostSave_TestDecimal;
+        public static event ObjectEventHandler<TestDecimal> OnNotifyPostSave_TestDecimal;
 
-        [EventBasedMethod("OnCreated_TestDecimal")]
+        [EventBasedMethod("OnNotifyCreated_TestDecimal")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_TestDecimal != null) OnCreated_TestDecimal(this);
+            if (OnNotifyCreated_TestDecimal != null) OnNotifyCreated_TestDecimal(this);
         }
-        public static event ObjectEventHandler<TestDecimal> OnCreated_TestDecimal;
+        public static event ObjectEventHandler<TestDecimal> OnNotifyCreated_TestDecimal;
 
-        [EventBasedMethod("OnDeleting_TestDecimal")]
+        [EventBasedMethod("OnNotifyDeleting_TestDecimal")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_TestDecimal != null) OnDeleting_TestDecimal(this);
+            if (OnNotifyDeleting_TestDecimal != null) OnNotifyDeleting_TestDecimal(this);
         }
-        public static event ObjectEventHandler<TestDecimal> OnDeleting_TestDecimal;
+        public static event ObjectEventHandler<TestDecimal> OnNotifyDeleting_TestDecimal;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

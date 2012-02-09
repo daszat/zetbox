@@ -1180,37 +1180,37 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public static event ToStringHandler<Calendar> OnToString_Calendar;
 
-        [EventBasedMethod("OnPreSave_Calendar")]
+        [EventBasedMethod("OnNotifyPreSave_Calendar")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Calendar != null) OnPreSave_Calendar(this);
+            if (OnNotifyPreSave_Calendar != null) OnNotifyPreSave_Calendar(this);
         }
-        public static event ObjectEventHandler<Calendar> OnPreSave_Calendar;
+        public static event ObjectEventHandler<Calendar> OnNotifyPreSave_Calendar;
 
-        [EventBasedMethod("OnPostSave_Calendar")]
+        [EventBasedMethod("OnNotifyPostSave_Calendar")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Calendar != null) OnPostSave_Calendar(this);
+            if (OnNotifyPostSave_Calendar != null) OnNotifyPostSave_Calendar(this);
         }
-        public static event ObjectEventHandler<Calendar> OnPostSave_Calendar;
+        public static event ObjectEventHandler<Calendar> OnNotifyPostSave_Calendar;
 
-        [EventBasedMethod("OnCreated_Calendar")]
+        [EventBasedMethod("OnNotifyCreated_Calendar")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Calendar != null) OnCreated_Calendar(this);
+            if (OnNotifyCreated_Calendar != null) OnNotifyCreated_Calendar(this);
         }
-        public static event ObjectEventHandler<Calendar> OnCreated_Calendar;
+        public static event ObjectEventHandler<Calendar> OnNotifyCreated_Calendar;
 
-        [EventBasedMethod("OnDeleting_Calendar")]
+        [EventBasedMethod("OnNotifyDeleting_Calendar")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Calendar != null) OnDeleting_Calendar(this);
+            if (OnNotifyDeleting_Calendar != null) OnNotifyDeleting_Calendar(this);
         }
-        public static event ObjectEventHandler<Calendar> OnDeleting_Calendar;
+        public static event ObjectEventHandler<Calendar> OnNotifyDeleting_Calendar;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

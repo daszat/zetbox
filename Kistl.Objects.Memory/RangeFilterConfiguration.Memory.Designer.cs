@@ -207,37 +207,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<RangeFilterConfiguration> OnToString_RangeFilterConfiguration;
 
-        [EventBasedMethod("OnPreSave_RangeFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_RangeFilterConfiguration")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_RangeFilterConfiguration != null) OnPreSave_RangeFilterConfiguration(this);
+            if (OnNotifyPreSave_RangeFilterConfiguration != null) OnNotifyPreSave_RangeFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<RangeFilterConfiguration> OnPreSave_RangeFilterConfiguration;
+        public static event ObjectEventHandler<RangeFilterConfiguration> OnNotifyPreSave_RangeFilterConfiguration;
 
-        [EventBasedMethod("OnPostSave_RangeFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_RangeFilterConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_RangeFilterConfiguration != null) OnPostSave_RangeFilterConfiguration(this);
+            if (OnNotifyPostSave_RangeFilterConfiguration != null) OnNotifyPostSave_RangeFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<RangeFilterConfiguration> OnPostSave_RangeFilterConfiguration;
+        public static event ObjectEventHandler<RangeFilterConfiguration> OnNotifyPostSave_RangeFilterConfiguration;
 
-        [EventBasedMethod("OnCreated_RangeFilterConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_RangeFilterConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_RangeFilterConfiguration != null) OnCreated_RangeFilterConfiguration(this);
+            if (OnNotifyCreated_RangeFilterConfiguration != null) OnNotifyCreated_RangeFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<RangeFilterConfiguration> OnCreated_RangeFilterConfiguration;
+        public static event ObjectEventHandler<RangeFilterConfiguration> OnNotifyCreated_RangeFilterConfiguration;
 
-        [EventBasedMethod("OnDeleting_RangeFilterConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_RangeFilterConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_RangeFilterConfiguration != null) OnDeleting_RangeFilterConfiguration(this);
+            if (OnNotifyDeleting_RangeFilterConfiguration != null) OnNotifyDeleting_RangeFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<RangeFilterConfiguration> OnDeleting_RangeFilterConfiguration;
+        public static event ObjectEventHandler<RangeFilterConfiguration> OnNotifyDeleting_RangeFilterConfiguration;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

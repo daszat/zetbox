@@ -1623,40 +1623,40 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public static event ToStringHandler<DataType> OnToString_DataType;
 
-        [EventBasedMethod("OnPreSave_DataType")]
+        [EventBasedMethod("OnNotifyPreSave_DataType")]
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_DataType != null) OnPreSave_DataType(this);
+            if (OnNotifyPreSave_DataType != null) OnNotifyPreSave_DataType(this);
         }
-        public static event ObjectEventHandler<DataType> OnPreSave_DataType;
+        public static event ObjectEventHandler<DataType> OnNotifyPreSave_DataType;
 
-        [EventBasedMethod("OnPostSave_DataType")]
+        [EventBasedMethod("OnNotifyPostSave_DataType")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DataType != null) OnPostSave_DataType(this);
+            if (OnNotifyPostSave_DataType != null) OnNotifyPostSave_DataType(this);
         }
-        public static event ObjectEventHandler<DataType> OnPostSave_DataType;
+        public static event ObjectEventHandler<DataType> OnNotifyPostSave_DataType;
 
-        [EventBasedMethod("OnCreated_DataType")]
+        [EventBasedMethod("OnNotifyCreated_DataType")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DataType != null) OnCreated_DataType(this);
+            if (OnNotifyCreated_DataType != null) OnNotifyCreated_DataType(this);
         }
-        public static event ObjectEventHandler<DataType> OnCreated_DataType;
+        public static event ObjectEventHandler<DataType> OnNotifyCreated_DataType;
 
-        [EventBasedMethod("OnDeleting_DataType")]
+        [EventBasedMethod("OnNotifyDeleting_DataType")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DataType != null) OnDeleting_DataType(this);
+            if (OnNotifyDeleting_DataType != null) OnNotifyDeleting_DataType(this);
         }
-        public static event ObjectEventHandler<DataType> OnDeleting_DataType;
+        public static event ObjectEventHandler<DataType> OnNotifyDeleting_DataType;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

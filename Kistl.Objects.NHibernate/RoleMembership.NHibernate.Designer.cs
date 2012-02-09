@@ -156,37 +156,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<RoleMembership> OnToString_RoleMembership;
 
-        [EventBasedMethod("OnPreSave_RoleMembership")]
+        [EventBasedMethod("OnNotifyPreSave_RoleMembership")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_RoleMembership != null) OnPreSave_RoleMembership(this);
+            if (OnNotifyPreSave_RoleMembership != null) OnNotifyPreSave_RoleMembership(this);
         }
-        public static event ObjectEventHandler<RoleMembership> OnPreSave_RoleMembership;
+        public static event ObjectEventHandler<RoleMembership> OnNotifyPreSave_RoleMembership;
 
-        [EventBasedMethod("OnPostSave_RoleMembership")]
+        [EventBasedMethod("OnNotifyPostSave_RoleMembership")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_RoleMembership != null) OnPostSave_RoleMembership(this);
+            if (OnNotifyPostSave_RoleMembership != null) OnNotifyPostSave_RoleMembership(this);
         }
-        public static event ObjectEventHandler<RoleMembership> OnPostSave_RoleMembership;
+        public static event ObjectEventHandler<RoleMembership> OnNotifyPostSave_RoleMembership;
 
-        [EventBasedMethod("OnCreated_RoleMembership")]
+        [EventBasedMethod("OnNotifyCreated_RoleMembership")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_RoleMembership != null) OnCreated_RoleMembership(this);
+            if (OnNotifyCreated_RoleMembership != null) OnNotifyCreated_RoleMembership(this);
         }
-        public static event ObjectEventHandler<RoleMembership> OnCreated_RoleMembership;
+        public static event ObjectEventHandler<RoleMembership> OnNotifyCreated_RoleMembership;
 
-        [EventBasedMethod("OnDeleting_RoleMembership")]
+        [EventBasedMethod("OnNotifyDeleting_RoleMembership")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_RoleMembership != null) OnDeleting_RoleMembership(this);
+            if (OnNotifyDeleting_RoleMembership != null) OnNotifyDeleting_RoleMembership(this);
         }
-        public static event ObjectEventHandler<RoleMembership> OnDeleting_RoleMembership;
+        public static event ObjectEventHandler<RoleMembership> OnNotifyDeleting_RoleMembership;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

@@ -1257,37 +1257,37 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         }
         public static event ToStringHandler<NavigationEntry> OnToString_NavigationEntry;
 
-        [EventBasedMethod("OnPreSave_NavigationEntry")]
+        [EventBasedMethod("OnNotifyPreSave_NavigationEntry")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_NavigationEntry != null) OnPreSave_NavigationEntry(this);
+            if (OnNotifyPreSave_NavigationEntry != null) OnNotifyPreSave_NavigationEntry(this);
         }
-        public static event ObjectEventHandler<NavigationEntry> OnPreSave_NavigationEntry;
+        public static event ObjectEventHandler<NavigationEntry> OnNotifyPreSave_NavigationEntry;
 
-        [EventBasedMethod("OnPostSave_NavigationEntry")]
+        [EventBasedMethod("OnNotifyPostSave_NavigationEntry")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_NavigationEntry != null) OnPostSave_NavigationEntry(this);
+            if (OnNotifyPostSave_NavigationEntry != null) OnNotifyPostSave_NavigationEntry(this);
         }
-        public static event ObjectEventHandler<NavigationEntry> OnPostSave_NavigationEntry;
+        public static event ObjectEventHandler<NavigationEntry> OnNotifyPostSave_NavigationEntry;
 
-        [EventBasedMethod("OnCreated_NavigationEntry")]
+        [EventBasedMethod("OnNotifyCreated_NavigationEntry")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_NavigationEntry != null) OnCreated_NavigationEntry(this);
+            if (OnNotifyCreated_NavigationEntry != null) OnNotifyCreated_NavigationEntry(this);
         }
-        public static event ObjectEventHandler<NavigationEntry> OnCreated_NavigationEntry;
+        public static event ObjectEventHandler<NavigationEntry> OnNotifyCreated_NavigationEntry;
 
-        [EventBasedMethod("OnDeleting_NavigationEntry")]
+        [EventBasedMethod("OnNotifyDeleting_NavigationEntry")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_NavigationEntry != null) OnDeleting_NavigationEntry(this);
+            if (OnNotifyDeleting_NavigationEntry != null) OnNotifyDeleting_NavigationEntry(this);
         }
-        public static event ObjectEventHandler<NavigationEntry> OnDeleting_NavigationEntry;
+        public static event ObjectEventHandler<NavigationEntry> OnNotifyDeleting_NavigationEntry;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

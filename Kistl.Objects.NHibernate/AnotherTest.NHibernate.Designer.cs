@@ -93,37 +93,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<AnotherTest> OnToString_AnotherTest;
 
-        [EventBasedMethod("OnPreSave_AnotherTest")]
+        [EventBasedMethod("OnNotifyPreSave_AnotherTest")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_AnotherTest != null) OnPreSave_AnotherTest(this);
+            if (OnNotifyPreSave_AnotherTest != null) OnNotifyPreSave_AnotherTest(this);
         }
-        public static event ObjectEventHandler<AnotherTest> OnPreSave_AnotherTest;
+        public static event ObjectEventHandler<AnotherTest> OnNotifyPreSave_AnotherTest;
 
-        [EventBasedMethod("OnPostSave_AnotherTest")]
+        [EventBasedMethod("OnNotifyPostSave_AnotherTest")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_AnotherTest != null) OnPostSave_AnotherTest(this);
+            if (OnNotifyPostSave_AnotherTest != null) OnNotifyPostSave_AnotherTest(this);
         }
-        public static event ObjectEventHandler<AnotherTest> OnPostSave_AnotherTest;
+        public static event ObjectEventHandler<AnotherTest> OnNotifyPostSave_AnotherTest;
 
-        [EventBasedMethod("OnCreated_AnotherTest")]
+        [EventBasedMethod("OnNotifyCreated_AnotherTest")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_AnotherTest != null) OnCreated_AnotherTest(this);
+            if (OnNotifyCreated_AnotherTest != null) OnNotifyCreated_AnotherTest(this);
         }
-        public static event ObjectEventHandler<AnotherTest> OnCreated_AnotherTest;
+        public static event ObjectEventHandler<AnotherTest> OnNotifyCreated_AnotherTest;
 
-        [EventBasedMethod("OnDeleting_AnotherTest")]
+        [EventBasedMethod("OnNotifyDeleting_AnotherTest")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_AnotherTest != null) OnDeleting_AnotherTest(this);
+            if (OnNotifyDeleting_AnotherTest != null) OnNotifyDeleting_AnotherTest(this);
         }
-        public static event ObjectEventHandler<AnotherTest> OnDeleting_AnotherTest;
+        public static event ObjectEventHandler<AnotherTest> OnNotifyDeleting_AnotherTest;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

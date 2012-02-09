@@ -222,37 +222,37 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         }
         public static event ToStringHandler<RequiredParent> OnToString_RequiredParent;
 
-        [EventBasedMethod("OnPreSave_RequiredParent")]
+        [EventBasedMethod("OnNotifyPreSave_RequiredParent")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_RequiredParent != null) OnPreSave_RequiredParent(this);
+            if (OnNotifyPreSave_RequiredParent != null) OnNotifyPreSave_RequiredParent(this);
         }
-        public static event ObjectEventHandler<RequiredParent> OnPreSave_RequiredParent;
+        public static event ObjectEventHandler<RequiredParent> OnNotifyPreSave_RequiredParent;
 
-        [EventBasedMethod("OnPostSave_RequiredParent")]
+        [EventBasedMethod("OnNotifyPostSave_RequiredParent")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_RequiredParent != null) OnPostSave_RequiredParent(this);
+            if (OnNotifyPostSave_RequiredParent != null) OnNotifyPostSave_RequiredParent(this);
         }
-        public static event ObjectEventHandler<RequiredParent> OnPostSave_RequiredParent;
+        public static event ObjectEventHandler<RequiredParent> OnNotifyPostSave_RequiredParent;
 
-        [EventBasedMethod("OnCreated_RequiredParent")]
+        [EventBasedMethod("OnNotifyCreated_RequiredParent")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_RequiredParent != null) OnCreated_RequiredParent(this);
+            if (OnNotifyCreated_RequiredParent != null) OnNotifyCreated_RequiredParent(this);
         }
-        public static event ObjectEventHandler<RequiredParent> OnCreated_RequiredParent;
+        public static event ObjectEventHandler<RequiredParent> OnNotifyCreated_RequiredParent;
 
-        [EventBasedMethod("OnDeleting_RequiredParent")]
+        [EventBasedMethod("OnNotifyDeleting_RequiredParent")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_RequiredParent != null) OnDeleting_RequiredParent(this);
+            if (OnNotifyDeleting_RequiredParent != null) OnNotifyDeleting_RequiredParent(this);
         }
-        public static event ObjectEventHandler<RequiredParent> OnDeleting_RequiredParent;
+        public static event ObjectEventHandler<RequiredParent> OnNotifyDeleting_RequiredParent;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

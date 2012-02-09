@@ -978,37 +978,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ServiceDescriptor> OnToString_ServiceDescriptor;
 
-        [EventBasedMethod("OnPreSave_ServiceDescriptor")]
+        [EventBasedMethod("OnNotifyPreSave_ServiceDescriptor")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ServiceDescriptor != null) OnPreSave_ServiceDescriptor(this);
+            if (OnNotifyPreSave_ServiceDescriptor != null) OnNotifyPreSave_ServiceDescriptor(this);
         }
-        public static event ObjectEventHandler<ServiceDescriptor> OnPreSave_ServiceDescriptor;
+        public static event ObjectEventHandler<ServiceDescriptor> OnNotifyPreSave_ServiceDescriptor;
 
-        [EventBasedMethod("OnPostSave_ServiceDescriptor")]
+        [EventBasedMethod("OnNotifyPostSave_ServiceDescriptor")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ServiceDescriptor != null) OnPostSave_ServiceDescriptor(this);
+            if (OnNotifyPostSave_ServiceDescriptor != null) OnNotifyPostSave_ServiceDescriptor(this);
         }
-        public static event ObjectEventHandler<ServiceDescriptor> OnPostSave_ServiceDescriptor;
+        public static event ObjectEventHandler<ServiceDescriptor> OnNotifyPostSave_ServiceDescriptor;
 
-        [EventBasedMethod("OnCreated_ServiceDescriptor")]
+        [EventBasedMethod("OnNotifyCreated_ServiceDescriptor")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ServiceDescriptor != null) OnCreated_ServiceDescriptor(this);
+            if (OnNotifyCreated_ServiceDescriptor != null) OnNotifyCreated_ServiceDescriptor(this);
         }
-        public static event ObjectEventHandler<ServiceDescriptor> OnCreated_ServiceDescriptor;
+        public static event ObjectEventHandler<ServiceDescriptor> OnNotifyCreated_ServiceDescriptor;
 
-        [EventBasedMethod("OnDeleting_ServiceDescriptor")]
+        [EventBasedMethod("OnNotifyDeleting_ServiceDescriptor")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ServiceDescriptor != null) OnDeleting_ServiceDescriptor(this);
+            if (OnNotifyDeleting_ServiceDescriptor != null) OnNotifyDeleting_ServiceDescriptor(this);
         }
-        public static event ObjectEventHandler<ServiceDescriptor> OnDeleting_ServiceDescriptor;
+        public static event ObjectEventHandler<ServiceDescriptor> OnNotifyDeleting_ServiceDescriptor;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

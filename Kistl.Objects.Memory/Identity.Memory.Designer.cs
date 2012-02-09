@@ -327,37 +327,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Identity> OnToString_Identity;
 
-        [EventBasedMethod("OnPreSave_Identity")]
+        [EventBasedMethod("OnNotifyPreSave_Identity")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Identity != null) OnPreSave_Identity(this);
+            if (OnNotifyPreSave_Identity != null) OnNotifyPreSave_Identity(this);
         }
-        public static event ObjectEventHandler<Identity> OnPreSave_Identity;
+        public static event ObjectEventHandler<Identity> OnNotifyPreSave_Identity;
 
-        [EventBasedMethod("OnPostSave_Identity")]
+        [EventBasedMethod("OnNotifyPostSave_Identity")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Identity != null) OnPostSave_Identity(this);
+            if (OnNotifyPostSave_Identity != null) OnNotifyPostSave_Identity(this);
         }
-        public static event ObjectEventHandler<Identity> OnPostSave_Identity;
+        public static event ObjectEventHandler<Identity> OnNotifyPostSave_Identity;
 
-        [EventBasedMethod("OnCreated_Identity")]
+        [EventBasedMethod("OnNotifyCreated_Identity")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Identity != null) OnCreated_Identity(this);
+            if (OnNotifyCreated_Identity != null) OnNotifyCreated_Identity(this);
         }
-        public static event ObjectEventHandler<Identity> OnCreated_Identity;
+        public static event ObjectEventHandler<Identity> OnNotifyCreated_Identity;
 
-        [EventBasedMethod("OnDeleting_Identity")]
+        [EventBasedMethod("OnNotifyDeleting_Identity")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Identity != null) OnDeleting_Identity(this);
+            if (OnNotifyDeleting_Identity != null) OnNotifyDeleting_Identity(this);
         }
-        public static event ObjectEventHandler<Identity> OnDeleting_Identity;
+        public static event ObjectEventHandler<Identity> OnNotifyDeleting_Identity;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

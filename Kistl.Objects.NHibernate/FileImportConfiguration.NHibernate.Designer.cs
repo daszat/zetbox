@@ -831,40 +831,40 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<FileImportConfiguration> OnToString_FileImportConfiguration;
 
-        [EventBasedMethod("OnPreSave_FileImportConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_FileImportConfiguration")]
         public override void NotifyPreSave()
         {
             FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_FileImportConfiguration != null) OnPreSave_FileImportConfiguration(this);
+            if (OnNotifyPreSave_FileImportConfiguration != null) OnNotifyPreSave_FileImportConfiguration(this);
         }
-        public static event ObjectEventHandler<FileImportConfiguration> OnPreSave_FileImportConfiguration;
+        public static event ObjectEventHandler<FileImportConfiguration> OnNotifyPreSave_FileImportConfiguration;
 
-        [EventBasedMethod("OnPostSave_FileImportConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_FileImportConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_FileImportConfiguration != null) OnPostSave_FileImportConfiguration(this);
+            if (OnNotifyPostSave_FileImportConfiguration != null) OnNotifyPostSave_FileImportConfiguration(this);
         }
-        public static event ObjectEventHandler<FileImportConfiguration> OnPostSave_FileImportConfiguration;
+        public static event ObjectEventHandler<FileImportConfiguration> OnNotifyPostSave_FileImportConfiguration;
 
-        [EventBasedMethod("OnCreated_FileImportConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_FileImportConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_FileImportConfiguration != null) OnCreated_FileImportConfiguration(this);
+            if (OnNotifyCreated_FileImportConfiguration != null) OnNotifyCreated_FileImportConfiguration(this);
         }
-        public static event ObjectEventHandler<FileImportConfiguration> OnCreated_FileImportConfiguration;
+        public static event ObjectEventHandler<FileImportConfiguration> OnNotifyCreated_FileImportConfiguration;
 
-        [EventBasedMethod("OnDeleting_FileImportConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_FileImportConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_FileImportConfiguration != null) OnDeleting_FileImportConfiguration(this);
+            if (OnNotifyDeleting_FileImportConfiguration != null) OnNotifyDeleting_FileImportConfiguration(this);
         }
-        public static event ObjectEventHandler<FileImportConfiguration> OnDeleting_FileImportConfiguration;
+        public static event ObjectEventHandler<FileImportConfiguration> OnNotifyDeleting_FileImportConfiguration;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

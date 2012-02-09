@@ -357,37 +357,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<OrderedNEnd> OnToString_OrderedNEnd;
 
-        [EventBasedMethod("OnPreSave_OrderedNEnd")]
+        [EventBasedMethod("OnNotifyPreSave_OrderedNEnd")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_OrderedNEnd != null) OnPreSave_OrderedNEnd(this);
+            if (OnNotifyPreSave_OrderedNEnd != null) OnNotifyPreSave_OrderedNEnd(this);
         }
-        public static event ObjectEventHandler<OrderedNEnd> OnPreSave_OrderedNEnd;
+        public static event ObjectEventHandler<OrderedNEnd> OnNotifyPreSave_OrderedNEnd;
 
-        [EventBasedMethod("OnPostSave_OrderedNEnd")]
+        [EventBasedMethod("OnNotifyPostSave_OrderedNEnd")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_OrderedNEnd != null) OnPostSave_OrderedNEnd(this);
+            if (OnNotifyPostSave_OrderedNEnd != null) OnNotifyPostSave_OrderedNEnd(this);
         }
-        public static event ObjectEventHandler<OrderedNEnd> OnPostSave_OrderedNEnd;
+        public static event ObjectEventHandler<OrderedNEnd> OnNotifyPostSave_OrderedNEnd;
 
-        [EventBasedMethod("OnCreated_OrderedNEnd")]
+        [EventBasedMethod("OnNotifyCreated_OrderedNEnd")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_OrderedNEnd != null) OnCreated_OrderedNEnd(this);
+            if (OnNotifyCreated_OrderedNEnd != null) OnNotifyCreated_OrderedNEnd(this);
         }
-        public static event ObjectEventHandler<OrderedNEnd> OnCreated_OrderedNEnd;
+        public static event ObjectEventHandler<OrderedNEnd> OnNotifyCreated_OrderedNEnd;
 
-        [EventBasedMethod("OnDeleting_OrderedNEnd")]
+        [EventBasedMethod("OnNotifyDeleting_OrderedNEnd")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_OrderedNEnd != null) OnDeleting_OrderedNEnd(this);
+            if (OnNotifyDeleting_OrderedNEnd != null) OnNotifyDeleting_OrderedNEnd(this);
         }
-        public static event ObjectEventHandler<OrderedNEnd> OnDeleting_OrderedNEnd;
+        public static event ObjectEventHandler<OrderedNEnd> OnNotifyDeleting_OrderedNEnd;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

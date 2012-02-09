@@ -555,37 +555,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DecimalProperty> OnToString_DecimalProperty;
 
-        [EventBasedMethod("OnPreSave_DecimalProperty")]
+        [EventBasedMethod("OnNotifyPreSave_DecimalProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DecimalProperty != null) OnPreSave_DecimalProperty(this);
+            if (OnNotifyPreSave_DecimalProperty != null) OnNotifyPreSave_DecimalProperty(this);
         }
-        public static event ObjectEventHandler<DecimalProperty> OnPreSave_DecimalProperty;
+        public static event ObjectEventHandler<DecimalProperty> OnNotifyPreSave_DecimalProperty;
 
-        [EventBasedMethod("OnPostSave_DecimalProperty")]
+        [EventBasedMethod("OnNotifyPostSave_DecimalProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DecimalProperty != null) OnPostSave_DecimalProperty(this);
+            if (OnNotifyPostSave_DecimalProperty != null) OnNotifyPostSave_DecimalProperty(this);
         }
-        public static event ObjectEventHandler<DecimalProperty> OnPostSave_DecimalProperty;
+        public static event ObjectEventHandler<DecimalProperty> OnNotifyPostSave_DecimalProperty;
 
-        [EventBasedMethod("OnCreated_DecimalProperty")]
+        [EventBasedMethod("OnNotifyCreated_DecimalProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DecimalProperty != null) OnCreated_DecimalProperty(this);
+            if (OnNotifyCreated_DecimalProperty != null) OnNotifyCreated_DecimalProperty(this);
         }
-        public static event ObjectEventHandler<DecimalProperty> OnCreated_DecimalProperty;
+        public static event ObjectEventHandler<DecimalProperty> OnNotifyCreated_DecimalProperty;
 
-        [EventBasedMethod("OnDeleting_DecimalProperty")]
+        [EventBasedMethod("OnNotifyDeleting_DecimalProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DecimalProperty != null) OnDeleting_DecimalProperty(this);
+            if (OnNotifyDeleting_DecimalProperty != null) OnNotifyDeleting_DecimalProperty(this);
         }
-        public static event ObjectEventHandler<DecimalProperty> OnDeleting_DecimalProperty;
+        public static event ObjectEventHandler<DecimalProperty> OnNotifyDeleting_DecimalProperty;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

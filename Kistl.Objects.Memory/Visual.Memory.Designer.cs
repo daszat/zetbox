@@ -474,37 +474,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Visual> OnToString_Visual;
 
-        [EventBasedMethod("OnPreSave_Visual")]
+        [EventBasedMethod("OnNotifyPreSave_Visual")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Visual != null) OnPreSave_Visual(this);
+            if (OnNotifyPreSave_Visual != null) OnNotifyPreSave_Visual(this);
         }
-        public static event ObjectEventHandler<Visual> OnPreSave_Visual;
+        public static event ObjectEventHandler<Visual> OnNotifyPreSave_Visual;
 
-        [EventBasedMethod("OnPostSave_Visual")]
+        [EventBasedMethod("OnNotifyPostSave_Visual")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Visual != null) OnPostSave_Visual(this);
+            if (OnNotifyPostSave_Visual != null) OnNotifyPostSave_Visual(this);
         }
-        public static event ObjectEventHandler<Visual> OnPostSave_Visual;
+        public static event ObjectEventHandler<Visual> OnNotifyPostSave_Visual;
 
-        [EventBasedMethod("OnCreated_Visual")]
+        [EventBasedMethod("OnNotifyCreated_Visual")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Visual != null) OnCreated_Visual(this);
+            if (OnNotifyCreated_Visual != null) OnNotifyCreated_Visual(this);
         }
-        public static event ObjectEventHandler<Visual> OnCreated_Visual;
+        public static event ObjectEventHandler<Visual> OnNotifyCreated_Visual;
 
-        [EventBasedMethod("OnDeleting_Visual")]
+        [EventBasedMethod("OnNotifyDeleting_Visual")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Visual != null) OnDeleting_Visual(this);
+            if (OnNotifyDeleting_Visual != null) OnNotifyDeleting_Visual(this);
         }
-        public static event ObjectEventHandler<Visual> OnDeleting_Visual;
+        public static event ObjectEventHandler<Visual> OnNotifyDeleting_Visual;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

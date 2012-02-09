@@ -230,37 +230,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<StringDefaultValue> OnToString_StringDefaultValue;
 
-        [EventBasedMethod("OnPreSave_StringDefaultValue")]
+        [EventBasedMethod("OnNotifyPreSave_StringDefaultValue")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_StringDefaultValue != null) OnPreSave_StringDefaultValue(this);
+            if (OnNotifyPreSave_StringDefaultValue != null) OnNotifyPreSave_StringDefaultValue(this);
         }
-        public static event ObjectEventHandler<StringDefaultValue> OnPreSave_StringDefaultValue;
+        public static event ObjectEventHandler<StringDefaultValue> OnNotifyPreSave_StringDefaultValue;
 
-        [EventBasedMethod("OnPostSave_StringDefaultValue")]
+        [EventBasedMethod("OnNotifyPostSave_StringDefaultValue")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_StringDefaultValue != null) OnPostSave_StringDefaultValue(this);
+            if (OnNotifyPostSave_StringDefaultValue != null) OnNotifyPostSave_StringDefaultValue(this);
         }
-        public static event ObjectEventHandler<StringDefaultValue> OnPostSave_StringDefaultValue;
+        public static event ObjectEventHandler<StringDefaultValue> OnNotifyPostSave_StringDefaultValue;
 
-        [EventBasedMethod("OnCreated_StringDefaultValue")]
+        [EventBasedMethod("OnNotifyCreated_StringDefaultValue")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_StringDefaultValue != null) OnCreated_StringDefaultValue(this);
+            if (OnNotifyCreated_StringDefaultValue != null) OnNotifyCreated_StringDefaultValue(this);
         }
-        public static event ObjectEventHandler<StringDefaultValue> OnCreated_StringDefaultValue;
+        public static event ObjectEventHandler<StringDefaultValue> OnNotifyCreated_StringDefaultValue;
 
-        [EventBasedMethod("OnDeleting_StringDefaultValue")]
+        [EventBasedMethod("OnNotifyDeleting_StringDefaultValue")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_StringDefaultValue != null) OnDeleting_StringDefaultValue(this);
+            if (OnNotifyDeleting_StringDefaultValue != null) OnNotifyDeleting_StringDefaultValue(this);
         }
-        public static event ObjectEventHandler<StringDefaultValue> OnDeleting_StringDefaultValue;
+        public static event ObjectEventHandler<StringDefaultValue> OnNotifyDeleting_StringDefaultValue;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

@@ -293,37 +293,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<YearFilterConfiguration> OnToString_YearFilterConfiguration;
 
-        [EventBasedMethod("OnPreSave_YearFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_YearFilterConfiguration")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_YearFilterConfiguration != null) OnPreSave_YearFilterConfiguration(this);
+            if (OnNotifyPreSave_YearFilterConfiguration != null) OnNotifyPreSave_YearFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<YearFilterConfiguration> OnPreSave_YearFilterConfiguration;
+        public static event ObjectEventHandler<YearFilterConfiguration> OnNotifyPreSave_YearFilterConfiguration;
 
-        [EventBasedMethod("OnPostSave_YearFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_YearFilterConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_YearFilterConfiguration != null) OnPostSave_YearFilterConfiguration(this);
+            if (OnNotifyPostSave_YearFilterConfiguration != null) OnNotifyPostSave_YearFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<YearFilterConfiguration> OnPostSave_YearFilterConfiguration;
+        public static event ObjectEventHandler<YearFilterConfiguration> OnNotifyPostSave_YearFilterConfiguration;
 
-        [EventBasedMethod("OnCreated_YearFilterConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_YearFilterConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_YearFilterConfiguration != null) OnCreated_YearFilterConfiguration(this);
+            if (OnNotifyCreated_YearFilterConfiguration != null) OnNotifyCreated_YearFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<YearFilterConfiguration> OnCreated_YearFilterConfiguration;
+        public static event ObjectEventHandler<YearFilterConfiguration> OnNotifyCreated_YearFilterConfiguration;
 
-        [EventBasedMethod("OnDeleting_YearFilterConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_YearFilterConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_YearFilterConfiguration != null) OnDeleting_YearFilterConfiguration(this);
+            if (OnNotifyDeleting_YearFilterConfiguration != null) OnNotifyDeleting_YearFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<YearFilterConfiguration> OnDeleting_YearFilterConfiguration;
+        public static event ObjectEventHandler<YearFilterConfiguration> OnNotifyDeleting_YearFilterConfiguration;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

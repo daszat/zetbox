@@ -178,37 +178,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<Company> OnToString_Company;
 
-        [EventBasedMethod("OnPreSave_Company")]
+        [EventBasedMethod("OnNotifyPreSave_Company")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Company != null) OnPreSave_Company(this);
+            if (OnNotifyPreSave_Company != null) OnNotifyPreSave_Company(this);
         }
-        public static event ObjectEventHandler<Company> OnPreSave_Company;
+        public static event ObjectEventHandler<Company> OnNotifyPreSave_Company;
 
-        [EventBasedMethod("OnPostSave_Company")]
+        [EventBasedMethod("OnNotifyPostSave_Company")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Company != null) OnPostSave_Company(this);
+            if (OnNotifyPostSave_Company != null) OnNotifyPostSave_Company(this);
         }
-        public static event ObjectEventHandler<Company> OnPostSave_Company;
+        public static event ObjectEventHandler<Company> OnNotifyPostSave_Company;
 
-        [EventBasedMethod("OnCreated_Company")]
+        [EventBasedMethod("OnNotifyCreated_Company")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Company != null) OnCreated_Company(this);
+            if (OnNotifyCreated_Company != null) OnNotifyCreated_Company(this);
         }
-        public static event ObjectEventHandler<Company> OnCreated_Company;
+        public static event ObjectEventHandler<Company> OnNotifyCreated_Company;
 
-        [EventBasedMethod("OnDeleting_Company")]
+        [EventBasedMethod("OnNotifyDeleting_Company")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Company != null) OnDeleting_Company(this);
+            if (OnNotifyDeleting_Company != null) OnNotifyDeleting_Company(this);
         }
-        public static event ObjectEventHandler<Company> OnDeleting_Company;
+        public static event ObjectEventHandler<Company> OnNotifyDeleting_Company;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

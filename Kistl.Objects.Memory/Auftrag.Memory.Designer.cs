@@ -1133,37 +1133,37 @@ namespace Kistl.App.Projekte
         }
         public static event ToStringHandler<Auftrag> OnToString_Auftrag;
 
-        [EventBasedMethod("OnPreSave_Auftrag")]
+        [EventBasedMethod("OnNotifyPreSave_Auftrag")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Auftrag != null) OnPreSave_Auftrag(this);
+            if (OnNotifyPreSave_Auftrag != null) OnNotifyPreSave_Auftrag(this);
         }
-        public static event ObjectEventHandler<Auftrag> OnPreSave_Auftrag;
+        public static event ObjectEventHandler<Auftrag> OnNotifyPreSave_Auftrag;
 
-        [EventBasedMethod("OnPostSave_Auftrag")]
+        [EventBasedMethod("OnNotifyPostSave_Auftrag")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Auftrag != null) OnPostSave_Auftrag(this);
+            if (OnNotifyPostSave_Auftrag != null) OnNotifyPostSave_Auftrag(this);
         }
-        public static event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
+        public static event ObjectEventHandler<Auftrag> OnNotifyPostSave_Auftrag;
 
-        [EventBasedMethod("OnCreated_Auftrag")]
+        [EventBasedMethod("OnNotifyCreated_Auftrag")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Auftrag != null) OnCreated_Auftrag(this);
+            if (OnNotifyCreated_Auftrag != null) OnNotifyCreated_Auftrag(this);
         }
-        public static event ObjectEventHandler<Auftrag> OnCreated_Auftrag;
+        public static event ObjectEventHandler<Auftrag> OnNotifyCreated_Auftrag;
 
-        [EventBasedMethod("OnDeleting_Auftrag")]
+        [EventBasedMethod("OnNotifyDeleting_Auftrag")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Auftrag != null) OnDeleting_Auftrag(this);
+            if (OnNotifyDeleting_Auftrag != null) OnNotifyDeleting_Auftrag(this);
         }
-        public static event ObjectEventHandler<Auftrag> OnDeleting_Auftrag;
+        public static event ObjectEventHandler<Auftrag> OnNotifyDeleting_Auftrag;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

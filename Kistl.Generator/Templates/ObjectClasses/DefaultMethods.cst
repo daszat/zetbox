@@ -27,44 +27,44 @@
         }
         public static event ToStringHandler<<%= dt.Name %>> OnToString_<%= dt.Name %>;
 
-        [EventBasedMethod("OnPreSave_<%= dt.Name %>")]
+        [EventBasedMethod("OnNotifyPreSave_<%= dt.Name %>")]
         public override void NotifyPreSave()
         {
 <% ApplyPrePreSaveTemplate(); %>
             base.NotifyPreSave();
-            if (OnPreSave_<%= dt.Name %> != null) OnPreSave_<%= dt.Name %>(this);
+            if (OnNotifyPreSave_<%= dt.Name %> != null) OnNotifyPreSave_<%= dt.Name %>(this);
 <% ApplyPostPreSaveTemplate(); %>
         }
-        public static event ObjectEventHandler<<%= dt.Name %>> OnPreSave_<%= dt.Name %>;
+        public static event ObjectEventHandler<<%= dt.Name %>> OnNotifyPreSave_<%= dt.Name %>;
 
-        [EventBasedMethod("OnPostSave_<%= dt.Name %>")]
+        [EventBasedMethod("OnNotifyPostSave_<%= dt.Name %>")]
         public override void NotifyPostSave()
         {
 <% ApplyPrePostSaveTemplate(); %>
             base.NotifyPostSave();
-            if (OnPostSave_<%= dt.Name %> != null) OnPostSave_<%= dt.Name %>(this);
+            if (OnNotifyPostSave_<%= dt.Name %> != null) OnNotifyPostSave_<%= dt.Name %>(this);
 <% ApplyPostPostSaveTemplate(); %>
         }
-        public static event ObjectEventHandler<<%= dt.Name %>> OnPostSave_<%= dt.Name %>;
+        public static event ObjectEventHandler<<%= dt.Name %>> OnNotifyPostSave_<%= dt.Name %>;
 
-        [EventBasedMethod("OnCreated_<%= dt.Name %>")]
+        [EventBasedMethod("OnNotifyCreated_<%= dt.Name %>")]
         public override void NotifyCreated()
         {
 <% ApplyPreCreatedTemplate(); %>
             base.NotifyCreated();
-            if (OnCreated_<%= dt.Name %> != null) OnCreated_<%= dt.Name %>(this);
+            if (OnNotifyCreated_<%= dt.Name %> != null) OnNotifyCreated_<%= dt.Name %>(this);
 <% ApplyPostCreatedTemplate(); %>
         }
-        public static event ObjectEventHandler<<%= dt.Name %>> OnCreated_<%= dt.Name %>;
+        public static event ObjectEventHandler<<%= dt.Name %>> OnNotifyCreated_<%= dt.Name %>;
 
-        [EventBasedMethod("OnDeleting_<%= dt.Name %>")]
+        [EventBasedMethod("OnNotifyDeleting_<%= dt.Name %>")]
         public override void NotifyDeleting()
         {
 <% ApplyPreDeletingTemplate(); %>
             base.NotifyDeleting();
-            if (OnDeleting_<%= dt.Name %> != null) OnDeleting_<%= dt.Name %>(this);
+            if (OnNotifyDeleting_<%= dt.Name %> != null) OnNotifyDeleting_<%= dt.Name %>(this);
 <% ApplyPostDeletingTemplate(); %>
         }
-        public static event ObjectEventHandler<<%= dt.Name %>> OnDeleting_<%= dt.Name %>;
+        public static event ObjectEventHandler<<%= dt.Name %>> OnNotifyDeleting_<%= dt.Name %>;
 
         #endregion // <%= this.GetType() %>

@@ -1590,37 +1590,37 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         }
         public static event ToStringHandler<Method> OnToString_Method;
 
-        [EventBasedMethod("OnPreSave_Method")]
+        [EventBasedMethod("OnNotifyPreSave_Method")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Method != null) OnPreSave_Method(this);
+            if (OnNotifyPreSave_Method != null) OnNotifyPreSave_Method(this);
         }
-        public static event ObjectEventHandler<Method> OnPreSave_Method;
+        public static event ObjectEventHandler<Method> OnNotifyPreSave_Method;
 
-        [EventBasedMethod("OnPostSave_Method")]
+        [EventBasedMethod("OnNotifyPostSave_Method")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Method != null) OnPostSave_Method(this);
+            if (OnNotifyPostSave_Method != null) OnNotifyPostSave_Method(this);
         }
-        public static event ObjectEventHandler<Method> OnPostSave_Method;
+        public static event ObjectEventHandler<Method> OnNotifyPostSave_Method;
 
-        [EventBasedMethod("OnCreated_Method")]
+        [EventBasedMethod("OnNotifyCreated_Method")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Method != null) OnCreated_Method(this);
+            if (OnNotifyCreated_Method != null) OnNotifyCreated_Method(this);
         }
-        public static event ObjectEventHandler<Method> OnCreated_Method;
+        public static event ObjectEventHandler<Method> OnNotifyCreated_Method;
 
-        [EventBasedMethod("OnDeleting_Method")]
+        [EventBasedMethod("OnNotifyDeleting_Method")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Method != null) OnDeleting_Method(this);
+            if (OnNotifyDeleting_Method != null) OnNotifyDeleting_Method(this);
         }
-        public static event ObjectEventHandler<Method> OnDeleting_Method;
+        public static event ObjectEventHandler<Method> OnNotifyDeleting_Method;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

@@ -430,37 +430,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<DateRangeFilterConfiguration> OnToString_DateRangeFilterConfiguration;
 
-        [EventBasedMethod("OnPreSave_DateRangeFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_DateRangeFilterConfiguration")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DateRangeFilterConfiguration != null) OnPreSave_DateRangeFilterConfiguration(this);
+            if (OnNotifyPreSave_DateRangeFilterConfiguration != null) OnNotifyPreSave_DateRangeFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<DateRangeFilterConfiguration> OnPreSave_DateRangeFilterConfiguration;
+        public static event ObjectEventHandler<DateRangeFilterConfiguration> OnNotifyPreSave_DateRangeFilterConfiguration;
 
-        [EventBasedMethod("OnPostSave_DateRangeFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_DateRangeFilterConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DateRangeFilterConfiguration != null) OnPostSave_DateRangeFilterConfiguration(this);
+            if (OnNotifyPostSave_DateRangeFilterConfiguration != null) OnNotifyPostSave_DateRangeFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<DateRangeFilterConfiguration> OnPostSave_DateRangeFilterConfiguration;
+        public static event ObjectEventHandler<DateRangeFilterConfiguration> OnNotifyPostSave_DateRangeFilterConfiguration;
 
-        [EventBasedMethod("OnCreated_DateRangeFilterConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_DateRangeFilterConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DateRangeFilterConfiguration != null) OnCreated_DateRangeFilterConfiguration(this);
+            if (OnNotifyCreated_DateRangeFilterConfiguration != null) OnNotifyCreated_DateRangeFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<DateRangeFilterConfiguration> OnCreated_DateRangeFilterConfiguration;
+        public static event ObjectEventHandler<DateRangeFilterConfiguration> OnNotifyCreated_DateRangeFilterConfiguration;
 
-        [EventBasedMethod("OnDeleting_DateRangeFilterConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_DateRangeFilterConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DateRangeFilterConfiguration != null) OnDeleting_DateRangeFilterConfiguration(this);
+            if (OnNotifyDeleting_DateRangeFilterConfiguration != null) OnNotifyDeleting_DateRangeFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<DateRangeFilterConfiguration> OnDeleting_DateRangeFilterConfiguration;
+        public static event ObjectEventHandler<DateRangeFilterConfiguration> OnNotifyDeleting_DateRangeFilterConfiguration;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

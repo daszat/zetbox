@@ -398,37 +398,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<GuidProperty> OnToString_GuidProperty;
 
-        [EventBasedMethod("OnPreSave_GuidProperty")]
+        [EventBasedMethod("OnNotifyPreSave_GuidProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_GuidProperty != null) OnPreSave_GuidProperty(this);
+            if (OnNotifyPreSave_GuidProperty != null) OnNotifyPreSave_GuidProperty(this);
         }
-        public static event ObjectEventHandler<GuidProperty> OnPreSave_GuidProperty;
+        public static event ObjectEventHandler<GuidProperty> OnNotifyPreSave_GuidProperty;
 
-        [EventBasedMethod("OnPostSave_GuidProperty")]
+        [EventBasedMethod("OnNotifyPostSave_GuidProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_GuidProperty != null) OnPostSave_GuidProperty(this);
+            if (OnNotifyPostSave_GuidProperty != null) OnNotifyPostSave_GuidProperty(this);
         }
-        public static event ObjectEventHandler<GuidProperty> OnPostSave_GuidProperty;
+        public static event ObjectEventHandler<GuidProperty> OnNotifyPostSave_GuidProperty;
 
-        [EventBasedMethod("OnCreated_GuidProperty")]
+        [EventBasedMethod("OnNotifyCreated_GuidProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_GuidProperty != null) OnCreated_GuidProperty(this);
+            if (OnNotifyCreated_GuidProperty != null) OnNotifyCreated_GuidProperty(this);
         }
-        public static event ObjectEventHandler<GuidProperty> OnCreated_GuidProperty;
+        public static event ObjectEventHandler<GuidProperty> OnNotifyCreated_GuidProperty;
 
-        [EventBasedMethod("OnDeleting_GuidProperty")]
+        [EventBasedMethod("OnNotifyDeleting_GuidProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_GuidProperty != null) OnDeleting_GuidProperty(this);
+            if (OnNotifyDeleting_GuidProperty != null) OnNotifyDeleting_GuidProperty(this);
         }
-        public static event ObjectEventHandler<GuidProperty> OnDeleting_GuidProperty;
+        public static event ObjectEventHandler<GuidProperty> OnNotifyDeleting_GuidProperty;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

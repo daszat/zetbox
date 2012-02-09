@@ -880,37 +880,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Assembly> OnToString_Assembly;
 
-        [EventBasedMethod("OnPreSave_Assembly")]
+        [EventBasedMethod("OnNotifyPreSave_Assembly")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Assembly != null) OnPreSave_Assembly(this);
+            if (OnNotifyPreSave_Assembly != null) OnNotifyPreSave_Assembly(this);
         }
-        public static event ObjectEventHandler<Assembly> OnPreSave_Assembly;
+        public static event ObjectEventHandler<Assembly> OnNotifyPreSave_Assembly;
 
-        [EventBasedMethod("OnPostSave_Assembly")]
+        [EventBasedMethod("OnNotifyPostSave_Assembly")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Assembly != null) OnPostSave_Assembly(this);
+            if (OnNotifyPostSave_Assembly != null) OnNotifyPostSave_Assembly(this);
         }
-        public static event ObjectEventHandler<Assembly> OnPostSave_Assembly;
+        public static event ObjectEventHandler<Assembly> OnNotifyPostSave_Assembly;
 
-        [EventBasedMethod("OnCreated_Assembly")]
+        [EventBasedMethod("OnNotifyCreated_Assembly")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Assembly != null) OnCreated_Assembly(this);
+            if (OnNotifyCreated_Assembly != null) OnNotifyCreated_Assembly(this);
         }
-        public static event ObjectEventHandler<Assembly> OnCreated_Assembly;
+        public static event ObjectEventHandler<Assembly> OnNotifyCreated_Assembly;
 
-        [EventBasedMethod("OnDeleting_Assembly")]
+        [EventBasedMethod("OnNotifyDeleting_Assembly")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Assembly != null) OnDeleting_Assembly(this);
+            if (OnNotifyDeleting_Assembly != null) OnNotifyDeleting_Assembly(this);
         }
-        public static event ObjectEventHandler<Assembly> OnDeleting_Assembly;
+        public static event ObjectEventHandler<Assembly> OnNotifyDeleting_Assembly;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

@@ -1308,40 +1308,40 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<TypeRef> OnToString_TypeRef;
 
-        [EventBasedMethod("OnPreSave_TypeRef")]
+        [EventBasedMethod("OnNotifyPreSave_TypeRef")]
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_TypeRef != null) OnPreSave_TypeRef(this);
+            if (OnNotifyPreSave_TypeRef != null) OnNotifyPreSave_TypeRef(this);
         }
-        public static event ObjectEventHandler<TypeRef> OnPreSave_TypeRef;
+        public static event ObjectEventHandler<TypeRef> OnNotifyPreSave_TypeRef;
 
-        [EventBasedMethod("OnPostSave_TypeRef")]
+        [EventBasedMethod("OnNotifyPostSave_TypeRef")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_TypeRef != null) OnPostSave_TypeRef(this);
+            if (OnNotifyPostSave_TypeRef != null) OnNotifyPostSave_TypeRef(this);
         }
-        public static event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
+        public static event ObjectEventHandler<TypeRef> OnNotifyPostSave_TypeRef;
 
-        [EventBasedMethod("OnCreated_TypeRef")]
+        [EventBasedMethod("OnNotifyCreated_TypeRef")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_TypeRef != null) OnCreated_TypeRef(this);
+            if (OnNotifyCreated_TypeRef != null) OnNotifyCreated_TypeRef(this);
         }
-        public static event ObjectEventHandler<TypeRef> OnCreated_TypeRef;
+        public static event ObjectEventHandler<TypeRef> OnNotifyCreated_TypeRef;
 
-        [EventBasedMethod("OnDeleting_TypeRef")]
+        [EventBasedMethod("OnNotifyDeleting_TypeRef")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_TypeRef != null) OnDeleting_TypeRef(this);
+            if (OnNotifyDeleting_TypeRef != null) OnNotifyDeleting_TypeRef(this);
         }
-        public static event ObjectEventHandler<TypeRef> OnDeleting_TypeRef;
+        public static event ObjectEventHandler<TypeRef> OnNotifyDeleting_TypeRef;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

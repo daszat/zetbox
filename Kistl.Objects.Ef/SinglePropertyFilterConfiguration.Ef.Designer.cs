@@ -209,37 +209,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<SinglePropertyFilterConfiguration> OnToString_SinglePropertyFilterConfiguration;
 
-        [EventBasedMethod("OnPreSave_SinglePropertyFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_SinglePropertyFilterConfiguration")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_SinglePropertyFilterConfiguration != null) OnPreSave_SinglePropertyFilterConfiguration(this);
+            if (OnNotifyPreSave_SinglePropertyFilterConfiguration != null) OnNotifyPreSave_SinglePropertyFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnPreSave_SinglePropertyFilterConfiguration;
+        public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnNotifyPreSave_SinglePropertyFilterConfiguration;
 
-        [EventBasedMethod("OnPostSave_SinglePropertyFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_SinglePropertyFilterConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_SinglePropertyFilterConfiguration != null) OnPostSave_SinglePropertyFilterConfiguration(this);
+            if (OnNotifyPostSave_SinglePropertyFilterConfiguration != null) OnNotifyPostSave_SinglePropertyFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnPostSave_SinglePropertyFilterConfiguration;
+        public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnNotifyPostSave_SinglePropertyFilterConfiguration;
 
-        [EventBasedMethod("OnCreated_SinglePropertyFilterConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_SinglePropertyFilterConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_SinglePropertyFilterConfiguration != null) OnCreated_SinglePropertyFilterConfiguration(this);
+            if (OnNotifyCreated_SinglePropertyFilterConfiguration != null) OnNotifyCreated_SinglePropertyFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnCreated_SinglePropertyFilterConfiguration;
+        public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnNotifyCreated_SinglePropertyFilterConfiguration;
 
-        [EventBasedMethod("OnDeleting_SinglePropertyFilterConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_SinglePropertyFilterConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_SinglePropertyFilterConfiguration != null) OnDeleting_SinglePropertyFilterConfiguration(this);
+            if (OnNotifyDeleting_SinglePropertyFilterConfiguration != null) OnNotifyDeleting_SinglePropertyFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnDeleting_SinglePropertyFilterConfiguration;
+        public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnNotifyDeleting_SinglePropertyFilterConfiguration;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

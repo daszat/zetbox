@@ -958,37 +958,37 @@ namespace Kistl.App.Projekte
         }
         public static event ToStringHandler<Task> OnToString_Task;
 
-        [EventBasedMethod("OnPreSave_Task")]
+        [EventBasedMethod("OnNotifyPreSave_Task")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Task != null) OnPreSave_Task(this);
+            if (OnNotifyPreSave_Task != null) OnNotifyPreSave_Task(this);
         }
-        public static event ObjectEventHandler<Task> OnPreSave_Task;
+        public static event ObjectEventHandler<Task> OnNotifyPreSave_Task;
 
-        [EventBasedMethod("OnPostSave_Task")]
+        [EventBasedMethod("OnNotifyPostSave_Task")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Task != null) OnPostSave_Task(this);
+            if (OnNotifyPostSave_Task != null) OnNotifyPostSave_Task(this);
         }
-        public static event ObjectEventHandler<Task> OnPostSave_Task;
+        public static event ObjectEventHandler<Task> OnNotifyPostSave_Task;
 
-        [EventBasedMethod("OnCreated_Task")]
+        [EventBasedMethod("OnNotifyCreated_Task")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Task != null) OnCreated_Task(this);
+            if (OnNotifyCreated_Task != null) OnNotifyCreated_Task(this);
         }
-        public static event ObjectEventHandler<Task> OnCreated_Task;
+        public static event ObjectEventHandler<Task> OnNotifyCreated_Task;
 
-        [EventBasedMethod("OnDeleting_Task")]
+        [EventBasedMethod("OnNotifyDeleting_Task")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Task != null) OnDeleting_Task(this);
+            if (OnNotifyDeleting_Task != null) OnNotifyDeleting_Task(this);
         }
-        public static event ObjectEventHandler<Task> OnDeleting_Task;
+        public static event ObjectEventHandler<Task> OnNotifyDeleting_Task;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

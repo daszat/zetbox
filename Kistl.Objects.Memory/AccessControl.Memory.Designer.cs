@@ -1014,37 +1014,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<AccessControl> OnToString_AccessControl;
 
-        [EventBasedMethod("OnPreSave_AccessControl")]
+        [EventBasedMethod("OnNotifyPreSave_AccessControl")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_AccessControl != null) OnPreSave_AccessControl(this);
+            if (OnNotifyPreSave_AccessControl != null) OnNotifyPreSave_AccessControl(this);
         }
-        public static event ObjectEventHandler<AccessControl> OnPreSave_AccessControl;
+        public static event ObjectEventHandler<AccessControl> OnNotifyPreSave_AccessControl;
 
-        [EventBasedMethod("OnPostSave_AccessControl")]
+        [EventBasedMethod("OnNotifyPostSave_AccessControl")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_AccessControl != null) OnPostSave_AccessControl(this);
+            if (OnNotifyPostSave_AccessControl != null) OnNotifyPostSave_AccessControl(this);
         }
-        public static event ObjectEventHandler<AccessControl> OnPostSave_AccessControl;
+        public static event ObjectEventHandler<AccessControl> OnNotifyPostSave_AccessControl;
 
-        [EventBasedMethod("OnCreated_AccessControl")]
+        [EventBasedMethod("OnNotifyCreated_AccessControl")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_AccessControl != null) OnCreated_AccessControl(this);
+            if (OnNotifyCreated_AccessControl != null) OnNotifyCreated_AccessControl(this);
         }
-        public static event ObjectEventHandler<AccessControl> OnCreated_AccessControl;
+        public static event ObjectEventHandler<AccessControl> OnNotifyCreated_AccessControl;
 
-        [EventBasedMethod("OnDeleting_AccessControl")]
+        [EventBasedMethod("OnNotifyDeleting_AccessControl")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_AccessControl != null) OnDeleting_AccessControl(this);
+            if (OnNotifyDeleting_AccessControl != null) OnNotifyDeleting_AccessControl(this);
         }
-        public static event ObjectEventHandler<AccessControl> OnDeleting_AccessControl;
+        public static event ObjectEventHandler<AccessControl> OnNotifyDeleting_AccessControl;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

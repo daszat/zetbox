@@ -421,37 +421,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CLRObjectParameter> OnToString_CLRObjectParameter;
 
-        [EventBasedMethod("OnPreSave_CLRObjectParameter")]
+        [EventBasedMethod("OnNotifyPreSave_CLRObjectParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_CLRObjectParameter != null) OnPreSave_CLRObjectParameter(this);
+            if (OnNotifyPreSave_CLRObjectParameter != null) OnNotifyPreSave_CLRObjectParameter(this);
         }
-        public static event ObjectEventHandler<CLRObjectParameter> OnPreSave_CLRObjectParameter;
+        public static event ObjectEventHandler<CLRObjectParameter> OnNotifyPreSave_CLRObjectParameter;
 
-        [EventBasedMethod("OnPostSave_CLRObjectParameter")]
+        [EventBasedMethod("OnNotifyPostSave_CLRObjectParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_CLRObjectParameter != null) OnPostSave_CLRObjectParameter(this);
+            if (OnNotifyPostSave_CLRObjectParameter != null) OnNotifyPostSave_CLRObjectParameter(this);
         }
-        public static event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
+        public static event ObjectEventHandler<CLRObjectParameter> OnNotifyPostSave_CLRObjectParameter;
 
-        [EventBasedMethod("OnCreated_CLRObjectParameter")]
+        [EventBasedMethod("OnNotifyCreated_CLRObjectParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_CLRObjectParameter != null) OnCreated_CLRObjectParameter(this);
+            if (OnNotifyCreated_CLRObjectParameter != null) OnNotifyCreated_CLRObjectParameter(this);
         }
-        public static event ObjectEventHandler<CLRObjectParameter> OnCreated_CLRObjectParameter;
+        public static event ObjectEventHandler<CLRObjectParameter> OnNotifyCreated_CLRObjectParameter;
 
-        [EventBasedMethod("OnDeleting_CLRObjectParameter")]
+        [EventBasedMethod("OnNotifyDeleting_CLRObjectParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_CLRObjectParameter != null) OnDeleting_CLRObjectParameter(this);
+            if (OnNotifyDeleting_CLRObjectParameter != null) OnNotifyDeleting_CLRObjectParameter(this);
         }
-        public static event ObjectEventHandler<CLRObjectParameter> OnDeleting_CLRObjectParameter;
+        public static event ObjectEventHandler<CLRObjectParameter> OnNotifyDeleting_CLRObjectParameter;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

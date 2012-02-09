@@ -356,37 +356,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DateTimeParameter> OnToString_DateTimeParameter;
 
-        [EventBasedMethod("OnPreSave_DateTimeParameter")]
+        [EventBasedMethod("OnNotifyPreSave_DateTimeParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DateTimeParameter != null) OnPreSave_DateTimeParameter(this);
+            if (OnNotifyPreSave_DateTimeParameter != null) OnNotifyPreSave_DateTimeParameter(this);
         }
-        public static event ObjectEventHandler<DateTimeParameter> OnPreSave_DateTimeParameter;
+        public static event ObjectEventHandler<DateTimeParameter> OnNotifyPreSave_DateTimeParameter;
 
-        [EventBasedMethod("OnPostSave_DateTimeParameter")]
+        [EventBasedMethod("OnNotifyPostSave_DateTimeParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DateTimeParameter != null) OnPostSave_DateTimeParameter(this);
+            if (OnNotifyPostSave_DateTimeParameter != null) OnNotifyPostSave_DateTimeParameter(this);
         }
-        public static event ObjectEventHandler<DateTimeParameter> OnPostSave_DateTimeParameter;
+        public static event ObjectEventHandler<DateTimeParameter> OnNotifyPostSave_DateTimeParameter;
 
-        [EventBasedMethod("OnCreated_DateTimeParameter")]
+        [EventBasedMethod("OnNotifyCreated_DateTimeParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DateTimeParameter != null) OnCreated_DateTimeParameter(this);
+            if (OnNotifyCreated_DateTimeParameter != null) OnNotifyCreated_DateTimeParameter(this);
         }
-        public static event ObjectEventHandler<DateTimeParameter> OnCreated_DateTimeParameter;
+        public static event ObjectEventHandler<DateTimeParameter> OnNotifyCreated_DateTimeParameter;
 
-        [EventBasedMethod("OnDeleting_DateTimeParameter")]
+        [EventBasedMethod("OnNotifyDeleting_DateTimeParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DateTimeParameter != null) OnDeleting_DateTimeParameter(this);
+            if (OnNotifyDeleting_DateTimeParameter != null) OnNotifyDeleting_DateTimeParameter(this);
         }
-        public static event ObjectEventHandler<DateTimeParameter> OnDeleting_DateTimeParameter;
+        public static event ObjectEventHandler<DateTimeParameter> OnNotifyDeleting_DateTimeParameter;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

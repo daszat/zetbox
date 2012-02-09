@@ -964,40 +964,40 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<File> OnToString_File;
 
-        [EventBasedMethod("OnPreSave_File")]
+        [EventBasedMethod("OnNotifyPreSave_File")]
         public override void NotifyPreSave()
         {
             FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_File != null) OnPreSave_File(this);
+            if (OnNotifyPreSave_File != null) OnNotifyPreSave_File(this);
         }
-        public static event ObjectEventHandler<File> OnPreSave_File;
+        public static event ObjectEventHandler<File> OnNotifyPreSave_File;
 
-        [EventBasedMethod("OnPostSave_File")]
+        [EventBasedMethod("OnNotifyPostSave_File")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_File != null) OnPostSave_File(this);
+            if (OnNotifyPostSave_File != null) OnNotifyPostSave_File(this);
         }
-        public static event ObjectEventHandler<File> OnPostSave_File;
+        public static event ObjectEventHandler<File> OnNotifyPostSave_File;
 
-        [EventBasedMethod("OnCreated_File")]
+        [EventBasedMethod("OnNotifyCreated_File")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_File != null) OnCreated_File(this);
+            if (OnNotifyCreated_File != null) OnNotifyCreated_File(this);
         }
-        public static event ObjectEventHandler<File> OnCreated_File;
+        public static event ObjectEventHandler<File> OnNotifyCreated_File;
 
-        [EventBasedMethod("OnDeleting_File")]
+        [EventBasedMethod("OnNotifyDeleting_File")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_File != null) OnDeleting_File(this);
+            if (OnNotifyDeleting_File != null) OnNotifyDeleting_File(this);
         }
-        public static event ObjectEventHandler<File> OnDeleting_File;
+        public static event ObjectEventHandler<File> OnNotifyDeleting_File;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

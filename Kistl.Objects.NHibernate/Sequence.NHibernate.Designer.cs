@@ -1051,40 +1051,40 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Sequence> OnToString_Sequence;
 
-        [EventBasedMethod("OnPreSave_Sequence")]
+        [EventBasedMethod("OnNotifyPreSave_Sequence")]
         public override void NotifyPreSave()
         {
             FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_Sequence != null) OnPreSave_Sequence(this);
+            if (OnNotifyPreSave_Sequence != null) OnNotifyPreSave_Sequence(this);
         }
-        public static event ObjectEventHandler<Sequence> OnPreSave_Sequence;
+        public static event ObjectEventHandler<Sequence> OnNotifyPreSave_Sequence;
 
-        [EventBasedMethod("OnPostSave_Sequence")]
+        [EventBasedMethod("OnNotifyPostSave_Sequence")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Sequence != null) OnPostSave_Sequence(this);
+            if (OnNotifyPostSave_Sequence != null) OnNotifyPostSave_Sequence(this);
         }
-        public static event ObjectEventHandler<Sequence> OnPostSave_Sequence;
+        public static event ObjectEventHandler<Sequence> OnNotifyPostSave_Sequence;
 
-        [EventBasedMethod("OnCreated_Sequence")]
+        [EventBasedMethod("OnNotifyCreated_Sequence")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Sequence != null) OnCreated_Sequence(this);
+            if (OnNotifyCreated_Sequence != null) OnNotifyCreated_Sequence(this);
         }
-        public static event ObjectEventHandler<Sequence> OnCreated_Sequence;
+        public static event ObjectEventHandler<Sequence> OnNotifyCreated_Sequence;
 
-        [EventBasedMethod("OnDeleting_Sequence")]
+        [EventBasedMethod("OnNotifyDeleting_Sequence")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Sequence != null) OnDeleting_Sequence(this);
+            if (OnNotifyDeleting_Sequence != null) OnNotifyDeleting_Sequence(this);
         }
-        public static event ObjectEventHandler<Sequence> OnDeleting_Sequence;
+        public static event ObjectEventHandler<Sequence> OnNotifyDeleting_Sequence;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

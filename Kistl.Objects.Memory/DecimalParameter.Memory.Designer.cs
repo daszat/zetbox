@@ -270,37 +270,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DecimalParameter> OnToString_DecimalParameter;
 
-        [EventBasedMethod("OnPreSave_DecimalParameter")]
+        [EventBasedMethod("OnNotifyPreSave_DecimalParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DecimalParameter != null) OnPreSave_DecimalParameter(this);
+            if (OnNotifyPreSave_DecimalParameter != null) OnNotifyPreSave_DecimalParameter(this);
         }
-        public static event ObjectEventHandler<DecimalParameter> OnPreSave_DecimalParameter;
+        public static event ObjectEventHandler<DecimalParameter> OnNotifyPreSave_DecimalParameter;
 
-        [EventBasedMethod("OnPostSave_DecimalParameter")]
+        [EventBasedMethod("OnNotifyPostSave_DecimalParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DecimalParameter != null) OnPostSave_DecimalParameter(this);
+            if (OnNotifyPostSave_DecimalParameter != null) OnNotifyPostSave_DecimalParameter(this);
         }
-        public static event ObjectEventHandler<DecimalParameter> OnPostSave_DecimalParameter;
+        public static event ObjectEventHandler<DecimalParameter> OnNotifyPostSave_DecimalParameter;
 
-        [EventBasedMethod("OnCreated_DecimalParameter")]
+        [EventBasedMethod("OnNotifyCreated_DecimalParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DecimalParameter != null) OnCreated_DecimalParameter(this);
+            if (OnNotifyCreated_DecimalParameter != null) OnNotifyCreated_DecimalParameter(this);
         }
-        public static event ObjectEventHandler<DecimalParameter> OnCreated_DecimalParameter;
+        public static event ObjectEventHandler<DecimalParameter> OnNotifyCreated_DecimalParameter;
 
-        [EventBasedMethod("OnDeleting_DecimalParameter")]
+        [EventBasedMethod("OnNotifyDeleting_DecimalParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DecimalParameter != null) OnDeleting_DecimalParameter(this);
+            if (OnNotifyDeleting_DecimalParameter != null) OnNotifyDeleting_DecimalParameter(this);
         }
-        public static event ObjectEventHandler<DecimalParameter> OnDeleting_DecimalParameter;
+        public static event ObjectEventHandler<DecimalParameter> OnNotifyDeleting_DecimalParameter;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

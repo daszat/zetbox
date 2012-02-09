@@ -421,37 +421,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CompoundObjectParameter> OnToString_CompoundObjectParameter;
 
-        [EventBasedMethod("OnPreSave_CompoundObjectParameter")]
+        [EventBasedMethod("OnNotifyPreSave_CompoundObjectParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_CompoundObjectParameter != null) OnPreSave_CompoundObjectParameter(this);
+            if (OnNotifyPreSave_CompoundObjectParameter != null) OnNotifyPreSave_CompoundObjectParameter(this);
         }
-        public static event ObjectEventHandler<CompoundObjectParameter> OnPreSave_CompoundObjectParameter;
+        public static event ObjectEventHandler<CompoundObjectParameter> OnNotifyPreSave_CompoundObjectParameter;
 
-        [EventBasedMethod("OnPostSave_CompoundObjectParameter")]
+        [EventBasedMethod("OnNotifyPostSave_CompoundObjectParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_CompoundObjectParameter != null) OnPostSave_CompoundObjectParameter(this);
+            if (OnNotifyPostSave_CompoundObjectParameter != null) OnNotifyPostSave_CompoundObjectParameter(this);
         }
-        public static event ObjectEventHandler<CompoundObjectParameter> OnPostSave_CompoundObjectParameter;
+        public static event ObjectEventHandler<CompoundObjectParameter> OnNotifyPostSave_CompoundObjectParameter;
 
-        [EventBasedMethod("OnCreated_CompoundObjectParameter")]
+        [EventBasedMethod("OnNotifyCreated_CompoundObjectParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_CompoundObjectParameter != null) OnCreated_CompoundObjectParameter(this);
+            if (OnNotifyCreated_CompoundObjectParameter != null) OnNotifyCreated_CompoundObjectParameter(this);
         }
-        public static event ObjectEventHandler<CompoundObjectParameter> OnCreated_CompoundObjectParameter;
+        public static event ObjectEventHandler<CompoundObjectParameter> OnNotifyCreated_CompoundObjectParameter;
 
-        [EventBasedMethod("OnDeleting_CompoundObjectParameter")]
+        [EventBasedMethod("OnNotifyDeleting_CompoundObjectParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_CompoundObjectParameter != null) OnDeleting_CompoundObjectParameter(this);
+            if (OnNotifyDeleting_CompoundObjectParameter != null) OnNotifyDeleting_CompoundObjectParameter(this);
         }
-        public static event ObjectEventHandler<CompoundObjectParameter> OnDeleting_CompoundObjectParameter;
+        public static event ObjectEventHandler<CompoundObjectParameter> OnNotifyDeleting_CompoundObjectParameter;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

@@ -470,37 +470,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<Antwort> OnToString_Antwort;
 
-        [EventBasedMethod("OnPreSave_Antwort")]
+        [EventBasedMethod("OnNotifyPreSave_Antwort")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Antwort != null) OnPreSave_Antwort(this);
+            if (OnNotifyPreSave_Antwort != null) OnNotifyPreSave_Antwort(this);
         }
-        public static event ObjectEventHandler<Antwort> OnPreSave_Antwort;
+        public static event ObjectEventHandler<Antwort> OnNotifyPreSave_Antwort;
 
-        [EventBasedMethod("OnPostSave_Antwort")]
+        [EventBasedMethod("OnNotifyPostSave_Antwort")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Antwort != null) OnPostSave_Antwort(this);
+            if (OnNotifyPostSave_Antwort != null) OnNotifyPostSave_Antwort(this);
         }
-        public static event ObjectEventHandler<Antwort> OnPostSave_Antwort;
+        public static event ObjectEventHandler<Antwort> OnNotifyPostSave_Antwort;
 
-        [EventBasedMethod("OnCreated_Antwort")]
+        [EventBasedMethod("OnNotifyCreated_Antwort")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Antwort != null) OnCreated_Antwort(this);
+            if (OnNotifyCreated_Antwort != null) OnNotifyCreated_Antwort(this);
         }
-        public static event ObjectEventHandler<Antwort> OnCreated_Antwort;
+        public static event ObjectEventHandler<Antwort> OnNotifyCreated_Antwort;
 
-        [EventBasedMethod("OnDeleting_Antwort")]
+        [EventBasedMethod("OnNotifyDeleting_Antwort")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Antwort != null) OnDeleting_Antwort(this);
+            if (OnNotifyDeleting_Antwort != null) OnNotifyDeleting_Antwort(this);
         }
-        public static event ObjectEventHandler<Antwort> OnDeleting_Antwort;
+        public static event ObjectEventHandler<Antwort> OnNotifyDeleting_Antwort;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

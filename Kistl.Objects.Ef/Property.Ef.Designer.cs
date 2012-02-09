@@ -2088,37 +2088,37 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         }
         public static event ToStringHandler<Property> OnToString_Property;
 
-        [EventBasedMethod("OnPreSave_Property")]
+        [EventBasedMethod("OnNotifyPreSave_Property")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Property != null) OnPreSave_Property(this);
+            if (OnNotifyPreSave_Property != null) OnNotifyPreSave_Property(this);
         }
-        public static event ObjectEventHandler<Property> OnPreSave_Property;
+        public static event ObjectEventHandler<Property> OnNotifyPreSave_Property;
 
-        [EventBasedMethod("OnPostSave_Property")]
+        [EventBasedMethod("OnNotifyPostSave_Property")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Property != null) OnPostSave_Property(this);
+            if (OnNotifyPostSave_Property != null) OnNotifyPostSave_Property(this);
         }
-        public static event ObjectEventHandler<Property> OnPostSave_Property;
+        public static event ObjectEventHandler<Property> OnNotifyPostSave_Property;
 
-        [EventBasedMethod("OnCreated_Property")]
+        [EventBasedMethod("OnNotifyCreated_Property")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Property != null) OnCreated_Property(this);
+            if (OnNotifyCreated_Property != null) OnNotifyCreated_Property(this);
         }
-        public static event ObjectEventHandler<Property> OnCreated_Property;
+        public static event ObjectEventHandler<Property> OnNotifyCreated_Property;
 
-        [EventBasedMethod("OnDeleting_Property")]
+        [EventBasedMethod("OnNotifyDeleting_Property")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Property != null) OnDeleting_Property(this);
+            if (OnNotifyDeleting_Property != null) OnNotifyDeleting_Property(this);
         }
-        public static event ObjectEventHandler<Property> OnDeleting_Property;
+        public static event ObjectEventHandler<Property> OnNotifyDeleting_Property;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

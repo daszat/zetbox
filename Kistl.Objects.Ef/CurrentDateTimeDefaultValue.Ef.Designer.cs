@@ -146,37 +146,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CurrentDateTimeDefaultValue> OnToString_CurrentDateTimeDefaultValue;
 
-        [EventBasedMethod("OnPreSave_CurrentDateTimeDefaultValue")]
+        [EventBasedMethod("OnNotifyPreSave_CurrentDateTimeDefaultValue")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_CurrentDateTimeDefaultValue != null) OnPreSave_CurrentDateTimeDefaultValue(this);
+            if (OnNotifyPreSave_CurrentDateTimeDefaultValue != null) OnNotifyPreSave_CurrentDateTimeDefaultValue(this);
         }
-        public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnPreSave_CurrentDateTimeDefaultValue;
+        public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnNotifyPreSave_CurrentDateTimeDefaultValue;
 
-        [EventBasedMethod("OnPostSave_CurrentDateTimeDefaultValue")]
+        [EventBasedMethod("OnNotifyPostSave_CurrentDateTimeDefaultValue")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_CurrentDateTimeDefaultValue != null) OnPostSave_CurrentDateTimeDefaultValue(this);
+            if (OnNotifyPostSave_CurrentDateTimeDefaultValue != null) OnNotifyPostSave_CurrentDateTimeDefaultValue(this);
         }
-        public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnPostSave_CurrentDateTimeDefaultValue;
+        public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnNotifyPostSave_CurrentDateTimeDefaultValue;
 
-        [EventBasedMethod("OnCreated_CurrentDateTimeDefaultValue")]
+        [EventBasedMethod("OnNotifyCreated_CurrentDateTimeDefaultValue")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_CurrentDateTimeDefaultValue != null) OnCreated_CurrentDateTimeDefaultValue(this);
+            if (OnNotifyCreated_CurrentDateTimeDefaultValue != null) OnNotifyCreated_CurrentDateTimeDefaultValue(this);
         }
-        public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnCreated_CurrentDateTimeDefaultValue;
+        public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnNotifyCreated_CurrentDateTimeDefaultValue;
 
-        [EventBasedMethod("OnDeleting_CurrentDateTimeDefaultValue")]
+        [EventBasedMethod("OnNotifyDeleting_CurrentDateTimeDefaultValue")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_CurrentDateTimeDefaultValue != null) OnDeleting_CurrentDateTimeDefaultValue(this);
+            if (OnNotifyDeleting_CurrentDateTimeDefaultValue != null) OnNotifyDeleting_CurrentDateTimeDefaultValue(this);
         }
-        public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnDeleting_CurrentDateTimeDefaultValue;
+        public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnNotifyDeleting_CurrentDateTimeDefaultValue;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

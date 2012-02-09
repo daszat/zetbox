@@ -209,37 +209,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IsValidIdentifierConstraint> OnToString_IsValidIdentifierConstraint;
 
-        [EventBasedMethod("OnPreSave_IsValidIdentifierConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_IsValidIdentifierConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IsValidIdentifierConstraint != null) OnPreSave_IsValidIdentifierConstraint(this);
+            if (OnNotifyPreSave_IsValidIdentifierConstraint != null) OnNotifyPreSave_IsValidIdentifierConstraint(this);
         }
-        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnPreSave_IsValidIdentifierConstraint;
+        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnNotifyPreSave_IsValidIdentifierConstraint;
 
-        [EventBasedMethod("OnPostSave_IsValidIdentifierConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_IsValidIdentifierConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IsValidIdentifierConstraint != null) OnPostSave_IsValidIdentifierConstraint(this);
+            if (OnNotifyPostSave_IsValidIdentifierConstraint != null) OnNotifyPostSave_IsValidIdentifierConstraint(this);
         }
-        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnPostSave_IsValidIdentifierConstraint;
+        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnNotifyPostSave_IsValidIdentifierConstraint;
 
-        [EventBasedMethod("OnCreated_IsValidIdentifierConstraint")]
+        [EventBasedMethod("OnNotifyCreated_IsValidIdentifierConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_IsValidIdentifierConstraint != null) OnCreated_IsValidIdentifierConstraint(this);
+            if (OnNotifyCreated_IsValidIdentifierConstraint != null) OnNotifyCreated_IsValidIdentifierConstraint(this);
         }
-        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnCreated_IsValidIdentifierConstraint;
+        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnNotifyCreated_IsValidIdentifierConstraint;
 
-        [EventBasedMethod("OnDeleting_IsValidIdentifierConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_IsValidIdentifierConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_IsValidIdentifierConstraint != null) OnDeleting_IsValidIdentifierConstraint(this);
+            if (OnNotifyDeleting_IsValidIdentifierConstraint != null) OnNotifyDeleting_IsValidIdentifierConstraint(this);
         }
-        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnDeleting_IsValidIdentifierConstraint;
+        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnNotifyDeleting_IsValidIdentifierConstraint;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

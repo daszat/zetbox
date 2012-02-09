@@ -908,37 +908,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Blob> OnToString_Blob;
 
-        [EventBasedMethod("OnPreSave_Blob")]
+        [EventBasedMethod("OnNotifyPreSave_Blob")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Blob != null) OnPreSave_Blob(this);
+            if (OnNotifyPreSave_Blob != null) OnNotifyPreSave_Blob(this);
         }
-        public static event ObjectEventHandler<Blob> OnPreSave_Blob;
+        public static event ObjectEventHandler<Blob> OnNotifyPreSave_Blob;
 
-        [EventBasedMethod("OnPostSave_Blob")]
+        [EventBasedMethod("OnNotifyPostSave_Blob")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Blob != null) OnPostSave_Blob(this);
+            if (OnNotifyPostSave_Blob != null) OnNotifyPostSave_Blob(this);
         }
-        public static event ObjectEventHandler<Blob> OnPostSave_Blob;
+        public static event ObjectEventHandler<Blob> OnNotifyPostSave_Blob;
 
-        [EventBasedMethod("OnCreated_Blob")]
+        [EventBasedMethod("OnNotifyCreated_Blob")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Blob != null) OnCreated_Blob(this);
+            if (OnNotifyCreated_Blob != null) OnNotifyCreated_Blob(this);
         }
-        public static event ObjectEventHandler<Blob> OnCreated_Blob;
+        public static event ObjectEventHandler<Blob> OnNotifyCreated_Blob;
 
-        [EventBasedMethod("OnDeleting_Blob")]
+        [EventBasedMethod("OnNotifyDeleting_Blob")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Blob != null) OnDeleting_Blob(this);
+            if (OnNotifyDeleting_Blob != null) OnNotifyDeleting_Blob(this);
         }
-        public static event ObjectEventHandler<Blob> OnDeleting_Blob;
+        public static event ObjectEventHandler<Blob> OnNotifyDeleting_Blob;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

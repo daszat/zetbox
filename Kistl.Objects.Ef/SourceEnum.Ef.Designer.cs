@@ -909,37 +909,37 @@ namespace ZBox.App.SchemaMigration
         }
         public static event ToStringHandler<SourceEnum> OnToString_SourceEnum;
 
-        [EventBasedMethod("OnPreSave_SourceEnum")]
+        [EventBasedMethod("OnNotifyPreSave_SourceEnum")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_SourceEnum != null) OnPreSave_SourceEnum(this);
+            if (OnNotifyPreSave_SourceEnum != null) OnNotifyPreSave_SourceEnum(this);
         }
-        public static event ObjectEventHandler<SourceEnum> OnPreSave_SourceEnum;
+        public static event ObjectEventHandler<SourceEnum> OnNotifyPreSave_SourceEnum;
 
-        [EventBasedMethod("OnPostSave_SourceEnum")]
+        [EventBasedMethod("OnNotifyPostSave_SourceEnum")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_SourceEnum != null) OnPostSave_SourceEnum(this);
+            if (OnNotifyPostSave_SourceEnum != null) OnNotifyPostSave_SourceEnum(this);
         }
-        public static event ObjectEventHandler<SourceEnum> OnPostSave_SourceEnum;
+        public static event ObjectEventHandler<SourceEnum> OnNotifyPostSave_SourceEnum;
 
-        [EventBasedMethod("OnCreated_SourceEnum")]
+        [EventBasedMethod("OnNotifyCreated_SourceEnum")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_SourceEnum != null) OnCreated_SourceEnum(this);
+            if (OnNotifyCreated_SourceEnum != null) OnNotifyCreated_SourceEnum(this);
         }
-        public static event ObjectEventHandler<SourceEnum> OnCreated_SourceEnum;
+        public static event ObjectEventHandler<SourceEnum> OnNotifyCreated_SourceEnum;
 
-        [EventBasedMethod("OnDeleting_SourceEnum")]
+        [EventBasedMethod("OnNotifyDeleting_SourceEnum")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_SourceEnum != null) OnDeleting_SourceEnum(this);
+            if (OnNotifyDeleting_SourceEnum != null) OnNotifyDeleting_SourceEnum(this);
         }
-        public static event ObjectEventHandler<SourceEnum> OnDeleting_SourceEnum;
+        public static event ObjectEventHandler<SourceEnum> OnNotifyDeleting_SourceEnum;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

@@ -961,40 +961,40 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         }
         public static event ToStringHandler<Kunde> OnToString_Kunde;
 
-        [EventBasedMethod("OnPreSave_Kunde")]
+        [EventBasedMethod("OnNotifyPreSave_Kunde")]
         public override void NotifyPreSave()
         {
             FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_Kunde != null) OnPreSave_Kunde(this);
+            if (OnNotifyPreSave_Kunde != null) OnNotifyPreSave_Kunde(this);
         }
-        public static event ObjectEventHandler<Kunde> OnPreSave_Kunde;
+        public static event ObjectEventHandler<Kunde> OnNotifyPreSave_Kunde;
 
-        [EventBasedMethod("OnPostSave_Kunde")]
+        [EventBasedMethod("OnNotifyPostSave_Kunde")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Kunde != null) OnPostSave_Kunde(this);
+            if (OnNotifyPostSave_Kunde != null) OnNotifyPostSave_Kunde(this);
         }
-        public static event ObjectEventHandler<Kunde> OnPostSave_Kunde;
+        public static event ObjectEventHandler<Kunde> OnNotifyPostSave_Kunde;
 
-        [EventBasedMethod("OnCreated_Kunde")]
+        [EventBasedMethod("OnNotifyCreated_Kunde")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Kunde != null) OnCreated_Kunde(this);
+            if (OnNotifyCreated_Kunde != null) OnNotifyCreated_Kunde(this);
         }
-        public static event ObjectEventHandler<Kunde> OnCreated_Kunde;
+        public static event ObjectEventHandler<Kunde> OnNotifyCreated_Kunde;
 
-        [EventBasedMethod("OnDeleting_Kunde")]
+        [EventBasedMethod("OnNotifyDeleting_Kunde")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Kunde != null) OnDeleting_Kunde(this);
+            if (OnNotifyDeleting_Kunde != null) OnNotifyDeleting_Kunde(this);
         }
-        public static event ObjectEventHandler<Kunde> OnDeleting_Kunde;
+        public static event ObjectEventHandler<Kunde> OnNotifyDeleting_Kunde;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

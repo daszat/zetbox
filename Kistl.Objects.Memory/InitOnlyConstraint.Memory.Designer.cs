@@ -207,37 +207,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<InitOnlyConstraint> OnToString_InitOnlyConstraint;
 
-        [EventBasedMethod("OnPreSave_InitOnlyConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_InitOnlyConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_InitOnlyConstraint != null) OnPreSave_InitOnlyConstraint(this);
+            if (OnNotifyPreSave_InitOnlyConstraint != null) OnNotifyPreSave_InitOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<InitOnlyConstraint> OnPreSave_InitOnlyConstraint;
+        public static event ObjectEventHandler<InitOnlyConstraint> OnNotifyPreSave_InitOnlyConstraint;
 
-        [EventBasedMethod("OnPostSave_InitOnlyConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_InitOnlyConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_InitOnlyConstraint != null) OnPostSave_InitOnlyConstraint(this);
+            if (OnNotifyPostSave_InitOnlyConstraint != null) OnNotifyPostSave_InitOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<InitOnlyConstraint> OnPostSave_InitOnlyConstraint;
+        public static event ObjectEventHandler<InitOnlyConstraint> OnNotifyPostSave_InitOnlyConstraint;
 
-        [EventBasedMethod("OnCreated_InitOnlyConstraint")]
+        [EventBasedMethod("OnNotifyCreated_InitOnlyConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_InitOnlyConstraint != null) OnCreated_InitOnlyConstraint(this);
+            if (OnNotifyCreated_InitOnlyConstraint != null) OnNotifyCreated_InitOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<InitOnlyConstraint> OnCreated_InitOnlyConstraint;
+        public static event ObjectEventHandler<InitOnlyConstraint> OnNotifyCreated_InitOnlyConstraint;
 
-        [EventBasedMethod("OnDeleting_InitOnlyConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_InitOnlyConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_InitOnlyConstraint != null) OnDeleting_InitOnlyConstraint(this);
+            if (OnNotifyDeleting_InitOnlyConstraint != null) OnNotifyDeleting_InitOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<InitOnlyConstraint> OnDeleting_InitOnlyConstraint;
+        public static event ObjectEventHandler<InitOnlyConstraint> OnNotifyDeleting_InitOnlyConstraint;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

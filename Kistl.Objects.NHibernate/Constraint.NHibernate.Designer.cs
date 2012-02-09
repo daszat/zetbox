@@ -925,40 +925,40 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Constraint> OnToString_Constraint;
 
-        [EventBasedMethod("OnPreSave_Constraint")]
+        [EventBasedMethod("OnNotifyPreSave_Constraint")]
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_Constraint != null) OnPreSave_Constraint(this);
+            if (OnNotifyPreSave_Constraint != null) OnNotifyPreSave_Constraint(this);
         }
-        public static event ObjectEventHandler<Constraint> OnPreSave_Constraint;
+        public static event ObjectEventHandler<Constraint> OnNotifyPreSave_Constraint;
 
-        [EventBasedMethod("OnPostSave_Constraint")]
+        [EventBasedMethod("OnNotifyPostSave_Constraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Constraint != null) OnPostSave_Constraint(this);
+            if (OnNotifyPostSave_Constraint != null) OnNotifyPostSave_Constraint(this);
         }
-        public static event ObjectEventHandler<Constraint> OnPostSave_Constraint;
+        public static event ObjectEventHandler<Constraint> OnNotifyPostSave_Constraint;
 
-        [EventBasedMethod("OnCreated_Constraint")]
+        [EventBasedMethod("OnNotifyCreated_Constraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Constraint != null) OnCreated_Constraint(this);
+            if (OnNotifyCreated_Constraint != null) OnNotifyCreated_Constraint(this);
         }
-        public static event ObjectEventHandler<Constraint> OnCreated_Constraint;
+        public static event ObjectEventHandler<Constraint> OnNotifyCreated_Constraint;
 
-        [EventBasedMethod("OnDeleting_Constraint")]
+        [EventBasedMethod("OnNotifyDeleting_Constraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Constraint != null) OnDeleting_Constraint(this);
+            if (OnNotifyDeleting_Constraint != null) OnNotifyDeleting_Constraint(this);
         }
-        public static event ObjectEventHandler<Constraint> OnDeleting_Constraint;
+        public static event ObjectEventHandler<Constraint> OnNotifyDeleting_Constraint;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

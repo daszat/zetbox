@@ -230,37 +230,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CurrentSchema> OnToString_CurrentSchema;
 
-        [EventBasedMethod("OnPreSave_CurrentSchema")]
+        [EventBasedMethod("OnNotifyPreSave_CurrentSchema")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_CurrentSchema != null) OnPreSave_CurrentSchema(this);
+            if (OnNotifyPreSave_CurrentSchema != null) OnNotifyPreSave_CurrentSchema(this);
         }
-        public static event ObjectEventHandler<CurrentSchema> OnPreSave_CurrentSchema;
+        public static event ObjectEventHandler<CurrentSchema> OnNotifyPreSave_CurrentSchema;
 
-        [EventBasedMethod("OnPostSave_CurrentSchema")]
+        [EventBasedMethod("OnNotifyPostSave_CurrentSchema")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_CurrentSchema != null) OnPostSave_CurrentSchema(this);
+            if (OnNotifyPostSave_CurrentSchema != null) OnNotifyPostSave_CurrentSchema(this);
         }
-        public static event ObjectEventHandler<CurrentSchema> OnPostSave_CurrentSchema;
+        public static event ObjectEventHandler<CurrentSchema> OnNotifyPostSave_CurrentSchema;
 
-        [EventBasedMethod("OnCreated_CurrentSchema")]
+        [EventBasedMethod("OnNotifyCreated_CurrentSchema")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_CurrentSchema != null) OnCreated_CurrentSchema(this);
+            if (OnNotifyCreated_CurrentSchema != null) OnNotifyCreated_CurrentSchema(this);
         }
-        public static event ObjectEventHandler<CurrentSchema> OnCreated_CurrentSchema;
+        public static event ObjectEventHandler<CurrentSchema> OnNotifyCreated_CurrentSchema;
 
-        [EventBasedMethod("OnDeleting_CurrentSchema")]
+        [EventBasedMethod("OnNotifyDeleting_CurrentSchema")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_CurrentSchema != null) OnDeleting_CurrentSchema(this);
+            if (OnNotifyDeleting_CurrentSchema != null) OnNotifyDeleting_CurrentSchema(this);
         }
-        public static event ObjectEventHandler<CurrentSchema> OnDeleting_CurrentSchema;
+        public static event ObjectEventHandler<CurrentSchema> OnNotifyDeleting_CurrentSchema;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

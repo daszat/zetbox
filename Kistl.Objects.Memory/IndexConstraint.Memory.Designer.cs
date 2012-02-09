@@ -340,37 +340,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IndexConstraint> OnToString_IndexConstraint;
 
-        [EventBasedMethod("OnPreSave_IndexConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_IndexConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IndexConstraint != null) OnPreSave_IndexConstraint(this);
+            if (OnNotifyPreSave_IndexConstraint != null) OnNotifyPreSave_IndexConstraint(this);
         }
-        public static event ObjectEventHandler<IndexConstraint> OnPreSave_IndexConstraint;
+        public static event ObjectEventHandler<IndexConstraint> OnNotifyPreSave_IndexConstraint;
 
-        [EventBasedMethod("OnPostSave_IndexConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_IndexConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IndexConstraint != null) OnPostSave_IndexConstraint(this);
+            if (OnNotifyPostSave_IndexConstraint != null) OnNotifyPostSave_IndexConstraint(this);
         }
-        public static event ObjectEventHandler<IndexConstraint> OnPostSave_IndexConstraint;
+        public static event ObjectEventHandler<IndexConstraint> OnNotifyPostSave_IndexConstraint;
 
-        [EventBasedMethod("OnCreated_IndexConstraint")]
+        [EventBasedMethod("OnNotifyCreated_IndexConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_IndexConstraint != null) OnCreated_IndexConstraint(this);
+            if (OnNotifyCreated_IndexConstraint != null) OnNotifyCreated_IndexConstraint(this);
         }
-        public static event ObjectEventHandler<IndexConstraint> OnCreated_IndexConstraint;
+        public static event ObjectEventHandler<IndexConstraint> OnNotifyCreated_IndexConstraint;
 
-        [EventBasedMethod("OnDeleting_IndexConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_IndexConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_IndexConstraint != null) OnDeleting_IndexConstraint(this);
+            if (OnNotifyDeleting_IndexConstraint != null) OnNotifyDeleting_IndexConstraint(this);
         }
-        public static event ObjectEventHandler<IndexConstraint> OnDeleting_IndexConstraint;
+        public static event ObjectEventHandler<IndexConstraint> OnNotifyDeleting_IndexConstraint;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

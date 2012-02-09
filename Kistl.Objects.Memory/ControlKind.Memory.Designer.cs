@@ -620,37 +620,37 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         }
         public static event ToStringHandler<ControlKind> OnToString_ControlKind;
 
-        [EventBasedMethod("OnPreSave_ControlKind")]
+        [EventBasedMethod("OnNotifyPreSave_ControlKind")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ControlKind != null) OnPreSave_ControlKind(this);
+            if (OnNotifyPreSave_ControlKind != null) OnNotifyPreSave_ControlKind(this);
         }
-        public static event ObjectEventHandler<ControlKind> OnPreSave_ControlKind;
+        public static event ObjectEventHandler<ControlKind> OnNotifyPreSave_ControlKind;
 
-        [EventBasedMethod("OnPostSave_ControlKind")]
+        [EventBasedMethod("OnNotifyPostSave_ControlKind")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ControlKind != null) OnPostSave_ControlKind(this);
+            if (OnNotifyPostSave_ControlKind != null) OnNotifyPostSave_ControlKind(this);
         }
-        public static event ObjectEventHandler<ControlKind> OnPostSave_ControlKind;
+        public static event ObjectEventHandler<ControlKind> OnNotifyPostSave_ControlKind;
 
-        [EventBasedMethod("OnCreated_ControlKind")]
+        [EventBasedMethod("OnNotifyCreated_ControlKind")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ControlKind != null) OnCreated_ControlKind(this);
+            if (OnNotifyCreated_ControlKind != null) OnNotifyCreated_ControlKind(this);
         }
-        public static event ObjectEventHandler<ControlKind> OnCreated_ControlKind;
+        public static event ObjectEventHandler<ControlKind> OnNotifyCreated_ControlKind;
 
-        [EventBasedMethod("OnDeleting_ControlKind")]
+        [EventBasedMethod("OnNotifyDeleting_ControlKind")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ControlKind != null) OnDeleting_ControlKind(this);
+            if (OnNotifyDeleting_ControlKind != null) OnNotifyDeleting_ControlKind(this);
         }
-        public static event ObjectEventHandler<ControlKind> OnDeleting_ControlKind;
+        public static event ObjectEventHandler<ControlKind> OnNotifyDeleting_ControlKind;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

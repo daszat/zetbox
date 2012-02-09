@@ -270,37 +270,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IntParameter> OnToString_IntParameter;
 
-        [EventBasedMethod("OnPreSave_IntParameter")]
+        [EventBasedMethod("OnNotifyPreSave_IntParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IntParameter != null) OnPreSave_IntParameter(this);
+            if (OnNotifyPreSave_IntParameter != null) OnNotifyPreSave_IntParameter(this);
         }
-        public static event ObjectEventHandler<IntParameter> OnPreSave_IntParameter;
+        public static event ObjectEventHandler<IntParameter> OnNotifyPreSave_IntParameter;
 
-        [EventBasedMethod("OnPostSave_IntParameter")]
+        [EventBasedMethod("OnNotifyPostSave_IntParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IntParameter != null) OnPostSave_IntParameter(this);
+            if (OnNotifyPostSave_IntParameter != null) OnNotifyPostSave_IntParameter(this);
         }
-        public static event ObjectEventHandler<IntParameter> OnPostSave_IntParameter;
+        public static event ObjectEventHandler<IntParameter> OnNotifyPostSave_IntParameter;
 
-        [EventBasedMethod("OnCreated_IntParameter")]
+        [EventBasedMethod("OnNotifyCreated_IntParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_IntParameter != null) OnCreated_IntParameter(this);
+            if (OnNotifyCreated_IntParameter != null) OnNotifyCreated_IntParameter(this);
         }
-        public static event ObjectEventHandler<IntParameter> OnCreated_IntParameter;
+        public static event ObjectEventHandler<IntParameter> OnNotifyCreated_IntParameter;
 
-        [EventBasedMethod("OnDeleting_IntParameter")]
+        [EventBasedMethod("OnNotifyDeleting_IntParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_IntParameter != null) OnDeleting_IntParameter(this);
+            if (OnNotifyDeleting_IntParameter != null) OnNotifyDeleting_IntParameter(this);
         }
-        public static event ObjectEventHandler<IntParameter> OnDeleting_IntParameter;
+        public static event ObjectEventHandler<IntParameter> OnNotifyDeleting_IntParameter;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

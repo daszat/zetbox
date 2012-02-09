@@ -421,37 +421,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ObjectReferenceParameter> OnToString_ObjectReferenceParameter;
 
-        [EventBasedMethod("OnPreSave_ObjectReferenceParameter")]
+        [EventBasedMethod("OnNotifyPreSave_ObjectReferenceParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ObjectReferenceParameter != null) OnPreSave_ObjectReferenceParameter(this);
+            if (OnNotifyPreSave_ObjectReferenceParameter != null) OnNotifyPreSave_ObjectReferenceParameter(this);
         }
-        public static event ObjectEventHandler<ObjectReferenceParameter> OnPreSave_ObjectReferenceParameter;
+        public static event ObjectEventHandler<ObjectReferenceParameter> OnNotifyPreSave_ObjectReferenceParameter;
 
-        [EventBasedMethod("OnPostSave_ObjectReferenceParameter")]
+        [EventBasedMethod("OnNotifyPostSave_ObjectReferenceParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ObjectReferenceParameter != null) OnPostSave_ObjectReferenceParameter(this);
+            if (OnNotifyPostSave_ObjectReferenceParameter != null) OnNotifyPostSave_ObjectReferenceParameter(this);
         }
-        public static event ObjectEventHandler<ObjectReferenceParameter> OnPostSave_ObjectReferenceParameter;
+        public static event ObjectEventHandler<ObjectReferenceParameter> OnNotifyPostSave_ObjectReferenceParameter;
 
-        [EventBasedMethod("OnCreated_ObjectReferenceParameter")]
+        [EventBasedMethod("OnNotifyCreated_ObjectReferenceParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ObjectReferenceParameter != null) OnCreated_ObjectReferenceParameter(this);
+            if (OnNotifyCreated_ObjectReferenceParameter != null) OnNotifyCreated_ObjectReferenceParameter(this);
         }
-        public static event ObjectEventHandler<ObjectReferenceParameter> OnCreated_ObjectReferenceParameter;
+        public static event ObjectEventHandler<ObjectReferenceParameter> OnNotifyCreated_ObjectReferenceParameter;
 
-        [EventBasedMethod("OnDeleting_ObjectReferenceParameter")]
+        [EventBasedMethod("OnNotifyDeleting_ObjectReferenceParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ObjectReferenceParameter != null) OnDeleting_ObjectReferenceParameter(this);
+            if (OnNotifyDeleting_ObjectReferenceParameter != null) OnNotifyDeleting_ObjectReferenceParameter(this);
         }
-        public static event ObjectEventHandler<ObjectReferenceParameter> OnDeleting_ObjectReferenceParameter;
+        public static event ObjectEventHandler<ObjectReferenceParameter> OnNotifyDeleting_ObjectReferenceParameter;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

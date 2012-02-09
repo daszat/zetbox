@@ -364,37 +364,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<StringRangeConstraint> OnToString_StringRangeConstraint;
 
-        [EventBasedMethod("OnPreSave_StringRangeConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_StringRangeConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_StringRangeConstraint != null) OnPreSave_StringRangeConstraint(this);
+            if (OnNotifyPreSave_StringRangeConstraint != null) OnNotifyPreSave_StringRangeConstraint(this);
         }
-        public static event ObjectEventHandler<StringRangeConstraint> OnPreSave_StringRangeConstraint;
+        public static event ObjectEventHandler<StringRangeConstraint> OnNotifyPreSave_StringRangeConstraint;
 
-        [EventBasedMethod("OnPostSave_StringRangeConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_StringRangeConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_StringRangeConstraint != null) OnPostSave_StringRangeConstraint(this);
+            if (OnNotifyPostSave_StringRangeConstraint != null) OnNotifyPostSave_StringRangeConstraint(this);
         }
-        public static event ObjectEventHandler<StringRangeConstraint> OnPostSave_StringRangeConstraint;
+        public static event ObjectEventHandler<StringRangeConstraint> OnNotifyPostSave_StringRangeConstraint;
 
-        [EventBasedMethod("OnCreated_StringRangeConstraint")]
+        [EventBasedMethod("OnNotifyCreated_StringRangeConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_StringRangeConstraint != null) OnCreated_StringRangeConstraint(this);
+            if (OnNotifyCreated_StringRangeConstraint != null) OnNotifyCreated_StringRangeConstraint(this);
         }
-        public static event ObjectEventHandler<StringRangeConstraint> OnCreated_StringRangeConstraint;
+        public static event ObjectEventHandler<StringRangeConstraint> OnNotifyCreated_StringRangeConstraint;
 
-        [EventBasedMethod("OnDeleting_StringRangeConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_StringRangeConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_StringRangeConstraint != null) OnDeleting_StringRangeConstraint(this);
+            if (OnNotifyDeleting_StringRangeConstraint != null) OnNotifyDeleting_StringRangeConstraint(this);
         }
-        public static event ObjectEventHandler<StringRangeConstraint> OnDeleting_StringRangeConstraint;
+        public static event ObjectEventHandler<StringRangeConstraint> OnNotifyDeleting_StringRangeConstraint;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

@@ -207,37 +207,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ViewReadOnlyConstraint> OnToString_ViewReadOnlyConstraint;
 
-        [EventBasedMethod("OnPreSave_ViewReadOnlyConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_ViewReadOnlyConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ViewReadOnlyConstraint != null) OnPreSave_ViewReadOnlyConstraint(this);
+            if (OnNotifyPreSave_ViewReadOnlyConstraint != null) OnNotifyPreSave_ViewReadOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<ViewReadOnlyConstraint> OnPreSave_ViewReadOnlyConstraint;
+        public static event ObjectEventHandler<ViewReadOnlyConstraint> OnNotifyPreSave_ViewReadOnlyConstraint;
 
-        [EventBasedMethod("OnPostSave_ViewReadOnlyConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_ViewReadOnlyConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ViewReadOnlyConstraint != null) OnPostSave_ViewReadOnlyConstraint(this);
+            if (OnNotifyPostSave_ViewReadOnlyConstraint != null) OnNotifyPostSave_ViewReadOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<ViewReadOnlyConstraint> OnPostSave_ViewReadOnlyConstraint;
+        public static event ObjectEventHandler<ViewReadOnlyConstraint> OnNotifyPostSave_ViewReadOnlyConstraint;
 
-        [EventBasedMethod("OnCreated_ViewReadOnlyConstraint")]
+        [EventBasedMethod("OnNotifyCreated_ViewReadOnlyConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ViewReadOnlyConstraint != null) OnCreated_ViewReadOnlyConstraint(this);
+            if (OnNotifyCreated_ViewReadOnlyConstraint != null) OnNotifyCreated_ViewReadOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<ViewReadOnlyConstraint> OnCreated_ViewReadOnlyConstraint;
+        public static event ObjectEventHandler<ViewReadOnlyConstraint> OnNotifyCreated_ViewReadOnlyConstraint;
 
-        [EventBasedMethod("OnDeleting_ViewReadOnlyConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_ViewReadOnlyConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ViewReadOnlyConstraint != null) OnDeleting_ViewReadOnlyConstraint(this);
+            if (OnNotifyDeleting_ViewReadOnlyConstraint != null) OnNotifyDeleting_ViewReadOnlyConstraint(this);
         }
-        public static event ObjectEventHandler<ViewReadOnlyConstraint> OnDeleting_ViewReadOnlyConstraint;
+        public static event ObjectEventHandler<ViewReadOnlyConstraint> OnNotifyDeleting_ViewReadOnlyConstraint;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

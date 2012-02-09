@@ -293,37 +293,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<OptionalPredicateFilterConfiguration> OnToString_OptionalPredicateFilterConfiguration;
 
-        [EventBasedMethod("OnPreSave_OptionalPredicateFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_OptionalPredicateFilterConfiguration")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_OptionalPredicateFilterConfiguration != null) OnPreSave_OptionalPredicateFilterConfiguration(this);
+            if (OnNotifyPreSave_OptionalPredicateFilterConfiguration != null) OnNotifyPreSave_OptionalPredicateFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<OptionalPredicateFilterConfiguration> OnPreSave_OptionalPredicateFilterConfiguration;
+        public static event ObjectEventHandler<OptionalPredicateFilterConfiguration> OnNotifyPreSave_OptionalPredicateFilterConfiguration;
 
-        [EventBasedMethod("OnPostSave_OptionalPredicateFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_OptionalPredicateFilterConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_OptionalPredicateFilterConfiguration != null) OnPostSave_OptionalPredicateFilterConfiguration(this);
+            if (OnNotifyPostSave_OptionalPredicateFilterConfiguration != null) OnNotifyPostSave_OptionalPredicateFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<OptionalPredicateFilterConfiguration> OnPostSave_OptionalPredicateFilterConfiguration;
+        public static event ObjectEventHandler<OptionalPredicateFilterConfiguration> OnNotifyPostSave_OptionalPredicateFilterConfiguration;
 
-        [EventBasedMethod("OnCreated_OptionalPredicateFilterConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_OptionalPredicateFilterConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_OptionalPredicateFilterConfiguration != null) OnCreated_OptionalPredicateFilterConfiguration(this);
+            if (OnNotifyCreated_OptionalPredicateFilterConfiguration != null) OnNotifyCreated_OptionalPredicateFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<OptionalPredicateFilterConfiguration> OnCreated_OptionalPredicateFilterConfiguration;
+        public static event ObjectEventHandler<OptionalPredicateFilterConfiguration> OnNotifyCreated_OptionalPredicateFilterConfiguration;
 
-        [EventBasedMethod("OnDeleting_OptionalPredicateFilterConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_OptionalPredicateFilterConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_OptionalPredicateFilterConfiguration != null) OnDeleting_OptionalPredicateFilterConfiguration(this);
+            if (OnNotifyDeleting_OptionalPredicateFilterConfiguration != null) OnNotifyDeleting_OptionalPredicateFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<OptionalPredicateFilterConfiguration> OnDeleting_OptionalPredicateFilterConfiguration;
+        public static event ObjectEventHandler<OptionalPredicateFilterConfiguration> OnNotifyDeleting_OptionalPredicateFilterConfiguration;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

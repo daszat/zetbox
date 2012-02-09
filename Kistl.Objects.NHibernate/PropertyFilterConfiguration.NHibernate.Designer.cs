@@ -383,37 +383,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<PropertyFilterConfiguration> OnToString_PropertyFilterConfiguration;
 
-        [EventBasedMethod("OnPreSave_PropertyFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_PropertyFilterConfiguration")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_PropertyFilterConfiguration != null) OnPreSave_PropertyFilterConfiguration(this);
+            if (OnNotifyPreSave_PropertyFilterConfiguration != null) OnNotifyPreSave_PropertyFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<PropertyFilterConfiguration> OnPreSave_PropertyFilterConfiguration;
+        public static event ObjectEventHandler<PropertyFilterConfiguration> OnNotifyPreSave_PropertyFilterConfiguration;
 
-        [EventBasedMethod("OnPostSave_PropertyFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_PropertyFilterConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_PropertyFilterConfiguration != null) OnPostSave_PropertyFilterConfiguration(this);
+            if (OnNotifyPostSave_PropertyFilterConfiguration != null) OnNotifyPostSave_PropertyFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<PropertyFilterConfiguration> OnPostSave_PropertyFilterConfiguration;
+        public static event ObjectEventHandler<PropertyFilterConfiguration> OnNotifyPostSave_PropertyFilterConfiguration;
 
-        [EventBasedMethod("OnCreated_PropertyFilterConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_PropertyFilterConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_PropertyFilterConfiguration != null) OnCreated_PropertyFilterConfiguration(this);
+            if (OnNotifyCreated_PropertyFilterConfiguration != null) OnNotifyCreated_PropertyFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<PropertyFilterConfiguration> OnCreated_PropertyFilterConfiguration;
+        public static event ObjectEventHandler<PropertyFilterConfiguration> OnNotifyCreated_PropertyFilterConfiguration;
 
-        [EventBasedMethod("OnDeleting_PropertyFilterConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_PropertyFilterConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_PropertyFilterConfiguration != null) OnDeleting_PropertyFilterConfiguration(this);
+            if (OnNotifyDeleting_PropertyFilterConfiguration != null) OnNotifyDeleting_PropertyFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<PropertyFilterConfiguration> OnDeleting_PropertyFilterConfiguration;
+        public static event ObjectEventHandler<PropertyFilterConfiguration> OnNotifyDeleting_PropertyFilterConfiguration;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

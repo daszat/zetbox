@@ -974,37 +974,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<BoolProperty> OnToString_BoolProperty;
 
-        [EventBasedMethod("OnPreSave_BoolProperty")]
+        [EventBasedMethod("OnNotifyPreSave_BoolProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_BoolProperty != null) OnPreSave_BoolProperty(this);
+            if (OnNotifyPreSave_BoolProperty != null) OnNotifyPreSave_BoolProperty(this);
         }
-        public static event ObjectEventHandler<BoolProperty> OnPreSave_BoolProperty;
+        public static event ObjectEventHandler<BoolProperty> OnNotifyPreSave_BoolProperty;
 
-        [EventBasedMethod("OnPostSave_BoolProperty")]
+        [EventBasedMethod("OnNotifyPostSave_BoolProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_BoolProperty != null) OnPostSave_BoolProperty(this);
+            if (OnNotifyPostSave_BoolProperty != null) OnNotifyPostSave_BoolProperty(this);
         }
-        public static event ObjectEventHandler<BoolProperty> OnPostSave_BoolProperty;
+        public static event ObjectEventHandler<BoolProperty> OnNotifyPostSave_BoolProperty;
 
-        [EventBasedMethod("OnCreated_BoolProperty")]
+        [EventBasedMethod("OnNotifyCreated_BoolProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_BoolProperty != null) OnCreated_BoolProperty(this);
+            if (OnNotifyCreated_BoolProperty != null) OnNotifyCreated_BoolProperty(this);
         }
-        public static event ObjectEventHandler<BoolProperty> OnCreated_BoolProperty;
+        public static event ObjectEventHandler<BoolProperty> OnNotifyCreated_BoolProperty;
 
-        [EventBasedMethod("OnDeleting_BoolProperty")]
+        [EventBasedMethod("OnNotifyDeleting_BoolProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_BoolProperty != null) OnDeleting_BoolProperty(this);
+            if (OnNotifyDeleting_BoolProperty != null) OnNotifyDeleting_BoolProperty(this);
         }
-        public static event ObjectEventHandler<BoolProperty> OnDeleting_BoolProperty;
+        public static event ObjectEventHandler<BoolProperty> OnNotifyDeleting_BoolProperty;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

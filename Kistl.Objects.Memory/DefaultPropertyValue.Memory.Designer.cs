@@ -770,37 +770,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DefaultPropertyValue> OnToString_DefaultPropertyValue;
 
-        [EventBasedMethod("OnPreSave_DefaultPropertyValue")]
+        [EventBasedMethod("OnNotifyPreSave_DefaultPropertyValue")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DefaultPropertyValue != null) OnPreSave_DefaultPropertyValue(this);
+            if (OnNotifyPreSave_DefaultPropertyValue != null) OnNotifyPreSave_DefaultPropertyValue(this);
         }
-        public static event ObjectEventHandler<DefaultPropertyValue> OnPreSave_DefaultPropertyValue;
+        public static event ObjectEventHandler<DefaultPropertyValue> OnNotifyPreSave_DefaultPropertyValue;
 
-        [EventBasedMethod("OnPostSave_DefaultPropertyValue")]
+        [EventBasedMethod("OnNotifyPostSave_DefaultPropertyValue")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DefaultPropertyValue != null) OnPostSave_DefaultPropertyValue(this);
+            if (OnNotifyPostSave_DefaultPropertyValue != null) OnNotifyPostSave_DefaultPropertyValue(this);
         }
-        public static event ObjectEventHandler<DefaultPropertyValue> OnPostSave_DefaultPropertyValue;
+        public static event ObjectEventHandler<DefaultPropertyValue> OnNotifyPostSave_DefaultPropertyValue;
 
-        [EventBasedMethod("OnCreated_DefaultPropertyValue")]
+        [EventBasedMethod("OnNotifyCreated_DefaultPropertyValue")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DefaultPropertyValue != null) OnCreated_DefaultPropertyValue(this);
+            if (OnNotifyCreated_DefaultPropertyValue != null) OnNotifyCreated_DefaultPropertyValue(this);
         }
-        public static event ObjectEventHandler<DefaultPropertyValue> OnCreated_DefaultPropertyValue;
+        public static event ObjectEventHandler<DefaultPropertyValue> OnNotifyCreated_DefaultPropertyValue;
 
-        [EventBasedMethod("OnDeleting_DefaultPropertyValue")]
+        [EventBasedMethod("OnNotifyDeleting_DefaultPropertyValue")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DefaultPropertyValue != null) OnDeleting_DefaultPropertyValue(this);
+            if (OnNotifyDeleting_DefaultPropertyValue != null) OnNotifyDeleting_DefaultPropertyValue(this);
         }
-        public static event ObjectEventHandler<DefaultPropertyValue> OnDeleting_DefaultPropertyValue;
+        public static event ObjectEventHandler<DefaultPropertyValue> OnNotifyDeleting_DefaultPropertyValue;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

@@ -488,37 +488,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ExceptionLogEntry> OnToString_ExceptionLogEntry;
 
-        [EventBasedMethod("OnPreSave_ExceptionLogEntry")]
+        [EventBasedMethod("OnNotifyPreSave_ExceptionLogEntry")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ExceptionLogEntry != null) OnPreSave_ExceptionLogEntry(this);
+            if (OnNotifyPreSave_ExceptionLogEntry != null) OnNotifyPreSave_ExceptionLogEntry(this);
         }
-        public static event ObjectEventHandler<ExceptionLogEntry> OnPreSave_ExceptionLogEntry;
+        public static event ObjectEventHandler<ExceptionLogEntry> OnNotifyPreSave_ExceptionLogEntry;
 
-        [EventBasedMethod("OnPostSave_ExceptionLogEntry")]
+        [EventBasedMethod("OnNotifyPostSave_ExceptionLogEntry")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ExceptionLogEntry != null) OnPostSave_ExceptionLogEntry(this);
+            if (OnNotifyPostSave_ExceptionLogEntry != null) OnNotifyPostSave_ExceptionLogEntry(this);
         }
-        public static event ObjectEventHandler<ExceptionLogEntry> OnPostSave_ExceptionLogEntry;
+        public static event ObjectEventHandler<ExceptionLogEntry> OnNotifyPostSave_ExceptionLogEntry;
 
-        [EventBasedMethod("OnCreated_ExceptionLogEntry")]
+        [EventBasedMethod("OnNotifyCreated_ExceptionLogEntry")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ExceptionLogEntry != null) OnCreated_ExceptionLogEntry(this);
+            if (OnNotifyCreated_ExceptionLogEntry != null) OnNotifyCreated_ExceptionLogEntry(this);
         }
-        public static event ObjectEventHandler<ExceptionLogEntry> OnCreated_ExceptionLogEntry;
+        public static event ObjectEventHandler<ExceptionLogEntry> OnNotifyCreated_ExceptionLogEntry;
 
-        [EventBasedMethod("OnDeleting_ExceptionLogEntry")]
+        [EventBasedMethod("OnNotifyDeleting_ExceptionLogEntry")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ExceptionLogEntry != null) OnDeleting_ExceptionLogEntry(this);
+            if (OnNotifyDeleting_ExceptionLogEntry != null) OnNotifyDeleting_ExceptionLogEntry(this);
         }
-        public static event ObjectEventHandler<ExceptionLogEntry> OnDeleting_ExceptionLogEntry;
+        public static event ObjectEventHandler<ExceptionLogEntry> OnNotifyDeleting_ExceptionLogEntry;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

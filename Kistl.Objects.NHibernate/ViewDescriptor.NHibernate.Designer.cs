@@ -658,38 +658,38 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ViewDescriptor> OnToString_ViewDescriptor;
 
-        [EventBasedMethod("OnPreSave_ViewDescriptor")]
+        [EventBasedMethod("OnNotifyPreSave_ViewDescriptor")]
         public override void NotifyPreSave()
         {
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_ViewDescriptor != null) OnPreSave_ViewDescriptor(this);
+            if (OnNotifyPreSave_ViewDescriptor != null) OnNotifyPreSave_ViewDescriptor(this);
         }
-        public static event ObjectEventHandler<ViewDescriptor> OnPreSave_ViewDescriptor;
+        public static event ObjectEventHandler<ViewDescriptor> OnNotifyPreSave_ViewDescriptor;
 
-        [EventBasedMethod("OnPostSave_ViewDescriptor")]
+        [EventBasedMethod("OnNotifyPostSave_ViewDescriptor")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ViewDescriptor != null) OnPostSave_ViewDescriptor(this);
+            if (OnNotifyPostSave_ViewDescriptor != null) OnNotifyPostSave_ViewDescriptor(this);
         }
-        public static event ObjectEventHandler<ViewDescriptor> OnPostSave_ViewDescriptor;
+        public static event ObjectEventHandler<ViewDescriptor> OnNotifyPostSave_ViewDescriptor;
 
-        [EventBasedMethod("OnCreated_ViewDescriptor")]
+        [EventBasedMethod("OnNotifyCreated_ViewDescriptor")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ViewDescriptor != null) OnCreated_ViewDescriptor(this);
+            if (OnNotifyCreated_ViewDescriptor != null) OnNotifyCreated_ViewDescriptor(this);
         }
-        public static event ObjectEventHandler<ViewDescriptor> OnCreated_ViewDescriptor;
+        public static event ObjectEventHandler<ViewDescriptor> OnNotifyCreated_ViewDescriptor;
 
-        [EventBasedMethod("OnDeleting_ViewDescriptor")]
+        [EventBasedMethod("OnNotifyDeleting_ViewDescriptor")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ViewDescriptor != null) OnDeleting_ViewDescriptor(this);
+            if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
         }
-        public static event ObjectEventHandler<ViewDescriptor> OnDeleting_ViewDescriptor;
+        public static event ObjectEventHandler<ViewDescriptor> OnNotifyDeleting_ViewDescriptor;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

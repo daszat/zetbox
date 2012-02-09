@@ -1364,40 +1364,40 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<RelationEnd> OnToString_RelationEnd;
 
-        [EventBasedMethod("OnPreSave_RelationEnd")]
+        [EventBasedMethod("OnNotifyPreSave_RelationEnd")]
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_RelationEnd != null) OnPreSave_RelationEnd(this);
+            if (OnNotifyPreSave_RelationEnd != null) OnNotifyPreSave_RelationEnd(this);
         }
-        public static event ObjectEventHandler<RelationEnd> OnPreSave_RelationEnd;
+        public static event ObjectEventHandler<RelationEnd> OnNotifyPreSave_RelationEnd;
 
-        [EventBasedMethod("OnPostSave_RelationEnd")]
+        [EventBasedMethod("OnNotifyPostSave_RelationEnd")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_RelationEnd != null) OnPostSave_RelationEnd(this);
+            if (OnNotifyPostSave_RelationEnd != null) OnNotifyPostSave_RelationEnd(this);
         }
-        public static event ObjectEventHandler<RelationEnd> OnPostSave_RelationEnd;
+        public static event ObjectEventHandler<RelationEnd> OnNotifyPostSave_RelationEnd;
 
-        [EventBasedMethod("OnCreated_RelationEnd")]
+        [EventBasedMethod("OnNotifyCreated_RelationEnd")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_RelationEnd != null) OnCreated_RelationEnd(this);
+            if (OnNotifyCreated_RelationEnd != null) OnNotifyCreated_RelationEnd(this);
         }
-        public static event ObjectEventHandler<RelationEnd> OnCreated_RelationEnd;
+        public static event ObjectEventHandler<RelationEnd> OnNotifyCreated_RelationEnd;
 
-        [EventBasedMethod("OnDeleting_RelationEnd")]
+        [EventBasedMethod("OnNotifyDeleting_RelationEnd")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_RelationEnd != null) OnDeleting_RelationEnd(this);
+            if (OnNotifyDeleting_RelationEnd != null) OnNotifyDeleting_RelationEnd(this);
         }
-        public static event ObjectEventHandler<RelationEnd> OnDeleting_RelationEnd;
+        public static event ObjectEventHandler<RelationEnd> OnNotifyDeleting_RelationEnd;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

@@ -241,37 +241,37 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<DayOfWeekCalendarRule> OnToString_DayOfWeekCalendarRule;
 
-        [EventBasedMethod("OnPreSave_DayOfWeekCalendarRule")]
+        [EventBasedMethod("OnNotifyPreSave_DayOfWeekCalendarRule")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DayOfWeekCalendarRule != null) OnPreSave_DayOfWeekCalendarRule(this);
+            if (OnNotifyPreSave_DayOfWeekCalendarRule != null) OnNotifyPreSave_DayOfWeekCalendarRule(this);
         }
-        public static event ObjectEventHandler<DayOfWeekCalendarRule> OnPreSave_DayOfWeekCalendarRule;
+        public static event ObjectEventHandler<DayOfWeekCalendarRule> OnNotifyPreSave_DayOfWeekCalendarRule;
 
-        [EventBasedMethod("OnPostSave_DayOfWeekCalendarRule")]
+        [EventBasedMethod("OnNotifyPostSave_DayOfWeekCalendarRule")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DayOfWeekCalendarRule != null) OnPostSave_DayOfWeekCalendarRule(this);
+            if (OnNotifyPostSave_DayOfWeekCalendarRule != null) OnNotifyPostSave_DayOfWeekCalendarRule(this);
         }
-        public static event ObjectEventHandler<DayOfWeekCalendarRule> OnPostSave_DayOfWeekCalendarRule;
+        public static event ObjectEventHandler<DayOfWeekCalendarRule> OnNotifyPostSave_DayOfWeekCalendarRule;
 
-        [EventBasedMethod("OnCreated_DayOfWeekCalendarRule")]
+        [EventBasedMethod("OnNotifyCreated_DayOfWeekCalendarRule")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DayOfWeekCalendarRule != null) OnCreated_DayOfWeekCalendarRule(this);
+            if (OnNotifyCreated_DayOfWeekCalendarRule != null) OnNotifyCreated_DayOfWeekCalendarRule(this);
         }
-        public static event ObjectEventHandler<DayOfWeekCalendarRule> OnCreated_DayOfWeekCalendarRule;
+        public static event ObjectEventHandler<DayOfWeekCalendarRule> OnNotifyCreated_DayOfWeekCalendarRule;
 
-        [EventBasedMethod("OnDeleting_DayOfWeekCalendarRule")]
+        [EventBasedMethod("OnNotifyDeleting_DayOfWeekCalendarRule")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DayOfWeekCalendarRule != null) OnDeleting_DayOfWeekCalendarRule(this);
+            if (OnNotifyDeleting_DayOfWeekCalendarRule != null) OnNotifyDeleting_DayOfWeekCalendarRule(this);
         }
-        public static event ObjectEventHandler<DayOfWeekCalendarRule> OnDeleting_DayOfWeekCalendarRule;
+        public static event ObjectEventHandler<DayOfWeekCalendarRule> OnNotifyDeleting_DayOfWeekCalendarRule;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

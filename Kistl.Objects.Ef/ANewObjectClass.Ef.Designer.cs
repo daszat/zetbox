@@ -172,37 +172,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<ANewObjectClass> OnToString_ANewObjectClass;
 
-        [EventBasedMethod("OnPreSave_ANewObjectClass")]
+        [EventBasedMethod("OnNotifyPreSave_ANewObjectClass")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ANewObjectClass != null) OnPreSave_ANewObjectClass(this);
+            if (OnNotifyPreSave_ANewObjectClass != null) OnNotifyPreSave_ANewObjectClass(this);
         }
-        public static event ObjectEventHandler<ANewObjectClass> OnPreSave_ANewObjectClass;
+        public static event ObjectEventHandler<ANewObjectClass> OnNotifyPreSave_ANewObjectClass;
 
-        [EventBasedMethod("OnPostSave_ANewObjectClass")]
+        [EventBasedMethod("OnNotifyPostSave_ANewObjectClass")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ANewObjectClass != null) OnPostSave_ANewObjectClass(this);
+            if (OnNotifyPostSave_ANewObjectClass != null) OnNotifyPostSave_ANewObjectClass(this);
         }
-        public static event ObjectEventHandler<ANewObjectClass> OnPostSave_ANewObjectClass;
+        public static event ObjectEventHandler<ANewObjectClass> OnNotifyPostSave_ANewObjectClass;
 
-        [EventBasedMethod("OnCreated_ANewObjectClass")]
+        [EventBasedMethod("OnNotifyCreated_ANewObjectClass")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ANewObjectClass != null) OnCreated_ANewObjectClass(this);
+            if (OnNotifyCreated_ANewObjectClass != null) OnNotifyCreated_ANewObjectClass(this);
         }
-        public static event ObjectEventHandler<ANewObjectClass> OnCreated_ANewObjectClass;
+        public static event ObjectEventHandler<ANewObjectClass> OnNotifyCreated_ANewObjectClass;
 
-        [EventBasedMethod("OnDeleting_ANewObjectClass")]
+        [EventBasedMethod("OnNotifyDeleting_ANewObjectClass")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ANewObjectClass != null) OnDeleting_ANewObjectClass(this);
+            if (OnNotifyDeleting_ANewObjectClass != null) OnNotifyDeleting_ANewObjectClass(this);
         }
-        public static event ObjectEventHandler<ANewObjectClass> OnDeleting_ANewObjectClass;
+        public static event ObjectEventHandler<ANewObjectClass> OnNotifyDeleting_ANewObjectClass;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

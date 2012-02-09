@@ -1659,37 +1659,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Relation> OnToString_Relation;
 
-        [EventBasedMethod("OnPreSave_Relation")]
+        [EventBasedMethod("OnNotifyPreSave_Relation")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Relation != null) OnPreSave_Relation(this);
+            if (OnNotifyPreSave_Relation != null) OnNotifyPreSave_Relation(this);
         }
-        public static event ObjectEventHandler<Relation> OnPreSave_Relation;
+        public static event ObjectEventHandler<Relation> OnNotifyPreSave_Relation;
 
-        [EventBasedMethod("OnPostSave_Relation")]
+        [EventBasedMethod("OnNotifyPostSave_Relation")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Relation != null) OnPostSave_Relation(this);
+            if (OnNotifyPostSave_Relation != null) OnNotifyPostSave_Relation(this);
         }
-        public static event ObjectEventHandler<Relation> OnPostSave_Relation;
+        public static event ObjectEventHandler<Relation> OnNotifyPostSave_Relation;
 
-        [EventBasedMethod("OnCreated_Relation")]
+        [EventBasedMethod("OnNotifyCreated_Relation")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Relation != null) OnCreated_Relation(this);
+            if (OnNotifyCreated_Relation != null) OnNotifyCreated_Relation(this);
         }
-        public static event ObjectEventHandler<Relation> OnCreated_Relation;
+        public static event ObjectEventHandler<Relation> OnNotifyCreated_Relation;
 
-        [EventBasedMethod("OnDeleting_Relation")]
+        [EventBasedMethod("OnNotifyDeleting_Relation")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Relation != null) OnDeleting_Relation(this);
+            if (OnNotifyDeleting_Relation != null) OnNotifyDeleting_Relation(this);
         }
-        public static event ObjectEventHandler<Relation> OnDeleting_Relation;
+        public static event ObjectEventHandler<Relation> OnNotifyDeleting_Relation;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

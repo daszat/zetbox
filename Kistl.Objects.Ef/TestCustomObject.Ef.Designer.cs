@@ -836,37 +836,37 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         }
         public static event ToStringHandler<TestCustomObject> OnToString_TestCustomObject;
 
-        [EventBasedMethod("OnPreSave_TestCustomObject")]
+        [EventBasedMethod("OnNotifyPreSave_TestCustomObject")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_TestCustomObject != null) OnPreSave_TestCustomObject(this);
+            if (OnNotifyPreSave_TestCustomObject != null) OnNotifyPreSave_TestCustomObject(this);
         }
-        public static event ObjectEventHandler<TestCustomObject> OnPreSave_TestCustomObject;
+        public static event ObjectEventHandler<TestCustomObject> OnNotifyPreSave_TestCustomObject;
 
-        [EventBasedMethod("OnPostSave_TestCustomObject")]
+        [EventBasedMethod("OnNotifyPostSave_TestCustomObject")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_TestCustomObject != null) OnPostSave_TestCustomObject(this);
+            if (OnNotifyPostSave_TestCustomObject != null) OnNotifyPostSave_TestCustomObject(this);
         }
-        public static event ObjectEventHandler<TestCustomObject> OnPostSave_TestCustomObject;
+        public static event ObjectEventHandler<TestCustomObject> OnNotifyPostSave_TestCustomObject;
 
-        [EventBasedMethod("OnCreated_TestCustomObject")]
+        [EventBasedMethod("OnNotifyCreated_TestCustomObject")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_TestCustomObject != null) OnCreated_TestCustomObject(this);
+            if (OnNotifyCreated_TestCustomObject != null) OnNotifyCreated_TestCustomObject(this);
         }
-        public static event ObjectEventHandler<TestCustomObject> OnCreated_TestCustomObject;
+        public static event ObjectEventHandler<TestCustomObject> OnNotifyCreated_TestCustomObject;
 
-        [EventBasedMethod("OnDeleting_TestCustomObject")]
+        [EventBasedMethod("OnNotifyDeleting_TestCustomObject")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_TestCustomObject != null) OnDeleting_TestCustomObject(this);
+            if (OnNotifyDeleting_TestCustomObject != null) OnNotifyDeleting_TestCustomObject(this);
         }
-        public static event ObjectEventHandler<TestCustomObject> OnDeleting_TestCustomObject;
+        public static event ObjectEventHandler<TestCustomObject> OnNotifyDeleting_TestCustomObject;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

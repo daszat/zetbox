@@ -1582,7 +1582,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         }
         public static event ToStringHandler<SourceColumn> OnToString_SourceColumn;
 
-        [EventBasedMethod("OnPreSave_SourceColumn")]
+        [EventBasedMethod("OnNotifyPreSave_SourceColumn")]
         public override void NotifyPreSave()
         {
             FetchCompareNullsOrDefault();
@@ -1590,33 +1590,33 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             FetchChangedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_SourceColumn != null) OnPreSave_SourceColumn(this);
+            if (OnNotifyPreSave_SourceColumn != null) OnNotifyPreSave_SourceColumn(this);
         }
-        public static event ObjectEventHandler<SourceColumn> OnPreSave_SourceColumn;
+        public static event ObjectEventHandler<SourceColumn> OnNotifyPreSave_SourceColumn;
 
-        [EventBasedMethod("OnPostSave_SourceColumn")]
+        [EventBasedMethod("OnNotifyPostSave_SourceColumn")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_SourceColumn != null) OnPostSave_SourceColumn(this);
+            if (OnNotifyPostSave_SourceColumn != null) OnNotifyPostSave_SourceColumn(this);
         }
-        public static event ObjectEventHandler<SourceColumn> OnPostSave_SourceColumn;
+        public static event ObjectEventHandler<SourceColumn> OnNotifyPostSave_SourceColumn;
 
-        [EventBasedMethod("OnCreated_SourceColumn")]
+        [EventBasedMethod("OnNotifyCreated_SourceColumn")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_SourceColumn != null) OnCreated_SourceColumn(this);
+            if (OnNotifyCreated_SourceColumn != null) OnNotifyCreated_SourceColumn(this);
         }
-        public static event ObjectEventHandler<SourceColumn> OnCreated_SourceColumn;
+        public static event ObjectEventHandler<SourceColumn> OnNotifyCreated_SourceColumn;
 
-        [EventBasedMethod("OnDeleting_SourceColumn")]
+        [EventBasedMethod("OnNotifyDeleting_SourceColumn")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_SourceColumn != null) OnDeleting_SourceColumn(this);
+            if (OnNotifyDeleting_SourceColumn != null) OnNotifyDeleting_SourceColumn(this);
         }
-        public static event ObjectEventHandler<SourceColumn> OnDeleting_SourceColumn;
+        public static event ObjectEventHandler<SourceColumn> OnNotifyDeleting_SourceColumn;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

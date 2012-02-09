@@ -690,37 +690,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<AbstractModuleMember> OnToString_AbstractModuleMember;
 
-        [EventBasedMethod("OnPreSave_AbstractModuleMember")]
+        [EventBasedMethod("OnNotifyPreSave_AbstractModuleMember")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_AbstractModuleMember != null) OnPreSave_AbstractModuleMember(this);
+            if (OnNotifyPreSave_AbstractModuleMember != null) OnNotifyPreSave_AbstractModuleMember(this);
         }
-        public static event ObjectEventHandler<AbstractModuleMember> OnPreSave_AbstractModuleMember;
+        public static event ObjectEventHandler<AbstractModuleMember> OnNotifyPreSave_AbstractModuleMember;
 
-        [EventBasedMethod("OnPostSave_AbstractModuleMember")]
+        [EventBasedMethod("OnNotifyPostSave_AbstractModuleMember")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_AbstractModuleMember != null) OnPostSave_AbstractModuleMember(this);
+            if (OnNotifyPostSave_AbstractModuleMember != null) OnNotifyPostSave_AbstractModuleMember(this);
         }
-        public static event ObjectEventHandler<AbstractModuleMember> OnPostSave_AbstractModuleMember;
+        public static event ObjectEventHandler<AbstractModuleMember> OnNotifyPostSave_AbstractModuleMember;
 
-        [EventBasedMethod("OnCreated_AbstractModuleMember")]
+        [EventBasedMethod("OnNotifyCreated_AbstractModuleMember")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_AbstractModuleMember != null) OnCreated_AbstractModuleMember(this);
+            if (OnNotifyCreated_AbstractModuleMember != null) OnNotifyCreated_AbstractModuleMember(this);
         }
-        public static event ObjectEventHandler<AbstractModuleMember> OnCreated_AbstractModuleMember;
+        public static event ObjectEventHandler<AbstractModuleMember> OnNotifyCreated_AbstractModuleMember;
 
-        [EventBasedMethod("OnDeleting_AbstractModuleMember")]
+        [EventBasedMethod("OnNotifyDeleting_AbstractModuleMember")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_AbstractModuleMember != null) OnDeleting_AbstractModuleMember(this);
+            if (OnNotifyDeleting_AbstractModuleMember != null) OnNotifyDeleting_AbstractModuleMember(this);
         }
-        public static event ObjectEventHandler<AbstractModuleMember> OnDeleting_AbstractModuleMember;
+        public static event ObjectEventHandler<AbstractModuleMember> OnNotifyDeleting_AbstractModuleMember;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

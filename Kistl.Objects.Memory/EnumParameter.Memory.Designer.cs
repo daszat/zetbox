@@ -421,37 +421,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<EnumParameter> OnToString_EnumParameter;
 
-        [EventBasedMethod("OnPreSave_EnumParameter")]
+        [EventBasedMethod("OnNotifyPreSave_EnumParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_EnumParameter != null) OnPreSave_EnumParameter(this);
+            if (OnNotifyPreSave_EnumParameter != null) OnNotifyPreSave_EnumParameter(this);
         }
-        public static event ObjectEventHandler<EnumParameter> OnPreSave_EnumParameter;
+        public static event ObjectEventHandler<EnumParameter> OnNotifyPreSave_EnumParameter;
 
-        [EventBasedMethod("OnPostSave_EnumParameter")]
+        [EventBasedMethod("OnNotifyPostSave_EnumParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_EnumParameter != null) OnPostSave_EnumParameter(this);
+            if (OnNotifyPostSave_EnumParameter != null) OnNotifyPostSave_EnumParameter(this);
         }
-        public static event ObjectEventHandler<EnumParameter> OnPostSave_EnumParameter;
+        public static event ObjectEventHandler<EnumParameter> OnNotifyPostSave_EnumParameter;
 
-        [EventBasedMethod("OnCreated_EnumParameter")]
+        [EventBasedMethod("OnNotifyCreated_EnumParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_EnumParameter != null) OnCreated_EnumParameter(this);
+            if (OnNotifyCreated_EnumParameter != null) OnNotifyCreated_EnumParameter(this);
         }
-        public static event ObjectEventHandler<EnumParameter> OnCreated_EnumParameter;
+        public static event ObjectEventHandler<EnumParameter> OnNotifyCreated_EnumParameter;
 
-        [EventBasedMethod("OnDeleting_EnumParameter")]
+        [EventBasedMethod("OnNotifyDeleting_EnumParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_EnumParameter != null) OnDeleting_EnumParameter(this);
+            if (OnNotifyDeleting_EnumParameter != null) OnNotifyDeleting_EnumParameter(this);
         }
-        public static event ObjectEventHandler<EnumParameter> OnDeleting_EnumParameter;
+        public static event ObjectEventHandler<EnumParameter> OnNotifyDeleting_EnumParameter;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

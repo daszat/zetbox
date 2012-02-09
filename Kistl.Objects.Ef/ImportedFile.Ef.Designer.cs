@@ -462,37 +462,37 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<ImportedFile> OnToString_ImportedFile;
 
-        [EventBasedMethod("OnPreSave_ImportedFile")]
+        [EventBasedMethod("OnNotifyPreSave_ImportedFile")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ImportedFile != null) OnPreSave_ImportedFile(this);
+            if (OnNotifyPreSave_ImportedFile != null) OnNotifyPreSave_ImportedFile(this);
         }
-        public static event ObjectEventHandler<ImportedFile> OnPreSave_ImportedFile;
+        public static event ObjectEventHandler<ImportedFile> OnNotifyPreSave_ImportedFile;
 
-        [EventBasedMethod("OnPostSave_ImportedFile")]
+        [EventBasedMethod("OnNotifyPostSave_ImportedFile")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ImportedFile != null) OnPostSave_ImportedFile(this);
+            if (OnNotifyPostSave_ImportedFile != null) OnNotifyPostSave_ImportedFile(this);
         }
-        public static event ObjectEventHandler<ImportedFile> OnPostSave_ImportedFile;
+        public static event ObjectEventHandler<ImportedFile> OnNotifyPostSave_ImportedFile;
 
-        [EventBasedMethod("OnCreated_ImportedFile")]
+        [EventBasedMethod("OnNotifyCreated_ImportedFile")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ImportedFile != null) OnCreated_ImportedFile(this);
+            if (OnNotifyCreated_ImportedFile != null) OnNotifyCreated_ImportedFile(this);
         }
-        public static event ObjectEventHandler<ImportedFile> OnCreated_ImportedFile;
+        public static event ObjectEventHandler<ImportedFile> OnNotifyCreated_ImportedFile;
 
-        [EventBasedMethod("OnDeleting_ImportedFile")]
+        [EventBasedMethod("OnNotifyDeleting_ImportedFile")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ImportedFile != null) OnDeleting_ImportedFile(this);
+            if (OnNotifyDeleting_ImportedFile != null) OnNotifyDeleting_ImportedFile(this);
         }
-        public static event ObjectEventHandler<ImportedFile> OnDeleting_ImportedFile;
+        public static event ObjectEventHandler<ImportedFile> OnNotifyDeleting_ImportedFile;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

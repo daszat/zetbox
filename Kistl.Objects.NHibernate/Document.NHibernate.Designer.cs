@@ -343,37 +343,37 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<Document> OnToString_Document;
 
-        [EventBasedMethod("OnPreSave_Document")]
+        [EventBasedMethod("OnNotifyPreSave_Document")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Document != null) OnPreSave_Document(this);
+            if (OnNotifyPreSave_Document != null) OnNotifyPreSave_Document(this);
         }
-        public static event ObjectEventHandler<Document> OnPreSave_Document;
+        public static event ObjectEventHandler<Document> OnNotifyPreSave_Document;
 
-        [EventBasedMethod("OnPostSave_Document")]
+        [EventBasedMethod("OnNotifyPostSave_Document")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Document != null) OnPostSave_Document(this);
+            if (OnNotifyPostSave_Document != null) OnNotifyPostSave_Document(this);
         }
-        public static event ObjectEventHandler<Document> OnPostSave_Document;
+        public static event ObjectEventHandler<Document> OnNotifyPostSave_Document;
 
-        [EventBasedMethod("OnCreated_Document")]
+        [EventBasedMethod("OnNotifyCreated_Document")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Document != null) OnCreated_Document(this);
+            if (OnNotifyCreated_Document != null) OnNotifyCreated_Document(this);
         }
-        public static event ObjectEventHandler<Document> OnCreated_Document;
+        public static event ObjectEventHandler<Document> OnNotifyCreated_Document;
 
-        [EventBasedMethod("OnDeleting_Document")]
+        [EventBasedMethod("OnNotifyDeleting_Document")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Document != null) OnDeleting_Document(this);
+            if (OnNotifyDeleting_Document != null) OnNotifyDeleting_Document(this);
         }
-        public static event ObjectEventHandler<Document> OnDeleting_Document;
+        public static event ObjectEventHandler<Document> OnNotifyDeleting_Document;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

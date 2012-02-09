@@ -231,37 +231,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<TestStudent> OnToString_TestStudent;
 
-        [EventBasedMethod("OnPreSave_TestStudent")]
+        [EventBasedMethod("OnNotifyPreSave_TestStudent")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_TestStudent != null) OnPreSave_TestStudent(this);
+            if (OnNotifyPreSave_TestStudent != null) OnNotifyPreSave_TestStudent(this);
         }
-        public static event ObjectEventHandler<TestStudent> OnPreSave_TestStudent;
+        public static event ObjectEventHandler<TestStudent> OnNotifyPreSave_TestStudent;
 
-        [EventBasedMethod("OnPostSave_TestStudent")]
+        [EventBasedMethod("OnNotifyPostSave_TestStudent")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_TestStudent != null) OnPostSave_TestStudent(this);
+            if (OnNotifyPostSave_TestStudent != null) OnNotifyPostSave_TestStudent(this);
         }
-        public static event ObjectEventHandler<TestStudent> OnPostSave_TestStudent;
+        public static event ObjectEventHandler<TestStudent> OnNotifyPostSave_TestStudent;
 
-        [EventBasedMethod("OnCreated_TestStudent")]
+        [EventBasedMethod("OnNotifyCreated_TestStudent")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_TestStudent != null) OnCreated_TestStudent(this);
+            if (OnNotifyCreated_TestStudent != null) OnNotifyCreated_TestStudent(this);
         }
-        public static event ObjectEventHandler<TestStudent> OnCreated_TestStudent;
+        public static event ObjectEventHandler<TestStudent> OnNotifyCreated_TestStudent;
 
-        [EventBasedMethod("OnDeleting_TestStudent")]
+        [EventBasedMethod("OnNotifyDeleting_TestStudent")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_TestStudent != null) OnDeleting_TestStudent(this);
+            if (OnNotifyDeleting_TestStudent != null) OnNotifyDeleting_TestStudent(this);
         }
-        public static event ObjectEventHandler<TestStudent> OnDeleting_TestStudent;
+        public static event ObjectEventHandler<TestStudent> OnNotifyDeleting_TestStudent;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

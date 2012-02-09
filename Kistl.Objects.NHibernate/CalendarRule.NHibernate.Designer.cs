@@ -1246,7 +1246,7 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<CalendarRule> OnToString_CalendarRule;
 
-        [EventBasedMethod("OnPreSave_CalendarRule")]
+        [EventBasedMethod("OnNotifyPreSave_CalendarRule")]
         public override void NotifyPreSave()
         {
             FetchExportGuidOrDefault();
@@ -1254,33 +1254,33 @@ namespace Kistl.App.Calendar
             FetchChangedOnOrDefault();
             FetchIsWorkingDayOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_CalendarRule != null) OnPreSave_CalendarRule(this);
+            if (OnNotifyPreSave_CalendarRule != null) OnNotifyPreSave_CalendarRule(this);
         }
-        public static event ObjectEventHandler<CalendarRule> OnPreSave_CalendarRule;
+        public static event ObjectEventHandler<CalendarRule> OnNotifyPreSave_CalendarRule;
 
-        [EventBasedMethod("OnPostSave_CalendarRule")]
+        [EventBasedMethod("OnNotifyPostSave_CalendarRule")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_CalendarRule != null) OnPostSave_CalendarRule(this);
+            if (OnNotifyPostSave_CalendarRule != null) OnNotifyPostSave_CalendarRule(this);
         }
-        public static event ObjectEventHandler<CalendarRule> OnPostSave_CalendarRule;
+        public static event ObjectEventHandler<CalendarRule> OnNotifyPostSave_CalendarRule;
 
-        [EventBasedMethod("OnCreated_CalendarRule")]
+        [EventBasedMethod("OnNotifyCreated_CalendarRule")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_CalendarRule != null) OnCreated_CalendarRule(this);
+            if (OnNotifyCreated_CalendarRule != null) OnNotifyCreated_CalendarRule(this);
         }
-        public static event ObjectEventHandler<CalendarRule> OnCreated_CalendarRule;
+        public static event ObjectEventHandler<CalendarRule> OnNotifyCreated_CalendarRule;
 
-        [EventBasedMethod("OnDeleting_CalendarRule")]
+        [EventBasedMethod("OnNotifyDeleting_CalendarRule")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_CalendarRule != null) OnDeleting_CalendarRule(this);
+            if (OnNotifyDeleting_CalendarRule != null) OnNotifyDeleting_CalendarRule(this);
         }
-        public static event ObjectEventHandler<CalendarRule> OnDeleting_CalendarRule;
+        public static event ObjectEventHandler<CalendarRule> OnNotifyDeleting_CalendarRule;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

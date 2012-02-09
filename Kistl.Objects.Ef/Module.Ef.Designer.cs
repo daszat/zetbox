@@ -911,37 +911,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Module> OnToString_Module;
 
-        [EventBasedMethod("OnPreSave_Module")]
+        [EventBasedMethod("OnNotifyPreSave_Module")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Module != null) OnPreSave_Module(this);
+            if (OnNotifyPreSave_Module != null) OnNotifyPreSave_Module(this);
         }
-        public static event ObjectEventHandler<Module> OnPreSave_Module;
+        public static event ObjectEventHandler<Module> OnNotifyPreSave_Module;
 
-        [EventBasedMethod("OnPostSave_Module")]
+        [EventBasedMethod("OnNotifyPostSave_Module")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Module != null) OnPostSave_Module(this);
+            if (OnNotifyPostSave_Module != null) OnNotifyPostSave_Module(this);
         }
-        public static event ObjectEventHandler<Module> OnPostSave_Module;
+        public static event ObjectEventHandler<Module> OnNotifyPostSave_Module;
 
-        [EventBasedMethod("OnCreated_Module")]
+        [EventBasedMethod("OnNotifyCreated_Module")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Module != null) OnCreated_Module(this);
+            if (OnNotifyCreated_Module != null) OnNotifyCreated_Module(this);
         }
-        public static event ObjectEventHandler<Module> OnCreated_Module;
+        public static event ObjectEventHandler<Module> OnNotifyCreated_Module;
 
-        [EventBasedMethod("OnDeleting_Module")]
+        [EventBasedMethod("OnNotifyDeleting_Module")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Module != null) OnDeleting_Module(this);
+            if (OnNotifyDeleting_Module != null) OnNotifyDeleting_Module(this);
         }
-        public static event ObjectEventHandler<Module> OnDeleting_Module;
+        public static event ObjectEventHandler<Module> OnNotifyDeleting_Module;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

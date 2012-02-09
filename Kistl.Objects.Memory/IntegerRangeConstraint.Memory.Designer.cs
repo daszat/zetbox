@@ -356,37 +356,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IntegerRangeConstraint> OnToString_IntegerRangeConstraint;
 
-        [EventBasedMethod("OnPreSave_IntegerRangeConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_IntegerRangeConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IntegerRangeConstraint != null) OnPreSave_IntegerRangeConstraint(this);
+            if (OnNotifyPreSave_IntegerRangeConstraint != null) OnNotifyPreSave_IntegerRangeConstraint(this);
         }
-        public static event ObjectEventHandler<IntegerRangeConstraint> OnPreSave_IntegerRangeConstraint;
+        public static event ObjectEventHandler<IntegerRangeConstraint> OnNotifyPreSave_IntegerRangeConstraint;
 
-        [EventBasedMethod("OnPostSave_IntegerRangeConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_IntegerRangeConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IntegerRangeConstraint != null) OnPostSave_IntegerRangeConstraint(this);
+            if (OnNotifyPostSave_IntegerRangeConstraint != null) OnNotifyPostSave_IntegerRangeConstraint(this);
         }
-        public static event ObjectEventHandler<IntegerRangeConstraint> OnPostSave_IntegerRangeConstraint;
+        public static event ObjectEventHandler<IntegerRangeConstraint> OnNotifyPostSave_IntegerRangeConstraint;
 
-        [EventBasedMethod("OnCreated_IntegerRangeConstraint")]
+        [EventBasedMethod("OnNotifyCreated_IntegerRangeConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_IntegerRangeConstraint != null) OnCreated_IntegerRangeConstraint(this);
+            if (OnNotifyCreated_IntegerRangeConstraint != null) OnNotifyCreated_IntegerRangeConstraint(this);
         }
-        public static event ObjectEventHandler<IntegerRangeConstraint> OnCreated_IntegerRangeConstraint;
+        public static event ObjectEventHandler<IntegerRangeConstraint> OnNotifyCreated_IntegerRangeConstraint;
 
-        [EventBasedMethod("OnDeleting_IntegerRangeConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_IntegerRangeConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_IntegerRangeConstraint != null) OnDeleting_IntegerRangeConstraint(this);
+            if (OnNotifyDeleting_IntegerRangeConstraint != null) OnNotifyDeleting_IntegerRangeConstraint(this);
         }
-        public static event ObjectEventHandler<IntegerRangeConstraint> OnDeleting_IntegerRangeConstraint;
+        public static event ObjectEventHandler<IntegerRangeConstraint> OnNotifyDeleting_IntegerRangeConstraint;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

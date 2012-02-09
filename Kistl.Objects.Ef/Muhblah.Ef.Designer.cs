@@ -774,37 +774,37 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         }
         public static event ToStringHandler<Muhblah> OnToString_Muhblah;
 
-        [EventBasedMethod("OnPreSave_Muhblah")]
+        [EventBasedMethod("OnNotifyPreSave_Muhblah")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Muhblah != null) OnPreSave_Muhblah(this);
+            if (OnNotifyPreSave_Muhblah != null) OnNotifyPreSave_Muhblah(this);
         }
-        public static event ObjectEventHandler<Muhblah> OnPreSave_Muhblah;
+        public static event ObjectEventHandler<Muhblah> OnNotifyPreSave_Muhblah;
 
-        [EventBasedMethod("OnPostSave_Muhblah")]
+        [EventBasedMethod("OnNotifyPostSave_Muhblah")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Muhblah != null) OnPostSave_Muhblah(this);
+            if (OnNotifyPostSave_Muhblah != null) OnNotifyPostSave_Muhblah(this);
         }
-        public static event ObjectEventHandler<Muhblah> OnPostSave_Muhblah;
+        public static event ObjectEventHandler<Muhblah> OnNotifyPostSave_Muhblah;
 
-        [EventBasedMethod("OnCreated_Muhblah")]
+        [EventBasedMethod("OnNotifyCreated_Muhblah")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Muhblah != null) OnCreated_Muhblah(this);
+            if (OnNotifyCreated_Muhblah != null) OnNotifyCreated_Muhblah(this);
         }
-        public static event ObjectEventHandler<Muhblah> OnCreated_Muhblah;
+        public static event ObjectEventHandler<Muhblah> OnNotifyCreated_Muhblah;
 
-        [EventBasedMethod("OnDeleting_Muhblah")]
+        [EventBasedMethod("OnNotifyDeleting_Muhblah")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Muhblah != null) OnDeleting_Muhblah(this);
+            if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
         }
-        public static event ObjectEventHandler<Muhblah> OnDeleting_Muhblah;
+        public static event ObjectEventHandler<Muhblah> OnNotifyDeleting_Muhblah;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

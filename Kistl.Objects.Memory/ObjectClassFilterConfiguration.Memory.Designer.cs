@@ -374,37 +374,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ObjectClassFilterConfiguration> OnToString_ObjectClassFilterConfiguration;
 
-        [EventBasedMethod("OnPreSave_ObjectClassFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPreSave_ObjectClassFilterConfiguration")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ObjectClassFilterConfiguration != null) OnPreSave_ObjectClassFilterConfiguration(this);
+            if (OnNotifyPreSave_ObjectClassFilterConfiguration != null) OnNotifyPreSave_ObjectClassFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnPreSave_ObjectClassFilterConfiguration;
+        public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnNotifyPreSave_ObjectClassFilterConfiguration;
 
-        [EventBasedMethod("OnPostSave_ObjectClassFilterConfiguration")]
+        [EventBasedMethod("OnNotifyPostSave_ObjectClassFilterConfiguration")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ObjectClassFilterConfiguration != null) OnPostSave_ObjectClassFilterConfiguration(this);
+            if (OnNotifyPostSave_ObjectClassFilterConfiguration != null) OnNotifyPostSave_ObjectClassFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnPostSave_ObjectClassFilterConfiguration;
+        public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnNotifyPostSave_ObjectClassFilterConfiguration;
 
-        [EventBasedMethod("OnCreated_ObjectClassFilterConfiguration")]
+        [EventBasedMethod("OnNotifyCreated_ObjectClassFilterConfiguration")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ObjectClassFilterConfiguration != null) OnCreated_ObjectClassFilterConfiguration(this);
+            if (OnNotifyCreated_ObjectClassFilterConfiguration != null) OnNotifyCreated_ObjectClassFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnCreated_ObjectClassFilterConfiguration;
+        public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnNotifyCreated_ObjectClassFilterConfiguration;
 
-        [EventBasedMethod("OnDeleting_ObjectClassFilterConfiguration")]
+        [EventBasedMethod("OnNotifyDeleting_ObjectClassFilterConfiguration")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ObjectClassFilterConfiguration != null) OnDeleting_ObjectClassFilterConfiguration(this);
+            if (OnNotifyDeleting_ObjectClassFilterConfiguration != null) OnNotifyDeleting_ObjectClassFilterConfiguration(this);
         }
-        public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnDeleting_ObjectClassFilterConfiguration;
+        public static event ObjectEventHandler<ObjectClassFilterConfiguration> OnNotifyDeleting_ObjectClassFilterConfiguration;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

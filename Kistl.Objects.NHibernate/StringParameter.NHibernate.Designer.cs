@@ -282,37 +282,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<StringParameter> OnToString_StringParameter;
 
-        [EventBasedMethod("OnPreSave_StringParameter")]
+        [EventBasedMethod("OnNotifyPreSave_StringParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_StringParameter != null) OnPreSave_StringParameter(this);
+            if (OnNotifyPreSave_StringParameter != null) OnNotifyPreSave_StringParameter(this);
         }
-        public static event ObjectEventHandler<StringParameter> OnPreSave_StringParameter;
+        public static event ObjectEventHandler<StringParameter> OnNotifyPreSave_StringParameter;
 
-        [EventBasedMethod("OnPostSave_StringParameter")]
+        [EventBasedMethod("OnNotifyPostSave_StringParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_StringParameter != null) OnPostSave_StringParameter(this);
+            if (OnNotifyPostSave_StringParameter != null) OnNotifyPostSave_StringParameter(this);
         }
-        public static event ObjectEventHandler<StringParameter> OnPostSave_StringParameter;
+        public static event ObjectEventHandler<StringParameter> OnNotifyPostSave_StringParameter;
 
-        [EventBasedMethod("OnCreated_StringParameter")]
+        [EventBasedMethod("OnNotifyCreated_StringParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_StringParameter != null) OnCreated_StringParameter(this);
+            if (OnNotifyCreated_StringParameter != null) OnNotifyCreated_StringParameter(this);
         }
-        public static event ObjectEventHandler<StringParameter> OnCreated_StringParameter;
+        public static event ObjectEventHandler<StringParameter> OnNotifyCreated_StringParameter;
 
-        [EventBasedMethod("OnDeleting_StringParameter")]
+        [EventBasedMethod("OnNotifyDeleting_StringParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_StringParameter != null) OnDeleting_StringParameter(this);
+            if (OnNotifyDeleting_StringParameter != null) OnNotifyDeleting_StringParameter(this);
         }
-        public static event ObjectEventHandler<StringParameter> OnDeleting_StringParameter;
+        public static event ObjectEventHandler<StringParameter> OnNotifyDeleting_StringParameter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

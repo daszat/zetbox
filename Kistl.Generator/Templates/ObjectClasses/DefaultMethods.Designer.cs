@@ -50,61 +50,61 @@ this.WriteObjects("            return e.Result;\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ToStringHandler<",  dt.Name , "> OnToString_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        [EventBasedMethod(\"OnPreSave_",  dt.Name , "\")]\r\n");
+this.WriteObjects("        [EventBasedMethod(\"OnNotifyPreSave_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyPreSave()\r\n");
 this.WriteObjects("        {\r\n");
 #line 33 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPrePreSaveTemplate(); 
 #line 34 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyPreSave();\r\n");
-this.WriteObjects("            if (OnPreSave_",  dt.Name , " != null) OnPreSave_",  dt.Name , "(this);\r\n");
+this.WriteObjects("            if (OnNotifyPreSave_",  dt.Name , " != null) OnNotifyPreSave_",  dt.Name , "(this);\r\n");
 #line 36 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostPreSaveTemplate(); 
 #line 37 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnPreSave_",  dt.Name , ";\r\n");
+this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyPreSave_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        [EventBasedMethod(\"OnPostSave_",  dt.Name , "\")]\r\n");
+this.WriteObjects("        [EventBasedMethod(\"OnNotifyPostSave_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyPostSave()\r\n");
 this.WriteObjects("        {\r\n");
 #line 43 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPrePostSaveTemplate(); 
 #line 44 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyPostSave();\r\n");
-this.WriteObjects("            if (OnPostSave_",  dt.Name , " != null) OnPostSave_",  dt.Name , "(this);\r\n");
+this.WriteObjects("            if (OnNotifyPostSave_",  dt.Name , " != null) OnNotifyPostSave_",  dt.Name , "(this);\r\n");
 #line 46 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostPostSaveTemplate(); 
 #line 47 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnPostSave_",  dt.Name , ";\r\n");
+this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyPostSave_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        [EventBasedMethod(\"OnCreated_",  dt.Name , "\")]\r\n");
+this.WriteObjects("        [EventBasedMethod(\"OnNotifyCreated_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyCreated()\r\n");
 this.WriteObjects("        {\r\n");
 #line 53 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPreCreatedTemplate(); 
 #line 54 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyCreated();\r\n");
-this.WriteObjects("            if (OnCreated_",  dt.Name , " != null) OnCreated_",  dt.Name , "(this);\r\n");
+this.WriteObjects("            if (OnNotifyCreated_",  dt.Name , " != null) OnNotifyCreated_",  dt.Name , "(this);\r\n");
 #line 56 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostCreatedTemplate(); 
 #line 57 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnCreated_",  dt.Name , ";\r\n");
+this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyCreated_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        [EventBasedMethod(\"OnDeleting_",  dt.Name , "\")]\r\n");
+this.WriteObjects("        [EventBasedMethod(\"OnNotifyDeleting_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyDeleting()\r\n");
 this.WriteObjects("        {\r\n");
 #line 63 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPreDeletingTemplate(); 
 #line 64 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyDeleting();\r\n");
-this.WriteObjects("            if (OnDeleting_",  dt.Name , " != null) OnDeleting_",  dt.Name , "(this);\r\n");
+this.WriteObjects("            if (OnNotifyDeleting_",  dt.Name , " != null) OnNotifyDeleting_",  dt.Name , "(this);\r\n");
 #line 66 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostDeletingTemplate(); 
 #line 67 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnDeleting_",  dt.Name , ";\r\n");
+this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyDeleting_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
 

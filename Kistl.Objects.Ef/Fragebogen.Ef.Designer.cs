@@ -299,37 +299,37 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         }
         public static event ToStringHandler<Fragebogen> OnToString_Fragebogen;
 
-        [EventBasedMethod("OnPreSave_Fragebogen")]
+        [EventBasedMethod("OnNotifyPreSave_Fragebogen")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Fragebogen != null) OnPreSave_Fragebogen(this);
+            if (OnNotifyPreSave_Fragebogen != null) OnNotifyPreSave_Fragebogen(this);
         }
-        public static event ObjectEventHandler<Fragebogen> OnPreSave_Fragebogen;
+        public static event ObjectEventHandler<Fragebogen> OnNotifyPreSave_Fragebogen;
 
-        [EventBasedMethod("OnPostSave_Fragebogen")]
+        [EventBasedMethod("OnNotifyPostSave_Fragebogen")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Fragebogen != null) OnPostSave_Fragebogen(this);
+            if (OnNotifyPostSave_Fragebogen != null) OnNotifyPostSave_Fragebogen(this);
         }
-        public static event ObjectEventHandler<Fragebogen> OnPostSave_Fragebogen;
+        public static event ObjectEventHandler<Fragebogen> OnNotifyPostSave_Fragebogen;
 
-        [EventBasedMethod("OnCreated_Fragebogen")]
+        [EventBasedMethod("OnNotifyCreated_Fragebogen")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Fragebogen != null) OnCreated_Fragebogen(this);
+            if (OnNotifyCreated_Fragebogen != null) OnNotifyCreated_Fragebogen(this);
         }
-        public static event ObjectEventHandler<Fragebogen> OnCreated_Fragebogen;
+        public static event ObjectEventHandler<Fragebogen> OnNotifyCreated_Fragebogen;
 
-        [EventBasedMethod("OnDeleting_Fragebogen")]
+        [EventBasedMethod("OnNotifyDeleting_Fragebogen")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Fragebogen != null) OnDeleting_Fragebogen(this);
+            if (OnNotifyDeleting_Fragebogen != null) OnNotifyDeleting_Fragebogen(this);
         }
-        public static event ObjectEventHandler<Fragebogen> OnDeleting_Fragebogen;
+        public static event ObjectEventHandler<Fragebogen> OnNotifyDeleting_Fragebogen;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

@@ -295,37 +295,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<EnumDefaultValue> OnToString_EnumDefaultValue;
 
-        [EventBasedMethod("OnPreSave_EnumDefaultValue")]
+        [EventBasedMethod("OnNotifyPreSave_EnumDefaultValue")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_EnumDefaultValue != null) OnPreSave_EnumDefaultValue(this);
+            if (OnNotifyPreSave_EnumDefaultValue != null) OnNotifyPreSave_EnumDefaultValue(this);
         }
-        public static event ObjectEventHandler<EnumDefaultValue> OnPreSave_EnumDefaultValue;
+        public static event ObjectEventHandler<EnumDefaultValue> OnNotifyPreSave_EnumDefaultValue;
 
-        [EventBasedMethod("OnPostSave_EnumDefaultValue")]
+        [EventBasedMethod("OnNotifyPostSave_EnumDefaultValue")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_EnumDefaultValue != null) OnPostSave_EnumDefaultValue(this);
+            if (OnNotifyPostSave_EnumDefaultValue != null) OnNotifyPostSave_EnumDefaultValue(this);
         }
-        public static event ObjectEventHandler<EnumDefaultValue> OnPostSave_EnumDefaultValue;
+        public static event ObjectEventHandler<EnumDefaultValue> OnNotifyPostSave_EnumDefaultValue;
 
-        [EventBasedMethod("OnCreated_EnumDefaultValue")]
+        [EventBasedMethod("OnNotifyCreated_EnumDefaultValue")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_EnumDefaultValue != null) OnCreated_EnumDefaultValue(this);
+            if (OnNotifyCreated_EnumDefaultValue != null) OnNotifyCreated_EnumDefaultValue(this);
         }
-        public static event ObjectEventHandler<EnumDefaultValue> OnCreated_EnumDefaultValue;
+        public static event ObjectEventHandler<EnumDefaultValue> OnNotifyCreated_EnumDefaultValue;
 
-        [EventBasedMethod("OnDeleting_EnumDefaultValue")]
+        [EventBasedMethod("OnNotifyDeleting_EnumDefaultValue")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_EnumDefaultValue != null) OnDeleting_EnumDefaultValue(this);
+            if (OnNotifyDeleting_EnumDefaultValue != null) OnNotifyDeleting_EnumDefaultValue(this);
         }
-        public static event ObjectEventHandler<EnumDefaultValue> OnDeleting_EnumDefaultValue;
+        public static event ObjectEventHandler<EnumDefaultValue> OnNotifyDeleting_EnumDefaultValue;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

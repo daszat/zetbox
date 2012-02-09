@@ -156,37 +156,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<NewGuidDefaultValue> OnToString_NewGuidDefaultValue;
 
-        [EventBasedMethod("OnPreSave_NewGuidDefaultValue")]
+        [EventBasedMethod("OnNotifyPreSave_NewGuidDefaultValue")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_NewGuidDefaultValue != null) OnPreSave_NewGuidDefaultValue(this);
+            if (OnNotifyPreSave_NewGuidDefaultValue != null) OnNotifyPreSave_NewGuidDefaultValue(this);
         }
-        public static event ObjectEventHandler<NewGuidDefaultValue> OnPreSave_NewGuidDefaultValue;
+        public static event ObjectEventHandler<NewGuidDefaultValue> OnNotifyPreSave_NewGuidDefaultValue;
 
-        [EventBasedMethod("OnPostSave_NewGuidDefaultValue")]
+        [EventBasedMethod("OnNotifyPostSave_NewGuidDefaultValue")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_NewGuidDefaultValue != null) OnPostSave_NewGuidDefaultValue(this);
+            if (OnNotifyPostSave_NewGuidDefaultValue != null) OnNotifyPostSave_NewGuidDefaultValue(this);
         }
-        public static event ObjectEventHandler<NewGuidDefaultValue> OnPostSave_NewGuidDefaultValue;
+        public static event ObjectEventHandler<NewGuidDefaultValue> OnNotifyPostSave_NewGuidDefaultValue;
 
-        [EventBasedMethod("OnCreated_NewGuidDefaultValue")]
+        [EventBasedMethod("OnNotifyCreated_NewGuidDefaultValue")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_NewGuidDefaultValue != null) OnCreated_NewGuidDefaultValue(this);
+            if (OnNotifyCreated_NewGuidDefaultValue != null) OnNotifyCreated_NewGuidDefaultValue(this);
         }
-        public static event ObjectEventHandler<NewGuidDefaultValue> OnCreated_NewGuidDefaultValue;
+        public static event ObjectEventHandler<NewGuidDefaultValue> OnNotifyCreated_NewGuidDefaultValue;
 
-        [EventBasedMethod("OnDeleting_NewGuidDefaultValue")]
+        [EventBasedMethod("OnNotifyDeleting_NewGuidDefaultValue")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_NewGuidDefaultValue != null) OnDeleting_NewGuidDefaultValue(this);
+            if (OnNotifyDeleting_NewGuidDefaultValue != null) OnNotifyDeleting_NewGuidDefaultValue(this);
         }
-        public static event ObjectEventHandler<NewGuidDefaultValue> OnDeleting_NewGuidDefaultValue;
+        public static event ObjectEventHandler<NewGuidDefaultValue> OnNotifyDeleting_NewGuidDefaultValue;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

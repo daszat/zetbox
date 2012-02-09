@@ -304,37 +304,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<One_to_N_relations_N> OnToString_One_to_N_relations_N;
 
-        [EventBasedMethod("OnPreSave_One_to_N_relations_N")]
+        [EventBasedMethod("OnNotifyPreSave_One_to_N_relations_N")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_One_to_N_relations_N != null) OnPreSave_One_to_N_relations_N(this);
+            if (OnNotifyPreSave_One_to_N_relations_N != null) OnNotifyPreSave_One_to_N_relations_N(this);
         }
-        public static event ObjectEventHandler<One_to_N_relations_N> OnPreSave_One_to_N_relations_N;
+        public static event ObjectEventHandler<One_to_N_relations_N> OnNotifyPreSave_One_to_N_relations_N;
 
-        [EventBasedMethod("OnPostSave_One_to_N_relations_N")]
+        [EventBasedMethod("OnNotifyPostSave_One_to_N_relations_N")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_One_to_N_relations_N != null) OnPostSave_One_to_N_relations_N(this);
+            if (OnNotifyPostSave_One_to_N_relations_N != null) OnNotifyPostSave_One_to_N_relations_N(this);
         }
-        public static event ObjectEventHandler<One_to_N_relations_N> OnPostSave_One_to_N_relations_N;
+        public static event ObjectEventHandler<One_to_N_relations_N> OnNotifyPostSave_One_to_N_relations_N;
 
-        [EventBasedMethod("OnCreated_One_to_N_relations_N")]
+        [EventBasedMethod("OnNotifyCreated_One_to_N_relations_N")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_One_to_N_relations_N != null) OnCreated_One_to_N_relations_N(this);
+            if (OnNotifyCreated_One_to_N_relations_N != null) OnNotifyCreated_One_to_N_relations_N(this);
         }
-        public static event ObjectEventHandler<One_to_N_relations_N> OnCreated_One_to_N_relations_N;
+        public static event ObjectEventHandler<One_to_N_relations_N> OnNotifyCreated_One_to_N_relations_N;
 
-        [EventBasedMethod("OnDeleting_One_to_N_relations_N")]
+        [EventBasedMethod("OnNotifyDeleting_One_to_N_relations_N")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_One_to_N_relations_N != null) OnDeleting_One_to_N_relations_N(this);
+            if (OnNotifyDeleting_One_to_N_relations_N != null) OnNotifyDeleting_One_to_N_relations_N(this);
         }
-        public static event ObjectEventHandler<One_to_N_relations_N> OnDeleting_One_to_N_relations_N;
+        public static event ObjectEventHandler<One_to_N_relations_N> OnNotifyDeleting_One_to_N_relations_N;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

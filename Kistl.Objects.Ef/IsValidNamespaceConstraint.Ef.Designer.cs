@@ -209,37 +209,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IsValidNamespaceConstraint> OnToString_IsValidNamespaceConstraint;
 
-        [EventBasedMethod("OnPreSave_IsValidNamespaceConstraint")]
+        [EventBasedMethod("OnNotifyPreSave_IsValidNamespaceConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IsValidNamespaceConstraint != null) OnPreSave_IsValidNamespaceConstraint(this);
+            if (OnNotifyPreSave_IsValidNamespaceConstraint != null) OnNotifyPreSave_IsValidNamespaceConstraint(this);
         }
-        public static event ObjectEventHandler<IsValidNamespaceConstraint> OnPreSave_IsValidNamespaceConstraint;
+        public static event ObjectEventHandler<IsValidNamespaceConstraint> OnNotifyPreSave_IsValidNamespaceConstraint;
 
-        [EventBasedMethod("OnPostSave_IsValidNamespaceConstraint")]
+        [EventBasedMethod("OnNotifyPostSave_IsValidNamespaceConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IsValidNamespaceConstraint != null) OnPostSave_IsValidNamespaceConstraint(this);
+            if (OnNotifyPostSave_IsValidNamespaceConstraint != null) OnNotifyPostSave_IsValidNamespaceConstraint(this);
         }
-        public static event ObjectEventHandler<IsValidNamespaceConstraint> OnPostSave_IsValidNamespaceConstraint;
+        public static event ObjectEventHandler<IsValidNamespaceConstraint> OnNotifyPostSave_IsValidNamespaceConstraint;
 
-        [EventBasedMethod("OnCreated_IsValidNamespaceConstraint")]
+        [EventBasedMethod("OnNotifyCreated_IsValidNamespaceConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_IsValidNamespaceConstraint != null) OnCreated_IsValidNamespaceConstraint(this);
+            if (OnNotifyCreated_IsValidNamespaceConstraint != null) OnNotifyCreated_IsValidNamespaceConstraint(this);
         }
-        public static event ObjectEventHandler<IsValidNamespaceConstraint> OnCreated_IsValidNamespaceConstraint;
+        public static event ObjectEventHandler<IsValidNamespaceConstraint> OnNotifyCreated_IsValidNamespaceConstraint;
 
-        [EventBasedMethod("OnDeleting_IsValidNamespaceConstraint")]
+        [EventBasedMethod("OnNotifyDeleting_IsValidNamespaceConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_IsValidNamespaceConstraint != null) OnDeleting_IsValidNamespaceConstraint(this);
+            if (OnNotifyDeleting_IsValidNamespaceConstraint != null) OnNotifyDeleting_IsValidNamespaceConstraint(this);
         }
-        public static event ObjectEventHandler<IsValidNamespaceConstraint> OnDeleting_IsValidNamespaceConstraint;
+        public static event ObjectEventHandler<IsValidNamespaceConstraint> OnNotifyDeleting_IsValidNamespaceConstraint;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

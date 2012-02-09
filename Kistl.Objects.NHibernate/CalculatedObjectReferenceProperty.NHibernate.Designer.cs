@@ -596,37 +596,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CalculatedObjectReferenceProperty> OnToString_CalculatedObjectReferenceProperty;
 
-        [EventBasedMethod("OnPreSave_CalculatedObjectReferenceProperty")]
+        [EventBasedMethod("OnNotifyPreSave_CalculatedObjectReferenceProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_CalculatedObjectReferenceProperty != null) OnPreSave_CalculatedObjectReferenceProperty(this);
+            if (OnNotifyPreSave_CalculatedObjectReferenceProperty != null) OnNotifyPreSave_CalculatedObjectReferenceProperty(this);
         }
-        public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnPreSave_CalculatedObjectReferenceProperty;
+        public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyPreSave_CalculatedObjectReferenceProperty;
 
-        [EventBasedMethod("OnPostSave_CalculatedObjectReferenceProperty")]
+        [EventBasedMethod("OnNotifyPostSave_CalculatedObjectReferenceProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_CalculatedObjectReferenceProperty != null) OnPostSave_CalculatedObjectReferenceProperty(this);
+            if (OnNotifyPostSave_CalculatedObjectReferenceProperty != null) OnNotifyPostSave_CalculatedObjectReferenceProperty(this);
         }
-        public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnPostSave_CalculatedObjectReferenceProperty;
+        public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyPostSave_CalculatedObjectReferenceProperty;
 
-        [EventBasedMethod("OnCreated_CalculatedObjectReferenceProperty")]
+        [EventBasedMethod("OnNotifyCreated_CalculatedObjectReferenceProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_CalculatedObjectReferenceProperty != null) OnCreated_CalculatedObjectReferenceProperty(this);
+            if (OnNotifyCreated_CalculatedObjectReferenceProperty != null) OnNotifyCreated_CalculatedObjectReferenceProperty(this);
         }
-        public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnCreated_CalculatedObjectReferenceProperty;
+        public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyCreated_CalculatedObjectReferenceProperty;
 
-        [EventBasedMethod("OnDeleting_CalculatedObjectReferenceProperty")]
+        [EventBasedMethod("OnNotifyDeleting_CalculatedObjectReferenceProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_CalculatedObjectReferenceProperty != null) OnDeleting_CalculatedObjectReferenceProperty(this);
+            if (OnNotifyDeleting_CalculatedObjectReferenceProperty != null) OnNotifyDeleting_CalculatedObjectReferenceProperty(this);
         }
-        public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnDeleting_CalculatedObjectReferenceProperty;
+        public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyDeleting_CalculatedObjectReferenceProperty;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

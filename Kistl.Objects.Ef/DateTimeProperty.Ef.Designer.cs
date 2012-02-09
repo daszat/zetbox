@@ -502,37 +502,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DateTimeProperty> OnToString_DateTimeProperty;
 
-        [EventBasedMethod("OnPreSave_DateTimeProperty")]
+        [EventBasedMethod("OnNotifyPreSave_DateTimeProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DateTimeProperty != null) OnPreSave_DateTimeProperty(this);
+            if (OnNotifyPreSave_DateTimeProperty != null) OnNotifyPreSave_DateTimeProperty(this);
         }
-        public static event ObjectEventHandler<DateTimeProperty> OnPreSave_DateTimeProperty;
+        public static event ObjectEventHandler<DateTimeProperty> OnNotifyPreSave_DateTimeProperty;
 
-        [EventBasedMethod("OnPostSave_DateTimeProperty")]
+        [EventBasedMethod("OnNotifyPostSave_DateTimeProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DateTimeProperty != null) OnPostSave_DateTimeProperty(this);
+            if (OnNotifyPostSave_DateTimeProperty != null) OnNotifyPostSave_DateTimeProperty(this);
         }
-        public static event ObjectEventHandler<DateTimeProperty> OnPostSave_DateTimeProperty;
+        public static event ObjectEventHandler<DateTimeProperty> OnNotifyPostSave_DateTimeProperty;
 
-        [EventBasedMethod("OnCreated_DateTimeProperty")]
+        [EventBasedMethod("OnNotifyCreated_DateTimeProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DateTimeProperty != null) OnCreated_DateTimeProperty(this);
+            if (OnNotifyCreated_DateTimeProperty != null) OnNotifyCreated_DateTimeProperty(this);
         }
-        public static event ObjectEventHandler<DateTimeProperty> OnCreated_DateTimeProperty;
+        public static event ObjectEventHandler<DateTimeProperty> OnNotifyCreated_DateTimeProperty;
 
-        [EventBasedMethod("OnDeleting_DateTimeProperty")]
+        [EventBasedMethod("OnNotifyDeleting_DateTimeProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DateTimeProperty != null) OnDeleting_DateTimeProperty(this);
+            if (OnNotifyDeleting_DateTimeProperty != null) OnNotifyDeleting_DateTimeProperty(this);
         }
-        public static event ObjectEventHandler<DateTimeProperty> OnDeleting_DateTimeProperty;
+        public static event ObjectEventHandler<DateTimeProperty> OnNotifyDeleting_DateTimeProperty;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

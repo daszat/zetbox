@@ -944,40 +944,40 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         }
         public static event ToStringHandler<MigrationProject> OnToString_MigrationProject;
 
-        [EventBasedMethod("OnPreSave_MigrationProject")]
+        [EventBasedMethod("OnNotifyPreSave_MigrationProject")]
         public override void NotifyPreSave()
         {
             FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnPreSave_MigrationProject != null) OnPreSave_MigrationProject(this);
+            if (OnNotifyPreSave_MigrationProject != null) OnNotifyPreSave_MigrationProject(this);
         }
-        public static event ObjectEventHandler<MigrationProject> OnPreSave_MigrationProject;
+        public static event ObjectEventHandler<MigrationProject> OnNotifyPreSave_MigrationProject;
 
-        [EventBasedMethod("OnPostSave_MigrationProject")]
+        [EventBasedMethod("OnNotifyPostSave_MigrationProject")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_MigrationProject != null) OnPostSave_MigrationProject(this);
+            if (OnNotifyPostSave_MigrationProject != null) OnNotifyPostSave_MigrationProject(this);
         }
-        public static event ObjectEventHandler<MigrationProject> OnPostSave_MigrationProject;
+        public static event ObjectEventHandler<MigrationProject> OnNotifyPostSave_MigrationProject;
 
-        [EventBasedMethod("OnCreated_MigrationProject")]
+        [EventBasedMethod("OnNotifyCreated_MigrationProject")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_MigrationProject != null) OnCreated_MigrationProject(this);
+            if (OnNotifyCreated_MigrationProject != null) OnNotifyCreated_MigrationProject(this);
         }
-        public static event ObjectEventHandler<MigrationProject> OnCreated_MigrationProject;
+        public static event ObjectEventHandler<MigrationProject> OnNotifyCreated_MigrationProject;
 
-        [EventBasedMethod("OnDeleting_MigrationProject")]
+        [EventBasedMethod("OnNotifyDeleting_MigrationProject")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_MigrationProject != null) OnDeleting_MigrationProject(this);
+            if (OnNotifyDeleting_MigrationProject != null) OnNotifyDeleting_MigrationProject(this);
         }
-        public static event ObjectEventHandler<MigrationProject> OnDeleting_MigrationProject;
+        public static event ObjectEventHandler<MigrationProject> OnNotifyDeleting_MigrationProject;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

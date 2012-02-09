@@ -566,37 +566,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Template> OnToString_Template;
 
-        [EventBasedMethod("OnPreSave_Template")]
+        [EventBasedMethod("OnNotifyPreSave_Template")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Template != null) OnPreSave_Template(this);
+            if (OnNotifyPreSave_Template != null) OnNotifyPreSave_Template(this);
         }
-        public static event ObjectEventHandler<Template> OnPreSave_Template;
+        public static event ObjectEventHandler<Template> OnNotifyPreSave_Template;
 
-        [EventBasedMethod("OnPostSave_Template")]
+        [EventBasedMethod("OnNotifyPostSave_Template")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Template != null) OnPostSave_Template(this);
+            if (OnNotifyPostSave_Template != null) OnNotifyPostSave_Template(this);
         }
-        public static event ObjectEventHandler<Template> OnPostSave_Template;
+        public static event ObjectEventHandler<Template> OnNotifyPostSave_Template;
 
-        [EventBasedMethod("OnCreated_Template")]
+        [EventBasedMethod("OnNotifyCreated_Template")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Template != null) OnCreated_Template(this);
+            if (OnNotifyCreated_Template != null) OnNotifyCreated_Template(this);
         }
-        public static event ObjectEventHandler<Template> OnCreated_Template;
+        public static event ObjectEventHandler<Template> OnNotifyCreated_Template;
 
-        [EventBasedMethod("OnDeleting_Template")]
+        [EventBasedMethod("OnNotifyDeleting_Template")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Template != null) OnDeleting_Template(this);
+            if (OnNotifyDeleting_Template != null) OnNotifyDeleting_Template(this);
         }
-        public static event ObjectEventHandler<Template> OnDeleting_Template;
+        public static event ObjectEventHandler<Template> OnNotifyDeleting_Template;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

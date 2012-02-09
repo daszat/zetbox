@@ -304,37 +304,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Interface> OnToString_Interface;
 
-        [EventBasedMethod("OnPreSave_Interface")]
+        [EventBasedMethod("OnNotifyPreSave_Interface")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Interface != null) OnPreSave_Interface(this);
+            if (OnNotifyPreSave_Interface != null) OnNotifyPreSave_Interface(this);
         }
-        public static event ObjectEventHandler<Interface> OnPreSave_Interface;
+        public static event ObjectEventHandler<Interface> OnNotifyPreSave_Interface;
 
-        [EventBasedMethod("OnPostSave_Interface")]
+        [EventBasedMethod("OnNotifyPostSave_Interface")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Interface != null) OnPostSave_Interface(this);
+            if (OnNotifyPostSave_Interface != null) OnNotifyPostSave_Interface(this);
         }
-        public static event ObjectEventHandler<Interface> OnPostSave_Interface;
+        public static event ObjectEventHandler<Interface> OnNotifyPostSave_Interface;
 
-        [EventBasedMethod("OnCreated_Interface")]
+        [EventBasedMethod("OnNotifyCreated_Interface")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Interface != null) OnCreated_Interface(this);
+            if (OnNotifyCreated_Interface != null) OnNotifyCreated_Interface(this);
         }
-        public static event ObjectEventHandler<Interface> OnCreated_Interface;
+        public static event ObjectEventHandler<Interface> OnNotifyCreated_Interface;
 
-        [EventBasedMethod("OnDeleting_Interface")]
+        [EventBasedMethod("OnNotifyDeleting_Interface")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Interface != null) OnDeleting_Interface(this);
+            if (OnNotifyDeleting_Interface != null) OnNotifyDeleting_Interface(this);
         }
-        public static event ObjectEventHandler<Interface> OnDeleting_Interface;
+        public static event ObjectEventHandler<Interface> OnNotifyDeleting_Interface;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

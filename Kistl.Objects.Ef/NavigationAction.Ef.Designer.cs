@@ -146,37 +146,37 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<NavigationAction> OnToString_NavigationAction;
 
-        [EventBasedMethod("OnPreSave_NavigationAction")]
+        [EventBasedMethod("OnNotifyPreSave_NavigationAction")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_NavigationAction != null) OnPreSave_NavigationAction(this);
+            if (OnNotifyPreSave_NavigationAction != null) OnNotifyPreSave_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationAction> OnPreSave_NavigationAction;
+        public static event ObjectEventHandler<NavigationAction> OnNotifyPreSave_NavigationAction;
 
-        [EventBasedMethod("OnPostSave_NavigationAction")]
+        [EventBasedMethod("OnNotifyPostSave_NavigationAction")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_NavigationAction != null) OnPostSave_NavigationAction(this);
+            if (OnNotifyPostSave_NavigationAction != null) OnNotifyPostSave_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationAction> OnPostSave_NavigationAction;
+        public static event ObjectEventHandler<NavigationAction> OnNotifyPostSave_NavigationAction;
 
-        [EventBasedMethod("OnCreated_NavigationAction")]
+        [EventBasedMethod("OnNotifyCreated_NavigationAction")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_NavigationAction != null) OnCreated_NavigationAction(this);
+            if (OnNotifyCreated_NavigationAction != null) OnNotifyCreated_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationAction> OnCreated_NavigationAction;
+        public static event ObjectEventHandler<NavigationAction> OnNotifyCreated_NavigationAction;
 
-        [EventBasedMethod("OnDeleting_NavigationAction")]
+        [EventBasedMethod("OnNotifyDeleting_NavigationAction")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_NavigationAction != null) OnDeleting_NavigationAction(this);
+            if (OnNotifyDeleting_NavigationAction != null) OnNotifyDeleting_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationAction> OnDeleting_NavigationAction;
+        public static event ObjectEventHandler<NavigationAction> OnNotifyDeleting_NavigationAction;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

@@ -419,37 +419,37 @@ namespace ZBox.App.SchemaMigration
         }
         public static event ToStringHandler<MigrationLog> OnToString_MigrationLog;
 
-        [EventBasedMethod("OnPreSave_MigrationLog")]
+        [EventBasedMethod("OnNotifyPreSave_MigrationLog")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_MigrationLog != null) OnPreSave_MigrationLog(this);
+            if (OnNotifyPreSave_MigrationLog != null) OnNotifyPreSave_MigrationLog(this);
         }
-        public static event ObjectEventHandler<MigrationLog> OnPreSave_MigrationLog;
+        public static event ObjectEventHandler<MigrationLog> OnNotifyPreSave_MigrationLog;
 
-        [EventBasedMethod("OnPostSave_MigrationLog")]
+        [EventBasedMethod("OnNotifyPostSave_MigrationLog")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_MigrationLog != null) OnPostSave_MigrationLog(this);
+            if (OnNotifyPostSave_MigrationLog != null) OnNotifyPostSave_MigrationLog(this);
         }
-        public static event ObjectEventHandler<MigrationLog> OnPostSave_MigrationLog;
+        public static event ObjectEventHandler<MigrationLog> OnNotifyPostSave_MigrationLog;
 
-        [EventBasedMethod("OnCreated_MigrationLog")]
+        [EventBasedMethod("OnNotifyCreated_MigrationLog")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_MigrationLog != null) OnCreated_MigrationLog(this);
+            if (OnNotifyCreated_MigrationLog != null) OnNotifyCreated_MigrationLog(this);
         }
-        public static event ObjectEventHandler<MigrationLog> OnCreated_MigrationLog;
+        public static event ObjectEventHandler<MigrationLog> OnNotifyCreated_MigrationLog;
 
-        [EventBasedMethod("OnDeleting_MigrationLog")]
+        [EventBasedMethod("OnNotifyDeleting_MigrationLog")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_MigrationLog != null) OnDeleting_MigrationLog(this);
+            if (OnNotifyDeleting_MigrationLog != null) OnNotifyDeleting_MigrationLog(this);
         }
-        public static event ObjectEventHandler<MigrationLog> OnDeleting_MigrationLog;
+        public static event ObjectEventHandler<MigrationLog> OnNotifyDeleting_MigrationLog;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

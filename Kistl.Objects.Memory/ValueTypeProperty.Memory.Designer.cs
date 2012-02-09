@@ -608,37 +608,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ValueTypeProperty> OnToString_ValueTypeProperty;
 
-        [EventBasedMethod("OnPreSave_ValueTypeProperty")]
+        [EventBasedMethod("OnNotifyPreSave_ValueTypeProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ValueTypeProperty != null) OnPreSave_ValueTypeProperty(this);
+            if (OnNotifyPreSave_ValueTypeProperty != null) OnNotifyPreSave_ValueTypeProperty(this);
         }
-        public static event ObjectEventHandler<ValueTypeProperty> OnPreSave_ValueTypeProperty;
+        public static event ObjectEventHandler<ValueTypeProperty> OnNotifyPreSave_ValueTypeProperty;
 
-        [EventBasedMethod("OnPostSave_ValueTypeProperty")]
+        [EventBasedMethod("OnNotifyPostSave_ValueTypeProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ValueTypeProperty != null) OnPostSave_ValueTypeProperty(this);
+            if (OnNotifyPostSave_ValueTypeProperty != null) OnNotifyPostSave_ValueTypeProperty(this);
         }
-        public static event ObjectEventHandler<ValueTypeProperty> OnPostSave_ValueTypeProperty;
+        public static event ObjectEventHandler<ValueTypeProperty> OnNotifyPostSave_ValueTypeProperty;
 
-        [EventBasedMethod("OnCreated_ValueTypeProperty")]
+        [EventBasedMethod("OnNotifyCreated_ValueTypeProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ValueTypeProperty != null) OnCreated_ValueTypeProperty(this);
+            if (OnNotifyCreated_ValueTypeProperty != null) OnNotifyCreated_ValueTypeProperty(this);
         }
-        public static event ObjectEventHandler<ValueTypeProperty> OnCreated_ValueTypeProperty;
+        public static event ObjectEventHandler<ValueTypeProperty> OnNotifyCreated_ValueTypeProperty;
 
-        [EventBasedMethod("OnDeleting_ValueTypeProperty")]
+        [EventBasedMethod("OnNotifyDeleting_ValueTypeProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ValueTypeProperty != null) OnDeleting_ValueTypeProperty(this);
+            if (OnNotifyDeleting_ValueTypeProperty != null) OnNotifyDeleting_ValueTypeProperty(this);
         }
-        public static event ObjectEventHandler<ValueTypeProperty> OnDeleting_ValueTypeProperty;
+        public static event ObjectEventHandler<ValueTypeProperty> OnNotifyDeleting_ValueTypeProperty;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

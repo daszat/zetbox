@@ -235,37 +235,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IntDefaultValue> OnToString_IntDefaultValue;
 
-        [EventBasedMethod("OnPreSave_IntDefaultValue")]
+        [EventBasedMethod("OnNotifyPreSave_IntDefaultValue")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_IntDefaultValue != null) OnPreSave_IntDefaultValue(this);
+            if (OnNotifyPreSave_IntDefaultValue != null) OnNotifyPreSave_IntDefaultValue(this);
         }
-        public static event ObjectEventHandler<IntDefaultValue> OnPreSave_IntDefaultValue;
+        public static event ObjectEventHandler<IntDefaultValue> OnNotifyPreSave_IntDefaultValue;
 
-        [EventBasedMethod("OnPostSave_IntDefaultValue")]
+        [EventBasedMethod("OnNotifyPostSave_IntDefaultValue")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_IntDefaultValue != null) OnPostSave_IntDefaultValue(this);
+            if (OnNotifyPostSave_IntDefaultValue != null) OnNotifyPostSave_IntDefaultValue(this);
         }
-        public static event ObjectEventHandler<IntDefaultValue> OnPostSave_IntDefaultValue;
+        public static event ObjectEventHandler<IntDefaultValue> OnNotifyPostSave_IntDefaultValue;
 
-        [EventBasedMethod("OnCreated_IntDefaultValue")]
+        [EventBasedMethod("OnNotifyCreated_IntDefaultValue")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_IntDefaultValue != null) OnCreated_IntDefaultValue(this);
+            if (OnNotifyCreated_IntDefaultValue != null) OnNotifyCreated_IntDefaultValue(this);
         }
-        public static event ObjectEventHandler<IntDefaultValue> OnCreated_IntDefaultValue;
+        public static event ObjectEventHandler<IntDefaultValue> OnNotifyCreated_IntDefaultValue;
 
-        [EventBasedMethod("OnDeleting_IntDefaultValue")]
+        [EventBasedMethod("OnNotifyDeleting_IntDefaultValue")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_IntDefaultValue != null) OnDeleting_IntDefaultValue(this);
+            if (OnNotifyDeleting_IntDefaultValue != null) OnNotifyDeleting_IntDefaultValue(this);
         }
-        public static event ObjectEventHandler<IntDefaultValue> OnDeleting_IntDefaultValue;
+        public static event ObjectEventHandler<IntDefaultValue> OnNotifyDeleting_IntDefaultValue;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

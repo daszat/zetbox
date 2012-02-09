@@ -241,37 +241,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<GroupMembership> OnToString_GroupMembership;
 
-        [EventBasedMethod("OnPreSave_GroupMembership")]
+        [EventBasedMethod("OnNotifyPreSave_GroupMembership")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_GroupMembership != null) OnPreSave_GroupMembership(this);
+            if (OnNotifyPreSave_GroupMembership != null) OnNotifyPreSave_GroupMembership(this);
         }
-        public static event ObjectEventHandler<GroupMembership> OnPreSave_GroupMembership;
+        public static event ObjectEventHandler<GroupMembership> OnNotifyPreSave_GroupMembership;
 
-        [EventBasedMethod("OnPostSave_GroupMembership")]
+        [EventBasedMethod("OnNotifyPostSave_GroupMembership")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_GroupMembership != null) OnPostSave_GroupMembership(this);
+            if (OnNotifyPostSave_GroupMembership != null) OnNotifyPostSave_GroupMembership(this);
         }
-        public static event ObjectEventHandler<GroupMembership> OnPostSave_GroupMembership;
+        public static event ObjectEventHandler<GroupMembership> OnNotifyPostSave_GroupMembership;
 
-        [EventBasedMethod("OnCreated_GroupMembership")]
+        [EventBasedMethod("OnNotifyCreated_GroupMembership")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_GroupMembership != null) OnCreated_GroupMembership(this);
+            if (OnNotifyCreated_GroupMembership != null) OnNotifyCreated_GroupMembership(this);
         }
-        public static event ObjectEventHandler<GroupMembership> OnCreated_GroupMembership;
+        public static event ObjectEventHandler<GroupMembership> OnNotifyCreated_GroupMembership;
 
-        [EventBasedMethod("OnDeleting_GroupMembership")]
+        [EventBasedMethod("OnNotifyDeleting_GroupMembership")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_GroupMembership != null) OnDeleting_GroupMembership(this);
+            if (OnNotifyDeleting_GroupMembership != null) OnNotifyDeleting_GroupMembership(this);
         }
-        public static event ObjectEventHandler<GroupMembership> OnDeleting_GroupMembership;
+        public static event ObjectEventHandler<GroupMembership> OnNotifyDeleting_GroupMembership;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

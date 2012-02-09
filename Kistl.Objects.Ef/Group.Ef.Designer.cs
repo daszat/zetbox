@@ -498,37 +498,37 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Group> OnToString_Group;
 
-        [EventBasedMethod("OnPreSave_Group")]
+        [EventBasedMethod("OnNotifyPreSave_Group")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Group != null) OnPreSave_Group(this);
+            if (OnNotifyPreSave_Group != null) OnNotifyPreSave_Group(this);
         }
-        public static event ObjectEventHandler<Group> OnPreSave_Group;
+        public static event ObjectEventHandler<Group> OnNotifyPreSave_Group;
 
-        [EventBasedMethod("OnPostSave_Group")]
+        [EventBasedMethod("OnNotifyPostSave_Group")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Group != null) OnPostSave_Group(this);
+            if (OnNotifyPostSave_Group != null) OnNotifyPostSave_Group(this);
         }
-        public static event ObjectEventHandler<Group> OnPostSave_Group;
+        public static event ObjectEventHandler<Group> OnNotifyPostSave_Group;
 
-        [EventBasedMethod("OnCreated_Group")]
+        [EventBasedMethod("OnNotifyCreated_Group")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Group != null) OnCreated_Group(this);
+            if (OnNotifyCreated_Group != null) OnNotifyCreated_Group(this);
         }
-        public static event ObjectEventHandler<Group> OnCreated_Group;
+        public static event ObjectEventHandler<Group> OnNotifyCreated_Group;
 
-        [EventBasedMethod("OnDeleting_Group")]
+        [EventBasedMethod("OnNotifyDeleting_Group")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Group != null) OnDeleting_Group(this);
+            if (OnNotifyDeleting_Group != null) OnNotifyDeleting_Group(this);
         }
-        public static event ObjectEventHandler<Group> OnDeleting_Group;
+        public static event ObjectEventHandler<Group> OnNotifyDeleting_Group;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty

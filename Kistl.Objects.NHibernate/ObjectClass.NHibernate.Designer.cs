@@ -1267,37 +1267,37 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         }
         public static event ToStringHandler<ObjectClass> OnToString_ObjectClass;
 
-        [EventBasedMethod("OnPreSave_ObjectClass")]
+        [EventBasedMethod("OnNotifyPreSave_ObjectClass")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ObjectClass != null) OnPreSave_ObjectClass(this);
+            if (OnNotifyPreSave_ObjectClass != null) OnNotifyPreSave_ObjectClass(this);
         }
-        public static event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
+        public static event ObjectEventHandler<ObjectClass> OnNotifyPreSave_ObjectClass;
 
-        [EventBasedMethod("OnPostSave_ObjectClass")]
+        [EventBasedMethod("OnNotifyPostSave_ObjectClass")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ObjectClass != null) OnPostSave_ObjectClass(this);
+            if (OnNotifyPostSave_ObjectClass != null) OnNotifyPostSave_ObjectClass(this);
         }
-        public static event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
+        public static event ObjectEventHandler<ObjectClass> OnNotifyPostSave_ObjectClass;
 
-        [EventBasedMethod("OnCreated_ObjectClass")]
+        [EventBasedMethod("OnNotifyCreated_ObjectClass")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ObjectClass != null) OnCreated_ObjectClass(this);
+            if (OnNotifyCreated_ObjectClass != null) OnNotifyCreated_ObjectClass(this);
         }
-        public static event ObjectEventHandler<ObjectClass> OnCreated_ObjectClass;
+        public static event ObjectEventHandler<ObjectClass> OnNotifyCreated_ObjectClass;
 
-        [EventBasedMethod("OnDeleting_ObjectClass")]
+        [EventBasedMethod("OnNotifyDeleting_ObjectClass")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ObjectClass != null) OnDeleting_ObjectClass(this);
+            if (OnNotifyDeleting_ObjectClass != null) OnNotifyDeleting_ObjectClass(this);
         }
-        public static event ObjectEventHandler<ObjectClass> OnDeleting_ObjectClass;
+        public static event ObjectEventHandler<ObjectClass> OnNotifyDeleting_ObjectClass;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()

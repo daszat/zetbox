@@ -201,37 +201,37 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<N_to_M_relations_B> OnToString_N_to_M_relations_B;
 
-        [EventBasedMethod("OnPreSave_N_to_M_relations_B")]
+        [EventBasedMethod("OnNotifyPreSave_N_to_M_relations_B")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_N_to_M_relations_B != null) OnPreSave_N_to_M_relations_B(this);
+            if (OnNotifyPreSave_N_to_M_relations_B != null) OnNotifyPreSave_N_to_M_relations_B(this);
         }
-        public static event ObjectEventHandler<N_to_M_relations_B> OnPreSave_N_to_M_relations_B;
+        public static event ObjectEventHandler<N_to_M_relations_B> OnNotifyPreSave_N_to_M_relations_B;
 
-        [EventBasedMethod("OnPostSave_N_to_M_relations_B")]
+        [EventBasedMethod("OnNotifyPostSave_N_to_M_relations_B")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_N_to_M_relations_B != null) OnPostSave_N_to_M_relations_B(this);
+            if (OnNotifyPostSave_N_to_M_relations_B != null) OnNotifyPostSave_N_to_M_relations_B(this);
         }
-        public static event ObjectEventHandler<N_to_M_relations_B> OnPostSave_N_to_M_relations_B;
+        public static event ObjectEventHandler<N_to_M_relations_B> OnNotifyPostSave_N_to_M_relations_B;
 
-        [EventBasedMethod("OnCreated_N_to_M_relations_B")]
+        [EventBasedMethod("OnNotifyCreated_N_to_M_relations_B")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_N_to_M_relations_B != null) OnCreated_N_to_M_relations_B(this);
+            if (OnNotifyCreated_N_to_M_relations_B != null) OnNotifyCreated_N_to_M_relations_B(this);
         }
-        public static event ObjectEventHandler<N_to_M_relations_B> OnCreated_N_to_M_relations_B;
+        public static event ObjectEventHandler<N_to_M_relations_B> OnNotifyCreated_N_to_M_relations_B;
 
-        [EventBasedMethod("OnDeleting_N_to_M_relations_B")]
+        [EventBasedMethod("OnNotifyDeleting_N_to_M_relations_B")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_N_to_M_relations_B != null) OnDeleting_N_to_M_relations_B(this);
+            if (OnNotifyDeleting_N_to_M_relations_B != null) OnNotifyDeleting_N_to_M_relations_B(this);
         }
-        public static event ObjectEventHandler<N_to_M_relations_B> OnDeleting_N_to_M_relations_B;
+        public static event ObjectEventHandler<N_to_M_relations_B> OnNotifyDeleting_N_to_M_relations_B;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 
