@@ -209,6 +209,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<RangeFilterConfiguration> OnToString_RangeFilterConfiguration;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_RangeFilterConfiguration")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_RangeFilterConfiguration != null)
+            {
+                OnObjectIsValid_RangeFilterConfiguration(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<RangeFilterConfiguration> OnObjectIsValid_RangeFilterConfiguration;
+
         [EventBasedMethod("OnNotifyPreSave_RangeFilterConfiguration")]
         public override void NotifyPreSave()
         {

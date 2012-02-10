@@ -913,6 +913,22 @@ namespace ZBox.App.SchemaMigration
         }
         public static event ToStringHandler<SourceEnum> OnToString_SourceEnum;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_SourceEnum")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_SourceEnum != null)
+            {
+                OnObjectIsValid_SourceEnum(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<SourceEnum> OnObjectIsValid_SourceEnum;
+
         [EventBasedMethod("OnNotifyPreSave_SourceEnum")]
         public override void NotifyPreSave()
         {

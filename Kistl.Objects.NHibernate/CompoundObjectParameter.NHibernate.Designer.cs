@@ -430,6 +430,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CompoundObjectParameter> OnToString_CompoundObjectParameter;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_CompoundObjectParameter")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_CompoundObjectParameter != null)
+            {
+                OnObjectIsValid_CompoundObjectParameter(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<CompoundObjectParameter> OnObjectIsValid_CompoundObjectParameter;
+
         [EventBasedMethod("OnNotifyPreSave_CompoundObjectParameter")]
         public override void NotifyPreSave()
         {

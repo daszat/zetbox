@@ -209,6 +209,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<NotNullableConstraint> OnToString_NotNullableConstraint;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_NotNullableConstraint")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_NotNullableConstraint != null)
+            {
+                OnObjectIsValid_NotNullableConstraint(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<NotNullableConstraint> OnObjectIsValid_NotNullableConstraint;
+
         [EventBasedMethod("OnNotifyPreSave_NotNullableConstraint")]
         public override void NotifyPreSave()
         {

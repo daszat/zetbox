@@ -658,6 +658,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ViewDescriptor> OnToString_ViewDescriptor;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_ViewDescriptor")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_ViewDescriptor != null)
+            {
+                OnObjectIsValid_ViewDescriptor(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<ViewDescriptor> OnObjectIsValid_ViewDescriptor;
+
         [EventBasedMethod("OnNotifyPreSave_ViewDescriptor")]
         public override void NotifyPreSave()
         {

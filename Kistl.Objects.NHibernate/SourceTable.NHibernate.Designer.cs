@@ -1269,6 +1269,22 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         }
         public static event ToStringHandler<SourceTable> OnToString_SourceTable;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_SourceTable")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_SourceTable != null)
+            {
+                OnObjectIsValid_SourceTable(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<SourceTable> OnObjectIsValid_SourceTable;
+
         [EventBasedMethod("OnNotifyPreSave_SourceTable")]
         public override void NotifyPreSave()
         {

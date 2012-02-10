@@ -222,6 +222,22 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         }
         public static event ToStringHandler<OrderedOneEnd> OnToString_OrderedOneEnd;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_OrderedOneEnd")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_OrderedOneEnd != null)
+            {
+                OnObjectIsValid_OrderedOneEnd(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<OrderedOneEnd> OnObjectIsValid_OrderedOneEnd;
+
         [EventBasedMethod("OnNotifyPreSave_OrderedOneEnd")]
         public override void NotifyPreSave()
         {

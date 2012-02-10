@@ -173,6 +173,22 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<TestPhoneCompoundObject> OnToString_TestPhoneCompoundObject;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_TestPhoneCompoundObject")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_TestPhoneCompoundObject != null)
+            {
+                OnObjectIsValid_TestPhoneCompoundObject(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<TestPhoneCompoundObject> OnObjectIsValid_TestPhoneCompoundObject;
+
         #endregion // Kistl.Generator.Templates.CompoundObjects.DefaultMethods
 
         #region Serializer

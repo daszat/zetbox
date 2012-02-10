@@ -289,9 +289,9 @@ namespace Kistl.API.Server
         /// Always returns <value>true</value>. CollectionEntries are checked via their navigators or relations.
         /// </summary>
         /// <returns><value>true</value></returns>
-        public override bool IsValid()
+        protected override ObjectIsValidResult ObjectIsValid()
         {
-            return true;
+            return ObjectIsValidResult.Valid;
         }
 
         /// <summary>

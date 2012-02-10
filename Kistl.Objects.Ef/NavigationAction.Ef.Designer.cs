@@ -146,6 +146,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<NavigationAction> OnToString_NavigationAction;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_NavigationAction")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_NavigationAction != null)
+            {
+                OnObjectIsValid_NavigationAction(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<NavigationAction> OnObjectIsValid_NavigationAction;
+
         [EventBasedMethod("OnNotifyPreSave_NavigationAction")]
         public override void NotifyPreSave()
         {

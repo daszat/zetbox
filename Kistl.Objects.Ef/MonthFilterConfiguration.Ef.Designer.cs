@@ -298,6 +298,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<MonthFilterConfiguration> OnToString_MonthFilterConfiguration;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_MonthFilterConfiguration")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_MonthFilterConfiguration != null)
+            {
+                OnObjectIsValid_MonthFilterConfiguration(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<MonthFilterConfiguration> OnObjectIsValid_MonthFilterConfiguration;
+
         [EventBasedMethod("OnNotifyPreSave_MonthFilterConfiguration")]
         public override void NotifyPreSave()
         {

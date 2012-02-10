@@ -50,6 +50,22 @@ this.WriteObjects("            return e.Result;\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ToStringHandler<",  dt.Name , "> OnToString_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
+this.WriteObjects("		[System.Diagnostics.DebuggerHidden()]\r\n");
+this.WriteObjects("        [EventBasedMethod(\"OnObjectIsValid_",  dt.Name , "\")]\r\n");
+this.WriteObjects("        protected override ObjectIsValidResult ObjectIsValid()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();\r\n");
+this.WriteObjects("			var b = base.ObjectIsValid();\r\n");
+this.WriteObjects("            e.IsValid = b.IsValid;\r\n");
+this.WriteObjects("			e.Errors.AddRange(b.Errors);\r\n");
+this.WriteObjects("            if (OnObjectIsValid_",  dt.Name , " != null)\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                OnObjectIsValid_",  dt.Name , "(this, e);\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("            return new ObjectIsValidResult(e.IsValid, e.Errors);\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("        public static event ObjectIsValidHandler<",  dt.Name , "> OnObjectIsValid_",  dt.Name , ";\r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
 
         }

@@ -206,7 +206,7 @@ namespace Kistl.API.Server.Mocks
             _IsAttached = false;
         }
 
-        public override bool IsValid()
+        protected override ObjectIsValidResult ObjectIsValid()
         {
             throw new NotImplementedException();
         }

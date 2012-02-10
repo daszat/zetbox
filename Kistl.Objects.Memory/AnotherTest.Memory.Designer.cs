@@ -81,6 +81,22 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<AnotherTest> OnToString_AnotherTest;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_AnotherTest")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_AnotherTest != null)
+            {
+                OnObjectIsValid_AnotherTest(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<AnotherTest> OnObjectIsValid_AnotherTest;
+
         [EventBasedMethod("OnNotifyPreSave_AnotherTest")]
         public override void NotifyPreSave()
         {

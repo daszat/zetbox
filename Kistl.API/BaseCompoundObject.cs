@@ -168,6 +168,11 @@ namespace Kistl.API
             // Compound objects do not audit locally
         }
 
+        protected virtual ObjectIsValidResult ObjectIsValid()
+        {
+            return ObjectIsValidResult.Valid;
+        }
+
         #region IComparable
         int System.IComparable.CompareTo(object other)
         {

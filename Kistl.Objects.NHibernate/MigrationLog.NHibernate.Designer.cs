@@ -426,6 +426,22 @@ namespace ZBox.App.SchemaMigration
         }
         public static event ToStringHandler<MigrationLog> OnToString_MigrationLog;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_MigrationLog")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_MigrationLog != null)
+            {
+                OnObjectIsValid_MigrationLog(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<MigrationLog> OnObjectIsValid_MigrationLog;
+
         [EventBasedMethod("OnNotifyPreSave_MigrationLog")]
         public override void NotifyPreSave()
         {

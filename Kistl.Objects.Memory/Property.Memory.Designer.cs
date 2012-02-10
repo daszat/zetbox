@@ -2017,6 +2017,22 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         }
         public static event ToStringHandler<Property> OnToString_Property;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Property")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Property != null)
+            {
+                OnObjectIsValid_Property(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Property> OnObjectIsValid_Property;
+
         [EventBasedMethod("OnNotifyPreSave_Property")]
         public override void NotifyPreSave()
         {

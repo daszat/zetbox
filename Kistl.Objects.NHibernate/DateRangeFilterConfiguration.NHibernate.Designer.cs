@@ -428,6 +428,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<DateRangeFilterConfiguration> OnToString_DateRangeFilterConfiguration;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DateRangeFilterConfiguration")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DateRangeFilterConfiguration != null)
+            {
+                OnObjectIsValid_DateRangeFilterConfiguration(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DateRangeFilterConfiguration> OnObjectIsValid_DateRangeFilterConfiguration;
+
         [EventBasedMethod("OnNotifyPreSave_DateRangeFilterConfiguration")]
         public override void NotifyPreSave()
         {

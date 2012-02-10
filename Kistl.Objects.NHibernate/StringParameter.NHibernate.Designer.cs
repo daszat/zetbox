@@ -282,6 +282,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<StringParameter> OnToString_StringParameter;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_StringParameter")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_StringParameter != null)
+            {
+                OnObjectIsValid_StringParameter(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<StringParameter> OnObjectIsValid_StringParameter;
+
         [EventBasedMethod("OnNotifyPreSave_StringParameter")]
         public override void NotifyPreSave()
         {

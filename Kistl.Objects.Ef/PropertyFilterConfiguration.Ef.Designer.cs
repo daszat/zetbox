@@ -368,6 +368,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<PropertyFilterConfiguration> OnToString_PropertyFilterConfiguration;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_PropertyFilterConfiguration")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_PropertyFilterConfiguration != null)
+            {
+                OnObjectIsValid_PropertyFilterConfiguration(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<PropertyFilterConfiguration> OnObjectIsValid_PropertyFilterConfiguration;
+
         [EventBasedMethod("OnNotifyPreSave_PropertyFilterConfiguration")]
         public override void NotifyPreSave()
         {

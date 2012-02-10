@@ -499,6 +499,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ConstraintInvocation> OnToString_ConstraintInvocation;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_ConstraintInvocation")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_ConstraintInvocation != null)
+            {
+                OnObjectIsValid_ConstraintInvocation(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<ConstraintInvocation> OnObjectIsValid_ConstraintInvocation;
+
         [EventBasedMethod("OnNotifyPreSave_ConstraintInvocation")]
         public override void NotifyPreSave()
         {

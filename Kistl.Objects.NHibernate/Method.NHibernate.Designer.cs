@@ -1544,6 +1544,22 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         }
         public static event ToStringHandler<Method> OnToString_Method;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Method")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Method != null)
+            {
+                OnObjectIsValid_Method(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Method> OnObjectIsValid_Method;
+
         [EventBasedMethod("OnNotifyPreSave_Method")]
         public override void NotifyPreSave()
         {

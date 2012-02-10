@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.Client.Mocks
 
         #endregion
 
-        public override bool IsValid()
+        protected override ObjectIsValidResult ObjectIsValid()
         {
             throw new NotImplementedException();
         }

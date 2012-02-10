@@ -156,6 +156,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<NewGuidDefaultValue> OnToString_NewGuidDefaultValue;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_NewGuidDefaultValue")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_NewGuidDefaultValue != null)
+            {
+                OnObjectIsValid_NewGuidDefaultValue(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<NewGuidDefaultValue> OnObjectIsValid_NewGuidDefaultValue;
+
         [EventBasedMethod("OnNotifyPreSave_NewGuidDefaultValue")]
         public override void NotifyPreSave()
         {

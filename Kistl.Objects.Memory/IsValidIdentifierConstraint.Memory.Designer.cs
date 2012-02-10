@@ -207,6 +207,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IsValidIdentifierConstraint> OnToString_IsValidIdentifierConstraint;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_IsValidIdentifierConstraint")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_IsValidIdentifierConstraint != null)
+            {
+                OnObjectIsValid_IsValidIdentifierConstraint(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<IsValidIdentifierConstraint> OnObjectIsValid_IsValidIdentifierConstraint;
+
         [EventBasedMethod("OnNotifyPreSave_IsValidIdentifierConstraint")]
         public override void NotifyPreSave()
         {

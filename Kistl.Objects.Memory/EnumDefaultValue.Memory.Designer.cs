@@ -295,6 +295,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<EnumDefaultValue> OnToString_EnumDefaultValue;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_EnumDefaultValue")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_EnumDefaultValue != null)
+            {
+                OnObjectIsValid_EnumDefaultValue(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<EnumDefaultValue> OnObjectIsValid_EnumDefaultValue;
+
         [EventBasedMethod("OnNotifyPreSave_EnumDefaultValue")]
         public override void NotifyPreSave()
         {

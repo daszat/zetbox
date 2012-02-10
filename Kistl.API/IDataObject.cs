@@ -124,7 +124,7 @@ namespace Kistl.API
         }
         public static bool HasReadRights(this AccessRights? r)
         {
-            return r.HasValue && ( (r & API.AccessRights.Read) != 0 || (r & API.AccessRights.Write) != 0 );
+            return r.HasValue && ((r & API.AccessRights.Read) != 0 || (r & API.AccessRights.Write) != 0);
         }
         public static bool HasWriteRights(this AccessRights? r)
         {
@@ -387,6 +387,54 @@ namespace Kistl.API
         public T Result { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ObjectIsValidEventArgs
+        : EventArgs
+    {
+        public ObjectIsValidEventArgs()
+        {
+            IsValid = true;
+            Errors = new List<string>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsValid { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> Errors { get; private set; }
+    }
+
+    public class ObjectIsValidResult
+    {
+        public static readonly ObjectIsValidResult Valid = new ObjectIsValidResult() { IsValid = true };
+
+        public ObjectIsValidResult()
+        {
+            Errors = new string[] { };
+        }
+
+        public ObjectIsValidResult(bool isValid, List<string> errors)
+        {
+            if (errors == null) throw new ArgumentNullException("errors");
+            IsValid = isValid;
+            Errors = errors.ToArray();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsValid { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string[] Errors { get; private set; }
+    }
+
     // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
     //<summary>
     //ToString delegate. Is triggered by IDataObject implementors.
@@ -395,6 +443,14 @@ namespace Kistl.API
     //<param name="obj">Object that has fired this Event.</param>
     //<param name="e">Method return Arguments.</param>
     public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e);
+
+    // <summary>
+    // 
+    // </summary>
+    // <typeparam name="T"></typeparam>
+    // <param name="obj"></param>
+    // <param name="e"></param>
+    public delegate void ObjectIsValidHandler<T>(T obj, ObjectIsValidEventArgs e);
 
     // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
     // <summary>
@@ -487,10 +543,24 @@ namespace Kistl.API
         public V NewValue { get; private set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class PropertyIsValidEventArgs
         : EventArgs
     {
+        public PropertyIsValidEventArgs()
+        {
+            IsValid = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsValid { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string Error { get; set; }
     }
 

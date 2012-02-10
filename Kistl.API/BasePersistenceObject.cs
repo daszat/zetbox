@@ -114,7 +114,6 @@ namespace Kistl.API
         public abstract void SetUnmodified();
         public abstract void SetDeleted();
         public abstract void SetUnDeleted();
-        
 
         /// <summary>
         /// Attach this Object to a Context. This Method is called by the Context.
@@ -299,13 +298,9 @@ namespace Kistl.API
 
         #region IDataErrorInfo Members
 
-        /// <summary>
-        /// Returns a value indicating whether or not this object is in a valid configuration.
-        /// </summary>
-        /// <returns>a value indicating whether or not this object is in a valid configuration.</returns>
-        public virtual bool IsValid()
+        protected virtual ObjectIsValidResult ObjectIsValid()
         {
-            return String.IsNullOrEmpty(((IDataErrorInfo)this).Error);
+            return ObjectIsValidResult.Valid;
         }
 
         /// <summary>
@@ -351,6 +346,7 @@ namespace Kistl.API
                         var error = String.Join(",", errorStrings);
                         return vpd.UnderlyingDescriptor.Name + ": " + error;
                     })
+                    .Concat(ObjectIsValid().Errors.AsEnumerable())
                     .Where(err => !String.IsNullOrEmpty(err))
                     .ToArray();
                 return String.Join("\n", errors);

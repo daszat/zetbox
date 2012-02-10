@@ -207,6 +207,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<SinglePropertyFilterConfiguration> OnToString_SinglePropertyFilterConfiguration;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_SinglePropertyFilterConfiguration")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_SinglePropertyFilterConfiguration != null)
+            {
+                OnObjectIsValid_SinglePropertyFilterConfiguration(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<SinglePropertyFilterConfiguration> OnObjectIsValid_SinglePropertyFilterConfiguration;
+
         [EventBasedMethod("OnNotifyPreSave_SinglePropertyFilterConfiguration")]
         public override void NotifyPreSave()
         {

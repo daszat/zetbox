@@ -1720,6 +1720,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Relation> OnToString_Relation;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Relation")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Relation != null)
+            {
+                OnObjectIsValid_Relation(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Relation> OnObjectIsValid_Relation;
+
         [EventBasedMethod("OnNotifyPreSave_Relation")]
         public override void NotifyPreSave()
         {

@@ -230,6 +230,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IntDefaultValue> OnToString_IntDefaultValue;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_IntDefaultValue")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_IntDefaultValue != null)
+            {
+                OnObjectIsValid_IntDefaultValue(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<IntDefaultValue> OnObjectIsValid_IntDefaultValue;
+
         [EventBasedMethod("OnNotifyPreSave_IntDefaultValue")]
         public override void NotifyPreSave()
         {

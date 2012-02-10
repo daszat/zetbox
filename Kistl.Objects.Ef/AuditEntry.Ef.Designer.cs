@@ -428,6 +428,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<AuditEntry> OnToString_AuditEntry;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_AuditEntry")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_AuditEntry != null)
+            {
+                OnObjectIsValid_AuditEntry(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<AuditEntry> OnObjectIsValid_AuditEntry;
+
         #endregion // Kistl.Generator.Templates.CompoundObjects.DefaultMethods
 
         #region Serializer

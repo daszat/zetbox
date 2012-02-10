@@ -1183,6 +1183,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ViewModelDescriptor> OnToString_ViewModelDescriptor;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_ViewModelDescriptor")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_ViewModelDescriptor != null)
+            {
+                OnObjectIsValid_ViewModelDescriptor(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<ViewModelDescriptor> OnObjectIsValid_ViewModelDescriptor;
+
         [EventBasedMethod("OnNotifyPreSave_ViewModelDescriptor")]
         public override void NotifyPreSave()
         {

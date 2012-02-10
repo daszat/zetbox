@@ -280,6 +280,22 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<DynamicFile> OnToString_DynamicFile;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DynamicFile")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DynamicFile != null)
+            {
+                OnObjectIsValid_DynamicFile(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DynamicFile> OnObjectIsValid_DynamicFile;
+
         [EventBasedMethod("OnNotifyPreSave_DynamicFile")]
         public override void NotifyPreSave()
         {

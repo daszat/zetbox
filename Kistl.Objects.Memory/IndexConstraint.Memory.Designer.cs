@@ -340,6 +340,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IndexConstraint> OnToString_IndexConstraint;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_IndexConstraint")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_IndexConstraint != null)
+            {
+                OnObjectIsValid_IndexConstraint(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<IndexConstraint> OnObjectIsValid_IndexConstraint;
+
         [EventBasedMethod("OnNotifyPreSave_IndexConstraint")]
         public override void NotifyPreSave()
         {

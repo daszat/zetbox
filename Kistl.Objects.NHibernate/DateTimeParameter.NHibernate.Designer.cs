@@ -367,6 +367,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DateTimeParameter> OnToString_DateTimeParameter;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DateTimeParameter")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DateTimeParameter != null)
+            {
+                OnObjectIsValid_DateTimeParameter(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DateTimeParameter> OnObjectIsValid_DateTimeParameter;
+
         [EventBasedMethod("OnNotifyPreSave_DateTimeParameter")]
         public override void NotifyPreSave()
         {

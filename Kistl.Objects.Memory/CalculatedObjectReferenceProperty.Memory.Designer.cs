@@ -583,6 +583,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CalculatedObjectReferenceProperty> OnToString_CalculatedObjectReferenceProperty;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_CalculatedObjectReferenceProperty")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_CalculatedObjectReferenceProperty != null)
+            {
+                OnObjectIsValid_CalculatedObjectReferenceProperty(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<CalculatedObjectReferenceProperty> OnObjectIsValid_CalculatedObjectReferenceProperty;
+
         [EventBasedMethod("OnNotifyPreSave_CalculatedObjectReferenceProperty")]
         public override void NotifyPreSave()
         {

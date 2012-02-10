@@ -689,6 +689,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Icon> OnToString_Icon;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Icon")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Icon != null)
+            {
+                OnObjectIsValid_Icon(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Icon> OnObjectIsValid_Icon;
+
         [EventBasedMethod("OnNotifyPreSave_Icon")]
         public override void NotifyPreSave()
         {

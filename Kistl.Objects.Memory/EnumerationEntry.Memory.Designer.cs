@@ -1059,6 +1059,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<EnumerationEntry> OnToString_EnumerationEntry;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_EnumerationEntry")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_EnumerationEntry != null)
+            {
+                OnObjectIsValid_EnumerationEntry(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<EnumerationEntry> OnObjectIsValid_EnumerationEntry;
+
         [EventBasedMethod("OnNotifyPreSave_EnumerationEntry")]
         public override void NotifyPreSave()
         {

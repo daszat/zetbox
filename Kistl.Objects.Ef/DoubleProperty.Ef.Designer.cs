@@ -398,6 +398,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DoubleProperty> OnToString_DoubleProperty;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DoubleProperty")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DoubleProperty != null)
+            {
+                OnObjectIsValid_DoubleProperty(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DoubleProperty> OnObjectIsValid_DoubleProperty;
+
         [EventBasedMethod("OnNotifyPreSave_DoubleProperty")]
         public override void NotifyPreSave()
         {

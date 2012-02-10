@@ -282,6 +282,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DoubleParameter> OnToString_DoubleParameter;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DoubleParameter")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DoubleParameter != null)
+            {
+                OnObjectIsValid_DoubleParameter(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DoubleParameter> OnObjectIsValid_DoubleParameter;
+
         [EventBasedMethod("OnNotifyPreSave_DoubleParameter")]
         public override void NotifyPreSave()
         {

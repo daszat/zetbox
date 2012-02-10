@@ -270,6 +270,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<BoolParameter> OnToString_BoolParameter;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_BoolParameter")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_BoolParameter != null)
+            {
+                OnObjectIsValid_BoolParameter(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<BoolParameter> OnObjectIsValid_BoolParameter;
+
         [EventBasedMethod("OnNotifyPreSave_BoolParameter")]
         public override void NotifyPreSave()
         {

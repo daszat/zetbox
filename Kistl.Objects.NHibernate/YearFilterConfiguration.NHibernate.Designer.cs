@@ -304,6 +304,22 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<YearFilterConfiguration> OnToString_YearFilterConfiguration;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_YearFilterConfiguration")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_YearFilterConfiguration != null)
+            {
+                OnObjectIsValid_YearFilterConfiguration(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<YearFilterConfiguration> OnObjectIsValid_YearFilterConfiguration;
+
         [EventBasedMethod("OnNotifyPreSave_YearFilterConfiguration")]
         public override void NotifyPreSave()
         {

@@ -238,6 +238,22 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
         }
         public static event ToStringHandler<One_to_N_relations_One> OnToString_One_to_N_relations_One;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_One_to_N_relations_One")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_One_to_N_relations_One != null)
+            {
+                OnObjectIsValid_One_to_N_relations_One(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<One_to_N_relations_One> OnObjectIsValid_One_to_N_relations_One;
+
         [EventBasedMethod("OnNotifyPreSave_One_to_N_relations_One")]
         public override void NotifyPreSave()
         {

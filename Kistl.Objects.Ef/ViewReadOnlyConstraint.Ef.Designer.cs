@@ -209,6 +209,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ViewReadOnlyConstraint> OnToString_ViewReadOnlyConstraint;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_ViewReadOnlyConstraint")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_ViewReadOnlyConstraint != null)
+            {
+                OnObjectIsValid_ViewReadOnlyConstraint(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<ViewReadOnlyConstraint> OnObjectIsValid_ViewReadOnlyConstraint;
+
         [EventBasedMethod("OnNotifyPreSave_ViewReadOnlyConstraint")]
         public override void NotifyPreSave()
         {

@@ -201,6 +201,22 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<N_to_M_relations_B> OnToString_N_to_M_relations_B;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_N_to_M_relations_B")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_N_to_M_relations_B != null)
+            {
+                OnObjectIsValid_N_to_M_relations_B(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<N_to_M_relations_B> OnObjectIsValid_N_to_M_relations_B;
+
         [EventBasedMethod("OnNotifyPreSave_N_to_M_relations_B")]
         public override void NotifyPreSave()
         {

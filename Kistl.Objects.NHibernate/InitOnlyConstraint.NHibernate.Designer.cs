@@ -219,6 +219,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<InitOnlyConstraint> OnToString_InitOnlyConstraint;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_InitOnlyConstraint")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_InitOnlyConstraint != null)
+            {
+                OnObjectIsValid_InitOnlyConstraint(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<InitOnlyConstraint> OnObjectIsValid_InitOnlyConstraint;
+
         [EventBasedMethod("OnNotifyPreSave_InitOnlyConstraint")]
         public override void NotifyPreSave()
         {

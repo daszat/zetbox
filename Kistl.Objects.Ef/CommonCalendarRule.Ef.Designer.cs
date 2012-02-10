@@ -146,6 +146,22 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<CommonCalendarRule> OnToString_CommonCalendarRule;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_CommonCalendarRule")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_CommonCalendarRule != null)
+            {
+                OnObjectIsValid_CommonCalendarRule(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<CommonCalendarRule> OnObjectIsValid_CommonCalendarRule;
+
         [EventBasedMethod("OnNotifyPreSave_CommonCalendarRule")]
         public override void NotifyPreSave()
         {

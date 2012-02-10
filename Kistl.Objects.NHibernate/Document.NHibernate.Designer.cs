@@ -343,6 +343,22 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<Document> OnToString_Document;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Document")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Document != null)
+            {
+                OnObjectIsValid_Document(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Document> OnObjectIsValid_Document;
+
         [EventBasedMethod("OnNotifyPreSave_Document")]
         public override void NotifyPreSave()
         {

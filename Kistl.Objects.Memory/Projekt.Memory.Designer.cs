@@ -958,6 +958,22 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         }
         public static event ToStringHandler<Projekt> OnToString_Projekt;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Projekt")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Projekt != null)
+            {
+                OnObjectIsValid_Projekt(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Projekt> OnObjectIsValid_Projekt;
+
         [EventBasedMethod("OnNotifyPreSave_Projekt")]
         public override void NotifyPreSave()
         {

@@ -356,6 +356,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<StringRangeConstraint> OnToString_StringRangeConstraint;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_StringRangeConstraint")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_StringRangeConstraint != null)
+            {
+                OnObjectIsValid_StringRangeConstraint(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<StringRangeConstraint> OnObjectIsValid_StringRangeConstraint;
+
         [EventBasedMethod("OnNotifyPreSave_StringRangeConstraint")]
         public override void NotifyPreSave()
         {

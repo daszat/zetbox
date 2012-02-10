@@ -344,6 +344,22 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<OrderedNEnd> OnToString_OrderedNEnd;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_OrderedNEnd")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_OrderedNEnd != null)
+            {
+                OnObjectIsValid_OrderedNEnd(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<OrderedNEnd> OnObjectIsValid_OrderedNEnd;
+
         [EventBasedMethod("OnNotifyPreSave_OrderedNEnd")]
         public override void NotifyPreSave()
         {

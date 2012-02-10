@@ -342,6 +342,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Identity> OnToString_Identity;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Identity")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Identity != null)
+            {
+                OnObjectIsValid_Identity(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Identity> OnObjectIsValid_Identity;
+
         [EventBasedMethod("OnNotifyPreSave_Identity")]
         public override void NotifyPreSave()
         {

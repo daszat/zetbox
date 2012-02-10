@@ -798,6 +798,22 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         }
         public static event ToStringHandler<TestCustomObject> OnToString_TestCustomObject;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_TestCustomObject")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_TestCustomObject != null)
+            {
+                OnObjectIsValid_TestCustomObject(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<TestCustomObject> OnObjectIsValid_TestCustomObject;
+
         [EventBasedMethod("OnNotifyPreSave_TestCustomObject")]
         public override void NotifyPreSave()
         {

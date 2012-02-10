@@ -812,6 +812,22 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<FileImportConfiguration> OnToString_FileImportConfiguration;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_FileImportConfiguration")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_FileImportConfiguration != null)
+            {
+                OnObjectIsValid_FileImportConfiguration(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<FileImportConfiguration> OnObjectIsValid_FileImportConfiguration;
+
         [EventBasedMethod("OnNotifyPreSave_FileImportConfiguration")]
         public override void NotifyPreSave()
         {

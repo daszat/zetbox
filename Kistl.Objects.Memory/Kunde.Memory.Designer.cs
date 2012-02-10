@@ -926,6 +926,22 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         }
         public static event ToStringHandler<Kunde> OnToString_Kunde;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Kunde")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Kunde != null)
+            {
+                OnObjectIsValid_Kunde(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Kunde> OnObjectIsValid_Kunde;
+
         [EventBasedMethod("OnNotifyPreSave_Kunde")]
         public override void NotifyPreSave()
         {

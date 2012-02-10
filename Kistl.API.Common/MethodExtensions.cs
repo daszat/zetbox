@@ -9,7 +9,7 @@ namespace Kistl.App.Extensions
     public static class MethodExtensions
     {
         /// <summary>
-        /// returns true if the Method is one of the "default" methods, "ToString", "NotifyPreSave", "NotifyPostSave", "NotifyCreated" or "NotifyDeleting".
+        /// returns true if the Method is one of the "default" methods, "ToString", "ObjectIsValid", "NotifyPreSave", "NotifyPostSave", "NotifyCreated" or "NotifyDeleting".
         /// </summary>
         public static bool IsDefaultMethod(this Method method)
         {
@@ -22,6 +22,7 @@ namespace Kistl.App.Extensions
                 case "NotifyPostSave":
                 case "NotifyCreated":
                 case "NotifyDeleting":
+                case "ObjectIsValid":
                     return true;
                 default:
                     return false;

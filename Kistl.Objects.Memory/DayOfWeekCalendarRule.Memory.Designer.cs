@@ -230,6 +230,22 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<DayOfWeekCalendarRule> OnToString_DayOfWeekCalendarRule;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DayOfWeekCalendarRule")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DayOfWeekCalendarRule != null)
+            {
+                OnObjectIsValid_DayOfWeekCalendarRule(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DayOfWeekCalendarRule> OnObjectIsValid_DayOfWeekCalendarRule;
+
         [EventBasedMethod("OnNotifyPreSave_DayOfWeekCalendarRule")]
         public override void NotifyPreSave()
         {

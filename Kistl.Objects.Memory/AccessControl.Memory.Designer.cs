@@ -1014,6 +1014,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<AccessControl> OnToString_AccessControl;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_AccessControl")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_AccessControl != null)
+            {
+                OnObjectIsValid_AccessControl(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<AccessControl> OnObjectIsValid_AccessControl;
+
         [EventBasedMethod("OnNotifyPreSave_AccessControl")]
         public override void NotifyPreSave()
         {

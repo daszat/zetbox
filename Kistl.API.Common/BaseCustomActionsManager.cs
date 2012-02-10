@@ -348,6 +348,7 @@ namespace Kistl.App.Extensions
             }
 
             CreateDefaultMethodInvocations(implType, dt, "ToString");
+            CreateDefaultMethodInvocations(implType, dt, "ObjectIsValid");
 
             // Reflected Properties
             // New style

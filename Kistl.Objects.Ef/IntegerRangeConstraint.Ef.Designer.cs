@@ -364,6 +364,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IntegerRangeConstraint> OnToString_IntegerRangeConstraint;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_IntegerRangeConstraint")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_IntegerRangeConstraint != null)
+            {
+                OnObjectIsValid_IntegerRangeConstraint(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<IntegerRangeConstraint> OnObjectIsValid_IntegerRangeConstraint;
+
         [EventBasedMethod("OnNotifyPreSave_IntegerRangeConstraint")]
         public override void NotifyPreSave()
         {

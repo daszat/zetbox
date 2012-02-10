@@ -280,6 +280,22 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<StaticFile> OnToString_StaticFile;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_StaticFile")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_StaticFile != null)
+            {
+                OnObjectIsValid_StaticFile(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<StaticFile> OnObjectIsValid_StaticFile;
+
         [EventBasedMethod("OnNotifyPreSave_StaticFile")]
         public override void NotifyPreSave()
         {

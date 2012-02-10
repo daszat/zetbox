@@ -218,6 +218,22 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<TestStudent> OnToString_TestStudent;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_TestStudent")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_TestStudent != null)
+            {
+                OnObjectIsValid_TestStudent(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<TestStudent> OnObjectIsValid_TestStudent;
+
         [EventBasedMethod("OnNotifyPreSave_TestStudent")]
         public override void NotifyPreSave()
         {

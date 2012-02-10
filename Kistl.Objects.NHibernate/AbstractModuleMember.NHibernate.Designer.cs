@@ -712,6 +712,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<AbstractModuleMember> OnToString_AbstractModuleMember;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_AbstractModuleMember")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_AbstractModuleMember != null)
+            {
+                OnObjectIsValid_AbstractModuleMember(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<AbstractModuleMember> OnObjectIsValid_AbstractModuleMember;
+
         [EventBasedMethod("OnNotifyPreSave_AbstractModuleMember")]
         public override void NotifyPreSave()
         {

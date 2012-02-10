@@ -502,6 +502,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DateTimeProperty> OnToString_DateTimeProperty;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DateTimeProperty")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DateTimeProperty != null)
+            {
+                OnObjectIsValid_DateTimeProperty(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DateTimeProperty> OnObjectIsValid_DateTimeProperty;
+
         [EventBasedMethod("OnNotifyPreSave_DateTimeProperty")]
         public override void NotifyPreSave()
         {

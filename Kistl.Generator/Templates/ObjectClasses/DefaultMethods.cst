@@ -27,6 +27,22 @@
         }
         public static event ToStringHandler<<%= dt.Name %>> OnToString_<%= dt.Name %>;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_<%= dt.Name %>")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_<%= dt.Name %> != null)
+            {
+                OnObjectIsValid_<%= dt.Name %>(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<<%= dt.Name %>> OnObjectIsValid_<%= dt.Name %>;
+
         [EventBasedMethod("OnNotifyPreSave_<%= dt.Name %>")]
         public override void NotifyPreSave()
         {

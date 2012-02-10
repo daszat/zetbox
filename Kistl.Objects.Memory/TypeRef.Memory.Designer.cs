@@ -1288,6 +1288,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<TypeRef> OnToString_TypeRef;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_TypeRef")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_TypeRef != null)
+            {
+                OnObjectIsValid_TypeRef(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<TypeRef> OnObjectIsValid_TypeRef;
+
         [EventBasedMethod("OnNotifyPreSave_TypeRef")]
         public override void NotifyPreSave()
         {

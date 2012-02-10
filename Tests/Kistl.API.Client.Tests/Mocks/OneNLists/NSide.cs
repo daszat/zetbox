@@ -61,7 +61,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
             throw new NotImplementedException();
         }
 
-        public override bool IsValid()
+        protected override ObjectIsValidResult ObjectIsValid()
         {
             throw new NotImplementedException();
         }

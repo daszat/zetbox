@@ -965,6 +965,22 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         }
         public static event ToStringHandler<MigrationProject> OnToString_MigrationProject;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_MigrationProject")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_MigrationProject != null)
+            {
+                OnObjectIsValid_MigrationProject(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<MigrationProject> OnObjectIsValid_MigrationProject;
+
         [EventBasedMethod("OnNotifyPreSave_MigrationProject")]
         public override void NotifyPreSave()
         {

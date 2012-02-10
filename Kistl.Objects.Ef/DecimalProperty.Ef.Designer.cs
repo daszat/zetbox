@@ -553,6 +553,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DecimalProperty> OnToString_DecimalProperty;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DecimalProperty")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DecimalProperty != null)
+            {
+                OnObjectIsValid_DecimalProperty(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DecimalProperty> OnObjectIsValid_DecimalProperty;
+
         [EventBasedMethod("OnNotifyPreSave_DecimalProperty")]
         public override void NotifyPreSave()
         {

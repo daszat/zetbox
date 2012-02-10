@@ -1257,6 +1257,22 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         }
         public static event ToStringHandler<NavigationEntry> OnToString_NavigationEntry;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_NavigationEntry")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_NavigationEntry != null)
+            {
+                OnObjectIsValid_NavigationEntry(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<NavigationEntry> OnObjectIsValid_NavigationEntry;
+
         [EventBasedMethod("OnNotifyPreSave_NavigationEntry")]
         public override void NotifyPreSave()
         {

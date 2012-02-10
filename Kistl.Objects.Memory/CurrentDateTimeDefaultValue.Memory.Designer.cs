@@ -144,6 +144,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CurrentDateTimeDefaultValue> OnToString_CurrentDateTimeDefaultValue;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_CurrentDateTimeDefaultValue")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_CurrentDateTimeDefaultValue != null)
+            {
+                OnObjectIsValid_CurrentDateTimeDefaultValue(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<CurrentDateTimeDefaultValue> OnObjectIsValid_CurrentDateTimeDefaultValue;
+
         [EventBasedMethod("OnNotifyPreSave_CurrentDateTimeDefaultValue")]
         public override void NotifyPreSave()
         {

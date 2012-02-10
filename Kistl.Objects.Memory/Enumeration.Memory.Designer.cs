@@ -661,6 +661,22 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public static event ToStringHandler<Enumeration> OnToString_Enumeration;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Enumeration")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Enumeration != null)
+            {
+                OnObjectIsValid_Enumeration(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Enumeration> OnObjectIsValid_Enumeration;
+
         [EventBasedMethod("OnNotifyPreSave_Enumeration")]
         public override void NotifyPreSave()
         {

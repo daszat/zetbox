@@ -214,6 +214,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DateTimeRange> OnToString_DateTimeRange;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_DateTimeRange")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_DateTimeRange != null)
+            {
+                OnObjectIsValid_DateTimeRange(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<DateTimeRange> OnObjectIsValid_DateTimeRange;
+
         #endregion // Kistl.Generator.Templates.CompoundObjects.DefaultMethods
 
         #region Serializer

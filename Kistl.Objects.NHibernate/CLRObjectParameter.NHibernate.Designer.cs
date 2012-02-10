@@ -430,6 +430,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CLRObjectParameter> OnToString_CLRObjectParameter;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_CLRObjectParameter")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_CLRObjectParameter != null)
+            {
+                OnObjectIsValid_CLRObjectParameter(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<CLRObjectParameter> OnObjectIsValid_CLRObjectParameter;
+
         [EventBasedMethod("OnNotifyPreSave_CLRObjectParameter")]
         public override void NotifyPreSave()
         {

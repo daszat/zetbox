@@ -617,6 +617,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ValueTypeProperty> OnToString_ValueTypeProperty;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_ValueTypeProperty")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_ValueTypeProperty != null)
+            {
+                OnObjectIsValid_ValueTypeProperty(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<ValueTypeProperty> OnObjectIsValid_ValueTypeProperty;
+
         [EventBasedMethod("OnNotifyPreSave_ValueTypeProperty")]
         public override void NotifyPreSave()
         {

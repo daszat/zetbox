@@ -321,6 +321,22 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<RequiredParentChild> OnToString_RequiredParentChild;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_RequiredParentChild")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_RequiredParentChild != null)
+            {
+                OnObjectIsValid_RequiredParentChild(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<RequiredParentChild> OnObjectIsValid_RequiredParentChild;
+
         [EventBasedMethod("OnNotifyPreSave_RequiredParentChild")]
         public override void NotifyPreSave()
         {

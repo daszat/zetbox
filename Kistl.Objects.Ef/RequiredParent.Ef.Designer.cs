@@ -238,6 +238,22 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         }
         public static event ToStringHandler<RequiredParent> OnToString_RequiredParent;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_RequiredParent")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_RequiredParent != null)
+            {
+                OnObjectIsValid_RequiredParent(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<RequiredParent> OnObjectIsValid_RequiredParent;
+
         [EventBasedMethod("OnNotifyPreSave_RequiredParent")]
         public override void NotifyPreSave()
         {

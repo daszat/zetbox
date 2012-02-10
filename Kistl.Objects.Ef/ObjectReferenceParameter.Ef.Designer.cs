@@ -419,6 +419,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ObjectReferenceParameter> OnToString_ObjectReferenceParameter;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_ObjectReferenceParameter")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_ObjectReferenceParameter != null)
+            {
+                OnObjectIsValid_ObjectReferenceParameter(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<ObjectReferenceParameter> OnObjectIsValid_ObjectReferenceParameter;
+
         [EventBasedMethod("OnNotifyPreSave_ObjectReferenceParameter")]
         public override void NotifyPreSave()
         {

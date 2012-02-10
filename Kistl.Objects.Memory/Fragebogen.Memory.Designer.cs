@@ -261,6 +261,22 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         }
         public static event ToStringHandler<Fragebogen> OnToString_Fragebogen;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Fragebogen")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Fragebogen != null)
+            {
+                OnObjectIsValid_Fragebogen(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Fragebogen> OnObjectIsValid_Fragebogen;
+
         [EventBasedMethod("OnNotifyPreSave_Fragebogen")]
         public override void NotifyPreSave()
         {

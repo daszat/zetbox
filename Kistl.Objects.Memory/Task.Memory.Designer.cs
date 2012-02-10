@@ -958,6 +958,22 @@ namespace Kistl.App.Projekte
         }
         public static event ToStringHandler<Task> OnToString_Task;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_Task")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_Task != null)
+            {
+                OnObjectIsValid_Task(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<Task> OnObjectIsValid_Task;
+
         [EventBasedMethod("OnNotifyPreSave_Task")]
         public override void NotifyPreSave()
         {

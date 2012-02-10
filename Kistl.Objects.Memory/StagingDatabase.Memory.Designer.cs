@@ -1008,6 +1008,22 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         }
         public static event ToStringHandler<StagingDatabase> OnToString_StagingDatabase;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_StagingDatabase")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_StagingDatabase != null)
+            {
+                OnObjectIsValid_StagingDatabase(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<StagingDatabase> OnObjectIsValid_StagingDatabase;
+
         [EventBasedMethod("OnNotifyPreSave_StagingDatabase")]
         public override void NotifyPreSave()
         {

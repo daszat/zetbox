@@ -952,6 +952,22 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ServiceDescriptor> OnToString_ServiceDescriptor;
 
+		[System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnObjectIsValid_ServiceDescriptor")]
+        protected override ObjectIsValidResult ObjectIsValid()
+        {
+            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
+			var b = base.ObjectIsValid();
+            e.IsValid = b.IsValid;
+			e.Errors.AddRange(b.Errors);
+            if (OnObjectIsValid_ServiceDescriptor != null)
+            {
+                OnObjectIsValid_ServiceDescriptor(this, e);
+            }
+            return new ObjectIsValidResult(e.IsValid, e.Errors);
+        }
+        public static event ObjectIsValidHandler<ServiceDescriptor> OnObjectIsValid_ServiceDescriptor;
+
         [EventBasedMethod("OnNotifyPreSave_ServiceDescriptor")]
         public override void NotifyPreSave()
         {

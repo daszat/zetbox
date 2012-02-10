@@ -19,6 +19,13 @@ namespace Kistl.App.Projekte
         }
 
         [Invocation]
+        public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
+        {
+            e.IsValid = true;
+        }
+
+
+        [Invocation]
         public static void isValid_Aufwand(Task obj, PropertyIsValidEventArgs e)
         {
             e.IsValid = obj.Aufwand >= 0;
