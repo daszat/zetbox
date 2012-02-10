@@ -60,6 +60,12 @@ namespace Kistl.API.Server.Mocks
             set;
         }
 
+        public string CodeTemplate
+        {
+            get;
+            private set;
+        }
+
         public void CreateDefaultMethods()
         {
             throw new NotImplementedException();
