@@ -28,6 +28,7 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
         }
 
         [Test]
+        [Ignore("This is a philosophical question. When a Object is referenced by another, should it realy be deleted? Whit if this breaks a Business Rule? You can only be sure, if cascade deletion is defined and implemented.")]
         public void should_remove_from_Collection()
         {
             ctx.Delete(bSide1);
