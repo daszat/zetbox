@@ -28,6 +28,13 @@ namespace Kistl.App.Base
         }
 
         /// <summary>
+        /// Provides a code template for default methods
+        /// </summary>
+        string CodeTemplate {
+            get;
+        }
+
+        /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
         Kistl.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor {
@@ -78,11 +85,6 @@ namespace Kistl.App.Base
             get;
             set;
         }
-
-        /// <summary>
-        /// Creates, if needed, all default  Methods
-        /// </summary>
-        void CreateDefaultMethods();
 
         /// <summary>
         /// Creates a new Method for this class

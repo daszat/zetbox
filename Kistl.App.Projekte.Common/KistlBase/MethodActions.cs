@@ -58,7 +58,7 @@ namespace Kistl.App.Base
         public static void get_CodeTemplate(Method obj, PropertyGetterEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("public static void {0}(", obj.Name);
+            sb.AppendFormat("[Invocation]\npublic static void {0}(", obj.Name);
 
             if (obj.ObjectClass != null)
             {

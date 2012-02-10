@@ -184,6 +184,30 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnBaseObjectClass_IsValid;
 
         /// <summary>
+        /// Provides a code template for default methods
+        /// </summary>
+        // calculated  property
+        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        public string CodeTemplate
+        {
+            get
+            {
+                if (OnCodeTemplate_Getter == null)
+                {
+                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.ObjectClass.CodeTemplate");
+                }
+
+                var e = new PropertyGetterEventArgs<string>(default(string));
+                OnCodeTemplate_Getter(this, e);
+                return e.Result;
+            }
+        }
+        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnCodeTemplate_IsValid;
+
+        /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
         // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
@@ -568,69 +592,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PostSetter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnTableName_IsValid;
-
-        /// <summary>
-        /// Creates, if needed, all default  Methods
-        /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnCreateDefaultMethods_ObjectClass")]
-        public virtual void CreateDefaultMethods()
-        {
-            // base.CreateDefaultMethods();
-            if (OnCreateDefaultMethods_ObjectClass != null)
-            {
-                OnCreateDefaultMethods_ObjectClass(this);
-            }
-            else
-            {
-                throw new NotImplementedException("No handler registered on method ObjectClass.CreateDefaultMethods");
-            }
-        }
-        public delegate void CreateDefaultMethods_Handler<T>(T obj);
-        public static event CreateDefaultMethods_Handler<ObjectClass> OnCreateDefaultMethods_ObjectClass;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
-		// CanExec
-		public static event CanExecMethodEventHandler<ObjectClass> OnCreateDefaultMethods_ObjectClass_CanExec;
-
-        [EventBasedMethod("OnCreateDefaultMethods_ObjectClass_CanExec")]
-        public virtual bool CreateDefaultMethodsCanExec
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<bool>();
-				if (OnCreateDefaultMethods_ObjectClass_CanExec != null)
-				{
-					OnCreateDefaultMethods_ObjectClass_CanExec(this, e);
-				}
-				else
-				{
-					e.Result = true;
-				}
-				return e.Result;
-			}
-        }
-
-		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<ObjectClass> OnCreateDefaultMethods_ObjectClass_CanExecReason;
-
-        [EventBasedMethod("OnCreateDefaultMethods_ObjectClass_CanExecReason")]
-        public virtual string CreateDefaultMethodsCanExecReason
-        {
-			get 
-			{
-				var e = new MethodReturnEventArgs<string>();
-				if (OnCreateDefaultMethods_ObjectClass_CanExecReason != null)
-				{
-					OnCreateDefaultMethods_ObjectClass_CanExecReason(this, e);
-				}
-				else
-				{
-					e.Result = string.Empty;
-				}
-				return e.Result;
-			}
-        }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Creates a new Method for this class
@@ -1185,6 +1146,15 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         obj => obj.BaseObjectClass,
                         (obj, val) => obj.BaseObjectClass = val,
 						obj => OnBaseObjectClass_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<ObjectClass, string>(
+                        lazyCtx,
+                        new Guid("7afdb672-f364-4b05-ad5d-ea6d59dc3553"),
+                        "CodeTemplate",
+                        null,
+                        obj => obj.CodeTemplate,
+                        null, // calculated property
+						obj => OnCodeTemplate_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<ObjectClass, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,

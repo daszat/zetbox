@@ -167,6 +167,7 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="BaseObjectClass" column="`fk_BaseObjectClass`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
 
+<!-- ValueTypeProperty CodeTemplate is calculated -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Kistl.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Kistl.Objects.NHibernateImpl" />
 

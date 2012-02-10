@@ -13,65 +13,35 @@ namespace Kistl.App.Base
     [Implementor]
     public static class ObjectClassActions
     {
-        #region CreateDefaultMethods
-        private static void CheckDefaultMethod(ObjectClass obj, string methodName)
-        {
-            var m = obj.Methods.SingleOrDefault(i => i.Name == methodName);
-            if (m == null && obj.BaseObjectClass == null)
-            {
-                // Only for BaseClasses
-                m = obj.Context.Create<Method>();
-                m.Name = methodName;
-                m.Module = obj.Module;
-                obj.Methods.Add(m);
-            }
-            // Do not delete if BaseClass is declared
-            // deleting should be a user action
-            // TODO: Add Object Level Constraint
-        }
-
         [Invocation]
-        public static void CreateDefaultMethods(Kistl.App.Base.ObjectClass obj)
+        public static void get_CodeTemplate(ObjectClass obj, PropertyGetterEventArgs<string> e)
         {
-            CheckDefaultMethod(obj, "ToString");
-            CheckDefaultMethod(obj, "NotifyPreSave");
-            CheckDefaultMethod(obj, "NotifyPostSave");
-            CheckDefaultMethod(obj, "NotifyCreated");
-            CheckDefaultMethod(obj, "NotifyDeleting");
+            StringBuilder sb = new StringBuilder();
 
-            var toStr = obj.Methods.SingleOrDefault(i => i.Name == "ToString");
-            if (toStr != null && toStr.Parameter.Count == 0)
-            {
-                var p = obj.Context.Create<StringParameter>();
-                p.IsReturnParameter = true;
-                p.Name = "retVal";
-                toStr.Parameter.Add(p);
-            }
+            string type = obj.Name;
+
+            sb.AppendFormat("[Invocation]\npublic static void ToString({0} obj, MethodReturnEventArgs<string> e)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static void NotifyPreSave({0} obj)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static void NotifyPostSave({0} obj)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static void NotifyCreated({0} obj)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static void NotifyDeleting({0} obj)\n{{\n}}\n\n", type);
+
+            e.Result = sb.ToString();
         }
-        #endregion
 
         [Invocation]
         public static void NotifyPreSave(Kistl.App.Base.ObjectClass obj)
         {
-            // Do not call CreateDefaultMethods
-            // during deploy these Methods are also invoked
-            // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
         [Invocation]
         public static void NotifyCreated(Kistl.App.Base.ObjectClass obj)
         {
-            // Do not call CreateDefaultMethods
-            // during deploy these Methods are also invoked
-            // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
         [Invocation]
         public static void postSet_BaseObjectClass(Kistl.App.Base.ObjectClass obj, PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass> e)
         {
-            // Do not call CreateDefaultMethods
-            // during deploy these Methods are also invoked
-            // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
         [Invocation]

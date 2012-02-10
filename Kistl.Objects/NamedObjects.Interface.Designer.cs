@@ -1176,6 +1176,10 @@ namespace Kistl {
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("ad060d41-bc7a-41b8-a3e3-ec9302c8c714"); }
                                 }
+                                public static TypedGuid<global::Kistl.App.Base.Property> CodeTemplate
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("7afdb672-f364-4b05-ad5d-ea6d59dc3553"); }
+                                }
                                 public static TypedGuid<global::Kistl.App.Base.Property> DefaultViewModelDescriptor
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("11adedb9-d32a-4da9-b986-0534e65df760"); }
