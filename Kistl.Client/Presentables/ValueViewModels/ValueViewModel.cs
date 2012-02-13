@@ -717,7 +717,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     return new ParseResult<TValue?>()
                     {
-                        Error = "Empty value"
+                        Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorEmptyValue)
                     };
                 }
                 return new ParseResult<TValue?>()
@@ -729,7 +729,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 return new ParseResult<TValue?>()
                 {
-                    Error = "Unable to convert type"
+                    Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType)
                 };
             }
         }
@@ -768,7 +768,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 return new ParseResult<TValue>()
                 {
-                    Error = "Unable to convert type"
+                    Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType)
                 };
             }
         }
@@ -839,7 +839,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 }
                 else
                 {
-                    error = "Error converting Enumeration";
+                    error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
                 }
             }
 
@@ -954,7 +954,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             catch
             {
-                error = "Error parsing Guid";
+                error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
             }
 
             return new ParseResult<Guid?>()
@@ -1008,12 +1008,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     }
                     else
                     {
-                        result.Error = string.Format("Fehler bei Zeiteingabe hh:mm : {0}", str);
+                        result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
                     }
                 }
                 else
                 {
-                    result.Error = string.Format("Fehler bei Zeiteingabe hh:mm : {0}", str);
+                    result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
                 }
                 return result;
             }

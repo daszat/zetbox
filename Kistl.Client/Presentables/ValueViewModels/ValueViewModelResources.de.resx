@@ -129,6 +129,12 @@
   <data name="EditCommand_Tooltip" xml:space="preserve">
     <value>Öffnet ein Bearbeitungs Dialog</value>
   </data>
+  <data name="ErrorConvertingType" xml:space="preserve">
+    <value>Wert wurde falsch eingegeben</value>
+  </data>
+  <data name="ErrorEmptyValue" xml:space="preserve">
+    <value>Wert darf nicht leer sein</value>
+  </data>
   <data name="False" xml:space="preserve">
     <value>Nein</value>
   </data>

@@ -129,6 +129,12 @@
   <data name="EditCommand_Tooltip" xml:space="preserve">
     <value>Opens a Editor Dialog</value>
   </data>
+  <data name="ErrorConvertingType" xml:space="preserve">
+    <value>Unable to convert type</value>
+  </data>
+  <data name="ErrorEmptyValue" xml:space="preserve">
+    <value>Empty value</value>
+  </data>
   <data name="False" xml:space="preserve">
     <value>False</value>
   </data>
