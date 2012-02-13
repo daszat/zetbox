@@ -925,13 +925,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public void Edit()
         {
-            ViewModelFactory.ShowModel(
+            ViewModelFactory.ShowDialog(
                     ViewModelFactory.CreateViewModel<MultiLineEditorDialogViewModel.Factory>().Invoke(
                         DataContext,
                         this,
                         Value,
-                        (v) => Value = v),
-                    true);
+                        (v) => Value = v));
         }
     }
 

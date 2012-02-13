@@ -98,7 +98,7 @@ namespace Kistl.Client.Presentables
                         var result = info.Invoke(Object, p);
                         HandleResult(result, callback);
                     });
-                ViewModelFactory.ShowModel(pitMdl, true);
+                ViewModelFactory.ShowDialog(pitMdl);
             }
             else
             {

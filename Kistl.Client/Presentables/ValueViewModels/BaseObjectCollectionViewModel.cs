@@ -407,7 +407,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     null);
                 lstMdl.ListViewModel.ShowCommands = false;
 
-                ViewModelFactory.ShowModel(lstMdl, true);
+                ViewModelFactory.ShowDialog(lstMdl);
             }
         }
 
@@ -454,7 +454,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             lstMdl.ListViewModel.ShowOpenCommand = false;
             lstMdl.ListViewModel.AllowAddNew = AllowAddNew || AllowAddNewWhenAddingExisting;
 
-            ViewModelFactory.ShowModel(lstMdl, true);
+            ViewModelFactory.ShowDialog(lstMdl);
         }
 
         public virtual void RemoveItem(DataObjectViewModel item)

@@ -110,7 +110,7 @@ namespace Kistl.Client.Presentables.KistlBase
             selTaskVMdl.ListViewModel.ShowCommands = false;
             selTaskVMdl.ListViewModel.EnableAutoFilter = false;
             selTaskVMdl.ListViewModel.AddFilter(new ToStringFilterModel(FrozenContext));
-            ViewModelFactory.ShowModel(selTaskVMdl, true);
+            ViewModelFactory.ShowDialog(selTaskVMdl);
         }
 
         public void SelectStartingObjectClass()
@@ -130,7 +130,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     }),
                     null);
             lstMdl.ListViewModel.ShowCommands = false;
-            ViewModelFactory.ShowModel(lstMdl, true);
+            ViewModelFactory.ShowDialog(lstMdl);
         }
 
         public override void RemoveItem(DataObjectViewModel item)

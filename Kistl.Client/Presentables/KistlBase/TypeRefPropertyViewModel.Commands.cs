@@ -110,7 +110,7 @@ namespace Kistl.Client.Presentables.KistlBase
             //    .FirstOrDefault(m => m.Key.Object == assembly)
             //    .Key;
             regenerateCmd.ListModel = selectionTask.ListViewModel;
-            ViewModelFactory.ShowModel(selectionTask, true);
+            ViewModelFactory.ShowDialog(selectionTask);
         }
 
         private class RegenerateTypeRefsCommand : CommandViewModel

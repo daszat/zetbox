@@ -94,7 +94,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
             });
             dlg.FollowCompundObjects = true;
 
-            ViewModelFactory.ShowModel(dlg, true);
+            ViewModelFactory.ShowDialog(dlg);
         }
 
         protected override void OnPropertyChanged(string propertyName)

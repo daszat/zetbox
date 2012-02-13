@@ -259,7 +259,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         }), null);
                 lstMdl.ListViewModel.ShowCommands = false;
 
-                ViewModelFactory.ShowModel(lstMdl, true);
+                ViewModelFactory.ShowDialog(lstMdl);
             }
         }
 
@@ -307,7 +307,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             selectionTask.ListViewModel.ShowOpenCommand = false;
             selectionTask.ListViewModel.AllowAddNew = true;
 
-            ViewModelFactory.ShowModel(selectionTask, true);
+            ViewModelFactory.ShowDialog(selectionTask);
         }
 
         private ICommandViewModel _SelectValueCommand;
