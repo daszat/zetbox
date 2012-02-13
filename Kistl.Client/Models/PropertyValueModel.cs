@@ -242,7 +242,7 @@ namespace Kistl.Client.Models
         {
             get
             {
-                if (DataContext.IsElevatedMode && !Property.IsCalculated()) return false;
+                if (DataContext != null && DataContext.IsElevatedMode && !Property.IsCalculated()) return false;
                 if (_IsReadOnly == null)
                 {
                     _IsReadOnly = Property.IsReadOnly();
