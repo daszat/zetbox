@@ -12,70 +12,78 @@
                   Height="600"
                   Width="800"
                   Background="LightGray">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Apps"
-                      ItemsSource="{Binding Applications}">
-                <MenuItem.ItemContainerStyle>
-                    <Style TargetType="{x:Type MenuItem}">
-                        <Setter Property="Header"
-                                Value="{Binding Name}" />
-                        <Setter Property="Command"
-                                Value="{Binding OpenApplicationCommand, Converter={StaticResource CommandConverter}}" />
-                        <Setter Property="CommandParameter"
-                                Value="{Binding}" />
-                    </Style>
-                </MenuItem.ItemContainerStyle>
-            </MenuItem>
-        </Menu>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250" />
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
+  <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="Apps"
+                ItemsSource="{Binding Applications}">
+        <MenuItem.ItemContainerStyle>
+          <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="Header"
+                    Value="{Binding Name}" />
+            <Setter Property="Command"
+                    Value="{Binding OpenApplicationCommand, Converter={StaticResource CommandConverter}}" />
+            <Setter Property="CommandParameter"
+                    Value="{Binding}" />
+          </Style>
+        </MenuItem.ItemContainerStyle>
+      </MenuItem>
+    </Menu>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="250" />
+        <ColumnDefinition Width="5" />
+        <ColumnDefinition Width="2*" />
+      </Grid.ColumnDefinitions>
 
-            <!-- Navigation Tree -->
-            <TreeView x:Name="ObjectTree"
-                      Grid.Column="0"
-                      BorderThickness="0"
-                      Margin="5"
-                      SelectedItemChanged="ModuleTreeSelectedItemChangedHandler">
-                <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType="{x:Type objBrowser:ModuleViewModel}"
-                                              ItemsSource="{Binding ObjectClasses}">
-                        <!--<view:DataObjectLineDisplay />-->
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Converter={StaticResource IconConverter}}"
-                                   Width="14"
-                                   Height="14" />
-                            <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"
-                                       Margin="3,0,0,0" />
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                    <DataTemplate DataType="{x:Type clientKistlBase:InstanceListViewModel}">
-                        <!-- <view:DataObjectLineDisplay DataContext="{Binding DataTypeViewModel}" />-->
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Converter={StaticResource IconConverter}}"
-                                   Width="14"
-                                   Height="14" />
-                            <TextBlock Text="{Binding DataTypeViewModel.PropertyModelsByName[Name].Value}"
-                                       Margin="3,0,0,0" />
-                        </StackPanel>
-                    </DataTemplate>
-                </TreeView.Resources>
-                <TreeViewItem Header="Browse"
-                              ItemsSource="{Binding Modules}"
-                              IsExpanded="True" />
-            </TreeView>
+      <!-- Navigation Tree -->
+      <TreeView x:Name="ObjectTree"
+                Grid.Column="0"
+                BorderThickness="0"
+                Margin="5"
+                SelectedItemChanged="ModuleTreeSelectedItemChangedHandler">
+        <TreeView.Resources>
+          <HierarchicalDataTemplate DataType="{x:Type objBrowser:ModuleViewModel}"
+                                    ItemsSource="{Binding Children}">
+            <!--<view:DataObjectLineDisplay />-->
+            <StackPanel Orientation="Horizontal">
+              <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                     Width="14"
+                     Height="14" />
+              <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"
+                         Margin="3,0,0,0" />
+            </StackPanel>
+          </HierarchicalDataTemplate>
+          <DataTemplate DataType="{x:Type clientKistlBase:InstanceListViewModel}">
+            <!-- <view:DataObjectLineDisplay DataContext="{Binding DataTypeViewModel}" />-->
+            <StackPanel Orientation="Horizontal">
+              <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                     Width="14"
+                     Height="14" />
+              <TextBlock Text="{Binding DataTypeViewModel.PropertyModelsByName[Name].Value}"
+                         Margin="3,0,0,0" />
+            </StackPanel>
+          </DataTemplate>
+          <HierarchicalDataTemplate DataType="{x:Type objBrowser:ModuleViewModel+TreeNodeSimpleObjects}"
+                                   ItemsSource="{Binding Children}">
+            <!--<view:DataObjectLineDisplay />-->
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding Name}"
+                         Margin="3,0,0,0" />
+            </StackPanel>
+          </HierarchicalDataTemplate>
+        </TreeView.Resources>
+        <TreeViewItem Header="Browse"
+                      ItemsSource="{Binding Modules}"
+                      IsExpanded="True" />
+      </TreeView>
 
-            <GridSplitter Grid.Column="1"
-                          HorizontalAlignment="Stretch" />
+      <GridSplitter Grid.Column="1"
+                    HorizontalAlignment="Stretch" />
 
-            <ContentPresenter Grid.Column="2"
-                              Grid.IsSharedSizeScope="True"
-                              Content="{Binding SelectedItem}"
-                              ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
-        </Grid>
-    </DockPanel>
+      <ContentPresenter Grid.Column="2"
+                        Grid.IsSharedSizeScope="True"
+                        Content="{Binding SelectedItem}"
+                        ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
+    </Grid>
+  </DockPanel>
 </ctrls:WindowView>

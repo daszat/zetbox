@@ -9,11 +9,24 @@ using Kistl.API.Configuration;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Client.Presentables.KistlBase;
+using System.Collections;
 
 namespace Kistl.Client.Presentables.ObjectBrowser
 {
     public class ModuleViewModel : DataObjectViewModel
     {
+        public class TreeNodeSimpleObjects
+        {
+            public string Name
+            {
+                get
+                {
+                    return "Simple Objects";
+                }
+            }
+            public IEnumerable Children { get; set; }
+        }
+
         public new delegate ModuleViewModel Factory(IKistlContext dataCtx, ViewModel parent, Module mdl);
 
         private Func<IKistlContext> _ctxFactory;
@@ -30,17 +43,39 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         #region public interface
 
-        private ObservableCollection<InstanceListViewModel> _objectClassesCache = null;
-        public ObservableCollection<InstanceListViewModel> ObjectClasses
+        public IEnumerable Children
+        {
+            get
+            {
+                return ObjectClasses
+                    .Cast<object>()
+                    .Concat(new[] { new TreeNodeSimpleObjects() { Children = this.SimpleObjectClasses } });
+            }
+        }
+
+        private List<InstanceListViewModel> _objectClassesCache = null;
+        public IEnumerable<InstanceListViewModel> ObjectClasses
         {
             get
             {
                 if (_objectClassesCache == null)
                 {
-                    _objectClassesCache = new ObservableCollection<InstanceListViewModel>();
-                    LoadObjectClasses();
+                    _objectClassesCache = LoadObjectClasses(false);                    
                 }
                 return _objectClassesCache;
+            }
+        }
+
+        private List<InstanceListViewModel> _simpleObjectClassesCache = null;
+        public IEnumerable<InstanceListViewModel> SimpleObjectClasses
+        {
+            get
+            {
+                if (_simpleObjectClassesCache == null)
+                {
+                    _simpleObjectClassesCache = LoadObjectClasses(true);                    
+                }
+                return _simpleObjectClassesCache;
             }
         }
 
@@ -48,10 +83,11 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         #region Utilities and UI callbacks
 
-        private void LoadObjectClasses()
+        private List<InstanceListViewModel> LoadObjectClasses(bool simpleObjects)
         {
+            var result = new List<InstanceListViewModel>();
             var datatypes = FrozenContext.GetQuery<ObjectClass>()
-                .Where(dt => dt.Module.ExportGuid == _module.ExportGuid && !dt.IsSimpleObject)
+                .Where(dt => dt.Module.ExportGuid == _module.ExportGuid && dt.IsSimpleObject == simpleObjects)
                 .OrderBy(dt => dt.Name)
                 .ToList();
             foreach (var cls in datatypes)
@@ -61,8 +97,10 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 mdl.AllowDelete = true;
                 mdl.ViewMethod = Kistl.App.GUI.InstanceListViewMethod.Details;
                 mdl.Commands.Add(ViewModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, this, cls));
-                ObjectClasses.Add(mdl);
+                result.Add(mdl);
             }
+
+            return result;
         }
 
         #endregion
