@@ -69,6 +69,12 @@ namespace Kistl.Client.Models
         DateTimeStyles DateTimeStyle { get; }
     }
 
+    public interface IDecimalValueModel : IValueModel<decimal?>
+    {
+        int? Precision { get; }
+        int? Scale { get; }
+    }
+
     public interface IBoolValueModel : IValueModel<bool?>
     {
         Kistl.App.GUI.Icon FalseIcon { get; }

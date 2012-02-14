@@ -3869,6 +3869,10 @@ namespace Kistl {
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("fc74b434-3801-4e4a-ab67-e65a9e014005"); }
                 }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("481d7a65-208c-4706-8d4d-64ea629a109c"); }
+                }
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableGuidPropertyViewModel
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("2b6fb70f-a382-4057-a139-cc33333d619d"); }
@@ -3876,10 +3880,6 @@ namespace Kistl {
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableMonthPropertyViewModel
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("e66f8cad-f532-4c75-8fb0-e1aa8baddd06"); }
-                }
-                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Decimal_
-                {
-                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("481d7a65-208c-4706-8d4d-64ea629a109c"); }
                 }
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_
                 {

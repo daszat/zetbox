@@ -23,7 +23,7 @@ namespace Kistl.App.Base
         [Invocation]
         public static void NotifyCreated(Kistl.App.Base.DecimalProperty obj)
         {
-            obj.ValueModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Decimal_.Find(obj.Context);
+            obj.ValueModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel.Find(obj.Context);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-02-10T08:43:30Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-02-14T16:21:51Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -9504,6 +9504,13 @@
     <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.Presentables.ObjectBrowser.ModuleViewModel+Factory</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="b0f28382-5ad7-4c44-8966-b34e0e184937">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-02-14T15:21:51.227448Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-02-14T15:21:51.227448Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectBrowser.ModuleViewModel+TreeNodeSimpleObjects</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="bf51f3c4-2f92-480b-a244-02dc8c69ed56">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-08-05T10:31:13.124287Z</KistlBase:ChangedOn>
@@ -10285,6 +10292,20 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel+Factory</KistlBase:FullName>
     <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel+Factory</KistlBase:ToStringCache>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="26fe8ae8-25cc-431c-91e1-76047a15ead9">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-02-14T15:21:51.227448Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-02-14T15:21:51.227448Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ValueViewModels.NullableDecimalPropertyViewModel</KistlBase:FullName>
+    <KistlBase:Parent>8bf7ae08-2e4f-4ceb-bb10-6ae13826ea8f</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="76919a73-d02c-4c79-bb62-24509dfd043b">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-02-14T15:21:51.227448Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-02-14T15:21:51.227448Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ValueViewModels.NullableDecimalPropertyViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="7bd64a79-f060-4a3a-9605-dcb76c1ea5f0">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -31035,6 +31056,13 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>114e887c-4e5b-45d0-a3f6-7b22c056dd71</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="481d7a65-208c-4706-8d4d-64ea629a109c">
+    <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
+    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
+    <GUI:Description>An decimal attribute</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>26fe8ae8-25cc-431c-91e1-76047a15ead9</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="2b6fb70f-a382-4057-a139-cc33333d619d">
     <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
     <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
@@ -31055,13 +31083,6 @@
     <GUI:Description>A floating point attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>f223c178-c447-40a8-960e-ffba6b8423af</GUI:ViewModelRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="481d7a65-208c-4706-8d4d-64ea629a109c">
-    <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
-    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
-    <GUI:Description>An decimal attribute</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>8bf7ae08-2e4f-4ceb-bb10-6ae13826ea8f</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="edaf9334-dc36-4778-aa33-1e5cdaeeb767">
     <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>

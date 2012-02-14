@@ -38,7 +38,7 @@ namespace Kistl.Client.Models
             }
             else if (prop is DecimalProperty)
             {
-                return new NullableStructPropertyValueModel<decimal>(obj, prop);
+                return new DecimalPropertyValueModel(obj, (DecimalProperty)prop);
             }
             else if (prop is GuidProperty)
             {
@@ -120,7 +120,7 @@ namespace Kistl.Client.Models
             }
             else if (prop is DecimalProperty)
             {
-                return new NullableStructValueModel<decimal>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new DecimalValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is GuidProperty)
             {
@@ -1077,6 +1077,27 @@ namespace Kistl.Client.Models
         public string TrueLabel
         {
             get { return bProp.TrueLabel; }
+        }
+    }
+
+    public class DecimalPropertyValueModel : NullableStructPropertyValueModel<decimal>, IDecimalValueModel
+    {
+        protected readonly DecimalProperty dProp;
+
+        public DecimalPropertyValueModel(INotifyingObject obj, DecimalProperty prop)
+            : base(obj, prop)
+        {
+            dProp = prop;
+        }
+
+        public int? Precision
+        {
+            get { return dProp.Precision > 0 ? dProp.Precision : (int?)null; }
+        }
+
+        public int? Scale
+        {
+            get { return dProp.Scale > 0 ? dProp.Scale : (int?)null; }
         }
     }
 }

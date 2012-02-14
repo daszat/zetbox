@@ -965,6 +965,29 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
     }
 
+    public class NullableDecimalPropertyViewModel : NullableStructValueViewModel<decimal>
+    {
+        public new delegate NullableDecimalPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+
+        public NullableDecimalPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+            DecimalModel = (IDecimalValueModel)mdl;
+        }
+
+        public IDecimalValueModel DecimalModel { get; private set; }
+
+        protected override string FormatValue(decimal? value)
+        {
+            if (DecimalModel.Scale.HasValue && value.HasValue)
+            {
+                var format = string.Format("N{0}", DecimalModel.Scale.Value);
+                return value.Value.ToString(format);
+            }
+            return base.FormatValue(value);
+        }
+    }
+
     public class NullableDateTimePropertyViewModel
         : NullableStructValueViewModel<DateTime>
     {

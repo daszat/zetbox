@@ -368,8 +368,8 @@ using System.Linq.Expressions;
             BaseValueModel mdl = null;
             if (propType == typeof(decimal))
             {
-                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Decimal_.Find(frozenCtx);
-                mdl = new NullableStructValueModel<decimal>(label, "", true, false, requestedArgumentKind);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel.Find(frozenCtx);
+                mdl = new DecimalValueModel(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(int))
             {
@@ -762,9 +762,9 @@ using System.Linq.Expressions;
             BaseValueModel mdl2 = null;
             if (type == typeof(decimal))
             {
-                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Decimal_.Find(frozenCtx);
-                mdl1 = new NullableStructValueModel<decimal>("", "", true, false, requestedArgumentKind);
-                mdl2 = new NullableStructValueModel<decimal>("", "", true, false, requestedArgumentKind);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel.Find(frozenCtx);
+                mdl1 = new DecimalValueModel("", "", true, false, requestedArgumentKind);
+                mdl2 = new DecimalValueModel("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(int))
             {

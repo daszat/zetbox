@@ -42,7 +42,7 @@ namespace Kistl.Client.Models
             }
             else if (parameter is DecimalParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<decimal>(lb, parameter.Description, allowNullInput, false);
+                return new DecimalValueModel(lb, parameter.Description, allowNullInput, false);
             }
             else if (parameter is StringParameter && !parameter.IsList)
             {
@@ -323,6 +323,31 @@ namespace Kistl.Client.Models
 
         public Icon TrueIcon { get; set; }
         public string TrueLabel { get; set; }
+    }
+
+    public class DecimalValueModel : NullableStructValueModel<decimal>, IDecimalValueModel
+    {
+        public DecimalValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
+            : base(label, description, allowNullInput, isReadOnly)
+        {
+        }
+
+        public DecimalValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
+        {
+        }
+
+        public int? Precision
+        {
+            get;
+            set;
+        }
+
+        public int? Scale
+        {
+            get;
+            set;
+        }
     }
 
     public class ClassValueModel<TValue> : ValueModel<TValue>

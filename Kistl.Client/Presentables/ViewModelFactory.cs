@@ -160,7 +160,7 @@ namespace Kistl.Client.Presentables
             }
             else if (param is DecimalParameter && !param.IsList)
             {
-                t = typeof(NullableStructValueViewModel<decimal>);
+                t = typeof(NullableDecimalPropertyViewModel);
             }
             else if (param is StringParameter && !param.IsList)
             {
