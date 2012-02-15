@@ -193,6 +193,7 @@
     <Compile Include="Kunde.Ef.Designer.cs" />
     <Compile Include="Method.Ef.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Ef.Designer.cs" />
+    <Compile Include="MethodTest.Ef.Designer.cs" />
     <Compile Include="MigrationLog.Ef.Designer.cs" />
     <Compile Include="MigrationProject.Ef.Designer.cs" />
     <Compile Include="Mitarbeiter.Ef.Designer.cs" />

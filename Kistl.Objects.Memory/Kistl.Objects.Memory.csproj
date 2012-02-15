@@ -190,6 +190,7 @@
     <Compile Include="Kunde.Memory.Designer.cs" />
     <Compile Include="Method.Memory.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Memory.Designer.cs" />
+    <Compile Include="MethodTest.Memory.Designer.cs" />
     <Compile Include="MigrationLog.Memory.Designer.cs" />
     <Compile Include="MigrationProject.Memory.Designer.cs" />
     <Compile Include="Mitarbeiter.Memory.Designer.cs" />

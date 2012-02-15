@@ -39,6 +39,7 @@
     <EntitySet Name="InstanceConstraint" EntityType="Model.InstanceConstraint" />
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
     <EntitySet Name="Method" EntityType="Model.Method" />
+    <EntitySet Name="MethodTest" EntityType="Model.MethodTest" />
     <EntitySet Name="MigrationLog" EntityType="Model.MigrationLog" />
     <EntitySet Name="MigrationProject" EntityType="Model.MigrationProject" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
@@ -715,6 +716,10 @@
     <AssociationSet Name="FK_OneSide_connectsTo_NSide" Association="Model.FK_OneSide_connectsTo_NSide" >
       <End Role="OneSide" EntitySet="One_to_N_relations_One" />
       <End Role="NSide" EntitySet="One_to_N_relations_N" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parent_has_Children" Association="Model.FK_Parent_has_Children" >
+      <End Role="Parent" EntitySet="MethodTest" />
+      <End Role="Children" EntitySet="MethodTest" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_navigates_to_Children" Association="Model.FK_Parent_navigates_to_Children" >
       <End Role="Parent" EntitySet="NavigationEntry" />
@@ -1682,6 +1687,21 @@
                         Relationship="Model.FK_ObjRefProp_shows_Methods_B"
                         FromRole="Methods"
                         ToRole="CollectionEntry" />
+  </EntityType>
+  <EntityType Name="MethodTest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChildrenImpl"
+                        Relationship="Model.FK_Parent_has_Children"
+                        FromRole="Parent"
+                        ToRole="Children" />
+    <NavigationProperty Name="ParentImpl"
+                        Relationship="Model.FK_Parent_has_Children"
+                        FromRole="Children"
+                        ToRole="Parent" />
+    <Property Name="StringProp" Type="String" Nullable="true" MaxLength="200"  />
   </EntityType>
   <EntityType Name="MigrationLog">
     <Key>
@@ -4637,6 +4657,14 @@
          Multiplicity="0..1" />
     <End Role="NSide"
          Type="Model.One_to_N_relations_N" 
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Parent_has_Children" >
+    <End Role="Parent"
+         Type="Model.MethodTest" 
+         Multiplicity="0..1" />
+    <End Role="Children"
+         Type="Model.MethodTest" 
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Parent_navigates_to_Children" >

@@ -2551,6 +2551,10 @@ namespace Kistl {
                             {
                                 get { return new TypedGuid<global::Kistl.App.Base.DataType>("a78ff235-4511-431b-8437-939f7fecded4"); }
                             }
+                            public static TypedGuid<global::Kistl.App.Base.DataType> MethodTest
+                            {
+                                get { return new TypedGuid<global::Kistl.App.Base.DataType>("68a664ee-67e0-4ba7-a0dc-148b9dfa32a7"); }
+                            }
                             public static TypedGuid<global::Kistl.App.Base.DataType> Muhblah
                             {
                                 get { return new TypedGuid<global::Kistl.App.Base.DataType>("fd357e42-2c2c-4bef-8110-69a466d09af0"); }
@@ -2649,6 +2653,21 @@ namespace Kistl {
                                 public static TypedGuid<global::Kistl.App.Base.Property> Student
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("3a91e745-0dd2-4f31-864e-eaf657ddb577"); }
+                                }
+                            }
+                            public static class MethodTest_Properties
+                            {
+                                public static TypedGuid<global::Kistl.App.Base.Property> Children
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("bf48b883-8821-4c4e-8509-590a72604f9e"); }
+                                }
+                                public static TypedGuid<global::Kistl.App.Base.Property> Parent
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("02a7d534-9325-48e5-bbc2-b61420afd940"); }
+                                }
+                                public static TypedGuid<global::Kistl.App.Base.Property> StringProp
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("8d226658-fecc-4139-8234-aa88a4738b4d"); }
                                 }
                             }
                             public static class Muhblah_Properties

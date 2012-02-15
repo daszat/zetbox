@@ -1817,6 +1817,21 @@ using Kistl.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Parent_has_Children
+    A: ZeroOrOne MethodTest as Parent
+    B: ZeroOrMore MethodTest as Children
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Parent_has_Children",
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.MethodTestEfImpl),
+    "Children", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.MethodTestEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Parent_navigates_to_Children
     A: ZeroOrOne NavigationEntry as Parent
     B: ZeroOrMore NavigationEntry as Children

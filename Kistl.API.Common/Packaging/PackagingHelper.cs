@@ -146,6 +146,14 @@ namespace Kistl.App.Packaging
                     .ToList().OrderBy(i => i.Name)
                     .ThenBy(i => i.ExportGuid));
 
+                // Properties <-> Methods
+                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ObjectReferenceProperty_shows_Method_RelationEntry>()
+                    .Where(i => i.A.Module.ID == moduleID || i.B.Module.ID == moduleID)
+                    .ToList()
+                    .OrderBy(i => i.A.Name)
+                    .ThenBy(i => i.A.ExportGuid)
+                    .ThenBy(i => i.B.ExportGuid));
+
                 // Sequences
                 AddMetaObjects(result, () => ctx.GetQuery<Sequence>().Where(i => i.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.Description).ThenBy(i => i.ExportGuid));

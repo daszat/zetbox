@@ -284,6 +284,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (AllowRemove) cmds.Add(RemoveCommand);
             if (AllowDelete) cmds.Add(DeleteCommand);
 
+            if (ObjectCollectionModel.RelEnd != null && ObjectCollectionModel is BasePropertyValueModel)
+            {
+                var obj = (IDataObject)((BasePropertyValueModel)ObjectCollectionModel).Object;
+                var navigator = ObjectCollectionModel.RelEnd.Navigator;
+                foreach (var m in navigator.Methods)
+                {
+                    cmds.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(DataContext, this, obj, m).ExecuteCommand);
+                }
+            }
+
             return cmds;
         }
 
@@ -396,14 +406,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => children.AsQueryable(),
-                        new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                        (chosen) =>
                         {
                             if (chosen != null)
                             {
-                                var targetClass = ((ObjectClass)chosen.Object);
+                                var targetClass = ((ObjectClass)chosen.First().Object);
                                 CreateItemAndActivate(targetClass);
                             }
-                        }),
+                        },
                     null);
                 lstMdl.ListViewModel.ShowCommands = false;
 
@@ -442,13 +452,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     this,
                     ifType.GetObjectClass(FrozenContext),
                     null,
-                    new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                    (chosen) =>
                     {
                         if (chosen != null)
                         {
-                            AddItem(chosen);
+                            foreach(var obj in chosen)
+                            {
+                                AddItem(obj);
+                            }
                         }
-                    }),
+                    },
                     null);
             lstMdl.ListViewModel.AllowDelete = false;
             lstMdl.ListViewModel.ShowOpenCommand = false;

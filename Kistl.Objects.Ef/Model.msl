@@ -652,6 +652,14 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MethodTest">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodTest)">
+	    <MappingFragment StoreEntitySet="MethodTest">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="StringProp" ColumnName="StringProp" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="MigrationLog">
       <EntityTypeMapping TypeName="IsTypeOf(Model.MigrationLog)">
 	    <MappingFragment StoreEntitySet="MigrationLog">
@@ -3830,6 +3838,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_OneSide" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Parent_has_Children
+    A: ZeroOrOne MethodTest as Parent
+    B: ZeroOrMore MethodTest as Children
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Parent_has_Children"
+                           TypeName="Model.FK_Parent_has_Children"
+                           StoreEntitySet="MethodTest" >
+      <EndProperty Name="Parent">
+        <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
+      </EndProperty>
+      <EndProperty Name="Children">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Parent" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Parent_navigates_to_Children

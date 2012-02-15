@@ -43,6 +43,7 @@
     <EntitySet Name="InstanceConstraint" EntityType="Model.Store.InstanceConstraint" Schema="base" Table="InstanceConstraint"/>
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Schema="projekte" Table="Kunden"/>
     <EntitySet Name="Method" EntityType="Model.Store.Method" Schema="base" Table="Methods"/>
+    <EntitySet Name="MethodTest" EntityType="Model.Store.MethodTest" Schema="test" Table="MethodTests"/>
     <EntitySet Name="MigrationLog" EntityType="Model.Store.MigrationLog" Schema="migration" Table="MigrationLogs"/>
     <EntitySet Name="MigrationProject" EntityType="Model.Store.MigrationProject" Schema="migration" Table="MigrationProjects"/>
     <EntitySet Name="Mitarbeiter" EntityType="Model.Store.Mitarbeiter" Schema="projekte" Table="Mitarbeiter"/>
@@ -1245,6 +1246,10 @@
       <End Role="OneSide" EntitySet="One_to_N_relations_One" />
       <End Role="NSide" EntitySet="One_to_N_relations_N" />
     </AssociationSet>
+    <AssociationSet Name="FK_Parent_has_Children" Association="Model.Store.FK_Parent_has_Children" >
+      <End Role="Parent" EntitySet="MethodTest" />
+      <End Role="Children" EntitySet="MethodTest" />
+    </AssociationSet>
     <AssociationSet Name="FK_Parent_navigates_to_Children" Association="Model.Store.FK_Parent_navigates_to_Children" >
       <End Role="Parent" EntitySet="NavigationEntry" />
       <End Role="Children" EntitySet="NavigationEntry" />
@@ -2298,6 +2303,15 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="MethodTest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Parent" Type="int" />
+    <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="MigrationLog">
@@ -5338,6 +5352,20 @@
       </Principal>
       <Dependent Role="NSide">
         <PropertyRef Name="fk_OneSide" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Parent_has_Children">
+    <End Role="Parent" Type="Model.Store.MethodTest" Multiplicity="0..1" />
+    <End Role="Children" Type="Model.Store.MethodTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Children">
+        <PropertyRef Name="fk_Parent" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

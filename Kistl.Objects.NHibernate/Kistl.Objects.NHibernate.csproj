@@ -205,6 +205,7 @@
     <Compile Include="Kunde.NHibernate.Designer.cs" />
     <Compile Include="Method.NHibernate.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.NHibernate.Designer.cs" />
+    <Compile Include="MethodTest.NHibernate.Designer.cs" />
     <Compile Include="MigrationLog.NHibernate.Designer.cs" />
     <Compile Include="MigrationProject.NHibernate.Designer.cs" />
     <Compile Include="Mitarbeiter.NHibernate.Designer.cs" />

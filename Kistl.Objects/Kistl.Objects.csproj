@@ -164,6 +164,7 @@
     <Compile Include="Kunde.Interface.Designer.cs" />
     <Compile Include="Method.Interface.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Interface.Designer.cs" />
+    <Compile Include="MethodTest.Interface.Designer.cs" />
     <Compile Include="MigrationLog.Interface.Designer.cs" />
     <Compile Include="MigrationProject.Interface.Designer.cs" />
     <Compile Include="Mitarbeiter.Interface.Designer.cs" />
