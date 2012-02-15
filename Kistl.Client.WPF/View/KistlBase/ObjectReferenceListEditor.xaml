@@ -15,12 +15,12 @@
 
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                                  ItemsSource="{Binding Commands}">
-            <ToolBar.ItemTemplate>
-                <DataTemplate>
-                    <ctrls:CommandButton CommandViewModel="{Binding}"
-                                         Style="{StaticResource ImageToolbarButton}"/>
-                </DataTemplate>
-            </ToolBar.ItemTemplate>
+          <ctrls:WorkaroundToolBar.Resources>
+            <DataTemplate DataType="{x:Type client:CommandViewModel}">
+              <ctrls:CommandButton CommandViewModel="{Binding}"
+                                   Style="{StaticResource ImageToolbarButton}" />
+            </DataTemplate>
+          </ctrls:WorkaroundToolBar.Resources>
         </ctrls:WorkaroundToolBar>
 
         <!-- configured from code, see RefreshGridView() -->

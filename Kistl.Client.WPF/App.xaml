@@ -4,73 +4,74 @@
              xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
              Startup="Application_Startup"
              Exit="Application_Exit"
              ShutdownMode="OnExplicitShutdown"
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
-    <!-- Shutdown managed by WPF Model Factory -->
-    <Application.Resources>
-        <ResourceDictionary>
-            <converter:FormattingConverter x:Key="FormattingConverter" />
-            <converter:MultiplyingConverter x:Key="MultiplyingConverter" />
-            <converter:DividingConverter x:Key="DividingConverter" />
-            <converter:GetTypeConverter x:Key="GetTypeConverter" />
-            <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
-            <converter:DebugConverter x:Key="debug" />
-            <converter:HourConverter x:Key="HourConverter" />
-            <converter:InvertedBoolConverter x:Key="InvertedBoolConverter" />
-            <converter:BooleanMultiselectToSelectionModeConverter x:Key="BooleanMultiselectToSelectionModeConverter" />
-            <converter:ImageConverter x:Key="ImageConverter" />
-            <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <commands:Converter x:Key="CommandConverter" />
-            <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
-            <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />
-            <converter:LighterShadeConverter x:Key="LighterShadeConverter" />
+  <!-- Shutdown managed by WPF Model Factory -->
+  <Application.Resources>
+    <ResourceDictionary>
+      <converter:FormattingConverter x:Key="FormattingConverter" />
+      <converter:MultiplyingConverter x:Key="MultiplyingConverter" />
+      <converter:DividingConverter x:Key="DividingConverter" />
+      <converter:GetTypeConverter x:Key="GetTypeConverter" />
+      <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
+      <converter:DebugConverter x:Key="debug" />
+      <converter:HourConverter x:Key="HourConverter" />
+      <converter:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+      <converter:BooleanMultiselectToSelectionModeConverter x:Key="BooleanMultiselectToSelectionModeConverter" />
+      <converter:ImageConverter x:Key="ImageConverter" />
+      <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
+      <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+      <commands:Converter x:Key="CommandConverter" />
+      <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
+      <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />
+      <converter:LighterShadeConverter x:Key="LighterShadeConverter" />
 
-          <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
+      <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
 
 
-          <converter:HorizontalContentAlignmentConverter x:Key="HorizontalContentAlignmentConverter"/>
-            <converter:VerticalContentAlignmentConverter x:Key="VerticalContentAlignmentConverter"/>
-            <converter:EmptyStringToCollapsedConverter x:Key="EmptyStringToCollapsedConverter"/>
-            <converter:EmptyCountToCollapsedConverter x:Key="EmptyCountToCollapsedConverter"/>
-            <converter:FormattingToFontWeightConverter x:Key="FormattingToFontWeightConverter"/>
+      <converter:HorizontalContentAlignmentConverter x:Key="HorizontalContentAlignmentConverter"/>
+      <converter:VerticalContentAlignmentConverter x:Key="VerticalContentAlignmentConverter"/>
+      <converter:EmptyStringToCollapsedConverter x:Key="EmptyStringToCollapsedConverter"/>
+      <converter:EmptyCountToCollapsedConverter x:Key="EmptyCountToCollapsedConverter"/>
+      <converter:FormattingToFontWeightConverter x:Key="FormattingToFontWeightConverter"/>
 
-            <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
-            <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
-            <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />
-            <converter:HighlightGridFontWeightConverter x:Key="HighlightGridFontWeightConverter" />
-            <converter:HighlightPanelBackgroundConverter x:Key="HighlightPanelBackgroundConverter" />
+      <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
+      <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
+      <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />
+      <converter:HighlightGridFontWeightConverter x:Key="HighlightGridFontWeightConverter" />
+      <converter:HighlightPanelBackgroundConverter x:Key="HighlightPanelBackgroundConverter" />
 
-            <DataTemplate x:Key="FakeProgressOverlay">
-                <Grid Background="#88888888">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border Grid.Row="1"
-                            Grid.Column="1"
-                            Background="#AAAAAAAA"
-                            Padding="5"
-                            CornerRadius="10"
-                            Height="30" >
-                        <TextBlock HorizontalAlignment="Center" >Bitte warten...</TextBlock>
-                    </Border>
-                    <ProgressBar Grid.Row="2"
-                                 Grid.Column="1"
-                                 Height="30"
-                                 Maximum="100"
-                                 Value="33"/>
-                </Grid>
-            </DataTemplate>
-        </ResourceDictionary>
-    </Application.Resources>
+      <DataTemplate x:Key="FakeProgressOverlay">
+        <Grid Background="#88888888">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Border Grid.Row="1"
+                  Grid.Column="1"
+                  Background="#AAAAAAAA"
+                  Padding="5"
+                  CornerRadius="10"
+                  Height="30" >
+            <TextBlock HorizontalAlignment="Center" >Bitte warten...</TextBlock>
+          </Border>
+          <ProgressBar Grid.Row="2"
+                       Grid.Column="1"
+                       Height="30"
+                       Maximum="100"
+                       Value="33"/>
+        </Grid>
+      </DataTemplate>
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>

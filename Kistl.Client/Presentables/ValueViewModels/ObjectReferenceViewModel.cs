@@ -173,6 +173,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
             cmds.Add(OpenReferenceCommand);
             cmds.Add(ClearValueCommand);
 
+            if (ObjectReferenceModel.RelEnd != null && ObjectReferenceModel is BasePropertyValueModel)
+            {
+                var obj = (IDataObject)((BasePropertyValueModel)ObjectReferenceModel).Object;
+                var navigator = ObjectReferenceModel.RelEnd.Navigator;
+                ObjectReferenceHelper.AddActionViewModels(cmds, obj, navigator, this, ViewModelFactory);
+            }
+
             return cmds;
         }
 

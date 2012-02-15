@@ -344,4 +344,19 @@
     <Setter Property="MinHeight" Value="26" />
     <Setter Property="VerticalAlignment" Value="Top" />
   </Style>
+
+  <!-- Commands -->
+  <DataTemplate DataType="{x:Type client:ContainerCommand}">
+    <Menu Margin="0,2,0,0" Background="#00000000">
+      <Menu.Resources>
+        <DataTemplate DataType="{x:Type client:CommandViewModel}">
+          <TextBlock Text="{Binding}"/>
+        </DataTemplate>
+      </Menu.Resources>
+      <MenuItem ItemsSource="{Binding Commands}"
+                Header="{Binding Name}"
+                ItemContainerStyle="{StaticResource CommandMenuItem}">
+      </MenuItem>
+    </Menu>
+  </DataTemplate>
 </ResourceDictionary>
