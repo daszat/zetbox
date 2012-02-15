@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables
         public new delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry,
-            Action<DataObjectViewModel> callback,
+            Action<IEnumerable<DataObjectViewModel>> callback,
             IList<CommandViewModel> additionalActions);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Kistl.Client.Presentables
             IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry,
-            Action<DataObjectViewModel> callback,
+            Action<IEnumerable<DataObjectViewModel>> callback,
             IList<CommandViewModel> additionalActions)
             : base(appCtx, dataCtx, parent)
         {
@@ -61,13 +61,12 @@ namespace Kistl.Client.Presentables
 
             // Same like choose
             var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
-            Choose(mdl);
+            Choose(new[] { mdl });
         }
 
         void ListViewModel_ItemsDefaultAction(InstanceListViewModel sender, IEnumerable<DataObjectViewModel> objects)
         {
-            var obj = objects.FirstOrDefault();
-            if (obj != null) Choose(obj);
+            if (objects != null && objects.Count() > 0) Choose(objects);
         }
 
         public InstanceListViewModel ListViewModel { get; private set; }
@@ -93,16 +92,16 @@ namespace Kistl.Client.Presentables
                         DataContext,
                         this,
                         DataObjectSelectionTaskViewModelResources.Choose,
-                        DataObjectSelectionTaskViewModelResources.Choose_Tooltip, 
-                        () => Choose(SelectedItem),
-                        () => SelectedItem != null, 
+                        DataObjectSelectionTaskViewModelResources.Choose_Tooltip,
+                        () => Choose(SelectedItems),
+                        () => SelectedItems != null && SelectedItems.Count() > 0,
                         null);
                 }
                 return _ChooseCommand;
             }
         }
 
-        public void Choose(DataObjectViewModel obj)
+        public void Choose(IEnumerable<DataObjectViewModel> obj)
         {
             _callback(obj);
             Show = false;
@@ -121,7 +120,7 @@ namespace Kistl.Client.Presentables
                         DataObjectSelectionTaskViewModelResources.Cancel,
                         DataObjectSelectionTaskViewModelResources.Cancel_Tooltip,
                         Cancel,
-                        null, 
+                        null,
                         null);
                 }
                 return _CancelCommand;
@@ -139,17 +138,17 @@ namespace Kistl.Client.Presentables
             ListViewModel.ReloadInstances();
         }
 
-        public DataObjectViewModel SelectedItem
+        public IEnumerable<DataObjectViewModel> SelectedItems
         {
             get
             {
-                return ListViewModel.SelectedItems.FirstOrDefault();
+                return ListViewModel.SelectedItems;
             }
         }
 
         #endregion
 
-        private Action<DataObjectViewModel> _callback;
+        private Action<IEnumerable<DataObjectViewModel>> _callback;
         private ReadOnlyCollection<CommandViewModel> _additionalActions;
 
         public override string Name

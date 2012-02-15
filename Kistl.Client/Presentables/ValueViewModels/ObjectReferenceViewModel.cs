@@ -245,18 +245,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         DataContext, this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => children.AsQueryable(),
-                        new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                        (chosen) =>
                         {
                             if (chosen != null)
                             {
-                                var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
+                                var targetType = ((ObjectClass)chosen.First().Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
                                 var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
 
                                 Value = model;
                                 ViewModelFactory.ShowModel(model, true);
                             }
-                        }), null);
+                        }, null);
                 lstMdl.ListViewModel.ShowCommands = false;
 
                 ViewModelFactory.ShowDialog(lstMdl);
@@ -295,13 +295,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 this,
                 ifType.GetObjectClass(FrozenContext),
                 null,
-                new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                (chosen) =>
                 {
                     if (chosen != null)
                     {
-                        Value = chosen;
+                        Value = chosen.First();
                     }
-                }),
+                },
                 null);
             selectionTask.ListViewModel.AllowDelete = false;
             selectionTask.ListViewModel.ShowOpenCommand = false;

@@ -94,13 +94,13 @@ namespace Kistl.Client.Presentables.KistlBase
                 Parent,
                 typeof(TypeRef).GetObjectClass(FrozenContext),
                 () => DataContext.GetQuery<Kistl.App.Base.TypeRef>(),
-                new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                (chosen) =>
                 {
                     if (chosen != null)
                     {
-                        this.ParentType.Value = chosen;
+                        this.ParentType.Value = chosen.FirstOrDefault();
                     }
-                }),
+                },
                 new List<CommandViewModel>() { regenerateCmd }
             );
             //var filter = selectionTask.ListViewModel.Filter.Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));

@@ -99,13 +99,13 @@ namespace Kistl.Client.Presentables.KistlBase
                     ViewModelFactory.GetWorkspace(DataContext),
                     typeof(Relation).GetObjectClass(FrozenContext),
                     () => qry,
-                    new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                    (chosen) =>
                     {
                         if (chosen != null)
                         {
-                            AddItem(chosen);
+                            AddItem(chosen.First());
                         }
-                    }),
+                    },
                     null);
             selTaskVMdl.ListViewModel.ShowCommands = false;
             selTaskVMdl.ListViewModel.EnableAutoFilter = false;
@@ -120,14 +120,14 @@ namespace Kistl.Client.Presentables.KistlBase
                     this,
                     typeof(ObjectClass).GetObjectClass(FrozenContext),
                     () => DataContext.GetQuery<ObjectClass>(),
-                    new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                    (chosen) =>
                     {
                         if (chosen != null)
                         {
-                            StartingObjectClass = chosen;
+                            StartingObjectClass = chosen.First();
                             ContinueAddRelation();
                         }
-                    }),
+                    },
                     null);
             lstMdl.ListViewModel.ShowCommands = false;
             ViewModelFactory.ShowDialog(lstMdl);

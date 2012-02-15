@@ -193,13 +193,13 @@ namespace Kistl.Client.Presentables.KistlBase
                         DataContext, this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => children.AsQueryable(),
-                        new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                        (chosen) =>
                         {
                             if (chosen != null)
                             {
-                                CreateItem((ObjectClass)chosen.Object);
+                                CreateItem((ObjectClass)chosen.First().Object);
                             }
-                        }), null);
+                        }, null);
                 lstMdl.ListViewModel.ShowCommands = false;
 
                 ViewModelFactory.ShowModel(lstMdl, true);
