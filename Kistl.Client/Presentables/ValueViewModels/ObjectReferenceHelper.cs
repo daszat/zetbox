@@ -15,9 +15,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var ctx = obj.Context;
             navigator
                 .Methods
-                .SelectMany(m => (String.IsNullOrEmpty(m.CategoryTags) ? string.Empty : m.CategoryTags)
+                .SelectMany(m => (String.IsNullOrEmpty(m.CategoryTags) ? "Summary" : m.CategoryTags)
                                         .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                                        .Select(s => new { Category = s, Method = m }))
+                                        .Select(s => new { Category = s == "Summary" ? string.Empty : s, Method = m })) // make summary empty -> will be first, then groups
                 .GroupBy(x => x.Category, x => x.Method)
                 .OrderBy(group => group.Key)
                 .ForEach(group =>
@@ -25,7 +25,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     var name = group.Key;
                     if (string.IsNullOrEmpty(name))
                     {
-                        foreach (var m in group)
+                        foreach (var m in group.OrderBy(m => m.Name))
                         {
                             cmds.Add(vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m).ExecuteCommand);
                         }
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                                 parent,
                                 name,
                                 "",
-                                group.Select(m => vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m).ExecuteCommand).ToArray());
+                                group.OrderBy(m => m.Name).Select(m => vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m).ExecuteCommand).ToArray());
                         cmds.Add(container);
                     }
                 });
