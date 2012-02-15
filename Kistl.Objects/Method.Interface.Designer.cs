@@ -91,6 +91,12 @@ namespace Kistl.App.Base
         IList<Kistl.App.Base.BaseParameter> Parameter { get; }
 
         /// <summary>
+        /// This method is show by these properties
+        /// </summary>
+
+        ICollection<Kistl.App.Base.ObjectReferenceProperty> ShowByProperties { get; }
+
+        /// <summary>
         /// 
         /// </summary>
         string GetLabel();

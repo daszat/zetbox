@@ -1090,6 +1090,31 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnParameter_IsValid;
 
         /// <summary>
+        /// This method is show by these properties
+        /// </summary>
+        // collection entry list property
+   		// Kistl.Generator.Templates.Properties.CollectionEntryListProperty
+		public ICollection<Kistl.App.Base.ObjectReferenceProperty> ShowByProperties
+		{
+			get
+			{
+				if (_ShowByProperties == null)
+				{
+					Context.FetchRelation<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.B, this);
+					_ShowByProperties 
+						= new ObservableASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
+							this, 
+							new RelationshipFilterBSideCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+				}
+				return (ICollection<Kistl.App.Base.ObjectReferenceProperty>)_ShowByProperties;
+			}
+		}
+
+		private ObservableASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _ShowByProperties;
+
+        public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnShowByProperties_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
@@ -1505,6 +1530,15 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
                         obj => obj.Parameter,
                         null, // lists are read-only properties
                         obj => OnParameter_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<Method, ICollection<Kistl.App.Base.ObjectReferenceProperty>>(
+                        lazyCtx,
+                        new Guid("f062792d-757f-4c39-bdb1-1cc81d063595"),
+                        "ShowByProperties",
+                        null,
+                        obj => obj.ShowByProperties,
+                        null, // lists are read-only properties
+                        obj => OnShowByProperties_IsValid), 
                     // position columns
                 };
             }

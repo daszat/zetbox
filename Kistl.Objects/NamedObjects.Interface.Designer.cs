@@ -1126,6 +1126,10 @@ namespace Kistl {
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("8dace0a9-6db1-458d-b054-ace4a3d906c2"); }
                                 }
+                                public static TypedGuid<global::Kistl.App.Base.Property> ShowByProperties
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("f062792d-757f-4c39-bdb1-1cc81d063595"); }
+                                }
                             }
                             public static class Module_Properties
                             {
@@ -1252,6 +1256,10 @@ namespace Kistl {
                                 public static TypedGuid<global::Kistl.App.Base.Property> IsInlineEditable
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("f7183d87-8cc8-4703-b148-02db9f5bf9bc"); }
+                                }
+                                public static TypedGuid<global::Kistl.App.Base.Property> Methods
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("6d8fd10e-90d8-46e4-80ab-198b94537e2f"); }
                                 }
                                 public static TypedGuid<global::Kistl.App.Base.Property> RelationEnd
                                 {

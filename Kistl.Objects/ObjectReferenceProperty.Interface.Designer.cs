@@ -30,6 +30,12 @@ namespace Kistl.App.Base
         }
 
         /// <summary>
+        /// This property will show these methods
+        /// </summary>
+
+        ICollection<Kistl.App.Base.Method> Methods { get; }
+
+        /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
         Kistl.App.Base.RelationEnd RelationEnd {

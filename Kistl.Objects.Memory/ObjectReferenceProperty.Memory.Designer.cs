@@ -141,6 +141,31 @@ namespace Kistl.App.Base
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnIsInlineEditable_IsValid;
 
         /// <summary>
+        /// This property will show these methods
+        /// </summary>
+        // collection entry list property
+   		// Kistl.Generator.Templates.Properties.CollectionEntryListProperty
+		public ICollection<Kistl.App.Base.Method> Methods
+		{
+			get
+			{
+				if (_Methods == null)
+				{
+					Context.FetchRelation<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
+					_Methods 
+						= new ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
+							this, 
+							new RelationshipFilterASideCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+				}
+				return (ICollection<Kistl.App.Base.Method>)_Methods;
+			}
+		}
+
+		private ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _Methods;
+
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
+
+        /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
         // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
@@ -716,6 +741,15 @@ namespace Kistl.App.Base
                         obj => obj.IsInlineEditable,
                         (obj, val) => obj.IsInlineEditable = val,
 						obj => OnIsInlineEditable_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<ObjectReferenceProperty, ICollection<Kistl.App.Base.Method>>(
+                        lazyCtx,
+                        new Guid("6d8fd10e-90d8-46e4-80ab-198b94537e2f"),
+                        "Methods",
+                        null,
+                        obj => obj.Methods,
+                        null, // lists are read-only properties
+                        obj => OnMethods_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<ObjectReferenceProperty, Kistl.App.Base.RelationEnd>(
                         lazyCtx,

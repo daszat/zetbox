@@ -1470,6 +1470,45 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_ObjRefProp_shows_Methods
+    A: ZeroOrMore ObjectReferenceProperty as ObjRefProp
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="ObjectReferenceProperty_shows_Method_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty_shows_Method_RelationEntry)">
+        <MappingFragment StoreEntitySet="ObjectReferenceProperty_shows_Method_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_ObjRefProp_shows_Methods_A"
+                           TypeName="Model.FK_ObjRefProp_shows_Methods_A"
+                           StoreEntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" >
+      <EndProperty Name="ObjRefProp">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjRefProp"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ObjRefProp" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_ObjRefProp_shows_Methods_B"
+                           TypeName="Model.FK_ObjRefProp_shows_Methods_B"
+                           StoreEntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" >
+      <EndProperty Name="Methods">
+        <ScalarProperty Name="ID" ColumnName="fk_Methods"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Methods" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_Presentable_displayedBy_SecondaryControlKinds
     A: ZeroOrMore ViewModelDescriptor as Presentable
     B: ZeroOrMore ControlKind as SecondaryControlKinds

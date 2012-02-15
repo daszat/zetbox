@@ -184,6 +184,15 @@
                   column="`IsInlineEditable`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=ObjectReferenceProperty_shows_Method_RelationEntry -->
+        <!-- relEnd=ObjRefProp otherEnd=Methods -->
+        <set name="Methods" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_ObjRefProp`" />
+            <one-to-many class="Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
         <many-to-one name="RelationEnd" column="`fk_RelationEnd`" class="Kistl.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Kistl.Objects.NHibernateImpl" unique="true" />
 
 

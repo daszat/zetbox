@@ -150,6 +150,56 @@ namespace Kistl.App.Base
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnIsInlineEditable_IsValid;
 
         /// <summary>
+        /// This property will show these methods
+        /// </summary>
+    /*
+    Relation: FK_ObjRefProp_shows_Methods
+    A: ZeroOrMore ObjectReferenceProperty as ObjRefProp
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: Separate
+    */
+        // collection reference property
+        // Kistl.DalProvider.Ef.Generator.Templates.Properties.CollectionEntryListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.Method> Methods
+        {
+            get
+            {
+                if (_Methods == null)
+                {
+                    _Methods = new BSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>>(
+                            this,
+                            MethodsImpl);
+                }
+                return _Methods;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjRefProp_shows_Methods_A", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> MethodsImpl
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
+                        "Model.FK_ObjRefProp_shows_Methods_A",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                c.ForEach(i => i.AttachToContext(Context));
+                return c;
+            }
+        }
+        private BSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _Methods;
+
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
+
+        /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
     /*
@@ -716,6 +766,15 @@ namespace Kistl.App.Base
                         obj => obj.IsInlineEditable,
                         (obj, val) => obj.IsInlineEditable = val,
 						obj => OnIsInlineEditable_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorEfImpl<ObjectReferenceProperty, ICollection<Kistl.App.Base.Method>>(
+                        lazyCtx,
+                        new Guid("6d8fd10e-90d8-46e4-80ab-198b94537e2f"),
+                        "Methods",
+                        null,
+                        obj => obj.Methods,
+                        null, // lists are read-only properties
+                        obj => OnMethods_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ObjectReferenceProperty, Kistl.App.Base.RelationEnd>(
                         lazyCtx,

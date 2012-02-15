@@ -607,6 +607,22 @@
     </AssociationSet>
     
     <!-- 
+    Relation: FK_ObjRefProp_shows_Methods
+    A: ZeroOrMore ObjectReferenceProperty as ObjRefProp
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="ObjectReferenceProperty_shows_Method_RelationEntry" EntityType="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Schema="base" Table="ObjRefProp_shows_Methods" />
+    <AssociationSet Name="FK_ObjRefProp_shows_Methods_A" Association="Model.Store.FK_ObjRefProp_shows_Methods_A" >
+      <End Role="ObjRefProp" EntitySet="ObjectReferenceProperty" />
+      <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjRefProp_shows_Methods_B" Association="Model.Store.FK_ObjRefProp_shows_Methods_B" >
+      <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" />
+      <End Role="Methods" EntitySet="Method" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_Presentable_displayedBy_SecondaryControlKinds
     A: ZeroOrMore ViewModelDescriptor as Presentable
     B: ZeroOrMore ControlKind as SecondaryControlKinds
@@ -3293,6 +3309,45 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_Groups" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="ObjectReferenceProperty_shows_Method_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_ObjRefProp" Type="int" Nullable="true" />
+    <Property Name="fk_Methods" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_ObjRefProp_shows_Methods_A">
+    <End Role="ObjRefProp" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjRefProp">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_ObjRefProp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_ObjRefProp_shows_Methods_B">
+    <End Role="Methods" Type="Model.Store.Method" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Methods">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Methods" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -150,6 +150,37 @@ namespace Kistl.App.Base
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnIsInlineEditable_IsValid;
 
         /// <summary>
+        /// This property will show these methods
+        /// </summary>
+        // collection entry list property
+   		// Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CollectionEntryListProperty
+		public ICollection<Kistl.App.Base.Method> Methods
+		{
+			get
+			{
+				if (_Methods == null)
+				{
+					_Methods 
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+							this, 
+							new ProjectedCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+                                this.Proxy.Methods,
+                                p => (Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.B.ShowByProperties);
+                    if (Methods_was_eagerLoaded) { Methods_was_eagerLoaded = false; }
+				}
+				return (ICollection<Kistl.App.Base.Method>)_Methods;
+			}
+		}
+
+		private NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _Methods;
+		// ignored, but required for Serialization
+        private bool Methods_was_eagerLoaded = false;
+
+        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
+
+        /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
@@ -723,6 +754,15 @@ namespace Kistl.App.Base
                         obj => obj.IsInlineEditable,
                         (obj, val) => obj.IsInlineEditable = val,
 						obj => OnIsInlineEditable_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorNHibernateImpl<ObjectReferenceProperty, ICollection<Kistl.App.Base.Method>>(
+                        lazyCtx,
+                        new Guid("6d8fd10e-90d8-46e4-80ab-198b94537e2f"),
+                        "Methods",
+                        null,
+                        obj => obj.Methods,
+                        null, // lists are read-only properties
+                        obj => OnMethods_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectReferenceProperty, Kistl.App.Base.RelationEnd>(
                         lazyCtx,
@@ -833,6 +873,7 @@ namespace Kistl.App.Base
         {
             public ObjectReferencePropertyProxy()
             {
+                Methods = new Collection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy>();
             }
 
             public override Type ZBoxWrapper { get { return typeof(ObjectReferencePropertyNHibernateImpl); } }
@@ -842,6 +883,8 @@ namespace Kistl.App.Base
             public virtual bool EagerLoading { get; set; }
 
             public virtual bool? IsInlineEditable { get; set; }
+
+            public virtual ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy> Methods { get; set; }
 
             public virtual Kistl.App.Base.RelationEndNHibernateImpl.RelationEndProxy RelationEnd { get; set; }
 

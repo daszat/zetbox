@@ -1769,6 +1769,24 @@ using Kistl.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_ObjRefProp_shows_Methods
+    A: ZeroOrMore ObjectReferenceProperty as ObjRefProp
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_ObjRefProp_shows_Methods_A",
+    "ObjRefProp", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferencePropertyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_ObjRefProp_shows_Methods_B",
+    "Methods", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
+    )]
+
+	/*
     Relation: FK_OneEnd_hasMany_NEnds
     A: ZeroOrOne OrderedOneEnd as OneEnd
     B: ZeroOrMore OrderedNEnd as NEnds

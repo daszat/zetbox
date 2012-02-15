@@ -1100,6 +1100,37 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnParameter_IsValid;
 
         /// <summary>
+        /// This method is show by these properties
+        /// </summary>
+        // collection entry list property
+   		// Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CollectionEntryListProperty
+		public ICollection<Kistl.App.Base.ObjectReferenceProperty> ShowByProperties
+		{
+			get
+			{
+				if (_ShowByProperties == null)
+				{
+					_ShowByProperties 
+						= new NHibernateASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+							this, 
+							new ProjectedCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+                                this.Proxy.ShowByProperties,
+                                p => (Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.A.Methods);
+                    if (ShowByProperties_was_eagerLoaded) { ShowByProperties_was_eagerLoaded = false; }
+				}
+				return (ICollection<Kistl.App.Base.ObjectReferenceProperty>)_ShowByProperties;
+			}
+		}
+
+		private NHibernateASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _ShowByProperties;
+		// ignored, but required for Serialization
+        private bool ShowByProperties_was_eagerLoaded = false;
+
+        public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnShowByProperties_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
@@ -1516,6 +1547,15 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
                         obj => obj.Parameter,
                         null, // lists are read-only properties
                         obj => OnParameter_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorNHibernateImpl<Method, ICollection<Kistl.App.Base.ObjectReferenceProperty>>(
+                        lazyCtx,
+                        new Guid("f062792d-757f-4c39-bdb1-1cc81d063595"),
+                        "ShowByProperties",
+                        null,
+                        obj => obj.ShowByProperties,
+                        null, // lists are read-only properties
+                        obj => OnShowByProperties_IsValid), 
                     // position columns
                 };
             }
@@ -1651,6 +1691,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             public MethodProxy()
             {
                 Parameter = new Collection<Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy>();
+                ShowByProperties = new Collection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1687,6 +1728,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             public virtual Kistl.App.Base.DataTypeNHibernateImpl.DataTypeProxy ObjectClass { get; set; }
 
             public virtual ICollection<Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy> Parameter { get; set; }
+
+            public virtual ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy> ShowByProperties { get; set; }
 
         }
 

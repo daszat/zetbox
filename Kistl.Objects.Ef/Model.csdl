@@ -148,6 +148,15 @@
       <End Role="Groups" EntitySet="Group" />
       <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="ObjectReferenceProperty_shows_Method_RelationEntry" EntityType="Model.ObjectReferenceProperty_shows_Method_RelationEntry" />
+    <AssociationSet Name="FK_ObjRefProp_shows_Methods_A" Association="Model.FK_ObjRefProp_shows_Methods_A" >
+      <End Role="ObjRefProp" EntitySet="Property" />
+      <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjRefProp_shows_Methods_B" Association="Model.FK_ObjRefProp_shows_Methods_B" >
+      <End Role="Methods" EntitySet="Method" />
+      <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" />
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_A" Association="Model.FK_Presentable_displayedBy_SecondaryControlKinds_A" >
       <End Role="Presentable" EntitySet="ViewModelDescriptor" />
@@ -1669,6 +1678,10 @@
                         Relationship="Model.FK_Method_has_Parameter"
                         FromRole="Method"
                         ToRole="Parameter" />
+    <NavigationProperty Name="ShowByPropertiesImpl"
+                        Relationship="Model.FK_ObjRefProp_shows_Methods_B"
+                        FromRole="Methods"
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="MigrationLog">
     <Key>
@@ -2806,6 +2819,10 @@
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
     <Property Name="EagerLoading" Type="Boolean" Nullable="false"  />
     <Property Name="IsInlineEditable" Type="Boolean" Nullable="true"  />
+    <NavigationProperty Name="MethodsImpl"
+                        Relationship="Model.FK_ObjRefProp_shows_Methods_A"
+                        FromRole="ObjRefProp"
+                        ToRole="CollectionEntry" />
     <NavigationProperty Name="RelationEndImpl"
                         Relationship="Model.FK_RelationEnd_has_Navigator"
                         FromRole="Navigator"
@@ -3156,6 +3173,49 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.NavigationEntry_accessed_by_Group_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_ObjRefProp_shows_Methods
+    A: ZeroOrMore ObjectReferenceProperty as ObjRefProp
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="ObjectReferenceProperty_shows_Method_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="AImpl"
+                        Relationship="Model.FK_ObjRefProp_shows_Methods_A"
+                        FromRole="CollectionEntry"
+                        ToRole="ObjRefProp" />
+
+    <!-- B -->
+    <NavigationProperty Name="BImpl"
+                        Relationship="Model.FK_ObjRefProp_shows_Methods_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Methods" />
+  </EntityType>
+  <Association Name="FK_ObjRefProp_shows_Methods_A" >
+    <End Role="ObjRefProp"
+         Type="Model.ObjectReferenceProperty" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.ObjectReferenceProperty_shows_Method_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ObjRefProp_shows_Methods_B" >
+    <End Role="Methods"
+         Type="Model.Method" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.ObjectReferenceProperty_shows_Method_RelationEntry"
          Multiplicity="*" />
   </Association>
   
