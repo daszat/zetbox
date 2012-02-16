@@ -53,6 +53,45 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
         }
+        public void CheckBaseSchema(bool withRepair)
+        {
+            using (Log.DebugTraceMethodCall("CheckBaseSchema"))
+            {
+                this.repair = withRepair;
+                WriteReportHeader(withRepair ? "Check Base-Schema Report with repair" : "Check Base-Schema Report");
+
+                if (schema.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
+                {
+                    Log.Error("Current Schema is empty, aborting");
+                }
+                else
+                {
+                    Log.Info("Checking Tables & Columns");
+                    Log.Debug("-------------------------");
+
+                    // Checking Tables
+                    foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.Module.Name == "KistlBase" || o.Module.Name == "GUI").OrderBy(o => o.Name))
+                    {
+                        Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+
+                        if (db.CheckTableExists(db.GetTableName(objClass.Module.SchemaName, objClass.TableName)))
+                        {
+                            Log.DebugFormat("  Table: {0}", objClass.TableName);
+                            CheckColumns(objClass, objClass.Properties, String.Empty);
+                        }
+                        else
+                        {
+                            Log.WarnFormat("Table '{0}' is missing", objClass.TableName);
+                            if (repair)
+                            {
+                                Log.Info("Fixing");
+                                Case.DoNewObjectClass(objClass);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         private void CheckUpdateRightsTrigger()
         {

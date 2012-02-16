@@ -115,6 +115,17 @@ namespace Kistl.Server
             }
         }
 
+        public void CheckBaseSchema(bool withRepair)
+        {
+            using (Log.InfoTraceMethodCallFormat("CheckSchemaFromCurrentMetaData", "withRepair=[{0}]", withRepair))
+            using (var subContainer = container.BeginLifetimeScope())
+            {
+                var ctx = subContainer.Resolve<IFrozenContext>();
+                var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
+                mgr.CheckBaseSchema(withRepair);
+            }
+        }
+
         public void CheckSchemaFromCurrentMetaData(bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("CheckSchemaFromCurrentMetaData", "withRepair=[{0}]", withRepair))

@@ -131,6 +131,20 @@ namespace Kistl.API.Server
                 });
 
             builder
+                .RegisterCmdLineAction("checkbaseschema", "checks the base schema against the schema in frozen context",
+                scope =>
+                {
+                    scope.Resolve<IServer>().CheckBaseSchema(false);
+                });
+
+            builder
+                .RegisterCmdLineAction("repairbaseschema", "checks the base schema against the schema in frozen context and tries to correct deviations",
+                scope =>
+                {
+                    scope.Resolve<IServer>().CheckBaseSchema(true);
+                });
+
+            builder
                .RegisterCmdLineAction("updatedeployedschema", "updates the schema to the current metadata",
                 scope =>
                 {
