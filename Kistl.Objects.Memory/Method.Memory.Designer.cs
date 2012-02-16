@@ -549,7 +549,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
         // fkBackingName=_fk_Icon; fkGuidBackingName=_fk_guid_Icon;
-        // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does call events
@@ -1100,17 +1100,17 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
 			{
 				if (_ShowByProperties == null)
 				{
-					Context.FetchRelation<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.B, this);
+					Context.FetchRelation<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.B, this);
 					_ShowByProperties 
-						= new ObservableASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
+						= new ObservableASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterBSideCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterBSideCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.ObjectReferenceProperty>)_ShowByProperties;
 			}
 		}
 
-		private ObservableASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _ShowByProperties;
+		private ObservableASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _ShowByProperties;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnShowByProperties_IsValid;
 
@@ -1708,7 +1708,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(Icon != null ? Icon.ID : (int?)null, xml, "Icon", "Kistl.App.Base");
+            XmlStreamer.ToStream(Icon != null ? Icon.ID : (int?)null, xml, "Icon", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Label, xml, "Label", "Kistl.App.Base");
@@ -1739,7 +1739,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.FromStream(ref this._fk_Icon, xml, "Icon", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Icon, xml, "Icon", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Label, xml, "Label", "Kistl.App.Base");
@@ -1765,7 +1765,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Icon != null ? Icon.ExportGuid : (Guid?)null, xml, "Icon", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Icon != null ? Icon.ExportGuid : (Guid?)null, xml, "Icon", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Label, xml, "Label", "Kistl.App.Base");
@@ -1789,7 +1789,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_Icon, xml, "Icon", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Icon, xml, "Icon", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Label, xml, "Label", "Kistl.App.Base");

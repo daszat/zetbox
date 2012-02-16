@@ -813,7 +813,6 @@ namespace Kistl.App.Base
 
 namespace at.dasz.DocumentManagement
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryMemoryImpl")]
     public class Document_has_Blob_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentMemoryImpl, Kistl.App.Base.Blob, Kistl.App.Base.BlobMemoryImpl>, Document_has_Blob_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
@@ -2708,7 +2707,6 @@ namespace Kistl.App.Test
 
 namespace Kistl.App.GUI
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl")]
     public class NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntryMemoryImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupMemoryImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
@@ -3106,7 +3104,7 @@ namespace Kistl.App.GUI
     // END Kistl.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Kistl.App.GUI
 {
     // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl")]
@@ -3215,7 +3213,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
@@ -3285,7 +3283,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
@@ -3386,8 +3384,8 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -3397,8 +3395,8 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -3412,8 +3410,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -3421,8 +3419,8 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
         #endregion
@@ -4457,7 +4455,6 @@ namespace Kistl.App.Base
 
 namespace ZBox.App.SchemaMigration
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryMemoryImpl")]
     public class SourceColumn_created_Property_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnMemoryImpl, Kistl.App.Base.Property, Kistl.App.Base.PropertyMemoryImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, SourceColumn_created_Property_RelationEntry
@@ -6088,7 +6085,6 @@ namespace Kistl.App.Base
 
 namespace Kistl.App.GUI
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl")]
     public class ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ViewDescriptorMemoryImpl, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRefMemoryImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry

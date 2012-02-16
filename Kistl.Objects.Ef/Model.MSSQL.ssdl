@@ -613,7 +613,7 @@
     B: ZeroOrMore Method as Methods
     Preferred Storage: Separate
     -->
-    <EntitySet Name="ObjectReferenceProperty_shows_Method_RelationEntry" EntityType="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Schema="base" Table="ObjRefProp_shows_Methods" />
+    <EntitySet Name="ObjectReferenceProperty_shows_Method_RelationEntry" EntityType="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Schema="gui" Table="ObjRefProp_shows_Methods" />
     <AssociationSet Name="FK_ObjRefProp_shows_Methods_A" Association="Model.Store.FK_ObjRefProp_shows_Methods_A" >
       <End Role="ObjRefProp" EntitySet="ObjectReferenceProperty" />
       <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" />

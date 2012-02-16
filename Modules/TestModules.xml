@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-02-15T15:38:54Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-02-16T12:42:00Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.664236Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -3824,62 +3824,62 @@
     <KistlBase:ConstrainedProperty>190b4492-c1cb-40a2-8941-84b8ff3ac141</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2010-03-16T11:19:10Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="4d4ddea4-c9aa-4377-a0b2-bba2d4ccf200">
-    <KistlBase:A>bf48b883-8821-4c4e-8509-590a72604f9e</KistlBase:A>
-    <KistlBase:B>37951886-6ea4-4adc-a59f-b78a3d981180</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="95004276-3a3b-433f-b50f-59773927cf81">
-    <KistlBase:A>bf48b883-8821-4c4e-8509-590a72604f9e</KistlBase:A>
-    <KistlBase:B>63be30c4-22cf-4323-8d2a-21f7a8c3a440</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="9b60369f-6d84-4e65-b89b-9044a0f7a651">
-    <KistlBase:A>bf48b883-8821-4c4e-8509-590a72604f9e</KistlBase:A>
-    <KistlBase:B>7901a41d-6ee0-4283-86fe-f19982464f73</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="e4724d4f-35c5-404e-a9c1-b0a5d5bd6f23">
-    <KistlBase:A>bf48b883-8821-4c4e-8509-590a72604f9e</KistlBase:A>
-    <KistlBase:B>792be50b-66d7-4299-9c13-29609766f098</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="6d74366f-8ff5-4081-8465-149807376307">
-    <KistlBase:A>bf48b883-8821-4c4e-8509-590a72604f9e</KistlBase:A>
-    <KistlBase:B>838ddba3-52d5-444b-b29d-4b8105b1be34</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="8a74200b-508e-47e5-bc6c-38ea0936418e">
-    <KistlBase:A>bf48b883-8821-4c4e-8509-590a72604f9e</KistlBase:A>
-    <KistlBase:B>bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="74987442-4431-4b39-9be3-fdd04f13d066">
-    <KistlBase:A>bf48b883-8821-4c4e-8509-590a72604f9e</KistlBase:A>
-    <KistlBase:B>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="114087ad-552b-40b4-b011-d08802ac1b1f">
-    <KistlBase:A>02a7d534-9325-48e5-bbc2-b61420afd940</KistlBase:A>
-    <KistlBase:B>37951886-6ea4-4adc-a59f-b78a3d981180</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="8b4287f4-1562-4fd8-98b5-727222ad5e23">
-    <KistlBase:A>02a7d534-9325-48e5-bbc2-b61420afd940</KistlBase:A>
-    <KistlBase:B>63be30c4-22cf-4323-8d2a-21f7a8c3a440</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="b8ab9084-ffa3-4d28-864d-ff6141c7c315">
-    <KistlBase:A>02a7d534-9325-48e5-bbc2-b61420afd940</KistlBase:A>
-    <KistlBase:B>7901a41d-6ee0-4283-86fe-f19982464f73</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="630cc58e-c96d-4cd7-a3f0-436b11752640">
-    <KistlBase:A>02a7d534-9325-48e5-bbc2-b61420afd940</KistlBase:A>
-    <KistlBase:B>792be50b-66d7-4299-9c13-29609766f098</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="ea9cc6be-c623-4e1f-a058-87db714e1217">
-    <KistlBase:A>02a7d534-9325-48e5-bbc2-b61420afd940</KistlBase:A>
-    <KistlBase:B>838ddba3-52d5-444b-b29d-4b8105b1be34</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="20af439d-45dc-4f74-934c-819daa3e4eba">
-    <KistlBase:A>02a7d534-9325-48e5-bbc2-b61420afd940</KistlBase:A>
-    <KistlBase:B>bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="8df2697c-5e2a-426b-970e-a55a5576f972">
-    <KistlBase:A>02a7d534-9325-48e5-bbc2-b61420afd940</KistlBase:A>
-    <KistlBase:B>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</KistlBase:B>
-  </KistlBase:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="ed558acc-b436-4a47-af2b-27f58100a4c6">
+    <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
+    <GUI:B>37951886-6ea4-4adc-a59f-b78a3d981180</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="714f31f3-c4c9-4e8d-b224-1b8eeaab8af6">
+    <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
+    <GUI:B>63be30c4-22cf-4323-8d2a-21f7a8c3a440</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="f8e00dec-4eee-46e3-af25-94aee1e5b950">
+    <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
+    <GUI:B>7901a41d-6ee0-4283-86fe-f19982464f73</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="b7cf0618-ddf6-481a-9d5f-5f22b8fd089c">
+    <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
+    <GUI:B>792be50b-66d7-4299-9c13-29609766f098</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="ae254dd5-d7c4-4f72-94de-2c76e420176d">
+    <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
+    <GUI:B>838ddba3-52d5-444b-b29d-4b8105b1be34</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="8ac65c5c-4053-477a-a9c6-4200b7808b2c">
+    <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
+    <GUI:B>bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="9490ce2c-2fd2-4149-a1d0-d7a361f373f4">
+    <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
+    <GUI:B>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="0cabe566-12ad-4776-9a9c-0b29c31598fc">
+    <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
+    <GUI:B>37951886-6ea4-4adc-a59f-b78a3d981180</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="c561ffea-1142-462b-adfc-52fb7d6e735e">
+    <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
+    <GUI:B>63be30c4-22cf-4323-8d2a-21f7a8c3a440</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="2952ca97-4210-4c26-9af5-d6062c2683e3">
+    <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
+    <GUI:B>7901a41d-6ee0-4283-86fe-f19982464f73</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="f6273fd6-a7aa-4dfe-8e14-5832495f86ca">
+    <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
+    <GUI:B>792be50b-66d7-4299-9c13-29609766f098</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="62590ca5-ee2a-4273-ae5e-f6539f04edc8">
+    <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
+    <GUI:B>838ddba3-52d5-444b-b29d-4b8105b1be34</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="4d7fee7a-5c7b-48bd-a1f2-f458a912b1a3">
+    <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
+    <GUI:B>bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="d2bca110-3244-4e01-9a65-19a86cf3a52d">
+    <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
+    <GUI:B>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
   <KistlBase:Sequence ExportGuid="57a01b4f-940d-4089-b239-fa5a46dc7d00">
     <KistlBase:ChangedOn>2011-08-05T10:31:12.739265Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-25T11:51:32Z</KistlBase:CreatedOn>

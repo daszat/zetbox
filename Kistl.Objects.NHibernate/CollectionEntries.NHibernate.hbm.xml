@@ -149,14 +149,14 @@
                      column="`fk_Groups`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
-           proxy="Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
+    <class name="Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
+           proxy="Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
            table="`ObjRefProp_shows_Methods`"
-           schema="`base`" >
+           schema="`gui`" >
 
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
-                <param name="schema">`base`</param>
+                <param name="schema">`gui`</param>
                 <param name="sequence">`ObjRefProp_shows_Methods_ID_seq`</param>
             </generator>
         </id>

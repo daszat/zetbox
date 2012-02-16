@@ -571,7 +571,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
         // fkBackingName=this.Proxy.Icon; fkGuidBackingName=_fk_guid_Icon;
-        // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does call events
@@ -1111,20 +1111,20 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
 				if (_ShowByProperties == null)
 				{
 					_ShowByProperties 
-						= new NHibernateASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+						= new NHibernateASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
                                 this.Proxy.ShowByProperties,
-                                p => (Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.A.Methods);
+                                p => (Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.A.Methods);
                     if (ShowByProperties_was_eagerLoaded) { ShowByProperties_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.ObjectReferenceProperty>)_ShowByProperties;
 			}
 		}
 
-		private NHibernateASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _ShowByProperties;
+		private NHibernateASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _ShowByProperties;
 		// ignored, but required for Serialization
         private bool ShowByProperties_was_eagerLoaded = false;
 
@@ -1691,7 +1691,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             public MethodProxy()
             {
                 Parameter = new Collection<Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy>();
-                ShowByProperties = new Collection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy>();
+                ShowByProperties = new Collection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1729,7 +1729,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
 
             public virtual ICollection<Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy> Parameter { get; set; }
 
-            public virtual ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy> ShowByProperties { get; set; }
+            public virtual ICollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy> ShowByProperties { get; set; }
 
         }
 
@@ -1856,7 +1856,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this.Proxy.Icon != null ? OurContext.GetIdFromProxy(this.Proxy.Icon) : (int?)null, xml, "Icon", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.Icon != null ? OurContext.GetIdFromProxy(this.Proxy.Icon) : (int?)null, xml, "Icon", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.Label, xml, "Label", "Kistl.App.Base");
@@ -1906,7 +1906,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
                 XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
                 this.Proxy.ExportGuid = tmp;
             }
-            XmlStreamer.FromStream(ref this._fk_Icon, xml, "Icon", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Icon, xml, "Icon", "Kistl.App.GUI");
             {
                 // yuck
                 bool? tmp = this.Proxy.InvokeOnServer;
@@ -1952,7 +1952,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Icon != null ? this.Proxy.Icon.ExportGuid : (Guid?)null, xml, "Icon", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Icon != null ? this.Proxy.Icon.ExportGuid : (Guid?)null, xml, "Icon", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Label, xml, "Label", "Kistl.App.Base");
@@ -2001,7 +2001,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
                 this.Proxy.ExportGuid = tmp;
                 this._isExportGuidSet = true;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_Icon, xml, "Icon", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Icon, xml, "Icon", "Kistl.App.GUI");
             {
                 // yuck
                 bool? tmp = this.Proxy.InvokeOnServer;

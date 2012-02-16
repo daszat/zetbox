@@ -1778,12 +1778,12 @@ using Kistl.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ObjRefProp_shows_Methods_A",
     "ObjRefProp", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferencePropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ObjRefProp_shows_Methods_B",
     "Methods", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
     )]
 
 	/*

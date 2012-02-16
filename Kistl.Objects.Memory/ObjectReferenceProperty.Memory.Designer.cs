@@ -151,17 +151,17 @@ namespace Kistl.App.Base
 			{
 				if (_Methods == null)
 				{
-					Context.FetchRelation<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
 					_Methods 
-						= new ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.Method>)_Methods;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _Methods;
+		private ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _Methods;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
 

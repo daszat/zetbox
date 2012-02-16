@@ -872,7 +872,6 @@ namespace Kistl.App.Base
 
 namespace at.dasz.DocumentManagement
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="Document_has_Blob_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryEfImpl")]
@@ -2899,7 +2898,6 @@ namespace Kistl.App.Test
 
 namespace Kistl.App.GUI
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="NavigationEntry_accessed_by_Group_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryEfImpl")]
@@ -3327,7 +3325,7 @@ namespace Kistl.App.GUI
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Kistl.App.GUI
 {
     // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="ObjectReferenceProperty_shows_Method_RelationEntry")]
@@ -3441,7 +3439,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -3516,7 +3514,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -3630,11 +3628,11 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyEfImpl>("Model.FK_ObjRefProp_shows_Methods_A", "ObjRefProp").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
+                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>("Model.FK_ObjRefProp_shows_Methods_B", "Methods").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
+                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.GUI");
             }
         }
 
@@ -3645,8 +3643,8 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -3660,8 +3658,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -3669,8 +3667,8 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
         #endregion
@@ -4771,7 +4769,6 @@ namespace Kistl.App.Base
 
 namespace ZBox.App.SchemaMigration
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="SourceColumn_created_Property_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryEfImpl")]
@@ -6522,7 +6519,6 @@ namespace Kistl.App.Base
 
 namespace Kistl.App.GUI
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="ViewDescriptor_supports_TypeRef_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryEfImpl")]

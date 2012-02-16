@@ -161,20 +161,20 @@ namespace Kistl.App.Base
 				if (_Methods == null)
 				{
 					_Methods 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
                                 this.Proxy.Methods,
-                                p => (Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.B.ShowByProperties);
+                                p => (Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.B.ShowByProperties);
                     if (Methods_was_eagerLoaded) { Methods_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.Method>)_Methods;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _Methods;
+		private NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _Methods;
 		// ignored, but required for Serialization
         private bool Methods_was_eagerLoaded = false;
 
@@ -873,7 +873,7 @@ namespace Kistl.App.Base
         {
             public ObjectReferencePropertyProxy()
             {
-                Methods = new Collection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy>();
+                Methods = new Collection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy>();
             }
 
             public override Type ZBoxWrapper { get { return typeof(ObjectReferencePropertyNHibernateImpl); } }
@@ -884,7 +884,7 @@ namespace Kistl.App.Base
 
             public virtual bool? IsInlineEditable { get; set; }
 
-            public virtual ICollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy> Methods { get; set; }
+            public virtual ICollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy> Methods { get; set; }
 
             public virtual Kistl.App.Base.RelationEndNHibernateImpl.RelationEndProxy RelationEnd { get; set; }
 

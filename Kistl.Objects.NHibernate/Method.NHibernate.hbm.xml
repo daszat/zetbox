@@ -81,7 +81,7 @@
         <!-- relEnd=Methods otherEnd=ObjRefProp -->
         <set name="ShowByProperties" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Methods`" />
-            <one-to-many class="Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
         </set>
 
 

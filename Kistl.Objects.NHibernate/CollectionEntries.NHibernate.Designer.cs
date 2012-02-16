@@ -870,7 +870,6 @@ namespace Kistl.App.Base
 
 namespace at.dasz.DocumentManagement
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryNHibernateImpl")]
     public class Document_has_Blob_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentNHibernateImpl, Kistl.App.Base.Blob, Kistl.App.Base.BlobNHibernateImpl>, Document_has_Blob_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
@@ -2893,7 +2892,6 @@ namespace Kistl.App.Test
 
 namespace Kistl.App.GUI
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl")]
     public class NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntryNHibernateImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
@@ -3319,7 +3317,7 @@ namespace Kistl.App.GUI
     // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Kistl.App.GUI
 {
     // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl")]
@@ -3413,7 +3411,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
@@ -3479,7 +3477,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
@@ -3579,9 +3577,9 @@ namespace Kistl.App.Base
             base.ToStream(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -3593,11 +3591,11 @@ namespace Kistl.App.Base
             {
                 // yuck
                 Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
                 this.Proxy.ExportGuid = tmp;
             }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -3611,8 +3609,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -3622,11 +3620,11 @@ namespace Kistl.App.Base
             {
                 // yuck
                 Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
                 this.Proxy.ExportGuid = tmp;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
         #endregion
@@ -4838,7 +4836,6 @@ namespace Kistl.App.Base
 
 namespace ZBox.App.SchemaMigration
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryNHibernateImpl")]
     public class SourceColumn_created_Property_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnNHibernateImpl, Kistl.App.Base.Property, Kistl.App.Base.PropertyNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, SourceColumn_created_Property_RelationEntry
@@ -6629,7 +6626,6 @@ namespace Kistl.App.Base
 
 namespace Kistl.App.GUI
 {
-	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl")]
     public class ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ViewDescriptorNHibernateImpl, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRefNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry

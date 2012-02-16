@@ -602,7 +602,7 @@ namespace Kistl.App.Base
         // object reference property
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
         // fkBackingName=_fk_Icon; fkGuidBackingName=_fk_guid_Icon;
-        // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -1221,7 +1221,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             {
                 if (_ShowByProperties == null)
                 {
-                    _ShowByProperties = new ASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>>(
+                    _ShowByProperties = new ASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>>(
                             this,
                             ShowByPropertiesImpl);
                 }
@@ -1230,12 +1230,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_ObjRefProp_shows_Methods_B", "CollectionEntry")]
-        public EntityCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> ShowByPropertiesImpl
+        public EntityCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> ShowByPropertiesImpl
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
+                    .GetRelatedCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
                         "Model.FK_ObjRefProp_shows_Methods_B",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1247,7 +1247,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
                 return c;
             }
         }
-        private ASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _ShowByProperties;
+        private ASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _ShowByProperties;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnShowByProperties_IsValid;
 
@@ -1839,7 +1839,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.IconEfImpl>("Model.FK_Method_has_Icon", "Icon").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Icon", "Kistl.App.Base");
+                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Icon", "Kistl.App.GUI");
             }
             XmlStreamer.ToStream(this._InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
@@ -1877,7 +1877,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.FromStream(ref this._fk_Icon, xml, "Icon", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Icon, xml, "Icon", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Label, xml, "Label", "Kistl.App.Base");
@@ -1903,7 +1903,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Icon != null ? Icon.ExportGuid : (Guid?)null, xml, "Icon", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Icon != null ? Icon.ExportGuid : (Guid?)null, xml, "Icon", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Label, xml, "Label", "Kistl.App.Base");
@@ -1927,7 +1927,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_Icon, xml, "Icon", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Icon, xml, "Icon", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._InvokeOnServer, xml, "InvokeOnServer", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Label, xml, "Label", "Kistl.App.Base");
