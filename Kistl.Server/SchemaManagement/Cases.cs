@@ -77,8 +77,12 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewObjectClass(ObjectClass objClass)
         {
-            Log.InfoFormat("New Table: {0}", db.GetTableName(objClass.Module.SchemaName, objClass.TableName));
-            db.CreateTable(db.GetTableName(objClass.Module.SchemaName, objClass.TableName), objClass.BaseObjectClass == null);
+            var tblName= db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            Log.InfoFormat("New Table: {0}", tblName);
+            if (!db.CheckTableExists(tblName))
+                db.CreateTable(tblName, objClass.BaseObjectClass == null);
+            else
+                Log.ErrorFormat("Table {0} already exists", tblName);
         }
         #endregion
 
@@ -1379,6 +1383,12 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
             var fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+
+            if (db.CheckTableExists(tblName))
+            {
+                Log.ErrorFormat("Relation table {0} already exists", tblName);
+                return;
+            }
 
             db.CreateTable(tblName, true);
 
