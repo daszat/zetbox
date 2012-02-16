@@ -89,6 +89,27 @@ namespace Kistl.Server.SchemaManagement
                             }
                         }
                     }
+
+                    Log.Info("Checking Relations");
+                    Log.Debug("------------------");
+                    foreach (Relation rel in schema.GetQuery<Relation>().Where(r => r.Module.Name == "KistlBase" || r.Module.Name == "GUI"))
+                    {
+                        string assocName = rel.GetAssociationName();
+                        Log.DebugFormat("Relation: \"{0}\" \"{1} - {2}\"", assocName, rel.A.Type.Name, rel.B.Type.Name);
+                        switch (rel.GetRelationType())
+                        {
+                            case RelationType.one_one:
+                                Check_1_1_RelationColumns(rel, rel.A, RelationEndRole.A);
+                                Check_1_1_RelationColumns(rel, rel.B, RelationEndRole.B);
+                                break;
+                            case RelationType.one_n:
+                                Check_1_N_RelationColumns(rel);
+                                break;
+                            case RelationType.n_m:
+                                Check_N_M_RelationColumns(rel);
+                                break;
+                        }
+                    }
                 }
             }
         }

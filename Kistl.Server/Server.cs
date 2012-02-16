@@ -117,7 +117,7 @@ namespace Kistl.Server
 
         public void CheckBaseSchema(bool withRepair)
         {
-            using (Log.InfoTraceMethodCallFormat("CheckSchemaFromCurrentMetaData", "withRepair=[{0}]", withRepair))
+            using (Log.InfoTraceMethodCallFormat("CheckBaseSchemaFromFrozenContext", "withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IFrozenContext>();
