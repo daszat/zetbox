@@ -44,19 +44,6 @@ using <%= ns %>;
 namespace <%= rel.Module.Namespace %>
 {
 <%
-		if (rel.Module.Namespace != rel.A.Type.Module.Namespace)
-		{
-%>
-	using <%= rel.A.Type.Module.Namespace %>;
-<%
-		}
-		if (rel.Module.Namespace != rel.B.Type.Module.Namespace)
-		{
-%>
-	using <%= rel.B.Type.Module.Namespace %>;
-<%
-		}
-
 		RelationEntry.Call(Host, ctx, rel);
 %>
 }

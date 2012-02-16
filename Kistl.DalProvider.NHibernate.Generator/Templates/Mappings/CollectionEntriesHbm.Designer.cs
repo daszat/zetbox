@@ -46,7 +46,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
         .ToList()
         .OrderBy(r => r.GetRelationClassName()))
     {
-        var collectionEntryNamespace = rel.A.Type.Module.Namespace;
+        var collectionEntryNamespace = rel.Module.Namespace;
         var collectionEntryClassName = rel.GetRelationClassName() + ImplementationSuffix;
         var proxyClassName = rel.GetRelationClassName() + "Proxy";
         var schemaName = rel.Module.SchemaName;

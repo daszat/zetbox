@@ -68,29 +68,14 @@ this.WriteObjects("\r\n");
 this.WriteObjects("namespace ",  rel.Module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 #line 47 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
-if (rel.Module.Namespace != rel.A.Type.Module.Namespace)
-		{
+RelationEntry.Call(Host, ctx, rel);
 
-#line 50 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
-this.WriteObjects("	using ",  rel.A.Type.Module.Namespace , ";\r\n");
-#line 52 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
-}
-		if (rel.Module.Namespace != rel.B.Type.Module.Namespace)
-		{
-
-#line 56 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
-this.WriteObjects("	using ",  rel.B.Type.Module.Namespace , ";\r\n");
-#line 58 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
-}
-
-		RelationEntry.Call(Host, ctx, rel);
-
-#line 62 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 49 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("}\r\n");
-#line 64 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 51 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 }
 
-#line 67 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 54 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -100,19 +85,19 @@ foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
 	{
 
 
-#line 76 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 63 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("namespace ",  prop.GetCollectionEntryNamespace() , "\r\n");
 this.WriteObjects("{\r\n");
-#line 80 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 67 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 ValueCollectionEntry.Call(Host, ctx, prop);
 
-#line 82 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 69 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("}\r\n");
-#line 84 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 71 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 }
 
-#line 87 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 74 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -121,16 +106,16 @@ foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .ThenBy(p => p.Name))
 	{
 
-#line 95 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 82 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("namespace ",  prop.GetCollectionEntryNamespace() , "\r\n");
 this.WriteObjects("{\r\n");
-#line 99 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 86 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 ValueCollectionEntry.Call(Host, ctx, prop);
 
-#line 101 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 88 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("}\r\n");
-#line 103 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
+#line 90 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 }
 
 
