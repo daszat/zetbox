@@ -105,6 +105,9 @@ namespace Kistl.Server
 
         public void Deploy(string file)
         {
+            // TODO: I don't know if this is a good idea, but I can't help myself currently
+            CheckBaseSchema(true);
+
             using (Log.InfoTraceMethodCallFormat("Deploy", "file=[{0}]", file))
             using (var subContainer = container.BeginLifetimeScope())
             {
