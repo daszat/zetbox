@@ -288,7 +288,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 var obj = (IDataObject)((BasePropertyValueModel)ObjectCollectionModel).Object;
                 var navigator = ObjectCollectionModel.RelEnd.Navigator;
-                ObjectReferenceHelper.AddActionViewModels(cmds, obj, navigator, this, ViewModelFactory);
+                ObjectReferenceHelper.AddActionViewModels(cmds, obj, navigator.Methods, this, ViewModelFactory);
             }
 
             return cmds;

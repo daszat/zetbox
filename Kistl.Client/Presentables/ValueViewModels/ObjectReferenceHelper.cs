@@ -5,16 +5,17 @@ using System.Text;
 using System.Collections.ObjectModel;
 using Kistl.API;
 using Kistl.App.Base;
+using System.Collections;
 
 namespace Kistl.Client.Presentables.ValueViewModels
 {
     public static class ObjectReferenceHelper
     {
-        public static void AddActionViewModels(ObservableCollection<ICommandViewModel> cmds, IDataObject obj, ObjectReferenceProperty navigator, ViewModel parent, IViewModelFactory vmdlFactory)
+        public static List<ActionViewModel> AddActionViewModels(IList cmds, IDataObject obj, IEnumerable<Method> methods, ViewModel parent, IViewModelFactory vmdlFactory)
         {
+            var result = new List<ActionViewModel>();
             var ctx = obj.Context;
-            navigator
-                .Methods
+            methods
                 .SelectMany(m => (String.IsNullOrEmpty(m.CategoryTags) ? "Summary" : m.CategoryTags)
                                         .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                                         .Select(s => new { Category = s == "Summary" ? string.Empty : s, Method = m })) // make summary empty -> will be first, then groups
@@ -27,11 +28,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     {
                         foreach (var m in group.OrderBy(m => m.Name))
                         {
-                            cmds.Add(vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m));
+                            var mdl = vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m);
+                            cmds.Add(mdl);
+                            result.Add(mdl);
                         }
                     }
                     else
                     {
+                        var mdls = group.OrderBy(m => m.Name).Select(m => vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m)).ToArray();
+                        result.AddRange(mdls);
                         var container = vmdlFactory
                             .CreateViewModel<ContainerCommand.Factory>()
                             .Invoke(
@@ -39,11 +44,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                                 parent,
                                 name,
                                 "",
-                                group.OrderBy(m => m.Name).Select(m => vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m)).ToArray());
+                                mdls);
                         cmds.Add(container);
                     }
                 });
-        }
 
+            return result;
+        }
     }
 }

@@ -336,43 +336,38 @@ namespace Kistl.Client.Presentables
         #endregion
 
         #region Actions
-        // TODO: should go to renderer and use database backed decision tables
-        protected virtual void SetClassActionViewModels(ObjectClass cls, IEnumerable<Method> methods)
-        {
-            foreach (var action in methods)
-            {
-                //Debug.Assert(action.Parameter.Count == 0);
-                _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>(action).Invoke(DataContext, this, _object, action));
-            }
-        }
-
+        private List<ActionViewModel> _allActionsCache;
+        private ObservableCollection<ICommandViewModel> _actionsCommandCache;
+        private ReadOnlyObservableCollection<ICommandViewModel> _actionsCommandView;
         private void FetchActions()
         {
-            // load properties
-            ObjectClass cls = _object.GetObjectClass(FrozenContext);
-            var actions = new List<Method>();
-            while (cls != null)
+            if (_actionsCommandCache == null)
             {
-                actions.AddRange(cls.Methods.Where(m => m.IsDisplayable));
-                cls = cls.BaseObjectClass;
-            }
+                var actions = new List<Method>();
+                _actionsCommandCache = new ObservableCollection<ICommandViewModel>();
+                _actionsCommandView = new ReadOnlyObservableCollection<ICommandViewModel>(_actionsCommandCache);
 
-            SetClassActionViewModels(cls, actions);
+                // load properties
+                ObjectClass cls = _object.GetObjectClass(FrozenContext);
+                while (cls != null)
+                {
+                    actions.AddRange(cls.Methods.Where(m => m.IsDisplayable));
+                    cls = cls.BaseObjectClass;
+                }
+
+                _allActionsCache = ObjectReferenceHelper.AddActionViewModels(_actionsCommandCache, _object, actions, this, ViewModelFactory);
+            }
         }
 
-        private ObservableCollection<ActionViewModel> _actionsCache;
-        private ReadOnlyObservableCollection<ActionViewModel> _actionsView;
-        public ReadOnlyObservableCollection<ActionViewModel> Actions
+        public ReadOnlyObservableCollection<ICommandViewModel> Actions
         {
             get
             {
-                if (_actionsView == null)
+                if (_actionsCommandView == null)
                 {
-                    _actionsCache = new ObservableCollection<ActionViewModel>();
-                    _actionsView = new ReadOnlyObservableCollection<ActionViewModel>(_actionsCache);
                     FetchActions();
                 }
-                return _actionsView;
+                return _actionsCommandView;
             }
         }
         private IDictionary<string, ActionViewModel> _ActionViewModelsByName;
@@ -382,7 +377,8 @@ namespace Kistl.Client.Presentables
             {
                 if (_ActionViewModelsByName == null)
                 {
-                    _ActionViewModelsByName = Actions.ToDictionary(a => a.MethodName);
+                    FetchActions();
+                    _ActionViewModelsByName = _allActionsCache.ToDictionary(a => a.MethodName);
                 }
                 return _ActionViewModelsByName;
             }
