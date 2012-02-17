@@ -17,17 +17,37 @@ namespace Kistl.Client.WPF.Converter
     public class IconConverter : IValueConverter
     {
         private readonly IFrozenContext FrozenContext;
-        private readonly IKistlContext Context;
+        private readonly Func<IKistlContext> ctxFactroy;
         private readonly Dictionary<Guid, BitmapImage> _cache = new Dictionary<Guid, BitmapImage>();
 
-        public IconConverter(IFrozenContext frozenCtx, IKistlContext ctx)
+        public IconConverter(IFrozenContext frozenCtx, Func<IKistlContext> ctx)
         {
             this.FrozenContext = frozenCtx;
-            this.Context = ctx;
+            this.ctxFactroy = ctx;
+        }
+
+        private bool _initialized = false;
+        public void Initialized()
+        {
+            _initialized = true;
+        }
+
+        private IKistlContext _Context;
+        private IKistlContext Context
+        {
+            get
+            {
+                if (_Context == null && _initialized)
+                {
+                    _Context = ctxFactroy();
+                }
+                return _Context;
+            }
         }
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if (!_initialized) return Binding.DoNothing;
             try
             {
                 Kistl.App.GUI.Icon icon = null;

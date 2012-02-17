@@ -352,6 +352,9 @@
         <DataTemplate DataType="{x:Type client:CommandViewModel}">
           <TextBlock Text="{Binding}"/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type client:ActionViewModel}">
+          <TextBlock Text="{Binding}"/>
+        </DataTemplate>
       </Menu.Resources>
       <MenuItem ItemsSource="{Binding Commands}"
                 Header="{Binding Name}"

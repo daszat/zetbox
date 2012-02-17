@@ -153,9 +153,10 @@ namespace Kistl.Client.WPF
 
             resources.BeginInit();
 
-            // Introduce noop converter to prevent them to ask for credentials during initialization
-            resources["IconConverter"] = new NoopConverter();
-            resources["ImageCtrlConverter"] = new NoopConverter();
+            // Create icon converter
+            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<Func<IKistlContext>>());
+            resources["IconConverter"] = iconConverter;
+            resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
 
             // Init all Converter that are not using a Context
             var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
@@ -189,10 +190,8 @@ namespace Kistl.Client.WPF
 
             StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
 
-            // Create real converter after credentials are resolved
-            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
-            resources["IconConverter"] = iconConverter;
-            resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
+            // Tell icon converter that everything is initialized
+            iconConverter.Initialized();
 
             // Focus nightmare
             // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
