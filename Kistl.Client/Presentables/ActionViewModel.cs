@@ -45,7 +45,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return Method.Description;
+                return string.IsNullOrEmpty(Reason) ? Method.Description : Reason;
             }
             protected set
             {
@@ -80,6 +80,10 @@ namespace Kistl.Client.Presentables
             if (result == false)
             {
                 base.Reason = Object.GetPropertyValue<string>(Method.Name + "CanExecReason");
+            }
+            else
+            {
+                base.Reason = string.Empty;
             }
             return result;
         }
