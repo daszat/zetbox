@@ -19,13 +19,14 @@
 
     <DockPanel Style="{StaticResource DataObjectEditor_MainPanel}">
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                                 ItemsSource="{Binding Actions}"
-                                 ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
+                                 ItemsSource="{Binding Actions}">
             <ctrls:WorkaroundToolBar.Resources>
-                <Style TargetType="{x:Type viewKistlBase:ActionDisplay}"
-                       BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+              <DataTemplate DataType="{x:Type client:ActionViewModel}">
+                <ctrls:CommandButton CommandViewModel="{Binding}"
+                                     Style="{StaticResource ImageToolbarButton}"/>
+              </DataTemplate>
             </ctrls:WorkaroundToolBar.Resources>
-        </ctrls:WorkaroundToolBar>
+          </ctrls:WorkaroundToolBar>
         <DockPanel DockPanel.Dock="Top">
             <Image DockPanel.Dock="Left"
                    Source="{Binding Converter={StaticResource IconConverter}}"

@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     {
                         foreach (var m in group.OrderBy(m => m.Name))
                         {
-                            cmds.Add(vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m).ExecuteCommand);
+                            cmds.Add(vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m));
                         }
                     }
                     else
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                                 parent,
                                 name,
                                 "",
-                                group.OrderBy(m => m.Name).Select(m => vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m).ExecuteCommand).ToArray());
+                                group.OrderBy(m => m.Name).Select(m => vmdlFactory.CreateViewModel<ActionViewModel.Factory>(m).Invoke(ctx, parent, obj, m)).ToArray());
                         cmds.Add(container);
                     }
                 });

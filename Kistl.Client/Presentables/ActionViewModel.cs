@@ -11,28 +11,61 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Base;
 
     public class ActionViewModel
-        : ViewModel
+        : CommandViewModel
     {
         public new delegate ActionViewModel Factory(IKistlContext dataCtx, ViewModel parent, IDataObject obj, Method m);
 
         public ActionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, 
             IDataObject obj, Method m)
-            : base(appCtx, dataCtx, parent)
+            : base(appCtx, dataCtx, parent, string.Empty, string.Empty)
         {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (m == null) throw new ArgumentNullException("m");
+
             Object = obj;
             Method = m;
 
             Method.PropertyChanged += MethodPropertyChanged;
         }
 
+        public override string Label
+        {
+            get
+            {
+                return Method.GetLabel();
+            }
+            protected set
+            {
+                base.Label = value;
+            }
+        }
+
+        public override string ToolTip
+        {
+            get
+            {
+                return Method.Description;
+            }
+            protected set
+            {
+                base.ToolTip = value;
+            }
+        }
+
+        public override App.GUI.Icon Icon
+        {
+            get
+            {
+                return Method.Icon ?? base.Icon;
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
 
         #region Public Interface
-
-        // TODO: proxying implementations might block on that
-        public string Label { get { return Method.GetLabel(); } }
-        // TODO: proxying implementations might block on that
-        public string ToolTip { get { return Method.Description; } }
 
         public string MethodName { get { return Method.Name; } }
 
@@ -41,35 +74,14 @@ namespace Kistl.Client.Presentables
             get { return Label; }
         }
 
-        private ICommandViewModel _ExecuteCommand = null;
-        public ICommandViewModel ExecuteCommand
+        public override bool CanExecute(object data)
         {
-            get
+            var result = Object.GetPropertyValue<bool>(Method.Name + "CanExec");
+            if (result == false)
             {
-                if (_ExecuteCommand == null)
-                {
-                    _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        Parent,
-                        Method.GetLabel(), 
-                        Method.Description, 
-                        Execute,
-                        CanExecute, 
-                        GetReason
-                    );
-                }
-                return _ExecuteCommand;
+                base.Reason = Object.GetPropertyValue<string>(Method.Name + "CanExecReason");
             }
-        }
-
-        public bool CanExecute()
-        {
-            return Object.GetPropertyValue<bool>(Method.Name + "CanExec");
-        }
-
-        public string GetReason()
-        {
-            return Object.GetPropertyValue<string>(Method.Name + "CanExecReason");
+            return result;
         }
 
         /// <summary>
@@ -77,7 +89,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public void Execute()
         {
-            Execute(null);
+            base.Execute(null);
         }
 
         /// <summary>
@@ -87,27 +99,33 @@ namespace Kistl.Client.Presentables
         /// <param name="callback">A callback or null</param>
         public void Execute(Action callback)
         {
+            base.Execute(callback);
+        }
+
+        protected override void DoExecute(object data)
+        {
             var parameter = Method.Parameter.Where(i => !i.IsReturnParameter).ToArray();
             MethodInfo info = Object.GetType().FindMethod(Method.Name, parameter.Select(i => i.GetParameterType()).ToArray());
             if (info == null) throw new InvalidOperationException(string.Format(ActionViewModelResources.MethodNotFoundException, Method.Name));
 
             if (parameter.Length > 0)
             {
-                var pitMdl = ViewModelFactory.CreateViewModel<ParameterInputTaskViewModel.Factory>().Invoke(DataContext, this, Method, 
-                    (p) => {
+                var pitMdl = ViewModelFactory.CreateViewModel<ParameterInputTaskViewModel.Factory>().Invoke(DataContext, this, Method,
+                    (p) =>
+                    {
                         var result = info.Invoke(Object, p);
-                        HandleResult(result, callback);
+                        HandleResult(result, data);
                     });
                 ViewModelFactory.ShowDialog(pitMdl);
             }
             else
             {
                 var result = info.Invoke(Object, new object[] { });
-                HandleResult(result, callback);
-            }                        
+                HandleResult(result, data);
+            }
         }
 
-        private void HandleResult(object result, Action callback)
+        private void HandleResult(object result, object callback)
         {
             IDataObject obj = result as IDataObject;
             if (obj != null && obj.Context == DataContext)
@@ -119,9 +137,9 @@ namespace Kistl.Client.Presentables
                 ViewModelFactory.ShowMessage(result.ToString(), "Result");
             }
 
-            if (callback != null)
+            if (callback is Action)
             {
-                callback();
+                ((Action)callback)();
             }
         }
 

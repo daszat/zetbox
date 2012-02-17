@@ -240,7 +240,7 @@ namespace Kistl.Client.Presentables
         /// Gets or sets a short descriptive label for this command.
         /// Suitable for display on a button or menu item.
         /// </summary>
-        public string Label
+        public virtual string Label
         {
             get
             {
@@ -263,7 +263,7 @@ namespace Kistl.Client.Presentables
         /// Gets or sets a longer descriptive text for this command.
         /// Suitable for display in a tool tip.
         /// </summary>
-        public string ToolTip
+        public virtual string ToolTip
         {
             get
             {
