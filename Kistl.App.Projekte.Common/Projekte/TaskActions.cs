@@ -30,7 +30,6 @@ namespace Kistl.App.Projekte
         {
             e.IsValid = obj.Aufwand >= 0;
             e.Error = e.IsValid ? string.Empty : "Ungültiger Aufwand";
-            if (obj.DatumBis < obj.DatumVon) throw new ArgumentOutOfRangeException("obj", "Falsches Zeitalter");
         }
 
         [Invocation]

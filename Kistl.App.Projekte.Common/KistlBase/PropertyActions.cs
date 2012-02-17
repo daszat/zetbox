@@ -109,6 +109,7 @@ namespace Kistl.App.Base
             sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "get", obj.Name, type, "PropertyGetterEventArgs", propType);
             sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "preSet", obj.Name, type, "PropertyPreSetterEventArgs", propType);
             sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "postSet", obj.Name, type, "PropertyPostSetterEventArgs", propType);
+            sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3} e)\n{{\n\te.IsValid = obj.{1} == ...;\n\te.Error = e.IsValid ? string.Empty : \"<Error>\";\n}}\n\n", "isValid", obj.Name, type, "PropertyIsValidEventArgs");
 
             e.Result = sb.ToString();
         }
