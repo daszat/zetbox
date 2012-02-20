@@ -58,6 +58,17 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        private bool _showCalculated = false;
+        public bool ShowCalculated
+        {
+            get { return _showCalculated; }
+            set
+            {
+                _showCalculated = value;
+                OnPropertyChanged("ShowCalculated");
+            }
+        }
+
         private bool _followRelationsMany = false;
         public bool FollowRelationsMany
         {
@@ -187,6 +198,10 @@ namespace Kistl.Client.Presentables.KistlBase
                 return
                     (FollowRelationsOne && !objRefProp.GetIsList()) ||
                     (FollowRelationsMany && objRefProp.GetIsList());
+            }
+            else if (prop.IsCalculated() && !ShowCalculated)
+            {
+                return false;
             }
             return true;
         }
