@@ -338,7 +338,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void UpdateDeletedColumns(ObjectClass objClass, string prefix)
         {
-            foreach (ValueTypeProperty prop in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList))
+            foreach (ValueTypeProperty prop in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList && !p.IsCalculated))
             {
                 if (Case.IsDeleteValueTypeProperty(prop))
                 {
