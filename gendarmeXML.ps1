@@ -1,4 +1,3 @@
-param($SolutionDir)
 
 function Convert-WithXslt($xmlFilePath, $xsltFilePath, $outputFilePath) 
 {
