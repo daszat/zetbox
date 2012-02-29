@@ -12,7 +12,6 @@ function Convert-WithXslt($xmlFilePath, $xsltFilePath, $outputFilePath)
 }
 
 "." > bin\gendarme.txt
-cd $SolutionDir
 
 .\gendarme.bat -xml
 

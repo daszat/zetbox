@@ -133,9 +133,9 @@
 echo *******************************************************************
 echo **** Read gendarme-powershell-policy.txt if this does not run! ****
 echo *******************************************************************
-
-echo powershell -command "$(SolutionDir)gendarmeXML.ps1" "-SolutionDir:$(SolutionDir)"
-powershell -command "$(SolutionDir)gendarmeXML.ps1" "-SolutionDir:$(SolutionDir)"
-type "$(SolutionDir)bin\gendarme.txt"</PostBuildEvent>
+cd "$(SolutionDir)"
+echo powershell -command "gendarmeXML.ps1"
+powershell -command "gendarmeXML.ps1"
+type "bin\gendarme.txt"</PostBuildEvent>
   </PropertyGroup>
 </Project>
