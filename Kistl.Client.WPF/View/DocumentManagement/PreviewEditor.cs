@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows;
 using Kistl.Client.Presentables.DocumentManagement;
 using Kistl.Client.GUI;
+using Kistl.API.Utils;
 
 namespace Kistl.Client.WPF.View.DocumentManagement
 {
@@ -53,7 +54,15 @@ namespace Kistl.Client.WPF.View.DocumentManagement
                     vistaPreview = new WPFPreviewControl();
                 }
                 PreviewControl.Content = vistaPreview;
-                vistaPreview.PreviewFilePath = ViewModel.File.Context.GetFileInfo(ViewModel.File.Blob.ID).FullName;
+                try
+                {
+                    vistaPreview.PreviewFilePath = ViewModel.File.Context.GetFileInfo(ViewModel.File.Blob.ID).FullName;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Client.Error("Setting PreviewFilePath", ex);
+                    PreviewControl.Content = new TextBlock() { Text = ex.Message };
+                }
             }
             else
             {
