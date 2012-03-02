@@ -81,7 +81,7 @@ namespace Kistl.API
         public static readonly int MAXLISTCOUNT = 1000;
 
         /// <summary>
-        /// Replaces all illigal Path Characters with an '_' char.
+        /// Replaces all illigal path characters with an '_' char.
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
@@ -90,6 +90,17 @@ namespace Kistl.API
             Path.GetInvalidPathChars().ToList().ForEach(c => path = path.Replace(c, '_'));
 
             return path;
+        }
+
+        /// <summary>
+        /// Replaces all illigal file name characters with an '_' char.
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public static string GetLegalFileName(string filename)
+        {
+            Path.GetInvalidFileNameChars().ToList().ForEach(c => filename = filename.Replace(c, '_'));
+            return filename;
         }
 
         public static string Indent(int count)

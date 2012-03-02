@@ -401,10 +401,10 @@ namespace Kistl.API.Configuration
 
                 workingFolder = Path.Combine(workingFolder, "dasz");
                 workingFolder = Path.Combine(workingFolder, "zbox");
-                workingFolder = Path.Combine(workingFolder, Helper.GetLegalPathName(this.ConfigName));
+                workingFolder = Path.Combine(workingFolder, Helper.GetLegalFileName(this.ConfigName));
 
                 // TODO: very bad idea because this may change when passing the config between AppDomains
-                workingFolder = Path.Combine(workingFolder, Helper.GetLegalPathName(AppDomain.CurrentDomain.FriendlyName));
+                workingFolder = Path.Combine(workingFolder, Helper.GetLegalFileName(AppDomain.CurrentDomain.FriendlyName));
 
                 System.IO.Directory.CreateDirectory(workingFolder);
                 return workingFolder;

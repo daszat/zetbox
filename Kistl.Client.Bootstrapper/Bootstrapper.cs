@@ -167,7 +167,7 @@ namespace Kistl.Client.Bootstrapper
             targetDir = Path.Combine(targetDir, "dasz");
             targetDir = Path.Combine(targetDir, "ZBox");
             targetDir = Path.Combine(targetDir, "BootStrapper");
-            targetDir = Path.Combine(targetDir, new Uri(address).Authority.GetLegalPathName());
+            targetDir = Path.Combine(targetDir, new Uri(address).Authority.GetLegalFileName());
 
             Directory.CreateDirectory(targetDir);
             return targetDir;

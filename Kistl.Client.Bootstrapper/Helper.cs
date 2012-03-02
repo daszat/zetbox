@@ -35,9 +35,9 @@ namespace Kistl.Client.Bootstrapper
             }
         }
 
-        public static string GetLegalPathName(this string path)
+        public static string GetLegalFileName(this string path)
         {
-            Path.GetInvalidPathChars().Union(new[] { ':' }).ToList().ForEach(c => path = path.Replace(c, '_'));
+            Path.GetInvalidFileNameChars().ToList().ForEach(c => path = path.Replace(c, '_'));
             return path;
         }
 
