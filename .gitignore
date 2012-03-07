@@ -8,6 +8,7 @@
 /Kistl.Server.HttpService/Common
 /Kistl.Complete.suo
 /Libs/Kistl
+/Libs/PrepareEnv.*
 obj
 bin
 *.csproj.user
