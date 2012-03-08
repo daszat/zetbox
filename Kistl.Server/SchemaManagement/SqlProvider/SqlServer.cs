@@ -250,7 +250,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
             foreach (var s in GetSchemaNames())
             {
-                DropSchema(s, true);
+                // Do not drop schema dbo!
+                if (!string.Equals(s, "dbo", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    DropSchema(s, true);
+                }
             }
         }
 
