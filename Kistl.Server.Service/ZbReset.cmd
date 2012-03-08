@@ -12,7 +12,7 @@ set config=%1
 
 :GOON
 
-Libs\Kistl\Kistl.Server.Service.exe %config% -wipe -updateschema Libs\Kistl\Modules\KistlBasic.xml -deploy Libs\Kistl\Modules\KistlBasic.xml -deploy Libs\Kistl\Modules\KistlUtils.xml -deploy Libs\Kistl\Modules\TestModules.xml -updatedeployedschema -repairschema -syncidentities
+Libs\Kistl\Kistl.Server.Service.exe %config% -wipe -deploy-update -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

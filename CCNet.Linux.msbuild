@@ -11,7 +11,7 @@
 
 
     <Message Importance="high" Text="resetting database" />
-    <!-- Reset & Generate -->
+    <!-- Reset and Generate -->
     <Exec Command="./!ResetDatabase.sh" />
 
     <Message Importance="high" Text="Backup and remove old generated code" />
