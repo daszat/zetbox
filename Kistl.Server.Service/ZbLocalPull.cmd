@@ -26,6 +26,13 @@ IF ERRORLEVEL 1 GOTO FAIL
 rd /q /s %destination%\Tests
 IF ERRORLEVEL 1 GOTO FAIL
 
+rem since robocopy cannot exclude directories on the top-level only,
+rem we have to delete this after copying
+del /q /s /f %destination%\Configs
+IF ERRORLEVEL 1 GOTO FAIL
+rd /q /s %destination%\Configs
+IF ERRORLEVEL 1 GOTO FAIL
+
 robocopy %source%\Modules %destination%\Modules /MIR
 rem errorlevel 8 or higher indicates errors
 IF ERRORLEVEL 8 GOTO FAIL
