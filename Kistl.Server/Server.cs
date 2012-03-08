@@ -17,6 +17,7 @@ namespace Kistl.Server
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.App.Packaging;
+    using Kistl.Generator;
 
     /// <summary>
     /// Central Server Object
@@ -103,11 +104,25 @@ namespace Kistl.Server
             }
         }
 
+        public void Deploy()
+        {
+            using (Log.InfoTraceMethodCall("Deploy", "files=*, update schema"))
+            {
+                var files = Directory.GetFiles("Modules", "*.xml", SearchOption.TopDirectoryOnly);
+                if (files == null || files.Length == 0) throw new InvalidOperationException("No files found to deploy");
+                Logging.Server.InfoFormat("Found {0} files to deploy", files.Length);
+                UpdateSchema(files);
+                files.ForEach(Deploy);
+                CheckSchema(true);               
+                using (var subContainer = container.BeginLifetimeScope())
+                {
+                    subContainer.Resolve<Compiler>().GenerateCode();
+                }
+            }
+        }
+
         public void Deploy(string file)
         {
-            // TODO: I don't know if this is a good idea, but I can't help myself currently
-            CheckBaseSchema(true);
-
             using (Log.InfoTraceMethodCallFormat("Deploy", "file=[{0}]", file))
             using (var subContainer = container.BeginLifetimeScope())
             {
@@ -115,17 +130,6 @@ namespace Kistl.Server
                 Importer.Deploy(ctx, file);
                 Log.Info("Submitting changes");
                 ctx.SubmitRestore();
-            }
-        }
-
-        public void CheckBaseSchema(bool withRepair)
-        {
-            using (Log.InfoTraceMethodCallFormat("CheckBaseSchemaFromFrozenContext", "withRepair=[{0}]", withRepair))
-            using (var subContainer = container.BeginLifetimeScope())
-            {
-                var ctx = subContainer.Resolve<IFrozenContext>();
-                var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
-                mgr.CheckBaseSchema(withRepair);
             }
         }
 

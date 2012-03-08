@@ -56,6 +56,7 @@ namespace Kistl.API.Server
                 .RegisterCmdLineAction("deploy=", "deploy the database from the specified xml file",
                 (scope, arg) =>
                 {
+                    Logging.Server.Warn("Option deploy with arguments is depricated, migrate to new deployment strategy");
                     scope.Resolve<IServer>().Deploy(arg);
                 });
 
@@ -66,6 +67,13 @@ namespace Kistl.API.Server
                     var srv = scope.Resolve<IServer>();
                     Directory.GetFiles(arg ?? "Modules", "*.xml", SearchOption.TopDirectoryOnly)
                         .ForEach(srv.Deploy);
+                });
+
+            builder
+                .RegisterCmdLineAction("deploy-update", "update the database from all files in Module directory, deployes them and generates",
+                (scope, arg) =>
+                {
+                    scope.Resolve<IServer>().Deploy();
                 });
 
             builder
@@ -128,20 +136,6 @@ namespace Kistl.API.Server
                 scope =>
                 {
                     scope.Resolve<IServer>().CheckSchema(true);
-                });
-
-            builder
-                .RegisterCmdLineAction("checkbaseschema", "checks the base schema against the schema in frozen context",
-                scope =>
-                {
-                    scope.Resolve<IServer>().CheckBaseSchema(false);
-                });
-
-            builder
-                .RegisterCmdLineAction("repairbaseschema", "checks the base schema against the schema in frozen context and tries to correct deviations",
-                scope =>
-                {
-                    scope.Resolve<IServer>().CheckBaseSchema(true);
                 });
 
             builder

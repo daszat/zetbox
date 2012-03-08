@@ -9,7 +9,7 @@ namespace Kistl.API.Server
         void CheckSchema(bool withRepair);
         void CheckSchema(string file, bool withRepair);
         void CheckSchemaFromCurrentMetaData(bool withRepair);
-        void CheckBaseSchema(bool withRepair);
+        void Deploy();
         void Deploy(string file);
         void Export(string file, string[] schemaModules, string[] ownerModules);
         void Import(string file);
