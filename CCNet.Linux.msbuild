@@ -1,14 +1,5 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build">
-    <!--
-    <Message Importance="high" Text="clean temp output" />
-    <RemoveDir Directories="bin;Kistl.Server.HttpService\Common;Kistl.Server.HttpService\Bootstrapper;Kistl.Server.HttpService\Client;Kistl.Server.HttpService\Server" />
-    <MakeDir Directories="bin" />
-    -->
-
-
-
-
     <Message Importance="high" Text="cleaning solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean" />
 
@@ -20,11 +11,8 @@
 
 
     <Message Importance="high" Text="resetting database" />
+    <!-- Reset & Generate -->
     <Exec Command="./!ResetDatabase.sh" />
-
-    <!-- Generate -->
-    <Message Importance="high" Text="generate new objects" />
-    <Exec Command="bin\Debug\Kistl.Server.Service.exe Configs\$(zenv)\Kistl.Server.Service.xml -generate" />
 
     <Message Importance="high" Text="Backup and remove old generated code" />
     <ItemGroup>
