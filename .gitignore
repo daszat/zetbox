@@ -23,3 +23,5 @@ VersionInfo.Designer.cs
 /Kistl.Server.HttpService/Logs/Kistl.Server.Service.log
 /Kistl.Server.HttpService/Logs/SchemaReport.log
 /Libs/ArebisCGen/Arebis.Installer/Debug/setup.exe
+
+/Libs/PrepareEnv/PrepareEnv/Examples/env.xml
