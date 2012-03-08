@@ -60,7 +60,15 @@ namespace Kistl.Generator.Extensions
         public static string GetCollectionEntryNamespace(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            return prop.Module.Namespace;
+            var orp = prop as ObjectReferenceProperty;
+            if (orp != null)
+            {
+                return orp.RelationEnd.Parent.Module.Namespace;
+            }
+            else
+            {
+                return prop.Module.Namespace;
+            }
         }
 
         public static string GetCollectionEntryClassName(this Property prop)
