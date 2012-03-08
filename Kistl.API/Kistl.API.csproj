@@ -153,6 +153,9 @@
     <Compile Include="Utils\XmlDictionary.cs" />
     <Compile Include="XmlStreamer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <PrepareEnv Include="..\Libs\PrepareEnv.*" Exclude="..\Libs\PrepareEnv.vshost.*" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -165,5 +168,6 @@
   <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+    <Copy SourceFiles="@(PrepareEnv)" DestinationFolder="$(OutputPath)..\..\" />
   </Target>
 </Project>
