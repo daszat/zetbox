@@ -35,6 +35,7 @@
     <string>Common/Core.Generated</string>
     <string>Common/Core.Fallback</string>
     <string>Server/Core</string>
+    <string>Server/Npgsql.Linux</string>
     <string>Server/NH</string>
     <string>Server/NH.Generated</string>
     <string>Server/NH.Fallback</string>
