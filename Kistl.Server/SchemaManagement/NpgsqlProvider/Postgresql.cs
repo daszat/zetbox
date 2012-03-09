@@ -69,7 +69,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             ExecuteScalar("SELECT dblink_connect(@alias, @connstr)",
                 new Dictionary<string, object>() {
                     { "@alias", tblName.Database},
-                    { "@connstr", String.Format("dbname={0} port={1} user={2} password={3}", tblName.Database, CurrentConnection.Port, _connectionSettings.UserName, _connectionSettings.Password) }
+                    { "@connstr", String.Format("dbname={0} port={1} user={2} password={3}", tblName.Database, CurrentConnection.Port, _connectionSettings.UserName, new string(Encoding.UTF8.GetChars(_connectionSettings.PasswordAsByteArray))) }
                 });
             _dblinks[tblName.Database] = tblName.Database;
         }
