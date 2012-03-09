@@ -218,10 +218,10 @@ bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Boots
   -->
   <Target Name="AfterBuild">
     <Message Text="Copying to Deployment Dir:" />
-    <Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)\bin\$(Configuration).HttpService\%(Content.RelativeDir)" />
+    <Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)\bin\$(Configuration)\HttpService\%(Content.RelativeDir)" />
     <CreateItem Include="$(OutputPath)\*">
       <Output TaskParameter="Include" ItemName="WebBinaries" />
     </CreateItem>
-    <Copy SourceFiles="@(WebBinaries)" DestinationFolder="$(SolutionDir)\bin\$(Configuration).HttpService\bin" />
+    <Copy SourceFiles="@(WebBinaries)" DestinationFolder="$(SolutionDir)\bin\$(Configuration)\HttpService\bin" />
   </Target>
 </Project>
