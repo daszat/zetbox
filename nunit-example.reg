@@ -1,0 +1,20 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\AssemblyFolders\NUnit Libraries]
+@="C:\\Program Files (x86)\\NUnit 2.5.10\\bin\\net-2.0\\framework"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\AssemblyFolders\NUnit Libraries]
+@="C:\\Program Files (x86)\\NUnit 2.5.10\\bin\\net-2.0\\framework"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\v3.5\AssemblyFoldersEx\NUnit Libraries]
+@="C:\\Program Files (x86)\\NUnit 2.5.10\\bin\\net-2.0\\framework"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.5\AssemblyFoldersEx\NUnit Libraries]
+@="C:\\Program Files (x86)\\NUnit 2.5.10\\bin\\net-2.0\\framework"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\v4.0.30319\AssemblyFoldersEx\NUnit Libraries]
+@="C:\\Program Files (x86)\\NUnit 2.5.10\\bin\\net-2.0\\framework"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319\AssemblyFoldersEx\NUnit Libraries]
+@="C:\\Program Files (x86)\\NUnit 2.5.10\\bin\\net-2.0\\framework"
+
