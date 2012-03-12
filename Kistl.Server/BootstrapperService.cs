@@ -73,18 +73,20 @@ namespace Kistl.Server
             {
                 Log.InfoFormat("Processing client file location [{0}] ({0})", dir.Name, dir.Value);
 
+                var value = ResolveConfigPath(dir.Value);
+
                 switch (dir.Name)
                 {
                     case "Exe":
-                        if (File.Exists(dir.Value))
+                        if (File.Exists(value))
                         {
                             // whole file is specified, get directory path
-                            var directory = Path.GetFullPath(Path.GetDirectoryName(dir.Value));
+                            var directory = Path.GetFullPath(Path.GetDirectoryName(value));
 
-                            result.Add(InspectFile("Exe", directory, Path.GetFileName(dir.Value)));
+                            result.Add(InspectFile("Exe", directory, Path.GetFileName(value)));
 
                             // need to collect .config too
-                            var dotConfig = dir.Value + ".config";
+                            var dotConfig = value + ".config";
                             if (File.Exists(dotConfig))
                             {
                                 result.Add(InspectFile("Exe", directory, dotConfig));
@@ -92,18 +94,18 @@ namespace Kistl.Server
                         }
                         break;
                     case "Configs":
-                        if (File.Exists(dir.Value))
+                        if (File.Exists(value))
                         {
-                            var fi = InspectFile("Configs", Path.GetFullPath(Path.GetDirectoryName(dir.Value)), dir.Value);
+                            var fi = InspectFile("Configs", Path.GetFullPath(Path.GetDirectoryName(value)), value);
                             result.Add(fi);
                         }
                         break;
                     default:
                         {
-                            var root = Path.GetFullPath(dir.Value);
+                            var root = Path.GetFullPath(value);
                             var regex = !string.IsNullOrEmpty(dir.Exclude) ? new Regex(dir.Exclude) : null;
 
-                            foreach (var f in Directory.GetFiles(dir.Value, "*.*", SearchOption.AllDirectories))
+                            foreach (var f in Directory.GetFiles(value, "*.*", SearchOption.AllDirectories))
                             {
                                 if (regex != null && regex.IsMatch(f)) continue;
                                 var fi = InspectFile(dir.Name, root, f);
@@ -115,6 +117,14 @@ namespace Kistl.Server
             }
 
             return result.ToArray();
+        }
+
+        private static string ResolveConfigPath(string dir)
+        {
+            var value = Path.IsPathRooted(dir)
+                ? dir
+                : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dir);
+            return value;
         }
 
         private FileInfo InspectFile(string baseDir, string root, string f)
@@ -158,12 +168,12 @@ namespace Kistl.Server
         {
             if (String.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
             var parts = path.Split('/');
-
             var dir = config.Server.ClientFilesLocations.Single(i => i.Name == parts[0]);
+            var value = ResolveConfigPath(dir.Value);
             var file = dir.Name == "Exe" || dir.Name == "Configs"
-                ? Path.GetFullPath(Path.Combine(Path.GetDirectoryName(dir.Value), API.Helper.PathCombine(parts.Skip(1).ToArray()))) // Exe and Configs reference file directly
-                : Path.GetFullPath(Path.Combine(dir.Value, API.Helper.PathCombine(parts.Skip(1).ToArray())));
-            if (file.StartsWith(Path.GetFullPath(dir.Value)))
+                ? Path.GetFullPath(Path.Combine(Path.GetDirectoryName(value), API.Helper.PathCombine(parts.Skip(1).ToArray()))) // Exe and Configs reference file directly
+                : Path.GetFullPath(Path.Combine(value, API.Helper.PathCombine(parts.Skip(1).ToArray())));
+            if (file.StartsWith(Path.GetFullPath(value)))
             {
                 return file;
             }
