@@ -7,18 +7,18 @@ namespace Kistl.API.Server
     {
         void AnalyzeDatabase(string connectionName, TextWriter output);
         void CheckSchema(bool withRepair);
-        void CheckSchema(string file, bool withRepair);
+        void CheckSchema(string[] files, bool withRepair);
         void CheckSchemaFromCurrentMetaData(bool withRepair);
         void Deploy();
-        void Deploy(string file);
+        void Deploy(params string[] files);
         void Export(string file, string[] schemaModules, string[] ownerModules);
-        void Import(string file);
+        void Import(params string[] files);
         void Publish(string file, string[] ownerModules);
         void RunBenchmarks();
         void RunFixes();
         void SyncIdentities();
         void UpdateSchema();
-        void UpdateSchema(string[] files);
+        void UpdateSchema(params string[] files);
         void WipeDatabase();
     }
 }

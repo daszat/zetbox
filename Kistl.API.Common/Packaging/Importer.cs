@@ -19,22 +19,34 @@ namespace Kistl.App.Packaging
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Importer");
 
         #region Public Methods
-        public static void Deploy(IKistlContext ctx, string filename)
+        public static void Deploy(IKistlContext ctx, params string[] filenames)
         {
-            using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Read))
+            var packages = new List<FileSystemPackageProvider>();
+            try
             {
-                Deploy(ctx, s);
+                foreach (var f in filenames)
+                {
+                    packages.Add(new FileSystemPackageProvider(f, BasePackageProvider.Modes.Read));
+                }
+                Deploy(ctx, packages.ToArray());
+            }
+            finally
+            {
+                foreach (var p in packages)
+                {
+                    p.Dispose();
+                }
             }
         }
 
-        public static void Deploy(IKistlContext ctx, IPackageProvider s)
+        public static void Deploy(IKistlContext ctx, params IPackageProvider[] providers)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            if (s == null) { throw new ArgumentNullException("s"); }
+            if (providers == null) { throw new ArgumentNullException("providers"); }
 
             using (Log.InfoTraceMethodCall("Deploy"))
             {
-                Log.InfoFormat("Starting Deployment from {0}", s);
+                Log.InfoFormat("Starting Deployment from {0}", string.Join(", ", providers.Select(p => p.ToString()).ToArray()));
                 try
                 {
                     // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
@@ -48,8 +60,8 @@ namespace Kistl.App.Packaging
 
                 Dictionary<Guid, IPersistenceObject> currentObjects = new Dictionary<Guid, IPersistenceObject>();
                 Log.Info("Loading namespaces");
-                var names = LoadModuleNames(s);
-                if (names.Count() == 0) throw new InvalidOperationException("No modules found in import file");
+                var names = providers.SelectMany(p => LoadModuleNames(p)).Distinct().ToList();
+                if (names.Count == 0) throw new InvalidOperationException("No modules found in import file");
 
                 foreach (var name in names)
                 {
@@ -68,22 +80,24 @@ namespace Kistl.App.Packaging
                     }
                 }
 
-                s.RewindData();
+                providers.ForEach(p => p.RewindData());
                 Dictionary<Guid, IPersistenceObject> importedObjects = new Dictionary<Guid, IPersistenceObject>();
                 Log.Info("Loading");
 
-                var reader = s.Reader;
-
-                // Find Root Element
-                while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "KistlPackaging" && reader.NamespaceURI != "http://dasz.at/Kistl") ;
-
-                // Read content
-                while (reader.Read())
+                foreach (var p in providers)
                 {
-                    if (reader.NodeType != XmlNodeType.Element) continue;
-                    var obj = ImportElement(ctx, currentObjects, s);
-                    if (obj == null) throw new InvalidOperationException("Invalid import format: ImportElement returned NULL");
-                    importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
+                    var reader = p.Reader;
+                    // Find Root Element
+                    while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "KistlPackaging" && reader.NamespaceURI != "http://dasz.at/Kistl") ;
+
+                    // Read content
+                    while (reader.Read())
+                    {
+                        if (reader.NodeType != XmlNodeType.Element) continue;
+                        var obj = ImportElement(ctx, currentObjects, p);
+                        if (obj == null) throw new InvalidOperationException("Invalid import format: ImportElement returned NULL");
+                        importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
+                    }
                 }
 
                 Log.Info("Reloading References");
@@ -106,12 +120,24 @@ namespace Kistl.App.Packaging
         /// Loads a database from the specified filename into the specified context.
         /// </summary>
         /// <param name="ctx"></param>
-        /// <param name="filename"></param>
-        public static void LoadFromXml(IKistlContext ctx, string filename)
+        /// <param name="filenames"></param>
+        public static void LoadFromXml(IKistlContext ctx, params string[] filenames)
         {
-            using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Read))
+            var packages = new List<FileSystemPackageProvider>();
+            try
             {
-                LoadFromXml(ctx, s);
+                foreach (var f in filenames)
+                {
+                    packages.Add(new FileSystemPackageProvider(f, BasePackageProvider.Modes.Read));
+                }
+                LoadFromXml(ctx, packages.ToArray());
+            }
+            finally
+            {
+                foreach (var p in packages)
+                {
+                    p.Dispose();
+                }
             }
         }
 
@@ -127,15 +153,15 @@ namespace Kistl.App.Packaging
         /// Loads a database from the specified stream into the specified context.
         /// </summary>
         /// <param name="ctx"></param>
-        /// <param name="s">a stream containing a database.xml</param>
-        public static void LoadFromXml(IKistlContext ctx, IPackageProvider s)
+        /// <param name="providers">a stream containing a database.xml</param>
+        public static void LoadFromXml(IKistlContext ctx, params IPackageProvider[] providers)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            if (s == null) { throw new ArgumentNullException("s"); }
+            if (providers == null) { throw new ArgumentNullException("providers"); }
 
             using (Log.InfoTraceMethodCall("LoadFromXml"))
             {
-                Log.InfoFormat("Starting Import from {0}", s);
+                Log.InfoFormat("Starting Import from {0}", string.Join(", ", providers.Select(p => p.ToString()).ToArray()));
                 try
                 {
                     using (Log.DebugTraceMethodCall("initialisation query"))
@@ -152,30 +178,32 @@ namespace Kistl.App.Packaging
                 }
 
                 Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
-                Dictionary<Type, List<Guid>> guids = LoadGuids(ctx, s);
+                Dictionary<Type, List<Guid>> guids = LoadGuids(ctx, providers);
 
                 PreFetchObjects(ctx, objects, guids);
 
                 using (Log.InfoTraceMethodCall("Loading"))
                 {
-                    s.RewindData();
+                    providers.ForEach(p => p.RewindData());
                     Log.Info("Loading");
-                    var reader = s.Reader;
-
-                    // Find Root Element
-                    while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "KistlPackaging" && reader.NamespaceURI != "http://dasz.at/Kistl") ;
-
-                    // Read content
-                    while (reader.Read())
+                    foreach (var p in providers)
                     {
-                        if (reader.NodeType != XmlNodeType.Element) continue;
-                        ImportElement(ctx, objects, s);
+                        var reader = p.Reader;
+
+                        // Find Root Element
+                        while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "KistlPackaging" && reader.NamespaceURI != "http://dasz.at/Kistl") ;
+
+                        // Read content
+                        while (reader.Read())
+                        {
+                            if (reader.NodeType != XmlNodeType.Element) continue;
+                            ImportElement(ctx, objects, p);
+                        }
                     }
                 }
 
                 using (Log.InfoTraceMethodCall("Reloading References"))
                 {
-                    Log.Info("Reloading References");
                     foreach (var obj in objects.Values)
                     {
                         obj.ReloadReferences();
@@ -206,35 +234,38 @@ namespace Kistl.App.Packaging
             }
         }
 
-        private static Dictionary<Type, List<Guid>> LoadGuids(IKistlContext ctx, IPackageProvider s)
+        private static Dictionary<Type, List<Guid>> LoadGuids(IKistlContext ctx, IPackageProvider[] providers)
         {
             Log.Info("Loading Export Guids");
 
             Dictionary<Type, List<Guid>> guids = new Dictionary<Type, List<Guid>>();
-            XPathDocument doc = new XPathDocument(s.Reader);
-            XPathNavigator nav = doc.CreateNavigator();
-            XPathNodeIterator it = nav.Select("//*[@ExportGuid]");
-
-            while (it.MoveNext())
+            foreach (var reader in providers.Select(p => p.Reader))
             {
-                string ns = it.Current.NamespaceURI;
-                string tn = it.Current.LocalName;
-                if (it.Current.MoveToAttribute("ExportGuid", String.Empty))
+                XPathDocument doc = new XPathDocument(reader);
+                XPathNavigator nav = doc.CreateNavigator();
+                XPathNodeIterator it = nav.Select("//*[@ExportGuid]");
+
+                while (it.MoveNext())
                 {
-                    Guid exportGuid = it.Current.Value.TryParseGuidValue();
-                    if (exportGuid != Guid.Empty)
+                    string ns = it.Current.NamespaceURI;
+                    string tn = it.Current.LocalName;
+                    if (it.Current.MoveToAttribute("ExportGuid", String.Empty))
                     {
-                        string ifTypeName = string.Format("{0}.{1}", ns, tn);
-                        ifTypeName = MigrateTypeNameMapping(ifTypeName);
-                        Type t = ctx.GetInterfaceType(ifTypeName).Type;
-                        if (t != null)
+                        Guid exportGuid = it.Current.Value.TryParseGuidValue();
+                        if (exportGuid != Guid.Empty)
                         {
-                            if (!guids.ContainsKey(t)) guids[t] = new List<Guid>();
-                            guids[t].Add(exportGuid);
-                        }
-                        else
-                        {
-                            Log.WarnOnce(string.Format("Type {0} not found", ifTypeName));
+                            string ifTypeName = string.Format("{0}.{1}", ns, tn);
+                            ifTypeName = MigrateTypeNameMapping(ifTypeName);
+                            Type t = ctx.GetInterfaceType(ifTypeName).Type;
+                            if (t != null)
+                            {
+                                if (!guids.ContainsKey(t)) guids[t] = new List<Guid>();
+                                guids[t].Add(exportGuid);
+                            }
+                            else
+                            {
+                                Log.WarnOnce(string.Format("Type {0} not found", ifTypeName));
+                            }
                         }
                     }
                 }

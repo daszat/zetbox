@@ -65,8 +65,7 @@ namespace Kistl.API.Server
                 (scope, arg) =>
                 {
                     var srv = scope.Resolve<IServer>();
-                    Directory.GetFiles(arg ?? "Modules", "*.xml", SearchOption.TopDirectoryOnly)
-                        .ForEach(srv.Deploy);
+                    srv.Deploy(Directory.GetFiles(arg ?? "Modules", "*.xml", SearchOption.TopDirectoryOnly));
                 });
 
             builder
@@ -127,7 +126,7 @@ namespace Kistl.API.Server
                     }
                     else
                     {
-                        scope.Resolve<IServer>().CheckSchema(arg, false);
+                        scope.Resolve<IServer>().CheckSchema(new [] { arg }, false);
                     }
                 });
 

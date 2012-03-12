@@ -83,13 +83,13 @@ namespace Kistl.Server
             }
         }
 
-        public void Import(string file)
+        public void Import(params string[] files)
         {
-            using (Log.InfoTraceMethodCallFormat("Import", "file=[{0}]", file))
+            using (Log.InfoTraceMethodCallFormat("Import", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlServerContext ctx = subContainer.Resolve<IKistlServerContext>();
-                Importer.LoadFromXml(ctx, file);
+                Importer.LoadFromXml(ctx, files);
                 Log.Info("Submitting changes");
                 ctx.SubmitRestore();
             }
@@ -112,7 +112,7 @@ namespace Kistl.Server
                 if (files == null || files.Length == 0) throw new InvalidOperationException("No files found to deploy");
                 Logging.Server.InfoFormat("Found {0} files to deploy", files.Length);
                 UpdateSchema(files);
-                files.ForEach(Deploy);
+                Deploy(files);
                 CheckSchema(true);               
                 using (var subContainer = container.BeginLifetimeScope())
                 {
@@ -121,13 +121,13 @@ namespace Kistl.Server
             }
         }
 
-        public void Deploy(string file)
+        public void Deploy(params string[] files)
         {
-            using (Log.InfoTraceMethodCallFormat("Deploy", "file=[{0}]", file))
+            using (Log.InfoTraceMethodCallFormat("Deploy", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IKistlServerContext>();
-                Importer.Deploy(ctx, file);
+                Importer.Deploy(ctx, files);
                 Log.Info("Submitting changes");
                 ctx.SubmitRestore();
             }
@@ -161,13 +161,13 @@ namespace Kistl.Server
             }
         }
 
-        public void CheckSchema(string file, bool withRepair)
+        public void CheckSchema(string[] files, bool withRepair)
         {
-            using (Log.InfoTraceMethodCallFormat("CheckSchema", "file=[{0}],withRepair=[{1}]", file, withRepair))
+            using (Log.InfoTraceMethodCallFormat("CheckSchema", "files=[{0}],withRepair=[{1}]", string.Join(", ", files), withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
-                Importer.LoadFromXml(ctx, file);
+                Importer.LoadFromXml(ctx, files);
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.CheckSchema(withRepair);
             }
@@ -196,16 +196,13 @@ namespace Kistl.Server
             }
         }
 
-        public void UpdateSchema(string[] files)
+        public void UpdateSchema(params string[] files)
         {
-            using (Log.InfoTraceMethodCallFormat("UpdateSchema", "file=[{0}]", string.Join(";", files)))
+            using (Log.InfoTraceMethodCallFormat("UpdateSchema", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
-                foreach (var f in files)
-                {
-                    Importer.LoadFromXml(ctx, f);
-                }
+                Importer.LoadFromXml(ctx, files);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.UpdateSchema();
