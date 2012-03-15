@@ -123,6 +123,9 @@
   <data name="ClearValueCommand_Tooltip" xml:space="preserve">
     <value>Sets the value to nothing</value>
   </data>
+  <data name="DecimalOutOfRange" xml:space="preserve">
+    <value>The value '{0}' is not in the allowed range (max. {1} places before the comma)</value>
+  </data>
   <data name="EditCommand_Name" xml:space="preserve">
     <value>Edit</value>
   </data>

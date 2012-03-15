@@ -977,6 +977,21 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public IDecimalValueModel DecimalModel { get; private set; }
 
+        protected override ValueViewModel<decimal?, decimal?>.ParseResult<decimal?> ParseValue(string str)
+        {
+            var result = base.ParseValue(str);
+            if (!result.HasErrors && result.Value.HasValue && DecimalModel.Precision.HasValue)
+            {
+                var maxMagnitude = DecimalModel.Precision.Value - (DecimalModel.Scale ?? 0);
+                var maxValue = (decimal)Math.Pow(10, maxMagnitude);
+                if (Math.Abs(result.Value.Value) > maxValue)
+                {
+                    result.Error = string.Format(ValueViewModelResources.DecimalOutOfRange, result.Value.Value, maxMagnitude);
+                }
+            }
+            return result;
+        }
+
         protected override string FormatValue(decimal? value)
         {
             if (DecimalModel.Scale.HasValue && value.HasValue)

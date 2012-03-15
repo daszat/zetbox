@@ -79,6 +79,15 @@ namespace Kistl.Client.Presentables.ValueViewModels {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value &apos;{0}&apos; is not in the allowed range (max. {1} places before the comma).
+        /// </summary>
+        internal static string DecimalOutOfRange {
+            get {
+                return ResourceManager.GetString("DecimalOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string EditCommand_Name {
