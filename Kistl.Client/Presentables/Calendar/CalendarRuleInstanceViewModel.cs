@@ -2,12 +2,13 @@ namespace Kistl.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.Client.Presentables;
     using Kistl.API;
     using Kistl.App.Calendar;
     using Kistl.App.GUI;
+    using Kistl.Client.Presentables;
 
     [ViewModelDescriptor]
     public class CalendarRuleInstanceViewModel : ViewModel, IAppointmentViewModel
@@ -61,10 +62,10 @@ namespace Kistl.Client.Presentables.Calendar
             set { _color = value; OnPropertyChanged("Color"); }
         }
 
-        event EventHandler IAppointmentViewModel.Changed
+        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
         {
-            add { } // unable to change 
-            remove { } // unable to change 
+            add { } // does not change
+            remove { } // does not change
         }
 
         public ControlKind RequestedCalendarKind

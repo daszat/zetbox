@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables.Calendar
 {
-    public interface IAppointmentViewModel
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.App.GUI;
+
+    public interface IAppointmentViewModel : INotifyPropertyChanged
     {
         string Subject { get; }
         /// <summary>
@@ -28,7 +30,5 @@ namespace Kistl.Client.Presentables.Calendar
         string Color { get; set; }
 
         ControlKind RequestedCalendarKind { get; }
-
-        event EventHandler Changed;
     }
 }

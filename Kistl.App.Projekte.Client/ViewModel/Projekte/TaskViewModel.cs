@@ -1,13 +1,15 @@
+
 namespace Kistl.App.Projekte.Client.ViewModel.Projekte
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.Client.Presentables;
     using Kistl.API;
-    using Kistl.Client.Presentables.Calendar;
     using Kistl.App.GUI;
+    using Kistl.Client.Presentables;
+    using Kistl.Client.Presentables.Calendar;
 
     [ViewModelDescriptor]
     public class TaskViewModel : DataObjectViewModel, IAppointmentViewModel
@@ -24,6 +26,24 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
             get
             {
                 return (Task)base.Object;
+            }
+        }
+
+        protected override void OnObjectPropertyChanged(string propName)
+        {
+            base.OnObjectPropertyChanged(propName);
+            switch (propName)
+            {
+                case "Name":
+                    OnPropertyChanged("Name");
+                    OnPropertyChanged("Subject");
+                    break;
+                case "DatumVon":
+                    OnPropertyChanged("From");
+                    break;
+                case "DatumBis":
+                    OnPropertyChanged("Until");
+                    break;
             }
         }
 
@@ -69,20 +89,5 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
             get { return null; } // default
         }
 
-        private EventHandler _Changed;
-        event EventHandler IAppointmentViewModel.Changed
-        {
-            add { _Changed += value; }
-            remove { _Changed -= value; }
-        }
-
-        protected override void OnObjectPropertyChanged(string propName)
-        {
-            var temp = _Changed;
-            if (temp != null)
-            {
-                temp(this, EventArgs.Empty);
-            }
-        }
     }
 }

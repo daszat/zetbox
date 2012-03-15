@@ -2,12 +2,14 @@ namespace Kistl.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Drawing;
     using System.Linq;
     using System.Text;
     using Kistl.API;
     using Kistl.Client.Presentables;
 
-    public class CalendarItemViewModel : Kistl.Client.Presentables.ViewModel
+    public class CalendarItemViewModel : ViewModel
     {
         public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, ViewModel parent, IAppointmentViewModel obj);
 
@@ -18,9 +20,33 @@ namespace Kistl.Client.Presentables.Calendar
 
             this.SlotWidth = this.OverlappingWidth = 1.0;
             this.ObjectViewModel = obj;
+            this.ObjectViewModel.PropertyChanged += AppointmentViewModelChanged;
         }
 
-        void parent_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void AppointmentViewModelChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "From":
+                case "Until":
+                    // must be handled by Calendar
+                    break;
+                case "Subject":
+                    OnPropertyChanged("Name");
+                    OnPropertyChanged("Text");
+                    break;
+                case "Color":
+                    OnPropertyChanged("Color");
+                    break;
+                case "Location":
+                case "Body":
+                case "RequestedCalendarKind":
+                    // not used
+                    break;
+            }
+        }
+
+        private void DayCalendarPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -39,8 +65,10 @@ namespace Kistl.Client.Presentables.Calendar
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
+                if (_DayCalendar != null)
+                    _DayCalendar.PropertyChanged -= DayCalendarPropertyChanged;
                 _DayCalendar = value;
-                _DayCalendar.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(parent_PropertyChanged);
+                _DayCalendar.PropertyChanged += DayCalendarPropertyChanged;
             }
         }
 
@@ -59,6 +87,7 @@ namespace Kistl.Client.Presentables.Calendar
                 {
                     _From = value;
                     OnPropertyChanged("From");
+                    OnPropertyChanged("FromToText");
                 }
             }
         }
@@ -76,7 +105,16 @@ namespace Kistl.Client.Presentables.Calendar
                 {
                     _until = value;
                     OnPropertyChanged("Until");
+                    OnPropertyChanged("FromToText");
                 }
+            }
+        }
+
+        public string FromToText
+        {
+            get
+            {
+                return string.Format("{0} - {1}", From.ToShortTimeString(), Until.ToShortTimeString());
             }
         }
 
@@ -105,7 +143,6 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-
         public string Color
         {
             get
@@ -114,20 +151,11 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-
-        public string FromToText
+        public PointF Position
         {
             get
             {
-                return string.Format("{0} - {1}", From.ToShortTimeString(), Until.ToShortTimeString());
-            }
-        }
-
-        public System.Drawing.PointF Position
-        {
-            get
-            {
-                return new System.Drawing.PointF((float)(OverlappingIndex * SlotWidth * ActualWidth) - 1.0f, (float)From.TimeOfDay.TotalHours * 44.0f - 1.0f);
+                return new PointF((float)(OverlappingIndex * SlotWidth * ActualWidth) - 1.0f, (float)From.TimeOfDay.TotalHours * 44.0f - 1.0f);
             }
         }
 

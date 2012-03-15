@@ -2,12 +2,13 @@ namespace Kistl.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows.Media;
     using Kistl.API;
-    using Kistl.Client.Presentables;
     using Kistl.API.Utils;
+    using Kistl.Client.Presentables;
 
     [ViewModelDescriptor]
     public class WeekCalendarViewModel : Kistl.Client.Presentables.ViewModel
@@ -74,7 +75,6 @@ namespace Kistl.Client.Presentables.Calendar
             From = DateTime.Today.FirstWeekDay();
         }
 
-
         private ICommandViewModel _RefreshCommand = null;
         public ICommandViewModel RefreshCommand
         {
@@ -85,12 +85,17 @@ namespace Kistl.Client.Presentables.Calendar
                     _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         "Aktualisieren",
                         "Die angezeigten Daten neu laden",
-                        LoadItems,
+                        Refresh,
                         null,
                         null);
                 }
                 return _RefreshCommand;
             }
+        }
+
+        public void Refresh()
+        {
+            ReloadAppointments();
         }
 
         private DateTime _From = DateTime.Today.FirstWeekDay();
@@ -106,7 +111,7 @@ namespace Kistl.Client.Presentables.Calendar
                 {
                     _From = value;
                     _DayItems = null;
-                    LoadItems(); // Get new data
+                    Refresh(); // Get new data
                     OnPropertyChanged("From");
                     OnPropertyChanged("To");
                     OnPropertyChanged("DayItems");
@@ -151,7 +156,7 @@ namespace Kistl.Client.Presentables.Calendar
             set
             {
                 _Source = value;
-                LoadItems();
+                Refresh();
             }
         }
 
@@ -184,9 +189,38 @@ namespace Kistl.Client.Presentables.Calendar
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl));
         }
 
-        public void UpdateItems()
+
+        private List<IAppointmentViewModel> _allAppointments;
+        private void ReloadAppointments()
         {
-            if (_allItems == null) LoadItemsInternal();
+            if (_allAppointments != null)
+            {
+                foreach (var a in _allAppointments)
+                {
+                    a.PropertyChanged -= AppointmentViewModelChanged;
+                }
+                _allAppointments = null;
+            }
+            EnsureAppointments();
+        }
+
+        private void EnsureAppointments()
+        {
+            _allAppointments = _Source(From, To).ToList();
+
+            RecreateItems();
+        }
+
+        private List<CalendarItemViewModel> _allItems;
+        private void RecreateItems()
+        {
+            _allItems = new List<CalendarItemViewModel>();
+            foreach (var a in _allAppointments)
+            {
+                var items = CreateCalendarItemViewModel(a);
+                if (items != null && items.Count > 0) _allItems.AddRange(items);
+            }
+
             foreach (var day in DayItems)
             {
                 day.CalendarItems = _allItems
@@ -194,37 +228,9 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-        public void LoadItems()
-        {
-            LoadItemsInternal();
-            UpdateItems();
-        }
-
-        private List<CalendarItemViewModel> _allItems;
-        private List<IAppointmentViewModel> _allAppointments;
-        private void LoadItemsInternal()
-        {
-            if(_allAppointments != null)
-            {
-                foreach (var a in _allAppointments)
-                {
-                    a.Changed -= appointment_Changed;
-                }
-            }
-
-            _allAppointments = _Source(From, To).ToList();
-            _allItems = new List<CalendarItemViewModel>();
-
-            foreach (var a in _allAppointments)
-            {
-                var items = CreateCalendarItemViewModel(a);
-                if (items != null && items.Count > 0) _allItems.AddRange(items);
-            }
-        }
-
         private List<CalendarItemViewModel> CreateCalendarItemViewModel(IAppointmentViewModel a)
         {
-            a.Changed += appointment_Changed;
+            a.PropertyChanged += AppointmentViewModelChanged;
             if (a.From <= a.Until)
             {
                 List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
@@ -250,11 +256,16 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-        void appointment_Changed(object sender, EventArgs e)
+        private void AppointmentViewModelChanged(object sender, PropertyChangedEventArgs e)
         {
-            UpdateItems();
+            switch (e.PropertyName)
+            {
+                case "From":
+                case "Until":
+                    RecreateItems();
+                    break;
+            }
         }
-
 
         public void NewItem(DateTime dt)
         {
@@ -267,12 +278,13 @@ namespace Kistl.Client.Presentables.Calendar
                 return;
             }
 
-            if (_allItems == null) LoadItemsInternal();
+            EnsureAppointments();
+
             var items = CreateCalendarItemViewModel(result.AppointmentViewModel);
             if (items != null && items.Count > 0)
             {
                 _allItems.AddRange(items);
-                UpdateItems();
+                RecreateItems();
                 SelectedItem = result.AppointmentViewModel;
             }
         }
