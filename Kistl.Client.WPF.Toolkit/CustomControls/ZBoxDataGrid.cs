@@ -208,5 +208,12 @@ namespace Kistl.Client.WPF.CustomControls
             }
         }
         #endregion
+
+        // Case 6181
+        // Avoid stack overflow. http://stackoverflow.com/questions/4017786/wpf-recursive-call-to-automation-peer-api-is-not-valid
+        protected override System.Windows.Automation.Peers.AutomationPeer OnCreateAutomationPeer()
+        {
+            return null;
+        }
     }
 }
