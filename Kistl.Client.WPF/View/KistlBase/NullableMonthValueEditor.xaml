@@ -10,6 +10,7 @@
 
     <StackPanel Orientation="Horizontal">
         <ComboBox x:Name="cbMonth"
+                  IsSynchronizedWithCurrentItem="False"
                   DisplayMemberPath="Name"
                   SelectedValuePath="Month"
                   ItemsSource="{Binding Months}"

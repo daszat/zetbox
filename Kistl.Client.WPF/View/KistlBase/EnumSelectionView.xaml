@@ -8,6 +8,7 @@
                      VerticalAlignment="Top">
 
     <ComboBox x:Name="cb"
+              IsSynchronizedWithCurrentItem="False"
               ItemsSource="{Binding PossibleValues, Mode=OneWay}"
               IsEditable="True"
               DisplayMemberPath="Value"

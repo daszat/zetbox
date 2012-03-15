@@ -16,6 +16,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0"
+                      IsSynchronizedWithCurrentItem="False"
                       ItemsSource="{Binding FromOperators}"
                       SelectedItem="{Binding FromOperator}"
                       DisplayMemberPath="Name" />
@@ -24,6 +25,7 @@
                               tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedArgumentKind, Mode=OneWay}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
             <ComboBox Grid.Column="2"
+                      IsSynchronizedWithCurrentItem="False"
                       ItemsSource="{Binding ToOperators}"
                       SelectedItem="{Binding ToOperator}"
                       DisplayMemberPath="Name" />

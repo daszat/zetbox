@@ -9,6 +9,7 @@
                      VerticalAlignment="Top">
 
     <ComboBox x:Name="cbBool"
+              IsSynchronizedWithCurrentItem="False"
               DisplayMemberPath="Value"
               SelectedValuePath="Key"
               ItemsSource="{Binding PossibleValues}"

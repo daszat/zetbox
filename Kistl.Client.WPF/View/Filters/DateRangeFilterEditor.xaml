@@ -6,29 +6,33 @@
              xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
              ToolTip="{Binding ToolTip}">
-    <ctrls:LabeledContainer Label="{Binding Label}"
-                         Required="{Binding Required}">
-        <UniformGrid Columns="3">
-            <ComboBox DisplayMemberPath="Name"
+  <ctrls:LabeledContainer Label="{Binding Label}"
+                       Required="{Binding Required}">
+    <UniformGrid Columns="3">
+      <ComboBox DisplayMemberPath="Name"
+                IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding Years}"
                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                 SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                 MinWidth="75" />
-            <ComboBox DisplayMemberPath="Name"
+      <ComboBox DisplayMemberPath="Name"
+                IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding HalfYears}"
                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                 SelectedValue="{Binding HalfYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                 MinWidth="75" />
-            <ComboBox DisplayMemberPath="Name"
+      <ComboBox DisplayMemberPath="Name"
+                IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding Quaters}"
                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                 SelectedValue="{Binding Quater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                 MinWidth="75" />
-            <ComboBox DisplayMemberPath="Name"
+      <ComboBox DisplayMemberPath="Name"
+                IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding Months}"
                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                 SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                 MinWidth="75" />
-        </UniformGrid>
-    </ctrls:LabeledContainer>
+    </UniformGrid>
+  </ctrls:LabeledContainer>
 </UserControl>

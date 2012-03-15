@@ -13,6 +13,7 @@
                   IsEnabled="False" />
 
         <ComboBox x:Name="cb"
+                  IsSynchronizedWithCurrentItem="False"
                   Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                   ItemsSource="{Binding PossibleValues, Mode=OneWay}"
                   IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
