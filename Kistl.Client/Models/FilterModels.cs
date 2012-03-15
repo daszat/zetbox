@@ -385,6 +385,10 @@ using System.Linq.Expressions;
             {
                 vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(frozenCtx);
                 fmdl.RefreshOnFilterChanged = true;
+                if (requestedArgumentKind == null)
+                {
+                    requestedArgumentKind = NamedObjects.Gui.ControlKinds.Kistl_App_GUI_DropdownBoolKind.Find(frozenCtx);
+                }
                 mdl = new BoolValueModel(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(string))
