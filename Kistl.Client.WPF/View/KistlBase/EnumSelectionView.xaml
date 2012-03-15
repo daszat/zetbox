@@ -12,9 +12,9 @@
               ItemsSource="{Binding PossibleValues, Mode=OneWay}"
               IsEditable="True"
               DisplayMemberPath="Value"
-              SelectedValuePath="Key"
               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-              SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
+              SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+              KeyDown="cbValue_KeyDown">
         <ComboBox.ContextMenu>
             <ContextMenu>
                 <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"

@@ -49,5 +49,14 @@ namespace Kistl.Client.WPF.View
         {
             if(dpProp != BackgroundProperty) base.SetHighlightValue(ctrl, dpProp, h, converter, finalConverter);
         }
+
+        private void cbValue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+                ViewModel.FormattedValue = cb.Text;
+            }
+        }
     }
 }

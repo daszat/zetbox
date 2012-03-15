@@ -813,6 +813,24 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+        protected override void NotifyValueChanged()
+        {
+            base.NotifyValueChanged();
+            OnPropertyChanged("SelectedItem");
+        }
+
+        public KeyValuePair<int?, string> SelectedItem
+        {
+            get
+            {
+                return PossibleValues.FirstOrDefault(i => i.Key == Value);
+            }
+            set
+            {
+                Value = value.Key;
+            }
+        }
+
         protected override string FormatValue(int? value)
         {
             if (value == null) return string.Empty;
