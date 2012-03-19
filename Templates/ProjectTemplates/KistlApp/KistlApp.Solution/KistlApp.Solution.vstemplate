@@ -5,7 +5,7 @@
     <Description>A solution template for Kistl Applications</Description>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
-    <CreateNewFolder>true</CreateNewFolder>
+    <CreateNewFolder>false</CreateNewFolder>
     <DefaultName>KistlApp</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
@@ -13,11 +13,19 @@
   </TemplateData>
   <TemplateContent>
     <ProjectCollection>
-      <ProjectTemplateLink ProjectName="KistlApp.Common">KistlApp.Common\KistlApp.Common.vstemplate</ProjectTemplateLink>
-      <ProjectTemplateLink ProjectName="KistlApp.Client">KistlApp.Client\KistlApp.Client.vstemplate</ProjectTemplateLink>
-      <ProjectTemplateLink ProjectName="KistlApp.Server">KistlApp.Server\KistlApp.Server.vstemplate</ProjectTemplateLink>
-      <ProjectTemplateLink ProjectName="KistlApp.Client.WPF">KistlApp.Client.WPF\KistlApp.Client.WPF.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Bootstrapper">KistlApp.Bootstrapper\KistlApp.Bootstrapper.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Common">KistlApp.Common\KistlApp.Common.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Client">KistlApp.Client\KistlApp.Client.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Client.WPF">KistlApp.Client.WPF\KistlApp.Client.WPF.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Server">KistlApp.Server\KistlApp.Server.vstemplate</ProjectTemplateLink>
     </ProjectCollection>
-    <CustomParameters />
+
   </TemplateContent>
+  <!--<WizardData>
+    --><!--<ProjectTemplateLink ProjectName="Configs">Configs\Configs.vstemplate</ProjectTemplateLink>--><!--
+  </WizardData>-->
+  <WizardExtension>
+    <Assembly>KistlApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
+    <FullClassName>KistlApp.Wizard.SolutionWizard</FullClassName>
+  </WizardExtension>
 </VSTemplate>

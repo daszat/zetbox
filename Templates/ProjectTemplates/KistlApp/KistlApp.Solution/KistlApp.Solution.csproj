@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KistlApp.Solution</RootNamespace>
     <AssemblyName>KistlApp.Solution</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
@@ -21,6 +21,7 @@
     <CopyVsixManifestToOutput>false</CopyVsixManifestToOutput>
     <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
     <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,18 +50,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Configs\ZbPull.cmd" />
+    <None Include="Configs\ZbPullLocalBinaries.cmd" />
+    <None Include="Configs\ZbPullPrebuiltBinaries.cmd" />
     <None Include="KistlApp.Server\AssemblyInfo.cs" />
     <None Include="KistlApp.Server\Class1.cs" />
     <None Include="KistlApp.Common\AssemblyInfo.cs" />
     <None Include="KistlApp.Common\Class1.cs" />
     <None Include="KistlApp.Client.WPF\AssemblyInfo.cs" />
-    <None Include="KistlApp.Client.WPF\Class1.cs" />
+    <None Include="KistlApp.Client.WPF\ClientModuleWPF.cs" />
     <None Include="KistlApp.Client\AssemblyInfo.cs" />
-    <None Include="KistlApp.Client\Class1.cs" />
+    <None Include="KistlApp.Client\ClientModule.cs" />
+    <None Include="KistlApp.Bootstrapper\AssemblyInfo.cs" />
+    <None Include="KistlApp.Bootstrapper\Bootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ProjectTemplate.csproj" />
     <None Include="KistlApp.Solution.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +106,17 @@
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="KistlApp.Client\KistlApp.Client.vstemplate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configs\test2.xml" />
+    <Content Include="Configs\test.xml" />
+    <None Include="KistlApp.Bootstrapper\ProjectTemplate.csproj">
+      <SubType>Designer</SubType>
+    </None>
+    <VSTemplate Include="KistlApp.Bootstrapper\KistlApp.Bootstrapper.vstemplate">
+      <SubType>Designer</SubType>
+    </VSTemplate>
+    <None Include="KistlApp.Bootstrapper\KistlApp.Bootstrapper.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\VSSDK\Microsoft.VsSDK.targets" />

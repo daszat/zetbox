@@ -16,6 +16,7 @@
   </Identifier>
   <References />
   <Content>
+    <Assembly AssemblyName="KistlApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa">KistlApp.Wizard.dll</Assembly>
     <ProjectTemplate>ProjectTemplates</ProjectTemplate>
   </Content>
 </Vsix>

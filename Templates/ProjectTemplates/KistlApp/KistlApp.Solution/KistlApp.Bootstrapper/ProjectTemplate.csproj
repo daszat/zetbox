@@ -6,7 +6,7 @@
 		<ProductVersion>8.0.30703</ProductVersion>
 		<SchemaVersion>2.0</SchemaVersion>
 		<ProjectGuid>$guid1$</ProjectGuid>
-		<OutputType>Library</OutputType>
+		<OutputType>Windows</OutputType>
 		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<RootNamespace>$safeprojectname$</RootNamespace>
 		<AssemblyName>$safeprojectname$</AssemblyName>
@@ -44,8 +44,7 @@
 		<Reference Include="System.Xml"/>
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="Class1.cs" />
-
+		<Compile Include="Bootstrapper.cs" />
 		<Compile Include="Properties\AssemblyInfo.cs" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

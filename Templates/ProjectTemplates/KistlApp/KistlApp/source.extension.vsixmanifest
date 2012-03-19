@@ -16,6 +16,7 @@
   </Identifier>
   <References />
   <Content>
+    <Assembly AssemblyName="|KistlApp.Wizard;AssemblyName|">|KistlApp.Wizard|</Assembly>
     <ProjectTemplate>ProjectTemplates</ProjectTemplate>
   </Content>
 </Vsix>

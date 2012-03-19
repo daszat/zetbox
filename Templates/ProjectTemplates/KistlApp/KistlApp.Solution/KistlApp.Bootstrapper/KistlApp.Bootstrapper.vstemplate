@@ -3,7 +3,7 @@
   <TemplateData>
     <Name>KistlApp.Client</Name>
     <Description>&lt;No description available&gt;</Description>
-    <Icon>KistlApp.Client.ico</Icon>
+    <Icon>KistlApp.Bootstrapper.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
     <SortOrder>1000</SortOrder>
@@ -15,7 +15,7 @@
   <TemplateContent>
     <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" OpenInEditor="true">ClientModule.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">Bootstrapper.cs</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

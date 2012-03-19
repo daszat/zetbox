@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KistlApp", "KistlApp\KistlA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KistlApp.Solution", "KistlApp.Solution\KistlApp.Solution.csproj", "{21AE7B50-2093-4437-BD14-648BEED8A54C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KistlApp.Wizard", "KistlApp.Wizard\KistlApp.Wizard.csproj", "{D22A24E6-48CE-47F9-9987-68385E8C5AC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{21AE7B50-2093-4437-BD14-648BEED8A54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21AE7B50-2093-4437-BD14-648BEED8A54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21AE7B50-2093-4437-BD14-648BEED8A54C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D22A24E6-48CE-47F9-9987-68385E8C5AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22A24E6-48CE-47F9-9987-68385E8C5AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22A24E6-48CE-47F9-9987-68385E8C5AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22A24E6-48CE-47F9-9987-68385E8C5AC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
