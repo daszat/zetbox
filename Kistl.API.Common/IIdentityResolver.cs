@@ -24,12 +24,12 @@ namespace Kistl.API.Common
         }
 
         public UnresolvableIdentityException(string userName)
-            : base(string.Format("Unable to resolve identity {0}", userName))
+            : base(string.Format("Unable to resolve identity '{0}'", userName))
         {
         }
 
         public UnresolvableIdentityException(string userName, Exception inner)
-            : base(string.Format("Unable to resolve identity {0}", userName), inner)
+            : base(string.Format("Unable to resolve identity '{0}'", userName), inner)
         {
         }
 
