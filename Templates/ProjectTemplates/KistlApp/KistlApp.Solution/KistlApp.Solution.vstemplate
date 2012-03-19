@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<VSTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Type="ProjectGroup" Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>KistlApp</Name>
+    <Description>A solution template for Kistl Applications</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>KistlApp</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <LocationField>Enabled</LocationField>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+      <ProjectTemplateLink ProjectName="KistlApp.Common">KistlApp.Common\KistlApp.Common.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="KistlApp.Client">KistlApp.Client\KistlApp.Client.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="KistlApp.Server">KistlApp.Server\KistlApp.Server.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="KistlApp.Client.WPF">KistlApp.Client.WPF\KistlApp.Client.WPF.vstemplate</ProjectTemplateLink>
+    </ProjectCollection>
+    <CustomParameters />
+  </TemplateContent>
+</VSTemplate>

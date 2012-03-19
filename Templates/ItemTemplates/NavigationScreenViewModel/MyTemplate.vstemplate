@@ -1,0 +1,14 @@
+<VSTemplate Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>NavigationScreenViewModel.cs</DefaultName>
+    <Name>NavigationScreenViewModel</Name>
+    <Description>ZBox NavigationScreen ViewModel</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="Code" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">NavigationScreenViewModel.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>
