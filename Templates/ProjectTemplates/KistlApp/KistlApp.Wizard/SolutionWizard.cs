@@ -38,6 +38,54 @@ namespace KistlApp.Wizard
             _solution = _dte.Solution;
             _solution.SaveAs((string)_solution.Properties.Item("Path").Value);
 
+            MoveProjects();
+            ExtractSolutionItems();
+            SetProjectReferences();
+        }
+
+        private void SetProjectReferences()
+        {
+            var allProjects = new Dictionary<string, Project>();
+            foreach (Project prj in _solution.Projects)
+            {
+                if (prj.Name.EndsWith(".Client"))
+                {
+                    allProjects["client"] = prj;
+                }
+                else if (prj.Name.EndsWith(".Client.WPF"))
+                {
+                    allProjects["wpf"] = prj;
+                }
+                else if (prj.Name.EndsWith(".Common"))
+                {
+                    allProjects["common"] = prj;
+                }
+                else if (prj.Name.EndsWith(".Server"))
+                {
+                    allProjects["server"] = prj;
+                }
+            }
+
+            foreach (Project prj in _solution.Projects)
+            {
+                VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;
+                if (prj.Name.EndsWith(".Client"))
+                {
+                    vsProj.References.AddProject(allProjects["common"]).CopyLocal = false;
+                }
+                else if (prj.Name.EndsWith(".Client.WPF"))
+                {
+                    vsProj.References.AddProject(allProjects["client"]).CopyLocal = false;
+                }
+                else if (prj.Name.EndsWith(".Server"))
+                {
+                    vsProj.References.AddProject(allProjects["common"]).CopyLocal = false;
+                }
+            }
+        }
+
+        private void MoveProjects()
+        {
             var projects = new List<Project>();
             foreach (Project project in _solution.Projects)
             {
@@ -57,8 +105,6 @@ namespace KistlApp.Wizard
             {
                 MessageBox.Show(ex.ToString());
             }
-
-            ExtractSolutionItems();
         }
 
         private void ExtractSolutionItems()
@@ -123,6 +169,7 @@ namespace KistlApp.Wizard
             _solutionFolder = Path.GetDirectoryName(_wrongProjectFolder);
             _templatePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName((string)customParams[0]), ".."));
             _desiredNamespace = replacementsDictionary["$safeprojectname$"];
+            replacementsDictionary.Add("$safesolutionname$", _desiredNamespace);
         }
 
         public bool ShouldAddProjectItem(string filePath)

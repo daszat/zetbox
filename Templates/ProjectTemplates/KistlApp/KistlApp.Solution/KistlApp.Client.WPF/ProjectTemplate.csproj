@@ -43,7 +43,7 @@
 		<Reference Include="System.Data"/>
 		<Reference Include="System.Xml"/>
 	</ItemGroup>
-	<ItemGroup>
+  <ItemGroup>
 		<Compile Include="ClientModuleWPF.cs" />
 
 		<Compile Include="Properties\AssemblyInfo.cs" />
