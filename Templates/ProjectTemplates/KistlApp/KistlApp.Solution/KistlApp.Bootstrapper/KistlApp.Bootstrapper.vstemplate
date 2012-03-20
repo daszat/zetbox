@@ -18,4 +18,8 @@
       <ProjectItem ReplaceParameters="true" OpenInEditor="true">Bootstrapper.cs</ProjectItem>
     </Project>
   </TemplateContent>
+  <WizardExtension>
+    <Assembly>KistlApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
+    <FullClassName>KistlApp.Wizard.ProjectWizard</FullClassName>
+  </WizardExtension>
 </VSTemplate>

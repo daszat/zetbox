@@ -14,10 +14,19 @@ namespace KistlApp.Wizard
 {
     public class SolutionWizard : IWizard
     {
-        private string _wrongProjectFolder;
-        private string _solutionFolder;
-        private string _templatePath;
-        private string _desiredNamespace;
+        private static string _wrongProjectFolder;
+        private static string _solutionFolder;
+        private static string _templatePath;
+        private static string _solutionName;
+
+        public static string SolutionName
+        {
+            get
+            {
+                return _solutionName;
+            }
+        }
+
         private DTE _dte;
         private Solution _solution;
 
@@ -168,8 +177,8 @@ namespace KistlApp.Wizard
             _wrongProjectFolder = replacementsDictionary["$destinationdirectory$"];
             _solutionFolder = Path.GetDirectoryName(_wrongProjectFolder);
             _templatePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName((string)customParams[0]), ".."));
-            _desiredNamespace = replacementsDictionary["$safeprojectname$"];
-            replacementsDictionary.Add("$safesolutionname$", _desiredNamespace);
+            _solutionName = replacementsDictionary["$safeprojectname$"];
+            replacementsDictionary.Add("$safesolutionname$", _solutionName);
         }
 
         public bool ShouldAddProjectItem(string filePath)
