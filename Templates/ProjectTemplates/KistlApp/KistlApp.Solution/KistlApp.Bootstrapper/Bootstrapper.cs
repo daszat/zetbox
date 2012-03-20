@@ -7,5 +7,8 @@ namespace $safeprojectname$
 {
 	public class Bootstrapper
 	{
+        public static void Main(string[] args)
+        {
+        }
 	}
 }
