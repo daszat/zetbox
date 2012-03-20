@@ -21,9 +21,6 @@
     </ProjectCollection>
 
   </TemplateContent>
-  <!--<WizardData>
-    --><!--<ProjectTemplateLink ProjectName="Configs">Configs\Configs.vstemplate</ProjectTemplateLink>--><!--
-  </WizardData>-->
   <WizardExtension>
     <Assembly>KistlApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
     <FullClassName>KistlApp.Wizard.SolutionWizard</FullClassName>

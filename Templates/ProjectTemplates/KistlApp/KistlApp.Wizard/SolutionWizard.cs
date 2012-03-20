@@ -49,14 +49,47 @@ namespace KistlApp.Wizard
                 MoveProjectToDirectory(project, projectDestination);
             }
 
-            MessageBox.Show("Deleting: " + _wrongProjectFolder);
             try
             {
                 Directory.Delete(_wrongProjectFolder, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+
+            ExtractSolutionItems();
+        }
+
+        private void ExtractSolutionItems()
+        {
+            var assembly = typeof(SolutionWizard).Assembly;
+            foreach (var res in assembly.GetManifestResourceNames())
+            {
+                if (res.Contains(".SolutionItems."))
+                {
+                    // KistlApp.Wizard.SolutionItems.Configs.test.xml
+                    var relFilePath = res.Substring(res.IndexOf(".SolutionItems.") + ".SolutionItems.".Length);
+                    // Configs.test.xml
+                    var ext = Path.GetExtension(relFilePath);
+                    // .xml
+                    relFilePath = relFilePath.Substring(0, relFilePath.Length - ext.Length);
+                    // Configs.test
+                    relFilePath = relFilePath.Replace('.', '\\');
+                    // Configs\test
+                    relFilePath = relFilePath + ext;
+                    // Configs\test.xml
+                    var destFilePath = Path.Combine(_solutionFolder, relFilePath);
+                    var folder = Path.GetDirectoryName(destFilePath);
+                    if (!Directory.Exists(folder))
+                        Directory.CreateDirectory(folder);
+                    using (var s = assembly.GetManifestResourceStream(res))
+                    using (var fs = File.Create(destFilePath))
+                    {
+                        fs.SetLength(0);
+                        s.CopyTo(fs);
+                    }
+                }
             }
         }
 
@@ -64,7 +97,7 @@ namespace KistlApp.Wizard
         {
             string projectFilename = Path.GetFileName(project.FileName);
             string projectDir = Path.GetDirectoryName(project.FileName);
-            CopyFolder(projectDir, destinationDirectory);
+            Helper.CopyFolder(projectDir, destinationDirectory);
             string newProjectFilename = Path.Combine(destinationDirectory, projectFilename);
 
             Project newProject;
@@ -79,28 +112,8 @@ namespace KistlApp.Wizard
                 _solution.Remove(project);
                 newProject = _solution.AddFromFile(newProjectFilename, false);
             }
-            
-            Directory.Delete(projectDir, true);
-        }
 
-        public static void CopyFolder(string sourceFolder, string destFolder)
-        {
-            if (!Directory.Exists(destFolder))
-                Directory.CreateDirectory(destFolder);
-            string[] files = Directory.GetFiles(sourceFolder);
-            foreach (string file in files)
-            {
-                string name = Path.GetFileName(file);
-                string dest = Path.Combine(destFolder, name);
-                File.Copy(file, dest);
-            }
-            string[] folders = Directory.GetDirectories(sourceFolder);
-            foreach (string folder in folders)
-            {
-                string name = Path.GetFileName(folder);
-                string dest = Path.Combine(destFolder, name);
-                CopyFolder(folder, dest);
-            }
+            Directory.Delete(projectDir, true);
         }
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
@@ -110,9 +123,6 @@ namespace KistlApp.Wizard
             _solutionFolder = Path.GetDirectoryName(_wrongProjectFolder);
             _templatePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName((string)customParams[0]), ".."));
             _desiredNamespace = replacementsDictionary["$safeprojectname$"];
-
-            MessageBox.Show("_solutionFolder: " + _solutionFolder);
-            MessageBox.Show("_wrongProjectFolder: " + _wrongProjectFolder);
         }
 
         public bool ShouldAddProjectItem(string filePath)

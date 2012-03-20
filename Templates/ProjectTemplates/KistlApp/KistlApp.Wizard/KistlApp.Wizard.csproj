@@ -56,11 +56,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolutionWizard.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\ZbPull.cmd" />
+    <EmbeddedResource Include="SolutionItems\ZbPullLocalBinaries.cmd" />
+    <EmbeddedResource Include="SolutionItems\ZbPullPrebuiltBinaries.cmd" />
     <None Include="TemplateWizard.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\test.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\test2.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

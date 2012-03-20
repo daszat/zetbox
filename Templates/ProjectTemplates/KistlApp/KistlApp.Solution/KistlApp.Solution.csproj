@@ -50,9 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configs\ZbPull.cmd" />
-    <None Include="Configs\ZbPullLocalBinaries.cmd" />
-    <None Include="Configs\ZbPullPrebuiltBinaries.cmd" />
     <None Include="KistlApp.Server\AssemblyInfo.cs" />
     <None Include="KistlApp.Server\Class1.cs" />
     <None Include="KistlApp.Common\AssemblyInfo.cs" />
@@ -108,8 +105,6 @@
     <VSTemplate Include="KistlApp.Client\KistlApp.Client.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configs\test2.xml" />
-    <Content Include="Configs\test.xml" />
     <None Include="KistlApp.Bootstrapper\ProjectTemplate.csproj">
       <SubType>Designer</SubType>
     </None>
