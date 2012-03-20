@@ -51,9 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="KistlApp.Server\AssemblyInfo.cs" />
-    <None Include="KistlApp.Server\Class1.cs" />
+    <None Include="KistlApp.Server\ServerModule.cs" />
     <None Include="KistlApp.Common\AssemblyInfo.cs" />
-    <None Include="KistlApp.Common\Class1.cs" />
+    <None Include="KistlApp.Common\CommonModule.cs" />
     <None Include="KistlApp.Client.WPF\AssemblyInfo.cs" />
     <None Include="KistlApp.Client.WPF\ClientModuleWPF.cs" />
     <None Include="KistlApp.Client\AssemblyInfo.cs" />
