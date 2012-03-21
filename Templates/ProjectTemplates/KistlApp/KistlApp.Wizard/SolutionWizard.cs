@@ -42,6 +42,35 @@ namespace KistlApp.Wizard
         {
         }
 
+        public bool ShouldAddProjectItem(string filePath)
+        {
+            return true;
+        }
+
+        public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
+        {
+            _dte = (DTE)automationObject;
+            _wrongProjectFolder = replacementsDictionary["$destinationdirectory$"];
+            _solutionFolder = Path.GetDirectoryName(_wrongProjectFolder);
+            _templatePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName((string)customParams[0]), ".."));
+            _solutionName = replacementsDictionary["$safeprojectname$"];
+            replacementsDictionary.Add("$safesolutionname$", _solutionName);
+
+            var dlg = new WizardForm(_solutionName);
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                replacementsDictionary.Add("$connectinstring$", dlg.ConnectinString);
+                replacementsDictionary.Add("$ormapperclassname$", dlg.ORMapperClassName);
+                replacementsDictionary.Add("$ormappermodule$", dlg.ORMapperModule);
+                replacementsDictionary.Add("$schema$", dlg.Schema);
+                replacementsDictionary.Add("$provider$", dlg.Provider);
+            }
+            else
+            {
+                throw new WizardCancelledException("Aborted by user");
+            }
+        }
+
         public void RunFinished()
         {
             _solution = _dte.Solution;
@@ -169,21 +198,6 @@ namespace KistlApp.Wizard
             }
 
             Directory.Delete(projectDir, true);
-        }
-
-        public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
-        {
-            _dte = (DTE)automationObject;
-            _wrongProjectFolder = replacementsDictionary["$destinationdirectory$"];
-            _solutionFolder = Path.GetDirectoryName(_wrongProjectFolder);
-            _templatePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName((string)customParams[0]), ".."));
-            _solutionName = replacementsDictionary["$safeprojectname$"];
-            replacementsDictionary.Add("$safesolutionname$", _solutionName);
-        }
-
-        public bool ShouldAddProjectItem(string filePath)
-        {
-            return true;
         }
     }
 }
