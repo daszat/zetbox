@@ -2,7 +2,7 @@
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
     <Name>KistlApp.Client</Name>
-    <Description>&lt;No description available&gt;</Description>
+    <Description>This assembly contains client-side business logic for this Kistl application</Description>
     <Icon>KistlApp.Client.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>

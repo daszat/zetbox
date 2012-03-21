@@ -2,7 +2,7 @@
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
     <Name>KistlApp.Client.WPF</Name>
-    <Description>&lt;No description available&gt;</Description>
+    <Description>This assembly contains WPF-specific UI code.</Description>
     <Icon>KistlApp.Client.WPF.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>

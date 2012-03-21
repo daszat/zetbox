@@ -2,7 +2,7 @@
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
     <Name>KistlApp.Common</Name>
-    <Description>&lt;No description available&gt;</Description>
+    <Description>This assembly contains business logic that can run on the server as well as on the client.</Description>
     <Icon>KistlApp.Common.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <RequiredFrameworkVersion>3.5</RequiredFrameworkVersion>
