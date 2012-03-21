@@ -3,7 +3,7 @@
   <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
-      <Database Name="Kistl" Schema="$schema$" Provider="$provider$">$connectinstring$</Database>
+      <Database Name="Kistl" Schema="$schema$" Provider="$provider$">$connectionstring$</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
@@ -32,7 +32,7 @@
       <!-- Development/Master Server modules -->
       <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
-      <Module>Kistl.DalProvider.$ormapperclassname$.Generator.NhGeneratorProvider, Kistl.DalProvider.$ormapperclassname$.Generator</Module>
+      <Module>Kistl.DalProvider.$ormapperclassname$.Generator.$ormapperclassname$GeneratorProvider, Kistl.DalProvider.$ormapperclassname$.Generator</Module>
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
     </Modules>
   </Server>

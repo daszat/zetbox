@@ -3,7 +3,7 @@
   <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
-      <Database Name="Kistl" Schema="$schema$" Provider="$provider$">$connectinstring$</Database>
+      <Database Name="Kistl" Schema="$schema$" Provider="$provider$">$connectionstring$</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>

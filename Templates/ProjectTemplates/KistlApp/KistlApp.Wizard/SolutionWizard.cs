@@ -2,12 +2,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Linq;
-using EnvDTE;
-using Microsoft.VisualStudio.TemplateWizard;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.TemplateWizard;
 
 
 namespace KistlApp.Wizard
@@ -60,7 +60,7 @@ namespace KistlApp.Wizard
             var dlg = new WizardForm(_solutionName);
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                replacementsDictionary.Add("$connectinstring$", dlg.ConnectinString);
+                replacementsDictionary.Add("$connectionstring$", dlg.ConnectinString);
                 replacementsDictionary.Add("$databasename$", dlg.DatabaseName);
                 replacementsDictionary.Add("$ormapperclassname$", dlg.ORMapperClassName);
                 replacementsDictionary.Add("$ormappermodule$", dlg.ORMapperModule);

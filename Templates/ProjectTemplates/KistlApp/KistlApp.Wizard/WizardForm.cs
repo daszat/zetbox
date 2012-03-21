@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Data.SqlClient;
-using Npgsql;
 
 namespace KistlApp.Wizard
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+    using Npgsql;
+
     public partial class WizardForm : Form
     {
         public static readonly string SQLConnectionStringTemplate = @"Data Source=.\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;MultipleActiveResultSets=true;";
@@ -107,7 +108,7 @@ namespace KistlApp.Wizard
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error connecting to database:\n" + ex.Message, 
+                MessageBox.Show("Error connecting to database:\n" + ex.Message,
                     "Test connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
