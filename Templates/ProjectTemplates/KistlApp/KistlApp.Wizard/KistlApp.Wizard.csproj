@@ -90,14 +90,31 @@
     <EmbeddedResource Include="WizardForm.resx">
       <DependentUpon>WizardForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SolutionItems\ZbInstall.cmd" />
+    <EmbeddedResource Include="SolutionItems\ZbDeployAll.cmd" />
+    <EmbeddedResource Include="SolutionItems\ZbPublishAll.cmd" />
+    <EmbeddedResource Include="SolutionItems\ZbResetAll.cmd" />
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\test.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\test2.xml" />
+    <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl.Server.HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl.Server.Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Kistl.Server.HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Kistl.Server.Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\Kistl.Client.WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Kistl.Server.HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Kistl.Server.Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Kistl.Server.HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Kistl.Server.Service.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl.Client.WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl.Server.HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl.Server.Service.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -72,7 +72,7 @@
 		<Reference Include="System.Xml"/>
 	</ItemGroup>
   <ItemGroup>
-		<Compile Include="ClientModuleWPF.cs" />
+		<Compile Include="ClientWPFModule.cs" />
 
 		<Compile Include="Properties\AssemblyInfo.cs" />
 	</ItemGroup>

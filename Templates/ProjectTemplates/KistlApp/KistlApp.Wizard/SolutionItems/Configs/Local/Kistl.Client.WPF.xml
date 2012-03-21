@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>$safesolutionname$ Client Configuration</ConfigName>
+  <Client StartClient="false" ThrowErrors="false">
+    <!--<Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>-->
+    <Culture>de-AT</Culture>
+    <UICulture>de-AT</UICulture>
+    <DocumentStore>DocumentStore\Client\</DocumentStore>
+    <DevelopmentEnvironment>false</DevelopmentEnvironment>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
+      <Module>Kistl.API.Client.WcfClientModule, Kistl.API.Client</Module>
+      <Module>Kistl.API.Common.ApiCommonModule, Kistl.API.Common</Module>
+      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
+      <Module>Kistl.Client.WPF.WPFModule, Kistl.Client.WPF</Module>
+      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
+      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.Client.ClientProvider, Kistl.DalProvider.ClientObjects</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+	  <Module>Kistl.Microsoft.Module, Kistl.Microsoft</Module>
+	  <Module>Kistl.Microsoft.OutlookMailSender+Module, Kistl.Microsoft</Module>
+      <Module>Kistl.API.MailProblemReporter+Module, Kistl.API</Module>
+
+      <!-- 
+      <Module>Kistl.Client.BasicAuthCredentialsResolver+Module, Kistl.Client</Module>
+      -->
+      <!-- application specific modules -->
+      <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
+      <Module>$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
+    </Modules>
+  </Client>
+  <AssemblySearchPaths>
+    <string>Client\Core.Generated</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core</string>
+    <string>Client\Core</string>
+    <string>Client\WPF</string>
+    <string>Common\App.ZBox</string>
+    <string>Client\App.ZBox</string>
+    <string>Common\Microsoft</string>
+	<string>Common\$safesolutionname$</string>
+	<string>Client\$safesolutionname$</string>
+  </AssemblySearchPaths>
+</KistlConfig>

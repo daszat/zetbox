@@ -18,6 +18,7 @@ namespace KistlApp.Wizard
         private static string _solutionFolder;
         private static string _templatePath;
         private static string _solutionName;
+        private Dictionary<string, string> _replacementsDictionary;
 
         public static string SolutionName
         {
@@ -60,6 +61,7 @@ namespace KistlApp.Wizard
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 replacementsDictionary.Add("$connectinstring$", dlg.ConnectinString);
+                replacementsDictionary.Add("$databasename$", dlg.DatabaseName);
                 replacementsDictionary.Add("$ormapperclassname$", dlg.ORMapperClassName);
                 replacementsDictionary.Add("$ormappermodule$", dlg.ORMapperModule);
                 replacementsDictionary.Add("$schema$", dlg.Schema);
@@ -69,6 +71,8 @@ namespace KistlApp.Wizard
             {
                 throw new WizardCancelledException("Aborted by user");
             }
+
+            _replacementsDictionary = replacementsDictionary;
         }
 
         public void RunFinished()
@@ -79,6 +83,28 @@ namespace KistlApp.Wizard
             MoveProjects();
             ExtractSolutionItems();
             SetProjectReferences();
+
+            if (MessageBox.Show("Fetch and install ZetBox?", "Installation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                ShellExecute("ZbPullPrebuiltBinaries.cmd");
+                ShellExecute("ZbDeployAll.cmd");
+            }
+        }
+
+        private void ShellExecute(string file)
+        {
+            if (string.IsNullOrEmpty(file)) throw new ArgumentNullException("file");
+
+            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
+            si.UseShellExecute = true;
+            si.WorkingDirectory = _solutionFolder;
+            si.FileName = file;
+            var process = System.Diagnostics.Process.Start(si);
+            process.WaitForExit();
+            if (process.ExitCode > 0)
+            {
+                MessageBox.Show("Error executing " + file, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SetProjectReferences()
@@ -167,11 +193,35 @@ namespace KistlApp.Wizard
                     var folder = Path.GetDirectoryName(destFilePath);
                     if (!Directory.Exists(folder))
                         Directory.CreateDirectory(folder);
+
                     using (var s = assembly.GetManifestResourceStream(res))
-                    using (var fs = File.Create(destFilePath))
                     {
-                        fs.SetLength(0);
-                        s.CopyTo(fs);
+                        if (".xml".Equals(ext, StringComparison.InvariantCultureIgnoreCase) || 
+                            ".txt".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
+                            ".cmd".Equals(ext, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            var sr = new StreamReader(s);
+                            var content = sr.ReadToEnd();
+
+                            foreach (var keyVal in _replacementsDictionary)
+                            {
+                                content = content.Replace(keyVal.Key, keyVal.Value);
+                            }
+
+                            using (var fs = File.CreateText(destFilePath))
+                            {                                
+                                fs.BaseStream.SetLength(0);
+                                fs.Write(content);
+                            }
+                        }
+                        else
+                        {
+                            using (var fs = File.Create(destFilePath))
+                            {
+                                fs.SetLength(0);
+                                s.CopyTo(fs);
+                            }
+                        }
                     }
                 }
             }

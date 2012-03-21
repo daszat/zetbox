@@ -18,6 +18,7 @@
 		<DebugType>full</DebugType>
 		<Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Common\App.$safesolutionname$\</OutputPath>
+    <KistlOutputPath>..\bin\Debug\</KistlOutputPath>
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>4</WarningLevel>
@@ -26,6 +27,7 @@
 		<DebugType>pdbonly</DebugType>
  		<Optimize>true</Optimize>
     <OutputPath>..\bin\Release\Common\App.$safesolutionname$\</OutputPath>
+    <KistlOutputPath>..\bin\Release\</KistlOutputPath>
 		<DefineConstants>TRACE</DefineConstants>
 		<ErrorReport>prompt</ErrorReport>
 		<WarningLevel>4</WarningLevel>
@@ -65,16 +67,33 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="CommonModule.cs" />
-
 		<Compile Include="Properties\AssemblyInfo.cs" />
 	</ItemGroup>
+  <ItemGroup>
+    <KistlFiles Include="..\Libs\Kistl\**\*.*">
+      <InProject>false</InProject>
+    </KistlFiles>
+    <MyModules Include="..\Modules\**\*.*">
+      <InProject>false</InProject>
+    </MyModules>
+    <MyData Include="..\Data\**\*.*" >
+      <InProject>false</InProject>
+    </MyData>
+  </ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
+       Other similar extension points exist, see Microsoft.Common.targets.  -->
   <Target Name="BeforeBuild">
+    <Copy
+      SourceFiles="@(KistlFiles)"
+      DestinationFiles="@(KistlFiles->'$(KistlOutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy
+      SourceFiles="@(MyModules)"
+      DestinationFiles="@(MyModules->'$(KistlOutputPath)\Modules\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy
+      SourceFiles="@(MyData)"
+      DestinationFiles="@(MyData->'$(KistlOutputPath)\Data\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  -->
-
  </Project>

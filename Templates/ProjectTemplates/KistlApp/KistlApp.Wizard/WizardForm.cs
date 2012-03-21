@@ -26,6 +26,7 @@ namespace KistlApp.Wizard
 
         public string SolutionName { get; set; }
         public string ConnectinString { get; set; }
+        public string DatabaseName { get; set; }
         public string Schema { get; set; }
         public string Provider { get; set; }
         public string ORMapperClassName { get; set; }
@@ -38,6 +39,17 @@ namespace KistlApp.Wizard
             ORMapperModule = rbEF.Checked ? "EF" : "NH";
             Schema = rbSQLServer.Checked ? "MSSQL" : "POSTGRESQL";
             Provider = rbSQLServer.Checked ? "NHibernate.Dialect.MsSql2005Dialect" : "Npgsql";
+
+            if (rbSQLServer.Checked)
+            {
+                var cb = new SqlConnectionStringBuilder(txtConnectionString.Text);
+                DatabaseName = cb.InitialCatalog;
+            }
+            else
+            {
+                var cb = new NpgsqlConnectionStringBuilder(txtConnectionString.Text);
+                DatabaseName = cb.Database;
+            }
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();

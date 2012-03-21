@@ -55,7 +55,7 @@
     <None Include="KistlApp.Common\AssemblyInfo.cs" />
     <None Include="KistlApp.Common\CommonModule.cs" />
     <None Include="KistlApp.Client.WPF\AssemblyInfo.cs" />
-    <None Include="KistlApp.Client.WPF\ClientModuleWPF.cs" />
+    <None Include="KistlApp.Client.WPF\ClientWPFModule.cs" />
     <None Include="KistlApp.Client\AssemblyInfo.cs" />
     <None Include="KistlApp.Client\ClientModule.cs" />
     <None Include="KistlApp.Bootstrapper\AssemblyInfo.cs" />

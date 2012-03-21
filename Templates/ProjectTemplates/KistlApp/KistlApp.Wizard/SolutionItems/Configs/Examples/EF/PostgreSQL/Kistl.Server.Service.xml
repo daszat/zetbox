@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
+  <Server StartServer="true">
+    <ConnectionStrings>
+      <Database Name="Kistl" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=$databasename$;User Id=zbox;Password=</Database>
+    </ConnectionStrings>
+    <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenBinaryOutputPath>
+      <string>bin\Debug</string>
+    </CodeGenBinaryOutputPath>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
+      <Module>Kistl.API.Common.ApiCommonModule, Kistl.API.Common</Module>
+      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
+      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
+      <Module>Kistl.Objects.EfModule, Kistl.Objects.EfImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.Ef.EfProvider, Kistl.DalProvider.Ef</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+
+      <!-- Development/Master Server modules -->
+      <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
+      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
+      <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
+      <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
+      <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
+
+      <Module>Kistl.API.Server.PerfCounter.PerfMonAppender+Module, Kistl.API.Server</Module>
+    </Modules>
+  </Server>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Server\Core</string>
+    <string>Server\EF</string>
+    <string>Server\EF.Generated</string>
+    <string>Server\EF.Fallback</string>
+    <string>Server\NH</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\App.ZBox</string>
+  </AssemblySearchPaths>
+</KistlConfig>
