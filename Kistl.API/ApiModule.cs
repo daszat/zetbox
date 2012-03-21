@@ -46,6 +46,11 @@ namespace Kistl.API
                 .RegisterType<ServiceControlManager>()
                 .As<IServiceControlManager>()
                 .SingleInstance();
+
+            builder
+                .RegisterType<DefaultFileOpener>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
         }
     }
 }

@@ -11,8 +11,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public class DtoTabbedViewModel : DtoGroupedViewModel
     {
-        public DtoTabbedViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, object debugInfo)
-            : base(dependencies, dataCtx, parent, debugInfo)
+        public DtoTabbedViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, object debugInfo)
+            : base(dependencies, dataCtx, parent, fileOpener, debugInfo)
         {
         }
     }

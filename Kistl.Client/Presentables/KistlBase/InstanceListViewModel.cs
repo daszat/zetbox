@@ -34,12 +34,14 @@ namespace Kistl.Client.Presentables.KistlBase
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, ViewModel parent, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 
         protected readonly Func<IKistlContext> workingCtxFactory;
+        protected readonly IFileOpener fileOpener;
 
         /// <summary>
         /// Initializes a new instance of the DataTypeViewModel class.
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="config"></param>
+        /// <param name="fileOpener"></param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">Parent ViewModel</param>
         /// <param name="workingCtxFactory">A factory for creating a working context. If the InstanceList is embedded in a workspace which the user has to submit manually, the factory should return the same context as passed in the dataCtx parameter.</param>
@@ -48,6 +50,7 @@ namespace Kistl.Client.Presentables.KistlBase
         public InstanceListViewModel(
             IViewModelDependencies appCtx,
             KistlConfig config,
+            IFileOpener fileOpener,
             IKistlContext dataCtx, ViewModel parent,
             Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
@@ -57,6 +60,8 @@ namespace Kistl.Client.Presentables.KistlBase
             if (dataCtx == null) throw new ArgumentNullException("dataCtx");
             if (workingCtxFactory == null) throw new ArgumentNullException("workingCtxFactory");
             if (type == null) throw new ArgumentNullException("type");
+            if (fileOpener == null) throw new ArgumentNullException("fileOpener");
+            this.fileOpener = fileOpener;
 
             _type = type;
             if (qry == null)
@@ -660,7 +665,7 @@ namespace Kistl.Client.Presentables.KistlBase
             pdf.RenderDocument();
             pdf.Save(filename);
 
-            new FileInfo(filename).ShellExecute();
+            fileOpener.ShellExecute(filename);
         }
 
         private ICommandViewModel _ExportCommand = null;
@@ -725,7 +730,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
 
-            new FileInfo(tmpFile).ShellExecute();
+            fileOpener.ShellExecute(tmpFile);
         }
 
         private ICommandViewModel _ExportContainerCommand = null;
