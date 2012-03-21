@@ -8,7 +8,7 @@ namespace $safeprojectname$
     using Autofac;
     using Kistl.API;
 
-	public class CommonModule : Module
+    public class CommonModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {

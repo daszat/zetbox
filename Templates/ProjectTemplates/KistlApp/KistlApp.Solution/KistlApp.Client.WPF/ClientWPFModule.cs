@@ -10,7 +10,7 @@ namespace $safeprojectname$
     using Kistl.API.Client;
     using Kistl.Client;
 
-	public class ClientWPFModule : Module
+    public class ClientWPFModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
