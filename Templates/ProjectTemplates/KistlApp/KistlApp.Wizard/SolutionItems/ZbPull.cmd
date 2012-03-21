@@ -10,7 +10,7 @@ if .%2. == .. GOTO FAIL
 set source=%1
 set destination=%2
 
-robocopy %source%\bin\Debug %destination% /MIR /XD Core.Generated NH.Generated EF.Generated EF EF.Fallback
+robocopy %source%\bin\Debug %destination% /MIR /XD Core.Generated NH.Generated EF.Generated
 rem errorlevel 8 or higher indicates errors
 IF ERRORLEVEL 8 GOTO FAIL
 

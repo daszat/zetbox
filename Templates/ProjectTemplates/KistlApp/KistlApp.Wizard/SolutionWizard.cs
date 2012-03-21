@@ -87,7 +87,8 @@ namespace KistlApp.Wizard
             if (MessageBox.Show("Fetch and install ZetBox?", "Installation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ShellExecute("ZbPullPrebuiltBinaries.cmd");
-                ShellExecute("ZbDeployAll.cmd");
+                ShellExecute("ZbInstall.cmd"); // not needed when Zbreset uses PrepareEnv.exe
+                ShellExecute("ZbResetAll.cmd");
             }
         }
 
@@ -178,17 +179,19 @@ namespace KistlApp.Wizard
             {
                 if (res.Contains(".SolutionItems."))
                 {
-                    // KistlApp.Wizard.SolutionItems.Configs.test.xml
+                    // KistlApp.Wizard.SolutionItems.Configs.test___a.xml
                     var relFilePath = res.Substring(res.IndexOf(".SolutionItems.") + ".SolutionItems.".Length);
-                    // Configs.test.xml
+                    // Configs.test___a.xml
                     var ext = Path.GetExtension(relFilePath);
                     // .xml
                     relFilePath = relFilePath.Substring(0, relFilePath.Length - ext.Length);
-                    // Configs.test
+                    // Configs.test___a
                     relFilePath = relFilePath.Replace('.', '\\');
-                    // Configs\test
+                    // Configs\test___a
                     relFilePath = relFilePath + ext;
-                    // Configs\test.xml
+                    // Configs\test___a.xml
+                    relFilePath = relFilePath.Replace("___", ".");
+                    // Configs\test.a.xml
                     var destFilePath = Path.Combine(_solutionFolder, relFilePath);
                     var folder = Path.GetDirectoryName(destFilePath);
                     if (!Directory.Exists(folder))

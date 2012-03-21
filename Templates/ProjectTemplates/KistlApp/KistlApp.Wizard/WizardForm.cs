@@ -88,6 +88,7 @@ namespace KistlApp.Wizard
             {
                 if (rbSQLServer.Checked)
                 {
+                    SqlConnection.ClearAllPools();
                     using (var db = new SqlConnection(txtConnectionString.Text))
                     {
                         db.Open();
@@ -95,6 +96,7 @@ namespace KistlApp.Wizard
                 }
                 else
                 {
+                    NpgsqlConnection.ClearAllPools();
                     using (var db = new NpgsqlConnection(txtConnectionString.Text))
                     {
                         db.Open();
@@ -121,6 +123,7 @@ namespace KistlApp.Wizard
             {
                 if (rbSQLServer.Checked)
                 {
+                    SqlConnection.ClearAllPools();
                     var cb = new SqlConnectionStringBuilder(txtConnectionString.Text);
                     var dbname = cb.InitialCatalog;
                     cb.InitialCatalog = "master";
@@ -133,6 +136,7 @@ namespace KistlApp.Wizard
                 }
                 else
                 {
+                    NpgsqlConnection.ClearAllPools();
                     var cb = new NpgsqlConnectionStringBuilder(txtConnectionString.Text);
                     var dbname = cb.Database;
                     cb.Database = "postgres";

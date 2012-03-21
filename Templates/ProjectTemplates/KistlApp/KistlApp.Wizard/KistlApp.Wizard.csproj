@@ -94,27 +94,31 @@
     <EmbeddedResource Include="SolutionItems\ZbDeployAll.cmd" />
     <EmbeddedResource Include="SolutionItems\ZbPublishAll.cmd" />
     <EmbeddedResource Include="SolutionItems\ZbResetAll.cmd" />
+    <EmbeddedResource Include="SolutionItems\StartClient.cmd" />
+    <EmbeddedResource Include="SolutionItems\StartServer.cmd" />
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl.Server.HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl.Server.Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Kistl.Server.HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Kistl.Server.Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\Kistl.Client.WPF.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Kistl.Server.HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Kistl.Server.Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Kistl.Server.HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Kistl.Server.Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Kistl___Server___Service.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl.Client.WPF.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl.Server.HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl.Server.Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Kistl___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\Kistl___Client___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Kistl___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Kistl___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Kistl___Server___Service.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl___Client___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl___Server___Service.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
