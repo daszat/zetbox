@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>KistlApp.Client.Tests</Name>
+    <Description>This assembly contains client-side unit- and integration-tests.</Description>
+    <Icon>KistlApp.Client.Tests.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>fb6879d0-c15c-4743-ae45-e1f1e6d8c90c</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>KistlApp.Client.Tests</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">Integration\BasicTests.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>KistlApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
+    <FullClassName>KistlApp.Wizard.ProjectWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

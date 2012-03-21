@@ -60,6 +60,8 @@
     <None Include="KistlApp.Client\ClientModule.cs" />
     <None Include="KistlApp.Bootstrapper\AssemblyInfo.cs" />
     <None Include="KistlApp.Bootstrapper\Bootstrapper.cs" />
+    <None Include="KistlApp.Client.Tests\AssemblyInfo.cs" />
+    <None Include="KistlApp.Client.Tests\Integration\BasicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +114,11 @@
       <SubType>Designer</SubType>
     </VSTemplate>
     <None Include="KistlApp.Bootstrapper\KistlApp.Bootstrapper.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="KistlApp.Client.Tests\KistlApp.Client.Tests.ico" />
+    <Content Include="KistlApp.Client.Tests\KistlApp.Client.Tests.vstemplate" />
+    <Content Include="KistlApp.Client.Tests\ProjectTemplate.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\VSSDK\Microsoft.VsSDK.targets" />

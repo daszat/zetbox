@@ -16,10 +16,10 @@
       <ProjectTemplateLink ProjectName="$safeprojectname$.Bootstrapper">KistlApp.Bootstrapper\KistlApp.Bootstrapper.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Common">KistlApp.Common\KistlApp.Common.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Client">KistlApp.Client\KistlApp.Client.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.Client.Tests">KistlApp.Client.Tests\KistlApp.Client.Tests.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Client.WPF">KistlApp.Client.WPF\KistlApp.Client.WPF.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Server">KistlApp.Server\KistlApp.Server.vstemplate</ProjectTemplateLink>
     </ProjectCollection>
-
   </TemplateContent>
   <WizardExtension>
     <Assembly>KistlApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
