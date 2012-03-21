@@ -10,10 +10,10 @@ namespace Kistl.DalProvider.NHibernate.Generator
     using Kistl.Generator;
     using System.Collections.Specialized;
 
-    public class NhGenerator
+    public class NHibernateGenerator
         : AbstractBaseGenerator
     {
-        public NhGenerator(IEnumerable<ISchemaProvider> schemaProviders)
+        public NHibernateGenerator(IEnumerable<ISchemaProvider> schemaProviders)
             : base(schemaProviders)
         {
         }

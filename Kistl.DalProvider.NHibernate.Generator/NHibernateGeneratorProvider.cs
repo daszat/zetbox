@@ -8,7 +8,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
     using Autofac;
     using Kistl.Generator;
 
-    public sealed class NhGeneratorProvider
+    public sealed class NHibernateGeneratorProvider
         : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -16,7 +16,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
             base.Load(builder);
 
             builder
-                .RegisterType<NhGenerator>()
+                .RegisterType<NHibernateGenerator>()
                 .As<AbstractBaseGenerator>()
                 .SingleInstance();
         }

@@ -70,8 +70,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NhGenerator.cs" />
-    <Compile Include="NhGeneratorProvider.cs" />
+    <Compile Include="NHibernateGenerator.cs" />
+    <Compile Include="NHibernateGeneratorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
