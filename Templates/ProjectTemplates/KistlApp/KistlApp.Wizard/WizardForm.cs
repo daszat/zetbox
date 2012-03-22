@@ -39,7 +39,7 @@ namespace KistlApp.Wizard
             ORMapperClassName = rbEF.Checked ? "Ef" : "NHibernate";
             ORMapperModule = rbEF.Checked ? "EF" : "NH";
             Schema = rbSQLServer.Checked ? "MSSQL" : "POSTGRESQL";
-            Provider = rbSQLServer.Checked ? "NHibernate.Dialect.MsSql2005Dialect" : "Npgsql";
+            Provider = rbSQLServer.Checked ? "NHibernate.Dialect.MsSql2005Dialect" : "NHibernate.Dialect.PostgreSQL82Dialect";
 
             if (rbSQLServer.Checked)
             {
@@ -144,17 +144,27 @@ namespace KistlApp.Wizard
                     using (var db = new NpgsqlConnection(cb.ToString()))
                     {
                         db.Open();
-                        var cmd = new NpgsqlCommand(string.Format("CREATE DATABASE [{0}];", dbname), db);
+                        var cmd = new NpgsqlCommand(string.Format("CREATE DATABASE \"{0}\";", dbname), db);
+                        cmd.ExecuteNonQuery();
+                    }
+                    cb.Database = dbname;
+                    using (var db = new NpgsqlConnection(cb.ToString()))
+                    {
+                        db.Open();
+                        var cmd = new NpgsqlCommand(@"CREATE OR REPLACE FUNCTION uuid_generate_v4()
+RETURNS uuid
+AS '$libdir/uuid-ossp', 'uuid_generate_v4'
+VOLATILE STRICT LANGUAGE C;", db);
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                MessageBox.Show("Success", "Test connection", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Success", "Database creation", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error connecting to database:\n" + ex.Message,
-                    "Test connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    "Database creation", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
