@@ -13,7 +13,7 @@ namespace KistlApp.Solution.KistlApp.Client.Tests.Integration
         [Test]
         public void ConnectionTest()
         {
-            var ctx = GetClientContext();
+            var ctx = GetContext();
             var result = ctx.GetQuery<ObjectClass>().FirstOrDefault();
             Assert.That(result, Is.Not.Null);
         }
