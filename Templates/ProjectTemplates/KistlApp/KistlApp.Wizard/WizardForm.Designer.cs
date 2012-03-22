@@ -53,7 +53,7 @@ namespace KistlApp.Wizard
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 0;
-            this.btnNext.Text = "Next >>";
+            this.btnNext.Text = "Create >>";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
