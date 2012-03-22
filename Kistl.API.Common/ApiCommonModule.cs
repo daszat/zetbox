@@ -14,11 +14,6 @@ namespace Kistl.API.Common
             base.Load(builder);
 
             builder
-                .RegisterType<ServiceControlManager>()
-                .As<IServiceControlManager>()
-                .SingleInstance();
-
-            builder
                 .RegisterType<CachingMetaDataResolver>()
                 .As<CachingMetaDataResolver>()
                 .As<IMetaDataResolver>()

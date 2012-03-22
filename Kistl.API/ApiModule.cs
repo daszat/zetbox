@@ -41,6 +41,11 @@ namespace Kistl.API
                 .AssignableTo<CmdLineData>()
                 .As<Option>()
                 .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<ServiceControlManager>()
+                .As<IServiceControlManager>()
+                .SingleInstance();
         }
     }
 }

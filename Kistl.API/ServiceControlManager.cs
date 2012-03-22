@@ -1,22 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Kistl.API.Utils;
 
-namespace Kistl.API.Common
+namespace Kistl.API
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Autofac;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-
-    public interface IServiceControlManager
-    {
-        void Start();
-        void Stop();
-    }
-
     public class ServiceControlManager : IServiceControlManager
     {
         private readonly IEnumerable<IService> _services;

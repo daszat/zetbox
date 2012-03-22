@@ -16,4 +16,10 @@ namespace Kistl.API
         string DisplayName { get; }
         string Description { get; }
     }
+
+    public interface IServiceControlManager
+    {
+        void Start();
+        void Stop();
+    }
 }

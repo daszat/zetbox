@@ -85,6 +85,7 @@
     <Compile Include="IKistlService.cs" />
     <Compile Include="IPackageProvider.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="ServiceControlManager.cs" />
     <Compile Include="KistlContextDebugger.cs" />
     <Compile Include="KistlGeneratedVersion.cs" />
     <Compile Include="LinqExtensions.cs" />

@@ -16,7 +16,6 @@ namespace Kistl.Client.WPF
     using Autofac.Features.Metadata;
     using Kistl.API;
     using Kistl.API.Client;
-    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
