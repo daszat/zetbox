@@ -53,13 +53,13 @@ namespace KistlApp.Wizard
             {
                 var cb = new SqlConnectionStringBuilder(txtConnectionString.Text);
                 DatabaseName = cb.InitialCatalog;
-                DatabaseUser = cb.UserID;
+                DatabaseUser = string.IsNullOrEmpty(cb.UserID) ? "zbox" : cb.UserID;
             }
             else
             {
                 var cb = new NpgsqlConnectionStringBuilder(txtConnectionString.Text);
                 DatabaseName = cb.Database;
-                DatabaseUser = cb.UserName;
+                DatabaseUser = string.IsNullOrEmpty(cb.UserName) ? "zbox" : cb.UserName;
             }
 
             this.DialogResult = DialogResult.OK;

@@ -84,12 +84,25 @@ namespace KistlApp.Wizard
             MoveProjects();
             ExtractSolutionItems();
             SetProjectReferences();
+            SetupConfigurationManager();
 
             if (MessageBox.Show("Fetch and install ZetBox?", "Installation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ShellExecute("ZbPullPrebuiltBinaries.cmd");
                 ShellExecute("ZbInstall.cmd"); // not needed when Zbreset uses PrepareEnv.exe
                 ShellExecute("ZbResetAll.cmd");
+            }
+        }
+
+        private void SetupConfigurationManager()
+        {
+            var config = _solution.SolutionBuild.SolutionConfigurations.Item("Linux.Debug");
+            foreach (SolutionContext ctx in config.SolutionContexts)
+            {
+                if (ctx.ProjectName.EndsWith(".Client.WPF.csproj"))
+                {
+                    ctx.ShouldBuild = false;
+                }
             }
         }
 
