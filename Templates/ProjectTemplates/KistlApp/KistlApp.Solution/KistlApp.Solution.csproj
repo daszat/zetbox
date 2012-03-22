@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="KistlApp.Client.Tests\App.config" />
     <None Include="KistlApp.Server\AssemblyInfo.cs" />
     <None Include="KistlApp.Server\ServerModule.cs" />
     <None Include="KistlApp.Common\AssemblyInfo.cs" />
