@@ -28,7 +28,7 @@
       <!-- Development/Master Server modules -->
       <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
-      <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
+      <Module>Kistl.DalProvider.NHibernate.Generator.NHibernateGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
     </Modules>
