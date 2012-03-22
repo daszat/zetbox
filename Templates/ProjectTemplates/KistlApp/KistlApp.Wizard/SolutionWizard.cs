@@ -192,27 +192,24 @@ namespace KistlApp.Wizard
                     // Configs\test___a.xml
                     relFilePath = relFilePath.Replace("___", ".");
                     // Configs\test.a.xml
-                    var destFilePath = Path.Combine(_solutionFolder, relFilePath);
+                    var destFilePath = Path.Combine(_solutionFolder, ExpandMacros(relFilePath));
                     var folder = Path.GetDirectoryName(destFilePath);
                     if (!Directory.Exists(folder))
                         Directory.CreateDirectory(folder);
 
                     using (var s = assembly.GetManifestResourceStream(res))
                     {
-                        if (".xml".Equals(ext, StringComparison.InvariantCultureIgnoreCase) || 
+                        if (".xml".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".txt".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".cmd".Equals(ext, StringComparison.InvariantCultureIgnoreCase))
                         {
                             var sr = new StreamReader(s);
                             var content = sr.ReadToEnd();
 
-                            foreach (var keyVal in _replacementsDictionary)
-                            {
-                                content = content.Replace(keyVal.Key, keyVal.Value);
-                            }
+                            content = ExpandMacros(content);
 
                             using (var fs = File.CreateText(destFilePath))
-                            {                                
+                            {
                                 fs.BaseStream.SetLength(0);
                                 fs.Write(content);
                             }
@@ -228,6 +225,15 @@ namespace KistlApp.Wizard
                     }
                 }
             }
+        }
+
+        private string ExpandMacros(string content)
+        {
+            foreach (var keyVal in _replacementsDictionary)
+            {
+                content = content.Replace(keyVal.Key, keyVal.Value);
+            }
+            return content;
         }
 
         private void MoveProjectToDirectory(Project project, string destinationDirectory)
