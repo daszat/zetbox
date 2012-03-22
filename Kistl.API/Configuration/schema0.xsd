@@ -7,7 +7,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="ConfigName" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="Server" type="tns:ServerConfig" />
       <xs:element minOccurs="0" maxOccurs="1" name="Client" type="tns:ClientConfig" />
-      <xs:element minOccurs="0" maxOccurs="1" name="AssemblySearchPaths" type="tns:ArrayOfString" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AssemblySearchPaths" type="tns:AssemblySearchPaths" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ServerConfig">
@@ -70,5 +70,11 @@
     </xs:sequence>
     <xs:attribute name="StartClient" type="xs:boolean" use="required" />
     <xs:attribute name="ThrowErrors" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="AssemblySearchPaths">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="enableShadowCopy" type="xs:boolean" use="required" />
   </xs:complexType>
 </xs:schema>

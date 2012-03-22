@@ -82,8 +82,23 @@ namespace Kistl.API.Configuration
         /// Location (Path) to Assemblies
         /// <see cref="AssemblyLoader.SearchPath"/>
         /// </summary>
-        [XmlArray(IsNullable = false)]
-        public string[] AssemblySearchPaths { get; set; }
+        [XmlElement(IsNullable = false)]
+        public AssemblySearchPathArray AssemblySearchPaths { get; set; }
+
+        [XmlType("AssemblySearchPaths")]
+        [Serializable]
+        public class AssemblySearchPathArray
+        {
+            public AssemblySearchPathArray()
+            {
+                EnableShadowCopy = true;
+            }
+
+            [XmlAttribute("enableShadowCopy")]
+            public bool EnableShadowCopy { get; set; }
+            [XmlElement("string")]
+            public string[] Paths { get; set; }
+        }
 
         /// <summary>
         /// These additional command line options are filled while parsing the commandline.

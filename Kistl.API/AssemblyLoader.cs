@@ -73,7 +73,7 @@ namespace Kistl.API
 
                 Log.DebugFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
                 InitialiseTargetAssemblyFolder(config);
-                InitialiseSearchPath(config.AssemblySearchPaths);
+                InitialiseSearchPath(config.AssemblySearchPaths.Paths);
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
@@ -97,18 +97,26 @@ namespace Kistl.API
         /// <param name="config">must not be null</param>
         private static void InitialiseTargetAssemblyFolder(KistlConfig config)
         {
-            TargetAssemblyFolder = Path.Combine(config.WorkingFolder, "bin");
-            Directory.CreateDirectory(TargetAssemblyFolder);
+            EnableShadowCopy = config.AssemblySearchPaths.EnableShadowCopy;
+            if (EnableShadowCopy)
+            {
+                TargetAssemblyFolder = Path.Combine(config.WorkingFolder, "bin");
+                Directory.CreateDirectory(TargetAssemblyFolder);
 
-            // Delete stale Assemblies
-            try
-            {
-                Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
-                Log.InfoFormat("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
+                // Delete stale Assemblies
+                try
+                {
+                    Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
+                    Log.InfoFormat("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
+                }
+                catch (Exception ex)
+                {
+                    Log.WarnFormat("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Log.WarnFormat("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
+                Log.Info("Shadow copy has been disabled");
             }
         }
 
@@ -116,6 +124,7 @@ namespace Kistl.API
         /// Gets the Target Assembly Folder. Directory is created if it does not exist.
         /// </summary>
         public static string TargetAssemblyFolder { get; private set; }
+        public static bool EnableShadowCopy { get; private set; }
 
         static AssemblyLoader()
         {
@@ -245,36 +254,45 @@ namespace Kistl.API
                     // Copy files to destination folder, unless the target file exists
                     // the folder should have been cleared on initialisation and once
                     // an assembly is loaded, we cannot re-load the assembly anyways.
-                    string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
-                    Log.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
-                    try
+                    string dllToLoad;
+                    if (EnableShadowCopy)
                     {
-                        if (!File.Exists(targetDll))
+                        dllToLoad = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
+                        Log.DebugFormat("Loading {0} (from {1}){2}", sourceDll, dllToLoad, reflectOnly ? " for reflection" : String.Empty);
+                        try
                         {
-                            File.Copy(sourceDll, targetDll, true);
-                            // Also copy .PDB Files.
-                            string sourcePDBFile = PdbFromDll(sourceDll);
-                            string targetPDBFile = PdbFromDll(targetDll);
-                            if (File.Exists(sourcePDBFile))
+                            if (!File.Exists(dllToLoad))
                             {
-                                File.Copy(sourcePDBFile, targetPDBFile, true);
+                                File.Copy(sourceDll, dllToLoad, true);
+                                // Also copy .PDB Files.
+                                string sourcePDBFile = PdbFromDll(sourceDll);
+                                string targetPDBFile = PdbFromDll(dllToLoad);
+                                if (File.Exists(sourcePDBFile))
+                                {
+                                    File.Copy(sourcePDBFile, targetPDBFile, true);
+                                }
                             }
                         }
+                        catch (Exception ex)
+                        {
+                            Log.Warn("Error loading assembly", ex);
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Log.Warn("Error loading assembly", ex);
+                        Log.DebugFormat("Loading {0}{1}", sourceDll, reflectOnly ? " for reflection" : String.Empty);
+                        dllToLoad = sourceDll;
                     }
                     Assembly result = null;
 
                     // Finally load the Assembly
                     if (reflectOnly)
                     {
-                        result = Assembly.ReflectionOnlyLoadFrom(targetDll);
+                        result = Assembly.ReflectionOnlyLoadFrom(dllToLoad);
                     }
                     else
                     {
-                        assemblyName.CodeBase = targetDll;
+                        assemblyName.CodeBase = dllToLoad;
                         result = Assembly.Load(assemblyName);
 
                         // If the assembly could not be loaded, do nothing! Return null. 

@@ -2,13 +2,15 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Default Server Configuration</ConfigName>
   <Server StartServer="false">
-    <SchemaProvider>MSSQL</SchemaProvider>
-    <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <ConnectionStrings>
+      <Database Name="Kistl" Schema="MSSQL" Provider="NHibernate.Dialect.MsSql2005Dialect">Data Source=.\SQLEXPRESS;Initial Catalog=zbox;Integrated Security=True;MultipleActiveResultSets=true;</Database>
+    </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenBinaryOutputPath>
+      <string>bin\Debug</string>
+    </CodeGenBinaryOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
@@ -22,9 +24,10 @@
     </Modules>
   </Server>
   <Client StartClient="false" ThrowErrors="true">
+    <Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>
     <Culture></Culture>
     <UICulture></UICulture>
-    <DocumentStore>DocumentStore\Client\</DocumentStore>
+    <DevelopmentEnvironment>false</DevelopmentEnvironment>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
@@ -37,7 +40,7 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths>
+  <AssemblySearchPaths enableShadowCopy="true">
     <!-- default probe path -->
     <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
     <!-- Fallback path for local development -->
