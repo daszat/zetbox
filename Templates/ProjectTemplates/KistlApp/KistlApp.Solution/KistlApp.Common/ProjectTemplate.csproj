@@ -69,6 +69,9 @@
     <KistlFiles Include="..\Libs\Kistl\**\*.*">
       <InProject>false</InProject>
     </KistlFiles>
+    <Configs Include="..\Configs\**\*.*">
+      <InProject>false</InProject>
+    </Configs>
     <MyModules Include="..\Modules\**\*.*">
       <InProject>false</InProject>
     </MyModules>
@@ -83,6 +86,9 @@
     <Copy
       SourceFiles="@(KistlFiles)"
       DestinationFiles="@(KistlFiles->'$(KistlOutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy
+      SourceFiles="@(Configs)"
+      DestinationFiles="@(Configs->'$(KistlOutputPath)\Configs\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy
       SourceFiles="@(MyModules)"
       DestinationFiles="@(MyModules->'$(KistlOutputPath)\Modules\%(RecursiveDir)%(Filename)%(Extension)')" />
