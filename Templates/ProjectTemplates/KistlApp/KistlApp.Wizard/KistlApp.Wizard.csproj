@@ -102,7 +102,9 @@
     <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Kistl___Server___Service.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl___Server___HttpService.xml" />
