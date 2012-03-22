@@ -39,7 +39,14 @@ namespace KistlApp.Wizard
             ORMapperClassName = rbEF.Checked ? "Ef" : "NHibernate";
             ORMapperModule = rbEF.Checked ? "EF" : "NH";
             Schema = rbSQLServer.Checked ? "MSSQL" : "POSTGRESQL";
-            Provider = rbSQLServer.Checked ? "NHibernate.Dialect.MsSql2005Dialect" : "NHibernate.Dialect.PostgreSQL82Dialect";
+            if (rbEF.Checked)
+            {
+                Provider = rbSQLServer.Checked ? "System.Data.SqlClient" : "Npgsql";
+            }
+            else
+            {
+                Provider = rbSQLServer.Checked ? "NHibernate.Dialect.MsSql2005Dialect" : "NHibernate.Dialect.PostgreSQL82Dialect";
+            }
 
             if (rbSQLServer.Checked)
             {
