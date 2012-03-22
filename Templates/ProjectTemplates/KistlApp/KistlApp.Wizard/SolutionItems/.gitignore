@@ -1,0 +1,11 @@
+/bin
+/Configs/Local
+/DocumentStore
+/$safesolutionname$.Client.Tests/bin
+/Libs/Kistl/*.csv
+/Libs/Kistl/*.log
+/Libs/Kistl/*.log.*
+/Libs/LinqCube/bin
+*.suo
+*.csproj.user
+obj

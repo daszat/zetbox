@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Default Client Configuration</ConfigName>
+  <ConfigName>$safesolutionname$ Client Configuration</ConfigName>
   <Server StartServer="false">
   </Server>
   <Client StartClient="false" ThrowErrors="false">
-    <!--<Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>-->
     <Culture>de-AT</Culture>
     <UICulture>de-AT</UICulture>
     <DocumentStore>.\DocumentStore\Client\</DocumentStore>
@@ -24,9 +23,10 @@
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
       <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
 
-      <!-- application specific modules -->
-      <Module>Kistl.Parties.Client.CustomClientActionsModule, Kistl.Parties.Client</Module>
-      <Module>Kistl.Parties.Client.Tests.SqueezeModule, Kistl.Parties.Client.Tests</Module>
+      <!-- application specific modules 
+      <Module>$safesolutionname$.Client.CustomClientActionsModule, $safesolutionname$.Client</Module>
+      <Module>$safesolutionname$.Client.Tests.SqueezeModule, $safesolutionname$.Client.Tests</Module>
+      -->
     </Modules>
   </Client>
   <AssemblySearchPaths>
@@ -38,7 +38,7 @@
     <string>Common\App.ZBox</string>
     <string>Client\App.ZBox</string>
     <string>Common\Microsoft</string>
-	<string>Common\App.Ini50</string>
-	<string>Client\App.Ini50</string>
+    <string>Common\App.$safesolutionname$</string>
+    <string>Client\App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </KistlConfig>

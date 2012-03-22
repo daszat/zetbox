@@ -149,6 +149,7 @@
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Kistl___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\%24safesolutionname%24___Client___Tests.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\env.xml" />
+    <EmbeddedResource Include="SolutionItems\.gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
