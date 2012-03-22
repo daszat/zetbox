@@ -62,6 +62,7 @@ namespace KistlApp.Wizard
             {
                 replacementsDictionary.Add("$connectionstring$", dlg.ConnectinString);
                 replacementsDictionary.Add("$databasename$", dlg.DatabaseName);
+                replacementsDictionary.Add("$databaseuser$", dlg.DatabaseUser);
                 replacementsDictionary.Add("$ormapperclassname$", dlg.ORMapperClassName);
                 replacementsDictionary.Add("$ormappermodule$", dlg.ORMapperModule);
                 replacementsDictionary.Add("$schema$", dlg.Schema);

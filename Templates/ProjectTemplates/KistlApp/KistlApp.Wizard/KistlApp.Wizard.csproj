@@ -96,6 +96,10 @@
     <EmbeddedResource Include="SolutionItems\ZbResetAll.cmd" />
     <EmbeddedResource Include="SolutionItems\StartClient.cmd" />
     <EmbeddedResource Include="SolutionItems\StartServer.cmd" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Kistl___Server___Service___exe.config" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\HttpService___Web.config" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Kistl___Server___Service___exe.config" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\HttpService___Web.config" />
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +133,22 @@
     <EmbeddedResource Include="SolutionItems\Modules\%24safesolutionname%24.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\env.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\env.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\env.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Kistl___Client___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Kistl___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\env.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Kistl___Client___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Kistl___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\%24safesolutionname%24___Client___Tests.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\env.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

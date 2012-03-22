@@ -28,6 +28,7 @@ namespace KistlApp.Wizard
         public string SolutionName { get; set; }
         public string ConnectinString { get; set; }
         public string DatabaseName { get; set; }
+        public string DatabaseUser { get; set; }
         public string Schema { get; set; }
         public string Provider { get; set; }
         public string ORMapperClassName { get; set; }
@@ -52,11 +53,13 @@ namespace KistlApp.Wizard
             {
                 var cb = new SqlConnectionStringBuilder(txtConnectionString.Text);
                 DatabaseName = cb.InitialCatalog;
+                DatabaseUser = cb.UserID;
             }
             else
             {
                 var cb = new NpgsqlConnectionStringBuilder(txtConnectionString.Text);
                 DatabaseName = cb.Database;
+                DatabaseUser = cb.UserName;
             }
 
             this.DialogResult = DialogResult.OK;

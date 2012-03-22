@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>Kistl.Parties HttpService Configuration</ConfigName>
+  <Server StartServer="true">
+    <DocumentStore>..\DocumentStore\Server\</DocumentStore>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
+      <Module>Kistl.API.Common.ApiCommonModule, Kistl.API.Common</Module>
+      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
+      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
+      <Module>Kistl.Objects.EfModule, Kistl.Objects.EfImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.Ef.EfProvider, Kistl.DalProvider.Ef</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+
+      <!-- application specific modules -->
+      <Module>Kistl.Parties.Common.CustomCommonActionsModule, Kistl.Parties.Common</Module>
+      <Module>Kistl.Parties.Server.CustomServerActionsModule, Kistl.Parties.Server</Module>
+    </Modules>
+    <ClientFilesLocations>
+      <Location Name="Exe">..\Kistl.Client.WPF.exe</Location>
+      <Location Name="Configs">..\Configs\Kistl.Client.WPF.xml</Location>
+      <Location Name="Common">..\Common</Location>
+      <Location Name="Client">..\Client</Location>
+    </ClientFilesLocations>
+  </Server>
+  <AssemblySearchPaths>
+    <string>..\Common\Core</string>
+    <string>..\Common\Core.Generated</string>
+    <string>..\Server\Core</string>
+    <string>..\Server\EF</string>
+    <string>..\Server\EF.Generated</string>
+    <string>..\Common\App.ZBox</string>
+    <string>..\Server\App.ZBox</string>
+    <string>..\Server\App.Parties</string>
+    <string>..\Common\App.Parties</string>
+  </AssemblySearchPaths>
+</KistlConfig>
