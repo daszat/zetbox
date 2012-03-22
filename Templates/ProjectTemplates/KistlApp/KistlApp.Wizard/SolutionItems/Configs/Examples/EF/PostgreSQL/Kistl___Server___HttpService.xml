@@ -48,5 +48,7 @@
     <string>Server\NH</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
+    <string>Common\App.$safesolutionname$</string>
+    <string>Server\App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </KistlConfig>

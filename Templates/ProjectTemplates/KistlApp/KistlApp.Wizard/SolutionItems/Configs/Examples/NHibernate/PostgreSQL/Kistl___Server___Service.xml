@@ -6,12 +6,12 @@
       <Database Name="Kistl" Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=localhost;Port=5432;Database=$databasename$;User Id=zbox;Password=</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
-    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenWorkingPath>..\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>..\CodeGen</CodeGenOutputPath>
     <CodeGenBinaryOutputPath>
-      <string>bin\Debug</string>
+      <string>.</string>
     </CodeGenBinaryOutputPath>
-    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <CodeGenArchivePath>..\Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
@@ -52,5 +52,7 @@
     <string>Server\EF</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
+    <string>Common\App.$safesolutionname$</string>
+    <string>Server\App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </KistlConfig>

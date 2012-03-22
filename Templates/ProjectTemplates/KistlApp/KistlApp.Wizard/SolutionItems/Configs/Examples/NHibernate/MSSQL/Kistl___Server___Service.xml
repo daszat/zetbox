@@ -5,13 +5,12 @@
     <ConnectionStrings>
       <Database Name="Kistl" Schema="MSSQL" Provider="NHibernate.Dialect.MsSql2005Dialect">Data Source=.\SQLEXPRESS;Initial Catalog=$databasename$;Integrated Security=True;MultipleActiveResultSets=true;</Database>
     </ConnectionStrings>
-    <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
-    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenWorkingPath>..\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>..\CodeGen</CodeGenOutputPath>
     <CodeGenBinaryOutputPath>
-      <string>bin\Debug</string>
+      <string>.</string>
     </CodeGenBinaryOutputPath>
-    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <CodeGenArchivePath>..\Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
@@ -46,5 +45,7 @@
     <string>Server\EF</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
+    <string>Common\App.$safesolutionname$</string>
+    <string>Server\App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </KistlConfig>

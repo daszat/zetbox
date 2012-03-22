@@ -21,8 +21,8 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
-	  <Module>Kistl.Microsoft.Module, Kistl.Microsoft</Module>
-	  <Module>Kistl.Microsoft.OutlookMailSender+Module, Kistl.Microsoft</Module>
+      <Module>Kistl.Microsoft.Module, Kistl.Microsoft</Module>
+      <Module>Kistl.Microsoft.OutlookMailSender+Module, Kistl.Microsoft</Module>
       <Module>Kistl.API.MailProblemReporter+Module, Kistl.API</Module>
       <Module>Kistl.App.Projekte.DocumentManagement.FileImportService+Module, Kistl.App.Projekte.Common</Module>
 
@@ -40,5 +40,7 @@
     <string>Common\App.ZBox</string>
     <string>Client\App.ZBox</string>
     <string>Common\Microsoft</string>
+    <string>Common\App.$safesolutionname$</string>
+    <string>Client\App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </KistlConfig>
