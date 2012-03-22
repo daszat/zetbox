@@ -15,15 +15,15 @@ set config=%1
 
 call "ZbInstall.cmd" %config%
 
-bin\debug\Kistl.Server.Service.exe %config% -deploy-local -updatedeployedschema -repairschema
-IF ERRORLEVEL 1 GOTO FAIL
+cd bin\Debug
 
-bin\debug\Kistl.Server.Service.exe %config% -generate
+Kistl.Server.Service.exe %config% -deploy-update
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************
+cd ..\..
 GOTO EOF
 
 :FAIL
@@ -31,6 +31,7 @@ echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo                                  Aborting Deploy
+cd ..\..
 rem return error without closing parent shell
 echo A | choice /c:A /n
 
