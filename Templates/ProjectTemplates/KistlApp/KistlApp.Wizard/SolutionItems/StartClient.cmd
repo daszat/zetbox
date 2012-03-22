@@ -3,4 +3,5 @@ echo ***************************************************************************
 echo Run the development client.
 echo ********************************************************************************
 
-start bin\debug\Kistl.Client.WPF.exe
+cd bin\Debug
+start Kistl.Client.WPF.exe
