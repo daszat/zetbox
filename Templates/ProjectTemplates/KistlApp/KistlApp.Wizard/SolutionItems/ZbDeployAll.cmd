@@ -17,7 +17,7 @@ call "ZbInstall.cmd" %config%
 
 cd bin\Debug
 
-Kistl.Server.Service.exe %config% -deploy-update
+Kistl.Server.Service.exe %config% -deploy-update -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

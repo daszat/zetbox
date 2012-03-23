@@ -12,7 +12,7 @@ set config=%1
 
 :GOON
 
-Libs\Kistl\Kistl.Server.Service.exe %config% -wipe -deploy-update -syncidentities
+Libs\Kistl\Kistl.Server.Service.exe %config% -wipe -deploy-update -generate -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

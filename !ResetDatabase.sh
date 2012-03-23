@@ -6,7 +6,8 @@ echo '**************************************************************************
 
 mono --debug bin/Debug/Kistl.Server.Service.exe Configs/$zenv/Kistl.Server.Service.xml \
 	-wipe \
-	-deploy-update
+	-deploy-update \
+	-generate
 
 echo '********************************************************************************'
 echo '************************************ Success ***********************************'

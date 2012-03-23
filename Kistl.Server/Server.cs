@@ -114,10 +114,6 @@ namespace Kistl.Server
                 UpdateSchema(files);
                 Deploy(files);
                 CheckSchema(true);               
-                using (var subContainer = container.BeginLifetimeScope())
-                {
-                    subContainer.Resolve<Compiler>().GenerateCode();
-                }
             }
         }
 

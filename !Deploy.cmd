@@ -13,7 +13,7 @@ set config=%1
 
 :GOON
 
-bin\debug\Kistl.Server.Service.exe %config% -deploy-update
+bin\debug\Kistl.Server.Service.exe %config% -deploy-update -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************
