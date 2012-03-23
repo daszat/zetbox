@@ -879,7 +879,7 @@ namespace Kistl.DalProvider.Client
         {
             get
             {
-                return Path.Combine(config.WorkingFolder, "DocumentCache");
+                return Path.Combine(config.TempFolder, "DocumentCache");
             }
         }
 

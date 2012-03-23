@@ -100,7 +100,7 @@ namespace Kistl.API
             EnableShadowCopy = config.AssemblySearchPaths.EnableShadowCopy;
             if (EnableShadowCopy)
             {
-                TargetAssemblyFolder = Path.Combine(config.WorkingFolder, "bin");
+                TargetAssemblyFolder = Path.Combine(config.TempFolder, "bin");
                 Directory.CreateDirectory(TargetAssemblyFolder);
 
                 // Delete stale Assemblies

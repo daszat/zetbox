@@ -401,21 +401,21 @@ namespace Kistl.API.Configuration
         }
 
         /// <summary>
-        /// The WorkingFolder of this application contains all local state of the app.
-        /// The Path is [LocalApplicationData]\dasz\Kistl\[Current Configuration Name]\[AppDomain.FriendlyName]\
+        /// The TempFolder of this application contains all local state of the app.
+        /// The Path is [TEMPPATH]\dasz\zetbox\[Current Configuration Name]\[AppDomain.FriendlyName]\
         /// </summary>
         /// <remarks>
-        /// eg.: C:\Users\Arthur\AppData\Local\dasz\Kistl\Arthur's Configuration\Kistl.Client.exe\
+        /// eg.: C:\Temp\dasz\zetbox\Arthur's Configuration\Kistl.Client.exe\
         /// </remarks>
         [XmlIgnore]
-        public string WorkingFolder
+        public string TempFolder
         {
             get
             {
-                string workingFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string workingFolder = Path.GetTempPath();
 
                 workingFolder = Path.Combine(workingFolder, "dasz");
-                workingFolder = Path.Combine(workingFolder, "zbox");
+                workingFolder = Path.Combine(workingFolder, "zetbox");
                 workingFolder = Path.Combine(workingFolder, Helper.GetLegalFileName(this.ConfigName));
 
                 // TODO: very bad idea because this may change when passing the config between AppDomains
