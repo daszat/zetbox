@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EnvConfig Version="1.0">
+  <BinarySource>Libs\Kistl</BinarySource>
+  <BinaryTarget>bin\Debug</BinaryTarget>
+
+  <DatabaseSource Schema="EMPTY" />
+  <DatabaseTarget Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=localhost;Port=5432;Database=example;User Id=example;Password=foobar</DatabaseTarget>
+</EnvConfig>

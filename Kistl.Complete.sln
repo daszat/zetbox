@@ -247,6 +247,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.HttpService", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Microsoft", "Kistl.Microsoft\Kistl.Microsoft.csproj", "{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepareEnv", "PrepareEnv\PrepareEnv.csproj", "{39C24036-DD89-40C7-8196-1E7D3A817D5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -1257,6 +1259,24 @@ Global
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|x86.ActiveCfg = Release|Any CPU
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Debug|.NET.ActiveCfg = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Debug|x86.ActiveCfg = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Debug|x86.Build.0 = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Linux.Debug|.NET.ActiveCfg = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Linux.Debug|Any CPU.ActiveCfg = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Linux.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Linux.Debug|x86.ActiveCfg = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Linux.Debug|x86.Build.0 = Debug|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Release|.NET.ActiveCfg = Release|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Release|Any CPU.ActiveCfg = Release|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Release|x86.ActiveCfg = Release|x86
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EnvConfig Version="1.0">
+  <BinarySource>artifactsDir</BinarySource>
+  <BinaryTarget>bin/Debug/Tests</BinaryTarget>
+
+  <!-- mirrors production database for tests -->
+  <DatabaseSource Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=pg-server;Port=5432;Database=example;User Id=example;Password=foobar</DatabaseSource>
+  <DatabaseTarget Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=jenkins;Port=5432;Database=example_test;User Id=example;Password=foobar</DatabaseTarget>
+</EnvConfig>

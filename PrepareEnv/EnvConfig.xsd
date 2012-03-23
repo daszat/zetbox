@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="EnvConfig">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ConfigSource" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="BinarySource" type="xs:string" />
+        <xs:element name="BinaryTarget" type="xs:string" />
+        <xs:element name="DatabaseSource">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="Schema" type="xs:string" use="required" />
+                <xs:attribute name="Provider" type="xs:string" use="required" />
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DatabaseTarget">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="Schema" type="xs:string" use="required" />
+                <xs:attribute name="Provider" type="xs:string" use="required" />
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AppServer">
+          <xs:complexType>
+            <xs:attribute name="Type" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Version" type="xs:decimal" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

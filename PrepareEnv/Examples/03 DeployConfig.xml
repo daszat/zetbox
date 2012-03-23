@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EnvConfig Version="1.0">
+  <BinarySource>artifactsDir</BinarySource>
+  <ConfigSource>/srv/zetbox/ExampleAppConfigs</ConfigSource>
+  
+  <BinaryTarget>/srv/zetbox/ExampleApp</BinaryTarget>
+
+  <DatabaseTarget Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=pg-server;Port=5432;Database=example;User Id=example;Password=foobar</DatabaseTarget>
+
+  <AppServer Type="xsp"/>
+</EnvConfig>
