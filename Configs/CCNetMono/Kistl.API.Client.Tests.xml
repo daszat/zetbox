@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Client.API's Test Configuration</ConfigName>
-  <Client StartClient="false" ThrowErrors="true">
-    <DocumentStore>DocumentStore/Client/</DocumentStore>
-  </Client>
-</KistlConfig>

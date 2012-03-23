@@ -1,17 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Default Server Configuration</ConfigName>
+  <ConfigName>zetbox Server Configuration</ConfigName>
   <Server StartServer="true">
-    <ConnectionStrings>
-      <Database Name="Kistl" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=zbox;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
-    </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
-    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenWorkingPath>..\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>..\CodeGen</CodeGenOutputPath>
     <CodeGenBinaryOutputPath>
-      <string>bin\Debug</string>
+      <string>.</string>
     </CodeGenBinaryOutputPath>
-    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <CodeGenArchivePath>..\..\Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
@@ -25,23 +22,15 @@
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
 
-      <!-- Development/Master Server modules -->
-      <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
-      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
-      <Module>Kistl.DalProvider.NHibernate.Generator.NHibernateGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
-      <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
-      <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
+      <!-- application specific modules -->
     </Modules>
   </Server>
   <AssemblySearchPaths>
     <string>Common\Core</string>
     <string>Common\Core.Generated</string>
-    <string>Common\Core.Fallback</string>
     <string>Server\Core</string>
     <string>Server\EF</string>
     <string>Server\EF.Generated</string>
-    <string>Server\EF.Fallback</string>
-    <string>Server\NH</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
   </AssemblySearchPaths>
