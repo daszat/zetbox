@@ -27,8 +27,8 @@
       <Module>Kistl.App.Projekte.DocumentManagement.FileImportService+Module, Kistl.App.Projekte.Common</Module>
 
       <!-- application specific modules -->
-      <Module>Kistl.Parties.Common.CustomCommonActionsModule, Kistl.Parties.Common</Module>
-      <Module>Kistl.Parties.Client.CustomClientActionsModule, Kistl.Parties.Client</Module>
+      <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
+      <Module>$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>
@@ -39,8 +39,8 @@
     <string>Client\WPF</string>
     <string>Common\App.ZBox</string>
     <string>Client\App.ZBox</string>
-    <string>Common\App.Parties</string>
-    <string>Client\App.Parties</string>
+    <string>Common\App.$safesolutionname$</string>
+    <string>Client\App.$safesolutionname$</string>
     <string>Common\Microsoft</string>
   </AssemblySearchPaths>
 </KistlConfig>

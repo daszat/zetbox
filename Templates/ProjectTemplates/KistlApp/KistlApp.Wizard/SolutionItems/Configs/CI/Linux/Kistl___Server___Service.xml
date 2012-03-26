@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.Parties Server Configuration</ConfigName>
+  <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
     <DocumentStore>DocumentStore/Server</DocumentStore>
     <CodeGenWorkingPath>../CodeGenNext</CodeGenWorkingPath>
@@ -29,7 +29,7 @@
       <!-- Development/Master Server modules -->
       <Module>Kistl.Generator.XBuildGeneratorModule, Kistl.Generator</Module>
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
-      <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
+      <Module>Kistl.DalProvider.NHibernate.Generator.NHibernateGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
     </Modules>
   </Server>
@@ -43,7 +43,7 @@
     <string>Server/NH.Fallback</string>
     <string>Common/App.ZBox</string>
     <string>Server/App.ZBox</string>
-    <string>Server/App.Parties</string>
-    <string>Common/App.Parties</string>
+    <string>Server/App.$safesolutionname$</string>
+    <string>Common/App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </KistlConfig>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.Parties Server Configuration</ConfigName>
+  <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
     <DocumentStore>DocumentStore/Server</DocumentStore>
     <Modules>
@@ -17,8 +17,7 @@
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
 
       <!-- application specific modules -->
-      <Module>Kistl.Parties.Common.CustomCommonActionsModule, Kistl.Parties.Common</Module>
-      <Module>Kistl.Parties.Server.CustomServerActionsModule, Kistl.Parties.Server</Module>
+      <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
@@ -29,7 +28,7 @@
     <string>Server/NH.Generated</string>
     <string>Common/App.ZBox</string>
     <string>Server/App.ZBox</string>
-    <string>Server/App.Parties</string>
-    <string>Common/App.Parties</string>
+    <string>Server/App.$safesolutionname$</string>
+    <string>Common/App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </KistlConfig>

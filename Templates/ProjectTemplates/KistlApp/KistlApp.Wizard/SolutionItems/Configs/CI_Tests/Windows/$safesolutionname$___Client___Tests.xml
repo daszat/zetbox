@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>$safesolutionname$ Client Configuration</ConfigName>
+  <ConfigName>$safesolutionname$ Client Tests Configuration</ConfigName>
   <Server StartServer="false">
   </Server>
   <Client StartClient="false" ThrowErrors="false">

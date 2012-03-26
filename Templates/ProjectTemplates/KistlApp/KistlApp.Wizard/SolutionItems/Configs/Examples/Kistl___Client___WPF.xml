@@ -29,6 +29,9 @@
       <!-- 
       <Module>Kistl.Client.BasicAuthCredentialsResolver+Module, Kistl.Client</Module>
       -->
+      <!-- application specific modules -->
+      <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
+      <Module>$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>

@@ -13,18 +13,24 @@ set config=%1
 
 :GOON
 
-bin\debug\Kistl.Server.Service.exe %config% -wipe
-IF ERRORLEVEL 1 GOTO FAIL
+cd bin\Debug
+
+Kistl.Server.Service.exe %config% -wipe
+IF ERRORLEVEL 1 GOTO FAIL1
+
+cd ..\..
 
 call "ZbDeployAll" %config%
-IF ERRORLEVEL 1 GOTO FAIL
+IF ERRORLEVEL 1 GOTO FAIL2
 
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************
 GOTO EOF
 
-:FAIL
+:FAIL1
+cd ..\..
+:FAIL2
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

@@ -215,7 +215,8 @@ namespace KistlApp.Wizard
                     {
                         if (".xml".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
                             ".txt".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
-                            ".cmd".Equals(ext, StringComparison.InvariantCultureIgnoreCase))
+                            ".cmd".Equals(ext, StringComparison.InvariantCultureIgnoreCase) ||
+                            ".gitignore".Equals(ext, StringComparison.InvariantCultureIgnoreCase))
                         {
                             var sr = new StreamReader(s);
                             var content = sr.ReadToEnd();
