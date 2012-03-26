@@ -136,7 +136,7 @@ namespace Kistl.Generator.InterfaceTemplates
 
         private void RenderObjects(string type, string name, Guid guid)
         {
-            if (name == currentPrefix.Last())
+            if (name == currentPrefix.LastOrDefault())
             {
                 WriteObjects(indent, "// Cannot render: member names cannot be the same as their enclosing type");
                 WriteLine();
