@@ -297,6 +297,9 @@ using Kistl.API.Client.PerfCounter;
 
             MakeRequest(() =>
             {
+                // Rewind stream to ensure complete files, e.g. after a fault
+                if(msg.Stream.Position != 0)
+                    msg.Stream.Seek(0, SeekOrigin.Begin);
                 response = _service.SetBlobStream(msg);
             });
 
