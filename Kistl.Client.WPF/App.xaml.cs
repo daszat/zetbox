@@ -201,10 +201,10 @@ namespace Kistl.Client.WPF
 
             FixupDatabase(container.Resolve<Func<IKistlContext>>());
 
-            Logging.Log.Info("Starting ZBox Services");
             IServiceControlManager scm = null;
             if (container.TryResolve<IServiceControlManager>(out scm))
             {
+                Logging.Log.Info("Starting ZBox Services");
                 scm.Start();
             }
             else

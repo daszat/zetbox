@@ -23,6 +23,7 @@ namespace Kistl.App.Projekte.DocumentManagement
                 // Register explicit overrides here
                 moduleBuilder
                     .RegisterType<FileImportService>()
+                    .AsImplementedInterfaces()
                     .SingleInstance();
             }
         }
