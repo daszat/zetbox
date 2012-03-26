@@ -29092,7 +29092,7 @@
   <GUI:ViewModelDescriptor ExportGuid="83aae6fd-0fae-4348-b313-737a6e751027">
     <GUI:DefaultEditorKind>d30d2676-7f2f-4f0d-895a-e46f19b8f526</GUI:DefaultEditorKind>
     <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
-    <GUI:DefaultGridCellEditorKind>d55c9558-4ced-47b0-8eda-81553340fb5b</GUI:DefaultGridCellEditorKind>
+    <GUI:DefaultGridCellEditorKind>d30d2676-7f2f-4f0d-895a-e46f19b8f526</GUI:DefaultGridCellEditorKind>
     <GUI:DefaultGridCellPreEditorKind>d55c9558-4ced-47b0-8eda-81553340fb5b</GUI:DefaultGridCellPreEditorKind>
     <GUI:Description>A reference to an IDataObject</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
