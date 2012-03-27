@@ -222,6 +222,16 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             return "this.Proxy.ExportGuid";
         }
 
+        protected override void ApplyNamespaceTailTemplate()
+        {
+            base.ApplyNamespaceTailTemplate();
+
+            if (NeedsRightsTable())
+            {
+                RightsClass.Call(Host, ctx, Construct.SecurityRulesClassName(this.DataType as ObjectClass));
+            }
+        }
+
         #region Property Templates
 
         protected override void ApplyNotifyingValueProperty(
@@ -232,7 +242,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 serList, prop.Module.Namespace, prop.GetElementTypeString(), prop.Name, false, true,
                 prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(), prop.GetClassName(), prop.IsNullable(), "_is" + prop.Name + "Set", prop.ExportGuid, prop.GetElementTypeString(), "Proxy." + prop.Name);
         }
-
 
         protected override void ApplyCollectionEntryListTemplate(ObjectReferenceProperty prop)
         {
@@ -319,15 +328,5 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         }
 
         #endregion
-
-        protected override void ApplyNamespaceTailTemplate()
-        {
-            base.ApplyNamespaceTailTemplate();
-
-            if (NeedsRightsTable())
-            {
-                RightsClass.Call(Host, ctx, Construct.SecurityRulesClassName(this.DataType as ObjectClass));
-            }
-        }
     }
 }

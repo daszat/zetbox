@@ -153,7 +153,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // calculated  property
-        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
         public int? TotalDays
         {
             get
@@ -162,13 +162,10 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.DateTimeRange.TotalDays");
                 }
-
-                var e = new PropertyGetterEventArgs<int?>(default(int?));
-                OnTotalDays_Getter(this, e);
-                return e.Result;
-            }
+                var e = new PropertyGetterEventArgs<int?>(default(int?));                OnTotalDays_Getter(this, e);                return e.Result;            }
         }
-        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+        private bool TotalDays_IsDirty = true;
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DateTimeRange, int?> OnTotalDays_Getter;
 
         public override Type GetImplementedInterface()

@@ -268,6 +268,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MethodCanExec.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\OnPropertyChange.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnPropertyChange.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\ReloadOneReference.cs">
       <DependentUpon>ReloadOneReference.cst</DependentUpon>
     </Compile>
@@ -593,6 +598,10 @@
     <None Include="Templates\ObjectClasses\Constructors.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\OnPropertyChange.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>OnPropertyChange.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\ObjectClasses\CustomTypeDescriptor.cst">
       <Generator>Arebis Template Processor</Generator>

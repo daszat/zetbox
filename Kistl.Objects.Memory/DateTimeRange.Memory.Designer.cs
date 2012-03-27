@@ -155,12 +155,9 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.DateTimeRange.TotalDays");
                 }
-
-                var e = new PropertyGetterEventArgs<int?>(default(int?));
-                OnTotalDays_Getter(this, e);
-                return e.Result;
-            }
+                var e = new PropertyGetterEventArgs<int?>(default(int?));                OnTotalDays_Getter(this, e);                return e.Result;            }
         }
+        private bool TotalDays_IsDirty = true;
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DateTimeRange, int?> OnTotalDays_Getter;
 

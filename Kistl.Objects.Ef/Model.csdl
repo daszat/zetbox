@@ -1656,6 +1656,7 @@
                         FromRole="Method"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="CreatedByImpl"
                         Relationship="Model.FK_Method_was_CreatedBy"
                         FromRole="Method"
@@ -1988,6 +1989,7 @@
                         FromRole="Property"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="ConstraintsImpl"
                         Relationship="Model.FK_ConstrainedProperty_has_Constraints"
                         FromRole="ConstrainedProperty"
@@ -2133,6 +2135,7 @@
                         FromRole="Sequence"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="CurrentNumber" Type="Int32" Nullable="true"  />
     <NavigationProperty Name="DataImpl"
                         Relationship="Model.FK_Sequence_has_Data"
                         FromRole="Sequence"
@@ -2796,6 +2799,7 @@
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="SubClasses"
                         ToRole="BaseObjectClass" />
+    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="DefaultViewModelDescriptorImpl"
                         Relationship="Model.FK_Presentable_has_DefaultViewModelDescriptor"
                         FromRole="Presentable"
@@ -5211,6 +5215,7 @@
     <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
     <Property Name="From" Type="DateTime" Nullable="true"  />
     <Property Name="Thru" Type="DateTime" Nullable="true"  />
+    <Property Name="TotalDays" Type="Int32" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="TestPhoneCompoundObject" >
     <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />

@@ -1,0 +1,32 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="ObjectClasses.OnPropertyChange"
+    ClassName="Kistl.Generator.Templates.ObjectClasses.OnPropertyChange"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="dt" Type="DataType" %>
+<% var props = dt.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.IsCalculated).ToList(); %>
+<% if (props.Count > 0 && !(dt is CompoundObject)) { %>
+        #region <%= this.GetType() %>
+
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            switch (property)
+            {
+<%      foreach (var prop in props) { %>
+                case "<%= prop.Name %>":
+                    <%= prop.Name %>_IsDirty = true;
+                    break;
+<%      } %>
+            }
+            base.OnPropertyChanging(property, oldValue, newValue);
+        }
+
+        #endregion // <%= this.GetType() %>
+<% } %>

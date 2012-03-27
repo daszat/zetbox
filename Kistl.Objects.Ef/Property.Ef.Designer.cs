@@ -280,12 +280,18 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Property.CodeTemplate");
                 }
-
-                var e = new PropertyGetterEventArgs<string>(default(string));
-                OnCodeTemplate_Getter(this, e);
-                return e.Result;
+                if (CodeTemplate_IsDirty)
+                {
+                    var e = new PropertyGetterEventArgs<string>(default(string));
+                    OnCodeTemplate_Getter(this, e);
+                    CodeTemplate_Store = e.Result;
+                    CodeTemplate_IsDirty = false;
+                }
+                return CodeTemplate_Store;
             }
         }
+        string CodeTemplate_Store;
+        private bool CodeTemplate_IsDirty = true;
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCodeTemplate_Getter;
 
@@ -1816,6 +1822,20 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             base.AttachToContext(ctx);
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            switch (property)
+            {
+                case "CodeTemplate":
+                    CodeTemplate_IsDirty = true;
+                    break;
+            }
+            base.OnPropertyChanging(property, oldValue, newValue);
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

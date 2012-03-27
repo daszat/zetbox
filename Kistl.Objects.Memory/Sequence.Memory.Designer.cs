@@ -361,12 +361,18 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Sequence.CurrentNumber");
                 }
-
-                var e = new PropertyGetterEventArgs<int?>(default(int?));
-                OnCurrentNumber_Getter(this, e);
-                return e.Result;
+                if (CurrentNumber_IsDirty)
+                {
+                    var e = new PropertyGetterEventArgs<int?>(default(int?));
+                    OnCurrentNumber_Getter(this, e);
+                    CurrentNumber_Store = e.Result;
+                    CurrentNumber_IsDirty = false;
+                }
+                return CurrentNumber_Store;
             }
         }
+        int? CurrentNumber_Store;
+        private bool CurrentNumber_IsDirty = true;
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int?> OnCurrentNumber_Getter;
 
@@ -871,6 +877,20 @@ namespace Kistl.App.Base
                     break;
             }
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            switch (property)
+            {
+                case "CurrentNumber":
+                    CurrentNumber_IsDirty = true;
+                    break;
+            }
+            base.OnPropertyChanging(property, oldValue, newValue);
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

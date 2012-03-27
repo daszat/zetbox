@@ -196,7 +196,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         /// Provides a code template for default methods
         /// </summary>
         // calculated  property
-        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
         public string CodeTemplate
         {
             get
@@ -205,13 +205,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.ObjectClass.CodeTemplate");
                 }
-
-                var e = new PropertyGetterEventArgs<string>(default(string));
-                OnCodeTemplate_Getter(this, e);
-                return e.Result;
+                if (CodeTemplate_IsDirty)
+                {
+                    var e = new PropertyGetterEventArgs<string>(default(string));
+                    OnCodeTemplate_Getter(this, e);
+                    Proxy.CodeTemplate = e.Result;
+                    CodeTemplate_IsDirty = false;
+                }
+                return Proxy.CodeTemplate;
             }
         }
-        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+        
+        private bool CodeTemplate_IsDirty = true;
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnCodeTemplate_IsValid;
@@ -1080,6 +1086,20 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                     break;
             }
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            switch (property)
+            {
+                case "CodeTemplate":
+                    CodeTemplate_IsDirty = true;
+                    break;
+            }
+            base.OnPropertyChanging(property, oldValue, newValue);
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -1385,6 +1405,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             public virtual ICollection<Kistl.App.Base.AccessControlNHibernateImpl.AccessControlProxy> AccessControlList { get; set; }
 
             public virtual Kistl.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy BaseObjectClass { get; set; }
+
+            public virtual string CodeTemplate { get; set; }
 
             public virtual Kistl.App.GUI.ViewModelDescriptorNHibernateImpl.ViewModelDescriptorProxy DefaultViewModelDescriptor { get; set; }
 

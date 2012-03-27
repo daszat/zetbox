@@ -861,7 +861,7 @@ namespace Kistl.App.Base
         /// the parent relation
         /// </summary>
         // calculated  property
-        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
         public Kistl.App.Base.Relation Parent
         {
             get
@@ -870,13 +870,19 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.RelationEnd.Parent");
                 }
-
-                var e = new PropertyGetterEventArgs<Kistl.App.Base.Relation>(default(Kistl.App.Base.Relation));
-                OnParent_Getter(this, e);
-                return e.Result;
+                if (Parent_IsDirty)
+                {
+                    var e = new PropertyGetterEventArgs<Kistl.App.Base.Relation>(default(Kistl.App.Base.Relation));
+                    OnParent_Getter(this, e);
+                    Proxy.Parent = e.Result;
+                    Parent_IsDirty = false;
+                }
+                return Proxy.Parent;
             }
         }
-        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+        
+        private bool Parent_IsDirty = true;
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnParent_IsValid;

@@ -2289,6 +2289,7 @@
     <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
+    <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
@@ -2488,6 +2489,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_BaseObjectClass" Type="int" />
     <Property Name="fk_DefaultViewModelDescriptor" Type="int" />
+    <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="IsAbstract" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
@@ -2626,6 +2628,7 @@
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
+    <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
@@ -2724,6 +2727,7 @@
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="CurrentNumber" Type="int" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsContinuous" Type="bit" Nullable="false" />

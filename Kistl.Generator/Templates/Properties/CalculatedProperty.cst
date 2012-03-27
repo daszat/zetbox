@@ -7,8 +7,9 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="referencedType" Type="string" %>
-<%@ Parameter Name="propertyName" Type="String" %>
-<%@ Parameter Name="getterEventName" Type="String" %>
+<%@ Parameter Name="propertyName" Type="string" %>
+<%@ Parameter Name="getterEventName" Type="string" %>
+<%@ Parameter Name="isCompound" Type="bool" %>
         // BEGIN <%= this.GetType() %>
         <%= GetModifiers() %> <%= referencedType %> <%= propertyName %>
         {
@@ -18,10 +19,21 @@
                 {
                     throw new NotImplementedException("No handler registered on calculated property <%= className %>.<%= propertyName %>");
                 }
-
-                var e = new PropertyGetterEventArgs<<%= referencedType %>>(default(<%= referencedType %>));
-                <%= getterEventName %>(this, e);
-                return e.Result;
+<% if (isCompound) { %>
+                var e = new PropertyGetterEventArgs<<%= referencedType %>>(default(<%= referencedType %>));                <%= getterEventName %>(this, e);                return e.Result;<% } else { %>
+                if (<%= propertyName %>_IsDirty)
+                {
+                    var e = new PropertyGetterEventArgs<<%= referencedType %>>(default(<%= referencedType %>));
+                    <%= getterEventName %>(this, e);
+                    <%= ApplyStorageStatement("e.Result") %>
+                    <%= propertyName %>_IsDirty = false;
+                }
+                return <%= ApplyResultExpression() %>;
+<% } %>
             }
         }
+<% if (!isCompound) { %>
+        <%= ApplyBackingStorageDefinition() %>
+<% } %>
+        private bool <%= propertyName %>_IsDirty = true;
         // END <%= this.GetType() %>

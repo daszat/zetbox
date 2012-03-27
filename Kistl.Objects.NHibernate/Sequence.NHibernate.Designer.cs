@@ -370,7 +370,7 @@ namespace Kistl.App.Base
         /// The current number of this Sequence. This is calculated from the Data and initialises this, if not available.
         /// </summary>
         // calculated  property
-        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
         public int? CurrentNumber
         {
             get
@@ -379,13 +379,19 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Sequence.CurrentNumber");
                 }
-
-                var e = new PropertyGetterEventArgs<int?>(default(int?));
-                OnCurrentNumber_Getter(this, e);
-                return e.Result;
+                if (CurrentNumber_IsDirty)
+                {
+                    var e = new PropertyGetterEventArgs<int?>(default(int?));
+                    OnCurrentNumber_Getter(this, e);
+                    Proxy.CurrentNumber = e.Result;
+                    CurrentNumber_IsDirty = false;
+                }
+                return Proxy.CurrentNumber;
             }
         }
-        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+        
+        private bool CurrentNumber_IsDirty = true;
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int?> OnCurrentNumber_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCurrentNumber_IsValid;
@@ -887,6 +893,20 @@ namespace Kistl.App.Base
                     break;
             }
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            switch (property)
+            {
+                case "CurrentNumber":
+                    CurrentNumber_IsDirty = true;
+                    break;
+            }
+            base.OnPropertyChanging(property, oldValue, newValue);
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -1156,6 +1176,8 @@ namespace Kistl.App.Base
             public virtual Kistl.App.Base.IdentityNHibernateImpl.IdentityProxy CreatedBy { get; set; }
 
             public virtual DateTime CreatedOn { get; set; }
+
+            public virtual int? CurrentNumber { get; set; }
 
             public virtual Kistl.App.Base.SequenceDataNHibernateImpl.SequenceDataProxy Data { get; set; }
 

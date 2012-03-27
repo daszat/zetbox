@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             // shortcut unmapped properties
             if (prop.IsCalculated)
             {
-                _host.WriteOutput(string.Format("<!-- ValueTypeProperty {0} is calculated -->\n", prop.Name));
+                _host.WriteOutput(string.Format("<!-- ValueTypeProperty {0} is calculated and persisted -->\n", prop.Name));
             }
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
