@@ -141,7 +141,8 @@ namespace Kistl.Generator.Templates
             ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
         }
 
-        protected virtual void ApplyCalculatedPropertyTemplate(Property prop)
+        // override ApplyCalculatedProperty instead
+        protected void ApplyCalculatedPropertyTemplate(Property prop)
         {
             this.WriteLine("        // calculated  property");
             ApplyCalculatedProperty(prop, this.MembersToSerialize);

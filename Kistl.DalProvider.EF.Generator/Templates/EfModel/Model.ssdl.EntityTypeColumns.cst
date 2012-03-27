@@ -40,10 +40,6 @@
 		{
 			throw new ArgumentException("properties", String.Format("contains ObjectReferenceProperty {0}, but this template cannot work with that", p));
 		}
-		else if (p is ValueTypeProperty && ((ValueTypeProperty)p).IsCalculated)
-		{
-			// Not in database
-		}
 		else
 		{
 			string propertyName = Construct.NestedColumnName(p, prefix);

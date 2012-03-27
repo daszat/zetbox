@@ -28,7 +28,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             if (prop.IsCalculated)
             {
                 _host.WriteOutput(string.Format("<!-- ValueTypeProperty {0} is calculated -->\n", prop.Name));
-                return;
             }
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;

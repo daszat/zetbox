@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
                 }
             }
 
-            foreach (var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).OrderBy(p => p.Name))
+            foreach (var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
                 ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, prop, prop.Name, String.Empty);
             }

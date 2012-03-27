@@ -202,10 +202,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                             {
                                 type = ceCollectionType;
                             }
-                            if (vtp != null && vtp.IsCalculated)
-                            {
-                                type = null;
-                            }
                         }
                     }
                     return new KeyValuePair<string, string>(type, prop.Name);
