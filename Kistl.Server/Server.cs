@@ -310,6 +310,26 @@ namespace Kistl.Server
             }
         }
 
+        public List<IDataObject> GetParcelHack<T>(IKistlServerContext ctx, int lastID, int count)
+            where T : class, IDataObject
+        {
+            // The query translator cannot properly handle the IDataObject cast:
+            // return GetQuery<T>().Cast<IDataObject>();
+
+            var result = new List<IDataObject>();
+            foreach (var o in ctx.GetQuery<T>().Where(obj => obj.ID > lastID).OrderBy(obj => obj.ID).Take(count))
+            {
+                result.Add(o);
+            }
+            return result;
+        }
+
+        private List<IDataObject> GetParcel(Type t, IKistlServerContext ctx, int lastID, int count)
+        {
+            var mi = this.GetType().FindGenericMethod("GetParcelHack", new[] { t }, new Type[] { typeof(IKistlServerContext), typeof(int), typeof(int) });
+            return (List<IDataObject>)mi.Invoke(this, new object[] { ctx, lastID, count });
+        }
+
         public void RecalculateProperties(Property[] properties)
         {
             using (Log.InfoTraceMethodCallFormat("RecalculateProperties", "properties.Length=[{0}]", properties == null ? "ALL" : properties.Length.ToString()))
@@ -330,24 +350,27 @@ namespace Kistl.Server
                         if (clsGroup.Key is ObjectClass)
                         {
                             Log.InfoFormat("Processing ObjectClass [{0}]", clsGroup.Key.Name);
-                            var ifType = ctx.GetInterfaceType(clsGroup.Key.GetDataType());
-                            foreach (var obj in ctx.Internals().GetAll(ifType))
+                            var lastID = 0;
+                            var dtType = clsGroup.Key.GetDataType();
+                            List<IDataObject> parcel = null;
+                            do
                             {
-                                foreach (var p in clsGroup)
+                                parcel = GetParcel(dtType, ctx, lastID, 100);
+                                foreach (var obj in parcel)
                                 {
-                                    obj.NotifyPropertyChanged(p.Name, null, null);
+                                    foreach (var p in clsGroup)
+                                    {
+                                        obj.NotifyPropertyChanged(p.Name, null, null);
+                                    }
+                                    objCounter++;
+                                    lastID = obj.ID;
                                 }
-                                objCounter++;
-                            }
-                            if (objCounter > 100)
-                            {
-                                objCounter = 0;
+                                Log.InfoFormat("Updated {0} objects", objCounter);
                                 ctx.SubmitChanges();
-                                Log.Info("Updated 100 objects");
                                 subContainer.Dispose();
                                 subContainer = container.BeginLifetimeScope();
                                 ctx = subContainer.Resolve<IKistlServerContext>();
-                            }
+                            } while (parcel != null && parcel.Count > 0);
                         }
                         else if (clsGroup.Key is CompoundObject)
                         {
