@@ -337,7 +337,6 @@ namespace Kistl.Client.Presentables.KistlBase
                     });
             dlg.FollowRelationsOne = true;
             dlg.FollowRelationsMany = false; // TODO: Not working yet, linq predicate is wrong
-            dlg.ShowCalculated = false;
             ViewModelFactory.ShowDialog(dlg);
         }
 

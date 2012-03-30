@@ -557,7 +557,6 @@ namespace Kistl.Client.Presentables.KistlBase
                     props => { });
             dlg.FollowRelationsOne = true;
             dlg.MultiSelect = true;
-            dlg.ShowCalculated = true;
             dlg.UpdateInitialSelectedProperties(this.DisplayedProperties);
             dlg.SelectedPropertySelectionChanged += (s, e) =>
             {

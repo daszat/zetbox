@@ -58,7 +58,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private bool _showCalculated = false;
+        private bool _showCalculated = true;
         public bool ShowCalculated
         {
             get { return _showCalculated; }
