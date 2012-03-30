@@ -79,6 +79,8 @@ M: System.Linq.IQueryable Kistl.Client.Presentables.ValueViewModels.ObjectRefere
 # Helper method which is only called by reflection from GetAll
 M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.BaseMemoryContext::GetAllHack()
 M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.Server.BaseKistlDataContext::GetAllHack()
+# Helper method which is only called by reflection from GetParcel
+M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.Server.Server::GetParcelHack(Kistl.API.Server.IKistlServerContext,System.Int32,System.Int32)
 
 # generated code (wpf)
 M: System.Delegate Kistl.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
