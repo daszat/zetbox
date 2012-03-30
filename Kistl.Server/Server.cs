@@ -113,7 +113,7 @@ namespace Kistl.Server
                 Logging.Server.InfoFormat("Found {0} files to deploy", files.Length);
                 UpdateSchema(files);
                 Deploy(files);
-                CheckSchema(true);               
+                CheckSchema(true);
             }
         }
 
@@ -307,6 +307,59 @@ namespace Kistl.Server
                 var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
                 schemaProvider.Open(connectionString.ConnectionString);
                 schemaProvider.DropAllObjects();
+            }
+        }
+
+        public void RecalculateProperties(Property[] properties)
+        {
+            using (Log.InfoTraceMethodCallFormat("RecalculateProperties", "properties.Length=[{0}]", properties == null ? "ALL" : properties.Length.ToString()))
+            using (var propertyContainer = container.BeginLifetimeScope())
+            using (var propertyCtx = propertyContainer.Resolve<IKistlServerContext>())
+            {
+                var subContainer = container.BeginLifetimeScope();
+                try
+                {
+                    var ctx = subContainer.Resolve<IKistlServerContext>();
+                    if (properties == null)
+                    {
+                        properties = propertyCtx.GetQuery<Property>().ToList().Where(p => p.IsCalculated()).ToArray();
+                    }
+                    int objCounter = 0;
+                    foreach (var clsGroup in properties.GroupBy(p => p.ObjectClass).OrderBy(g => g.Key.Name).ThenBy(g => g.Key.ID))
+                    {
+                        if (clsGroup.Key is ObjectClass)
+                        {
+                            Log.InfoFormat("Processing ObjectClass [{0}]", clsGroup.Key.Name);
+                            var ifType = ctx.GetInterfaceType(clsGroup.Key.GetDataType());
+                            foreach (var obj in ctx.Internals().GetAll(ifType))
+                            {
+                                foreach (var p in clsGroup)
+                                {
+                                    obj.NotifyPropertyChanged(p.Name, null, null);
+                                }
+                                objCounter++;
+                            }
+                            if (objCounter > 100)
+                            {
+                                objCounter = 0;
+                                ctx.SubmitChanges();
+                                Log.Info("Updated 100 objects");
+                                subContainer.Dispose();
+                                subContainer = container.BeginLifetimeScope();
+                                ctx = subContainer.Resolve<IKistlServerContext>();
+                            }
+                        }
+                        else if (clsGroup.Key is CompoundObject)
+                        {
+                            Log.WarnFormat("Skipping CompoundObject [{0}]", clsGroup.Key.Name);
+                        }
+                    }
+                    ctx.SubmitChanges();
+                }
+                finally
+                {
+                    subContainer.Dispose();
+                }
             }
         }
 

@@ -2,6 +2,7 @@ namespace Kistl.API.Server
 {
     using System;
     using System.IO;
+    using Kistl.App.Base;
 
     public interface IServer
     {
@@ -19,6 +20,8 @@ namespace Kistl.API.Server
         void SyncIdentities();
         void UpdateSchema();
         void UpdateSchema(params string[] files);
+        /// <param name="properties">Pass null to recalculate all properties. Or, pass the list properties you want to have recalculated. An empty list, of course, will not process anything.</param>
+        void RecalculateProperties(Property[] properties);
         void WipeDatabase();
     }
 }

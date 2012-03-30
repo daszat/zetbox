@@ -126,7 +126,7 @@ namespace Kistl.API.Server
                     }
                     else
                     {
-                        scope.Resolve<IServer>().CheckSchema(new [] { arg }, false);
+                        scope.Resolve<IServer>().CheckSchema(new[] { arg }, false);
                     }
                 });
 
@@ -199,6 +199,15 @@ namespace Kistl.API.Server
                 {
                     scope.Resolve<IServer>().WipeDatabase();
                 });
+
+            builder
+                .RegisterCmdLineAction("recalc-all", "Recalculate all calculated properties. This may be needed if the implementation has changed and no proper migration is in place",
+                 scope =>
+                 {
+                     // recalculate all
+                     scope.Resolve<IServer>().RecalculateProperties(null);
+                 });
+
         }
 
         private static void ParseModules(KistlConfig config, out string[] schemaModulesArray, out string[] ownerModulesArray)
