@@ -5,6 +5,8 @@
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Serialization.SerializationMembersList" %>
+<%@ Parameter Name="modulenamespace" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="referencedType" Type="string" %>
 <%@ Parameter Name="propertyName" Type="string" %>
@@ -36,4 +38,5 @@
         <%= ApplyBackingStorageDefinition() %>
 <% } %>
         private bool <%= propertyName %>_IsDirty = true;
+<% AddSerialization(serializationList, propertyName); %>
         // END <%= this.GetType() %>

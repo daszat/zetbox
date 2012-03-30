@@ -7,11 +7,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Serialization = Kistl.Generator.Templates.Serialization;
 
     public class CalculatedProperty : Kistl.Generator.Templates.Properties.CalculatedProperty
     {
-        public CalculatedProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, string referencedType, string propertyName, string getterEventName, bool isCompound)
-            : base(_host, ctx, className, referencedType, propertyName, getterEventName, isCompound)
+        public CalculatedProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, string modulenamespace, string className, string referencedType, string propertyName, string getterEventName, bool isCompound)
+            : base(_host, ctx, serializationList, modulenamespace, className, referencedType, propertyName, getterEventName, isCompound)
         {
         }
 

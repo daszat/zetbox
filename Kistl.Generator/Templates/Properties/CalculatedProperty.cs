@@ -19,7 +19,13 @@ namespace Kistl.Generator.Templates.Properties
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            Call(host, ctx, prop.ObjectClass.GetDataTypeString(), prop.GetElementTypeString(), prop.Name, "On" + prop.Name + "_Getter", prop.ObjectClass is CompoundObject);
+            // IKistlContext ctx, Serialization.SerializationMembersList serializationList, string modulenamespace, string className, string referencedType, string propertyName, string getterEventName, bool isCompound, string backingName)
+            Call(host, ctx, serList,
+                prop.Module.Namespace, 
+                prop.ObjectClass.GetDataTypeString(), 
+                prop.GetElementTypeString(), 
+                prop.Name, "On" + prop.Name + "_Getter", 
+                prop.ObjectClass is CompoundObject);
         }
 
         protected virtual string ApplyBackingStorageDefinition()
@@ -37,21 +43,10 @@ namespace Kistl.Generator.Templates.Properties
             return string.Format("{0}_Store = {1};", propertyName, valueExpression);
         }
 
-        //public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-        //    IKistlContext ctx,
-        //    string className,
-        //    string referencedType,
-        //    string propertyName,
-        //    string getterEventName)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-        //    if (ctx == null) { throw new ArgumentNullException("ctx"); }
-        //    if (String.IsNullOrEmpty(className)) { throw new ArgumentNullException("className"); }
-        //    if (String.IsNullOrEmpty(referencedType)) { throw new ArgumentNullException("referencedType"); }
-        //    if (String.IsNullOrEmpty(propertyName)) { throw new ArgumentNullException("propertyName"); }
-        //    if (String.IsNullOrEmpty(getterEventName)) { throw new ArgumentNullException("getterEventName"); }
-
-        //    host.CallTemplate("Properties.CalculatedProperty", ctx, className, referencedType, propertyName, getterEventName);
-        //}
+        protected virtual void AddSerialization(Serialization.SerializationMembersList list, string name)
+        {
+            if (list != null)
+                list.Add(Serialization.SerializerType.All, modulenamespace, name, ApplyResultExpression());
+        }
     }
 }
