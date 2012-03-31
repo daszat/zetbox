@@ -27,7 +27,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
         /// <summary>
         /// number of seconds to wait before cancelling _test reset.
         /// </summary>
-        private const int RESET_TIMEOUT = 2 * 60;
+        private const int RESET_TIMEOUT = 4 * 60;
 
         public PostgreSqlResetter(KistlConfig config, ISchemaProvider schemaManager)
         {
@@ -145,7 +145,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
             if (!p.WaitForExit(RESET_TIMEOUT * 1000))
             {
                 p.Kill();
-                throw new InvalidOperationException(String.Format("{0} did not complete within {0} seconds", util, RESET_TIMEOUT));
+                throw new InvalidOperationException(String.Format("{0} did not complete within {1} seconds", util, RESET_TIMEOUT));
             }
 
             return p.ExitCode;
