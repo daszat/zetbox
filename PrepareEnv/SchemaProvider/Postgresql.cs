@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Npgsql;
-using System.IO;
-using System.Diagnostics;
 
 namespace PrepareEnv.SchemaProvider
 {
@@ -46,7 +46,7 @@ namespace PrepareEnv.SchemaProvider
             }
         }
 
-        private const int RESET_TIMEOUT = 2 * 60;
+        private const int RESET_TIMEOUT = 4 * 60;
         private static int RunPgUtil(string util, string args)
         {
             var binPath = Path.Combine(GetPgSqlBinPath(), util);
@@ -75,7 +75,7 @@ namespace PrepareEnv.SchemaProvider
             if (!p.WaitForExit(RESET_TIMEOUT * 1000))
             {
                 p.Kill();
-                throw new InvalidOperationException(String.Format("{0} did not complete within {0} seconds", util, RESET_TIMEOUT));
+                throw new InvalidOperationException(String.Format("{0} did not complete within {1} seconds", util, RESET_TIMEOUT));
             }
 
             return p.ExitCode;
