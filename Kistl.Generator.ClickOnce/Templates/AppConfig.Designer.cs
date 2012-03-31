@@ -39,7 +39,7 @@ this.WriteObjects("      <wsHttpBinding>\r\n");
 this.WriteObjects("        <binding name=\"KistlService_Binding\" closeTimeout=\"00:01:00\"\r\n");
 this.WriteObjects("				 openTimeout=\"00:01:00\" receiveTimeout=\"10:00:00\" sendTimeout=\"00:01:00\"\r\n");
 this.WriteObjects("				 bypassProxyOnLocal=\"true\" transactionFlow=\"false\" hostNameComparisonMode=\"StrongWildcard\"\r\n");
-this.WriteObjects("				 maxBufferPoolSize=\"524288\" maxReceivedMessageSize=\"6553600\" messageEncoding=\"Text\"\r\n");
+this.WriteObjects("				 maxBufferPoolSize=\"524288\" maxReceivedMessageSize=\"16553600\" messageEncoding=\"Text\"\r\n");
 this.WriteObjects("				 textEncoding=\"utf-8\" useDefaultWebProxy=\"true\" allowCookies=\"false\">\r\n");
 this.WriteObjects("          <security mode=\"Message\">\r\n");
 this.WriteObjects("            <message clientCredentialType=\"Windows\" />\r\n");
