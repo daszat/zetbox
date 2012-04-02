@@ -52,6 +52,8 @@ namespace Kistl.Generator.Templates.Properties
         protected virtual void ApplyBackingStoreDefinition()
         {
             this.WriteLine("        private {0} {1};", type, backingName);
+            if (isCalculated)
+                this.WriteLine("        private bool {0}_Dirty = true;", backingName);
         }
     }
 }

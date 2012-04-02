@@ -14,6 +14,7 @@
 <%@ Parameter Name="name" Type="string" %>
 <%@ Parameter Name="modulenamespace" Type="string" %>
 <%@ Parameter Name="backingName" Type="string" %>
+<%@ Parameter Name="isCalculated" Type="bool" %>
         // BEGIN <%= this.GetType() %>
 <%
 
@@ -36,16 +37,17 @@
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-<% ApplyOnAllSetTemplate(); %>
+<% if (!isCalculated) ApplyOnAllSetTemplate(); %>
                 if (<%= backingName %> != value)
                 {
                     var __oldValue = <%= backingName %>;
                     var __newValue = value;
-<% ApplyPreSetTemplate(); %>
+<% if (!isCalculated) ApplyPreSetTemplate(); %>
                     NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = __newValue;
+                    <%= backingName %>_Dirty = false;
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
-<% ApplyPostSetTemplate(); %>
+<% if (!isCalculated) ApplyPostSetTemplate(); %>
                 }
             }
         }

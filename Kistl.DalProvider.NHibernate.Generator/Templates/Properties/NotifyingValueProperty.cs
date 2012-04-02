@@ -13,8 +13,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
     public class NotifyingValueProperty
         : Templates.Properties.NotifyingValueProperty
     {
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializationMembersList serializationList, string type, string name, string modulenamespace, string backingName)
-            : base(_host, ctx, serializationList, type, name, modulenamespace, "Proxy." + name)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializationMembersList serializationList, string type, string name, string modulenamespace, string backingName, bool isCalculated)
+            : base(_host, ctx, serializationList, type, name, modulenamespace, "Proxy." + name, isCalculated)
         {
         }
 

@@ -26,7 +26,7 @@ namespace Kistl.Generator.Templates.Properties
         private Property _prop;
 
         public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
-            : base(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name)
+            : base(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name, prop.IsCalculated())
         {
             _prop = prop;
         }
@@ -51,9 +51,10 @@ namespace Kistl.Generator.Templates.Properties
         {
             get
             {
-                return _prop.DefaultValue != null;
+                return _prop.DefaultValue != null && !isCalculated;
             }
         }
+
         protected override void ApplyOnGetTemplate()
         {
             base.ApplyOnGetTemplate();
@@ -70,10 +71,15 @@ namespace Kistl.Generator.Templates.Properties
                     type,
                     backingName);
             }
-            this.WriteObjects("                if (", EventName, "_Getter != null)\r\n");
+            if (isCalculated)
+                this.WriteObjects("                if (", backingName, "_Dirty && ", EventName, "_Getter != null)\r\n");
+            else
+                this.WriteObjects("                if (", EventName, "_Getter != null)\r\n");
             this.WriteObjects("                {\r\n");
             this.WriteObjects("                    var __e = new PropertyGetterEventArgs<", type, ">(__result);\r\n");
             this.WriteObjects("                    ", EventName, "_Getter(this, __e);\r\n");
+            if (isCalculated)
+                this.WriteObjects("                    ", backingName, "_Dirty = false;\r\n");
             this.WriteObjects("                    __result = __e.Result;\r\n");
             this.WriteObjects("                }\r\n");
         }
