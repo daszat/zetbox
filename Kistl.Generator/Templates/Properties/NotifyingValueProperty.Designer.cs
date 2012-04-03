@@ -84,13 +84,17 @@ this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", _
 ApplyPostSetTemplate(); 
 #line 49 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("                }\r\n");
+this.WriteObjects("				else \r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("					SetInitializedProperty(\"",  name , "\");\r\n");
+this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 52 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 56 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 ApplyBackingStoreDefinition(); 
-#line 53 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 57 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 AddSerialization(serializationList, name); 
-#line 54 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 58 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

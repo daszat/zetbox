@@ -100,10 +100,7 @@ namespace Kistl.API
         /// <param name="newValue">new value of the changed property</param>
         protected virtual void OnPropertyChanged(string property, object oldValue, object newValue)
         {
-            if (_notInitializedProperties != null && _notInitializedProperties.ContainsKey(property))
-            {
-                _notInitializedProperties.Remove(property);
-            }
+            SetInitializedProperty(property);
 
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
@@ -220,6 +217,14 @@ namespace Kistl.API
                 _notInitializedProperties = new Dictionary<string, object>();
             }
             _notInitializedProperties.Add(propName, null);
+        }
+
+        protected void SetInitializedProperty(string propName)
+        {
+            if (_notInitializedProperties != null && _notInitializedProperties.ContainsKey(propName))
+            {
+                _notInitializedProperties.Remove(propName);
+            }
         }
 
         public bool IsInitialized(string propName)
