@@ -100,6 +100,11 @@ namespace Kistl.API
         /// <param name="newValue">new value of the changed property</param>
         protected virtual void OnPropertyChanged(string property, object oldValue, object newValue)
         {
+            if (_notInitializedProperties != null && _notInitializedProperties.ContainsKey(property))
+            {
+                _notInitializedProperties.Remove(property);
+            }
+
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
 
@@ -200,6 +205,27 @@ namespace Kistl.API
                 _auditLog[property] = new Notification(property, oldValue, newValue);
         }
 
+        #endregion
+
+        #region IsInitialized
+        /// <summary>
+        /// Contains all NOT initialized properties
+        /// </summary>
+        private Dictionary<string, object> _notInitializedProperties;
+
+        protected void SetNotInitializedProperty(string propName)
+        {
+            if (_notInitializedProperties == null)
+            {
+                _notInitializedProperties = new Dictionary<string, object>();
+            }
+            _notInitializedProperties.Add(propName, null);
+        }
+
+        public bool IsInitialized(string propName)
+        {
+            return _notInitializedProperties == null || _notInitializedProperties.ContainsKey(propName) == false;
+        }
         #endregion
     }
 }

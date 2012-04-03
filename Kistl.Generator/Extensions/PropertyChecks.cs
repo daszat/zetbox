@@ -90,6 +90,24 @@ namespace Kistl.Generator.Extensions
             return result;
         }
 
+        public static bool IsList(this Property prop)
+        {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            if (prop is ObjectReferenceProperty)
+            {
+                return IsList((ObjectReferenceProperty)prop);
+            }
+            else if (prop is ValueTypeProperty)
+            {
+                return ((ValueTypeProperty)prop).IsList;
+            }
+            else if (prop is CompoundObjectProperty)
+            {
+                return ((CompoundObjectProperty)prop).IsList;
+            }
+            return false;
+        }
+
         public static bool IsList(this ObjectReferenceProperty prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }

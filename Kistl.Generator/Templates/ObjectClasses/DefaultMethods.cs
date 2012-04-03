@@ -7,6 +7,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
     using System.Text;
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.Generator.Extensions;
 
     public partial class DefaultMethods
     {
@@ -14,7 +15,15 @@ namespace Kistl.Generator.Templates.ObjectClasses
         protected virtual void ApplyPostPreSaveTemplate() { }
         protected virtual void ApplyPrePostSaveTemplate() { }
         protected virtual void ApplyPostPostSaveTemplate() { }
-        protected virtual void ApplyPreCreatedTemplate() { }
+        
+        protected virtual void ApplyPreCreatedTemplate() 
+        {
+            foreach (var prop in dt.Properties.Where(p => !p.IsList() && p.DefaultValue == null).OrderBy(p => p.Name))
+            {
+                this.WriteObjects("            SetNotInitializedProperty(\"", prop.Name, "\");\r\n");
+            }
+        }
+
         protected virtual void ApplyPostCreatedTemplate() { }
         protected virtual void ApplyPreDeletingTemplate() { }
         protected virtual void ApplyPostDeletingTemplate() { }

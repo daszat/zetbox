@@ -190,7 +190,10 @@ namespace Kistl.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
-
+        public bool IsInitialized(string propName)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region IPersistenceObject Members

@@ -293,5 +293,10 @@ namespace Kistl.API.Mocks
         {
             throw new NotImplementedException();
         }
+
+        public bool IsInitialized(string propName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
