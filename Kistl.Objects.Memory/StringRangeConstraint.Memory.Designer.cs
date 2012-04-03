@@ -391,6 +391,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_StringRangeConstraint")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("MaxLength");
+            SetNotInitializedProperty("MinLength");
             base.NotifyCreated();
             if (OnNotifyCreated_StringRangeConstraint != null) OnNotifyCreated_StringRangeConstraint(this);
         }

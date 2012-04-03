@@ -338,6 +338,8 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyCreated_FixedYearlyCalendarRule")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Day");
+            SetNotInitializedProperty("Month");
             base.NotifyCreated();
             if (OnNotifyCreated_FixedYearlyCalendarRule != null) OnNotifyCreated_FixedYearlyCalendarRule(this);
         }

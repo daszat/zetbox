@@ -1288,6 +1288,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         [EventBasedMethod("OnNotifyCreated_SourceTable")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("Comment");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("DestinationObjectClass");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("StagingDatabase");
+            SetNotInitializedProperty("Status");
             base.NotifyCreated();
             if (OnNotifyCreated_SourceTable != null) OnNotifyCreated_SourceTable(this);
         }

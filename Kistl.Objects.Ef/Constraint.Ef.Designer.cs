@@ -948,6 +948,10 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Constraint")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("ConstrainedProperty");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Reason");
             base.NotifyCreated();
             if (OnNotifyCreated_Constraint != null) OnNotifyCreated_Constraint(this);
         }

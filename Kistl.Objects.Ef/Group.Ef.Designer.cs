@@ -533,6 +533,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Group")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Group != null) OnNotifyCreated_Group(this);
         }

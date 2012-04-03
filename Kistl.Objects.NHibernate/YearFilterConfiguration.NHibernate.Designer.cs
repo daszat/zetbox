@@ -339,6 +339,7 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_YearFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("IsCurrentYearDefault");
             base.NotifyCreated();
             if (OnNotifyCreated_YearFilterConfiguration != null) OnNotifyCreated_YearFilterConfiguration(this);
         }

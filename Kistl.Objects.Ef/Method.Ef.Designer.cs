@@ -1684,6 +1684,18 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         [EventBasedMethod("OnNotifyCreated_Method")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CategoryTags");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CodeTemplate");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Icon");
+            SetNotInitializedProperty("InvokeOnServer");
+            SetNotInitializedProperty("IsDisplayable");
+            SetNotInitializedProperty("Label");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("ObjectClass");
             base.NotifyCreated();
             if (OnNotifyCreated_Method != null) OnNotifyCreated_Method(this);
         }

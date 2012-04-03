@@ -339,6 +339,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_EnumDefaultValue")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("EnumValue");
             base.NotifyCreated();
             if (OnNotifyCreated_EnumDefaultValue != null) OnNotifyCreated_EnumDefaultValue(this);
         }

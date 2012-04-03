@@ -1168,6 +1168,13 @@ namespace Kistl.App.Projekte
         [EventBasedMethod("OnNotifyCreated_Auftrag")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Auftragsname");
+            SetNotInitializedProperty("Auftragswert");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Kunde");
+            SetNotInitializedProperty("Mitarbeiter");
+            SetNotInitializedProperty("Projekt");
             base.NotifyCreated();
             if (OnNotifyCreated_Auftrag != null) OnNotifyCreated_Auftrag(this);
         }

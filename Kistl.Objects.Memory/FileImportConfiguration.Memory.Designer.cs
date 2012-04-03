@@ -847,6 +847,11 @@ namespace at.dasz.DocumentManagement
         [EventBasedMethod("OnNotifyCreated_FileImportConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Identity");
+            SetNotInitializedProperty("MachineName");
+            SetNotInitializedProperty("PickupDirectory");
             base.NotifyCreated();
             if (OnNotifyCreated_FileImportConfiguration != null) OnNotifyCreated_FileImportConfiguration(this);
         }

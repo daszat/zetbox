@@ -978,6 +978,10 @@ namespace at.dasz.DocumentManagement
         [EventBasedMethod("OnNotifyCreated_File")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Blob");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_File != null) OnNotifyCreated_File(this);
         }

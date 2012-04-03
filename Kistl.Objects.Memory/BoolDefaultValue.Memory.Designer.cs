@@ -265,6 +265,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_BoolDefaultValue")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("BoolValue");
             base.NotifyCreated();
             if (OnNotifyCreated_BoolDefaultValue != null) OnNotifyCreated_BoolDefaultValue(this);
         }

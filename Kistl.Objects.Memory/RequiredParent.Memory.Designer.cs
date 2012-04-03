@@ -252,6 +252,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         [EventBasedMethod("OnNotifyCreated_RequiredParent")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_RequiredParent != null) OnNotifyCreated_RequiredParent(this);
         }

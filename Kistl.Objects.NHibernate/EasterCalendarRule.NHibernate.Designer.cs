@@ -276,6 +276,7 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyCreated_EasterCalendarRule")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Offset");
             base.NotifyCreated();
             if (OnNotifyCreated_EasterCalendarRule != null) OnNotifyCreated_EasterCalendarRule(this);
         }

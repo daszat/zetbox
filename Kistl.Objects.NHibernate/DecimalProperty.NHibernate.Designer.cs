@@ -590,6 +590,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_DecimalProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Precision");
+            SetNotInitializedProperty("Scale");
             base.NotifyCreated();
             if (OnNotifyCreated_DecimalProperty != null) OnNotifyCreated_DecimalProperty(this);
         }

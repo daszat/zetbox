@@ -733,6 +733,10 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_ViewDescriptor")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ControlKind");
+            SetNotInitializedProperty("ControlRef");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Toolkit");
             base.NotifyCreated();
             if (OnNotifyCreated_ViewDescriptor != null) OnNotifyCreated_ViewDescriptor(this);
         }

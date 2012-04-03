@@ -643,6 +643,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ValueTypeProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("HasPersistentOrder");
+            SetNotInitializedProperty("IsCalculated");
+            SetNotInitializedProperty("IsList");
             base.NotifyCreated();
             if (OnNotifyCreated_ValueTypeProperty != null) OnNotifyCreated_ValueTypeProperty(this);
         }

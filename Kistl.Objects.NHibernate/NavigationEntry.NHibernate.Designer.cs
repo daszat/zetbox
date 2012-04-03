@@ -1313,6 +1313,13 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         [EventBasedMethod("OnNotifyCreated_NavigationEntry")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("Color");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Parent");
+            SetNotInitializedProperty("Title");
+            SetNotInitializedProperty("ViewModelDescriptor");
             base.NotifyCreated();
             if (OnNotifyCreated_NavigationEntry != null) OnNotifyCreated_NavigationEntry(this);
         }

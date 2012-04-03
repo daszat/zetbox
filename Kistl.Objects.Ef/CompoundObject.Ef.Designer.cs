@@ -453,6 +453,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_CompoundObject")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DefaultPropertyViewModelDescriptor");
             base.NotifyCreated();
             if (OnNotifyCreated_CompoundObject != null) OnNotifyCreated_CompoundObject(this);
         }

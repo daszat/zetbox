@@ -753,6 +753,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         [EventBasedMethod("OnNotifyCreated_Muhblah")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("TestBool");
+            SetNotInitializedProperty("TestCustomObjects_Nav");
+            SetNotInitializedProperty("TestCustomObjects_One_Nav");
+            SetNotInitializedProperty("TestDateTime");
+            SetNotInitializedProperty("TestEnum");
+            SetNotInitializedProperty("TestString");
             base.NotifyCreated();
             if (OnNotifyCreated_Muhblah != null) OnNotifyCreated_Muhblah(this);
         }

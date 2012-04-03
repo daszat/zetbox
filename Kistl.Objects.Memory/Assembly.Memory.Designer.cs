@@ -915,6 +915,11 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Assembly")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DeploymentRestrictions");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Assembly != null) OnNotifyCreated_Assembly(this);
         }

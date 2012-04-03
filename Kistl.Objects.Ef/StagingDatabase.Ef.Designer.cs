@@ -1084,6 +1084,13 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         [EventBasedMethod("OnNotifyCreated_StagingDatabase")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("ConnectionStringKey");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("MigrationProject");
+            SetNotInitializedProperty("OriginConnectionStringKey");
+            SetNotInitializedProperty("Schema");
             base.NotifyCreated();
             if (OnNotifyCreated_StagingDatabase != null) OnNotifyCreated_StagingDatabase(this);
         }

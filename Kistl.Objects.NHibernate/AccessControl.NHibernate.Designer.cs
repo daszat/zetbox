@@ -1075,6 +1075,13 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_AccessControl")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("ObjectClass");
+            SetNotInitializedProperty("Rights");
             base.NotifyCreated();
             if (OnNotifyCreated_AccessControl != null) OnNotifyCreated_AccessControl(this);
         }

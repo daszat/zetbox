@@ -379,6 +379,8 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_OrderedNEnd")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("OneEnd");
+            SetNotInitializedProperty("OtherInt");
             base.NotifyCreated();
             if (OnNotifyCreated_OrderedNEnd != null) OnNotifyCreated_OrderedNEnd(this);
         }

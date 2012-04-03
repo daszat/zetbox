@@ -922,6 +922,11 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Blob")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("MimeType");
+            SetNotInitializedProperty("OriginalName");
+            SetNotInitializedProperty("StoragePath");
             base.NotifyCreated();
             if (OnNotifyCreated_Blob != null) OnNotifyCreated_Blob(this);
         }

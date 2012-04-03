@@ -922,6 +922,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Module")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Namespace");
+            SetNotInitializedProperty("SchemaName");
             base.NotifyCreated();
             if (OnNotifyCreated_Module != null) OnNotifyCreated_Module(this);
         }

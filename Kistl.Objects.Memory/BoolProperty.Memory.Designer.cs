@@ -1009,6 +1009,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_BoolProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("FalseIcon");
+            SetNotInitializedProperty("FalseLabel");
+            SetNotInitializedProperty("NullIcon");
+            SetNotInitializedProperty("NullLabel");
+            SetNotInitializedProperty("TrueIcon");
+            SetNotInitializedProperty("TrueLabel");
             base.NotifyCreated();
             if (OnNotifyCreated_BoolProperty != null) OnNotifyCreated_BoolProperty(this);
         }

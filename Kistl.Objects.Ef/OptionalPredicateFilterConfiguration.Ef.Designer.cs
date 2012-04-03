@@ -333,6 +333,7 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_OptionalPredicateFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Predicate");
             base.NotifyCreated();
             if (OnNotifyCreated_OptionalPredicateFilterConfiguration != null) OnNotifyCreated_OptionalPredicateFilterConfiguration(this);
         }

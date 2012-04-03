@@ -835,6 +835,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ObjectReferenceProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("EagerLoading");
+            SetNotInitializedProperty("IsInlineEditable");
+            SetNotInitializedProperty("RelationEnd");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectReferenceProperty != null) OnNotifyCreated_ObjectReferenceProperty(this);
         }

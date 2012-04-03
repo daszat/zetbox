@@ -1395,6 +1395,14 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_BaseParameter")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("IsList");
+            SetNotInitializedProperty("IsReturnParameter");
+            SetNotInitializedProperty("Label");
+            SetNotInitializedProperty("Method");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_BaseParameter != null) OnNotifyCreated_BaseParameter(this);
         }

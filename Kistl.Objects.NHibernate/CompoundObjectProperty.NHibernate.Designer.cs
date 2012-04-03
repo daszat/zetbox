@@ -715,6 +715,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_CompoundObjectProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CompoundObjectDefinition");
+            SetNotInitializedProperty("HasPersistentOrder");
+            SetNotInitializedProperty("IsList");
             base.NotifyCreated();
             if (OnNotifyCreated_CompoundObjectProperty != null) OnNotifyCreated_CompoundObjectProperty(this);
         }

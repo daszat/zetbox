@@ -523,6 +523,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ExceptionLogEntry")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Date");
+            SetNotInitializedProperty("Exception");
+            SetNotInitializedProperty("Level");
+            SetNotInitializedProperty("Logger");
+            SetNotInitializedProperty("Message");
+            SetNotInitializedProperty("Thread");
             base.NotifyCreated();
             if (OnNotifyCreated_ExceptionLogEntry != null) OnNotifyCreated_ExceptionLogEntry(this);
         }

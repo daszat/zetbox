@@ -1285,6 +1285,14 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyCreated_CalendarRule")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Calendar");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("ValidFrom");
+            SetNotInitializedProperty("ValidUntil");
+            SetNotInitializedProperty("WorkingHours");
             base.NotifyCreated();
             if (OnNotifyCreated_CalendarRule != null) OnNotifyCreated_CalendarRule(this);
         }

@@ -465,6 +465,9 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_DateRangeFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("IsCurrentMonthDefault");
+            SetNotInitializedProperty("IsCurrentQuaterDefault");
+            SetNotInitializedProperty("IsCurrentYearDefault");
             base.NotifyCreated();
             if (OnNotifyCreated_DateRangeFilterConfiguration != null) OnNotifyCreated_DateRangeFilterConfiguration(this);
         }

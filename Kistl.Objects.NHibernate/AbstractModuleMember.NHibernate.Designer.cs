@@ -750,6 +750,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_AbstractModuleMember")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Module");
             base.NotifyCreated();
             if (OnNotifyCreated_AbstractModuleMember != null) OnNotifyCreated_AbstractModuleMember(this);
         }

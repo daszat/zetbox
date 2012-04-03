@@ -609,6 +609,10 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_Template")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DisplayedTypeAssembly");
+            SetNotInitializedProperty("DisplayedTypeFullName");
+            SetNotInitializedProperty("DisplayName");
+            SetNotInitializedProperty("VisualTree");
             base.NotifyCreated();
             if (OnNotifyCreated_Template != null) OnNotifyCreated_Template(this);
         }

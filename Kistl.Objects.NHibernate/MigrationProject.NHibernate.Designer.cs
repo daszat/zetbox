@@ -982,6 +982,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         [EventBasedMethod("OnNotifyCreated_MigrationProject")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("DestinationModule");
             base.NotifyCreated();
             if (OnNotifyCreated_MigrationProject != null) OnNotifyCreated_MigrationProject(this);
         }

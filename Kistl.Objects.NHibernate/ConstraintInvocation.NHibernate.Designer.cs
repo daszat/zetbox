@@ -550,6 +550,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ConstraintInvocation")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Implementor");
+            SetNotInitializedProperty("MemberName");
             base.NotifyCreated();
             if (OnNotifyCreated_ConstraintInvocation != null) OnNotifyCreated_ConstraintInvocation(this);
         }

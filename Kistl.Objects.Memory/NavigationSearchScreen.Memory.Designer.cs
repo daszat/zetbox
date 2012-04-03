@@ -1513,6 +1513,24 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_NavigationSearchScreen")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AllowAddNew");
+            SetNotInitializedProperty("AllowDelete");
+            SetNotInitializedProperty("AllowSelectColumns");
+            SetNotInitializedProperty("AllowUserFilter");
+            SetNotInitializedProperty("EnableAutoFilter");
+            SetNotInitializedProperty("InitialSort");
+            SetNotInitializedProperty("InitialSortDirection");
+            SetNotInitializedProperty("IsEditable");
+            SetNotInitializedProperty("IsMultiselect");
+            SetNotInitializedProperty("RequestedEditorKind");
+            SetNotInitializedProperty("RequestedWorkspaceKind");
+            SetNotInitializedProperty("RespectRequiredFilter");
+            SetNotInitializedProperty("ShowFilter");
+            SetNotInitializedProperty("ShowMasterDetail");
+            SetNotInitializedProperty("ShowOpenCommand");
+            SetNotInitializedProperty("ShowRefreshCommand");
+            SetNotInitializedProperty("Type");
+            SetNotInitializedProperty("ViewMethod");
             base.NotifyCreated();
             if (OnNotifyCreated_NavigationSearchScreen != null) OnNotifyCreated_NavigationSearchScreen(this);
         }

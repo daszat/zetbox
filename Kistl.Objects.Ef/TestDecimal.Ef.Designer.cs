@@ -339,6 +339,9 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_TestDecimal")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Large");
+            SetNotInitializedProperty("NoScale");
+            SetNotInitializedProperty("SmallDecimal");
             base.NotifyCreated();
             if (OnNotifyCreated_TestDecimal != null) OnNotifyCreated_TestDecimal(this);
         }

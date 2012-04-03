@@ -1103,6 +1103,13 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Sequence")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("CurrentNumber");
+            SetNotInitializedProperty("Data");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("IsContinuous");
+            SetNotInitializedProperty("Module");
             base.NotifyCreated();
             if (OnNotifyCreated_Sequence != null) OnNotifyCreated_Sequence(this);
         }

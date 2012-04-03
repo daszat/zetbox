@@ -1281,6 +1281,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         [EventBasedMethod("OnNotifyCreated_ObjectClass")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("BaseObjectClass");
+            SetNotInitializedProperty("CodeTemplate");
+            SetNotInitializedProperty("DefaultViewModelDescriptor");
+            SetNotInitializedProperty("IsAbstract");
+            SetNotInitializedProperty("IsFrozenObject");
+            SetNotInitializedProperty("IsSimpleObject");
+            SetNotInitializedProperty("TableName");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectClass != null) OnNotifyCreated_ObjectClass(this);
         }

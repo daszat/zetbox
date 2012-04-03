@@ -403,6 +403,7 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_ObjectClassFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ObjectClass");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectClassFilterConfiguration != null) OnNotifyCreated_ObjectClassFilterConfiguration(this);
         }

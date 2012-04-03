@@ -847,6 +847,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         [EventBasedMethod("OnNotifyCreated_MethodTest")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Parent");
+            SetNotInitializedProperty("StringProp");
             base.NotifyCreated();
             if (OnNotifyCreated_MethodTest != null) OnNotifyCreated_MethodTest(this);
         }

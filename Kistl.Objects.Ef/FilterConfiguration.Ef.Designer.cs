@@ -1316,6 +1316,14 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_FilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Label");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("RefreshOnFilterChanged");
+            SetNotInitializedProperty("RequestedKind");
+            SetNotInitializedProperty("Required");
+            SetNotInitializedProperty("ViewModelDescriptor");
             base.NotifyCreated();
             if (OnNotifyCreated_FilterConfiguration != null) OnNotifyCreated_FilterConfiguration(this);
         }

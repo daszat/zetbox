@@ -1268,6 +1268,11 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         [EventBasedMethod("OnNotifyCreated_Calendar")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("BaseCalendar");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Calendar != null) OnNotifyCreated_Calendar(this);
         }

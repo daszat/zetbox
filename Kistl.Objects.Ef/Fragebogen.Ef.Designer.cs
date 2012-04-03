@@ -334,6 +334,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         [EventBasedMethod("OnNotifyCreated_Fragebogen")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("BogenNummer");
             base.NotifyCreated();
             if (OnNotifyCreated_Fragebogen != null) OnNotifyCreated_Fragebogen(this);
         }

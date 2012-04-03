@@ -999,6 +999,13 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         [EventBasedMethod("OnNotifyCreated_Kunde")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Adresse");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Kundenname");
+            SetNotInitializedProperty("Land");
+            SetNotInitializedProperty("Ort");
+            SetNotInitializedProperty("PLZ");
             base.NotifyCreated();
             if (OnNotifyCreated_Kunde != null) OnNotifyCreated_Kunde(this);
         }

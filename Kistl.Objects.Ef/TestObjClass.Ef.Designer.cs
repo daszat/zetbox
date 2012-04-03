@@ -537,6 +537,10 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_TestObjClass")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("MyIntProperty");
+            SetNotInitializedProperty("ObjectProp");
+            SetNotInitializedProperty("StringProp");
+            SetNotInitializedProperty("TestEnumProp");
             base.NotifyCreated();
             if (OnNotifyCreated_TestObjClass != null) OnNotifyCreated_TestObjClass(this);
         }

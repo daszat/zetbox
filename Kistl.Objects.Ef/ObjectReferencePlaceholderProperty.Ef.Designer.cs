@@ -910,6 +910,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ObjectReferencePlaceholderProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("HasPersistentOrder");
+            SetNotInitializedProperty("ImplementorRoleName");
+            SetNotInitializedProperty("IsList");
+            SetNotInitializedProperty("ItemRoleName");
+            SetNotInitializedProperty("ReferencedObjectClass");
+            SetNotInitializedProperty("Verb");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectReferencePlaceholderProperty != null) OnNotifyCreated_ObjectReferencePlaceholderProperty(this);
         }

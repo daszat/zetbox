@@ -582,6 +582,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_EnumerationProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Enumeration");
             base.NotifyCreated();
             if (OnNotifyCreated_EnumerationProperty != null) OnNotifyCreated_EnumerationProperty(this);
         }

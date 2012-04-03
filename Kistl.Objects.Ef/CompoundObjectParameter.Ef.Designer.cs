@@ -454,6 +454,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_CompoundObjectParameter")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CompoundObject");
             base.NotifyCreated();
             if (OnNotifyCreated_CompoundObjectParameter != null) OnNotifyCreated_CompoundObjectParameter(this);
         }

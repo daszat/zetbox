@@ -213,6 +213,7 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_Company")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Company != null) OnNotifyCreated_Company(this);
         }

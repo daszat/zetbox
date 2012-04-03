@@ -1089,6 +1089,13 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_Application")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("RootScreen");
+            SetNotInitializedProperty("WorkspaceViewModel");
             base.NotifyCreated();
             if (OnNotifyCreated_Application != null) OnNotifyCreated_Application(this);
         }

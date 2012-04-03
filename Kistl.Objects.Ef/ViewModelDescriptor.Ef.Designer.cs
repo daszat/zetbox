@@ -1277,6 +1277,14 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_ViewModelDescriptor")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DefaultDisplayKind");
+            SetNotInitializedProperty("DefaultEditorKind");
+            SetNotInitializedProperty("DefaultGridCellDisplayKind");
+            SetNotInitializedProperty("DefaultGridCellEditorKind");
+            SetNotInitializedProperty("DefaultGridCellPreEditorKind");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("ViewModelRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ViewModelDescriptor != null) OnNotifyCreated_ViewModelDescriptor(this);
         }

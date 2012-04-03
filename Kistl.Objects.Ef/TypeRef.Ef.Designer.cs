@@ -1378,6 +1378,13 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_TypeRef")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Assembly");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Deleted");
+            SetNotInitializedProperty("FullName");
+            SetNotInitializedProperty("Parent");
+            SetNotInitializedProperty("ToStringCache");
             base.NotifyCreated();
             if (OnNotifyCreated_TypeRef != null) OnNotifyCreated_TypeRef(this);
         }

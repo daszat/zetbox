@@ -1661,6 +1661,16 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         [EventBasedMethod("OnNotifyCreated_DataType")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DefaultIcon");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("RequestedKind");
+            SetNotInitializedProperty("ShowIconInLists");
+            SetNotInitializedProperty("ShowIdInLists");
+            SetNotInitializedProperty("ShowNameInLists");
             base.NotifyCreated();
             if (OnNotifyCreated_DataType != null) OnNotifyCreated_DataType(this);
         }

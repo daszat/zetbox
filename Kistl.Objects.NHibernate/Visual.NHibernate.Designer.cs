@@ -524,6 +524,9 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_Visual")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Method");
+            SetNotInitializedProperty("Property");
             base.NotifyCreated();
             if (OnNotifyCreated_Visual != null) OnNotifyCreated_Visual(this);
         }

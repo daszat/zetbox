@@ -1694,6 +1694,15 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Relation")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("A");
+            SetNotInitializedProperty("B");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("Containment");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Storage");
+            SetNotInitializedProperty("Verb");
             base.NotifyCreated();
             if (OnNotifyCreated_Relation != null) OnNotifyCreated_Relation(this);
         }

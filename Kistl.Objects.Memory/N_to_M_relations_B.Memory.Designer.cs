@@ -236,6 +236,7 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_N_to_M_relations_B")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_N_to_M_relations_B != null) OnNotifyCreated_N_to_M_relations_B(this);
         }

@@ -676,6 +676,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         [EventBasedMethod("OnNotifyCreated_ControlKind")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Parent");
             base.NotifyCreated();
             if (OnNotifyCreated_ControlKind != null) OnNotifyCreated_ControlKind(this);
         }

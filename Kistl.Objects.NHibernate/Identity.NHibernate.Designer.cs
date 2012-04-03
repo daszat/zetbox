@@ -377,6 +377,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Identity")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DisplayName");
+            SetNotInitializedProperty("Password");
+            SetNotInitializedProperty("UserName");
             base.NotifyCreated();
             if (OnNotifyCreated_Identity != null) OnNotifyCreated_Identity(this);
         }

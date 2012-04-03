@@ -267,6 +267,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_GroupMembership")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Group");
             base.NotifyCreated();
             if (OnNotifyCreated_GroupMembership != null) OnNotifyCreated_GroupMembership(this);
         }

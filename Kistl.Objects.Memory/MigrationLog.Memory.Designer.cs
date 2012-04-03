@@ -454,6 +454,11 @@ namespace ZBox.App.SchemaMigration
         [EventBasedMethod("OnNotifyCreated_MigrationLog")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Destination");
+            SetNotInitializedProperty("DestinationRows");
+            SetNotInitializedProperty("Source");
+            SetNotInitializedProperty("SourceRows");
+            SetNotInitializedProperty("Timestamp");
             base.NotifyCreated();
             if (OnNotifyCreated_MigrationLog != null) OnNotifyCreated_MigrationLog(this);
         }

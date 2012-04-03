@@ -993,6 +993,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyCreated_Projekt")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AufwandGes");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Kundenname");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Projekt != null) OnNotifyCreated_Projekt(this);
         }

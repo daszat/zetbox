@@ -342,6 +342,8 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_RequiredParentChild")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Parent");
             base.NotifyCreated();
             if (OnNotifyCreated_RequiredParentChild != null) OnNotifyCreated_RequiredParentChild(this);
         }

@@ -516,6 +516,10 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_Antwort")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Frage");
+            SetNotInitializedProperty("Fragebogen");
+            SetNotInitializedProperty("FragenNummer");
+            SetNotInitializedProperty("GegebeneAntwort");
             base.NotifyCreated();
             if (OnNotifyCreated_Antwort != null) OnNotifyCreated_Antwort(this);
         }

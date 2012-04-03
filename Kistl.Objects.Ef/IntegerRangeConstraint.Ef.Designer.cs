@@ -399,6 +399,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_IntegerRangeConstraint")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Max");
+            SetNotInitializedProperty("Min");
             base.NotifyCreated();
             if (OnNotifyCreated_IntegerRangeConstraint != null) OnNotifyCreated_IntegerRangeConstraint(this);
         }

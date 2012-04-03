@@ -944,6 +944,11 @@ namespace ZBox.App.SchemaMigration
         [EventBasedMethod("OnNotifyCreated_SourceEnum")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DestinationValue");
+            SetNotInitializedProperty("SourceColumn");
+            SetNotInitializedProperty("SourceValue");
             base.NotifyCreated();
             if (OnNotifyCreated_SourceEnum != null) OnNotifyCreated_SourceEnum(this);
         }
