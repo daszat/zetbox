@@ -123,6 +123,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
                         OnSomeInt_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SomeInt");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

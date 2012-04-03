@@ -77,6 +77,10 @@ namespace Kistl.App.Test
                         OnMyIntProperty_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MyIntProperty");
+				}
             }
         }
         private int? _MyIntProperty;
@@ -221,6 +225,10 @@ namespace Kistl.App.Test
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("StringProp");
+				}
             }
         }
         private string _StringProp;
@@ -274,6 +282,10 @@ namespace Kistl.App.Test
                         OnTestEnumProp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestEnumProp");
+				}
             }
         }
         private Kistl.App.Test.TestEnum _TestEnumProp;

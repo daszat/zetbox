@@ -77,6 +77,10 @@ namespace Kistl.App.GUI
                         OnPredicate_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Predicate");
+				}
             }
         }
         private string _Predicate;

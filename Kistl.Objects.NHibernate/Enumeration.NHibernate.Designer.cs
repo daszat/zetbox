@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnAreFlags_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AreFlags");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

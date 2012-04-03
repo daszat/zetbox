@@ -91,6 +91,10 @@ namespace Kistl.App.Projekte
                         OnAufwand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Aufwand");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -231,6 +235,10 @@ namespace Kistl.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -390,6 +398,10 @@ namespace Kistl.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -461,6 +473,10 @@ namespace Kistl.App.Projekte
                         OnDatumBis_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DatumBis");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -513,6 +529,10 @@ namespace Kistl.App.Projekte
                         OnDatumVon_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DatumVon");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -566,6 +586,10 @@ namespace Kistl.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -637,6 +661,10 @@ namespace Kistl.App.Projekte
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

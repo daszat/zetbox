@@ -200,6 +200,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -374,6 +378,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -431,6 +439,10 @@ namespace Kistl.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -577,6 +589,10 @@ namespace Kistl.App.Base
                     _EnumerationEntries_pos = __newValue;
                     NotifyPropertyChanged("EnumerationEntries_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("EnumerationEntries_pos");
+				}
             }
         }
         private int? _EnumerationEntries_pos;
@@ -646,6 +662,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -703,6 +723,10 @@ namespace Kistl.App.Base
                         OnLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Label");
+				}
             }
         }
         private string _Label;
@@ -759,6 +783,10 @@ namespace Kistl.App.Base
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -815,6 +843,10 @@ namespace Kistl.App.Base
                         OnValue_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Value");
+				}
             }
         }
         private int _Value;
@@ -1165,6 +1197,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

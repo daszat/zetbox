@@ -89,6 +89,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -235,6 +239,10 @@ namespace Kistl.App.Base
                         OnMemberName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MemberName");
+				}
             }
         }
         private string _MemberName;

@@ -177,6 +177,10 @@ namespace Kistl.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("HasPersistentOrder");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -229,6 +233,10 @@ namespace Kistl.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsList");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

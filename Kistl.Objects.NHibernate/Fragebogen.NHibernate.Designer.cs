@@ -125,6 +125,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
                         OnBogenNummer_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("BogenNummer");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

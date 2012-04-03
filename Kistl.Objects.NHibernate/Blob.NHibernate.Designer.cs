@@ -179,6 +179,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -338,6 +342,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -410,6 +418,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -481,6 +493,10 @@ namespace Kistl.App.Base
                         OnMimeType_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MimeType");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -533,6 +549,10 @@ namespace Kistl.App.Base
                         OnOriginalName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("OriginalName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -585,6 +605,10 @@ namespace Kistl.App.Base
                         OnStoragePath_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("StoragePath");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

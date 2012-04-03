@@ -83,6 +83,10 @@ namespace Kistl.App.Base
                         OnMaxLength_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MaxLength");
+				}
             }
         }
         private int? _MaxLength;
@@ -139,6 +143,10 @@ namespace Kistl.App.Base
                         OnMinLength_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MinLength");
+				}
             }
         }
         private int _MinLength;

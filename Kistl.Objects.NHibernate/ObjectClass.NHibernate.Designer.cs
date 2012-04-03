@@ -383,6 +383,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsAbstract_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsAbstract");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -435,6 +439,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsFrozenObject_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsFrozenObject");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -487,6 +495,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsSimpleObject_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsSimpleObject");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -574,6 +586,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         OnTableName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TableName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

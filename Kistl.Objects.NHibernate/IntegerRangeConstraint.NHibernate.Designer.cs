@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnMax_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Max");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Base
                         OnMin_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Min");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

@@ -326,6 +326,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -520,6 +524,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -592,6 +600,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -752,6 +764,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

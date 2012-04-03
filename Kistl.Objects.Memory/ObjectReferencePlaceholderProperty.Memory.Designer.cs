@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("HasPersistentOrder");
+				}
             }
         }
         private bool _HasPersistentOrder;
@@ -130,6 +134,10 @@ namespace Kistl.App.Base
                         OnImplementorRoleName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ImplementorRoleName");
+				}
             }
         }
         private string _ImplementorRoleName;
@@ -183,6 +191,10 @@ namespace Kistl.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsList");
+				}
             }
         }
         private bool _IsList;
@@ -236,6 +248,10 @@ namespace Kistl.App.Base
                         OnItemRoleName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ItemRoleName");
+				}
             }
         }
         private string _ItemRoleName;
@@ -381,6 +397,10 @@ namespace Kistl.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Verb");
+				}
             }
         }
         private string _Verb;

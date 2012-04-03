@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnSchema_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Schema");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Base
                         OnVersion_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Version");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

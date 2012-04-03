@@ -273,6 +273,10 @@ namespace Kistl.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -446,6 +450,10 @@ namespace Kistl.App.GUI
                         OnToolkit_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Toolkit");
+				}
             }
         }
         private Kistl.App.GUI.Toolkit _Toolkit;

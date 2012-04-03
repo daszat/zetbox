@@ -77,6 +77,10 @@ namespace Kistl.App.Test
                         OnTestString_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestString");
+				}
             }
         }
         private string _TestString;

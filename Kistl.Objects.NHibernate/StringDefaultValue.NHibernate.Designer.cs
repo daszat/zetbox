@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnDefaultValue_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DefaultValue");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

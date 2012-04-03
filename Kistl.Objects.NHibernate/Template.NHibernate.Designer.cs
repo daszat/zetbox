@@ -175,6 +175,10 @@ namespace Kistl.App.GUI
                         OnDisplayedTypeFullName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DisplayedTypeFullName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -227,6 +231,10 @@ namespace Kistl.App.GUI
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DisplayName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

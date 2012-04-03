@@ -66,6 +66,10 @@ namespace Kistl.App.Base
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -493,6 +497,10 @@ namespace Kistl.App.Base
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -920,6 +928,10 @@ namespace at.dasz.DocumentManagement
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -1043,6 +1055,10 @@ namespace at.dasz.DocumentManagement
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -1134,6 +1150,10 @@ namespace at.dasz.DocumentManagement
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -1815,6 +1835,10 @@ namespace Kistl.App.Base
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -2942,6 +2966,10 @@ namespace Kistl.App.GUI
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -3369,6 +3397,10 @@ namespace Kistl.App.GUI
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -3796,6 +3828,10 @@ namespace Kistl.App.Projekte
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -3919,6 +3955,10 @@ namespace Kistl.App.Projekte
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -4010,6 +4050,10 @@ namespace Kistl.App.Projekte
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -4341,6 +4385,10 @@ namespace Kistl.App.Base
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -4464,6 +4512,10 @@ namespace Kistl.App.Base
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -4555,6 +4607,10 @@ namespace Kistl.App.Base
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -4886,6 +4942,10 @@ namespace ZBox.App.SchemaMigration
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -5009,6 +5069,10 @@ namespace ZBox.App.SchemaMigration
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -5100,6 +5164,10 @@ namespace ZBox.App.SchemaMigration
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -6131,6 +6199,10 @@ namespace Kistl.App.Base
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -6254,6 +6326,10 @@ namespace Kistl.App.Base
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -6345,6 +6421,10 @@ namespace Kistl.App.Base
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -6676,6 +6756,10 @@ namespace Kistl.App.GUI
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -7103,6 +7187,10 @@ namespace Kistl.App.GUI
                     Proxy.ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
@@ -8324,6 +8412,10 @@ namespace Kistl.App.Projekte
                     Proxy.Value = __newValue;
                     NotifyPropertyChanged("Value", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("Value");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty

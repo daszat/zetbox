@@ -83,6 +83,10 @@ namespace Kistl.App.Calendar
                         OnDay_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Day");
+				}
             }
         }
         private int _Day;
@@ -139,6 +143,10 @@ namespace Kistl.App.Calendar
                         OnMonth_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Month");
+				}
             }
         }
         private int _Month;

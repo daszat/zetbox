@@ -318,6 +318,10 @@ namespace Kistl.App.Calendar
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -492,6 +496,10 @@ namespace Kistl.App.Calendar
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -561,6 +569,10 @@ namespace Kistl.App.Calendar
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -630,6 +642,10 @@ namespace Kistl.App.Calendar
                         OnIsWorkingDay_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsWorkingDay");
+				}
             }
         }
         private bool _IsWorkingDay;
@@ -793,6 +809,10 @@ namespace Kistl.App.Calendar
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -849,6 +869,10 @@ namespace Kistl.App.Calendar
                         OnValidFrom_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ValidFrom");
+				}
             }
         }
         private DateTime? _ValidFrom;
@@ -905,6 +929,10 @@ namespace Kistl.App.Calendar
                         OnValidUntil_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ValidUntil");
+				}
             }
         }
         private DateTime? _ValidUntil;
@@ -961,6 +989,10 @@ namespace Kistl.App.Calendar
                         OnWorkingHours_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("WorkingHours");
+				}
             }
         }
         private decimal _WorkingHours;
@@ -1329,6 +1361,10 @@ namespace Kistl.App.Calendar
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

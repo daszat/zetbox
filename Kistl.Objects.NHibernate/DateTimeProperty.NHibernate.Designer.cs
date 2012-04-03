@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnDateTimeStyle_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DateTimeStyle");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

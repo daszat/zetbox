@@ -189,6 +189,10 @@ namespace Kistl.App.Base
                         OnFalseLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("FalseLabel");
+				}
             }
         }
         private string _FalseLabel;
@@ -351,6 +355,10 @@ namespace Kistl.App.Base
                         OnNullLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("NullLabel");
+				}
             }
         }
         private string _NullLabel;
@@ -513,6 +521,10 @@ namespace Kistl.App.Base
                         OnTrueLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TrueLabel");
+				}
             }
         }
         private string _TrueLabel;

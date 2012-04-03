@@ -306,6 +306,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -480,6 +484,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -537,6 +545,10 @@ namespace Kistl.App.Base
                         OnDeleted_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Deleted");
+				}
             }
         }
         private bool? _Deleted;
@@ -605,6 +617,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -662,6 +678,10 @@ namespace Kistl.App.Base
                         OnFullName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("FullName");
+				}
             }
         }
         private string _FullName;
@@ -875,6 +895,10 @@ namespace Kistl.App.Base
                         OnToStringCache_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ToStringCache");
+				}
             }
         }
         private string _ToStringCache;
@@ -1421,6 +1445,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

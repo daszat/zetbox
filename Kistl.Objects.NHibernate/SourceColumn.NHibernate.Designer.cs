@@ -180,6 +180,10 @@ namespace ZBox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -251,6 +255,10 @@ namespace ZBox.App.SchemaMigration
                         OnComment_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Comment");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -304,6 +312,10 @@ namespace ZBox.App.SchemaMigration
                         OnCompareNulls_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CompareNulls");
+				}
             }
         }
 
@@ -463,6 +475,10 @@ namespace ZBox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -534,6 +550,10 @@ namespace ZBox.App.SchemaMigration
                         OnDbType_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DbType");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -586,6 +606,10 @@ namespace ZBox.App.SchemaMigration
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -705,6 +729,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -776,6 +804,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                         OnIsNullable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsNullable");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -828,6 +860,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1027,6 +1063,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                         OnSize_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Size");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1191,6 +1231,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                         OnStatus_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Status");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

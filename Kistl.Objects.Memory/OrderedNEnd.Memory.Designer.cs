@@ -156,6 +156,10 @@ namespace Kistl.App.Test
                     _NEnds_pos = __newValue;
                     NotifyPropertyChanged("NEnds_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("NEnds_pos");
+				}
             }
         }
         private int? _NEnds_pos;
@@ -210,6 +214,10 @@ namespace Kistl.App.Test
                         OnOtherInt_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("OtherInt");
+				}
             }
         }
         private int? _OtherInt;

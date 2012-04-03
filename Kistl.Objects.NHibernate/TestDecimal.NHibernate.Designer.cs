@@ -88,6 +88,10 @@ namespace Kistl.App.Test
                         OnLarge_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Large");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Test
                         OnNoScale_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("NoScale");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -192,6 +200,10 @@ namespace Kistl.App.Test
                         OnSmallDecimal_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SmallDecimal");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

@@ -77,6 +77,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentYearDefault");
+				}
             }
         }
         private bool? _IsCurrentYearDefault;

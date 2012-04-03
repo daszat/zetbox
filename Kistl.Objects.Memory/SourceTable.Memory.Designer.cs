@@ -180,6 +180,10 @@ namespace ZBox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -234,6 +238,10 @@ namespace ZBox.App.SchemaMigration
                         OnComment_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Comment");
+				}
             }
         }
         private string _Comment;
@@ -390,6 +398,10 @@ namespace ZBox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -444,6 +456,10 @@ namespace ZBox.App.SchemaMigration
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -601,6 +617,10 @@ namespace ZBox.App.SchemaMigration
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -655,6 +675,10 @@ namespace ZBox.App.SchemaMigration
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -857,6 +881,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                         OnStatus_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Status");
+				}
             }
         }
         private ZBox.App.SchemaMigration.MappingStatus? _Status;

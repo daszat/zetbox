@@ -180,6 +180,10 @@ namespace Kistl.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -337,6 +341,10 @@ namespace Kistl.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -403,6 +411,10 @@ namespace Kistl.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -457,6 +469,10 @@ namespace Kistl.App.Projekte
                         OnGeburtstag_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Geburtstag");
+				}
             }
         }
         private DateTime? _Geburtstag;
@@ -601,6 +617,10 @@ namespace Kistl.App.Projekte
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -679,6 +699,10 @@ namespace Kistl.App.Projekte
                         OnSVNr_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SVNr");
+				}
             }
         }
         private string _SVNr;
@@ -732,6 +756,10 @@ namespace Kistl.App.Projekte
                         OnTelefonNummer_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TelefonNummer");
+				}
             }
         }
         private string _TelefonNummer;

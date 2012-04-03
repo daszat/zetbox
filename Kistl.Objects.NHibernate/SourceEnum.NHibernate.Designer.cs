@@ -179,6 +179,10 @@ namespace ZBox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -338,6 +342,10 @@ namespace ZBox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -499,6 +507,10 @@ namespace ZBox.App.SchemaMigration
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -682,6 +694,10 @@ namespace ZBox.App.SchemaMigration
                         OnSourceValue_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SourceValue");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

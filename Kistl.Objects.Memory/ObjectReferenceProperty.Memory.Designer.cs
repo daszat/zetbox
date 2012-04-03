@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnEagerLoading_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("EagerLoading");
+				}
             }
         }
         private bool _EagerLoading;
@@ -130,6 +134,10 @@ namespace Kistl.App.Base
                         OnIsInlineEditable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsInlineEditable");
+				}
             }
         }
         private bool? _IsInlineEditable;

@@ -91,6 +91,10 @@ namespace Kistl.App.Projekte
                         OnAuftragsname_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Auftragsname");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -143,6 +147,10 @@ namespace Kistl.App.Projekte
                         OnAuftragswert_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Auftragswert");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -283,6 +291,10 @@ namespace Kistl.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -442,6 +454,10 @@ namespace Kistl.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -514,6 +530,10 @@ namespace Kistl.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 

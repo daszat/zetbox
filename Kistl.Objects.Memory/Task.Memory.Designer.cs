@@ -77,6 +77,10 @@ namespace Kistl.App.Projekte
                         OnAufwand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Aufwand");
+				}
             }
         }
         private double? _Aufwand;
@@ -233,6 +237,10 @@ namespace Kistl.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -390,6 +398,10 @@ namespace Kistl.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -444,6 +456,10 @@ namespace Kistl.App.Projekte
                         OnDatumBis_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DatumBis");
+				}
             }
         }
         private DateTime _DatumBis;
@@ -497,6 +513,10 @@ namespace Kistl.App.Projekte
                         OnDatumVon_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DatumVon");
+				}
             }
         }
         private DateTime _DatumVon;
@@ -562,6 +582,10 @@ namespace Kistl.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -616,6 +640,10 @@ namespace Kistl.App.Projekte
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;

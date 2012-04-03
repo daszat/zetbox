@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnDate_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Date");
+				}
             }
         }
         private DateTime _Date;
@@ -130,6 +134,10 @@ namespace Kistl.App.Base
                         OnException_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Exception");
+				}
             }
         }
         private string _Exception;
@@ -183,6 +191,10 @@ namespace Kistl.App.Base
                         OnLevel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Level");
+				}
             }
         }
         private string _Level;
@@ -236,6 +248,10 @@ namespace Kistl.App.Base
                         OnLogger_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Logger");
+				}
             }
         }
         private string _Logger;
@@ -289,6 +305,10 @@ namespace Kistl.App.Base
                         OnMessage_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Message");
+				}
             }
         }
         private string _Message;
@@ -342,6 +362,10 @@ namespace Kistl.App.Base
                         OnThread_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Thread");
+				}
             }
         }
         private string _Thread;

@@ -118,6 +118,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
                         OnSomeInt_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SomeInt");
+				}
             }
         }
         private int? _SomeInt;

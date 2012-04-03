@@ -125,6 +125,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -285,6 +289,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

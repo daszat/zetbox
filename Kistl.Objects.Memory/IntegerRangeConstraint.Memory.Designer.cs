@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnMax_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Max");
+				}
             }
         }
         private int _Max;
@@ -130,6 +134,10 @@ namespace Kistl.App.Base
                         OnMin_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Min");
+				}
             }
         }
         private int _Min;

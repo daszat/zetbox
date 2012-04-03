@@ -88,6 +88,10 @@ namespace Kistl.App.Test
                         OnFrage_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Frage");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -222,6 +226,10 @@ namespace Kistl.App.Test
                     Proxy.gute_Antworten_pos = __newValue;
                     NotifyPropertyChanged("gute_Antworten_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("gute_Antworten_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -275,6 +283,10 @@ namespace Kistl.App.Test
                         OnFragenNummer_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("FragenNummer");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -327,6 +339,10 @@ namespace Kistl.App.Test
                         OnGegebeneAntwort_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("GegebeneAntwort");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

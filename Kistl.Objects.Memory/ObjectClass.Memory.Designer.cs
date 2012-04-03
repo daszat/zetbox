@@ -383,6 +383,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsAbstract_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsAbstract");
+				}
             }
         }
         private bool _IsAbstract;
@@ -436,6 +440,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsFrozenObject_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsFrozenObject");
+				}
             }
         }
         private bool _IsFrozenObject;
@@ -489,6 +497,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsSimpleObject_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsSimpleObject");
+				}
             }
         }
         private bool _IsSimpleObject;
@@ -583,6 +595,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         OnTableName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TableName");
+				}
             }
         }
         private string _TableName;

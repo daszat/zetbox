@@ -126,6 +126,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnAufwandGes_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AufwandGes");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -266,6 +270,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -425,6 +433,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -497,6 +509,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -568,6 +584,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Kundenname");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -651,6 +671,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

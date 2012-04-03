@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnEagerLoading_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("EagerLoading");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Base
                         OnIsInlineEditable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsInlineEditable");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

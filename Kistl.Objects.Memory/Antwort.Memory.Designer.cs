@@ -77,6 +77,10 @@ namespace Kistl.App.Test
                         OnFrage_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Frage");
+				}
             }
         }
         private string _Frage;
@@ -209,6 +213,10 @@ namespace Kistl.App.Test
                     _gute_Antworten_pos = __newValue;
                     NotifyPropertyChanged("gute_Antworten_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("gute_Antworten_pos");
+				}
             }
         }
         private int? _gute_Antworten_pos;
@@ -263,6 +271,10 @@ namespace Kistl.App.Test
                         OnFragenNummer_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("FragenNummer");
+				}
             }
         }
         private int _FragenNummer;
@@ -316,6 +328,10 @@ namespace Kistl.App.Test
                         OnGegebeneAntwort_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("GegebeneAntwort");
+				}
             }
         }
         private int? _GegebeneAntwort;

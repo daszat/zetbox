@@ -225,6 +225,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("StringProp");
+				}
             }
         }
         private string _StringProp;

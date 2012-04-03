@@ -88,6 +88,10 @@ namespace Kistl.App.GUI
                         OnPredicate_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Predicate");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

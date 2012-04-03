@@ -202,6 +202,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -273,6 +277,10 @@ namespace Kistl.App.Base
                         OnReason_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Reason");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

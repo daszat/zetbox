@@ -83,6 +83,10 @@ namespace Kistl.App.Test
                         OnTestBool_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestBool");
+				}
             }
         }
         private bool? _TestBool;
@@ -480,6 +484,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                         OnTestDateTime_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestDateTime");
+				}
             }
         }
         private DateTime? _TestDateTime;
@@ -607,6 +615,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                         OnTestString_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestString");
+				}
             }
         }
         private string _TestString;
@@ -851,6 +863,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

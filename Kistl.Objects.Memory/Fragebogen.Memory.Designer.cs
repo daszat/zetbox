@@ -128,6 +128,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
                         OnBogenNummer_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("BogenNummer");
+				}
             }
         }
         private int? _BogenNummer;

@@ -77,6 +77,10 @@ namespace Kistl.App.Calendar
                         OnDayOfWeek_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DayOfWeek");
+				}
             }
         }
         private Kistl.App.Base.DayOfWeek _DayOfWeek;

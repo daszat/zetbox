@@ -88,6 +88,10 @@ namespace Kistl.App.Calendar
                         OnOffset_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Offset");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

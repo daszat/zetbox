@@ -77,6 +77,10 @@ namespace ZBox.App.SchemaMigration
                         OnDestination_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Destination");
+				}
             }
         }
         private string _Destination;
@@ -130,6 +134,10 @@ namespace ZBox.App.SchemaMigration
                         OnDestinationRows_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DestinationRows");
+				}
             }
         }
         private int _DestinationRows;
@@ -183,6 +191,10 @@ namespace ZBox.App.SchemaMigration
                         OnSource_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Source");
+				}
             }
         }
         private string _Source;
@@ -236,6 +248,10 @@ namespace ZBox.App.SchemaMigration
                         OnSourceRows_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SourceRows");
+				}
             }
         }
         private int _SourceRows;
@@ -289,6 +305,10 @@ namespace ZBox.App.SchemaMigration
                         OnTimestamp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Timestamp");
+				}
             }
         }
         private DateTime _Timestamp;

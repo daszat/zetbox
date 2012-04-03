@@ -88,6 +88,10 @@ namespace Kistl.App.Calendar
                         OnDay_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Day");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Calendar
                         OnMonth_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Month");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

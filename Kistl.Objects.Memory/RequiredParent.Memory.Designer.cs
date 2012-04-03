@@ -118,6 +118,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;

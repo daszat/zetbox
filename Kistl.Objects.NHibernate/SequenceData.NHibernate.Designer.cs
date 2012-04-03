@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CurrentNumber");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

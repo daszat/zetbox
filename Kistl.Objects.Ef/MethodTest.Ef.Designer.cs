@@ -257,6 +257,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("StringProp");
+				}
             }
         }
         private string _StringProp;
@@ -885,6 +889,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

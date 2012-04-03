@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DisplayName");
+				}
             }
         }
         private string _DisplayName;
@@ -155,6 +159,10 @@ namespace Kistl.App.Base
                         OnPassword_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Password");
+				}
             }
         }
         private string _Password;
@@ -208,6 +216,10 @@ namespace Kistl.App.Base
                         OnUserName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("UserName");
+				}
             }
         }
         private string _UserName;

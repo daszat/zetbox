@@ -88,6 +88,10 @@ namespace Kistl.App.Calendar
                         OnDayOfWeek_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DayOfWeek");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

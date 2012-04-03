@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnSchema_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Schema");
+				}
             }
         }
         private string _Schema;
@@ -130,6 +134,10 @@ namespace Kistl.App.Base
                         OnVersion_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Version");
+				}
             }
         }
         private int _Version;

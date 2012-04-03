@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnDateTimeStyle_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DateTimeStyle");
+				}
             }
         }
         private Kistl.App.Base.DateTimeStyles? _DateTimeStyle;

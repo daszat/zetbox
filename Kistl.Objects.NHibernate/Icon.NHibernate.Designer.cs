@@ -179,6 +179,10 @@ namespace Kistl.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -250,6 +254,10 @@ namespace Kistl.App.GUI
                         OnIconFile_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IconFile");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

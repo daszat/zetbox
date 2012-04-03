@@ -123,6 +123,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

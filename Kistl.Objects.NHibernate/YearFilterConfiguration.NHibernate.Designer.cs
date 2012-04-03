@@ -88,6 +88,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentYearDefault");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

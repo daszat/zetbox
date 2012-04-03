@@ -140,6 +140,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -310,6 +314,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

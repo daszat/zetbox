@@ -83,6 +83,10 @@ namespace Kistl.App.Base
                         OnIntValue_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IntValue");
+				}
             }
         }
         private int _IntValue;

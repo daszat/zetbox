@@ -81,6 +81,10 @@ namespace Kistl.App.Test
                         OnBirthday_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Birthday");
+				}
             }
         }
         private DateTime? _Birthday;
@@ -414,6 +418,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                         OnPersonName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("PersonName");
+				}
             }
         }
         private string _PersonName;

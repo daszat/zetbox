@@ -181,6 +181,10 @@ namespace Kistl.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -235,6 +239,10 @@ namespace Kistl.App.GUI
                         OnIconFile_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IconFile");
+				}
             }
         }
         private string _IconFile;

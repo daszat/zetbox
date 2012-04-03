@@ -200,6 +200,10 @@ namespace Kistl.App.GUI
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -314,6 +318,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                         OnColor_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Color");
+				}
             }
         }
         private string _Color;
@@ -487,6 +495,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -556,6 +568,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -860,6 +876,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                     _Children_pos = __newValue;
                     NotifyPropertyChanged("Children_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("Children_pos");
+				}
             }
         }
         private int? _Children_pos;
@@ -917,6 +937,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                         OnTitle_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Title");
+				}
             }
         }
         private string _Title;
@@ -1407,6 +1431,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

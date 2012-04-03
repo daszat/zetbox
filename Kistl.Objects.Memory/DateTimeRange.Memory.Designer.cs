@@ -83,6 +83,10 @@ namespace Kistl.App.Base
                         OnFrom_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("From");
+				}
             }
         }
         private DateTime? _From;
@@ -134,6 +138,10 @@ namespace Kistl.App.Base
                         OnThru_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Thru");
+				}
             }
         }
         private DateTime? _Thru;

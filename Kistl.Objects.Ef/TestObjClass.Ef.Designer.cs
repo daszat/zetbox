@@ -83,6 +83,10 @@ namespace Kistl.App.Test
                         OnMyIntProperty_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MyIntProperty");
+				}
             }
         }
         private int? _MyIntProperty;
@@ -244,6 +248,10 @@ namespace Kistl.App.Test
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("StringProp");
+				}
             }
         }
         private string _StringProp;
@@ -577,6 +585,10 @@ namespace Kistl.App.Test
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

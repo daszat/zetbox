@@ -88,6 +88,10 @@ namespace Kistl.App.Test
                         OnMyIntProperty_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MyIntProperty");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -227,6 +231,10 @@ namespace Kistl.App.Test
                         OnStringProp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("StringProp");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -279,6 +287,10 @@ namespace Kistl.App.Test
                         OnTestEnumProp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestEnumProp");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

@@ -130,6 +130,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -276,6 +280,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;

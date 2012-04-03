@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CurrentNumber");
+				}
             }
         }
         private int _CurrentNumber;

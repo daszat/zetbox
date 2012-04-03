@@ -77,6 +77,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentMonthDefault");
+				}
             }
         }
         private bool? _IsCurrentMonthDefault;
@@ -130,6 +134,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentQuaterDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentQuaterDefault");
+				}
             }
         }
         private bool? _IsCurrentQuaterDefault;
@@ -183,6 +191,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentYearDefault");
+				}
             }
         }
         private bool? _IsCurrentYearDefault;

@@ -83,6 +83,10 @@ namespace Kistl.App.Base
                         OnPrecision_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Precision");
+				}
             }
         }
         private int _Precision;
@@ -139,6 +143,10 @@ namespace Kistl.App.Base
                         OnScale_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Scale");
+				}
             }
         }
         private int _Scale;

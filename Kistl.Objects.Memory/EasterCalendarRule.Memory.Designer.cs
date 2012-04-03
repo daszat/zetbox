@@ -77,6 +77,10 @@ namespace Kistl.App.Calendar
                         OnOffset_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Offset");
+				}
             }
         }
         private int? _Offset;
