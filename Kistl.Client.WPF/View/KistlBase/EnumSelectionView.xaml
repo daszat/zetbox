@@ -13,6 +13,7 @@
               IsEditable="True"
               DisplayMemberPath="Value"
               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+              Text="{Binding FormattedValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
               SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
               KeyDown="cbValue_KeyDown">
         <ComboBox.ContextMenu>

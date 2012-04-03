@@ -398,6 +398,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     {
                         OnPartialInput(value, parseResult.Error);
                     }
+                    else if (!AllowNullInput && parseResult.Value == null)
+                    {
+                        OnPartialInput(value, "Wert muss gesetzt sein");
+                    }
                     else
                     {
                         OnValidInput(value, parseResult.Value);
@@ -688,7 +692,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 switch (columnName)
                 {
                     case "FormattedValue":
-                        return _partialUserInputError;
+                        return Error;
                     default:
                         return base[columnName];
                 }
@@ -827,7 +831,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             set
             {
-                Value = value.Key;
+                // Value = value.Key;
+                FormattedValue = value.Value;
             }
         }
 
@@ -866,6 +871,20 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 Value = value,
                 Error = error
             };
+        }
+
+        public override string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    case "SelectedItem":
+                        return Error;
+                    default:
+                        return base[columnName];
+                }
+            }
         }
     }
 
