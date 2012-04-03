@@ -59,12 +59,12 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
 
         DateTime IAppointmentViewModel.From
         {
-            get { return Task.DatumVon ?? DateTime.Today; }
+            get { return Task.DatumVon; }
         }
 
         DateTime IAppointmentViewModel.Until
         {
-            get { return Task.DatumBis ?? DateTime.Today; }
+            get { return Task.DatumBis; }
         }
 
         string IAppointmentViewModel.Location

@@ -2588,7 +2588,7 @@
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Kundenname" Type="varchar" MaxLength="100" Nullable="true" />
-    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
     <EntityType Name="Projekt_Rights">
       <Key>
@@ -2882,10 +2882,10 @@
     <Property Name="Aufwand" Type="float8" Nullable="true" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="DatumBis" Type="timestamp" Nullable="true" />
-    <Property Name="DatumVon" Type="timestamp" Nullable="true" />
+    <Property Name="DatumBis" Type="timestamp" Nullable="false" />
+    <Property Name="DatumVon" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
     <EntityType Name="Task_Rights">
       <Key>

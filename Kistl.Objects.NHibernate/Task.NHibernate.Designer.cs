@@ -423,17 +423,17 @@ namespace Kistl.App.Projekte
         /// </summary>
 
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-        public DateTime? DatumBis
+        public DateTime DatumBis
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DatumBis;
                 if (OnDatumBis_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnDatumBis_Getter(this, __e);
                     __result = __e.Result;
                 }
@@ -448,7 +448,7 @@ namespace Kistl.App.Projekte
                     var __newValue = value;
                     if (OnDatumBis_PreSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnDatumBis_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
@@ -457,16 +457,16 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanged("DatumBis", __oldValue, __newValue);
                     if (OnDatumBis_PostSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnDatumBis_PostSetter(this, __e);
                     }
                 }
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumBis_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumBis_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumBis_PostSetter;
 
         public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnDatumBis_IsValid;
 
@@ -475,17 +475,17 @@ namespace Kistl.App.Projekte
         /// </summary>
 
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-        public DateTime? DatumVon
+        public DateTime DatumVon
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DatumVon;
                 if (OnDatumVon_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnDatumVon_Getter(this, __e);
                     __result = __e.Result;
                 }
@@ -500,7 +500,7 @@ namespace Kistl.App.Projekte
                     var __newValue = value;
                     if (OnDatumVon_PreSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnDatumVon_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
@@ -509,16 +509,16 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanged("DatumVon", __oldValue, __newValue);
                     if (OnDatumVon_PostSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnDatumVon_PostSetter(this, __e);
                     }
                 }
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumVon_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumVon_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumVon_PostSetter;
 
         public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnDatumVon_IsValid;
 
@@ -911,7 +911,7 @@ namespace Kistl.App.Projekte
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<Task, DateTime?>(
+                    new PropertyDescriptorNHibernateImpl<Task, DateTime>(
                         lazyCtx,
                         new Guid("2b705496-388a-43a8-82e8-b17b652a55fc"),
                         "DatumBis",
@@ -920,7 +920,7 @@ namespace Kistl.App.Projekte
                         (obj, val) => obj.DatumBis = val,
 						obj => OnDatumBis_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<Task, DateTime?>(
+                    new PropertyDescriptorNHibernateImpl<Task, DateTime>(
                         lazyCtx,
                         new Guid("1485a7b7-c4d5-456a-a18a-0c409c3eca8e"),
                         "DatumVon",
@@ -1084,9 +1084,9 @@ namespace Kistl.App.Projekte
 
             public virtual DateTime CreatedOn { get; set; }
 
-            public virtual DateTime? DatumBis { get; set; }
+            public virtual DateTime DatumBis { get; set; }
 
-            public virtual DateTime? DatumVon { get; set; }
+            public virtual DateTime DatumVon { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
@@ -1169,12 +1169,12 @@ namespace Kistl.App.Projekte
                 this.Proxy.CreatedOn = tmp;
             }
             {
-                DateTime? tmp;
+                DateTime tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.DatumBis = tmp;
             }
             {
-                DateTime? tmp;
+                DateTime tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.DatumVon = tmp;
             }
@@ -1254,13 +1254,13 @@ namespace Kistl.App.Projekte
             }
             {
                 // yuck
-                DateTime? tmp = this.Proxy.DatumBis;
+                DateTime tmp = this.Proxy.DatumBis;
                 XmlStreamer.FromStream(ref tmp, xml, "DatumBis", "Kistl.App.Projekte");
                 this.Proxy.DatumBis = tmp;
             }
             {
                 // yuck
-                DateTime? tmp = this.Proxy.DatumVon;
+                DateTime tmp = this.Proxy.DatumVon;
                 XmlStreamer.FromStream(ref tmp, xml, "DatumVon", "Kistl.App.Projekte");
                 this.Proxy.DatumVon = tmp;
             }
@@ -1330,13 +1330,13 @@ namespace Kistl.App.Projekte
             }
             {
                 // yuck
-                DateTime? tmp = this.Proxy.DatumBis;
+                DateTime tmp = this.Proxy.DatumBis;
                 XmlStreamer.FromStream(ref tmp, xml, "DatumBis", "Kistl.App.Projekte");
                 this.Proxy.DatumBis = tmp;
             }
             {
                 // yuck
-                DateTime? tmp = this.Proxy.DatumVon;
+                DateTime tmp = this.Proxy.DatumVon;
                 XmlStreamer.FromStream(ref tmp, xml, "DatumVon", "Kistl.App.Projekte");
                 this.Proxy.DatumVon = tmp;
             }
