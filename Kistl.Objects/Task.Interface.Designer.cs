@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Enddatum
         /// </summary>
-        DateTime? DatumBis {
+        DateTime DatumBis {
             get;
             set;
         }
@@ -32,7 +32,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Start Datum
         /// </summary>
-        DateTime? DatumVon {
+        DateTime DatumVon {
             get;
             set;
         }

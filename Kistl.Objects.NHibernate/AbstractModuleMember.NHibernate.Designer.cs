@@ -179,6 +179,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -338,6 +342,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -410,6 +418,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -750,6 +762,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_AbstractModuleMember")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Module");
             base.NotifyCreated();
             if (OnNotifyCreated_AbstractModuleMember != null) OnNotifyCreated_AbstractModuleMember(this);
         }

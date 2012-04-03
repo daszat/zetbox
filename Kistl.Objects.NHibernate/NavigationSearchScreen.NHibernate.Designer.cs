@@ -88,6 +88,10 @@ namespace Kistl.App.GUI
                         OnAllowAddNew_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AllowAddNew");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.GUI
                         OnAllowDelete_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AllowDelete");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -192,6 +200,10 @@ namespace Kistl.App.GUI
                         OnAllowSelectColumns_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AllowSelectColumns");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -244,6 +256,10 @@ namespace Kistl.App.GUI
                         OnAllowUserFilter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AllowUserFilter");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -296,6 +312,10 @@ namespace Kistl.App.GUI
                         OnEnableAutoFilter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("EnableAutoFilter");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -348,6 +368,10 @@ namespace Kistl.App.GUI
                         OnInitialSort_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("InitialSort");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -400,6 +424,10 @@ namespace Kistl.App.GUI
                         OnInitialSortDirection_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("InitialSortDirection");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -452,6 +480,10 @@ namespace Kistl.App.GUI
                         OnIsEditable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsEditable");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -504,6 +536,10 @@ namespace Kistl.App.GUI
                         OnIsMultiselect_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsMultiselect");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -734,6 +770,10 @@ namespace Kistl.App.GUI
                         OnRespectRequiredFilter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("RespectRequiredFilter");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -786,6 +826,10 @@ namespace Kistl.App.GUI
                         OnShowFilter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowFilter");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -838,6 +882,10 @@ namespace Kistl.App.GUI
                         OnShowMasterDetail_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowMasterDetail");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -890,6 +938,10 @@ namespace Kistl.App.GUI
                         OnShowOpenCommand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowOpenCommand");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -942,6 +994,10 @@ namespace Kistl.App.GUI
                         OnShowRefreshCommand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowRefreshCommand");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1083,6 +1139,10 @@ namespace Kistl.App.GUI
                         OnViewMethod_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ViewMethod");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1501,6 +1561,24 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_NavigationSearchScreen")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AllowAddNew");
+            SetNotInitializedProperty("AllowDelete");
+            SetNotInitializedProperty("AllowSelectColumns");
+            SetNotInitializedProperty("AllowUserFilter");
+            SetNotInitializedProperty("EnableAutoFilter");
+            SetNotInitializedProperty("InitialSort");
+            SetNotInitializedProperty("InitialSortDirection");
+            SetNotInitializedProperty("IsEditable");
+            SetNotInitializedProperty("IsMultiselect");
+            SetNotInitializedProperty("RequestedEditorKind");
+            SetNotInitializedProperty("RequestedWorkspaceKind");
+            SetNotInitializedProperty("RespectRequiredFilter");
+            SetNotInitializedProperty("ShowFilter");
+            SetNotInitializedProperty("ShowMasterDetail");
+            SetNotInitializedProperty("ShowOpenCommand");
+            SetNotInitializedProperty("ShowRefreshCommand");
+            SetNotInitializedProperty("Type");
+            SetNotInitializedProperty("ViewMethod");
             base.NotifyCreated();
             if (OnNotifyCreated_NavigationSearchScreen != null) OnNotifyCreated_NavigationSearchScreen(this);
         }

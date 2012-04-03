@@ -128,6 +128,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
                         OnBogenNummer_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("BogenNummer");
+				}
             }
         }
         private int? _BogenNummer;
@@ -296,6 +300,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         [EventBasedMethod("OnNotifyCreated_Fragebogen")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("BogenNummer");
             base.NotifyCreated();
             if (OnNotifyCreated_Fragebogen != null) OnNotifyCreated_Fragebogen(this);
         }

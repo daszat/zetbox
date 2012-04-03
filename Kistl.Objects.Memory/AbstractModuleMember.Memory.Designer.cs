@@ -180,6 +180,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -337,6 +341,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -403,6 +411,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -725,6 +737,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_AbstractModuleMember")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Module");
             base.NotifyCreated();
             if (OnNotifyCreated_AbstractModuleMember != null) OnNotifyCreated_AbstractModuleMember(this);
         }

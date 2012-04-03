@@ -1221,32 +1221,6 @@ namespace Kistl.API
 
     public static class FileExtensions
     {
-        public static void ShellExecute(this System.IO.FileInfo file)
-        {
-            ShellExecute(file, "");
-        }
-
-        public static void ShellExecute(this System.IO.FileInfo file, string verb)
-        {
-            if (file == null) throw new ArgumentNullException("file");
-
-            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
-            si.UseShellExecute = true;
-            si.FileName = file.FullName;
-            si.Verb = verb;
-            System.Diagnostics.Process.Start(si);
-        }
-
-        public static string[] GetFileVerbs(this System.IO.FileInfo file)
-        {
-            if (file == null) throw new ArgumentNullException("file");
-
-            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
-            si.UseShellExecute = true;
-            si.FileName = file.FullName;
-            return si.Verbs;
-        }
-
         public static string GetMimeType(this System.IO.FileInfo file)
         {
             if (file == null) throw new ArgumentNullException("file");

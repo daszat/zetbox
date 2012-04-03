@@ -200,6 +200,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -492,6 +496,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -561,6 +569,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -618,6 +630,10 @@ namespace Kistl.App.Base
                         OnReason_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Reason");
+				}
             }
         }
         private string _Reason;
@@ -948,6 +964,10 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Constraint")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("ConstrainedProperty");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Reason");
             base.NotifyCreated();
             if (OnNotifyCreated_Constraint != null) OnNotifyCreated_Constraint(this);
         }
@@ -984,6 +1004,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

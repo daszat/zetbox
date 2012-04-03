@@ -613,6 +613,10 @@ namespace Kistl.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -681,6 +685,10 @@ namespace Kistl.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -1277,6 +1285,14 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_ViewModelDescriptor")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DefaultDisplayKind");
+            SetNotInitializedProperty("DefaultEditorKind");
+            SetNotInitializedProperty("DefaultGridCellDisplayKind");
+            SetNotInitializedProperty("DefaultGridCellEditorKind");
+            SetNotInitializedProperty("DefaultGridCellPreEditorKind");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("ViewModelRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ViewModelDescriptor != null) OnNotifyCreated_ViewModelDescriptor(this);
         }
@@ -1313,6 +1329,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

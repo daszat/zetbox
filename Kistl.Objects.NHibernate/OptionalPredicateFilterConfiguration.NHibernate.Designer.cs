@@ -88,6 +88,10 @@ namespace Kistl.App.GUI
                         OnPredicate_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Predicate");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -339,6 +343,7 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_OptionalPredicateFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Predicate");
             base.NotifyCreated();
             if (OnNotifyCreated_OptionalPredicateFilterConfiguration != null) OnNotifyCreated_OptionalPredicateFilterConfiguration(this);
         }

@@ -83,6 +83,10 @@ namespace Kistl.App.Base
                         OnDate_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Date");
+				}
             }
         }
         private DateTime _Date;
@@ -139,6 +143,10 @@ namespace Kistl.App.Base
                         OnException_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Exception");
+				}
             }
         }
         private string _Exception;
@@ -195,6 +203,10 @@ namespace Kistl.App.Base
                         OnLevel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Level");
+				}
             }
         }
         private string _Level;
@@ -251,6 +263,10 @@ namespace Kistl.App.Base
                         OnLogger_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Logger");
+				}
             }
         }
         private string _Logger;
@@ -307,6 +323,10 @@ namespace Kistl.App.Base
                         OnMessage_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Message");
+				}
             }
         }
         private string _Message;
@@ -363,6 +383,10 @@ namespace Kistl.App.Base
                         OnThread_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Thread");
+				}
             }
         }
         private string _Thread;
@@ -537,6 +561,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ExceptionLogEntry")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Date");
+            SetNotInitializedProperty("Exception");
+            SetNotInitializedProperty("Level");
+            SetNotInitializedProperty("Logger");
+            SetNotInitializedProperty("Message");
+            SetNotInitializedProperty("Thread");
             base.NotifyCreated();
             if (OnNotifyCreated_ExceptionLogEntry != null) OnNotifyCreated_ExceptionLogEntry(this);
         }
@@ -573,6 +603,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

@@ -10,12 +10,18 @@ namespace Kistl.App.Base
     /// Client implementation
     /// </summary>
     [Implementor]
-    public static class BlobActions
+    public class BlobActions
     {
+        private static IFileOpener _fileOpener;
+        public BlobActions(IFileOpener fileOpener)
+        {
+            _fileOpener = fileOpener;
+        }
+
         [Invocation]
         public static void Open(Kistl.App.Base.Blob obj)
         {
-            obj.Context.GetFileInfo(obj.ID).ShellExecute();
+            _fileOpener.ShellExecute(obj.Context.GetFileInfo(obj.ID));
         }
     }
 }

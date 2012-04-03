@@ -77,6 +77,10 @@ namespace Kistl.App.Calendar
                         OnDayOfWeek_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DayOfWeek");
+				}
             }
         }
         private Kistl.App.Base.DayOfWeek _DayOfWeek;
@@ -265,6 +269,7 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyCreated_DayOfWeekCalendarRule")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DayOfWeek");
             base.NotifyCreated();
             if (OnNotifyCreated_DayOfWeekCalendarRule != null) OnNotifyCreated_DayOfWeekCalendarRule(this);
         }

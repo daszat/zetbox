@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnMax_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Max");
+				}
             }
         }
         private int _Max;
@@ -130,6 +134,10 @@ namespace Kistl.App.Base
                         OnMin_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Min");
+				}
             }
         }
         private int _Min;
@@ -391,6 +399,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_IntegerRangeConstraint")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Max");
+            SetNotInitializedProperty("Min");
             base.NotifyCreated();
             if (OnNotifyCreated_IntegerRangeConstraint != null) OnNotifyCreated_IntegerRangeConstraint(this);
         }

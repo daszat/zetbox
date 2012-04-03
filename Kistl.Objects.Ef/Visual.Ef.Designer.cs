@@ -183,6 +183,10 @@ namespace Kistl.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -565,6 +569,9 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_Visual")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Method");
+            SetNotInitializedProperty("Property");
             base.NotifyCreated();
             if (OnNotifyCreated_Visual != null) OnNotifyCreated_Visual(this);
         }
@@ -601,6 +608,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

@@ -49,6 +49,10 @@
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
 <% if (!isCalculated) ApplyPostSetTemplate(); %>
                 }
+				else 
+				{
+					SetInitializedProperty("<%= name %>");
+				}
             }
         }
 <% ApplyBackingStoreDefinition(); %>

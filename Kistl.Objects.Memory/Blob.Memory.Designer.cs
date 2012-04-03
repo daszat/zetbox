@@ -180,6 +180,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -337,6 +341,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -403,6 +411,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -457,6 +469,10 @@ namespace Kistl.App.Base
                         OnMimeType_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MimeType");
+				}
             }
         }
         private string _MimeType;
@@ -510,6 +526,10 @@ namespace Kistl.App.Base
                         OnOriginalName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("OriginalName");
+				}
             }
         }
         private string _OriginalName;
@@ -563,6 +583,10 @@ namespace Kistl.App.Base
                         OnStoragePath_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("StoragePath");
+				}
             }
         }
         private string _StoragePath;
@@ -922,6 +946,11 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Blob")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("MimeType");
+            SetNotInitializedProperty("OriginalName");
+            SetNotInitializedProperty("StoragePath");
             base.NotifyCreated();
             if (OnNotifyCreated_Blob != null) OnNotifyCreated_Blob(this);
         }

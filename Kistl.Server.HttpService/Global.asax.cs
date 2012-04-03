@@ -33,7 +33,7 @@ namespace Kistl.Server.HttpService
         void CreateMasterContainer(KistlConfig config)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
-          
+
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
 
@@ -51,9 +51,16 @@ namespace Kistl.Server.HttpService
 
             var cfgFile = System.Configuration.ConfigurationManager.AppSettings["ConfigFile"];
 
+            var appBasePath = Server.MapPath("~/");
+            var zbBasePath = Path.Combine(appBasePath, "..");
+            var configsPath = Path.Combine(zbBasePath, "Configs");
+
             var config = KistlConfig.FromFile(
                 string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
-                KistlConfig.GetDefaultConfigName("Kistl.Server.HttpService.xml", Path.Combine(Path.Combine(Server.MapPath("~/"), ".."), "Configs")));
+                KistlConfig.GetDefaultConfigName("Kistl.Server.HttpService.xml", configsPath));
+
+            // Make DocumentStore relative to HttpService
+            config.Server.DocumentStore = Path.Combine(appBasePath, config.Server.DocumentStore);
 
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
             CreateMasterContainer(config);
@@ -66,7 +73,7 @@ namespace Kistl.Server.HttpService
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

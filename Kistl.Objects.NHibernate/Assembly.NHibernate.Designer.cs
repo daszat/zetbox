@@ -179,6 +179,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -338,6 +342,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -409,6 +417,10 @@ namespace Kistl.App.Base
                         OnDeploymentRestrictions_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DeploymentRestrictions");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -462,6 +474,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -622,6 +638,10 @@ namespace Kistl.App.Base
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -938,6 +958,11 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Assembly")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DeploymentRestrictions");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Assembly != null) OnNotifyCreated_Assembly(this);
         }

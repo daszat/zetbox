@@ -389,6 +389,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -548,6 +552,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -620,6 +628,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -691,6 +703,10 @@ namespace Kistl.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("HasPersistentOrder");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -743,6 +759,10 @@ namespace Kistl.App.Base
                         OnMultiplicity_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Multiplicity");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -930,6 +950,10 @@ namespace Kistl.App.Base
                         OnRoleName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("RoleName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1408,6 +1432,16 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_RelationEnd")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AParent");
+            SetNotInitializedProperty("BParent");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("HasPersistentOrder");
+            SetNotInitializedProperty("Multiplicity");
+            SetNotInitializedProperty("Navigator");
+            SetNotInitializedProperty("Parent");
+            SetNotInitializedProperty("RoleName");
+            SetNotInitializedProperty("Type");
             base.NotifyCreated();
             if (OnNotifyCreated_RelationEnd != null) OnNotifyCreated_RelationEnd(this);
         }

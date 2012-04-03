@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnDate_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Date");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Base
                         OnException_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Exception");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -192,6 +200,10 @@ namespace Kistl.App.Base
                         OnLevel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Level");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -244,6 +256,10 @@ namespace Kistl.App.Base
                         OnLogger_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Logger");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -296,6 +312,10 @@ namespace Kistl.App.Base
                         OnMessage_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Message");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -348,6 +368,10 @@ namespace Kistl.App.Base
                         OnThread_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Thread");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -523,6 +547,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ExceptionLogEntry")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Date");
+            SetNotInitializedProperty("Exception");
+            SetNotInitializedProperty("Level");
+            SetNotInitializedProperty("Logger");
+            SetNotInitializedProperty("Message");
+            SetNotInitializedProperty("Thread");
             base.NotifyCreated();
             if (OnNotifyCreated_ExceptionLogEntry != null) OnNotifyCreated_ExceptionLogEntry(this);
         }

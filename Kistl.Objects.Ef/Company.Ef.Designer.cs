@@ -83,6 +83,10 @@ namespace Kistl.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -207,6 +211,7 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_Company")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Company != null) OnNotifyCreated_Company(this);
         }
@@ -243,6 +248,10 @@ namespace Kistl.App.Test
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

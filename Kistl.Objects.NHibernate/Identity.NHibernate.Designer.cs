@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DisplayName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -171,6 +175,10 @@ namespace Kistl.App.Base
                         OnPassword_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Password");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -223,6 +231,10 @@ namespace Kistl.App.Base
                         OnUserName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("UserName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -377,6 +389,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Identity")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DisplayName");
+            SetNotInitializedProperty("Password");
+            SetNotInitializedProperty("UserName");
             base.NotifyCreated();
             if (OnNotifyCreated_Identity != null) OnNotifyCreated_Identity(this);
         }

@@ -15,6 +15,12 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public class DtoPrinter
     {
+        private readonly IFileOpener _fileOpener;
+        public DtoPrinter(IFileOpener fileOpener)
+        {
+            _fileOpener = fileOpener;
+        }
+
         /// <summary>
         /// DTOs as lists are rendered as a sequence of sections containing paragraphs and tables with various different parameters.
         /// This class keeps track of the current end of document and is able to append new values, groups and tables with minimal changes.
@@ -210,7 +216,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
         //    dw.Close();
         //}
 
-        private static void PrintToPdf(Document doc)
+        private void PrintToPdf(Document doc)
         {
             var pdf = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.None);
             pdf.Document = doc;
@@ -219,7 +225,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             var tmp = Path.GetTempFileName();
             tmp = Path.ChangeExtension(tmp, "pdf");
             pdf.Save(tmp);
-            new FileInfo(tmp).ShellExecute();
+            _fileOpener.ShellExecute(tmp);
         }
 
         private Document GetListFormattedDocument(DtoBaseViewModel dto)

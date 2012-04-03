@@ -99,6 +99,10 @@ namespace Kistl.App.Test
                         OnAreaCode_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AreaCode");
+				}
             }
         }
         private string _AreaCode;
@@ -153,6 +157,10 @@ namespace Kistl.App.Test
                         OnNumber_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Number");
+				}
             }
         }
         private string _Number;

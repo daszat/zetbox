@@ -87,6 +87,10 @@ this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", _
 if (!isCalculated) ApplyPostSetTemplate(); 
 #line 51 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("                }\r\n");
+this.WriteObjects("				else \r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("					SetInitializedProperty(\"",  name , "\");\r\n");
+this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 #line 54 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"

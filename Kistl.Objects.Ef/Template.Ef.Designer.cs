@@ -188,6 +188,10 @@ namespace Kistl.App.GUI
                         OnDisplayedTypeFullName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DisplayedTypeFullName");
+				}
             }
         }
         private string _DisplayedTypeFullName;
@@ -244,6 +248,10 @@ namespace Kistl.App.GUI
                         OnDisplayName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DisplayName");
+				}
             }
         }
         private string _DisplayName;
@@ -635,6 +643,10 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_Template")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DisplayedTypeAssembly");
+            SetNotInitializedProperty("DisplayedTypeFullName");
+            SetNotInitializedProperty("DisplayName");
+            SetNotInitializedProperty("VisualTree");
             base.NotifyCreated();
             if (OnNotifyCreated_Template != null) OnNotifyCreated_Template(this);
         }
@@ -671,6 +683,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

@@ -88,6 +88,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentYearDefault");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -339,6 +343,7 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_YearFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("IsCurrentYearDefault");
             base.NotifyCreated();
             if (OnNotifyCreated_YearFilterConfiguration != null) OnNotifyCreated_YearFilterConfiguration(this);
         }

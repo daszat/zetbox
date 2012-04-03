@@ -17,11 +17,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public TreeItemInstanceListViewModel(
             IViewModelDependencies appCtx,
             KistlConfig config,
+            IFileOpener fileOpener,
             IKistlContext dataCtx, ViewModel parent,
             Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
             Func<IQueryable> qry)
-            : base(appCtx, config, dataCtx, parent, workingCtxFactory, type, qry)
+            : base(appCtx, config, fileOpener, dataCtx, parent, workingCtxFactory, type, qry)
         {
         }
 

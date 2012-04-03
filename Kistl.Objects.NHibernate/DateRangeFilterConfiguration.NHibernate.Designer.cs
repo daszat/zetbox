@@ -88,6 +88,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentMonthDefault");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentQuaterDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentQuaterDefault");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -192,6 +200,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentYearDefault");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -463,6 +475,9 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_DateRangeFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("IsCurrentMonthDefault");
+            SetNotInitializedProperty("IsCurrentQuaterDefault");
+            SetNotInitializedProperty("IsCurrentYearDefault");
             base.NotifyCreated();
             if (OnNotifyCreated_DateRangeFilterConfiguration != null) OnNotifyCreated_DateRangeFilterConfiguration(this);
         }

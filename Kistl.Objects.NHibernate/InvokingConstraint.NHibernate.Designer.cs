@@ -518,6 +518,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_InvokingConstraint")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("GetErrorTextInvocation");
+            SetNotInitializedProperty("IsValidInvocation");
             base.NotifyCreated();
             if (OnNotifyCreated_InvokingConstraint != null) OnNotifyCreated_InvokingConstraint(this);
         }

@@ -77,6 +77,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentMonthDefault");
+				}
             }
         }
         private bool? _IsCurrentMonthDefault;
@@ -328,6 +332,7 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_MonthFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("IsCurrentMonthDefault");
             base.NotifyCreated();
             if (OnNotifyCreated_MonthFilterConfiguration != null) OnNotifyCreated_MonthFilterConfiguration(this);
         }

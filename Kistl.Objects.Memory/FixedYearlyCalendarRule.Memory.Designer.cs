@@ -77,6 +77,10 @@ namespace Kistl.App.Calendar
                         OnDay_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Day");
+				}
             }
         }
         private int _Day;
@@ -130,6 +134,10 @@ namespace Kistl.App.Calendar
                         OnMonth_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Month");
+				}
             }
         }
         private int _Month;
@@ -328,6 +336,8 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyCreated_FixedYearlyCalendarRule")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Day");
+            SetNotInitializedProperty("Month");
             base.NotifyCreated();
             if (OnNotifyCreated_FixedYearlyCalendarRule != null) OnNotifyCreated_FixedYearlyCalendarRule(this);
         }

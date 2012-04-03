@@ -180,6 +180,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -337,6 +341,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -391,6 +399,10 @@ namespace Kistl.App.Base
                         OnDeploymentRestriction_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DeploymentRestriction");
+				}
             }
         }
         private Kistl.App.Base.DeploymentRestriction? _DeploymentRestriction;
@@ -444,6 +456,10 @@ namespace Kistl.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -509,6 +525,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -970,6 +990,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ServiceDescriptor")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DeploymentRestriction");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("TypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ServiceDescriptor != null) OnNotifyCreated_ServiceDescriptor(this);
         }

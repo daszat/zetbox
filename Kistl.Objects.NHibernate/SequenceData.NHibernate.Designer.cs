@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnCurrentNumber_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CurrentNumber");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -349,6 +353,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_SequenceData")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CurrentNumber");
+            SetNotInitializedProperty("Sequence");
             base.NotifyCreated();
             if (OnNotifyCreated_SequenceData != null) OnNotifyCreated_SequenceData(this);
         }

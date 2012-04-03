@@ -375,6 +375,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -606,6 +610,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -675,6 +683,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -838,6 +850,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -1268,6 +1284,11 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         [EventBasedMethod("OnNotifyCreated_Calendar")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("BaseCalendar");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Calendar != null) OnNotifyCreated_Calendar(this);
         }
@@ -1304,6 +1325,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

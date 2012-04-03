@@ -180,6 +180,10 @@ namespace ZBox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -234,6 +238,10 @@ namespace ZBox.App.SchemaMigration
                         OnConnectionStringKey_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ConnectionStringKey");
+				}
             }
         }
         private string _ConnectionStringKey;
@@ -390,6 +398,10 @@ namespace ZBox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -444,6 +456,10 @@ namespace ZBox.App.SchemaMigration
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -509,6 +525,10 @@ namespace ZBox.App.SchemaMigration
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -671,6 +691,10 @@ namespace ZBox.App.SchemaMigration
                         OnOriginConnectionStringKey_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("OriginConnectionStringKey");
+				}
             }
         }
         private string _OriginConnectionStringKey;
@@ -724,6 +748,10 @@ namespace ZBox.App.SchemaMigration
                         OnSchema_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Schema");
+				}
             }
         }
         private string _Schema;
@@ -1043,6 +1071,13 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         [EventBasedMethod("OnNotifyCreated_StagingDatabase")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("ConnectionStringKey");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("MigrationProject");
+            SetNotInitializedProperty("OriginConnectionStringKey");
+            SetNotInitializedProperty("Schema");
             base.NotifyCreated();
             if (OnNotifyCreated_StagingDatabase != null) OnNotifyCreated_StagingDatabase(this);
         }

@@ -179,6 +179,10 @@ namespace at.dasz.DocumentManagement
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -338,6 +342,10 @@ namespace at.dasz.DocumentManagement
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -410,6 +418,10 @@ namespace at.dasz.DocumentManagement
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -568,6 +580,10 @@ namespace at.dasz.DocumentManagement
                         OnMachineName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MachineName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -620,6 +636,10 @@ namespace at.dasz.DocumentManagement
                         OnPickupDirectory_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("PickupDirectory");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -869,6 +889,11 @@ namespace at.dasz.DocumentManagement
         [EventBasedMethod("OnNotifyCreated_FileImportConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Identity");
+            SetNotInitializedProperty("MachineName");
+            SetNotInitializedProperty("PickupDirectory");
             base.NotifyCreated();
             if (OnNotifyCreated_FileImportConfiguration != null) OnNotifyCreated_FileImportConfiguration(this);
         }

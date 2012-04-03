@@ -77,6 +77,10 @@ namespace Kistl.App.Test
                         OnTestBool_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestBool");
+				}
             }
         }
         private bool? _TestBool;
@@ -410,6 +414,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                         OnTestDateTime_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestDateTime");
+				}
             }
         }
         private DateTime? _TestDateTime;
@@ -463,6 +471,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                         OnTestEnum_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestEnum");
+				}
             }
         }
         private Kistl.App.Test.TestEnum _TestEnum;
@@ -516,6 +528,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                         OnTestString_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestString");
+				}
             }
         }
         private string _TestString;
@@ -746,6 +762,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         [EventBasedMethod("OnNotifyCreated_Muhblah")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("TestBool");
+            SetNotInitializedProperty("TestCustomObjects_Nav");
+            SetNotInitializedProperty("TestCustomObjects_One_Nav");
+            SetNotInitializedProperty("TestDateTime");
+            SetNotInitializedProperty("TestEnum");
+            SetNotInitializedProperty("TestString");
             base.NotifyCreated();
             if (OnNotifyCreated_Muhblah != null) OnNotifyCreated_Muhblah(this);
         }

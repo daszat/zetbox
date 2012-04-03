@@ -180,6 +180,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -339,6 +343,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -410,6 +418,10 @@ namespace Kistl.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -463,6 +475,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -534,6 +550,10 @@ namespace Kistl.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsList");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -587,6 +607,10 @@ namespace Kistl.App.Base
                         OnIsNullable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsNullable");
+				}
             }
         }
 
@@ -658,6 +682,10 @@ namespace Kistl.App.Base
                         OnIsReturnParameter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsReturnParameter");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -710,6 +738,10 @@ namespace Kistl.App.Base
                         OnLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Label");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -846,6 +878,10 @@ namespace Kistl.App.Base
                     Proxy.Parameter_pos = __newValue;
                     NotifyPropertyChanged("Parameter_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("Parameter_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -899,6 +935,10 @@ namespace Kistl.App.Base
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1395,6 +1435,14 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_BaseParameter")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("IsList");
+            SetNotInitializedProperty("IsReturnParameter");
+            SetNotInitializedProperty("Label");
+            SetNotInitializedProperty("Method");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_BaseParameter != null) OnNotifyCreated_BaseParameter(this);
         }

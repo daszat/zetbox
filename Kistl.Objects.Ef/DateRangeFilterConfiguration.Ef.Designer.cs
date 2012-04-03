@@ -83,6 +83,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentMonthDefault");
+				}
             }
         }
         private bool? _IsCurrentMonthDefault;
@@ -139,6 +143,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentQuaterDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentQuaterDefault");
+				}
             }
         }
         private bool? _IsCurrentQuaterDefault;
@@ -195,6 +203,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentYearDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentYearDefault");
+				}
             }
         }
         private bool? _IsCurrentYearDefault;
@@ -465,6 +477,9 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_DateRangeFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("IsCurrentMonthDefault");
+            SetNotInitializedProperty("IsCurrentQuaterDefault");
+            SetNotInitializedProperty("IsCurrentYearDefault");
             base.NotifyCreated();
             if (OnNotifyCreated_DateRangeFilterConfiguration != null) OnNotifyCreated_DateRangeFilterConfiguration(this);
         }

@@ -180,6 +180,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -337,6 +341,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -528,6 +536,10 @@ namespace Kistl.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -593,6 +605,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -647,6 +663,10 @@ namespace Kistl.App.Base
                         OnIsContinuous_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsContinuous");
+				}
             }
         }
         private bool _IsContinuous;
@@ -1090,6 +1110,13 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Sequence")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("CurrentNumber");
+            SetNotInitializedProperty("Data");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("IsContinuous");
+            SetNotInitializedProperty("Module");
             base.NotifyCreated();
             if (OnNotifyCreated_Sequence != null) OnNotifyCreated_Sequence(this);
         }

@@ -140,6 +140,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
                         OnSomeInt_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SomeInt");
+				}
             }
         }
         private int? _SomeInt;
@@ -273,6 +277,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         [EventBasedMethod("OnNotifyCreated_OrderedOneEnd")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("SomeInt");
             base.NotifyCreated();
             if (OnNotifyCreated_OrderedOneEnd != null) OnNotifyCreated_OrderedOneEnd(this);
         }
@@ -309,6 +314,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

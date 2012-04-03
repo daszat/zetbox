@@ -268,6 +268,10 @@ namespace at.dasz.DocumentManagement
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -427,6 +431,10 @@ namespace at.dasz.DocumentManagement
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -499,6 +507,10 @@ namespace at.dasz.DocumentManagement
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -570,6 +582,10 @@ namespace at.dasz.DocumentManagement
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1002,6 +1018,10 @@ namespace at.dasz.DocumentManagement
         [EventBasedMethod("OnNotifyCreated_File")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Blob");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_File != null) OnNotifyCreated_File(this);
         }

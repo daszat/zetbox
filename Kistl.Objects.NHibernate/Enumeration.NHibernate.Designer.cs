@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnAreFlags_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AreFlags");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -701,6 +705,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         [EventBasedMethod("OnNotifyCreated_Enumeration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AreFlags");
             base.NotifyCreated();
             if (OnNotifyCreated_Enumeration != null) OnNotifyCreated_Enumeration(this);
         }

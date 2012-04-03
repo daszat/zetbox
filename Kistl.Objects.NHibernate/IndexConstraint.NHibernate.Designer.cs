@@ -90,6 +90,10 @@ namespace Kistl.App.Base
                         OnIsUnique_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsUnique");
+				}
             }
         }
 

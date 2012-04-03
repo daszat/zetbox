@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnAreFlags_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AreFlags");
+				}
             }
         }
         private bool _AreFlags;
@@ -696,6 +700,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         [EventBasedMethod("OnNotifyCreated_Enumeration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AreFlags");
             base.NotifyCreated();
             if (OnNotifyCreated_Enumeration != null) OnNotifyCreated_Enumeration(this);
         }

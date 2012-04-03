@@ -179,6 +179,10 @@ namespace Kistl.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -250,6 +254,10 @@ namespace Kistl.App.GUI
                         OnIconFile_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IconFile");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -728,6 +736,9 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_Icon")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Blob");
+            SetNotInitializedProperty("IconFile");
+            SetNotInitializedProperty("Module");
             base.NotifyCreated();
             if (OnNotifyCreated_Icon != null) OnNotifyCreated_Icon(this);
         }

@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("HasPersistentOrder");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Base
                         OnImplementorRoleName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ImplementorRoleName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -192,6 +200,10 @@ namespace Kistl.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsList");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -244,6 +256,10 @@ namespace Kistl.App.Base
                         OnItemRoleName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ItemRoleName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -385,6 +401,10 @@ namespace Kistl.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Verb");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -901,6 +921,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ObjectReferencePlaceholderProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("HasPersistentOrder");
+            SetNotInitializedProperty("ImplementorRoleName");
+            SetNotInitializedProperty("IsList");
+            SetNotInitializedProperty("ItemRoleName");
+            SetNotInitializedProperty("ReferencedObjectClass");
+            SetNotInitializedProperty("Verb");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectReferencePlaceholderProperty != null) OnNotifyCreated_ObjectReferencePlaceholderProperty(this);
         }

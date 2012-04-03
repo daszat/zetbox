@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("HasPersistentOrder");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Base
                         OnIsCalculated_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCalculated");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -192,6 +200,10 @@ namespace Kistl.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsList");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -652,6 +664,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ValueTypeProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("HasPersistentOrder");
+            SetNotInitializedProperty("IsCalculated");
+            SetNotInitializedProperty("IsList");
             base.NotifyCreated();
             if (OnNotifyCreated_ValueTypeProperty != null) OnNotifyCreated_ValueTypeProperty(this);
         }

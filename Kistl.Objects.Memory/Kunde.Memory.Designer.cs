@@ -77,6 +77,10 @@ namespace Kistl.App.Projekte
                         OnAdresse_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Adresse");
+				}
             }
         }
         private string _Adresse;
@@ -233,6 +237,10 @@ namespace Kistl.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -390,6 +398,10 @@ namespace Kistl.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -484,6 +496,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -538,6 +554,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Kundenname");
+				}
             }
         }
         private string _Kundenname;
@@ -591,6 +611,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnLand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Land");
+				}
             }
         }
         private string _Land;
@@ -644,6 +668,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnOrt_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Ort");
+				}
             }
         }
         private string _Ort;
@@ -697,6 +725,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnPLZ_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("PLZ");
+				}
             }
         }
         private string _PLZ;
@@ -961,6 +993,13 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         [EventBasedMethod("OnNotifyCreated_Kunde")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Adresse");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Kundenname");
+            SetNotInitializedProperty("Land");
+            SetNotInitializedProperty("Ort");
+            SetNotInitializedProperty("PLZ");
             base.NotifyCreated();
             if (OnNotifyCreated_Kunde != null) OnNotifyCreated_Kunde(this);
         }

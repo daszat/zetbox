@@ -88,6 +88,10 @@ namespace Kistl.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -356,6 +360,8 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_RequiredParentChild")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Parent");
             base.NotifyCreated();
             if (OnNotifyCreated_RequiredParentChild != null) OnNotifyCreated_RequiredParentChild(this);
         }

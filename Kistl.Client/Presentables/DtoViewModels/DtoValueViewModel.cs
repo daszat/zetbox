@@ -12,8 +12,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public class DtoValueViewModel : DtoBaseViewModel
     {
-        public DtoValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, object debugInfo)
-            : base(dependencies, dataCtx, parent, debugInfo)
+        public DtoValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, object debugInfo)
+            : base(dependencies, dataCtx, parent, fileOpener, debugInfo)
         {
         }
 

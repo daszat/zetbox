@@ -33,6 +33,8 @@ namespace Kistl.Client.WPF.View
 
             InitializeComponent();
 
+            txtDate.GotKeyboardFocus += (s, e) => ViewModel.Focus();
+            txtDate.LostKeyboardFocus += (s, e) => ViewModel.Blur();
             txtTime.GotKeyboardFocus += (s, e) => ViewModel.Focus();
             txtTime.LostKeyboardFocus += (s, e) => ViewModel.Blur();
         }

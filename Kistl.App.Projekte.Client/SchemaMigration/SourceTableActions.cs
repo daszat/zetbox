@@ -16,10 +16,12 @@ namespace ZBox.App.SchemaMigration
     public class SourceTableActions
     {
         private static IViewModelFactory _mdlFactory = null;
+        private static IFileOpener _fileOpener = null;
 
-        public SourceTableActions(IViewModelFactory mdlFactory)
+        public SourceTableActions(IViewModelFactory mdlFactory, IFileOpener fileOpener)
         {
             _mdlFactory = mdlFactory;
+            _fileOpener = fileOpener;
 
         }
         [Invocation]
@@ -31,7 +33,7 @@ namespace ZBox.App.SchemaMigration
                 var r = new SourceTableMappingReport();
                 r.CreateReport(obj);
                 r.Save(fileName);
-                new FileInfo(fileName).ShellExecute();
+                _fileOpener.ShellExecute(fileName);
             }
         }
     }

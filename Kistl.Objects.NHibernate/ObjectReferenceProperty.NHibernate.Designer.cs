@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnEagerLoading_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("EagerLoading");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Base
                         OnIsInlineEditable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsInlineEditable");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -835,6 +843,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ObjectReferenceProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("EagerLoading");
+            SetNotInitializedProperty("IsInlineEditable");
+            SetNotInitializedProperty("RelationEnd");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectReferenceProperty != null) OnNotifyCreated_ObjectReferenceProperty(this);
         }

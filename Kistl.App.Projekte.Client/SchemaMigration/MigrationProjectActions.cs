@@ -15,10 +15,12 @@ namespace ZBox.App.SchemaMigration
     public class MigrationProjectActions
     {
         private static IViewModelFactory _mdlFactory = null;
+        private static IFileOpener _fileOpener = null;
 
-        public MigrationProjectActions(IViewModelFactory mdlFactory)
+        public MigrationProjectActions(IViewModelFactory mdlFactory, IFileOpener fileOpener)
         {
             _mdlFactory = mdlFactory;
+            _fileOpener = fileOpener;
 
         }
 
@@ -31,7 +33,7 @@ namespace ZBox.App.SchemaMigration
                 var r = new MigrationProjectMappingReport();
                 r.CreateReport(obj);
                 r.Save(fileName);
-                new FileInfo(fileName).ShellExecute();
+                _fileOpener.ShellExecute(fileName);
             }
         }
 

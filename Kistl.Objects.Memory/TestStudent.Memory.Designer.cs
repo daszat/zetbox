@@ -77,6 +77,10 @@ namespace Kistl.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -236,6 +240,7 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_TestStudent")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_TestStudent != null) OnNotifyCreated_TestStudent(this);
         }

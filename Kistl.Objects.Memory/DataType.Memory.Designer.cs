@@ -180,6 +180,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -388,6 +392,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -534,6 +542,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -599,6 +611,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -821,6 +837,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -1017,6 +1037,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         OnShowIconInLists_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowIconInLists");
+				}
             }
         }
         private bool _ShowIconInLists;
@@ -1070,6 +1094,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         OnShowIdInLists_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowIdInLists");
+				}
             }
         }
         private bool _ShowIdInLists;
@@ -1123,6 +1151,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         OnShowNameInLists_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowNameInLists");
+				}
             }
         }
         private bool _ShowNameInLists;
@@ -1683,6 +1715,16 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         [EventBasedMethod("OnNotifyCreated_DataType")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DefaultIcon");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("RequestedKind");
+            SetNotInitializedProperty("ShowIconInLists");
+            SetNotInitializedProperty("ShowIdInLists");
+            SetNotInitializedProperty("ShowNameInLists");
             base.NotifyCreated();
             if (OnNotifyCreated_DataType != null) OnNotifyCreated_DataType(this);
         }

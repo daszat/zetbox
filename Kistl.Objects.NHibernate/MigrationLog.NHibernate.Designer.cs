@@ -88,6 +88,10 @@ namespace ZBox.App.SchemaMigration
                         OnDestination_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Destination");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace ZBox.App.SchemaMigration
                         OnDestinationRows_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DestinationRows");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -192,6 +200,10 @@ namespace ZBox.App.SchemaMigration
                         OnSource_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Source");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -244,6 +256,10 @@ namespace ZBox.App.SchemaMigration
                         OnSourceRows_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SourceRows");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -296,6 +312,10 @@ namespace ZBox.App.SchemaMigration
                         OnTimestamp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Timestamp");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -461,6 +481,11 @@ namespace ZBox.App.SchemaMigration
         [EventBasedMethod("OnNotifyCreated_MigrationLog")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Destination");
+            SetNotInitializedProperty("DestinationRows");
+            SetNotInitializedProperty("Source");
+            SetNotInitializedProperty("SourceRows");
+            SetNotInitializedProperty("Timestamp");
             base.NotifyCreated();
             if (OnNotifyCreated_MigrationLog != null) OnNotifyCreated_MigrationLog(this);
         }

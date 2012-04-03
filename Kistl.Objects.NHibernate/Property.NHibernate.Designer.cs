@@ -91,6 +91,10 @@ namespace Kistl.App.Base
                         OnCategoryTags_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CategoryTags");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -231,6 +235,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -457,6 +465,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -633,6 +645,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -686,6 +702,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -862,6 +882,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Label");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1003,6 +1027,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1139,6 +1167,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                     Proxy.Properties_pos = __newValue;
                     NotifyPropertyChanged("Properties_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("Properties_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -2070,6 +2102,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         [EventBasedMethod("OnNotifyCreated_Property")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CategoryTags");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CodeTemplate");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DefaultValue");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("FilterConfiguration");
+            SetNotInitializedProperty("Label");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("ObjectClass");
+            SetNotInitializedProperty("RequestedKind");
+            SetNotInitializedProperty("ValueModelDescriptor");
             base.NotifyCreated();
             if (OnNotifyCreated_Property != null) OnNotifyCreated_Property(this);
         }

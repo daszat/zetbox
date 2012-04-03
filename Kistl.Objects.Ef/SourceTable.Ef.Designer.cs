@@ -200,6 +200,10 @@ namespace ZBox.App.SchemaMigration
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -257,6 +261,10 @@ namespace ZBox.App.SchemaMigration
                         OnComment_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Comment");
+				}
             }
         }
         private string _Comment;
@@ -430,6 +438,10 @@ namespace ZBox.App.SchemaMigration
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -487,6 +499,10 @@ namespace ZBox.App.SchemaMigration
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -661,6 +677,10 @@ namespace ZBox.App.SchemaMigration
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -718,6 +738,10 @@ namespace ZBox.App.SchemaMigration
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -1349,6 +1373,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         [EventBasedMethod("OnNotifyCreated_SourceTable")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("Comment");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("DestinationObjectClass");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("StagingDatabase");
+            SetNotInitializedProperty("Status");
             base.NotifyCreated();
             if (OnNotifyCreated_SourceTable != null) OnNotifyCreated_SourceTable(this);
         }
@@ -1385,6 +1417,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

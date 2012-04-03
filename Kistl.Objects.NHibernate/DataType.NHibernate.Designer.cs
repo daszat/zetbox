@@ -179,6 +179,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -375,6 +379,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -535,6 +543,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -588,6 +600,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -816,6 +832,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -994,6 +1014,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         OnShowIconInLists_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowIconInLists");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1046,6 +1070,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         OnShowIdInLists_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowIdInLists");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1098,6 +1126,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         OnShowNameInLists_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowNameInLists");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1661,6 +1693,16 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         [EventBasedMethod("OnNotifyCreated_DataType")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DefaultIcon");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("RequestedKind");
+            SetNotInitializedProperty("ShowIconInLists");
+            SetNotInitializedProperty("ShowIdInLists");
+            SetNotInitializedProperty("ShowNameInLists");
             base.NotifyCreated();
             if (OnNotifyCreated_DataType != null) OnNotifyCreated_DataType(this);
         }

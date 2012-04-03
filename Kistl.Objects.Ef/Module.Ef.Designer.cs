@@ -200,6 +200,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -374,6 +378,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -431,6 +439,10 @@ namespace Kistl.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -499,6 +511,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -556,6 +572,10 @@ namespace Kistl.App.Base
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -612,6 +632,10 @@ namespace Kistl.App.Base
                         OnNamespace_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Namespace");
+				}
             }
         }
         private string _Namespace;
@@ -668,6 +692,10 @@ namespace Kistl.App.Base
                         OnSchemaName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SchemaName");
+				}
             }
         }
         private string _SchemaName;
@@ -946,6 +974,12 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Module")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Namespace");
+            SetNotInitializedProperty("SchemaName");
             base.NotifyCreated();
             if (OnNotifyCreated_Module != null) OnNotifyCreated_Module(this);
         }
@@ -982,6 +1016,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

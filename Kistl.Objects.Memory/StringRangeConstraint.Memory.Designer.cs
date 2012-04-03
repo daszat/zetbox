@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnMaxLength_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MaxLength");
+				}
             }
         }
         private int? _MaxLength;
@@ -130,6 +134,10 @@ namespace Kistl.App.Base
                         OnMinLength_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MinLength");
+				}
             }
         }
         private int _MinLength;
@@ -391,6 +399,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_StringRangeConstraint")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("MaxLength");
+            SetNotInitializedProperty("MinLength");
             base.NotifyCreated();
             if (OnNotifyCreated_StringRangeConstraint != null) OnNotifyCreated_StringRangeConstraint(this);
         }

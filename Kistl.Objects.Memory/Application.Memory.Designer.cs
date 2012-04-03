@@ -180,6 +180,10 @@ namespace Kistl.App.GUI
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -337,6 +341,10 @@ namespace Kistl.App.GUI
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -391,6 +399,10 @@ namespace Kistl.App.GUI
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -456,6 +468,10 @@ namespace Kistl.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -602,6 +618,10 @@ namespace Kistl.App.GUI
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -1089,6 +1109,13 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_Application")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("RootScreen");
+            SetNotInitializedProperty("WorkspaceViewModel");
             base.NotifyCreated();
             if (OnNotifyCreated_Application != null) OnNotifyCreated_Application(this);
         }

@@ -88,6 +88,10 @@ namespace Kistl.App.Test
                         OnTestBool_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestBool");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -419,6 +423,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                         OnTestDateTime_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestDateTime");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -471,6 +479,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                         OnTestEnum_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestEnum");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -523,6 +535,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                         OnTestString_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestString");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -753,6 +769,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         [EventBasedMethod("OnNotifyCreated_Muhblah")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("TestBool");
+            SetNotInitializedProperty("TestCustomObjects_Nav");
+            SetNotInitializedProperty("TestCustomObjects_One_Nav");
+            SetNotInitializedProperty("TestDateTime");
+            SetNotInitializedProperty("TestEnum");
+            SetNotInitializedProperty("TestString");
             base.NotifyCreated();
             if (OnNotifyCreated_Muhblah != null) OnNotifyCreated_Muhblah(this);
         }

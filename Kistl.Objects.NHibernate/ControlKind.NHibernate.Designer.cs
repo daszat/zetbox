@@ -125,6 +125,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -285,6 +289,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -669,6 +677,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         [EventBasedMethod("OnNotifyCreated_ControlKind")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Parent");
             base.NotifyCreated();
             if (OnNotifyCreated_ControlKind != null) OnNotifyCreated_ControlKind(this);
         }

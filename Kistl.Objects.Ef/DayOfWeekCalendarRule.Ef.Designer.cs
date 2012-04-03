@@ -285,6 +285,7 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyCreated_DayOfWeekCalendarRule")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DayOfWeek");
             base.NotifyCreated();
             if (OnNotifyCreated_DayOfWeekCalendarRule != null) OnNotifyCreated_DayOfWeekCalendarRule(this);
         }

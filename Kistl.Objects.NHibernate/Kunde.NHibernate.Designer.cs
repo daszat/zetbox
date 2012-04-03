@@ -91,6 +91,10 @@ namespace Kistl.App.Projekte
                         OnAdresse_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Adresse");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -231,6 +235,10 @@ namespace Kistl.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -390,6 +398,10 @@ namespace Kistl.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -505,6 +517,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -576,6 +592,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Kundenname");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -628,6 +648,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnLand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Land");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -680,6 +704,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnOrt_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Ort");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -732,6 +760,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                         OnPLZ_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("PLZ");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -999,6 +1031,13 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         [EventBasedMethod("OnNotifyCreated_Kunde")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Adresse");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Kundenname");
+            SetNotInitializedProperty("Land");
+            SetNotInitializedProperty("Ort");
+            SetNotInitializedProperty("PLZ");
             base.NotifyCreated();
             if (OnNotifyCreated_Kunde != null) OnNotifyCreated_Kunde(this);
         }

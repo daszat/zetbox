@@ -83,6 +83,10 @@ namespace Kistl.App.Projekte
                         OnAuftragsname_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Auftragsname");
+				}
             }
         }
         private string _Auftragsname;
@@ -139,6 +143,10 @@ namespace Kistl.App.Projekte
                         OnAuftragswert_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Auftragswert");
+				}
             }
         }
         private double? _Auftragswert;
@@ -312,6 +320,10 @@ namespace Kistl.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -486,6 +498,10 @@ namespace Kistl.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -555,6 +571,10 @@ namespace Kistl.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -1197,6 +1217,13 @@ namespace Kistl.App.Projekte
         [EventBasedMethod("OnNotifyCreated_Auftrag")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Auftragsname");
+            SetNotInitializedProperty("Auftragswert");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Kunde");
+            SetNotInitializedProperty("Mitarbeiter");
+            SetNotInitializedProperty("Projekt");
             base.NotifyCreated();
             if (OnNotifyCreated_Auftrag != null) OnNotifyCreated_Auftrag(this);
         }
@@ -1233,6 +1260,10 @@ namespace Kistl.App.Projekte
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

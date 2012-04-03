@@ -292,6 +292,10 @@ namespace Kistl.App.Calendar
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -451,6 +455,10 @@ namespace Kistl.App.Calendar
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -523,6 +531,10 @@ namespace Kistl.App.Calendar
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -595,6 +607,10 @@ namespace Kistl.App.Calendar
                         OnIsWorkingDay_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsWorkingDay");
+				}
             }
         }
 
@@ -755,6 +771,10 @@ namespace Kistl.App.Calendar
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -807,6 +827,10 @@ namespace Kistl.App.Calendar
                         OnValidFrom_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ValidFrom");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -859,6 +883,10 @@ namespace Kistl.App.Calendar
                         OnValidUntil_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ValidUntil");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -911,6 +939,10 @@ namespace Kistl.App.Calendar
                         OnWorkingHours_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("WorkingHours");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1285,6 +1317,14 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyCreated_CalendarRule")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Calendar");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("ValidFrom");
+            SetNotInitializedProperty("ValidUntil");
+            SetNotInitializedProperty("WorkingHours");
             base.NotifyCreated();
             if (OnNotifyCreated_CalendarRule != null) OnNotifyCreated_CalendarRule(this);
         }

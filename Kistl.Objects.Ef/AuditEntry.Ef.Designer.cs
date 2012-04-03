@@ -99,6 +99,10 @@ namespace Kistl.App.Base
                         OnIdentity_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Identity");
+				}
             }
         }
         private string _Identity;
@@ -153,6 +157,10 @@ namespace Kistl.App.Base
                         OnMessageFormat_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MessageFormat");
+				}
             }
         }
         private string _MessageFormat;
@@ -207,6 +215,10 @@ namespace Kistl.App.Base
                         OnNewValue_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("NewValue");
+				}
             }
         }
         private string _NewValue;
@@ -261,6 +273,10 @@ namespace Kistl.App.Base
                         OnOldValue_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("OldValue");
+				}
             }
         }
         private string _OldValue;
@@ -315,6 +331,10 @@ namespace Kistl.App.Base
                         OnPropertyName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("PropertyName");
+				}
             }
         }
         private string _PropertyName;
@@ -384,6 +404,10 @@ namespace Kistl.App.Base
                         OnTimestamp_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Timestamp");
+				}
             }
         }
         private DateTime? _Timestamp;

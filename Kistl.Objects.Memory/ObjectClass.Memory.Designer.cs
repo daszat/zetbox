@@ -389,6 +389,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsAbstract_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsAbstract");
+				}
             }
         }
         private bool _IsAbstract;
@@ -442,6 +446,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsFrozenObject_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsFrozenObject");
+				}
             }
         }
         private bool _IsFrozenObject;
@@ -495,6 +503,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         OnIsSimpleObject_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsSimpleObject");
+				}
             }
         }
         private bool _IsSimpleObject;
@@ -589,6 +601,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         OnTableName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TableName");
+				}
             }
         }
         private string _TableName;
@@ -1301,6 +1317,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         [EventBasedMethod("OnNotifyCreated_ObjectClass")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("BaseObjectClass");
+            SetNotInitializedProperty("CodeTemplate");
+            SetNotInitializedProperty("DefaultViewModelDescriptor");
+            SetNotInitializedProperty("IsAbstract");
+            SetNotInitializedProperty("IsFrozenObject");
+            SetNotInitializedProperty("IsSimpleObject");
+            SetNotInitializedProperty("TableName");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectClass != null) OnNotifyCreated_ObjectClass(this);
         }

@@ -179,6 +179,10 @@ namespace Kistl.App.GUI
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -338,6 +342,10 @@ namespace Kistl.App.GUI
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -410,6 +418,10 @@ namespace Kistl.App.GUI
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -481,6 +493,10 @@ namespace Kistl.App.GUI
                         OnLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Label");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -622,6 +638,10 @@ namespace Kistl.App.GUI
                         OnRefreshOnFilterChanged_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("RefreshOnFilterChanged");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -763,6 +783,10 @@ namespace Kistl.App.GUI
                         OnRequired_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Required");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1296,6 +1320,14 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_FilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Label");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("RefreshOnFilterChanged");
+            SetNotInitializedProperty("RequestedKind");
+            SetNotInitializedProperty("Required");
+            SetNotInitializedProperty("ViewModelDescriptor");
             base.NotifyCreated();
             if (OnNotifyCreated_FilterConfiguration != null) OnNotifyCreated_FilterConfiguration(this);
         }

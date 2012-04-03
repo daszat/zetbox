@@ -83,6 +83,10 @@ namespace Kistl.App.Base
                         OnCategoryTags_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CategoryTags");
+				}
             }
         }
         private string _CategoryTags;
@@ -256,6 +260,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -519,6 +527,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -694,6 +706,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -762,6 +778,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -937,6 +957,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Label");
+				}
             }
         }
         private string _Label;
@@ -1099,6 +1123,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -1245,6 +1273,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                     _Properties_pos = __newValue;
                     NotifyPropertyChanged("Properties_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("Properties_pos");
+				}
             }
         }
         private int? _Properties_pos;
@@ -2143,6 +2175,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         [EventBasedMethod("OnNotifyCreated_Property")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CategoryTags");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CodeTemplate");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DefaultValue");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("FilterConfiguration");
+            SetNotInitializedProperty("Label");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("ObjectClass");
+            SetNotInitializedProperty("RequestedKind");
+            SetNotInitializedProperty("ValueModelDescriptor");
             base.NotifyCreated();
             if (OnNotifyCreated_Property != null) OnNotifyCreated_Property(this);
         }
@@ -2179,6 +2224,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

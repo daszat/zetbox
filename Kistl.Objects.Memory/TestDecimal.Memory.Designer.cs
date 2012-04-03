@@ -77,6 +77,10 @@ namespace Kistl.App.Test
                         OnLarge_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Large");
+				}
             }
         }
         private decimal? _Large;
@@ -130,6 +134,10 @@ namespace Kistl.App.Test
                         OnNoScale_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("NoScale");
+				}
             }
         }
         private decimal? _NoScale;
@@ -183,6 +191,10 @@ namespace Kistl.App.Test
                         OnSmallDecimal_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("SmallDecimal");
+				}
             }
         }
         private decimal? _SmallDecimal;
@@ -328,6 +340,9 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_TestDecimal")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Large");
+            SetNotInitializedProperty("NoScale");
+            SetNotInitializedProperty("SmallDecimal");
             base.NotifyCreated();
             if (OnNotifyCreated_TestDecimal != null) OnNotifyCreated_TestDecimal(this);
         }

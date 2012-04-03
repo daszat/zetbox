@@ -106,13 +106,17 @@ this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName 
 ApplyPostSetTemplate(); 
 #line 59 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("                }\r\n");
+this.WriteObjects("				else \r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("					SetInitializedProperty(\"",  propertyName , "\");\r\n");
+this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 62 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 66 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 ApplyTailTemplate(); 
-#line 63 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 67 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 AddSerialization(serializationList, propertyName, "Proxy." + propertyName); 
-#line 64 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 68 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

@@ -170,6 +170,10 @@ namespace Kistl.App.Test
                     Proxy.NEnds_pos = __newValue;
                     NotifyPropertyChanged("NEnds_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("NEnds_pos");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -223,6 +227,10 @@ namespace Kistl.App.Test
                         OnOtherInt_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("OtherInt");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -392,6 +400,8 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_OrderedNEnd")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("OneEnd");
+            SetNotInitializedProperty("OtherInt");
             base.NotifyCreated();
             if (OnNotifyCreated_OrderedNEnd != null) OnNotifyCreated_OrderedNEnd(this);
         }

@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnDefaultValue_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DefaultValue");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -276,6 +280,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_StringDefaultValue")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DefaultValue");
             base.NotifyCreated();
             if (OnNotifyCreated_StringDefaultValue != null) OnNotifyCreated_StringDefaultValue(this);
         }

@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnDateTimeStyle_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DateTimeStyle");
+				}
             }
         }
         private Kistl.App.Base.DateTimeStyles? _DateTimeStyle;
@@ -391,6 +395,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_DateTimeParameter")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DateTimeStyle");
             base.NotifyCreated();
             if (OnNotifyCreated_DateTimeParameter != null) OnNotifyCreated_DateTimeParameter(this);
         }

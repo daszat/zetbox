@@ -411,6 +411,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_DateTimeParameter")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DateTimeStyle");
             base.NotifyCreated();
             if (OnNotifyCreated_DateTimeParameter != null) OnNotifyCreated_DateTimeParameter(this);
         }

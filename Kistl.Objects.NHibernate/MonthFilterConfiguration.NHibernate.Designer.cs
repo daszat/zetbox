@@ -88,6 +88,10 @@ namespace Kistl.App.GUI
                         OnIsCurrentMonthDefault_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsCurrentMonthDefault");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -339,6 +343,7 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_MonthFilterConfiguration")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("IsCurrentMonthDefault");
             base.NotifyCreated();
             if (OnNotifyCreated_MonthFilterConfiguration != null) OnNotifyCreated_MonthFilterConfiguration(this);
         }

@@ -83,6 +83,10 @@ namespace Kistl.App.Test
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -339,6 +343,8 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_One_to_N_relations_N")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("OneSide");
             base.NotifyCreated();
             if (OnNotifyCreated_One_to_N_relations_N != null) OnNotifyCreated_One_to_N_relations_N(this);
         }
@@ -375,6 +381,10 @@ namespace Kistl.App.Test
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

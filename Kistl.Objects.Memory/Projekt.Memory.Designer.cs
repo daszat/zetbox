@@ -118,6 +118,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnAufwandGes_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AufwandGes");
+				}
             }
         }
         private double? _AufwandGes;
@@ -274,6 +278,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -431,6 +439,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -497,6 +509,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -551,6 +567,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnKundenname_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Kundenname");
+				}
             }
         }
         private string _Kundenname;
@@ -629,6 +649,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -993,6 +1017,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyCreated_Projekt")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AufwandGes");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Kundenname");
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Projekt != null) OnNotifyCreated_Projekt(this);
         }

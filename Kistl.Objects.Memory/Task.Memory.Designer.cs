@@ -77,6 +77,10 @@ namespace Kistl.App.Projekte
                         OnAufwand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Aufwand");
+				}
             }
         }
         private double? _Aufwand;
@@ -233,6 +237,10 @@ namespace Kistl.App.Projekte
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -390,6 +398,10 @@ namespace Kistl.App.Projekte
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -406,17 +418,17 @@ namespace Kistl.App.Projekte
         /// </summary>
         // value type property
         // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
-        public DateTime? DatumBis
+        public DateTime DatumBis
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _DatumBis;
                 if (OnDatumBis_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnDatumBis_Getter(this, __e);
                     __result = __e.Result;
                 }
@@ -431,7 +443,7 @@ namespace Kistl.App.Projekte
                     var __newValue = value;
                     if (OnDatumBis_PreSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnDatumBis_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
@@ -440,17 +452,21 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanged("DatumBis", __oldValue, __newValue);
                     if (OnDatumBis_PostSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnDatumBis_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DatumBis");
+				}
             }
         }
-        private DateTime? _DatumBis;
+        private DateTime _DatumBis;
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumBis_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumBis_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumBis_PostSetter;
 
         public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnDatumBis_IsValid;
 
@@ -459,17 +475,17 @@ namespace Kistl.App.Projekte
         /// </summary>
         // value type property
         // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
-        public DateTime? DatumVon
+        public DateTime DatumVon
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _DatumVon;
                 if (OnDatumVon_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnDatumVon_Getter(this, __e);
                     __result = __e.Result;
                 }
@@ -484,7 +500,7 @@ namespace Kistl.App.Projekte
                     var __newValue = value;
                     if (OnDatumVon_PreSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnDatumVon_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
@@ -493,17 +509,21 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanged("DatumVon", __oldValue, __newValue);
                     if (OnDatumVon_PostSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnDatumVon_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DatumVon");
+				}
             }
         }
-        private DateTime? _DatumVon;
+        private DateTime _DatumVon;
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumVon_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumVon_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumVon_PostSetter;
 
         public static event PropertyIsValidHandler<Kistl.App.Projekte.Task> OnDatumVon_IsValid;
 
@@ -562,6 +582,10 @@ namespace Kistl.App.Projekte
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -616,6 +640,10 @@ namespace Kistl.App.Projekte
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -886,7 +914,7 @@ namespace Kistl.App.Projekte
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<Task, DateTime?>(
+                    new PropertyDescriptorMemoryImpl<Task, DateTime>(
                         lazyCtx,
                         new Guid("2b705496-388a-43a8-82e8-b17b652a55fc"),
                         "DatumBis",
@@ -895,7 +923,7 @@ namespace Kistl.App.Projekte
                         (obj, val) => obj.DatumBis = val,
 						obj => OnDatumBis_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<Task, DateTime?>(
+                    new PropertyDescriptorMemoryImpl<Task, DateTime>(
                         lazyCtx,
                         new Guid("1485a7b7-c4d5-456a-a18a-0c409c3eca8e"),
                         "DatumVon",
@@ -993,6 +1021,13 @@ namespace Kistl.App.Projekte
         [EventBasedMethod("OnNotifyCreated_Task")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Aufwand");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DatumBis");
+            SetNotInitializedProperty("DatumVon");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Projekt");
             base.NotifyCreated();
             if (OnNotifyCreated_Task != null) OnNotifyCreated_Task(this);
         }

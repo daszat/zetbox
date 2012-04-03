@@ -77,6 +77,10 @@ namespace Kistl.App.Base
                         OnCategoryTags_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CategoryTags");
+				}
             }
         }
         private string _CategoryTags;
@@ -233,6 +237,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
         private DateTime _ChangedOn;
@@ -420,6 +428,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
         private DateTime _CreatedOn;
@@ -474,6 +486,10 @@ namespace Kistl.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         private string _Description;
@@ -539,6 +555,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -685,6 +705,10 @@ namespace Kistl.App.Base
                         OnInvokeOnServer_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("InvokeOnServer");
+				}
             }
         }
         private bool? _InvokeOnServer;
@@ -738,6 +762,10 @@ namespace Kistl.App.Base
                         OnIsDisplayable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsDisplayable");
+				}
             }
         }
         private bool _IsDisplayable;
@@ -791,6 +819,10 @@ namespace Kistl.App.Base
                         OnLabel_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Label");
+				}
             }
         }
         private string _Label;
@@ -936,6 +968,10 @@ namespace Kistl.App.Base
                         OnName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
             }
         }
         private string _Name;
@@ -1622,6 +1658,18 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         [EventBasedMethod("OnNotifyCreated_Method")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CategoryTags");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("CodeTemplate");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Icon");
+            SetNotInitializedProperty("InvokeOnServer");
+            SetNotInitializedProperty("IsDisplayable");
+            SetNotInitializedProperty("Label");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("ObjectClass");
             base.NotifyCreated();
             if (OnNotifyCreated_Method != null) OnNotifyCreated_Method(this);
         }

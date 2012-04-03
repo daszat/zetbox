@@ -88,6 +88,10 @@ namespace Kistl.App.Base
                         OnPrecision_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Precision");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -140,6 +144,10 @@ namespace Kistl.App.Base
                         OnScale_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Scale");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -590,6 +598,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_DecimalProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Precision");
+            SetNotInitializedProperty("Scale");
             base.NotifyCreated();
             if (OnNotifyCreated_DecimalProperty != null) OnNotifyCreated_DecimalProperty(this);
         }

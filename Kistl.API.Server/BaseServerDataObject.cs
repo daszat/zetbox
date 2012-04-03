@@ -114,7 +114,7 @@ namespace Kistl.API.Server
                 throw new InvalidOperationException("Cannot undelete object when in State " + _ObjectState.ToString());
             }
 
-            SetObjectState(DataObjectState.Modified);            
+            SetObjectState(DataObjectState.Modified);
         }
 
         public override void AttachToContext(IKistlContext ctx)

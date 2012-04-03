@@ -106,6 +106,10 @@ namespace Kistl.App.Test
                         OnBirthday_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Birthday");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -437,6 +441,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                         OnPersonName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("PersonName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -833,6 +841,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         [EventBasedMethod("OnNotifyCreated_TestCustomObject")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Birthday");
+            SetNotInitializedProperty("MubBlah_Nav");
+            SetNotInitializedProperty("MuhBlah_One_Nav");
+            SetNotInitializedProperty("PersonName");
+            SetNotInitializedProperty("PhoneNumberMobile");
+            SetNotInitializedProperty("PhoneNumberOffice");
             base.NotifyCreated();
             if (OnNotifyCreated_TestCustomObject != null) OnNotifyCreated_TestCustomObject(this);
         }

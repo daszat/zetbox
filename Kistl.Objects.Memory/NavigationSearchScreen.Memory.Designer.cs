@@ -77,6 +77,10 @@ namespace Kistl.App.GUI
                         OnAllowAddNew_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AllowAddNew");
+				}
             }
         }
         private bool? _AllowAddNew;
@@ -130,6 +134,10 @@ namespace Kistl.App.GUI
                         OnAllowDelete_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AllowDelete");
+				}
             }
         }
         private bool? _AllowDelete;
@@ -183,6 +191,10 @@ namespace Kistl.App.GUI
                         OnAllowSelectColumns_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AllowSelectColumns");
+				}
             }
         }
         private bool? _AllowSelectColumns;
@@ -236,6 +248,10 @@ namespace Kistl.App.GUI
                         OnAllowUserFilter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("AllowUserFilter");
+				}
             }
         }
         private bool? _AllowUserFilter;
@@ -289,6 +305,10 @@ namespace Kistl.App.GUI
                         OnEnableAutoFilter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("EnableAutoFilter");
+				}
             }
         }
         private bool? _EnableAutoFilter;
@@ -342,6 +362,10 @@ namespace Kistl.App.GUI
                         OnInitialSort_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("InitialSort");
+				}
             }
         }
         private string _InitialSort;
@@ -395,6 +419,10 @@ namespace Kistl.App.GUI
                         OnInitialSortDirection_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("InitialSortDirection");
+				}
             }
         }
         private Kistl.App.GUI.ListSortDirection? _InitialSortDirection;
@@ -448,6 +476,10 @@ namespace Kistl.App.GUI
                         OnIsEditable_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsEditable");
+				}
             }
         }
         private bool? _IsEditable;
@@ -501,6 +533,10 @@ namespace Kistl.App.GUI
                         OnIsMultiselect_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsMultiselect");
+				}
             }
         }
         private bool? _IsMultiselect;
@@ -738,6 +774,10 @@ namespace Kistl.App.GUI
                         OnRespectRequiredFilter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("RespectRequiredFilter");
+				}
             }
         }
         private bool? _RespectRequiredFilter;
@@ -791,6 +831,10 @@ namespace Kistl.App.GUI
                         OnShowFilter_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowFilter");
+				}
             }
         }
         private bool? _ShowFilter;
@@ -844,6 +888,10 @@ namespace Kistl.App.GUI
                         OnShowMasterDetail_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowMasterDetail");
+				}
             }
         }
         private bool? _ShowMasterDetail;
@@ -897,6 +945,10 @@ namespace Kistl.App.GUI
                         OnShowOpenCommand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowOpenCommand");
+				}
             }
         }
         private bool? _ShowOpenCommand;
@@ -950,6 +1002,10 @@ namespace Kistl.App.GUI
                         OnShowRefreshCommand_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ShowRefreshCommand");
+				}
             }
         }
         private bool? _ShowRefreshCommand;
@@ -1095,6 +1151,10 @@ namespace Kistl.App.GUI
                         OnViewMethod_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ViewMethod");
+				}
             }
         }
         private Kistl.App.GUI.InstanceListViewMethod? _ViewMethod;
@@ -1513,6 +1573,24 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyCreated_NavigationSearchScreen")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AllowAddNew");
+            SetNotInitializedProperty("AllowDelete");
+            SetNotInitializedProperty("AllowSelectColumns");
+            SetNotInitializedProperty("AllowUserFilter");
+            SetNotInitializedProperty("EnableAutoFilter");
+            SetNotInitializedProperty("InitialSort");
+            SetNotInitializedProperty("InitialSortDirection");
+            SetNotInitializedProperty("IsEditable");
+            SetNotInitializedProperty("IsMultiselect");
+            SetNotInitializedProperty("RequestedEditorKind");
+            SetNotInitializedProperty("RequestedWorkspaceKind");
+            SetNotInitializedProperty("RespectRequiredFilter");
+            SetNotInitializedProperty("ShowFilter");
+            SetNotInitializedProperty("ShowMasterDetail");
+            SetNotInitializedProperty("ShowOpenCommand");
+            SetNotInitializedProperty("ShowRefreshCommand");
+            SetNotInitializedProperty("Type");
+            SetNotInitializedProperty("ViewMethod");
             base.NotifyCreated();
             if (OnNotifyCreated_NavigationSearchScreen != null) OnNotifyCreated_NavigationSearchScreen(this);
         }

@@ -88,6 +88,10 @@ namespace Kistl.App.Test
                         OnTestString_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("TestString");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -213,6 +217,7 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyCreated_ANewObjectClass")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("TestString");
             base.NotifyCreated();
             if (OnNotifyCreated_ANewObjectClass != null) OnNotifyCreated_ANewObjectClass(this);
         }

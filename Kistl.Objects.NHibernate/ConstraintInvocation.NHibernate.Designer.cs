@@ -90,6 +90,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -250,6 +254,10 @@ namespace Kistl.App.Base
                         OnMemberName_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("MemberName");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -550,6 +558,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ConstraintInvocation")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Implementor");
+            SetNotInitializedProperty("MemberName");
             base.NotifyCreated();
             if (OnNotifyCreated_ConstraintInvocation != null) OnNotifyCreated_ConstraintInvocation(this);
         }

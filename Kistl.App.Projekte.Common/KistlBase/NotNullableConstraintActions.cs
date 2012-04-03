@@ -29,6 +29,15 @@ namespace Kistl.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
+            if (constrainedObjectParam is IDataObject)
+            {
+                var dataObj = (IDataObject)constrainedObjectParam;
+                if (!dataObj.IsInitialized(obj.ConstrainedProperty.Name))
+                {
+                    e.Result = false;
+                    return;
+                }
+            }
             e.Result = constrainedValueParam != null;
         }
 

@@ -456,6 +456,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_ObjectReferenceParameter")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("ObjectClass");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectReferenceParameter != null) OnNotifyCreated_ObjectReferenceParameter(this);
         }

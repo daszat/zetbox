@@ -399,7 +399,7 @@ namespace Kistl.Client.Models
 
                 _valueCache = value;
 
-                if (!object.Equals(GetPropertyValue(), value))
+                if (!IsPropertyInitialized() || !object.Equals(GetPropertyValue(), value))
                 {
                     SetPropertyValue(value);
                     CheckConstraints();
@@ -430,7 +430,14 @@ namespace Kistl.Client.Models
         /// <returns></returns>
         protected virtual TValue? GetPropertyValue()
         {
-            return Object.GetPropertyValue<Nullable<TValue>>(Property.Name);
+            if (IsPropertyInitialized())
+            {
+                return Object.GetPropertyValue<Nullable<TValue>>(Property.Name);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -440,6 +447,16 @@ namespace Kistl.Client.Models
         protected virtual void SetPropertyValue(TValue? val)
         {
             Object.SetPropertyValue<Nullable<TValue>>(Property.Name, val);
+        }
+
+        protected virtual bool IsPropertyInitialized()
+        {
+            if (Object is IDataObject)
+            {
+                var obj = (IDataObject)Object;
+                return obj.IsInitialized(Property.Name);
+            }
+            return true;
         }
         #endregion
     }

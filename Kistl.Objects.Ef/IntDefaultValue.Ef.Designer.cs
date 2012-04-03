@@ -83,6 +83,10 @@ namespace Kistl.App.Base
                         OnIntValue_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IntValue");
+				}
             }
         }
         private int _IntValue;
@@ -270,6 +274,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_IntDefaultValue")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("IntValue");
             base.NotifyCreated();
             if (OnNotifyCreated_IntDefaultValue != null) OnNotifyCreated_IntDefaultValue(this);
         }

@@ -303,6 +303,9 @@ namespace Kistl.API.Client.Mocks.OneNLists
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
         }
-
+        public bool IsInitialized(string propName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

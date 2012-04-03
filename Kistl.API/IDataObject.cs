@@ -307,6 +307,13 @@ namespace Kistl.API
     /// </summary>
     public interface IDataObject : IPersistenceObject, IDataErrorInfo, IComparable
     {
+        /// <summary>
+        /// Checks if a property was initialized
+        /// </summary>
+        /// <param name="propName">property name to check</param>
+        /// <returns>true, if the property was set at least once. Returns always true, if the object is not in the new state.</returns>
+        bool IsInitialized(string propName);
+
         #region //// INTERNALS /////
         // TODO: move to separate interface
 

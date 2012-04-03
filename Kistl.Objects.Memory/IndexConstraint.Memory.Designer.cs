@@ -89,6 +89,10 @@ namespace Kistl.App.Base
                         OnIsUnique_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsUnique");
+				}
             }
         }
         private bool _IsUnique;

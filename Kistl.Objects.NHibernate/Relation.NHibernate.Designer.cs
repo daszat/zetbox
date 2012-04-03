@@ -389,6 +389,10 @@ namespace Kistl.App.Base
                         OnChangedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ChangedOn");
+				}
             }
         }
 
@@ -460,6 +464,10 @@ namespace Kistl.App.Base
                         OnContainment_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Containment");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -600,6 +608,10 @@ namespace Kistl.App.Base
                         OnCreatedOn_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("CreatedOn");
+				}
             }
         }
 
@@ -671,6 +683,10 @@ namespace Kistl.App.Base
                         OnDescription_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Description");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -724,6 +740,10 @@ namespace Kistl.App.Base
                         OnExportGuid_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
 
@@ -884,6 +904,10 @@ namespace Kistl.App.Base
                         OnStorage_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Storage");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -936,6 +960,10 @@ namespace Kistl.App.Base
                         OnVerb_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("Verb");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -1709,6 +1737,15 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_Relation")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("A");
+            SetNotInitializedProperty("B");
+            SetNotInitializedProperty("ChangedBy");
+            SetNotInitializedProperty("Containment");
+            SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Module");
+            SetNotInitializedProperty("Storage");
+            SetNotInitializedProperty("Verb");
             base.NotifyCreated();
             if (OnNotifyCreated_Relation != null) OnNotifyCreated_Relation(this);
         }

@@ -54,6 +54,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -86,6 +90,10 @@ namespace Kistl.App.Base
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -483,6 +491,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -515,6 +527,10 @@ namespace Kistl.App.Base
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -909,6 +925,10 @@ namespace at.dasz.DocumentManagement
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -941,6 +961,10 @@ namespace at.dasz.DocumentManagement
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -1077,6 +1101,10 @@ namespace at.dasz.DocumentManagement
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         private int? _A_pos;
@@ -1181,6 +1209,10 @@ namespace at.dasz.DocumentManagement
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         private int? _B_pos;
@@ -1417,6 +1449,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -1781,6 +1817,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -1813,6 +1853,10 @@ namespace Kistl.App.Base
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -2207,6 +2251,10 @@ namespace Kistl.App.Test
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -2571,6 +2619,10 @@ namespace Kistl.App.Test
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -2935,6 +2987,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -2967,6 +3023,10 @@ namespace Kistl.App.GUI
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -3364,6 +3424,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -3396,6 +3460,10 @@ namespace Kistl.App.GUI
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -3790,6 +3858,10 @@ namespace Kistl.App.Projekte
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -3822,6 +3894,10 @@ namespace Kistl.App.Projekte
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -3958,6 +4034,10 @@ namespace Kistl.App.Projekte
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         private int? _A_pos;
@@ -4062,6 +4142,10 @@ namespace Kistl.App.Projekte
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         private int? _B_pos;
@@ -4298,6 +4382,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -4330,6 +4418,10 @@ namespace Kistl.App.Base
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -4466,6 +4558,10 @@ namespace Kistl.App.Base
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         private int? _A_pos;
@@ -4570,6 +4666,10 @@ namespace Kistl.App.Base
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         private int? _B_pos;
@@ -4806,6 +4906,10 @@ namespace ZBox.App.SchemaMigration
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -4838,6 +4942,10 @@ namespace ZBox.App.SchemaMigration
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -4974,6 +5082,10 @@ namespace ZBox.App.SchemaMigration
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         private int? _A_pos;
@@ -5078,6 +5190,10 @@ namespace ZBox.App.SchemaMigration
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         private int? _B_pos;
@@ -5317,6 +5433,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -5681,6 +5801,10 @@ namespace Kistl.App.Test
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -6045,6 +6169,10 @@ namespace Kistl.App.Base
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -6077,6 +6205,10 @@ namespace Kistl.App.Base
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -6213,6 +6345,10 @@ namespace Kistl.App.Base
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("A_pos");
+				}
             }
         }
         private int? _A_pos;
@@ -6317,6 +6453,10 @@ namespace Kistl.App.Base
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("B_pos");
+				}
             }
         }
         private int? _B_pos;
@@ -6556,6 +6696,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -6588,6 +6732,10 @@ namespace Kistl.App.GUI
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -6985,6 +7133,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -7017,6 +7169,10 @@ namespace Kistl.App.GUI
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ExportGuid");
+				}
             }
         }
         private Guid _ExportGuid;
@@ -7411,6 +7567,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -7775,6 +7935,10 @@ namespace Kistl.App.GUI
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -8138,6 +8302,10 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;
@@ -8264,6 +8432,10 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                     _Value = __newValue;
                     NotifyPropertyChanged("Value", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("Value");
+				}
             }
         }
         private string _Value;
@@ -8443,6 +8615,10 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
                 }
+				else 
+				{
+					SetInitializedProperty("ID");
+				}
             }
         }
         private int _ID;

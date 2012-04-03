@@ -88,6 +88,10 @@ namespace Kistl.App.Calendar
                         OnDayOfWeek_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("DayOfWeek");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -276,6 +280,7 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyCreated_DayOfWeekCalendarRule")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("DayOfWeek");
             base.NotifyCreated();
             if (OnNotifyCreated_DayOfWeekCalendarRule != null) OnNotifyCreated_DayOfWeekCalendarRule(this);
         }

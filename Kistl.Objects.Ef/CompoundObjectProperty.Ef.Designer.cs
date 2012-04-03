@@ -189,6 +189,10 @@ namespace Kistl.App.Base
                         OnHasPersistentOrder_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("HasPersistentOrder");
+				}
             }
         }
         private bool _HasPersistentOrder;
@@ -245,6 +249,10 @@ namespace Kistl.App.Base
                         OnIsList_PostSetter(this, __e);
                     }
                 }
+				else 
+				{
+					SetInitializedProperty("IsList");
+				}
             }
         }
         private bool _IsList;
@@ -712,6 +720,9 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyCreated_CompoundObjectProperty")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("CompoundObjectDefinition");
+            SetNotInitializedProperty("HasPersistentOrder");
+            SetNotInitializedProperty("IsList");
             base.NotifyCreated();
             if (OnNotifyCreated_CompoundObjectProperty != null) OnNotifyCreated_CompoundObjectProperty(this);
         }

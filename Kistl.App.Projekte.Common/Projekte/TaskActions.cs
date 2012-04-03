@@ -24,7 +24,6 @@ namespace Kistl.App.Projekte
             e.IsValid = true;
         }
 
-
         [Invocation]
         public static void isValid_Aufwand(Task obj, PropertyIsValidEventArgs e)
         {
