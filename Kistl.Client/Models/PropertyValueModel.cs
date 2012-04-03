@@ -430,6 +430,12 @@ namespace Kistl.Client.Models
         /// <returns></returns>
         protected virtual TValue? GetPropertyValue()
         {
+            if (Object is IDataObject)
+            {
+                var obj = (IDataObject)Object;
+                if (!obj.IsInitialized(Property.Name)) 
+                    return null;
+            }
             return Object.GetPropertyValue<Nullable<TValue>>(Property.Name);
         }
 

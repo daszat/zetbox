@@ -1125,13 +1125,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             protected override DateTime? GetValueFromModel()
             {
-                var dt = Parent.GetValueFromModel() != null ? Parent.GetValueFromModel().Value.Date : (DateTime?)null;
-                if (dt == DateTime.MinValue)
-                {
-                    // It makes no sense to display the 01.01.0001 in the View - empty is better
-                    dt = null;
-                }
-                return dt;
+                return Parent.GetValueFromModel() != null ? Parent.GetValueFromModel().Value.Date : (DateTime?)null;
             }
 
             protected override void SetValueToModel(DateTime? value)
@@ -1250,28 +1244,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public override DateTime? Value
-        {
-            get
-            {
-                // It makes no sense to display the 01.01.0001 in the View - empty is better
-                if (base.Value == DateTime.MinValue) return null;
-                return base.Value;
-            }
-            set
-            {
-                if (base.Value != value)
-                {
-                    base.Value = value;
-                }
-            }
-        }
-
         protected override void SetValueToModel(DateTime? value)
         {
-            if (value == DateTime.MinValue)
+            if (value < DateTime.MinValue.AddDays(1))
             {
-                // the 01.01.0001 00:00 is treaded as null
+                // the 01.01.0001 00:00 is treated as null
                 value = null;
             }
             base.SetValueToModel(value);
