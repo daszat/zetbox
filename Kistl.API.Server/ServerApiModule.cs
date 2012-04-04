@@ -201,13 +201,47 @@ namespace Kistl.API.Server
                 });
 
             builder
-                .RegisterCmdLineAction("recalc-all", "Recalculate all calculated properties. This may be needed if the implementation has changed and no proper migration is in place",
-                 scope =>
+                .RegisterCmdLineListAction("recalc-all:", "Recalculate calculated properties. This may be needed if the implementation has changed and no proper migration is in place. If no ; seperated list of properties is provided, all properties will be recalculated. e.g -recalc-all or -recalc-all=module.objclass.prop;module.objclass.prop2",
+                 (scope, args) =>
                  {
-                     // recalculate all
-                     scope.Resolve<IServer>().RecalculateProperties(null);
+                     if (args == null || args.Length == 0)
+                     {
+                         // recalculate all
+                         scope.Resolve<IServer>().RecalculateProperties(null);
+                     }
+                     else
+                     {
+                         var ctx = scope.Resolve<IKistlServerContext>();
+                         var properties = ParseProperties(args, ctx);
+                         scope.Resolve<IServer>().RecalculateProperties(properties.ToArray());
+                     }
                  });
 
+        }
+
+        private static List<App.Base.Property> ParseProperties(string[] args, IKistlServerContext ctx)
+        {
+            var properties = new List<App.Base.Property>();
+            foreach (var prop in args)
+            {
+                var parts = prop.Split('.');
+                if (parts.Length != 3)
+                {
+                    Logging.Log.ErrorFormat("Argument '{0}' is not in the right format. Format is ModuleName.ObjectClass.PropertyName", prop);
+                    continue;
+                }
+
+                var obj = ctx.GetQuery<App.Base.Property>().FirstOrDefault(p => p.Name == parts[2] && p.ObjectClass.Name == parts[1] && p.ObjectClass.Module.Name == parts[0]);
+                if (obj == null)
+                {
+                    Logging.Log.ErrorFormat("Property '{0}' was not found in ObjectClass '{1}' in Module '{2}'", parts[2], parts[1], parts[0]);
+                }
+                else
+                {
+                    properties.Add(obj);
+                }
+            }
+            return properties;
         }
 
         private static void ParseModules(KistlConfig config, out string[] schemaModulesArray, out string[] ownerModulesArray)
