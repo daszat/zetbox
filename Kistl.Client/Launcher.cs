@@ -18,13 +18,13 @@ namespace Kistl.Client
 
     public class Launcher
     {
-        private readonly Func<IKistlContext> ctxFactory;
+        private readonly Func<ClientIsolationLevel, IKistlContext> ctxFactory;
         private readonly IViewModelFactory mdlFactory;
         private readonly IFrozenContext frozenCtx;
         private readonly KistlConfig cfg;
         private readonly IPerfCounter perfCounter;
 
-        public Launcher(Func<IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
+        public Launcher(Func<ClientIsolationLevel, IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
         {
             this.frozenCtx = frozenCtx;
             this.ctxFactory = ctxFactory;
@@ -56,7 +56,7 @@ namespace Kistl.Client
             }
             else
             {
-                var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke(), null);
+                var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory(ClientIsolationLevel.MergeServerData), null);
                 ControlKind launcher = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_LauncherKind.Find(frozenCtx);
                 mdlFactory.ShowModel(ws, launcher, true);
             }
@@ -72,7 +72,7 @@ namespace Kistl.Client
         private void LaunchApplication(Guid appGuid)
         {
             var app = frozenCtx.FindPersistenceObject<Kistl.App.GUI.Application>(appGuid);
-            var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory.Invoke(), null, app);
+            var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory(ClientIsolationLevel.MergeServerData), null, app);
             appMdl.OpenApplication(appMdl);
         }
     }

@@ -82,7 +82,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 // responsibility to externalCtx's disposal passes to newWorkspace
                 var newWorkspace = ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(
-                    ctxFactory(ClientIsolationLevel.PrefereClientData) // TODO: Backward compatibility? 
+                    ctxFactory(ClientIsolationLevel.MergeServerData) // no data changes in applications! Open a workspace
                     , null
                 );
                 ViewModelFactory.ShowModel(newWorkspace, true);
@@ -90,7 +90,7 @@ namespace Kistl.Client.Presentables.KistlBase
             else if (appMdl.RootScreen != null)
             {
                 var newWorkspace = ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(
-                    ctxFactory(ClientIsolationLevel.MergeServerData), // TODO: no data changes on navigation screens?
+                    ctxFactory(ClientIsolationLevel.MergeServerData), // no data changes on navigation screens! Open a workspace
                     null,
                     appMdl.RootScreen
                 );
