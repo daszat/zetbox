@@ -213,7 +213,7 @@ namespace Kistl.App.Base
             }
         }
         private int? _TotalDays;
-        private bool _TotalDays_IsDirty = true;
+        private bool _TotalDays_IsDirty = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DateTimeRange, int?> OnTotalDays_Getter;
 

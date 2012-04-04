@@ -975,7 +975,7 @@ namespace Kistl.App.Base
             }
         }
         Kistl.App.Base.Relation Parent_Store;
-        private bool _Parent_IsDirty = true;
+        private bool _Parent_IsDirty = true; // Always true as it will not be stored in the database (yet)
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
 

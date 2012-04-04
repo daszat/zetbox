@@ -1735,9 +1735,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("ObjectClass");
+            _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Method != null) OnNotifyCreated_Method(this);
-            _CodeTemplate_IsDirty = true;
         }
         public static event ObjectEventHandler<Method> OnNotifyCreated_Method;
 

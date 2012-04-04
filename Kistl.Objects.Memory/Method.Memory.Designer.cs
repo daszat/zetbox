@@ -293,7 +293,7 @@ namespace Kistl.App.Base
             }
         }
         private string _CodeTemplate;
-        private bool _CodeTemplate_IsDirty = true;
+        private bool _CodeTemplate_IsDirty = false;
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Method, string> OnCodeTemplate_Getter;
 
@@ -1687,6 +1687,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("ObjectClass");
+            _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Method != null) OnNotifyCreated_Method(this);
         }

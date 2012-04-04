@@ -397,7 +397,7 @@ namespace Kistl.App.Base
             }
         }
         private int? _CurrentNumber;
-        private bool _CurrentNumber_IsDirty = true;
+        private bool _CurrentNumber_IsDirty = false;
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int?> OnCurrentNumber_Getter;
 
@@ -1134,6 +1134,7 @@ namespace Kistl.App.Base
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("IsContinuous");
             SetNotInitializedProperty("Module");
+            _CurrentNumber_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Sequence != null) OnNotifyCreated_Sequence(this);
         }

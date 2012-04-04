@@ -319,7 +319,7 @@ namespace Kistl.App.Base
             }
         }
         private string _CodeTemplate;
-        private bool _CodeTemplate_IsDirty = true;
+        private bool _CodeTemplate_IsDirty = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCodeTemplate_Getter;
 
@@ -2208,6 +2208,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             SetNotInitializedProperty("ObjectClass");
             SetNotInitializedProperty("RequestedKind");
             SetNotInitializedProperty("ValueModelDescriptor");
+            _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Property != null) OnNotifyCreated_Property(this);
         }

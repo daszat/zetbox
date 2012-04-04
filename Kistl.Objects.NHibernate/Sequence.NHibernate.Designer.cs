@@ -1173,9 +1173,9 @@ namespace Kistl.App.Base
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("IsContinuous");
             SetNotInitializedProperty("Module");
+            _CurrentNumber_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Sequence != null) OnNotifyCreated_Sequence(this);
-            _CurrentNumber_IsDirty = true;
         }
         public static event ObjectEventHandler<Sequence> OnNotifyCreated_Sequence;
 

@@ -2156,9 +2156,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             SetNotInitializedProperty("ObjectClass");
             SetNotInitializedProperty("RequestedKind");
             SetNotInitializedProperty("ValueModelDescriptor");
+            _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Property != null) OnNotifyCreated_Property(this);
-            _CodeTemplate_IsDirty = true;
         }
         public static event ObjectEventHandler<Property> OnNotifyCreated_Property;
 

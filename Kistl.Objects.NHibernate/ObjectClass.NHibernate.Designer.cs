@@ -1350,9 +1350,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             SetNotInitializedProperty("IsFrozenObject");
             SetNotInitializedProperty("IsSimpleObject");
             SetNotInitializedProperty("TableName");
+            _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectClass != null) OnNotifyCreated_ObjectClass(this);
-            _CodeTemplate_IsDirty = true;
         }
         public static event ObjectEventHandler<ObjectClass> OnNotifyCreated_ObjectClass;
 

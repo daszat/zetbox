@@ -224,7 +224,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
             }
         }
         private string _CodeTemplate;
-        private bool _CodeTemplate_IsDirty = true;
+        private bool _CodeTemplate_IsDirty = false;
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
 
@@ -1341,6 +1341,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             SetNotInitializedProperty("IsFrozenObject");
             SetNotInitializedProperty("IsSimpleObject");
             SetNotInitializedProperty("TableName");
+            _CodeTemplate_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectClass != null) OnNotifyCreated_ObjectClass(this);
         }
