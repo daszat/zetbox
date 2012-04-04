@@ -26,6 +26,7 @@
 <%@ Parameter Name="propertyGuid" Type="Guid" %>
 <%@ Parameter Name="backingStoreType" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
+<%@ Parameter Name="isCalculated" Type="bool" %>
 
         // BEGIN <%= this.GetType() %>
         <%= GetModifiers() %> <%= propertyType %> <%= propertyName %>
@@ -35,7 +36,7 @@
                 if (!CurrentAccessRights.HasReadRights()) return default(<%= propertyType %>);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-<% if (hasDefaultValue) { %>
+<% if (hasDefaultValue || isCalculated) { %>
                 var __result = Fetch<%= propertyName %>OrDefault();
 <% } else { %>
                 var __result = Proxy.<%= propertyName %>;
@@ -46,16 +47,20 @@
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-<% ApplyOnAllSetTemplate(); %>
+<% if (!isCalculated) ApplyOnAllSetTemplate(); %>
                 if (Proxy.<%= propertyName %> != value)
                 {
                     var __oldValue = Proxy.<%= propertyName %>;
                     var __newValue = value;
-<% ApplyPreSetTemplate(); %>
+<% if(!isCalculated) ApplyPreSetTemplate(); %>
                     NotifyPropertyChanging("<%= propertyName %>", __oldValue, __newValue);
                     Proxy.<%= propertyName %> = __newValue;
+<% if (isCalculated) { %>
+			        _<%= propertyName %>_IsDirty = false;
+<% } %>
+
                     NotifyPropertyChanged("<%= propertyName %>", __oldValue, __newValue);
-<% ApplyPostSetTemplate(); %>
+<% if(!isCalculated) ApplyPostSetTemplate(); %>
                 }
 				else 
 				{
@@ -63,6 +68,12 @@
 				}
             }
         }
+<% if (isCalculated) {  
+	// Different from standard. NotifyCreated will initialize to true 
+%>
+		private bool _<%= propertyName %>_IsDirty = false;
+<% } %>
+
 <% ApplyTailTemplate(); %>
 <% AddSerialization(serializationList, propertyName, "Proxy." + propertyName); %>
         // END <%= this.GetType() %>

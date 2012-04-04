@@ -1,4 +1,4 @@
-﻿<%@ CodeTemplate Language="C#"
+﻿	<%@ CodeTemplate Language="C#"
     Name="Properties.ObjectReferencePropertyTemplate"
     ClassName="Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
     Inherits="Kistl.Generator.MemberTemplate" %>
@@ -188,7 +188,7 @@
     {
         Properties.NotifyingValueProperty.Call(
             Host, ctx, serializationList,
-            "int?", positionPropertyName, moduleNamespace);
+            "int?", positionPropertyName, moduleNamespace, false);
     }
 %>
         // END <%= this.GetType() %> for <%= name %>

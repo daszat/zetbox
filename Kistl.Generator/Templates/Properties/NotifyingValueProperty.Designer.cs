@@ -81,11 +81,17 @@ if (!isCalculated) ApplyPreSetTemplate();
 #line 46 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  backingName , " = __newValue;\r\n");
-this.WriteObjects("                    ",  backingName , "_Dirty = false;\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
+#line 48 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+if (isCalculated) { 
+#line 49 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+this.WriteObjects("			        ",  backingName , "_IsDirty = false;\r\n");
 #line 50 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
-if (!isCalculated) ApplyPostSetTemplate(); 
+} 
 #line 51 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
+#line 52 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+if (!isCalculated) ApplyPostSetTemplate(); 
+#line 53 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("                }\r\n");
 this.WriteObjects("				else \r\n");
 this.WriteObjects("				{\r\n");
@@ -93,11 +99,11 @@ this.WriteObjects("					SetInitializedProperty(\"",  name , "\");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 54 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 60 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 ApplyBackingStoreDefinition(); 
-#line 55 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 61 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 AddSerialization(serializationList, name); 
-#line 56 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 62 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

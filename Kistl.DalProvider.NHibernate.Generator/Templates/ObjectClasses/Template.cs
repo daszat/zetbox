@@ -240,7 +240,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             Properties.ProxyProperty.Call(Host, ctx,
                 serList, prop.Module.Namespace, prop.GetElementTypeString(), prop.Name, false, true,
-                prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(), prop.GetClassName(), prop.IsNullable(), "_is" + prop.Name + "Set", prop.ExportGuid, prop.GetElementTypeString(), "Proxy." + prop.Name);
+                prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(), 
+                prop.GetClassName(), 
+                prop.IsNullable(), 
+                "_is" + prop.Name + "Set", 
+                prop.ExportGuid, 
+                prop.GetElementTypeString(), 
+                "Proxy." + prop.Name,
+                prop.IsCalculated());
         }
 
         protected override void ApplyCollectionEntryListTemplate(ObjectReferenceProperty prop)

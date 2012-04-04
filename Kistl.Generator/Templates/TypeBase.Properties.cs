@@ -72,12 +72,7 @@ namespace Kistl.Generator.Templates
             else if (p is ValueTypeProperty)
             {
                 var vtp = (ValueTypeProperty)p;
-                if (vtp.IsCalculated)
-                {
-                    ApplyCalculatedPropertyTemplate(p);
-                    ApplyPropertyEvents(p, true);
-                }
-                else if (vtp.IsList)
+                if (vtp.IsList)
                 {
                     ApplyValueTypeListTemplate(vtp);
                     ApplyListChangedEvent(p);
@@ -105,7 +100,7 @@ namespace Kistl.Generator.Templates
 
         protected virtual void ApplyPropertyEvents(Property p, bool isReadOnly)
         {
-            Properties.PropertyEvents.Call(Host, ctx, p, isReadOnly);
+            Properties.PropertyEvents.Call(Host, ctx, p, isReadOnly || p.IsCalculated());
         }
 
         protected virtual void ApplyListChangedEvent(Property p)
@@ -142,7 +137,7 @@ namespace Kistl.Generator.Templates
         }
 
         // override ApplyCalculatedProperty instead
-        protected void ApplyCalculatedPropertyTemplate(Property prop)
+        protected void ApplyCalculatedPropertyTemplate(CalculatedObjectReferenceProperty prop)
         {
             this.WriteLine("        // calculated  property");
             ApplyCalculatedProperty(prop, this.MembersToSerialize);
@@ -199,7 +194,7 @@ namespace Kistl.Generator.Templates
                 prop);
         }
 
-        protected virtual void ApplyCalculatedProperty(Property prop, Serialization.SerializationMembersList serList)
+        protected virtual void ApplyCalculatedProperty(CalculatedObjectReferenceProperty prop, Serialization.SerializationMembersList serList)
         {
             Properties.CalculatedProperty.Call(Host, ctx,
                 serList, prop);

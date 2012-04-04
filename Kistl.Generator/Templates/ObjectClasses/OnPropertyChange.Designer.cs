@@ -48,7 +48,7 @@ this.WriteObjects("            {\r\n");
 foreach (var prop in props) { 
 #line 23 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                case \"",  prop.Name , "\":\r\n");
-this.WriteObjects("                    ",  prop.Name , "_IsDirty = true;\r\n");
+this.WriteObjects("                    _",  prop.Name , "_IsDirty = true;\r\n");
 this.WriteObjects("                    break;\r\n");
 #line 26 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 } 

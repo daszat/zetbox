@@ -13,14 +13,13 @@ namespace Kistl.Generator.Templates.Properties
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx, Serialization.SerializationMembersList serializationList,
-            string type, string name, string modulenamespace)
+            string type, string name, string modulenamespace, bool isCalculated)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             string backingName = "_" + name;
 
-            host.CallTemplate("Properties.NotifyingValueProperty",
-                ctx, serializationList, type, name, modulenamespace, backingName);
+            Call(host, ctx, serializationList, type, name, modulenamespace, backingName, isCalculated);
         }
 
         protected virtual void ApplySecurityCheckTemplate()
@@ -53,7 +52,7 @@ namespace Kistl.Generator.Templates.Properties
         {
             this.WriteLine("        private {0} {1};", type, backingName);
             if (isCalculated)
-                this.WriteLine("        private bool {0}_Dirty = true;", backingName);
+                this.WriteLine("        private bool {0}_IsDirty = true;", backingName);
         }
     }
 }

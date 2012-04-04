@@ -78,7 +78,8 @@ namespace Kistl.Generator.Templates.CollectionEntries
                 inverseNavigatorIsList,
                 eagerLoading,
                 relDataTypeExportable,
-                callGetterSetterEvents);
+                callGetterSetterEvents,
+                false); // ObjRef with relation cannot be calculated
         }
 
         protected virtual void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)

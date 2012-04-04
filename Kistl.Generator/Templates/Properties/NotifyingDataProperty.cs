@@ -72,14 +72,14 @@ namespace Kistl.Generator.Templates.Properties
                     backingName);
             }
             if (isCalculated)
-                this.WriteObjects("                if (", backingName, "_Dirty && ", EventName, "_Getter != null)\r\n");
+                this.WriteObjects("                if (", backingName, "_IsDirty && ", EventName, "_Getter != null)\r\n");
             else
                 this.WriteObjects("                if (", EventName, "_Getter != null)\r\n");
             this.WriteObjects("                {\r\n");
             this.WriteObjects("                    var __e = new PropertyGetterEventArgs<", type, ">(__result);\r\n");
             this.WriteObjects("                    ", EventName, "_Getter(this, __e);\r\n");
             if (isCalculated)
-                this.WriteObjects("                    ", backingName, "_Dirty = false;\r\n");
+                this.WriteObjects("                    ", backingName, "_IsDirty = false;\r\n");
             this.WriteObjects("                    __result = __e.Result;\r\n");
             this.WriteObjects("                }\r\n");
         }

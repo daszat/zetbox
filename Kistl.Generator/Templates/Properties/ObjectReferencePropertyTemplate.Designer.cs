@@ -69,6 +69,8 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
+#line 1 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("	");
 #line 32 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , " for ",  name , "\r\n");
 this.WriteObjects("        // fkBackingName=",  fkBackingName , "; fkGuidBackingName=",  fkGuidBackingName , ";\r\n");
@@ -249,7 +251,7 @@ AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
     {
         Properties.NotifyingValueProperty.Call(
             Host, ctx, serializationList,
-            "int?", positionPropertyName, moduleNamespace);
+            "int?", positionPropertyName, moduleNamespace, false);
     }
 
 #line 194 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"

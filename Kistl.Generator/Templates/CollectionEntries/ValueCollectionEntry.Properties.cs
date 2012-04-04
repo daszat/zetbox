@@ -43,7 +43,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
             {
                 Properties.NotifyingValueProperty.Call(
                     Host, ctx, MembersToSerialize,
-                    interfaceType, "Value", vtp.Module.Namespace);
+                    interfaceType, "Value", vtp.Module.Namespace, vtp.IsCalculated);
             }
 
             Properties.DelegatingProperty.Call(Host, ctx, "ValueObject", "object", "Value", implementationType);
@@ -58,7 +58,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
         {
             Properties.NotifyingValueProperty.Call(
                 Host, ctx, MembersToSerialize,
-                "int?", "Index", prop.GetCollectionEntryNamespace());
+                "int?", "Index", prop.GetCollectionEntryNamespace(), false);
         }
     }
 }

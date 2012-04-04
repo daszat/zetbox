@@ -53,7 +53,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 true /*inverseNavigatorIsList*/,
                 false /*eagerLoading*/,
                 false /*relDataTypeExportable*/,
-                false /*callGetterSetterEvents*/);
+                false /*callGetterSetterEvents*/,
+                prop.IsCalculated());
 
             Templates.Properties.DelegatingProperty.Call(
                 Host, ctx,

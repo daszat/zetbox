@@ -39,7 +39,8 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
                 true,
                 false, 
                 false, // value collection entries are always streamed/exported in-place
-                false);
+                false,
+                prop.IsCalculated());
 
             Templates.Properties.DelegatingProperty.Call(
                 Host, ctx,

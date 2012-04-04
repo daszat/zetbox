@@ -53,18 +53,18 @@ this.WriteObjects("                }\r\n");
 #line 24 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
 if (isCompound) { 
 #line 25 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("                var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\r");
-this.WriteObjects("                ",  getterEventName , "(this, e);\r");
-this.WriteObjects("                return e.Result;\r");
+this.WriteObjects("                var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\r\n");
+this.WriteObjects("                ",  getterEventName , "(this, e);\r\n");
+this.WriteObjects("                return e.Result;\r\n");
 #line 28 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
 } else { 
 #line 29 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("                if (",  propertyName , "_IsDirty)\r\n");
+this.WriteObjects("                if (_",  propertyName , "_IsDirty)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\r\n");
 this.WriteObjects("                    ",  getterEventName , "(this, e);\r\n");
 this.WriteObjects("                    ",  ApplyStorageStatement("e.Result") , "\r\n");
-this.WriteObjects("                    ",  propertyName , "_IsDirty = false;\r\n");
+this.WriteObjects("                    _",  propertyName , "_IsDirty = false;\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  ApplyResultExpression() , ";\r\n");
 #line 37 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
@@ -79,10 +79,7 @@ this.WriteObjects("        ",  ApplyBackingStorageDefinition() , "\r\n");
 #line 42 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
 } 
 #line 43 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("        private bool ",  propertyName , "_IsDirty = true;\r\n");
-#line 44 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
-AddSerialization(serializationList, propertyName); 
-#line 45 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
+this.WriteObjects("        private bool _",  propertyName , "_IsDirty = true;\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

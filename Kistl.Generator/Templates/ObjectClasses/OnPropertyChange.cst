@@ -21,7 +21,7 @@
             {
 <%      foreach (var prop in props) { %>
                 case "<%= prop.Name %>":
-                    <%= prop.Name %>_IsDirty = true;
+                    _<%= prop.Name %>_IsDirty = true;
                     break;
 <%      } %>
             }

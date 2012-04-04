@@ -19,7 +19,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         }
 
         public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string moduleNamespace, string interfaceName)
-            : base(_host, ctx, serializationList, moduleNamespace, "Guid", "ExportGuid", false, false, false, interfaceName, null, false, null, Guid.Empty, "Guid", "ExportGuid")
+            : base(_host, ctx, serializationList, moduleNamespace, "Guid", "ExportGuid", false, false, false, interfaceName, null, false, null, Guid.Empty, "Guid", "ExportGuid", false)
         { 
         }
 

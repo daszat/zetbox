@@ -15,7 +15,7 @@ namespace Kistl.Generator.Templates.Properties
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Serialization.SerializationMembersList serList,
-            Property prop)
+            CalculatedObjectReferenceProperty prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
 

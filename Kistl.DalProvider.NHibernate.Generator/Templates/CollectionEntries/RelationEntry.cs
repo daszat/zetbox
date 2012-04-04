@@ -84,7 +84,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 inverseNavigatorIsList,
                 eagerLoading,
                 relDataTypeExportable,
-                callGetterSetterEvents);
+                callGetterSetterEvents,
+                false);
         }
 
         protected override void ApplyAIndexPropertyTemplate()

@@ -96,7 +96,8 @@ namespace Kistl.Generator.Templates.Properties
                 inverseNavigatorIsList,
                 eagerLoading,
                 relDataTypeExportable,
-                callGetterSetterEvents);
+                callGetterSetterEvents,
+                false); // ObjRef with relation cannot be calculated
         }
 
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string sourceMember, string targetMember, string targetGuidMember)

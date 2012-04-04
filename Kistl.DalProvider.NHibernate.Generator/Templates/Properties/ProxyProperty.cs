@@ -32,7 +32,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         protected virtual void ApplyOnGetTemplate()
         {
-            if (useEvents)
+            if (useEvents && !isCalculated)
             {
                 this.WriteObjects("                if (", EventName, "_Getter != null)");
                 this.WriteLine();
@@ -110,6 +110,38 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 Templates.Properties.ComputeDefaultValue.Call(Host, ctx, interfaceName, className, propertyName, isNullable, isSetFlagName, propertyGuid, backingStoreType, backingStoreName);
                 this.WriteObjects("            return __result;");
                 this.WriteLine();
+                this.WriteObjects("        }");
+                this.WriteLine();
+                this.WriteLine();
+
+                this.WriteObjects("        private bool ", isSetFlagName, " = false;");
+                this.WriteLine();
+            }
+            else if (isCalculated)
+            {
+                this.WriteLine();
+                this.WriteObjects("        private ", propertyType, " Fetch", propertyName, "OrDefault()");
+                this.WriteLine();
+                this.WriteObjects("        {");
+                this.WriteLine();
+                this.WriteObjects("           var __result = Proxy.", propertyName, ";");
+                this.WriteLine();
+                this.WriteObjects("            if (_", propertyName, "_IsDirty && ", EventName, "_Getter != null)");
+                this.WriteLine();
+                this.WriteObjects("            {");
+                this.WriteLine();
+                this.WriteObjects("                var __e = new PropertyGetterEventArgs<", propertyType, ">(__result);");
+                this.WriteLine();
+                this.WriteObjects("                ", EventName, "_Getter(this, __e);");
+                this.WriteLine();
+                this.WriteObjects("                _", propertyName, "_IsDirty = false;");
+                this.WriteLine();
+                this.WriteObjects("                __result = Proxy.", propertyName, " = __e.Result;");
+                this.WriteLine();
+                this.WriteObjects("            }");
+                this.WriteLine();
+                this.WriteObjects("            return __result;");
+                this.WriteLine(); 
                 this.WriteObjects("        }");
                 this.WriteLine();
                 this.WriteLine();

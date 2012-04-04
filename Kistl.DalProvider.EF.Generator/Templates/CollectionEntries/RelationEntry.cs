@@ -78,7 +78,8 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
                 inverseNavigatorIsList,
                 eagerLoading,
                 relDataTypeExportable,
-                callGetterSetterEvents);
+                callGetterSetterEvents,
+                false); // ObjRef with relation cannot be calculated
         }
     }
 }

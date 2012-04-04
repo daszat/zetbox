@@ -101,7 +101,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 inverseNavigatorIsList,
                 eagerLoading,
                 relDataTypeExportable,
-                callGetterSetterEvents);
+                callGetterSetterEvents,
+                false);
         }
 
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string sourceMember, string targetMember, string targetGuidMember)

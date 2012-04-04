@@ -16,19 +16,19 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
         }
 
-        protected override string ApplyBackingStorageDefinition()
-        {
-            return string.Empty;
-        }
+        //protected override string ApplyBackingStorageDefinition()
+        //{
+        //    return string.Empty;
+        //}
 
-        protected override string ApplyResultExpression()
-        {
-            return string.Format("Proxy.{0}", propertyName);
-        }
+        //protected override string ApplyResultExpression()
+        //{
+        //    return string.Format("{0}", propertyName);
+        //}
 
-        protected override string ApplyStorageStatement(string valueExpression)
-        {
-            return string.Format("Proxy.{0} = {1};", propertyName, valueExpression);
-        }
+        //protected override string ApplyStorageStatement(string valueExpression)
+        //{
+        //    return string.Format("{0} = {1};", propertyName, valueExpression);
+        //}
     }
 }
