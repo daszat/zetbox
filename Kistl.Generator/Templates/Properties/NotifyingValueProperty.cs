@@ -52,7 +52,7 @@ namespace Kistl.Generator.Templates.Properties
         {
             this.WriteLine("        private {0} {1};", type, backingName);
             if (isCalculated)
-                this.WriteLine("        private bool {0}_IsDirty = true;", backingName);
+                this.WriteLine("        private bool {0}_IsDirty = false;", backingName);
         }
     }
 }

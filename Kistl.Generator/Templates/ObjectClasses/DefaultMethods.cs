@@ -16,24 +16,20 @@ namespace Kistl.Generator.Templates.ObjectClasses
         protected virtual void ApplyPostPreSaveTemplate() { }
         protected virtual void ApplyPrePostSaveTemplate() { }
         protected virtual void ApplyPostPostSaveTemplate() { }
-        
-        protected virtual void ApplyPreCreatedTemplate() 
+
+        protected virtual void ApplyPreCreatedTemplate()
         {
             foreach (var prop in dt.Properties.Where(p => !p.IsList() && p.DefaultValue == null).OrderBy(p => p.Name))
             {
                 this.WriteObjects("            SetNotInitializedProperty(\"", prop.Name, "\");\r\n");
             }
-        }
-
-        protected virtual void ApplyPostCreatedTemplate() 
-        {
-            foreach (var propertyName in dt.Properties.Where(p => p.IsCalculated()).Select(p => p.Name))
+            foreach (var prop in dt.Properties.Where(p => p.IsCalculated()).OrderBy(p => p.Name))
             {
-                this.WriteObjects("            _", propertyName, "_IsDirty = true;");
-                this.WriteLine();
+                this.WriteObjects("            _", prop.Name, "_IsDirty = true;\r\n");
             }
         }
 
+        protected virtual void ApplyPostCreatedTemplate() { }
         protected virtual void ApplyPreDeletingTemplate() { }
         protected virtual void ApplyPostDeletingTemplate() { }
     }
