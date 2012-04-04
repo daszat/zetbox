@@ -124,19 +124,18 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 #line 71 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 if (isCalculated) {  
-	// Different from standard. NotifyCreated will initialize to true 
 
-#line 74 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 73 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("		private bool _",  propertyName , "_IsDirty = false;\r\n");
-#line 75 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 74 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 } 
-#line 76 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 75 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("\r\n");
-#line 77 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 76 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 ApplyTailTemplate(); 
-#line 78 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 77 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 AddSerialization(serializationList, propertyName, "Proxy." + propertyName); 
-#line 79 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 78 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

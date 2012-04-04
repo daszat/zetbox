@@ -69,7 +69,6 @@
             }
         }
 <% if (isCalculated) {  
-	// Different from standard. NotifyCreated will initialize to true 
 %>
 		private bool _<%= propertyName %>_IsDirty = false;
 <% } %>

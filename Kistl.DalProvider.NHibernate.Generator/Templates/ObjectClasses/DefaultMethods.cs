@@ -27,15 +27,5 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 this.WriteLine();
             }
         }
-
-        protected override void ApplyPostCreatedTemplate()
-        {
-            base.ApplyPostCreatedTemplate();
-            foreach (var propertyName in dt.Properties.Where(p => p.IsCalculated()).Select(p => p.Name))
-            {
-                this.WriteObjects("            _", propertyName, "_IsDirty = true;");
-                this.WriteLine();
-            }
-        }
     }
 }

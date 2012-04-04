@@ -40,5 +40,5 @@
 <% if (!isCompound) { %>
         <%= ApplyBackingStorageDefinition() %>
 <% } %>
-        private bool _<%= propertyName %>_IsDirty = true;
+        private bool _<%= propertyName %>_IsDirty = false;
         // END <%= this.GetType() %>

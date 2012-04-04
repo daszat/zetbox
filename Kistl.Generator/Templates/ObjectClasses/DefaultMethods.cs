@@ -7,6 +7,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
     using System.Text;
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
     using Kistl.Generator.Extensions;
 
     public partial class DefaultMethods
@@ -24,7 +25,15 @@ namespace Kistl.Generator.Templates.ObjectClasses
             }
         }
 
-        protected virtual void ApplyPostCreatedTemplate() { }
+        protected virtual void ApplyPostCreatedTemplate() 
+        {
+            foreach (var propertyName in dt.Properties.Where(p => p.IsCalculated()).Select(p => p.Name))
+            {
+                this.WriteObjects("            _", propertyName, "_IsDirty = true;");
+                this.WriteLine();
+            }
+        }
+
         protected virtual void ApplyPreDeletingTemplate() { }
         protected virtual void ApplyPostDeletingTemplate() { }
     }

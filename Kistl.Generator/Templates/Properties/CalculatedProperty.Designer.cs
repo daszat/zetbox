@@ -79,7 +79,7 @@ this.WriteObjects("        ",  ApplyBackingStorageDefinition() , "\r\n");
 #line 42 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
 } 
 #line 43 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("        private bool _",  propertyName , "_IsDirty = true;\r\n");
+this.WriteObjects("        private bool _",  propertyName , "_IsDirty = false;\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
