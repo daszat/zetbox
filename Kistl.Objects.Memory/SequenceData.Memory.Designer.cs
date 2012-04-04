@@ -71,6 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
                     _CurrentNumber = __newValue;
                     NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
+
                     if (OnCurrentNumber_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);

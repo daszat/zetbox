@@ -172,8 +172,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
-
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -337,8 +337,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
-
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -415,8 +415,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -492,8 +492,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("Label", __oldValue, __newValue);
                     Proxy.Label = __newValue;
-
                     NotifyPropertyChanged("Label", __oldValue, __newValue);
+
                     if (OnLabel_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -639,8 +639,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("RefreshOnFilterChanged", __oldValue, __newValue);
                     Proxy.RefreshOnFilterChanged = __newValue;
-
                     NotifyPropertyChanged("RefreshOnFilterChanged", __oldValue, __newValue);
+
                     if (OnRefreshOnFilterChanged_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -786,8 +786,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("Required", __oldValue, __newValue);
                     Proxy.Required = __newValue;
-
                     NotifyPropertyChanged("Required", __oldValue, __newValue);
+
                     if (OnRequired_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);

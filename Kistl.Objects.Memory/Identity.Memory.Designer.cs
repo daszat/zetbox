@@ -71,6 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -153,6 +154,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Password", __oldValue, __newValue);
                     _Password = __newValue;
                     NotifyPropertyChanged("Password", __oldValue, __newValue);
+
                     if (OnPassword_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -210,6 +212,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("UserName", __oldValue, __newValue);
                     _UserName = __newValue;
                     NotifyPropertyChanged("UserName", __oldValue, __newValue);
+
                     if (OnUserName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

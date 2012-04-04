@@ -194,6 +194,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -372,6 +373,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -433,6 +435,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -505,6 +508,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -566,6 +570,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -638,6 +643,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsNullable", __oldValue, __newValue);
                     _IsNullable = __newValue;
                     NotifyPropertyChanged("IsNullable", __oldValue, __newValue);
+
                     if (OnIsNullable_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -699,6 +705,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsReturnParameter", __oldValue, __newValue);
                     _IsReturnParameter = __newValue;
                     NotifyPropertyChanged("IsReturnParameter", __oldValue, __newValue);
+
                     if (OnIsReturnParameter_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -759,6 +766,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Label", __oldValue, __newValue);
                     _Label = __newValue;
                     NotifyPropertyChanged("Label", __oldValue, __newValue);
+
                     if (OnLabel_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -914,6 +922,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Parameter_pos", __oldValue, __newValue);
                     _Parameter_pos = __newValue;
                     NotifyPropertyChanged("Parameter_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -970,6 +979,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -1478,6 +1488,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

@@ -174,6 +174,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -232,6 +233,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("Comment", __oldValue, __newValue);
                     _Comment = __newValue;
                     NotifyPropertyChanged("Comment", __oldValue, __newValue);
+
                     if (OnComment_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -301,6 +303,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("CompareNulls", __oldValue, __newValue);
                     _CompareNulls = __newValue;
                     NotifyPropertyChanged("CompareNulls", __oldValue, __newValue);
+
                     if (OnCompareNulls_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -462,6 +465,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -520,6 +524,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("DbType", __oldValue, __newValue);
                     _DbType = __newValue;
                     NotifyPropertyChanged("DbType", __oldValue, __newValue);
+
                     if (OnDbType_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<ZBox.App.SchemaMigration.ColumnType>(__oldValue, __newValue);
@@ -577,6 +582,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -714,6 +720,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -772,6 +779,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     NotifyPropertyChanging("IsNullable", __oldValue, __newValue);
                     _IsNullable = __newValue;
                     NotifyPropertyChanged("IsNullable", __oldValue, __newValue);
+
                     if (OnIsNullable_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -829,6 +837,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -1035,6 +1044,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     NotifyPropertyChanging("Size", __oldValue, __newValue);
                     _Size = __newValue;
                     NotifyPropertyChanged("Size", __oldValue, __newValue);
+
                     if (OnSize_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
@@ -1200,6 +1210,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     NotifyPropertyChanging("Status", __oldValue, __newValue);
                     _Status = __newValue;
                     NotifyPropertyChanged("Status", __oldValue, __newValue);
+
                     if (OnStatus_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<ZBox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);

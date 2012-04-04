@@ -146,6 +146,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -313,6 +314,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -722,6 +724,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

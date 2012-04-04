@@ -81,8 +81,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("DateTimeStyle", __oldValue, __newValue);
                     Proxy.DateTimeStyle = __newValue;
-
                     NotifyPropertyChanged("DateTimeStyle", __oldValue, __newValue);
+
                     if (OnDateTimeStyle_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Kistl.App.Base.DateTimeStyles?>(__oldValue, __newValue);

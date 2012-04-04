@@ -172,8 +172,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -249,8 +249,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IconFile", __oldValue, __newValue);
                     Proxy.IconFile = __newValue;
-
                     NotifyPropertyChanged("IconFile", __oldValue, __newValue);
+
                     if (OnIconFile_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

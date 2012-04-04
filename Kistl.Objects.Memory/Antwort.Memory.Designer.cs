@@ -71,6 +71,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("Frage", __oldValue, __newValue);
                     _Frage = __newValue;
                     NotifyPropertyChanged("Frage", __oldValue, __newValue);
+
                     if (OnFrage_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -212,6 +213,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("gute_Antworten_pos", __oldValue, __newValue);
                     _gute_Antworten_pos = __newValue;
                     NotifyPropertyChanged("gute_Antworten_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -265,6 +267,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("FragenNummer", __oldValue, __newValue);
                     _FragenNummer = __newValue;
                     NotifyPropertyChanged("FragenNummer", __oldValue, __newValue);
+
                     if (OnFragenNummer_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
@@ -322,6 +325,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("GegebeneAntwort", __oldValue, __newValue);
                     _GegebeneAntwort = __newValue;
                     NotifyPropertyChanged("GegebeneAntwort", __oldValue, __newValue);
+
                     if (OnGegebeneAntwort_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);

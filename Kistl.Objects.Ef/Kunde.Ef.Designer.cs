@@ -77,6 +77,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("Adresse", __oldValue, __newValue);
                     _Adresse = __newValue;
                     NotifyPropertyChanged("Adresse", __oldValue, __newValue);
+
                     if (OnAdresse_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -254,6 +255,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -432,6 +434,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -552,6 +555,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -613,6 +617,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     NotifyPropertyChanging("Kundenname", __oldValue, __newValue);
                     _Kundenname = __newValue;
                     NotifyPropertyChanged("Kundenname", __oldValue, __newValue);
+
                     if (OnKundenname_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -673,6 +678,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     NotifyPropertyChanging("Land", __oldValue, __newValue);
                     _Land = __newValue;
                     NotifyPropertyChanged("Land", __oldValue, __newValue);
+
                     if (OnLand_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -733,6 +739,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     NotifyPropertyChanging("Ort", __oldValue, __newValue);
                     _Ort = __newValue;
                     NotifyPropertyChanged("Ort", __oldValue, __newValue);
+
                     if (OnOrt_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -793,6 +800,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     NotifyPropertyChanging("PLZ", __oldValue, __newValue);
                     _PLZ = __newValue;
                     NotifyPropertyChanged("PLZ", __oldValue, __newValue);
+
                     if (OnPLZ_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -1081,6 +1089,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

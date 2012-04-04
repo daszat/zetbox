@@ -71,6 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Date", __oldValue, __newValue);
                     _Date = __newValue;
                     NotifyPropertyChanged("Date", __oldValue, __newValue);
+
                     if (OnDate_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -128,6 +129,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Exception", __oldValue, __newValue);
                     _Exception = __newValue;
                     NotifyPropertyChanged("Exception", __oldValue, __newValue);
+
                     if (OnException_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -185,6 +187,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Level", __oldValue, __newValue);
                     _Level = __newValue;
                     NotifyPropertyChanged("Level", __oldValue, __newValue);
+
                     if (OnLevel_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -242,6 +245,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Logger", __oldValue, __newValue);
                     _Logger = __newValue;
                     NotifyPropertyChanged("Logger", __oldValue, __newValue);
+
                     if (OnLogger_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -299,6 +303,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Message", __oldValue, __newValue);
                     _Message = __newValue;
                     NotifyPropertyChanged("Message", __oldValue, __newValue);
+
                     if (OnMessage_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -356,6 +361,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Thread", __oldValue, __newValue);
                     _Thread = __newValue;
                     NotifyPropertyChanged("Thread", __oldValue, __newValue);
+
                     if (OnThread_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

@@ -118,8 +118,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
                     }
                     NotifyPropertyChanging("BogenNummer", __oldValue, __newValue);
                     Proxy.BogenNummer = __newValue;
-
                     NotifyPropertyChanged("BogenNummer", __oldValue, __newValue);
+
                     if (OnBogenNummer_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);

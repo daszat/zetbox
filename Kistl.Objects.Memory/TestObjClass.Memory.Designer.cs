@@ -71,6 +71,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("MyIntProperty", __oldValue, __newValue);
                     _MyIntProperty = __newValue;
                     NotifyPropertyChanged("MyIntProperty", __oldValue, __newValue);
+
                     if (OnMyIntProperty_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
@@ -219,6 +220,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     _StringProp = __newValue;
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
+
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -276,6 +278,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("TestEnumProp", __oldValue, __newValue);
                     _TestEnumProp = __newValue;
                     NotifyPropertyChanged("TestEnumProp", __oldValue, __newValue);
+
                     if (OnTestEnumProp_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);

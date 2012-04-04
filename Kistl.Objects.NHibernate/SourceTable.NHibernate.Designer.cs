@@ -172,8 +172,8 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
-
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -249,8 +249,8 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("Comment", __oldValue, __newValue);
                     Proxy.Comment = __newValue;
-
                     NotifyPropertyChanged("Comment", __oldValue, __newValue);
+
                     if (OnComment_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -395,8 +395,8 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
-
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -472,8 +472,8 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
-
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -620,8 +620,8 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -697,8 +697,8 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
-
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -902,8 +902,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                     }
                     NotifyPropertyChanging("Status", __oldValue, __newValue);
                     Proxy.Status = __newValue;
-
                     NotifyPropertyChanged("Status", __oldValue, __newValue);
+
                     if (OnStatus_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<ZBox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);

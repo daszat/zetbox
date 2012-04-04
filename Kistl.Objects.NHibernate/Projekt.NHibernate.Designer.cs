@@ -107,9 +107,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     var __newValue = value;
                     NotifyPropertyChanging("AufwandGes", __oldValue, __newValue);
                     Proxy.AufwandGes = __newValue;
+                    NotifyPropertyChanged("AufwandGes", __oldValue, __newValue);
 			        _AufwandGes_IsDirty = false;
 
-                    NotifyPropertyChanged("AufwandGes", __oldValue, __newValue);
                 }
 				else 
 				{
@@ -263,8 +263,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
-
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -428,8 +428,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
-
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -506,8 +506,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -583,8 +583,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("Kundenname", __oldValue, __newValue);
                     Proxy.Kundenname = __newValue;
-
                     NotifyPropertyChanged("Kundenname", __oldValue, __newValue);
+
                     if (OnKundenname_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -672,8 +672,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
-
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

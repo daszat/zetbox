@@ -81,8 +81,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Precision", __oldValue, __newValue);
                     Proxy.Precision = __newValue;
-
                     NotifyPropertyChanged("Precision", __oldValue, __newValue);
+
                     if (OnPrecision_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
@@ -139,8 +139,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Scale", __oldValue, __newValue);
                     Proxy.Scale = __newValue;
-
                     NotifyPropertyChanged("Scale", __oldValue, __newValue);
+
                     if (OnScale_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);

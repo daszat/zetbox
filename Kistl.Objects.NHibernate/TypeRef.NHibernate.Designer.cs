@@ -261,8 +261,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
-
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -426,8 +426,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
-
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -503,8 +503,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Deleted", __oldValue, __newValue);
                     Proxy.Deleted = __newValue;
-
                     NotifyPropertyChanged("Deleted", __oldValue, __newValue);
+
                     if (OnDeleted_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -562,8 +562,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -639,8 +639,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("FullName", __oldValue, __newValue);
                     Proxy.FullName = __newValue;
-
                     NotifyPropertyChanged("FullName", __oldValue, __newValue);
+
                     if (OnFullName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -817,8 +817,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ToStringCache", __oldValue, __newValue);
                     Proxy.ToStringCache = __newValue;
-
                     NotifyPropertyChanged("ToStringCache", __oldValue, __newValue);
+
                     if (OnToStringCache_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

@@ -84,6 +84,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("AreaCode", __oldValue, __newValue);
                     _AreaCode = __newValue;
                     NotifyPropertyChanged("AreaCode", __oldValue, __newValue);
+
                     if (OnAreaCode_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -139,6 +140,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("Number", __oldValue, __newValue);
                     _Number = __newValue;
                     NotifyPropertyChanged("Number", __oldValue, __newValue);
+
                     if (OnNumber_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

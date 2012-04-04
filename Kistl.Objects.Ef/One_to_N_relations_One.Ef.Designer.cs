@@ -77,6 +77,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -313,6 +314,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

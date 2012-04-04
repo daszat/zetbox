@@ -143,8 +143,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
-
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

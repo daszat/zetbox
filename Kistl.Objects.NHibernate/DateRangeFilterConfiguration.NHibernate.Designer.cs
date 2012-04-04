@@ -81,8 +81,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentMonthDefault", __oldValue, __newValue);
                     Proxy.IsCurrentMonthDefault = __newValue;
-
                     NotifyPropertyChanged("IsCurrentMonthDefault", __oldValue, __newValue);
+
                     if (OnIsCurrentMonthDefault_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -139,8 +139,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentQuaterDefault", __oldValue, __newValue);
                     Proxy.IsCurrentQuaterDefault = __newValue;
-
                     NotifyPropertyChanged("IsCurrentQuaterDefault", __oldValue, __newValue);
+
                     if (OnIsCurrentQuaterDefault_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -197,8 +197,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     Proxy.IsCurrentYearDefault = __newValue;
-
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
+
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);

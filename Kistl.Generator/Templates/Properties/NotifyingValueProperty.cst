@@ -45,10 +45,11 @@
 <% if (!isCalculated) ApplyPreSetTemplate(); %>
                     NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = __newValue;
+                    NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
 <% if (isCalculated) { %>
 			        <%= backingName %>_IsDirty = false;
 <% } %>
-                    NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+
 <% if (!isCalculated) ApplyPostSetTemplate(); %>
                 }
 				else 

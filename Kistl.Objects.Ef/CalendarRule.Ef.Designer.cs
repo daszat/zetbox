@@ -312,6 +312,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -490,6 +491,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -563,6 +565,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -636,6 +639,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("IsWorkingDay", __oldValue, __newValue);
                     _IsWorkingDay = __newValue;
                     NotifyPropertyChanged("IsWorkingDay", __oldValue, __newValue);
+
                     if (OnIsWorkingDay_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -803,6 +807,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -863,6 +868,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("ValidFrom", __oldValue, __newValue);
                     _ValidFrom = __newValue;
                     NotifyPropertyChanged("ValidFrom", __oldValue, __newValue);
+
                     if (OnValidFrom_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -923,6 +929,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("ValidUntil", __oldValue, __newValue);
                     _ValidUntil = __newValue;
                     NotifyPropertyChanged("ValidUntil", __oldValue, __newValue);
+
                     if (OnValidUntil_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -983,6 +990,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("WorkingHours", __oldValue, __newValue);
                     _WorkingHours = __newValue;
                     NotifyPropertyChanged("WorkingHours", __oldValue, __newValue);
+
                     if (OnWorkingHours_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<decimal>(__oldValue, __newValue);
@@ -1360,6 +1368,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

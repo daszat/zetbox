@@ -182,6 +182,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
                     _DisplayedTypeFullName = __newValue;
                     NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
+
                     if (OnDisplayedTypeFullName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -242,6 +243,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -682,6 +684,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

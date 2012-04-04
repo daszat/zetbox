@@ -382,8 +382,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
-
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -547,8 +547,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
-
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -625,8 +625,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -702,8 +702,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
-
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -760,8 +760,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Multiplicity", __oldValue, __newValue);
                     Proxy.Multiplicity = __newValue;
-
                     NotifyPropertyChanged("Multiplicity", __oldValue, __newValue);
+
                     if (OnMultiplicity_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Kistl.App.Base.Multiplicity>(__oldValue, __newValue);
@@ -953,8 +953,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("RoleName", __oldValue, __newValue);
                     Proxy.RoleName = __newValue;
-
                     NotifyPropertyChanged("RoleName", __oldValue, __newValue);
+
                     if (OnRoleName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

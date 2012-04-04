@@ -71,6 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("MaxLength", __oldValue, __newValue);
                     _MaxLength = __newValue;
                     NotifyPropertyChanged("MaxLength", __oldValue, __newValue);
+
                     if (OnMaxLength_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
@@ -128,6 +129,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("MinLength", __oldValue, __newValue);
                     _MinLength = __newValue;
                     NotifyPropertyChanged("MinLength", __oldValue, __newValue);
+
                     if (OnMinLength_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);

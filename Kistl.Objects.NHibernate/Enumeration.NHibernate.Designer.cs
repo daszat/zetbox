@@ -81,8 +81,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("AreFlags", __oldValue, __newValue);
                     Proxy.AreFlags = __newValue;
-
                     NotifyPropertyChanged("AreFlags", __oldValue, __newValue);
+
                     if (OnAreFlags_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);

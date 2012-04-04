@@ -64,8 +64,8 @@ namespace Kistl.App.Base
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -497,8 +497,8 @@ namespace Kistl.App.Base
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -930,8 +930,8 @@ namespace at.dasz.DocumentManagement
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -1060,6 +1060,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -1155,6 +1156,7 @@ namespace at.dasz.DocumentManagement
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -1839,8 +1841,8 @@ namespace Kistl.App.Base
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -2972,8 +2974,8 @@ namespace Kistl.App.GUI
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -3405,8 +3407,8 @@ namespace Kistl.App.GUI
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -3838,8 +3840,8 @@ namespace Kistl.App.Projekte
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -3968,6 +3970,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -4063,6 +4066,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -4397,8 +4401,8 @@ namespace Kistl.App.Base
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -4527,6 +4531,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -4622,6 +4627,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -4956,8 +4962,8 @@ namespace ZBox.App.SchemaMigration
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -5086,6 +5092,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -5181,6 +5188,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -6215,8 +6223,8 @@ namespace Kistl.App.Base
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -6345,6 +6353,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     Proxy.A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -6440,6 +6449,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     Proxy.B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -6774,8 +6784,8 @@ namespace Kistl.App.GUI
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -7207,8 +7217,8 @@ namespace Kistl.App.GUI
                     var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -8435,6 +8445,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("Value", __oldValue, __newValue);
                     Proxy.Value = __newValue;
                     NotifyPropertyChanged("Value", __oldValue, __newValue);
+
                 }
 				else 
 				{

@@ -116,8 +116,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
-
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

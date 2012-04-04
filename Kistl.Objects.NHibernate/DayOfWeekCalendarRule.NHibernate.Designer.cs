@@ -81,8 +81,8 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("DayOfWeek", __oldValue, __newValue);
                     Proxy.DayOfWeek = __newValue;
-
                     NotifyPropertyChanged("DayOfWeek", __oldValue, __newValue);
+
                     if (OnDayOfWeek_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Kistl.App.Base.DayOfWeek>(__oldValue, __newValue);

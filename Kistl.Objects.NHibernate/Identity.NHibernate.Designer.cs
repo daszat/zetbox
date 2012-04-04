@@ -81,8 +81,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
-
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -170,8 +170,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Password", __oldValue, __newValue);
                     Proxy.Password = __newValue;
-
                     NotifyPropertyChanged("Password", __oldValue, __newValue);
+
                     if (OnPassword_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -228,8 +228,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("UserName", __oldValue, __newValue);
                     Proxy.UserName = __newValue;
-
                     NotifyPropertyChanged("UserName", __oldValue, __newValue);
+
                     if (OnUserName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

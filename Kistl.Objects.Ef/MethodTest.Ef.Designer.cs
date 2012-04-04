@@ -251,6 +251,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     _StringProp = __newValue;
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
+
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -888,6 +889,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

@@ -77,6 +77,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("AllowAddNew", __oldValue, __newValue);
                     _AllowAddNew = __newValue;
                     NotifyPropertyChanged("AllowAddNew", __oldValue, __newValue);
+
                     if (OnAllowAddNew_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -137,6 +138,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("AllowDelete", __oldValue, __newValue);
                     _AllowDelete = __newValue;
                     NotifyPropertyChanged("AllowDelete", __oldValue, __newValue);
+
                     if (OnAllowDelete_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -197,6 +199,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("AllowSelectColumns", __oldValue, __newValue);
                     _AllowSelectColumns = __newValue;
                     NotifyPropertyChanged("AllowSelectColumns", __oldValue, __newValue);
+
                     if (OnAllowSelectColumns_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -257,6 +260,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("AllowUserFilter", __oldValue, __newValue);
                     _AllowUserFilter = __newValue;
                     NotifyPropertyChanged("AllowUserFilter", __oldValue, __newValue);
+
                     if (OnAllowUserFilter_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -317,6 +321,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("EnableAutoFilter", __oldValue, __newValue);
                     _EnableAutoFilter = __newValue;
                     NotifyPropertyChanged("EnableAutoFilter", __oldValue, __newValue);
+
                     if (OnEnableAutoFilter_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -377,6 +382,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("InitialSort", __oldValue, __newValue);
                     _InitialSort = __newValue;
                     NotifyPropertyChanged("InitialSort", __oldValue, __newValue);
+
                     if (OnInitialSort_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -508,6 +514,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("IsEditable", __oldValue, __newValue);
                     _IsEditable = __newValue;
                     NotifyPropertyChanged("IsEditable", __oldValue, __newValue);
+
                     if (OnIsEditable_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -568,6 +575,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("IsMultiselect", __oldValue, __newValue);
                     _IsMultiselect = __newValue;
                     NotifyPropertyChanged("IsMultiselect", __oldValue, __newValue);
+
                     if (OnIsMultiselect_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -840,6 +848,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("RespectRequiredFilter", __oldValue, __newValue);
                     _RespectRequiredFilter = __newValue;
                     NotifyPropertyChanged("RespectRequiredFilter", __oldValue, __newValue);
+
                     if (OnRespectRequiredFilter_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -900,6 +909,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("ShowFilter", __oldValue, __newValue);
                     _ShowFilter = __newValue;
                     NotifyPropertyChanged("ShowFilter", __oldValue, __newValue);
+
                     if (OnShowFilter_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -960,6 +970,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("ShowMasterDetail", __oldValue, __newValue);
                     _ShowMasterDetail = __newValue;
                     NotifyPropertyChanged("ShowMasterDetail", __oldValue, __newValue);
+
                     if (OnShowMasterDetail_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -1020,6 +1031,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("ShowOpenCommand", __oldValue, __newValue);
                     _ShowOpenCommand = __newValue;
                     NotifyPropertyChanged("ShowOpenCommand", __oldValue, __newValue);
+
                     if (OnShowOpenCommand_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -1080,6 +1092,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("ShowRefreshCommand", __oldValue, __newValue);
                     _ShowRefreshCommand = __newValue;
                     NotifyPropertyChanged("ShowRefreshCommand", __oldValue, __newValue);
+
                     if (OnShowRefreshCommand_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);

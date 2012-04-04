@@ -77,6 +77,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("From", __oldValue, __newValue);
                     _From = __newValue;
                     NotifyPropertyChanged("From", __oldValue, __newValue);
+
                     if (OnFrom_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -132,6 +133,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Thru", __oldValue, __newValue);
                     _Thru = __newValue;
                     NotifyPropertyChanged("Thru", __oldValue, __newValue);
+
                     if (OnThru_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -181,8 +183,9 @@ namespace Kistl.App.Base
                     var __newValue = value;
                     NotifyPropertyChanging("TotalDays", __oldValue, __newValue);
                     _TotalDays = __newValue;
-			        _TotalDays_IsDirty = false;
                     NotifyPropertyChanged("TotalDays", __oldValue, __newValue);
+			        _TotalDays_IsDirty = false;
+
                 }
 				else 
 				{

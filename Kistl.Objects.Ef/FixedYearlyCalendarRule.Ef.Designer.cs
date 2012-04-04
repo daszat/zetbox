@@ -77,6 +77,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("Day", __oldValue, __newValue);
                     _Day = __newValue;
                     NotifyPropertyChanged("Day", __oldValue, __newValue);
+
                     if (OnDay_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
@@ -137,6 +138,7 @@ namespace Kistl.App.Calendar
                     NotifyPropertyChanging("Month", __oldValue, __newValue);
                     _Month = __newValue;
                     NotifyPropertyChanged("Month", __oldValue, __newValue);
+
                     if (OnMonth_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);

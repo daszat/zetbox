@@ -194,6 +194,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -372,6 +373,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -433,6 +435,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
+
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -588,6 +591,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("EnumerationEntries_pos", __oldValue, __newValue);
                     _EnumerationEntries_pos = __newValue;
                     NotifyPropertyChanged("EnumerationEntries_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -656,6 +660,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -717,6 +722,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Label", __oldValue, __newValue);
                     _Label = __newValue;
                     NotifyPropertyChanged("Label", __oldValue, __newValue);
+
                     if (OnLabel_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -777,6 +783,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
+
                     if (OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -837,6 +844,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Value", __oldValue, __newValue);
                     _Value = __newValue;
                     NotifyPropertyChanged("Value", __oldValue, __newValue);
+
                     if (OnValue_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
@@ -1196,6 +1204,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

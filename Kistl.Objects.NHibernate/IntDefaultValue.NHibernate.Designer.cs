@@ -81,8 +81,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("IntValue", __oldValue, __newValue);
                     Proxy.IntValue = __newValue;
-
                     NotifyPropertyChanged("IntValue", __oldValue, __newValue);
+
                     if (OnIntValue_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);

@@ -170,8 +170,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
-
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -228,8 +228,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     Proxy.IsList = __newValue;
-
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
+
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);

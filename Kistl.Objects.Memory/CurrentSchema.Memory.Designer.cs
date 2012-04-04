@@ -71,6 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Schema", __oldValue, __newValue);
                     _Schema = __newValue;
                     NotifyPropertyChanged("Schema", __oldValue, __newValue);
+
                     if (OnSchema_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -128,6 +129,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Version", __oldValue, __newValue);
                     _Version = __newValue;
                     NotifyPropertyChanged("Version", __oldValue, __newValue);
+
                     if (OnVersion_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);

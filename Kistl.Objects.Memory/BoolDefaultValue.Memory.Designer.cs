@@ -71,6 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("BoolValue", __oldValue, __newValue);
                     _BoolValue = __newValue;
                     NotifyPropertyChanged("BoolValue", __oldValue, __newValue);
+
                     if (OnBoolValue_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);

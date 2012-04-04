@@ -75,6 +75,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("Birthday", __oldValue, __newValue);
                     _Birthday = __newValue;
                     NotifyPropertyChanged("Birthday", __oldValue, __newValue);
+
                     if (OnBirthday_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -412,6 +413,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                     NotifyPropertyChanging("PersonName", __oldValue, __newValue);
                     _PersonName = __newValue;
                     NotifyPropertyChanged("PersonName", __oldValue, __newValue);
+
                     if (OnPersonName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

@@ -81,8 +81,8 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("TestBool", __oldValue, __newValue);
                     Proxy.TestBool = __newValue;
-
                     NotifyPropertyChanged("TestBool", __oldValue, __newValue);
+
                     if (OnTestBool_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
@@ -418,8 +418,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                     }
                     NotifyPropertyChanging("TestDateTime", __oldValue, __newValue);
                     Proxy.TestDateTime = __newValue;
-
                     NotifyPropertyChanged("TestDateTime", __oldValue, __newValue);
+
                     if (OnTestDateTime_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
@@ -476,8 +476,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                     }
                     NotifyPropertyChanging("TestEnum", __oldValue, __newValue);
                     Proxy.TestEnum = __newValue;
-
                     NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
+
                     if (OnTestEnum_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
@@ -534,8 +534,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                     }
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     Proxy.TestString = __newValue;
-
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
+
                     if (OnTestString_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

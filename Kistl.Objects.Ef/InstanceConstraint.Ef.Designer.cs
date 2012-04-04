@@ -207,6 +207,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -268,6 +269,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Reason", __oldValue, __newValue);
                     _Reason = __newValue;
                     NotifyPropertyChanged("Reason", __oldValue, __newValue);
+
                     if (OnReason_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -595,6 +597,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

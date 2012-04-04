@@ -163,6 +163,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("FalseLabel", __oldValue, __newValue);
                     _FalseLabel = __newValue;
                     NotifyPropertyChanged("FalseLabel", __oldValue, __newValue);
+
                     if (OnFalseLabel_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -312,6 +313,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("NullLabel", __oldValue, __newValue);
                     _NullLabel = __newValue;
                     NotifyPropertyChanged("NullLabel", __oldValue, __newValue);
+
                     if (OnNullLabel_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -461,6 +463,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("TrueLabel", __oldValue, __newValue);
                     _TrueLabel = __newValue;
                     NotifyPropertyChanged("TrueLabel", __oldValue, __newValue);
+
                     if (OnTrueLabel_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

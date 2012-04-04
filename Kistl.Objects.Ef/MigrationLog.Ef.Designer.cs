@@ -77,6 +77,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("Destination", __oldValue, __newValue);
                     _Destination = __newValue;
                     NotifyPropertyChanged("Destination", __oldValue, __newValue);
+
                     if (OnDestination_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -137,6 +138,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("DestinationRows", __oldValue, __newValue);
                     _DestinationRows = __newValue;
                     NotifyPropertyChanged("DestinationRows", __oldValue, __newValue);
+
                     if (OnDestinationRows_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
@@ -197,6 +199,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("Source", __oldValue, __newValue);
                     _Source = __newValue;
                     NotifyPropertyChanged("Source", __oldValue, __newValue);
+
                     if (OnSource_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -257,6 +260,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("SourceRows", __oldValue, __newValue);
                     _SourceRows = __newValue;
                     NotifyPropertyChanged("SourceRows", __oldValue, __newValue);
+
                     if (OnSourceRows_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
@@ -317,6 +321,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("Timestamp", __oldValue, __newValue);
                     _Timestamp = __newValue;
                     NotifyPropertyChanged("Timestamp", __oldValue, __newValue);
+
                     if (OnTimestamp_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -531,6 +536,7 @@ namespace ZBox.App.SchemaMigration
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

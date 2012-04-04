@@ -77,6 +77,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("DefaultValue", __oldValue, __newValue);
                     _DefaultValue = __newValue;
                     NotifyPropertyChanged("DefaultValue", __oldValue, __newValue);
+
                     if (OnDefaultValue_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

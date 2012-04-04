@@ -77,6 +77,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("Auftragsname", __oldValue, __newValue);
                     _Auftragsname = __newValue;
                     NotifyPropertyChanged("Auftragsname", __oldValue, __newValue);
+
                     if (OnAuftragsname_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -137,6 +138,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("Auftragswert", __oldValue, __newValue);
                     _Auftragswert = __newValue;
                     NotifyPropertyChanged("Auftragswert", __oldValue, __newValue);
+
                     if (OnAuftragswert_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
@@ -314,6 +316,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -492,6 +495,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -565,6 +569,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -1259,6 +1264,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
 				else 
 				{

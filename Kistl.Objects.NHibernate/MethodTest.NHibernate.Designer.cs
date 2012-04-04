@@ -226,8 +226,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                     }
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     Proxy.StringProp = __newValue;
-
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
+
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

@@ -89,6 +89,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsUnique", __oldValue, __newValue);
                     _IsUnique = __newValue;
                     NotifyPropertyChanged("IsUnique", __oldValue, __newValue);
+
                     if (OnIsUnique_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);

@@ -81,8 +81,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     Proxy.IsCurrentYearDefault = __newValue;
-
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
+
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);

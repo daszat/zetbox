@@ -155,6 +155,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("NEnds_pos", __oldValue, __newValue);
                     _NEnds_pos = __newValue;
                     NotifyPropertyChanged("NEnds_pos", __oldValue, __newValue);
+
                 }
 				else 
 				{
@@ -208,6 +209,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("OtherInt", __oldValue, __newValue);
                     _OtherInt = __newValue;
                     NotifyPropertyChanged("OtherInt", __oldValue, __newValue);
+
                     if (OnOtherInt_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);

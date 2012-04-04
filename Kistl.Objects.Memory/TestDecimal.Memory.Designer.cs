@@ -71,6 +71,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("Large", __oldValue, __newValue);
                     _Large = __newValue;
                     NotifyPropertyChanged("Large", __oldValue, __newValue);
+
                     if (OnLarge_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<decimal?>(__oldValue, __newValue);
@@ -128,6 +129,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("NoScale", __oldValue, __newValue);
                     _NoScale = __newValue;
                     NotifyPropertyChanged("NoScale", __oldValue, __newValue);
+
                     if (OnNoScale_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<decimal?>(__oldValue, __newValue);
@@ -185,6 +187,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("SmallDecimal", __oldValue, __newValue);
                     _SmallDecimal = __newValue;
                     NotifyPropertyChanged("SmallDecimal", __oldValue, __newValue);
+
                     if (OnSmallDecimal_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<decimal?>(__oldValue, __newValue);

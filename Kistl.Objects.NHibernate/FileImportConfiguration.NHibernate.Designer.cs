@@ -172,8 +172,8 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
-
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -337,8 +337,8 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
-
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
@@ -415,8 +415,8 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -579,8 +579,8 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("MachineName", __oldValue, __newValue);
                     Proxy.MachineName = __newValue;
-
                     NotifyPropertyChanged("MachineName", __oldValue, __newValue);
+
                     if (OnMachineName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -637,8 +637,8 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("PickupDirectory", __oldValue, __newValue);
                     Proxy.PickupDirectory = __newValue;
-
                     NotifyPropertyChanged("PickupDirectory", __oldValue, __newValue);
+
                     if (OnPickupDirectory_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

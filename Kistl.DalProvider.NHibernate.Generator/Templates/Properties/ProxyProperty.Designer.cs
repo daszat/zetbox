@@ -103,15 +103,15 @@ if(!isCalculated) ApplyPreSetTemplate();
 #line 56 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("                    NotifyPropertyChanging(\"",  propertyName , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("                    Proxy.",  propertyName , " = __newValue;\r\n");
-#line 58 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-if (isCalculated) { 
-#line 59 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-this.WriteObjects("			        _",  propertyName , "_IsDirty = false;\r\n");
-#line 60 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-} 
-#line 61 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-this.WriteObjects("\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName , "\", __oldValue, __newValue);\r\n");
+#line 59 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+if (isCalculated) { 
+#line 60 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+this.WriteObjects("			        _",  propertyName , "_IsDirty = false;\r\n");
+#line 61 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+} 
+#line 62 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+this.WriteObjects("\r\n");
 #line 63 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 if(!isCalculated) ApplyPostSetTemplate(); 
 #line 64 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"

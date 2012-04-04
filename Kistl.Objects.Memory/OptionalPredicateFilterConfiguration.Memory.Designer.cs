@@ -71,6 +71,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("Predicate", __oldValue, __newValue);
                     _Predicate = __newValue;
                     NotifyPropertyChanged("Predicate", __oldValue, __newValue);
+
                     if (OnPredicate_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

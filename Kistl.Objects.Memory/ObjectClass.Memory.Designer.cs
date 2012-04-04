@@ -214,8 +214,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                     var __newValue = value;
                     NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
                     _CodeTemplate = __newValue;
-			        _CodeTemplate_IsDirty = false;
                     NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
+			        _CodeTemplate_IsDirty = false;
+
                 }
 				else 
 				{
@@ -400,6 +401,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                     NotifyPropertyChanging("IsAbstract", __oldValue, __newValue);
                     _IsAbstract = __newValue;
                     NotifyPropertyChanged("IsAbstract", __oldValue, __newValue);
+
                     if (OnIsAbstract_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -457,6 +459,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                     NotifyPropertyChanging("IsFrozenObject", __oldValue, __newValue);
                     _IsFrozenObject = __newValue;
                     NotifyPropertyChanged("IsFrozenObject", __oldValue, __newValue);
+
                     if (OnIsFrozenObject_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -514,6 +517,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                     NotifyPropertyChanging("IsSimpleObject", __oldValue, __newValue);
                     _IsSimpleObject = __newValue;
                     NotifyPropertyChanged("IsSimpleObject", __oldValue, __newValue);
+
                     if (OnIsSimpleObject_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
@@ -612,6 +616,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                     NotifyPropertyChanging("TableName", __oldValue, __newValue);
                     _TableName = __newValue;
                     NotifyPropertyChanged("TableName", __oldValue, __newValue);
+
                     if (OnTableName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

@@ -55,11 +55,11 @@
 <% if(!isCalculated) ApplyPreSetTemplate(); %>
                     NotifyPropertyChanging("<%= propertyName %>", __oldValue, __newValue);
                     Proxy.<%= propertyName %> = __newValue;
+                    NotifyPropertyChanged("<%= propertyName %>", __oldValue, __newValue);
 <% if (isCalculated) { %>
 			        _<%= propertyName %>_IsDirty = false;
 <% } %>
 
-                    NotifyPropertyChanged("<%= propertyName %>", __oldValue, __newValue);
 <% if(!isCalculated) ApplyPostSetTemplate(); %>
                 }
 				else 

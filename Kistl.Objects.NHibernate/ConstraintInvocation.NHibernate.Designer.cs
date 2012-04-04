@@ -83,8 +83,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
-
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -249,8 +249,8 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("MemberName", __oldValue, __newValue);
                     Proxy.MemberName = __newValue;
-
                     NotifyPropertyChanged("MemberName", __oldValue, __newValue);
+
                     if (OnMemberName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

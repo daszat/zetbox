@@ -168,8 +168,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
                     Proxy.DisplayedTypeFullName = __newValue;
-
                     NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
+
                     if (OnDisplayedTypeFullName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
@@ -226,8 +226,8 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
-
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);

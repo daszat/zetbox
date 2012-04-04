@@ -81,8 +81,8 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("Offset", __oldValue, __newValue);
                     Proxy.Offset = __newValue;
-
                     NotifyPropertyChanged("Offset", __oldValue, __newValue);
+
                     if (OnOffset_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
