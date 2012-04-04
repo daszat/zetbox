@@ -32,8 +32,7 @@
 <%          } %>
 <%      } else { %>
 <%			if(prop.IsCalculated) { %>
-            this._<%= prop.Name %> = otherImpl._<%= prop.Name %>;
-			this._<%= prop.Name %>_IsDirty = false;
+            this.<%= prop.Name %> = otherImpl.<%= prop.Name %>;
 <%			} else { %>
             me.<%= prop.Name %> = other.<%= prop.Name %>;
 <%			} %>

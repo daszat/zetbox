@@ -23,7 +23,7 @@
             var me = (<%= clsName %>)this;
 
 <% // Only Client and Menory objects are applying calculated properties. NH + EF are re-calculating those properties when a depended object has changed. %>
-<% foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsCalculated).OrderBy(p => p.Name)) { %>
+<% foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().OrderBy(p => p.Name)) { %>
 <%      if (prop.IsList) { %>
 <%          if (prop.HasPersistentOrder) { %>
             SynchronizeLists(this._<%= prop.Name %>Collection, otherImpl._<%= prop.Name %>Collection);
@@ -32,8 +32,7 @@
 <%          } %>
 <%      } else { %>
 <%			if(prop.IsCalculated) { %>
-            this._<%= prop.Name %> = otherImpl._<%= prop.Name %>;
-			this._<%= prop.Name %>_IsDirty = false;
+            this.<%= prop.Name %> = otherImpl.<%= prop.Name %>;
 <%			} else { %>
             me.<%= prop.Name %> = other.<%= prop.Name %>;
 <%			} %>
