@@ -1716,8 +1716,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
             me.CategoryTags = other.CategoryTags;
             me.ChangedOn = other.ChangedOn;
-            this._CodeTemplate = otherImpl._CodeTemplate;
-			this._CodeTemplate_IsDirty = false;
+            this.CodeTemplate = otherImpl.CodeTemplate;
             me.CreatedOn = other.CreatedOn;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;

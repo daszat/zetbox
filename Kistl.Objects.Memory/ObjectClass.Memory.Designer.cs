@@ -1088,8 +1088,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             var otherImpl = (ObjectClassMemoryImpl)obj;
             var me = (ObjectClass)this;
 
-            this._CodeTemplate = otherImpl._CodeTemplate;
-			this._CodeTemplate_IsDirty = false;
+            this.CodeTemplate = otherImpl.CodeTemplate;
             me.IsAbstract = other.IsAbstract;
             me.IsFrozenObject = other.IsFrozenObject;
             me.IsSimpleObject = other.IsSimpleObject;

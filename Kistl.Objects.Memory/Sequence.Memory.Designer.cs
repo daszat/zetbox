@@ -864,8 +864,7 @@ namespace Kistl.App.Base
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
-            this._CurrentNumber = otherImpl._CurrentNumber;
-			this._CurrentNumber_IsDirty = false;
+            this.CurrentNumber = otherImpl.CurrentNumber;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
             me.IsContinuous = other.IsContinuous;

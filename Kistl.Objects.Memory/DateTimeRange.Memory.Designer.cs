@@ -209,8 +209,7 @@ namespace Kistl.App.Base
 
             me.From = other.From;
             me.Thru = other.Thru;
-            this._TotalDays = otherImpl._TotalDays;
-			this._TotalDays_IsDirty = false;
+            this.TotalDays = otherImpl.TotalDays;
         }
         #region Kistl.Generator.Templates.CompoundObjects.DefaultMethods
 

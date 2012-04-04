@@ -770,8 +770,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             var otherImpl = (ProjektMemoryImpl)obj;
             var me = (Projekt)this;
 
-            this._AufwandGes = otherImpl._AufwandGes;
-			this._AufwandGes_IsDirty = false;
+            this.AufwandGes = otherImpl.AufwandGes;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
