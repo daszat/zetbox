@@ -13,17 +13,9 @@ namespace Kistl.App.Projekte
     [Implementor]
     public static class ProjektActions
     {
-        /// <summary>
-        /// PreSave für Projekte, beim Projektnamen "_action" hinzufügen.
-        /// Sinnlos, aber ganz lustig
-        /// </summary>
         [Invocation]
         public static void NotifyPreSave(Projekt obj)
         {
-            if (obj.ObjectState == Kistl.API.DataObjectState.Modified)
-            {
-                obj.AufwandGes = obj.Tasks.Sum(t => t.Aufwand);
-            }
         }
 
         [Invocation]

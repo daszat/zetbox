@@ -25,6 +25,19 @@ namespace Kistl.App.Projekte
         }
 
         [Invocation]
+        public static void postSet_Aufwand(Task obj, PropertyPostSetterEventArgs<double?> e)
+        {
+            if (obj.Projekt != null) obj.Projekt.NotifyPropertyChanged("AufwandGes", null, null);
+        }
+
+        [Invocation]
+        public static void postSet_Projekt(Task obj, PropertyPostSetterEventArgs<Projekt> e)
+        {
+            if (e.OldValue != null) e.OldValue.NotifyPropertyChanged("AufwandGes", null, null);
+            if (e.NewValue != null) e.NewValue.NotifyPropertyChanged("AufwandGes", null, null);
+        }
+
+        [Invocation]
         public static void isValid_Aufwand(Task obj, PropertyIsValidEventArgs e)
         {
             e.IsValid = obj.Aufwand >= 0;

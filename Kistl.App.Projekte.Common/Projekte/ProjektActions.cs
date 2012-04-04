@@ -17,5 +17,17 @@ namespace Kistl.App.Projekte
         {
             e.Result = obj.Name;
         }
+
+        [Invocation]
+        public static void postSet_Tasks(Projekt obj)
+        {
+            obj.NotifyPropertyChanged("AufwandGes", null, null);
+        }
+
+        [Invocation]
+        public static void get_AufwandGes(Projekt obj, PropertyGetterEventArgs<double?> e)
+        {
+            e.Result = obj.Tasks.Sum(t => t.Aufwand);
+        }
     }
 }

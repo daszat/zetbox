@@ -24,7 +24,6 @@ namespace Kistl.App.Projekte
         /// </summary>
         double? AufwandGes {
             get;
-            set;
         }
 
         /// <summary>

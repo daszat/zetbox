@@ -110,10 +110,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _AufwandGes;
-                if (OnAufwandGes_Getter != null)
+                if (_AufwandGes_IsDirty && OnAufwandGes_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<double?>(__result);
                     OnAufwandGes_Getter(this, __e);
+                    _AufwandGes_IsDirty = false;
                     __result = __e.Result;
                 }
                 return __result;
@@ -125,20 +126,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 {
                     var __oldValue = _AufwandGes;
                     var __newValue = value;
-                    if (OnAufwandGes_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnAufwandGes_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
                     NotifyPropertyChanging("AufwandGes", __oldValue, __newValue);
                     _AufwandGes = __newValue;
+			        _AufwandGes_IsDirty = false;
                     NotifyPropertyChanged("AufwandGes", __oldValue, __newValue);
-                    if (OnAufwandGes_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnAufwandGes_PostSetter(this, __e);
-                    }
                 }
 				else 
 				{
@@ -147,10 +138,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
             }
         }
         private double? _AufwandGes;
+        private bool _AufwandGes_IsDirty = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_PostSetter;
 
         public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAufwandGes_IsValid;
 
@@ -886,7 +876,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             var otherImpl = (ProjektEfImpl)obj;
             var me = (Projekt)this;
 
-            me.AufwandGes = other.AufwandGes;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
@@ -900,6 +889,20 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         {
             base.AttachToContext(ctx);
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            switch (property)
+            {
+                case "AufwandGes":
+                    _AufwandGes_IsDirty = true;
+                    break;
+            }
+            base.OnPropertyChanged(property, oldValue, newValue);
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -949,7 +952,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         "AufwandGes",
                         null,
                         obj => obj.AufwandGes,
-                        (obj, val) => obj.AufwandGes = val,
+                        null, // calculated property
 						obj => OnAufwandGes_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Projekt, Kistl.App.Base.Identity>(
@@ -1100,6 +1103,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Kundenname");
             SetNotInitializedProperty("Name");
+            _AufwandGes_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Projekt != null) OnNotifyCreated_Projekt(this);
         }

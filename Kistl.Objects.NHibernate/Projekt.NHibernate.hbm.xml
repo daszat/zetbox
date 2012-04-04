@@ -23,6 +23,7 @@
             <one-to-many class="Kistl.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Kistl.Objects.NHibernateImpl" />
         </set>
 
+<!-- ValueTypeProperty AufwandGes is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
         <property name="AufwandGes" 
                   column="`AufwandGes`" 

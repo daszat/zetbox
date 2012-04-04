@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-03T13:11:49Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-04T13:57:05Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -9,7 +9,7 @@
     <KistlBase:SchemaName>calendar</KistlBase:SchemaName>
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="901a2ddd-1330-4129-b8a2-92b8e655d168">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.021281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-14T15:25:54Z</KistlBase:CreatedOn>
     <KistlBase:Description>A Calendar describing recurrent working hours</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -17,6 +17,32 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(Calendar obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(Calendar obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(Calendar obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(Calendar obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -24,7 +50,7 @@
     <KistlBase:TableName>Calendars</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ee70b186-09ae-43a3-afb2-a632c47765b9">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.022281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-14T15:24:32Z</KistlBase:CreatedOn>
     <KistlBase:Description>Abstract base class for Calendar Rules describing recurrent working hours</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -32,6 +58,32 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(CalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(CalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(CalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(CalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(CalendarRule obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -39,7 +91,7 @@
     <KistlBase:TableName>CalendarRules</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="198bab3d-85a9-4d11-99e1-5e3f9420bdae">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.022281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-14T16:10:56Z</KistlBase:CreatedOn>
     <KistlBase:Description>This rule applies every day</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -48,6 +100,32 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(CommonCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(CommonCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(CommonCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(CommonCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(CommonCalendarRule obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -55,7 +133,7 @@
     <KistlBase:TableName>CommonCalendarRules</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="9654967e-0182-409b-8765-65882785f607">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.022281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-14T16:12:28Z</KistlBase:CreatedOn>
     <KistlBase:Description>This rule applies every day of week</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -64,6 +142,32 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(DayOfWeekCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(DayOfWeekCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(DayOfWeekCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(DayOfWeekCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(DayOfWeekCalendarRule obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -71,7 +175,7 @@
     <KistlBase:TableName>DayOfWeekCalendarRules</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="d321c926-952d-4810-904b-a57251dd5e9d">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.022281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-14T16:30:54Z</KistlBase:CreatedOn>
     <KistlBase:Description>This rule applies every year, n days relative to easter.</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -80,6 +184,32 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(EasterCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(EasterCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(EasterCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(EasterCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(EasterCalendarRule obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -87,7 +217,7 @@
     <KistlBase:TableName>EasterCalendarRules</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="632137c7-1cb1-4c60-bda6-31aa2060b39a">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.022281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-14T16:27:48Z</KistlBase:CreatedOn>
     <KistlBase:Description>This rule applies every year on the same date</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -96,6 +226,32 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(FixedYearlyCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(FixedYearlyCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(FixedYearlyCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(FixedYearlyCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(FixedYearlyCalendarRule obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -103,7 +259,7 @@
     <KistlBase:TableName>FixedYearlyCalendarRules</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.022281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-14T16:25:45Z</KistlBase:CreatedOn>
     <KistlBase:Description>This rule applies every year. This class is abstract.</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -112,6 +268,32 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(YearlyCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(YearlyCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(YearlyCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(YearlyCalendarRule obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(YearlyCalendarRule obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -144,7 +326,30 @@
   </KistlBase:DataType_implements_Interface_RelationEntry>
   <KistlBase:ObjectReferenceProperty ExportGuid="17a8fbd3-5a42-4cf6-9517-0adf4142f4fe">
     <KistlBase:CategoryTags>Hierarchie</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_BaseCalendar(Calendar obj, PropertyGetterEventArgs&lt;Kistl.App.Calendar.Calendar&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_BaseCalendar(Calendar obj, PropertyPreSetterEventArgs&lt;Kistl.App.Calendar.Calendar&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_BaseCalendar(Calendar obj, PropertyPostSetterEventArgs&lt;Kistl.App.Calendar.Calendar&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_BaseCalendar(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.BaseCalendar == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:36:13Z</KistlBase:CreatedOn>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
     <KistlBase:Name>BaseCalendar</KistlBase:Name>
@@ -156,7 +361,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="b16c20d8-ac72-45e8-883c-52c6f28571f2">
     <KistlBase:CategoryTags>Rules</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CalendarRules(Calendar obj, PropertyGetterEventArgs&lt;ICollection&lt;Kistl.App.Calendar.CalendarRule&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CalendarRules(Calendar obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Kistl.App.Calendar.CalendarRule&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CalendarRules(Calendar obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Kistl.App.Calendar.CalendarRule&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CalendarRules(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CalendarRules == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:37:40Z</KistlBase:CreatedOn>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
     <KistlBase:Name>CalendarRules</KistlBase:Name>
@@ -168,7 +396,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="34eb524b-3f24-4972-b0e5-a64c9f27838a">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(Calendar obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(Calendar obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(Calendar obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:17Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -181,7 +432,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="486810c7-c031-4c86-ad86-7b88530008ca">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(Calendar obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(Calendar obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:17Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>4c221b56-632c-4f84-8dca-3c8f3e85a6ed</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -196,7 +470,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="c2fc6792-bc1f-42bb-b6c3-451ab99ddbef">
     <KistlBase:CategoryTags>Hierarchie</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChildCalendar(Calendar obj, PropertyGetterEventArgs&lt;ICollection&lt;Kistl.App.Calendar.Calendar&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChildCalendar(Calendar obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Kistl.App.Calendar.Calendar&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChildCalendar(Calendar obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Kistl.App.Calendar.Calendar&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChildCalendar(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChildCalendar == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:36:13Z</KistlBase:CreatedOn>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
     <KistlBase:Name>ChildCalendar</KistlBase:Name>
@@ -208,7 +505,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="d567d5a4-3be0-44f1-af91-046180218a38">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(Calendar obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(Calendar obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(Calendar obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:17Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -221,7 +541,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="b81a61fa-b991-4928-8390-d529abc42e72">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(Calendar obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(Calendar obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:17Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>1384f4f3-7d02-48a2-a3ad-58b13bc46706</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -236,7 +579,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:GuidProperty ExportGuid="45599fa5-a838-4a1e-b9f1-4031dea7f4e7">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(Calendar obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(Calendar obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(Calendar obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:17Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>c13ea12a-e1b6-4ad1-afb6-164898996101</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -251,7 +617,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="82affab5-a5b2-45ca-a29c-6b7dc0f31190">
     <KistlBase:CategoryTags>MetaData</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Module(Calendar obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Module(Calendar obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Module(Calendar obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Module(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Module == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T17:33:03Z</KistlBase:CreatedOn>
     <KistlBase:Description>Optional member of a module</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -265,7 +654,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:StringProperty ExportGuid="49cdf3fb-639f-4c20-b9ca-9af1bbe0d4d7">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Name(Calendar obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(Calendar obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(Calendar obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(Calendar obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:38:49Z</KistlBase:CreatedOn>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
     <KistlBase:Name>Name</KistlBase:Name>
@@ -278,7 +690,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="115c1d4c-ddd3-4d33-ae74-a6b676fc0dfa">
     <KistlBase:CategoryTags>Hierarchie</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Calendar(CalendarRule obj, PropertyGetterEventArgs&lt;Kistl.App.Calendar.Calendar&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Calendar(CalendarRule obj, PropertyPreSetterEventArgs&lt;Kistl.App.Calendar.Calendar&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Calendar(CalendarRule obj, PropertyPostSetterEventArgs&lt;Kistl.App.Calendar.Calendar&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Calendar(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Calendar == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:37:40Z</KistlBase:CreatedOn>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
     <KistlBase:Name>Calendar</KistlBase:Name>
@@ -290,7 +725,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="a14bfc87-c65e-4111-8245-3fbb31189392">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(CalendarRule obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(CalendarRule obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(CalendarRule obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:43Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -303,7 +761,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="ddab18cc-3278-4ac5-8a76-25d23b1cb7be">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.040282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(CalendarRule obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(CalendarRule obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:43Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>cb44dda0-f397-4db6-8c10-4c124c31bf27</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -318,7 +799,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="0556d238-5f1e-4f01-b7b1-13f562726942">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(CalendarRule obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(CalendarRule obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(CalendarRule obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:43Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -331,7 +835,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="d61d2a16-f80d-449f-9850-0301a43fdc71">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(CalendarRule obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(CalendarRule obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:43Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>d702a407-b8a6-4e70-b26c-eb937741d300</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -346,7 +873,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:GuidProperty ExportGuid="c730faff-a917-4f89-9a49-b65374cb4de1">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(CalendarRule obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(CalendarRule obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(CalendarRule obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:27:43Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>ef679e72-ba34-404a-a166-c14fca6880a7</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -361,7 +911,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:BoolProperty ExportGuid="09cfc4e1-c106-46ec-825d-31226d8df335">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_IsWorkingDay(CalendarRule obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_IsWorkingDay(CalendarRule obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_IsWorkingDay(CalendarRule obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_IsWorkingDay(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.IsWorkingDay == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-15T14:10:44Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>65c67dc3-11ff-419e-9d0d-d20c1a6a2c6f</KistlBase:DefaultValue>
     <KistlBase:Description>True if the day is a working day, regardless of the working hours. E.g. Saturday is a working day (in Austria), but most people aktually don't work.</KistlBase:Description>
@@ -377,7 +950,30 @@
   </KistlBase:BoolProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="7fc947a4-09c5-433b-a26e-5014663e3931">
     <KistlBase:CategoryTags>MetaData</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Module(CalendarRule obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Module(CalendarRule obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Module(CalendarRule obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Module(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Module == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T17:34:15Z</KistlBase:CreatedOn>
     <KistlBase:Description>Optional member of a module</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -391,7 +987,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:StringProperty ExportGuid="88bd31d8-6963-49ed-8ac8-31d438744eef">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Name(CalendarRule obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(CalendarRule obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(CalendarRule obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:57:50Z</KistlBase:CreatedOn>
     <KistlBase:Description>The name of the Rule</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -405,7 +1024,30 @@
   </KistlBase:StringProperty>
   <KistlBase:DateTimeProperty ExportGuid="940552fc-7cb1-4512-9096-54c3e70f7a1f">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ValidFrom(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ValidFrom(CalendarRule obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ValidFrom(CalendarRule obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ValidFrom(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ValidFrom == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:58:39Z</KistlBase:CreatedOn>
     <KistlBase:Description>Optional valid from date</KistlBase:Description>
     <KistlBase:Label>Valid from</KistlBase:Label>
@@ -421,7 +1063,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:DateTimeProperty ExportGuid="4fced9a6-fe27-44a2-a21d-17a09c720588">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ValidUntil(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ValidUntil(CalendarRule obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ValidUntil(CalendarRule obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ValidUntil(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ValidUntil == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:59:16Z</KistlBase:CreatedOn>
     <KistlBase:Description>Optional valid until date</KistlBase:Description>
     <KistlBase:Label>Valid until</KistlBase:Label>
@@ -437,7 +1102,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:DecimalProperty ExportGuid="20370deb-580a-44e6-b201-f5740ee5e330">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_WorkingHours(CalendarRule obj, PropertyGetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_WorkingHours(CalendarRule obj, PropertyPreSetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_WorkingHours(CalendarRule obj, PropertyPostSetterEventArgs&lt;decimal&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_WorkingHours(CalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.WorkingHours == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T16:03:20Z</KistlBase:CreatedOn>
     <KistlBase:Description>The amount of working hours. 0 if it's a free day.</KistlBase:Description>
     <KistlBase:Label>Working hours</KistlBase:Label>
@@ -454,7 +1142,30 @@
   </KistlBase:DecimalProperty>
   <KistlBase:EnumerationProperty ExportGuid="8755ff98-63d1-4a74-b0e3-da08a81f7f4e">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_DayOfWeek(DayOfWeekCalendarRule obj, PropertyGetterEventArgs&lt;Kistl.App.Base.DayOfWeek&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_DayOfWeek(DayOfWeekCalendarRule obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.DayOfWeek&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_DayOfWeek(DayOfWeekCalendarRule obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.DayOfWeek&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_DayOfWeek(DayOfWeekCalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.DayOfWeek == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T16:23:34Z</KistlBase:CreatedOn>
     <KistlBase:Label>Day of week</KistlBase:Label>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -469,7 +1180,30 @@
   </KistlBase:EnumerationProperty>
   <KistlBase:IntProperty ExportGuid="0fdcab86-001e-429d-af31-a5d0df5e6c75">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Offset(EasterCalendarRule obj, PropertyGetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Offset(EasterCalendarRule obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Offset(EasterCalendarRule obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Offset(EasterCalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Offset == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T16:31:53Z</KistlBase:CreatedOn>
     <KistlBase:Description>Offset to eater. Null or zero, if easter is meant. Negative numbers are before easter.</KistlBase:Description>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
@@ -483,7 +1217,30 @@
   </KistlBase:IntProperty>
   <KistlBase:IntProperty ExportGuid="7d16cd01-93ce-44d2-bb69-ac06f5b61aaf">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Day(FixedYearlyCalendarRule obj, PropertyGetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Day(FixedYearlyCalendarRule obj, PropertyPreSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Day(FixedYearlyCalendarRule obj, PropertyPostSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Day(FixedYearlyCalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Day == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T16:27:48Z</KistlBase:CreatedOn>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
     <KistlBase:Name>Day</KistlBase:Name>
@@ -496,7 +1253,30 @@
   </KistlBase:IntProperty>
   <KistlBase:IntProperty ExportGuid="43be3542-1b21-4423-aeb4-f9e411b2453f">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.041282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Month(FixedYearlyCalendarRule obj, PropertyGetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Month(FixedYearlyCalendarRule obj, PropertyPreSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Month(FixedYearlyCalendarRule obj, PropertyPostSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Month(FixedYearlyCalendarRule obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Month == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T16:28:37Z</KistlBase:CreatedOn>
     <KistlBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</KistlBase:Module>
     <KistlBase:Name>Month</KistlBase:Name>
@@ -742,7 +1522,12 @@
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:Method ExportGuid="79e9a145-8d0d-400c-a3b8-875c9bda44e8">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.096285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void GetOffDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T16:43:48Z</KistlBase:CreatedOn>
     <KistlBase:Description>Gets the number of free days between two dates</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -751,7 +1536,12 @@
     <KistlBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.096285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void GetWorkingDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T16:42:22Z</KistlBase:CreatedOn>
     <KistlBase:Description>Get the number of working days between two dates</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -760,7 +1550,12 @@
     <KistlBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="bb7592bc-26e6-463f-a806-91f56dc9fa6e">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.096285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void GetWorkingHours(Calendar obj, MethodReturnEventArgs&lt;decimal&gt; e, DateTime from, DateTime until)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T16:41:04Z</KistlBase:CreatedOn>
     <KistlBase:Description>Returns the amount of working hours between two dates</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -770,7 +1565,12 @@
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="3f50df16-1d0c-4820-aaae-ce022f73c435">
     <KistlBase:CategoryTags>Hidden</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.097285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void AppliesTo(CalendarRule obj, MethodReturnEventArgs&lt;bool&gt; e, DateTime date)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-06-14T15:29:25Z</KistlBase:CreatedOn>
     <KistlBase:Description>Checks if the Rule applies to the given date</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -1144,7 +1944,7 @@
     <KistlBase:SchemaName>doc</KistlBase:SchemaName>
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="3f496de2-bef4-4059-8c3e-c25db38bd3c2">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.023281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-12T13:35:18Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Document with revisions</KistlBase:Description>
@@ -1154,6 +1954,32 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(Document obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(Document obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(Document obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(Document obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(Document obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>377176c3-4ff9-4a6f-bfc0-de893bce1c12</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -1161,7 +1987,7 @@
     <KistlBase:TableName>Documents</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="e1556c0b-cdb9-4174-a9e5-07efba58ef05">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.023281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-10T13:38:16Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>File with changeable content</KistlBase:Description>
@@ -1171,6 +1997,32 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(DynamicFile obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(DynamicFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(DynamicFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(DynamicFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(DynamicFile obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>62f82ae5-b646-4ce3-a66a-da3fe3f49e9f</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -1178,7 +2030,7 @@
     <KistlBase:TableName>DynamicFiles</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.023281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-10T13:14:04Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Abstract Baseclass for File Types</KistlBase:Description>
@@ -1187,6 +2039,32 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(File obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(File obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(File obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(File obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(File obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -1194,7 +2072,7 @@
     <KistlBase:TableName>Files</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="740f4a8b-32fa-48ba-84d9-6792a755d5c9">
-    <KistlBase:ChangedOn>2011-10-28T16:15:26.346873Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-10-28T16:15:26.346873Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -1202,6 +2080,32 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(FileImportConfiguration obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(FileImportConfiguration obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(FileImportConfiguration obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(FileImportConfiguration obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(FileImportConfiguration obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -1209,7 +2113,7 @@
     <KistlBase:TableName>FileImportConfigurations</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="523a75bb-29c4-421c-9343-93d8658bb5f8">
-    <KistlBase:ChangedOn>2011-10-28T16:11:26.056129Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-10-28T16:08:59.39074Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Files beeing imported by the import service.</KistlBase:Description>
@@ -1219,6 +2123,32 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(ImportedFile obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(ImportedFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(ImportedFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(ImportedFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(ImportedFile obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>3aeddad1-a2cf-46b0-af26-6bf6e5f8f6e2</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -1226,7 +2156,7 @@
     <KistlBase:TableName>ImportedFiles</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="5aaabfe9-081d-445d-a543-53e0253feeb8">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.023281Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-12T13:33:23Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Static file. Content cannot be changed</KistlBase:Description>
@@ -1236,6 +2166,32 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(StaticFile obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(StaticFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(StaticFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(StaticFile obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(StaticFile obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>c6753751-760d-498d-9e0a-f7f85f44e985</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -1260,7 +2216,30 @@
   </KistlBase:DataType_implements_Interface_RelationEntry>
   <KistlBase:ObjectReferenceProperty ExportGuid="ec544fe0-8189-4bb2-a3d1-3cb61d815aa5">
     <KistlBase:CategoryTags>Revisions</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.042282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Revisions(Document obj, PropertyGetterEventArgs&lt;IList&lt;Kistl.App.Base.Blob&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Revisions(Document obj, PropertyPreSetterEventArgs&lt;IList&lt;Kistl.App.Base.Blob&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Revisions(Document obj, PropertyPostSetterEventArgs&lt;IList&lt;Kistl.App.Base.Blob&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Revisions(Document obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Revisions == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-12T14:22:54Z</KistlBase:CreatedOn>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
     <KistlBase:Name>Revisions</KistlBase:Name>
@@ -1272,7 +2251,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="ef5addda-340f-4a87-83c9-3ee419519343">
     <KistlBase:CategoryTags>Content</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.042282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Blob(File obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Blob&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Blob(File obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Blob&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Blob(File obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Blob&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Blob(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Blob == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:17:20Z</KistlBase:CreatedOn>
     <KistlBase:Description>Current File Content</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -1285,7 +2287,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="c22516f3-b897-4827-a025-27d1515aadcd">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.042282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(File obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(File obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(File obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:14:05Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -1298,7 +2323,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="c144678d-632d-4a83-8041-280d674f4453">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.042282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(File obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(File obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(File obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:14:05Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>7f466f3e-066f-4092-9f80-72a28d37742e</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -1313,7 +2361,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="dc8da15a-a432-43fd-b93f-9b3530ce3144">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.042282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(File obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(File obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(File obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:14:05Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -1326,7 +2397,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="e1892507-375b-4b52-ab20-16095dfc3514">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.042282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(File obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(File obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(File obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:14:05Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>92ed998e-2ce2-415e-a1b8-ff0da3b3be37</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -1341,7 +2435,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:GuidProperty ExportGuid="91566b41-879d-4e72-b48b-9677cc156649">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.043282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(File obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(File obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(File obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:14:05Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>9908f0df-2f0b-48ea-89c8-41337ad723f3</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -1356,7 +2473,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:StringProperty ExportGuid="1c5f2bea-9915-4634-8ff9-5fd6f0871704">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.043282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Name(File obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(File obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(File obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:14:05Z</KistlBase:CreatedOn>
     <KistlBase:Description>Filename</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -1370,7 +2510,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="533d8049-92ac-4100-b94f-661e5dbf5c74">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-28T16:22:29.375069Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(FileImportConfiguration obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(FileImportConfiguration obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(FileImportConfiguration obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(FileImportConfiguration obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:17:08.288704Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -1383,7 +2546,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="4dfd754a-6c10-4fb0-851d-b11e05a55abc">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-28T16:22:29.375069Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(FileImportConfiguration obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(FileImportConfiguration obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(FileImportConfiguration obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(FileImportConfiguration obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:17:08.288704Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>c53655e0-0413-473f-9d13-a94a93b14e6b</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -1398,7 +2584,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="afb941f3-1f6a-427a-9d45-f04b1a8440b1">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-28T16:22:29.375069Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(FileImportConfiguration obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(FileImportConfiguration obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(FileImportConfiguration obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(FileImportConfiguration obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:17:08.288704Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -1411,7 +2620,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="66be2bc9-c3a2-4411-9a53-6e07548d10ab">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-28T16:22:29.375069Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(FileImportConfiguration obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(FileImportConfiguration obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(FileImportConfiguration obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(FileImportConfiguration obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:17:08.288704Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>4d5f5f26-ffdf-4614-b3b4-c8842e36821e</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -1426,7 +2658,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:GuidProperty ExportGuid="1034a145-8bfa-470f-8345-555b9c5087cb">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-28T16:22:29.375069Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(FileImportConfiguration obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(FileImportConfiguration obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(FileImportConfiguration obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(FileImportConfiguration obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:17:08.288704Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>24badd67-f014-45d6-97a0-a97c28092586</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -1441,7 +2696,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="4762392e-1902-43ef-a023-9d57047892d9">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-28T16:20:22.788828Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Identity(FileImportConfiguration obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Identity(FileImportConfiguration obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Identity(FileImportConfiguration obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Identity(FileImportConfiguration obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Identity == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:20:15.199394Z</KistlBase:CreatedOn>
     <KistlBase:Description>Restricts this configuration to a specific identity</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -1454,7 +2732,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:StringProperty ExportGuid="f30f0053-0d08-4119-9775-284b6dee6bfd">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-28T16:18:41.888057Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_MachineName(FileImportConfiguration obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_MachineName(FileImportConfiguration obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_MachineName(FileImportConfiguration obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_MachineName(FileImportConfiguration obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.MachineName == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:18:07.393084Z</KistlBase:CreatedOn>
     <KistlBase:Description>Restricts this configuration to a specific machine</KistlBase:Description>
     <KistlBase:Label>Machine name</KistlBase:Label>
@@ -1469,7 +2770,30 @@
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="cd085ad4-58a4-43be-90b4-4988b728903b">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-28T16:27:09.219075Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_PickupDirectory(FileImportConfiguration obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_PickupDirectory(FileImportConfiguration obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_PickupDirectory(FileImportConfiguration obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_PickupDirectory(FileImportConfiguration obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.PickupDirectory == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:21:25.692426Z</KistlBase:CreatedOn>
     <KistlBase:Description>Pickup directory for the file import service. Env Variables can be used with %VARIABLE%. e.g. %HOMEPATH%\MyPickupDir</KistlBase:Description>
     <KistlBase:Label>Pickup directory</KistlBase:Label>
@@ -1688,7 +3012,12 @@
     <KistlBase:Type>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:Method ExportGuid="197e0cfb-34db-4dfa-bde8-29e7e847be99">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.098285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void HandleBlobChange(File obj, MethodReturnEventArgs&lt;Kistl.App.Base.Blob&gt; e, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-12T13:28:42Z</KistlBase:CreatedOn>
     <KistlBase:Description>Handles the change of the current blob</KistlBase:Description>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
@@ -1698,7 +3027,12 @@
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="2bd818f0-4e9d-4f65-b9fd-7825c2b0f03e">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.098285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void Open(File obj)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:19:52Z</KistlBase:CreatedOn>
     <KistlBase:Description>Öffnet das Dokument schreibgeschützt</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -1708,7 +3042,12 @@
     <KistlBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="2e2df0d4-e526-47d0-b99f-c27c9d5720c5">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.098285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void Upload(File obj)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-03-10T13:20:34Z</KistlBase:CreatedOn>
     <KistlBase:Description>Uploads a new Content</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -1718,7 +3057,12 @@
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="3b2c80a9-d4d9-4de8-9413-74fe77dfb935">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-31T16:04:41.929022Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void MakeDocument(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.Document&gt; e)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T16:11:26.056129Z</KistlBase:CreatedOn>
     <KistlBase:Description>Converts the imported file to a document</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -1729,7 +3073,12 @@
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="72f086d7-fd3f-4bcf-a952-068bdfc85c7d">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-31T16:09:58.321022Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.DynamicFile&gt; e)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-31T16:04:41.929022Z</KistlBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <KistlBase:Label>Make file</KistlBase:Label>
@@ -1738,7 +3087,12 @@
     <KistlBase:ObjectClass>523a75bb-29c4-421c-9343-93d8658bb5f8</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="e7bc5afb-bc19-4e9f-ad0b-e1e454414392">
-    <KistlBase:ChangedOn>2011-10-31T16:09:58.321022Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.StaticFile&gt; e)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-31T16:04:41.929022Z</KistlBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
@@ -2193,7 +3547,7 @@
     <KistlBase:AreFlags>false</KistlBase:AreFlags>
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="49745ac0-db34-41ee-875f-0f09f1432ab0">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.036282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-07-28T12:25:37Z</KistlBase:CreatedOn>
     <KistlBase:Description>A log of all migration operations</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2201,6 +3555,32 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(MigrationLog obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(MigrationLog obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(MigrationLog obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(MigrationLog obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(MigrationLog obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -2208,7 +3588,7 @@
     <KistlBase:TableName>MigrationLogs</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="f2b4fe26-9d57-47c7-88b2-b30a38ebbd97">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.036282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-06-30T12:51:11Z</KistlBase:CreatedOn>
     <KistlBase:Description>Defines a Schema Migration Project</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2216,6 +3596,32 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(MigrationProject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(MigrationProject obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(MigrationProject obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(MigrationProject obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(MigrationProject obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -2223,13 +3629,39 @@
     <KistlBase:TableName>MigrationProjects</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="e921bb2f-2cac-46d1-a7f4-120bb1a4afe2">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.036282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-07-01T11:55:57Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>SourceColumn</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(SourceColumn obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(SourceColumn obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(SourceColumn obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(SourceColumn obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(SourceColumn obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -2237,7 +3669,7 @@
     <KistlBase:TableName>SourceColumns</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="138d462f-e432-46a0-8ce2-e7f9893654d4">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.037282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-07-12T13:27:35Z</KistlBase:CreatedOn>
     <KistlBase:Description>Mapps an Enum</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2245,6 +3677,32 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(SourceEnum obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(SourceEnum obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(SourceEnum obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(SourceEnum obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(SourceEnum obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -2252,13 +3710,39 @@
     <KistlBase:TableName>SourceEnums</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="7f95aa3e-0150-4073-8b9e-803226872cc2">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.037282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-07-01T11:23:49Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>SourceTable</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(SourceTable obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(SourceTable obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(SourceTable obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(SourceTable obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(SourceTable obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -2266,13 +3750,39 @@
     <KistlBase:TableName>SourceTables</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="4faf24fe-d732-4a1c-9156-2cbb7ec4be56">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.037282Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-07-12T16:32:08Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>StagingDatabase</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void ToString(StagingDatabase obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(StagingDatabase obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(StagingDatabase obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(StagingDatabase obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(StagingDatabase obj)
+{
+}
+
+</KistlBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
@@ -2321,7 +3831,30 @@
   </KistlBase:DataType_implements_Interface_RelationEntry>
   <KistlBase:StringProperty ExportGuid="04d6b444-4434-4bb8-a10e-c7b482befff9">
     <KistlBase:CategoryTags>Migration</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.091285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_MigrationErrors(IMigrationInfo obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_MigrationErrors(IMigrationInfo obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_MigrationErrors(IMigrationInfo obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_MigrationErrors(IMigrationInfo obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.MigrationErrors == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-16T09:48:20Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>MigrationErrors</KistlBase:Name>
@@ -2334,7 +3867,30 @@
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="bad56a8d-e23e-47e3-8545-ee4c2689aab8">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.091285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Destination(MigrationLog obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Destination(MigrationLog obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Destination(MigrationLog obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Destination(MigrationLog obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Destination == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-28T12:25:37Z</KistlBase:CreatedOn>
     <KistlBase:Description>The destination of this migration step</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2348,7 +3904,30 @@
   </KistlBase:StringProperty>
   <KistlBase:IntProperty ExportGuid="6b2ac709-a61b-4d22-96e6-e36f4bcbce84">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.091285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_DestinationRows(MigrationLog obj, PropertyGetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_DestinationRows(MigrationLog obj, PropertyPreSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_DestinationRows(MigrationLog obj, PropertyPostSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_DestinationRows(MigrationLog obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.DestinationRows == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-28T12:25:37Z</KistlBase:CreatedOn>
     <KistlBase:Description>The number of rows in the destination</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2362,7 +3941,30 @@
   </KistlBase:IntProperty>
   <KistlBase:StringProperty ExportGuid="fd0e1581-c4f0-476e-af24-2905e4aa377d">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.091285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Source(MigrationLog obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Source(MigrationLog obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Source(MigrationLog obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Source(MigrationLog obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Source == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-28T12:25:37Z</KistlBase:CreatedOn>
     <KistlBase:Description>The source of the migration step</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2376,7 +3978,30 @@
   </KistlBase:StringProperty>
   <KistlBase:IntProperty ExportGuid="52a3ddb3-c724-4427-a2e1-95bbf347906a">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.091285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_SourceRows(MigrationLog obj, PropertyGetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_SourceRows(MigrationLog obj, PropertyPreSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_SourceRows(MigrationLog obj, PropertyPostSetterEventArgs&lt;int&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_SourceRows(MigrationLog obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.SourceRows == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-28T12:25:37Z</KistlBase:CreatedOn>
     <KistlBase:Description>The number of rows in this source</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2390,7 +4015,30 @@
   </KistlBase:IntProperty>
   <KistlBase:DateTimeProperty ExportGuid="9e3a70c6-04f9-4464-93c9-68c1eec6b94f">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.091285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Timestamp(MigrationLog obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Timestamp(MigrationLog obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Timestamp(MigrationLog obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Timestamp(MigrationLog obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Timestamp == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-28T12:27:54Z</KistlBase:CreatedOn>
     <KistlBase:Description>When the logentry was written</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2404,7 +4052,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="339fa8af-5760-4e31-a112-5aa29e7a0d28">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.091285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(MigrationProject obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(MigrationProject obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(MigrationProject obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(MigrationProject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2417,7 +4088,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="133f7c7e-fcf4-4e90-b6e9-f3500dfcf1b9">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.091285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(MigrationProject obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(MigrationProject obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(MigrationProject obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(MigrationProject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>52bdd744-d166-45aa-8f33-34e8a685f2ae</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -2432,7 +4126,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="e11cb99e-3e4b-4c96-ba62-42b6a66618f3">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(MigrationProject obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(MigrationProject obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(MigrationProject obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(MigrationProject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2445,7 +4162,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="51ceaa28-d616-464b-8c6b-aadf7461aa4d">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(MigrationProject obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(MigrationProject obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(MigrationProject obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(MigrationProject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>ebba0ecf-09b3-44d5-a455-5efca9480c2e</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -2460,7 +4200,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:StringProperty ExportGuid="17634aec-04e4-40f8-a585-51989e5cd95f">
     <KistlBase:CategoryTags>Summary, Configuration</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Description(MigrationProject obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Description(MigrationProject obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Description(MigrationProject obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Description(MigrationProject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Description == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-06-30T13:46:16Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Description</KistlBase:Name>
@@ -2473,7 +4236,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="ed7a3291-b69b-42f3-9b60-dd06e374f856">
     <KistlBase:CategoryTags>Configuration</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_DestinationModule(MigrationProject obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_DestinationModule(MigrationProject obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_DestinationModule(MigrationProject obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_DestinationModule(MigrationProject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.DestinationModule == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T16:02:10Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>DestinationModule</KistlBase:Name>
@@ -2485,7 +4271,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:GuidProperty ExportGuid="0851878a-0753-425e-a053-c4642ce3f28b">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(MigrationProject obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(MigrationProject obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(MigrationProject obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(MigrationProject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>75b38722-7e3e-4d24-8918-e58f7bb562b3</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -2500,7 +4309,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="3750005b-3850-4697-8b80-b5a7854fc344">
     <KistlBase:CategoryTags>Configuration</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_StagingDatabases(MigrationProject obj, PropertyGetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.StagingDatabase&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StagingDatabases(MigrationProject obj, PropertyPreSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.StagingDatabase&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StagingDatabases(MigrationProject obj, PropertyPostSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.StagingDatabase&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StagingDatabases(MigrationProject obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StagingDatabases == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:35:35Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>StagingDatabases</KistlBase:Name>
@@ -2512,7 +4344,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="4f2f1af0-f33b-4d98-89bb-2a386e11a29a">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(SourceColumn obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(SourceColumn obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(SourceColumn obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2525,7 +4380,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="ddd4df6a-e085-45fe-b900-f3995dcb1845">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(SourceColumn obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(SourceColumn obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(SourceColumn obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>9297e978-6f83-45d8-b754-bce5289a0208</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -2540,7 +4418,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:StringProperty ExportGuid="66bcca34-2297-4e06-84e8-ff19c5d4af35">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Comment(SourceColumn obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Comment(SourceColumn obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Comment(SourceColumn obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Comment(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Comment == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T11:55:57Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Comment</KistlBase:Name>
@@ -2553,7 +4454,30 @@
   </KistlBase:StringProperty>
   <KistlBase:BoolProperty ExportGuid="09607800-4b5c-4d8a-a0cf-b508986c2f17">
     <KistlBase:CategoryTags>Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:27:32.847842Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CompareNulls(SourceColumn obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CompareNulls(SourceColumn obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CompareNulls(SourceColumn obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CompareNulls(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CompareNulls == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-04T16:24:26.435042Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>271dc159-efed-4f0a-926f-bbd92af7f966</KistlBase:DefaultValue>
     <KistlBase:Description>In some cases, when joining across source tables, nulls should be compared as equals, instead of not. This is especially true, when "null" is used as a domain value.</KistlBase:Description>
@@ -2571,7 +4495,30 @@
   </KistlBase:BoolProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="6c0d8f0c-2937-4d6a-972a-299c085e8b5d">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(SourceColumn obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(SourceColumn obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(SourceColumn obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2584,7 +4531,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="bb5f31d0-072d-45ec-a455-0234ccc31867">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(SourceColumn obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(SourceColumn obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(SourceColumn obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>723152f5-84bf-4c9a-a205-c61618669346</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -2599,7 +4569,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:EnumerationProperty ExportGuid="78873431-d503-4192-b658-5c5bc6442180">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:28:42.331842Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_DbType(SourceColumn obj, PropertyGetterEventArgs&lt;ZBox.App.SchemaMigration.ColumnType&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_DbType(SourceColumn obj, PropertyPreSetterEventArgs&lt;ZBox.App.SchemaMigration.ColumnType&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_DbType(SourceColumn obj, PropertyPostSetterEventArgs&lt;ZBox.App.SchemaMigration.ColumnType&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_DbType(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.DbType == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T11:55:57Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>DbType</KistlBase:Name>
@@ -2613,7 +4606,30 @@
   </KistlBase:EnumerationProperty>
   <KistlBase:StringProperty ExportGuid="6273444e-5309-4481-8d2a-99a7a8a1b059">
     <KistlBase:CategoryTags>Summary,Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Description(SourceColumn obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Description(SourceColumn obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Description(SourceColumn obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Description(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Description == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T11:55:57Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Description</KistlBase:Name>
@@ -2626,7 +4642,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="38dce431-bb65-44c5-b67a-1f28202e51d9">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_DestinationProperty(SourceColumn obj, PropertyGetterEventArgs&lt;IList&lt;Kistl.App.Base.Property&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_DestinationProperty(SourceColumn obj, PropertyPreSetterEventArgs&lt;IList&lt;Kistl.App.Base.Property&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_DestinationProperty(SourceColumn obj, PropertyPostSetterEventArgs&lt;IList&lt;Kistl.App.Base.Property&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_DestinationProperty(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.DestinationProperty == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-02T10:07:38Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>DestinationProperty</KistlBase:Name>
@@ -2639,7 +4678,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="a040ea6b-c105-4815-815b-e36f0778e4cb">
     <KistlBase:CategoryTags>EnumMapping</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:27:32.847842Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_EnumEntries(SourceColumn obj, PropertyGetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceEnum&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_EnumEntries(SourceColumn obj, PropertyPreSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceEnum&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_EnumEntries(SourceColumn obj, PropertyPostSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceEnum&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_EnumEntries(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.EnumEntries == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:18:35Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>EnumEntries</KistlBase:Name>
@@ -2651,7 +4713,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:GuidProperty ExportGuid="52ba9fcd-dbeb-42da-9146-6f40976c1c83">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(SourceColumn obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(SourceColumn obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(SourceColumn obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>6308c43c-ce15-495a-b7cd-12428170b7b4</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -2666,7 +4751,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:BoolProperty ExportGuid="817ccb79-7051-4b09-8386-941a21575bfc">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_IsNullable(SourceColumn obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_IsNullable(SourceColumn obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_IsNullable(SourceColumn obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_IsNullable(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.IsNullable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-02T12:11:53Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>IsNullable</KistlBase:Name>
@@ -2679,7 +4787,30 @@
   </KistlBase:BoolProperty>
   <KistlBase:StringProperty ExportGuid="a27f7d36-fd56-4271-bac0-88e22bc65027">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Name(SourceColumn obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(SourceColumn obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(SourceColumn obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T11:55:57Z</KistlBase:CreatedOn>
     <GUI:FilterConfiguration>20eea15e-e7e6-43d8-8807-26cffc295830</GUI:FilterConfiguration>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2693,7 +4824,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="4d6faa25-d610-4e23-b12f-7ee4c78da70b">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_References(SourceColumn obj, PropertyGetterEventArgs&lt;ZBox.App.SchemaMigration.SourceColumn&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_References(SourceColumn obj, PropertyPreSetterEventArgs&lt;ZBox.App.SchemaMigration.SourceColumn&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_References(SourceColumn obj, PropertyPostSetterEventArgs&lt;ZBox.App.SchemaMigration.SourceColumn&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_References(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.References == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-14T10:47:30Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>References</KistlBase:Name>
@@ -2705,7 +4859,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="71bed80f-57ec-4038-a9a4-9aabc0c2f60d">
     <KistlBase:CategoryTags>Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Referers(SourceColumn obj, PropertyGetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceColumn&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Referers(SourceColumn obj, PropertyPreSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceColumn&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Referers(SourceColumn obj, PropertyPostSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceColumn&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Referers(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Referers == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-14T11:49:17Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Referers</KistlBase:Name>
@@ -2717,7 +4894,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:IntProperty ExportGuid="5a1dc7f1-7743-4603-9b65-1b31ca17d55d">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Size(SourceColumn obj, PropertyGetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Size(SourceColumn obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Size(SourceColumn obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Size(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Size == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-02T12:11:53Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Size</KistlBase:Name>
@@ -2730,7 +4930,30 @@
   </KistlBase:IntProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="d1dca069-f6b5-4da1-beee-a51853c109ba">
     <KistlBase:CategoryTags>Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_SourceTable(SourceColumn obj, PropertyGetterEventArgs&lt;ZBox.App.SchemaMigration.SourceTable&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_SourceTable(SourceColumn obj, PropertyPreSetterEventArgs&lt;ZBox.App.SchemaMigration.SourceTable&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_SourceTable(SourceColumn obj, PropertyPostSetterEventArgs&lt;ZBox.App.SchemaMigration.SourceTable&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_SourceTable(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.SourceTable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T12:02:02Z</KistlBase:CreatedOn>
     <GUI:FilterConfiguration>c557074c-eb21-46a9-8351-a075682ee268</GUI:FilterConfiguration>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2743,7 +4966,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:EnumerationProperty ExportGuid="bba3aa19-0097-4692-b649-d51fbc626182">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-10-04T16:21:42.959042Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Status(SourceColumn obj, PropertyGetterEventArgs&lt;ZBox.App.SchemaMigration.MappingStatus?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Status(SourceColumn obj, PropertyPreSetterEventArgs&lt;ZBox.App.SchemaMigration.MappingStatus?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Status(SourceColumn obj, PropertyPostSetterEventArgs&lt;ZBox.App.SchemaMigration.MappingStatus?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Status(SourceColumn obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Status == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-21T17:22:30Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Status</KistlBase:Name>
@@ -2757,7 +5003,30 @@
   </KistlBase:EnumerationProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="55366c31-0051-4be7-a3ac-66e783f68780">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(SourceEnum obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(SourceEnum obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(SourceEnum obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(SourceEnum obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:16:38Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2770,7 +5039,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="9fefd927-1080-44d0-80ae-8afacf6620d3">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(SourceEnum obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(SourceEnum obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(SourceEnum obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(SourceEnum obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:16:38Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>51218876-2c92-440e-bc3f-48ee0d106744</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -2785,7 +5077,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="ab0d1cc0-622f-49d9-8dfa-d9461e50b4d6">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(SourceEnum obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(SourceEnum obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(SourceEnum obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(SourceEnum obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:16:38Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2798,7 +5113,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="4b5066bd-3dac-4520-87f0-4548f3bff8e4">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(SourceEnum obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(SourceEnum obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(SourceEnum obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(SourceEnum obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:16:38Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>ed00fd3c-a858-4945-a437-964203d36cbd</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -2813,7 +5151,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="0d29a48f-6791-4640-be97-7e93d246a389">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_DestinationValue(SourceEnum obj, PropertyGetterEventArgs&lt;Kistl.App.Base.EnumerationEntry&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_DestinationValue(SourceEnum obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.EnumerationEntry&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_DestinationValue(SourceEnum obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.EnumerationEntry&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_DestinationValue(SourceEnum obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.DestinationValue == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:20:22Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>DestinationValue</KistlBase:Name>
@@ -2825,7 +5186,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:GuidProperty ExportGuid="ecac7622-18c7-4364-b109-c390cb911ce5">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(SourceEnum obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(SourceEnum obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(SourceEnum obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(SourceEnum obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:16:38Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>7d7617ce-3413-401a-9833-6f26be9e9fc7</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -2840,7 +5224,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="b7195fb9-e6da-493f-b1be-9465e4d9d5ae">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_SourceColumn(SourceEnum obj, PropertyGetterEventArgs&lt;ZBox.App.SchemaMigration.SourceColumn&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_SourceColumn(SourceEnum obj, PropertyPreSetterEventArgs&lt;ZBox.App.SchemaMigration.SourceColumn&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_SourceColumn(SourceEnum obj, PropertyPostSetterEventArgs&lt;ZBox.App.SchemaMigration.SourceColumn&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_SourceColumn(SourceEnum obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.SourceColumn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:18:35Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>SourceColumn</KistlBase:Name>
@@ -2852,7 +5259,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:StringProperty ExportGuid="885a90e0-62e0-426a-a3b5-64dca3a38d18">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_SourceValue(SourceEnum obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_SourceValue(SourceEnum obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_SourceValue(SourceEnum obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_SourceValue(SourceEnum obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.SourceValue == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T14:16:38Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>SourceValue</KistlBase:Name>
@@ -2865,7 +5295,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="1156b3eb-af9b-4a44-8ed3-e64fa3fbb251">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(SourceTable obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(SourceTable obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(SourceTable obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2878,7 +5331,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="42040e80-e6a4-4d19-959f-033080669059">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(SourceTable obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(SourceTable obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(SourceTable obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>bfa6f2bf-6d8a-47f4-a37e-38506acb46bf</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -2893,7 +5369,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:StringProperty ExportGuid="86a05242-c667-4181-a7a7-1d50d20f9d0f">
     <KistlBase:CategoryTags>Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Comment(SourceTable obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Comment(SourceTable obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Comment(SourceTable obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Comment(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Comment == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T11:23:49Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Comment</KistlBase:Name>
@@ -2906,7 +5405,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="c32e650b-4c12-4eeb-9f93-46df426e38de">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(SourceTable obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(SourceTable obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(SourceTable obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -2919,7 +5441,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="0a19a3eb-ffa2-4eef-861f-824cc327ab27">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(SourceTable obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(SourceTable obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(SourceTable obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>a4d9faf1-14fa-4e0a-8a1e-241421956671</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -2934,7 +5479,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:StringProperty ExportGuid="8b93e1d4-1e2a-44a8-91c3-0c71541934c6">
     <KistlBase:CategoryTags>Summary,Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Description(SourceTable obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Description(SourceTable obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Description(SourceTable obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Description(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Description == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T11:23:49Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Description</KistlBase:Name>
@@ -2947,7 +5515,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="ec638748-894e-4e61-b618-7d8fbacec2fe">
     <KistlBase:CategoryTags>Summary,Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_DestinationObjectClass(SourceTable obj, PropertyGetterEventArgs&lt;Kistl.App.Base.ObjectClass&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_DestinationObjectClass(SourceTable obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.ObjectClass&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_DestinationObjectClass(SourceTable obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.ObjectClass&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_DestinationObjectClass(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.DestinationObjectClass == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T16:05:24Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>DestinationObjectClass</KistlBase:Name>
@@ -2959,7 +5550,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:GuidProperty ExportGuid="7f6f277e-78fa-4955-925c-554a6cfd466a">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(SourceTable obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(SourceTable obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(SourceTable obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T17:03:50Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>1aa97f2d-ef92-478e-aabf-0b4b1048c50c</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -2974,7 +5588,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:StringProperty ExportGuid="f01c1095-cf9b-41f5-b89c-532a86a78cc5">
     <KistlBase:CategoryTags>Summary, Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Name(SourceTable obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(SourceTable obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(SourceTable obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T11:23:49Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Name</KistlBase:Name>
@@ -2987,7 +5624,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="0e435261-9490-4fbb-8268-f7f1f6607d2c">
     <KistlBase:CategoryTags>Columns</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_SourceColumn(SourceTable obj, PropertyGetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceColumn&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_SourceColumn(SourceTable obj, PropertyPreSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceColumn&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_SourceColumn(SourceTable obj, PropertyPostSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceColumn&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_SourceColumn(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.SourceColumn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T12:02:02Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>SourceColumn</KistlBase:Name>
@@ -3001,7 +5661,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="d57c1138-b611-44b6-bd30-9b6d6a91cbed">
     <KistlBase:CategoryTags>Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_StagingDatabase(SourceTable obj, PropertyGetterEventArgs&lt;ZBox.App.SchemaMigration.StagingDatabase&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_StagingDatabase(SourceTable obj, PropertyPreSetterEventArgs&lt;ZBox.App.SchemaMigration.StagingDatabase&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_StagingDatabase(SourceTable obj, PropertyPostSetterEventArgs&lt;ZBox.App.SchemaMigration.StagingDatabase&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_StagingDatabase(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.StagingDatabase == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:38:07Z</KistlBase:CreatedOn>
     <GUI:FilterConfiguration>e5d96e32-5009-401a-bc52-b57261570767</GUI:FilterConfiguration>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -3014,7 +5697,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:EnumerationProperty ExportGuid="6029f896-82fd-4372-8cfd-76ca7e31ebf6">
     <KistlBase:CategoryTags>Summary,Information</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Status(SourceTable obj, PropertyGetterEventArgs&lt;ZBox.App.SchemaMigration.MappingStatus?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Status(SourceTable obj, PropertyPreSetterEventArgs&lt;ZBox.App.SchemaMigration.MappingStatus?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Status(SourceTable obj, PropertyPostSetterEventArgs&lt;ZBox.App.SchemaMigration.MappingStatus?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Status(SourceTable obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Status == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-21T17:21:53Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Status</KistlBase:Name>
@@ -3028,7 +5734,30 @@
   </KistlBase:EnumerationProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="ee3476a8-1715-4dc2-a2b2-13e4a2a27e10">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(StagingDatabase obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(StagingDatabase obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(StagingDatabase obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:32:08Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -3041,7 +5770,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="16652536-fb87-4b1b-866e-ec2fb68a8ae2">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(StagingDatabase obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(StagingDatabase obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(StagingDatabase obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:32:08Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>1a9f7a03-2301-44fc-842b-a1b134cc4a87</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
@@ -3056,7 +5808,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:StringProperty ExportGuid="6aa09a38-a4be-4095-bf8d-9799bd56a14d">
     <KistlBase:CategoryTags>Configuration</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ConnectionStringKey(StagingDatabase obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ConnectionStringKey(StagingDatabase obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ConnectionStringKey(StagingDatabase obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ConnectionStringKey(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ConnectionStringKey == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:32:08Z</KistlBase:CreatedOn>
     <KistlBase:Label>Connection String Key for Destination</KistlBase:Label>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -3070,7 +5845,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="9db15b1e-a55e-444c-9fa7-9dd66d9b13f6">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(StagingDatabase obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(StagingDatabase obj, PropertyPreSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(StagingDatabase obj, PropertyPostSetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:32:08Z</KistlBase:CreatedOn>
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -3083,7 +5881,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="d402f8a4-dc92-4041-a295-50257057e656">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(StagingDatabase obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(StagingDatabase obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(StagingDatabase obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:32:08Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>c8a7ec77-b816-4223-976a-724be67bb055</KistlBase:DefaultValue>
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
@@ -3098,7 +5919,30 @@
   </KistlBase:DateTimeProperty>
   <KistlBase:StringProperty ExportGuid="157ecaf4-3ee5-4d78-8148-ab936de50523">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Description(StagingDatabase obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Description(StagingDatabase obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Description(StagingDatabase obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Description(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Description == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:32:08Z</KistlBase:CreatedOn>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
     <KistlBase:Name>Description</KistlBase:Name>
@@ -3111,7 +5955,30 @@
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="6bc56e55-16c4-4c94-8c20-12861844e053">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(StagingDatabase obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(StagingDatabase obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(StagingDatabase obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:32:08Z</KistlBase:CreatedOn>
     <KistlBase:DefaultValue>c2f8dd32-ec41-4c09-bfd5-f317127c4476</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
@@ -3126,7 +5993,30 @@
   </KistlBase:GuidProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="8edc845c-6d39-45f7-ae28-434f0a1ef503">
     <KistlBase:CategoryTags>Configuration</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.092285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_MigrationProject(StagingDatabase obj, PropertyGetterEventArgs&lt;ZBox.App.SchemaMigration.MigrationProject&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_MigrationProject(StagingDatabase obj, PropertyPreSetterEventArgs&lt;ZBox.App.SchemaMigration.MigrationProject&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_MigrationProject(StagingDatabase obj, PropertyPostSetterEventArgs&lt;ZBox.App.SchemaMigration.MigrationProject&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_MigrationProject(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.MigrationProject == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:35:35Z</KistlBase:CreatedOn>
     <KistlBase:Label>Project</KistlBase:Label>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -3139,7 +6029,30 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:StringProperty ExportGuid="f82f3e1f-3275-4fcf-a362-71f7175f40f1">
     <KistlBase:CategoryTags>Configuration</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.094285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_OriginConnectionStringKey(StagingDatabase obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_OriginConnectionStringKey(StagingDatabase obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_OriginConnectionStringKey(StagingDatabase obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_OriginConnectionStringKey(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.OriginConnectionStringKey == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:33:28Z</KistlBase:CreatedOn>
     <KistlBase:Label>Connection String Key for Origin</KistlBase:Label>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -3153,7 +6066,30 @@
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="601a0dc6-ec58-4092-a53c-c902fcc85379">
     <KistlBase:CategoryTags>Configuration</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.094285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Schema(StagingDatabase obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Schema(StagingDatabase obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Schema(StagingDatabase obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Schema(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Schema == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-10-11T10:39:00Z</KistlBase:CreatedOn>
     <KistlBase:Label>Schema in Destination</KistlBase:Label>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -3167,7 +6103,30 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="e468c835-8c9c-4776-83ce-f54b1f4634a4">
     <KistlBase:CategoryTags>Tables</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.093285Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:16.677239Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_SourceTables(StagingDatabase obj, PropertyGetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceTable&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_SourceTables(StagingDatabase obj, PropertyPreSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceTable&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_SourceTables(StagingDatabase obj, PropertyPostSetterEventArgs&lt;ICollection&lt;ZBox.App.SchemaMigration.SourceTable&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_SourceTables(StagingDatabase obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.SourceTables == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-12T16:38:07Z</KistlBase:CreatedOn>
     <KistlBase:Label>Tables</KistlBase:Label>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -3984,7 +6943,12 @@
     <KistlBase:Value>2</KistlBase:Value>
   </KistlBase:EnumerationEntry>
   <KistlBase:Method ExportGuid="bd495406-0157-46d9-b89d-25a1700dfea8">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.109286Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void CreateMappingReport(MigrationProject obj)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-08T15:51:28Z</KistlBase:CreatedOn>
     <KistlBase:Description>Creates a mapping report</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -3993,7 +6957,12 @@
     <KistlBase:ObjectClass>f2b4fe26-9d57-47c7-88b2-b30a38ebbd97</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="bc1a8035-5383-4b92-b88c-dfc74aa32011">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.109286Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void UpdateFromSourceSchema(MigrationProject obj)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-06-30T14:14:51Z</KistlBase:CreatedOn>
     <KistlBase:InvokeOnServer>true</KistlBase:InvokeOnServer>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -4003,7 +6972,12 @@
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="bfedf0e2-7f3b-499c-9a75-68db3cc00007">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.109286Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void CreateProperty(SourceColumn obj)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T16:08:41Z</KistlBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
@@ -4011,7 +6985,12 @@
     <KistlBase:ObjectClass>e921bb2f-2cac-46d1-a7f4-120bb1a4afe2</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="e0aed0b7-6c43-496f-a43c-a95dd853afb1">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.110286Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void CreateMappingReport(SourceTable obj)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-08T15:51:48Z</KistlBase:CreatedOn>
     <KistlBase:Description>Creates a mapping report</KistlBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -4020,7 +6999,12 @@
     <KistlBase:ObjectClass>7f95aa3e-0150-4073-8b9e-803226872cc2</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="90a9d0b4-5024-4299-9c3c-b18ed0b02faf">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.110286Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-04T11:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void CreateObjectClass(SourceTable obj)
+{
+}
+</KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2010-07-01T16:03:33Z</KistlBase:CreatedOn>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <KistlBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</KistlBase:Module>
