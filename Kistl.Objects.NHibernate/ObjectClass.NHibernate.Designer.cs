@@ -1138,7 +1138,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         }
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             switch (property)
             {
@@ -1146,7 +1146,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                     _CodeTemplate_IsDirty = true;
                     break;
             }
-            base.OnPropertyChanging(property, oldValue, newValue);
+            base.OnPropertyChanged(property, oldValue, newValue);
         }
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange

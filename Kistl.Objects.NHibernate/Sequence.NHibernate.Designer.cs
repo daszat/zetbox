@@ -951,7 +951,7 @@ namespace Kistl.App.Base
         }
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             switch (property)
             {
@@ -959,7 +959,7 @@ namespace Kistl.App.Base
                     _CurrentNumber_IsDirty = true;
                     break;
             }
-            base.OnPropertyChanging(property, oldValue, newValue);
+            base.OnPropertyChanged(property, oldValue, newValue);
         }
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange

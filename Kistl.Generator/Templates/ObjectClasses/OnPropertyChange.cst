@@ -15,7 +15,7 @@
 <% if (props.Count > 0 && !(dt is CompoundObject)) { %>
         #region <%= this.GetType() %>
 
-        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             switch (property)
             {
@@ -25,7 +25,7 @@
                     break;
 <%      } %>
             }
-            base.OnPropertyChanging(property, oldValue, newValue);
+            base.OnPropertyChanged(property, oldValue, newValue);
         }
 
         #endregion // <%= this.GetType() %>

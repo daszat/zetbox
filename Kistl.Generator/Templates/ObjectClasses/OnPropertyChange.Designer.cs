@@ -40,7 +40,7 @@ if (props.Count > 0 && !(dt is CompoundObject)) {
 #line 16 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("        #region ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        protected override void OnPropertyChanging(string property, object oldValue, object newValue)\r\n");
+this.WriteObjects("        protected override void OnPropertyChanged(string property, object oldValue, object newValue)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            switch (property)\r\n");
 this.WriteObjects("            {\r\n");
@@ -54,7 +54,7 @@ this.WriteObjects("                    break;\r\n");
 } 
 #line 27 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("            }\r\n");
-this.WriteObjects("            base.OnPropertyChanging(property, oldValue, newValue);\r\n");
+this.WriteObjects("            base.OnPropertyChanged(property, oldValue, newValue);\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
