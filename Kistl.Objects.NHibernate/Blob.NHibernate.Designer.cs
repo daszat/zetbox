@@ -172,6 +172,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -185,6 +186,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -335,6 +337,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -348,6 +351,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -411,6 +415,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -424,6 +429,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -486,6 +492,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("MimeType", __oldValue, __newValue);
                     Proxy.MimeType = __newValue;
+
                     NotifyPropertyChanged("MimeType", __oldValue, __newValue);
                     if (OnMimeType_PostSetter != null && IsAttached)
                     {
@@ -499,6 +506,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Blob, string> OnMimeType_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnMimeType_PreSetter;
@@ -542,6 +550,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("OriginalName", __oldValue, __newValue);
                     Proxy.OriginalName = __newValue;
+
                     NotifyPropertyChanged("OriginalName", __oldValue, __newValue);
                     if (OnOriginalName_PostSetter != null && IsAttached)
                     {
@@ -555,6 +564,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Blob, string> OnOriginalName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnOriginalName_PreSetter;
@@ -598,6 +608,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("StoragePath", __oldValue, __newValue);
                     Proxy.StoragePath = __newValue;
+
                     NotifyPropertyChanged("StoragePath", __oldValue, __newValue);
                     if (OnStoragePath_PostSetter != null && IsAttached)
                     {
@@ -611,6 +622,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Blob, string> OnStoragePath_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnStoragePath_PreSetter;

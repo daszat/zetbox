@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("MaxLength", __oldValue, __newValue);
                     Proxy.MaxLength = __newValue;
+
                     NotifyPropertyChanged("MaxLength", __oldValue, __newValue);
                     if (OnMaxLength_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("MinLength", __oldValue, __newValue);
                     Proxy.MinLength = __newValue;
+
                     NotifyPropertyChanged("MinLength", __oldValue, __newValue);
                     if (OnMinLength_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PreSetter;

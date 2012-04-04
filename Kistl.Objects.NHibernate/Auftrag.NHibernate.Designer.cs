@@ -84,6 +84,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("Auftragsname", __oldValue, __newValue);
                     Proxy.Auftragsname = __newValue;
+
                     NotifyPropertyChanged("Auftragsname", __oldValue, __newValue);
                     if (OnAuftragsname_PostSetter != null && IsAttached)
                     {
@@ -97,6 +98,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PreSetter;
@@ -140,6 +142,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("Auftragswert", __oldValue, __newValue);
                     Proxy.Auftragswert = __newValue;
+
                     NotifyPropertyChanged("Auftragswert", __oldValue, __newValue);
                     if (OnAuftragswert_PostSetter != null && IsAttached)
                     {
@@ -153,6 +156,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PreSetter;
@@ -284,6 +288,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -297,6 +302,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -447,6 +453,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -460,6 +467,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -523,6 +531,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -536,6 +545,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {

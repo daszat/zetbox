@@ -116,6 +116,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -129,6 +130,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.RequiredParent, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.RequiredParent, string> OnName_PreSetter;

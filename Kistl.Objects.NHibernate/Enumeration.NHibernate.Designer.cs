@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("AreFlags", __oldValue, __newValue);
                     Proxy.AreFlags = __newValue;
+
                     NotifyPropertyChanged("AreFlags", __oldValue, __newValue);
                     if (OnAreFlags_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_PreSetter;

@@ -226,6 +226,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                     }
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     Proxy.StringProp = __newValue;
+
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
@@ -239,6 +240,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.MethodTest, string> OnStringProp_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.MethodTest, string> OnStringProp_PreSetter;

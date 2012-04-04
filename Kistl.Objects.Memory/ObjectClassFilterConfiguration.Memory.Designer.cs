@@ -37,7 +37,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
         // fkBackingName=_fk_ObjectClass; fkGuidBackingName=_fk_guid_ObjectClass;
         // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=FilterConfigurations; is list;

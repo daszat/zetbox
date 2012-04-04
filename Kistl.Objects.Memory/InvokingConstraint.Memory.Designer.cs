@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
         // fkBackingName=_fk_GetErrorTextInvocation; fkGuidBackingName=_fk_guid_GetErrorTextInvocation;
         // referencedInterface=Kistl.App.Base.ConstraintInvocation; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -129,7 +129,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation
         // fkBackingName=_fk_IsValidInvocation; fkGuidBackingName=_fk_guid_IsValidInvocation;
         // referencedInterface=Kistl.App.Base.ConstraintInvocation; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

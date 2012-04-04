@@ -118,6 +118,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
                     }
                     NotifyPropertyChanging("BogenNummer", __oldValue, __newValue);
                     Proxy.BogenNummer = __newValue;
+
                     NotifyPropertyChanged("BogenNummer", __oldValue, __newValue);
                     if (OnBogenNummer_PostSetter != null && IsAttached)
                     {
@@ -131,6 +132,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Fragebogen, int?> OnBogenNummer_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Fragebogen, int?> OnBogenNummer_PreSetter;

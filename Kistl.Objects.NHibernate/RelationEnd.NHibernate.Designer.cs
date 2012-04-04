@@ -382,6 +382,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -395,6 +396,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -545,6 +547,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -558,6 +561,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -621,6 +625,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -634,6 +639,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -696,6 +702,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
+
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -709,6 +716,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_PreSetter;
@@ -752,6 +760,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Multiplicity", __oldValue, __newValue);
                     Proxy.Multiplicity = __newValue;
+
                     NotifyPropertyChanged("Multiplicity", __oldValue, __newValue);
                     if (OnMultiplicity_PostSetter != null && IsAttached)
                     {
@@ -765,6 +774,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_PreSetter;
@@ -890,18 +900,18 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.RelationEnd.Parent");
                 }
-                if (Parent_IsDirty)
+                if (_Parent_IsDirty)
                 {
                     var e = new PropertyGetterEventArgs<Kistl.App.Base.Relation>(default(Kistl.App.Base.Relation));
                     OnParent_Getter(this, e);
-                    Proxy.Parent = e.Result;
-                    Parent_IsDirty = false;
+                    Parent_Store = e.Result;
+                    _Parent_IsDirty = false;
                 }
-                return Proxy.Parent;
+                return Parent_Store;
             }
         }
-        
-        private bool Parent_IsDirty = true;
+        Kistl.App.Base.Relation Parent_Store;
+        private bool _Parent_IsDirty = true;
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
 
@@ -943,6 +953,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("RoleName", __oldValue, __newValue);
                     Proxy.RoleName = __newValue;
+
                     NotifyPropertyChanged("RoleName", __oldValue, __newValue);
                     if (OnRoleName_PostSetter != null && IsAttached)
                     {
@@ -956,6 +967,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_PreSetter;

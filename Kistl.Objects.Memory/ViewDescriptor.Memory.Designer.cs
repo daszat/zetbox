@@ -37,7 +37,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
         // fkBackingName=_fk_ControlKind; fkGuidBackingName=_fk_guid_ControlKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -129,7 +129,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The control implementing this View
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
         // fkBackingName=_fk_ControlRef; fkGuidBackingName=_fk_guid_ControlRef;
         // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -291,7 +291,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Kistl.App.Base.Module; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

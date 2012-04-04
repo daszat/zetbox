@@ -37,7 +37,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneEnd
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneEnd
         // fkBackingName=_fk_OneEnd; fkGuidBackingName=_fk_guid_OneEnd;
         // referencedInterface=Kistl.App.Test.OrderedOneEnd; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=NEnds; is list;

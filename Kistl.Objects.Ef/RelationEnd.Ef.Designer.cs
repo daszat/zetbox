@@ -964,18 +964,18 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.RelationEnd.Parent");
                 }
-                if (Parent_IsDirty)
+                if (_Parent_IsDirty)
                 {
                     var e = new PropertyGetterEventArgs<Kistl.App.Base.Relation>(default(Kistl.App.Base.Relation));
                     OnParent_Getter(this, e);
                     Parent_Store = e.Result;
-                    Parent_IsDirty = false;
+                    _Parent_IsDirty = false;
                 }
                 return Parent_Store;
             }
         }
         Kistl.App.Base.Relation Parent_Store;
-        private bool Parent_IsDirty = true;
+        private bool _Parent_IsDirty = true;
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
 

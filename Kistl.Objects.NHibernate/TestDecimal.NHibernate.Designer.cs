@@ -81,6 +81,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("Large", __oldValue, __newValue);
                     Proxy.Large = __newValue;
+
                     NotifyPropertyChanged("Large", __oldValue, __newValue);
                     if (OnLarge_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnLarge_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnLarge_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("NoScale", __oldValue, __newValue);
                     Proxy.NoScale = __newValue;
+
                     NotifyPropertyChanged("NoScale", __oldValue, __newValue);
                     if (OnNoScale_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_PreSetter;
@@ -193,6 +197,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("SmallDecimal", __oldValue, __newValue);
                     Proxy.SmallDecimal = __newValue;
+
                     NotifyPropertyChanged("SmallDecimal", __oldValue, __newValue);
                     if (OnSmallDecimal_PostSetter != null && IsAttached)
                     {
@@ -206,6 +211,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnSmallDecimal_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnSmallDecimal_PreSetter;

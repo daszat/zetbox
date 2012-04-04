@@ -278,29 +278,49 @@ namespace Kistl.App.Base
         /// <summary>
         /// Provides a code template for a calculated property
         /// </summary>
-        // calculated  property
-        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        // value type property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
         public string CodeTemplate
         {
             get
             {
-                if (OnCodeTemplate_Getter == null)
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CodeTemplate;
+                if (_CodeTemplate_IsDirty && OnCodeTemplate_Getter != null)
                 {
-                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Property.CodeTemplate");
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnCodeTemplate_Getter(this, __e);
+                    _CodeTemplate_IsDirty = false;
+                    __result = __e.Result;
                 }
-                if (CodeTemplate_IsDirty)
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_CodeTemplate != value)
                 {
-                    var e = new PropertyGetterEventArgs<string>(default(string));
-                    OnCodeTemplate_Getter(this, e);
-                    CodeTemplate_Store = e.Result;
-                    CodeTemplate_IsDirty = false;
+                    var __oldValue = _CodeTemplate;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
+                    _CodeTemplate = __newValue;
+			        _CodeTemplate_IsDirty = false;
+                    NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
                 }
-                return CodeTemplate_Store;
+				else 
+				{
+					SetInitializedProperty("CodeTemplate");
+				}
             }
         }
-        string CodeTemplate_Store;
-        private bool CodeTemplate_IsDirty = true;
-        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+        private string _CodeTemplate;
+        private bool _CodeTemplate_IsDirty = true;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCodeTemplate_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.Property> OnCodeTemplate_IsValid;
@@ -1861,7 +1881,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             switch (property)
             {
                 case "CodeTemplate":
-                    CodeTemplate_IsDirty = true;
+                    _CodeTemplate_IsDirty = true;
                     break;
             }
             base.OnPropertyChanging(property, oldValue, newValue);
@@ -2250,6 +2270,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this._ChangedOn, binStream);
             }
+            BinarySerializer.ToStream(this._CodeTemplate, binStream);
 
 			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if (eagerLoadLists && auxObjects != null)
@@ -2323,6 +2344,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 BinarySerializer.FromStream(out this._ChangedOn, binStream);
             }
+            BinarySerializer.FromStream(out this._CodeTemplate, binStream);
 
 			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
 			{
@@ -2382,6 +2404,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             }
+            XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Property_was_CreatedBy", "CreatedBy").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
@@ -2436,6 +2459,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             }
+            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
             if (this._isCreatedOnSet) {
@@ -2471,6 +2495,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Kistl.App.Base");
@@ -2493,6 +2518,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             this._isChangedOnSet = true;
+            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             this._isCreatedOnSet = true;

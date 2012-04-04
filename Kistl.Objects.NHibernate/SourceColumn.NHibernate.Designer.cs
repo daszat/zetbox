@@ -173,6 +173,7 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -186,6 +187,7 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -248,6 +250,7 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("Comment", __oldValue, __newValue);
                     Proxy.Comment = __newValue;
+
                     NotifyPropertyChanged("Comment", __oldValue, __newValue);
                     if (OnComment_PostSetter != null && IsAttached)
                     {
@@ -261,6 +264,7 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnComment_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnComment_PreSetter;
@@ -305,6 +309,7 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("CompareNulls", __oldValue, __newValue);
                     Proxy.CompareNulls = __newValue;
+
                     NotifyPropertyChanged("CompareNulls", __oldValue, __newValue);
                     if (OnCompareNulls_PostSetter != null && IsAttached)
                     {
@@ -318,6 +323,7 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
+
 
         private bool FetchCompareNullsOrDefault()
         {
@@ -468,6 +474,7 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -481,6 +488,7 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -543,6 +551,7 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("DbType", __oldValue, __newValue);
                     Proxy.DbType = __newValue;
+
                     NotifyPropertyChanged("DbType", __oldValue, __newValue);
                     if (OnDbType_PostSetter != null && IsAttached)
                     {
@@ -556,6 +565,7 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.ColumnType> OnDbType_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.ColumnType> OnDbType_PreSetter;
@@ -599,6 +609,7 @@ namespace ZBox.App.SchemaMigration
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
+
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -612,6 +623,7 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnDescription_PreSetter;
@@ -722,6 +734,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -735,6 +748,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -797,6 +811,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     }
                     NotifyPropertyChanging("IsNullable", __oldValue, __newValue);
                     Proxy.IsNullable = __newValue;
+
                     NotifyPropertyChanged("IsNullable", __oldValue, __newValue);
                     if (OnIsNullable_PostSetter != null && IsAttached)
                     {
@@ -810,6 +825,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool?> OnIsNullable_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool?> OnIsNullable_PreSetter;
@@ -853,6 +869,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -866,6 +883,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnName_PreSetter;
@@ -1056,6 +1074,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     }
                     NotifyPropertyChanging("Size", __oldValue, __newValue);
                     Proxy.Size = __newValue;
+
                     NotifyPropertyChanged("Size", __oldValue, __newValue);
                     if (OnSize_PostSetter != null && IsAttached)
                     {
@@ -1069,6 +1088,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, int?> OnSize_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, int?> OnSize_PreSetter;
@@ -1224,6 +1244,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                     }
                     NotifyPropertyChanging("Status", __oldValue, __newValue);
                     Proxy.Status = __newValue;
+
                     NotifyPropertyChanged("Status", __oldValue, __newValue);
                     if (OnStatus_PostSetter != null && IsAttached)
                     {
@@ -1237,6 +1258,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.MappingStatus?> OnStatus_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.MappingStatus?> OnStatus_PreSetter;

@@ -168,6 +168,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
                     Proxy.DisplayedTypeFullName = __newValue;
+
                     NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
                     if (OnDisplayedTypeFullName_PostSetter != null && IsAttached)
                     {
@@ -181,6 +182,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PreSetter;
@@ -224,6 +226,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
+
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -237,6 +240,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PreSetter;

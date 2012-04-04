@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -249,7 +249,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -410,7 +410,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
         /// <summary>
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultIcon
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultIcon
         // fkBackingName=_fk_DefaultIcon; fkGuidBackingName=_fk_guid_DefaultIcon;
         // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -705,7 +705,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
         /// <summary>
         /// Modul der Objektklasse
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Kistl.App.Base.Module; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -905,7 +905,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         /// <summary>
         /// Optional requested ControlKind
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
         // fkBackingName=_fk_RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

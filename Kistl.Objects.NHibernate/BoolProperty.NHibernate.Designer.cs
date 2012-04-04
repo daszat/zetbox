@@ -170,6 +170,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("FalseLabel", __oldValue, __newValue);
                     Proxy.FalseLabel = __newValue;
+
                     NotifyPropertyChanged("FalseLabel", __oldValue, __newValue);
                     if (OnFalseLabel_PostSetter != null && IsAttached)
                     {
@@ -183,6 +184,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.BoolProperty, string> OnFalseLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnFalseLabel_PreSetter;
@@ -315,6 +317,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("NullLabel", __oldValue, __newValue);
                     Proxy.NullLabel = __newValue;
+
                     NotifyPropertyChanged("NullLabel", __oldValue, __newValue);
                     if (OnNullLabel_PostSetter != null && IsAttached)
                     {
@@ -328,6 +331,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.BoolProperty, string> OnNullLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnNullLabel_PreSetter;
@@ -460,6 +464,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("TrueLabel", __oldValue, __newValue);
                     Proxy.TrueLabel = __newValue;
+
                     NotifyPropertyChanged("TrueLabel", __oldValue, __newValue);
                     if (OnTrueLabel_PostSetter != null && IsAttached)
                     {
@@ -473,6 +478,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.BoolProperty, string> OnTrueLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolProperty, string> OnTrueLabel_PreSetter;

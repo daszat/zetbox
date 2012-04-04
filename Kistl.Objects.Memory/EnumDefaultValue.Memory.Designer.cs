@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
         // fkBackingName=_fk_EnumValue; fkGuidBackingName=_fk_guid_EnumValue;
         // referencedInterface=Kistl.App.Base.EnumerationEntry; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

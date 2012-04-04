@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
+
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("IsCalculated", __oldValue, __newValue);
                     Proxy.IsCalculated = __newValue;
+
                     NotifyPropertyChanged("IsCalculated", __oldValue, __newValue);
                     if (OnIsCalculated_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsCalculated_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsCalculated_PreSetter;
@@ -193,6 +197,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     Proxy.IsList = __newValue;
+
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -206,6 +211,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PreSetter;

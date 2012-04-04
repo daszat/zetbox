@@ -195,6 +195,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -208,6 +209,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -270,6 +272,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Reason", __oldValue, __newValue);
                     Proxy.Reason = __newValue;
+
                     NotifyPropertyChanged("Reason", __oldValue, __newValue);
                     if (OnReason_PostSetter != null && IsAttached)
                     {
@@ -283,6 +286,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PreSetter;

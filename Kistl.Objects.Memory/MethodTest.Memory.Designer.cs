@@ -78,7 +78,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Kistl.App.Test.MethodTest; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=Children; is list;

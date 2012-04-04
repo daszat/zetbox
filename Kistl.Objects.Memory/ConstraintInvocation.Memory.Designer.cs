@@ -107,7 +107,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The type implementing this invocation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor
         // fkBackingName=_fk_Implementor; fkGuidBackingName=_fk_guid_Implementor;
         // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

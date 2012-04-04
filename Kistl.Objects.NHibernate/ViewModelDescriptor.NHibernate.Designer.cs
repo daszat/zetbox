@@ -527,6 +527,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
+
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -540,6 +541,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, string> OnDescription_PreSetter;
@@ -584,6 +586,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -597,6 +600,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {

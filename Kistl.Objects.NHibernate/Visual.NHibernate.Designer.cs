@@ -143,6 +143,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
+
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -156,6 +157,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.Visual, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, string> OnDescription_PreSetter;

@@ -132,7 +132,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Module is optional. Use it only when you need a Group to be exportable
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Kistl.App.Base.Module; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

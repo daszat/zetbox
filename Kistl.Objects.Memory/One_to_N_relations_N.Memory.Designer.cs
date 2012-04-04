@@ -94,7 +94,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
         // fkBackingName=_fk_OneSide; fkGuidBackingName=_fk_guid_OneSide;
         // referencedInterface=Kistl.App.Test.One_to_N_relations_One; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=NSide; is list;

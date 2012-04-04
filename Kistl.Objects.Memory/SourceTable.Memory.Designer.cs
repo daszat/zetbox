@@ -37,7 +37,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -255,7 +255,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -473,7 +473,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationObjectClass
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationObjectClass
         // fkBackingName=_fk_DestinationObjectClass; fkGuidBackingName=_fk_guid_DestinationObjectClass;
         // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -733,7 +733,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StagingDatabase
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StagingDatabase
         // fkBackingName=_fk_StagingDatabase; fkGuidBackingName=_fk_guid_StagingDatabase;
         // referencedInterface=ZBox.App.SchemaMigration.StagingDatabase; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=SourceTables; is list;

@@ -84,6 +84,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("Adresse", __oldValue, __newValue);
                     Proxy.Adresse = __newValue;
+
                     NotifyPropertyChanged("Adresse", __oldValue, __newValue);
                     if (OnAdresse_PostSetter != null && IsAttached)
                     {
@@ -97,6 +98,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_PreSetter;
@@ -228,6 +230,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -241,6 +244,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -391,6 +395,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -404,6 +409,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -510,6 +516,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -523,6 +530,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -585,6 +593,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     }
                     NotifyPropertyChanging("Kundenname", __oldValue, __newValue);
                     Proxy.Kundenname = __newValue;
+
                     NotifyPropertyChanged("Kundenname", __oldValue, __newValue);
                     if (OnKundenname_PostSetter != null && IsAttached)
                     {
@@ -598,6 +607,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_PreSetter;
@@ -641,6 +651,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     }
                     NotifyPropertyChanging("Land", __oldValue, __newValue);
                     Proxy.Land = __newValue;
+
                     NotifyPropertyChanged("Land", __oldValue, __newValue);
                     if (OnLand_PostSetter != null && IsAttached)
                     {
@@ -654,6 +665,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_PreSetter;
@@ -697,6 +709,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     }
                     NotifyPropertyChanging("Ort", __oldValue, __newValue);
                     Proxy.Ort = __newValue;
+
                     NotifyPropertyChanged("Ort", __oldValue, __newValue);
                     if (OnOrt_PostSetter != null && IsAttached)
                     {
@@ -710,6 +723,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_PreSetter;
@@ -753,6 +767,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     }
                     NotifyPropertyChanging("PLZ", __oldValue, __newValue);
                     Proxy.PLZ = __newValue;
+
                     NotifyPropertyChanged("PLZ", __oldValue, __newValue);
                     if (OnPLZ_PostSetter != null && IsAttached)
                     {
@@ -766,6 +781,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PreSetter;

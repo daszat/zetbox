@@ -119,6 +119,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("AufwandGes", __oldValue, __newValue);
                     Proxy.AufwandGes = __newValue;
+
                     NotifyPropertyChanged("AufwandGes", __oldValue, __newValue);
                     if (OnAufwandGes_PostSetter != null && IsAttached)
                     {
@@ -132,6 +133,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_PreSetter;
@@ -263,6 +265,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -276,6 +279,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -426,6 +430,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -439,6 +444,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -502,6 +508,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -515,6 +522,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -577,6 +585,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("Kundenname", __oldValue, __newValue);
                     Proxy.Kundenname = __newValue;
+
                     NotifyPropertyChanged("Kundenname", __oldValue, __newValue);
                     if (OnKundenname_PostSetter != null && IsAttached)
                     {
@@ -590,6 +599,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, string> OnKundenname_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, string> OnKundenname_PreSetter;
@@ -664,6 +674,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -677,6 +688,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, string> OnName_PreSetter;

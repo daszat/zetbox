@@ -170,6 +170,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
+
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -183,6 +184,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnHasPersistentOrder_PreSetter;
@@ -226,6 +228,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     Proxy.IsList = __newValue;
+
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -239,6 +242,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnIsList_PreSetter;

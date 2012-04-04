@@ -172,6 +172,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -185,6 +186,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -372,6 +374,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -385,6 +388,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -536,6 +540,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
+
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -549,6 +554,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DataType, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, string> OnDescription_PreSetter;
@@ -593,6 +599,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -606,6 +613,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -825,6 +833,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -838,6 +847,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DataType, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, string> OnName_PreSetter;
@@ -1007,6 +1017,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                     }
                     NotifyPropertyChanging("ShowIconInLists", __oldValue, __newValue);
                     Proxy.ShowIconInLists = __newValue;
+
                     NotifyPropertyChanged("ShowIconInLists", __oldValue, __newValue);
                     if (OnShowIconInLists_PostSetter != null && IsAttached)
                     {
@@ -1020,6 +1031,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_PreSetter;
@@ -1063,6 +1075,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                     }
                     NotifyPropertyChanging("ShowIdInLists", __oldValue, __newValue);
                     Proxy.ShowIdInLists = __newValue;
+
                     NotifyPropertyChanged("ShowIdInLists", __oldValue, __newValue);
                     if (OnShowIdInLists_PostSetter != null && IsAttached)
                     {
@@ -1076,6 +1089,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_PreSetter;
@@ -1119,6 +1133,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                     }
                     NotifyPropertyChanging("ShowNameInLists", __oldValue, __newValue);
                     Proxy.ShowNameInLists = __newValue;
+
                     NotifyPropertyChanged("ShowNameInLists", __oldValue, __newValue);
                     if (OnShowNameInLists_PostSetter != null && IsAttached)
                     {
@@ -1132,6 +1147,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_PreSetter;

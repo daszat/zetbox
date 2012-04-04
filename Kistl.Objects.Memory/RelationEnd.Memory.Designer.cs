@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The Relation using this RelationEnd as A
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AParent
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AParent
         // fkBackingName=_fk_AParent; fkGuidBackingName=_fk_guid_AParent;
         // referencedInterface=Kistl.App.Base.Relation; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=A; is reference;
@@ -145,7 +145,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The Relation using this RelationEnd as B
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BParent
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BParent
         // fkBackingName=_fk_BParent; fkGuidBackingName=_fk_guid_BParent;
         // referencedInterface=Kistl.App.Base.Relation; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=B; is reference;
@@ -253,7 +253,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -414,7 +414,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -759,7 +759,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Navigator
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Navigator
         // fkBackingName=_fk_Navigator; fkGuidBackingName=_fk_guid_Navigator;
         // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=RelationEnd; is reference;
@@ -877,18 +877,18 @@ namespace Kistl.App.Base
                 {
                     throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.RelationEnd.Parent");
                 }
-                if (Parent_IsDirty)
+                if (_Parent_IsDirty)
                 {
                     var e = new PropertyGetterEventArgs<Kistl.App.Base.Relation>(default(Kistl.App.Base.Relation));
                     OnParent_Getter(this, e);
                     Parent_Store = e.Result;
-                    Parent_IsDirty = false;
+                    _Parent_IsDirty = false;
                 }
                 return Parent_Store;
             }
         }
         Kistl.App.Base.Relation Parent_Store;
-        private bool Parent_IsDirty = true;
+        private bool _Parent_IsDirty = true;
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
 
@@ -954,7 +954,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Specifies which type this End of the relation has. MUST NOT be null.
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
         // fkBackingName=_fk_Type; fkGuidBackingName=_fk_guid_Type;
         // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

@@ -139,7 +139,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MubBlah_Nav
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MubBlah_Nav
         // fkBackingName=_fk_MubBlah_Nav; fkGuidBackingName=_fk_guid_MubBlah_Nav;
         // referencedInterface=Kistl.App.Test.Muhblah; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=TestCustomObjects_List_Nav; is list;
@@ -271,7 +271,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MuhBlah_One_Nav
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MuhBlah_One_Nav
         // fkBackingName=_fk_MuhBlah_One_Nav; fkGuidBackingName=_fk_guid_MuhBlah_One_Nav;
         // referencedInterface=Kistl.App.Test.Muhblah; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=TestCustomObjects_One_Nav; is reference;

@@ -550,7 +550,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
         // fkBackingName=_fk_RequestedEditorKind; fkGuidBackingName=_fk_guid_RequestedEditorKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -642,7 +642,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
         // fkBackingName=_fk_RequestedWorkspaceKind; fkGuidBackingName=_fk_guid_RequestedWorkspaceKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -1019,7 +1019,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
         // fkBackingName=_fk_Type; fkGuidBackingName=_fk_guid_Type;
         // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

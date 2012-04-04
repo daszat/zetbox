@@ -83,6 +83,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("IsUnique", __oldValue, __newValue);
                     Proxy.IsUnique = __newValue;
+
                     NotifyPropertyChanged("IsUnique", __oldValue, __newValue);
                     if (OnIsUnique_PostSetter != null && IsAttached)
                     {
@@ -96,6 +97,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private bool FetchIsUniqueOrDefault()
         {

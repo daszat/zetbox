@@ -81,6 +81,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     Proxy.TestString = __newValue;
+
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
                     if (OnTestString_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PreSetter;

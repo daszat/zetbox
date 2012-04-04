@@ -94,7 +94,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Kistl.App.Test.RequiredParent; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=Children; is list;

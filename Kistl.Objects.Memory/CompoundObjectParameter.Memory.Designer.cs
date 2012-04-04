@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
         // fkBackingName=_fk_CompoundObject; fkGuidBackingName=_fk_guid_CompoundObject;
         // referencedInterface=Kistl.App.Base.CompoundObject; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

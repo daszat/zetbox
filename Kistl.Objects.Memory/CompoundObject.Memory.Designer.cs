@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// An optional default ViewModelDescriptor for Properties of this type
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultPropertyViewModelDescriptor
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultPropertyViewModelDescriptor
         // fkBackingName=_fk_DefaultPropertyViewModelDescriptor; fkGuidBackingName=_fk_guid_DefaultPropertyViewModelDescriptor;
         // referencedInterface=Kistl.App.GUI.ViewModelDescriptor; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

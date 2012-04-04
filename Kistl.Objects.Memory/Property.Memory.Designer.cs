@@ -94,7 +94,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -255,29 +255,46 @@ namespace Kistl.App.Base
         /// <summary>
         /// Provides a code template for a calculated property
         /// </summary>
-        // calculated  property
-        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        // value type property
+        // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
         public string CodeTemplate
         {
             get
             {
-                if (OnCodeTemplate_Getter == null)
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CodeTemplate;
+                if (_CodeTemplate_IsDirty && OnCodeTemplate_Getter != null)
                 {
-                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Property.CodeTemplate");
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnCodeTemplate_Getter(this, __e);
+                    _CodeTemplate_IsDirty = false;
+                    __result = __e.Result;
                 }
-                if (CodeTemplate_IsDirty)
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_CodeTemplate != value)
                 {
-                    var e = new PropertyGetterEventArgs<string>(default(string));
-                    OnCodeTemplate_Getter(this, e);
-                    CodeTemplate_Store = e.Result;
-                    CodeTemplate_IsDirty = false;
+                    var __oldValue = _CodeTemplate;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
+                    _CodeTemplate = __newValue;
+			        _CodeTemplate_IsDirty = false;
+                    NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
                 }
-                return CodeTemplate_Store;
+				else 
+				{
+					SetInitializedProperty("CodeTemplate");
+				}
             }
         }
-        string CodeTemplate_Store;
-        private bool CodeTemplate_IsDirty = true;
-        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+        private string _CodeTemplate;
+        private bool _CodeTemplate_IsDirty = true;
+        // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCodeTemplate_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.Property> OnCodeTemplate_IsValid;
@@ -336,7 +353,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -497,7 +514,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         /// <summary>
         /// Property can have a default value
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultValue
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultValue
         // fkBackingName=_fk_DefaultValue; fkGuidBackingName=_fk_guid_DefaultValue;
         // referencedInterface=Kistl.App.Base.DefaultPropertyValue; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=Property; is reference;
@@ -732,7 +749,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FilterConfiguration
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FilterConfiguration
         // fkBackingName=_fk_FilterConfiguration; fkGuidBackingName=_fk_guid_FilterConfiguration;
         // referencedInterface=Kistl.App.GUI.PropertyFilterConfiguration; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=Property; is reference;
@@ -897,7 +914,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Kistl.App.Base.Module; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -1046,7 +1063,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
         // fkBackingName=_fk_ObjectClass; fkGuidBackingName=_fk_guid_ObjectClass;
         // referencedInterface=Kistl.App.Base.DataType; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=Properties; is list;
@@ -1184,7 +1201,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         /// <summary>
         /// Optional requested ControlKind
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
         // fkBackingName=_fk_RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -1276,7 +1293,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         /// <summary>
         /// The ViewModel to use for values of this Property
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ValueModelDescriptor
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ValueModelDescriptor
         // fkBackingName=_fk_ValueModelDescriptor; fkGuidBackingName=_fk_guid_ValueModelDescriptor;
         // referencedInterface=Kistl.App.GUI.ViewModelDescriptor; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -1790,7 +1807,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             switch (property)
             {
                 case "CodeTemplate":
-                    CodeTemplate_IsDirty = true;
+                    _CodeTemplate_IsDirty = true;
                     break;
             }
             base.OnPropertyChanging(property, oldValue, newValue);
@@ -2146,6 +2163,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this._ChangedOn, binStream);
             }
+            BinarySerializer.ToStream(this._CodeTemplate, binStream);
 
 			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if (eagerLoadLists && auxObjects != null)
@@ -2195,6 +2213,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 BinarySerializer.FromStream(out this._ChangedOn, binStream);
             }
+            BinarySerializer.FromStream(out this._CodeTemplate, binStream);
 
 			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
 			{
@@ -2251,6 +2270,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             }
+            XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
             if (this._isCreatedOnSet) {
@@ -2284,6 +2304,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             }
+            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
             if (this._isCreatedOnSet) {
@@ -2319,6 +2340,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Kistl.App.Base");
@@ -2341,6 +2363,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             this._isChangedOnSet = true;
+            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             this._isCreatedOnSet = true;

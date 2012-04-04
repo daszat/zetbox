@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     Proxy.HasPersistentOrder = __newValue;
+
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
                     if (OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ImplementorRoleName", __oldValue, __newValue);
                     Proxy.ImplementorRoleName = __newValue;
+
                     NotifyPropertyChanged("ImplementorRoleName", __oldValue, __newValue);
                     if (OnImplementorRoleName_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PreSetter;
@@ -193,6 +197,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     Proxy.IsList = __newValue;
+
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
                     if (OnIsList_PostSetter != null && IsAttached)
                     {
@@ -206,6 +211,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PreSetter;
@@ -249,6 +255,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ItemRoleName", __oldValue, __newValue);
                     Proxy.ItemRoleName = __newValue;
+
                     NotifyPropertyChanged("ItemRoleName", __oldValue, __newValue);
                     if (OnItemRoleName_PostSetter != null && IsAttached)
                     {
@@ -262,6 +269,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PreSetter;
@@ -394,6 +402,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     Proxy.Verb = __newValue;
+
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
                     if (OnVerb_PostSetter != null && IsAttached)
                     {
@@ -407,6 +416,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PreSetter;

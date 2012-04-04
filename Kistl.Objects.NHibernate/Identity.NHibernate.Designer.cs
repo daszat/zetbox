@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     Proxy.DisplayName = __newValue;
+
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
                     if (OnDisplayName_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PreSetter;
@@ -168,6 +170,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Password", __oldValue, __newValue);
                     Proxy.Password = __newValue;
+
                     NotifyPropertyChanged("Password", __oldValue, __newValue);
                     if (OnPassword_PostSetter != null && IsAttached)
                     {
@@ -181,6 +184,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnPassword_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PreSetter;
@@ -224,6 +228,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("UserName", __oldValue, __newValue);
                     Proxy.UserName = __newValue;
+
                     NotifyPropertyChanged("UserName", __oldValue, __newValue);
                     if (OnUserName_PostSetter != null && IsAttached)
                     {
@@ -237,6 +242,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnUserName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;

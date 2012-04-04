@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Max", __oldValue, __newValue);
                     Proxy.Max = __newValue;
+
                     NotifyPropertyChanged("Max", __oldValue, __newValue);
                     if (OnMax_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Min", __oldValue, __newValue);
                     Proxy.Min = __newValue;
+
                     NotifyPropertyChanged("Min", __oldValue, __newValue);
                     if (OnMin_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PreSetter;

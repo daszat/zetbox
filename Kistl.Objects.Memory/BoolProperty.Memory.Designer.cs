@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
         // fkBackingName=_fk_FalseIcon; fkGuidBackingName=_fk_guid_FalseIcon;
         // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -186,7 +186,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
         // fkBackingName=_fk_NullIcon; fkGuidBackingName=_fk_guid_NullIcon;
         // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -335,7 +335,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
         // fkBackingName=_fk_TrueIcon; fkGuidBackingName=_fk_guid_TrueIcon;
         // referencedInterface=Kistl.App.GUI.Icon; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

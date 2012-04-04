@@ -176,7 +176,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
         // fkBackingName=_fk_RelationEnd; fkGuidBackingName=_fk_guid_RelationEnd;
         // referencedInterface=Kistl.App.Base.RelationEnd; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=Navigator; is reference;

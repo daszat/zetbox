@@ -128,7 +128,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Base.CalculatedObjectReferenceProperty; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -198,7 +198,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Property; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -535,7 +535,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Base.DataType; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -605,7 +605,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -942,7 +942,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=at.dasz.DocumentManagement.Document; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
@@ -1042,7 +1042,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
@@ -1400,7 +1400,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -1469,7 +1469,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Group; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -1777,7 +1777,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Base.IndexConstraint; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -1847,7 +1847,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Property; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -2151,7 +2151,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Test.Muhblah; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=none; is reference;
@@ -2220,7 +2220,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Test.TestCustomObject; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=none; is reference;
@@ -2495,7 +2495,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Test.N_to_M_relations_A; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=none; is reference;
@@ -2564,7 +2564,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Test.N_to_M_relations_B; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=none; is reference;
@@ -2872,7 +2872,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.GUI.NavigationEntry; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -2942,7 +2942,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Group; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -3279,7 +3279,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -3349,7 +3349,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -3686,7 +3686,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -3786,7 +3786,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Projekte.Mitarbeiter; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -4177,7 +4177,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Base.RoleMembership; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -4277,7 +4277,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Relation; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -4668,7 +4668,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=ZBox.App.SchemaMigration.SourceColumn; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -4768,7 +4768,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.Property; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -5126,7 +5126,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.GUI.Template; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -5195,7 +5195,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -5470,7 +5470,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Test.TestStudent; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=none; is reference;
@@ -5539,7 +5539,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Test.Fragebogen; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=none; is reference;
@@ -5847,7 +5847,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -5947,7 +5947,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -6338,7 +6338,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.GUI.ViewDescriptor; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -6408,7 +6408,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -6745,7 +6745,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.GUI.ViewModelDescriptor; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -6815,7 +6815,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -7119,7 +7119,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -7188,7 +7188,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -7463,7 +7463,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -7532,7 +7532,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

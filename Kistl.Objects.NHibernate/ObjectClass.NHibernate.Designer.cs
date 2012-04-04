@@ -195,29 +195,55 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         /// <summary>
         /// Provides a code template for default methods
         /// </summary>
-        // calculated  property
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public string CodeTemplate
         {
             get
             {
-                if (OnCodeTemplate_Getter == null)
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchCodeTemplateOrDefault();
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.CodeTemplate != value)
                 {
-                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.ObjectClass.CodeTemplate");
+                    var __oldValue = Proxy.CodeTemplate;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
+                    Proxy.CodeTemplate = __newValue;
+			        _CodeTemplate_IsDirty = false;
+
+                    NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
                 }
-                if (CodeTemplate_IsDirty)
-                {
-                    var e = new PropertyGetterEventArgs<string>(default(string));
-                    OnCodeTemplate_Getter(this, e);
-                    Proxy.CodeTemplate = e.Result;
-                    CodeTemplate_IsDirty = false;
-                }
-                return Proxy.CodeTemplate;
+				else 
+				{
+					SetInitializedProperty("CodeTemplate");
+				}
             }
         }
-        
-        private bool CodeTemplate_IsDirty = true;
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+		private bool _CodeTemplate_IsDirty = false;
+
+
+        private string FetchCodeTemplateOrDefault()
+        {
+           var __result = Proxy.CodeTemplate;
+            if (_CodeTemplate_IsDirty && OnCodeTemplate_Getter != null)
+            {
+                var __e = new PropertyGetterEventArgs<string>(__result);
+                OnCodeTemplate_Getter(this, __e);
+                _CodeTemplate_IsDirty = false;
+                __result = Proxy.CodeTemplate = __e.Result;
+            }
+            return __result;
+        }
+
+        private bool _isCodeTemplateSet = false;
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnCodeTemplate_IsValid;
@@ -382,6 +408,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                     }
                     NotifyPropertyChanging("IsAbstract", __oldValue, __newValue);
                     Proxy.IsAbstract = __newValue;
+
                     NotifyPropertyChanged("IsAbstract", __oldValue, __newValue);
                     if (OnIsAbstract_PostSetter != null && IsAttached)
                     {
@@ -395,6 +422,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_PreSetter;
@@ -438,6 +466,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                     }
                     NotifyPropertyChanging("IsFrozenObject", __oldValue, __newValue);
                     Proxy.IsFrozenObject = __newValue;
+
                     NotifyPropertyChanged("IsFrozenObject", __oldValue, __newValue);
                     if (OnIsFrozenObject_PostSetter != null && IsAttached)
                     {
@@ -451,6 +480,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PreSetter;
@@ -494,6 +524,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                     }
                     NotifyPropertyChanging("IsSimpleObject", __oldValue, __newValue);
                     Proxy.IsSimpleObject = __newValue;
+
                     NotifyPropertyChanged("IsSimpleObject", __oldValue, __newValue);
                     if (OnIsSimpleObject_PostSetter != null && IsAttached)
                     {
@@ -507,6 +538,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PreSetter;
@@ -585,6 +617,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                     }
                     NotifyPropertyChanging("TableName", __oldValue, __newValue);
                     Proxy.TableName = __newValue;
+
                     NotifyPropertyChanged("TableName", __oldValue, __newValue);
                     if (OnTableName_PostSetter != null && IsAttached)
                     {
@@ -598,6 +631,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
@@ -1109,7 +1143,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             switch (property)
             {
                 case "CodeTemplate":
-                    CodeTemplate_IsDirty = true;
+                    _CodeTemplate_IsDirty = true;
                     break;
             }
             base.OnPropertyChanging(property, oldValue, newValue);
@@ -1292,6 +1326,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         [EventBasedMethod("OnNotifyPreSave_ObjectClass")]
         public override void NotifyPreSave()
         {
+            FetchCodeTemplateOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_ObjectClass != null) OnNotifyPreSave_ObjectClass(this);
         }
@@ -1317,6 +1352,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             SetNotInitializedProperty("TableName");
             base.NotifyCreated();
             if (OnNotifyCreated_ObjectClass != null) OnNotifyCreated_ObjectClass(this);
+            _CodeTemplate_IsDirty = true;
         }
         public static event ObjectEventHandler<ObjectClass> OnNotifyCreated_ObjectClass;
 
@@ -1456,6 +1492,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.BaseObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.BaseObjectClass) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.CodeTemplate, binStream);
             BinarySerializer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultViewModelDescriptor) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.IsAbstract, binStream);
             BinarySerializer.ToStream(this.Proxy.IsFrozenObject, binStream);
@@ -1470,6 +1507,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
+            {
+                string tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.CodeTemplate = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_DefaultViewModelDescriptor, binStream);
             {
                 bool tmp;
@@ -1505,6 +1547,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.BaseObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.BaseObjectClass) : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultViewModelDescriptor) : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
@@ -1519,6 +1562,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            {
+                // yuck
+                string tmp = this.Proxy.CodeTemplate;
+                XmlStreamer.FromStream(ref tmp, xml, "CodeTemplate", "Kistl.App.Base");
+                this.Proxy.CodeTemplate = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             {
                 // yuck
@@ -1558,6 +1607,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.BaseObjectClass != null ? this.Proxy.BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? this.Proxy.DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
@@ -1571,6 +1621,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            {
+                // yuck
+                string tmp = this.Proxy.CodeTemplate;
+                XmlStreamer.FromStream(ref tmp, xml, "CodeTemplate", "Kistl.App.Base");
+                this.Proxy.CodeTemplate = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             {
                 // yuck

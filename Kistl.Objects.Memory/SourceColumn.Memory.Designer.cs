@@ -37,7 +37,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -325,7 +325,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
@@ -852,7 +852,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
         // fkBackingName=_fk_References; fkGuidBackingName=_fk_guid_References;
         // referencedInterface=ZBox.App.SchemaMigration.SourceColumn; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=Referers; is list;
@@ -1058,7 +1058,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
         // fkBackingName=_fk_SourceTable; fkGuidBackingName=_fk_guid_SourceTable;
         // referencedInterface=ZBox.App.SchemaMigration.SourceTable; moduleNamespace=ZBox.App.SchemaMigration;
         // inverse Navigator=SourceColumn; is list;

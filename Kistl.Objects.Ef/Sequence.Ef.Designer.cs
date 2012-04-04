@@ -396,29 +396,49 @@ namespace Kistl.App.Base
         /// <summary>
         /// The current number of this Sequence. This is calculated from the Data and initialises this, if not available.
         /// </summary>
-        // calculated  property
-        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        // value type property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
         public int? CurrentNumber
         {
             get
             {
-                if (OnCurrentNumber_Getter == null)
+                if (!CurrentAccessRights.HasReadRights()) return default(int?);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CurrentNumber;
+                if (_CurrentNumber_IsDirty && OnCurrentNumber_Getter != null)
                 {
-                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Sequence.CurrentNumber");
+                    var __e = new PropertyGetterEventArgs<int?>(__result);
+                    OnCurrentNumber_Getter(this, __e);
+                    _CurrentNumber_IsDirty = false;
+                    __result = __e.Result;
                 }
-                if (CurrentNumber_IsDirty)
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_CurrentNumber != value)
                 {
-                    var e = new PropertyGetterEventArgs<int?>(default(int?));
-                    OnCurrentNumber_Getter(this, e);
-                    CurrentNumber_Store = e.Result;
-                    CurrentNumber_IsDirty = false;
+                    var __oldValue = _CurrentNumber;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
+                    _CurrentNumber = __newValue;
+			        _CurrentNumber_IsDirty = false;
+                    NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
                 }
-                return CurrentNumber_Store;
+				else 
+				{
+					SetInitializedProperty("CurrentNumber");
+				}
             }
         }
-        int? CurrentNumber_Store;
-        private bool CurrentNumber_IsDirty = true;
-        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+        private int? _CurrentNumber;
+        private bool _CurrentNumber_IsDirty = true;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int?> OnCurrentNumber_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCurrentNumber_IsValid;
@@ -937,7 +957,7 @@ namespace Kistl.App.Base
             switch (property)
             {
                 case "CurrentNumber":
-                    CurrentNumber_IsDirty = true;
+                    _CurrentNumber_IsDirty = true;
                     break;
             }
             base.OnPropertyChanging(property, oldValue, newValue);
@@ -1219,6 +1239,7 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this._CreatedOn, binStream);
             }
+            BinarySerializer.ToStream(this._CurrentNumber, binStream);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.SequenceDataEfImpl>("Model.FK_Sequence_has_Data", "Data").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
@@ -1251,6 +1272,7 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 BinarySerializer.FromStream(out this._CreatedOn, binStream);
             }
+            BinarySerializer.FromStream(out this._CurrentNumber, binStream);
             BinarySerializer.FromStream(out this._fk_Data, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
@@ -1288,6 +1310,7 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             }
+            XmlStreamer.ToStream(this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.SequenceDataEfImpl>("Model.FK_Sequence_has_Data", "Data").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Data", "Kistl.App.Base");
@@ -1320,6 +1343,7 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             }
+            XmlStreamer.FromStream(ref this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Data, xml, "Data", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
@@ -1345,6 +1369,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
@@ -1360,6 +1385,7 @@ namespace Kistl.App.Base
             // Import must have default value set
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             this._isCreatedOnSet = true;
+            XmlStreamer.FromStream(ref this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");

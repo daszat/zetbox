@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
         // fkBackingName=_fk_Constrained; fkGuidBackingName=_fk_guid_Constrained;
         // referencedInterface=Kistl.App.Base.DataType; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=Constraints; is list;

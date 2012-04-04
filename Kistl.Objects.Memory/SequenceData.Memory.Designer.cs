@@ -94,7 +94,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
         // fkBackingName=_fk_Sequence; fkGuidBackingName=_fk_guid_Sequence;
         // referencedInterface=Kistl.App.Base.Sequence; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=Data; is reference;

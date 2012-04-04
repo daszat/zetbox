@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Precision", __oldValue, __newValue);
                     Proxy.Precision = __newValue;
+
                     NotifyPropertyChanged("Precision", __oldValue, __newValue);
                     if (OnPrecision_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DecimalProperty, int> OnPrecision_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DecimalProperty, int> OnPrecision_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Scale", __oldValue, __newValue);
                     Proxy.Scale = __newValue;
+
                     NotifyPropertyChanged("Scale", __oldValue, __newValue);
                     if (OnScale_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_PreSetter;

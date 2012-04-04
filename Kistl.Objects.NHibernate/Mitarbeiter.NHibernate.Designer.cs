@@ -172,6 +172,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -185,6 +186,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -335,6 +337,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -348,6 +351,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -411,6 +415,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -424,6 +429,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -486,6 +492,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("Geburtstag", __oldValue, __newValue);
                     Proxy.Geburtstag = __newValue;
+
                     NotifyPropertyChanged("Geburtstag", __oldValue, __newValue);
                     if (OnGeburtstag_PostSetter != null && IsAttached)
                     {
@@ -499,6 +506,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_PreSetter;
@@ -629,6 +637,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -642,6 +651,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnName_PreSetter;
@@ -716,6 +726,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("SVNr", __oldValue, __newValue);
                     Proxy.SVNr = __newValue;
+
                     NotifyPropertyChanged("SVNr", __oldValue, __newValue);
                     if (OnSVNr_PostSetter != null && IsAttached)
                     {
@@ -729,6 +740,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnSVNr_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnSVNr_PreSetter;
@@ -772,6 +784,7 @@ namespace Kistl.App.Projekte
                     }
                     NotifyPropertyChanging("TelefonNummer", __oldValue, __newValue);
                     Proxy.TelefonNummer = __newValue;
+
                     NotifyPropertyChanged("TelefonNummer", __oldValue, __newValue);
                     if (OnTelefonNummer_PostSetter != null && IsAttached)
                     {
@@ -785,6 +798,7 @@ namespace Kistl.App.Projekte
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnTelefonNummer_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnTelefonNummer_PreSetter;

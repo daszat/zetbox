@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
                     Proxy.CurrentNumber = __newValue;
+
                     NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
                     if (OnCurrentNumber_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.SequenceData, int> OnCurrentNumber_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.SequenceData, int> OnCurrentNumber_PreSetter;

@@ -99,6 +99,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("Birthday", __oldValue, __newValue);
                     Proxy.Birthday = __newValue;
+
                     NotifyPropertyChanged("Birthday", __oldValue, __newValue);
                     if (OnBirthday_PostSetter != null && IsAttached)
                     {
@@ -112,6 +113,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestCustomObject, DateTime?> OnBirthday_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, DateTime?> OnBirthday_PreSetter;
@@ -434,6 +436,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                     }
                     NotifyPropertyChanging("PersonName", __oldValue, __newValue);
                     Proxy.PersonName = __newValue;
+
                     NotifyPropertyChanged("PersonName", __oldValue, __newValue);
                     if (OnPersonName_PostSetter != null && IsAttached)
                     {
@@ -447,6 +450,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_PreSetter;

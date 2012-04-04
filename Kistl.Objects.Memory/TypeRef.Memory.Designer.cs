@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The assembly containing the referenced Type.
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Assembly
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Assembly
         // fkBackingName=_fk_Assembly; fkGuidBackingName=_fk_guid_Assembly;
         // referencedInterface=Kistl.App.Base.Assembly; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -129,7 +129,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -290,7 +290,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;
@@ -662,7 +662,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The TypeRef of the BaseClass of the referenced Type
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

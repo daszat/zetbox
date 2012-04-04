@@ -81,6 +81,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("Predicate", __oldValue, __newValue);
                     Proxy.Predicate = __newValue;
+
                     NotifyPropertyChanged("Predicate", __oldValue, __newValue);
                     if (OnPredicate_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration, string> OnPredicate_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.OptionalPredicateFilterConfiguration, string> OnPredicate_PreSetter;

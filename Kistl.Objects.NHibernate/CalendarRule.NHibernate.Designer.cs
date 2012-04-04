@@ -285,6 +285,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -298,6 +299,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -448,6 +450,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -461,6 +464,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -524,6 +528,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -537,6 +542,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -600,6 +606,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("IsWorkingDay", __oldValue, __newValue);
                     Proxy.IsWorkingDay = __newValue;
+
                     NotifyPropertyChanged("IsWorkingDay", __oldValue, __newValue);
                     if (OnIsWorkingDay_PostSetter != null && IsAttached)
                     {
@@ -613,6 +620,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
 
         private bool FetchIsWorkingDayOrDefault()
         {
@@ -764,6 +772,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -777,6 +786,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, string> OnName_PreSetter;
@@ -820,6 +830,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("ValidFrom", __oldValue, __newValue);
                     Proxy.ValidFrom = __newValue;
+
                     NotifyPropertyChanged("ValidFrom", __oldValue, __newValue);
                     if (OnValidFrom_PostSetter != null && IsAttached)
                     {
@@ -833,6 +844,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidFrom_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidFrom_PreSetter;
@@ -876,6 +888,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("ValidUntil", __oldValue, __newValue);
                     Proxy.ValidUntil = __newValue;
+
                     NotifyPropertyChanged("ValidUntil", __oldValue, __newValue);
                     if (OnValidUntil_PostSetter != null && IsAttached)
                     {
@@ -889,6 +902,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidUntil_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, DateTime?> OnValidUntil_PreSetter;
@@ -932,6 +946,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("WorkingHours", __oldValue, __newValue);
                     Proxy.WorkingHours = __newValue;
+
                     NotifyPropertyChanged("WorkingHours", __oldValue, __newValue);
                     if (OnWorkingHours_PostSetter != null && IsAttached)
                     {
@@ -945,6 +960,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.CalendarRule, decimal> OnWorkingHours_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.CalendarRule, decimal> OnWorkingHours_PreSetter;

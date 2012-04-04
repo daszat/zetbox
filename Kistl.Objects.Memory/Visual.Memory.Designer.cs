@@ -144,7 +144,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The Method whose return value shoud be displayed
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
         // fkBackingName=_fk_Method; fkGuidBackingName=_fk_guid_Method;
         // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -235,7 +235,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The Property to display
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
         // fkBackingName=_fk_Property; fkGuidBackingName=_fk_guid_Property;
         // referencedInterface=Kistl.App.Base.Property; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

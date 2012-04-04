@@ -81,6 +81,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("MyIntProperty", __oldValue, __newValue);
                     Proxy.MyIntProperty = __newValue;
+
                     NotifyPropertyChanged("MyIntProperty", __oldValue, __newValue);
                     if (OnMyIntProperty_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PreSetter;
@@ -224,6 +226,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     Proxy.StringProp = __newValue;
+
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
                     if (OnStringProp_PostSetter != null && IsAttached)
                     {
@@ -237,6 +240,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PreSetter;
@@ -280,6 +284,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("TestEnumProp", __oldValue, __newValue);
                     Proxy.TestEnumProp = __newValue;
+
                     NotifyPropertyChanged("TestEnumProp", __oldValue, __newValue);
                     if (OnTestEnumProp_PostSetter != null && IsAttached)
                     {
@@ -293,6 +298,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PreSetter;

@@ -81,6 +81,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("Offset", __oldValue, __newValue);
                     Proxy.Offset = __newValue;
+
                     NotifyPropertyChanged("Offset", __oldValue, __newValue);
                     if (OnOffset_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.EasterCalendarRule, int?> OnOffset_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.EasterCalendarRule, int?> OnOffset_PreSetter;

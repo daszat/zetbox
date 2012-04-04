@@ -81,6 +81,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentMonthDefault", __oldValue, __newValue);
                     Proxy.IsCurrentMonthDefault = __newValue;
+
                     NotifyPropertyChanged("IsCurrentMonthDefault", __oldValue, __newValue);
                     if (OnIsCurrentMonthDefault_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentMonthDefault_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentMonthDefault_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentQuaterDefault", __oldValue, __newValue);
                     Proxy.IsCurrentQuaterDefault = __newValue;
+
                     NotifyPropertyChanged("IsCurrentQuaterDefault", __oldValue, __newValue);
                     if (OnIsCurrentQuaterDefault_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentQuaterDefault_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentQuaterDefault_PreSetter;
@@ -193,6 +197,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     Proxy.IsCurrentYearDefault = __newValue;
+
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {
@@ -206,6 +211,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentYearDefault_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.DateRangeFilterConfiguration, bool?> OnIsCurrentYearDefault_PreSetter;

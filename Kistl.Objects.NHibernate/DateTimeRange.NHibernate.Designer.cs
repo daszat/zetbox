@@ -160,20 +160,46 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // calculated  property
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+        // value type property
+        // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
         public int? TotalDays
         {
             get
             {
-                if (OnTotalDays_Getter == null)
+                if (!CurrentAccessRights.HasReadRights()) return default(int?);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _TotalDays;
+                if (_TotalDays_IsDirty && OnTotalDays_Getter != null)
                 {
-                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.DateTimeRange.TotalDays");
+                    var __e = new PropertyGetterEventArgs<int?>(__result);
+                    OnTotalDays_Getter(this, __e);
+                    _TotalDays_IsDirty = false;
+                    __result = __e.Result;
                 }
-                var e = new PropertyGetterEventArgs<int?>(default(int?));                OnTotalDays_Getter(this, e);                return e.Result;            }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_TotalDays != value)
+                {
+                    var __oldValue = _TotalDays;
+                    var __newValue = value;
+                    NotifyPropertyChanging("TotalDays", __oldValue, __newValue);
+                    _TotalDays = __newValue;
+			        _TotalDays_IsDirty = false;
+                    NotifyPropertyChanged("TotalDays", __oldValue, __newValue);
+                }
+				else 
+				{
+					SetInitializedProperty("TotalDays");
+				}
+            }
         }
-        private bool TotalDays_IsDirty = true;
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+        private int? _TotalDays;
+        private bool _TotalDays_IsDirty = true;
+        // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DateTimeRange, int?> OnTotalDays_Getter;
 
         public override Type GetImplementedInterface()
@@ -237,6 +263,7 @@ public bool CompoundObject_IsNull { get; set; }
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._From, binStream);
             BinarySerializer.ToStream(this._Thru, binStream);
+            BinarySerializer.ToStream(this._TotalDays, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -247,6 +274,7 @@ public bool CompoundObject_IsNull { get; set; }
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._From, binStream);
             BinarySerializer.FromStream(out this._Thru, binStream);
+            BinarySerializer.FromStream(out this._TotalDays, binStream);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -262,6 +290,7 @@ public bool CompoundObject_IsNull { get; set; }
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._From, xml, "From", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Thru, xml, "Thru", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._TotalDays, xml, "TotalDays", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -272,6 +301,7 @@ public bool CompoundObject_IsNull { get; set; }
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Thru, xml, "Thru", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._TotalDays, xml, "TotalDays", "Kistl.App.Base");
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

@@ -116,6 +116,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
                     }
                     NotifyPropertyChanging("SomeInt", __oldValue, __newValue);
                     Proxy.SomeInt = __newValue;
+
                     NotifyPropertyChanged("SomeInt", __oldValue, __newValue);
                     if (OnSomeInt_PostSetter != null && IsAttached)
                     {
@@ -129,6 +130,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.OrderedOneEnd, int?> OnSomeInt_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.OrderedOneEnd, int?> OnSomeInt_PreSetter;

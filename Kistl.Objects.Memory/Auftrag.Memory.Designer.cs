@@ -151,7 +151,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -312,7 +312,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -543,7 +543,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Kunde des Projektes
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Kunde
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Kunde
         // fkBackingName=_fk_Kunde; fkGuidBackingName=_fk_guid_Kunde;
         // referencedInterface=Kistl.App.Projekte.Kunde; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -635,7 +635,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Mitarbeiter
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Mitarbeiter
         // fkBackingName=_fk_Mitarbeiter; fkGuidBackingName=_fk_guid_Mitarbeiter;
         // referencedInterface=Kistl.App.Projekte.Mitarbeiter; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
@@ -727,7 +727,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Projekt zum Auftrag
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
         // fkBackingName=_fk_Projekt; fkGuidBackingName=_fk_guid_Projekt;
         // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=Auftraege; is list;

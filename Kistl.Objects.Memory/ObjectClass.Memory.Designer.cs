@@ -78,7 +78,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
         // fkBackingName=_fk_BaseObjectClass; fkGuidBackingName=_fk_guid_BaseObjectClass;
         // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=SubClasses; is list;
@@ -186,29 +186,46 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         /// <summary>
         /// Provides a code template for default methods
         /// </summary>
-        // calculated  property
-        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        // value type property
+        // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
         public string CodeTemplate
         {
             get
             {
-                if (OnCodeTemplate_Getter == null)
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CodeTemplate;
+                if (_CodeTemplate_IsDirty && OnCodeTemplate_Getter != null)
                 {
-                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.ObjectClass.CodeTemplate");
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnCodeTemplate_Getter(this, __e);
+                    _CodeTemplate_IsDirty = false;
+                    __result = __e.Result;
                 }
-                if (CodeTemplate_IsDirty)
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_CodeTemplate != value)
                 {
-                    var e = new PropertyGetterEventArgs<string>(default(string));
-                    OnCodeTemplate_Getter(this, e);
-                    CodeTemplate_Store = e.Result;
-                    CodeTemplate_IsDirty = false;
+                    var __oldValue = _CodeTemplate;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
+                    _CodeTemplate = __newValue;
+			        _CodeTemplate_IsDirty = false;
+                    NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
                 }
-                return CodeTemplate_Store;
+				else 
+				{
+					SetInitializedProperty("CodeTemplate");
+				}
             }
         }
-        string CodeTemplate_Store;
-        private bool CodeTemplate_IsDirty = true;
-        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+        private string _CodeTemplate;
+        private bool _CodeTemplate_IsDirty = true;
+        // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnCodeTemplate_IsValid;
@@ -216,7 +233,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
         // fkBackingName=_fk_DefaultViewModelDescriptor; fkGuidBackingName=_fk_guid_DefaultViewModelDescriptor;
         // referencedInterface=Kistl.App.GUI.ViewModelDescriptor; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -1118,7 +1135,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             switch (property)
             {
                 case "CodeTemplate":
-                    CodeTemplate_IsDirty = true;
+                    _CodeTemplate_IsDirty = true;
                     break;
             }
             base.OnPropertyChanging(property, oldValue, newValue);
@@ -1348,6 +1365,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._CodeTemplate, binStream);
             BinarySerializer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._IsAbstract, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
@@ -1362,6 +1380,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
+            BinarySerializer.FromStream(out this._CodeTemplate, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultViewModelDescriptor, binStream);
             BinarySerializer.FromStream(out this._IsAbstract, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
@@ -1381,6 +1400,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
@@ -1395,6 +1415,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
@@ -1414,6 +1435,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
@@ -1427,6 +1449,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");

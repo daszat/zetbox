@@ -81,6 +81,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("DayOfWeek", __oldValue, __newValue);
                     Proxy.DayOfWeek = __newValue;
+
                     NotifyPropertyChanged("DayOfWeek", __oldValue, __newValue);
                     if (OnDayOfWeek_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.DayOfWeekCalendarRule, Kistl.App.Base.DayOfWeek> OnDayOfWeek_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.DayOfWeekCalendarRule, Kistl.App.Base.DayOfWeek> OnDayOfWeek_PreSetter;

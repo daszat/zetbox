@@ -37,7 +37,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -198,7 +198,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -486,7 +486,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Kistl.App.Base.Module; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -635,7 +635,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RootScreen
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RootScreen
         // fkBackingName=_fk_RootScreen; fkGuidBackingName=_fk_guid_RootScreen;
         // referencedInterface=Kistl.App.GUI.NavigationScreen; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -727,7 +727,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkspaceViewModel
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkspaceViewModel
         // fkBackingName=_fk_WorkspaceViewModel; fkGuidBackingName=_fk_guid_WorkspaceViewModel;
         // referencedInterface=Kistl.App.GUI.ViewModelDescriptor; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

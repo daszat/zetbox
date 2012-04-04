@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
         // fkBackingName=_fk_Group; fkGuidBackingName=_fk_guid_Group;
         // referencedInterface=Kistl.App.Base.Group; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

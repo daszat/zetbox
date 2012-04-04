@@ -94,7 +94,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// testtest
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
         // fkBackingName=_fk_ObjectProp; fkGuidBackingName=_fk_guid_ObjectProp;
         // referencedInterface=Kistl.App.Projekte.Kunde; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=none; is reference;

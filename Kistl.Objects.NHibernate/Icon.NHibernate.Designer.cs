@@ -172,6 +172,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -185,6 +186,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -247,6 +249,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IconFile", __oldValue, __newValue);
                     Proxy.IconFile = __newValue;
+
                     NotifyPropertyChanged("IconFile", __oldValue, __newValue);
                     if (OnIconFile_PostSetter != null && IsAttached)
                     {
@@ -260,6 +263,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PreSetter;

@@ -382,6 +382,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -395,6 +396,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -457,6 +459,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Containment", __oldValue, __newValue);
                     Proxy.Containment = __newValue;
+
                     NotifyPropertyChanged("Containment", __oldValue, __newValue);
                     if (OnContainment_PostSetter != null && IsAttached)
                     {
@@ -470,6 +473,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.ContainmentSpecification> OnContainment_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.ContainmentSpecification> OnContainment_PreSetter;
@@ -601,6 +605,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -614,6 +619,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -676,6 +682,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
+
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -689,6 +696,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnDescription_PreSetter;
@@ -733,6 +741,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -746,6 +755,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -897,6 +907,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Storage", __oldValue, __newValue);
                     Proxy.Storage = __newValue;
+
                     NotifyPropertyChanged("Storage", __oldValue, __newValue);
                     if (OnStorage_PostSetter != null && IsAttached)
                     {
@@ -910,6 +921,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_PreSetter;
@@ -953,6 +965,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     Proxy.Verb = __newValue;
+
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
                     if (OnVerb_PostSetter != null && IsAttached)
                     {
@@ -966,6 +979,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnVerb_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PreSetter;

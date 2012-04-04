@@ -220,6 +220,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("OtherInt", __oldValue, __newValue);
                     Proxy.OtherInt = __newValue;
+
                     NotifyPropertyChanged("OtherInt", __oldValue, __newValue);
                     if (OnOtherInt_PostSetter != null && IsAttached)
                     {
@@ -233,6 +234,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.OrderedNEnd, int?> OnOtherInt_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.OrderedNEnd, int?> OnOtherInt_PreSetter;

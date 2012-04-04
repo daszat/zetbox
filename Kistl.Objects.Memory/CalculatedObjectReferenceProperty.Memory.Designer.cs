@@ -64,7 +64,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the referenced class of objects
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
         // fkBackingName=_fk_ReferencedClass; fkGuidBackingName=_fk_guid_ReferencedClass;
         // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

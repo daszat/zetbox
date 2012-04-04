@@ -261,6 +261,7 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -274,6 +275,7 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -424,6 +426,7 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -437,6 +440,7 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -500,6 +504,7 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -513,6 +518,7 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -575,6 +581,7 @@ namespace at.dasz.DocumentManagement
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -588,6 +595,7 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PreSetter;

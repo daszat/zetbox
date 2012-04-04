@@ -81,6 +81,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("TestBool", __oldValue, __newValue);
                     Proxy.TestBool = __newValue;
+
                     NotifyPropertyChanged("TestBool", __oldValue, __newValue);
                     if (OnTestBool_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_PreSetter;
@@ -416,6 +418,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                     }
                     NotifyPropertyChanging("TestDateTime", __oldValue, __newValue);
                     Proxy.TestDateTime = __newValue;
+
                     NotifyPropertyChanged("TestDateTime", __oldValue, __newValue);
                     if (OnTestDateTime_PostSetter != null && IsAttached)
                     {
@@ -429,6 +432,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_PreSetter;
@@ -472,6 +476,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                     }
                     NotifyPropertyChanging("TestEnum", __oldValue, __newValue);
                     Proxy.TestEnum = __newValue;
+
                     NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
                     if (OnTestEnum_PostSetter != null && IsAttached)
                     {
@@ -485,6 +490,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_PreSetter;
@@ -528,6 +534,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                     }
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     Proxy.TestString = __newValue;
+
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
                     if (OnTestString_PostSetter != null && IsAttached)
                     {
@@ -541,6 +548,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_PreSetter;

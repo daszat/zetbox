@@ -84,6 +84,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("CategoryTags", __oldValue, __newValue);
                     Proxy.CategoryTags = __newValue;
+
                     NotifyPropertyChanged("CategoryTags", __oldValue, __newValue);
                     if (OnCategoryTags_PostSetter != null && IsAttached)
                     {
@@ -97,6 +98,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCategoryTags_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, string> OnCategoryTags_PreSetter;
@@ -228,6 +230,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -241,6 +244,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -270,29 +274,55 @@ namespace Kistl.App.Base
         /// <summary>
         /// Provides a code template for a calculated property
         /// </summary>
-        // calculated  property
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public string CodeTemplate
         {
             get
             {
-                if (OnCodeTemplate_Getter == null)
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchCodeTemplateOrDefault();
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.CodeTemplate != value)
                 {
-                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Property.CodeTemplate");
+                    var __oldValue = Proxy.CodeTemplate;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CodeTemplate", __oldValue, __newValue);
+                    Proxy.CodeTemplate = __newValue;
+			        _CodeTemplate_IsDirty = false;
+
+                    NotifyPropertyChanged("CodeTemplate", __oldValue, __newValue);
                 }
-                if (CodeTemplate_IsDirty)
-                {
-                    var e = new PropertyGetterEventArgs<string>(default(string));
-                    OnCodeTemplate_Getter(this, e);
-                    Proxy.CodeTemplate = e.Result;
-                    CodeTemplate_IsDirty = false;
-                }
-                return Proxy.CodeTemplate;
+				else 
+				{
+					SetInitializedProperty("CodeTemplate");
+				}
             }
         }
-        
-        private bool CodeTemplate_IsDirty = true;
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+		private bool _CodeTemplate_IsDirty = false;
+
+
+        private string FetchCodeTemplateOrDefault()
+        {
+           var __result = Proxy.CodeTemplate;
+            if (_CodeTemplate_IsDirty && OnCodeTemplate_Getter != null)
+            {
+                var __e = new PropertyGetterEventArgs<string>(__result);
+                OnCodeTemplate_Getter(this, __e);
+                _CodeTemplate_IsDirty = false;
+                __result = Proxy.CodeTemplate = __e.Result;
+            }
+            return __result;
+        }
+
+        private bool _isCodeTemplateSet = false;
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCodeTemplate_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.Property> OnCodeTemplate_IsValid;
@@ -458,6 +488,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -471,6 +502,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -638,6 +670,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
+
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -651,6 +684,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, string> OnDescription_PreSetter;
@@ -695,6 +729,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -708,6 +743,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -875,6 +911,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                     }
                     NotifyPropertyChanging("Label", __oldValue, __newValue);
                     Proxy.Label = __newValue;
+
                     NotifyPropertyChanged("Label", __oldValue, __newValue);
                     if (OnLabel_PostSetter != null && IsAttached)
                     {
@@ -888,6 +925,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, string> OnLabel_PreSetter;
@@ -1020,6 +1058,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -1033,6 +1072,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, string> OnName_PreSetter;
@@ -1785,7 +1825,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             switch (property)
             {
                 case "CodeTemplate":
-                    CodeTemplate_IsDirty = true;
+                    _CodeTemplate_IsDirty = true;
                     break;
             }
             base.OnPropertyChanging(property, oldValue, newValue);
@@ -2086,6 +2126,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             FetchExportGuidOrDefault();
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
+            FetchCodeTemplateOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_Property != null) OnNotifyPreSave_Property(this);
         }
@@ -2117,6 +2158,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             SetNotInitializedProperty("ValueModelDescriptor");
             base.NotifyCreated();
             if (OnNotifyCreated_Property != null) OnNotifyCreated_Property(this);
+            _CodeTemplate_IsDirty = true;
         }
         public static event ObjectEventHandler<Property> OnNotifyCreated_Property;
 
@@ -2265,6 +2307,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
+            BinarySerializer.ToStream(this.Proxy.CodeTemplate, binStream);
 
 			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if (eagerLoadLists && auxObjects != null)
@@ -2319,6 +2362,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 DateTime tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.ChangedOn = tmp;
+            }
+            {
+                string tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.CodeTemplate = tmp;
             }
 
 			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
@@ -2396,6 +2444,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             }
+            XmlStreamer.ToStream(this.Proxy.CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
             if (this._isCreatedOnSet) {
@@ -2436,6 +2485,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 DateTime tmp = this.Proxy.ChangedOn;
                 XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.Base");
                 this.Proxy.ChangedOn = tmp;
+            }
+            {
+                // yuck
+                string tmp = this.Proxy.CodeTemplate;
+                XmlStreamer.FromStream(ref tmp, xml, "CodeTemplate", "Kistl.App.Base");
+                this.Proxy.CodeTemplate = tmp;
             }
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
@@ -2498,6 +2553,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.DefaultValue != null ? this.Proxy.DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Kistl.App.Base");
@@ -2529,6 +2585,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.Base");
                 this.Proxy.ChangedOn = tmp;
                 this._isChangedOnSet = true;
+            }
+            {
+                // yuck
+                string tmp = this.Proxy.CodeTemplate;
+                XmlStreamer.FromStream(ref tmp, xml, "CodeTemplate", "Kistl.App.Base");
+                this.Proxy.CodeTemplate = tmp;
             }
             // Import must have default value set
             {

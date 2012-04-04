@@ -81,6 +81,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentYearDefault", __oldValue, __newValue);
                     Proxy.IsCurrentYearDefault = __newValue;
+
                     NotifyPropertyChanged("IsCurrentYearDefault", __oldValue, __newValue);
                     if (OnIsCurrentYearDefault_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.YearFilterConfiguration, bool?> OnIsCurrentYearDefault_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.YearFilterConfiguration, bool?> OnIsCurrentYearDefault_PreSetter;

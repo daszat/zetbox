@@ -81,6 +81,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("Frage", __oldValue, __newValue);
                     Proxy.Frage = __newValue;
+
                     NotifyPropertyChanged("Frage", __oldValue, __newValue);
                     if (OnFrage_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, string> OnFrage_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, string> OnFrage_PreSetter;
@@ -276,6 +278,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("FragenNummer", __oldValue, __newValue);
                     Proxy.FragenNummer = __newValue;
+
                     NotifyPropertyChanged("FragenNummer", __oldValue, __newValue);
                     if (OnFragenNummer_PostSetter != null && IsAttached)
                     {
@@ -289,6 +292,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_PreSetter;
@@ -332,6 +336,7 @@ namespace Kistl.App.Test
                     }
                     NotifyPropertyChanging("GegebeneAntwort", __oldValue, __newValue);
                     Proxy.GegebeneAntwort = __newValue;
+
                     NotifyPropertyChanged("GegebeneAntwort", __oldValue, __newValue);
                     if (OnGegebeneAntwort_PostSetter != null && IsAttached)
                     {
@@ -345,6 +350,7 @@ namespace Kistl.App.Test
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PreSetter;

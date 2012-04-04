@@ -37,7 +37,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Enumeration der Eigenschaft
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration
         // fkBackingName=_fk_Enumeration; fkGuidBackingName=_fk_guid_Enumeration;
         // referencedInterface=Kistl.App.Base.Enumeration; moduleNamespace=Kistl.App.Base;
         // inverse Navigator=none; is reference;

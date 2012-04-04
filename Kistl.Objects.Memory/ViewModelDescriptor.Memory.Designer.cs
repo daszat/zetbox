@@ -37,7 +37,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The default ControlKind to use for displaying this Presentable readonly. Defaults to DefaultKind with editing disabled.
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
         // fkBackingName=_fk_DefaultDisplayKind; fkGuidBackingName=_fk_guid_DefaultDisplayKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -129,7 +129,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The default ControlKind to use for this Presentable.
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
         // fkBackingName=_fk_DefaultEditorKind; fkGuidBackingName=_fk_guid_DefaultEditorKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -221,7 +221,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The default ControlKind to use for displaying this Presentable readonly in a GridCell. Defaults to DefaultDisplayKind.
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
         // fkBackingName=_fk_DefaultGridCellDisplayKind; fkGuidBackingName=_fk_guid_DefaultGridCellDisplayKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -313,7 +313,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The default ControlKind for displaying this model in a GridCell in editing mode. Defaults to DefaultKind.
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
         // fkBackingName=_fk_DefaultGridCellEditorKind; fkGuidBackingName=_fk_guid_DefaultGridCellEditorKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -405,7 +405,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// .The default ControlKind for displaying this model in a GridCell befor editing starts. Defaults to DefaultGridCellDisplayKind.
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
         // fkBackingName=_fk_DefaultGridCellPreEditorKind; fkGuidBackingName=_fk_guid_DefaultGridCellPreEditorKind;
         // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -624,7 +624,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Kistl.App.Base.Module; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -741,7 +741,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The described CLR class&amp;apos; reference
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
         // fkBackingName=_fk_ViewModelRef; fkGuidBackingName=_fk_guid_ViewModelRef;
         // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

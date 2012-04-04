@@ -81,6 +81,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("IsCurrentMonthDefault", __oldValue, __newValue);
                     Proxy.IsCurrentMonthDefault = __newValue;
+
                     NotifyPropertyChanged("IsCurrentMonthDefault", __oldValue, __newValue);
                     if (OnIsCurrentMonthDefault_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.MonthFilterConfiguration, bool?> OnIsCurrentMonthDefault_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.MonthFilterConfiguration, bool?> OnIsCurrentMonthDefault_PreSetter;

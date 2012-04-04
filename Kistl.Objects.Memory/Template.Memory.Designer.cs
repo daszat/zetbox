@@ -37,7 +37,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Assembly of the Type that is displayed with this Template
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
         // fkBackingName=_fk_DisplayedTypeAssembly; fkGuidBackingName=_fk_guid_DisplayedTypeAssembly;
         // referencedInterface=Kistl.App.Base.Assembly; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
@@ -267,7 +267,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The visual representation of this Template
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
         // fkBackingName=_fk_VisualTree; fkGuidBackingName=_fk_guid_VisualTree;
         // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;

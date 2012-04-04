@@ -319,6 +319,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -332,6 +333,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -517,6 +519,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -530,6 +533,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -593,6 +597,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -606,6 +611,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -757,6 +763,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     Proxy.Name = __newValue;
+
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
                     if (OnName_PostSetter != null && IsAttached)
                     {
@@ -770,6 +777,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.Calendar, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.Calendar, string> OnName_PreSetter;

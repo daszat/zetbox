@@ -172,6 +172,7 @@ namespace Kistl.App.GUI
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -185,6 +186,7 @@ namespace Kistl.App.GUI
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -282,6 +284,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                     }
                     NotifyPropertyChanging("Color", __oldValue, __newValue);
                     Proxy.Color = __newValue;
+
                     NotifyPropertyChanged("Color", __oldValue, __newValue);
                     if (OnColor_PostSetter != null && IsAttached)
                     {
@@ -295,6 +298,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationEntry, string> OnColor_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, string> OnColor_PreSetter;
@@ -426,6 +430,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -439,6 +444,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -502,6 +508,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -515,6 +522,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -838,6 +846,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                     }
                     NotifyPropertyChanging("Title", __oldValue, __newValue);
                     Proxy.Title = __newValue;
+
                     NotifyPropertyChanged("Title", __oldValue, __newValue);
                     if (OnTitle_PostSetter != null && IsAttached)
                     {
@@ -851,6 +860,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationEntry, string> OnTitle_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, string> OnTitle_PreSetter;

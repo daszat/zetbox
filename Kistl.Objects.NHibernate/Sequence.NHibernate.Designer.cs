@@ -172,6 +172,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     Proxy.ChangedOn = __newValue;
+
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
                     if (OnChangedOn_PostSetter != null && IsAttached)
                     {
@@ -185,6 +186,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchChangedOnOrDefault()
         {
@@ -335,6 +337,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     Proxy.CreatedOn = __newValue;
+
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
                     if (OnCreatedOn_PostSetter != null && IsAttached)
                     {
@@ -348,6 +351,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private DateTime FetchCreatedOnOrDefault()
         {
@@ -377,29 +381,55 @@ namespace Kistl.App.Base
         /// <summary>
         /// The current number of this Sequence. This is calculated from the Data and initialises this, if not available.
         /// </summary>
-        // calculated  property
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public int? CurrentNumber
         {
             get
             {
-                if (OnCurrentNumber_Getter == null)
+                if (!CurrentAccessRights.HasReadRights()) return default(int?);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchCurrentNumberOrDefault();
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.CurrentNumber != value)
                 {
-                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Sequence.CurrentNumber");
+                    var __oldValue = Proxy.CurrentNumber;
+                    var __newValue = value;
+                    NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
+                    Proxy.CurrentNumber = __newValue;
+			        _CurrentNumber_IsDirty = false;
+
+                    NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
                 }
-                if (CurrentNumber_IsDirty)
-                {
-                    var e = new PropertyGetterEventArgs<int?>(default(int?));
-                    OnCurrentNumber_Getter(this, e);
-                    Proxy.CurrentNumber = e.Result;
-                    CurrentNumber_IsDirty = false;
-                }
-                return Proxy.CurrentNumber;
+				else 
+				{
+					SetInitializedProperty("CurrentNumber");
+				}
             }
         }
-        
-        private bool CurrentNumber_IsDirty = true;
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
+		private bool _CurrentNumber_IsDirty = false;
+
+
+        private int? FetchCurrentNumberOrDefault()
+        {
+           var __result = Proxy.CurrentNumber;
+            if (_CurrentNumber_IsDirty && OnCurrentNumber_Getter != null)
+            {
+                var __e = new PropertyGetterEventArgs<int?>(__result);
+                OnCurrentNumber_Getter(this, __e);
+                _CurrentNumber_IsDirty = false;
+                __result = Proxy.CurrentNumber = __e.Result;
+            }
+            return __result;
+        }
+
+        private bool _isCurrentNumberSet = false;
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int?> OnCurrentNumber_Getter;
 
         public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCurrentNumber_IsValid;
@@ -543,6 +573,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     Proxy.Description = __newValue;
+
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
                     if (OnDescription_PostSetter != null && IsAttached)
                     {
@@ -556,6 +587,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, string> OnDescription_PreSetter;
@@ -600,6 +632,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     Proxy.ExportGuid = __newValue;
+
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
                     if (OnExportGuid_PostSetter != null && IsAttached)
                     {
@@ -613,6 +646,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
 
         private Guid FetchExportGuidOrDefault()
         {
@@ -675,6 +709,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("IsContinuous", __oldValue, __newValue);
                     Proxy.IsContinuous = __newValue;
+
                     NotifyPropertyChanged("IsContinuous", __oldValue, __newValue);
                     if (OnIsContinuous_PostSetter != null && IsAttached)
                     {
@@ -688,6 +723,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, bool> OnIsContinuous_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, bool> OnIsContinuous_PreSetter;
@@ -920,7 +956,7 @@ namespace Kistl.App.Base
             switch (property)
             {
                 case "CurrentNumber":
-                    CurrentNumber_IsDirty = true;
+                    _CurrentNumber_IsDirty = true;
                     break;
             }
             base.OnPropertyChanging(property, oldValue, newValue);
@@ -1113,6 +1149,7 @@ namespace Kistl.App.Base
             FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
             FetchExportGuidOrDefault();
+            FetchCurrentNumberOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_Sequence != null) OnNotifyPreSave_Sequence(this);
         }
@@ -1138,6 +1175,7 @@ namespace Kistl.App.Base
             SetNotInitializedProperty("Module");
             base.NotifyCreated();
             if (OnNotifyCreated_Sequence != null) OnNotifyCreated_Sequence(this);
+            _CurrentNumber_IsDirty = true;
         }
         public static event ObjectEventHandler<Sequence> OnNotifyCreated_Sequence;
 
@@ -1238,6 +1276,7 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
             }
+            BinarySerializer.ToStream(this.Proxy.CurrentNumber, binStream);
             BinarySerializer.ToStream(this.Proxy.Data != null ? OurContext.GetIdFromProxy(this.Proxy.Data) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Description, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
@@ -1267,6 +1306,11 @@ namespace Kistl.App.Base
                 DateTime tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.CreatedOn = tmp;
+            }
+            {
+                int? tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.CurrentNumber = tmp;
             }
             BinarySerializer.FromStream(out this._fk_Data, binStream);
             {
@@ -1309,6 +1353,7 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             }
+            XmlStreamer.ToStream(this.Proxy.CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Data != null ? OurContext.GetIdFromProxy(this.Proxy.Data) : (int?)null, xml, "Data", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
@@ -1340,6 +1385,12 @@ namespace Kistl.App.Base
                 DateTime tmp = this.Proxy.CreatedOn;
                 XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Base");
                 this.Proxy.CreatedOn = tmp;
+            }
+            {
+                // yuck
+                int? tmp = this.Proxy.CurrentNumber;
+                XmlStreamer.FromStream(ref tmp, xml, "CurrentNumber", "Kistl.App.Base");
+                this.Proxy.CurrentNumber = tmp;
             }
             XmlStreamer.FromStream(ref this._fk_Data, xml, "Data", "Kistl.App.Base");
             {
@@ -1379,6 +1430,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
@@ -1403,6 +1455,12 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Base");
                 this.Proxy.CreatedOn = tmp;
                 this._isCreatedOnSet = true;
+            }
+            {
+                // yuck
+                int? tmp = this.Proxy.CurrentNumber;
+                XmlStreamer.FromStream(ref tmp, xml, "CurrentNumber", "Kistl.App.Base");
+                this.Proxy.CurrentNumber = tmp;
             }
             {
                 // yuck

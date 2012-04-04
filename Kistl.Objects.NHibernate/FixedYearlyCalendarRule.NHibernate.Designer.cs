@@ -81,6 +81,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("Day", __oldValue, __newValue);
                     Proxy.Day = __newValue;
+
                     NotifyPropertyChanged("Day", __oldValue, __newValue);
                     if (OnDay_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnDay_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnDay_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.Calendar
                     }
                     NotifyPropertyChanging("Month", __oldValue, __newValue);
                     Proxy.Month = __newValue;
+
                     NotifyPropertyChanged("Month", __oldValue, __newValue);
                     if (OnMonth_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.Calendar
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_PreSetter;

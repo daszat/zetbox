@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("DefaultValue", __oldValue, __newValue);
                     Proxy.DefaultValue = __newValue;
+
                     NotifyPropertyChanged("DefaultValue", __oldValue, __newValue);
                     if (OnDefaultValue_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.StringDefaultValue, string> OnDefaultValue_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringDefaultValue, string> OnDefaultValue_PreSetter;

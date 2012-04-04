@@ -81,6 +81,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Date", __oldValue, __newValue);
                     Proxy.Date = __newValue;
+
                     NotifyPropertyChanged("Date", __oldValue, __newValue);
                     if (OnDate_PostSetter != null && IsAttached)
                     {
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ExceptionLogEntry, DateTime> OnDate_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, DateTime> OnDate_PreSetter;
@@ -137,6 +139,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Exception", __oldValue, __newValue);
                     Proxy.Exception = __newValue;
+
                     NotifyPropertyChanged("Exception", __oldValue, __newValue);
                     if (OnException_PostSetter != null && IsAttached)
                     {
@@ -150,6 +153,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnException_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnException_PreSetter;
@@ -193,6 +197,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Level", __oldValue, __newValue);
                     Proxy.Level = __newValue;
+
                     NotifyPropertyChanged("Level", __oldValue, __newValue);
                     if (OnLevel_PostSetter != null && IsAttached)
                     {
@@ -206,6 +211,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnLevel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnLevel_PreSetter;
@@ -249,6 +255,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Logger", __oldValue, __newValue);
                     Proxy.Logger = __newValue;
+
                     NotifyPropertyChanged("Logger", __oldValue, __newValue);
                     if (OnLogger_PostSetter != null && IsAttached)
                     {
@@ -262,6 +269,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnLogger_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnLogger_PreSetter;
@@ -305,6 +313,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Message", __oldValue, __newValue);
                     Proxy.Message = __newValue;
+
                     NotifyPropertyChanged("Message", __oldValue, __newValue);
                     if (OnMessage_PostSetter != null && IsAttached)
                     {
@@ -318,6 +327,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnMessage_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnMessage_PreSetter;
@@ -361,6 +371,7 @@ namespace Kistl.App.Base
                     }
                     NotifyPropertyChanging("Thread", __oldValue, __newValue);
                     Proxy.Thread = __newValue;
+
                     NotifyPropertyChanged("Thread", __oldValue, __newValue);
                     if (OnThread_PostSetter != null && IsAttached)
                     {
@@ -374,6 +385,7 @@ namespace Kistl.App.Base
 				}
             }
         }
+
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnThread_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ExceptionLogEntry, string> OnThread_PreSetter;

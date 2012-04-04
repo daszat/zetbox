@@ -94,7 +94,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// Workaround for Case 1376
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
+	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
         // fkBackingName=_fk_Fragebogen; fkGuidBackingName=_fk_guid_Fragebogen;
         // referencedInterface=Kistl.App.Test.Fragebogen; moduleNamespace=Kistl.App.Test;
         // inverse Navigator=Antworten; is list;
