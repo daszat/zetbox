@@ -314,6 +314,12 @@ namespace Kistl.API
         /// <returns>true, if the property was set at least once. Returns always true, if the object is not in the new state.</returns>
         bool IsInitialized(string propName);
 
+        /// <summary>
+        /// Marks a calculated property as dirty.
+        /// </summary>
+        /// <param name="propName">Name of the property to recalc</param>
+        void Recalculate(string propName);
+
         #region //// INTERNALS /////
         // TODO: move to separate interface
 

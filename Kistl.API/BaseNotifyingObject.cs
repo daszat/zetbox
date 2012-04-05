@@ -232,5 +232,10 @@ namespace Kistl.API
             return _notInitializedProperties == null || _notInitializedProperties.ContainsKey(propName) == false;
         }
         #endregion
+
+        public virtual void Recalculate(string propName)
+        {
+            throw new ArgumentOutOfRangeException("propName", string.Format("There is no calculated property '{0}' that could be re calculated", propName));
+        }
     }
 }
