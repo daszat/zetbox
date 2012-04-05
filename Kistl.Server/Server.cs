@@ -360,7 +360,7 @@ namespace Kistl.Server
                                 {
                                     foreach (var p in clsGroup)
                                     {
-                                        obj.NotifyPropertyChanged(p.Name, null, null);
+                                        obj.Recalculate(p.Name);
                                     }
                                     objCounter++;
                                     lastID = obj.ID;
