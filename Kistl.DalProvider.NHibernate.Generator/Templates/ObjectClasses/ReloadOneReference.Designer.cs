@@ -52,15 +52,15 @@ this.WriteObjects("\r\n");
 if (isExportable) { 
 #line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("            if (",  fkGuidBackingName , ".HasValue)\r\n");
-this.WriteObjects("                this.Proxy.",  name , " = ((",  referencedImplementation , ")OurContext.FindPersistenceObject<",  referencedInterface , ">(",  fkGuidBackingName , ".Value)).Proxy;\r\n");
+this.WriteObjects("                this.",  name , " = ((",  referencedImplementation , ")OurContext.FindPersistenceObject<",  referencedInterface , ">(",  fkGuidBackingName , ".Value));\r\n");
 this.WriteObjects("            else\r\n");
 #line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 } 
 #line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("            if (",  fkBackingName , ".HasValue)\r\n");
-this.WriteObjects("                this.Proxy.",  name , " = ((",  referencedImplementation , ")OurContext.FindPersistenceObject<",  referencedInterface , ">(",  fkBackingName , ".Value)).Proxy;\r\n");
+this.WriteObjects("                this.",  name , " = ((",  referencedImplementation , ")OurContext.FindPersistenceObject<",  referencedInterface , ">(",  fkBackingName , ".Value));\r\n");
 this.WriteObjects("            else\r\n");
-this.WriteObjects("                this.Proxy.",  name , " = null;\r\n");
+this.WriteObjects("                this.",  name , " = null;\r\n");
 
         }
 
