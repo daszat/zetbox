@@ -372,12 +372,12 @@ namespace Kistl.App.Base
             // fix direct object references
 
             if (_fk_guid_DefaultPropertyViewModelDescriptor.HasValue)
-                this.Proxy.DefaultPropertyViewModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultPropertyViewModelDescriptor.Value)).Proxy;
+                this.DefaultPropertyViewModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultPropertyViewModelDescriptor.Value));
             else
             if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
-                this.Proxy.DefaultPropertyViewModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value)).Proxy;
+                this.DefaultPropertyViewModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value));
             else
-                this.Proxy.DefaultPropertyViewModelDescriptor = null;
+                this.DefaultPropertyViewModelDescriptor = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

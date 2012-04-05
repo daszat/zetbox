@@ -257,9 +257,9 @@ namespace Kistl.App.Base
             // fix direct object references
 
             if (_fk_Sequence.HasValue)
-                this.Proxy.Sequence = ((Kistl.App.Base.SequenceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Sequence>(_fk_Sequence.Value)).Proxy;
+                this.Sequence = ((Kistl.App.Base.SequenceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Sequence>(_fk_Sequence.Value));
             else
-                this.Proxy.Sequence = null;
+                this.Sequence = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

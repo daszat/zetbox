@@ -355,20 +355,20 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -788,20 +788,20 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -1345,20 +1345,20 @@ namespace at.dasz.DocumentManagement
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_guid_A.Value)).Proxy;
+                this.A = ((at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_A.Value)).Proxy;
+                this.A = ((at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -1707,14 +1707,14 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -2132,20 +2132,20 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.IndexConstraint>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.IndexConstraint>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.IndexConstraint>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.IndexConstraint>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -2490,14 +2490,14 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -2840,14 +2840,14 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.N_to_M_relations_A>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.N_to_M_relations_A>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.N_to_M_relations_B>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.N_to_M_relations_B>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -3265,20 +3265,20 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -3698,20 +3698,20 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Method>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Method>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -4255,20 +4255,20 @@ namespace Kistl.App.Projekte
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -4816,20 +4816,20 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RoleMembership>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RoleMembership>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RoleMembership>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RoleMembership>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.RelationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.RelationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.RelationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.RelationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -5377,20 +5377,20 @@ namespace ZBox.App.SchemaMigration
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value)).Proxy;
+                this.A = ((ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.SourceColumn>(_fk_A.Value)).Proxy;
+                this.A = ((ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.SourceColumn>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -5739,14 +5739,14 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.TemplateNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Template>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.TemplateNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Template>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -6089,14 +6089,14 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Test.TestStudentNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestStudent>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Test.TestStudentNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestStudent>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Test.FragebogenNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Test.FragebogenNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -6638,20 +6638,20 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -7075,20 +7075,20 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewDescriptor>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewDescriptor>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewDescriptor>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewDescriptor>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -7508,20 +7508,20 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_B.Value)).Proxy;
+                this.B = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -7866,14 +7866,14 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -8216,14 +8216,14 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_A.Value)).Proxy;
+                this.A = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_A.Value));
             else
-                this.Proxy.A = null;
+                this.A = null;
 
             if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value)).Proxy;
+                this.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value));
             else
-                this.Proxy.B = null;
+                this.B = null;
 
         }
 
@@ -8568,9 +8568,9 @@ namespace Kistl.App.Projekte
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_Parent.HasValue)
-                this.Proxy.Parent = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_Parent.Value)).Proxy;
+                this.Parent = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_Parent.Value));
             else
-                this.Proxy.Parent = null;
+                this.Parent = null;
 
         }
 
@@ -8916,9 +8916,9 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_Parent.HasValue)
-                this.Proxy.Parent = ((Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_Parent.Value)).Proxy;
+                this.Parent = ((Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_Parent.Value));
             else
-                this.Proxy.Parent = null;
+                this.Parent = null;
 
         }
 

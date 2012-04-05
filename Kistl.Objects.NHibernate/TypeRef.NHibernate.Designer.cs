@@ -1179,30 +1179,30 @@ namespace Kistl.App.Base
             // fix direct object references
 
             if (_fk_guid_Assembly.HasValue)
-                this.Proxy.Assembly = ((Kistl.App.Base.AssemblyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_Assembly.Value)).Proxy;
+                this.Assembly = ((Kistl.App.Base.AssemblyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_Assembly.Value));
             else
             if (_fk_Assembly.HasValue)
-                this.Proxy.Assembly = ((Kistl.App.Base.AssemblyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_Assembly.Value)).Proxy;
+                this.Assembly = ((Kistl.App.Base.AssemblyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_Assembly.Value));
             else
-                this.Proxy.Assembly = null;
+                this.Assembly = null;
 
             if (_fk_ChangedBy.HasValue)
-                this.Proxy.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value)).Proxy;
+                this.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value));
             else
-                this.Proxy.ChangedBy = null;
+                this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.Proxy.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value)).Proxy;
+                this.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value));
             else
-                this.Proxy.CreatedBy = null;
+                this.CreatedBy = null;
 
             if (_fk_guid_Parent.HasValue)
-                this.Proxy.Parent = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Parent.Value)).Proxy;
+                this.Parent = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Parent.Value));
             else
             if (_fk_Parent.HasValue)
-                this.Proxy.Parent = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_Parent.Value)).Proxy;
+                this.Parent = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_Parent.Value));
             else
-                this.Proxy.Parent = null;
+                this.Parent = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

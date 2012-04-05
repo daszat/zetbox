@@ -491,14 +491,14 @@ namespace Kistl.App.GUI
             // fix direct object references
 
             if (_fk_DisplayedTypeAssembly.HasValue)
-                this.Proxy.DisplayedTypeAssembly = ((Kistl.App.Base.AssemblyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value)).Proxy;
+                this.DisplayedTypeAssembly = ((Kistl.App.Base.AssemblyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value));
             else
-                this.Proxy.DisplayedTypeAssembly = null;
+                this.DisplayedTypeAssembly = null;
 
             if (_fk_VisualTree.HasValue)
-                this.Proxy.VisualTree = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_VisualTree.Value)).Proxy;
+                this.VisualTree = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_VisualTree.Value));
             else
-                this.Proxy.VisualTree = null;
+                this.VisualTree = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

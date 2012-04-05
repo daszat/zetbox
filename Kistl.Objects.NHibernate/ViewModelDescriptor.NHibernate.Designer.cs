@@ -1012,60 +1012,60 @@ namespace Kistl.App.GUI
             // fix direct object references
 
             if (_fk_guid_DefaultDisplayKind.HasValue)
-                this.Proxy.DefaultDisplayKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultDisplayKind.Value)).Proxy;
+                this.DefaultDisplayKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultDisplayKind.Value));
             else
             if (_fk_DefaultDisplayKind.HasValue)
-                this.Proxy.DefaultDisplayKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value)).Proxy;
+                this.DefaultDisplayKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value));
             else
-                this.Proxy.DefaultDisplayKind = null;
+                this.DefaultDisplayKind = null;
 
             if (_fk_guid_DefaultEditorKind.HasValue)
-                this.Proxy.DefaultEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultEditorKind.Value)).Proxy;
+                this.DefaultEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultEditorKind.Value));
             else
             if (_fk_DefaultEditorKind.HasValue)
-                this.Proxy.DefaultEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value)).Proxy;
+                this.DefaultEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value));
             else
-                this.Proxy.DefaultEditorKind = null;
+                this.DefaultEditorKind = null;
 
             if (_fk_guid_DefaultGridCellDisplayKind.HasValue)
-                this.Proxy.DefaultGridCellDisplayKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellDisplayKind.Value)).Proxy;
+                this.DefaultGridCellDisplayKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellDisplayKind.Value));
             else
             if (_fk_DefaultGridCellDisplayKind.HasValue)
-                this.Proxy.DefaultGridCellDisplayKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value)).Proxy;
+                this.DefaultGridCellDisplayKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value));
             else
-                this.Proxy.DefaultGridCellDisplayKind = null;
+                this.DefaultGridCellDisplayKind = null;
 
             if (_fk_guid_DefaultGridCellEditorKind.HasValue)
-                this.Proxy.DefaultGridCellEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellEditorKind.Value)).Proxy;
+                this.DefaultGridCellEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellEditorKind.Value));
             else
             if (_fk_DefaultGridCellEditorKind.HasValue)
-                this.Proxy.DefaultGridCellEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value)).Proxy;
+                this.DefaultGridCellEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value));
             else
-                this.Proxy.DefaultGridCellEditorKind = null;
+                this.DefaultGridCellEditorKind = null;
 
             if (_fk_guid_DefaultGridCellPreEditorKind.HasValue)
-                this.Proxy.DefaultGridCellPreEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellPreEditorKind.Value)).Proxy;
+                this.DefaultGridCellPreEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellPreEditorKind.Value));
             else
             if (_fk_DefaultGridCellPreEditorKind.HasValue)
-                this.Proxy.DefaultGridCellPreEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value)).Proxy;
+                this.DefaultGridCellPreEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value));
             else
-                this.Proxy.DefaultGridCellPreEditorKind = null;
+                this.DefaultGridCellPreEditorKind = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Proxy.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value)).Proxy;
+                this.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                this.Proxy.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_Module.Value)).Proxy;
+                this.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_Module.Value));
             else
-                this.Proxy.Module = null;
+                this.Module = null;
 
             if (_fk_guid_ViewModelRef.HasValue)
-                this.Proxy.ViewModelRef = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value)).Proxy;
+                this.ViewModelRef = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value));
             else
             if (_fk_ViewModelRef.HasValue)
-                this.Proxy.ViewModelRef = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_ViewModelRef.Value)).Proxy;
+                this.ViewModelRef = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_ViewModelRef.Value));
             else
-                this.Proxy.ViewModelRef = null;
+                this.ViewModelRef = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

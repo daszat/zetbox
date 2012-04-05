@@ -264,9 +264,9 @@ namespace Kistl.App.Test
             // fix direct object references
 
             if (_fk_Parent.HasValue)
-                this.Proxy.Parent = ((Kistl.App.Test.RequiredParentNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.RequiredParent>(_fk_Parent.Value)).Proxy;
+                this.Parent = ((Kistl.App.Test.RequiredParentNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.RequiredParent>(_fk_Parent.Value));
             else
-                this.Proxy.Parent = null;
+                this.Parent = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

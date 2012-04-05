@@ -422,9 +422,9 @@ namespace Kistl.App.Test
             // fix direct object references
 
             if (_fk_ObjectProp.HasValue)
-                this.Proxy.ObjectProp = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_ObjectProp.Value)).Proxy;
+                this.ObjectProp = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_ObjectProp.Value));
             else
-                this.Proxy.ObjectProp = null;
+                this.ObjectProp = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

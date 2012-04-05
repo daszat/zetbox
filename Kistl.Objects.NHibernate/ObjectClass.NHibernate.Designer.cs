@@ -1168,20 +1168,20 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // fix direct object references
 
             if (_fk_guid_BaseObjectClass.HasValue)
-                this.Proxy.BaseObjectClass = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value)).Proxy;
+                this.BaseObjectClass = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value));
             else
             if (_fk_BaseObjectClass.HasValue)
-                this.Proxy.BaseObjectClass = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value)).Proxy;
+                this.BaseObjectClass = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value));
             else
-                this.Proxy.BaseObjectClass = null;
+                this.BaseObjectClass = null;
 
             if (_fk_guid_DefaultViewModelDescriptor.HasValue)
-                this.Proxy.DefaultViewModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value)).Proxy;
+                this.DefaultViewModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value));
             else
             if (_fk_DefaultViewModelDescriptor.HasValue)
-                this.Proxy.DefaultViewModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value)).Proxy;
+                this.DefaultViewModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value));
             else
-                this.Proxy.DefaultViewModelDescriptor = null;
+                this.DefaultViewModelDescriptor = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

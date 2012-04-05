@@ -1851,62 +1851,62 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.Proxy.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value)).Proxy;
+                this.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value));
             else
-                this.Proxy.ChangedBy = null;
+                this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.Proxy.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value)).Proxy;
+                this.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value));
             else
-                this.Proxy.CreatedBy = null;
+                this.CreatedBy = null;
 
             if (_fk_guid_DefaultValue.HasValue)
-                this.Proxy.DefaultValue = ((Kistl.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value)).Proxy;
+                this.DefaultValue = ((Kistl.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value));
             else
             if (_fk_DefaultValue.HasValue)
-                this.Proxy.DefaultValue = ((Kistl.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value)).Proxy;
+                this.DefaultValue = ((Kistl.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value));
             else
-                this.Proxy.DefaultValue = null;
+                this.DefaultValue = null;
 
             if (_fk_guid_FilterConfiguration.HasValue)
-                this.Proxy.FilterConfiguration = ((Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.PropertyFilterConfiguration>(_fk_guid_FilterConfiguration.Value)).Proxy;
+                this.FilterConfiguration = ((Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.PropertyFilterConfiguration>(_fk_guid_FilterConfiguration.Value));
             else
             if (_fk_FilterConfiguration.HasValue)
-                this.Proxy.FilterConfiguration = ((Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value)).Proxy;
+                this.FilterConfiguration = ((Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.PropertyFilterConfiguration>(_fk_FilterConfiguration.Value));
             else
-                this.Proxy.FilterConfiguration = null;
+                this.FilterConfiguration = null;
 
             if (_fk_guid_Module.HasValue)
-                this.Proxy.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value)).Proxy;
+                this.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value));
             else
             if (_fk_Module.HasValue)
-                this.Proxy.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_Module.Value)).Proxy;
+                this.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_Module.Value));
             else
-                this.Proxy.Module = null;
+                this.Module = null;
 
             if (_fk_guid_ObjectClass.HasValue)
-                this.Proxy.ObjectClass = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value)).Proxy;
+                this.ObjectClass = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value));
             else
             if (_fk_ObjectClass.HasValue)
-                this.Proxy.ObjectClass = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_ObjectClass.Value)).Proxy;
+                this.ObjectClass = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_ObjectClass.Value));
             else
-                this.Proxy.ObjectClass = null;
+                this.ObjectClass = null;
 
             if (_fk_guid_RequestedKind.HasValue)
-                this.Proxy.RequestedKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value)).Proxy;
+                this.RequestedKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedKind.Value));
             else
             if (_fk_RequestedKind.HasValue)
-                this.Proxy.RequestedKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_RequestedKind.Value)).Proxy;
+                this.RequestedKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_RequestedKind.Value));
             else
-                this.Proxy.RequestedKind = null;
+                this.RequestedKind = null;
 
             if (_fk_guid_ValueModelDescriptor.HasValue)
-                this.Proxy.ValueModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value)).Proxy;
+                this.ValueModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value));
             else
             if (_fk_ValueModelDescriptor.HasValue)
-                this.Proxy.ValueModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value)).Proxy;
+                this.ValueModelDescriptor = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value));
             else
-                this.Proxy.ValueModelDescriptor = null;
+                this.ValueModelDescriptor = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

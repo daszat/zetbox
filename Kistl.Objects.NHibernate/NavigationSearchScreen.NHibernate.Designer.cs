@@ -1330,28 +1330,28 @@ namespace Kistl.App.GUI
             // fix direct object references
 
             if (_fk_guid_RequestedEditorKind.HasValue)
-                this.Proxy.RequestedEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedEditorKind.Value)).Proxy;
+                this.RequestedEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedEditorKind.Value));
             else
             if (_fk_RequestedEditorKind.HasValue)
-                this.Proxy.RequestedEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value)).Proxy;
+                this.RequestedEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value));
             else
-                this.Proxy.RequestedEditorKind = null;
+                this.RequestedEditorKind = null;
 
             if (_fk_guid_RequestedWorkspaceKind.HasValue)
-                this.Proxy.RequestedWorkspaceKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedWorkspaceKind.Value)).Proxy;
+                this.RequestedWorkspaceKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedWorkspaceKind.Value));
             else
             if (_fk_RequestedWorkspaceKind.HasValue)
-                this.Proxy.RequestedWorkspaceKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value)).Proxy;
+                this.RequestedWorkspaceKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value));
             else
-                this.Proxy.RequestedWorkspaceKind = null;
+                this.RequestedWorkspaceKind = null;
 
             if (_fk_guid_Type.HasValue)
-                this.Proxy.Type = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_Type.Value)).Proxy;
+                this.Type = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_Type.Value));
             else
             if (_fk_Type.HasValue)
-                this.Proxy.Type = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_Type.Value)).Proxy;
+                this.Type = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_Type.Value));
             else
-                this.Proxy.Type = null;
+                this.Type = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

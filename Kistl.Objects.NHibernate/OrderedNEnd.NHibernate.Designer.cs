@@ -295,9 +295,9 @@ namespace Kistl.App.Test
             // fix direct object references
 
             if (_fk_OneEnd.HasValue)
-                this.Proxy.OneEnd = ((Kistl.App.Test.OrderedOneEndNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.OrderedOneEnd>(_fk_OneEnd.Value)).Proxy;
+                this.OneEnd = ((Kistl.App.Test.OrderedOneEndNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.OrderedOneEnd>(_fk_OneEnd.Value));
             else
-                this.Proxy.OneEnd = null;
+                this.OneEnd = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

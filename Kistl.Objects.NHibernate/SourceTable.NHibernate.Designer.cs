@@ -1137,30 +1137,30 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.Proxy.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value)).Proxy;
+                this.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value));
             else
-                this.Proxy.ChangedBy = null;
+                this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.Proxy.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value)).Proxy;
+                this.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value));
             else
-                this.Proxy.CreatedBy = null;
+                this.CreatedBy = null;
 
             if (_fk_guid_DestinationObjectClass.HasValue)
-                this.Proxy.DestinationObjectClass = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_DestinationObjectClass.Value)).Proxy;
+                this.DestinationObjectClass = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_DestinationObjectClass.Value));
             else
             if (_fk_DestinationObjectClass.HasValue)
-                this.Proxy.DestinationObjectClass = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value)).Proxy;
+                this.DestinationObjectClass = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value));
             else
-                this.Proxy.DestinationObjectClass = null;
+                this.DestinationObjectClass = null;
 
             if (_fk_guid_StagingDatabase.HasValue)
-                this.Proxy.StagingDatabase = ((ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.StagingDatabase>(_fk_guid_StagingDatabase.Value)).Proxy;
+                this.StagingDatabase = ((ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.StagingDatabase>(_fk_guid_StagingDatabase.Value));
             else
             if (_fk_StagingDatabase.HasValue)
-                this.Proxy.StagingDatabase = ((ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value)).Proxy;
+                this.StagingDatabase = ((ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value));
             else
-                this.Proxy.StagingDatabase = null;
+                this.StagingDatabase = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -679,14 +679,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             // fix direct object references
 
             if (_fk_MubBlah_Nav.HasValue)
-                this.Proxy.MubBlah_Nav = ((Kistl.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_MubBlah_Nav.Value)).Proxy;
+                this.MubBlah_Nav = ((Kistl.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_MubBlah_Nav.Value));
             else
-                this.Proxy.MubBlah_Nav = null;
+                this.MubBlah_Nav = null;
 
             if (_fk_MuhBlah_One_Nav.HasValue)
-                this.Proxy.MuhBlah_One_Nav = ((Kistl.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value)).Proxy;
+                this.MuhBlah_One_Nav = ((Kistl.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value));
             else
-                this.Proxy.MuhBlah_One_Nav = null;
+                this.MuhBlah_One_Nav = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

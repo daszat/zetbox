@@ -247,12 +247,12 @@ namespace Kistl.App.Base
             // fix direct object references
 
             if (_fk_guid_EnumValue.HasValue)
-                this.Proxy.EnumValue = ((Kistl.App.Base.EnumerationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.EnumerationEntry>(_fk_guid_EnumValue.Value)).Proxy;
+                this.EnumValue = ((Kistl.App.Base.EnumerationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.EnumerationEntry>(_fk_guid_EnumValue.Value));
             else
             if (_fk_EnumValue.HasValue)
-                this.Proxy.EnumValue = ((Kistl.App.Base.EnumerationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.EnumerationEntry>(_fk_EnumValue.Value)).Proxy;
+                this.EnumValue = ((Kistl.App.Base.EnumerationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.EnumerationEntry>(_fk_EnumValue.Value));
             else
-                this.Proxy.EnumValue = null;
+                this.EnumValue = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

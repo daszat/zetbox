@@ -409,20 +409,20 @@ namespace Kistl.App.Base
             // fix direct object references
 
             if (_fk_guid_GetErrorTextInvocation.HasValue)
-                this.Proxy.GetErrorTextInvocation = ((Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_GetErrorTextInvocation.Value)).Proxy;
+                this.GetErrorTextInvocation = ((Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_GetErrorTextInvocation.Value));
             else
             if (_fk_GetErrorTextInvocation.HasValue)
-                this.Proxy.GetErrorTextInvocation = ((Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value)).Proxy;
+                this.GetErrorTextInvocation = ((Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value));
             else
-                this.Proxy.GetErrorTextInvocation = null;
+                this.GetErrorTextInvocation = null;
 
             if (_fk_guid_IsValidInvocation.HasValue)
-                this.Proxy.IsValidInvocation = ((Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_IsValidInvocation.Value)).Proxy;
+                this.IsValidInvocation = ((Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_IsValidInvocation.Value));
             else
             if (_fk_IsValidInvocation.HasValue)
-                this.Proxy.IsValidInvocation = ((Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value)).Proxy;
+                this.IsValidInvocation = ((Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value));
             else
-                this.Proxy.IsValidInvocation = null;
+                this.IsValidInvocation = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

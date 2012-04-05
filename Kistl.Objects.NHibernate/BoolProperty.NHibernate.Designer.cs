@@ -874,28 +874,28 @@ namespace Kistl.App.Base
             // fix direct object references
 
             if (_fk_guid_FalseIcon.HasValue)
-                this.Proxy.FalseIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_FalseIcon.Value)).Proxy;
+                this.FalseIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_FalseIcon.Value));
             else
             if (_fk_FalseIcon.HasValue)
-                this.Proxy.FalseIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_FalseIcon.Value)).Proxy;
+                this.FalseIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_FalseIcon.Value));
             else
-                this.Proxy.FalseIcon = null;
+                this.FalseIcon = null;
 
             if (_fk_guid_NullIcon.HasValue)
-                this.Proxy.NullIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_NullIcon.Value)).Proxy;
+                this.NullIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_NullIcon.Value));
             else
             if (_fk_NullIcon.HasValue)
-                this.Proxy.NullIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_NullIcon.Value)).Proxy;
+                this.NullIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_NullIcon.Value));
             else
-                this.Proxy.NullIcon = null;
+                this.NullIcon = null;
 
             if (_fk_guid_TrueIcon.HasValue)
-                this.Proxy.TrueIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_TrueIcon.Value)).Proxy;
+                this.TrueIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_TrueIcon.Value));
             else
             if (_fk_TrueIcon.HasValue)
-                this.Proxy.TrueIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_TrueIcon.Value)).Proxy;
+                this.TrueIcon = ((Kistl.App.GUI.IconNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_TrueIcon.Value));
             else
-                this.Proxy.TrueIcon = null;
+                this.TrueIcon = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

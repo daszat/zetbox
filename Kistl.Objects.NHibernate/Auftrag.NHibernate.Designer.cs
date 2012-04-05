@@ -1020,38 +1020,38 @@ namespace Kistl.App.Projekte
             // fix direct object references
 
             if (_fk_ChangedBy.HasValue)
-                this.Proxy.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value)).Proxy;
+                this.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value));
             else
-                this.Proxy.ChangedBy = null;
+                this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.Proxy.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value)).Proxy;
+                this.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value));
             else
-                this.Proxy.CreatedBy = null;
+                this.CreatedBy = null;
 
             if (_fk_guid_Kunde.HasValue)
-                this.Proxy.Kunde = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_guid_Kunde.Value)).Proxy;
+                this.Kunde = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_guid_Kunde.Value));
             else
             if (_fk_Kunde.HasValue)
-                this.Proxy.Kunde = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_Kunde.Value)).Proxy;
+                this.Kunde = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_Kunde.Value));
             else
-                this.Proxy.Kunde = null;
+                this.Kunde = null;
 
             if (_fk_guid_Mitarbeiter.HasValue)
-                this.Proxy.Mitarbeiter = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_Mitarbeiter.Value)).Proxy;
+                this.Mitarbeiter = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_Mitarbeiter.Value));
             else
             if (_fk_Mitarbeiter.HasValue)
-                this.Proxy.Mitarbeiter = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value)).Proxy;
+                this.Mitarbeiter = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value));
             else
-                this.Proxy.Mitarbeiter = null;
+                this.Mitarbeiter = null;
 
             if (_fk_guid_Projekt.HasValue)
-                this.Proxy.Projekt = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value)).Proxy;
+                this.Projekt = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value));
             else
             if (_fk_Projekt.HasValue)
-                this.Proxy.Projekt = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value)).Proxy;
+                this.Projekt = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value));
             else
-                this.Proxy.Projekt = null;
+                this.Projekt = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

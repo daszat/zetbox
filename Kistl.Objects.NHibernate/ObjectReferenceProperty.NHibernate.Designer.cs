@@ -728,12 +728,12 @@ namespace Kistl.App.Base
             // fix direct object references
 
             if (_fk_guid_RelationEnd.HasValue)
-                this.Proxy.RelationEnd = ((Kistl.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value)).Proxy;
+                this.RelationEnd = ((Kistl.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value));
             else
             if (_fk_RelationEnd.HasValue)
-                this.Proxy.RelationEnd = ((Kistl.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value)).Proxy;
+                this.RelationEnd = ((Kistl.App.Base.RelationEndNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value));
             else
-                this.Proxy.RelationEnd = null;
+                this.RelationEnd = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

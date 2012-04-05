@@ -264,9 +264,9 @@ namespace Kistl.App.Test
             // fix direct object references
 
             if (_fk_OneSide.HasValue)
-                this.Proxy.OneSide = ((Kistl.App.Test.One_to_N_relations_OneNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.One_to_N_relations_One>(_fk_OneSide.Value)).Proxy;
+                this.OneSide = ((Kistl.App.Test.One_to_N_relations_OneNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.One_to_N_relations_One>(_fk_OneSide.Value));
             else
-                this.Proxy.OneSide = null;
+                this.OneSide = null;
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
