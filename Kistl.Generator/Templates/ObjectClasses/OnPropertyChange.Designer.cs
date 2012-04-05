@@ -42,23 +42,30 @@ this.WriteObjects("        #region ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        protected override void OnPropertyChanged(string property, object oldValue, object newValue)\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            switch (property)\r\n");
-this.WriteObjects("            {\r\n");
-#line 22 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
-foreach (var prop in props) { 
-#line 23 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
-this.WriteObjects("                case \"",  prop.Name , "\":\r\n");
-this.WriteObjects("                    _",  prop.Name , "_IsDirty = true;\r\n");
-this.WriteObjects("                    break;\r\n");
-#line 26 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
-} 
-#line 27 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
-this.WriteObjects("            }\r\n");
 this.WriteObjects("            base.OnPropertyChanged(property, oldValue, newValue);\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
+this.WriteObjects("		public override void Recalculate(string property)\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            switch (property)\r\n");
+this.WriteObjects("            {\r\n");
+#line 27 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+foreach (var prop in props) { 
+#line 28 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+this.WriteObjects("                case \"",  prop.Name , "\":\r\n");
+this.WriteObjects("                    _",  prop.Name , "_IsDirty = true;\r\n");
+this.WriteObjects("					NotifyPropertyChanged(property, null, null);\r\n");
+this.WriteObjects("                    return;\r\n");
 #line 32 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+} 
+#line 33 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+this.WriteObjects("            }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("			base.Recalculate(property);\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
+#line 39 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 } 
 
         }

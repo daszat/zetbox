@@ -953,13 +953,20 @@ namespace Kistl.App.Base
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
+            base.OnPropertyChanged(property, oldValue, newValue);
+        }
+
+		public override void Recalculate(string property)
+        {
             switch (property)
             {
                 case "CurrentNumber":
                     _CurrentNumber_IsDirty = true;
-                    break;
+					NotifyPropertyChanged(property, null, null);
+                    return;
             }
-            base.OnPropertyChanged(property, oldValue, newValue);
+
+			base.Recalculate(property);
         }
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange

@@ -307,5 +307,10 @@ namespace Kistl.API.Client.Mocks.OneNLists
         {
             throw new NotImplementedException();
         }
+
+        public void Recalculate(string propName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

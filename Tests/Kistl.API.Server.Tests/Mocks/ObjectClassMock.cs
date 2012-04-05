@@ -194,6 +194,10 @@ namespace Kistl.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
+        public void Recalculate(string propName)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region IPersistenceObject Members

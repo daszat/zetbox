@@ -17,15 +17,22 @@
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
+            base.OnPropertyChanged(property, oldValue, newValue);
+        }
+
+		public override void Recalculate(string property)
+        {
             switch (property)
             {
 <%      foreach (var prop in props) { %>
                 case "<%= prop.Name %>":
                     _<%= prop.Name %>_IsDirty = true;
-                    break;
+					NotifyPropertyChanged(property, null, null);
+                    return;
 <%      } %>
             }
-            base.OnPropertyChanged(property, oldValue, newValue);
+
+			base.Recalculate(property);
         }
 
         #endregion // <%= this.GetType() %>

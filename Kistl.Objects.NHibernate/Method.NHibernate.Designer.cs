@@ -1436,13 +1436,20 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
+            base.OnPropertyChanged(property, oldValue, newValue);
+        }
+
+		public override void Recalculate(string property)
+        {
             switch (property)
             {
                 case "CodeTemplate":
                     _CodeTemplate_IsDirty = true;
-                    break;
+					NotifyPropertyChanged(property, null, null);
+                    return;
             }
-            base.OnPropertyChanged(property, oldValue, newValue);
+
+			base.Recalculate(property);
         }
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
