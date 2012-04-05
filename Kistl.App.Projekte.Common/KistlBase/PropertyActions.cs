@@ -89,13 +89,13 @@ namespace Kistl.App.Base
         [Invocation]
         public static void postSet_Name(Property obj, PropertyPostSetterEventArgs<string> e)
         {
-            obj.NotifyPropertyChanged("CodeTemplate", string.Empty, string.Empty);
+            obj.Recalculate("CodeTemplate");
         }
 
         [Invocation]
         public static void postSet_ObjectClass(Property obj, PropertyPostSetterEventArgs<DataType> e)
         {
-            obj.NotifyPropertyChanged("CodeTemplate", string.Empty, string.Empty);
+            obj.Recalculate("CodeTemplate");
         }
 
         [Invocation]

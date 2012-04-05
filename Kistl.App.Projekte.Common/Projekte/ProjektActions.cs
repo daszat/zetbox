@@ -21,7 +21,7 @@ namespace Kistl.App.Projekte
         [Invocation]
         public static void postSet_Tasks(Projekt obj)
         {
-            obj.NotifyPropertyChanged("AufwandGes", null, null);
+            obj.Recalculate("AufwandGes");
         }
 
         [Invocation]
