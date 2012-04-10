@@ -226,17 +226,24 @@ using Kistl.API.Client.PerfCounter;
             List<IStreamable> result = new List<IStreamable>();
             bool cont = true;
             BinarySerializer.FromStream(out cont, sr);
+            long dbgByteCounter = 0;
+            long dbgObjTypeByteCounter = 0;
             while (cont)
             {
+                long dbgCurrentPos = sr.BaseStream.Position;
                 SerializableType objType;
                 BinarySerializer.FromStream(out objType, sr);
+                dbgObjTypeByteCounter += sr.BaseStream.Position - dbgCurrentPos;
 
                 IStreamable obj = (IStreamable)ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
                 obj.FromStream(sr);
                 result.Add((IStreamable)obj);
 
                 BinarySerializer.FromStream(out cont, sr);
+                long dbgSize = sr.BaseStream.Position - dbgCurrentPos;
+                dbgByteCounter += dbgSize;
             }
+            Logging.Facade.DebugFormat("ReceiveObjectList: {0:n0} objects; {1:n0} bytes total size; {2:n0} bytes avg. size / object; Total ObjType size: {3:n0}; {4:n2}% of total", result.Count, dbgByteCounter, (double)dbgByteCounter / (double)result.Count, dbgObjTypeByteCounter, (double)dbgObjTypeByteCounter / (double)dbgByteCounter * 100.0);
             return result;
         }
 
