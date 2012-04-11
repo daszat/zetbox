@@ -37,7 +37,10 @@ namespace Kistl.App.Base
         public static void preSet_Data(Sequence obj, PropertyPreSetterEventArgs<SequenceData> e)
         {
             // TODO: Workaroud: No! Changing Sequence Data is not allowed
-            e.Result = e.OldValue;
+            if (e.OldValue != null)
+            {
+                e.Result = e.OldValue;
+            }
         }
     }
 }
