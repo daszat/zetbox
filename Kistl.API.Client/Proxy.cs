@@ -120,6 +120,8 @@ using Kistl.API.Client.PerfCounter;
                         _orderBy);
                 });
 
+                Logging.Facade.DebugFormat("GetList retrieved: {0:n0} bytes", bytes.Length);
+
                 IEnumerable<IDataObject> result = null;
                 using (var sr = new BinaryReader(new MemoryStream(bytes)))
                 {
