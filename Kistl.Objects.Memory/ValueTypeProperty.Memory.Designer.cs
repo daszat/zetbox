@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ValueTypeProperty")]
     public abstract class ValueTypePropertyMemoryImpl : Kistl.App.Base.PropertyMemoryImpl, ValueTypeProperty
     {
+        private static readonly Guid _objectClassID = new Guid("b0c23c07-950f-47a0-af23-a925dc691b3e");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ValueTypePropertyMemoryImpl()
             : base(null)

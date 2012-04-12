@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ServiceDescriptor")]
     public class ServiceDescriptorMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Kistl.API.IExportableInternal, ServiceDescriptor
     {
+        private static readonly Guid _objectClassID = new Guid("d1bf8a7e-a8c0-435b-9dfe-b5ab61e71d1a");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ServiceDescriptorMemoryImpl()
             : base(null)

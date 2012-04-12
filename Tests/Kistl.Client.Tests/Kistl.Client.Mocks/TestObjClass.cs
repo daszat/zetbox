@@ -407,5 +407,10 @@ namespace Kistl.App.Test
         }
 
         #endregion
+
+        public override Guid ObjectClassID
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

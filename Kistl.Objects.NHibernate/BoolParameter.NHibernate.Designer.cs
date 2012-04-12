@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolParameter")]
     public class BoolParameterNHibernateImpl : Kistl.App.Base.BaseParameterNHibernateImpl, BoolParameter
     {
+        private static readonly Guid _objectClassID = new Guid("2fe66550-c506-4a60-ac88-19db27bf1f4b");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public BoolParameterNHibernateImpl()
             : this(null)
         {

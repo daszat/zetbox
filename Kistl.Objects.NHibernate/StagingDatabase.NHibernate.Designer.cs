@@ -24,6 +24,9 @@ namespace ZBox.App.SchemaMigration
     [System.Diagnostics.DebuggerDisplay("StagingDatabase")]
     public class StagingDatabaseNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, StagingDatabase
     {
+        private static readonly Guid _objectClassID = new Guid("4faf24fe-d732-4a1c-9156-2cbb7ec4be56");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public StagingDatabaseNHibernateImpl()
             : this(null)
         {

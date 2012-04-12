@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DecimalProperty")]
     public class DecimalPropertyNHibernateImpl : Kistl.App.Base.ValueTypePropertyNHibernateImpl, DecimalProperty
     {
+        private static readonly Guid _objectClassID = new Guid("7e44265e-8d41-4f5f-bb5c-5038b55be5b2");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public DecimalPropertyNHibernateImpl()
             : this(null)
         {

@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ValueTypeProperty")]
     public abstract class ValueTypePropertyNHibernateImpl : Kistl.App.Base.PropertyNHibernateImpl, ValueTypeProperty
     {
+        private static readonly Guid _objectClassID = new Guid("b0c23c07-950f-47a0-af23-a925dc691b3e");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public ValueTypePropertyNHibernateImpl()
             : this(null)
         {

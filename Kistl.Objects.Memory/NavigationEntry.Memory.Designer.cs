@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("NavigationEntry")]
     public abstract class NavigationEntryMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Kistl.API.IExportableInternal, NavigationEntry
     {
+        private static readonly Guid _objectClassID = new Guid("9a640b13-a8c2-4a90-899a-954f0c57c1ab");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public NavigationEntryMemoryImpl()
             : base(null)

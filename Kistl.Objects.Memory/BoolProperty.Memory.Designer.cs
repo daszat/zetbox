@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolProperty")]
     public class BoolPropertyMemoryImpl : Kistl.App.Base.ValueTypePropertyMemoryImpl, BoolProperty
     {
+        private static readonly Guid _objectClassID = new Guid("3604a7b6-dffb-44ee-8464-5f292d7a0687");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public BoolPropertyMemoryImpl()
             : base(null)

@@ -26,6 +26,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("StaticFile")]
     public class StaticFileEfImpl : at.dasz.DocumentManagement.FileEfImpl, StaticFile
     {
+        private static readonly Guid _objectClassID = new Guid("5aaabfe9-081d-445d-a543-53e0253feeb8");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public StaticFileEfImpl()
             : base(null)

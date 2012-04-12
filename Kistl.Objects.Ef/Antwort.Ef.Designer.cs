@@ -26,6 +26,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Antwort")]
     public class AntwortEfImpl : BaseServerDataObject_EntityFramework, Antwort
     {
+        private static readonly Guid _objectClassID = new Guid("e5577f89-58d1-4983-ab35-60e6624780df");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public AntwortEfImpl()
             : base(null)

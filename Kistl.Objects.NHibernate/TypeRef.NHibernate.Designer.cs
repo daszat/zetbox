@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
     public class TypeRefNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, TypeRef
     {
+        private static readonly Guid _objectClassID = new Guid("87766ae2-89a4-4c37-ab25-583a710c55e5");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public TypeRefNHibernateImpl()
             : this(null)
         {

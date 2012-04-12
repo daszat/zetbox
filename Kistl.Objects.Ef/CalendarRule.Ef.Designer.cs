@@ -26,6 +26,9 @@ namespace Kistl.App.Calendar
     [System.Diagnostics.DebuggerDisplay("CalendarRule")]
     public abstract class CalendarRuleEfImpl : BaseServerDataObject_EntityFramework, CalendarRule, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("ee70b186-09ae-43a3-afb2-a632c47765b9");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public CalendarRuleEfImpl()
             : base(null)

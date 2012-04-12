@@ -90,5 +90,10 @@ namespace Kistl.API.Client.Mocks.OneNLists
         {
             throw new NotImplementedException();
         }
+
+        public override Guid ObjectClassID
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

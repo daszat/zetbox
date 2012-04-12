@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BaseParameter")]
     public abstract class BaseParameterEfImpl : BaseServerDataObject_EntityFramework, BaseParameter, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("63b8e3f7-e663-4fde-a09a-64ca876586bd");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public BaseParameterEfImpl()
             : base(null)

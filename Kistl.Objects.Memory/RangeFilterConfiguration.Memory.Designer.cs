@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("RangeFilterConfiguration")]
     public class RangeFilterConfigurationMemoryImpl : Kistl.App.GUI.PropertyFilterConfigurationMemoryImpl, RangeFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("549efe2c-9dc7-4458-a0ff-b7c0710ae84c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public RangeFilterConfigurationMemoryImpl()
             : base(null)

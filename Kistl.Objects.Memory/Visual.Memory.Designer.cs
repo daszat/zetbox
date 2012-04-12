@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Visual")]
     public class VisualMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Visual
     {
+        private static readonly Guid _objectClassID = new Guid("98790e5d-808f-4e0b-8a1a-b304839f07ab");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public VisualMemoryImpl()
             : base(null)

@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("OrderedNEnd")]
     public class OrderedNEndMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, OrderedNEnd
     {
+        private static readonly Guid _objectClassID = new Guid("e39c9cbb-3181-49e1-93ab-aed0d0e11728");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public OrderedNEndMemoryImpl()
             : base(null)

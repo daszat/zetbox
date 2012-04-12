@@ -24,6 +24,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Muhblah")]
     public class MuhblahNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Muhblah
     {
+        private static readonly Guid _objectClassID = new Guid("fd357e42-2c2c-4bef-8110-69a466d09af0");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public MuhblahNHibernateImpl()
             : this(null)
         {

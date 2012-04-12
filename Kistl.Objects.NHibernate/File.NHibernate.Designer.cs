@@ -24,6 +24,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("File")]
     public abstract class FileNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, File, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public FileNHibernateImpl()
             : this(null)
         {

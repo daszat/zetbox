@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("InitOnlyConstraint")]
     public class InitOnlyConstraintEfImpl : Kistl.App.Base.ReadOnlyConstraintEfImpl, InitOnlyConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("aa0a3dcf-fadf-4d53-8fbd-102a9770357c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public InitOnlyConstraintEfImpl()
             : base(null)

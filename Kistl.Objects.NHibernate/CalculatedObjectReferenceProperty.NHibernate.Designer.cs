@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty")]
     public class CalculatedObjectReferencePropertyNHibernateImpl : Kistl.App.Base.PropertyNHibernateImpl, CalculatedObjectReferenceProperty
     {
+        private static readonly Guid _objectClassID = new Guid("8708c578-6e55-4349-ba24-ede46ca6f585");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public CalculatedObjectReferencePropertyNHibernateImpl()
             : this(null)
         {

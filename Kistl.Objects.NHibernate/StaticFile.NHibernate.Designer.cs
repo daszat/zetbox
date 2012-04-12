@@ -24,6 +24,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("StaticFile")]
     public class StaticFileNHibernateImpl : at.dasz.DocumentManagement.FileNHibernateImpl, StaticFile
     {
+        private static readonly Guid _objectClassID = new Guid("5aaabfe9-081d-445d-a543-53e0253feeb8");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public StaticFileNHibernateImpl()
             : this(null)
         {

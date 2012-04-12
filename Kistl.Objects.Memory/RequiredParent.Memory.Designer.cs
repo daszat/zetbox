@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("RequiredParent")]
     public class RequiredParentMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, RequiredParent
     {
+        private static readonly Guid _objectClassID = new Guid("0d753d7d-b023-43ce-9189-2ea6d03b70a1");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public RequiredParentMemoryImpl()
             : base(null)

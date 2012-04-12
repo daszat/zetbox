@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DoubleProperty")]
     public class DoublePropertyNHibernateImpl : Kistl.App.Base.ValueTypePropertyNHibernateImpl, DoubleProperty
     {
+        private static readonly Guid _objectClassID = new Guid("404782b3-fbbc-4190-9b96-43dad7177090");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public DoublePropertyNHibernateImpl()
             : this(null)
         {

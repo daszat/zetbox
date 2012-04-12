@@ -24,6 +24,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestCustomObject")]
     public class TestCustomObjectNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, TestCustomObject
     {
+        private static readonly Guid _objectClassID = new Guid("de155110-79cc-4dac-89d6-0916608be1fb");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public TestCustomObjectNHibernateImpl()
             : this(null)
         {

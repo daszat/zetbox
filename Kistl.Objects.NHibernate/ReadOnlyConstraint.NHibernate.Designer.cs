@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ReadOnlyConstraint")]
     public abstract class ReadOnlyConstraintNHibernateImpl : Kistl.App.Base.ConstraintNHibernateImpl, ReadOnlyConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("c83424ff-71bd-449a-81c7-4b6439fa28c6");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public ReadOnlyConstraintNHibernateImpl()
             : this(null)
         {

@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Group")]
     public class GroupNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Group, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("01a06aef-8fe4-4cb6-b348-ee4bcd11f5af");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public GroupNHibernateImpl()
             : this(null)
         {

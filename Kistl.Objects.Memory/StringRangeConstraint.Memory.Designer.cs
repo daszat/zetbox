@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringRangeConstraint")]
     public class StringRangeConstraintMemoryImpl : Kistl.App.Base.ConstraintMemoryImpl, StringRangeConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("7bb90dc3-2b8c-4cff-ba8e-435ff386a4cf");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public StringRangeConstraintMemoryImpl()
             : base(null)

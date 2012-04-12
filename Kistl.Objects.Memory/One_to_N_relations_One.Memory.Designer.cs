@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("One_to_N_relations_One")]
     public class One_to_N_relations_OneMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, One_to_N_relations_One
     {
+        private static readonly Guid _objectClassID = new Guid("e98ca434-19be-4daa-8920-d979a1d98522");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public One_to_N_relations_OneMemoryImpl()
             : base(null)

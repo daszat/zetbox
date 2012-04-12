@@ -7812,6 +7812,9 @@ namespace Kistl.App.Projekte
         }
         private int _ID;
         // END Kistl.Generator.Templates.Properties.IdProperty
+        private static readonly Guid _propertyID = new Guid("1d0f6da6-4b69-48d7-9e94-bfb5466654b9");
+        public override Guid PropertyID { get { return _propertyID; } }
+
 
         /// <summary>
         /// the A-side value of this CollectionEntry
@@ -8085,6 +8088,9 @@ namespace Kistl.App.Test
         }
         private int _ID;
         // END Kistl.Generator.Templates.Properties.IdProperty
+        private static readonly Guid _propertyID = new Guid("0c0c1101-118a-4ce2-806c-d30a03b19dde");
+        public override Guid PropertyID { get { return _propertyID; } }
+
 
         /// <summary>
         /// the A-side value of this CollectionEntry

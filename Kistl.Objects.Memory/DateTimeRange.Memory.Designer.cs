@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DateTimeRange")]
     public class DateTimeRangeMemoryImpl : CompoundObjectDefaultImpl, DateTimeRange, ICompoundObject
     {
+        private static readonly Guid _compoundObjectID = new Guid("0a5419ae-2acf-4c4e-b998-6fcb25dc5650");
+        public override Guid CompoundObjectID { get { return _compoundObjectID; } }
+
         [Obsolete]
         public DateTimeRangeMemoryImpl()
             : base(null)

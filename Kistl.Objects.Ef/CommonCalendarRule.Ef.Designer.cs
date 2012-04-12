@@ -26,6 +26,9 @@ namespace Kistl.App.Calendar
     [System.Diagnostics.DebuggerDisplay("CommonCalendarRule")]
     public class CommonCalendarRuleEfImpl : Kistl.App.Calendar.CalendarRuleEfImpl, CommonCalendarRule
     {
+        private static readonly Guid _objectClassID = new Guid("198bab3d-85a9-4d11-99e1-5e3f9420bdae");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public CommonCalendarRuleEfImpl()
             : base(null)

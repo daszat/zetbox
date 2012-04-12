@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Group")]
     public class GroupMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Group, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("01a06aef-8fe4-4cb6-b348-ee4bcd11f5af");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public GroupMemoryImpl()
             : base(null)

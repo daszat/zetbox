@@ -25,6 +25,7 @@ namespace Kistl.DalProvider.Memory
         /// <inheritdoc />
         public virtual void NotifyDeleting() { }
 
+        public abstract Guid ObjectClassID { get; }
 
         #endregion
 

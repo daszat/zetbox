@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DecimalParameter")]
     public class DecimalParameterEfImpl : Kistl.App.Base.BaseParameterEfImpl, DecimalParameter
     {
+        private static readonly Guid _objectClassID = new Guid("f839cf8c-4cd4-4351-bbfe-d599a93af226");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public DecimalParameterEfImpl()
             : base(null)

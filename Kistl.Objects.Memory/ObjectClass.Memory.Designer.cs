@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectClass")]
     public class ObjectClassMemoryImpl : Kistl.App.Base.DataTypeMemoryImpl, ObjectClass
     {
+        private static readonly Guid _objectClassID = new Guid("20888dfc-1fbc-47c8-9f3c-c6a30a5c0048");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ObjectClassMemoryImpl()
             : base(null)

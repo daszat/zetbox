@@ -49,5 +49,10 @@ namespace Kistl.API.Mocks
         {
             throw new NotImplementedException();
         }
+
+        public override Guid CompoundObjectID
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

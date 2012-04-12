@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestPhoneCompoundObject")]
     public class TestPhoneCompoundObjectMemoryImpl : CompoundObjectDefaultImpl, ICompoundObject, TestPhoneCompoundObject
     {
+        private static readonly Guid _compoundObjectID = new Guid("2510af08-089f-4252-8a98-ec84cb67bcb9");
+        public override Guid CompoundObjectID { get { return _compoundObjectID; } }
+
         [Obsolete]
         public TestPhoneCompoundObjectMemoryImpl()
             : base(null)

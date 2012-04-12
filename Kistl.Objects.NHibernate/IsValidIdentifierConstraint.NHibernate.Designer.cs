@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IsValidIdentifierConstraint")]
     public class IsValidIdentifierConstraintNHibernateImpl : Kistl.App.Base.ConstraintNHibernateImpl, IsValidIdentifierConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("ed8f30ad-186f-48ee-8dd5-a153d24dfada");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public IsValidIdentifierConstraintNHibernateImpl()
             : this(null)
         {

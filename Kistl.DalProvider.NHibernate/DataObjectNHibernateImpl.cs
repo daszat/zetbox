@@ -34,6 +34,8 @@ namespace Kistl.DalProvider.NHibernate
         /// <inheritdoc />
         public virtual void NotifyDeleting() { }
 
+        public abstract Guid ObjectClassID { get; }
+
         #endregion
 
         public virtual void UpdateParent(string propertyName, IDataObject parentObj)

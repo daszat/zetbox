@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("InstanceConstraint")]
     public class InstanceConstraintNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, InstanceConstraint, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("25a83f49-3cff-4baf-850d-8d185bb329ec");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public InstanceConstraintNHibernateImpl()
             : this(null)
         {

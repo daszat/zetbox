@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ExceptionLogEntry")]
     public class ExceptionLogEntryNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, ExceptionLogEntry
     {
+        private static readonly Guid _objectClassID = new Guid("72d9934d-aee9-4512-ad1e-1a30af1d353e");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public ExceptionLogEntryNHibernateImpl()
             : this(null)
         {

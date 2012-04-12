@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ClientReadOnlyConstraint")]
     public class ClientReadOnlyConstraintMemoryImpl : Kistl.App.Base.ReadOnlyConstraintMemoryImpl, ClientReadOnlyConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("87ccfb15-e731-448e-9a0a-3f8b73f767a7");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ClientReadOnlyConstraintMemoryImpl()
             : base(null)

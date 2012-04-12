@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("AccessControl")]
     public class AccessControlEfImpl : BaseServerDataObject_EntityFramework, AccessControl, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("f1c37bfb-e45f-4964-b6ba-672c1ec81b60");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public AccessControlEfImpl()
             : base(null)

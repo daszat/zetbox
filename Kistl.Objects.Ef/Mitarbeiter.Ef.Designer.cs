@@ -26,6 +26,9 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Mitarbeiter")]
     public class MitarbeiterEfImpl : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Mitarbeiter
     {
+        private static readonly Guid _objectClassID = new Guid("77933a20-338a-4961-b751-62ffa0a75c6a");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public MitarbeiterEfImpl()
             : base(null)

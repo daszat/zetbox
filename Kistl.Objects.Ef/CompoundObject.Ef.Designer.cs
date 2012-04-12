@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CompoundObject")]
     public class CompoundObjectEfImpl : Kistl.App.Base.DataTypeEfImpl, CompoundObject
     {
+        private static readonly Guid _objectClassID = new Guid("2cb3f778-dd6a-46c7-ad2b-5f8691313035");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public CompoundObjectEfImpl()
             : base(null)

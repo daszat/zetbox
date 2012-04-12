@@ -24,6 +24,9 @@ namespace Kistl.App.Calendar
     [System.Diagnostics.DebuggerDisplay("Calendar")]
     public class CalendarNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Calendar, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("901a2ddd-1330-4129-b8a2-92b8e655d168");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public CalendarNHibernateImpl()
             : this(null)
         {

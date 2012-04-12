@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("NavigationAction")]
     public class NavigationActionEfImpl : Kistl.App.GUI.NavigationEntryEfImpl, NavigationAction
     {
+        private static readonly Guid _objectClassID = new Guid("e1415447-ccb4-4de5-aba0-9479c4472b08");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public NavigationActionEfImpl()
             : base(null)

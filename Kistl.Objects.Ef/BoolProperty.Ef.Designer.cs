@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolProperty")]
     public class BoolPropertyEfImpl : Kistl.App.Base.ValueTypePropertyEfImpl, BoolProperty
     {
+        private static readonly Guid _objectClassID = new Guid("3604a7b6-dffb-44ee-8464-5f292d7a0687");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public BoolPropertyEfImpl()
             : base(null)

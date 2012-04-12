@@ -24,6 +24,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("RequiredParentChild")]
     public class RequiredParentChildNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, RequiredParentChild
     {
+        private static readonly Guid _objectClassID = new Guid("3e7f2f55-ff5c-4a13-ba58-74368e9c8780");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public RequiredParentChildNHibernateImpl()
             : this(null)
         {

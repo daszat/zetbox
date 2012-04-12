@@ -24,6 +24,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestDecimal")]
     public class TestDecimalNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, TestDecimal
     {
+        private static readonly Guid _objectClassID = new Guid("9a352669-42c1-4384-b2d3-6de6d198938e");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public TestDecimalNHibernateImpl()
             : this(null)
         {

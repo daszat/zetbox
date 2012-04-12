@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestStudent")]
     public class TestStudentMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, TestStudent
     {
+        private static readonly Guid _objectClassID = new Guid("9efc763c-9cdf-41e3-930c-7505fc4ac840");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public TestStudentMemoryImpl()
             : base(null)

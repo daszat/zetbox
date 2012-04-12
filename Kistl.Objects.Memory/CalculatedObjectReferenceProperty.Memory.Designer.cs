@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty")]
     public class CalculatedObjectReferencePropertyMemoryImpl : Kistl.App.Base.PropertyMemoryImpl, CalculatedObjectReferenceProperty
     {
+        private static readonly Guid _objectClassID = new Guid("8708c578-6e55-4349-ba24-ede46ca6f585");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public CalculatedObjectReferencePropertyMemoryImpl()
             : base(null)

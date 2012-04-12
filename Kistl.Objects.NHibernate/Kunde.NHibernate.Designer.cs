@@ -24,6 +24,9 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Kunde")]
     public class KundeNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, Kunde
     {
+        private static readonly Guid _objectClassID = new Guid("b9ddd097-4f45-40c5-87e9-7331ab58727c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public KundeNHibernateImpl()
             : this(null)
         {

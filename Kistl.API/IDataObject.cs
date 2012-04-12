@@ -349,6 +349,8 @@ namespace Kistl.API
         /// <param name="propertyName"></param>
         /// <param name="parentObj"></param>
         void UpdateParent(string propertyName, IDataObject parentObj);
+
+        Guid ObjectClassID { get; }
         #endregion
     }
 
@@ -385,6 +387,8 @@ namespace Kistl.API
         /// Applies the changes from the other compound object.
         /// </summary>
         void ApplyChangesFrom(ICompoundObject other);
+
+        Guid CompoundObjectID { get; }
     }
 
     /// <summary>

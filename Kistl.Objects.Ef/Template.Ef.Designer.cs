@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Template")]
     public class TemplateEfImpl : BaseServerDataObject_EntityFramework, Template
     {
+        private static readonly Guid _objectClassID = new Guid("c677d3fe-7dfe-4ea5-91e0-d1b0df9118be");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public TemplateEfImpl()
             : base(null)

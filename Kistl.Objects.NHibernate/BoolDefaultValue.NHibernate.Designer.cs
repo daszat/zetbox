@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolDefaultValue")]
     public class BoolDefaultValueNHibernateImpl : Kistl.App.Base.DefaultPropertyValueNHibernateImpl, BoolDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("47838e25-d8f7-4d18-a913-eeb4095bb862");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public BoolDefaultValueNHibernateImpl()
             : this(null)
         {

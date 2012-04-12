@@ -24,6 +24,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("FilterConfiguration")]
     public abstract class FilterConfigurationNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, FilterConfiguration, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("9419242e-31f2-4af7-bb09-49b908f397ee");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public FilterConfigurationNHibernateImpl()
             : this(null)
         {

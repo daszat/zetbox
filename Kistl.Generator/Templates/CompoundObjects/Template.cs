@@ -78,6 +78,16 @@ namespace Kistl.Generator.Templates.CompoundObjects
             ObjectClasses.ApplyChangesFromMethod.Call(Host, ctx, typeof(ICompoundObject).Name, DataType, GetTypeName());
         }
 
+        protected override void ApplyClassHeadTemplate()
+        {
+            base.ApplyClassHeadTemplate();
+
+            // Implement CompoundObjectID by using a static backing store
+            this.WriteLine("        private static readonly Guid _compoundObjectID = new Guid(\"{0}\");", DataType.ExportGuid);
+            this.WriteLine("        public override Guid CompoundObjectID { get { return _compoundObjectID; } }");
+            this.WriteLine();
+        }
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();

@@ -23,6 +23,9 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Auftrag")]
     public class AuftragMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Auftrag, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public AuftragMemoryImpl()
             : base(null)

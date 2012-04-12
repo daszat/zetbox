@@ -35,5 +35,7 @@ namespace Kistl.DalProvider.Client
         }
 
         #endregion
+
+        public abstract Guid PropertyID { get; }
     }
 }

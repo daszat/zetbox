@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("RoleMembership")]
     public class RoleMembershipNHibernateImpl : Kistl.App.Base.AccessControlNHibernateImpl, RoleMembership
     {
+        private static readonly Guid _objectClassID = new Guid("3b79d759-2943-4caa-bf6f-5e89955f7f91");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public RoleMembershipNHibernateImpl()
             : this(null)
         {

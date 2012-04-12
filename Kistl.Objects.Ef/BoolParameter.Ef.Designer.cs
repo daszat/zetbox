@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolParameter")]
     public class BoolParameterEfImpl : Kistl.App.Base.BaseParameterEfImpl, BoolParameter
     {
+        private static readonly Guid _objectClassID = new Guid("2fe66550-c506-4a60-ac88-19db27bf1f4b");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public BoolParameterEfImpl()
             : base(null)

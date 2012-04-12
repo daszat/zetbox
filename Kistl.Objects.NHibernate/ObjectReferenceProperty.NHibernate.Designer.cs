@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty")]
     public class ObjectReferencePropertyNHibernateImpl : Kistl.App.Base.PropertyNHibernateImpl, ObjectReferenceProperty
     {
+        private static readonly Guid _objectClassID = new Guid("f1baf69c-a341-4a3a-b321-e782e1458e87");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public ObjectReferencePropertyNHibernateImpl()
             : this(null)
         {

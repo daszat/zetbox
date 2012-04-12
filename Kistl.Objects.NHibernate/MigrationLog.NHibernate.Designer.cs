@@ -24,6 +24,9 @@ namespace ZBox.App.SchemaMigration
     [System.Diagnostics.DebuggerDisplay("MigrationLog")]
     public class MigrationLogNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, MigrationLog
     {
+        private static readonly Guid _objectClassID = new Guid("49745ac0-db34-41ee-875f-0f09f1432ab0");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public MigrationLogNHibernateImpl()
             : this(null)
         {

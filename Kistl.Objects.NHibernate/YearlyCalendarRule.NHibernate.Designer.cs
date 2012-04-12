@@ -24,6 +24,9 @@ namespace Kistl.App.Calendar
     [System.Diagnostics.DebuggerDisplay("YearlyCalendarRule")]
     public abstract class YearlyCalendarRuleNHibernateImpl : Kistl.App.Calendar.CalendarRuleNHibernateImpl, YearlyCalendarRule
     {
+        private static readonly Guid _objectClassID = new Guid("c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public YearlyCalendarRuleNHibernateImpl()
             : this(null)
         {

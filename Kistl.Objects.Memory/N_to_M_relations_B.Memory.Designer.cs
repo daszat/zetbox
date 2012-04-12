@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("N_to_M_relations_B")]
     public class N_to_M_relations_BMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, N_to_M_relations_B
     {
+        private static readonly Guid _objectClassID = new Guid("c2af3719-d63a-4a94-9cc8-b4f94bb253ff");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public N_to_M_relations_BMemoryImpl()
             : base(null)

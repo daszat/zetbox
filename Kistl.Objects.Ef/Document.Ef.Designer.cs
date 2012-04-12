@@ -26,6 +26,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("Document")]
     public class DocumentEfImpl : at.dasz.DocumentManagement.FileEfImpl, Document
     {
+        private static readonly Guid _objectClassID = new Guid("3f496de2-bef4-4059-8c3e-c25db38bd3c2");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public DocumentEfImpl()
             : base(null)

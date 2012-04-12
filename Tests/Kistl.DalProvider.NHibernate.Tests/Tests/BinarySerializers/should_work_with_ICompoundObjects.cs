@@ -24,6 +24,11 @@ namespace Kistl.DalProvider.NHibernate.Tests.BinarySerializers
         {
             return typeof(CompoundObjectMock);
         }
+
+        public override Guid CompoundObjectID
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 
     [TestFixture(typeof(CompoundObjectMockImpl))]

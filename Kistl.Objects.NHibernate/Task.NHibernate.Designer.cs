@@ -24,6 +24,9 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Task")]
     public class TaskNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, Task
     {
+        private static readonly Guid _objectClassID = new Guid("3fbb42ca-a084-491d-9135-85ed24f1ef78");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public TaskNHibernateImpl()
             : this(null)
         {

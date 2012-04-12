@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Template")]
     public class TemplateMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Template
     {
+        private static readonly Guid _objectClassID = new Guid("c677d3fe-7dfe-4ea5-91e0-d1b0df9118be");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public TemplateMemoryImpl()
             : base(null)

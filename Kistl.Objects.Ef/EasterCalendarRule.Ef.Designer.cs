@@ -26,6 +26,9 @@ namespace Kistl.App.Calendar
     [System.Diagnostics.DebuggerDisplay("EasterCalendarRule")]
     public class EasterCalendarRuleEfImpl : Kistl.App.Calendar.YearlyCalendarRuleEfImpl, EasterCalendarRule
     {
+        private static readonly Guid _objectClassID = new Guid("d321c926-952d-4810-904b-a57251dd5e9d");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public EasterCalendarRuleEfImpl()
             : base(null)

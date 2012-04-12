@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("GuidProperty")]
     public class GuidPropertyEfImpl : Kistl.App.Base.ValueTypePropertyEfImpl, GuidProperty
     {
+        private static readonly Guid _objectClassID = new Guid("bd34d049-2b64-47f4-8d79-932008d0cf72");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public GuidPropertyEfImpl()
             : base(null)

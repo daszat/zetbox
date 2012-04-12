@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DateTimeProperty")]
     public class DateTimePropertyEfImpl : Kistl.App.Base.ValueTypePropertyEfImpl, DateTimeProperty
     {
+        private static readonly Guid _objectClassID = new Guid("1caadf11-7b95-4c68-8b42-87ac51b01ea0");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public DateTimePropertyEfImpl()
             : base(null)

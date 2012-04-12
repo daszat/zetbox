@@ -26,6 +26,9 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Kunde")]
     public class KundeEfImpl : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Kunde
     {
+        private static readonly Guid _objectClassID = new Guid("b9ddd097-4f45-40c5-87e9-7331ab58727c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public KundeEfImpl()
             : base(null)

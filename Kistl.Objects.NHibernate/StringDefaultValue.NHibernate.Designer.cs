@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringDefaultValue")]
     public class StringDefaultValueNHibernateImpl : Kistl.App.Base.DefaultPropertyValueNHibernateImpl, StringDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("7af200ea-9218-419b-9b02-33757d4b0150");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public StringDefaultValueNHibernateImpl()
             : this(null)
         {

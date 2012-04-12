@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("AuditEntry")]
     public class AuditEntryNHibernateImpl : CompoundObjectDefaultImpl, AuditEntry, ICompoundObject
     {
+        private static readonly Guid _compoundObjectID = new Guid("84d3d914-cb79-41fe-8aae-54128e7edb87");
+        public override Guid CompoundObjectID { get { return _compoundObjectID; } }
+
         // used by NHibernate
         public AuditEntryNHibernateImpl()
             : this(null, null, null, null)

@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("InvokingConstraint")]
     public class InvokingConstraintNHibernateImpl : Kistl.App.Base.ConstraintNHibernateImpl, InvokingConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("f5965ba1-6d47-4a4a-a143-eff28d7c66ad");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public InvokingConstraintNHibernateImpl()
             : this(null)
         {

@@ -23,6 +23,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("File")]
     public abstract class FileMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, File, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public FileMemoryImpl()
             : base(null)

@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Icon")]
     public class IconEfImpl : BaseServerDataObject_EntityFramework, Icon, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("78b6f354-013b-4129-a390-7f3a5a5e28e9");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public IconEfImpl()
             : base(null)

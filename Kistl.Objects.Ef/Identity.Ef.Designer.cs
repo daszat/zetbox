@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Identity")]
     public class IdentityEfImpl : BaseServerDataObject_EntityFramework, Identity
     {
+        private static readonly Guid _objectClassID = new Guid("31d8890a-67fc-4a78-9d35-9ff0b9e09b4c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public IdentityEfImpl()
             : base(null)

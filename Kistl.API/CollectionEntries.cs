@@ -77,6 +77,8 @@ namespace Kistl.API
         /// <param name="propertyName"></param>
         /// <param name="parentObj"></param>
         void UpdateParent(string propertyName, IDataObject parentObj);
+
+        Guid PropertyID { get; }
     }
 
     /// <summary>

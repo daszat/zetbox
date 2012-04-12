@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntegerRangeConstraint")]
     public class IntegerRangeConstraintMemoryImpl : Kistl.App.Base.ConstraintMemoryImpl, IntegerRangeConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("31b03f62-b0d6-49ab-81e9-f912077d4e49");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public IntegerRangeConstraintMemoryImpl()
             : base(null)

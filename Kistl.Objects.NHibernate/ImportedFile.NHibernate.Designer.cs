@@ -24,6 +24,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("ImportedFile")]
     public class ImportedFileNHibernateImpl : at.dasz.DocumentManagement.FileNHibernateImpl, ImportedFile
     {
+        private static readonly Guid _objectClassID = new Guid("523a75bb-29c4-421c-9343-93d8658bb5f8");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public ImportedFileNHibernateImpl()
             : this(null)
         {

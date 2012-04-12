@@ -26,6 +26,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("ANewObjectClass")]
     public class ANewObjectClassEfImpl : BaseServerDataObject_EntityFramework, ANewObjectClass
     {
+        private static readonly Guid _objectClassID = new Guid("798887f9-2d21-4d02-a143-bf1cbe07469b");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ANewObjectClassEfImpl()
             : base(null)

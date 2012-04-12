@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Muhblah")]
     public class MuhblahMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Muhblah
     {
+        private static readonly Guid _objectClassID = new Guid("fd357e42-2c2c-4bef-8110-69a466d09af0");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public MuhblahMemoryImpl()
             : base(null)

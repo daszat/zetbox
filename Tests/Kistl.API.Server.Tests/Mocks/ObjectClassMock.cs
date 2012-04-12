@@ -49,6 +49,8 @@ namespace Kistl.API.Server.Mocks
             set;
         }
 
+        public virtual Guid ObjectClassID { get { return Guid.Empty; } }
+
         public ICollection<Kistl.App.Base.ObjectClass> SubClasses
         {
             get { throw new NotImplementedException(); }

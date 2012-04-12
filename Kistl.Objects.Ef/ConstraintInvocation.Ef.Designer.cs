@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ConstraintInvocation")]
     public class ConstraintInvocationEfImpl : BaseServerDataObject_EntityFramework, ConstraintInvocation, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("038230c3-ee0b-4a04-b89b-fe342ac8f069");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ConstraintInvocationEfImpl()
             : base(null)

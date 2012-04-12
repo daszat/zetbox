@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Fragebogen")]
     public class FragebogenMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Fragebogen
     {
+        private static readonly Guid _objectClassID = new Guid("a78ff235-4511-431b-8437-939f7fecded4");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public FragebogenMemoryImpl()
             : base(null)

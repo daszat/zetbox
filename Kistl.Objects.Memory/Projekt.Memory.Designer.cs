@@ -23,6 +23,9 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Projekt")]
     public class ProjektMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Kistl.API.IExportableInternal, Projekt
     {
+        private static readonly Guid _objectClassID = new Guid("885939e8-82e1-4fdf-b80e-5f612d5131d3");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ProjektMemoryImpl()
             : base(null)

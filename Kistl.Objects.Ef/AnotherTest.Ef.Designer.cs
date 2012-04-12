@@ -26,6 +26,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("AnotherTest")]
     public class AnotherTestEfImpl : BaseServerDataObject_EntityFramework, AnotherTest
     {
+        private static readonly Guid _objectClassID = new Guid("6d00a4e3-75b0-4a56-bc9f-3e9812d9c8fe");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public AnotherTestEfImpl()
             : base(null)

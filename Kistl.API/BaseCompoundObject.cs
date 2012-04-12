@@ -64,6 +64,8 @@ namespace Kistl.API
             throw new NotImplementedException();
         }
 
+        public abstract Guid CompoundObjectID { get; }
+
         #endregion
 
         #region IStreamable Members

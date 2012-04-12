@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ControlKind")]
     public class ControlKindEfImpl : BaseServerDataObject_EntityFramework, ControlKind, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("a9166f1e-9233-4d2d-8eb6-be71d724ea14");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ControlKindEfImpl()
             : base(null)

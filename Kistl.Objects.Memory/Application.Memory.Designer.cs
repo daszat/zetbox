@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Application")]
     public class ApplicationMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Application, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("896187c2-2714-4430-8adb-6532612d7e0f");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ApplicationMemoryImpl()
             : base(null)

@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("MethodInvocationConstraint")]
     public class MethodInvocationConstraintEfImpl : Kistl.App.Base.ConstraintEfImpl, MethodInvocationConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("2667704b-ea27-44ff-a6b2-0ef42ffccedc");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public MethodInvocationConstraintEfImpl()
             : base(null)

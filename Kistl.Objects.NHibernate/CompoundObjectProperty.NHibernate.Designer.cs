@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CompoundObjectProperty")]
     public class CompoundObjectPropertyNHibernateImpl : Kistl.App.Base.PropertyNHibernateImpl, CompoundObjectProperty
     {
+        private static readonly Guid _objectClassID = new Guid("7b5ba73f-91f4-4542-9542-4f418b5c109f");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public CompoundObjectPropertyNHibernateImpl()
             : this(null)
         {

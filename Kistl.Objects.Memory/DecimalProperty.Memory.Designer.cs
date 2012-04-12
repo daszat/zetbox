@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DecimalProperty")]
     public class DecimalPropertyMemoryImpl : Kistl.App.Base.ValueTypePropertyMemoryImpl, DecimalProperty
     {
+        private static readonly Guid _objectClassID = new Guid("7e44265e-8d41-4f5f-bb5c-5038b55be5b2");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public DecimalPropertyMemoryImpl()
             : base(null)

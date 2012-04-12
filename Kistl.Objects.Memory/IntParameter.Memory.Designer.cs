@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntParameter")]
     public class IntParameterMemoryImpl : Kistl.App.Base.BaseParameterMemoryImpl, IntParameter
     {
+        private static readonly Guid _objectClassID = new Guid("24fb74a4-0d21-49d5-9c81-2ded8948d4d4");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public IntParameterMemoryImpl()
             : base(null)

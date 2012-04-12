@@ -24,6 +24,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("SinglePropertyFilterConfiguration")]
     public class SinglePropertyFilterConfigurationNHibernateImpl : Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl, SinglePropertyFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("0c65fbda-a2ac-475c-af94-ee705381ee08");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public SinglePropertyFilterConfigurationNHibernateImpl()
             : this(null)
         {

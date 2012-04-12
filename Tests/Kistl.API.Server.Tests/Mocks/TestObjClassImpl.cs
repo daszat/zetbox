@@ -220,5 +220,10 @@ namespace Kistl.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
+
+        public override Guid ObjectClassID
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

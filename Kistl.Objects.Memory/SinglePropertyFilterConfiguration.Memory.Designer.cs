@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("SinglePropertyFilterConfiguration")]
     public class SinglePropertyFilterConfigurationMemoryImpl : Kistl.App.GUI.PropertyFilterConfigurationMemoryImpl, SinglePropertyFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("0c65fbda-a2ac-475c-af94-ee705381ee08");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public SinglePropertyFilterConfigurationMemoryImpl()
             : base(null)

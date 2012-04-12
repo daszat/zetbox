@@ -26,6 +26,9 @@ namespace Kistl.App.Calendar
     [System.Diagnostics.DebuggerDisplay("FixedYearlyCalendarRule")]
     public class FixedYearlyCalendarRuleEfImpl : Kistl.App.Calendar.YearlyCalendarRuleEfImpl, FixedYearlyCalendarRule
     {
+        private static readonly Guid _objectClassID = new Guid("632137c7-1cb1-4c60-bda6-31aa2060b39a");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public FixedYearlyCalendarRuleEfImpl()
             : base(null)

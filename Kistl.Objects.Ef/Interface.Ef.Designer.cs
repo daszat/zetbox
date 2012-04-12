@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Interface")]
     public class InterfaceEfImpl : Kistl.App.Base.DataTypeEfImpl, Interface
     {
+        private static readonly Guid _objectClassID = new Guid("7ea88d99-88f0-44a7-b0a3-da725e57595d");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public InterfaceEfImpl()
             : base(null)

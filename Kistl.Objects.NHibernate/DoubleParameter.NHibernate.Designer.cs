@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DoubleParameter")]
     public class DoubleParameterNHibernateImpl : Kistl.App.Base.BaseParameterNHibernateImpl, DoubleParameter
     {
+        private static readonly Guid _objectClassID = new Guid("74aa31e4-4dcf-46d5-a8b4-aa02b82bd2df");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public DoubleParameterNHibernateImpl()
             : this(null)
         {

@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("MonthFilterConfiguration")]
     public class MonthFilterConfigurationEfImpl : Kistl.App.GUI.PropertyFilterConfigurationEfImpl, MonthFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("4d690bc6-7e4f-4967-a50a-770dd5c24590");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public MonthFilterConfigurationEfImpl()
             : base(null)

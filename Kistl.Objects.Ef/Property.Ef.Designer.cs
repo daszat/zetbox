@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Property")]
     public abstract class PropertyEfImpl : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Property
     {
+        private static readonly Guid _objectClassID = new Guid("e5f93f63-9cb8-40a5-8118-d1d9e479370c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public PropertyEfImpl()
             : base(null)

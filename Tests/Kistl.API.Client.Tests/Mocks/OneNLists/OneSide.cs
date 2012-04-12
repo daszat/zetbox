@@ -60,6 +60,9 @@ namespace Kistl.API.Client.Mocks.OneNLists
             get { return null; }
         }
 
+        public virtual Guid ObjectClassID { get { return Guid.Empty; } }
+
+
         #region INotifyPropertyChanged Members
 
         private void OnPropertyChanged(string propertyName)

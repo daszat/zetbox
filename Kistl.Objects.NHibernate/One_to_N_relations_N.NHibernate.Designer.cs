@@ -24,6 +24,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("One_to_N_relations_N")]
     public class One_to_N_relations_NNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, One_to_N_relations_N
     {
+        private static readonly Guid _objectClassID = new Guid("1d828b85-c122-4aeb-8b88-06d5d27d0c06");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public One_to_N_relations_NNHibernateImpl()
             : this(null)
         {

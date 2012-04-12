@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CLRObjectParameter")]
     public class CLRObjectParameterNHibernateImpl : Kistl.App.Base.BaseParameterNHibernateImpl, CLRObjectParameter
     {
+        private static readonly Guid _objectClassID = new Guid("012dfab4-934b-443e-853a-11a5da5b0627");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public CLRObjectParameterNHibernateImpl()
             : this(null)
         {

@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Relation")]
     public class RelationMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Kistl.API.IExportableInternal, Relation
     {
+        private static readonly Guid _objectClassID = new Guid("1c0e894f-4eb4-422f-8094-3095735b4917");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public RelationMemoryImpl()
             : base(null)

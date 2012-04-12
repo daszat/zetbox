@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("NavigationSearchScreen")]
     public class NavigationSearchScreenEfImpl : Kistl.App.GUI.NavigationScreenEfImpl, NavigationSearchScreen
     {
+        private static readonly Guid _objectClassID = new Guid("cccc4b79-4e6d-449b-8866-c1827c4dcdc1");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public NavigationSearchScreenEfImpl()
             : base(null)

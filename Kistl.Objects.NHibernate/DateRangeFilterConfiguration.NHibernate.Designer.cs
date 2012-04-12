@@ -24,6 +24,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("DateRangeFilterConfiguration")]
     public class DateRangeFilterConfigurationNHibernateImpl : Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl, DateRangeFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("eb9ea5f9-d4b7-4e77-92c3-3eb60853e881");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public DateRangeFilterConfigurationNHibernateImpl()
             : this(null)
         {

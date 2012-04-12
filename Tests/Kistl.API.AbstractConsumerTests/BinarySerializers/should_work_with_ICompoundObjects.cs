@@ -32,7 +32,7 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
         {
             get { throw new NotImplementedException(); }
         }
-
+        public virtual Guid CompoundObjectID { get { return Guid.Empty; } }
         #endregion
 
         #region IStreamable Members

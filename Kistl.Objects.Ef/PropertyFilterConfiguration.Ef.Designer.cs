@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("PropertyFilterConfiguration")]
     public abstract class PropertyFilterConfigurationEfImpl : Kistl.App.GUI.FilterConfigurationEfImpl, PropertyFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("b7099b5a-295a-4de0-9aa0-c5577e39adcb");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public PropertyFilterConfigurationEfImpl()
             : base(null)

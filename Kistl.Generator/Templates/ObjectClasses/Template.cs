@@ -143,6 +143,16 @@ namespace Kistl.Generator.Templates.ObjectClasses
             ObjectClasses.AttachToContextTemplate.Call(Host, ctx, ObjectClass);
         }
 
+        protected override void ApplyClassHeadTemplate()
+        {
+            base.ApplyClassHeadTemplate();
+
+            // Implement ObjectClassID by using a static backing store
+            this.WriteLine("        private static readonly Guid _objectClassID = new Guid(\"{0}\");", DataType.ExportGuid);
+            this.WriteLine("        public override Guid ObjectClassID { get { return _objectClassID; } }");
+            this.WriteLine();
+        }
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();

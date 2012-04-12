@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntDefaultValue")]
     public class IntDefaultValueEfImpl : Kistl.App.Base.DefaultPropertyValueEfImpl, IntDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("5295bddf-aecc-449e-92b9-1906a1499d62");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public IntDefaultValueEfImpl()
             : base(null)

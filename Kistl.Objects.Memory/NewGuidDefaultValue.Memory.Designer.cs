@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("NewGuidDefaultValue")]
     public class NewGuidDefaultValueMemoryImpl : Kistl.App.Base.DefaultPropertyValueMemoryImpl, NewGuidDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("a9fc1ec8-a91e-4569-b311-ec85c22a15c3");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public NewGuidDefaultValueMemoryImpl()
             : base(null)

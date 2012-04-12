@@ -24,6 +24,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("FileImportConfiguration")]
     public class FileImportConfigurationNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, FileImportConfiguration, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("740f4a8b-32fa-48ba-84d9-6792a755d5c9");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public FileImportConfigurationNHibernateImpl()
             : this(null)
         {

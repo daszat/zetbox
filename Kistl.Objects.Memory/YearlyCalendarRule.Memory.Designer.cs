@@ -23,6 +23,9 @@ namespace Kistl.App.Calendar
     [System.Diagnostics.DebuggerDisplay("YearlyCalendarRule")]
     public abstract class YearlyCalendarRuleMemoryImpl : Kistl.App.Calendar.CalendarRuleMemoryImpl, YearlyCalendarRule
     {
+        private static readonly Guid _objectClassID = new Guid("c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public YearlyCalendarRuleMemoryImpl()
             : base(null)

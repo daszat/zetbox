@@ -99,5 +99,6 @@ namespace Kistl.API.Server.Mocks
                     break;
             }
         }
+        public virtual Guid PropertyID { get { return Guid.Empty; } }
     }
 }

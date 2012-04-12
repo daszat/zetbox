@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectReferencePlaceholderProperty")]
     public class ObjectReferencePlaceholderPropertyMemoryImpl : Kistl.App.Base.PropertyMemoryImpl, ObjectReferencePlaceholderProperty
     {
+        private static readonly Guid _objectClassID = new Guid("93241989-0bb0-435f-b6e5-06fdbbf19e5d");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ObjectReferencePlaceholderPropertyMemoryImpl()
             : base(null)

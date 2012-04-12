@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IsValidIdentifierConstraint")]
     public class IsValidIdentifierConstraintEfImpl : Kistl.App.Base.ConstraintEfImpl, IsValidIdentifierConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("ed8f30ad-186f-48ee-8dd5-a153d24dfada");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public IsValidIdentifierConstraintEfImpl()
             : base(null)

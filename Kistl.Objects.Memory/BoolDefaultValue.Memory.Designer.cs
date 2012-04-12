@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolDefaultValue")]
     public class BoolDefaultValueMemoryImpl : Kistl.App.Base.DefaultPropertyValueMemoryImpl, BoolDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("47838e25-d8f7-4d18-a913-eeb4095bb862");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public BoolDefaultValueMemoryImpl()
             : base(null)

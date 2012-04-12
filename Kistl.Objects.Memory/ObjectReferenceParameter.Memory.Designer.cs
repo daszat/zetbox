@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceParameter")]
     public class ObjectReferenceParameterMemoryImpl : Kistl.App.Base.BaseParameterMemoryImpl, ObjectReferenceParameter
     {
+        private static readonly Guid _objectClassID = new Guid("3fb8bf11-cab6-478f-b9b8-3f6d70a70d37");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ObjectReferenceParameterMemoryImpl()
             : base(null)

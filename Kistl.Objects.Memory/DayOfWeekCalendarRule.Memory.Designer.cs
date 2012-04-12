@@ -23,6 +23,9 @@ namespace Kistl.App.Calendar
     [System.Diagnostics.DebuggerDisplay("DayOfWeekCalendarRule")]
     public class DayOfWeekCalendarRuleMemoryImpl : Kistl.App.Calendar.CalendarRuleMemoryImpl, DayOfWeekCalendarRule
     {
+        private static readonly Guid _objectClassID = new Guid("9654967e-0182-409b-8765-65882785f607");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public DayOfWeekCalendarRuleMemoryImpl()
             : base(null)

@@ -158,6 +158,16 @@ namespace Kistl.Generator.Templates.CollectionEntries
             }
         }
 
+        protected override void ApplyClassHeadTemplate()
+        {
+            base.ApplyClassHeadTemplate();
+
+            // Implement PropertyID by using a static backing store
+            this.WriteLine("        private static readonly Guid _propertyID = new Guid(\"{0}\");", prop.ExportGuid);
+            this.WriteLine("        public override Guid PropertyID { get { return _propertyID; } }");
+            this.WriteLine();
+        }
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();

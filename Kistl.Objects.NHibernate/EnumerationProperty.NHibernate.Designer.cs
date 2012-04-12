@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumerationProperty")]
     public class EnumerationPropertyNHibernateImpl : Kistl.App.Base.ValueTypePropertyNHibernateImpl, EnumerationProperty
     {
+        private static readonly Guid _objectClassID = new Guid("19a8d9f0-4de6-4cc9-a75d-c1499e3a103b");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public EnumerationPropertyNHibernateImpl()
             : this(null)
         {

@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IndexConstraint")]
     public class IndexConstraintMemoryImpl : Kistl.App.Base.InstanceConstraintMemoryImpl, IndexConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("1d5a58e9-fba6-4ef8-b3b7-9966a4dcba83");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public IndexConstraintMemoryImpl()
             : base(null)

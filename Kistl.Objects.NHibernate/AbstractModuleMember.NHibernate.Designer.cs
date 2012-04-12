@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("AbstractModuleMember")]
     public class AbstractModuleMemberNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, AbstractModuleMember, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("d833bf36-29ab-47fa-ba49-bfb820fcf83c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public AbstractModuleMemberNHibernateImpl()
             : this(null)
         {

@@ -24,6 +24,9 @@ namespace ZBox.App.SchemaMigration
     [System.Diagnostics.DebuggerDisplay("SourceTable")]
     public class SourceTableNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, SourceTable
     {
+        private static readonly Guid _objectClassID = new Guid("7f95aa3e-0150-4073-8b9e-803226872cc2");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public SourceTableNHibernateImpl()
             : this(null)
         {

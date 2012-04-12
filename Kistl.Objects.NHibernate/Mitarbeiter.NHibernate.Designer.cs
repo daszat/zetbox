@@ -24,6 +24,9 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Mitarbeiter")]
     public class MitarbeiterNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, Mitarbeiter
     {
+        private static readonly Guid _objectClassID = new Guid("77933a20-338a-4961-b751-62ffa0a75c6a");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public MitarbeiterNHibernateImpl()
             : this(null)
         {

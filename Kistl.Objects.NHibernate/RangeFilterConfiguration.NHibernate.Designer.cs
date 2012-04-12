@@ -24,6 +24,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("RangeFilterConfiguration")]
     public class RangeFilterConfigurationNHibernateImpl : Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl, RangeFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("549efe2c-9dc7-4458-a0ff-b7c0710ae84c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public RangeFilterConfigurationNHibernateImpl()
             : this(null)
         {

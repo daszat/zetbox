@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("PropertyFilterConfiguration")]
     public abstract class PropertyFilterConfigurationMemoryImpl : Kistl.App.GUI.FilterConfigurationMemoryImpl, PropertyFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("b7099b5a-295a-4de0-9aa0-c5577e39adcb");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public PropertyFilterConfigurationMemoryImpl()
             : base(null)

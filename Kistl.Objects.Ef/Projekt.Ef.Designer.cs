@@ -26,6 +26,9 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Projekt")]
     public class ProjektEfImpl : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Projekt
     {
+        private static readonly Guid _objectClassID = new Guid("885939e8-82e1-4fdf-b80e-5f612d5131d3");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ProjektEfImpl()
             : base(null)

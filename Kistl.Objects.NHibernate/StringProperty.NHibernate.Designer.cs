@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringProperty")]
     public class StringPropertyNHibernateImpl : Kistl.App.Base.ValueTypePropertyNHibernateImpl, StringProperty
     {
+        private static readonly Guid _objectClassID = new Guid("539d6b20-f0cb-461b-b087-a522fec6c838");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public StringPropertyNHibernateImpl()
             : this(null)
         {

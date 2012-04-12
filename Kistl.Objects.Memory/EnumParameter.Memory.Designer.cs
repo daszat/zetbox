@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumParameter")]
     public class EnumParameterMemoryImpl : Kistl.App.Base.BaseParameterMemoryImpl, EnumParameter
     {
+        private static readonly Guid _objectClassID = new Guid("041eaa58-84cb-405f-a6ea-c3d77e4acd82");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public EnumParameterMemoryImpl()
             : base(null)

@@ -24,6 +24,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ControlKind")]
     public class ControlKindNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, ControlKind, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("a9166f1e-9233-4d2d-8eb6-be71d724ea14");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public ControlKindNHibernateImpl()
             : this(null)
         {

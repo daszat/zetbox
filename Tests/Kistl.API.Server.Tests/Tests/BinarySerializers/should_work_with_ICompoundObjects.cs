@@ -22,6 +22,11 @@ namespace Kistl.API.Server.Tests.BinarySerializers
         {
             return typeof(CompoundObjectMock);
         }
+
+        public override Guid CompoundObjectID
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 
     [TestFixture]

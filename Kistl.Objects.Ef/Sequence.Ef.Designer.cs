@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Sequence")]
     public class SequenceEfImpl : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Sequence
     {
+        private static readonly Guid _objectClassID = new Guid("8745716a-a9e7-4b2f-b7e8-948b992aaafb");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public SequenceEfImpl()
             : base(null)

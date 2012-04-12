@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IsValidNamespaceConstraint")]
     public class IsValidNamespaceConstraintEfImpl : Kistl.App.Base.IsValidIdentifierConstraintEfImpl, IsValidNamespaceConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("94916227-138b-49e5-b62e-b982a45a5c21");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public IsValidNamespaceConstraintEfImpl()
             : base(null)

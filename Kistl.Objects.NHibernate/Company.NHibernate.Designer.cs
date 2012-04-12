@@ -24,6 +24,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Company")]
     public class CompanyNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Company
     {
+        private static readonly Guid _objectClassID = new Guid("352a4ade-1dca-4d28-9630-66bbcc1622ea");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public CompanyNHibernateImpl()
             : this(null)
         {

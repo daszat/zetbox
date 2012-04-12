@@ -24,6 +24,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("DynamicFile")]
     public class DynamicFileNHibernateImpl : at.dasz.DocumentManagement.FileNHibernateImpl, DynamicFile
     {
+        private static readonly Guid _objectClassID = new Guid("e1556c0b-cdb9-4174-a9e5-07efba58ef05");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public DynamicFileNHibernateImpl()
             : this(null)
         {

@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntegerRangeConstraint")]
     public class IntegerRangeConstraintNHibernateImpl : Kistl.App.Base.ConstraintNHibernateImpl, IntegerRangeConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("31b03f62-b0d6-49ab-81e9-f912077d4e49");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public IntegerRangeConstraintNHibernateImpl()
             : this(null)
         {

@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("YearFilterConfiguration")]
     public class YearFilterConfigurationMemoryImpl : Kistl.App.GUI.PropertyFilterConfigurationMemoryImpl, YearFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("96297bd7-7182-4446-8aed-23079250f408");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public YearFilterConfigurationMemoryImpl()
             : base(null)

@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumDefaultValue")]
     public class EnumDefaultValueMemoryImpl : Kistl.App.Base.DefaultPropertyValueMemoryImpl, EnumDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("4f35c5da-924c-4114-a011-4d736faa3ae2");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public EnumDefaultValueMemoryImpl()
             : base(null)

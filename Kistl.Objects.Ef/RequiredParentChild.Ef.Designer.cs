@@ -26,6 +26,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("RequiredParentChild")]
     public class RequiredParentChildEfImpl : BaseServerDataObject_EntityFramework, RequiredParentChild
     {
+        private static readonly Guid _objectClassID = new Guid("3e7f2f55-ff5c-4a13-ba58-74368e9c8780");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public RequiredParentChildEfImpl()
             : base(null)

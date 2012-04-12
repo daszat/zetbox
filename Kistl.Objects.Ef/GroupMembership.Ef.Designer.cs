@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("GroupMembership")]
     public class GroupMembershipEfImpl : Kistl.App.Base.AccessControlEfImpl, GroupMembership
     {
+        private static readonly Guid _objectClassID = new Guid("acf18a64-5fc0-4610-b083-9893eea0776c");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public GroupMembershipEfImpl()
             : base(null)

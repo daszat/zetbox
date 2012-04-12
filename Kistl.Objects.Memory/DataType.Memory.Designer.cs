@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DataType")]
     public abstract class DataTypeMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, DataType, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("6f005f31-c09c-45f9-9bcb-44090ebf0d1f");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public DataTypeMemoryImpl()
             : base(null)

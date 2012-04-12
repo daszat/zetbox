@@ -23,6 +23,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("OrderedOneEnd")]
     public class OrderedOneEndMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, OrderedOneEnd
     {
+        private static readonly Guid _objectClassID = new Guid("c170405f-c29d-4d87-a4f7-a622185a94d9");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public OrderedOneEndMemoryImpl()
             : base(null)

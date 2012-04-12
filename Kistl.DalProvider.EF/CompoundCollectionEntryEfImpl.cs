@@ -18,5 +18,6 @@ namespace Kistl.DalProvider.Ef
             : base(lazyCtx)
         {
         }
+        public abstract Guid PropertyID { get; }
     }
 }

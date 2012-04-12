@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CurrentSchema")]
     public class CurrentSchemaNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, CurrentSchema
     {
+        private static readonly Guid _objectClassID = new Guid("b276a0f6-cc89-473d-9dce-2efcf3efdd37");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public CurrentSchemaNHibernateImpl()
             : this(null)
         {

@@ -88,5 +88,7 @@ namespace Kistl.API.Client.Tests
         {
             return typeof(IValueCollectionEntry<TestObjClass, string>);
         }
+
+        public virtual Guid PropertyID { get { return Guid.Empty; } }
     }
 }

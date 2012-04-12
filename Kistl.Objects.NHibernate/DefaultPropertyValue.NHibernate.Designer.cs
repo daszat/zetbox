@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DefaultPropertyValue")]
     public abstract class DefaultPropertyValueNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, DefaultPropertyValue, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("74785c72-3271-4fb7-95fc-86b0baa09c8e");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public DefaultPropertyValueNHibernateImpl()
             : this(null)
         {

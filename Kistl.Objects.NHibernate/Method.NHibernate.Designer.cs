@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Method")]
     public class MethodNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, Method
     {
+        private static readonly Guid _objectClassID = new Guid("ef79c0b9-55e0-45ad-8233-1ff8f852661f");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public MethodNHibernateImpl()
             : this(null)
         {

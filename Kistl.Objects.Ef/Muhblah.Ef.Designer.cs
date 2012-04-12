@@ -26,6 +26,9 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Muhblah")]
     public class MuhblahEfImpl : BaseServerDataObject_EntityFramework, Muhblah
     {
+        private static readonly Guid _objectClassID = new Guid("fd357e42-2c2c-4bef-8110-69a466d09af0");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public MuhblahEfImpl()
             : base(null)

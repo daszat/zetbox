@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Assembly")]
     public class AssemblyEfImpl : BaseServerDataObject_EntityFramework, Assembly, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("a590a975-66e5-421c-aa97-7ab3169e0e9b");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public AssemblyEfImpl()
             : base(null)

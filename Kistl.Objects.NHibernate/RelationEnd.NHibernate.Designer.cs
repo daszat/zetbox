@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("RelationEnd")]
     public class RelationEndNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, RelationEnd
     {
+        private static readonly Guid _objectClassID = new Guid("07817322-d4b9-4dd8-8464-bcb6745fef34");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public RelationEndNHibernateImpl()
             : this(null)
         {

@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CompoundObjectParameter")]
     public class CompoundObjectParameterMemoryImpl : Kistl.App.Base.BaseParameterMemoryImpl, CompoundObjectParameter
     {
+        private static readonly Guid _objectClassID = new Guid("3915cfbf-33c4-4a25-bc5f-b2dd07a9439d");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public CompoundObjectParameterMemoryImpl()
             : base(null)

@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumerationEntry")]
     public class EnumerationEntryMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, EnumerationEntry, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("6365c62d-60a6-4fa3-9c78-370ffcc50478");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public EnumerationEntryMemoryImpl()
             : base(null)

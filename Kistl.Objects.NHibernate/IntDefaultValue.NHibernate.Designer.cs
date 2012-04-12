@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntDefaultValue")]
     public class IntDefaultValueNHibernateImpl : Kistl.App.Base.DefaultPropertyValueNHibernateImpl, IntDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("5295bddf-aecc-449e-92b9-1906a1499d62");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public IntDefaultValueNHibernateImpl()
             : this(null)
         {

@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("NotNullableConstraint")]
     public class NotNullableConstraintEfImpl : Kistl.App.Base.ConstraintEfImpl, NotNullableConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("8604ef0c-f933-4f66-b7df-21d27c9003b2");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public NotNullableConstraintEfImpl()
             : base(null)

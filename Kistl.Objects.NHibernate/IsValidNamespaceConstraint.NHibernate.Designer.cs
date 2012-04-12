@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IsValidNamespaceConstraint")]
     public class IsValidNamespaceConstraintNHibernateImpl : Kistl.App.Base.IsValidIdentifierConstraintNHibernateImpl, IsValidNamespaceConstraint
     {
+        private static readonly Guid _objectClassID = new Guid("94916227-138b-49e5-b62e-b982a45a5c21");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public IsValidNamespaceConstraintNHibernateImpl()
             : this(null)
         {

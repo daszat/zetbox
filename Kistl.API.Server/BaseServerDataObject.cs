@@ -260,6 +260,8 @@ namespace Kistl.API.Server
         /// </summary>
         public virtual void NotifyDeleting() { }
 
+        public abstract Guid ObjectClassID { get; }
+
         public abstract void UpdateParent(string propertyName, IDataObject parentObj);
 
         int System.IComparable.CompareTo(object other)

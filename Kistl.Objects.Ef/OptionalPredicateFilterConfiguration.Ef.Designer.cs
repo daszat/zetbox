@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("OptionalPredicateFilterConfiguration")]
     public class OptionalPredicateFilterConfigurationEfImpl : Kistl.App.GUI.ObjectClassFilterConfigurationEfImpl, OptionalPredicateFilterConfiguration
     {
+        private static readonly Guid _objectClassID = new Guid("da69f553-1096-48be-8129-eff9118498f0");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public OptionalPredicateFilterConfigurationEfImpl()
             : base(null)

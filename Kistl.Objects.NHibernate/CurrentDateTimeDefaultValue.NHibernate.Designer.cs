@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CurrentDateTimeDefaultValue")]
     public class CurrentDateTimeDefaultValueNHibernateImpl : Kistl.App.Base.DefaultPropertyValueNHibernateImpl, CurrentDateTimeDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("8b202069-2dd3-470c-bb3f-956f44884298");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public CurrentDateTimeDefaultValueNHibernateImpl()
             : this(null)
         {

@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Blob")]
     public class BlobEfImpl : BaseServerDataObject_EntityFramework, Blob, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("afd99ba6-f150-4ed4-ad1f-4ef57b14728b");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public BlobEfImpl()
             : base(null)

@@ -26,6 +26,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CurrentDateTimeDefaultValue")]
     public class CurrentDateTimeDefaultValueEfImpl : Kistl.App.Base.DefaultPropertyValueEfImpl, CurrentDateTimeDefaultValue
     {
+        private static readonly Guid _objectClassID = new Guid("8b202069-2dd3-470c-bb3f-956f44884298");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public CurrentDateTimeDefaultValueEfImpl()
             : base(null)

@@ -26,6 +26,9 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("DynamicFile")]
     public class DynamicFileEfImpl : at.dasz.DocumentManagement.FileEfImpl, DynamicFile
     {
+        private static readonly Guid _objectClassID = new Guid("e1556c0b-cdb9-4174-a9e5-07efba58ef05");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public DynamicFileEfImpl()
             : base(null)

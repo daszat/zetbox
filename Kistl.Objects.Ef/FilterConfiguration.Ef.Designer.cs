@@ -26,6 +26,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("FilterConfiguration")]
     public abstract class FilterConfigurationEfImpl : BaseServerDataObject_EntityFramework, FilterConfiguration, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("9419242e-31f2-4af7-bb09-49b908f397ee");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public FilterConfigurationEfImpl()
             : base(null)

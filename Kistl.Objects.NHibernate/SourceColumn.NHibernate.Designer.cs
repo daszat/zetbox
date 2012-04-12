@@ -24,6 +24,9 @@ namespace ZBox.App.SchemaMigration
     [System.Diagnostics.DebuggerDisplay("SourceColumn")]
     public class SourceColumnNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, SourceColumn
     {
+        private static readonly Guid _objectClassID = new Guid("e921bb2f-2cac-46d1-a7f4-120bb1a4afe2");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public SourceColumnNHibernateImpl()
             : this(null)
         {

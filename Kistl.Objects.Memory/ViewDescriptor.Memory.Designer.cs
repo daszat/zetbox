@@ -23,6 +23,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
     public class ViewDescriptorMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Kistl.API.IExportableInternal, ViewDescriptor
     {
+        private static readonly Guid _objectClassID = new Guid("ffda4604-1536-43b6-b951-f8753d5092ca");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public ViewDescriptorMemoryImpl()
             : base(null)

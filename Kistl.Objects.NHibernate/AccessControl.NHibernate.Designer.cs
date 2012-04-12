@@ -24,6 +24,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("AccessControl")]
     public class AccessControlNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, AccessControl, Kistl.API.IExportableInternal
     {
+        private static readonly Guid _objectClassID = new Guid("f1c37bfb-e45f-4964-b6ba-672c1ec81b60");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public AccessControlNHibernateImpl()
             : this(null)
         {

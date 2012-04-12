@@ -23,6 +23,9 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringParameter")]
     public class StringParameterMemoryImpl : Kistl.App.Base.BaseParameterMemoryImpl, StringParameter
     {
+        private static readonly Guid _objectClassID = new Guid("d3eee1cb-313d-465a-8a06-732ac119bc75");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public StringParameterMemoryImpl()
             : base(null)

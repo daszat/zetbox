@@ -224,6 +224,8 @@ namespace Kistl.API.Mocks
         {
         }
 
+        public virtual Guid ObjectClassID { get { return Guid.Empty; } }
+
         #region ICustomTypeDescriptor Members
 
         public AttributeCollection GetAttributes()

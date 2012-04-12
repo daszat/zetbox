@@ -24,6 +24,9 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("NavigationScreen")]
     public class NavigationScreenNHibernateImpl : Kistl.App.GUI.NavigationEntryNHibernateImpl, NavigationScreen
     {
+        private static readonly Guid _objectClassID = new Guid("2879e023-77e4-4601-80b0-75ef76fd4001");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         public NavigationScreenNHibernateImpl()
             : this(null)
         {

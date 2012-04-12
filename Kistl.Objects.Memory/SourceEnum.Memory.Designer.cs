@@ -23,6 +23,9 @@ namespace ZBox.App.SchemaMigration
     [System.Diagnostics.DebuggerDisplay("SourceEnum")]
     public class SourceEnumMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Kistl.API.IExportableInternal, SourceEnum
     {
+        private static readonly Guid _objectClassID = new Guid("138d462f-e432-46a0-8ce2-e7f9893654d4");
+        public override Guid ObjectClassID { get { return _objectClassID; } }
+
         [Obsolete]
         public SourceEnumMemoryImpl()
             : base(null)
