@@ -442,12 +442,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// </summary>
         public void AddExistingItem()
         {
-            var ifType = ReferencedClass.GetDescribedInterfaceType();
-
             var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
                     this,
-                    ifType.GetObjectClass(FrozenContext),
+                    ReferencedClass,
                     null,
                     (chosen) =>
                     {

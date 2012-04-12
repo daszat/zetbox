@@ -296,11 +296,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public void SelectValue()
         {
-            var ifType = ReferencedClass.GetDescribedInterfaceType();
             var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 this,
-                ifType.GetObjectClass(FrozenContext),
+                ReferencedClass,
                 null,
                 (chosen) =>
                 {

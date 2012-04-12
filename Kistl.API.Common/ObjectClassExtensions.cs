@@ -17,15 +17,7 @@ namespace Kistl.App.Extensions
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return GetObjectClass(obj.ReadOnlyContext.GetInterfaceType(obj), ctx);
-        }
-
-        public static ObjectClass GetObjectClass(this InterfaceType ifType, IReadOnlyKistlContext ctx)
-        {
-            // if (ifType == null) { throw new ArgumentNullException("ifType"); }
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
-
-            return GetObjectClass(ifType.Type, ctx);
+            return ctx.FindPersistenceObject<ObjectClass>(obj.ObjectClassID);
         }
 
         public static ObjectClass GetObjectClass(this Type type, IReadOnlyKistlContext ctx)
