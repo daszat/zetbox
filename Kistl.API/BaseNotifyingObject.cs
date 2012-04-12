@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
 namespace Kistl.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+
     public class PropertyChangeWithValueEventArgs : EventArgs
     {
         public PropertyChangeWithValueEventArgs(string propName, object oldValue, object newValue)
@@ -192,6 +192,9 @@ namespace Kistl.API
 
         protected virtual void AuditPropertyChange(string property, object oldValue, object newValue)
         {
+            if (Object.ReferenceEquals(oldValue, newValue) || (oldValue == null && newValue == null) || (oldValue != null && oldValue.Equals(newValue)))
+                return;
+
             // save memory by allocating lazily
             if (_auditLog == null)
                 _auditLog = new Dictionary<string, Notification>();
