@@ -7,7 +7,8 @@
            table="`ExceptionLog`"
            abstract="false"
            dynamic-update="false"
-           optimistic-lock="none">
+           optimistic-lock="none"
+           batch-size="100">
 
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">

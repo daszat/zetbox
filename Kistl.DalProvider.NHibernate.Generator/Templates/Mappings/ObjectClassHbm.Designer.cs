@@ -65,20 +65,21 @@ this.WriteObjects("           schema=\"`",  schemaName , "`\"\r\n");
 this.WriteObjects("           table=\"`",  tableName , "`\"\r\n");
 this.WriteObjects("           abstract=\"",  isAbstract ? "true" : "false" , "\"\r\n");
 this.WriteObjects("           dynamic-update=\"",  needsConcurrency ? "true" : "false" , "\"\r\n");
-this.WriteObjects("           optimistic-lock=\"",  needsConcurrency ? "dirty" : "none" , "\">\r\n");
+this.WriteObjects("           optimistic-lock=\"",  needsConcurrency ? "dirty" : "none" , "\"\r\n");
+this.WriteObjects("           batch-size=\"100\">\r\n");
 this.WriteObjects("\r\n");
-#line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-IdGeneratorHbm.Call(Host, "id", schemaName, tableName); 
 #line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+IdGeneratorHbm.Call(Host, "id", schemaName, tableName); 
+#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        <!-- define the properties -->\r\n");
-#line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-ApplyPropertyDefinitions(properties); 
 #line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-this.WriteObjects("\r\n");
+ApplyPropertyDefinitions(properties); 
 #line 42 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-if (needsRightsTable) { 
+this.WriteObjects("\r\n");
 #line 43 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+if (needsRightsTable) { 
+#line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("        <!-- map rights -->\r\n");
 this.WriteObjects("        <set name=\"SecurityRightsCollectionImpl\"\r\n");
 this.WriteObjects("             schema=\"`",  schemaName , "`\"\r\n");
@@ -93,13 +94,13 @@ this.WriteObjects("                <property name=\"Right\" column=\"`Right`\" /
 this.WriteObjects("            </composite-element>\r\n");
 this.WriteObjects("        </set>\r\n");
 this.WriteObjects("\r\n");
-#line 57 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-} 
 #line 58 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-this.WriteObjects("        <!-- define the subclasses -->\r\n");
+} 
 #line 59 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-ApplyJoinedSubclasses(subClasses); 
+this.WriteObjects("        <!-- define the subclasses -->\r\n");
 #line 60 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+ApplyJoinedSubclasses(subClasses); 
+#line 61 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    </class>\r\n");
 this.WriteObjects("</hibernate-mapping>");

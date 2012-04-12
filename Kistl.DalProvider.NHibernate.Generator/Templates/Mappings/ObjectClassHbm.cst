@@ -32,7 +32,8 @@
            table="`<%= tableName %>`"
            abstract="<%= isAbstract ? "true" : "false" %>"
            dynamic-update="<%= needsConcurrency ? "true" : "false" %>"
-           optimistic-lock="<%= needsConcurrency ? "dirty" : "none" %>">
+           optimistic-lock="<%= needsConcurrency ? "dirty" : "none" %>"
+           batch-size="100">
 
 <% IdGeneratorHbm.Call(Host, "id", schemaName, tableName); %>
 

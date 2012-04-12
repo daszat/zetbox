@@ -7,7 +7,8 @@
            table="`DefaultPropertyValues`"
            abstract="true"
            dynamic-update="true"
-           optimistic-lock="dirty">
+           optimistic-lock="dirty"
+           batch-size="100">
 
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
