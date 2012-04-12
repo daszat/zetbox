@@ -112,6 +112,7 @@ namespace Kistl.API.Client
                 // must not be set for apache/mono server!
                 //httpWebRequest.SendChunked = true;
                 httpWebRequest.Pipelined = false;
+                httpWebRequest.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             }
 
             _credentialsResolver.InitWebRequest(req);
