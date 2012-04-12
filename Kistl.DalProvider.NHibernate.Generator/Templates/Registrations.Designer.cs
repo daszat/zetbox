@@ -41,11 +41,6 @@ this.WriteObjects("                        var connectionString = kistlConfig.Se
 this.WriteObjects("                        result.Properties[\"dialect\"] = connectionString.DatabaseProvider;\r\n");
 this.WriteObjects("                        result.Properties[\"connection.connection_string\"] = connectionString.ConnectionString;\r\n");
 this.WriteObjects("                        result.Properties[\"max_fetch_depth\"] = \"1\"; // keep SQL statements small\r\n");
-this.WriteObjects("#if DEBUG\r\n");
-this.WriteObjects("                        // make debugging easier by removing reflection optimizations\r\n");
-this.WriteObjects("                        result.Properties[\"use_reflection_optimizer\"] = \"false\";\r\n");
-this.WriteObjects("                        result.Properties[\"bytecode.provider\"] = \"null\";\r\n");
-this.WriteObjects("#endif\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                        return result\r\n");
 this.WriteObjects("                            .AddAssembly(typeof(NHibernateModule).Assembly)\r\n");

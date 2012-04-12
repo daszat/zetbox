@@ -18,11 +18,6 @@
                         result.Properties["dialect"] = connectionString.DatabaseProvider;
                         result.Properties["connection.connection_string"] = connectionString.ConnectionString;
                         result.Properties["max_fetch_depth"] = "1"; // keep SQL statements small
-#if DEBUG
-                        // make debugging easier by removing reflection optimizations
-                        result.Properties["use_reflection_optimizer"] = "false";
-                        result.Properties["bytecode.provider"] = "null";
-#endif
 
                         return result
                             .AddAssembly(typeof(NHibernateModule).Assembly)
