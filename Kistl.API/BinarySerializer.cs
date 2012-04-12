@@ -20,6 +20,21 @@ namespace Kistl.API
     /// </summary>
     public static class BinarySerializer
     {
+        private static Dictionary<Guid, SerializableType> _typeMap;
+        public static Dictionary<Guid, SerializableType> TypeMap
+        {
+            get
+            {
+                return _typeMap;
+            }
+            set
+            {
+                _typeMap = value;
+                GuidMap = _typeMap.ToDictionary(k => k.Value, v => v.Key);
+            }
+        }
+        private static Dictionary<SerializableType, Guid> GuidMap;
+
         [Conditional("DEBUG_SERIALIZATION")]
         private static void SerializerTrace(string fmt, params object[] args)
         {
@@ -270,7 +285,7 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing Guid {0}", val);
-            sw.Write(val.ToString());
+            sw.Write(val.ToByteArray());
         }
 
         /// <summary>
@@ -283,7 +298,7 @@ namespace Kistl.API
             if (sr == null)
                 throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
-            val = new Guid(sr.ReadString());
+            val = new Guid(sr.ReadBytes(16));
             SerializerTrace("read Guid {0}", val);
         }
 
@@ -712,8 +727,17 @@ namespace Kistl.API
 
             long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
 
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(sw.BaseStream, type);
+            if (GuidMap.ContainsKey(type))
+            {
+                ToStream(GuidMap[type], sw);
+            }
+            else
+            {
+                ToStream(Guid.Empty, sw);
+
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(sw.BaseStream, type);
+            }
 
             long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             SerializerTrace("({0} bytes)", endPos - beginPos);
@@ -742,8 +766,19 @@ namespace Kistl.API
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
 
             long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
-            BinaryFormatter bf = new BinaryFormatter();
-            type = (SerializableType)bf.Deserialize(sr.BaseStream);
+
+            Guid guid;
+            FromStream(out guid, sr);
+            if (guid != Guid.Empty)
+            {
+                type = TypeMap[guid];
+            }
+            else
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                type = (SerializableType)bf.Deserialize(sr.BaseStream);
+            }
+
             long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             SerializerTrace("read SerializableType {0} ({1} bytes)", type, endPos - beginPos);
         }
