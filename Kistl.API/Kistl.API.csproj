@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="SerializableExpression.cs" />
     <Compile Include="SerializableType.cs" />
+    <Compile Include="Utils\TypeMap.cs" />
     <Compile Include="Utils\Diff.cs" />
     <Compile Include="Utils\ExpressionDumper.cs" />
     <Compile Include="Utils\FuncCache.cs" />
