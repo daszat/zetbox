@@ -800,6 +800,29 @@ namespace Kistl.App.Base
         {
             base.AttachToContext(ctx);
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "CreatedOn":
+                case "ChangedOn":
+                case "Name":
+                case "ExportGuid":
+                case "DeploymentRestrictions":
+                case "CreatedBy":
+                case "Module":
+                case "ChangedBy":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

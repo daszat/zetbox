@@ -702,6 +702,29 @@ namespace at.dasz.DocumentManagement
                     break;
             }
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "MachineName":
+                case "PickupDirectory":
+                case "CreatedOn":
+                case "ChangedOn":
+                case "ExportGuid":
+                case "Identity":
+                case "CreatedBy":
+                case "ChangedBy":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

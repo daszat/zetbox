@@ -273,6 +273,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OnPropertyChange.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\OnPropertyChange.cs">
+      <DependentUpon>OnPropertyChange.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\ReloadOneReference.cs">
       <DependentUpon>ReloadOneReference.cst</DependentUpon>
     </Compile>

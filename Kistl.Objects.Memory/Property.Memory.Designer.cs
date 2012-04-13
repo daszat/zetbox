@@ -1818,21 +1818,42 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "Name":
+                case "Label":
+                case "Description":
+                case "CategoryTags":
+                case "ExportGuid":
+                case "ChangedOn":
+                case "CreatedOn":
+                case "Module":
+                case "DefaultValue":
+                case "ObjectClass":
+                case "RequestedKind":
+                case "ValueModelDescriptor":
+                case "FilterConfiguration":
+                case "ChangedBy":
+                case "CreatedBy":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
         }
 
-		public override void Recalculate(string property)
+        public override void Recalculate(string property)
         {
             switch (property)
             {
                 case "CodeTemplate":
                     _CodeTemplate_IsDirty = true;
-					NotifyPropertyChanged(property, null, null);
+                    NotifyPropertyChanged(property, null, null);
                     return;
             }
 
-			base.Recalculate(property);
+            base.Recalculate(property);
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

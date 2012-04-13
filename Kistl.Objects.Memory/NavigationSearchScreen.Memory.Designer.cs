@@ -1319,6 +1319,39 @@ namespace Kistl.App.GUI
                     break;
             }
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "InitialSort":
+                case "InitialSortDirection":
+                case "AllowAddNew":
+                case "AllowDelete":
+                case "AllowSelectColumns":
+                case "AllowUserFilter":
+                case "EnableAutoFilter":
+                case "IsEditable":
+                case "IsMultiselect":
+                case "RespectRequiredFilter":
+                case "ShowFilter":
+                case "ShowMasterDetail":
+                case "ShowOpenCommand":
+                case "ShowRefreshCommand":
+                case "ViewMethod":
+                case "Type":
+                case "RequestedWorkspaceKind":
+                case "RequestedEditorKind":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

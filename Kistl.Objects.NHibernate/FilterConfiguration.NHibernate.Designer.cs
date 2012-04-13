@@ -1113,6 +1113,32 @@ namespace Kistl.App.GUI
                     break;
             }
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "ExportGuid":
+                case "Required":
+                case "Label":
+                case "RefreshOnFilterChanged":
+                case "CreatedOn":
+                case "ChangedOn":
+                case "ViewModelDescriptor":
+                case "Module":
+                case "RequestedKind":
+                case "CreatedBy":
+                case "ChangedBy":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

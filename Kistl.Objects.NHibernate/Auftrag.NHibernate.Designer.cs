@@ -1012,6 +1012,31 @@ namespace Kistl.App.Projekte
                     break;
             }
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "ChangedOn":
+                case "CreatedOn":
+                case "Auftragswert":
+                case "Auftragsname":
+                case "ExportGuid":
+                case "Projekt":
+                case "Mitarbeiter":
+                case "CreatedBy":
+                case "ChangedBy":
+                case "Kunde":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

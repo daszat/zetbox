@@ -256,6 +256,10 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

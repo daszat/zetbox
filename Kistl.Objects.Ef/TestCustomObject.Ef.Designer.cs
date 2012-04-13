@@ -707,6 +707,27 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             if (_PhoneNumbersOther != null)
                 PhoneNumbersOtherImpl.ForEach<IPersistenceObject>(i => ctx.Attach(i));
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "Birthday":
+                case "PersonName":
+                case "MubBlah_Nav":
+                case "MuhBlah_One_Nav":
+                case "PhoneNumberOffice":
+                case "PhoneNumberMobile":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

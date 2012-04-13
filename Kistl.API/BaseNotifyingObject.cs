@@ -107,8 +107,6 @@ namespace Kistl.API
 
             if (PropertyChangedWithValue != null)
                 PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
-
-            AuditPropertyChange(property, oldValue, newValue);
         }
 
         protected sealed class Notification

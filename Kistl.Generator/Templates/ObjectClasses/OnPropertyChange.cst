@@ -11,29 +11,41 @@
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="dt" Type="DataType" %>
-<% var props = dt.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.IsCalculated).ToList(); %>
-<% if (props.Count > 0 && !(dt is CompoundObject)) { %>
+<% var recalcProps = GetRecalcProperties();                                                                         %>
+<% var auditProps = GetAuditProperties();                                                                           %>
         #region <%= this.GetType() %>
 
+<% if (auditProps.Count > 0 && !(dt is CompoundObject)) {                                                           %>
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
-        }
 
-		public override void Recalculate(string property)
+            // Do not audit calculated properties
+            switch (property)
+            {
+<%      foreach (var prop in auditProps ) {                                                                         %>
+                case "<%= prop.Name %>":
+<%      }                                                                                                           %>
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
+        }
+<% }                                                                                                                %>
+
+<% if (recalcProps.Count > 0 && !(dt is CompoundObject)) {                                                          %>
+        public override void Recalculate(string property)
         {
             switch (property)
             {
-<%      foreach (var prop in props) { %>
+<%      foreach (var prop in recalcProps) {                                                                         %>
                 case "<%= prop.Name %>":
                     _<%= prop.Name %>_IsDirty = true;
-					NotifyPropertyChanged(property, null, null);
+                    NotifyPropertyChanged(property, null, null);
                     return;
-<%      } %>
+<%      }                                                                                                           %>
             }
 
-			base.Recalculate(property);
+            base.Recalculate(property);
         }
-
+<% }                                                                                                                %>
         #endregion // <%= this.GetType() %>
-<% } %>

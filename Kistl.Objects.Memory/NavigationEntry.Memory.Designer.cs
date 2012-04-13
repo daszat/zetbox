@@ -1087,6 +1087,31 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                     break;
             }
         }
+        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "Title":
+                case "Color":
+                case "CreatedOn":
+                case "ChangedOn":
+                case "ExportGuid":
+                case "Module":
+                case "ViewModelDescriptor":
+                case "Parent":
+                case "CreatedBy":
+                case "ChangedBy":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
+        }
+
+        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

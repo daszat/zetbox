@@ -964,21 +964,36 @@ namespace Kistl.App.Base
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "CreatedOn":
+                case "ChangedOn":
+                case "ExportGuid":
+                case "Description":
+                case "IsContinuous":
+                case "Data":
+                case "CreatedBy":
+                case "ChangedBy":
+                case "Module":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
         }
 
-		public override void Recalculate(string property)
+        public override void Recalculate(string property)
         {
             switch (property)
             {
                 case "CurrentNumber":
                     _CurrentNumber_IsDirty = true;
-					NotifyPropertyChanged(property, null, null);
+                    NotifyPropertyChanged(property, null, null);
                     return;
             }
 
-			base.Recalculate(property);
+            base.Recalculate(property);
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

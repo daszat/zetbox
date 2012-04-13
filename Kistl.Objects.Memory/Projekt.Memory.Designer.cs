@@ -826,21 +826,34 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
+
+            // Do not audit calculated properties
+            switch (property)
+            {
+                case "Name":
+                case "Kundenname":
+                case "ChangedOn":
+                case "CreatedOn":
+                case "ExportGuid":
+                case "CreatedBy":
+                case "ChangedBy":
+                    AuditPropertyChange(property, oldValue, newValue);
+                    break;
+            }
         }
 
-		public override void Recalculate(string property)
+        public override void Recalculate(string property)
         {
             switch (property)
             {
                 case "AufwandGes":
                     _AufwandGes_IsDirty = true;
-					NotifyPropertyChanged(property, null, null);
+                    NotifyPropertyChanged(property, null, null);
                     return;
             }
 
-			base.Recalculate(property);
+            base.Recalculate(property);
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
