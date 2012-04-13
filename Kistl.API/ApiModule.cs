@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using Autofac;
-using Kistl.API.Utils;
 
 namespace Kistl.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.Utils;
+
     public sealed class ApiModule
         : Autofac.Module
     {
@@ -25,7 +26,7 @@ namespace Kistl.API
                 .SingleInstance();
 
             builder
-                .RegisterModule(new Kistl.API.SmtpMailSender.Module());
+                .RegisterModule(new SmtpMailSender.Module());
 
             builder
                 .RegisterAssemblyTypes(typeof(ApiModule).Assembly)
@@ -50,6 +51,21 @@ namespace Kistl.API
             builder
                 .RegisterType<DefaultFileOpener>()
                 .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder
+                .RegisterType<KistlStreamReader>()
+                .AsSelf()
+                .InstancePerDependency();
+
+            builder
+                .RegisterType<KistlStreamWriter>()
+                .AsSelf()
+                .InstancePerDependency();
+
+            builder
+                .RegisterType<TypeMap>()
+                .AsSelf()
                 .SingleInstance();
         }
     }
