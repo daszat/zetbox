@@ -859,13 +859,13 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // Do not audit calculated properties
             switch (property)
             {
-                case "Name":
-                case "Kundenname":
+                case "ChangedBy":
                 case "ChangedOn":
+                case "CreatedBy":
                 case "CreatedOn":
                 case "ExportGuid":
-                case "CreatedBy":
-                case "ChangedBy":
+                case "Kundenname":
+                case "Name":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

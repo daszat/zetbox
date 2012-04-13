@@ -1207,12 +1207,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // Do not audit calculated properties
             switch (property)
             {
-                case "IsSimpleObject":
-                case "IsFrozenObject":
-                case "TableName":
-                case "IsAbstract":
                 case "BaseObjectClass":
                 case "DefaultViewModelDescriptor":
+                case "IsAbstract":
+                case "IsFrozenObject":
+                case "IsSimpleObject":
+                case "TableName":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

@@ -1008,15 +1008,15 @@ namespace Kistl.App.GUI
             // Do not audit calculated properties
             switch (property)
             {
-                case "ExportGuid":
-                case "Description":
-                case "Module":
-                case "ViewModelRef":
-                case "DefaultEditorKind":
                 case "DefaultDisplayKind":
+                case "DefaultEditorKind":
+                case "DefaultGridCellDisplayKind":
                 case "DefaultGridCellEditorKind":
                 case "DefaultGridCellPreEditorKind":
-                case "DefaultGridCellDisplayKind":
+                case "Description":
+                case "ExportGuid":
+                case "Module":
+                case "ViewModelRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

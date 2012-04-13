@@ -415,9 +415,9 @@ namespace Kistl.App.Test
             switch (property)
             {
                 case "Frage":
+                case "Fragebogen":
                 case "FragenNummer":
                 case "GegebeneAntwort":
-                case "Fragebogen":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

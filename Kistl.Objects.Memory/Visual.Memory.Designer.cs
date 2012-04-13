@@ -386,8 +386,8 @@ namespace Kistl.App.GUI
             switch (property)
             {
                 case "Description":
-                case "Property":
                 case "Method":
+                case "Property":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

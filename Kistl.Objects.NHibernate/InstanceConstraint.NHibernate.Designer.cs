@@ -475,9 +475,9 @@ namespace Kistl.App.Base
             // Do not audit calculated properties
             switch (property)
             {
-                case "Reason":
-                case "ExportGuid":
                 case "Constrained":
+                case "ExportGuid":
+                case "Reason":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

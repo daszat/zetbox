@@ -928,16 +928,16 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
             // Do not audit calculated properties
             switch (property)
             {
-                case "CreatedOn":
-                case "ChangedOn":
-                case "ExportGuid":
-                case "Description":
-                case "ConnectionStringKey":
-                case "Schema":
-                case "OriginConnectionStringKey":
-                case "MigrationProject":
-                case "CreatedBy":
                 case "ChangedBy":
+                case "ChangedOn":
+                case "ConnectionStringKey":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "Description":
+                case "ExportGuid":
+                case "MigrationProject":
+                case "OriginConnectionStringKey":
+                case "Schema":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

@@ -1139,17 +1139,17 @@ namespace Kistl.App.GUI
             // Do not audit calculated properties
             switch (property)
             {
-                case "ExportGuid":
-                case "Required":
-                case "Label":
-                case "RefreshOnFilterChanged":
-                case "CreatedOn":
-                case "ChangedOn":
-                case "ViewModelDescriptor":
-                case "Module":
-                case "RequestedKind":
-                case "CreatedBy":
                 case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "ExportGuid":
+                case "Label":
+                case "Module":
+                case "RefreshOnFilterChanged":
+                case "RequestedKind":
+                case "Required":
+                case "ViewModelDescriptor":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

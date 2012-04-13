@@ -1553,19 +1553,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             // Do not audit calculated properties
             switch (property)
             {
-                case "Name":
+                case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "DefaultIcon":
                 case "Description":
+                case "ExportGuid":
+                case "Module":
+                case "Name":
+                case "RequestedKind":
                 case "ShowIconInLists":
                 case "ShowIdInLists":
                 case "ShowNameInLists":
-                case "ChangedOn":
-                case "CreatedOn":
-                case "ExportGuid":
-                case "Module":
-                case "RequestedKind":
-                case "DefaultIcon":
-                case "CreatedBy":
-                case "ChangedBy":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

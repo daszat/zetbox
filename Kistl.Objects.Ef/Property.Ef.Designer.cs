@@ -1895,21 +1895,21 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             // Do not audit calculated properties
             switch (property)
             {
-                case "Name":
-                case "Label":
-                case "Description":
                 case "CategoryTags":
-                case "ExportGuid":
+                case "ChangedBy":
                 case "ChangedOn":
+                case "CreatedBy":
                 case "CreatedOn":
-                case "Module":
                 case "DefaultValue":
+                case "Description":
+                case "ExportGuid":
+                case "FilterConfiguration":
+                case "Label":
+                case "Module":
+                case "Name":
                 case "ObjectClass":
                 case "RequestedKind":
                 case "ValueModelDescriptor":
-                case "FilterConfiguration":
-                case "ChangedBy":
-                case "CreatedBy":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

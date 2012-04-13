@@ -1098,14 +1098,14 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             // Do not audit calculated properties
             switch (property)
             {
-                case "CreatedOn":
-                case "ChangedOn":
-                case "ExportGuid":
-                case "Name":
-                case "CreatedBy":
-                case "ChangedBy":
                 case "BaseCalendar":
+                case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "ExportGuid":
                 case "Module":
+                case "Name":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

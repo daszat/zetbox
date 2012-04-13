@@ -439,9 +439,9 @@ namespace Kistl.App.Base
             // Do not audit calculated properties
             switch (property)
             {
-                case "MemberName":
                 case "ExportGuid":
                 case "Implementor":
+                case "MemberName":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

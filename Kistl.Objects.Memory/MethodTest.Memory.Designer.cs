@@ -733,8 +733,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
             // Do not audit calculated properties
             switch (property)
             {
-                case "StringProp":
                 case "Parent":
+                case "StringProp":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

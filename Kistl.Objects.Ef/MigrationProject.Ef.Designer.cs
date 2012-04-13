@@ -856,13 +856,13 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
             // Do not audit calculated properties
             switch (property)
             {
-                case "Description":
-                case "CreatedOn":
-                case "ChangedOn":
-                case "ExportGuid":
-                case "DestinationModule":
-                case "CreatedBy":
                 case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "Description":
+                case "DestinationModule":
+                case "ExportGuid":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

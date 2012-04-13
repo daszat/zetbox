@@ -1401,24 +1401,24 @@ namespace Kistl.App.GUI
             // Do not audit calculated properties
             switch (property)
             {
-                case "InitialSort":
-                case "InitialSortDirection":
                 case "AllowAddNew":
                 case "AllowDelete":
                 case "AllowSelectColumns":
                 case "AllowUserFilter":
                 case "EnableAutoFilter":
+                case "InitialSort":
+                case "InitialSortDirection":
                 case "IsEditable":
                 case "IsMultiselect":
+                case "RequestedEditorKind":
+                case "RequestedWorkspaceKind":
                 case "RespectRequiredFilter":
                 case "ShowFilter":
                 case "ShowMasterDetail":
                 case "ShowOpenCommand":
                 case "ShowRefreshCommand":
-                case "ViewMethod":
                 case "Type":
-                case "RequestedWorkspaceKind":
-                case "RequestedEditorKind":
+                case "ViewMethod":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

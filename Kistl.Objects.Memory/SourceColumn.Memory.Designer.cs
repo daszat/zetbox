@@ -1385,21 +1385,21 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             // Do not audit calculated properties
             switch (property)
             {
-                case "DbType":
-                case "Name":
-                case "Description":
-                case "IsNullable":
-                case "Size":
-                case "Comment":
-                case "Status":
-                case "CompareNulls":
-                case "CreatedOn":
-                case "ChangedOn":
-                case "ExportGuid":
-                case "References":
-                case "SourceTable":
-                case "CreatedBy":
                 case "ChangedBy":
+                case "ChangedOn":
+                case "Comment":
+                case "CompareNulls":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "DbType":
+                case "Description":
+                case "ExportGuid":
+                case "IsNullable":
+                case "Name":
+                case "References":
+                case "Size":
+                case "SourceTable":
+                case "Status":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

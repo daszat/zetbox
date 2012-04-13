@@ -868,13 +868,13 @@ namespace at.dasz.DocumentManagement
             // Do not audit calculated properties
             switch (property)
             {
-                case "CreatedOn":
+                case "Blob":
+                case "ChangedBy":
                 case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
                 case "ExportGuid":
                 case "Name":
-                case "CreatedBy":
-                case "ChangedBy":
-                case "Blob":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

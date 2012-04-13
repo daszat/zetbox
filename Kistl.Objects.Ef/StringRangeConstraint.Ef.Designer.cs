@@ -317,8 +317,8 @@ namespace Kistl.App.Base
             // Do not audit calculated properties
             switch (property)
             {
-                case "MinLength":
                 case "MaxLength":
+                case "MinLength":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

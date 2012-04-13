@@ -11,20 +11,17 @@ namespace Kistl.Generator.Templates.ObjectClasses
     {
         public List<ValueTypeProperty> GetRecalcProperties()
         {
-            return dt.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.IsCalculated).ToList();
+            return dt.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.IsCalculated).OrderBy(p => p.Name).ToList();
         }
 
         public List<Property> GetAuditProperties()
         {
-            var result = dt.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).Cast<Property>().ToList();
-            result.AddRange(
-                dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.GetIsList()).Cast<Property>()
-                );
-            result.AddRange(
-                dt.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList /* && !p.IsCalculated */).Cast<Property>()
-                );
-
-            return result;
+            return dt.Properties
+                .OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).Cast<Property>()
+                .Concat(dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.GetIsList()).Cast<Property>())
+                .Concat(dt.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList /* && !p.IsCalculated */).Cast<Property>())
+                .OrderBy(p => p.Name)
+                .ToList();
         }
     }
 }

@@ -296,8 +296,8 @@ namespace Kistl.App.Test
             // Do not audit calculated properties
             switch (property)
             {
-                case "OtherInt":
                 case "OneEnd":
+                case "OtherInt":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

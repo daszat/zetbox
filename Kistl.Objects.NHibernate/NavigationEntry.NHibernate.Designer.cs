@@ -1119,16 +1119,16 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
             // Do not audit calculated properties
             switch (property)
             {
-                case "Title":
-                case "Color":
-                case "CreatedOn":
+                case "ChangedBy":
                 case "ChangedOn":
+                case "Color":
+                case "CreatedBy":
+                case "CreatedOn":
                 case "ExportGuid":
                 case "Module":
-                case "ViewModelDescriptor":
                 case "Parent":
-                case "CreatedBy":
-                case "ChangedBy":
+                case "Title":
+                case "ViewModelDescriptor":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

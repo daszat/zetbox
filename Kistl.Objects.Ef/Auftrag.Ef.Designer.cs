@@ -1024,16 +1024,16 @@ namespace Kistl.App.Projekte
             // Do not audit calculated properties
             switch (property)
             {
-                case "ChangedOn":
-                case "CreatedOn":
-                case "Auftragswert":
                 case "Auftragsname":
-                case "ExportGuid":
-                case "Projekt":
-                case "Mitarbeiter":
-                case "CreatedBy":
+                case "Auftragswert":
                 case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "ExportGuid":
                 case "Kunde":
+                case "Mitarbeiter":
+                case "Projekt":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

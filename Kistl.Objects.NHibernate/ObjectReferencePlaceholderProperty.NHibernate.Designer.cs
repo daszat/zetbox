@@ -796,11 +796,11 @@ namespace Kistl.App.Base
             switch (property)
             {
                 case "HasPersistentOrder":
-                case "IsList":
                 case "ImplementorRoleName":
+                case "IsList":
                 case "ItemRoleName":
-                case "Verb":
                 case "ReferencedObjectClass":
+                case "Verb":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

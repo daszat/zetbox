@@ -482,9 +482,9 @@ namespace Kistl.App.GUI
             // Do not audit calculated properties
             switch (property)
             {
+                case "DisplayedTypeAssembly":
                 case "DisplayedTypeFullName":
                 case "DisplayName":
-                case "DisplayedTypeAssembly":
                 case "VisualTree":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;

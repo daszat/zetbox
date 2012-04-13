@@ -553,11 +553,11 @@ namespace Kistl.App.GUI
             // Do not audit calculated properties
             switch (property)
             {
-                case "ExportGuid":
-                case "Toolkit":
                 case "ControlKind":
-                case "Module":
                 case "ControlRef":
+                case "ExportGuid":
+                case "Module":
+                case "Toolkit":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

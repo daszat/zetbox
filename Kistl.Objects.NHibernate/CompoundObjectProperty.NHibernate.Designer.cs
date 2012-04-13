@@ -618,9 +618,9 @@ namespace Kistl.App.Base
             // Do not audit calculated properties
             switch (property)
             {
+                case "CompoundObjectDefinition":
                 case "HasPersistentOrder":
                 case "IsList":
-                case "CompoundObjectDefinition":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

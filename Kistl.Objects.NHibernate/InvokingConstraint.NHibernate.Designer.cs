@@ -410,8 +410,8 @@ namespace Kistl.App.Base
             // Do not audit calculated properties
             switch (property)
             {
-                case "IsValidInvocation":
                 case "GetErrorTextInvocation":
+                case "IsValidInvocation":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

@@ -613,9 +613,9 @@ namespace Kistl.App.GUI
             // Do not audit calculated properties
             switch (property)
             {
+                case "Blob":
                 case "ExportGuid":
                 case "IconFile":
-                case "Blob":
                 case "Module":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;

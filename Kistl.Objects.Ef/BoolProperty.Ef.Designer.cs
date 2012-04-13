@@ -889,12 +889,12 @@ namespace Kistl.App.Base
             // Do not audit calculated properties
             switch (property)
             {
-                case "TrueLabel":
+                case "FalseIcon":
                 case "FalseLabel":
+                case "NullIcon":
                 case "NullLabel":
                 case "TrueIcon":
-                case "FalseIcon":
-                case "NullIcon":
+                case "TrueLabel":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

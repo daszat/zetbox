@@ -368,9 +368,9 @@ namespace Kistl.App.GUI
             // Do not audit calculated properties
             switch (property)
             {
-                case "IsCurrentYearDefault":
-                case "IsCurrentQuaterDefault":
                 case "IsCurrentMonthDefault":
+                case "IsCurrentQuaterDefault":
+                case "IsCurrentYearDefault":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

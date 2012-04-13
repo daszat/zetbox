@@ -432,11 +432,11 @@ namespace Kistl.App.Base
             switch (property)
             {
                 case "Date":
-                case "Thread":
+                case "Exception":
                 case "Level":
                 case "Logger":
                 case "Message":
-                case "Exception":
+                case "Thread":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

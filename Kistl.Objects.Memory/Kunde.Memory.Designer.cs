@@ -818,16 +818,16 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
             // Do not audit calculated properties
             switch (property)
             {
-                case "CreatedOn":
-                case "ChangedOn":
-                case "Kundenname":
                 case "Adresse":
-                case "Land":
-                case "PLZ":
-                case "Ort":
-                case "ExportGuid":
                 case "ChangedBy":
+                case "ChangedOn":
                 case "CreatedBy":
+                case "CreatedOn":
+                case "ExportGuid":
+                case "Kundenname":
+                case "Land":
+                case "Ort":
+                case "PLZ":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

@@ -797,13 +797,13 @@ namespace Kistl.App.Base
             // Do not audit calculated properties
             switch (property)
             {
-                case "ChangedOn":
-                case "CreatedOn":
-                case "Reason":
-                case "ExportGuid":
                 case "ChangedBy":
+                case "ChangedOn":
                 case "ConstrainedProperty":
                 case "CreatedBy":
+                case "CreatedOn":
+                case "ExportGuid":
+                case "Reason":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

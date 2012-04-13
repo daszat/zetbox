@@ -717,11 +717,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             switch (property)
             {
                 case "Birthday":
-                case "PersonName":
                 case "MubBlah_Nav":
                 case "MuhBlah_One_Nav":
-                case "PhoneNumberOffice":
+                case "PersonName":
                 case "PhoneNumberMobile":
+                case "PhoneNumberOffice":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

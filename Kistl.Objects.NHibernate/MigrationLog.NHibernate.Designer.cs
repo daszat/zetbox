@@ -372,11 +372,11 @@ namespace ZBox.App.SchemaMigration
             // Do not audit calculated properties
             switch (property)
             {
-                case "Timestamp":
-                case "Source":
-                case "SourceRows":
                 case "Destination":
                 case "DestinationRows":
+                case "Source":
+                case "SourceRows":
+                case "Timestamp":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

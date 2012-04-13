@@ -268,8 +268,8 @@ namespace Kistl.App.Base
             switch (property)
             {
                 case "DisplayName":
-                case "UserName":
                 case "Password":
+                case "UserName":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

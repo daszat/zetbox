@@ -800,14 +800,14 @@ namespace ZBox.App.SchemaMigration
             // Do not audit calculated properties
             switch (property)
             {
-                case "CreatedOn":
-                case "ChangedOn":
-                case "ExportGuid":
-                case "SourceValue":
-                case "DestinationValue":
-                case "CreatedBy":
                 case "ChangedBy":
+                case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "DestinationValue":
+                case "ExportGuid":
                 case "SourceColumn":
+                case "SourceValue":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

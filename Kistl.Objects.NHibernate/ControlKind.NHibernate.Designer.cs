@@ -546,9 +546,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             switch (property)
             {
                 case "ExportGuid":
+                case "Module":
                 case "Name":
                 case "Parent":
-                case "Module":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

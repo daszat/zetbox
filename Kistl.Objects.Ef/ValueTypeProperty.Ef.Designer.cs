@@ -569,8 +569,8 @@ namespace Kistl.App.Base
             switch (property)
             {
                 case "HasPersistentOrder":
-                case "IsList":
                 case "IsCalculated":
+                case "IsList":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

@@ -734,14 +734,14 @@ namespace at.dasz.DocumentManagement
             // Do not audit calculated properties
             switch (property)
             {
-                case "MachineName":
-                case "PickupDirectory":
-                case "CreatedOn":
+                case "ChangedBy":
                 case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
                 case "ExportGuid":
                 case "Identity":
-                case "CreatedBy":
-                case "ChangedBy":
+                case "MachineName":
+                case "PickupDirectory":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

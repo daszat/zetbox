@@ -916,16 +916,16 @@ namespace Kistl.App.GUI
             // Do not audit calculated properties
             switch (property)
             {
-                case "Name":
-                case "Description":
-                case "CreatedOn":
+                case "ChangedBy":
                 case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "Description":
                 case "ExportGuid":
+                case "Module":
+                case "Name":
                 case "RootScreen":
                 case "WorkspaceViewModel":
-                case "CreatedBy":
-                case "ChangedBy":
-                case "Module":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

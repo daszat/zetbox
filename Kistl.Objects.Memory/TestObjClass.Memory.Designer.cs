@@ -415,10 +415,10 @@ namespace Kistl.App.Test
             // Do not audit calculated properties
             switch (property)
             {
-                case "StringProp":
                 case "MyIntProperty":
-                case "TestEnumProp":
                 case "ObjectProp":
+                case "StringProp":
+                case "TestEnumProp":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

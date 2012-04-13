@@ -622,11 +622,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             switch (property)
             {
                 case "TestBool":
-                case "TestDateTime":
-                case "TestString":
-                case "TestEnum":
-                case "TestCustomObjects_One_Nav":
                 case "TestCustomObjects_Nav":
+                case "TestCustomObjects_One_Nav":
+                case "TestDateTime":
+                case "TestEnum":
+                case "TestString":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

@@ -254,9 +254,9 @@ namespace Kistl.App.Test
             // Do not audit calculated properties
             switch (property)
             {
-                case "SmallDecimal":
                 case "Large":
                 case "NoScale":
+                case "SmallDecimal":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }

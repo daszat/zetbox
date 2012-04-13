@@ -1084,18 +1084,18 @@ namespace Kistl.App.Calendar
             // Do not audit calculated properties
             switch (property)
             {
-                case "ExportGuid":
-                case "CreatedOn":
+                case "Calendar":
+                case "ChangedBy":
                 case "ChangedOn":
+                case "CreatedBy":
+                case "CreatedOn":
+                case "ExportGuid":
+                case "IsWorkingDay":
+                case "Module":
                 case "Name":
-                case "WorkingHours":
                 case "ValidFrom":
                 case "ValidUntil":
-                case "IsWorkingDay":
-                case "CreatedBy":
-                case "ChangedBy":
-                case "Calendar":
-                case "Module":
+                case "WorkingHours":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
