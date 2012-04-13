@@ -400,16 +400,16 @@ namespace Kistl.DalProvider.NHibernate
             return Activator.CreateInstance(ToImplementationType(ifType).Type, lazyCtx);
         }
 
-        public override void Delete(IPersistenceObject obj)
+        protected override void DoDeleteObject(IPersistenceObject obj)
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
             var nhObj = obj as NHibernatePersistenceObject;
             if (nhObj == null) { throw new ArgumentOutOfRangeException("obj", "should be a NHibernatePersistenceObject, but is a " + obj.GetType()); }
 
-            nhObj.Delete();
+            base.DoDeleteObject(obj);
 
-            base.Delete(obj);
+            nhObj.Delete();
         }
 
         public override IDataObject Find(InterfaceType ifType, int ID)

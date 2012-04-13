@@ -478,12 +478,15 @@ namespace Kistl.DalProvider.Ef
         /// Delete an IPersistenceObject.
         /// </summary>
         /// <param baseDir="obj">IPersistenceObject</param>
-        public override void Delete(IPersistenceObject obj)
+        protected override void DoDeleteObject(IPersistenceObject obj)
         {
             CheckDisposed();
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
+            base.DoDeleteObject(obj);
+
             _ctx.DeleteObject(obj);
             ((BaseServerPersistenceObject)obj).SetDeleted();
-            base.Delete(obj);
         }
 
         /// <summary>

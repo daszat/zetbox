@@ -205,17 +205,24 @@ namespace Kistl.API.Server
         /// Delete an IPersistenceObject.
         /// </summary>
         /// <param name="obj">IPersistenceObject</param>
-        public virtual void Delete(IPersistenceObject obj)
+        public void Delete(IPersistenceObject obj)
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             IsModified = true;
-            OnObjectDeleted(obj);
             if (obj is IDataObject)
             {
                 ((IDataObject)obj).NotifyDeleting();
             }
+            
+            DoDeleteObject(obj);
+         
+            OnObjectDeleted(obj);
+        }
+
+        protected virtual void DoDeleteObject(IPersistenceObject obj)
+        {
         }
 
         /// <summary>
