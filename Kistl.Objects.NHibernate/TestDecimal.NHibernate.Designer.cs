@@ -425,17 +425,17 @@ namespace Kistl.App.Test
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Large, binStream);
-            BinarySerializer.ToStream(this.Proxy.NoScale, binStream);
-            BinarySerializer.ToStream(this.Proxy.SmallDecimal, binStream);
+            binStream.Write(this.Proxy.Large);
+            binStream.Write(this.Proxy.NoScale);
+            binStream.Write(this.Proxy.SmallDecimal);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -443,17 +443,17 @@ namespace Kistl.App.Test
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 decimal? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Large = tmp;
             }
             {
                 decimal? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.NoScale = tmp;
             }
             {
                 decimal? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.SmallDecimal = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

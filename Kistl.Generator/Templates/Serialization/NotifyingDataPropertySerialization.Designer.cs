@@ -47,13 +47,13 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 23 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertySerialization.cst"
-this.WriteObjects("            BinarySerializer.ToStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Write(this.",  backingStoreName , ");\r\n");
 #line 25 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 28 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertySerialization.cst"
-this.WriteObjects("            BinarySerializer.FromStream(out this.",  backingStoreName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Read(out this.",  backingStoreName , ");\r\n");
 #line 30 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertySerialization.cst"
 break;
         case SerializerDirection.ToXmlStream:

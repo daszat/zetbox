@@ -23,51 +23,51 @@
 	{
 		case SerializerDirection.ToStream:
 %>
-			BinarySerializer.ToStream(eagerLoadLists, <%= streamName %>);
+			<%= streamName %>.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
-<% if (serializeIds) { %>
-				BinarySerializer.ToStream(true, <%= streamName %>);
-				BinarySerializer.ToStream(<%= collectionName %>.Count, <%= streamName %>);
-<% } %>
+<% if (serializeIds) {                                                          %>
+				<%= streamName %>.Write(true);
+				<%= streamName %>.Write(<%= collectionName %>.Count);
+<% }                                                                            %>
 				foreach(var obj in <%= collectionName %>)
 				{
 					auxObjects.Add(obj);
-<% if (serializeIds) { %>
-					BinarySerializer.ToStream(obj.ID, <%= streamName %>);
-<% } %>
+<% if (serializeIds) {                                                          %>
+					<%= streamName %>.Write(obj.ID);
+<% }                                                                            %>
 				}
-<% if (serializeRelationEntries) { ApplyRelationEntrySerialization(); } %>
+<% if (serializeRelationEntries) { ApplyRelationEntrySerialization(); }         %>
 			}
-<% if (serializeIds) { %>
+<% if (serializeIds) {                                                          %>
 			else
 			{
-				BinarySerializer.ToStream(false, <%= streamName %>);
+				<%= streamName %>.Write(false);
 			}
-<% } %>
+<% }                                                                            %>
 <%
 			break;
 		case SerializerDirection.FromStream:
 %>
-			BinarySerializer.FromStream(out <%= collectionName %>_was_eagerLoaded, <%= streamName %>);
-<% if (serializeIds) { %>
+			<%= streamName %>.Read(out <%= collectionName %>_was_eagerLoaded);
+<% if (serializeIds) {                                                          %>
 			{
 				bool containsList;
-				BinarySerializer.FromStream(out containsList, <%= streamName %>);
+				<%= streamName %>.Read(out containsList);
 				if (containsList)
 				{
 					int numElements;
-					BinarySerializer.FromStream(out numElements, <%= streamName %>);
+					<%= streamName %>.Read(out numElements);
 					<%= collectionName %>Ids = new List<int>(numElements);
 					while (numElements-- > 0) 
 					{
 						int id;
-						BinarySerializer.FromStream(out id, <%= streamName %>);
+						<%= streamName %>.Read(out id);
 						<%= collectionName %>Ids.Add(id);
 					}
 				}
 			}
-<% } %>
+<% }                                                                            %>
 <%
 			break;
 		default:

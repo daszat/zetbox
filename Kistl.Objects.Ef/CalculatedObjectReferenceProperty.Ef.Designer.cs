@@ -683,13 +683,13 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
 				foreach(var obj in Inputs)
@@ -703,22 +703,22 @@ namespace Kistl.App.Base
 			}
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_CalculatedReference_references_ReferencedClass", "ReferencedClass").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
 			if (auxObjects != null) {
 				auxObjects.Add(ReferencedClass);
 			}
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
 
-			BinarySerializer.FromStream(out Inputs_was_eagerLoaded, binStream);
-            BinarySerializer.FromStream(out this._fk_ReferencedClass, binStream);
+			binStream.Read(out Inputs_was_eagerLoaded);
+            binStream.Read(out this._fk_ReferencedClass);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

@@ -48,13 +48,13 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
-this.WriteObjects("            BinarySerializer.ToStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Write(this.",  backingStoreName , ");\r\n");
 #line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
-this.WriteObjects("            BinarySerializer.FromStreamConverter(v => this.",  backingStoreName , " = v, ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".ReadConverter(v => this.",  backingStoreName , " = v);\r\n");
 #line 31 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 break;
         case SerializerDirection.ToXmlStream:

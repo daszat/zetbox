@@ -52,13 +52,13 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            BinarySerializer.ToStream(",  sourceMember , " != null ? OurContext.GetIdFromProxy(",  sourceMember , ") : (int?)null, ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Write(",  sourceMember , " != null ? OurContext.GetIdFromProxy(",  sourceMember , ") : (int?)null);\r\n");
 #line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 31 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            BinarySerializer.FromStream(out this.",  targetMember , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
 #line 33 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.ToXmlStream:

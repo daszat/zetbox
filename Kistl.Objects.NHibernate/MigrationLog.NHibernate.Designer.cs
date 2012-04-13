@@ -569,19 +569,19 @@ namespace ZBox.App.SchemaMigration
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Destination, binStream);
-            BinarySerializer.ToStream(this.Proxy.DestinationRows, binStream);
-            BinarySerializer.ToStream(this.Proxy.Source, binStream);
-            BinarySerializer.ToStream(this.Proxy.SourceRows, binStream);
-            BinarySerializer.ToStream(this.Proxy.Timestamp, binStream);
+            binStream.Write(this.Proxy.Destination);
+            binStream.Write(this.Proxy.DestinationRows);
+            binStream.Write(this.Proxy.Source);
+            binStream.Write(this.Proxy.SourceRows);
+            binStream.Write(this.Proxy.Timestamp);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -589,27 +589,27 @@ namespace ZBox.App.SchemaMigration
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Destination = tmp;
             }
             {
                 int tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.DestinationRows = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Source = tmp;
             }
             {
                 int tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.SourceRows = tmp;
             }
             {
                 DateTime tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Timestamp = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

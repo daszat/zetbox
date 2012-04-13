@@ -21,12 +21,12 @@
     {
         case SerializerDirection.ToStream:
 %>
-            BinarySerializer.ToStream(this.<%= memberName %>, <%= streamName %>);
+            <%= streamName %>.Write(this.<%= memberName %>);
 <%
             break;
         case SerializerDirection.FromStream:
 %>
-            BinarySerializer.FromStream(out this.<%= memberName %>, <%= streamName %>);
+            <%= streamName %>.Read(out this.<%= memberName %>);
 <%
             break;
         case SerializerDirection.ToXmlStream:

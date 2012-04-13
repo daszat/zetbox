@@ -886,23 +886,23 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(Parent != null ? Parent.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._StringProp, binStream);
+            binStream.Write(Parent != null ? Parent.ID : (int?)null);
+            binStream.Write(this._StringProp);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_Parent, binStream);
-            BinarySerializer.FromStream(out this._StringProp, binStream);
+            binStream.Read(out this._fk_Parent);
+            binStream.Read(out this._StringProp);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

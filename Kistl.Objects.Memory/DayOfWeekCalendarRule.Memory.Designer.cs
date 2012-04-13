@@ -312,15 +312,15 @@ namespace Kistl.App.Calendar
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream((int?)((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek, binStream);
+            binStream.Write((int?)((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -328,7 +328,7 @@ namespace Kistl.App.Calendar
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek = (Kistl.App.Base.DayOfWeek)baseValue;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

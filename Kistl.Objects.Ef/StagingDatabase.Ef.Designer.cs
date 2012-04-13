@@ -1210,66 +1210,66 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_StagingDatabase_was_ChangedBy", "ChangedBy").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._isChangedOnSet, binStream);
+            binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.ToStream(this._ChangedOn, binStream);
+                binStream.Write(this._ChangedOn);
             }
-            BinarySerializer.ToStream(this._ConnectionStringKey, binStream);
+            binStream.Write(this._ConnectionStringKey);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_StagingDatabase_was_CreatedBy", "CreatedBy").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
+            binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.ToStream(this._CreatedOn, binStream);
+                binStream.Write(this._CreatedOn);
             }
-            BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this._Description);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this._ExportGuid, binStream);
+                binStream.Write(this._ExportGuid);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<ZBox.App.SchemaMigration.MigrationProjectEfImpl>("Model.FK_MigrationProject_reads_from_StagingDatabases", "MigrationProject").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._OriginConnectionStringKey, binStream);
-            BinarySerializer.ToStream(this._Schema, binStream);
+            binStream.Write(this._OriginConnectionStringKey);
+            binStream.Write(this._Schema);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
-            BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
+            binStream.Read(out this._fk_ChangedBy);
+            binStream.Read(out this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.FromStream(out this._ChangedOn, binStream);
+                binStream.Read(out this._ChangedOn);
             }
-            BinarySerializer.FromStream(out this._ConnectionStringKey, binStream);
-            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
-            BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
+            binStream.Read(out this._ConnectionStringKey);
+            binStream.Read(out this._fk_CreatedBy);
+            binStream.Read(out this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.FromStream(out this._CreatedOn, binStream);
+                binStream.Read(out this._CreatedOn);
             }
-            BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._Description);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+                binStream.Read(out this._ExportGuid);
             }
-            BinarySerializer.FromStream(out this._fk_MigrationProject, binStream);
-            BinarySerializer.FromStream(out this._OriginConnectionStringKey, binStream);
-            BinarySerializer.FromStream(out this._Schema, binStream);
+            binStream.Read(out this._fk_MigrationProject);
+            binStream.Read(out this._OriginConnectionStringKey);
+            binStream.Read(out this._Schema);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

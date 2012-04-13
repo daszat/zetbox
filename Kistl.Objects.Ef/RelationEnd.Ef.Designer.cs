@@ -1599,86 +1599,86 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEfImpl>("Model.FK_Relation_hasA_A", "Relation").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEfImpl>("Model.FK_Relation_hasB_B", "Relation").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_RelationEnd_was_ChangedBy", "ChangedBy").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._isChangedOnSet, binStream);
+            binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.ToStream(this._ChangedOn, binStream);
+                binStream.Write(this._ChangedOn);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_RelationEnd_was_CreatedBy", "CreatedBy").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
+            binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.ToStream(this._CreatedOn, binStream);
+                binStream.Write(this._CreatedOn);
             }
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this._ExportGuid, binStream);
+                binStream.Write(this._ExportGuid);
             }
-            BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
-            BinarySerializer.ToStream((int?)((Kistl.App.Base.RelationEnd)this).Multiplicity, binStream);
+            binStream.Write(this._HasPersistentOrder);
+            binStream.Write((int?)((Kistl.App.Base.RelationEnd)this).Multiplicity);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyEfImpl>("Model.FK_RelationEnd_has_Navigator", "Navigator").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
 			if (auxObjects != null) {
 				auxObjects.Add(Navigator);
 			}
-            BinarySerializer.ToStream(this._RoleName, binStream);
+            binStream.Write(this._RoleName);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_RelationEnd_has_Type", "Type").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_AParent, binStream);
-            BinarySerializer.FromStream(out this._fk_BParent, binStream);
-            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
-            BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
+            binStream.Read(out this._fk_AParent);
+            binStream.Read(out this._fk_BParent);
+            binStream.Read(out this._fk_ChangedBy);
+            binStream.Read(out this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.FromStream(out this._ChangedOn, binStream);
+                binStream.Read(out this._ChangedOn);
             }
-            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
-            BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
+            binStream.Read(out this._fk_CreatedBy);
+            binStream.Read(out this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.FromStream(out this._CreatedOn, binStream);
+                binStream.Read(out this._CreatedOn);
             }
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+                binStream.Read(out this._ExportGuid);
             }
-            BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
+            binStream.Read(out this._HasPersistentOrder);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((Kistl.App.Base.RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)baseValue;
             }
-            BinarySerializer.FromStream(out this._fk_Navigator, binStream);
-            BinarySerializer.FromStream(out this._RoleName, binStream);
-            BinarySerializer.FromStream(out this._fk_Type, binStream);
+            binStream.Read(out this._fk_Navigator);
+            binStream.Read(out this._RoleName);
+            binStream.Read(out this._fk_Type);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

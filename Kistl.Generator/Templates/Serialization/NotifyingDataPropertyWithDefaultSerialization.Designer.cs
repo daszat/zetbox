@@ -49,18 +49,18 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 24 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
-this.WriteObjects("            BinarySerializer.ToStream(this.",  isSetFlagName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Write(this.",  isSetFlagName , ");\r\n");
 this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
-this.WriteObjects("                BinarySerializer.ToStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
+this.WriteObjects("                ",  streamName , ".Write(this.",  backingStoreName , ");\r\n");
 this.WriteObjects("            }\r\n");
 #line 29 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 32 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
-this.WriteObjects("            BinarySerializer.FromStream(out this.",  isSetFlagName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Read(out this.",  isSetFlagName , ");\r\n");
 this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
-this.WriteObjects("                BinarySerializer.FromStream(out this.",  backingStoreName , ", ",  streamName , ");\r\n");
+this.WriteObjects("                ",  streamName , ".Read(out this.",  backingStoreName , ");\r\n");
 this.WriteObjects("            }\r\n");
 #line 37 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
 break;

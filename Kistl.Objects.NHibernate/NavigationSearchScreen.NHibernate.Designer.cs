@@ -1751,32 +1751,32 @@ namespace Kistl.App.GUI
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.AllowAddNew, binStream);
-            BinarySerializer.ToStream(this.Proxy.AllowDelete, binStream);
-            BinarySerializer.ToStream(this.Proxy.AllowSelectColumns, binStream);
-            BinarySerializer.ToStream(this.Proxy.AllowUserFilter, binStream);
-            BinarySerializer.ToStream(this.Proxy.EnableAutoFilter, binStream);
-            BinarySerializer.ToStream(this.Proxy.InitialSort, binStream);
-            BinarySerializer.ToStream((int?)Proxy.InitialSortDirection, binStream);
-            BinarySerializer.ToStream(this.Proxy.IsEditable, binStream);
-            BinarySerializer.ToStream(this.Proxy.IsMultiselect, binStream);
-            BinarySerializer.ToStream(this.Proxy.RequestedEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedEditorKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedWorkspaceKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.RespectRequiredFilter, binStream);
-            BinarySerializer.ToStream(this.Proxy.ShowFilter, binStream);
-            BinarySerializer.ToStream(this.Proxy.ShowMasterDetail, binStream);
-            BinarySerializer.ToStream(this.Proxy.ShowOpenCommand, binStream);
-            BinarySerializer.ToStream(this.Proxy.ShowRefreshCommand, binStream);
-            BinarySerializer.ToStream(this.Proxy.Type != null ? OurContext.GetIdFromProxy(this.Proxy.Type) : (int?)null, binStream);
-            BinarySerializer.ToStream((int?)Proxy.ViewMethod, binStream);
+            binStream.Write(this.Proxy.AllowAddNew);
+            binStream.Write(this.Proxy.AllowDelete);
+            binStream.Write(this.Proxy.AllowSelectColumns);
+            binStream.Write(this.Proxy.AllowUserFilter);
+            binStream.Write(this.Proxy.EnableAutoFilter);
+            binStream.Write(this.Proxy.InitialSort);
+            binStream.Write((int?)Proxy.InitialSortDirection);
+            binStream.Write(this.Proxy.IsEditable);
+            binStream.Write(this.Proxy.IsMultiselect);
+            binStream.Write(this.Proxy.RequestedEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedEditorKind) : (int?)null);
+            binStream.Write(this.Proxy.RequestedWorkspaceKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedWorkspaceKind) : (int?)null);
+            binStream.Write(this.Proxy.RespectRequiredFilter);
+            binStream.Write(this.Proxy.ShowFilter);
+            binStream.Write(this.Proxy.ShowMasterDetail);
+            binStream.Write(this.Proxy.ShowOpenCommand);
+            binStream.Write(this.Proxy.ShowRefreshCommand);
+            binStream.Write(this.Proxy.Type != null ? OurContext.GetIdFromProxy(this.Proxy.Type) : (int?)null);
+            binStream.Write((int?)Proxy.ViewMethod);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -1784,80 +1784,80 @@ namespace Kistl.App.GUI
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.AllowAddNew = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.AllowDelete = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.AllowSelectColumns = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.AllowUserFilter = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.EnableAutoFilter = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.InitialSort = tmp;
             }
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 Proxy.InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)baseValue;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.IsEditable = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.IsMultiselect = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_RequestedEditorKind, binStream);
-            BinarySerializer.FromStream(out this._fk_RequestedWorkspaceKind, binStream);
+            binStream.Read(out this._fk_RequestedEditorKind);
+            binStream.Read(out this._fk_RequestedWorkspaceKind);
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.RespectRequiredFilter = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ShowFilter = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ShowMasterDetail = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ShowOpenCommand = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ShowRefreshCommand = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_Type, binStream);
+            binStream.Read(out this._fk_Type);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)baseValue;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

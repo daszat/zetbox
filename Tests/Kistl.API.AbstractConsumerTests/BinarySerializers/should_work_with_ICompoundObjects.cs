@@ -37,6 +37,16 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 
         #region IStreamable Members
 
+        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+
+        }
+
+        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        {
+            return null;
+        }
+
         public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
 

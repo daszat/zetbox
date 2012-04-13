@@ -241,6 +241,21 @@ namespace Kistl.API
         /// <param name="sw">Stream to serialize to</param>
         /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
         /// <param name="eagerLoadLists">True if Lists should be eager loaded.</param>
+        public virtual void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            if (sw == null)
+                throw new ArgumentNullException("sw");
+
+            sw.Write(ReadOnlyContext.GetInterfaceType(this.GetImplementedInterface()).ToSerializableType());
+            sw.Write(this.ID);
+        }
+
+        /// <summary>
+        /// Base method for serializing this Object.
+        /// </summary>
+        /// <param name="sw">Stream to serialize to</param>
+        /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
+        /// <param name="eagerLoadLists">True if Lists should be eager loaded.</param>
         public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             if (sw == null)
@@ -248,6 +263,21 @@ namespace Kistl.API
 
             BinarySerializer.ToStream(ReadOnlyContext.GetInterfaceType(this.GetImplementedInterface()).ToSerializableType(), sw);
             BinarySerializer.ToStream(this.ID, sw);
+        }
+
+        /// <summary>
+        /// Base method for deserializing this Object.
+        /// </summary>
+        /// <param name="sr">Stream to serialize from</param>
+        public virtual IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+            if (this.IsAttached)
+                throw new InvalidOperationException("Deserializing attached objects is not allowed");
+
+            sr.ReadConverter(i => this.ID = i);
+            return null;
         }
 
         /// <summary>

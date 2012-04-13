@@ -333,15 +333,15 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Name, binStream);
+            binStream.Write(this.Proxy.Name);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -349,7 +349,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Name = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

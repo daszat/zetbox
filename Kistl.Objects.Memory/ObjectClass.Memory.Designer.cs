@@ -1397,33 +1397,33 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._CodeTemplate, binStream);
-            BinarySerializer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._IsAbstract, binStream);
-            BinarySerializer.ToStream(this._IsFrozenObject, binStream);
-            BinarySerializer.ToStream(this._IsSimpleObject, binStream);
-            BinarySerializer.ToStream(this._TableName, binStream);
+            binStream.Write(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null);
+            binStream.Write(this._CodeTemplate);
+            binStream.Write(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null);
+            binStream.Write(this._IsAbstract);
+            binStream.Write(this._IsFrozenObject);
+            binStream.Write(this._IsSimpleObject);
+            binStream.Write(this._TableName);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
-            BinarySerializer.FromStream(out this._CodeTemplate, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultViewModelDescriptor, binStream);
-            BinarySerializer.FromStream(out this._IsAbstract, binStream);
-            BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
-            BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
-            BinarySerializer.FromStream(out this._TableName, binStream);
+            binStream.Read(out this._fk_BaseObjectClass);
+            binStream.Read(out this._CodeTemplate);
+            binStream.Read(out this._fk_DefaultViewModelDescriptor);
+            binStream.Read(out this._IsAbstract);
+            binStream.Read(out this._IsFrozenObject);
+            binStream.Read(out this._IsSimpleObject);
+            binStream.Read(out this._TableName);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

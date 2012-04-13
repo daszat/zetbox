@@ -631,17 +631,17 @@ namespace Kistl.App.GUI
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Description, binStream);
-            BinarySerializer.ToStream(this.Proxy.Method != null ? OurContext.GetIdFromProxy(this.Proxy.Method) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.Property != null ? OurContext.GetIdFromProxy(this.Proxy.Property) : (int?)null, binStream);
+            binStream.Write(this.Proxy.Description);
+            binStream.Write(this.Proxy.Method != null ? OurContext.GetIdFromProxy(this.Proxy.Method) : (int?)null);
+            binStream.Write(this.Proxy.Property != null ? OurContext.GetIdFromProxy(this.Proxy.Property) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -649,11 +649,11 @@ namespace Kistl.App.GUI
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Description = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_Method, binStream);
-            BinarySerializer.FromStream(out this._fk_Property, binStream);
+            binStream.Read(out this._fk_Method);
+            binStream.Read(out this._fk_Property);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

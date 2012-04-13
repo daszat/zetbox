@@ -419,26 +419,26 @@ namespace Kistl.App.Test
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._Name, binStream);
+            binStream.Write(this._Name);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.RequiredParentEfImpl>("Model.FK_Parent_of_Children", "Parent").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._fk_Parent, binStream);
+            binStream.Read(out this._Name);
+            binStream.Read(out this._fk_Parent);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

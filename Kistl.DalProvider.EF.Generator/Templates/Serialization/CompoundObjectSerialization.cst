@@ -22,7 +22,7 @@
 	if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.ToStream)
 	{
 %>
-			BinarySerializer.ToStream(this.<%= memberName %>, <%= streamName %>);
+			<%= streamName %>.Write(this.<%= memberName %>);
 <%	
 	}
 	else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.FromStream)
@@ -31,7 +31,7 @@
 			{
                 // use backing store to avoid notifications
 				<%= backingStoreType %> tmp;
-				BinarySerializer.FromStream(out tmp, <%= streamName %>);
+				<%= streamName %>.Read(out tmp);
 	            this.<%= backingStoreName %> = tmp ?? new <%= backingStoreType %>(true, this, "<%= memberName %>");
                 this.<%= backingStoreName %>.AttachToObject(this, "<%= memberName %>");
 	        }

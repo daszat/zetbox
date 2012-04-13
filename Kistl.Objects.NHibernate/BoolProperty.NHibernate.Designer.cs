@@ -1139,41 +1139,41 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.FalseIcon != null ? OurContext.GetIdFromProxy(this.Proxy.FalseIcon) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.FalseLabel, binStream);
-            BinarySerializer.ToStream(this.Proxy.NullIcon != null ? OurContext.GetIdFromProxy(this.Proxy.NullIcon) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.NullLabel, binStream);
-            BinarySerializer.ToStream(this.Proxy.TrueIcon != null ? OurContext.GetIdFromProxy(this.Proxy.TrueIcon) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.TrueLabel, binStream);
+            binStream.Write(this.Proxy.FalseIcon != null ? OurContext.GetIdFromProxy(this.Proxy.FalseIcon) : (int?)null);
+            binStream.Write(this.Proxy.FalseLabel);
+            binStream.Write(this.Proxy.NullIcon != null ? OurContext.GetIdFromProxy(this.Proxy.NullIcon) : (int?)null);
+            binStream.Write(this.Proxy.NullLabel);
+            binStream.Write(this.Proxy.TrueIcon != null ? OurContext.GetIdFromProxy(this.Proxy.TrueIcon) : (int?)null);
+            binStream.Write(this.Proxy.TrueLabel);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_FalseIcon, binStream);
+            binStream.Read(out this._fk_FalseIcon);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.FalseLabel = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_NullIcon, binStream);
+            binStream.Read(out this._fk_NullIcon);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.NullLabel = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_TrueIcon, binStream);
+            binStream.Read(out this._fk_TrueIcon);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.TrueLabel = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

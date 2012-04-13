@@ -1740,70 +1740,70 @@ namespace Kistl.App.GUI
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._AllowAddNew, binStream);
-            BinarySerializer.ToStream(this._AllowDelete, binStream);
-            BinarySerializer.ToStream(this._AllowSelectColumns, binStream);
-            BinarySerializer.ToStream(this._AllowUserFilter, binStream);
-            BinarySerializer.ToStream(this._EnableAutoFilter, binStream);
-            BinarySerializer.ToStream(this._InitialSort, binStream);
-            BinarySerializer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection, binStream);
-            BinarySerializer.ToStream(this._IsEditable, binStream);
-            BinarySerializer.ToStream(this._IsMultiselect, binStream);
+            binStream.Write(this._AllowAddNew);
+            binStream.Write(this._AllowDelete);
+            binStream.Write(this._AllowSelectColumns);
+            binStream.Write(this._AllowUserFilter);
+            binStream.Write(this._EnableAutoFilter);
+            binStream.Write(this._InitialSort);
+            binStream.Write((int?)((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection);
+            binStream.Write(this._IsEditable);
+            binStream.Write(this._IsMultiselect);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedEditorKind", "RequestedEditorKind").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedWorkspaceKind", "RequestedWorkspaceKind").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._RespectRequiredFilter, binStream);
-            BinarySerializer.ToStream(this._ShowFilter, binStream);
-            BinarySerializer.ToStream(this._ShowMasterDetail, binStream);
-            BinarySerializer.ToStream(this._ShowOpenCommand, binStream);
-            BinarySerializer.ToStream(this._ShowRefreshCommand, binStream);
+            binStream.Write(this._RespectRequiredFilter);
+            binStream.Write(this._ShowFilter);
+            binStream.Write(this._ShowMasterDetail);
+            binStream.Write(this._ShowOpenCommand);
+            binStream.Write(this._ShowRefreshCommand);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_SearchScreen_of_Type", "Type").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod, binStream);
+            binStream.Write((int?)((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._AllowAddNew, binStream);
-            BinarySerializer.FromStream(out this._AllowDelete, binStream);
-            BinarySerializer.FromStream(out this._AllowSelectColumns, binStream);
-            BinarySerializer.FromStream(out this._AllowUserFilter, binStream);
-            BinarySerializer.FromStream(out this._EnableAutoFilter, binStream);
-            BinarySerializer.FromStream(out this._InitialSort, binStream);
+            binStream.Read(out this._AllowAddNew);
+            binStream.Read(out this._AllowDelete);
+            binStream.Read(out this._AllowSelectColumns);
+            binStream.Read(out this._AllowUserFilter);
+            binStream.Read(out this._EnableAutoFilter);
+            binStream.Read(out this._InitialSort);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)baseValue;
             }
-            BinarySerializer.FromStream(out this._IsEditable, binStream);
-            BinarySerializer.FromStream(out this._IsMultiselect, binStream);
-            BinarySerializer.FromStream(out this._fk_RequestedEditorKind, binStream);
-            BinarySerializer.FromStream(out this._fk_RequestedWorkspaceKind, binStream);
-            BinarySerializer.FromStream(out this._RespectRequiredFilter, binStream);
-            BinarySerializer.FromStream(out this._ShowFilter, binStream);
-            BinarySerializer.FromStream(out this._ShowMasterDetail, binStream);
-            BinarySerializer.FromStream(out this._ShowOpenCommand, binStream);
-            BinarySerializer.FromStream(out this._ShowRefreshCommand, binStream);
-            BinarySerializer.FromStream(out this._fk_Type, binStream);
+            binStream.Read(out this._IsEditable);
+            binStream.Read(out this._IsMultiselect);
+            binStream.Read(out this._fk_RequestedEditorKind);
+            binStream.Read(out this._fk_RequestedWorkspaceKind);
+            binStream.Read(out this._RespectRequiredFilter);
+            binStream.Read(out this._ShowFilter);
+            binStream.Read(out this._ShowMasterDetail);
+            binStream.Read(out this._ShowOpenCommand);
+            binStream.Read(out this._ShowRefreshCommand);
+            binStream.Read(out this._fk_Type);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)baseValue;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

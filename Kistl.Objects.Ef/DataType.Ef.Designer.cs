@@ -1916,186 +1916,186 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_DataType_was_ChangedBy", "ChangedBy").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._isChangedOnSet, binStream);
+            binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.ToStream(this._ChangedOn, binStream);
+                binStream.Write(this._ChangedOn);
             }
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
-				BinarySerializer.ToStream(true, binStream);
-				BinarySerializer.ToStream(Constraints.Count, binStream);
+				binStream.Write(true);
+				binStream.Write(Constraints.Count);
 				foreach(var obj in Constraints)
 				{
 					auxObjects.Add(obj);
-					BinarySerializer.ToStream(obj.ID, binStream);
+					binStream.Write(obj.ID);
 				}
 			}
 			else
 			{
-				BinarySerializer.ToStream(false, binStream);
+				binStream.Write(false);
 			}
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_DataType_was_CreatedBy", "CreatedBy").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
+            binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.ToStream(this._CreatedOn, binStream);
+                binStream.Write(this._CreatedOn);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.IconEfImpl>("Model.FK_DataType_has_DefaultIcon", "DefaultIcon").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
 			if (auxObjects != null) {
 				auxObjects.Add(DefaultIcon);
 			}
-            BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this._Description);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this._ExportGuid, binStream);
+                binStream.Write(this._ExportGuid);
             }
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
-				BinarySerializer.ToStream(true, binStream);
-				BinarySerializer.ToStream(Methods.Count, binStream);
+				binStream.Write(true);
+				binStream.Write(Methods.Count);
 				foreach(var obj in Methods)
 				{
 					auxObjects.Add(obj);
-					BinarySerializer.ToStream(obj.ID, binStream);
+					binStream.Write(obj.ID);
 				}
 			}
 			else
 			{
-				BinarySerializer.ToStream(false, binStream);
+				binStream.Write(false);
 			}
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleEfImpl>("Model.FK_Module_contains_DataTypes", "Module").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
 			if (auxObjects != null) {
 				auxObjects.Add(Module);
 			}
-            BinarySerializer.ToStream(this._Name, binStream);
+            binStream.Write(this._Name);
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
-				BinarySerializer.ToStream(true, binStream);
-				BinarySerializer.ToStream(Properties.Count, binStream);
+				binStream.Write(true);
+				binStream.Write(Properties.Count);
 				foreach(var obj in Properties)
 				{
 					auxObjects.Add(obj);
-					BinarySerializer.ToStream(obj.ID, binStream);
+					binStream.Write(obj.ID);
 				}
 			}
 			else
 			{
-				BinarySerializer.ToStream(false, binStream);
+				binStream.Write(false);
 			}
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_DataType_may_request_ControlKind", "ControlKind").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._ShowIconInLists, binStream);
-            BinarySerializer.ToStream(this._ShowIdInLists, binStream);
-            BinarySerializer.ToStream(this._ShowNameInLists, binStream);
+            binStream.Write(this._ShowIconInLists);
+            binStream.Write(this._ShowIdInLists);
+            binStream.Write(this._ShowNameInLists);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
-            BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
+            binStream.Read(out this._fk_ChangedBy);
+            binStream.Read(out this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.FromStream(out this._ChangedOn, binStream);
+                binStream.Read(out this._ChangedOn);
             }
 
-			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
+			binStream.Read(out Constraints_was_eagerLoaded);
 			{
 				bool containsList;
-				BinarySerializer.FromStream(out containsList, binStream);
+				binStream.Read(out containsList);
 				if (containsList)
 				{
 					int numElements;
-					BinarySerializer.FromStream(out numElements, binStream);
+					binStream.Read(out numElements);
 					ConstraintsIds = new List<int>(numElements);
 					while (numElements-- > 0) 
 					{
 						int id;
-						BinarySerializer.FromStream(out id, binStream);
+						binStream.Read(out id);
 						ConstraintsIds.Add(id);
 					}
 				}
 			}
-            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
-            BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
+            binStream.Read(out this._fk_CreatedBy);
+            binStream.Read(out this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.FromStream(out this._CreatedOn, binStream);
+                binStream.Read(out this._CreatedOn);
             }
-            BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._fk_DefaultIcon);
+            binStream.Read(out this._Description);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+                binStream.Read(out this._ExportGuid);
             }
 
-			BinarySerializer.FromStream(out Methods_was_eagerLoaded, binStream);
+			binStream.Read(out Methods_was_eagerLoaded);
 			{
 				bool containsList;
-				BinarySerializer.FromStream(out containsList, binStream);
+				binStream.Read(out containsList);
 				if (containsList)
 				{
 					int numElements;
-					BinarySerializer.FromStream(out numElements, binStream);
+					binStream.Read(out numElements);
 					MethodsIds = new List<int>(numElements);
 					while (numElements-- > 0) 
 					{
 						int id;
-						BinarySerializer.FromStream(out id, binStream);
+						binStream.Read(out id);
 						MethodsIds.Add(id);
 					}
 				}
 			}
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
+            binStream.Read(out this._fk_Module);
+            binStream.Read(out this._Name);
 
-			BinarySerializer.FromStream(out Properties_was_eagerLoaded, binStream);
+			binStream.Read(out Properties_was_eagerLoaded);
 			{
 				bool containsList;
-				BinarySerializer.FromStream(out containsList, binStream);
+				binStream.Read(out containsList);
 				if (containsList)
 				{
 					int numElements;
-					BinarySerializer.FromStream(out numElements, binStream);
+					binStream.Read(out numElements);
 					PropertiesIds = new List<int>(numElements);
 					while (numElements-- > 0) 
 					{
 						int id;
-						BinarySerializer.FromStream(out id, binStream);
+						binStream.Read(out id);
 						PropertiesIds.Add(id);
 					}
 				}
 			}
-            BinarySerializer.FromStream(out this._fk_RequestedKind, binStream);
-            BinarySerializer.FromStream(out this._ShowIconInLists, binStream);
-            BinarySerializer.FromStream(out this._ShowIdInLists, binStream);
-            BinarySerializer.FromStream(out this._ShowNameInLists, binStream);
+            binStream.Read(out this._fk_RequestedKind);
+            binStream.Read(out this._ShowIconInLists);
+            binStream.Read(out this._ShowIdInLists);
+            binStream.Read(out this._ShowNameInLists);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

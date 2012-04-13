@@ -53,7 +53,7 @@ namespace Kistl.Generator.Templates.Serialization
         case SerializerDirection.ToStream:
 
 #line 28 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            BinarySerializer.ToStream((int?)",  backingStoreName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Write((int?)",  backingStoreName , ");\r\n");
 #line 30 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         case SerializerDirection.FromStream:
@@ -61,7 +61,7 @@ break;
 #line 33 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                int? baseValue;\r\n");
-this.WriteObjects("                BinarySerializer.FromStream(out baseValue, ",  streamName , ");\r\n");
+this.WriteObjects("                ",  streamName , ".Read(out baseValue);\r\n");
 this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")baseValue;\r\n");
 this.WriteObjects("            }\r\n");
 #line 39 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"

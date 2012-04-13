@@ -60,14 +60,14 @@ switch(direction)
 #line 29 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                var key = this.RelationshipManager.GetRelatedReference<",  clsFullName , ">(\"Model.",  assocName , "\", \"",  targetRoleName , "\").EntityKey;\r\n");
-this.WriteObjects("                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, ",  streamName , ");\r\n");
+this.WriteObjects("                ",  streamName , ".Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);\r\n");
 this.WriteObjects("            }\r\n");
 #line 34 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 37 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            BinarySerializer.FromStream(out this.",  targetMember , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
 #line 39 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.ToXmlStream:

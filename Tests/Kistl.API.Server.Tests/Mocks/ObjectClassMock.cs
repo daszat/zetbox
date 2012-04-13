@@ -301,6 +301,16 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
+        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ToStream(System.Xml.XmlWriter xml)
         {
             throw new NotImplementedException();

@@ -644,35 +644,35 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
+                binStream.Write(this.Proxy.ExportGuid);
             }
-            BinarySerializer.ToStream(this.Proxy.Implementor != null ? OurContext.GetIdFromProxy(this.Proxy.Implementor) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.MemberName, binStream);
+            binStream.Write(this.Proxy.Implementor != null ? OurContext.GetIdFromProxy(this.Proxy.Implementor) : (int?)null);
+            binStream.Write(this.Proxy.MemberName);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 Guid tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ExportGuid = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_Implementor, binStream);
+            binStream.Read(out this._fk_Implementor);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.MemberName = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

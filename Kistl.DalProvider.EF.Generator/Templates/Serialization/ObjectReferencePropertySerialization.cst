@@ -28,13 +28,13 @@
 %>
             {
                 var key = this.RelationshipManager.GetRelatedReference<<%= clsFullName %>>("Model.<%= assocName %>", "<%= targetRoleName %>").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, <%= streamName %>);
+                <%= streamName %>.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
 <%
             break;
         case SerializerDirection.FromStream:
 %>
-            BinarySerializer.FromStream(out this.<%= targetMember %>, <%= streamName %>);
+            <%= streamName %>.Read(out this.<%= targetMember %>);
 <%
             break;
         case SerializerDirection.ToXmlStream:

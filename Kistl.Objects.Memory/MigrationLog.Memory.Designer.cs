@@ -529,29 +529,29 @@ namespace ZBox.App.SchemaMigration
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._Destination, binStream);
-            BinarySerializer.ToStream(this._DestinationRows, binStream);
-            BinarySerializer.ToStream(this._Source, binStream);
-            BinarySerializer.ToStream(this._SourceRows, binStream);
-            BinarySerializer.ToStream(this._Timestamp, binStream);
+            binStream.Write(this._Destination);
+            binStream.Write(this._DestinationRows);
+            binStream.Write(this._Source);
+            binStream.Write(this._SourceRows);
+            binStream.Write(this._Timestamp);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._Destination, binStream);
-            BinarySerializer.FromStream(out this._DestinationRows, binStream);
-            BinarySerializer.FromStream(out this._Source, binStream);
-            BinarySerializer.FromStream(out this._SourceRows, binStream);
-            BinarySerializer.FromStream(out this._Timestamp, binStream);
+            binStream.Read(out this._Destination);
+            binStream.Read(out this._DestinationRows);
+            binStream.Read(out this._Source);
+            binStream.Read(out this._SourceRows);
+            binStream.Read(out this._Timestamp);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

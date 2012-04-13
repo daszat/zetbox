@@ -818,20 +818,20 @@ namespace Kistl.App.GUI
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.ControlKind != null ? OurContext.GetIdFromProxy(this.Proxy.ControlKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.ControlRef != null ? OurContext.GetIdFromProxy(this.Proxy.ControlRef) : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this.Proxy.ControlKind != null ? OurContext.GetIdFromProxy(this.Proxy.ControlKind) : (int?)null);
+            binStream.Write(this.Proxy.ControlRef != null ? OurContext.GetIdFromProxy(this.Proxy.ControlRef) : (int?)null);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
+                binStream.Write(this.Proxy.ExportGuid);
             }
-            BinarySerializer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, binStream);
+            binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
 				foreach(var obj in SupportedViewModels)
@@ -843,29 +843,29 @@ namespace Kistl.App.GUI
 					auxObjects.Add(OurContext.AttachAndWrap(relEntry));
 				}
 			}
-            BinarySerializer.ToStream((int?)Proxy.Toolkit, binStream);
+            binStream.Write((int?)Proxy.Toolkit);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_ControlKind, binStream);
-            BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._fk_ControlKind);
+            binStream.Read(out this._fk_ControlRef);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 Guid tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ExportGuid = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            binStream.Read(out this._fk_Module);
 
-			BinarySerializer.FromStream(out SupportedViewModels_was_eagerLoaded, binStream);
+			binStream.Read(out SupportedViewModels_was_eagerLoaded);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 Proxy.Toolkit = (Kistl.App.GUI.Toolkit)baseValue;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

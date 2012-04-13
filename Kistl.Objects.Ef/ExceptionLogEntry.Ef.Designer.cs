@@ -650,31 +650,31 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._Date, binStream);
-            BinarySerializer.ToStream(this._Exception, binStream);
-            BinarySerializer.ToStream(this._Level, binStream);
-            BinarySerializer.ToStream(this._Logger, binStream);
-            BinarySerializer.ToStream(this._Message, binStream);
-            BinarySerializer.ToStream(this._Thread, binStream);
+            binStream.Write(this._Date);
+            binStream.Write(this._Exception);
+            binStream.Write(this._Level);
+            binStream.Write(this._Logger);
+            binStream.Write(this._Message);
+            binStream.Write(this._Thread);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._Date, binStream);
-            BinarySerializer.FromStream(out this._Exception, binStream);
-            BinarySerializer.FromStream(out this._Level, binStream);
-            BinarySerializer.FromStream(out this._Logger, binStream);
-            BinarySerializer.FromStream(out this._Message, binStream);
-            BinarySerializer.FromStream(out this._Thread, binStream);
+            binStream.Read(out this._Date);
+            binStream.Read(out this._Exception);
+            binStream.Read(out this._Level);
+            binStream.Read(out this._Logger);
+            binStream.Read(out this._Message);
+            binStream.Read(out this._Thread);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

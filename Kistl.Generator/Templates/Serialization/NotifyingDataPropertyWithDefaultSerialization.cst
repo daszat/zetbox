@@ -21,17 +21,17 @@
     {
         case SerializerDirection.ToStream:
 %>
-            BinarySerializer.ToStream(this.<%= isSetFlagName %>, <%= streamName %>);
+            <%= streamName %>.Write(this.<%= isSetFlagName %>);
             if (this.<%= isSetFlagName %>) {
-                BinarySerializer.ToStream(this.<%= backingStoreName %>, <%= streamName %>);
+                <%= streamName %>.Write(this.<%= backingStoreName %>);
             }
 <%
             break;
         case SerializerDirection.FromStream:
 %>
-            BinarySerializer.FromStream(out this.<%= isSetFlagName %>, <%= streamName %>);
+            <%= streamName %>.Read(out this.<%= isSetFlagName %>);
             if (this.<%= isSetFlagName %>) {
-                BinarySerializer.FromStream(out this.<%= backingStoreName %>, <%= streamName %>);
+                <%= streamName %>.Read(out this.<%= backingStoreName %>);
             }
 <%
             break;

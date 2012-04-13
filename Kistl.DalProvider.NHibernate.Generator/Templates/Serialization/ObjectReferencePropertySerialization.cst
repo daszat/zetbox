@@ -23,12 +23,12 @@
     {
         case SerializerDirection.ToStream:
 %>
-            BinarySerializer.ToStream(<%= sourceMember %> != null ? OurContext.GetIdFromProxy(<%= sourceMember %>) : (int?)null, <%= streamName %>);
+            <%= streamName %>.Write(<%= sourceMember %> != null ? OurContext.GetIdFromProxy(<%= sourceMember %>) : (int?)null);
 <%
             break;
         case SerializerDirection.FromStream:
 %>
-            BinarySerializer.FromStream(out this.<%= targetMember %>, <%= streamName %>);
+            <%= streamName %>.Read(out this.<%= targetMember %>);
 <%
             break;
         case SerializerDirection.ToXmlStream:

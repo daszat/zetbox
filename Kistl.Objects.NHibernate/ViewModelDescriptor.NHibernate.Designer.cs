@@ -1412,49 +1412,49 @@ namespace Kistl.App.GUI
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.DefaultDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultDisplayKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.DefaultEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultEditorKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellDisplayKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.DefaultGridCellEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellEditorKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.DefaultGridCellPreEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellPreEditorKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.Description, binStream);
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this.Proxy.DefaultDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultDisplayKind) : (int?)null);
+            binStream.Write(this.Proxy.DefaultEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultEditorKind) : (int?)null);
+            binStream.Write(this.Proxy.DefaultGridCellDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellDisplayKind) : (int?)null);
+            binStream.Write(this.Proxy.DefaultGridCellEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellEditorKind) : (int?)null);
+            binStream.Write(this.Proxy.DefaultGridCellPreEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellPreEditorKind) : (int?)null);
+            binStream.Write(this.Proxy.Description);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
+                binStream.Write(this.Proxy.ExportGuid);
             }
-            BinarySerializer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.ViewModelRef != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelRef) : (int?)null, binStream);
+            binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
+            binStream.Write(this.Proxy.ViewModelRef != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelRef) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_DefaultDisplayKind, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultEditorKind, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultGridCellDisplayKind, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultGridCellEditorKind, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultGridCellPreEditorKind, binStream);
+            binStream.Read(out this._fk_DefaultDisplayKind);
+            binStream.Read(out this._fk_DefaultEditorKind);
+            binStream.Read(out this._fk_DefaultGridCellDisplayKind);
+            binStream.Read(out this._fk_DefaultGridCellEditorKind);
+            binStream.Read(out this._fk_DefaultGridCellPreEditorKind);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Description = tmp;
             }
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 Guid tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ExportGuid = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStream(out this._fk_ViewModelRef, binStream);
+            binStream.Read(out this._fk_Module);
+            binStream.Read(out this._fk_ViewModelRef);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

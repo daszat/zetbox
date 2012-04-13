@@ -82,6 +82,24 @@ namespace Kistl.API.Mocks
             return null;
         }
 
+        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            sw.Write(ReadOnlyContext.GetInterfaceType(this).ToSerializableType());
+            sw.Write(ID);
+            sw.Write(StringProperty);
+            sw.Write(IntProperty);
+            sw.Write(BoolProperty);
+        }
+
+        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        {
+            sr.Read(out _ID);
+            sr.Read(out _StringProperty);
+            sr.Read(out _IntProperty);
+            sr.Read(out _BoolProperty);
+            return null;
+        }
+
         public virtual void ToStream(System.Xml.XmlWriter xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");

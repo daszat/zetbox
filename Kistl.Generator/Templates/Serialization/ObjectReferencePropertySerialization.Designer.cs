@@ -51,13 +51,13 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 25 "P:\Kistl\Kistl.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            BinarySerializer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ID : (int?)null, ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Write(",  sourceMember , " != null ? ",  sourceMember , ".ID : (int?)null);\r\n");
 #line 27 "P:\Kistl\Kistl.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 30 "P:\Kistl\Kistl.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            BinarySerializer.FromStream(out this.",  targetMember , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
 #line 32 "P:\Kistl\Kistl.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.ToXmlStream:

@@ -824,35 +824,35 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._TestBool, binStream);
-            BinarySerializer.ToStream(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._TestDateTime, binStream);
-            BinarySerializer.ToStream((int?)((Kistl.App.Test.Muhblah)this).TestEnum, binStream);
-            BinarySerializer.ToStream(this._TestString, binStream);
+            binStream.Write(this._TestBool);
+            binStream.Write(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null);
+            binStream.Write(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null);
+            binStream.Write(this._TestDateTime);
+            binStream.Write((int?)((Kistl.App.Test.Muhblah)this).TestEnum);
+            binStream.Write(this._TestString);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._TestBool, binStream);
-            BinarySerializer.FromStream(out this._fk_TestCustomObjects_Nav, binStream);
-            BinarySerializer.FromStream(out this._fk_TestCustomObjects_One_Nav, binStream);
-            BinarySerializer.FromStream(out this._TestDateTime, binStream);
+            binStream.Read(out this._TestBool);
+            binStream.Read(out this._fk_TestCustomObjects_Nav);
+            binStream.Read(out this._fk_TestCustomObjects_One_Nav);
+            binStream.Read(out this._TestDateTime);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((Kistl.App.Test.Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)baseValue;
             }
-            BinarySerializer.FromStream(out this._TestString, binStream);
+            binStream.Read(out this._TestString);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

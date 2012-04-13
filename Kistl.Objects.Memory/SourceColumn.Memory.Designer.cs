@@ -1723,30 +1723,30 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isChangedOnSet, binStream);
+            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.ToStream(this._ChangedOn, binStream);
+                binStream.Write(this._ChangedOn);
             }
-            BinarySerializer.ToStream(this._Comment, binStream);
-            BinarySerializer.ToStream(this._isCompareNullsSet, binStream);
+            binStream.Write(this._Comment);
+            binStream.Write(this._isCompareNullsSet);
             if (this._isCompareNullsSet) {
-                BinarySerializer.ToStream(this._CompareNulls, binStream);
+                binStream.Write(this._CompareNulls);
             }
-            BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
+            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.ToStream(this._CreatedOn, binStream);
+                binStream.Write(this._CreatedOn);
             }
-            BinarySerializer.ToStream((int?)((ZBox.App.SchemaMigration.SourceColumn)this).DbType, binStream);
-            BinarySerializer.ToStream(this._Description, binStream);
+            binStream.Write((int?)((ZBox.App.SchemaMigration.SourceColumn)this).DbType);
+            binStream.Write(this._Description);
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
 				foreach(var obj in DestinationProperty)
@@ -1754,59 +1754,59 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 					auxObjects.Add(obj);
 				}
 			}
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this._ExportGuid, binStream);
+                binStream.Write(this._ExportGuid);
             }
-            BinarySerializer.ToStream(this._IsNullable, binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStream(References != null ? References.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._Size, binStream);
-            BinarySerializer.ToStream(SourceTable != null ? SourceTable.ID : (int?)null, binStream);
-            BinarySerializer.ToStream((int?)((ZBox.App.SchemaMigration.SourceColumn)this).Status, binStream);
+            binStream.Write(this._IsNullable);
+            binStream.Write(this._Name);
+            binStream.Write(References != null ? References.ID : (int?)null);
+            binStream.Write(this._Size);
+            binStream.Write(SourceTable != null ? SourceTable.ID : (int?)null);
+            binStream.Write((int?)((ZBox.App.SchemaMigration.SourceColumn)this).Status);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
-            BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
+            binStream.Read(out this._fk_ChangedBy);
+            binStream.Read(out this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.FromStream(out this._ChangedOn, binStream);
+                binStream.Read(out this._ChangedOn);
             }
-            BinarySerializer.FromStream(out this._Comment, binStream);
-            BinarySerializer.FromStream(out this._isCompareNullsSet, binStream);
+            binStream.Read(out this._Comment);
+            binStream.Read(out this._isCompareNullsSet);
             if (this._isCompareNullsSet) {
-                BinarySerializer.FromStream(out this._CompareNulls, binStream);
+                binStream.Read(out this._CompareNulls);
             }
-            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
-            BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
+            binStream.Read(out this._fk_CreatedBy);
+            binStream.Read(out this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.FromStream(out this._CreatedOn, binStream);
+                binStream.Read(out this._CreatedOn);
             }
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((ZBox.App.SchemaMigration.SourceColumn)this).DbType = (ZBox.App.SchemaMigration.ColumnType)baseValue;
             }
-            BinarySerializer.FromStream(out this._Description, binStream);
+            binStream.Read(out this._Description);
 
-			BinarySerializer.FromStream(out DestinationProperty_was_eagerLoaded, binStream);
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+			binStream.Read(out DestinationProperty_was_eagerLoaded);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+                binStream.Read(out this._ExportGuid);
             }
-            BinarySerializer.FromStream(out this._IsNullable, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._fk_References, binStream);
-            BinarySerializer.FromStream(out this._Size, binStream);
-            BinarySerializer.FromStream(out this._fk_SourceTable, binStream);
+            binStream.Read(out this._IsNullable);
+            binStream.Read(out this._Name);
+            binStream.Read(out this._fk_References);
+            binStream.Read(out this._Size);
+            binStream.Read(out this._fk_SourceTable);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((ZBox.App.SchemaMigration.SourceColumn)this).Status = (ZBox.App.SchemaMigration.MappingStatus?)baseValue;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

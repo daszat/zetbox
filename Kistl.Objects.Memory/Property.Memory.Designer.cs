@@ -2211,105 +2211,105 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._CategoryTags, binStream);
-            BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isChangedOnSet, binStream);
+            binStream.Write(this._CategoryTags);
+            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.ToStream(this._ChangedOn, binStream);
+                binStream.Write(this._ChangedOn);
             }
-            BinarySerializer.ToStream(this._CodeTemplate, binStream);
+            binStream.Write(this._CodeTemplate);
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
-				BinarySerializer.ToStream(true, binStream);
-				BinarySerializer.ToStream(Constraints.Count, binStream);
+				binStream.Write(true);
+				binStream.Write(Constraints.Count);
 				foreach(var obj in Constraints)
 				{
 					auxObjects.Add(obj);
-					BinarySerializer.ToStream(obj.ID, binStream);
+					binStream.Write(obj.ID);
 				}
 			}
 			else
 			{
-				BinarySerializer.ToStream(false, binStream);
+				binStream.Write(false);
 			}
-            BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
+            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.ToStream(this._CreatedOn, binStream);
+                binStream.Write(this._CreatedOn);
             }
-            BinarySerializer.ToStream(DefaultValue != null ? DefaultValue.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(DefaultValue != null ? DefaultValue.ID : (int?)null);
+            binStream.Write(this._Description);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this._ExportGuid, binStream);
+                binStream.Write(this._ExportGuid);
             }
-            BinarySerializer.ToStream(FilterConfiguration != null ? FilterConfiguration.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._Label, binStream);
-            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._Properties_pos, binStream);
-            BinarySerializer.ToStream(RequestedKind != null ? RequestedKind.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, binStream);
+            binStream.Write(FilterConfiguration != null ? FilterConfiguration.ID : (int?)null);
+            binStream.Write(this._Label);
+            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(this._Name);
+            binStream.Write(ObjectClass != null ? ObjectClass.ID : (int?)null);
+            binStream.Write(this._Properties_pos);
+            binStream.Write(RequestedKind != null ? RequestedKind.ID : (int?)null);
+            binStream.Write(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._CategoryTags, binStream);
-            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
-            BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
+            binStream.Read(out this._CategoryTags);
+            binStream.Read(out this._fk_ChangedBy);
+            binStream.Read(out this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.FromStream(out this._ChangedOn, binStream);
+                binStream.Read(out this._ChangedOn);
             }
-            BinarySerializer.FromStream(out this._CodeTemplate, binStream);
+            binStream.Read(out this._CodeTemplate);
 
-			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
+			binStream.Read(out Constraints_was_eagerLoaded);
 			{
 				bool containsList;
-				BinarySerializer.FromStream(out containsList, binStream);
+				binStream.Read(out containsList);
 				if (containsList)
 				{
 					int numElements;
-					BinarySerializer.FromStream(out numElements, binStream);
+					binStream.Read(out numElements);
 					ConstraintsIds = new List<int>(numElements);
 					while (numElements-- > 0) 
 					{
 						int id;
-						BinarySerializer.FromStream(out id, binStream);
+						binStream.Read(out id);
 						ConstraintsIds.Add(id);
 					}
 				}
 			}
-            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
-            BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
+            binStream.Read(out this._fk_CreatedBy);
+            binStream.Read(out this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.FromStream(out this._CreatedOn, binStream);
+                binStream.Read(out this._CreatedOn);
             }
-            BinarySerializer.FromStream(out this._fk_DefaultValue, binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._fk_DefaultValue);
+            binStream.Read(out this._Description);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+                binStream.Read(out this._ExportGuid);
             }
-            BinarySerializer.FromStream(out this._fk_FilterConfiguration, binStream);
-            BinarySerializer.FromStream(out this._Label, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
-            BinarySerializer.FromStream(out this._Properties_pos, binStream);
-            BinarySerializer.FromStream(out this._fk_RequestedKind, binStream);
-            BinarySerializer.FromStream(out this._fk_ValueModelDescriptor, binStream);
+            binStream.Read(out this._fk_FilterConfiguration);
+            binStream.Read(out this._Label);
+            binStream.Read(out this._fk_Module);
+            binStream.Read(out this._Name);
+            binStream.Read(out this._fk_ObjectClass);
+            binStream.Read(out this._Properties_pos);
+            binStream.Read(out this._fk_RequestedKind);
+            binStream.Read(out this._fk_ValueModelDescriptor);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

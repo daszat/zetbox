@@ -623,18 +623,18 @@ namespace Kistl.App.Test
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.MyIntProperty, binStream);
-            BinarySerializer.ToStream(this.Proxy.ObjectProp != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectProp) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.StringProp, binStream);
-            BinarySerializer.ToStream((int?)Proxy.TestEnumProp, binStream);
+            binStream.Write(this.Proxy.MyIntProperty);
+            binStream.Write(this.Proxy.ObjectProp != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectProp) : (int?)null);
+            binStream.Write(this.Proxy.StringProp);
+            binStream.Write((int?)Proxy.TestEnumProp);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -642,18 +642,18 @@ namespace Kistl.App.Test
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 int? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.MyIntProperty = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
+            binStream.Read(out this._fk_ObjectProp);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.StringProp = tmp;
             }
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 Proxy.TestEnumProp = (Kistl.App.Test.TestEnum)baseValue;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

@@ -820,32 +820,32 @@ namespace Kistl.App.GUI
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_ViewDescriptor_is_a_ControlKind", "ControlKind").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_View_has_ControlRef", "ControlRef").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
 			if (auxObjects != null) {
 				auxObjects.Add(ControlRef);
 			}
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this._ExportGuid, binStream);
+                binStream.Write(this._ExportGuid);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleEfImpl>("Model.FK_ViewDescriptor_has_Module", "Module").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
 				foreach(var obj in SupportedViewModels)
@@ -857,27 +857,27 @@ namespace Kistl.App.GUI
 					auxObjects.Add(relEntry);
 				}
 			}
-            BinarySerializer.ToStream((int?)((Kistl.App.GUI.ViewDescriptor)this).Toolkit, binStream);
+            binStream.Write((int?)((Kistl.App.GUI.ViewDescriptor)this).Toolkit);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_ControlKind, binStream);
-            BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._fk_ControlKind);
+            binStream.Read(out this._fk_ControlRef);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+                binStream.Read(out this._ExportGuid);
             }
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            binStream.Read(out this._fk_Module);
 
-			BinarySerializer.FromStream(out SupportedViewModels_was_eagerLoaded, binStream);
+			binStream.Read(out SupportedViewModels_was_eagerLoaded);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((Kistl.App.GUI.ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)baseValue;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

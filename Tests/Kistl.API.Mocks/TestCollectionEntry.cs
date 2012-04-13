@@ -67,6 +67,20 @@ namespace Kistl.API.Mocks
             BinarySerializer.ToStream(TestName, sw);
         }
 
+        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        {
+            sr.Read(out _ID);
+            sr.Read(out _TestName);
+            return null;
+        }
+
+        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            sw.Write(ReadOnlyContext.GetInterfaceType(this).ToSerializableType());
+            sw.Write(ID);
+            sw.Write(TestName);
+        }
+
         [Obsolete]
         public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
@@ -120,7 +134,8 @@ namespace Kistl.API.Mocks
 
         public IKistlContext Context
         {
-            get; private set;
+            get;
+            private set;
         }
         public IReadOnlyKistlContext ReadOnlyContext
         {

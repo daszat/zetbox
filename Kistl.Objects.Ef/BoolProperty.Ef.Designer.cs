@@ -1096,40 +1096,40 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_FalseIcon", "FalseIcon").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._FalseLabel, binStream);
+            binStream.Write(this._FalseLabel);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_NullIcon", "NullIcon").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._NullLabel, binStream);
+            binStream.Write(this._NullLabel);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.IconEfImpl>("Model.FK_BoolProperty_has_TrueIcon", "TrueIcon").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._TrueLabel, binStream);
+            binStream.Write(this._TrueLabel);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_FalseIcon, binStream);
-            BinarySerializer.FromStream(out this._FalseLabel, binStream);
-            BinarySerializer.FromStream(out this._fk_NullIcon, binStream);
-            BinarySerializer.FromStream(out this._NullLabel, binStream);
-            BinarySerializer.FromStream(out this._fk_TrueIcon, binStream);
-            BinarySerializer.FromStream(out this._TrueLabel, binStream);
+            binStream.Read(out this._fk_FalseIcon);
+            binStream.Read(out this._FalseLabel);
+            binStream.Read(out this._fk_NullIcon);
+            binStream.Read(out this._NullLabel);
+            binStream.Read(out this._fk_TrueIcon);
+            binStream.Read(out this._TrueLabel);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

@@ -2358,56 +2358,56 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.CategoryTags, binStream);
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isChangedOnSet, binStream);
+            binStream.Write(this.Proxy.CategoryTags);
+            binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
+            binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
+                binStream.Write(this.Proxy.ChangedOn);
             }
-            BinarySerializer.ToStream(this.Proxy.CodeTemplate, binStream);
+            binStream.Write(this.Proxy.CodeTemplate);
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
-				BinarySerializer.ToStream(true, binStream);
-				BinarySerializer.ToStream(Constraints.Count, binStream);
+				binStream.Write(true);
+				binStream.Write(Constraints.Count);
 				foreach(var obj in Constraints)
 				{
 					auxObjects.Add(obj);
-					BinarySerializer.ToStream(obj.ID, binStream);
+					binStream.Write(obj.ID);
 				}
 			}
 			else
 			{
-				BinarySerializer.ToStream(false, binStream);
+				binStream.Write(false);
 			}
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
+            binStream.Write(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null);
+            binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
+                binStream.Write(this.Proxy.CreatedOn);
             }
-            BinarySerializer.ToStream(this.Proxy.DefaultValue != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultValue) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.Description, binStream);
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this.Proxy.DefaultValue != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultValue) : (int?)null);
+            binStream.Write(this.Proxy.Description);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
+                binStream.Write(this.Proxy.ExportGuid);
             }
-            BinarySerializer.ToStream(this.Proxy.FilterConfiguration != null ? OurContext.GetIdFromProxy(this.Proxy.FilterConfiguration) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.Label, binStream);
-            BinarySerializer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.Name, binStream);
-            BinarySerializer.ToStream(this.Proxy.ObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectClass) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.Properties_pos, binStream);
-            BinarySerializer.ToStream(this.Proxy.RequestedKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedKind) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.ValueModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.ValueModelDescriptor) : (int?)null, binStream);
+            binStream.Write(this.Proxy.FilterConfiguration != null ? OurContext.GetIdFromProxy(this.Proxy.FilterConfiguration) : (int?)null);
+            binStream.Write(this.Proxy.Label);
+            binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
+            binStream.Write(this.Proxy.Name);
+            binStream.Write(this.Proxy.ObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectClass) : (int?)null);
+            binStream.Write(this.Proxy.Properties_pos);
+            binStream.Write(this.Proxy.RequestedKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedKind) : (int?)null);
+            binStream.Write(this.Proxy.ValueModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.ValueModelDescriptor) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -2415,78 +2415,78 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.CategoryTags = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
-            BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
+            binStream.Read(out this._fk_ChangedBy);
+            binStream.Read(out this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 DateTime tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ChangedOn = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.CodeTemplate = tmp;
             }
 
-			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
+			binStream.Read(out Constraints_was_eagerLoaded);
 			{
 				bool containsList;
-				BinarySerializer.FromStream(out containsList, binStream);
+				binStream.Read(out containsList);
 				if (containsList)
 				{
 					int numElements;
-					BinarySerializer.FromStream(out numElements, binStream);
+					binStream.Read(out numElements);
 					ConstraintsIds = new List<int>(numElements);
 					while (numElements-- > 0) 
 					{
 						int id;
-						BinarySerializer.FromStream(out id, binStream);
+						binStream.Read(out id);
 						ConstraintsIds.Add(id);
 					}
 				}
 			}
-            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
-            BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
+            binStream.Read(out this._fk_CreatedBy);
+            binStream.Read(out this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 DateTime tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.CreatedOn = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_DefaultValue, binStream);
+            binStream.Read(out this._fk_DefaultValue);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Description = tmp;
             }
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 Guid tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ExportGuid = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_FilterConfiguration, binStream);
+            binStream.Read(out this._fk_FilterConfiguration);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Label = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            binStream.Read(out this._fk_Module);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Name = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
+            binStream.Read(out this._fk_ObjectClass);
             {
                 int? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Properties_pos = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_RequestedKind, binStream);
-            BinarySerializer.FromStream(out this._fk_ValueModelDescriptor, binStream);
+            binStream.Read(out this._fk_RequestedKind);
+            binStream.Read(out this._fk_ValueModelDescriptor);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

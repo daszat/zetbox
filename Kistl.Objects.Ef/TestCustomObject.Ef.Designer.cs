@@ -977,51 +977,51 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._Birthday, binStream);
+            binStream.Write(this._Birthday);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>("Model.FK_MB_Role_has_TCO_Lst_Role", "MB_Role").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "MB_One_Role").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._PersonName, binStream);
-			BinarySerializer.ToStream(this.PhoneNumberMobile, binStream);
-			BinarySerializer.ToStream(this.PhoneNumberOffice, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.PhoneNumbersOtherImpl, binStream);
+            binStream.Write(this._PersonName);
+			binStream.Write(this.PhoneNumberMobile);
+			binStream.Write(this.PhoneNumberOffice);
+            binStream.WriteCollectionEntries(this.PhoneNumbersOtherImpl);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._Birthday, binStream);
-            BinarySerializer.FromStream(out this._fk_MubBlah_Nav, binStream);
-            BinarySerializer.FromStream(out this._fk_MuhBlah_One_Nav, binStream);
-            BinarySerializer.FromStream(out this._PersonName, binStream);
+            binStream.Read(out this._Birthday);
+            binStream.Read(out this._fk_MubBlah_Nav);
+            binStream.Read(out this._fk_MuhBlah_One_Nav);
+            binStream.Read(out this._PersonName);
 			{
                 // use backing store to avoid notifications
 				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp;
-				BinarySerializer.FromStream(out tmp, binStream);
+				binStream.Read(out tmp);
 	            this.PhoneNumberMobileImpl = tmp ?? new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberMobile");
                 this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
 	        }
 			{
                 // use backing store to avoid notifications
 				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp;
-				BinarySerializer.FromStream(out tmp, binStream);
+				binStream.Read(out tmp);
 	            this.PhoneNumberOfficeImpl = tmp ?? new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberOffice");
                 this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
 	        }
-            BinarySerializer.FromStreamCollectionEntries(this, this.PhoneNumbersOtherImpl, binStream);
+            binStream.ReadCollectionEntries(this, this.PhoneNumbersOtherImpl);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

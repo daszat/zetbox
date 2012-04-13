@@ -1020,20 +1020,20 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.HasPersistentOrder, binStream);
-            BinarySerializer.ToStream(this.Proxy.ImplementorRoleName, binStream);
-            BinarySerializer.ToStream(this.Proxy.IsList, binStream);
-            BinarySerializer.ToStream(this.Proxy.ItemRoleName, binStream);
-            BinarySerializer.ToStream(this.Proxy.ReferencedObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.ReferencedObjectClass) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.Verb, binStream);
+            binStream.Write(this.Proxy.HasPersistentOrder);
+            binStream.Write(this.Proxy.ImplementorRoleName);
+            binStream.Write(this.Proxy.IsList);
+            binStream.Write(this.Proxy.ItemRoleName);
+            binStream.Write(this.Proxy.ReferencedObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.ReferencedObjectClass) : (int?)null);
+            binStream.Write(this.Proxy.Verb);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -1041,28 +1041,28 @@ namespace Kistl.App.Base
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 bool tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.HasPersistentOrder = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ImplementorRoleName = tmp;
             }
             {
                 bool tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.IsList = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ItemRoleName = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_ReferencedObjectClass, binStream);
+            binStream.Read(out this._fk_ReferencedObjectClass);
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Verb = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

@@ -24,12 +24,12 @@
         {
             case SerializerDirection.ToStream:
 %>
-            BinarySerializer.ToStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>);
+            <%= streamName %>.WriteCollectionEntries(this.<%= collectionName %>);
 <%
                 break;
             case SerializerDirection.FromStream:
 %>
-            BinarySerializer.FromStreamCollectionEntries(this, this.<%= collectionName %>, <%= streamName %>);
+            <%= streamName %>.ReadCollectionEntries(this, this.<%= collectionName %>);
 <%
                 break;
             case SerializerDirection.ToXmlStream:

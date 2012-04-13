@@ -53,13 +53,13 @@ if (ShouldSerialize())
             case SerializerDirection.ToStream:
 
 #line 27 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            BinarySerializer.ToStreamCollectionEntries(this.",  collectionName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".WriteCollectionEntries(this.",  collectionName , ");\r\n");
 #line 29 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             case SerializerDirection.FromStream:
 
 #line 32 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            BinarySerializer.FromStreamCollectionEntries(this, this.",  collectionName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".ReadCollectionEntries(this, this.",  collectionName , ");\r\n");
 #line 34 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             case SerializerDirection.ToXmlStream:

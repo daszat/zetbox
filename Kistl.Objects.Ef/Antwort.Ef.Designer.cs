@@ -610,32 +610,32 @@ namespace Kistl.App.Test
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._Frage, binStream);
+            binStream.Write(this._Frage);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.FragebogenEfImpl>("Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten", "Ein_Fragebogen").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._gute_Antworten_pos, binStream);
-            BinarySerializer.ToStream(this._FragenNummer, binStream);
-            BinarySerializer.ToStream(this._GegebeneAntwort, binStream);
+            binStream.Write(this._gute_Antworten_pos);
+            binStream.Write(this._FragenNummer);
+            binStream.Write(this._GegebeneAntwort);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._Frage, binStream);
-            BinarySerializer.FromStream(out this._fk_Fragebogen, binStream);
-            BinarySerializer.FromStream(out this._gute_Antworten_pos, binStream);
-            BinarySerializer.FromStream(out this._FragenNummer, binStream);
-            BinarySerializer.FromStream(out this._GegebeneAntwort, binStream);
+            binStream.Read(out this._Frage);
+            binStream.Read(out this._fk_Fragebogen);
+            binStream.Read(out this._gute_Antworten_pos);
+            binStream.Read(out this._FragenNummer);
+            binStream.Read(out this._GegebeneAntwort);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

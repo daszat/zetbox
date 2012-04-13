@@ -53,7 +53,7 @@ string methodName = direction.ToString();
     switch(direction)
     {
         case SerializerDirection.ToStream:
-            argType = "System.IO.BinaryWriter";
+            argType = "Kistl.API.KistlStreamWriter";
             argName = "binStream";
             methodName = "ToStream";
             serType = SerializerType.Binary;
@@ -61,7 +61,7 @@ string methodName = direction.ToString();
             callBaseWithAdditionalArgs = ", auxObjects, eagerLoadLists";
             break;
         case SerializerDirection.FromStream:
-            argType = "System.IO.BinaryReader";
+            argType = "Kistl.API.KistlStreamReader";
             argName = "binStream";
             methodName = "FromStream";
             serType = SerializerType.Binary;

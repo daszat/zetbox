@@ -1862,30 +1862,30 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isChangedOnSet, binStream);
+            binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
+            binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
+                binStream.Write(this.Proxy.ChangedOn);
             }
-            BinarySerializer.ToStream(this.Proxy.Comment, binStream);
-            BinarySerializer.ToStream(this._isCompareNullsSet, binStream);
+            binStream.Write(this.Proxy.Comment);
+            binStream.Write(this._isCompareNullsSet);
             if (this._isCompareNullsSet) {
-                BinarySerializer.ToStream(this.Proxy.CompareNulls, binStream);
+                binStream.Write(this.Proxy.CompareNulls);
             }
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
+            binStream.Write(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null);
+            binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
+                binStream.Write(this.Proxy.CreatedOn);
             }
-            BinarySerializer.ToStream((int?)Proxy.DbType, binStream);
-            BinarySerializer.ToStream(this.Proxy.Description, binStream);
+            binStream.Write((int?)Proxy.DbType);
+            binStream.Write(this.Proxy.Description);
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
 				foreach(var obj in DestinationProperty)
@@ -1897,87 +1897,87 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 					auxObjects.Add(OurContext.AttachAndWrap(relEntry));
 				}
 			}
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
+                binStream.Write(this.Proxy.ExportGuid);
             }
-            BinarySerializer.ToStream(this.Proxy.IsNullable, binStream);
-            BinarySerializer.ToStream(this.Proxy.Name, binStream);
-            BinarySerializer.ToStream(this.Proxy.References != null ? OurContext.GetIdFromProxy(this.Proxy.References) : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.Size, binStream);
-            BinarySerializer.ToStream(this.Proxy.SourceTable != null ? OurContext.GetIdFromProxy(this.Proxy.SourceTable) : (int?)null, binStream);
-            BinarySerializer.ToStream((int?)Proxy.Status, binStream);
+            binStream.Write(this.Proxy.IsNullable);
+            binStream.Write(this.Proxy.Name);
+            binStream.Write(this.Proxy.References != null ? OurContext.GetIdFromProxy(this.Proxy.References) : (int?)null);
+            binStream.Write(this.Proxy.Size);
+            binStream.Write(this.Proxy.SourceTable != null ? OurContext.GetIdFromProxy(this.Proxy.SourceTable) : (int?)null);
+            binStream.Write((int?)Proxy.Status);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
-            BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
+            binStream.Read(out this._fk_ChangedBy);
+            binStream.Read(out this._isChangedOnSet);
             if (this._isChangedOnSet) {
                 DateTime tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ChangedOn = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Comment = tmp;
             }
-            BinarySerializer.FromStream(out this._isCompareNullsSet, binStream);
+            binStream.Read(out this._isCompareNullsSet);
             if (this._isCompareNullsSet) {
                 bool tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.CompareNulls = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
-            BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
+            binStream.Read(out this._fk_CreatedBy);
+            binStream.Read(out this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
                 DateTime tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.CreatedOn = tmp;
             }
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 Proxy.DbType = (ZBox.App.SchemaMigration.ColumnType)baseValue;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Description = tmp;
             }
 
-			BinarySerializer.FromStream(out DestinationProperty_was_eagerLoaded, binStream);
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+			binStream.Read(out DestinationProperty_was_eagerLoaded);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 Guid tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.ExportGuid = tmp;
             }
             {
                 bool? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.IsNullable = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Name = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_References, binStream);
+            binStream.Read(out this._fk_References);
             {
                 int? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Size = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_SourceTable, binStream);
+            binStream.Read(out this._fk_SourceTable);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 Proxy.Status = (ZBox.App.SchemaMigration.MappingStatus?)baseValue;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

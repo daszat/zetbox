@@ -25,14 +25,14 @@
     switch(direction){
         case SerializerDirection.ToStream:
 %>
-            BinarySerializer.ToStream((int?)<%= backingStoreName %>, <%= streamName %>);
+            <%= streamName %>.Write((int?)<%= backingStoreName %>);
 <%
             break;
         case SerializerDirection.FromStream:
 %>
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, <%= streamName %>);
+                <%= streamName %>.Read(out baseValue);
                 <%= backingStoreName %> = (<%= enumerationType %>)baseValue;
             }
 <%

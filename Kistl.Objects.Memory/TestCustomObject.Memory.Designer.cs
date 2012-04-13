@@ -880,34 +880,34 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._Birthday, binStream);
-            BinarySerializer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._PersonName, binStream);
-			BinarySerializer.ToStream(this.PhoneNumberMobile, binStream);
-			BinarySerializer.ToStream(this.PhoneNumberOffice, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this._PhoneNumbersOtherCollection, binStream);
+            binStream.Write(this._Birthday);
+            binStream.Write(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null);
+            binStream.Write(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null);
+            binStream.Write(this._PersonName);
+			binStream.Write(this.PhoneNumberMobile);
+			binStream.Write(this.PhoneNumberOffice);
+            binStream.WriteCollectionEntries(this._PhoneNumbersOtherCollection);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._Birthday, binStream);
-            BinarySerializer.FromStream(out this._fk_MubBlah_Nav, binStream);
-            BinarySerializer.FromStream(out this._fk_MuhBlah_One_Nav, binStream);
-            BinarySerializer.FromStream(out this._PersonName, binStream);
+            binStream.Read(out this._Birthday);
+            binStream.Read(out this._fk_MubBlah_Nav);
+            binStream.Read(out this._fk_MuhBlah_One_Nav);
+            binStream.Read(out this._PersonName);
 			{
                 // use backing store to avoid notifications
 				Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl tmp;
-				BinarySerializer.FromStream(out tmp, binStream);
+				binStream.Read(out tmp);
 	            this.PhoneNumberMobileImpl = tmp;
                 if (this.PhoneNumberMobileImpl != null)
                     this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
@@ -915,12 +915,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 			{
                 // use backing store to avoid notifications
 				Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl tmp;
-				BinarySerializer.FromStream(out tmp, binStream);
+				binStream.Read(out tmp);
 	            this.PhoneNumberOfficeImpl = tmp;
                 if (this.PhoneNumberOfficeImpl != null)
                     this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
 	        }
-            BinarySerializer.FromStreamCollectionEntries(this, this._PhoneNumbersOtherCollection, binStream);
+            binStream.ReadCollectionEntries(this, this._PhoneNumbersOtherCollection);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

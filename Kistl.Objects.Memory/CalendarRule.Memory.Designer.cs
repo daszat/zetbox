@@ -1359,67 +1359,67 @@ namespace Kistl.App.Calendar
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(Calendar != null ? Calendar.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isChangedOnSet, binStream);
+            binStream.Write(Calendar != null ? Calendar.ID : (int?)null);
+            binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
+            binStream.Write(this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.ToStream(this._ChangedOn, binStream);
+                binStream.Write(this._ChangedOn);
             }
-            BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
+            binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
+            binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.ToStream(this._CreatedOn, binStream);
+                binStream.Write(this._CreatedOn);
             }
-            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.ToStream(this._ExportGuid, binStream);
+                binStream.Write(this._ExportGuid);
             }
-            BinarySerializer.ToStream(this._isIsWorkingDaySet, binStream);
+            binStream.Write(this._isIsWorkingDaySet);
             if (this._isIsWorkingDaySet) {
-                BinarySerializer.ToStream(this._IsWorkingDay, binStream);
+                binStream.Write(this._IsWorkingDay);
             }
-            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStream(this._ValidFrom, binStream);
-            BinarySerializer.ToStream(this._ValidUntil, binStream);
-            BinarySerializer.ToStream(this._WorkingHours, binStream);
+            binStream.Write(Module != null ? Module.ID : (int?)null);
+            binStream.Write(this._Name);
+            binStream.Write(this._ValidFrom);
+            binStream.Write(this._ValidUntil);
+            binStream.Write(this._WorkingHours);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_Calendar, binStream);
-            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
-            BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
+            binStream.Read(out this._fk_Calendar);
+            binStream.Read(out this._fk_ChangedBy);
+            binStream.Read(out this._isChangedOnSet);
             if (this._isChangedOnSet) {
-                BinarySerializer.FromStream(out this._ChangedOn, binStream);
+                binStream.Read(out this._ChangedOn);
             }
-            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
-            BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
+            binStream.Read(out this._fk_CreatedBy);
+            binStream.Read(out this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
-                BinarySerializer.FromStream(out this._CreatedOn, binStream);
+                binStream.Read(out this._CreatedOn);
             }
-            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            binStream.Read(out this._isExportGuidSet);
             if (this._isExportGuidSet) {
-                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+                binStream.Read(out this._ExportGuid);
             }
-            BinarySerializer.FromStream(out this._isIsWorkingDaySet, binStream);
+            binStream.Read(out this._isIsWorkingDaySet);
             if (this._isIsWorkingDaySet) {
-                BinarySerializer.FromStream(out this._IsWorkingDay, binStream);
+                binStream.Read(out this._IsWorkingDay);
             }
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._ValidFrom, binStream);
-            BinarySerializer.FromStream(out this._ValidUntil, binStream);
-            BinarySerializer.FromStream(out this._WorkingHours, binStream);
+            binStream.Read(out this._fk_Module);
+            binStream.Read(out this._Name);
+            binStream.Read(out this._ValidFrom);
+            binStream.Read(out this._ValidUntil);
+            binStream.Read(out this._WorkingHours);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

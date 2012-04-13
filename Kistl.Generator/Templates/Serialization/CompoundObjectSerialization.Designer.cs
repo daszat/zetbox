@@ -52,7 +52,7 @@ if (direction == SerializerDirection.ToStream)
 	{
 
 #line 25 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("			BinarySerializer.ToStream(this.",  memberName , ", ",  streamName , ");\r\n");
+this.WriteObjects("			",  streamName , ".Write(this.",  memberName , ");\r\n");
 #line 27 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
 	else if (direction == SerializerDirection.FromStream)
@@ -62,7 +62,7 @@ this.WriteObjects("			BinarySerializer.ToStream(this.",  memberName , ", ",  str
 this.WriteObjects("			{\r\n");
 this.WriteObjects("                // use backing store to avoid notifications\r\n");
 this.WriteObjects("				",  backingStoreType , " tmp;\r\n");
-this.WriteObjects("				BinarySerializer.FromStream(out tmp, ",  streamName , ");\r\n");
+this.WriteObjects("				",  streamName , ".Read(out tmp);\r\n");
 this.WriteObjects("	            this.",  backingStoreName , " = tmp;\r\n");
 this.WriteObjects("                if (this.",  backingStoreName , " != null)\r\n");
 this.WriteObjects("                    this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\r\n");

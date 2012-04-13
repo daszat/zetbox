@@ -727,33 +727,33 @@ namespace Kistl.App.GUI
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.AssemblyEfImpl>("Model.FK_Template_has_DisplayedTypeAssembly", "DisplayedTypeAssembly").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-            BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
-            BinarySerializer.ToStream(this._DisplayName, binStream);
+            binStream.Write(this._DisplayedTypeFullName);
+            binStream.Write(this._DisplayName);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Template_has_VisualTree", "VisualTree").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+                binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._fk_DisplayedTypeAssembly, binStream);
-            BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
-            BinarySerializer.FromStream(out this._DisplayName, binStream);
-            BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
+            binStream.Read(out this._fk_DisplayedTypeAssembly);
+            binStream.Read(out this._DisplayedTypeFullName);
+            binStream.Read(out this._DisplayName);
+            binStream.Read(out this._fk_VisualTree);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

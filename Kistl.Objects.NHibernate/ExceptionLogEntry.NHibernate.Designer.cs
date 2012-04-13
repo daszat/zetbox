@@ -641,20 +641,20 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Date, binStream);
-            BinarySerializer.ToStream(this.Proxy.Exception, binStream);
-            BinarySerializer.ToStream(this.Proxy.Level, binStream);
-            BinarySerializer.ToStream(this.Proxy.Logger, binStream);
-            BinarySerializer.ToStream(this.Proxy.Message, binStream);
-            BinarySerializer.ToStream(this.Proxy.Thread, binStream);
+            binStream.Write(this.Proxy.Date);
+            binStream.Write(this.Proxy.Exception);
+            binStream.Write(this.Proxy.Level);
+            binStream.Write(this.Proxy.Logger);
+            binStream.Write(this.Proxy.Message);
+            binStream.Write(this.Proxy.Thread);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -662,32 +662,32 @@ namespace Kistl.App.Base
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 DateTime tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Date = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Exception = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Level = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Logger = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Message = tmp;
             }
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Thread = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

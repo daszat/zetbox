@@ -49,7 +49,7 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 24 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            BinarySerializer.ToStream(this.",  memberName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\r\n");
 #line 26 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
@@ -57,7 +57,7 @@ break;
 #line 29 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                ",  memberType , " tmp;\r\n");
-this.WriteObjects("                BinarySerializer.FromStream(out tmp, ",  streamName , ");\r\n");
+this.WriteObjects("                ",  streamName , ".Read(out tmp);\r\n");
 this.WriteObjects("                this.",  memberName , " = tmp;\r\n");
 this.WriteObjects("            }\r\n");
 #line 35 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"

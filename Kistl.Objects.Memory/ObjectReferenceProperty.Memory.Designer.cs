@@ -881,25 +881,25 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._EagerLoading, binStream);
-            BinarySerializer.ToStream(this._IsInlineEditable, binStream);
-            BinarySerializer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, binStream);
+            binStream.Write(this._EagerLoading);
+            binStream.Write(this._IsInlineEditable);
+            binStream.Write(RelationEnd != null ? RelationEnd.ID : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._EagerLoading, binStream);
-            BinarySerializer.FromStream(out this._IsInlineEditable, binStream);
-            BinarySerializer.FromStream(out this._fk_RelationEnd, binStream);
+            binStream.Read(out this._EagerLoading);
+            binStream.Read(out this._IsInlineEditable);
+            binStream.Read(out this._fk_RelationEnd);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

@@ -439,16 +439,16 @@ namespace Kistl.App.Test
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Name, binStream);
-            BinarySerializer.ToStream(this.Proxy.OneSide != null ? OurContext.GetIdFromProxy(this.Proxy.OneSide) : (int?)null, binStream);
+            binStream.Write(this.Proxy.Name);
+            binStream.Write(this.Proxy.OneSide != null ? OurContext.GetIdFromProxy(this.Proxy.OneSide) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
@@ -456,10 +456,10 @@ namespace Kistl.App.Test
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.Name = tmp;
             }
-            BinarySerializer.FromStream(out this._fk_OneSide, binStream);
+            binStream.Read(out this._fk_OneSide);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0

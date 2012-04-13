@@ -379,57 +379,57 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
 
-			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			binStream.Write(eagerLoadLists);
 			if (eagerLoadLists && auxObjects != null)
 			{
-				BinarySerializer.ToStream(true, binStream);
-				BinarySerializer.ToStream(Antworten.Count, binStream);
+				binStream.Write(true);
+				binStream.Write(Antworten.Count);
 				foreach(var obj in Antworten)
 				{
 					auxObjects.Add(obj);
-					BinarySerializer.ToStream(obj.ID, binStream);
+					binStream.Write(obj.ID);
 				}
 			}
 			else
 			{
-				BinarySerializer.ToStream(false, binStream);
+				binStream.Write(false);
 			}
-            BinarySerializer.ToStream(this.Proxy.BogenNummer, binStream);
+            binStream.Write(this.Proxy.BogenNummer);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
 
-			BinarySerializer.FromStream(out Antworten_was_eagerLoaded, binStream);
+			binStream.Read(out Antworten_was_eagerLoaded);
 			{
 				bool containsList;
-				BinarySerializer.FromStream(out containsList, binStream);
+				binStream.Read(out containsList);
 				if (containsList)
 				{
 					int numElements;
-					BinarySerializer.FromStream(out numElements, binStream);
+					binStream.Read(out numElements);
 					AntwortenIds = new List<int>(numElements);
 					while (numElements-- > 0) 
 					{
 						int id;
-						BinarySerializer.FromStream(out id, binStream);
+						binStream.Read(out id);
 						AntwortenIds.Add(id);
 					}
 				}
 			}
             {
                 int? tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
+                binStream.Read(out tmp);
                 this.Proxy.BogenNummer = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)

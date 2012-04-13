@@ -10,11 +10,11 @@ namespace Kistl.API.Client
     using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.ServiceModel;
     using System.Text;
     using Kistl.API.Client.KistlService;
+    using Kistl.API.Client.PerfCounter;
     using Kistl.API.Utils;
-using Kistl.API.Client.PerfCounter;
-    using System.ServiceModel;
 
     /// <summary>
     /// Proxy Interface for IKistlService
