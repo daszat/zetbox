@@ -96,7 +96,7 @@ namespace Kistl.Client.Presentables.GUI
 
                 _listViewModel = ViewModelFactory
                     .CreateViewModel<InstanceListViewModel.Factory>()
-                    .Invoke(DataContext, this, _ctxFactory, Type, _queryFactory);
+                    .Invoke(DataContext, this, _ctxFactory, Type, QueryFactory);
 
                 InitializeListViewModel(_listViewModel);
             }
