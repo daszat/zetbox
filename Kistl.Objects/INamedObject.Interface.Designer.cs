@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Objects implementing this interface can be accessed as named objects.
     /// </summary>
+    [Kistl.API.DefinitionGuid("9c7c4532-2624-4b37-8f77-1ef06a6d174b")]
     public interface INamedObject : Kistl.App.Base.IExportable 
     {
 

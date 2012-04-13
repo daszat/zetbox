@@ -11,4 +11,5 @@
 
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="prop" Type="Property" %>
+        [Kistl.API.DefinitionGuid("<%= prop.ExportGuid %>")]
         <%= GetPropertyTypeString() %> <%= GetPropertyName() %> { get; }

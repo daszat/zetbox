@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Parameter. This class is abstract.
     /// </summary>
+    [Kistl.API.DefinitionGuid("63b8e3f7-e663-4fde-a09a-64ca876586bd")]
     public interface BaseParameter : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Description of this Parameter
         /// </summary>
+        [Kistl.API.DefinitionGuid("20668b5a-ecaa-4531-81d8-6e50c9858ff0")]
         string Description {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Parameter wird als List&amp;lt;&amp;gt; generiert
         /// </summary>
+        [Kistl.API.DefinitionGuid("ec4d5dbc-f738-4eb3-a663-2328d0baa79c")]
         bool IsList {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("dfa5d0ec-ce8b-4bb7-ab5b-fde21f56ad3a")]
         bool IsNullable {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Es darf nur ein Return Parameter angegeben werden
         /// </summary>
+        [Kistl.API.DefinitionGuid("ba5bfb2e-f679-41b2-93ef-fc795e2e92d4")]
         bool IsReturnParameter {
             get;
             set;
@@ -48,6 +53,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("fcf1e2ff-470a-4abe-9e44-e7f3dc1a5c95")]
         string Label {
             get;
             set;
@@ -56,6 +62,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Methode des Parameters
         /// </summary>
+        [Kistl.API.DefinitionGuid("29d7eba7-6b87-438a-910d-1a2bf17d8215")]
         Kistl.App.Base.Method Method {
             get;
             set;
@@ -64,6 +71,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Name des Parameter
         /// </summary>
+        [Kistl.API.DefinitionGuid("25c82fbd-cf5d-4021-b549-fccb46e166b3")]
         string Name {
             get;
             set;

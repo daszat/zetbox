@@ -6,6 +6,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("89eea80f-b5fd-4972-9163-9bbfef61c747")]
     public enum ContainmentSpecification
     {
 		/// <summary>

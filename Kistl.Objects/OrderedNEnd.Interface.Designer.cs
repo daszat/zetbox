@@ -10,12 +10,14 @@ namespace Kistl.App.Test
     /// <summary>
     /// A test class for persistently ordered 1:N relations
     /// </summary>
+    [Kistl.API.DefinitionGuid("e39c9cbb-3181-49e1-93ab-aed0d0e11728")]
     public interface OrderedNEnd : IDataObject 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("40b1123f-b73d-4b33-ae0c-c65fe2c2c19c")]
         Kistl.App.Test.OrderedOneEnd OneEnd {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("7d5ffa69-671a-4e88-ab4b-e805d635fb9e")]
         int? OtherInt {
             get;
             set;

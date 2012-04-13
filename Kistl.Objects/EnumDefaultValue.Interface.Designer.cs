@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Sets an enumeration property with an configured default value
     /// </summary>
+    [Kistl.API.DefinitionGuid("4f35c5da-924c-4114-a011-4d736faa3ae2")]
     public interface EnumDefaultValue : Kistl.App.Base.DefaultPropertyValue 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("d072423b-f723-4342-8111-79fb563c8ab4")]
         Kistl.App.Base.EnumerationEntry EnumValue {
             get;
             set;

@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Marks a DataType as exportable
     /// </summary>
+    [Kistl.API.DefinitionGuid("4ae6616a-eca3-47a5-b502-8e3c3913c2f0")]
     public interface IExportable  
     {
 
         /// <summary>
         /// Export Guid
         /// </summary>
+        [Kistl.API.DefinitionGuid("59ce9855-9e67-455f-b6fa-636c47da5ae2")]
         Guid ExportGuid {
             get;
             set;

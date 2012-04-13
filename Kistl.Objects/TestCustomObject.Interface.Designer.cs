@@ -10,12 +10,14 @@ namespace Kistl.App.Test
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("de155110-79cc-4dac-89d6-0916608be1fb")]
     public interface TestCustomObject : IDataObject 
     {
 
         /// <summary>
         /// Happy Birthday!
         /// </summary>
+        [Kistl.API.DefinitionGuid("bdcf86b8-4c47-4c50-b340-d9323344c7f0")]
         DateTime? Birthday {
             get;
             set;
@@ -25,11 +27,13 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("4a929ef5-f211-47b4-92c3-4961da6d5173")]
         ICollection<Kistl.App.Test.Muhblah> MubBlah_List_Nav { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("3251497d-5214-4e42-976e-f36c3d9541de")]
         Kistl.App.Test.Muhblah MubBlah_Nav {
             get;
             set;
@@ -39,11 +43,13 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("9c4217f2-47d8-47b5-a324-7601ecabc7b0")]
         ICollection<Kistl.App.Test.Muhblah> MuhBlah_ManyList_Nav { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("e7b207d3-5d25-4716-85b3-564f10eac210")]
         Kistl.App.Test.Muhblah MuhBlah_One_Nav {
             get;
             set;
@@ -52,6 +58,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// Person&amp;apos;s Name
         /// </summary>
+        [Kistl.API.DefinitionGuid("bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd")]
         string PersonName {
             get;
             set;
@@ -60,6 +67,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("05e41070-e88a-4270-ab1c-94cd2e7d41d1")]
         Kistl.App.Test.TestPhoneCompoundObject PhoneNumberMobile {
             get;
             set;
@@ -68,6 +76,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("465e10ec-4e5e-4e8f-831f-44562dd0d68b")]
         Kistl.App.Test.TestPhoneCompoundObject PhoneNumberOffice {
             get;
             set;
@@ -77,6 +86,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("0c0c1101-118a-4ce2-806c-d30a03b19dde")]
         ICollection<Kistl.App.Test.TestPhoneCompoundObject> PhoneNumbersOther { get; }
     }
 }

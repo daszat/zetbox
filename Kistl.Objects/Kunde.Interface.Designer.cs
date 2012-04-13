@@ -10,12 +10,14 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("b9ddd097-4f45-40c5-87e9-7331ab58727c")]
     public interface Kunde : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Adresse &amp;amp; Hausnummer
         /// </summary>
+        [Kistl.API.DefinitionGuid("7ba07561-15f4-495a-b2eb-59006e4210e5")]
         string Adresse {
             get;
             set;
@@ -25,11 +27,13 @@ namespace Kistl.App.Projekte
         /// EMails des Kunden - können mehrere sein
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("1d0f6da6-4b69-48d7-9e94-bfb5466654b9")]
         ICollection<string> EMails { get; }
 
         /// <summary>
         /// Name des Kunden
         /// </summary>
+        [Kistl.API.DefinitionGuid("2817a845-b2d5-43ed-b0f1-5a6692a62183")]
         string Kundenname {
             get;
             set;
@@ -38,6 +42,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Land
         /// </summary>
+        [Kistl.API.DefinitionGuid("c01afb40-9f28-494f-9058-9d0eca79a125")]
         string Land {
             get;
             set;
@@ -46,6 +51,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Ort
         /// </summary>
+        [Kistl.API.DefinitionGuid("5281cbe0-8f63-4a2d-bb9e-2ee04588202d")]
         string Ort {
             get;
             set;
@@ -54,6 +60,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Postleitzahl
         /// </summary>
+        [Kistl.API.DefinitionGuid("cafb4b93-4a1a-4753-8ec0-c65936a0d129")]
         string PLZ {
             get;
             set;

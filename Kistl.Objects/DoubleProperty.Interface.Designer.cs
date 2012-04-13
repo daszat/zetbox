@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Double Properties.
     /// </summary>
+    [Kistl.API.DefinitionGuid("404782b3-fbbc-4190-9b96-43dad7177090")]
     public interface DoubleProperty : Kistl.App.Base.ValueTypeProperty 
     {
     }

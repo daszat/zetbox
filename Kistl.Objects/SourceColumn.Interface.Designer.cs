@@ -10,12 +10,14 @@ namespace ZBox.App.SchemaMigration
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("e921bb2f-2cac-46d1-a7f4-120bb1a4afe2")]
     public interface SourceColumn : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("66bcca34-2297-4e06-84e8-ff19c5d4af35")]
         string Comment {
             get;
             set;
@@ -24,6 +26,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// In some cases, when joining across source tables, nulls should be compared as equals, instead of not. This is especially true, when &quot;null&quot; is used as a domain value.
         /// </summary>
+        [Kistl.API.DefinitionGuid("09607800-4b5c-4d8a-a0cf-b508986c2f17")]
         bool CompareNulls {
             get;
             set;
@@ -32,6 +35,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("78873431-d503-4192-b658-5c5bc6442180")]
         ZBox.App.SchemaMigration.ColumnType DbType {
             get;
             set;
@@ -40,6 +44,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("6273444e-5309-4481-8d2a-99a7a8a1b059")]
         string Description {
             get;
             set;
@@ -49,17 +54,20 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("38dce431-bb65-44c5-b67a-1f28202e51d9")]
         IList<Kistl.App.Base.Property> DestinationProperty { get; }
 
         /// <summary>
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("a040ea6b-c105-4815-815b-e36f0778e4cb")]
         ICollection<ZBox.App.SchemaMigration.SourceEnum> EnumEntries { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("817ccb79-7051-4b09-8386-941a21575bfc")]
         bool? IsNullable {
             get;
             set;
@@ -68,6 +76,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("a27f7d36-fd56-4271-bac0-88e22bc65027")]
         string Name {
             get;
             set;
@@ -76,6 +85,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("4d6faa25-d610-4e23-b12f-7ee4c78da70b")]
         ZBox.App.SchemaMigration.SourceColumn References {
             get;
             set;
@@ -85,11 +95,13 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("71bed80f-57ec-4038-a9a4-9aabc0c2f60d")]
         ICollection<ZBox.App.SchemaMigration.SourceColumn> Referers { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("5a1dc7f1-7743-4603-9b65-1b31ca17d55d")]
         int? Size {
             get;
             set;
@@ -98,6 +110,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("d1dca069-f6b5-4da1-beee-a51853c109ba")]
         ZBox.App.SchemaMigration.SourceTable SourceTable {
             get;
             set;
@@ -106,6 +119,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("bba3aa19-0097-4692-b649-d51fbc626182")]
         ZBox.App.SchemaMigration.MappingStatus? Status {
             get;
             set;

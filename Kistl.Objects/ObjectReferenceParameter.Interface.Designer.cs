@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Object Parameter.
     /// </summary>
+    [Kistl.API.DefinitionGuid("3fb8bf11-cab6-478f-b9b8-3f6d70a70d37")]
     public interface ObjectReferenceParameter : Kistl.App.Base.BaseParameter 
     {
 
         /// <summary>
         /// Kistl-Typ des Parameters
         /// </summary>
+        [Kistl.API.DefinitionGuid("9bd64c60-7282-47f0-8069-528a175fcc92")]
         Kistl.App.Base.ObjectClass ObjectClass {
             get;
             set;

@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("acf18a64-5fc0-4610-b083-9893eea0776c")]
     public interface GroupMembership : Kistl.App.Base.AccessControl 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("da080b07-15d2-4cdf-bc1c-df776e094a75")]
         Kistl.App.Base.Group Group {
             get;
             set;

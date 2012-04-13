@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("01a06aef-8fe4-4cb6-b348-ee4bcd11f5af")]
     public interface Group : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember, Kistl.App.Base.INamedObject 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.Base
         /// Identities are member of this group
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("f60308a5-a502-4641-aa19-f895e701778c")]
         ICollection<Kistl.App.Base.Identity> Member { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("99c320b1-0003-4e2d-aa98-9a215d80988b")]
         string Name {
             get;
             set;

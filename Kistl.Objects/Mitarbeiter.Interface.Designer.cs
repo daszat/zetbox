@@ -10,12 +10,14 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("77933a20-338a-4961-b751-62ffa0a75c6a")]
     public interface Mitarbeiter : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Herzlichen Glückwunsch zum Geburtstag
         /// </summary>
+        [Kistl.API.DefinitionGuid("b10bf288-1252-49c3-9129-cfabb1637c47")]
         DateTime? Geburtstag {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("5e148730-ec8a-4349-bcf7-e59cef2ce29f")]
         Kistl.App.Base.Identity Identity {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Vorname Nachname
         /// </summary>
+        [Kistl.API.DefinitionGuid("5aab79fd-3083-4ce1-a558-ed1449ecddce")]
         string Name {
             get;
             set;
@@ -41,11 +45,13 @@ namespace Kistl.App.Projekte
         /// Projekte des/der Mitarbeiters/Mitarbeiterin für die er/sie Verantwortlich ist
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c")]
         IList<Kistl.App.Projekte.Projekt> Projekte { get; }
 
         /// <summary>
         /// NNNN TTMMYY
         /// </summary>
+        [Kistl.API.DefinitionGuid("505988c4-dd50-4a0f-be21-a360b25e7d7d")]
         string SVNr {
             get;
             set;
@@ -54,6 +60,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// +43 123 12345678
         /// </summary>
+        [Kistl.API.DefinitionGuid("73230333-f975-4f0b-9dd3-e850b48d9c13")]
         string TelefonNummer {
             get;
             set;

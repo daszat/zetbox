@@ -7,6 +7,7 @@ namespace Kistl.App.Base
     /// 
     /// </summary>
     [System.Flags]
+    [Kistl.API.DefinitionGuid("1d067873-d5e7-448e-a46a-4377a1a16ece")]
     public enum AccessRights
     {
 		/// <summary>

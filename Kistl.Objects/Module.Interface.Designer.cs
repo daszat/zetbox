@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Modules.
     /// </summary>
+    [Kistl.API.DefinitionGuid("8a1ace7c-77f2-4b48-9b0b-bcb68c660d11")]
     public interface Module : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.INamedObject 
     {
 
         /// <summary>
         /// Description of this Module
         /// </summary>
+        [Kistl.API.DefinitionGuid("79408b86-1731-42ad-89b2-ed5c567fbf8a")]
         string Description {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Name des Moduls
         /// </summary>
+        [Kistl.API.DefinitionGuid("63facb30-d8f7-42f6-8c14-85933d5f94b8")]
         string Name {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// CLR Namespace des Moduls
         /// </summary>
+        [Kistl.API.DefinitionGuid("36d2b9e7-d6b9-4a9c-a363-7e059a637919")]
         string Namespace {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Name of the database schema
         /// </summary>
+        [Kistl.API.DefinitionGuid("247ecea2-c8f7-4b30-9c16-8c02128413c8")]
         string SchemaName {
             get;
             set;

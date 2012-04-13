@@ -35,6 +35,7 @@ namespace Kistl.Generator.InterfaceTemplates.Properties
 #line 11 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
 this.WriteObjects("\r\n");
 #line 14 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
+this.WriteObjects("        [Kistl.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
 this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\r\n");
 
         }

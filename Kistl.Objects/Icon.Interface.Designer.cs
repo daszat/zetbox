@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("78b6f354-013b-4129-a390-7f3a5a5e28e9")]
     public interface Icon : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember, Kistl.App.Base.INamedObject 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("f4dfb868-260d-450b-84b8-833dac4d25ee")]
         Kistl.App.Base.Blob Blob {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Filename of the Icon
         /// </summary>
+        [Kistl.API.DefinitionGuid("cdbdfc01-5faa-416b-960f-2eb220f268fe")]
         string IconFile {
             get;
             set;

@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("9419242e-31f2-4af7-bb09-49b908f397ee")]
     public interface FilterConfiguration : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("f61fc911-989b-4dff-81e7-df00fd8497ba")]
         string Label {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Overrides the default behaviour. If true the filter will be immediately applied
         /// </summary>
+        [Kistl.API.DefinitionGuid("ede29e7c-6aa4-48d4-9737-811fae5d26d4")]
         bool? RefreshOnFilterChanged {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Overrides the default kind of the configured ViewModelDescriptor
         /// </summary>
+        [Kistl.API.DefinitionGuid("afd2747f-9165-425e-946f-aed748ca5703")]
         Kistl.App.GUI.ControlKind RequestedKind {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("9e23e6a1-8e4f-48c5-ae83-9dae82c6b796")]
         bool Required {
             get;
             set;
@@ -48,6 +53,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("5776e14c-4bf4-4388-8a5b-2e81b232bf8f")]
         Kistl.App.GUI.ViewModelDescriptor ViewModelDescriptor {
             get;
             set;

@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// The item can only be set during initialization
     /// </summary>
+    [Kistl.API.DefinitionGuid("aa0a3dcf-fadf-4d53-8fbd-102a9770357c")]
     public interface InitOnlyConstraint : Kistl.App.Base.ReadOnlyConstraint 
     {
     }

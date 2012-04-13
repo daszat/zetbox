@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("a590a975-66e5-421c-aa97-7ab3169e0e9b")]
     public interface Assembly : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// Deployment restrictions for this assembly
         /// </summary>
+        [Kistl.API.DefinitionGuid("8458ea0d-04ca-48db-88ed-7d36e7e93b58")]
         Kistl.App.Base.DeploymentRestriction DeploymentRestrictions {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Full Assemblyname eg. MyActions, Version=1.0.0.0
         /// </summary>
+        [Kistl.API.DefinitionGuid("9a9dbd59-6816-4d25-9ef2-da84b96bf454")]
         string Name {
             get;
             set;

@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Abstract base class for read only constraints
     /// </summary>
+    [Kistl.API.DefinitionGuid("c83424ff-71bd-449a-81c7-4b6439fa28c6")]
     public interface ReadOnlyConstraint : Kistl.App.Base.Constraint 
     {
     }

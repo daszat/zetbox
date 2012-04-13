@@ -10,6 +10,7 @@ namespace Kistl.App.Test
     /// <summary>
     /// The B-Side class for the N_to_M_relations Tests
     /// </summary>
+    [Kistl.API.DefinitionGuid("c2af3719-d63a-4a94-9cc8-b4f94bb253ff")]
     public interface N_to_M_relations_B : IDataObject 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("a741d6bd-8a87-44c2-83b3-69225661f958")]
         ICollection<Kistl.App.Test.N_to_M_relations_A> ASide { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("80ec9efe-c73b-4554-a145-064a32f225b8")]
         string Name {
             get;
             set;

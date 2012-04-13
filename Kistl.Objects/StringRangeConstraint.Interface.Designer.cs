@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("7bb90dc3-2b8c-4cff-ba8e-435ff386a4cf")]
     public interface StringRangeConstraint : Kistl.App.Base.Constraint 
     {
 
         /// <summary>
         /// The maximal length of this StringProperty or null for unlimited length
         /// </summary>
+        [Kistl.API.DefinitionGuid("17aa679d-72d0-480e-9bd9-b37f4eba1d68")]
         int? MaxLength {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The minimal length of this StringProperty
         /// </summary>
+        [Kistl.API.DefinitionGuid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6")]
         int MinLength {
             get;
             set;

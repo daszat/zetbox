@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Sets an integer property with the configured default value
     /// </summary>
+    [Kistl.API.DefinitionGuid("5295bddf-aecc-449e-92b9-1906a1499d62")]
     public interface IntDefaultValue : Kistl.App.Base.DefaultPropertyValue 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("c876dece-3b67-4302-88ef-313ba9ce62ae")]
         int IntValue {
             get;
             set;

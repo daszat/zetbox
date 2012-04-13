@@ -10,12 +10,14 @@ namespace ZBox.App.SchemaMigration
     /// <summary>
     /// Mapps an Enum
     /// </summary>
+    [Kistl.API.DefinitionGuid("138d462f-e432-46a0-8ce2-e7f9893654d4")]
     public interface SourceEnum : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("0d29a48f-6791-4640-be97-7e93d246a389")]
         Kistl.App.Base.EnumerationEntry DestinationValue {
             get;
             set;
@@ -24,6 +26,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("b7195fb9-e6da-493f-b1be-9465e4d9d5ae")]
         ZBox.App.SchemaMigration.SourceColumn SourceColumn {
             get;
             set;
@@ -32,6 +35,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("885a90e0-62e0-426a-a3b5-64dca3a38d18")]
         string SourceValue {
             get;
             set;

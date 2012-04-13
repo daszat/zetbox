@@ -10,12 +10,14 @@ namespace Kistl.App.Calendar
     /// <summary>
     /// A Calendar describing recurrent working hours
     /// </summary>
+    [Kistl.API.DefinitionGuid("901a2ddd-1330-4129-b8a2-92b8e655d168")]
     public interface Calendar : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("17a8fbd3-5a42-4cf6-9517-0adf4142f4fe")]
         Kistl.App.Calendar.Calendar BaseCalendar {
             get;
             set;
@@ -25,17 +27,20 @@ namespace Kistl.App.Calendar
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("b16c20d8-ac72-45e8-883c-52c6f28571f2")]
         ICollection<Kistl.App.Calendar.CalendarRule> CalendarRules { get; }
 
         /// <summary>
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("c2fc6792-bc1f-42bb-b6c3-451ab99ddbef")]
         ICollection<Kistl.App.Calendar.Calendar> ChildCalendar { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("49cdf3fb-639f-4c20-b9ca-9af1bbe0d4d7")]
         string Name {
             get;
             set;

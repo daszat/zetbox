@@ -10,12 +10,14 @@ namespace Kistl.App.Test
     /// <summary>
     /// The One-Side of the classes for the One_to_N_relations Tests
     /// </summary>
+    [Kistl.API.DefinitionGuid("e98ca434-19be-4daa-8920-d979a1d98522")]
     public interface One_to_N_relations_One : IDataObject 
     {
 
         /// <summary>
         /// A property to test queries across the Relation
         /// </summary>
+        [Kistl.API.DefinitionGuid("eea22954-2845-4b34-a721-358469fd0740")]
         string Name {
             get;
             set;
@@ -25,6 +27,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("00c825ba-6df2-4739-8074-2a85aae274a4")]
         ICollection<Kistl.App.Test.One_to_N_relations_N> NSide { get; }
     }
 }

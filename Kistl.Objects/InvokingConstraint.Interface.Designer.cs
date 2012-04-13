@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("f5965ba1-6d47-4a4a-a143-eff28d7c66ad")]
     public interface InvokingConstraint : Kistl.App.Base.Constraint 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("3b5d70f7-b6fd-4e39-b912-5a644a5de716")]
         Kistl.App.Base.ConstraintInvocation GetErrorTextInvocation {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("3c98da56-1c21-4849-87b1-81bf72d17e70")]
         Kistl.App.Base.ConstraintInvocation IsValidInvocation {
             get;
             set;

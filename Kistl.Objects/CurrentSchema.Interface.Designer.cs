@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Describes the currently loaded physical database schema
     /// </summary>
+    [Kistl.API.DefinitionGuid("b276a0f6-cc89-473d-9dce-2efcf3efdd37")]
     public interface CurrentSchema : IDataObject 
     {
 
         /// <summary>
         /// XML descriptor of the current schema
         /// </summary>
+        [Kistl.API.DefinitionGuid("175143b9-dd09-4b49-a633-e9cdb508c4c5")]
         string Schema {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Version number of this schema
         /// </summary>
+        [Kistl.API.DefinitionGuid("193c24c4-5a42-418e-8ed8-6e1689beca50")]
         int Version {
             get;
             set;

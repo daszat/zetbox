@@ -10,6 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// Abstract base class for Navigation Entries
     /// </summary>
+    [Kistl.API.DefinitionGuid("9a640b13-a8c2-4a90-899a-954f0c57c1ab")]
     public interface NavigationEntry : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("87eecae1-aa07-4159-8953-716cd27bb5dd")]
         IList<Kistl.App.GUI.NavigationEntry> Children { get; }
 
         /// <summary>
         /// Color of the ViewScreen or default color if empty
         /// </summary>
+        [Kistl.API.DefinitionGuid("39d7ecec-c192-4353-bfaa-941b5e877745")]
         string Color {
             get;
             set;
@@ -31,11 +34,13 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("7b01db75-218a-4040-bae9-aa82c253a620")]
         ICollection<Kistl.App.Base.Group> Groups { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("0d3e3599-3cf7-4025-8848-597194c3dc2f")]
         Kistl.App.GUI.NavigationEntry Parent {
             get;
             set;
@@ -44,6 +49,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The title of this screen
         /// </summary>
+        [Kistl.API.DefinitionGuid("3d5d6b12-ab8a-4bda-8487-6f987cee1fae")]
         string Title {
             get;
             set;
@@ -52,6 +58,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("60c43bca-219a-4346-859a-b2979a9f71a5")]
         Kistl.App.GUI.ViewModelDescriptor ViewModelDescriptor {
             get;
             set;

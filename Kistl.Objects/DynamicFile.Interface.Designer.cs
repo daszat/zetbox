@@ -10,6 +10,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// File with changeable content
     /// </summary>
+    [Kistl.API.DefinitionGuid("e1556c0b-cdb9-4174-a9e5-07efba58ef05")]
     public interface DynamicFile : at.dasz.DocumentManagement.File 
     {
     }

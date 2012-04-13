@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Enumeration Properties.
     /// </summary>
+    [Kistl.API.DefinitionGuid("19a8d9f0-4de6-4cc9-a75d-c1499e3a103b")]
     public interface EnumerationProperty : Kistl.App.Base.ValueTypeProperty 
     {
 
         /// <summary>
         /// Enumeration der Eigenschaft
         /// </summary>
+        [Kistl.API.DefinitionGuid("1144c061-3610-495f-b8b4-951058bb0c23")]
         Kistl.App.Base.Enumeration Enumeration {
             get;
             set;

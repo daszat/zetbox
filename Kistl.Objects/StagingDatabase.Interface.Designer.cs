@@ -10,12 +10,14 @@ namespace ZBox.App.SchemaMigration
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("4faf24fe-d732-4a1c-9156-2cbb7ec4be56")]
     public interface StagingDatabase : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("6aa09a38-a4be-4095-bf8d-9799bd56a14d")]
         string ConnectionStringKey {
             get;
             set;
@@ -24,6 +26,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("157ecaf4-3ee5-4d78-8148-ab936de50523")]
         string Description {
             get;
             set;
@@ -32,6 +35,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("8edc845c-6d39-45f7-ae28-434f0a1ef503")]
         ZBox.App.SchemaMigration.MigrationProject MigrationProject {
             get;
             set;
@@ -40,6 +44,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("f82f3e1f-3275-4fcf-a362-71f7175f40f1")]
         string OriginConnectionStringKey {
             get;
             set;
@@ -48,6 +53,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("601a0dc6-ec58-4092-a53c-c902fcc85379")]
         string Schema {
             get;
             set;
@@ -57,6 +63,7 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("e468c835-8c9c-4776-83ce-f54b1f4634a4")]
         ICollection<ZBox.App.SchemaMigration.SourceTable> SourceTables { get; }
     }
 }

@@ -10,12 +10,14 @@ namespace ZBox.App.SchemaMigration
     /// <summary>
     /// A log of all migration operations
     /// </summary>
+    [Kistl.API.DefinitionGuid("49745ac0-db34-41ee-875f-0f09f1432ab0")]
     public interface MigrationLog : IDataObject 
     {
 
         /// <summary>
         /// The destination of this migration step
         /// </summary>
+        [Kistl.API.DefinitionGuid("bad56a8d-e23e-47e3-8545-ee4c2689aab8")]
         string Destination {
             get;
             set;
@@ -24,6 +26,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// The number of rows in the destination
         /// </summary>
+        [Kistl.API.DefinitionGuid("6b2ac709-a61b-4d22-96e6-e36f4bcbce84")]
         int DestinationRows {
             get;
             set;
@@ -32,6 +35,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// The source of the migration step
         /// </summary>
+        [Kistl.API.DefinitionGuid("fd0e1581-c4f0-476e-af24-2905e4aa377d")]
         string Source {
             get;
             set;
@@ -40,6 +44,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// The number of rows in this source
         /// </summary>
+        [Kistl.API.DefinitionGuid("52a3ddb3-c724-4427-a2e1-95bbf347906a")]
         int SourceRows {
             get;
             set;
@@ -48,6 +53,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// When the logentry was written
         /// </summary>
+        [Kistl.API.DefinitionGuid("9e3a70c6-04f9-4464-93c9-68c1eec6b94f")]
         DateTime Timestamp {
             get;
             set;

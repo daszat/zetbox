@@ -6,6 +6,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Describes the multiplicities of objects on RelationEnds
     /// </summary>
+    [Kistl.API.DefinitionGuid("4f2b5005-672e-46ef-80ed-94b8cdd053db")]
     public enum Multiplicity
     {
 		/// <summary>

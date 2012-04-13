@@ -10,6 +10,7 @@ namespace Kistl.App.Calendar
     /// <summary>
     /// This rule applies every day
     /// </summary>
+    [Kistl.API.DefinitionGuid("198bab3d-85a9-4d11-99e1-5e3f9420bdae")]
     public interface CommonCalendarRule : Kistl.App.Calendar.CalendarRule 
     {
     }

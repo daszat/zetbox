@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("31b03f62-b0d6-49ab-81e9-f912077d4e49")]
     public interface IntegerRangeConstraint : Kistl.App.Base.Constraint 
     {
 
         /// <summary>
         /// The biggest value accepted by this constraint
         /// </summary>
+        [Kistl.API.DefinitionGuid("dff43695-5b93-4378-a01d-94a82d29dcef")]
         int Max {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The smallest value accepted by this constraint
         /// </summary>
+        [Kistl.API.DefinitionGuid("8afdbf66-c979-4c09-8872-1a44aa1dbf72")]
         int Min {
             get;
             set;

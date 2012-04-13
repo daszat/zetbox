@@ -15,6 +15,7 @@
     string name = prop.Name;
     string type = prop.GetPropertyTypeString();
 %>
+        [Kistl.API.DefinitionGuid("<%= prop.ExportGuid %>")]
         <%= type %> <%= name %> {
             get;
 <%

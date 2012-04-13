@@ -10,12 +10,14 @@ namespace ZBox.App.SchemaMigration
     /// <summary>
     /// Defines a Schema Migration Project
     /// </summary>
+    [Kistl.API.DefinitionGuid("f2b4fe26-9d57-47c7-88b2-b30a38ebbd97")]
     public interface MigrationProject : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("17634aec-04e4-40f8-a585-51989e5cd95f")]
         string Description {
             get;
             set;
@@ -24,6 +26,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("ed7a3291-b69b-42f3-9b60-dd06e374f856")]
         Kistl.App.Base.Module DestinationModule {
             get;
             set;
@@ -33,6 +36,7 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("3750005b-3850-4697-8b80-b5a7854fc344")]
         ICollection<ZBox.App.SchemaMigration.StagingDatabase> StagingDatabases { get; }
 
         /// <summary>

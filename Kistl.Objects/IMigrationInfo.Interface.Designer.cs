@@ -10,12 +10,14 @@ namespace ZBox.App.SchemaMigration
     /// <summary>
     /// Provides informations about a migrated ObjectClass
     /// </summary>
+    [Kistl.API.DefinitionGuid("69d044c9-19d4-4ce6-a6b6-1328115d0cd0")]
     public interface IMigrationInfo  
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("04d6b444-4434-4bb8-a10e-c7b482befff9")]
         string MigrationErrors {
             get;
             set;

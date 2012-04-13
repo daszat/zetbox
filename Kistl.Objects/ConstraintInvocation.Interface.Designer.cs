@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("038230c3-ee0b-4a04-b89b-fe342ac8f069")]
     public interface ConstraintInvocation : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IInvocation 
     {
     }

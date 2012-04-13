@@ -10,12 +10,14 @@ namespace Kistl.App.Calendar
     /// <summary>
     /// This rule applies every year on the same date
     /// </summary>
+    [Kistl.API.DefinitionGuid("632137c7-1cb1-4c60-bda6-31aa2060b39a")]
     public interface FixedYearlyCalendarRule : Kistl.App.Calendar.YearlyCalendarRule 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("7d16cd01-93ce-44d2-bb69-ac06f5b61aaf")]
         int Day {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Calendar
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("43be3542-1b21-4423-aeb4-f9e411b2453f")]
         int Month {
             get;
             set;

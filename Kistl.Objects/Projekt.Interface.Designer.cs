@@ -10,6 +10,7 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("885939e8-82e1-4fdf-b80e-5f612d5131d3")]
     public interface Projekt : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.Projekte
         /// Aufträge
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("30a1d8b6-4db5-45a0-a9a8-531472a9107e")]
         ICollection<Kistl.App.Projekte.Auftrag> Auftraege { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("a26cec7d-1e5c-44f5-9c56-92af595739eb")]
         double? AufwandGes {
             get;
         }
@@ -29,6 +32,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("b1e079e3-9236-4774-8f21-7b2abfcf9fb0")]
         DateTime? Bis {
             get;
             set;
@@ -37,6 +41,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("d9b9e70b-e9d2-4da4-8731-a4eee7bf6d87")]
         DateTime KickOffAm {
             get;
             set;
@@ -45,6 +50,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("a5057dbd-bd31-4e0a-81c2-e0fa551fa34d")]
         DateTime? KickOffBis {
             get;
             set;
@@ -53,6 +59,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
+        [Kistl.API.DefinitionGuid("cd6be045-d1bd-4086-b848-c83249f5ca9b")]
         string Kundenname {
             get;
             set;
@@ -62,11 +69,13 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("3e60fe29-ac50-4232-bbeb-af023ede02f6")]
         IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
 
         /// <summary>
         /// Projektname
         /// </summary>
+        [Kistl.API.DefinitionGuid("b5482479-fd14-4990-86f4-49872e2eeeb8")]
         string Name {
             get;
             set;
@@ -76,11 +85,13 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f")]
         ICollection<Kistl.App.Projekte.Task> Tasks { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("94ea407f-9816-470e-9e52-6607830c7c0b")]
         DateTime Von {
             get;
             set;

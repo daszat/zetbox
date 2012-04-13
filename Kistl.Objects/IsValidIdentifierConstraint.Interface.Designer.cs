@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("ed8f30ad-186f-48ee-8dd5-a153d24dfada")]
     public interface IsValidIdentifierConstraint : Kistl.App.Base.Constraint 
     {
     }

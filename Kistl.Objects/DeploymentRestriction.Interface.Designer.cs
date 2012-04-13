@@ -6,6 +6,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Deployment restriction for items
     /// </summary>
+    [Kistl.API.DefinitionGuid("2b0b1986-0337-4d90-ad59-bc9d1ad82b2b")]
     public enum DeploymentRestriction
     {
 		/// <summary>

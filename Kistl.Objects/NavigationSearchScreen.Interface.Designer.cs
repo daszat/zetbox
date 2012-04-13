@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// Navigation screen for searching objects
     /// </summary>
+    [Kistl.API.DefinitionGuid("cccc4b79-4e6d-449b-8866-c1827c4dcdc1")]
     public interface NavigationSearchScreen : Kistl.App.GUI.NavigationScreen 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("e21de4ba-0ee2-446c-9758-3ca35c2f1845")]
         bool? AllowAddNew {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("965b1750-5b17-458f-8824-b42df92d4635")]
         bool? AllowDelete {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("372dd9f8-3a34-473d-9c1b-b0712623abe0")]
         bool? AllowSelectColumns {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("54ddf503-c60a-4cc8-a8cc-80ab682dfc02")]
         bool? AllowUserFilter {
             get;
             set;
@@ -48,6 +53,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("720bda5a-7bfd-4594-8571-a6ebeea074e7")]
         bool? EnableAutoFilter {
             get;
             set;
@@ -56,6 +62,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("632994f1-9e97-4045-b2e8-92aa12ac80be")]
         string InitialSort {
             get;
             set;
@@ -64,6 +71,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("b43b05fe-e036-44b1-a8a6-43f4826df116")]
         Kistl.App.GUI.ListSortDirection? InitialSortDirection {
             get;
             set;
@@ -72,6 +80,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("0e71d44f-2373-4cfe-b902-c49373761cbe")]
         bool? IsEditable {
             get;
             set;
@@ -80,6 +89,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("6e27c254-f0b6-45df-97b3-053636864df8")]
         bool? IsMultiselect {
             get;
             set;
@@ -88,6 +98,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("80987e44-841a-4d56-88d2-92c28efb70a1")]
         Kistl.App.GUI.ControlKind RequestedEditorKind {
             get;
             set;
@@ -96,6 +107,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("e0a94b30-5225-45e6-9dfc-c88dbf0648f5")]
         Kistl.App.GUI.ControlKind RequestedWorkspaceKind {
             get;
             set;
@@ -104,6 +116,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("9323c1cf-f8d6-4b29-b854-41ceb509b57e")]
         bool? RespectRequiredFilter {
             get;
             set;
@@ -112,6 +125,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("055fd120-c058-436b-9f9e-e6a2a0fec2e5")]
         bool? ShowFilter {
             get;
             set;
@@ -120,6 +134,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("c7978c7d-92cc-46a4-a8e8-bd9c24597dda")]
         bool? ShowMasterDetail {
             get;
             set;
@@ -128,6 +143,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("84a66c05-9f95-475e-aa9d-a341a0de0ba6")]
         bool? ShowOpenCommand {
             get;
             set;
@@ -136,6 +152,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("13e637ea-d461-46da-a153-ae8af5b0b724")]
         bool? ShowRefreshCommand {
             get;
             set;
@@ -144,6 +161,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("0bbea63f-f609-4fc2-848e-7464bef87fb4")]
         Kistl.App.Base.ObjectClass Type {
             get;
             set;
@@ -152,6 +170,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("3b671e20-eb7e-4f24-b183-19bdf2666651")]
         Kistl.App.GUI.InstanceListViewMethod? ViewMethod {
             get;
             set;

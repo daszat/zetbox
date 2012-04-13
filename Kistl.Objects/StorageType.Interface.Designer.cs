@@ -6,6 +6,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Storage Type of a 1:1 Releation.
     /// </summary>
+    [Kistl.API.DefinitionGuid("351a22e8-d047-4878-b6d3-3945489139a0")]
     public enum StorageType
     {
 		/// <summary>

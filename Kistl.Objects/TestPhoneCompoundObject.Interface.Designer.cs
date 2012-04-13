@@ -10,12 +10,14 @@ namespace Kistl.App.Test
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("2510af08-089f-4252-8a98-ec84cb67bcb9")]
     public interface TestPhoneCompoundObject : ICompoundObject 
     {
 
         /// <summary>
         /// Enter Area Code
         /// </summary>
+        [Kistl.API.DefinitionGuid("7921bed7-1671-44cc-8f2e-cf9d5418641e")]
         string AreaCode {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// Enter a Number
         /// </summary>
+        [Kistl.API.DefinitionGuid("d2f60356-2244-46f3-b0a0-2dcfd76005bc")]
         string Number {
             get;
             set;

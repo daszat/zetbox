@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Sets an boolean property with an configured default value
     /// </summary>
+    [Kistl.API.DefinitionGuid("47838e25-d8f7-4d18-a913-eeb4095bb862")]
     public interface BoolDefaultValue : Kistl.App.Base.DefaultPropertyValue 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("635818b4-065f-456c-b57e-4a7cdc8b3378")]
         bool BoolValue {
             get;
             set;

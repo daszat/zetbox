@@ -53,6 +53,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  UglyXmlEncode(GetDescription()) , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
+this.WriteObjects("    [Kistl.API.DefinitionGuid(\"",  GetDefinitionGuid() , "\")]\r\n");
 this.WriteObjects("    public interface ",  GetCeClassName() , " : ",  GetCeInterface() , " \r\n");
 this.WriteObjects("    {\r\n");
 this.WriteObjects("\r\n");

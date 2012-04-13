@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("74785c72-3271-4fb7-95fc-86b0baa09c8e")]
     public interface DefaultPropertyValue : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Property where the default value is set
         /// </summary>
+        [Kistl.API.DefinitionGuid("a2451b2f-2430-4de4-81a6-3d5ac9f0138f")]
         Kistl.App.Base.Property Property {
             get;
             set;

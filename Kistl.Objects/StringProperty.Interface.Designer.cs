@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for String Properties.
     /// </summary>
+    [Kistl.API.DefinitionGuid("539d6b20-f0cb-461b-b087-a522fec6c838")]
     public interface StringProperty : Kistl.App.Base.ValueTypeProperty 
     {
     }

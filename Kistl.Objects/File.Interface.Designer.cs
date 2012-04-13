@@ -10,12 +10,14 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Abstract Baseclass for File Types
     /// </summary>
+    [Kistl.API.DefinitionGuid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6")]
     public interface File : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Current File Content
         /// </summary>
+        [Kistl.API.DefinitionGuid("ef5addda-340f-4a87-83c9-3ee419519343")]
         Kistl.App.Base.Blob Blob {
             get;
             set;
@@ -24,6 +26,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Filename
         /// </summary>
+        [Kistl.API.DefinitionGuid("1c5f2bea-9915-4634-8ff9-5fd6f0871704")]
         string Name {
             get;
             set;

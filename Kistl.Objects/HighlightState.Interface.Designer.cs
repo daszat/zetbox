@@ -6,6 +6,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// Enumeration of all possible highlight states
     /// </summary>
+    [Kistl.API.DefinitionGuid("ec554fba-231c-4a9e-a6cc-3a6d37ed9b6d")]
     public enum HighlightState
     {
 		/// <summary>

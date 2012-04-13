@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("2667704b-ea27-44ff-a6b2-0ef42ffccedc")]
     public interface MethodInvocationConstraint : Kistl.App.Base.Constraint 
     {
     }

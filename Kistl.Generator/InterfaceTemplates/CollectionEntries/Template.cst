@@ -28,6 +28,7 @@ namespace <%= module.Namespace %>
     /// <summary>
     /// <%= UglyXmlEncode(GetDescription()) %>
     /// </summary>
+    [Kistl.API.DefinitionGuid("<%= GetDefinitionGuid() %>")]
     public interface <%= GetCeClassName() %> : <%= GetCeInterface() %> 
     {
 

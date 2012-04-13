@@ -42,32 +42,28 @@ this.WriteObjects("\r\n");
 this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  UglyXmlEncode(e.Description) , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
+#line 22 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
+if (e.AreFlags) {                                
 #line 23 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
-if (e.AreFlags)
-	{	
-
-#line 26 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
 this.WriteObjects("    [System.Flags]\r\n");
-#line 28 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
-}
-
-#line 30 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
+#line 24 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
+}                                                
+#line 25 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
+this.WriteObjects("    [Kistl.API.DefinitionGuid(\"",  e.ExportGuid , "\")]\r\n");
 this.WriteObjects("    public enum ",  e.Name , "\r\n");
 this.WriteObjects("    {\r\n");
-#line 33 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
+#line 28 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
 foreach(EnumerationEntry entry in e.EnumerationEntries.OrderBy(ee => ee.Value))
-    {
-
-#line 36 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
+    {                                               
+#line 30 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
 this.WriteObjects("		/// <summary>\r\n");
 this.WriteObjects("		/// ",  UglyXmlEncode(entry.Description) , "\r\n");
 this.WriteObjects("		/// </summary>\r\n");
 this.WriteObjects("		",  entry.Name , " = ",  entry.Value , ",\r\n");
 this.WriteObjects("\r\n");
-#line 42 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
-}
-
-#line 44 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
+#line 35 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
+}                                               
+#line 36 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
 this.WriteObjects("	}\r\n");
 this.WriteObjects("}");
 

@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
+    [Kistl.API.DefinitionGuid("87766ae2-89a4-4c37-ab25-583a710c55e5")]
     public interface TypeRef : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// The assembly containing the referenced Type.
         /// </summary>
+        [Kistl.API.DefinitionGuid("885bfa97-3d43-48bb-a0aa-1049298714ff")]
         Kistl.App.Base.Assembly Assembly {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// If the TypeRef could not be found in the containing assembly this property is set to true, otherwise to null
         /// </summary>
+        [Kistl.API.DefinitionGuid("aa1a4c98-2ae0-45d9-a343-7db43ca6430e")]
         bool? Deleted {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("e418e513-e623-4a8f-bcbd-8572a29b7c82")]
         string FullName {
             get;
             set;
@@ -41,11 +45,13 @@ namespace Kistl.App.Base
         /// list of type arguments
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("443e3370-b1f4-46e8-9779-1a8d9ba1c8a6")]
         IList<Kistl.App.Base.TypeRef> GenericArguments { get; }
 
         /// <summary>
         /// The TypeRef of the BaseClass of the referenced Type
         /// </summary>
+        [Kistl.API.DefinitionGuid("f7ed21a0-9a41-40eb-b3ab-b35591f2edd7")]
         Kistl.App.Base.TypeRef Parent {
             get;
             set;
@@ -54,6 +60,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("7887ad1c-654c-46fb-b7eb-bde9de04184a")]
         string ToStringCache {
             get;
             set;

@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// A placeholder for data object references in interfaces
     /// </summary>
+    [Kistl.API.DefinitionGuid("93241989-0bb0-435f-b6e5-06fdbbf19e5d")]
     public interface ObjectReferencePlaceholderProperty : Kistl.App.Base.Property 
     {
 
         /// <summary>
         /// Whether or not the list has a persistent ordering of elements
         /// </summary>
+        [Kistl.API.DefinitionGuid("7e52aa2a-aa3a-4f5b-8171-c6c2f364108b")]
         bool HasPersistentOrder {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Suggested implementors role name. If empty, class name will be used
         /// </summary>
+        [Kistl.API.DefinitionGuid("b5fa31d8-ad30-4aeb-b5a0-8b4b117b1d29")]
         string ImplementorRoleName {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Whether or not this property placeholder is list valued
         /// </summary>
+        [Kistl.API.DefinitionGuid("52692870-0bd4-47b6-99dc-eb8bf4238f24")]
         bool IsList {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Suggested role name for the referenced item
         /// </summary>
+        [Kistl.API.DefinitionGuid("06d56d44-bc5f-428b-a6b5-4348573425f9")]
         string ItemRoleName {
             get;
             set;
@@ -48,6 +53,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
+        [Kistl.API.DefinitionGuid("41da7ae6-aff7-44cf-83be-6150bf7578fd")]
         Kistl.App.Base.ObjectClass ReferencedObjectClass {
             get;
             set;
@@ -56,6 +62,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Suggested verb for the new relation
         /// </summary>
+        [Kistl.API.DefinitionGuid("dd98c4f1-bf83-4d9a-8885-546457fc6591")]
         string Verb {
             get;
             set;

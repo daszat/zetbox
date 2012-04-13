@@ -6,6 +6,7 @@ namespace ZBox.App.SchemaMigration
     /// <summary>
     /// Reflects System.Data.DbType
     /// </summary>
+    [Kistl.API.DefinitionGuid("9a72db72-05a6-4cfe-939a-35b62a187cfe")]
     public enum ColumnType
     {
 		/// <summary>

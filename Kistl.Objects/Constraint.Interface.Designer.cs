@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("ac1d5ac9-d909-438f-a4f5-f64ea6904944")]
     public interface Constraint : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// The property to be constrained
         /// </summary>
+        [Kistl.API.DefinitionGuid("438b9307-fb40-4afe-a66f-a5762c41e14b")]
         Kistl.App.Base.Property ConstrainedProperty {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The reason of this constraint
         /// </summary>
+        [Kistl.API.DefinitionGuid("49f759b3-de60-4cee-be06-c712e901c24e")]
         string Reason {
             get;
             set;

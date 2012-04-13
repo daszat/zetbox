@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("25a83f49-3cff-4baf-850d-8d185bb329ec")]
     public interface InstanceConstraint : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("d89723fc-1050-45a1-9b74-5575a677bc2b")]
         Kistl.App.Base.DataType Constrained {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The reason of this constraint
         /// </summary>
+        [Kistl.API.DefinitionGuid("83be7495-e0e0-48fc-872a-70de9c0f7a88")]
         string Reason {
             get;
             set;

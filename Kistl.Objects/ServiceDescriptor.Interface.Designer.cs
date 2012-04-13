@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Descriptor Object for ZBox Services
     /// </summary>
+    [Kistl.API.DefinitionGuid("d1bf8a7e-a8c0-435b-9dfe-b5ab61e71d1a")]
     public interface ServiceDescriptor : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("0ddea895-aca0-41ff-ada3-37e99100d081")]
         Kistl.App.Base.DeploymentRestriction? DeploymentRestriction {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("10e8c65c-ca0f-4ed6-b830-457117c30c42")]
         string Description {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("2f31a3e7-cead-480a-a515-54da212b45dc")]
         Kistl.App.Base.TypeRef TypeRef {
             get;
             set;

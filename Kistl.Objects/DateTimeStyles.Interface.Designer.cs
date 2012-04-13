@@ -6,6 +6,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Style of Datetime. Can be Date, Date and Time or Time
     /// </summary>
+    [Kistl.API.DefinitionGuid("1385e46d-3e5b-4d91-bf9a-94a740f08ba1")]
     public enum DateTimeStyles
     {
 		/// <summary>

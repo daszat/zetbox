@@ -10,12 +10,14 @@ namespace Kistl.App.Calendar
     /// <summary>
     /// This rule applies every day of week
     /// </summary>
+    [Kistl.API.DefinitionGuid("9654967e-0182-409b-8765-65882785f607")]
     public interface DayOfWeekCalendarRule : Kistl.App.Calendar.CalendarRule 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("8755ff98-63d1-4a74-b0e3-da08a81f7f4e")]
         Kistl.App.Base.DayOfWeek DayOfWeek {
             get;
             set;

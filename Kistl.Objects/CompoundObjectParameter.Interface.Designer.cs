@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for a CompoundObject Parameter.
     /// </summary>
+    [Kistl.API.DefinitionGuid("3915cfbf-33c4-4a25-bc5f-b2dd07a9439d")]
     public interface CompoundObjectParameter : Kistl.App.Base.BaseParameter 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("43d03fec-b595-46d0-b5d5-cf4c5d21fda7")]
         Kistl.App.Base.CompoundObject CompoundObject {
             get;
             set;

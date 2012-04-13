@@ -10,12 +10,14 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d")]
     public interface Auftrag : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Bitte füllen Sie einen sprechenden Auftragsnamen aus
         /// </summary>
+        [Kistl.API.DefinitionGuid("aaffed82-1f4c-4c0f-a52d-3ca4dbdefe94")]
         string Auftragsname {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Wert in EUR des Auftrages
         /// </summary>
+        [Kistl.API.DefinitionGuid("f252395f-7867-4299-9965-66f7a7b8f3c5")]
         double? Auftragswert {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Kunde des Projektes
         /// </summary>
+        [Kistl.API.DefinitionGuid("57c977da-c113-4ce6-9484-3828f74c4193")]
         Kistl.App.Projekte.Kunde Kunde {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("5b57288b-835a-459e-8532-9f47e17ab2b5")]
         Kistl.App.Projekte.Mitarbeiter Mitarbeiter {
             get;
             set;
@@ -48,6 +53,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Projekt zum Auftrag
         /// </summary>
+        [Kistl.API.DefinitionGuid("a0ad574a-356b-4962-a98d-c305b1289154")]
         Kistl.App.Projekte.Projekt Projekt {
             get;
             set;

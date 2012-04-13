@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Provides the definition of a database sequence
     /// </summary>
+    [Kistl.API.DefinitionGuid("8745716a-a9e7-4b2f-b7e8-948b992aaafb")]
     public interface Sequence : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember, Kistl.App.Base.INamedObject 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("70836ae1-4b54-45e2-a0c6-d1a39c480631")]
         Kistl.App.Base.SequenceData Data {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("1ddfb0a8-182c-417a-aa58-88a0d6ba091c")]
         string Description {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Set to true if the sequence is guaranteed to be continous
         /// </summary>
+        [Kistl.API.DefinitionGuid("013ee98f-1e4e-4d80-a7c1-b75d10c61cff")]
         bool IsContinuous {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("0ea41ee8-cbf6-4c34-bd7e-341cbf38bcdf")]
         string Name {
             get;
             set;

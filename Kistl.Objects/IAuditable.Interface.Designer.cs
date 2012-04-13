@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Marks an object class as auditable and provides the basic audit trail table.
     /// </summary>
+    [Kistl.API.DefinitionGuid("ef042c7f-93c0-4989-a7c9-0d03598671e5")]
     public interface IAuditable  
     {
 
@@ -17,6 +18,7 @@ namespace Kistl.App.Base
         /// Eine Liste der Änderungen an diesem Datensatz.
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("5fd0ba19-b5e8-4a43-a95e-895a6054dd95")]
         ICollection<Kistl.App.Base.AuditEntry> AuditJournal { get; }
     }
 }

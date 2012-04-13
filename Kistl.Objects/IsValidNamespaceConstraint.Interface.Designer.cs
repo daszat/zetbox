@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("94916227-138b-49e5-b62e-b982a45a5c21")]
     public interface IsValidNamespaceConstraint : Kistl.App.Base.IsValidIdentifierConstraint 
     {
     }

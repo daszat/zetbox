@@ -46,20 +46,21 @@ this.WriteObjects("\r\n");
 this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  UglyXmlEncode(dataType.Description) , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
+this.WriteObjects("    [Kistl.API.DefinitionGuid(\"",  dataType.ExportGuid , "\")]\r\n");
 this.WriteObjects("    public interface ",  dataType.Name , " ",  GetInheritance() , " \r\n");
 this.WriteObjects("    {\r\n");
-#line 29 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
+#line 30 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 foreach(Property p in dataType.Properties.OrderBy(p => p.Name))
     {
         if (!IsDeclaredInImplementsInterface(p))
         {
 
-#line 34 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
+#line 35 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  UglyXmlEncode(p.Description) , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 39 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
+#line 40 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 ApplyPropertyTemplate(p);
         }
     }
@@ -72,18 +73,18 @@ ApplyPropertyTemplate(p);
             if (!IsDeclaredInImplementsInterface(m))
             {
 
-#line 51 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
+#line 52 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  UglyXmlEncode(m.Description) , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 56 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
+#line 57 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 ApplyMethodTemplate(m, index++);
             }
         }
     }
 
-#line 61 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
+#line 62 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 this.WriteObjects("    }\r\n");
 this.WriteObjects("}\r\n");
 

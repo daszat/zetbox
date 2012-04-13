@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("f1c37bfb-e45f-4964-b6ba-672c1ec81b60")]
     public interface AccessControl : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("cb4f9bf4-97dc-4b0f-8a30-7e85b37eca69")]
         string Description {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("07846156-f853-4f95-ae6f-09dad6c4d71d")]
         string Name {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("b2d2a5df-4e4e-490b-84ca-982b0b732e7e")]
         Kistl.App.Base.ObjectClass ObjectClass {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("11235aeb-9610-471c-82f9-ba5738baca2e")]
         Kistl.App.Base.AccessRights? Rights {
             get;
             set;

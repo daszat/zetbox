@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Creates a new Guid
     /// </summary>
+    [Kistl.API.DefinitionGuid("a9fc1ec8-a91e-4569-b311-ec85c22a15c3")]
     public interface NewGuidDefaultValue : Kistl.App.Base.DefaultPropertyValue 
     {
     }

@@ -19,27 +19,19 @@ namespace <%= e.Module.Namespace %>
     /// <summary>
     /// <%= UglyXmlEncode(e.Description) %>
     /// </summary>
-<%
-	if (e.AreFlags)
-	{	
-%>
+<% if (e.AreFlags) {                                %>
     [System.Flags]
-<%
-	}
-%>
+<% }                                                %>
+    [Kistl.API.DefinitionGuid("<%= e.ExportGuid %>")]
     public enum <%= e.Name %>
     {
-<%
-    foreach(EnumerationEntry entry in e.EnumerationEntries.OrderBy(ee => ee.Value))
-    {
-%>
+<% foreach(EnumerationEntry entry in e.EnumerationEntries.OrderBy(ee => ee.Value))
+    {                                               %>
 		/// <summary>
 		/// <%= UglyXmlEncode(entry.Description) %>
 		/// </summary>
 		<%= entry.Name %> = <%= entry.Value %>,
 
-<%
-    }
-%>
+<%  }                                               %>
 	}
 }

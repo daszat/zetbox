@@ -6,6 +6,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("cf9e5c97-7243-43f8-84ff-3590376c770c")]
     public enum InstanceListViewMethod
     {
 		/// <summary>

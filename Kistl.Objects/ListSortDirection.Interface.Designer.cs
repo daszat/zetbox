@@ -6,6 +6,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// Reflects System.ComponentModel.ListSortDirection
     /// </summary>
+    [Kistl.API.DefinitionGuid("c6f57b69-d401-4fe3-baec-59b9c0e11cad")]
     public enum ListSortDirection
     {
 		/// <summary>

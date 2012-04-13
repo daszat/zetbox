@@ -10,6 +10,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Document with revisions
     /// </summary>
+    [Kistl.API.DefinitionGuid("3f496de2-bef4-4059-8c3e-c25db38bd3c2")]
     public interface Document : at.dasz.DocumentManagement.File 
     {
 
@@ -17,6 +18,7 @@ namespace at.dasz.DocumentManagement
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5")]
         IList<Kistl.App.Base.Blob> Revisions { get; }
     }
 }

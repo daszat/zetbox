@@ -10,6 +10,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Static file. Content cannot be changed
     /// </summary>
+    [Kistl.API.DefinitionGuid("5aaabfe9-081d-445d-a543-53e0253feeb8")]
     public interface StaticFile : at.dasz.DocumentManagement.File 
     {
     }

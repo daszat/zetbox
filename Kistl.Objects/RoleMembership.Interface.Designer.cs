@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("3b79d759-2943-4caa-bf6f-5e89955f7f91")]
     public interface RoleMembership : Kistl.App.Base.AccessControl 
     {
 
@@ -17,6 +18,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("fb799900-1a5b-4b62-a445-5dae8febdd28")]
         IList<Kistl.App.Base.Relation> Relations { get; }
     }
 }

@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for ObjectReference Properties.
     /// </summary>
+    [Kistl.API.DefinitionGuid("f1baf69c-a341-4a3a-b321-e782e1458e87")]
     public interface ObjectReferenceProperty : Kistl.App.Base.Property 
     {
 
         /// <summary>
         /// Whether or not this reference should be loaded eagerly
         /// </summary>
+        [Kistl.API.DefinitionGuid("373f0036-42d6-41e2-a2a4-74462537f426")]
         bool EagerLoading {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Simple objects are inline editable in lists. Use this property to override this default. If true, the referenced instances are editable in lists, otherwise not.
         /// </summary>
+        [Kistl.API.DefinitionGuid("f7183d87-8cc8-4703-b148-02db9f5bf9bc")]
         bool? IsInlineEditable {
             get;
             set;
@@ -33,11 +36,13 @@ namespace Kistl.App.Base
         /// This property will show these methods
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("6d8fd10e-90d8-46e4-80ab-198b94537e2f")]
         ICollection<Kistl.App.Base.Method> Methods { get; }
 
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
+        [Kistl.API.DefinitionGuid("63ba109d-92c6-4ced-980b-0a52aabfaec0")]
         Kistl.App.Base.RelationEnd RelationEnd {
             get;
             set;

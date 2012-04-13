@@ -10,6 +10,7 @@ namespace Kistl.App.Test
     /// <summary>
     /// A test class for persistently ordered 1:N relations
     /// </summary>
+    [Kistl.API.DefinitionGuid("c170405f-c29d-4d87-a4f7-a622185a94d9")]
     public interface OrderedOneEnd : IDataObject 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("7b7a227b-462a-4923-bda6-15264f0af841")]
         IList<Kistl.App.Test.OrderedNEnd> NEnds { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("1062a9d3-b936-42b8-99ba-2353087cbce1")]
         int? SomeInt {
             get;
             set;

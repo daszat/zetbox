@@ -10,6 +10,7 @@ namespace Kistl.App.Test
     /// <summary>
     /// Test class for methods
     /// </summary>
+    [Kistl.API.DefinitionGuid("68a664ee-67e0-4ba7-a0dc-148b9dfa32a7")]
     public interface MethodTest : IDataObject 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("bf48b883-8821-4c4e-8509-590a72604f9e")]
         ICollection<Kistl.App.Test.MethodTest> Children { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("02a7d534-9325-48e5-bbc2-b61420afd940")]
         Kistl.App.Test.MethodTest Parent {
             get;
             set;
@@ -30,6 +33,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("8d226658-fecc-4139-8234-aa88a4738b4d")]
         string StringProp {
             get;
             set;

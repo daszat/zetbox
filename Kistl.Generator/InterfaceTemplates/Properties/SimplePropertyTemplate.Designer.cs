@@ -39,18 +39,19 @@ string name = prop.Name;
     string type = prop.GetPropertyTypeString();
 
 #line 18 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+this.WriteObjects("        [Kistl.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
 this.WriteObjects("        ",  type , " ",  name , " {\r\n");
 this.WriteObjects("            get;\r\n");
-#line 21 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 22 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 if (!isReadonly)
     {
 
-#line 24 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 25 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 this.WriteObjects("            set;\r\n");
-#line 26 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 27 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 }
 
-#line 28 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 29 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

@@ -13,6 +13,8 @@ namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
 
     public abstract partial class Template
     {
+        protected abstract string GetDefinitionGuid();
+
         protected abstract string GetCeClassName();
 
         /// <returns>which CollectionEntry interface to implement.</returns>

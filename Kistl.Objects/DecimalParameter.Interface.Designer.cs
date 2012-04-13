@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Decimal Parameter.
     /// </summary>
+    [Kistl.API.DefinitionGuid("f839cf8c-4cd4-4351-bbfe-d599a93af226")]
     public interface DecimalParameter : Kistl.App.Base.BaseParameter 
     {
     }

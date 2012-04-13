@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("eb9ea5f9-d4b7-4e77-92c3-3eb60853e881")]
     public interface DateRangeFilterConfiguration : Kistl.App.GUI.PropertyFilterConfiguration 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("c38eda0e-59b7-4e37-9d16-5f4fb7ae0b2d")]
         bool? IsCurrentMonthDefault {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("edb97f39-355d-4a87-9aa1-ad9eccafb369")]
         bool? IsCurrentQuaterDefault {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("8f9bbaf8-4624-49d9-9b49-878142189cf7")]
         bool? IsCurrentYearDefault {
             get;
             set;

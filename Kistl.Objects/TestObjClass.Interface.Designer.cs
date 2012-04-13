@@ -10,12 +10,14 @@ namespace Kistl.App.Test
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("19f38f05-e88e-44c6-bfdf-d502b3632028")]
     public interface TestObjClass : IDataObject, Kistl.App.Test.ITestInterface 
     {
 
         /// <summary>
         /// test
         /// </summary>
+        [Kistl.API.DefinitionGuid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf")]
         int? MyIntProperty {
             get;
             set;

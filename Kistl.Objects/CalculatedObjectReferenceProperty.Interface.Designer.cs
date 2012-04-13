@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// a object reference that is calculated from the contents of the containing class
     /// </summary>
+    [Kistl.API.DefinitionGuid("8708c578-6e55-4349-ba24-ede46ca6f585")]
     public interface CalculatedObjectReferenceProperty : Kistl.App.Base.Property 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.Base
         /// The properties on which the calculation depends. This is used to propagate change notifications.
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("bfda6511-087d-4381-9780-1f76f3abcffe")]
         ICollection<Kistl.App.Base.Property> Inputs { get; }
 
         /// <summary>
         /// the referenced class of objects
         /// </summary>
+        [Kistl.API.DefinitionGuid("cd62d769-0752-4a72-832f-5935ece1198b")]
         Kistl.App.Base.ObjectClass ReferencedClass {
             get;
             set;

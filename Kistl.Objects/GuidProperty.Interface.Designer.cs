@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Guid Property
     /// </summary>
+    [Kistl.API.DefinitionGuid("bd34d049-2b64-47f4-8d79-932008d0cf72")]
     public interface GuidProperty : Kistl.App.Base.ValueTypeProperty 
     {
     }

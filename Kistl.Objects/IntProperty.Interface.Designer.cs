@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Int Properties.
     /// </summary>
+    [Kistl.API.DefinitionGuid("6f818a25-4513-4fd3-8ed1-a92429d3910d")]
     public interface IntProperty : Kistl.App.Base.ValueTypeProperty 
     {
     }

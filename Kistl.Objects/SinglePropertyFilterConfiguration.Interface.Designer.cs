@@ -10,6 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// Filter configuration for filtering on a single value of a Property 
     /// </summary>
+    [Kistl.API.DefinitionGuid("0c65fbda-a2ac-475c-af94-ee705381ee08")]
     public interface SinglePropertyFilterConfiguration : Kistl.App.GUI.PropertyFilterConfiguration 
     {
     }

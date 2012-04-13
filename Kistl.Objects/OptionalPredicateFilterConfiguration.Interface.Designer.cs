@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// Filter configuration for filtering on an instance with an user selectable, optional and constant predicate
     /// </summary>
+    [Kistl.API.DefinitionGuid("da69f553-1096-48be-8129-eff9118498f0")]
     public interface OptionalPredicateFilterConfiguration : Kistl.App.GUI.ObjectClassFilterConfiguration 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("bcc5a62f-9401-4b88-9cd9-2b33be6fa81a")]
         string Predicate {
             get;
             set;

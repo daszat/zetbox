@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Int Parameter.
     /// </summary>
+    [Kistl.API.DefinitionGuid("24fb74a4-0d21-49d5-9c81-2ded8948d4d4")]
     public interface IntParameter : Kistl.App.Base.BaseParameter 
     {
     }

@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("4d690bc6-7e4f-4967-a50a-770dd5c24590")]
     public interface MonthFilterConfiguration : Kistl.App.GUI.PropertyFilterConfiguration 
     {
 
         /// <summary>
         /// If true, the current month will be the default value
         /// </summary>
+        [Kistl.API.DefinitionGuid("363661ad-85ce-4bc2-b249-c3cce65a1971")]
         bool? IsCurrentMonthDefault {
             get;
             set;

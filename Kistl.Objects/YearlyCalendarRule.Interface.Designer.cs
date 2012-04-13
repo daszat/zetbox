@@ -10,6 +10,7 @@ namespace Kistl.App.Calendar
     /// <summary>
     /// This rule applies every year. This class is abstract.
     /// </summary>
+    [Kistl.API.DefinitionGuid("c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc")]
     public interface YearlyCalendarRule : Kistl.App.Calendar.CalendarRule 
     {
     }

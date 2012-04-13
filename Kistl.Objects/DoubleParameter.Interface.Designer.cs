@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Double Parameter.
     /// </summary>
+    [Kistl.API.DefinitionGuid("74aa31e4-4dcf-46d5-a8b4-aa02b82bd2df")]
     public interface DoubleParameter : Kistl.App.Base.BaseParameter 
     {
     }

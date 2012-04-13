@@ -35,6 +35,11 @@ namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
             this.rel = rel;
         }
 
+        protected override string GetDefinitionGuid()
+        {
+            return rel.ExportGuid.ToString();
+        }
+
         protected override string GetCeClassName()
         {
             return rel.GetRelationClassName();

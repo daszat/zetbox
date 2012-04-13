@@ -6,6 +6,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("3961bb73-7ab6-4529-9457-ede6927224c7")]
     public enum DayOfWeek
     {
 		/// <summary>

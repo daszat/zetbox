@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for String Parameter.
     /// </summary>
+    [Kistl.API.DefinitionGuid("d3eee1cb-313d-465a-8a06-732ac119bc75")]
     public interface StringParameter : Kistl.App.Base.BaseParameter 
     {
     }

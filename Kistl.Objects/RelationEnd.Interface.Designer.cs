@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Describes one end of a relation between two object classes
     /// </summary>
+    [Kistl.API.DefinitionGuid("07817322-d4b9-4dd8-8464-bcb6745fef34")]
     public interface RelationEnd : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// The Relation using this RelationEnd as A
         /// </summary>
+        [Kistl.API.DefinitionGuid("dd6057d0-78bb-4242-9670-ec6c09bd4d92")]
         Kistl.App.Base.Relation AParent {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The Relation using this RelationEnd as B
         /// </summary>
+        [Kistl.API.DefinitionGuid("521ea0ba-ae3b-4a60-ae28-f366b3ee78f1")]
         Kistl.App.Base.Relation BParent {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
         /// </summary>
+        [Kistl.API.DefinitionGuid("edd8d122-7b58-4bbb-bf00-33caa8b69cc2")]
         bool HasPersistentOrder {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
+        [Kistl.API.DefinitionGuid("cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd")]
         Kistl.App.Base.Multiplicity Multiplicity {
             get;
             set;
@@ -48,6 +53,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
+        [Kistl.API.DefinitionGuid("6b25eaab-f746-47ec-a91e-f92ec6fccada")]
         Kistl.App.Base.ObjectReferenceProperty Navigator {
             get;
             set;
@@ -56,6 +62,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the parent relation
         /// </summary>
+        [Kistl.API.DefinitionGuid("3273a95a-1156-4ce2-b0d6-8957b4637320")]
         Kistl.App.Base.Relation Parent {
             get;
         }
@@ -63,6 +70,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// This end&amp;apos;s role name in the relation
         /// </summary>
+        [Kistl.API.DefinitionGuid("b32efbfc-5212-44e7-b25f-f4724b63cbee")]
         string RoleName {
             get;
             set;
@@ -71,6 +79,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Specifies which type this End of the relation has. MUST NOT be null.
         /// </summary>
+        [Kistl.API.DefinitionGuid("d4bfc4e0-6b57-49f0-91fd-b0de428484e0")]
         Kistl.App.Base.ObjectClass Type {
             get;
             set;

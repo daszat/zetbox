@@ -10,12 +10,14 @@ namespace Kistl.App.Test
     /// <summary>
     /// Testclass for Decimal DataType
     /// </summary>
+    [Kistl.API.DefinitionGuid("9a352669-42c1-4384-b2d3-6de6d198938e")]
     public interface TestDecimal : IDataObject 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("14a1eeb9-26b1-4913-bae1-228edfd1c9de")]
         decimal? Large {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("dbad0130-bfb8-4475-afb8-e26f1124395b")]
         decimal? NoScale {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("734795e4-4e0f-4175-b153-e465acafd609")]
         decimal? SmallDecimal {
             get;
             set;

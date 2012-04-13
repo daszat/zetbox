@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Interfaces.
     /// </summary>
+    [Kistl.API.DefinitionGuid("7ea88d99-88f0-44a7-b0a3-da725e57595d")]
     public interface Interface : Kistl.App.Base.DataType 
     {
     }

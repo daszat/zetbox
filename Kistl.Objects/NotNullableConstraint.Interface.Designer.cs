@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("8604ef0c-f933-4f66-b7df-21d27c9003b2")]
     public interface NotNullableConstraint : Kistl.App.Base.Constraint 
     {
     }

@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Bool Parameter.
     /// </summary>
+    [Kistl.API.DefinitionGuid("2fe66550-c506-4a60-ac88-19db27bf1f4b")]
     public interface BoolParameter : Kistl.App.Base.BaseParameter 
     {
     }

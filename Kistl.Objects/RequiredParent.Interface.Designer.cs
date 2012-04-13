@@ -10,6 +10,7 @@ namespace Kistl.App.Test
     /// <summary>
     /// Testclass for the required_parent tests: parent
     /// </summary>
+    [Kistl.API.DefinitionGuid("0d753d7d-b023-43ce-9189-2ea6d03b70a1")]
     public interface RequiredParent : IDataObject 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("e452deb2-1f35-4b7c-9adc-1f904dfbfc6d")]
         ICollection<Kistl.App.Test.RequiredParentChild> Children { get; }
 
         /// <summary>
         /// dummy property
         /// </summary>
+        [Kistl.API.DefinitionGuid("22abc57e-581f-49f1-8eff-747e126a6480")]
         string Name {
             get;
             set;

@@ -10,12 +10,14 @@ namespace Kistl.App.Test
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("e5577f89-58d1-4983-ab35-60e6624780df")]
     public interface Antwort : IDataObject 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("311cb474-be7d-4e6b-b803-379e6523720c")]
         string Frage {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// Workaround for Case 1376
         /// </summary>
+        [Kistl.API.DefinitionGuid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82")]
         Kistl.App.Test.Fragebogen Fragebogen {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("87a005fa-6249-4aab-b90e-b50c97487c09")]
         int FragenNummer {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("bbddff1f-943e-48cb-b097-377040280f0a")]
         int? GegebeneAntwort {
             get;
             set;

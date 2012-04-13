@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Enumerations.
     /// </summary>
+    [Kistl.API.DefinitionGuid("ee475de2-d626-49e9-9e40-6bb12cb026d4")]
     public interface Enumeration : Kistl.App.Base.DataType 
     {
 
         /// <summary>
         /// Enumeration Entries are Flags
         /// </summary>
+        [Kistl.API.DefinitionGuid("1ef92eea-d8b3-4f95-a694-9ca09ceff0e5")]
         bool AreFlags {
             get;
             set;
@@ -25,6 +27,7 @@ namespace Kistl.App.Base
         /// Einträge der Enumeration
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("1619c8a7-b969-4c05-851c-7a2545cda484")]
         IList<Kistl.App.Base.EnumerationEntry> EnumerationEntries { get; }
 
         /// <summary>

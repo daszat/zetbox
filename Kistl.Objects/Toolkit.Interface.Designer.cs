@@ -6,6 +6,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("803fb38d-f0d2-409c-9f15-30da4bdcf576")]
     public enum Toolkit
     {
 		/// <summary>

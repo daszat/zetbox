@@ -10,6 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// Filter configuration for filtering on a range of a Property 
     /// </summary>
+    [Kistl.API.DefinitionGuid("549efe2c-9dc7-4458-a0ff-b7c0710ae84c")]
     public interface RangeFilterConfiguration : Kistl.App.GUI.PropertyFilterConfiguration 
     {
     }

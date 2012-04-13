@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Abstract base class for classes (and their instances) belonging to a Module
     /// </summary>
+    [Kistl.API.DefinitionGuid("d833bf36-29ab-47fa-ba49-bfb820fcf83c")]
     public interface AbstractModuleMember : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
     }

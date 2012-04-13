@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Describes a Relation between two Object Classes
     /// </summary>
+    [Kistl.API.DefinitionGuid("1c0e894f-4eb4-422f-8094-3095735b4917")]
     public interface Relation : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// The A-side of this Relation.
         /// </summary>
+        [Kistl.API.DefinitionGuid("d4429d3c-8fd1-468e-88d5-17abfd658d04")]
         Kistl.App.Base.RelationEnd A {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The B-side of this Relation.
         /// </summary>
+        [Kistl.API.DefinitionGuid("20331803-079e-471e-ae45-f4d004aef48e")]
         Kistl.App.Base.RelationEnd B {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The ContainmentSpecification of this Relation.
         /// </summary>
+        [Kistl.API.DefinitionGuid("eed9955a-11a3-4c25-b0bb-e01ecd14b26f")]
         Kistl.App.Base.ContainmentSpecification Containment {
             get;
             set;
@@ -40,6 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Description of this Relation
         /// </summary>
+        [Kistl.API.DefinitionGuid("56948ee3-f1a7-44c3-956a-9baa863c5092")]
         string Description {
             get;
             set;
@@ -48,6 +53,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
+        [Kistl.API.DefinitionGuid("ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a")]
         Kistl.App.Base.StorageType Storage {
             get;
             set;
@@ -56,6 +62,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Verb of this Relation
         /// </summary>
+        [Kistl.API.DefinitionGuid("cd7a8de3-a1bf-4043-93d9-d9874b40bb69")]
         string Verb {
             get;
             set;

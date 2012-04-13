@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("96297bd7-7182-4446-8aed-23079250f408")]
     public interface YearFilterConfiguration : Kistl.App.GUI.PropertyFilterConfiguration 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("495159f4-a983-4a2a-a8f1-2291647673fd")]
         bool? IsCurrentYearDefault {
             get;
             set;

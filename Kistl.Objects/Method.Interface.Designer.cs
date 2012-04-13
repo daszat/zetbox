@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Methods.
     /// </summary>
+    [Kistl.API.DefinitionGuid("ef79c0b9-55e0-45ad-8233-1ff8f852661f")]
     public interface Method : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("d984fab4-5b62-4a5d-af6a-98cde8337729")]
         string CategoryTags {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Provides a code template for the method
         /// </summary>
+        [Kistl.API.DefinitionGuid("8ecc7baa-79b3-4dee-bd5b-2136b27f162e")]
         string CodeTemplate {
             get;
         }
@@ -31,6 +34,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Description of this Method
         /// </summary>
+        [Kistl.API.DefinitionGuid("cbf27789-e98f-4d9f-88e9-f3ff89e8c952")]
         string Description {
             get;
             set;
@@ -39,6 +43,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("82a3f85f-aa39-4309-a83c-aa5b073a6887")]
         Kistl.App.GUI.Icon Icon {
             get;
             set;
@@ -47,6 +52,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Method will be invoked on server if true
         /// </summary>
+        [Kistl.API.DefinitionGuid("1bd6290d-2f38-4cc0-96b9-83a0b00c951b")]
         bool? InvokeOnServer {
             get;
             set;
@@ -55,6 +61,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Shows this Method in th GUI
         /// </summary>
+        [Kistl.API.DefinitionGuid("5ac29d6a-9dec-4d88-8f66-59ee7a139f4d")]
         bool IsDisplayable {
             get;
             set;
@@ -63,6 +70,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("4ce1447d-5ba3-40a9-b665-a435c7a028aa")]
         string Label {
             get;
             set;
@@ -71,6 +79,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("88de8421-488e-452e-8289-33074054b22f")]
         string Name {
             get;
             set;
@@ -79,6 +88,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("9afc74a4-4eeb-4c39-879c-eacc8f369fa7")]
         Kistl.App.Base.DataType ObjectClass {
             get;
             set;
@@ -88,12 +98,14 @@ namespace Kistl.App.Base
         /// Parameter der Methode
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("8dace0a9-6db1-458d-b054-ace4a3d906c2")]
         IList<Kistl.App.Base.BaseParameter> Parameter { get; }
 
         /// <summary>
         /// This method is show by these properties
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("f062792d-757f-4c39-bdb1-1cc81d063595")]
         ICollection<Kistl.App.Base.ObjectReferenceProperty> ShowByProperties { get; }
 
         /// <summary>

@@ -23,6 +23,7 @@ namespace <%= dataType.Module.Namespace %>
     /// <summary>
     /// <%= UglyXmlEncode(dataType.Description) %>
     /// </summary>
+    [Kistl.API.DefinitionGuid("<%= dataType.ExportGuid %>")]
     public interface <%= dataType.Name %> <%= GetInheritance() %> 
     {
 <%

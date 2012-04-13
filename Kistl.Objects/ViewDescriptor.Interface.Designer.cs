@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("ffda4604-1536-43b6-b951-f8753d5092ca")]
     public interface ViewDescriptor : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("7720b38c-64af-4607-bc73-d015af6612e3")]
         Kistl.App.GUI.ControlKind ControlKind {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The control implementing this View
         /// </summary>
+        [Kistl.API.DefinitionGuid("eff6276d-975b-4a0d-bd3c-ad76af2189c3")]
         Kistl.App.Base.TypeRef ControlRef {
             get;
             set;
@@ -33,11 +36,13 @@ namespace Kistl.App.GUI
         /// A View supports one or more ViewModels
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("4698cfda-6b1d-4cd7-8350-630a1adab1a8")]
         ICollection<Kistl.App.Base.TypeRef> SupportedViewModels { get; }
 
         /// <summary>
         /// Which toolkit provides this View
         /// </summary>
+        [Kistl.API.DefinitionGuid("2a798728-d79d-471f-be51-1f488beb8dc1")]
         Kistl.App.GUI.Toolkit Toolkit {
             get;
             set;

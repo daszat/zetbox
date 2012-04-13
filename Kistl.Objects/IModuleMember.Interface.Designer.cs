@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Marks that an ObjectClass as a member of a Module
     /// </summary>
+    [Kistl.API.DefinitionGuid("b6afa3e7-edf6-4318-9194-75bdbfc7ec7b")]
     public interface IModuleMember  
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("c3396a63-9994-4453-ac86-8e6996191674")]
         Kistl.App.Base.Module Module {
             get;
             set;

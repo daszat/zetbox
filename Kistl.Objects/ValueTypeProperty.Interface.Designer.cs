@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for ValueType Properties. This class is abstract.
     /// </summary>
+    [Kistl.API.DefinitionGuid("b0c23c07-950f-47a0-af23-a925dc691b3e")]
     public interface ValueTypeProperty : Kistl.App.Base.Property 
     {
 
         /// <summary>
         /// Whether or not a list-valued property has a index
         /// </summary>
+        [Kistl.API.DefinitionGuid("b62c7fee-bb67-46a6-b481-81554e788aa0")]
         bool HasPersistentOrder {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// If true, a property getter will be invoked to get the properties value. No Backingstore is generated, thus there is no setter.
         /// </summary>
+        [Kistl.API.DefinitionGuid("2eed845e-887d-4230-8410-0b442ba7724b")]
         bool IsCalculated {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("b2bd1528-c22f-4e12-b80f-f8234a2c0831")]
         bool IsList {
             get;
             set;

@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("0999effb-c645-45e1-b3c2-5654530d0acb")]
     public interface IInvocation  
     {
 
         /// <summary>
         /// The type implementing this invocation
         /// </summary>
+        [Kistl.API.DefinitionGuid("f3caf1b1-867b-4c09-8377-e7542fd51be2")]
         Kistl.App.Base.TypeRef Implementor {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Name des implementierenden Members
         /// </summary>
+        [Kistl.API.DefinitionGuid("b14ea4c6-2638-4278-917d-863754aeff4b")]
         string MemberName {
             get;
             set;

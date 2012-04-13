@@ -10,12 +10,14 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("2e93e071-875a-41ee-a768-5d55c2683546")]
     public interface IRenderer  
     {
 
         /// <summary>
         /// The Toolkit used by this Renderer
         /// </summary>
+        [Kistl.API.DefinitionGuid("83ab9087-52a5-400d-9e41-bd46fb5e7957")]
         Kistl.App.GUI.Toolkit Platform {
             get;
             set;

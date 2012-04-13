@@ -6,6 +6,7 @@ namespace ZBox.App.SchemaMigration
     /// <summary>
     /// Status of the current mapping
     /// </summary>
+    [Kistl.API.DefinitionGuid("197fbcb0-8e5c-4b77-a41b-4cc31d804fbf")]
     public enum MappingStatus
     {
 		/// <summary>

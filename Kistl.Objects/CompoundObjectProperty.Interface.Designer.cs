@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Compound Object Properties.
     /// </summary>
+    [Kistl.API.DefinitionGuid("7b5ba73f-91f4-4542-9542-4f418b5c109f")]
     public interface CompoundObjectProperty : Kistl.App.Base.Property 
     {
 
         /// <summary>
         /// Definition of this Compound Object
         /// </summary>
+        [Kistl.API.DefinitionGuid("0d78c157-c106-4728-9af2-7992da7c935d")]
         Kistl.App.Base.CompoundObject CompoundObjectDefinition {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Whether or not the list has a persistent ordering of elements
         /// </summary>
+        [Kistl.API.DefinitionGuid("7c806f25-d85e-4d9f-b082-0cdaa7b60790")]
         bool HasPersistentOrder {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Whether or not this CompoundObject property is list valued
         /// </summary>
+        [Kistl.API.DefinitionGuid("8a861113-a48a-40c5-bdec-6ceafef86f48")]
         bool IsList {
             get;
             set;

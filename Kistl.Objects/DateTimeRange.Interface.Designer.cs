@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// A from and until DateTime Value
     /// </summary>
+    [Kistl.API.DefinitionGuid("0a5419ae-2acf-4c4e-b998-6fcb25dc5650")]
     public interface DateTimeRange : ICompoundObject 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("8a9d1f9e-44c9-4f01-9e38-69ee0e94da55")]
         DateTime? From {
             get;
             set;
@@ -24,6 +26,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("4085a966-8876-4f03-80d8-e04754dd1f96")]
         DateTime? Thru {
             get;
             set;
@@ -32,6 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("7c88e2e8-55c5-458e-ae63-a8a75c31f39b")]
         int? TotalDays {
             get;
         }

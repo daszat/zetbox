@@ -10,6 +10,7 @@ namespace Kistl.App.Test
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("a78ff235-4511-431b-8437-939f7fecded4")]
     public interface Fragebogen : IDataObject 
     {
 
@@ -17,11 +18,13 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("e8f20c02-abea-4c91-850f-c321adfd46f0")]
         IList<Kistl.App.Test.Antwort> Antworten { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("b65f1a91-e063-4054-a2e7-d5dc0292e3fc")]
         int? BogenNummer {
             get;
             set;
@@ -31,6 +34,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("3a91e745-0dd2-4f31-864e-eaf657ddb577")]
         ICollection<Kistl.App.Test.TestStudent> Student { get; }
     }
 }

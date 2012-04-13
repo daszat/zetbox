@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Represents an Identity
     /// </summary>
+    [Kistl.API.DefinitionGuid("31d8890a-67fc-4a78-9d35-9ff0b9e09b4c")]
     public interface Identity : IDataObject 
     {
 
         /// <summary>
         /// Displayname of this identity
         /// </summary>
+        [Kistl.API.DefinitionGuid("f93e6dbb-a704-460c-8183-ce8b1c2c47a2")]
         string DisplayName {
             get;
             set;
@@ -25,11 +27,13 @@ namespace Kistl.App.Base
         /// Identites are member of groups
         /// </summary>
 
+        [Kistl.API.DefinitionGuid("5f534204-f0d5-4d6f-8efa-7ff248580ba3")]
         ICollection<Kistl.App.Base.Group> Groups { get; }
 
         /// <summary>
         /// Password of a generic identity
         /// </summary>
+        [Kistl.API.DefinitionGuid("0d499610-99e3-42cc-b71b-49ed1a356355")]
         string Password {
             get;
             set;
@@ -38,6 +42,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Username of a generic identity
         /// </summary>
+        [Kistl.API.DefinitionGuid("a4ce1f5f-311b-4510-8817-4cca40f0bf0f")]
         string UserName {
             get;
             set;

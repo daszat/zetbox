@@ -10,6 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
+    [Kistl.API.DefinitionGuid("e1415447-ccb4-4de5-aba0-9479c4472b08")]
     public interface NavigationAction : Kistl.App.GUI.NavigationEntry 
     {
     }

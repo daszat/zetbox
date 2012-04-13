@@ -10,6 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Item is readonly on client but changable on the server
     /// </summary>
+    [Kistl.API.DefinitionGuid("87ccfb15-e731-448e-9a0a-3f8b73f767a7")]
     public interface ClientReadOnlyConstraint : Kistl.App.Base.ReadOnlyConstraint 
     {
     }

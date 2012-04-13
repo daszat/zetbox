@@ -10,6 +10,7 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Files beeing imported by the import service.
     /// </summary>
+    [Kistl.API.DefinitionGuid("523a75bb-29c4-421c-9343-93d8658bb5f8")]
     public interface ImportedFile : at.dasz.DocumentManagement.File 
     {
 

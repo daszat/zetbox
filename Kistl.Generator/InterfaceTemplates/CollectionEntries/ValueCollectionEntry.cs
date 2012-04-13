@@ -35,6 +35,11 @@ namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
             this.prop = prop;
         }
 
+        protected override string GetDefinitionGuid()
+        {
+            return prop.ExportGuid.ToString();
+        }
+
         protected override string GetCeClassName()
         {
             return prop.GetCollectionEntryClassName();

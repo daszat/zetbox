@@ -10,12 +10,14 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Enum Parameter.
     /// </summary>
+    [Kistl.API.DefinitionGuid("041eaa58-84cb-405f-a6ea-c3d77e4acd82")]
     public interface EnumParameter : Kistl.App.Base.BaseParameter 
     {
 
         /// <summary>
         /// 
         /// </summary>
+        [Kistl.API.DefinitionGuid("b5212dc9-376e-4414-a400-d994779fda18")]
         Kistl.App.Base.Enumeration Enumeration {
             get;
             set;
