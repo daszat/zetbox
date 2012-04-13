@@ -12,18 +12,35 @@ namespace PrepareEnv
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            try
+            {
+                if (args.Length != 1)
+                {
+                    LogTitle("Usge: PrepareEnv Path\\To\\Config\\Folder");
+                    return 1;
+                }
 
-            var envConfigDir = args[0];
-            var envConfig = (EnvConfig)new XmlSerializer(typeof(EnvConfig)).Deserialize(File.OpenRead(Path.Combine(envConfigDir, "env.xml")));
+                AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
-            PrepareEnvConfig(envConfig, envConfigDir);
-            InstallBinaries(envConfig);
-            InstallConfigs(envConfig);
-            EnforceConnectionString(envConfig);
-            DeployDatabaseTemplate(envConfig);
+                var envConfigDir = args[0];
+                var envConfig = (EnvConfig)new XmlSerializer(typeof(EnvConfig)).Deserialize(File.OpenRead(Path.Combine(envConfigDir, "env.xml")));
+
+                PrepareEnvConfig(envConfig, envConfigDir);
+                InstallBinaries(envConfig);
+                InstallConfigs(envConfig);
+                EnforceConnectionString(envConfig);
+                EnforceAppServer(envConfig);
+                DeployDatabaseTemplate(envConfig);
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                LogTitle(ex.ToString());
+                return 1;
+            }
         }
 
         /// <summary>
@@ -87,6 +104,11 @@ namespace PrepareEnv
             if (envConfig.DatabaseTarget != null && !string.IsNullOrEmpty(envConfig.DatabaseTarget.Value))
             {
                 envConfig.DatabaseTarget.Value = ExpandEnvVars(envConfig.DatabaseTarget.Value);
+            }
+
+            if (envConfig.AppServer != null && !string.IsNullOrEmpty(envConfig.AppServer.Uri))
+            {
+                envConfig.AppServer.Uri = ExpandEnvVars(envConfig.AppServer.Uri);
             }
         }
 
@@ -275,6 +297,32 @@ namespace PrepareEnv
                 databaseNode.InnerText = envConfig.DatabaseTarget.Value;
 
                 LogAction(string.Format("set connection string in {0}", configPath));
+                doc.Save(configPath);
+            }
+        }
+
+        private static void EnforceAppServer(EnvConfig envConfig)
+        {
+            if (envConfig.AppServer == null || string.IsNullOrEmpty(envConfig.AppServer.Uri))
+                return;
+
+            LogTitle("Enforcing app server");
+            var configTargetDir = Path.Combine(envConfig.BinaryTarget, "Configs");
+            foreach (var configPath in Directory.GetFiles(configTargetDir, "*.config", SearchOption.AllDirectories))
+            {
+                var doc = new XmlDocument();
+                doc.Load(configPath);
+
+                // check whether this is a KistlConfig
+                var endpoints = doc.SelectNodes("/configuration/system.serviceModel/client/endpoint");
+                if (endpoints.Count == 0)
+                    continue;
+
+                foreach (XmlElement endpoint in endpoints)
+                {
+                    endpoint.Attributes["address"].Value = envConfig.AppServer.Uri;
+                }
+                LogAction(string.Format("set enpoint address string in {0}", configPath));
                 doc.Save(configPath);
             }
         }

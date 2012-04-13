@@ -7,5 +7,5 @@
 
   <DatabaseTarget Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=pg-server;Port=5432;Database=example;User Id=example;Password=foobar</DatabaseTarget>
 
-  <AppServer Type="xsp"/>
+  <AppServer Type="xsp" Uri="http://localhost:8080/KistlService.svc"/>
 </EnvConfig>

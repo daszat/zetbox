@@ -29,6 +29,7 @@
         <xs:element name="AppServer">
           <xs:complexType>
             <xs:attribute name="Type" type="xs:string" use="required" />
+            <xs:attribute name="Uri" type="xs:string" use="required" />
           </xs:complexType>
         </xs:element>
       </xs:sequence>
