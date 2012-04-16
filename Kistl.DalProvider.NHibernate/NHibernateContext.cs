@@ -293,17 +293,24 @@ namespace Kistl.DalProvider.NHibernate
                     _nhSession.Delete(obj.NHibernateProxy);
                 }
 
-                foreach (var obj in notifySaveList.Where(obj => obj.ObjectState != DataObjectState.Deleted))
+                var saveOrUpdateList = notifySaveList.Where(obj => obj.ObjectState != DataObjectState.Deleted).ToList();
+                // remove objects from internal caches as the hashkey is about to change
+                foreach (var obj in saveOrUpdateList)
                 {
                     _attachedObjects.Remove(obj);
                     _attachedObjectsByProxy.Remove(obj);
+                }
 
+                // this will change IDs all over the place, depending on NHibernate's opinions on efficient updating
+                foreach (var obj in saveOrUpdateList)
+                {
                     obj.SaveOrUpdateTo(_nhSession);
                 }
 
+                // force outstanding changes into DB
                 _nhSession.Flush();
 
-                foreach (var obj in notifySaveList.Where(obj => obj.ObjectState != DataObjectState.Deleted))
+                foreach (var obj in saveOrUpdateList)
                 {
                     _attachedObjects.Add(obj);
                     _attachedObjectsByProxy.Add(obj);
