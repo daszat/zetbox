@@ -392,6 +392,7 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyDeleting_RequiredParentChild")]
         public override void NotifyDeleting()
         {
+            Parent = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_RequiredParentChild != null) OnNotifyDeleting_RequiredParentChild(this);
         }

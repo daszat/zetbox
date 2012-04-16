@@ -385,6 +385,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_SequenceData")]
         public override void NotifyDeleting()
         {
+            Sequence = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_SequenceData != null) OnNotifyDeleting_SequenceData(this);
         }

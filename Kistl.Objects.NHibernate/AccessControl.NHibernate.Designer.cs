@@ -1154,6 +1154,10 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_AccessControl")]
         public override void NotifyDeleting()
         {
+            ChangedBy = null;
+            CreatedBy = null;
+            Module = null;
+            ObjectClass = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_AccessControl != null) OnNotifyDeleting_AccessControl(this);
         }

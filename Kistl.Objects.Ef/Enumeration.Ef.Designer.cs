@@ -750,6 +750,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         [EventBasedMethod("OnNotifyDeleting_Enumeration")]
         public override void NotifyDeleting()
         {
+            EnumerationEntries.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_Enumeration != null) OnNotifyDeleting_Enumeration(this);
         }

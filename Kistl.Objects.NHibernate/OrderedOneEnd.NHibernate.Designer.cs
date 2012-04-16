@@ -291,6 +291,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         [EventBasedMethod("OnNotifyDeleting_OrderedOneEnd")]
         public override void NotifyDeleting()
         {
+            NEnds.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_OrderedOneEnd != null) OnNotifyDeleting_OrderedOneEnd(this);
         }

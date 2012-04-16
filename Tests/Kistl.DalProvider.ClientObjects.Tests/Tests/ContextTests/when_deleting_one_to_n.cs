@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.Tests.ContextTests
+namespace Kistl.DalProvider.Client.Tests.ContextTests
 {
     using System;
     using System.Collections.Generic;
@@ -7,13 +7,12 @@ namespace Kistl.Server.Tests.ContextTests
     using System.Text;
 
     using Kistl.API;
-    using Kistl.App.Base;
     using Kistl.App.Test;
 
     using NUnit.Framework;
-    
-    public class when_deleting
-        : Kistl.API.AbstractConsumerTests.ContextTests.when_deleting
+
+    public class when_deleting_one_to_n
+        : Kistl.API.AbstractConsumerTests.ContextTests.when_deleting_one_to_n
     {
     }
 }

@@ -1425,6 +1425,11 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_TypeRef")]
         public override void NotifyDeleting()
         {
+            GenericArguments.Clear();
+            Assembly = null;
+            ChangedBy = null;
+            CreatedBy = null;
+            Parent = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_TypeRef != null) OnNotifyDeleting_TypeRef(this);
         }

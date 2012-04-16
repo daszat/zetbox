@@ -269,6 +269,7 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyDeleting_TestStudent")]
         public override void NotifyDeleting()
         {
+            Testbogen.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestStudent != null) OnNotifyDeleting_TestStudent(this);
         }

@@ -878,6 +878,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         [EventBasedMethod("OnNotifyDeleting_MethodTest")]
         public override void NotifyDeleting()
         {
+            Children.Clear();
+            Parent = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_MethodTest != null) OnNotifyDeleting_MethodTest(this);
         }

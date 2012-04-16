@@ -655,6 +655,9 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyDeleting_Template")]
         public override void NotifyDeleting()
         {
+            Menu.Clear();
+            DisplayedTypeAssembly = null;
+            VisualTree = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Template != null) OnNotifyDeleting_Template(this);
         }

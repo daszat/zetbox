@@ -1378,6 +1378,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         [EventBasedMethod("OnNotifyDeleting_ObjectClass")]
         public override void NotifyDeleting()
         {
+            AccessControlList.Clear();
+            FilterConfigurations.Clear();
+            SubClasses.Clear();
+            BaseObjectClass = null;
+            DefaultViewModelDescriptor = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectClass != null) OnNotifyDeleting_ObjectClass(this);
         }

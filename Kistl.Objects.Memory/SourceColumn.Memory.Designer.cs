@@ -1699,6 +1699,13 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         [EventBasedMethod("OnNotifyDeleting_SourceColumn")]
         public override void NotifyDeleting()
         {
+            DestinationProperty.Clear();
+            EnumEntries.Clear();
+            Referers.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            References = null;
+            SourceTable = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceColumn != null) OnNotifyDeleting_SourceColumn(this);
         }

@@ -659,6 +659,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_CalculatedObjectReferenceProperty")]
         public override void NotifyDeleting()
         {
+            Inputs.Clear();
+            ReferencedClass = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalculatedObjectReferenceProperty != null) OnNotifyDeleting_CalculatedObjectReferenceProperty(this);
         }

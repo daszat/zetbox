@@ -94,7 +94,8 @@
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
-    <Compile Include="Tests\ContextTests\when_deleting.cs" />
+    <Compile Include="Tests\ContextTests\when_deleting_n_m.cs" />
+    <Compile Include="Tests\ContextTests\when_deleting_one_to_n.cs" />
     <Compile Include="Tests\ContextTests\when_searching.cs" />
     <Compile Include="Tests\DefaultValues\when_submitting.cs" />
     <Compile Include="Tests\KistlContextTests\KistlContextTests.cs" />

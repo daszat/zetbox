@@ -2197,6 +2197,15 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         [EventBasedMethod("OnNotifyDeleting_Property")]
         public override void NotifyDeleting()
         {
+            Constraints.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            DefaultValue = null;
+            FilterConfiguration = null;
+            Module = null;
+            ObjectClass = null;
+            RequestedKind = null;
+            ValueModelDescriptor = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Property != null) OnNotifyDeleting_Property(this);
         }

@@ -55,8 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractNHibernateTestFixture.cs" />
+    <Compile Include="Tests\ContextTests\when_deleting_n_m.cs" />
     <Compile Include="Tests\ContextTests\when_concurrency.cs" />
-    <Compile Include="Tests\ContextTests\when_deleting.cs" />
+    <Compile Include="Tests\ContextTests\when_deleting_one_to_n.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">

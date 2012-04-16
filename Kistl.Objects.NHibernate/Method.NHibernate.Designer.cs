@@ -1774,6 +1774,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         [EventBasedMethod("OnNotifyDeleting_Method")]
         public override void NotifyDeleting()
         {
+            Parameter.Clear();
+            ShowByProperties.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            Icon = null;
+            Module = null;
+            ObjectClass = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Method != null) OnNotifyDeleting_Method(this);
         }

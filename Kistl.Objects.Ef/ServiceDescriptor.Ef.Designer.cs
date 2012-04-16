@@ -1074,6 +1074,10 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_ServiceDescriptor")]
         public override void NotifyDeleting()
         {
+            ChangedBy = null;
+            CreatedBy = null;
+            Module = null;
+            TypeRef = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ServiceDescriptor != null) OnNotifyDeleting_ServiceDescriptor(this);
         }

@@ -851,6 +851,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         [EventBasedMethod("OnNotifyDeleting_TestCustomObject")]
         public override void NotifyDeleting()
         {
+            MubBlah_List_Nav.Clear();
+            MuhBlah_ManyList_Nav.Clear();
+            PhoneNumbersOther.Clear();
+            MubBlah_Nav = null;
+            MuhBlah_One_Nav = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestCustomObject != null) OnNotifyDeleting_TestCustomObject(this);
         }

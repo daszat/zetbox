@@ -358,6 +358,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_EnumDefaultValue")]
         public override void NotifyDeleting()
         {
+            EnumValue = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumDefaultValue != null) OnNotifyDeleting_EnumDefaultValue(this);
         }

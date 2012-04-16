@@ -608,6 +608,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_EnumerationProperty")]
         public override void NotifyDeleting()
         {
+            Enumeration = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumerationProperty != null) OnNotifyDeleting_EnumerationProperty(this);
         }

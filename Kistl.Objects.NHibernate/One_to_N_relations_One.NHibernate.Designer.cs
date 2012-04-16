@@ -291,6 +291,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
         [EventBasedMethod("OnNotifyDeleting_One_to_N_relations_One")]
         public override void NotifyDeleting()
         {
+            NSide.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_One_to_N_relations_One != null) OnNotifyDeleting_One_to_N_relations_One(this);
         }

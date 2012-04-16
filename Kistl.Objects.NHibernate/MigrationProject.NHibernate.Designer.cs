@@ -1043,6 +1043,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         [EventBasedMethod("OnNotifyDeleting_MigrationProject")]
         public override void NotifyDeleting()
         {
+            StagingDatabases.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            DestinationModule = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_MigrationProject != null) OnNotifyDeleting_MigrationProject(this);
         }

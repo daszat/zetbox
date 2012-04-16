@@ -11,9 +11,9 @@ namespace Kistl.DalProvider.NHibernate.Tests.ContextTests
     using Kistl.App.Test;
 
     using NUnit.Framework;
-    
-    public class when_deleting
-        : Kistl.API.AbstractConsumerTests.ContextTests.when_deleting
+
+    public class when_deleting_one_to_n
+        : Kistl.API.AbstractConsumerTests.ContextTests.when_deleting_one_to_n
     {
     }
 }

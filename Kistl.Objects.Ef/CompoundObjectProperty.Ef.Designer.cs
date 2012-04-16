@@ -754,6 +754,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_CompoundObjectProperty")]
         public override void NotifyDeleting()
         {
+            CompoundObjectDefinition = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObjectProperty != null) OnNotifyDeleting_CompoundObjectProperty(this);
         }

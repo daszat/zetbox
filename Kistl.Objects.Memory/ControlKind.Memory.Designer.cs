@@ -698,6 +698,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         [EventBasedMethod("OnNotifyDeleting_ControlKind")]
         public override void NotifyDeleting()
         {
+            ChildControlKinds.Clear();
+            Module = null;
+            Parent = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ControlKind != null) OnNotifyDeleting_ControlKind(this);
         }

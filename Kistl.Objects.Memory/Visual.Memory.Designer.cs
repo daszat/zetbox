@@ -546,6 +546,10 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyDeleting_Visual")]
         public override void NotifyDeleting()
         {
+            Children.Clear();
+            ContextMenu.Clear();
+            Method = null;
+            Property = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Visual != null) OnNotifyDeleting_Visual(this);
         }

@@ -969,6 +969,7 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_ObjectReferencePlaceholderProperty")]
         public override void NotifyDeleting()
         {
+            ReferencedObjectClass = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferencePlaceholderProperty != null) OnNotifyDeleting_ObjectReferencePlaceholderProperty(this);
         }

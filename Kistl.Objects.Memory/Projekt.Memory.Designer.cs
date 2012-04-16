@@ -1064,6 +1064,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyDeleting_Projekt")]
         public override void NotifyDeleting()
         {
+            Auftraege.Clear();
+            Mitarbeiter.Clear();
+            Tasks.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
         }

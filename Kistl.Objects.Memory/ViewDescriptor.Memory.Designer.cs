@@ -725,6 +725,10 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyDeleting_ViewDescriptor")]
         public override void NotifyDeleting()
         {
+            SupportedViewModels.Clear();
+            ControlKind = null;
+            ControlRef = null;
+            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
         }

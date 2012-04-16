@@ -1149,6 +1149,10 @@ namespace Kistl.App.Projekte
         [EventBasedMethod("OnNotifyDeleting_Mitarbeiter")]
         public override void NotifyDeleting()
         {
+            Projekte.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            Identity = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Mitarbeiter != null) OnNotifyDeleting_Mitarbeiter(this);
         }
