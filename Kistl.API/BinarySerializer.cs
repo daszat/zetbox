@@ -20,7 +20,7 @@ namespace Kistl.API
     /// </summary>
     public static class BinarySerializer
     {
-        private static Dictionary<Guid, SerializableType> _typeMap;
+        private static Dictionary<Guid, SerializableType> _typeMap = new Dictionary<Guid,SerializableType>();
         public static Dictionary<Guid, SerializableType> TypeMap
         {
             get
@@ -33,7 +33,7 @@ namespace Kistl.API
                 GuidMap = _typeMap.ToDictionary(k => k.Value, v => v.Key);
             }
         }
-        private static Dictionary<SerializableType, Guid> GuidMap;
+        private static Dictionary<SerializableType, Guid> GuidMap = new Dictionary<SerializableType,Guid>();
 
         [Conditional("DEBUG_SERIALIZATION")]
         private static void SerializerTrace(string fmt, params object[] args)
