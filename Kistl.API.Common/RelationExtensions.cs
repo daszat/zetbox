@@ -103,42 +103,6 @@ namespace Kistl.App.Extensions
             }
         }
 
-        public static RelationEnd GetEndFromClass(this Relation rel, ObjectClass cls)
-        {
-            if (rel == null) { throw new ArgumentNullException("rel"); }
-
-            if (rel.A.Type == cls)
-            {
-                return rel.A;
-            }
-            else if (rel.B.Type == cls)
-            {
-                return rel.B;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public static RelationEnd GetOtherEndFromClass(this Relation rel, ObjectClass cls)
-        {
-            if (rel == null) { throw new ArgumentNullException("rel"); }
-
-            if (rel.A.Type == cls)
-            {
-                return rel.B;
-            }
-            else if (rel.B.Type == cls)
-            {
-                return rel.A;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
         public static bool HasStorage(this Relation rel, RelationEndRole role)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
