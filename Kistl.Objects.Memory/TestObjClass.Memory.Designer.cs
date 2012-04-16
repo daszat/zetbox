@@ -564,7 +564,6 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyDeleting_TestObjClass")]
         public override void NotifyDeleting()
         {
-            ObjectProp = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestObjClass != null) OnNotifyDeleting_TestObjClass(this);
         }

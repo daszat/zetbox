@@ -402,7 +402,6 @@ namespace at.dasz.DocumentManagement
         [EventBasedMethod("OnNotifyDeleting_Document")]
         public override void NotifyDeleting()
         {
-            Revisions.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_Document != null) OnNotifyDeleting_Document(this);
         }

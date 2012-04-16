@@ -938,9 +938,6 @@ namespace at.dasz.DocumentManagement
         [EventBasedMethod("OnNotifyDeleting_FileImportConfiguration")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
-            Identity = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_FileImportConfiguration != null) OnNotifyDeleting_FileImportConfiguration(this);
         }

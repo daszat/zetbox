@@ -481,7 +481,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_CompoundObject")]
         public override void NotifyDeleting()
         {
-            DefaultPropertyViewModelDescriptor = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObject != null) OnNotifyDeleting_CompoundObject(this);
         }

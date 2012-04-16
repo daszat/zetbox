@@ -287,7 +287,6 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyDeleting_N_to_M_relations_B")]
         public override void NotifyDeleting()
         {
-            ASide.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_N_to_M_relations_B != null) OnNotifyDeleting_N_to_M_relations_B(this);
         }

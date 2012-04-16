@@ -1277,12 +1277,6 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyDeleting_ViewModelDescriptor")]
         public override void NotifyDeleting()
         {
-            SecondaryControlKinds.Clear();
-            DefaultDisplayKind = null;
-            DefaultEditorKind = null;
-            DefaultGridCellDisplayKind = null;
-            DefaultGridCellEditorKind = null;
-            DefaultGridCellPreEditorKind = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
         }

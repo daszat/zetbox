@@ -419,7 +419,6 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyDeleting_OrderedNEnd")]
         public override void NotifyDeleting()
         {
-            OneEnd = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_OrderedNEnd != null) OnNotifyDeleting_OrderedNEnd(this);
         }

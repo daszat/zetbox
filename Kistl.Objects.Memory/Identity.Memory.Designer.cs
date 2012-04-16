@@ -409,7 +409,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_Identity")]
         public override void NotifyDeleting()
         {
-            Groups.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_Identity != null) OnNotifyDeleting_Identity(this);
         }

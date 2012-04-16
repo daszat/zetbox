@@ -1492,9 +1492,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_RelationEnd")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
-            Navigator = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_RelationEnd != null) OnNotifyDeleting_RelationEnd(this);
         }

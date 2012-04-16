@@ -1065,9 +1065,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_BoolProperty")]
         public override void NotifyDeleting()
         {
-            FalseIcon = null;
-            NullIcon = null;
-            TrueIcon = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_BoolProperty != null) OnNotifyDeleting_BoolProperty(this);
         }

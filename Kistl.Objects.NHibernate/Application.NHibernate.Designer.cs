@@ -1179,11 +1179,6 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyDeleting_Application")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
-            Module = null;
-            RootScreen = null;
-            WorkspaceViewModel = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Application != null) OnNotifyDeleting_Application(this);
         }

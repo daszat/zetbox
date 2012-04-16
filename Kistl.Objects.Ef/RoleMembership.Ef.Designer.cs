@@ -215,7 +215,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_RoleMembership")]
         public override void NotifyDeleting()
         {
-            Relations.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_RoleMembership != null) OnNotifyDeleting_RoleMembership(this);
         }

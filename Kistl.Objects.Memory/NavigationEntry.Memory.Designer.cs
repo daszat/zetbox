@@ -1365,12 +1365,6 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         [EventBasedMethod("OnNotifyDeleting_NavigationEntry")]
         public override void NotifyDeleting()
         {
-            Children.Clear();
-            Groups.Clear();
-            ChangedBy = null;
-            CreatedBy = null;
-            Parent = null;
-            ViewModelDescriptor = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationEntry != null) OnNotifyDeleting_NavigationEntry(this);
         }

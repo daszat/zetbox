@@ -1327,12 +1327,6 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         [EventBasedMethod("OnNotifyDeleting_Calendar")]
         public override void NotifyDeleting()
         {
-            CalendarRules.Clear();
-            ChildCalendar.Clear();
-            BaseCalendar = null;
-            ChangedBy = null;
-            CreatedBy = null;
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Calendar != null) OnNotifyDeleting_Calendar(this);
         }

@@ -574,7 +574,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_Group")]
         public override void NotifyDeleting()
         {
-            Member.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_Group != null) OnNotifyDeleting_Group(this);
         }

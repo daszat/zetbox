@@ -1491,8 +1491,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_BaseParameter")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_BaseParameter != null) OnNotifyDeleting_BaseParameter(this);
         }

@@ -1338,9 +1338,6 @@ namespace Kistl.App.Calendar
         [EventBasedMethod("OnNotifyDeleting_CalendarRule")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalendarRule != null) OnNotifyDeleting_CalendarRule(this);
         }

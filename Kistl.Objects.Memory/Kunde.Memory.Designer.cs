@@ -1044,9 +1044,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         [EventBasedMethod("OnNotifyDeleting_Kunde")]
         public override void NotifyDeleting()
         {
-            EMails.Clear();
-            ChangedBy = null;
-            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Kunde != null) OnNotifyDeleting_Kunde(this);
         }

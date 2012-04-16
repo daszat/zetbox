@@ -434,7 +434,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_IndexConstraint")]
         public override void NotifyDeleting()
         {
-            Properties.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_IndexConstraint != null) OnNotifyDeleting_IndexConstraint(this);
         }

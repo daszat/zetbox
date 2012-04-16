@@ -998,8 +998,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_Module")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Module != null) OnNotifyDeleting_Module(this);
         }

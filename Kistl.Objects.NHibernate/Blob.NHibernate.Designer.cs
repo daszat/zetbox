@@ -1022,8 +1022,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_Blob")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Blob != null) OnNotifyDeleting_Blob(this);
         }

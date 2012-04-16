@@ -52,9 +52,11 @@ namespace Kistl.API.AbstractConsumerTests
             prj.Name = "Kistl";
 
             var task1 = ctx.Create<Task>();
+            task1.Name = "task1";
             task1.Projekt = prj;
 
             var task2 = ctx.Create<Task>();
+            task2.Name = "task2";
             task2.Projekt = prj;
 
             var ma1 = ctx.Create<Mitarbeiter>();

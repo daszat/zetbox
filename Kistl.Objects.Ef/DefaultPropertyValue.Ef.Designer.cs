@@ -868,8 +868,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_DefaultPropertyValue")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_DefaultPropertyValue != null) OnNotifyDeleting_DefaultPropertyValue(this);
         }

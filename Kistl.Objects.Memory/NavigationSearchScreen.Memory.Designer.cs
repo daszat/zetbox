@@ -1650,9 +1650,6 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyDeleting_NavigationSearchScreen")]
         public override void NotifyDeleting()
         {
-            RequestedEditorKind = null;
-            RequestedWorkspaceKind = null;
-            Type = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationSearchScreen != null) OnNotifyDeleting_NavigationSearchScreen(this);
         }

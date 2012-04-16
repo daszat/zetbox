@@ -879,8 +879,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_ObjectReferenceProperty")]
         public override void NotifyDeleting()
         {
-            Methods.Clear();
-            RelationEnd = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferenceProperty != null) OnNotifyDeleting_ObjectReferenceProperty(this);
         }

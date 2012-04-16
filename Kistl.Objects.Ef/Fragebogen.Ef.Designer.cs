@@ -367,8 +367,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         [EventBasedMethod("OnNotifyDeleting_Fragebogen")]
         public override void NotifyDeleting()
         {
-            Antworten.Clear();
-            Student.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_Fragebogen != null) OnNotifyDeleting_Fragebogen(this);
         }

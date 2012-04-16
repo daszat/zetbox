@@ -30,19 +30,18 @@ namespace Kistl.Generator.Templates.ObjectClasses
         }
 
         protected virtual void ApplyPostCreatedTemplate() { }
-        protected virtual void ApplyPreDeletingTemplate()
+        protected virtual void ApplyPreDeletingTemplate() { }
+        protected virtual void ApplyPostDeletingTemplate()
         {
-            // TODO: implement containment/delete cascading
-            foreach (var prop in dt.Properties.Where(p => p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name))
-            {
-                this.WriteObjects("            ", prop.Name, ".Clear();\r\n");
-            }
-            foreach (var prop in dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList() && !p.IsCalculated() && p.IsNullable()).OrderBy(p => p.Name))
-            {
-                this.WriteObjects("            ", prop.Name, " = null;\r\n");
-            }
+            //// TODO: implement containment/delete cascading
+            //foreach (var prop in dt.Properties.Where(p => p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name))
+            //{
+            //    this.WriteObjects("            ", prop.Name, ".Clear();\r\n");
+            //}
+            //foreach (var prop in dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList() && !p.IsCalculated() && p.IsNullable()).OrderBy(p => p.Name))
+            //{
+            //    this.WriteObjects("            ", prop.Name, " = null;\r\n");
+            //}
         }
-
-        protected virtual void ApplyPostDeletingTemplate() { }
     }
 }

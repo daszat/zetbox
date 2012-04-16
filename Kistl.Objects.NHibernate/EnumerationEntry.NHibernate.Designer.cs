@@ -1211,8 +1211,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_EnumerationEntry")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumerationEntry != null) OnNotifyDeleting_EnumerationEntry(this);
         }

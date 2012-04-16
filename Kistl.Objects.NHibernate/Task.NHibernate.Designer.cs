@@ -1106,8 +1106,6 @@ namespace Kistl.App.Projekte
         [EventBasedMethod("OnNotifyDeleting_Task")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Task != null) OnNotifyDeleting_Task(this);
         }

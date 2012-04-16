@@ -285,7 +285,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         [EventBasedMethod("OnNotifyDeleting_RequiredParent")]
         public override void NotifyDeleting()
         {
-            Children.Clear();
             base.NotifyDeleting();
             if (OnNotifyDeleting_RequiredParent != null) OnNotifyDeleting_RequiredParent(this);
         }

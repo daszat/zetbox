@@ -1863,14 +1863,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         [EventBasedMethod("OnNotifyDeleting_DataType")]
         public override void NotifyDeleting()
         {
-            Constraints.Clear();
-            ImplementsInterfaces.Clear();
-            Methods.Clear();
-            Properties.Clear();
-            ChangedBy = null;
-            CreatedBy = null;
-            DefaultIcon = null;
-            RequestedKind = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_DataType != null) OnNotifyDeleting_DataType(this);
         }

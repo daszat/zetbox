@@ -1003,8 +1003,6 @@ namespace ZBox.App.SchemaMigration
         [EventBasedMethod("OnNotifyDeleting_SourceEnum")]
         public override void NotifyDeleting()
         {
-            ChangedBy = null;
-            CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceEnum != null) OnNotifyDeleting_SourceEnum(this);
         }
