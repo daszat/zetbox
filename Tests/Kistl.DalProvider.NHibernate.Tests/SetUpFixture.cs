@@ -10,6 +10,7 @@ namespace Kistl.DalProvider.NHibernate.Tests
     using Kistl.App.Base;
     using Kistl.App.Projekte;
     using Kistl.Server;
+    using Npgsql;
     using NUnit.Framework;
 
     [SetUpFixture]
@@ -54,6 +55,13 @@ namespace Kistl.DalProvider.NHibernate.Tests
         protected override HostType GetHostType()
         {
             return HostType.Server;
+        }
+
+        public override void TearDown()
+        {
+            base.TearDown();
+            // always kill connections to the db
+            NpgsqlConnection.ClearAllPools();
         }
     }
 }
