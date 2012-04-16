@@ -80,7 +80,7 @@ namespace Kistl.Generator.Templates.Properties
             this.WriteObjects("                    ", EventName, "_Getter(this, __e);\r\n");
             if (isCalculated)
                 this.WriteObjects("                    ", backingName, "_IsDirty = false;\r\n");
-            this.WriteObjects("                    __result = __e.Result;\r\n");
+            this.WriteObjects("                    __result = ", backingName, " = __e.Result;\r\n");
             this.WriteObjects("                }\r\n");
         }
 

@@ -156,7 +156,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -369,7 +369,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -521,7 +521,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDescription_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Description = __e.Result;
                 }
                 return __result;
             }
@@ -590,7 +590,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -818,7 +818,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Name = __e.Result;
                 }
                 return __result;
             }
@@ -1019,7 +1019,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnShowIconInLists_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ShowIconInLists = __e.Result;
                 }
                 return __result;
             }
@@ -1077,7 +1077,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnShowIdInLists_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ShowIdInLists = __e.Result;
                 }
                 return __result;
             }
@@ -1135,7 +1135,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnShowNameInLists_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ShowNameInLists = __e.Result;
                 }
                 return __result;
             }

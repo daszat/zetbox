@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnEagerLoading_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _EagerLoading = __e.Result;
                 }
                 return __result;
             }
@@ -112,7 +112,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnIsInlineEditable_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsInlineEditable = __e.Result;
                 }
                 return __result;
             }

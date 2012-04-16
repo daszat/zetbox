@@ -60,7 +60,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnIsCurrentMonthDefault_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsCurrentMonthDefault = __e.Result;
                 }
                 return __result;
             }

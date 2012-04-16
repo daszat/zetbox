@@ -67,7 +67,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnIdentity_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Identity = __e.Result;
                 }
                 return __result;
             }
@@ -123,7 +123,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnMessageFormat_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _MessageFormat = __e.Result;
                 }
                 return __result;
             }
@@ -179,7 +179,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnNewValue_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _NewValue = __e.Result;
                 }
                 return __result;
             }
@@ -235,7 +235,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnOldValue_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _OldValue = __e.Result;
                 }
                 return __result;
             }
@@ -291,7 +291,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnPropertyName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _PropertyName = __e.Result;
                 }
                 return __result;
             }
@@ -361,7 +361,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime?>(__result);
                     OnTimestamp_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Timestamp = __e.Result;
                 }
                 return __result;
             }

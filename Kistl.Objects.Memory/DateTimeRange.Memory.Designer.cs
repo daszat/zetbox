@@ -60,7 +60,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime?>(__result);
                     OnFrom_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _From = __e.Result;
                 }
                 return __result;
             }
@@ -116,7 +116,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime?>(__result);
                     OnThru_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Thru = __e.Result;
                 }
                 return __result;
             }
@@ -173,7 +173,7 @@ namespace Kistl.App.Base
                     var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnTotalDays_Getter(this, __e);
                     _TotalDays_IsDirty = false;
-                    __result = __e.Result;
+                    __result = _TotalDays = __e.Result;
                 }
                 return __result;
             }

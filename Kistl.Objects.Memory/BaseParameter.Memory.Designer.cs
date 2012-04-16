@@ -156,7 +156,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -318,7 +318,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -378,7 +378,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDescription_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Description = __e.Result;
                 }
                 return __result;
             }
@@ -447,7 +447,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -507,7 +507,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsList_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsList = __e.Result;
                 }
                 return __result;
             }
@@ -576,7 +576,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsNullable_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsNullable = __e.Result;
                 }
                 return __result;
             }
@@ -636,7 +636,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsReturnParameter_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsReturnParameter = __e.Result;
                 }
                 return __result;
             }
@@ -694,7 +694,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnLabel_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Label = __e.Result;
                 }
                 return __result;
             }
@@ -891,7 +891,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Name = __e.Result;
                 }
                 return __result;
             }

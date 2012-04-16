@@ -60,7 +60,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnMyIntProperty_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _MyIntProperty = __e.Result;
                 }
                 return __result;
             }
@@ -226,7 +226,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnStringProp_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _StringProp = __e.Result;
                 }
                 return __result;
             }

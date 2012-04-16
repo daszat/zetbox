@@ -176,7 +176,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -355,7 +355,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -429,7 +429,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -597,7 +597,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnMachineName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _MachineName = __e.Result;
                 }
                 return __result;
             }
@@ -658,7 +658,7 @@ namespace at.dasz.DocumentManagement
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnPickupDirectory_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _PickupDirectory = __e.Result;
                 }
                 return __result;
             }

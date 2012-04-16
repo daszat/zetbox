@@ -60,7 +60,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnSchema_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Schema = __e.Result;
                 }
                 return __result;
             }
@@ -121,7 +121,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<int>(__result);
                     OnVersion_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Version = __e.Result;
                 }
                 return __result;
             }

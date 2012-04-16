@@ -60,7 +60,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnAdresse_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Adresse = __e.Result;
                 }
                 return __result;
             }
@@ -237,7 +237,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -416,7 +416,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -537,7 +537,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -600,7 +600,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnKundenname_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Kundenname = __e.Result;
                 }
                 return __result;
             }
@@ -661,7 +661,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnLand_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Land = __e.Result;
                 }
                 return __result;
             }
@@ -722,7 +722,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnOrt_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Ort = __e.Result;
                 }
                 return __result;
             }
@@ -783,7 +783,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnPLZ_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _PLZ = __e.Result;
                 }
                 return __result;
             }

@@ -54,7 +54,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnIsCurrentMonthDefault_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsCurrentMonthDefault = __e.Result;
                 }
                 return __result;
             }
@@ -112,7 +112,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnIsCurrentQuaterDefault_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsCurrentQuaterDefault = __e.Result;
                 }
                 return __result;
             }
@@ -170,7 +170,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnIsCurrentYearDefault_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsCurrentYearDefault = __e.Result;
                 }
                 return __result;
             }

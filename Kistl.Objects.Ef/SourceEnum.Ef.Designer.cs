@@ -176,7 +176,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -355,7 +355,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -535,7 +535,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -716,7 +716,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnSourceValue_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _SourceValue = __e.Result;
                 }
                 return __result;
             }

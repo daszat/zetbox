@@ -117,7 +117,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
                 {
                     var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnSomeInt_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _SomeInt = __e.Result;
                 }
                 return __result;
             }

@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<int>(__result);
                     OnMax_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Max = __e.Result;
                 }
                 return __result;
             }
@@ -112,7 +112,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<int>(__result);
                     OnMin_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Min = __e.Result;
                 }
                 return __result;
             }

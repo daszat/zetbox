@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<int>(__result);
                     OnPrecision_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Precision = __e.Result;
                 }
                 return __result;
             }
@@ -112,7 +112,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<int>(__result);
                     OnScale_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Scale = __e.Result;
                 }
                 return __result;
             }

@@ -146,7 +146,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnFalseLabel_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _FalseLabel = __e.Result;
                 }
                 return __result;
             }
@@ -296,7 +296,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnNullLabel_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _NullLabel = __e.Result;
                 }
                 return __result;
             }
@@ -446,7 +446,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnTrueLabel_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _TrueLabel = __e.Result;
                 }
                 return __result;
             }

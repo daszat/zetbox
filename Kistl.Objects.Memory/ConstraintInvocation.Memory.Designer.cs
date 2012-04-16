@@ -65,7 +65,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -217,7 +217,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnMemberName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _MemberName = __e.Result;
                 }
                 return __result;
             }

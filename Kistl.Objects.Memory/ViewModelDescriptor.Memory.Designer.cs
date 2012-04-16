@@ -514,7 +514,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDescription_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Description = __e.Result;
                 }
                 return __result;
             }
@@ -583,7 +583,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }

@@ -54,7 +54,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnPredicate_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Predicate = __e.Result;
                 }
                 return __result;
             }

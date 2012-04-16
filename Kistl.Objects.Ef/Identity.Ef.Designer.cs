@@ -60,7 +60,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDisplayName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DisplayName = __e.Result;
                 }
                 return __result;
             }
@@ -171,7 +171,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnPassword_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Password = __e.Result;
                 }
                 return __result;
             }
@@ -232,7 +232,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnUserName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _UserName = __e.Result;
                 }
                 return __result;
             }

@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnDate_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Date = __e.Result;
                 }
                 return __result;
             }
@@ -112,7 +112,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnException_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Exception = __e.Result;
                 }
                 return __result;
             }
@@ -170,7 +170,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnLevel_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Level = __e.Result;
                 }
                 return __result;
             }
@@ -228,7 +228,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnLogger_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Logger = __e.Result;
                 }
                 return __result;
             }
@@ -286,7 +286,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnMessage_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Message = __e.Result;
                 }
                 return __result;
             }
@@ -344,7 +344,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnThread_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Thread = __e.Result;
                 }
                 return __result;
             }

@@ -165,7 +165,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDisplayedTypeFullName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DisplayedTypeFullName = __e.Result;
                 }
                 return __result;
             }
@@ -226,7 +226,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDisplayName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DisplayName = __e.Result;
                 }
                 return __result;
             }

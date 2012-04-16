@@ -54,7 +54,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<Kistl.App.Base.DayOfWeek>(__result);
                     OnDayOfWeek_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DayOfWeek = __e.Result;
                 }
                 return __result;
             }

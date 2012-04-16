@@ -60,7 +60,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<decimal?>(__result);
                     OnLarge_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Large = __e.Result;
                 }
                 return __result;
             }
@@ -121,7 +121,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<decimal?>(__result);
                     OnNoScale_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _NoScale = __e.Result;
                 }
                 return __result;
             }
@@ -182,7 +182,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<decimal?>(__result);
                     OnSmallDecimal_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _SmallDecimal = __e.Result;
                 }
                 return __result;
             }

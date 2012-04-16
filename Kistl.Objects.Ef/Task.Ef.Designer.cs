@@ -60,7 +60,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<double?>(__result);
                     OnAufwand_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Aufwand = __e.Result;
                 }
                 return __result;
             }
@@ -237,7 +237,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -416,7 +416,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -479,7 +479,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnDatumBis_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DatumBis = __e.Result;
                 }
                 return __result;
             }
@@ -540,7 +540,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnDatumVon_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DatumVon = __e.Result;
                 }
                 return __result;
             }
@@ -612,7 +612,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -675,7 +675,7 @@ namespace Kistl.App.Projekte
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Name = __e.Result;
                 }
                 return __result;
             }

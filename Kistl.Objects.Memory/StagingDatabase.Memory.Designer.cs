@@ -156,7 +156,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -216,7 +216,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnConnectionStringKey_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ConnectionStringKey = __e.Result;
                 }
                 return __result;
             }
@@ -376,7 +376,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -436,7 +436,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDescription_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Description = __e.Result;
                 }
                 return __result;
             }
@@ -505,7 +505,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -673,7 +673,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnOriginConnectionStringKey_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _OriginConnectionStringKey = __e.Result;
                 }
                 return __result;
             }
@@ -731,7 +731,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnSchema_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Schema = __e.Result;
                 }
                 return __result;
             }

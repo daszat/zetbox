@@ -60,7 +60,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnFrage_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Frage = __e.Result;
                 }
                 return __result;
             }
@@ -272,7 +272,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<int>(__result);
                     OnFragenNummer_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _FragenNummer = __e.Result;
                 }
                 return __result;
             }
@@ -333,7 +333,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnGegebeneAntwort_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _GegebeneAntwort = __e.Result;
                 }
                 return __result;
             }

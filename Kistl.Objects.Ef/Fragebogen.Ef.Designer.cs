@@ -119,7 +119,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
                 {
                     var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnBogenNummer_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _BogenNummer = __e.Result;
                 }
                 return __result;
             }

@@ -64,7 +64,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<DateTime?>(__result);
                     OnBirthday_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Birthday = __e.Result;
                 }
                 return __result;
             }
@@ -466,7 +466,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnPersonName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _PersonName = __e.Result;
                 }
                 return __result;
             }

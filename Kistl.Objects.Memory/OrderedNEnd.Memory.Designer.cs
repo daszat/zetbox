@@ -192,7 +192,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnOtherInt_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _OtherInt = __e.Result;
                 }
                 return __result;
             }

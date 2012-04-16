@@ -60,7 +60,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnHasPersistentOrder_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _HasPersistentOrder = __e.Result;
                 }
                 return __result;
             }
@@ -121,7 +121,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsCalculated_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsCalculated = __e.Result;
                 }
                 return __result;
             }
@@ -182,7 +182,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsList_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsList = __e.Result;
                 }
                 return __result;
             }

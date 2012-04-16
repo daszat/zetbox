@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnBoolValue_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _BoolValue = __e.Result;
                 }
                 return __result;
             }

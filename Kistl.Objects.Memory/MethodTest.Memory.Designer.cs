@@ -202,7 +202,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnStringProp_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _StringProp = __e.Result;
                 }
                 return __result;
             }

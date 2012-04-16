@@ -118,7 +118,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                     var __e = new PropertyGetterEventArgs<double?>(__result);
                     OnAufwandGes_Getter(this, __e);
                     _AufwandGes_IsDirty = false;
-                    __result = __e.Result;
+                    __result = _AufwandGes = __e.Result;
                 }
                 return __result;
             }
@@ -284,7 +284,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -463,7 +463,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -537,7 +537,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -600,7 +600,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnKundenname_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Kundenname = __e.Result;
                 }
                 return __result;
             }
@@ -711,7 +711,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Name = __e.Result;
                 }
                 return __result;
             }

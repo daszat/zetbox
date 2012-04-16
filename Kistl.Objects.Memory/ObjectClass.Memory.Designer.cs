@@ -204,7 +204,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnCodeTemplate_Getter(this, __e);
                     _CodeTemplate_IsDirty = false;
-                    __result = __e.Result;
+                    __result = _CodeTemplate = __e.Result;
                 }
                 return __result;
             }
@@ -384,7 +384,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsAbstract_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsAbstract = __e.Result;
                 }
                 return __result;
             }
@@ -442,7 +442,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsFrozenObject_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsFrozenObject = __e.Result;
                 }
                 return __result;
             }
@@ -500,7 +500,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsSimpleObject_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsSimpleObject = __e.Result;
                 }
                 return __result;
             }
@@ -599,7 +599,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnTableName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _TableName = __e.Result;
                 }
                 return __result;
             }

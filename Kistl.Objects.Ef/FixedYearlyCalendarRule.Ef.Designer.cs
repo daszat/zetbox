@@ -60,7 +60,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<int>(__result);
                     OnDay_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Day = __e.Result;
                 }
                 return __result;
             }
@@ -121,7 +121,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<int>(__result);
                     OnMonth_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Month = __e.Result;
                 }
                 return __result;
             }

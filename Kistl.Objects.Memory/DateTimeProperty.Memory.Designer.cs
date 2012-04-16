@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<Kistl.App.Base.DateTimeStyles?>(__result);
                     OnDateTimeStyle_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DateTimeStyle = __e.Result;
                 }
                 return __result;
             }

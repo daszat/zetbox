@@ -372,7 +372,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -432,7 +432,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<Kistl.App.Base.ContainmentSpecification>(__result);
                     OnContainment_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Containment = __e.Result;
                 }
                 return __result;
             }
@@ -592,7 +592,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -652,7 +652,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDescription_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Description = __e.Result;
                 }
                 return __result;
             }
@@ -721,7 +721,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -873,7 +873,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<Kistl.App.Base.StorageType>(__result);
                     OnStorage_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Storage = __e.Result;
                 }
                 return __result;
             }
@@ -931,7 +931,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnVerb_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Verb = __e.Result;
                 }
                 return __result;
             }

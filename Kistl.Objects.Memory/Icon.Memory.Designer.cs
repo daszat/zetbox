@@ -157,7 +157,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -217,7 +217,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnIconFile_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IconFile = __e.Result;
                 }
                 return __result;
             }

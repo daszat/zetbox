@@ -60,7 +60,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnAllowAddNew_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _AllowAddNew = __e.Result;
                 }
                 return __result;
             }
@@ -121,7 +121,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnAllowDelete_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _AllowDelete = __e.Result;
                 }
                 return __result;
             }
@@ -182,7 +182,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnAllowSelectColumns_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _AllowSelectColumns = __e.Result;
                 }
                 return __result;
             }
@@ -243,7 +243,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnAllowUserFilter_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _AllowUserFilter = __e.Result;
                 }
                 return __result;
             }
@@ -304,7 +304,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnEnableAutoFilter_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _EnableAutoFilter = __e.Result;
                 }
                 return __result;
             }
@@ -365,7 +365,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnInitialSort_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _InitialSort = __e.Result;
                 }
                 return __result;
             }
@@ -497,7 +497,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnIsEditable_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsEditable = __e.Result;
                 }
                 return __result;
             }
@@ -558,7 +558,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnIsMultiselect_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsMultiselect = __e.Result;
                 }
                 return __result;
             }
@@ -831,7 +831,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnRespectRequiredFilter_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _RespectRequiredFilter = __e.Result;
                 }
                 return __result;
             }
@@ -892,7 +892,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnShowFilter_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ShowFilter = __e.Result;
                 }
                 return __result;
             }
@@ -953,7 +953,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnShowMasterDetail_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ShowMasterDetail = __e.Result;
                 }
                 return __result;
             }
@@ -1014,7 +1014,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnShowOpenCommand_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ShowOpenCommand = __e.Result;
                 }
                 return __result;
             }
@@ -1075,7 +1075,7 @@ namespace Kistl.App.GUI
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnShowRefreshCommand_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ShowRefreshCommand = __e.Result;
                 }
                 return __result;
             }

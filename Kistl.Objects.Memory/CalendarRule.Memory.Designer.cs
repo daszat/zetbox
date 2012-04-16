@@ -264,7 +264,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -426,7 +426,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -497,7 +497,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -568,7 +568,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsWorkingDay_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsWorkingDay = __e.Result;
                 }
                 return __result;
             }
@@ -720,7 +720,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Name = __e.Result;
                 }
                 return __result;
             }
@@ -778,7 +778,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<DateTime?>(__result);
                     OnValidFrom_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ValidFrom = __e.Result;
                 }
                 return __result;
             }
@@ -836,7 +836,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<DateTime?>(__result);
                     OnValidUntil_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ValidUntil = __e.Result;
                 }
                 return __result;
             }
@@ -894,7 +894,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<decimal>(__result);
                     OnWorkingHours_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _WorkingHours = __e.Result;
                 }
                 return __result;
             }

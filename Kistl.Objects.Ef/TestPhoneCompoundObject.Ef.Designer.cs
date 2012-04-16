@@ -76,7 +76,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnAreaCode_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _AreaCode = __e.Result;
                 }
                 return __result;
             }
@@ -135,7 +135,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnNumber_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Number = __e.Result;
                 }
                 return __result;
             }

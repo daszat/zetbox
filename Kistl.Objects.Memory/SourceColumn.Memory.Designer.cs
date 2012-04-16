@@ -156,7 +156,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnChangedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ChangedOn = __e.Result;
                 }
                 return __result;
             }
@@ -216,7 +216,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnComment_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Comment = __e.Result;
                 }
                 return __result;
             }
@@ -285,7 +285,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnCompareNulls_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CompareNulls = __e.Result;
                 }
                 return __result;
             }
@@ -447,7 +447,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<DateTime>(__result);
                     OnCreatedOn_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _CreatedOn = __e.Result;
                 }
                 return __result;
             }
@@ -507,7 +507,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<ZBox.App.SchemaMigration.ColumnType>(__result);
                     OnDbType_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DbType = __e.Result;
                 }
                 return __result;
             }
@@ -565,7 +565,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDescription_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Description = __e.Result;
                 }
                 return __result;
             }
@@ -702,7 +702,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 {
                     var __e = new PropertyGetterEventArgs<Guid>(__result);
                     OnExportGuid_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ExportGuid = __e.Result;
                 }
                 return __result;
             }
@@ -762,7 +762,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnIsNullable_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsNullable = __e.Result;
                 }
                 return __result;
             }
@@ -820,7 +820,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Name = __e.Result;
                 }
                 return __result;
             }
@@ -1027,7 +1027,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 {
                     var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnSize_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Size = __e.Result;
                 }
                 return __result;
             }
@@ -1193,7 +1193,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 {
                     var __e = new PropertyGetterEventArgs<ZBox.App.SchemaMigration.MappingStatus?>(__result);
                     OnStatus_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Status = __e.Result;
                 }
                 return __result;
             }

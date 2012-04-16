@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnDefaultValue_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _DefaultValue = __e.Result;
                 }
                 return __result;
             }

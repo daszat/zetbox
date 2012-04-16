@@ -60,7 +60,7 @@ namespace Kistl.App.Calendar
                 {
                     var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnOffset_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Offset = __e.Result;
                 }
                 return __result;
             }

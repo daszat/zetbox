@@ -60,7 +60,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnTestString_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _TestString = __e.Result;
                 }
                 return __result;
             }

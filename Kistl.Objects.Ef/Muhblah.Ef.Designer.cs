@@ -60,7 +60,7 @@ namespace Kistl.App.Test
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
                     OnTestBool_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _TestBool = __e.Result;
                 }
                 return __result;
             }
@@ -462,7 +462,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 {
                     var __e = new PropertyGetterEventArgs<DateTime?>(__result);
                     OnTestDateTime_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _TestDateTime = __e.Result;
                 }
                 return __result;
             }
@@ -594,7 +594,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnTestString_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _TestString = __e.Result;
                 }
                 return __result;
             }

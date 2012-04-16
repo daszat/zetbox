@@ -54,7 +54,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnAreFlags_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _AreFlags = __e.Result;
                 }
                 return __result;
             }

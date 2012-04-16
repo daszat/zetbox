@@ -60,7 +60,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnHasPersistentOrder_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _HasPersistentOrder = __e.Result;
                 }
                 return __result;
             }
@@ -121,7 +121,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnImplementorRoleName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ImplementorRoleName = __e.Result;
                 }
                 return __result;
             }
@@ -182,7 +182,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnIsList_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _IsList = __e.Result;
                 }
                 return __result;
             }
@@ -243,7 +243,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnItemRoleName_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _ItemRoleName = __e.Result;
                 }
                 return __result;
             }
@@ -410,7 +410,7 @@ namespace Kistl.App.Base
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
                     OnVerb_Getter(this, __e);
-                    __result = __e.Result;
+                    __result = _Verb = __e.Result;
                 }
                 return __result;
             }
