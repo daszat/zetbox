@@ -1592,14 +1592,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<NavigationSearchScreen> OnToString_NavigationSearchScreen;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_NavigationSearchScreen")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_NavigationSearchScreen != null)
             {
                 OnObjectIsValid_NavigationSearchScreen(this, e);
@@ -1655,36 +1655,27 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationSearchScreen != null) OnNotifyDeleting_NavigationSearchScreen(this);
+
+            if (RequestedEditorKind != null) {
+                ((NHibernatePersistenceObject)RequestedEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedEditorKind);
+            }
+            if (RequestedWorkspaceKind != null) {
+                ((NHibernatePersistenceObject)RequestedWorkspaceKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedWorkspaceKind);
+            }
+            if (Type != null) {
+                ((NHibernatePersistenceObject)Type).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Type);
+            }
+
+            RequestedEditorKind = null;
+            RequestedWorkspaceKind = null;
+            Type = null;
         }
         public static event ObjectEventHandler<NavigationSearchScreen> OnNotifyDeleting_NavigationSearchScreen;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Search_has_RequestedEditorKind
-            if (this.RequestedEditorKind != null && this.RequestedEditorKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.RequestedEditorKind);
-
-            // Follow Search_has_RequestedWorkspaceKind
-            if (this.RequestedWorkspaceKind != null && this.RequestedWorkspaceKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.RequestedWorkspaceKind);
-
-            // Follow SearchScreen_of_Type
-            if (this.Type != null && this.Type.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Type);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class NavigationSearchScreenProxy
             : Kistl.App.GUI.NavigationScreenNHibernateImpl.NavigationScreenProxy

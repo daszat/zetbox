@@ -12,6 +12,7 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="dt" Type="DataType" %>
         #region <%= this.GetType() %>
+<% ApplyRequisites(); %>
 
         [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnToString_<%= dt.Name %>")]
@@ -27,14 +28,14 @@
         }
         public static event ToStringHandler<<%= dt.Name %>> OnToString_<%= dt.Name %>;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_<%= dt.Name %>")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_<%= dt.Name %> != null)
             {
                 OnObjectIsValid_<%= dt.Name %>(this, e);

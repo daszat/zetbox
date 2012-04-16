@@ -380,14 +380,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DateTimeParameter> OnToString_DateTimeParameter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_DateTimeParameter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_DateTimeParameter != null)
             {
                 OnObjectIsValid_DateTimeParameter(this, e);

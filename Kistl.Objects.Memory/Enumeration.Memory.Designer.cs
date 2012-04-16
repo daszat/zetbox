@@ -685,14 +685,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         }
         public static event ToStringHandler<Enumeration> OnToString_Enumeration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Enumeration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Enumeration != null)
             {
                 OnObjectIsValid_Enumeration(this, e);
@@ -731,6 +731,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Enumeration != null) OnNotifyDeleting_Enumeration(this);
+            EnumerationEntries.Clear();
         }
         public static event ObjectEventHandler<Enumeration> OnNotifyDeleting_Enumeration;
 

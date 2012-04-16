@@ -1702,14 +1702,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public static event ToStringHandler<DataType> OnToString_DataType;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_DataType")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_DataType != null)
             {
                 OnObjectIsValid_DataType(this, e);
@@ -1760,65 +1760,52 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_DataType != null) OnNotifyDeleting_DataType(this);
+
+            if (DefaultIcon != null) {
+                ((NHibernatePersistenceObject)DefaultIcon).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultIcon);
+            }
+            if (RequestedKind != null) {
+                ((NHibernatePersistenceObject)RequestedKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedKind);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            foreach(NHibernatePersistenceObject x in Constraints) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            foreach(NHibernatePersistenceObject x in Methods) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            foreach(NHibernatePersistenceObject x in Properties) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+
+            Constraints.Clear();
+            ImplementsInterfaces.Clear();
+            Methods.Clear();
+            Properties.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            DefaultIcon = null;
+            RequestedKind = null;
         }
         public static event ObjectEventHandler<DataType> OnNotifyDeleting_DataType;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow DataType_has_DefaultIcon
-            if (this.DefaultIcon != null && this.DefaultIcon.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DefaultIcon);
-
-            // Follow DataType_may_request_ControlKind
-            if (this.RequestedKind != null && this.RequestedKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.RequestedKind);
-
-            // Follow DataType_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow DataType_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            // Follow Module_contains_DataTypes
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Constraint_on_Constrained
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.InstanceConstraint>()
-                .Where(child => child.Constrained == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ObjectClass_has_Methods
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Method>()
-                .Where(child => child.ObjectClass == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ObjectClass_has_Properties
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Property>()
-                .Where(child => child.ObjectClass == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class DataTypeProxy
             : IProxyObject, ISortKey<int>

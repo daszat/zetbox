@@ -153,14 +153,14 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<YearlyCalendarRule> OnToString_YearlyCalendarRule;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_YearlyCalendarRule")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_YearlyCalendarRule != null)
             {
                 OnObjectIsValid_YearlyCalendarRule(this, e);

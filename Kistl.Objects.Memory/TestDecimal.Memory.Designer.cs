@@ -329,14 +329,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<TestDecimal> OnToString_TestDecimal;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_TestDecimal")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_TestDecimal != null)
             {
                 OnObjectIsValid_TestDecimal(this, e);

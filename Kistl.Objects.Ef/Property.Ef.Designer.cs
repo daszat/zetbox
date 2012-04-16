@@ -2200,14 +2200,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         }
         public static event ToStringHandler<Property> OnToString_Property;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Property")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Property != null)
             {
                 OnObjectIsValid_Property(this, e);
@@ -2259,6 +2259,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Property != null) OnNotifyDeleting_Property(this);
+            Constraints.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            DefaultValue = null;
+            FilterConfiguration = null;
+            RequestedKind = null;
         }
         public static event ObjectEventHandler<Property> OnNotifyDeleting_Property;
 

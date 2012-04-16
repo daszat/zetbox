@@ -833,14 +833,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         }
         public static event ToStringHandler<MethodTest> OnToString_MethodTest;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_MethodTest")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_MethodTest != null)
             {
                 OnObjectIsValid_MethodTest(this, e);
@@ -880,31 +880,18 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_MethodTest != null) OnNotifyDeleting_MethodTest(this);
+
+            foreach(NHibernatePersistenceObject x in Children) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+
+            Children.Clear();
+            Parent = null;
         }
         public static event ObjectEventHandler<MethodTest> OnNotifyDeleting_MethodTest;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Parent_has_Children
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Test.MethodTest>()
-                .Where(child => child.Parent == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class MethodTestProxy
             : IProxyObject, ISortKey<int>

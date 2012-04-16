@@ -329,14 +329,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<MonthFilterConfiguration> OnToString_MonthFilterConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_MonthFilterConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_MonthFilterConfiguration != null)
             {
                 OnObjectIsValid_MonthFilterConfiguration(this, e);
@@ -375,24 +375,12 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_MonthFilterConfiguration != null) OnNotifyDeleting_MonthFilterConfiguration(this);
+
+
         }
         public static event ObjectEventHandler<MonthFilterConfiguration> OnNotifyDeleting_MonthFilterConfiguration;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class MonthFilterConfigurationProxy
             : Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl.PropertyFilterConfigurationProxy

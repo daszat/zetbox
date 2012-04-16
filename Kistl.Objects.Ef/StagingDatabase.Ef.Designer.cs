@@ -1112,14 +1112,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         }
         public static event ToStringHandler<StagingDatabase> OnToString_StagingDatabase;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_StagingDatabase")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_StagingDatabase != null)
             {
                 OnObjectIsValid_StagingDatabase(this, e);
@@ -1164,6 +1164,9 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_StagingDatabase != null) OnNotifyDeleting_StagingDatabase(this);
+            SourceTables.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<StagingDatabase> OnNotifyDeleting_StagingDatabase;
 

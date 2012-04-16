@@ -1445,14 +1445,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<BaseParameter> OnToString_BaseParameter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_BaseParameter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_BaseParameter != null)
             {
                 OnObjectIsValid_BaseParameter(this, e);
@@ -1502,36 +1502,26 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_BaseParameter != null) OnNotifyDeleting_BaseParameter(this);
+
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Method != null) {
+                ((NHibernatePersistenceObject)Method).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Method);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<BaseParameter> OnNotifyDeleting_BaseParameter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow BaseParameter_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow BaseParameter_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            // Follow Method_has_Parameter
-            if (this.Method != null && this.Method.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Method);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class BaseParameterProxy
             : IProxyObject, ISortKey<int>

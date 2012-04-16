@@ -1053,14 +1053,14 @@ namespace Kistl.App.Projekte
         }
         public static event ToStringHandler<Task> OnToString_Task;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Task")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Task != null)
             {
                 OnObjectIsValid_Task(this, e);
@@ -1108,36 +1108,26 @@ namespace Kistl.App.Projekte
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Task != null) OnNotifyDeleting_Task(this);
+
+            if (Projekt != null) {
+                ((NHibernatePersistenceObject)Projekt).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Projekt);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Task> OnNotifyDeleting_Task;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Projekt_has_Tasks
-            if (this.Projekt != null && this.Projekt.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Projekt);
-
-            // Follow Task_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Task_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class TaskProxy
             : IProxyObject, ISortKey<int>

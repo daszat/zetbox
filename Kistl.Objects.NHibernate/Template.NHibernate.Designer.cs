@@ -608,14 +608,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Template> OnToString_Template;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Template")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Template != null)
             {
                 OnObjectIsValid_Template(this, e);
@@ -657,32 +657,23 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Template != null) OnNotifyDeleting_Template(this);
+
+            if (DisplayedTypeAssembly != null) {
+                ((NHibernatePersistenceObject)DisplayedTypeAssembly).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DisplayedTypeAssembly);
+            }
+            if (VisualTree != null) {
+                ((NHibernatePersistenceObject)VisualTree).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)VisualTree);
+            }
+
+            Menu.Clear();
+            DisplayedTypeAssembly = null;
+            VisualTree = null;
         }
         public static event ObjectEventHandler<Template> OnNotifyDeleting_Template;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Template_has_DisplayedTypeAssembly
-            if (this.DisplayedTypeAssembly != null && this.DisplayedTypeAssembly.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DisplayedTypeAssembly);
-
-            // Follow Template_has_VisualTree
-            if (this.VisualTree != null && this.VisualTree.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.VisualTree);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class TemplateProxy
             : IProxyObject, ISortKey<int>

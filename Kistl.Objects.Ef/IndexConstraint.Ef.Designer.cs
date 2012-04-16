@@ -394,14 +394,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IndexConstraint> OnToString_IndexConstraint;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_IndexConstraint")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_IndexConstraint != null)
             {
                 OnObjectIsValid_IndexConstraint(this, e);
@@ -439,6 +439,7 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_IndexConstraint != null) OnNotifyDeleting_IndexConstraint(this);
+            Properties.Clear();
         }
         public static event ObjectEventHandler<IndexConstraint> OnNotifyDeleting_IndexConstraint;
 

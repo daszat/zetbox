@@ -363,14 +363,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Identity> OnToString_Identity;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Identity")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Identity != null)
             {
                 OnObjectIsValid_Identity(this, e);
@@ -411,6 +411,7 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Identity != null) OnNotifyDeleting_Identity(this);
+            Groups.Clear();
         }
         public static event ObjectEventHandler<Identity> OnNotifyDeleting_Identity;
 

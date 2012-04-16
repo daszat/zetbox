@@ -1317,14 +1317,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         }
         public static event ToStringHandler<SourceTable> OnToString_SourceTable;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_SourceTable")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_SourceTable != null)
             {
                 OnObjectIsValid_SourceTable(this, e);
@@ -1370,6 +1370,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceTable != null) OnNotifyDeleting_SourceTable(this);
+            SourceColumn.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            DestinationObjectClass = null;
         }
         public static event ObjectEventHandler<SourceTable> OnNotifyDeleting_SourceTable;
 

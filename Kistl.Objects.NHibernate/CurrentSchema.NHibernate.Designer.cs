@@ -272,14 +272,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CurrentSchema> OnToString_CurrentSchema;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CurrentSchema")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CurrentSchema != null)
             {
                 OnObjectIsValid_CurrentSchema(this, e);
@@ -319,24 +319,12 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CurrentSchema != null) OnNotifyDeleting_CurrentSchema(this);
+
+
         }
         public static event ObjectEventHandler<CurrentSchema> OnNotifyDeleting_CurrentSchema;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class CurrentSchemaProxy
             : IProxyObject, ISortKey<int>

@@ -534,14 +534,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<TestObjClass> OnToString_TestObjClass;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_TestObjClass")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_TestObjClass != null)
             {
                 OnObjectIsValid_TestObjClass(this, e);
@@ -583,6 +583,7 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestObjClass != null) OnNotifyDeleting_TestObjClass(this);
+            ObjectProp = null;
         }
         public static event ObjectEventHandler<TestObjClass> OnNotifyDeleting_TestObjClass;
 

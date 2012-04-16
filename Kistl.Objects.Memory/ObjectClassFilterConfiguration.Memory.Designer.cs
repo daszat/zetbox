@@ -393,14 +393,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ObjectClassFilterConfiguration> OnToString_ObjectClassFilterConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ObjectClassFilterConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ObjectClassFilterConfiguration != null)
             {
                 OnObjectIsValid_ObjectClassFilterConfiguration(this, e);

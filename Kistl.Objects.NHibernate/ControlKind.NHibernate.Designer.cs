@@ -667,14 +667,14 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         }
         public static event ToStringHandler<ControlKind> OnToString_ControlKind;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ControlKind")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ControlKind != null)
             {
                 OnObjectIsValid_ControlKind(this, e);
@@ -716,109 +716,33 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ControlKind != null) OnNotifyDeleting_ControlKind(this);
+
+            if (Parent != null) {
+                ((NHibernatePersistenceObject)Parent).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Parent);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            // should fetch && remember parent for DataType_may_request_ControlKind_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_has_ControlKind_RelationEntry
+            // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
+            // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
+            // should fetch && remember parent for Property_may_request_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewDescriptor_is_a_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_has_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_ControlKind_RelationEntry
+
+            ChildControlKinds.Clear();
+            Parent = null;
         }
         public static event ObjectEventHandler<ControlKind> OnNotifyDeleting_ControlKind;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow ChildControlKinds_have_a_Parent
-            if (this.Parent != null && this.Parent.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Parent);
-
-            // Follow ControlKind_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow DataType_may_request_ControlKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DataType>()
-                .Where(child => child.RequestedKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow FilterConfiguration_has_RequestedKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.FilterConfiguration>()
-                .Where(child => child.RequestedKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Presentable_has_DefaultKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.DefaultEditorKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Property_may_request_ControlKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Property>()
-                .Where(child => child.RequestedKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Search_has_RequestedEditorKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationSearchScreen>()
-                .Where(child => child.RequestedEditorKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Search_has_RequestedWorkspaceKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationSearchScreen>()
-                .Where(child => child.RequestedWorkspaceKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ViewDescriptor_is_a_ControlKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewDescriptor>()
-                .Where(child => child.ControlKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ViewModel_displayed_by_DefaultDisplayKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.DefaultDisplayKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ViewModel_displayed_by_DefaultGridCellEditorKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.DefaultGridCellEditorKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ViewModel_displayed_by_DefaultGridDisplayKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.DefaultGridCellDisplayKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.DefaultGridCellPreEditorKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class ControlKindProxy
             : IProxyObject, ISortKey<int>

@@ -1372,14 +1372,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<TypeRef> OnToString_TypeRef;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_TypeRef")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_TypeRef != null)
             {
                 OnObjectIsValid_TypeRef(this, e);
@@ -1427,75 +1427,37 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_TypeRef != null) OnNotifyDeleting_TypeRef(this);
+
+            // should fetch && remember parent for ViewDescriptor_has_TypeRef_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_has_TypeRef_RelationEntry
+            // should fetch && remember parent for CLRObjectParameter_isOf_TypeRef_RelationEntry
+            // should fetch && remember parent for ConstraintInvocation_has_TypeRef_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_describes_a_TypeRef_RelationEntry
+            if (Assembly != null) {
+                ((NHibernatePersistenceObject)Assembly).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Assembly);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Parent != null) {
+                ((NHibernatePersistenceObject)Parent).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Parent);
+            }
+
+            GenericArguments.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            Parent = null;
         }
         public static event ObjectEventHandler<TypeRef> OnNotifyDeleting_TypeRef;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Child_has_Parent
-            if (this.Parent != null && this.Parent.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Parent);
-
-            // Follow TypeRef_has_Assembly
-            if (this.Assembly != null && this.Assembly.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Assembly);
-
-            // Follow TypeRef_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow TypeRef_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow ClrObjectParameter_isOf_Type
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.CLRObjectParameter>()
-                .Where(child => child.Type == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ConstraintInvocation_has_TypeRef
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.ConstraintInvocation>()
-                .Where(child => child.Implementor == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Descriptor_has_ViewModelRef
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.ViewModelRef == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ServiceDescriptor_describes_a_TypeRef
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.ServiceDescriptor>()
-                .Where(child => child.TypeRef == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow View_has_ControlRef
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewDescriptor>()
-                .Where(child => child.ControlRef == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class TypeRefProxy
             : IProxyObject, ISortKey<int>

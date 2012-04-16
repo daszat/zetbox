@@ -262,14 +262,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
         }
         public static event ToStringHandler<One_to_N_relations_One> OnToString_One_to_N_relations_One;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_One_to_N_relations_One")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_One_to_N_relations_One != null)
             {
                 OnObjectIsValid_One_to_N_relations_One(this, e);
@@ -308,6 +308,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_One_to_N_relations_One != null) OnNotifyDeleting_One_to_N_relations_One(this);
+            NSide.Clear();
         }
         public static event ObjectEventHandler<One_to_N_relations_One> OnNotifyDeleting_One_to_N_relations_One;
 

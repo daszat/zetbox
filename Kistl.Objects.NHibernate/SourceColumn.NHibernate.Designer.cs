@@ -1681,14 +1681,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         }
         public static event ToStringHandler<SourceColumn> OnToString_SourceColumn;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_SourceColumn")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_SourceColumn != null)
             {
                 OnObjectIsValid_SourceColumn(this, e);
@@ -1741,47 +1741,38 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceColumn != null) OnNotifyDeleting_SourceColumn(this);
+
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            foreach(NHibernatePersistenceObject x in EnumEntries) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            if (References != null) {
+                ((NHibernatePersistenceObject)References).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)References);
+            }
+            if (SourceTable != null) {
+                ((NHibernatePersistenceObject)SourceTable).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)SourceTable);
+            }
+
+            DestinationProperty.Clear();
+            EnumEntries.Clear();
+            Referers.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            References = null;
         }
         public static event ObjectEventHandler<SourceColumn> OnNotifyDeleting_SourceColumn;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow FK_Column_references_PK_Column
-            if (this.References != null && this.References.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.References);
-
-            // Follow SourceColumn_belongs_to_SourceTable
-            if (this.SourceTable != null && this.SourceTable.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.SourceTable);
-
-            // Follow SourceColumn_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow SourceColumn_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow SourceColumn_may_have_EnumEntries
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceEnum>()
-                .Where(child => child.SourceColumn == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class SourceColumnProxy
             : IProxyObject, ISortKey<int>

@@ -226,14 +226,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ReadOnlyConstraint> OnToString_ReadOnlyConstraint;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ReadOnlyConstraint")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ReadOnlyConstraint != null)
             {
                 OnObjectIsValid_ReadOnlyConstraint(this, e);
@@ -271,24 +271,12 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ReadOnlyConstraint != null) OnNotifyDeleting_ReadOnlyConstraint(this);
+
+
         }
         public static event ObjectEventHandler<ReadOnlyConstraint> OnNotifyDeleting_ReadOnlyConstraint;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class ReadOnlyConstraintProxy
             : Kistl.App.Base.ConstraintNHibernateImpl.ConstraintProxy

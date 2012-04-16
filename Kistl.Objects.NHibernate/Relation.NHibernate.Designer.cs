@@ -1743,14 +1743,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Relation> OnToString_Relation;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Relation")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Relation != null)
             {
                 OnObjectIsValid_Relation(this, e);
@@ -1800,44 +1800,34 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Relation != null) OnNotifyDeleting_Relation(this);
+
+            if (A != null) {
+                ((NHibernatePersistenceObject)A).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)A);
+            }
+            if (B != null) {
+                ((NHibernatePersistenceObject)B).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)B);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Relation> OnNotifyDeleting_Relation;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Module_has_Relation
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            // Follow Relation_hasA_A
-            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.A);
-
-            // Follow Relation_hasB_B
-            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.B);
-
-            // Follow Relation_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Relation_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class RelationProxy
             : IProxyObject, ISortKey<int>

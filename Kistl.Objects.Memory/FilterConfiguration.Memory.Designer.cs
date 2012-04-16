@@ -1304,14 +1304,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<FilterConfiguration> OnToString_FilterConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_FilterConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_FilterConfiguration != null)
             {
                 OnObjectIsValid_FilterConfiguration(this, e);
@@ -1357,6 +1357,9 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_FilterConfiguration != null) OnNotifyDeleting_FilterConfiguration(this);
+            ChangedBy = null;
+            CreatedBy = null;
+            RequestedKind = null;
         }
         public static event ObjectEventHandler<FilterConfiguration> OnNotifyDeleting_FilterConfiguration;
 

@@ -974,14 +974,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Constraint> OnToString_Constraint;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Constraint")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Constraint != null)
             {
                 OnObjectIsValid_Constraint(this, e);
@@ -1026,36 +1026,26 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Constraint != null) OnNotifyDeleting_Constraint(this);
+
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (ConstrainedProperty != null) {
+                ((NHibernatePersistenceObject)ConstrainedProperty).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ConstrainedProperty);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Constraint> OnNotifyDeleting_Constraint;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow ConstrainedProperty_has_Constraints
-            if (this.ConstrainedProperty != null && this.ConstrainedProperty.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ConstrainedProperty);
-
-            // Follow Constraint_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Constraint_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class ConstraintProxy
             : IProxyObject, ISortKey<int>

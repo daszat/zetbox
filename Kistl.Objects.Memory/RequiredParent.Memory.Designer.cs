@@ -241,14 +241,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         }
         public static event ToStringHandler<RequiredParent> OnToString_RequiredParent;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_RequiredParent")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_RequiredParent != null)
             {
                 OnObjectIsValid_RequiredParent(this, e);
@@ -287,6 +287,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_RequiredParent != null) OnNotifyDeleting_RequiredParent(this);
+            Children.Clear();
         }
         public static event ObjectEventHandler<RequiredParent> OnNotifyDeleting_RequiredParent;
 

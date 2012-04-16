@@ -415,14 +415,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IntProperty> OnToString_IntProperty;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_IntProperty")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_IntProperty != null)
             {
                 OnObjectIsValid_IntProperty(this, e);
@@ -460,24 +460,12 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_IntProperty != null) OnNotifyDeleting_IntProperty(this);
+
+
         }
         public static event ObjectEventHandler<IntProperty> OnNotifyDeleting_IntProperty;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class IntPropertyProxy
             : Kistl.App.Base.ValueTypePropertyNHibernateImpl.ValueTypePropertyProxy

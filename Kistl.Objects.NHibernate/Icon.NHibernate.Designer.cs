@@ -726,14 +726,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Icon> OnToString_Icon;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Icon")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Icon != null)
             {
                 OnObjectIsValid_Icon(this, e);
@@ -775,67 +775,25 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Icon != null) OnNotifyDeleting_Icon(this);
+
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for DataType_has_Icon_RelationEntry
+            if (Blob != null) {
+                ((NHibernatePersistenceObject)Blob).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Blob);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            // should fetch && remember parent for Method_has_Icon_RelationEntry
+
         }
         public static event ObjectEventHandler<Icon> OnNotifyDeleting_Icon;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Icon_has_Blob
-            if (this.Blob != null && this.Blob.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Blob);
-
-            // Follow Icon_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow BoolProperty_has_FalseIcon
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.BoolProperty>()
-                .Where(child => child.FalseIcon == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow BoolProperty_has_NullIcon
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.BoolProperty>()
-                .Where(child => child.NullIcon == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow BoolProperty_has_TrueIcon
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.BoolProperty>()
-                .Where(child => child.TrueIcon == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow DataType_has_DefaultIcon
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DataType>()
-                .Where(child => child.DefaultIcon == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Method_has_Icon
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Method>()
-                .Where(child => child.Icon == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class IconProxy
             : IProxyObject, ISortKey<int>

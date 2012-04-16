@@ -439,14 +439,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CompoundObject> OnToString_CompoundObject;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CompoundObject")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CompoundObject != null)
             {
                 OnObjectIsValid_CompoundObject(this, e);
@@ -485,6 +485,7 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObject != null) OnNotifyDeleting_CompoundObject(this);
+            DefaultPropertyViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<CompoundObject> OnNotifyDeleting_CompoundObject;
 

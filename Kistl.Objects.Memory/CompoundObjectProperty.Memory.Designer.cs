@@ -704,14 +704,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CompoundObjectProperty> OnToString_CompoundObjectProperty;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CompoundObjectProperty")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CompoundObjectProperty != null)
             {
                 OnObjectIsValid_CompoundObjectProperty(this, e);

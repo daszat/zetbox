@@ -920,14 +920,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ObjectReferencePlaceholderProperty> OnToString_ObjectReferencePlaceholderProperty;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ObjectReferencePlaceholderProperty")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ObjectReferencePlaceholderProperty != null)
             {
                 OnObjectIsValid_ObjectReferencePlaceholderProperty(this, e);
@@ -971,28 +971,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferencePlaceholderProperty != null) OnNotifyDeleting_ObjectReferencePlaceholderProperty(this);
+
+            if (ReferencedObjectClass != null) {
+                ((NHibernatePersistenceObject)ReferencedObjectClass).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ReferencedObjectClass);
+            }
+
         }
         public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnNotifyDeleting_ObjectReferencePlaceholderProperty;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
-            if (this.ReferencedObjectClass != null && this.ReferencedObjectClass.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ReferencedObjectClass);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class ObjectReferencePlaceholderPropertyProxy
             : Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy

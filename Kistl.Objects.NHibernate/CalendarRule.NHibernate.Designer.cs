@@ -1324,14 +1324,14 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<CalendarRule> OnToString_CalendarRule;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CalendarRule")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CalendarRule != null)
             {
                 OnObjectIsValid_CalendarRule(this, e);
@@ -1381,40 +1381,31 @@ namespace Kistl.App.Calendar
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalendarRule != null) OnNotifyDeleting_CalendarRule(this);
+
+            if (Calendar != null) {
+                ((NHibernatePersistenceObject)Calendar).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Calendar);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
+            Module = null;
         }
         public static event ObjectEventHandler<CalendarRule> OnNotifyDeleting_CalendarRule;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Calendar_has_CalendarRules
-            if (this.Calendar != null && this.Calendar.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Calendar);
-
-            // Follow CalendarRule_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            // Follow CalendarRule_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow CalendarRule_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class CalendarRuleProxy
             : IProxyObject, ISortKey<int>

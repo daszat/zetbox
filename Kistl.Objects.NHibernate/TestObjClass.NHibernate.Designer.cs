@@ -525,14 +525,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<TestObjClass> OnToString_TestObjClass;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_TestObjClass")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_TestObjClass != null)
             {
                 OnObjectIsValid_TestObjClass(this, e);
@@ -574,28 +574,17 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestObjClass != null) OnNotifyDeleting_TestObjClass(this);
+
+            if (ObjectProp != null) {
+                ((NHibernatePersistenceObject)ObjectProp).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ObjectProp);
+            }
+
+            ObjectProp = null;
         }
         public static event ObjectEventHandler<TestObjClass> OnNotifyDeleting_TestObjClass;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow TestObjClass_has_ObjectProp
-            if (this.ObjectProp != null && this.ObjectProp.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ObjectProp);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class TestObjClassProxy
             : IProxyObject, ISortKey<int>

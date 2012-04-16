@@ -479,14 +479,14 @@ namespace ZBox.App.SchemaMigration
         }
         public static event ToStringHandler<MigrationLog> OnToString_MigrationLog;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_MigrationLog")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_MigrationLog != null)
             {
                 OnObjectIsValid_MigrationLog(this, e);
@@ -529,24 +529,12 @@ namespace ZBox.App.SchemaMigration
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_MigrationLog != null) OnNotifyDeleting_MigrationLog(this);
+
+
         }
         public static event ObjectEventHandler<MigrationLog> OnNotifyDeleting_MigrationLog;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class MigrationLogProxy
             : IProxyObject, ISortKey<int>

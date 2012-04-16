@@ -247,14 +247,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
         }
         public static event ToStringHandler<One_to_N_relations_One> OnToString_One_to_N_relations_One;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_One_to_N_relations_One")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_One_to_N_relations_One != null)
             {
                 OnObjectIsValid_One_to_N_relations_One(this, e);
@@ -293,31 +293,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_One_to_N_relations_One != null) OnNotifyDeleting_One_to_N_relations_One(this);
+
+            foreach(NHibernatePersistenceObject x in NSide) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+
+            NSide.Clear();
         }
         public static event ObjectEventHandler<One_to_N_relations_One> OnNotifyDeleting_One_to_N_relations_One;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow OneSide_connectsTo_NSide
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Test.One_to_N_relations_N>()
-                .Where(child => child.OneSide == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class One_to_N_relations_OneProxy
             : IProxyObject, ISortKey<int>

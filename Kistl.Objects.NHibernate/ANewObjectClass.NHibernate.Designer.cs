@@ -203,14 +203,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<ANewObjectClass> OnToString_ANewObjectClass;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ANewObjectClass")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ANewObjectClass != null)
             {
                 OnObjectIsValid_ANewObjectClass(this, e);
@@ -249,24 +249,12 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ANewObjectClass != null) OnNotifyDeleting_ANewObjectClass(this);
+
+
         }
         public static event ObjectEventHandler<ANewObjectClass> OnNotifyDeleting_ANewObjectClass;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class ANewObjectClassProxy
             : IProxyObject, ISortKey<int>

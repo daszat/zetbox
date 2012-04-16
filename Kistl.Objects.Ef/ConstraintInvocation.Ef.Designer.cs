@@ -534,14 +534,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ConstraintInvocation> OnToString_ConstraintInvocation;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ConstraintInvocation")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ConstraintInvocation != null)
             {
                 OnObjectIsValid_ConstraintInvocation(this, e);
@@ -581,6 +581,7 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ConstraintInvocation != null) OnNotifyDeleting_ConstraintInvocation(this);
+            Implementor = null;
         }
         public static event ObjectEventHandler<ConstraintInvocation> OnNotifyDeleting_ConstraintInvocation;
 

@@ -887,14 +887,14 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<FileImportConfiguration> OnToString_FileImportConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_FileImportConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_FileImportConfiguration != null)
             {
                 OnObjectIsValid_FileImportConfiguration(this, e);
@@ -940,36 +940,27 @@ namespace at.dasz.DocumentManagement
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_FileImportConfiguration != null) OnNotifyDeleting_FileImportConfiguration(this);
+
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Identity != null) {
+                ((NHibernatePersistenceObject)Identity).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Identity);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
+            Identity = null;
         }
         public static event ObjectEventHandler<FileImportConfiguration> OnNotifyDeleting_FileImportConfiguration;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Configuration_of_Identity
-            if (this.Identity != null && this.Identity.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Identity);
-
-            // Follow FileImportConfiguration_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow FileImportConfiguration_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class FileImportConfigurationProxy
             : IProxyObject, ISortKey<int>

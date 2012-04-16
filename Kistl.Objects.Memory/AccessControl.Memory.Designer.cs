@@ -1072,14 +1072,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<AccessControl> OnToString_AccessControl;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_AccessControl")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_AccessControl != null)
             {
                 OnObjectIsValid_AccessControl(this, e);
@@ -1124,6 +1124,8 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_AccessControl != null) OnNotifyDeleting_AccessControl(this);
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<AccessControl> OnNotifyDeleting_AccessControl;
 

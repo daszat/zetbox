@@ -678,14 +678,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ViewDescriptor> OnToString_ViewDescriptor;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ViewDescriptor")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ViewDescriptor != null)
             {
                 OnObjectIsValid_ViewDescriptor(this, e);
@@ -727,6 +727,8 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
+            SupportedViewModels.Clear();
+            ControlKind = null;
         }
         public static event ObjectEventHandler<ViewDescriptor> OnNotifyDeleting_ViewDescriptor;
 

@@ -963,14 +963,14 @@ namespace ZBox.App.SchemaMigration
         }
         public static event ToStringHandler<SourceEnum> OnToString_SourceEnum;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_SourceEnum")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_SourceEnum != null)
             {
                 OnObjectIsValid_SourceEnum(this, e);
@@ -1016,40 +1016,30 @@ namespace ZBox.App.SchemaMigration
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceEnum != null) OnNotifyDeleting_SourceEnum(this);
+
+            if (SourceColumn != null) {
+                ((NHibernatePersistenceObject)SourceColumn).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)SourceColumn);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (DestinationValue != null) {
+                ((NHibernatePersistenceObject)DestinationValue).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DestinationValue);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<SourceEnum> OnNotifyDeleting_SourceEnum;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow SourceColumn_may_have_EnumEntries
-            if (this.SourceColumn != null && this.SourceColumn.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.SourceColumn);
-
-            // Follow SourceEnum_mapps_to_DestinationValue
-            if (this.DestinationValue != null && this.DestinationValue.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DestinationValue);
-
-            // Follow SourceEnum_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow SourceEnum_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class SourceEnumProxy
             : IProxyObject, ISortKey<int>

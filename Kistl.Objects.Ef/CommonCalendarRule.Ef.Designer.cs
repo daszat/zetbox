@@ -153,14 +153,14 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<CommonCalendarRule> OnToString_CommonCalendarRule;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CommonCalendarRule")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CommonCalendarRule != null)
             {
                 OnObjectIsValid_CommonCalendarRule(this, e);

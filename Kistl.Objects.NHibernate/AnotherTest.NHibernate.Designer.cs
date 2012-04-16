@@ -100,14 +100,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<AnotherTest> OnToString_AnotherTest;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_AnotherTest")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_AnotherTest != null)
             {
                 OnObjectIsValid_AnotherTest(this, e);
@@ -145,24 +145,12 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_AnotherTest != null) OnNotifyDeleting_AnotherTest(this);
+
+
         }
         public static event ObjectEventHandler<AnotherTest> OnNotifyDeleting_AnotherTest;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class AnotherTestProxy
             : IProxyObject, ISortKey<int>

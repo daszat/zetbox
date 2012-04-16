@@ -1662,14 +1662,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<NavigationSearchScreen> OnToString_NavigationSearchScreen;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_NavigationSearchScreen")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_NavigationSearchScreen != null)
             {
                 OnObjectIsValid_NavigationSearchScreen(this, e);
@@ -1725,6 +1725,9 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationSearchScreen != null) OnNotifyDeleting_NavigationSearchScreen(this);
+            RequestedEditorKind = null;
+            RequestedWorkspaceKind = null;
+            Type = null;
         }
         public static event ObjectEventHandler<NavigationSearchScreen> OnNotifyDeleting_NavigationSearchScreen;
 

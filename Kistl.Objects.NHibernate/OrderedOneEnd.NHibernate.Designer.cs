@@ -247,14 +247,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         }
         public static event ToStringHandler<OrderedOneEnd> OnToString_OrderedOneEnd;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_OrderedOneEnd")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_OrderedOneEnd != null)
             {
                 OnObjectIsValid_OrderedOneEnd(this, e);
@@ -293,31 +293,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_OrderedOneEnd != null) OnNotifyDeleting_OrderedOneEnd(this);
+
+            foreach(NHibernatePersistenceObject x in NEnds) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+
+            NEnds.Clear();
         }
         public static event ObjectEventHandler<OrderedOneEnd> OnNotifyDeleting_OrderedOneEnd;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow OneEnd_hasMany_NEnds
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Test.OrderedNEnd>()
-                .Where(child => child.OneEnd == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class OrderedOneEndProxy
             : IProxyObject, ISortKey<int>

@@ -755,14 +755,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         }
         public static event ToStringHandler<Muhblah> OnToString_Muhblah;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Muhblah")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Muhblah != null)
             {
                 OnObjectIsValid_Muhblah(this, e);
@@ -806,6 +806,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
+            TestCustomObjects_List_Nav.Clear();
+            TestCustomObjects_ManyList_Nav.Clear();
+            TestCustomObjects_Nav = null;
+            TestCustomObjects_One_Nav = null;
         }
         public static event ObjectEventHandler<Muhblah> OnNotifyDeleting_Muhblah;
 

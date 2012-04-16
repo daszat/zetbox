@@ -1279,14 +1279,14 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public static event ToStringHandler<Calendar> OnToString_Calendar;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Calendar")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Calendar != null)
             {
                 OnObjectIsValid_Calendar(this, e);
@@ -1329,6 +1329,12 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Calendar != null) OnNotifyDeleting_Calendar(this);
+            CalendarRules.Clear();
+            ChildCalendar.Clear();
+            BaseCalendar = null;
+            ChangedBy = null;
+            CreatedBy = null;
+            Module = null;
         }
         public static event ObjectEventHandler<Calendar> OnNotifyDeleting_Calendar;
 

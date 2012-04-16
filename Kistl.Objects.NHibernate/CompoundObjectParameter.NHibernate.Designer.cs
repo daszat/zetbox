@@ -449,14 +449,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CompoundObjectParameter> OnToString_CompoundObjectParameter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CompoundObjectParameter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CompoundObjectParameter != null)
             {
                 OnObjectIsValid_CompoundObjectParameter(this, e);
@@ -495,28 +495,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObjectParameter != null) OnNotifyDeleting_CompoundObjectParameter(this);
+
+            if (CompoundObject != null) {
+                ((NHibernatePersistenceObject)CompoundObject).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CompoundObject);
+            }
+
         }
         public static event ObjectEventHandler<CompoundObjectParameter> OnNotifyDeleting_CompoundObjectParameter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow CPParameter_has_CompoundObject
-            if (this.CompoundObject != null && this.CompoundObject.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CompoundObject);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class CompoundObjectParameterProxy
             : Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy

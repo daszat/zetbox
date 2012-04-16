@@ -214,14 +214,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<IsValidNamespaceConstraint> OnToString_IsValidNamespaceConstraint;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_IsValidNamespaceConstraint")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_IsValidNamespaceConstraint != null)
             {
                 OnObjectIsValid_IsValidNamespaceConstraint(this, e);

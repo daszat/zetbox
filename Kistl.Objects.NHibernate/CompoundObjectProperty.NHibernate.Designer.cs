@@ -713,14 +713,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CompoundObjectProperty> OnToString_CompoundObjectProperty;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CompoundObjectProperty")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CompoundObjectProperty != null)
             {
                 OnObjectIsValid_CompoundObjectProperty(this, e);
@@ -761,28 +761,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObjectProperty != null) OnNotifyDeleting_CompoundObjectProperty(this);
+
+            if (CompoundObjectDefinition != null) {
+                ((NHibernatePersistenceObject)CompoundObjectDefinition).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CompoundObjectDefinition);
+            }
+
         }
         public static event ObjectEventHandler<CompoundObjectProperty> OnNotifyDeleting_CompoundObjectProperty;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow CompoundObjectProperty_has_CompoundObjectDefinition
-            if (this.CompoundObjectDefinition != null && this.CompoundObjectDefinition.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CompoundObjectDefinition);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class CompoundObjectPropertyProxy
             : Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy

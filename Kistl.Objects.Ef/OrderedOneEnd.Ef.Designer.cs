@@ -262,14 +262,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         }
         public static event ToStringHandler<OrderedOneEnd> OnToString_OrderedOneEnd;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_OrderedOneEnd")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_OrderedOneEnd != null)
             {
                 OnObjectIsValid_OrderedOneEnd(this, e);
@@ -308,6 +308,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_OrderedOneEnd != null) OnNotifyDeleting_OrderedOneEnd(this);
+            NEnds.Clear();
         }
         public static event ObjectEventHandler<OrderedOneEnd> OnNotifyDeleting_OrderedOneEnd;
 

@@ -255,14 +255,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<N_to_M_relations_A> OnToString_N_to_M_relations_A;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_N_to_M_relations_A")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_N_to_M_relations_A != null)
             {
                 OnObjectIsValid_N_to_M_relations_A(this, e);
@@ -301,6 +301,7 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_N_to_M_relations_A != null) OnNotifyDeleting_N_to_M_relations_A(this);
+            BSide.Clear();
         }
         public static event ObjectEventHandler<N_to_M_relations_A> OnNotifyDeleting_N_to_M_relations_A;
 

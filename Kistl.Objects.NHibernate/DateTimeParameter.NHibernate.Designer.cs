@@ -392,14 +392,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<DateTimeParameter> OnToString_DateTimeParameter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_DateTimeParameter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_DateTimeParameter != null)
             {
                 OnObjectIsValid_DateTimeParameter(this, e);
@@ -438,24 +438,12 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_DateTimeParameter != null) OnNotifyDeleting_DateTimeParameter(this);
+
+
         }
         public static event ObjectEventHandler<DateTimeParameter> OnNotifyDeleting_DateTimeParameter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class DateTimeParameterProxy
             : Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy

@@ -289,14 +289,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<BoolParameter> OnToString_BoolParameter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_BoolParameter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_BoolParameter != null)
             {
                 OnObjectIsValid_BoolParameter(this, e);
@@ -334,24 +334,12 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_BoolParameter != null) OnNotifyDeleting_BoolParameter(this);
+
+
         }
         public static event ObjectEventHandler<BoolParameter> OnNotifyDeleting_BoolParameter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class BoolParameterProxy
             : Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy

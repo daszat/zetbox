@@ -393,14 +393,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<PropertyFilterConfiguration> OnToString_PropertyFilterConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_PropertyFilterConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_PropertyFilterConfiguration != null)
             {
                 OnObjectIsValid_PropertyFilterConfiguration(this, e);

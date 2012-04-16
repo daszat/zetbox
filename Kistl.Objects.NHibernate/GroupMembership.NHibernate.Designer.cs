@@ -260,14 +260,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<GroupMembership> OnToString_GroupMembership;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_GroupMembership")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_GroupMembership != null)
             {
                 OnObjectIsValid_GroupMembership(this, e);
@@ -306,28 +306,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_GroupMembership != null) OnNotifyDeleting_GroupMembership(this);
+
+            if (Group != null) {
+                ((NHibernatePersistenceObject)Group).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Group);
+            }
+
         }
         public static event ObjectEventHandler<GroupMembership> OnNotifyDeleting_GroupMembership;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow GroupMembership_has_Group
-            if (this.Group != null && this.Group.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Group);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class GroupMembershipProxy
             : Kistl.App.Base.AccessControlNHibernateImpl.AccessControlProxy

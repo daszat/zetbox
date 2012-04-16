@@ -766,14 +766,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         }
         public static event ToStringHandler<Muhblah> OnToString_Muhblah;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Muhblah")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Muhblah != null)
             {
                 OnObjectIsValid_Muhblah(this, e);
@@ -817,39 +817,28 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
+
+            foreach(NHibernatePersistenceObject x in TestCustomObjects_List_Nav) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            if (TestCustomObjects_Nav != null) {
+                ((NHibernatePersistenceObject)TestCustomObjects_Nav).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)TestCustomObjects_Nav);
+            }
+            if (TestCustomObjects_One_Nav != null) {
+                ((NHibernatePersistenceObject)TestCustomObjects_One_Nav).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)TestCustomObjects_One_Nav);
+            }
+
+            TestCustomObjects_List_Nav.Clear();
+            TestCustomObjects_ManyList_Nav.Clear();
+            TestCustomObjects_Nav = null;
+            TestCustomObjects_One_Nav = null;
         }
         public static event ObjectEventHandler<Muhblah> OnNotifyDeleting_Muhblah;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow MB_Lst_Role_hasOther_TCO_Role
-            if (this.TestCustomObjects_Nav != null && this.TestCustomObjects_Nav.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.TestCustomObjects_Nav);
-
-            // Follow MB_One_Role_loves_TCO_One_Role
-            if (this.TestCustomObjects_One_Nav != null && this.TestCustomObjects_One_Nav.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.TestCustomObjects_One_Nav);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow MB_Role_has_TCO_Lst_Role
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Test.TestCustomObject>()
-                .Where(child => child.MubBlah_Nav == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class MuhblahProxy
             : IProxyObject, ISortKey<int>

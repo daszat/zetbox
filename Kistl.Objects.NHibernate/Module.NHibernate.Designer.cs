@@ -977,14 +977,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Module> OnToString_Module;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Module")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Module != null)
             {
                 OnObjectIsValid_Module(this, e);
@@ -1031,172 +1031,42 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Module != null) OnNotifyDeleting_Module(this);
+
+            // should fetch && remember parent for Application_has_Module_RelationEntry
+            // should fetch && remember parent for ControlKind_has_Module_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_has_Module_RelationEntry
+            // should fetch && remember parent for Icon_has_Module_RelationEntry
+            // should fetch && remember parent for NavigationEntry_has_Module_RelationEntry
+            // should fetch && remember parent for ViewDescriptor_has_Module_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_has_Module_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_has_Module_RelationEntry
+            // should fetch && remember parent for AccessControl_has_Module_RelationEntry
+            // should fetch && remember parent for Module_contains_Assembly_RelationEntry
+            // should fetch && remember parent for Module_contains_DataType_RelationEntry
+            // should fetch && remember parent for Group_has_Module_RelationEntry
+            // should fetch && remember parent for Method_has_Module_RelationEntry
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            // should fetch && remember parent for Property_has_Module_RelationEntry
+            // should fetch && remember parent for Module_has_Relation_RelationEntry
+            // should fetch && remember parent for Sequence_has_Module_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_has_Module_RelationEntry
+            // should fetch && remember parent for Calendar_has_Module_RelationEntry
+            // should fetch && remember parent for CalendarRule_has_Module_RelationEntry
+            // should fetch && remember parent for MigrationProject_migrates_to_Module_RelationEntry
+
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Module> OnNotifyDeleting_Module;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Module_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Module_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow AbstractModuleMember_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.AbstractModuleMember>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow AccessControl_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.AccessControl>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Application_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Application>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow BaseProperty_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Property>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Calendar_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.Calendar>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow CalendarRule_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.CalendarRule>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ControlKind_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ControlKind>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow FilterConfiguration_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.FilterConfiguration>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Group_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Group>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Icon_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Icon>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Method_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Method>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow MigrationProject_migrates_to_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.MigrationProject>()
-                .Where(child => child.DestinationModule == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Module_contains_Assemblies
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Assembly>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Module_contains_DataTypes
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DataType>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Module_has_Relation
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Relation>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow NavigationScreen_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationEntry>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Sequence_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Sequence>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ServiceDescriptor_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.ServiceDescriptor>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ViewDescriptor_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewDescriptor>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ViewModelDescriptor_has_Module
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class ModuleProxy
             : IProxyObject, ISortKey<int>

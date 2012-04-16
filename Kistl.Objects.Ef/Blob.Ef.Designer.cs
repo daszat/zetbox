@@ -964,14 +964,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Blob> OnToString_Blob;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Blob")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Blob != null)
             {
                 OnObjectIsValid_Blob(this, e);
@@ -1014,6 +1014,8 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Blob != null) OnNotifyDeleting_Blob(this);
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Blob> OnNotifyDeleting_Blob;
 

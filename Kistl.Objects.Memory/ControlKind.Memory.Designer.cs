@@ -652,14 +652,14 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         }
         public static event ToStringHandler<ControlKind> OnToString_ControlKind;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ControlKind")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ControlKind != null)
             {
                 OnObjectIsValid_ControlKind(this, e);
@@ -700,6 +700,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ControlKind != null) OnNotifyDeleting_ControlKind(this);
+            ChildControlKinds.Clear();
+            Parent = null;
         }
         public static event ObjectEventHandler<ControlKind> OnNotifyDeleting_ControlKind;
 

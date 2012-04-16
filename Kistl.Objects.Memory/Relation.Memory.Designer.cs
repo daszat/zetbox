@@ -1724,14 +1724,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Relation> OnToString_Relation;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Relation")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Relation != null)
             {
                 OnObjectIsValid_Relation(this, e);
@@ -1778,6 +1778,8 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Relation != null) OnNotifyDeleting_Relation(this);
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Relation> OnNotifyDeleting_Relation;
 

@@ -173,11 +173,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Templates\ObjectClasses\DefaultMethods.cs" />
-    <Compile Include="Templates\ObjectClasses\GetDeletedRelatives.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GetDeletedRelatives.cst</DependentUpon>
-    </Compile>
     <Compile Include="Templates\ObjectClasses\RightsClass.cs">
       <DependentUpon>RightsClass.cst</DependentUpon>
     </Compile>
@@ -369,10 +364,6 @@
     <None Include="Templates\ObjectClasses\Constructors.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\ObjectClasses\GetDeletedRelatives.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>GetDeletedRelatives.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\ObjectClasses\RightsClass.cst">
       <Generator>Arebis Template Processor</Generator>

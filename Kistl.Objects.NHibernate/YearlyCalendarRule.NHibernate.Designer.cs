@@ -163,14 +163,14 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<YearlyCalendarRule> OnToString_YearlyCalendarRule;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_YearlyCalendarRule")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_YearlyCalendarRule != null)
             {
                 OnObjectIsValid_YearlyCalendarRule(this, e);
@@ -208,24 +208,12 @@ namespace Kistl.App.Calendar
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_YearlyCalendarRule != null) OnNotifyDeleting_YearlyCalendarRule(this);
+
+
         }
         public static event ObjectEventHandler<YearlyCalendarRule> OnNotifyDeleting_YearlyCalendarRule;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class YearlyCalendarRuleProxy
             : Kistl.App.Calendar.CalendarRuleNHibernateImpl.CalendarRuleProxy

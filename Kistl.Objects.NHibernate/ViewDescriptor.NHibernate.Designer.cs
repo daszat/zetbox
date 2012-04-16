@@ -693,14 +693,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ViewDescriptor> OnToString_ViewDescriptor;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ViewDescriptor")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ViewDescriptor != null)
             {
                 OnObjectIsValid_ViewDescriptor(this, e);
@@ -743,36 +743,26 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
+
+            if (ControlKind != null) {
+                ((NHibernatePersistenceObject)ControlKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ControlKind);
+            }
+            if (ControlRef != null) {
+                ((NHibernatePersistenceObject)ControlRef).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ControlRef);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+
+            SupportedViewModels.Clear();
+            ControlKind = null;
         }
         public static event ObjectEventHandler<ViewDescriptor> OnNotifyDeleting_ViewDescriptor;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow View_has_ControlRef
-            if (this.ControlRef != null && this.ControlRef.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ControlRef);
-
-            // Follow ViewDescriptor_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            // Follow ViewDescriptor_is_a_ControlKind
-            if (this.ControlKind != null && this.ControlKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ControlKind);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class ViewDescriptorProxy
             : IProxyObject, ISortKey<int>

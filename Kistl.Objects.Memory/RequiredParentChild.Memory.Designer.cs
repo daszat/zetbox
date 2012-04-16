@@ -332,14 +332,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<RequiredParentChild> OnToString_RequiredParentChild;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_RequiredParentChild")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_RequiredParentChild != null)
             {
                 OnObjectIsValid_RequiredParentChild(this, e);

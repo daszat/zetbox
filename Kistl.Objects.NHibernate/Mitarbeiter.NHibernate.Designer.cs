@@ -1129,14 +1129,14 @@ namespace Kistl.App.Projekte
         }
         public static event ToStringHandler<Mitarbeiter> OnToString_Mitarbeiter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Mitarbeiter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Mitarbeiter != null)
             {
                 OnObjectIsValid_Mitarbeiter(this, e);
@@ -1184,43 +1184,29 @@ namespace Kistl.App.Projekte
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Mitarbeiter != null) OnNotifyDeleting_Mitarbeiter(this);
+
+            // should fetch && remember parent for Auftrag_has_Mitarbeiter_RelationEntry
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Identity != null) {
+                ((NHibernatePersistenceObject)Identity).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Identity);
+            }
+
+            Projekte.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            Identity = null;
         }
         public static event ObjectEventHandler<Mitarbeiter> OnNotifyDeleting_Mitarbeiter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Mitarbeiter_is_a_Identity
-            if (this.Identity != null && this.Identity.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Identity);
-
-            // Follow Mitarbeiter_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Mitarbeiter_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Auftrag_has_Mitarbeiter
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Auftrag>()
-                .Where(child => child.Mitarbeiter == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class MitarbeiterProxy
             : IProxyObject, ISortKey<int>

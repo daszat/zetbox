@@ -340,14 +340,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<SequenceData> OnToString_SequenceData;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_SequenceData")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_SequenceData != null)
             {
                 OnObjectIsValid_SequenceData(this, e);
@@ -387,28 +387,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SequenceData != null) OnNotifyDeleting_SequenceData(this);
+
+            if (Sequence != null) {
+                ((NHibernatePersistenceObject)Sequence).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Sequence);
+            }
+
         }
         public static event ObjectEventHandler<SequenceData> OnNotifyDeleting_SequenceData;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Sequence_has_Data
-            if (this.Sequence != null && this.Sequence.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Sequence);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class SequenceDataProxy
             : IProxyObject, ISortKey<int>

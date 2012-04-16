@@ -1765,14 +1765,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         }
         public static event ToStringHandler<Method> OnToString_Method;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Method")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Method != null)
             {
                 OnObjectIsValid_Method(this, e);
@@ -1823,6 +1823,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Method != null) OnNotifyDeleting_Method(this);
+            Parameter.Clear();
+            ShowByProperties.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            Icon = null;
         }
         public static event ObjectEventHandler<Method> OnNotifyDeleting_Method;
 

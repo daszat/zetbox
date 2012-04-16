@@ -254,14 +254,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<StringDefaultValue> OnToString_StringDefaultValue;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_StringDefaultValue")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_StringDefaultValue != null)
             {
                 OnObjectIsValid_StringDefaultValue(this, e);

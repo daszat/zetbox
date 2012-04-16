@@ -37,8 +37,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             base.ApplyClassTailTemplate();
 
-            GetDeletedRelatives.Call(Host, ctx, this.ObjectClass);
-
             var parent = this.ObjectClass.BaseObjectClass;
             if (parent != null)
             {

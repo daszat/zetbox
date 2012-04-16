@@ -1719,14 +1719,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         }
         public static event ToStringHandler<DataType> OnToString_DataType;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_DataType")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_DataType != null)
             {
                 OnObjectIsValid_DataType(this, e);
@@ -1774,6 +1774,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_DataType != null) OnNotifyDeleting_DataType(this);
+            Constraints.Clear();
+            ImplementsInterfaces.Clear();
+            Methods.Clear();
+            Properties.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            DefaultIcon = null;
+            RequestedKind = null;
         }
         public static event ObjectEventHandler<DataType> OnNotifyDeleting_DataType;
 

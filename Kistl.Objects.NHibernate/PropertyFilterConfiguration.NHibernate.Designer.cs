@@ -402,14 +402,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<PropertyFilterConfiguration> OnToString_PropertyFilterConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_PropertyFilterConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_PropertyFilterConfiguration != null)
             {
                 OnObjectIsValid_PropertyFilterConfiguration(this, e);
@@ -448,28 +448,16 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_PropertyFilterConfiguration != null) OnNotifyDeleting_PropertyFilterConfiguration(this);
+
+            if (Property != null) {
+                ((NHibernatePersistenceObject)Property).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Property);
+            }
+
         }
         public static event ObjectEventHandler<PropertyFilterConfiguration> OnNotifyDeleting_PropertyFilterConfiguration;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Property_Has_PropertyFilterConfiguration
-            if (this.Property != null && this.Property.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Property);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class PropertyFilterConfigurationProxy
             : Kistl.App.GUI.FilterConfigurationNHibernateImpl.FilterConfigurationProxy

@@ -987,14 +987,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ServiceDescriptor> OnToString_ServiceDescriptor;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ServiceDescriptor")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ServiceDescriptor != null)
             {
                 OnObjectIsValid_ServiceDescriptor(this, e);
@@ -1038,6 +1038,8 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ServiceDescriptor != null) OnNotifyDeleting_ServiceDescriptor(this);
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<ServiceDescriptor> OnNotifyDeleting_ServiceDescriptor;
 

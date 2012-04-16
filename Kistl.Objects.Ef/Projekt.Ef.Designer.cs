@@ -1092,14 +1092,14 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         }
         public static event ToStringHandler<Projekt> OnToString_Projekt;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Projekt")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Projekt != null)
             {
                 OnObjectIsValid_Projekt(this, e);
@@ -1143,6 +1143,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
+            Auftraege.Clear();
+            Mitarbeiter.Clear();
+            Tasks.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Projekt> OnNotifyDeleting_Projekt;
 

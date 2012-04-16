@@ -570,14 +570,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<InstanceConstraint> OnToString_InstanceConstraint;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_InstanceConstraint")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_InstanceConstraint != null)
             {
                 OnObjectIsValid_InstanceConstraint(this, e);
@@ -618,28 +618,17 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_InstanceConstraint != null) OnNotifyDeleting_InstanceConstraint(this);
+
+            if (Constrained != null) {
+                ((NHibernatePersistenceObject)Constrained).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Constrained);
+            }
+
+            Constrained = null;
         }
         public static event ObjectEventHandler<InstanceConstraint> OnNotifyDeleting_InstanceConstraint;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Constraint_on_Constrained
-            if (this.Constrained != null && this.Constrained.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Constrained);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class InstanceConstraintProxy
             : IProxyObject, ISortKey<int>

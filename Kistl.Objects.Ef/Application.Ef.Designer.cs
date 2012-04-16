@@ -1140,14 +1140,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Application> OnToString_Application;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Application")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Application != null)
             {
                 OnObjectIsValid_Application(this, e);
@@ -1192,6 +1192,11 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Application != null) OnNotifyDeleting_Application(this);
+            ChangedBy = null;
+            CreatedBy = null;
+            Module = null;
+            RootScreen = null;
+            WorkspaceViewModel = null;
         }
         public static event ObjectEventHandler<Application> OnNotifyDeleting_Application;
 

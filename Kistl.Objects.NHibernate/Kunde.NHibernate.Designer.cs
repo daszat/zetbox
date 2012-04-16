@@ -1037,14 +1037,14 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         }
         public static event ToStringHandler<Kunde> OnToString_Kunde;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Kunde")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Kunde != null)
             {
                 OnObjectIsValid_Kunde(this, e);
@@ -1092,46 +1092,29 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Kunde != null) OnNotifyDeleting_Kunde(this);
+            foreach(NHibernatePersistenceObject x in EMailsCollection) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+
+            // should fetch && remember parent for Auftrag_has_Kunde_RelationEntry
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            // should fetch && remember parent for TestObjClass_has_Kunde_RelationEntry
+
+            EMails.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Kunde> OnNotifyDeleting_Kunde;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Kunde_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Kunde_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Auftrag_has_Kunde
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Auftrag>()
-                .Where(child => child.Kunde == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow TestObjClass_has_ObjectProp
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Test.TestObjClass>()
-                .Where(child => child.ObjectProp == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class KundeProxy
             : IProxyObject, ISortKey<int>

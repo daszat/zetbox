@@ -388,14 +388,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<OrderedNEnd> OnToString_OrderedNEnd;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_OrderedNEnd")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_OrderedNEnd != null)
             {
                 OnObjectIsValid_OrderedNEnd(this, e);
@@ -435,28 +435,17 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_OrderedNEnd != null) OnNotifyDeleting_OrderedNEnd(this);
+
+            if (OneEnd != null) {
+                ((NHibernatePersistenceObject)OneEnd).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)OneEnd);
+            }
+
+            OneEnd = null;
         }
         public static event ObjectEventHandler<OrderedNEnd> OnNotifyDeleting_OrderedNEnd;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow OneEnd_hasMany_NEnds
-            if (this.OneEnd != null && this.OneEnd.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.OneEnd);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class OrderedNEndProxy
             : IProxyObject, ISortKey<int>

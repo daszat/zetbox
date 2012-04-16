@@ -1315,14 +1315,14 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         }
         public static event ToStringHandler<NavigationEntry> OnToString_NavigationEntry;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_NavigationEntry")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_NavigationEntry != null)
             {
                 OnObjectIsValid_NavigationEntry(this, e);
@@ -1367,6 +1367,12 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationEntry != null) OnNotifyDeleting_NavigationEntry(this);
+            Children.Clear();
+            Groups.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            Parent = null;
+            ViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<NavigationEntry> OnNotifyDeleting_NavigationEntry;
 

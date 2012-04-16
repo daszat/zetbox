@@ -1340,14 +1340,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         }
         public static event ToStringHandler<SourceTable> OnToString_SourceTable;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_SourceTable")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_SourceTable != null)
             {
                 OnObjectIsValid_SourceTable(this, e);
@@ -1396,47 +1396,36 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceTable != null) OnNotifyDeleting_SourceTable(this);
+
+            foreach(NHibernatePersistenceObject x in SourceColumn) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (DestinationObjectClass != null) {
+                ((NHibernatePersistenceObject)DestinationObjectClass).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DestinationObjectClass);
+            }
+            if (StagingDatabase != null) {
+                ((NHibernatePersistenceObject)StagingDatabase).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)StagingDatabase);
+            }
+
+            SourceColumn.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            DestinationObjectClass = null;
         }
         public static event ObjectEventHandler<SourceTable> OnNotifyDeleting_SourceTable;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow SourceTable_created_ObjectClass
-            if (this.DestinationObjectClass != null && this.DestinationObjectClass.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DestinationObjectClass);
-
-            // Follow SourceTable_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow SourceTable_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            // Follow SourceTables_are_contained_in_StagingDatabase
-            if (this.StagingDatabase != null && this.StagingDatabase.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.StagingDatabase);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow SourceColumn_belongs_to_SourceTable
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceColumn>()
-                .Where(child => child.SourceTable == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class SourceTableProxy
             : IProxyObject, ISortKey<int>

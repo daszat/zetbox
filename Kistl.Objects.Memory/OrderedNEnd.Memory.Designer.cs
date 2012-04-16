@@ -374,14 +374,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<OrderedNEnd> OnToString_OrderedNEnd;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_OrderedNEnd")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_OrderedNEnd != null)
             {
                 OnObjectIsValid_OrderedNEnd(this, e);
@@ -421,6 +421,7 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_OrderedNEnd != null) OnNotifyDeleting_OrderedNEnd(this);
+            OneEnd = null;
         }
         public static event ObjectEventHandler<OrderedNEnd> OnNotifyDeleting_OrderedNEnd;
 

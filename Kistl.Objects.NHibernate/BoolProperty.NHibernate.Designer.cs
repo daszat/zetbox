@@ -1016,14 +1016,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<BoolProperty> OnToString_BoolProperty;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_BoolProperty")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_BoolProperty != null)
             {
                 OnObjectIsValid_BoolProperty(this, e);
@@ -1067,36 +1067,27 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_BoolProperty != null) OnNotifyDeleting_BoolProperty(this);
+
+            if (FalseIcon != null) {
+                ((NHibernatePersistenceObject)FalseIcon).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)FalseIcon);
+            }
+            if (NullIcon != null) {
+                ((NHibernatePersistenceObject)NullIcon).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)NullIcon);
+            }
+            if (TrueIcon != null) {
+                ((NHibernatePersistenceObject)TrueIcon).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)TrueIcon);
+            }
+
+            FalseIcon = null;
+            NullIcon = null;
+            TrueIcon = null;
         }
         public static event ObjectEventHandler<BoolProperty> OnNotifyDeleting_BoolProperty;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow BoolProperty_has_FalseIcon
-            if (this.FalseIcon != null && this.FalseIcon.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.FalseIcon);
-
-            // Follow BoolProperty_has_NullIcon
-            if (this.NullIcon != null && this.NullIcon.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.NullIcon);
-
-            // Follow BoolProperty_has_TrueIcon
-            if (this.TrueIcon != null && this.TrueIcon.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.TrueIcon);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class BoolPropertyProxy
             : Kistl.App.Base.ValueTypePropertyNHibernateImpl.ValueTypePropertyProxy

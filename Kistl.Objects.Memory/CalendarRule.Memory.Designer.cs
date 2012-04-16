@@ -1287,14 +1287,14 @@ namespace Kistl.App.Calendar
         }
         public static event ToStringHandler<CalendarRule> OnToString_CalendarRule;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CalendarRule")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CalendarRule != null)
             {
                 OnObjectIsValid_CalendarRule(this, e);
@@ -1340,6 +1340,9 @@ namespace Kistl.App.Calendar
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalendarRule != null) OnNotifyDeleting_CalendarRule(this);
+            ChangedBy = null;
+            CreatedBy = null;
+            Module = null;
         }
         public static event ObjectEventHandler<CalendarRule> OnNotifyDeleting_CalendarRule;
 

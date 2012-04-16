@@ -500,14 +500,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<InvokingConstraint> OnToString_InvokingConstraint;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_InvokingConstraint")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_InvokingConstraint != null)
             {
                 OnObjectIsValid_InvokingConstraint(this, e);

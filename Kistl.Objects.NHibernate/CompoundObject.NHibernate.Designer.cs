@@ -448,14 +448,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CompoundObject> OnToString_CompoundObject;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CompoundObject")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CompoundObject != null)
             {
                 OnObjectIsValid_CompoundObject(this, e);
@@ -494,42 +494,19 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObject != null) OnNotifyDeleting_CompoundObject(this);
+
+            if (DefaultPropertyViewModelDescriptor != null) {
+                ((NHibernatePersistenceObject)DefaultPropertyViewModelDescriptor).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultPropertyViewModelDescriptor);
+            }
+            // should fetch && remember parent for CompoundObjectParameter_has_CompoundObject_RelationEntry
+            // should fetch && remember parent for CompoundObjectProperty_has_CompoundObject_RelationEntry
+
+            DefaultPropertyViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<CompoundObject> OnNotifyDeleting_CompoundObject;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Presentable_may_has_DefaultPropViewModelDescriptor
-            if (this.DefaultPropertyViewModelDescriptor != null && this.DefaultPropertyViewModelDescriptor.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DefaultPropertyViewModelDescriptor);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow CompoundObjectProperty_has_CompoundObjectDefinition
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.CompoundObjectProperty>()
-                .Where(child => child.CompoundObjectDefinition == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow CPParameter_has_CompoundObject
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.CompoundObjectParameter>()
-                .Where(child => child.CompoundObject == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class CompoundObjectProxy
             : Kistl.App.Base.DataTypeNHibernateImpl.DataTypeProxy

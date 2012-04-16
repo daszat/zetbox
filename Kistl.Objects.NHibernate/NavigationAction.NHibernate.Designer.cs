@@ -163,14 +163,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<NavigationAction> OnToString_NavigationAction;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_NavigationAction")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_NavigationAction != null)
             {
                 OnObjectIsValid_NavigationAction(this, e);
@@ -208,24 +208,12 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationAction != null) OnNotifyDeleting_NavigationAction(this);
+
+
         }
         public static event ObjectEventHandler<NavigationAction> OnNotifyDeleting_NavigationAction;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class NavigationActionProxy
             : Kistl.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy

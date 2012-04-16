@@ -547,14 +547,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ConstraintInvocation> OnToString_ConstraintInvocation;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ConstraintInvocation")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ConstraintInvocation != null)
             {
                 OnObjectIsValid_ConstraintInvocation(this, e);
@@ -595,42 +595,19 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ConstraintInvocation != null) OnNotifyDeleting_ConstraintInvocation(this);
+
+            if (Implementor != null) {
+                ((NHibernatePersistenceObject)Implementor).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Implementor);
+            }
+            // should fetch && remember children for InvokingConstraint_invokes_ConstraintInvocation_RelationEntry
+            // should fetch && remember children for InvokingConstraint_invokes_ConstraintInvocation_RelationEntry
+
+            Implementor = null;
         }
         public static event ObjectEventHandler<ConstraintInvocation> OnNotifyDeleting_ConstraintInvocation;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow ConstraintInvocation_has_TypeRef
-            if (this.Implementor != null && this.Implementor.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Implementor);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Constraint_invokes_GetErrorTextInvocation
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.InvokingConstraint>()
-                .Where(child => child.GetErrorTextInvocation == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Constraint_invokes_IsValidInvocation
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.InvokingConstraint>()
-                .Where(child => child.IsValidInvocation == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class ConstraintInvocationProxy
             : IProxyObject, ISortKey<int>

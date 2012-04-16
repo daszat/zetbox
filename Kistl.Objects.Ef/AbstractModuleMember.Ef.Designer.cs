@@ -746,14 +746,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<AbstractModuleMember> OnToString_AbstractModuleMember;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_AbstractModuleMember")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_AbstractModuleMember != null)
             {
                 OnObjectIsValid_AbstractModuleMember(this, e);
@@ -794,6 +794,8 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_AbstractModuleMember != null) OnNotifyDeleting_AbstractModuleMember(this);
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<AbstractModuleMember> OnNotifyDeleting_AbstractModuleMember;
 

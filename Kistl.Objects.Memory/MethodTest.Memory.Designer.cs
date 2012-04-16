@@ -824,14 +824,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         }
         public static event ToStringHandler<MethodTest> OnToString_MethodTest;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_MethodTest")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_MethodTest != null)
             {
                 OnObjectIsValid_MethodTest(this, e);
@@ -871,6 +871,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_MethodTest != null) OnNotifyDeleting_MethodTest(this);
+            Children.Clear();
+            Parent = null;
         }
         public static event ObjectEventHandler<MethodTest> OnNotifyDeleting_MethodTest;
 

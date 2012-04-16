@@ -186,14 +186,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<NavigationScreen> OnToString_NavigationScreen;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_NavigationScreen")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_NavigationScreen != null)
             {
                 OnObjectIsValid_NavigationScreen(this, e);
@@ -231,31 +231,13 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationScreen != null) OnNotifyDeleting_NavigationScreen(this);
+
+            // should fetch && remember parent for Application_has_NavigationScreen_RelationEntry
+
         }
         public static event ObjectEventHandler<NavigationScreen> OnNotifyDeleting_NavigationScreen;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Application_has_RootScreen
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Application>()
-                .Where(child => child.RootScreen == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class NavigationScreenProxy
             : Kistl.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy

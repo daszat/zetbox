@@ -1126,14 +1126,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Application> OnToString_Application;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Application")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Application != null)
             {
                 OnObjectIsValid_Application(this, e);
@@ -1181,44 +1181,37 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Application != null) OnNotifyDeleting_Application(this);
+
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            if (RootScreen != null) {
+                ((NHibernatePersistenceObject)RootScreen).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RootScreen);
+            }
+            if (WorkspaceViewModel != null) {
+                ((NHibernatePersistenceObject)WorkspaceViewModel).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)WorkspaceViewModel);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
+            Module = null;
+            RootScreen = null;
+            WorkspaceViewModel = null;
         }
         public static event ObjectEventHandler<Application> OnNotifyDeleting_Application;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Application_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            // Follow Application_has_RootScreen
-            if (this.RootScreen != null && this.RootScreen.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.RootScreen);
-
-            // Follow Application_opens_a_WorkspaceViewModel
-            if (this.WorkspaceViewModel != null && this.WorkspaceViewModel.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.WorkspaceViewModel);
-
-            // Follow Application_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Application_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class ApplicationProxy
             : IProxyObject, ISortKey<int>

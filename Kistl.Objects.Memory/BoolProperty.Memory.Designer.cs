@@ -1013,14 +1013,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<BoolProperty> OnToString_BoolProperty;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_BoolProperty")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_BoolProperty != null)
             {
                 OnObjectIsValid_BoolProperty(this, e);
@@ -1064,6 +1064,9 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_BoolProperty != null) OnNotifyDeleting_BoolProperty(this);
+            FalseIcon = null;
+            NullIcon = null;
+            TrueIcon = null;
         }
         public static event ObjectEventHandler<BoolProperty> OnNotifyDeleting_BoolProperty;
 

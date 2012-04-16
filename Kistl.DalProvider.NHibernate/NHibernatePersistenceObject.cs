@@ -85,7 +85,10 @@ namespace Kistl.DalProvider.NHibernate
             }
         }
 
-        public virtual List<NHibernatePersistenceObject> GetParentsToDelete() { return new List<NHibernatePersistenceObject>(); }
-        public virtual List<NHibernatePersistenceObject> GetChildrenToDelete() { return new List<NHibernatePersistenceObject>(); }
+        public readonly List<NHibernatePersistenceObject> ChildrenToDelete = new List<NHibernatePersistenceObject>();
+        public readonly List<NHibernatePersistenceObject> ParentsToDelete = new List<NHibernatePersistenceObject>();
+
+        public virtual List<NHibernatePersistenceObject> GetParentsToDelete() { return ParentsToDelete.Where(c => c.ObjectState == DataObjectState.Deleted).Distinct().ToList(); }
+        public virtual List<NHibernatePersistenceObject> GetChildrenToDelete() { return ChildrenToDelete.Where(c => c.ObjectState == DataObjectState.Deleted).Distinct().ToList(); }
     }
 }

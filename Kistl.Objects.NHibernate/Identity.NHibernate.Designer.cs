@@ -381,14 +381,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<Identity> OnToString_Identity;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Identity")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Identity != null)
             {
                 OnObjectIsValid_Identity(this, e);
@@ -429,514 +429,83 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Identity != null) OnNotifyDeleting_Identity(this);
+
+            // should fetch && remember parent for Application_was_Identity_RelationEntry
+            // should fetch && remember parent for Application_was_Identity_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
+            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
+            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
+            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
+            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
+            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
+            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
+            // should fetch && remember parent for Blob_was_Identity_RelationEntry
+            // should fetch && remember parent for Blob_was_Identity_RelationEntry
+            // should fetch && remember parent for Constraint_was_Identity_RelationEntry
+            // should fetch && remember parent for Constraint_was_Identity_RelationEntry
+            // should fetch && remember parent for DataType_was_Identity_RelationEntry
+            // should fetch && remember parent for DataType_was_Identity_RelationEntry
+            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
+            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
+            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for Method_was_Identity_RelationEntry
+            // should fetch && remember parent for Method_was_Identity_RelationEntry
+            // should fetch && remember parent for Module_was_Identity_RelationEntry
+            // should fetch && remember parent for Module_was_Identity_RelationEntry
+            // should fetch && remember parent for Property_was_Identity_RelationEntry
+            // should fetch && remember parent for Property_was_Identity_RelationEntry
+            // should fetch && remember parent for Relation_was_Identity_RelationEntry
+            // should fetch && remember parent for Relation_was_Identity_RelationEntry
+            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
+            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
+            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
+            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
+            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
+            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
+            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
+            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
+            // should fetch && remember parent for File_was_Identity_RelationEntry
+            // should fetch && remember parent for File_was_Identity_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_of_Identity_RelationEntry
+            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
+            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
+            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
+            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
+            // should fetch && remember parent for Auftrag_ChangedBy_Identity_RelationEntry
+            // should fetch && remember parent for Auftrag_CreatedBy_Identity_RelationEntry
+            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
+            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
+            // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
+            // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
+            // should fetch && remember children for Mitarbeiter_is_a_Identity_RelationEntry
+            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
+            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
+            // should fetch && remember parent for Task_was_Identity_RelationEntry
+            // should fetch && remember parent for Task_was_Identity_RelationEntry
+
+            Groups.Clear();
         }
         public static event ObjectEventHandler<Identity> OnNotifyDeleting_Identity;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow AbstractModuleMember_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.AbstractModuleMember>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow AbstractModuleMember_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.AbstractModuleMember>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow AccessControl_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.AccessControl>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow AccessControl_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.AccessControl>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Application_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Application>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Application_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Application>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Assembly_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Assembly>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Assembly_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Assembly>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Auftrag_ChangedBy_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Auftrag>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Auftrag_CreatedBy_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Auftrag>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow BaseParameter_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.BaseParameter>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow BaseParameter_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.BaseParameter>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Calendar_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.Calendar>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Calendar_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.Calendar>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow CalendarRule_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.CalendarRule>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow CalendarRule_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.CalendarRule>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Configuration_of_Identity
-            result.AddRange(Context.AttachedObjects
-                .OfType<at.dasz.DocumentManagement.FileImportConfiguration>()
-                .Where(child => child.Identity == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Constraint_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Constraint>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Constraint_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Constraint>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow DataType_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DataType>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow DataType_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DataType>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow DefaultPropertyValue_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DefaultPropertyValue>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow DefaultPropertyValue_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DefaultPropertyValue>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Document_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Blob>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Document_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Blob>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow EnumerationEntry_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.EnumerationEntry>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow EnumerationEntry_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.EnumerationEntry>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow File_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<at.dasz.DocumentManagement.File>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow File_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<at.dasz.DocumentManagement.File>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow FileImportConfiguration_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<at.dasz.DocumentManagement.FileImportConfiguration>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow FileImportConfiguration_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<at.dasz.DocumentManagement.FileImportConfiguration>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow FilterConfiguration_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.FilterConfiguration>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow FilterConfiguration_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.FilterConfiguration>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Kunde_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Kunde>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Kunde_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Kunde>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Method_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Method>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Method_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Method>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow MigrationProject_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.MigrationProject>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow MigrationProject_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.MigrationProject>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Mitarbeiter_is_a_Identity
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Mitarbeiter>()
-                .Where(child => child.Identity == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Mitarbeiter_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Mitarbeiter>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Mitarbeiter_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Mitarbeiter>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Module_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Module>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Module_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Module>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow NavigationScreen_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationEntry>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow NavigationScreen_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationEntry>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Projekt_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Projekt>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Projekt_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Projekt>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Property_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Property>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Property_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Property>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Relation_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Relation>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Relation_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Relation>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow RelationEnd_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.RelationEnd>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow RelationEnd_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.RelationEnd>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Sequence_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Sequence>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Sequence_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Sequence>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ServiceDescriptor_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.ServiceDescriptor>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow ServiceDescriptor_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.ServiceDescriptor>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow SourceColumn_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceColumn>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow SourceColumn_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceColumn>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow SourceEnum_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceEnum>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow SourceEnum_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceEnum>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow SourceTable_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceTable>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow SourceTable_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceTable>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow StagingDatabase_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.StagingDatabase>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow StagingDatabase_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.StagingDatabase>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Task_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Task>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Task_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Task>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow TypeRef_was_ChangedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.TypeRef>()
-                .Where(child => child.ChangedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow TypeRef_was_CreatedBy
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.TypeRef>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class IdentityProxy
             : IProxyObject, ISortKey<int>

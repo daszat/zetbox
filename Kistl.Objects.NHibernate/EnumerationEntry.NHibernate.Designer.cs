@@ -1158,14 +1158,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<EnumerationEntry> OnToString_EnumerationEntry;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_EnumerationEntry")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_EnumerationEntry != null)
             {
                 OnObjectIsValid_EnumerationEntry(this, e);
@@ -1213,50 +1213,28 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumerationEntry != null) OnNotifyDeleting_EnumerationEntry(this);
+
+            // should fetch && remember parent for EnumDefaultValue_defaults_to_EnumerationEntry_RelationEntry
+            if (Enumeration != null) {
+                ((NHibernatePersistenceObject)Enumeration).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Enumeration);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            // should fetch && remember parent for SourceEnum_mapps_to_EnumerationEntry_RelationEntry
+
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<EnumerationEntry> OnNotifyDeleting_EnumerationEntry;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Enumeration_has_EnumerationEntries
-            if (this.Enumeration != null && this.Enumeration.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Enumeration);
-
-            // Follow EnumerationEntry_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow EnumerationEntry_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow EnumDefaultValue_defaults_to_EnumValue
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.EnumDefaultValue>()
-                .Where(child => child.EnumValue == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow SourceEnum_mapps_to_DestinationValue
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceEnum>()
-                .Where(child => child.DestinationValue == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class EnumerationEntryProxy
             : IProxyObject, ISortKey<int>

@@ -994,14 +994,14 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         }
         public static event ToStringHandler<Kunde> OnToString_Kunde;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Kunde")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Kunde != null)
             {
                 OnObjectIsValid_Kunde(this, e);
@@ -1046,6 +1046,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Kunde != null) OnNotifyDeleting_Kunde(this);
+            EMails.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Kunde> OnNotifyDeleting_Kunde;
 

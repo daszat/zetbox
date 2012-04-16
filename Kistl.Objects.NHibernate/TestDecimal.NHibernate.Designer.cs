@@ -341,14 +341,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<TestDecimal> OnToString_TestDecimal;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_TestDecimal")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_TestDecimal != null)
             {
                 OnObjectIsValid_TestDecimal(this, e);
@@ -389,24 +389,12 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestDecimal != null) OnNotifyDeleting_TestDecimal(this);
+
+
         }
         public static event ObjectEventHandler<TestDecimal> OnNotifyDeleting_TestDecimal;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class TestDecimalProxy
             : IProxyObject, ISortKey<int>

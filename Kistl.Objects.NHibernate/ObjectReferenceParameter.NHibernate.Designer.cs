@@ -449,14 +449,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<ObjectReferenceParameter> OnToString_ObjectReferenceParameter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ObjectReferenceParameter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ObjectReferenceParameter != null)
             {
                 OnObjectIsValid_ObjectReferenceParameter(this, e);
@@ -495,28 +495,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferenceParameter != null) OnNotifyDeleting_ObjectReferenceParameter(this);
+
+            if (ObjectClass != null) {
+                ((NHibernatePersistenceObject)ObjectClass).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ObjectClass);
+            }
+
         }
         public static event ObjectEventHandler<ObjectReferenceParameter> OnNotifyDeleting_ObjectReferenceParameter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow ObjectParameter_has_ObjectClass
-            if (this.ObjectClass != null && this.ObjectClass.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ObjectClass);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class ObjectReferenceParameterProxy
             : Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy

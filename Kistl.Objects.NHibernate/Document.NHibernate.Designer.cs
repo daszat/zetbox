@@ -350,14 +350,14 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<Document> OnToString_Document;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Document")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Document != null)
             {
                 OnObjectIsValid_Document(this, e);
@@ -395,24 +395,13 @@ namespace at.dasz.DocumentManagement
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Document != null) OnNotifyDeleting_Document(this);
+
+
+            Revisions.Clear();
         }
         public static event ObjectEventHandler<Document> OnNotifyDeleting_Document;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class DocumentProxy
             : at.dasz.DocumentManagement.FileNHibernateImpl.FileProxy

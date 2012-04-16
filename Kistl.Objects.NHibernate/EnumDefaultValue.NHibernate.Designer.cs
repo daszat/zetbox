@@ -323,14 +323,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<EnumDefaultValue> OnToString_EnumDefaultValue;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_EnumDefaultValue")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_EnumDefaultValue != null)
             {
                 OnObjectIsValid_EnumDefaultValue(this, e);
@@ -369,28 +369,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumDefaultValue != null) OnNotifyDeleting_EnumDefaultValue(this);
+
+            if (EnumValue != null) {
+                ((NHibernatePersistenceObject)EnumValue).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)EnumValue);
+            }
+
         }
         public static event ObjectEventHandler<EnumDefaultValue> OnNotifyDeleting_EnumDefaultValue;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow EnumDefaultValue_defaults_to_EnumValue
-            if (this.EnumValue != null && this.EnumValue.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.EnumValue);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class EnumDefaultValueProxy
             : Kistl.App.Base.DefaultPropertyValueNHibernateImpl.DefaultPropertyValueProxy

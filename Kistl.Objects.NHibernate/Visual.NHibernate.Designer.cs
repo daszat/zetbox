@@ -516,14 +516,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Visual> OnToString_Visual;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Visual")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Visual != null)
             {
                 OnObjectIsValid_Visual(this, e);
@@ -564,39 +564,25 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Visual != null) OnNotifyDeleting_Visual(this);
+
+            // should fetch && remember parent for Template_has_Visual_RelationEntry
+            if (Method != null) {
+                ((NHibernatePersistenceObject)Method).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Method);
+            }
+            if (Property != null) {
+                ((NHibernatePersistenceObject)Property).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Property);
+            }
+
+            Children.Clear();
+            ContextMenu.Clear();
+            Method = null;
+            Property = null;
         }
         public static event ObjectEventHandler<Visual> OnNotifyDeleting_Visual;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Visual_has_Method
-            if (this.Method != null && this.Method.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Method);
-
-            // Follow Visual_has_Property
-            if (this.Property != null && this.Property.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Property);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Template_has_VisualTree
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Template>()
-                .Where(child => child.VisualTree == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class VisualProxy
             : IProxyObject, ISortKey<int>

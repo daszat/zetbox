@@ -988,14 +988,14 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<File> OnToString_File;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_File")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_File != null)
             {
                 OnObjectIsValid_File(this, e);
@@ -1037,6 +1037,8 @@ namespace at.dasz.DocumentManagement
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_File != null) OnNotifyDeleting_File(this);
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<File> OnNotifyDeleting_File;
 

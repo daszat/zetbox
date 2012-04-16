@@ -467,14 +467,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<DateRangeFilterConfiguration> OnToString_DateRangeFilterConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_DateRangeFilterConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_DateRangeFilterConfiguration != null)
             {
                 OnObjectIsValid_DateRangeFilterConfiguration(this, e);
@@ -515,24 +515,12 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_DateRangeFilterConfiguration != null) OnNotifyDeleting_DateRangeFilterConfiguration(this);
+
+
         }
         public static event ObjectEventHandler<DateRangeFilterConfiguration> OnNotifyDeleting_DateRangeFilterConfiguration;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class DateRangeFilterConfigurationProxy
             : Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl.PropertyFilterConfigurationProxy

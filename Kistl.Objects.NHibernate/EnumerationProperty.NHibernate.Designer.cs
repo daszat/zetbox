@@ -575,14 +575,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<EnumerationProperty> OnToString_EnumerationProperty;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_EnumerationProperty")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_EnumerationProperty != null)
             {
                 OnObjectIsValid_EnumerationProperty(this, e);
@@ -621,28 +621,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumerationProperty != null) OnNotifyDeleting_EnumerationProperty(this);
+
+            if (Enumeration != null) {
+                ((NHibernatePersistenceObject)Enumeration).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Enumeration);
+            }
+
         }
         public static event ObjectEventHandler<EnumerationProperty> OnNotifyDeleting_EnumerationProperty;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow EnumerationProperty_has_Enumeration
-            if (this.Enumeration != null && this.Enumeration.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Enumeration);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class EnumerationPropertyProxy
             : Kistl.App.Base.ValueTypePropertyNHibernateImpl.ValueTypePropertyProxy

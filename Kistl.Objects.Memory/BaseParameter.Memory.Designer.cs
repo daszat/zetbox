@@ -1406,14 +1406,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<BaseParameter> OnToString_BaseParameter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_BaseParameter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_BaseParameter != null)
             {
                 OnObjectIsValid_BaseParameter(this, e);
@@ -1459,6 +1459,8 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_BaseParameter != null) OnNotifyDeleting_BaseParameter(this);
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<BaseParameter> OnNotifyDeleting_BaseParameter;
 

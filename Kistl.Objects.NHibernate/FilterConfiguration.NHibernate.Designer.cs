@@ -1323,14 +1323,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<FilterConfiguration> OnToString_FilterConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_FilterConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_FilterConfiguration != null)
             {
                 OnObjectIsValid_FilterConfiguration(this, e);
@@ -1379,44 +1379,35 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_FilterConfiguration != null) OnNotifyDeleting_FilterConfiguration(this);
+
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            if (RequestedKind != null) {
+                ((NHibernatePersistenceObject)RequestedKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedKind);
+            }
+            if (ViewModelDescriptor != null) {
+                ((NHibernatePersistenceObject)ViewModelDescriptor).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelDescriptor);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
+            RequestedKind = null;
         }
         public static event ObjectEventHandler<FilterConfiguration> OnNotifyDeleting_FilterConfiguration;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow FilterConfiguration_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            // Follow FilterConfiguration_has_RequestedKind
-            if (this.RequestedKind != null && this.RequestedKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.RequestedKind);
-
-            // Follow FilterConfiguration_has_ViewModelDescriptor
-            if (this.ViewModelDescriptor != null && this.ViewModelDescriptor.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ViewModelDescriptor);
-
-            // Follow FilterConfiguration_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow FilterConfiguration_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class FilterConfigurationProxy
             : IProxyObject, ISortKey<int>

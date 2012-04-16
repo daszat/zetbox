@@ -624,14 +624,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CalculatedObjectReferenceProperty> OnToString_CalculatedObjectReferenceProperty;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CalculatedObjectReferenceProperty")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CalculatedObjectReferenceProperty != null)
             {
                 OnObjectIsValid_CalculatedObjectReferenceProperty(this, e);
@@ -670,6 +670,7 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalculatedObjectReferenceProperty != null) OnNotifyDeleting_CalculatedObjectReferenceProperty(this);
+            Inputs.Clear();
         }
         public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnNotifyDeleting_CalculatedObjectReferenceProperty;
 

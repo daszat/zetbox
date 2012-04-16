@@ -1401,14 +1401,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<TypeRef> OnToString_TypeRef;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_TypeRef")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_TypeRef != null)
             {
                 OnObjectIsValid_TypeRef(this, e);
@@ -1453,6 +1453,10 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_TypeRef != null) OnNotifyDeleting_TypeRef(this);
+            GenericArguments.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            Parent = null;
         }
         public static event ObjectEventHandler<TypeRef> OnNotifyDeleting_TypeRef;
 

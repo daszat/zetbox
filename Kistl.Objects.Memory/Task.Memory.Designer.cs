@@ -1021,14 +1021,14 @@ namespace Kistl.App.Projekte
         }
         public static event ToStringHandler<Task> OnToString_Task;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Task")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Task != null)
             {
                 OnObjectIsValid_Task(this, e);
@@ -1073,6 +1073,8 @@ namespace Kistl.App.Projekte
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Task != null) OnNotifyDeleting_Task(this);
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<Task> OnNotifyDeleting_Task;
 

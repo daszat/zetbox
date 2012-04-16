@@ -266,14 +266,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<StringDefaultValue> OnToString_StringDefaultValue;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_StringDefaultValue")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_StringDefaultValue != null)
             {
                 OnObjectIsValid_StringDefaultValue(this, e);
@@ -312,24 +312,12 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_StringDefaultValue != null) OnNotifyDeleting_StringDefaultValue(this);
+
+
         }
         public static event ObjectEventHandler<StringDefaultValue> OnNotifyDeleting_StringDefaultValue;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class StringDefaultValueProxy
             : Kistl.App.Base.DefaultPropertyValueNHibernateImpl.DefaultPropertyValueProxy

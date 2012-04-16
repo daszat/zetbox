@@ -1097,14 +1097,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         }
         public static event ToStringHandler<StagingDatabase> OnToString_StagingDatabase;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_StagingDatabase")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_StagingDatabase != null)
             {
                 OnObjectIsValid_StagingDatabase(this, e);
@@ -1152,43 +1152,31 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_StagingDatabase != null) OnNotifyDeleting_StagingDatabase(this);
+
+            if (MigrationProject != null) {
+                ((NHibernatePersistenceObject)MigrationProject).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)MigrationProject);
+            }
+            foreach(NHibernatePersistenceObject x in SourceTables) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+
+            SourceTables.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
         }
         public static event ObjectEventHandler<StagingDatabase> OnNotifyDeleting_StagingDatabase;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow MigrationProject_reads_from_StagingDatabases
-            if (this.MigrationProject != null && this.MigrationProject.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.MigrationProject);
-
-            // Follow StagingDatabase_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow StagingDatabase_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow SourceTables_are_contained_in_StagingDatabase
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceTable>()
-                .Where(child => child.StagingDatabase == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class StagingDatabaseProxy
             : IProxyObject, ISortKey<int>

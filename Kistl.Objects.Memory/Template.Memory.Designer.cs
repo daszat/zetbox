@@ -598,14 +598,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<Template> OnToString_Template;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Template")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Template != null)
             {
                 OnObjectIsValid_Template(this, e);
@@ -647,6 +647,9 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Template != null) OnNotifyDeleting_Template(this);
+            Menu.Clear();
+            DisplayedTypeAssembly = null;
+            VisualTree = null;
         }
         public static event ObjectEventHandler<Template> OnNotifyDeleting_Template;
 

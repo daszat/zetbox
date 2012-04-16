@@ -226,14 +226,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<SinglePropertyFilterConfiguration> OnToString_SinglePropertyFilterConfiguration;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_SinglePropertyFilterConfiguration")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_SinglePropertyFilterConfiguration != null)
             {
                 OnObjectIsValid_SinglePropertyFilterConfiguration(this, e);
@@ -271,24 +271,12 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_SinglePropertyFilterConfiguration != null) OnNotifyDeleting_SinglePropertyFilterConfiguration(this);
+
+
         }
         public static event ObjectEventHandler<SinglePropertyFilterConfiguration> OnNotifyDeleting_SinglePropertyFilterConfiguration;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class SinglePropertyFilterConfigurationProxy
             : Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl.PropertyFilterConfigurationProxy

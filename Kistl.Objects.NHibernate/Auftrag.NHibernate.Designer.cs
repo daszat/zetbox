@@ -1212,14 +1212,14 @@ namespace Kistl.App.Projekte
         }
         public static event ToStringHandler<Auftrag> OnToString_Auftrag;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Auftrag")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Auftrag != null)
             {
                 OnObjectIsValid_Auftrag(this, e);
@@ -1267,44 +1267,37 @@ namespace Kistl.App.Projekte
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Auftrag != null) OnNotifyDeleting_Auftrag(this);
+
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Kunde != null) {
+                ((NHibernatePersistenceObject)Kunde).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Kunde);
+            }
+            if (Mitarbeiter != null) {
+                ((NHibernatePersistenceObject)Mitarbeiter).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Mitarbeiter);
+            }
+            if (Projekt != null) {
+                ((NHibernatePersistenceObject)Projekt).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Projekt);
+            }
+
+            ChangedBy = null;
+            CreatedBy = null;
+            Kunde = null;
+            Mitarbeiter = null;
+            Projekt = null;
         }
         public static event ObjectEventHandler<Auftrag> OnNotifyDeleting_Auftrag;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Auftrag_ChangedBy_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Auftrag_CreatedBy_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            // Follow Auftrag_has_Kunde
-            if (this.Kunde != null && this.Kunde.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Kunde);
-
-            // Follow Auftrag_has_Mitarbeiter
-            if (this.Mitarbeiter != null && this.Mitarbeiter.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Mitarbeiter);
-
-            // Follow Projekt_has_Auftraege
-            if (this.Projekt != null && this.Projekt.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Projekt);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class AuftragProxy
             : IProxyObject, ISortKey<int>

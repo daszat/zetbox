@@ -479,14 +479,14 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<ImportedFile> OnToString_ImportedFile;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ImportedFile")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ImportedFile != null)
             {
                 OnObjectIsValid_ImportedFile(this, e);
@@ -524,24 +524,12 @@ namespace at.dasz.DocumentManagement
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ImportedFile != null) OnNotifyDeleting_ImportedFile(this);
+
+
         }
         public static event ObjectEventHandler<ImportedFile> OnNotifyDeleting_ImportedFile;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class ImportedFileProxy
             : at.dasz.DocumentManagement.FileNHibernateImpl.FileProxy

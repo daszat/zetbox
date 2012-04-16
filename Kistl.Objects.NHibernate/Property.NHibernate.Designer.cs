@@ -2136,14 +2136,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         }
         public static event ToStringHandler<Property> OnToString_Property;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Property")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Property != null)
             {
                 OnObjectIsValid_Property(this, e);
@@ -2199,76 +2199,55 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Property != null) OnNotifyDeleting_Property(this);
+
+            if (FilterConfiguration != null) {
+                ((NHibernatePersistenceObject)FilterConfiguration).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)FilterConfiguration);
+            }
+            if (RequestedKind != null) {
+                ((NHibernatePersistenceObject)RequestedKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedKind);
+            }
+            if (ValueModelDescriptor != null) {
+                ((NHibernatePersistenceObject)ValueModelDescriptor).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ValueModelDescriptor);
+            }
+            // should fetch && remember parent for Visual_has_Property_RelationEntry
+            foreach(NHibernatePersistenceObject x in Constraints) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            if (ObjectClass != null) {
+                ((NHibernatePersistenceObject)ObjectClass).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ObjectClass);
+            }
+            if (DefaultValue != null) {
+                ((NHibernatePersistenceObject)DefaultValue).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultValue);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+
+            Constraints.Clear();
+            ChangedBy = null;
+            CreatedBy = null;
+            DefaultValue = null;
+            FilterConfiguration = null;
+            RequestedKind = null;
         }
         public static event ObjectEventHandler<Property> OnNotifyDeleting_Property;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow BaseProperty_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            // Follow ObjectClass_has_Properties
-            if (this.ObjectClass != null && this.ObjectClass.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ObjectClass);
-
-            // Follow Property_has_ValueModelDescriptor
-            if (this.ValueModelDescriptor != null && this.ValueModelDescriptor.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ValueModelDescriptor);
-
-            // Follow Property_may_request_ControlKind
-            if (this.RequestedKind != null && this.RequestedKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.RequestedKind);
-
-            // Follow Property_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Property_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow ConstrainedProperty_has_Constraints
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Constraint>()
-                .Where(child => child.ConstrainedProperty == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Property_has_DefaultValue
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DefaultPropertyValue>()
-                .Where(child => child.Property == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Property_Has_PropertyFilterConfiguration
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.PropertyFilterConfiguration>()
-                .Where(child => child.Property == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Visual_has_Property
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Visual>()
-                .Where(child => child.Property == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class PropertyProxy
             : IProxyObject, ISortKey<int>

@@ -1243,14 +1243,14 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         }
         public static event ToStringHandler<Calendar> OnToString_Calendar;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Calendar")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Calendar != null)
             {
                 OnObjectIsValid_Calendar(this, e);
@@ -1296,50 +1296,38 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Calendar != null) OnNotifyDeleting_Calendar(this);
+
+            foreach(NHibernatePersistenceObject x in ChildCalendar) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            foreach(NHibernatePersistenceObject x in CalendarRules) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+
+            CalendarRules.Clear();
+            ChildCalendar.Clear();
+            BaseCalendar = null;
+            ChangedBy = null;
+            CreatedBy = null;
+            Module = null;
         }
         public static event ObjectEventHandler<Calendar> OnNotifyDeleting_Calendar;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Calendar_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            // Follow Calendar_was_ChangedBy
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
-            // Follow Calendar_was_CreatedBy
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow BaseCalendar_has_ChildCalendar
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.Calendar>()
-                .Where(child => child.BaseCalendar == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Calendar_has_CalendarRules
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.CalendarRule>()
-                .Where(child => child.Calendar == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class CalendarProxy
             : IProxyObject, ISortKey<int>

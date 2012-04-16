@@ -287,14 +287,14 @@ namespace at.dasz.DocumentManagement
         }
         public static event ToStringHandler<StaticFile> OnToString_StaticFile;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_StaticFile")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_StaticFile != null)
             {
                 OnObjectIsValid_StaticFile(this, e);
@@ -332,24 +332,12 @@ namespace at.dasz.DocumentManagement
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_StaticFile != null) OnNotifyDeleting_StaticFile(this);
+
+
         }
         public static event ObjectEventHandler<StaticFile> OnNotifyDeleting_StaticFile;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class StaticFileProxy
             : at.dasz.DocumentManagement.FileNHibernateImpl.FileProxy

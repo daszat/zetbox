@@ -802,14 +802,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         }
         public static event ToStringHandler<TestCustomObject> OnToString_TestCustomObject;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_TestCustomObject")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_TestCustomObject != null)
             {
                 OnObjectIsValid_TestCustomObject(this, e);
@@ -853,6 +853,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestCustomObject != null) OnNotifyDeleting_TestCustomObject(this);
+            MubBlah_List_Nav.Clear();
+            MuhBlah_ManyList_Nav.Clear();
+            PhoneNumbersOther.Clear();
+            MubBlah_Nav = null;
+            MuhBlah_One_Nav = null;
         }
         public static event ObjectEventHandler<TestCustomObject> OnNotifyDeleting_TestCustomObject;
 

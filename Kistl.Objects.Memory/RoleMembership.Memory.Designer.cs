@@ -145,14 +145,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<RoleMembership> OnToString_RoleMembership;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_RoleMembership")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_RoleMembership != null)
             {
                 OnObjectIsValid_RoleMembership(this, e);
@@ -190,6 +190,7 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_RoleMembership != null) OnNotifyDeleting_RoleMembership(this);
+            Relations.Clear();
         }
         public static event ObjectEventHandler<RoleMembership> OnNotifyDeleting_RoleMembership;
 

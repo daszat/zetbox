@@ -449,14 +449,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CLRObjectParameter> OnToString_CLRObjectParameter;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CLRObjectParameter")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CLRObjectParameter != null)
             {
                 OnObjectIsValid_CLRObjectParameter(this, e);
@@ -495,28 +495,16 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CLRObjectParameter != null) OnNotifyDeleting_CLRObjectParameter(this);
+
+            if (Type != null) {
+                ((NHibernatePersistenceObject)Type).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Type);
+            }
+
         }
         public static event ObjectEventHandler<CLRObjectParameter> OnNotifyDeleting_CLRObjectParameter;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow ClrObjectParameter_isOf_Type
-            if (this.Type != null && this.Type.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Type);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class CLRObjectParameterProxy
             : Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy

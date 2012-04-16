@@ -1327,14 +1327,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         }
         public static event ToStringHandler<ObjectClass> OnToString_ObjectClass;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ObjectClass")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ObjectClass != null)
             {
                 OnObjectIsValid_ObjectClass(this, e);
@@ -1380,6 +1380,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectClass != null) OnNotifyDeleting_ObjectClass(this);
+            AccessControlList.Clear();
+            FilterConfigurations.Clear();
+            SubClasses.Clear();
+            BaseObjectClass = null;
         }
         public static event ObjectEventHandler<ObjectClass> OnNotifyDeleting_ObjectClass;
 

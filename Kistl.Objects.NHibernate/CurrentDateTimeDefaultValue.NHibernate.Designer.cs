@@ -163,14 +163,14 @@ namespace Kistl.App.Base
         }
         public static event ToStringHandler<CurrentDateTimeDefaultValue> OnToString_CurrentDateTimeDefaultValue;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_CurrentDateTimeDefaultValue")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_CurrentDateTimeDefaultValue != null)
             {
                 OnObjectIsValid_CurrentDateTimeDefaultValue(this, e);
@@ -208,24 +208,12 @@ namespace Kistl.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CurrentDateTimeDefaultValue != null) OnNotifyDeleting_CurrentDateTimeDefaultValue(this);
+
+
         }
         public static event ObjectEventHandler<CurrentDateTimeDefaultValue> OnNotifyDeleting_CurrentDateTimeDefaultValue;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class CurrentDateTimeDefaultValueProxy
             : Kistl.App.Base.DefaultPropertyValueNHibernateImpl.DefaultPropertyValueProxy

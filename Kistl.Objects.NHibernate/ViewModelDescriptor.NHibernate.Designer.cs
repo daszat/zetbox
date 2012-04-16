@@ -1225,14 +1225,14 @@ namespace Kistl.App.GUI
         }
         public static event ToStringHandler<ViewModelDescriptor> OnToString_ViewModelDescriptor;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_ViewModelDescriptor")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_ViewModelDescriptor != null)
             {
                 OnObjectIsValid_ViewModelDescriptor(this, e);
@@ -1279,94 +1279,52 @@ namespace Kistl.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
+
+            // should fetch && remember parent for Application_opens_a_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for NavigationEntry_modeled_by_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for ObjectClass_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for Property_has_ViewModelDescriptor_RelationEntry
+            if (DefaultDisplayKind != null) {
+                ((NHibernatePersistenceObject)DefaultDisplayKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultDisplayKind);
+            }
+            if (DefaultEditorKind != null) {
+                ((NHibernatePersistenceObject)DefaultEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultEditorKind);
+            }
+            if (DefaultGridCellDisplayKind != null) {
+                ((NHibernatePersistenceObject)DefaultGridCellDisplayKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellDisplayKind);
+            }
+            if (DefaultGridCellEditorKind != null) {
+                ((NHibernatePersistenceObject)DefaultGridCellEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellEditorKind);
+            }
+            if (DefaultGridCellPreEditorKind != null) {
+                ((NHibernatePersistenceObject)DefaultGridCellPreEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellPreEditorKind);
+            }
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            if (ViewModelRef != null) {
+                ((NHibernatePersistenceObject)ViewModelRef).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelRef);
+            }
+            // should fetch && remember parent for CompoundObject_may_has_ViewModelDescriptor_RelationEntry
+
+            SecondaryControlKinds.Clear();
+            DefaultDisplayKind = null;
+            DefaultEditorKind = null;
+            DefaultGridCellDisplayKind = null;
+            DefaultGridCellEditorKind = null;
+            DefaultGridCellPreEditorKind = null;
         }
         public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyDeleting_ViewModelDescriptor;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Descriptor_has_ViewModelRef
-            if (this.ViewModelRef != null && this.ViewModelRef.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ViewModelRef);
-
-            // Follow Presentable_has_DefaultKind
-            if (this.DefaultEditorKind != null && this.DefaultEditorKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DefaultEditorKind);
-
-            // Follow ViewModel_displayed_by_DefaultDisplayKind
-            if (this.DefaultDisplayKind != null && this.DefaultDisplayKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DefaultDisplayKind);
-
-            // Follow ViewModel_displayed_by_DefaultGridCellEditorKind
-            if (this.DefaultGridCellEditorKind != null && this.DefaultGridCellEditorKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DefaultGridCellEditorKind);
-
-            // Follow ViewModel_displayed_by_DefaultGridDisplayKind
-            if (this.DefaultGridCellDisplayKind != null && this.DefaultGridCellDisplayKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DefaultGridCellDisplayKind);
-
-            // Follow ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind
-            if (this.DefaultGridCellPreEditorKind != null && this.DefaultGridCellPreEditorKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DefaultGridCellPreEditorKind);
-
-            // Follow ViewModelDescriptor_has_Module
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Application_opens_a_WorkspaceViewModel
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Application>()
-                .Where(child => child.WorkspaceViewModel == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow FilterConfiguration_has_ViewModelDescriptor
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.FilterConfiguration>()
-                .Where(child => child.ViewModelDescriptor == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Presentable_has_DefaultViewModelDescriptor
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.ObjectClass>()
-                .Where(child => child.DefaultViewModelDescriptor == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Presentable_may_has_DefaultPropViewModelDescriptor
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.CompoundObject>()
-                .Where(child => child.DefaultPropertyViewModelDescriptor == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Property_has_ValueModelDescriptor
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Property>()
-                .Where(child => child.ValueModelDescriptor == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            // Follow Screen_modeled_by_ViewModelDescriptor
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationEntry>()
-                .Where(child => child.ViewModelDescriptor == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class ViewModelDescriptorProxy
             : IProxyObject, ISortKey<int>

@@ -526,14 +526,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<Antwort> OnToString_Antwort;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_Antwort")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Antwort != null)
             {
                 OnObjectIsValid_Antwort(this, e);
@@ -575,28 +575,16 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Antwort != null) OnNotifyDeleting_Antwort(this);
+
+            if (Fragebogen != null) {
+                ((NHibernatePersistenceObject)Fragebogen).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Fragebogen);
+            }
+
         }
         public static event ObjectEventHandler<Antwort> OnNotifyDeleting_Antwort;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            // Follow Ein_Fragebogen_enthaelt_gute_Antworten
-            if (this.Fragebogen != null && this.Fragebogen.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Fragebogen);
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class AntwortProxy
             : IProxyObject, ISortKey<int>

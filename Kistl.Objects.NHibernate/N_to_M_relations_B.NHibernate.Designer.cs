@@ -243,14 +243,14 @@ namespace Kistl.App.Test
         }
         public static event ToStringHandler<N_to_M_relations_B> OnToString_N_to_M_relations_B;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_N_to_M_relations_B")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_N_to_M_relations_B != null)
             {
                 OnObjectIsValid_N_to_M_relations_B(this, e);
@@ -289,24 +289,13 @@ namespace Kistl.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_N_to_M_relations_B != null) OnNotifyDeleting_N_to_M_relations_B(this);
+
+
+            ASide.Clear();
         }
         public static event ObjectEventHandler<N_to_M_relations_B> OnNotifyDeleting_N_to_M_relations_B;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            return result;
-        }
-
 
         public class N_to_M_relations_BProxy
             : IProxyObject, ISortKey<int>

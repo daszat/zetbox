@@ -247,14 +247,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         }
         public static event ToStringHandler<RequiredParent> OnToString_RequiredParent;
 
-		[System.Diagnostics.DebuggerHidden()]
+        [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnObjectIsValid_RequiredParent")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
-			var b = base.ObjectIsValid();
+            var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
-			e.Errors.AddRange(b.Errors);
+            e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_RequiredParent != null)
             {
                 OnObjectIsValid_RequiredParent(this, e);
@@ -293,31 +293,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_RequiredParent != null) OnNotifyDeleting_RequiredParent(this);
+
+            foreach(NHibernatePersistenceObject x in Children) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+
+            Children.Clear();
         }
         public static event ObjectEventHandler<RequiredParent> OnNotifyDeleting_RequiredParent;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
-        public override List<NHibernatePersistenceObject> GetParentsToDelete()
-        {
-            var result = base.GetParentsToDelete();
-
-            return result;
-        }
-
-        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
-        {
-            var result = base.GetChildrenToDelete();
-
-            // Follow Parent_of_Children
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Test.RequiredParentChild>()
-                .Where(child => child.Parent == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
-            return result;
-        }
-
 
         public class RequiredParentProxy
             : IProxyObject, ISortKey<int>
