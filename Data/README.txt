@@ -1,0 +1,1 @@
+Currently there is not published data in the core, but this file is required to avoid jenkins going nuclear while keeping this directory available.
