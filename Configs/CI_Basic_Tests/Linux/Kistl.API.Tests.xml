@@ -3,6 +3,9 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Kistl.API.Tests' Configuration</ConfigName>
   <Server StartServer="false">
+    <ConnectionStrings>
+      <Database Name="Kistl" Schema="MSSQL" Provider="System.Data.SqlClient">Data Source=.\SQLEXPRESS;Initial Catalog=zbox_test;Integrated Security=True;MultipleActiveResultSets=true;</Database>
+    </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
