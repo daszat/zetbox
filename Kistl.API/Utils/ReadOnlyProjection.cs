@@ -20,7 +20,7 @@ namespace Kistl.API.Utils
         : ICollection<TOutput>, IEnumerable<TOutput>, ICollection, IEnumerable
     {
         private readonly object _lock = new object();
-        private readonly ICollection<TInput> _collection;
+        private readonly Func<ICollection<TInput>> _collection;
         private readonly Func<TInput, TOutput> _selector;
         private readonly Func<TOutput, TInput> _inverter;
         // TODO: these caches should be purged when items are removed or overwritten. As is, these create a veritable memory leak.
@@ -42,8 +42,56 @@ namespace Kistl.API.Utils
             if (!isReadOnly && collection.IsReadOnly)
                 throw new ArgumentException("Writable projected collection was requested, but the underlying collection is read only.");
 
+            _collection = () => collection;
+            _selector = CreateSelector(selector);
+            _inverter = CreateInverter(inverter);
+            _isReadOnly = isReadOnly;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="collection">the collection to project, wrapped in an accessor to be transparent to underlying reference changes</param>
+        /// <param name="selector">produces TOutput objects for TInput values; MUST always create Equal objects for the same input</param>
+        /// <param name="inverter">an optional inversion of the <paramref name="selector"/>; used to accelerate some operations; MAY be null</param>
+        /// <param name="isReadOnly">Whether or not this list should allow modifications through the public interface. Regardless of the value specified here, the contents can change if the underlying collection changes.</param>
+        protected AbstractProjectedCollection(Func<ICollection<TInput>> collection, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter, bool isReadOnly)
+        {
+            if (collection == null) { throw new ArgumentNullException("collection"); }
+            if (selector == null) { throw new ArgumentNullException("selector"); }
+
+            if (!isReadOnly && collection().IsReadOnly)
+                throw new ArgumentException("Writable projected collection was requested, but the underlying collection is read only.");
+
             _collection = collection;
-            _selector = input =>
+            _selector = CreateSelector(selector);
+            _inverter = CreateInverter(inverter);
+            _isReadOnly = isReadOnly;
+        }
+
+        private Func<TOutput, TInput> CreateInverter(Func<TOutput, TInput> inverter)
+        {
+            if (inverter == null)
+                return null;
+
+            return output =>
+            {
+                if (_inverterCache.ContainsKey(output))
+                {
+                    return _inverterCache[output];
+                }
+                else
+                {
+                    var input = inverter(output);
+                    _selectorCache[input] = output;
+                    _inverterCache[output] = input;
+                    return input;
+                }
+            };
+        }
+
+        private Func<TInput, TOutput> CreateSelector(Func<TInput, TOutput> selector)
+        {
+            return input =>
             {
                 if (_selectorCache.ContainsKey(input))
                 {
@@ -57,29 +105,16 @@ namespace Kistl.API.Utils
                     return output;
                 }
             };
-            if (inverter != null)
-                _inverter = output =>
-                {
-                    if (_inverterCache.ContainsKey(output))
-                    {
-                        return _inverterCache[output];
-                    }
-                    else
-                    {
-                        var input = inverter(output);
-                        _selectorCache[input] = output;
-                        _inverterCache[output] = input;
-                        return input;
-                    }
-                };
-            _isReadOnly = isReadOnly;
         }
 
         #region Utilities
 
+        /// <summary>
+        /// This reference may change without notice.
+        /// </summary>
         public ICollection<TInput> Collection
         {
-            get { return _collection; }
+            get { return _collection(); }
         }
 
         protected Func<TInput, TOutput> Selector { get { return _selector; } }
@@ -99,7 +134,7 @@ namespace Kistl.API.Utils
             }
             else
             {
-                return _collection.FirstOrDefault(input => Object.Equals(item, _selector(input)));
+                return _collection().FirstOrDefault(input => Object.Equals(item, _selector(input)));
             }
         }
 
@@ -111,21 +146,21 @@ namespace Kistl.API.Utils
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            _collection.Add(Invert(item));
+            _collection().Add(Invert(item));
         }
 
         void ICollection<TOutput>.Clear()
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            _collection.Clear();
+            _collection().Clear();
             _selectorCache.Clear();
             _inverterCache.Clear();
         }
 
         public bool Contains(TOutput item)
         {
-            return _collection.Contains(Invert(item));
+            return _collection().Contains(Invert(item));
         }
 
         public void CopyTo(TOutput[] array, int arrayIndex)
@@ -136,11 +171,11 @@ namespace Kistl.API.Utils
             if (arrayIndex < 0)
                 throw new ArgumentOutOfRangeException("arrayIndex", String.Format("arrayIndex={0} < 0", arrayIndex));
 
-            if (arrayIndex >= array.Length && _collection.Count > 0)
-                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("arrayIndex={0} >= array.Length={1} && _collection.Count={2} > 0", arrayIndex, array.Length, _collection.Count));
+            if (arrayIndex >= array.Length && _collection().Count > 0)
+                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("arrayIndex={0} >= array.Length={1} && _collection.Count={2} > 0", arrayIndex, array.Length, _collection().Count));
 
-            if ((array.Length - arrayIndex) < _collection.Count)
-                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("(array.Length={0} - arrayIndex={1})={2} < _collection.Count={3}", array.Length, arrayIndex, array.Length - arrayIndex, _collection.Count));
+            if ((array.Length - arrayIndex) < _collection().Count)
+                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("(array.Length={0} - arrayIndex={1})={2} < _collection.Count={3}", array.Length, arrayIndex, array.Length - arrayIndex, _collection().Count));
 
             foreach (var output in this)
             {
@@ -150,7 +185,7 @@ namespace Kistl.API.Utils
 
         public int Count
         {
-            get { return _collection.Count; }
+            get { return _collection().Count; }
         }
 
         public bool IsReadOnly
@@ -162,7 +197,7 @@ namespace Kistl.API.Utils
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            return _collection.Remove(Invert(item));
+            return _collection().Remove(Invert(item));
         }
 
         #endregion
@@ -171,7 +206,7 @@ namespace Kistl.API.Utils
 
         public IEnumerator<TOutput> GetEnumerator()
         {
-            return _collection.Select(_selector).GetEnumerator();
+            return _collection().Select(_selector).GetEnumerator();
         }
 
         #endregion
@@ -213,7 +248,7 @@ namespace Kistl.API.Utils
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _collection.Select(_selector).GetEnumerator();
+            return _collection().Select(_selector).GetEnumerator();
         }
 
         #endregion
@@ -222,7 +257,7 @@ namespace Kistl.API.Utils
     public abstract class AbstractProjectedList<TInput, TOutput>
         : AbstractProjectedCollection<TInput, TOutput>, IList<TOutput>, IList
     {
-        private readonly IList<TInput> _list;
+        private readonly Func<IList<TInput>> _list;
 
         /// <summary>
         /// </summary>
@@ -233,6 +268,12 @@ namespace Kistl.API.Utils
         protected AbstractProjectedList(IList<TInput> list, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter, bool isReadOnly)
             : base(list, selector, inverter, isReadOnly)
         {
+            _list = () => list;
+        }
+
+        public AbstractProjectedList(Func<IList<TInput>> list, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter, bool isReadOnly)
+            : base(() => (ICollection<TInput>)list(), selector, inverter, isReadOnly)
+        {
             _list = list;
         }
 
@@ -240,32 +281,32 @@ namespace Kistl.API.Utils
 
         public int IndexOf(TOutput item)
         {
-            return _list.IndexOf(Invert(item));
+            return _list().IndexOf(Invert(item));
         }
 
         void IList<TOutput>.Insert(int index, TOutput item)
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            _list.Insert(index, Invert(item));
+            _list().Insert(index, Invert(item));
         }
 
         void IList<TOutput>.RemoveAt(int index)
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            _list.RemoveAt(index);
+            _list().RemoveAt(index);
         }
 
         public TOutput this[int index]
         {
             get
             {
-                return Selector(_list[index]);
+                return Selector(_list()[index]);
             }
             set
             {
-                _list[index] = Invert(value);
+                _list()[index] = Invert(value);
             }
         }
 
@@ -290,8 +331,8 @@ namespace Kistl.API.Utils
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            _list.Add(Invert((TOutput)value));
-            return _list.Count - 1;
+            _list().Add(Invert((TOutput)value));
+            return _list().Count - 1;
         }
 
         void IList.Clear()
@@ -313,7 +354,7 @@ namespace Kistl.API.Utils
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            _list.Insert(index, Invert((TOutput)value));
+            _list().Insert(index, Invert((TOutput)value));
         }
 
         bool IList.IsFixedSize
@@ -325,14 +366,14 @@ namespace Kistl.API.Utils
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            _list.Remove(Invert((TOutput)value));
+            _list().Remove(Invert((TOutput)value));
         }
 
         void IList.RemoveAt(int index)
         {
             if (IsReadOnly)
                 throw new InvalidOperationException("This enumeration is readonly");
-            _list.RemoveAt(index);
+            _list().RemoveAt(index);
         }
 
         object IList.this[int index]
@@ -362,6 +403,11 @@ namespace Kistl.API.Utils
             : base(Collection, selector, inverter, true)
         {
         }
+
+        public ReadOnlyProjectedCollection(Func<ICollection<TInput>> collection, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
+            : base(collection, selector, inverter, false)
+        {
+        }
     }
 
     /// <summary>
@@ -373,6 +419,11 @@ namespace Kistl.API.Utils
         : AbstractProjectedCollection<TInput, TOutput>
     {
         public ProjectedCollection(ICollection<TInput> collection, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
+            : base(collection, selector, inverter, false)
+        {
+        }
+
+        public ProjectedCollection(Func<ICollection<TInput>> collection, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
             : base(collection, selector, inverter, false)
         {
         }
@@ -390,6 +441,11 @@ namespace Kistl.API.Utils
             : base(list, selector, inverter, true)
         {
         }
+
+        public ReadOnlyProjectedList(Func<IList<TInput>> list, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
+            : base(list, selector, inverter, true)
+        {
+        }
     }
 
     /// <summary>
@@ -401,6 +457,11 @@ namespace Kistl.API.Utils
         : AbstractProjectedList<TInput, TOutput>
     {
         public ProjectedList(IList<TInput> list, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
+            : base(list, selector, inverter, false)
+        {
+        }
+
+        public ProjectedList(Func<IList<TInput>> list, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
             : base(list, selector, inverter, false)
         {
         }
