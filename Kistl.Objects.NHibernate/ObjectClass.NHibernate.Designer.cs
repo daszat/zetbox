@@ -70,7 +70,7 @@ namespace Kistl.App.Base
                         () => this.NotifyPropertyChanging("AccessControlList", null, null),
                         () => { this.NotifyPropertyChanged("AccessControlList", null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.AccessControlNHibernateImpl.AccessControlProxy, Kistl.App.Base.AccessControl>(
-                            Proxy.AccessControlList,
+                            () => Proxy.AccessControlList,
                             p => (Kistl.App.Base.AccessControl)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Base.AccessControlNHibernateImpl.AccessControlProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -362,7 +362,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                         () => this.NotifyPropertyChanging("FilterConfigurations", null, null),
                         () => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl.ObjectClassFilterConfigurationProxy, Kistl.App.GUI.ObjectClassFilterConfiguration>(
-                            Proxy.FilterConfigurations,
+                            () => Proxy.FilterConfigurations,
                             p => (Kistl.App.GUI.ObjectClassFilterConfiguration)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl.ObjectClassFilterConfigurationProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -571,7 +571,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                         () => this.NotifyPropertyChanging("SubClasses", null, null),
                         () => { this.NotifyPropertyChanged("SubClasses", null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy, Kistl.App.Base.ObjectClass>(
-                            Proxy.SubClasses,
+                            () => Proxy.SubClasses,
                             p => (Kistl.App.Base.ObjectClass)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

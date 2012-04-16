@@ -277,7 +277,7 @@ namespace Kistl.DalProvider.Base
         where TParent : IDataObject
         where TEntry : IValueListEntry<TParent, TValue>
         where TEntryImpl : class, TEntry
-        where TEntryCollection : IList<TEntryImpl>
+        where TEntryCollection : ICollection<TEntryImpl>
     {
         public ClientValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)

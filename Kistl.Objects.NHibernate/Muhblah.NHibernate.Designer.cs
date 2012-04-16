@@ -128,7 +128,7 @@ namespace Kistl.App.Test
                         () => this.NotifyPropertyChanging("TestCustomObjects_List_Nav", null, null),
                         () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy, Kistl.App.Test.TestCustomObject>(
-                            Proxy.TestCustomObjects_List_Nav,
+                            () => Proxy.TestCustomObjects_List_Nav,
                             p => (Kistl.App.Test.TestCustomObject)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -156,7 +156,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 						= new NHibernateBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
-                                this.Proxy.TestCustomObjects_ManyList_Nav,
+                                () => this.Proxy.TestCustomObjects_ManyList_Nav,
                                 p => (Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>)entry.B.MuhBlah_ManyList_Nav);

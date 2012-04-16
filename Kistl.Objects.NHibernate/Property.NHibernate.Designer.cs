@@ -352,7 +352,7 @@ namespace Kistl.App.Base
                         () => this.NotifyPropertyChanging("Constraints", null, null),
                         () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.ConstraintNHibernateImpl.ConstraintProxy, Kistl.App.Base.Constraint>(
-                            Proxy.Constraints,
+                            () => Proxy.Constraints,
                             p => (Kistl.App.Base.Constraint)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Base.ConstraintNHibernateImpl.ConstraintProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

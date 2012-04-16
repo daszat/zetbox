@@ -266,7 +266,7 @@ namespace Kistl.App.GUI
 						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>(
-                                this.Proxy.Menu,
+                                () => this.Proxy.Menu,
                                 p => (Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>)null);

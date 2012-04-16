@@ -36,7 +36,7 @@
 						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(
 							this, 
 							new ProjectedCollection<<%= entryProxyType %>, <%= entryType %>>(
-                                this.Proxy.<%= name %>,
+                                () => this.Proxy.<%= name %>,
                                 p => (<%= entryType %>)OurContext.AttachAndWrap(p),
                                 ce => (<%= entryProxyType %>)((NHibernatePersistenceObject)ce).NHibernateProxy),
 <% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>

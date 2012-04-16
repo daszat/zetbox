@@ -121,7 +121,7 @@ namespace Kistl.App.Test
 						= new NHibernateBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
-                                this.Proxy.Testbogen,
+                                () => this.Proxy.Testbogen,
                                 p => (Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>)entry.B.Student);

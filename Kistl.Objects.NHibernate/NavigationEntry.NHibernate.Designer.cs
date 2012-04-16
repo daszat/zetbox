@@ -238,7 +238,7 @@ namespace Kistl.App.GUI
                         () => this.NotifyPropertyChanging("Children", null, null),
                         () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy, Kistl.App.GUI.NavigationEntry>(
-                            Proxy.Children,
+                            () => Proxy.Children,
                             p => (Kistl.App.GUI.NavigationEntry)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -567,7 +567,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy, Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
-                                this.Proxy.Groups,
+                                () => this.Proxy.Groups,
                                 p => (Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>)null);

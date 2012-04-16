@@ -70,7 +70,7 @@ namespace Kistl.App.Test
                         () => this.NotifyPropertyChanging("Children", null, null),
                         () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.MethodTestNHibernateImpl.MethodTestProxy, Kistl.App.Test.MethodTest>(
-                            Proxy.Children,
+                            () => Proxy.Children,
                             p => (Kistl.App.Test.MethodTest)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Test.MethodTestNHibernateImpl.MethodTestProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

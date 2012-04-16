@@ -677,7 +677,7 @@ namespace Kistl.App.Projekte
 						= new NHibernateASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
-                                this.Proxy.Projekte,
+                                () => this.Proxy.Projekte,
                                 p => (Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>)entry.A.Mitarbeiter);

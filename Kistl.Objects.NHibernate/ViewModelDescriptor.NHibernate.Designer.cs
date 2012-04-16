@@ -734,7 +734,7 @@ namespace Kistl.App.GUI
 						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
-                                this.Proxy.SecondaryControlKinds,
+                                () => this.Proxy.SecondaryControlKinds,
                                 p => (Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>)null);

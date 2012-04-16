@@ -1175,7 +1175,7 @@ namespace Kistl.App.Base
                         () => this.NotifyPropertyChanging("Parameter", null, null),
                         () => { this.NotifyPropertyChanged("Parameter", null, null); if(OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy, Kistl.App.Base.BaseParameter>(
-                            Proxy.Parameter,
+                            () => Proxy.Parameter,
                             p => (Kistl.App.Base.BaseParameter)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -1203,7 +1203,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
 						= new NHibernateASideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
-                                this.Proxy.ShowByProperties,
+                                () => this.Proxy.ShowByProperties,
                                 p => (Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.A.Methods);

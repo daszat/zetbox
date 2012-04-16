@@ -409,7 +409,7 @@ namespace Kistl.App.GUI
 						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>(
-                                this.Proxy.SupportedViewModels,
+                                () => this.Proxy.SupportedViewModels,
                                 p => (Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>)null);

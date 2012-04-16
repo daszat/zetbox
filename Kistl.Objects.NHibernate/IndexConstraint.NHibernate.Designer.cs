@@ -142,7 +142,7 @@ namespace Kistl.App.Base
 						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
-                                this.Proxy.Properties,
+                                () => this.Proxy.Properties,
                                 p => (Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>)null);

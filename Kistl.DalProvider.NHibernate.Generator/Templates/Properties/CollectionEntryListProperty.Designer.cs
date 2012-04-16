@@ -74,7 +74,7 @@ this.WriteObjects("					",  backingName , " \r\n");
 this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ">(\r\n");
 this.WriteObjects("							this, \r\n");
 this.WriteObjects("							new ProjectedCollection<",  entryProxyType , ", ",  entryType , ">(\r\n");
-this.WriteObjects("                                this.Proxy.",  name , ",\r\n");
+this.WriteObjects("                                () => this.Proxy.",  name , ",\r\n");
 this.WriteObjects("                                p => (",  entryType , ")OurContext.AttachAndWrap(p),\r\n");
 this.WriteObjects("                                ce => (",  entryProxyType , ")((NHibernatePersistenceObject)ce).NHibernateProxy),\r\n");
 #line 42 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"

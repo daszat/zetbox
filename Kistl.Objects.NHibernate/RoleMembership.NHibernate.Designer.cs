@@ -63,7 +63,7 @@ namespace Kistl.App.Base
 						= new NHibernateBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
-                                this.Proxy.Relations,
+                                () => this.Proxy.Relations,
                                 p => (Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>)null);

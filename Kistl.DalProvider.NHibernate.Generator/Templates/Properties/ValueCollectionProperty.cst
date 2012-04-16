@@ -26,7 +26,6 @@
 <%@ Parameter Name="underlyingCollectionBackingName" Type="string" %>
 <%@ Parameter Name="orderByValue" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
-<%@ Parameter Name="ListOrCollection" Type="string" %>
 
 <%
 	var eventName = "On" + name + "_PostSetter";
@@ -49,17 +48,13 @@
             }
         }
 
-        private Projected<%= ListOrCollection %><<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>> <%= underlyingCollectionName %>
+        private ProjectedCollection<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>> <%= underlyingCollectionName %>
         {
             get {
                 if (<%= underlyingCollectionBackingName %> == null)
                 {
-                    <%= underlyingCollectionBackingName %> = new Projected<%= ListOrCollection %><<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>>(
-<% if (ListOrCollection == "List" ) { %>
-                        MagicCollectionFactory.WrapAsList(this.Proxy.<%= name %>),
-<% } else { %>
-                        this.Proxy.<%= name %>,
-<% } %>
+                    <%= underlyingCollectionBackingName %> = new ProjectedCollection<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>>(
+                        () => this.Proxy.<%= name %>,
                         p => (<%= referencedCollectionEntryImpl %>)OurContext.AttachAndWrap(p),
                         d => (<%= referencedCollectionEntryProxy %>)((NHibernatePersistenceObject)d).NHibernateProxy);
                 }
@@ -68,5 +63,5 @@
         }
 
         private <%= backingCollectionType %> <%= backingName %>;
-        private Projected<%= ListOrCollection %><<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>> <%= underlyingCollectionBackingName %>;
+        private ProjectedCollection<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>> <%= underlyingCollectionBackingName %>;
         // END <%= this.GetType() %>

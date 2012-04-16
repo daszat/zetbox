@@ -128,7 +128,7 @@ namespace Kistl.App.Base
                         () => this.NotifyPropertyChanging("EnumerationEntries", null, null),
                         () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.EnumerationEntryNHibernateImpl.EnumerationEntryProxy, Kistl.App.Base.EnumerationEntry>(
-                            Proxy.EnumerationEntries,
+                            () => Proxy.EnumerationEntries,
                             p => (Kistl.App.Base.EnumerationEntry)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Base.EnumerationEntryNHibernateImpl.EnumerationEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

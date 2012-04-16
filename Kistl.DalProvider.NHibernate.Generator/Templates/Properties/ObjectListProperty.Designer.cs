@@ -86,7 +86,7 @@ this.WriteObjects("                        this,\r\n");
 this.WriteObjects("                        () => this.NotifyPropertyChanging(\"",  name , "\", null, null),\r\n");
 this.WriteObjects("                        () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
 this.WriteObjects("                        new ProjectedCollection<",  referencedProxy , ", ",  referencedInterface , ">(\r\n");
-this.WriteObjects("                            Proxy.",  name , ",\r\n");
+this.WriteObjects("                            () => Proxy.",  name , ",\r\n");
 this.WriteObjects("                            p => (",  referencedInterface , ")OurContext.AttachAndWrap(p),\r\n");
 this.WriteObjects("                            d => (",  referencedProxy , ")((NHibernatePersistenceObject)d).NHibernateProxy));\r\n");
 this.WriteObjects("                }\r\n");

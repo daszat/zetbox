@@ -679,7 +679,7 @@ namespace Kistl.App.Base
 						= new NHibernateBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>(
-                                this.Proxy.GenericArguments,
+                                () => this.Proxy.GenericArguments,
                                 p => (Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>)null);

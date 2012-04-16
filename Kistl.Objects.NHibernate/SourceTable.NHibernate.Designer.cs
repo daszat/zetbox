@@ -744,7 +744,7 @@ namespace ZBox.App.SchemaMigration
                         () => this.NotifyPropertyChanging("SourceColumn", null, null),
                         () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy, ZBox.App.SchemaMigration.SourceColumn>(
-                            Proxy.SourceColumn,
+                            () => Proxy.SourceColumn,
                             p => (ZBox.App.SchemaMigration.SourceColumn)OurContext.AttachAndWrap(p),
                             d => (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

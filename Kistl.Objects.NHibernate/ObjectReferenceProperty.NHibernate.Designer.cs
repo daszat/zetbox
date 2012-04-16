@@ -179,7 +179,7 @@ namespace Kistl.App.Base
 						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.Method, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
-                                this.Proxy.Methods,
+                                () => this.Proxy.Methods,
                                 p => (Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.B.ShowByProperties);

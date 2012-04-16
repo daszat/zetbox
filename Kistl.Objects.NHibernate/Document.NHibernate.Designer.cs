@@ -63,7 +63,7 @@ namespace at.dasz.DocumentManagement
 						= new NHibernateBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>(
-                                this.Proxy.Revisions,
+                                () => this.Proxy.Revisions,
                                 p => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>)null);

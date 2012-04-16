@@ -71,7 +71,7 @@ namespace Kistl.App.GUI
                         () => this.NotifyPropertyChanging("ChildControlKinds", null, null),
                         () => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.GUI.ControlKindNHibernateImpl.ControlKindProxy, Kistl.App.GUI.ControlKind>(
-                            Proxy.ChildControlKinds,
+                            () => Proxy.ChildControlKinds,
                             p => (Kistl.App.GUI.ControlKind)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.GUI.ControlKindNHibernateImpl.ControlKindProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

@@ -70,7 +70,7 @@ namespace Kistl.App.Test
                         () => this.NotifyPropertyChanging("Antworten", null, null),
                         () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.AntwortNHibernateImpl.AntwortProxy, Kistl.App.Test.Antwort>(
-                            Proxy.Antworten,
+                            () => Proxy.Antworten,
                             p => (Kistl.App.Test.Antwort)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Test.AntwortNHibernateImpl.AntwortProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -158,7 +158,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 						= new NHibernateASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
-                                this.Proxy.Student,
+                                () => this.Proxy.Student,
                                 p => (Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>)entry.A.Testbogen);

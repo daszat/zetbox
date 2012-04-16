@@ -41,7 +41,7 @@
                         () => this.NotifyPropertyChanging("<%= name %>", null, null),
                         () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
                         new ProjectedCollection<<%= referencedProxy %>, <%= referencedInterface %>>(
-                            Proxy.<%= name %>,
+                            () => Proxy.<%= name %>,
                             p => (<%= referencedInterface %>)OurContext.AttachAndWrap(p),
                             d => (<%= referencedProxy %>)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

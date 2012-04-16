@@ -649,7 +649,7 @@ namespace ZBox.App.SchemaMigration
 						= new NHibernateBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy, ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>(
-                                this.Proxy.DestinationProperty,
+                                () => this.Proxy.DestinationProperty,
                                 p => (ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>)null);
@@ -687,7 +687,7 @@ namespace ZBox.App.SchemaMigration
                         () => this.NotifyPropertyChanging("EnumEntries", null, null),
                         () => { this.NotifyPropertyChanged("EnumEntries", null, null); if(OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.SourceEnumNHibernateImpl.SourceEnumProxy, ZBox.App.SchemaMigration.SourceEnum>(
-                            Proxy.EnumEntries,
+                            () => Proxy.EnumEntries,
                             p => (ZBox.App.SchemaMigration.SourceEnum)OurContext.AttachAndWrap(p),
                             d => (ZBox.App.SchemaMigration.SourceEnumNHibernateImpl.SourceEnumProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -1028,7 +1028,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                         () => this.NotifyPropertyChanging("Referers", null, null),
                         () => { this.NotifyPropertyChanged("Referers", null, null); if(OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy, ZBox.App.SchemaMigration.SourceColumn>(
-                            Proxy.Referers,
+                            () => Proxy.Referers,
                             p => (ZBox.App.SchemaMigration.SourceColumn)OurContext.AttachAndWrap(p),
                             d => (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

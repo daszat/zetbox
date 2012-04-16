@@ -146,7 +146,7 @@ namespace Kistl.App.Test
                         () => this.NotifyPropertyChanging("MubBlah_List_Nav", null, null),
                         () => { this.NotifyPropertyChanged("MubBlah_List_Nav", null, null); if(OnMubBlah_List_Nav_PostSetter != null && IsAttached) OnMubBlah_List_Nav_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.MuhblahNHibernateImpl.MuhblahProxy, Kistl.App.Test.Muhblah>(
-                            Proxy.MubBlah_List_Nav,
+                            () => Proxy.MubBlah_List_Nav,
                             p => (Kistl.App.Test.Muhblah)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Test.MuhblahNHibernateImpl.MuhblahProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -284,7 +284,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 						= new NHibernateASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
-                                this.Proxy.MuhBlah_ManyList_Nav,
+                                () => this.Proxy.MuhBlah_ManyList_Nav,
                                 p => (Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>)entry.A.TestCustomObjects_ManyList_Nav);
@@ -597,7 +597,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 if (_PhoneNumbersOtherCollection == null)
                 {
                     _PhoneNumbersOtherCollection = new ProjectedCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>(
-                        this.Proxy.PhoneNumbersOther,
+                        () => this.Proxy.PhoneNumbersOther,
                         p => (Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                         d => (Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
                 }

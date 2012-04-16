@@ -238,7 +238,7 @@ namespace Kistl.App.Base
                         () => this.NotifyPropertyChanging("Constraints", null, null),
                         () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.InstanceConstraintNHibernateImpl.InstanceConstraintProxy, Kistl.App.Base.InstanceConstraint>(
-                            Proxy.Constraints,
+                            () => Proxy.Constraints,
                             p => (Kistl.App.Base.InstanceConstraint)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Base.InstanceConstraintNHibernateImpl.InstanceConstraintProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -658,7 +658,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.Interface, Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy, Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>(
-                                this.Proxy.ImplementsInterfaces,
+                                () => this.Proxy.ImplementsInterfaces,
                                 p => (Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>)null);
@@ -696,7 +696,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
                         () => this.NotifyPropertyChanging("Methods", null, null),
                         () => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.MethodNHibernateImpl.MethodProxy, Kistl.App.Base.Method>(
-                            Proxy.Methods,
+                            () => Proxy.Methods,
                             p => (Kistl.App.Base.Method)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Base.MethodNHibernateImpl.MethodProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -880,7 +880,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
                         () => this.NotifyPropertyChanging("Properties", null, null),
                         () => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy, Kistl.App.Base.Property>(
-                            Proxy.Properties,
+                            () => Proxy.Properties,
                             p => (Kistl.App.Base.Property)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

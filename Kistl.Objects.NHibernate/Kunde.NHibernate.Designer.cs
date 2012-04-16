@@ -467,7 +467,7 @@ namespace Kistl.App.Projekte
                 if (_EMailsCollection == null)
                 {
                     _EMailsCollection = new ProjectedCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy, Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl>(
-                        this.Proxy.EMails,
+                        () => this.Proxy.EMails,
                         p => (Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                         d => (Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
                 }

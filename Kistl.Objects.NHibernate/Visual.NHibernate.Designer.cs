@@ -63,7 +63,7 @@ namespace Kistl.App.GUI
 						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy, Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>(
-                                this.Proxy.Children,
+                                () => this.Proxy.Children,
                                 p => (Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>)null);
@@ -94,7 +94,7 @@ namespace Kistl.App.GUI
 						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy, Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>(
-                                this.Proxy.ContextMenu,
+                                () => this.Proxy.ContextMenu,
                                 p => (Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>)null);

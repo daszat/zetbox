@@ -142,7 +142,7 @@ namespace Kistl.App.Base
 						= new NHibernateASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
-                                this.Proxy.Member,
+                                () => this.Proxy.Member,
                                 p => (Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>)entry.A.Groups);

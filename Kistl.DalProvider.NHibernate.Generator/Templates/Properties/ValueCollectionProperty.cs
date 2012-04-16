@@ -56,11 +56,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
             string referencedCollectionEntryProxy = referencedCollectionEntryImpl + "." + prop.GetCollectionEntryClassName() + "Proxy";
 
-            // sometimes we have objects without ID, which cannot be used in a ProjectedList (ISortKey uses ID)
-            // TODO: Use list index as SortKey for PersistentOrder collection entries
-            string ListOrCollection = hasPersistentOrder ? "List" : "Collection";
-
-            string providerCollectionType = "I" + ListOrCollection + "<" + referencedCollectionEntryImpl + ">";
+            string providerCollectionType = "ICollection<" + referencedCollectionEntryImpl + ">";
             string underlyingCollectionName = name + "Collection";
             string underlyingCollectionBackingName = backingName + "Collection";
             string moduleNamespace = prop.Module.Namespace;
@@ -73,13 +69,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                     referencedCollectionEntryImpl,
                     providerCollectionType);
 
-
             Call(
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
                 thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryImpl, referencedCollectionEntryProxy,
                 providerCollectionType, underlyingCollectionName, underlyingCollectionBackingName,
-                orderByValue, moduleNamespace, ListOrCollection);
+                orderByValue, moduleNamespace);
         }
 
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string underlyingCollectionName)

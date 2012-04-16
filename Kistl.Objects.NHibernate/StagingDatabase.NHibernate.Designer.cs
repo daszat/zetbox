@@ -825,7 +825,7 @@ namespace ZBox.App.SchemaMigration
                         () => this.NotifyPropertyChanging("SourceTables", null, null),
                         () => { this.NotifyPropertyChanged("SourceTables", null, null); if(OnSourceTables_PostSetter != null && IsAttached) OnSourceTables_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.SourceTableNHibernateImpl.SourceTableProxy, ZBox.App.SchemaMigration.SourceTable>(
-                            Proxy.SourceTables,
+                            () => Proxy.SourceTables,
                             p => (ZBox.App.SchemaMigration.SourceTable)OurContext.AttachAndWrap(p),
                             d => (ZBox.App.SchemaMigration.SourceTableNHibernateImpl.SourceTableProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

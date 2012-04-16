@@ -128,7 +128,7 @@ namespace Kistl.App.Test
                         () => this.NotifyPropertyChanging("NSide", null, null),
                         () => { this.NotifyPropertyChanged("NSide", null, null); if(OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.One_to_N_relations_NNHibernateImpl.One_to_N_relations_NProxy, Kistl.App.Test.One_to_N_relations_N>(
-                            Proxy.NSide,
+                            () => Proxy.NSide,
                             p => (Kistl.App.Test.One_to_N_relations_N)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Test.One_to_N_relations_NNHibernateImpl.One_to_N_relations_NProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

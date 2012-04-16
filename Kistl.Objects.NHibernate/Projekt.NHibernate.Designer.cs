@@ -73,7 +73,7 @@ namespace Kistl.App.Projekte
                         () => this.NotifyPropertyChanging("Auftraege", null, null),
                         () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Projekte.AuftragNHibernateImpl.AuftragProxy, Kistl.App.Projekte.Auftrag>(
-                            Proxy.Auftraege,
+                            () => Proxy.Auftraege,
                             p => (Kistl.App.Projekte.Auftrag)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Projekte.AuftragNHibernateImpl.AuftragProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
@@ -623,7 +623,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 						= new NHibernateBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
 							this, 
 							new ProjectedCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
-                                this.Proxy.Mitarbeiter,
+                                () => this.Proxy.Mitarbeiter,
                                 p => (Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
                                 ce => (Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
                             entry => (IRelationListSync<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>)entry.B.Projekte);
@@ -719,7 +719,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                         () => this.NotifyPropertyChanging("Tasks", null, null),
                         () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Projekte.TaskNHibernateImpl.TaskProxy, Kistl.App.Projekte.Task>(
-                            Proxy.Tasks,
+                            () => Proxy.Tasks,
                             p => (Kistl.App.Projekte.Task)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Projekte.TaskNHibernateImpl.TaskProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

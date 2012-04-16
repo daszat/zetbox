@@ -628,7 +628,7 @@ namespace ZBox.App.SchemaMigration
                         () => this.NotifyPropertyChanging("StagingDatabases", null, null),
                         () => { this.NotifyPropertyChanged("StagingDatabases", null, null); if(OnStagingDatabases_PostSetter != null && IsAttached) OnStagingDatabases_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl.StagingDatabaseProxy, ZBox.App.SchemaMigration.StagingDatabase>(
-                            Proxy.StagingDatabases,
+                            () => Proxy.StagingDatabases,
                             p => (ZBox.App.SchemaMigration.StagingDatabase)OurContext.AttachAndWrap(p),
                             d => (ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl.StagingDatabaseProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }

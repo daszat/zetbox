@@ -70,7 +70,7 @@ namespace Kistl.App.Test
                         () => this.NotifyPropertyChanging("NEnds", null, null),
                         () => { this.NotifyPropertyChanged("NEnds", null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.OrderedNEndNHibernateImpl.OrderedNEndProxy, Kistl.App.Test.OrderedNEnd>(
-                            Proxy.NEnds,
+                            () => Proxy.NEnds,
                             p => (Kistl.App.Test.OrderedNEnd)OurContext.AttachAndWrap(p),
                             d => (Kistl.App.Test.OrderedNEndNHibernateImpl.OrderedNEndProxy)((NHibernatePersistenceObject)d).NHibernateProxy));
                 }
