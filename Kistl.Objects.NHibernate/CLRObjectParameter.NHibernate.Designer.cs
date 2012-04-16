@@ -493,7 +493,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_CLRObjectParameter")]
         public override void NotifyDeleting()
         {
-            Type = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_CLRObjectParameter != null) OnNotifyDeleting_CLRObjectParameter(this);
         }

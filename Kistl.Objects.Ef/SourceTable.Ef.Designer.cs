@@ -1428,7 +1428,6 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
             ChangedBy = null;
             CreatedBy = null;
             DestinationObjectClass = null;
-            StagingDatabase = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceTable != null) OnNotifyDeleting_SourceTable(this);
         }

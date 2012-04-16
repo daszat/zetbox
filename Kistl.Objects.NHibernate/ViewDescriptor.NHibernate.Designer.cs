@@ -743,8 +743,6 @@ namespace Kistl.App.GUI
         {
             SupportedViewModels.Clear();
             ControlKind = null;
-            ControlRef = null;
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
         }

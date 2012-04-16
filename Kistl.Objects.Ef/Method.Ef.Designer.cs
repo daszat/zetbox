@@ -1826,8 +1826,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             ChangedBy = null;
             CreatedBy = null;
             Icon = null;
-            Module = null;
-            ObjectClass = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Method != null) OnNotifyDeleting_Method(this);
         }

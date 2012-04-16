@@ -570,7 +570,6 @@ namespace Kistl.App.Base
         public override void NotifyDeleting()
         {
             Member.Clear();
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Group != null) OnNotifyDeleting_Group(this);
         }

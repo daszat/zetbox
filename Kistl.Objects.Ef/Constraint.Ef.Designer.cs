@@ -1006,7 +1006,6 @@ namespace Kistl.App.Base
         public override void NotifyDeleting()
         {
             ChangedBy = null;
-            ConstrainedProperty = null;
             CreatedBy = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Constraint != null) OnNotifyDeleting_Constraint(this);

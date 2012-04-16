@@ -1870,7 +1870,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             ChangedBy = null;
             CreatedBy = null;
             DefaultIcon = null;
-            Module = null;
             RequestedKind = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_DataType != null) OnNotifyDeleting_DataType(this);

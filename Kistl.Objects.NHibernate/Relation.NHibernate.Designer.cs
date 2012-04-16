@@ -1798,11 +1798,8 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_Relation")]
         public override void NotifyDeleting()
         {
-            A = null;
-            B = null;
             ChangedBy = null;
             CreatedBy = null;
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Relation != null) OnNotifyDeleting_Relation(this);
         }

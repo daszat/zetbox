@@ -2262,10 +2262,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             CreatedBy = null;
             DefaultValue = null;
             FilterConfiguration = null;
-            Module = null;
-            ObjectClass = null;
             RequestedKind = null;
-            ValueModelDescriptor = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Property != null) OnNotifyDeleting_Property(this);
         }

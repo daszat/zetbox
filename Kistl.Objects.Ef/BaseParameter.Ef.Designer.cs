@@ -1493,7 +1493,6 @@ namespace Kistl.App.Base
         {
             ChangedBy = null;
             CreatedBy = null;
-            Method = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_BaseParameter != null) OnNotifyDeleting_BaseParameter(this);
         }

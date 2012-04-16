@@ -1063,7 +1063,6 @@ namespace at.dasz.DocumentManagement
         [EventBasedMethod("OnNotifyDeleting_File")]
         public override void NotifyDeleting()
         {
-            Blob = null;
             ChangedBy = null;
             CreatedBy = null;
             base.NotifyDeleting();

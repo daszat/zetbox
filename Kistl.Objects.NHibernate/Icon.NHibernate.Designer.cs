@@ -773,8 +773,6 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyDeleting_Icon")]
         public override void NotifyDeleting()
         {
-            Blob = null;
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Icon != null) OnNotifyDeleting_Icon(this);
         }

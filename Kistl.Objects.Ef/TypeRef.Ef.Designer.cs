@@ -1452,7 +1452,6 @@ namespace Kistl.App.Base
         public override void NotifyDeleting()
         {
             GenericArguments.Clear();
-            Assembly = null;
             ChangedBy = null;
             CreatedBy = null;
             Parent = null;

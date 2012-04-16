@@ -1156,8 +1156,6 @@ namespace Kistl.App.Base
         {
             ChangedBy = null;
             CreatedBy = null;
-            Module = null;
-            ObjectClass = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_AccessControl != null) OnNotifyDeleting_AccessControl(this);
         }

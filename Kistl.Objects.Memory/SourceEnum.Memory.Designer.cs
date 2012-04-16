@@ -984,8 +984,6 @@ namespace ZBox.App.SchemaMigration
         {
             ChangedBy = null;
             CreatedBy = null;
-            DestinationValue = null;
-            SourceColumn = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceEnum != null) OnNotifyDeleting_SourceEnum(this);
         }

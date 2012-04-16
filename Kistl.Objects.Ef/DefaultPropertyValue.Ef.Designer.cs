@@ -870,7 +870,6 @@ namespace Kistl.App.Base
         {
             ChangedBy = null;
             CreatedBy = null;
-            Property = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_DefaultPropertyValue != null) OnNotifyDeleting_DefaultPropertyValue(this);
         }

@@ -981,7 +981,6 @@ namespace Kistl.App.Base
         {
             ChangedBy = null;
             CreatedBy = null;
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Assembly != null) OnNotifyDeleting_Assembly(this);
         }

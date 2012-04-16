@@ -1357,9 +1357,7 @@ namespace Kistl.App.GUI
         {
             ChangedBy = null;
             CreatedBy = null;
-            Module = null;
             RequestedKind = null;
-            ViewModelDescriptor = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_FilterConfiguration != null) OnNotifyDeleting_FilterConfiguration(this);
         }

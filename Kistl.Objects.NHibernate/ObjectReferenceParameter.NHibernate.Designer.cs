@@ -493,7 +493,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_ObjectReferenceParameter")]
         public override void NotifyDeleting()
         {
-            ObjectClass = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferenceParameter != null) OnNotifyDeleting_ObjectReferenceParameter(this);
         }

@@ -1819,7 +1819,6 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             ChangedBy = null;
             CreatedBy = null;
             References = null;
-            SourceTable = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceColumn != null) OnNotifyDeleting_SourceColumn(this);
         }

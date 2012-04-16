@@ -431,7 +431,6 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyDeleting_PropertyFilterConfiguration")]
         public override void NotifyDeleting()
         {
-            Property = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_PropertyFilterConfiguration != null) OnNotifyDeleting_PropertyFilterConfiguration(this);
         }

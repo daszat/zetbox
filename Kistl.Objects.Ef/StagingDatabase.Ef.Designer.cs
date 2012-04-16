@@ -1165,7 +1165,6 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
             SourceTables.Clear();
             ChangedBy = null;
             CreatedBy = null;
-            MigrationProject = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_StagingDatabase != null) OnNotifyDeleting_StagingDatabase(this);
         }

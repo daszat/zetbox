@@ -1395,7 +1395,6 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
             Groups.Clear();
             ChangedBy = null;
             CreatedBy = null;
-            Module = null;
             Parent = null;
             ViewModelDescriptor = null;
             base.NotifyDeleting();

@@ -545,8 +545,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnNotifyDeleting_InvokingConstraint")]
         public override void NotifyDeleting()
         {
-            GetErrorTextInvocation = null;
-            IsValidInvocation = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_InvokingConstraint != null) OnNotifyDeleting_InvokingConstraint(this);
         }

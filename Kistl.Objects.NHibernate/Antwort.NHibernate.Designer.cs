@@ -573,7 +573,6 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnNotifyDeleting_Antwort")]
         public override void NotifyDeleting()
         {
-            Fragebogen = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Antwort != null) OnNotifyDeleting_Antwort(this);
         }

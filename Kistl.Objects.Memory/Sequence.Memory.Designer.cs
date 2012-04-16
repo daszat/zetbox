@@ -1178,7 +1178,6 @@ namespace Kistl.App.Base
             ChangedBy = null;
             CreatedBy = null;
             Data = null;
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Sequence != null) OnNotifyDeleting_Sequence(this);
         }

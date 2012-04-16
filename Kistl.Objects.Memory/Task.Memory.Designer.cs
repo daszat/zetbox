@@ -1073,7 +1073,6 @@ namespace Kistl.App.Projekte
         {
             ChangedBy = null;
             CreatedBy = null;
-            Projekt = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_Task != null) OnNotifyDeleting_Task(this);
         }

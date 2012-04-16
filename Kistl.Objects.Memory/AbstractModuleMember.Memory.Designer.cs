@@ -777,7 +777,6 @@ namespace Kistl.App.Base
         {
             ChangedBy = null;
             CreatedBy = null;
-            Module = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_AbstractModuleMember != null) OnNotifyDeleting_AbstractModuleMember(this);
         }

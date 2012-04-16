@@ -1283,8 +1283,6 @@ namespace Kistl.App.GUI
             DefaultGridCellDisplayKind = null;
             DefaultGridCellEditorKind = null;
             DefaultGridCellPreEditorKind = null;
-            Module = null;
-            ViewModelRef = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
         }

@@ -1179,7 +1179,6 @@ namespace Kistl.App.Base
         {
             ChangedBy = null;
             CreatedBy = null;
-            Enumeration = null;
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumerationEntry != null) OnNotifyDeleting_EnumerationEntry(this);
         }

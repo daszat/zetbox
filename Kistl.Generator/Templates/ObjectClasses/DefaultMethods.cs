@@ -37,7 +37,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
             {
                 this.WriteObjects("            ", prop.Name, ".Clear();\r\n");
             }
-            foreach (var prop in dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name))
+            foreach (var prop in dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList() && !p.IsCalculated() && p.IsNullable()).OrderBy(p => p.Name))
             {
                 this.WriteObjects("            ", prop.Name, " = null;\r\n");
             }
