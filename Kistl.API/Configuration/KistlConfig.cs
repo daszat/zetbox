@@ -154,7 +154,7 @@ namespace Kistl.API.Configuration
 
             public Database GetConnectionString(string key)
             {
-                var result = ConnectionStrings.Where(i => i.Name == key).ToArray();
+                var result = (ConnectionStrings ?? Enumerable.Empty<Database>()).Where(i => i.Name == key).ToArray();
                 if (result.Length == 0)
                 {
                     throw new ArgumentOutOfRangeException("key", string.Format("No connection string with key '{0}' found", key));
