@@ -372,8 +372,8 @@ namespace Kistl.API.Utils
     public sealed class ProjectedCollection<TInput, TOutput>
         : AbstractProjectedCollection<TInput, TOutput>
     {
-        public ProjectedCollection(ICollection<TInput> Collection, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
-            : base(Collection, selector, inverter, false)
+        public ProjectedCollection(ICollection<TInput> collection, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
+            : base(collection, selector, inverter, false)
         {
         }
     }

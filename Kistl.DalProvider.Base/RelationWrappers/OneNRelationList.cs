@@ -25,6 +25,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         private readonly IDataObject _owner;
         private readonly Action _ownerChangingNotifier;
         private readonly Action _ownerChangedNotifier;
+        private readonly ICollection<T> _underlyingCollection;
         private List<T> collection; // can change
 
         #region legacy constructors, invalidly still used by Memory provider
@@ -42,14 +43,15 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             : this(fkProperty, posProperty, owner, ownerChangingNotifier, ownerChangedNotifier, new List<T>()) { }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
-        public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerChangingNotifier, Action ownerChangedNotifier, IEnumerable<T> collection)
+        public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerChangingNotifier, Action ownerChangedNotifier, ICollection<T> underlyingCollection)
         {
             _propertyName = fkProperty;
             _posProperty = posProperty;
             _owner = owner;
             _ownerChangingNotifier = ownerChangingNotifier;
             _ownerChangedNotifier = ownerChangedNotifier;
-            this.collection = collection != null ? collection.OrderBy(i => GetPosition(i)).ToList() : new List<T>();
+            _underlyingCollection = underlyingCollection ?? new List<T>();
+            this.collection = _underlyingCollection.OrderBy(i => GetPosition(i)).ToList();
 
             //foreach (var item in this.collection)
             //{
@@ -72,6 +74,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
                     {
                         NotifyOwnerChanging();
                         collection.Insert(idx, item);
+                        _underlyingCollection.Add(item);
                         OnItemAdded(item, idx);
 
                         return;
@@ -81,6 +84,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
             NotifyOwnerChanging();
             collection.Add(item);
+            _underlyingCollection.Add(item);
             OnItemAdded(item, collection.Count - 1);
         }
 
@@ -89,6 +93,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             int index = collection.IndexOf(item);
             NotifyOwnerChanging();
             collection.Remove(item);
+            _underlyingCollection.Remove(item);
             OnItemRemoved(item, index);
         }
 
@@ -112,6 +117,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
                 throw new WrongKistlContextException();
             NotifyOwnerChanging();
             collection.Insert(index, item);
+            _underlyingCollection.Add(item);
             SetPointerProperty(item);
             if (!String.IsNullOrEmpty(_posProperty))
             {
@@ -124,6 +130,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         {
             NotifyOwnerChanging();
             collection.RemoveAt(index);
+            _underlyingCollection.Remove(item);
             ClearPointerProperty(item);
             OnItemRemoved(item, index);
         }
@@ -153,6 +160,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
                 ClearPointerProperty(item);
             }
             collection.Clear();
+            _underlyingCollection.Clear();
             OnCollectionReset();
         }
 
@@ -189,15 +197,6 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             {
                 item.SetPropertyValue<int?>(_posProperty, null);
             }
-        }
-
-        public void ApplyChanges(OneNRelationList<T> list)
-        {
-            if (list == null)
-                return;
-            list.OnCollectionResetting();
-            list.collection = new List<T>(this.collection);
-            list.OnCollectionReset();
         }
 
         public void AttachToContext(IKistlContext ctx)
