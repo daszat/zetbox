@@ -23,7 +23,6 @@ namespace Kistl.API.Tests
         {
             Assert.That(cfg.ConfigName, Is.Not.Empty, "ConfigName");
             Assert.That(cfg.AssemblySearchPaths, Is.Not.Null, "AssemblySearchPaths");
-            Assert.That(cfg.AssemblySearchPaths.Paths, Is.TypeOf<IEnumerable>(), "AssemblySearchPaths");
             Assert.That(cfg.AssemblySearchPaths.Paths, Is.Not.Empty, "AssemblySearchPaths");
 
             Assert.That(cfg.Client, Is.Not.Null, "Client");
