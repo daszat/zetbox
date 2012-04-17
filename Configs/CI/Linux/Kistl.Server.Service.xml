@@ -2,13 +2,13 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>CI Server Configuration</ConfigName>
   <Server StartServer="true">
-    <DocumentStore>DocumentStore/Server/</DocumentStore>
-    <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
-    <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
+    <DocumentStore>../DocumentStore/Server/</DocumentStore>
+    <CodeGenWorkingPath>../bin/CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>../bin/CodeGen</CodeGenOutputPath>
     <CodeGenBinaryOutputPath>
-      <string>bin/Debug</string>
+      <string>./</string>
     </CodeGenBinaryOutputPath>
-    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <CodeGenArchivePath>../Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
