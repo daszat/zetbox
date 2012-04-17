@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Default Server Configuration</ConfigName>
+  <ConfigName>CI Server Configuration</ConfigName>
   <Server StartServer="true">
     <DocumentStore>DocumentStore/Server/</DocumentStore>
     <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
@@ -27,7 +27,6 @@
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
       <Module>Kistl.DalProvider.NHibernate.Generator.NHibernateGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
-      <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
@@ -38,7 +37,6 @@
     <string>Server/NH</string>
     <string>Server/NH.Generated</string>
     <string>Server/NH.Fallback</string>
-    <string>Server/EF</string>
     <string>Common/App.ZBox</string>
     <string>Server/App.ZBox</string>
   </AssemblySearchPaths>
