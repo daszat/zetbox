@@ -71,6 +71,12 @@ namespace Kistl.API
                 if (_isInitialised) return;
                 _isInitialised = true;
 
+                if (config.AssemblySearchPaths == null)
+                {
+                    Log.Info("Not initialising: no AssemblySearchPaths set.");
+                    return;
+                }
+
                 Log.DebugFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
                 InitialiseTargetAssemblyFolder(config);
                 InitialiseSearchPath(config.AssemblySearchPaths.Paths);
