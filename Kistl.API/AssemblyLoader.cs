@@ -97,7 +97,7 @@ namespace Kistl.API
         /// <param name="config">must not be null</param>
         private static void InitialiseTargetAssemblyFolder(KistlConfig config)
         {
-            EnableShadowCopy = config.AssemblySearchPaths.EnableShadowCopy;
+            EnableShadowCopy = config.AssemblySearchPaths == null ? false : config.AssemblySearchPaths.EnableShadowCopy;
             if (EnableShadowCopy)
             {
                 TargetAssemblyFolder = Path.Combine(config.TempFolder, "bin");
