@@ -80,6 +80,10 @@ namespace Kistl.App.Base
         {
             base.AttachToContext(ctx);
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 

@@ -652,6 +652,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             if (_PhoneNumbersOther != null)
                 this.Proxy.PhoneNumbersOther.ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {

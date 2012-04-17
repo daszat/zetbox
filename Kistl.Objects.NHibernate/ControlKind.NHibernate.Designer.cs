@@ -508,6 +508,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             base.AttachToContext(ctx);
             var nhCtx = (NHibernateContext)ctx;
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {

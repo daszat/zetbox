@@ -1198,6 +1198,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             base.AttachToContext(ctx);
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+            _CodeTemplate_IsDirty = true;
+        }
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)

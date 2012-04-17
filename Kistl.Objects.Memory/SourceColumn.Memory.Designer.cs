@@ -1330,6 +1330,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             base.AttachToContext(ctx);
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {

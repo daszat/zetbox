@@ -84,6 +84,7 @@ namespace <%= DataType.Module.Namespace %>
 <%
         ApplyApplyChangesFromMethod();
         ApplyAttachToContextMethod();
+		ApplySetNewMethod();
         ApplyClassTailTemplate();
 %>
 

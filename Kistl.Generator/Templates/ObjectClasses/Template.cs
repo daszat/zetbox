@@ -143,6 +143,20 @@ namespace Kistl.Generator.Templates.ObjectClasses
             ObjectClasses.AttachToContextTemplate.Call(Host, ctx, ObjectClass);
         }
 
+        protected override void ApplySetNewMethod()
+        {
+            base.ApplyAttachToContextMethod();
+
+            this.WriteLine("        public override void SetNew()");
+            this.WriteLine("        {");
+            this.WriteLine("            base.SetNew();");
+            foreach (var prop in ObjectClass.Properties.Where(p => p.IsCalculated()).OrderBy(p => p.Name))
+            {
+                this.WriteObjects("            _", prop.Name, "_IsDirty = true;\r\n");
+            } 
+            this.WriteLine("        }");
+        }
+
         protected override void ApplyClassHeadTemplate()
         {
             base.ApplyClassHeadTemplate();

@@ -177,6 +177,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         {
             base.AttachToContext(ctx);
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)

@@ -620,6 +620,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             if (_PhoneNumbersOtherCollection != null)
                 _PhoneNumbersOtherCollection.ForEach<IPersistenceObject>(i => ctx.Attach(i));
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {

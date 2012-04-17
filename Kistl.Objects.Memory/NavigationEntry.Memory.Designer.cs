@@ -1032,6 +1032,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         {
             base.AttachToContext(ctx);
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {

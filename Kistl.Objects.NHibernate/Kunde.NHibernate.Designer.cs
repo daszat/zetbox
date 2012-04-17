@@ -824,6 +824,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
             if (_EMails != null)
                 this.Proxy.EMails.ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {

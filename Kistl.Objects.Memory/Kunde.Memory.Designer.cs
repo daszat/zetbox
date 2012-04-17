@@ -781,6 +781,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
             if (_EMailsCollection != null)
                 _EMailsCollection.ForEach<IPersistenceObject>(i => ctx.Attach(i));
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {

@@ -605,6 +605,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             base.AttachToContext(ctx);
             var nhCtx = (NHibernateContext)ctx;
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
 
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 

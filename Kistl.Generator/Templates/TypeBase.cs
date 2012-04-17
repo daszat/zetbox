@@ -72,6 +72,8 @@ namespace Kistl.Generator.Templates
 
         protected virtual void ApplyAttachToContextMethod() { }
 
+        protected virtual void ApplySetNewMethod() { }
+
         /// <returns>The base class to inherit from.</returns>
         protected virtual string GetBaseClass()
         {

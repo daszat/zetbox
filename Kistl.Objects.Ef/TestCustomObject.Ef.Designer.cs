@@ -707,6 +707,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             if (_PhoneNumbersOther != null)
                 PhoneNumbersOtherImpl.ForEach<IPersistenceObject>(i => ctx.Attach(i));
         }
+        public override void SetNew()
+        {
+            base.SetNew();
+        }
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
