@@ -31,7 +31,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         protected override void ApplyPostDeletingTemplate()
         {
-            foreach (var prop in dt.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList() && !p.IsCalculated() && !(p is CompoundObjectProperty)).OrderBy(p => p.Name))
+            foreach (var prop in dt.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name).Cast<Property>()
+                         .Concat(dt.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList() && !p.IsCalculated()).OrderBy(p => p.Name).Cast<Property>()))
             {
                 this.WriteObjects("            foreach(NHibernatePersistenceObject x in ", prop.Name, "Collection) {\r\n");
                 this.WriteObjects("                x.ParentsToDelete.Add(this);\r\n");

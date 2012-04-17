@@ -885,6 +885,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestCustomObject != null) OnNotifyDeleting_TestCustomObject(this);
+            foreach(NHibernatePersistenceObject x in PhoneNumbersOtherCollection) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
 
             if (MubBlah_Nav != null) {
                 ((NHibernatePersistenceObject)MubBlah_Nav).ChildrenToDelete.Add(this);
