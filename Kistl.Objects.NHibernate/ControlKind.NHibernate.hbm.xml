@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <set name="ChildControlKinds" batch-size="100" inverse="true" >
+        <set name="ChildControlKinds" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Parent`" />
             <one-to-many class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
         </set>

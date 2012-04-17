@@ -19,7 +19,7 @@
 <%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
 <% if (isList) {                                                                    %>
         <!-- CompoundObjectProperty IsList -->
-        <set name="<%= propName %>" inverse="true" batch-size="100">
+        <set name="<%= propName %>" cascade="none" inverse="true" batch-size="100">
             <key column="`<%= ceReverseKeyColumnName %>`" />
             <one-to-many <%= ceClassAttr %> />
         </set>

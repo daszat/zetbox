@@ -54,7 +54,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     if (otherEnd.Multiplicity.UpperBound() > 1) // we are 1-side
                     {
                         // always map as set, the wrapper has to translate/order the elements
-                        this.WriteObjects("        <set ", nameAttr, " batch-size=\"100\" inverse=\"true\" ");
+                        this.WriteObjects("        <set ", nameAttr, " batch-size=\"100\" cascade=\"none\" inverse=\"true\" ");
                         if (prop.EagerLoading)
                         {
                             // TODO: re-think and re-test eagerloading

@@ -26,7 +26,7 @@
                   column="`ChangedOn`" 
                   optimistic-lock="true"/>
 <!-- ObjectReferenceProperty -->
-        <set name="Constraints" batch-size="100" inverse="true" >
+        <set name="Constraints" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Constrained`" />
             <one-to-many class="Kistl.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -59,7 +59,7 @@
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <set name="Methods" batch-size="100" inverse="true" >
+        <set name="Methods" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
             <one-to-many class="Kistl.App.Base.MethodNHibernateImpl+MethodProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -72,7 +72,7 @@
                   column="`Name`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="Properties" batch-size="100" inverse="true" >
+        <set name="Properties" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
             <one-to-many class="Kistl.App.Base.PropertyNHibernateImpl+PropertyProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -126,7 +126,7 @@
                   column="`AreFlags`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="EnumerationEntries" batch-size="100" inverse="true" >
+        <set name="EnumerationEntries" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Enumeration`" />
             <one-to-many class="Kistl.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -160,7 +160,7 @@
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <set name="AccessControlList" batch-size="100" inverse="true" >
+        <set name="AccessControlList" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
             <one-to-many class="Kistl.App.Base.AccessControlNHibernateImpl+AccessControlProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -177,7 +177,7 @@
         <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Kistl.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Kistl.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <set name="FilterConfigurations" batch-size="100" inverse="true" >
+        <set name="FilterConfigurations" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
             <one-to-many class="Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl+ObjectClassFilterConfigurationProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -195,7 +195,7 @@
                   column="`IsSimpleObject`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="SubClasses" batch-size="100" inverse="true" >
+        <set name="SubClasses" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_BaseObjectClass`" />
             <one-to-many class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
         </set>

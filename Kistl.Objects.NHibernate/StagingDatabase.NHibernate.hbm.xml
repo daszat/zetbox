@@ -56,7 +56,7 @@
                   column="`Schema`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="SourceTables" batch-size="100" inverse="true" >
+        <set name="SourceTables" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_StagingDatabase`" />
             <one-to-many class="ZBox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Kistl.Objects.NHibernateImpl" />
         </set>

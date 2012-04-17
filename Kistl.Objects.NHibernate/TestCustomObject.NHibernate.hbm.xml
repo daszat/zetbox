@@ -23,7 +23,7 @@
                   column="`Birthday`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="MubBlah_List_Nav" batch-size="100" inverse="true" >
+        <set name="MubBlah_List_Nav" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_TCO_Role`" />
             <one-to-many class="Kistl.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -77,7 +77,7 @@
                   optimistic-lock="false"/>
         </component>
         <!-- CompoundObjectProperty IsList -->
-        <set name="PhoneNumbersOther" inverse="true" batch-size="100">
+        <set name="PhoneNumbersOther" cascade="none" inverse="true" batch-size="100">
             <key column="`fk_TestCustomObject`" />
             <one-to-many class="Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy,Kistl.Objects.NHibernateImpl" />
         </set>

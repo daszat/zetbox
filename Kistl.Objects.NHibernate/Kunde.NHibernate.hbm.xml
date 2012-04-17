@@ -37,7 +37,7 @@
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isList -->
-        <set name="EMails"  inverse="true" batch-size="100">
+        <set name="EMails"  cascade="none" inverse="true" batch-size="100">
             <key column="`fk_Kunde`" />
             <one-to-many class="Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl+Kunde_EMails_CollectionEntryProxy,Kistl.Objects.NHibernateImpl" />
         </set>

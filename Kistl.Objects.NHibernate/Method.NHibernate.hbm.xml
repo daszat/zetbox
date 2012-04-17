@@ -75,7 +75,7 @@
         <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Kistl.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Kistl.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <set name="Parameter" batch-size="100" inverse="true" >
+        <set name="Parameter" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Method`" />
             <one-to-many class="Kistl.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Kistl.Objects.NHibernateImpl" />
         </set>

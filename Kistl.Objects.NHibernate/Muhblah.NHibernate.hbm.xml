@@ -23,7 +23,7 @@
                   column="`TestBool`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="TestCustomObjects_List_Nav" batch-size="100" inverse="true" >
+        <set name="TestCustomObjects_List_Nav" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_MB_Role`" />
             <one-to-many class="Kistl.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Kistl.Objects.NHibernateImpl" />
         </set>

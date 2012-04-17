@@ -58,7 +58,7 @@
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <set name="EnumEntries" batch-size="100" inverse="true" >
+        <set name="EnumEntries" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_SourceColumn`" />
             <one-to-many class="ZBox.App.SchemaMigration.SourceEnumNHibernateImpl+SourceEnumProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -79,7 +79,7 @@
         <many-to-one name="References" column="`fk_PK_Column`" class="ZBox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Kistl.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <set name="Referers" batch-size="100" inverse="true" >
+        <set name="Referers" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_PK_Column`" />
             <one-to-many class="ZBox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Kistl.Objects.NHibernateImpl" />
         </set>

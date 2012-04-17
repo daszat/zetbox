@@ -35,7 +35,7 @@
                   column="`CodeTemplate`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="Constraints" batch-size="100" inverse="true" >
+        <set name="Constraints" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ConstrainedProperty`" />
             <one-to-many class="Kistl.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Kistl.Objects.NHibernateImpl" />
         </set>

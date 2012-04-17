@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <set name="Auftraege" batch-size="100" inverse="true" >
+        <set name="Auftraege" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Projekt`" />
             <one-to-many class="Kistl.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -65,7 +65,7 @@
                   column="`Name`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="Tasks" batch-size="100" inverse="true" >
+        <set name="Tasks" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Projekt`" />
             <one-to-many class="Kistl.App.Projekte.TaskNHibernateImpl+TaskProxy, Kistl.Objects.NHibernateImpl" />
         </set>

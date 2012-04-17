@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <set name="Antworten" batch-size="100" inverse="true" >
+        <set name="Antworten" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Ein_Fragebogen`" />
             <one-to-many class="Kistl.App.Test.AntwortNHibernateImpl+AntwortProxy, Kistl.Objects.NHibernateImpl" />
         </set>

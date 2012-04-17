@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <set name="Children" batch-size="100" inverse="true" >
+        <set name="Children" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Parent`" />
             <one-to-many class="Kistl.App.Test.MethodTestNHibernateImpl+MethodTestProxy, Kistl.Objects.NHibernateImpl" />
         </set>

@@ -44,7 +44,7 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="StagingDatabases" batch-size="100" inverse="true" >
+        <set name="StagingDatabases" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_MigrationProject`" />
             <one-to-many class="ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Kistl.Objects.NHibernateImpl" />
         </set>

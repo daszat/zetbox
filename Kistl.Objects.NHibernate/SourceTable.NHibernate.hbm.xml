@@ -52,7 +52,7 @@
                   column="`Name`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="SourceColumn" batch-size="100" inverse="true" >
+        <set name="SourceColumn" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_SourceTable`" />
             <one-to-many class="ZBox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Kistl.Objects.NHibernateImpl" />
         </set>

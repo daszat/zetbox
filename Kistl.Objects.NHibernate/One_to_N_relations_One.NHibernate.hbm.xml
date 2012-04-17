@@ -23,7 +23,7 @@
                   column="`Name`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <set name="NSide" batch-size="100" inverse="true" >
+        <set name="NSide" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_OneSide`" />
             <one-to-many class="Kistl.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Kistl.Objects.NHibernateImpl" />
         </set>

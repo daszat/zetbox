@@ -22,7 +22,7 @@
         <many-to-one name="BaseCalendar" column="`fk_BaseCalendar`" class="Kistl.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Kistl.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <set name="CalendarRules" batch-size="100" inverse="true" >
+        <set name="CalendarRules" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Calendar`" />
             <one-to-many class="Kistl.App.Calendar.CalendarRuleNHibernateImpl+CalendarRuleProxy, Kistl.Objects.NHibernateImpl" />
         </set>
@@ -35,7 +35,7 @@
                   column="`ChangedOn`" 
                   optimistic-lock="true"/>
 <!-- ObjectReferenceProperty -->
-        <set name="ChildCalendar" batch-size="100" inverse="true" >
+        <set name="ChildCalendar" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_BaseCalendar`" />
             <one-to-many class="Kistl.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Kistl.Objects.NHibernateImpl" />
         </set>
