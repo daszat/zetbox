@@ -51,7 +51,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 if (isList) {                                                                    
 #line 21 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 this.WriteObjects("        <!-- CompoundObjectProperty IsList -->\r\n");
-this.WriteObjects("        <set name=\"",  propName , "\" cascade=\"none\" inverse=\"true\" batch-size=\"100\">\r\n");
+this.WriteObjects("        <set name=\"",  propName , "\" inverse=\"true\" batch-size=\"100\">\r\n");
 this.WriteObjects("            <key column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
 this.WriteObjects("            <one-to-many ",  ceClassAttr , " />\r\n");
 this.WriteObjects("        </set>\r\n");

@@ -16,7 +16,7 @@
 <%@ Parameter Name="optimisticLock" Type="bool" %>
 <% if (isList) {                                                                    %>
         <!-- ValueTypeProperty isList -->
-        <set name="<%= propName %>" <%= typeAttr %> cascade="none" inverse="true" batch-size="100">
+        <set name="<%= propName %>" <%= typeAttr %> inverse="true" batch-size="100">
             <key column="`<%= ceReverseKeyColumnName %>`" />
             <one-to-many <%= ceClassAttr %> />
         </set>

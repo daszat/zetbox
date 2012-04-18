@@ -47,7 +47,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 if (isList) {                                                                    
 #line 18 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isList -->\r\n");
-this.WriteObjects("        <set name=\"",  propName , "\" ",  typeAttr , " cascade=\"none\" inverse=\"true\" batch-size=\"100\">\r\n");
+this.WriteObjects("        <set name=\"",  propName , "\" ",  typeAttr , " inverse=\"true\" batch-size=\"100\">\r\n");
 this.WriteObjects("            <key column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
 this.WriteObjects("            <one-to-many ",  ceClassAttr , " />\r\n");
 this.WriteObjects("        </set>\r\n");
