@@ -56,6 +56,7 @@ namespace Kistl.Client.Tests.ValueViewModels.Enumerations
             valueModelMock.SetupGet<string>(o => o.Error).Returns(String.Empty);
             valueModelMock.SetupProperty(o => o.Value);
             valueModelMock.SetupGet(o => o.Label).Returns("ValueLabel");
+            valueModelMock.SetupGet(o => o.AllowNullInput).Returns(true);
 
             valueModelMock
                 .Setup<IEnumerable<KeyValuePair<int, string>>>(o => o.GetEntries())
