@@ -9,9 +9,11 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
     public partial class OnPropertyChange
     {
-        public List<ValueTypeProperty> GetRecalcProperties()
+        public List<Property> GetRecalcProperties()
         {
-            return dt.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.IsCalculated).OrderBy(p => p.Name).ToList();
+            return dt.Properties.OfType<ValueTypeProperty>().Where(p => p.IsCalculated).Cast<Property>()
+                .Concat(dt.Properties.OfType<CalculatedObjectReferenceProperty>().Cast<Property>())
+                .OrderBy(p => p.Name).ToList();
         }
 
         public List<Property> GetAuditProperties()
