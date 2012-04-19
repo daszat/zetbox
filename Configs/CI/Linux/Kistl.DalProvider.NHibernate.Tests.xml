@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Kistl.DalProvider.NHibernate's Test PostgreSQL Configuration</ConfigName>
-  <Server StartServer="false">
-    <ConnectionStrings>
-      <Database Name="Kistl" Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=localhost;Port=5432;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
-    </ConnectionStrings>
+  <Server StartServer="true">
     <DocumentStore>DocumentStore/Server/</DocumentStore>
     <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>

@@ -35,6 +35,17 @@ namespace Kistl.Tests.Utilities.PostgreSql
             this.schemaManager = schemaManager;
         }
 
+        public string ForceTestDB(string connectionString)
+        {
+            var cb = new NpgsqlConnectionStringBuilder(connectionString);
+            if (!cb.Database.EndsWith("_test"))
+            {
+                cb.Database += "_test";
+            }
+
+            return cb.ToString();
+        }
+
         public void ResetDatabase()
         {
             using (Log.InfoTraceMethodCall("ResetDatabase"))

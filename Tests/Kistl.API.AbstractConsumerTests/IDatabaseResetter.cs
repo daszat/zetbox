@@ -8,5 +8,6 @@ namespace Kistl.API.AbstractConsumerTests
     public interface IDatabaseResetter
     {
         void ResetDatabase();
+        string ForceTestDB(string connectionString);
     }
 }

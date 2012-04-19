@@ -25,6 +25,17 @@ namespace Kistl.Tests.Utilities.MsSql
             this.config = config;
         }
 
+        public string ForceTestDB(string connectionString)
+        {
+            var cb = new SqlConnectionStringBuilder(connectionString);
+            if (!cb.InitialCatalog.EndsWith("_test"))
+            {
+                cb.InitialCatalog += "_test";
+            }
+
+            return cb.ToString();
+        }
+
         public void ResetDatabase()
         {
             using (Log.InfoTraceMethodCall("ResetDatabase"))

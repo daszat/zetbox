@@ -47,11 +47,6 @@ namespace Kistl.API.AbstractConsumerTests
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 var config = KistlConfig.FromFile(null, GetConfigFile());
-                if (config.Server != null)
-                {
-                    config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
-                    Log.InfoFormat("Setting Server.DocumentStore=[{0}]", config.Server.DocumentStore);
-                }
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
@@ -91,7 +86,20 @@ namespace Kistl.API.AbstractConsumerTests
 
         protected virtual void SetUp(IContainer container)
         {
-
+            var config = container.Resolve<KistlConfig>();
+            if (config.Server != null)
+            {
+                var resetter = container.Resolve<IDatabaseResetter>();
+                config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
+                if (config.Server.ConnectionStrings != null)
+                {
+                    for (int i = 0; i < config.Server.ConnectionStrings.Length; i++)
+                    {
+                        config.Server.ConnectionStrings[i].ConnectionString = resetter.ForceTestDB(config.Server.ConnectionStrings[i].ConnectionString);
+                    }
+                }
+                Log.InfoFormat("Setting Server.DocumentStore=[{0}]", config.Server.DocumentStore);
+            }
         }
 
         /// <summary>
