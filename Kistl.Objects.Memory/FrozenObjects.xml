@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-04T13:57:05Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-19T16:16:41Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -21384,7 +21384,7 @@ public static void NotifyDeleting(RoleMembership obj)
     <KistlBase:TableName>RoleMemberships</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="8745716a-a9e7-4b2f-b7e8-948b992aaafb">
-    <KistlBase:ChangedOn>2012-04-04T11:26:07.927747Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:16:41.058212Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-24T11:53:16Z</KistlBase:CreatedOn>
     <KistlBase:Description>Provides the definition of a database sequence</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
@@ -30480,7 +30480,7 @@ public static void isValid_Relations(RoleMembership obj, PropertyIsValidEventArg
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="77650ba6-bbbf-468b-9f8d-78ecd3fb0082">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Sequence obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
 {
@@ -30509,14 +30509,14 @@ public static void isValid_ChangedBy(Sequence obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>ChangedBy</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>4</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>8</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>f438a7f0-9a0f-48b3-b9cd-a0527c19bd0c</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="848cbb55-071f-4fc7-a9ef-75d5335cf2d7">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Sequence obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -30546,7 +30546,7 @@ public static void isValid_ChangedOn(Sequence obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>ChangedOn</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>2</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>6</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
@@ -30554,7 +30554,7 @@ public static void isValid_ChangedOn(Sequence obj, PropertyIsValidEventArgs e)
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="25398df8-0005-4143-bc94-2c363d18ba40">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Sequence obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Identity&gt; e)
 {
@@ -30583,14 +30583,14 @@ public static void isValid_CreatedBy(Sequence obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>CreatedBy</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>3</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>7</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>97c2088b-831d-4158-ae56-45115a6219b7</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="542c6ac2-7e06-4b29-b2af-273863cd177b">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Sequence obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -30620,53 +30620,15 @@ public static void isValid_CreatedOn(Sequence obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>CreatedOn</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>1</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>5</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:DateTimeProperty>
-  <KistlBase:IntProperty ExportGuid="62988bcd-bf1d-441f-95a1-3b9d58e08ad3">
-    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
-    <KistlBase:CodeTemplate>[Invocation]
-public static void get_CurrentNumber(Sequence obj, PropertyGetterEventArgs&lt;int?&gt; e)
-{
-}
-
-[Invocation]
-public static void preSet_CurrentNumber(Sequence obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
-{
-}
-
-[Invocation]
-public static void postSet_CurrentNumber(Sequence obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
-{
-}
-
-[Invocation]
-public static void isValid_CurrentNumber(Sequence obj, PropertyIsValidEventArgs e)
-{
-	e.IsValid = obj.CurrentNumber == ...;
-	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
-}
-
-</KistlBase:CodeTemplate>
-    <KistlBase:CreatedOn>2012-01-12T13:03:58.108821Z</KistlBase:CreatedOn>
-    <KistlBase:Description>The current number of this Sequence. This is calculated from the Data and initialises this, if not available.</KistlBase:Description>
-    <KistlBase:Label>Current number</KistlBase:Label>
-    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Name>CurrentNumber</KistlBase:Name>
-    <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>9</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:IsCalculated>true</KistlBase:IsCalculated>
-    <KistlBase:IsList>false</KistlBase:IsList>
-  </KistlBase:IntProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="70836ae1-4b54-45e2-a0c6-d1a39c480631">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_Data(Sequence obj, PropertyGetterEventArgs&lt;Kistl.App.Base.SequenceData&gt; e)
 {
@@ -30694,14 +30656,14 @@ public static void isValid_Data(Sequence obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>Data</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>0</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>4</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>ce3084c6-76e6-468e-8a37-60b5bffa60f4</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:StringProperty ExportGuid="1ddfb0a8-182c-417a-aa58-88a0d6ba091c">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_Description(Sequence obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -30729,7 +30691,7 @@ public static void isValid_Description(Sequence obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>Description</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>7</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>2</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
@@ -30737,7 +30699,7 @@ public static void isValid_Description(Sequence obj, PropertyIsValidEventArgs e)
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="97795b28-a750-456b-880c-210b0564462e">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Sequence obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -30767,7 +30729,7 @@ public static void isValid_ExportGuid(Sequence obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>ExportGuid</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>5</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>9</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
@@ -30775,7 +30737,7 @@ public static void isValid_ExportGuid(Sequence obj, PropertyIsValidEventArgs e)
   </KistlBase:GuidProperty>
   <KistlBase:BoolProperty ExportGuid="013ee98f-1e4e-4d80-a7c1-b75d10c61cff">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_IsContinuous(Sequence obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -30805,7 +30767,7 @@ public static void isValid_IsContinuous(Sequence obj, PropertyIsValidEventArgs e
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>IsContinuous</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>8</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>3</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
@@ -30813,7 +30775,7 @@ public static void isValid_IsContinuous(Sequence obj, PropertyIsValidEventArgs e
   </KistlBase:BoolProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="8ddc8653-3535-4f35-b9ab-6adb05894649">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_Module(Sequence obj, PropertyGetterEventArgs&lt;Kistl.App.Base.Module&gt; e)
 {
@@ -30841,11 +30803,47 @@ public static void isValid_Module(Sequence obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>Module</KistlBase:Name>
     <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>6</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>1</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>854e34b3-e675-4e45-aa2d-0b0515b22360</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
+  <KistlBase:StringProperty ExportGuid="0ea41ee8-cbf6-4c34-bd7e-341cbf38bcdf">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Name(Sequence obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(Sequence obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(Sequence obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(Sequence obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
+    <KistlBase:CreatedOn>2012-04-19T14:08:07.826961Z</KistlBase:CreatedOn>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Name</KistlBase:Name>
+    <KistlBase:ObjectClass>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>0</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:StringProperty>
   <KistlBase:IntProperty ExportGuid="e557569b-1ed8-49a6-959e-0a6bc3ffa591">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2012-04-04T11:26:14.807132Z</KistlBase:ChangedOn>
@@ -37312,6 +37310,18 @@ public static void UpdateToStringCache(TypeRef obj)
     <KistlBase:ConstrainedProperty>8ddc8653-3535-4f35-b9ab-6adb05894649</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2010-11-24T11:54:53Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="5c243604-69b7-4b4a-baec-b8f425d50e8a">
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>0ea41ee8-cbf6-4c34-bd7e-341cbf38bcdf</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2012-04-19T14:08:07.826961Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:StringRangeConstraint ExportGuid="50e7fcc4-fc90-4104-ae1f-ff1516d17ec0">
+    <KistlBase:ChangedOn>2012-04-19T14:08:07.826961Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>0ea41ee8-cbf6-4c34-bd7e-341cbf38bcdf</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2012-04-19T14:08:07.826961Z</KistlBase:CreatedOn>
+    <KistlBase:MaxLength>100</KistlBase:MaxLength>
+    <KistlBase:MinLength>1</KistlBase:MinLength>
+  </KistlBase:StringRangeConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="3d7b5443-edde-4de4-aa49-4d5ffbfc5da6">
     <KistlBase:ChangedOn>2011-08-05T10:31:05.97508Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>e557569b-1ed8-49a6-959e-0a6bc3ffa591</KistlBase:ConstrainedProperty>
@@ -37560,6 +37570,11 @@ public static void UpdateToStringCache(TypeRef obj)
     <KistlBase:Reason>ExportGuid must be unique</KistlBase:Reason>
     <KistlBase:IsUnique>true</KistlBase:IsUnique>
   </KistlBase:IndexConstraint>
+  <KistlBase:IndexConstraint ExportGuid="06d9027a-3266-4ef2-9a92-069b31458c5d">
+    <KistlBase:Constrained>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:Constrained>
+    <KistlBase:Reason>Name must be unique within a module</KistlBase:Reason>
+    <KistlBase:IsUnique>true</KistlBase:IsUnique>
+  </KistlBase:IndexConstraint>
   <KistlBase:IndexConstraint ExportGuid="b218c5e5-667f-49a6-b09f-d1e1d759598e">
     <KistlBase:Constrained>8745716a-a9e7-4b2f-b7e8-948b992aaafb</KistlBase:Constrained>
     <KistlBase:Reason>ExportGuid must be unique</KistlBase:Reason>
@@ -37575,6 +37590,14 @@ public static void UpdateToStringCache(TypeRef obj)
     <KistlBase:Reason>ExportGuid must be unique</KistlBase:Reason>
     <KistlBase:IsUnique>true</KistlBase:IsUnique>
   </KistlBase:IndexConstraint>
+  <KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="1d23ef48-a4b7-436d-ac9a-b41f73ed3890">
+    <KistlBase:A>06d9027a-3266-4ef2-9a92-069b31458c5d</KistlBase:A>
+    <KistlBase:B>0ea41ee8-cbf6-4c34-bd7e-341cbf38bcdf</KistlBase:B>
+  </KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
+  <KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="49067a49-f124-4c84-b690-8bd5ff717cfe">
+    <KistlBase:A>06d9027a-3266-4ef2-9a92-069b31458c5d</KistlBase:A>
+    <KistlBase:B>8ddc8653-3535-4f35-b9ab-6adb05894649</KistlBase:B>
+  </KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
   <KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="3a09645c-9d2a-4000-9b6f-15598c7a5472">
     <KistlBase:A>127ea18e-1256-4daf-899c-f1feeed6ec51</KistlBase:A>
     <KistlBase:B>75e3db82-220c-474e-973a-ceb65fd8386d</KistlBase:B>
@@ -55537,19 +55560,19 @@ public static void TestMethod(TestObjClass obj, DateTime DateTimeParamForTestMet
     <GUI:B>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</GUI:B>
   </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
   <KistlBase:Sequence ExportGuid="57a01b4f-940d-4089-b239-fa5a46dc7d00">
-    <KistlBase:ChangedOn>2012-04-04T11:26:19.419969Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:18:21.445954Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-25T11:51:32Z</KistlBase:CreatedOn>
-    <KistlBase:CurrentNumber>0</KistlBase:CurrentNumber>
-    <KistlBase:Description>Test ContinuousSequence</KistlBase:Description>
+    <KistlBase:Description>for testing a continuous sequence</KistlBase:Description>
     <KistlBase:IsContinuous>true</KistlBase:IsContinuous>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>TestContinuousSequence</KistlBase:Name>
   </KistlBase:Sequence>
   <KistlBase:Sequence ExportGuid="5c3d9012-a36d-4910-9e7b-1bf7d8f7d09d">
-    <KistlBase:ChangedOn>2012-04-04T11:26:19.419969Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-19T14:18:06.978127Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-25T11:50:57Z</KistlBase:CreatedOn>
-    <KistlBase:CurrentNumber>0</KistlBase:CurrentNumber>
-    <KistlBase:Description>Test Sequence</KistlBase:Description>
+    <KistlBase:Description>for testing a simple sequence</KistlBase:Description>
     <KistlBase:IsContinuous>false</KistlBase:IsContinuous>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>TestSequence</KistlBase:Name>
   </KistlBase:Sequence>
 </KistlPackaging>

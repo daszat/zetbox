@@ -14,13 +14,6 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// The current number of this Sequence. This is calculated from the Data and initialises this, if not available.
-        /// </summary>
-        int? CurrentNumber {
-            get;
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         Kistl.App.Base.SequenceData Data {
@@ -40,6 +33,14 @@ namespace Kistl.App.Base
         /// Set to true if the sequence is guaranteed to be continous
         /// </summary>
         bool IsContinuous {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        string Name {
             get;
             set;
         }

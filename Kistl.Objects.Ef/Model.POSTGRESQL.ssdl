@@ -2727,10 +2727,10 @@
     <Property Name="fk_CreatedBy" Type="int4" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="CurrentNumber" Type="int4" Nullable="true" />
     <Property Name="Description" Type="varchar" MaxLength="1000" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="IsContinuous" Type="bool" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="SequenceData">

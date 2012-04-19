@@ -1468,10 +1468,6 @@ namespace Kistl {
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("542c6ac2-7e06-4b29-b2af-273863cd177b"); }
                                 }
-                                public static TypedGuid<global::Kistl.App.Base.Property> CurrentNumber
-                                {
-                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("62988bcd-bf1d-441f-95a1-3b9d58e08ad3"); }
-                                }
                                 public static TypedGuid<global::Kistl.App.Base.Property> Data
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("70836ae1-4b54-45e2-a0c6-d1a39c480631"); }
@@ -1491,6 +1487,10 @@ namespace Kistl {
                                 public static TypedGuid<global::Kistl.App.Base.Property> Module
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("8ddc8653-3535-4f35-b9ab-6adb05894649"); }
+                                }
+                                public static TypedGuid<global::Kistl.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("0ea41ee8-cbf6-4c34-bd7e-341cbf38bcdf"); }
                                 }
                             }
                             public static class SequenceData_Properties
@@ -3189,6 +3189,20 @@ namespace Kistl {
                 public static TypedGuid<global::Kistl.App.Base.Group> Everyone
                 {
                     get { return new TypedGuid<global::Kistl.App.Base.Group>("76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1"); }
+                }
+            }
+            public static class Sequences
+            {
+                public static class TestModule
+                {
+                    public static TypedGuid<global::Kistl.App.Base.Sequence> TestContinuousSequence
+                    {
+                        get { return new TypedGuid<global::Kistl.App.Base.Sequence>("57a01b4f-940d-4089-b239-fa5a46dc7d00"); }
+                    }
+                    public static TypedGuid<global::Kistl.App.Base.Sequence> TestSequence
+                    {
+                        get { return new TypedGuid<global::Kistl.App.Base.Sequence>("5c3d9012-a36d-4910-9e7b-1bf7d8f7d09d"); }
+                    }
                 }
             }
         }

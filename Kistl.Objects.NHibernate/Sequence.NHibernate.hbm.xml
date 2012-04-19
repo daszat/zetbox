@@ -32,11 +32,6 @@
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
-<!-- ValueTypeProperty CurrentNumber is calculated and persisted -->
-        <!-- ValueTypeProperty isValue -->
-        <property name="CurrentNumber" 
-                  column="`CurrentNumber`" 
-                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <one-to-one name="Data" class="Kistl.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Kistl.Objects.NHibernateImpl" constrained="false" property-ref="Sequence" />
         <!-- ValueTypeProperty isValue -->
@@ -54,6 +49,10 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
 
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 

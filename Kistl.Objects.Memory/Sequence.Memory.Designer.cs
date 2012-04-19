@@ -362,54 +362,6 @@ namespace Kistl.App.Base
         public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCreatedOn_IsValid;
 
         /// <summary>
-        /// The current number of this Sequence. This is calculated from the Data and initialises this, if not available.
-        /// </summary>
-        // value type property
-        // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
-        public int? CurrentNumber
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _CurrentNumber;
-                if (_CurrentNumber_IsDirty && OnCurrentNumber_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<int?>(__result);
-                    OnCurrentNumber_Getter(this, __e);
-                    _CurrentNumber_IsDirty = false;
-                    __result = _CurrentNumber = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_CurrentNumber != value)
-                {
-                    var __oldValue = _CurrentNumber;
-                    var __newValue = value;
-                    NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
-                    _CurrentNumber = __newValue;
-                    NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
-			        _CurrentNumber_IsDirty = false;
-
-                }
-				else 
-				{
-					SetInitializedProperty("CurrentNumber");
-				}
-            }
-        }
-        private int? _CurrentNumber;
-        private bool _CurrentNumber_IsDirty = false;
-        // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
-		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int?> OnCurrentNumber_Getter;
-
-        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnCurrentNumber_IsValid;
-
-        /// <summary>
         /// 
         /// </summary>
 	        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Data
@@ -798,6 +750,64 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+        // value type property
+        // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
+        public string Name
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Name;
+                if (OnName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnName_Getter(this, __e);
+                    __result = _Name = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+                    var __oldValue = _Name;
+                    var __newValue = value;
+                    if (OnName_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+
+                    if (OnName_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("Name");
+				}
+            }
+        }
+        private string _Name;
+        // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, string> OnName_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Base.Sequence> OnName_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetName_Sequence")]
         public virtual string GetName()
@@ -873,10 +883,10 @@ namespace Kistl.App.Base
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
-            this.CurrentNumber = otherImpl.CurrentNumber;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
             me.IsContinuous = other.IsContinuous;
+            me.Name = other.Name;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Data = otherImpl._fk_Data;
@@ -890,7 +900,6 @@ namespace Kistl.App.Base
         public override void SetNew()
         {
             base.SetNew();
-            _CurrentNumber_IsDirty = true;
         }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
@@ -947,23 +956,12 @@ namespace Kistl.App.Base
                 case "ExportGuid":
                 case "IsContinuous":
                 case "Module":
+                case "Name":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
         }
 
-        public override void Recalculate(string property)
-        {
-            switch (property)
-            {
-                case "CurrentNumber":
-                    _CurrentNumber_IsDirty = true;
-                    NotifyPropertyChanged(property, null, null);
-                    return;
-            }
-
-            base.Recalculate(property);
-        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1048,15 +1046,6 @@ namespace Kistl.App.Base
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<Sequence, int?>(
-                        lazyCtx,
-                        new Guid("62988bcd-bf1d-441f-95a1-3b9d58e08ad3"),
-                        "CurrentNumber",
-                        null,
-                        obj => obj.CurrentNumber,
-                        null, // calculated property
-						obj => OnCurrentNumber_IsValid), 
-                    // else
                     new PropertyDescriptorMemoryImpl<Sequence, Kistl.App.Base.SequenceData>(
                         lazyCtx,
                         new Guid("70836ae1-4b54-45e2-a0c6-d1a39c480631"),
@@ -1101,6 +1090,15 @@ namespace Kistl.App.Base
                         obj => obj.Module,
                         (obj, val) => obj.Module = val,
 						obj => OnModule_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<Sequence, string>(
+                        lazyCtx,
+                        new Guid("0ea41ee8-cbf6-4c34-bd7e-341cbf38bcdf"),
+                        "Name",
+                        null,
+                        obj => obj.Name,
+                        (obj, val) => obj.Name = val,
+						obj => OnName_IsValid), 
                     // position columns
                 };
             }
@@ -1166,12 +1164,11 @@ namespace Kistl.App.Base
         {
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
-            SetNotInitializedProperty("CurrentNumber");
             SetNotInitializedProperty("Data");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("IsContinuous");
             SetNotInitializedProperty("Module");
-            _CurrentNumber_IsDirty = true;
+            SetNotInitializedProperty("Name");
             base.NotifyCreated();
             if (OnNotifyCreated_Sequence != null) OnNotifyCreated_Sequence(this);
         }
@@ -1208,7 +1205,6 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this._CreatedOn, binStream);
             }
-            BinarySerializer.ToStream(this._CurrentNumber, binStream);
             BinarySerializer.ToStream(Data != null ? Data.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
@@ -1217,6 +1213,7 @@ namespace Kistl.App.Base
             }
             BinarySerializer.ToStream(this._IsContinuous, binStream);
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1235,7 +1232,6 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 BinarySerializer.FromStream(out this._CreatedOn, binStream);
             }
-            BinarySerializer.FromStream(out this._CurrentNumber, binStream);
             BinarySerializer.FromStream(out this._fk_Data, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
@@ -1244,6 +1240,7 @@ namespace Kistl.App.Base
             }
             BinarySerializer.FromStream(out this._IsContinuous, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -1267,7 +1264,6 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             XmlStreamer.ToStream(Data != null ? Data.ID : (int?)null, xml, "Data", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
@@ -1276,6 +1272,7 @@ namespace Kistl.App.Base
             }
             XmlStreamer.ToStream(this._IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1294,7 +1291,6 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             }
-            XmlStreamer.FromStream(ref this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Data, xml, "Data", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
@@ -1303,6 +1299,7 @@ namespace Kistl.App.Base
             }
             XmlStreamer.FromStream(ref this._IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -1320,10 +1317,10 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1336,13 +1333,13 @@ namespace Kistl.App.Base
             // Import must have default value set
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             this._isCreatedOnSet = true;
-            XmlStreamer.FromStream(ref this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         #endregion

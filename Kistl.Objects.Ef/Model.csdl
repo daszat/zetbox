@@ -2135,7 +2135,6 @@
                         FromRole="Sequence"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="CurrentNumber" Type="Int32" Nullable="true"  />
     <NavigationProperty Name="DataImpl"
                         Relationship="Model.FK_Sequence_has_Data"
                         FromRole="Sequence"
@@ -2147,6 +2146,7 @@
                         Relationship="Model.FK_Sequence_has_Module"
                         FromRole="Sequence"
                         ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
   </EntityType>
   <EntityType Name="SequenceData">
     <Key>
