@@ -89,16 +89,18 @@ namespace Kistl.API.AbstractConsumerTests
             var config = container.Resolve<KistlConfig>();
             if (config.Server != null)
             {
-                var resetter = container.Resolve<IDatabaseResetter>();
                 config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
-                if (config.Server.ConnectionStrings != null)
+                Log.InfoFormat("Setting Server.DocumentStore=[{0}]", config.Server.DocumentStore);
+
+                var resetter = container.Resolve<IEnumerable<IDatabaseResetter>>().SingleOrDefault();
+                if (resetter != null && config.Server.ConnectionStrings != null)
                 {
+                    Log.Info("Forcing test connection string");
                     for (int i = 0; i < config.Server.ConnectionStrings.Length; i++)
                     {
                         config.Server.ConnectionStrings[i].ConnectionString = resetter.ForceTestDB(config.Server.ConnectionStrings[i].ConnectionString);
                     }
                 }
-                Log.InfoFormat("Setting Server.DocumentStore=[{0}]", config.Server.DocumentStore);
             }
         }
 
