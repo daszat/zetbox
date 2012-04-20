@@ -888,6 +888,18 @@ namespace Kistl.DalProvider.Client
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
 
             string path = Path.Combine(DocumentCache, blob.StoragePath);
+            if (path.Length >= 256)
+            {
+                var dir = Path.GetDirectoryName(path);
+                if (dir.Length >= 256 - 41 - 4)
+                {
+                    throw new PathTooLongException("DocumentCache path is far too long. Should be less then 256 - 41 for guid and 4 for extension. Path includes DocumentStore\\year\\month\\day. FullPath: " + path);
+                }
+                var name = Path.GetFileNameWithoutExtension(path);
+                var ext = Path.GetExtension(path);
+                name = name.Substring(0, 255 - dir.Length - ext.Length);
+                path = Path.Combine(dir, name + ext);
+            }
             Directory.CreateDirectory(Path.GetDirectoryName(path));
 
             if (!File.Exists(path))
