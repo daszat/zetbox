@@ -1263,16 +1263,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override void SetValueToModel(DateTime? value)
-        {
-            if (value < DateTime.MinValue.AddDays(1))
-            {
-                // the 01.01.0001 00:00 is treated as null
-                value = null;
-            }
-            base.SetValueToModel(value);
-        }
-
         protected override void NotifyValueChanged()
         {
             base.NotifyValueChanged();
