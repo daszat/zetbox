@@ -104,12 +104,16 @@ this.WriteObjects("                    }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("					NotifyPropertyChanged(\"",  propName , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("				}\r\n");
+this.WriteObjects("				else\r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\r\n");
+this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 75 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 79 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 77 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 81 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }

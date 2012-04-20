@@ -147,10 +147,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Sequence == null)
+                if ((value == null && _fk_Sequence == null) || (value != null && value.ID == _fk_Sequence))
+				{
+					SetInitializedProperty("Sequence");
                     return;
-                else if (value != null && value.ID == _fk_Sequence)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = SequenceImpl;

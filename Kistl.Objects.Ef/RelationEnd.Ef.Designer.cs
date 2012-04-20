@@ -986,8 +986,6 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnParent_IsValid;
-
         /// <summary>
         /// This end&amp;apos;s role name in the relation
         /// </summary>
@@ -1252,6 +1250,7 @@ namespace Kistl.App.Base
         public override void SetNew()
         {
             base.SetNew();
+            _Parent_IsDirty = true;
         }
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
@@ -1455,7 +1454,7 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Parent,
                         null, // CalculatedObjectReferenceProperty is a read-only property
-						obj => OnParent_IsValid),  
+						null), // no constraints on calculated properties 
                     // else
                     new PropertyDescriptorEfImpl<RelationEnd, string>(
                         lazyCtx,
@@ -1544,9 +1543,9 @@ namespace Kistl.App.Base
             SetNotInitializedProperty("HasPersistentOrder");
             SetNotInitializedProperty("Multiplicity");
             SetNotInitializedProperty("Navigator");
-            SetNotInitializedProperty("Parent");
             SetNotInitializedProperty("RoleName");
             SetNotInitializedProperty("Type");
+            _Parent_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_RelationEnd != null) OnNotifyCreated_RelationEnd(this);
         }

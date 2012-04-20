@@ -20,7 +20,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
         protected virtual void ApplyPreCreatedTemplate()
         {
-            foreach (var prop in dt.Properties.Where(p => !p.IsList() && p.DefaultValue == null).OrderBy(p => p.Name))
+            foreach (var prop in dt.Properties.Where(p => !p.IsList() && p.DefaultValue == null && !p.IsCalculated()).OrderBy(p => p.Name))
             {
                 this.WriteObjects("            SetNotInitializedProperty(\"", prop.Name, "\");\r\n");
             }

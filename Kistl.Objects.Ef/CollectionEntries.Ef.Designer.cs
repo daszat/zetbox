@@ -8817,6 +8817,10 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
 
                     NotifyPropertyChanged("Value", "ValueImpl", __oldValue, value);
                 }
+				else
+				{
+					SetInitializedProperty("Value");
+				}
             }
         }
            // END Kistl.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty

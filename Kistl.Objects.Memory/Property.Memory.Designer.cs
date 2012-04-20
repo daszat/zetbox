@@ -147,10 +147,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ChangedBy == null)
+                if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
-                else if (value != null && value.ID == _fk_ChangedBy)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -303,8 +304,6 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.Property> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
@@ -408,10 +407,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_CreatedBy == null)
+                if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
-                else if (value != null && value.ID == _fk_CreatedBy)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -571,10 +571,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DefaultValue == null)
+                if ((value == null && _fk_DefaultValue == null) || (value != null && value.ID == _fk_DefaultValue))
+				{
+					SetInitializedProperty("DefaultValue");
                     return;
-                else if (value != null && value.ID == _fk_DefaultValue)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultValueImpl;
@@ -808,10 +809,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_FilterConfiguration == null)
+                if ((value == null && _fk_FilterConfiguration == null) || (value != null && value.ID == _fk_FilterConfiguration))
+				{
+					SetInitializedProperty("FilterConfiguration");
                     return;
-                else if (value != null && value.ID == _fk_FilterConfiguration)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = FilterConfigurationImpl;
@@ -974,10 +976,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Module == null)
+                if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
+				{
+					SetInitializedProperty("Module");
                     return;
-                else if (value != null && value.ID == _fk_Module)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -1124,10 +1127,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ObjectClass == null)
+                if ((value == null && _fk_ObjectClass == null) || (value != null && value.ID == _fk_ObjectClass))
+				{
+					SetInitializedProperty("ObjectClass");
                     return;
-                else if (value != null && value.ID == _fk_ObjectClass)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ObjectClassImpl;
@@ -1263,10 +1267,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_RequestedKind == null)
+                if ((value == null && _fk_RequestedKind == null) || (value != null && value.ID == _fk_RequestedKind))
+				{
+					SetInitializedProperty("RequestedKind");
                     return;
-                else if (value != null && value.ID == _fk_RequestedKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = RequestedKindImpl;
@@ -1355,10 +1360,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ValueModelDescriptor == null)
+                if ((value == null && _fk_ValueModelDescriptor == null) || (value != null && value.ID == _fk_ValueModelDescriptor))
+				{
+					SetInitializedProperty("ValueModelDescriptor");
                     return;
-                else if (value != null && value.ID == _fk_ValueModelDescriptor)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ValueModelDescriptorImpl;
@@ -1976,7 +1982,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<Property, ICollection<Kistl.App.Base.Constraint>>(
                         lazyCtx,
@@ -2169,7 +2175,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             SetNotInitializedProperty("CategoryTags");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("DefaultValue");
             SetNotInitializedProperty("Description");

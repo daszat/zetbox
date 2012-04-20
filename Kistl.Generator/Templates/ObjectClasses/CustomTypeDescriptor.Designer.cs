@@ -94,7 +94,7 @@ this.WriteObjects("                        \"",  propertyName , "\",\r\n");
 this.WriteObjects("                        null,\r\n");
 this.WriteObjects("                        obj => obj.",  propertyName , ",\r\n");
 this.WriteObjects("                        null, // CalculatedObjectReferenceProperty is a read-only property\r\n");
-this.WriteObjects("						obj => On",  propertyName , "_IsValid),  \r\n");
+this.WriteObjects("						null), // no constraints on calculated properties \r\n");
 #line 68 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } else { 
 #line 69 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
@@ -111,7 +111,7 @@ this.WriteObjects("                        obj => obj.",  propertyName , ",\r\n"
 if(isReadonly) { 
 #line 78 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                        null, // calculated property\r\n");
-this.WriteObjects("						obj => On",  propertyName , "_IsValid), \r\n");
+this.WriteObjects("						null), // no constraints on calculated properties\r\n");
 #line 80 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } else { 
 #line 81 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"

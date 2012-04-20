@@ -131,10 +131,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_BaseObjectClass == null)
+                if ((value == null && _fk_BaseObjectClass == null) || (value != null && value.ID == _fk_BaseObjectClass))
+				{
+					SetInitializedProperty("BaseObjectClass");
                     return;
-                else if (value != null && value.ID == _fk_BaseObjectClass)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BaseObjectClassImpl;
@@ -232,8 +233,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
@@ -287,10 +286,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DefaultViewModelDescriptor == null)
+                if ((value == null && _fk_DefaultViewModelDescriptor == null) || (value != null && value.ID == _fk_DefaultViewModelDescriptor))
+				{
+					SetInitializedProperty("DefaultViewModelDescriptor");
                     return;
-                else if (value != null && value.ID == _fk_DefaultViewModelDescriptor)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultViewModelDescriptorImpl;
@@ -1240,7 +1240,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorMemoryImpl<ObjectClass, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
@@ -1368,7 +1368,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("BaseObjectClass");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("DefaultViewModelDescriptor");
             SetNotInitializedProperty("IsAbstract");
             SetNotInitializedProperty("IsFrozenObject");

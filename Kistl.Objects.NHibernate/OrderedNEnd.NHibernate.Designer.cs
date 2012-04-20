@@ -82,7 +82,10 @@ namespace Kistl.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.OneEnd == null)
+				{
+					SetInitializedProperty("OneEnd");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.OrderedOneEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.OneEnd);
@@ -91,7 +94,10 @@ namespace Kistl.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("OneEnd");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("OneEnd", __oldValue, __newValue);

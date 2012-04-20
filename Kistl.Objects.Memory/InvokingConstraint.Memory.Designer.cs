@@ -90,10 +90,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_GetErrorTextInvocation == null)
+                if ((value == null && _fk_GetErrorTextInvocation == null) || (value != null && value.ID == _fk_GetErrorTextInvocation))
+				{
+					SetInitializedProperty("GetErrorTextInvocation");
                     return;
-                else if (value != null && value.ID == _fk_GetErrorTextInvocation)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = GetErrorTextInvocationImpl;
@@ -182,10 +183,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_IsValidInvocation == null)
+                if ((value == null && _fk_IsValidInvocation == null) || (value != null && value.ID == _fk_IsValidInvocation))
+				{
+					SetInitializedProperty("IsValidInvocation");
                     return;
-                else if (value != null && value.ID == _fk_IsValidInvocation)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = IsValidInvocationImpl;

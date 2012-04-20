@@ -130,10 +130,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Parent == null)
+                if ((value == null && _fk_Parent == null) || (value != null && value.ID == _fk_Parent))
+				{
+					SetInitializedProperty("Parent");
                     return;
-                else if (value != null && value.ID == _fk_Parent)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ParentImpl;

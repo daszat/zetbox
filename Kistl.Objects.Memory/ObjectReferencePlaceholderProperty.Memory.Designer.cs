@@ -322,10 +322,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ReferencedObjectClass == null)
+                if ((value == null && _fk_ReferencedObjectClass == null) || (value != null && value.ID == _fk_ReferencedObjectClass))
+				{
+					SetInitializedProperty("ReferencedObjectClass");
                     return;
-                else if (value != null && value.ID == _fk_ReferencedObjectClass)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ReferencedObjectClassImpl;

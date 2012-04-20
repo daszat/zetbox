@@ -612,10 +612,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_RequestedEditorKind == null)
+                if ((value == null && _fk_RequestedEditorKind == null) || (value != null && value.ID == _fk_RequestedEditorKind))
+				{
+					SetInitializedProperty("RequestedEditorKind");
                     return;
-                else if (value != null && value.ID == _fk_RequestedEditorKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = RequestedEditorKindImpl;
@@ -704,10 +705,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_RequestedWorkspaceKind == null)
+                if ((value == null && _fk_RequestedWorkspaceKind == null) || (value != null && value.ID == _fk_RequestedWorkspaceKind))
+				{
+					SetInitializedProperty("RequestedWorkspaceKind");
                     return;
-                else if (value != null && value.ID == _fk_RequestedWorkspaceKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = RequestedWorkspaceKindImpl;
@@ -1086,10 +1088,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Type == null)
+                if ((value == null && _fk_Type == null) || (value != null && value.ID == _fk_Type))
+				{
+					SetInitializedProperty("Type");
                     return;
-                else if (value != null && value.ID == _fk_Type)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = TypeImpl;

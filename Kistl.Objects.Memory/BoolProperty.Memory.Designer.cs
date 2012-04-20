@@ -90,10 +90,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_FalseIcon == null)
+                if ((value == null && _fk_FalseIcon == null) || (value != null && value.ID == _fk_FalseIcon))
+				{
+					SetInitializedProperty("FalseIcon");
                     return;
-                else if (value != null && value.ID == _fk_FalseIcon)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = FalseIconImpl;
@@ -240,10 +241,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_NullIcon == null)
+                if ((value == null && _fk_NullIcon == null) || (value != null && value.ID == _fk_NullIcon))
+				{
+					SetInitializedProperty("NullIcon");
                     return;
-                else if (value != null && value.ID == _fk_NullIcon)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = NullIconImpl;
@@ -390,10 +392,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_TrueIcon == null)
+                if ((value == null && _fk_TrueIcon == null) || (value != null && value.ID == _fk_TrueIcon))
+				{
+					SetInitializedProperty("TrueIcon");
                     return;
-                else if (value != null && value.ID == _fk_TrueIcon)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = TrueIconImpl;

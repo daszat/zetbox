@@ -66,6 +66,10 @@
 
 					NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
 				}
+				else
+				{
+					SetInitializedProperty("<%= propName %>");
+				}
             }
         }
 <%

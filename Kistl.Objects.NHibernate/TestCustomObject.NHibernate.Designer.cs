@@ -193,7 +193,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.MubBlah_Nav == null)
+				{
+					SetInitializedProperty("MubBlah_Nav");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MubBlah_Nav);
@@ -202,7 +205,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("MubBlah_Nav");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("MubBlah_Nav", __oldValue, __newValue);
@@ -334,7 +340,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.MuhBlah_One_Nav == null)
+				{
+					SetInitializedProperty("MuhBlah_One_Nav");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MuhBlah_One_Nav);
@@ -343,7 +352,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("MuhBlah_One_Nav");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("MuhBlah_One_Nav", __oldValue, __newValue);
@@ -509,6 +521,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 
 					NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
 				}
+				else
+				{
+					SetInitializedProperty("PhoneNumberMobile");
+				}
             }
         }
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -563,6 +579,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                     }
 
 					NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
+				}
+				else
+				{
+					SetInitializedProperty("PhoneNumberOffice");
 				}
             }
         }

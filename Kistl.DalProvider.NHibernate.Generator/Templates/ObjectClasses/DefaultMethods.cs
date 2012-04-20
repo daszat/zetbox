@@ -22,9 +22,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         protected override void ApplyPrePreSaveTemplate()
         {
             base.ApplyPrePreSaveTemplate();
-            foreach (var propertyName in dt.Properties.Where(p => p.DefaultValue != null || p.IsCalculated()).Select(p => p.Name))
+            foreach (var prop in dt.Properties.Where(p => p.DefaultValue != null || p.IsCalculated()).OrderBy(p => p.Name))
             {
-                this.WriteObjects("            Fetch", propertyName, "OrDefault();");
+                if (prop is CalculatedObjectReferenceProperty) continue;
+
+                this.WriteObjects("            Fetch", prop.Name, "OrDefault();");
                 this.WriteLine();
             }
         }

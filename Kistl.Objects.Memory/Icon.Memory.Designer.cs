@@ -90,10 +90,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Blob == null)
+                if ((value == null && _fk_Blob == null) || (value != null && value.ID == _fk_Blob))
+				{
+					SetInitializedProperty("Blob");
                     return;
-                else if (value != null && value.ID == _fk_Blob)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BlobImpl;
@@ -311,10 +312,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Module == null)
+                if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
+				{
+					SetInitializedProperty("Module");
                     return;
-                else if (value != null && value.ID == _fk_Module)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;

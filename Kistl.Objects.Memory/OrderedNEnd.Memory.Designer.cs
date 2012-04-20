@@ -89,10 +89,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_OneEnd == null)
+                if ((value == null && _fk_OneEnd == null) || (value != null && value.ID == _fk_OneEnd))
+				{
+					SetInitializedProperty("OneEnd");
                     return;
-                else if (value != null && value.ID == _fk_OneEnd)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = OneEndImpl;

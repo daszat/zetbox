@@ -82,10 +82,11 @@
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && <%= fkBackingName %> == null)
+                if ((value == null && <%= fkBackingName %> == null) || (value != null && value.ID == <%= fkBackingName %>))
+				{
+					SetInitializedProperty("<%= name %>");
                     return;
-                else if (value != null && value.ID == <%= fkBackingName %>)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = <%= implName %>;

@@ -85,7 +85,10 @@ namespace ZBox.App.SchemaMigration
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -94,7 +97,10 @@ namespace ZBox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -308,7 +314,10 @@ namespace ZBox.App.SchemaMigration
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -317,7 +326,10 @@ namespace ZBox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -531,7 +543,10 @@ namespace ZBox.App.SchemaMigration
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DestinationObjectClass == null)
+				{
+					SetInitializedProperty("DestinationObjectClass");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DestinationObjectClass);
@@ -540,7 +555,10 @@ namespace ZBox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("DestinationObjectClass");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DestinationObjectClass", __oldValue, __newValue);
@@ -791,7 +809,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.StagingDatabase == null)
+				{
+					SetInitializedProperty("StagingDatabase");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.StagingDatabase);
@@ -800,7 +821,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("StagingDatabase");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("StagingDatabase", __oldValue, __newValue);
@@ -1363,9 +1387,9 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         [EventBasedMethod("OnNotifyPreSave_SourceTable")]
         public override void NotifyPreSave()
         {
-            FetchExportGuidOrDefault();
-            FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
+            FetchCreatedOnOrDefault();
+            FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_SourceTable != null) OnNotifyPreSave_SourceTable(this);
         }

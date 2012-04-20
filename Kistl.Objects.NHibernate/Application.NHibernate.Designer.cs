@@ -85,7 +85,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -94,7 +97,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -250,7 +256,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -259,7 +268,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -551,7 +563,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -560,7 +575,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -698,7 +716,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RootScreen == null)
+				{
+					SetInitializedProperty("RootScreen");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.NavigationScreenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RootScreen);
@@ -707,7 +728,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("RootScreen");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RootScreen", __oldValue, __newValue);
@@ -787,7 +811,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.WorkspaceViewModel == null)
+				{
+					SetInitializedProperty("WorkspaceViewModel");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.WorkspaceViewModel);
@@ -796,7 +823,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("WorkspaceViewModel");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("WorkspaceViewModel", __oldValue, __newValue);
@@ -1149,8 +1179,8 @@ namespace Kistl.App.GUI
         [EventBasedMethod("OnNotifyPreSave_Application")]
         public override void NotifyPreSave()
         {
-            FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
+            FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_Application != null) OnNotifyPreSave_Application(this);

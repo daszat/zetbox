@@ -85,7 +85,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -94,7 +97,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -343,7 +349,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -352,7 +361,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -617,7 +629,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -626,7 +641,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -706,7 +724,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Parent == null)
+				{
+					SetInitializedProperty("Parent");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
@@ -715,7 +736,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Parent");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Parent", __oldValue, __newValue);
@@ -906,7 +930,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ViewModelDescriptor == null)
+				{
+					SetInitializedProperty("ViewModelDescriptor");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelDescriptor);
@@ -915,7 +942,10 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ViewModelDescriptor");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ViewModelDescriptor", __oldValue, __newValue);
@@ -1361,8 +1391,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
         [EventBasedMethod("OnNotifyPreSave_NavigationEntry")]
         public override void NotifyPreSave()
         {
-            FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
+            FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_NavigationEntry != null) OnNotifyPreSave_NavigationEntry(this);

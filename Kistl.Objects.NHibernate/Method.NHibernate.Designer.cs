@@ -143,7 +143,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -152,7 +155,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -328,8 +334,6 @@ namespace Kistl.App.Base
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Method, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -364,7 +368,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -373,7 +380,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -665,7 +675,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Icon == null)
+				{
+					SetInitializedProperty("Icon");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Icon);
@@ -674,7 +687,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Icon");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Icon", __oldValue, __newValue);
@@ -928,7 +944,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -937,7 +956,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -1075,7 +1097,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ObjectClass == null)
+				{
+					SetInitializedProperty("ObjectClass");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ObjectClass);
@@ -1084,7 +1109,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ObjectClass");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ObjectClass", __oldValue, __newValue);
@@ -1573,7 +1601,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorNHibernateImpl<Method, Kistl.App.Base.Identity>(
                         lazyCtx,
@@ -1738,10 +1766,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         [EventBasedMethod("OnNotifyPreSave_Method")]
         public override void NotifyPreSave()
         {
-            FetchCodeTemplateOrDefault();
-            FetchExportGuidOrDefault();
-            FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
+            FetchCodeTemplateOrDefault();
+            FetchCreatedOnOrDefault();
+            FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_Method != null) OnNotifyPreSave_Method(this);
         }
@@ -1760,7 +1788,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         {
             SetNotInitializedProperty("CategoryTags");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Icon");

@@ -89,10 +89,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DisplayedTypeAssembly == null)
+                if ((value == null && _fk_DisplayedTypeAssembly == null) || (value != null && value.ID == _fk_DisplayedTypeAssembly))
+				{
+					SetInitializedProperty("DisplayedTypeAssembly");
                     return;
-                else if (value != null && value.ID == _fk_DisplayedTypeAssembly)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DisplayedTypeAssemblyImpl;
@@ -321,10 +322,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_VisualTree == null)
+                if ((value == null && _fk_VisualTree == null) || (value != null && value.ID == _fk_VisualTree))
+				{
+					SetInitializedProperty("VisualTree");
                     return;
-                else if (value != null && value.ID == _fk_VisualTree)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = VisualTreeImpl;

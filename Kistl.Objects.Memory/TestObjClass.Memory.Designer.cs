@@ -147,10 +147,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ObjectProp == null)
+                if ((value == null && _fk_ObjectProp == null) || (value != null && value.ID == _fk_ObjectProp))
+				{
+					SetInitializedProperty("ObjectProp");
                     return;
-                else if (value != null && value.ID == _fk_ObjectProp)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ObjectPropImpl;

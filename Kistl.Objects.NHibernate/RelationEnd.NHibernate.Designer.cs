@@ -85,7 +85,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.AParent == null)
+				{
+					SetInitializedProperty("AParent");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.AParent);
@@ -94,7 +97,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("AParent");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("AParent", __oldValue, __newValue);
@@ -190,7 +196,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.BParent == null)
+				{
+					SetInitializedProperty("BParent");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.BParent);
@@ -199,7 +208,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("BParent");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("BParent", __oldValue, __newValue);
@@ -295,7 +307,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -304,7 +319,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -460,7 +478,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -469,7 +490,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -819,7 +843,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Navigator == null)
+				{
+					SetInitializedProperty("Navigator");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Navigator);
@@ -828,7 +855,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Navigator");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Navigator", __oldValue, __newValue);
@@ -917,8 +947,6 @@ namespace Kistl.App.Base
         private bool _Parent_IsDirty = true; // Always true as it will not be stored in the database (yet)
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
-
-        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnParent_IsValid;
 
         /// <summary>
         /// This end&amp;apos;s role name in the relation
@@ -1012,7 +1040,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Type == null)
+				{
+					SetInitializedProperty("Type");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Type);
@@ -1021,7 +1052,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Type");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Type", __oldValue, __newValue);
@@ -1165,6 +1199,7 @@ namespace Kistl.App.Base
         public override void SetNew()
         {
             base.SetNew();
+            _Parent_IsDirty = true;
         }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
@@ -1405,7 +1440,7 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Parent,
                         null, // CalculatedObjectReferenceProperty is a read-only property
-						obj => OnParent_IsValid),  
+						null), // no constraints on calculated properties 
                     // else
                     new PropertyDescriptorNHibernateImpl<RelationEnd, string>(
                         lazyCtx,
@@ -1497,9 +1532,9 @@ namespace Kistl.App.Base
             SetNotInitializedProperty("HasPersistentOrder");
             SetNotInitializedProperty("Multiplicity");
             SetNotInitializedProperty("Navigator");
-            SetNotInitializedProperty("Parent");
             SetNotInitializedProperty("RoleName");
             SetNotInitializedProperty("Type");
+            _Parent_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_RelationEnd != null) OnNotifyCreated_RelationEnd(this);
         }

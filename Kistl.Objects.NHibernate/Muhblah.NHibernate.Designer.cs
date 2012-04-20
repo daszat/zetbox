@@ -206,7 +206,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.TestCustomObjects_Nav == null)
+				{
+					SetInitializedProperty("TestCustomObjects_Nav");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_Nav);
@@ -215,7 +218,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("TestCustomObjects_Nav");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("TestCustomObjects_Nav", __oldValue, __newValue);
@@ -316,7 +322,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.TestCustomObjects_One_Nav == null)
+				{
+					SetInitializedProperty("TestCustomObjects_One_Nav");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_One_Nav);
@@ -325,7 +334,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("TestCustomObjects_One_Nav");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("TestCustomObjects_One_Nav", __oldValue, __newValue);

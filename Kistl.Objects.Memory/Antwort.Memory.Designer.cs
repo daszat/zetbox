@@ -147,10 +147,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Fragebogen == null)
+                if ((value == null && _fk_Fragebogen == null) || (value != null && value.ID == _fk_Fragebogen))
+				{
+					SetInitializedProperty("Fragebogen");
                     return;
-                else if (value != null && value.ID == _fk_Fragebogen)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = FragebogenImpl;

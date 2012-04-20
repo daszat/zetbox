@@ -147,10 +147,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ChangedBy == null)
+                if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
-                else if (value != null && value.ID == _fk_ChangedBy)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -303,8 +304,6 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Method, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -357,10 +356,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_CreatedBy == null)
+                if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
-                else if (value != null && value.ID == _fk_CreatedBy)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -649,10 +649,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Icon == null)
+                if ((value == null && _fk_Icon == null) || (value != null && value.ID == _fk_Icon))
+				{
+					SetInitializedProperty("Icon");
                     return;
-                else if (value != null && value.ID == _fk_Icon)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = IconImpl;
@@ -915,10 +916,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Module == null)
+                if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
+				{
+					SetInitializedProperty("Module");
                     return;
-                else if (value != null && value.ID == _fk_Module)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -1065,10 +1067,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ObjectClass == null)
+                if ((value == null && _fk_ObjectClass == null) || (value != null && value.ID == _fk_ObjectClass))
+				{
+					SetInitializedProperty("ObjectClass");
                     return;
-                else if (value != null && value.ID == _fk_ObjectClass)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ObjectClassImpl;
@@ -1540,7 +1543,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorMemoryImpl<Method, Kistl.App.Base.Identity>(
                         lazyCtx,
@@ -1723,7 +1726,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         {
             SetNotInitializedProperty("CategoryTags");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Icon");

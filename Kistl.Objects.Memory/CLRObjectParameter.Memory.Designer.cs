@@ -90,10 +90,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Type == null)
+                if ((value == null && _fk_Type == null) || (value != null && value.ID == _fk_Type))
+				{
+					SetInitializedProperty("Type");
                     return;
-                else if (value != null && value.ID == _fk_Type)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = TypeImpl;

@@ -85,7 +85,10 @@ namespace ZBox.App.SchemaMigration
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -94,7 +97,10 @@ namespace ZBox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -308,7 +314,10 @@ namespace ZBox.App.SchemaMigration
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -317,7 +326,10 @@ namespace ZBox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -609,7 +621,10 @@ namespace ZBox.App.SchemaMigration
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.MigrationProject == null)
+				{
+					SetInitializedProperty("MigrationProject");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (ZBox.App.SchemaMigration.MigrationProjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MigrationProject);
@@ -618,7 +633,10 @@ namespace ZBox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("MigrationProject");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("MigrationProject", __oldValue, __newValue);
@@ -1120,8 +1138,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         [EventBasedMethod("OnNotifyPreSave_StagingDatabase")]
         public override void NotifyPreSave()
         {
-            FetchCreatedOnOrDefault();
             FetchChangedOnOrDefault();
+            FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_StagingDatabase != null) OnNotifyPreSave_StagingDatabase(this);

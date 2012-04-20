@@ -90,10 +90,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DefaultDisplayKind == null)
+                if ((value == null && _fk_DefaultDisplayKind == null) || (value != null && value.ID == _fk_DefaultDisplayKind))
+				{
+					SetInitializedProperty("DefaultDisplayKind");
                     return;
-                else if (value != null && value.ID == _fk_DefaultDisplayKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultDisplayKindImpl;
@@ -182,10 +183,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DefaultEditorKind == null)
+                if ((value == null && _fk_DefaultEditorKind == null) || (value != null && value.ID == _fk_DefaultEditorKind))
+				{
+					SetInitializedProperty("DefaultEditorKind");
                     return;
-                else if (value != null && value.ID == _fk_DefaultEditorKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultEditorKindImpl;
@@ -274,10 +276,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DefaultGridCellDisplayKind == null)
+                if ((value == null && _fk_DefaultGridCellDisplayKind == null) || (value != null && value.ID == _fk_DefaultGridCellDisplayKind))
+				{
+					SetInitializedProperty("DefaultGridCellDisplayKind");
                     return;
-                else if (value != null && value.ID == _fk_DefaultGridCellDisplayKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellDisplayKindImpl;
@@ -366,10 +369,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DefaultGridCellEditorKind == null)
+                if ((value == null && _fk_DefaultGridCellEditorKind == null) || (value != null && value.ID == _fk_DefaultGridCellEditorKind))
+				{
+					SetInitializedProperty("DefaultGridCellEditorKind");
                     return;
-                else if (value != null && value.ID == _fk_DefaultGridCellEditorKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellEditorKindImpl;
@@ -458,10 +462,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DefaultGridCellPreEditorKind == null)
+                if ((value == null && _fk_DefaultGridCellPreEditorKind == null) || (value != null && value.ID == _fk_DefaultGridCellPreEditorKind))
+				{
+					SetInitializedProperty("DefaultGridCellPreEditorKind");
                     return;
-                else if (value != null && value.ID == _fk_DefaultGridCellPreEditorKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultGridCellPreEditorKindImpl;
@@ -679,10 +684,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Module == null)
+                if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
+				{
+					SetInitializedProperty("Module");
                     return;
-                else if (value != null && value.ID == _fk_Module)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;
@@ -796,10 +802,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ViewModelRef == null)
+                if ((value == null && _fk_ViewModelRef == null) || (value != null && value.ID == _fk_ViewModelRef))
+				{
+					SetInitializedProperty("ViewModelRef");
                     return;
-                else if (value != null && value.ID == _fk_ViewModelRef)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ViewModelRefImpl;

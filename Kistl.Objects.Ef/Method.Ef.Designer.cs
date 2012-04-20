@@ -329,8 +329,6 @@ namespace Kistl.App.Base
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Method, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.Method> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -1624,7 +1622,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorEfImpl<Method, Kistl.App.Base.Identity>(
                         lazyCtx,
@@ -1807,7 +1805,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         {
             SetNotInitializedProperty("CategoryTags");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Icon");

@@ -197,10 +197,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Method == null)
+                if ((value == null && _fk_Method == null) || (value != null && value.ID == _fk_Method))
+				{
+					SetInitializedProperty("Method");
                     return;
-                else if (value != null && value.ID == _fk_Method)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = MethodImpl;
@@ -288,10 +289,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Property == null)
+                if ((value == null && _fk_Property == null) || (value != null && value.ID == _fk_Property))
+				{
+					SetInitializedProperty("Property");
                     return;
-                else if (value != null && value.ID == _fk_Property)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = PropertyImpl;

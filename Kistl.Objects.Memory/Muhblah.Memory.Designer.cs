@@ -213,10 +213,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_TestCustomObjects_Nav == null)
+                if ((value == null && _fk_TestCustomObjects_Nav == null) || (value != null && value.ID == _fk_TestCustomObjects_Nav))
+				{
+					SetInitializedProperty("TestCustomObjects_Nav");
                     return;
-                else if (value != null && value.ID == _fk_TestCustomObjects_Nav)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = TestCustomObjects_NavImpl;
@@ -320,10 +321,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_TestCustomObjects_One_Nav == null)
+                if ((value == null && _fk_TestCustomObjects_One_Nav == null) || (value != null && value.ID == _fk_TestCustomObjects_One_Nav))
+				{
+					SetInitializedProperty("TestCustomObjects_One_Nav");
                     return;
-                else if (value != null && value.ID == _fk_TestCustomObjects_One_Nav)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = TestCustomObjects_One_NavImpl;

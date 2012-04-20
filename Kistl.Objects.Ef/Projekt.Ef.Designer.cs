@@ -146,8 +146,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAufwandGes_IsValid;
-
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -987,7 +985,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         null,
                         obj => obj.AufwandGes,
                         null, // calculated property
-						obj => OnAufwandGes_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorEfImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
@@ -1132,7 +1130,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyCreated_Projekt")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("AufwandGes");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Kundenname");

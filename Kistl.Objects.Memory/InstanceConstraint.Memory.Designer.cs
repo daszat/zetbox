@@ -90,10 +90,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Constrained == null)
+                if ((value == null && _fk_Constrained == null) || (value != null && value.ID == _fk_Constrained))
+				{
+					SetInitializedProperty("Constrained");
                     return;
-                else if (value != null && value.ID == _fk_Constrained)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ConstrainedImpl;

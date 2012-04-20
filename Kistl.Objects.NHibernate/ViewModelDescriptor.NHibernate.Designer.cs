@@ -83,7 +83,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultDisplayKind == null)
+				{
+					SetInitializedProperty("DefaultDisplayKind");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultDisplayKind);
@@ -92,7 +95,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("DefaultDisplayKind");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultDisplayKind", __oldValue, __newValue);
@@ -172,7 +178,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultEditorKind == null)
+				{
+					SetInitializedProperty("DefaultEditorKind");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultEditorKind);
@@ -181,7 +190,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("DefaultEditorKind");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultEditorKind", __oldValue, __newValue);
@@ -261,7 +273,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultGridCellDisplayKind == null)
+				{
+					SetInitializedProperty("DefaultGridCellDisplayKind");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellDisplayKind);
@@ -270,7 +285,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("DefaultGridCellDisplayKind");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultGridCellDisplayKind", __oldValue, __newValue);
@@ -350,7 +368,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultGridCellEditorKind == null)
+				{
+					SetInitializedProperty("DefaultGridCellEditorKind");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellEditorKind);
@@ -359,7 +380,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("DefaultGridCellEditorKind");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultGridCellEditorKind", __oldValue, __newValue);
@@ -439,7 +463,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultGridCellPreEditorKind == null)
+				{
+					SetInitializedProperty("DefaultGridCellPreEditorKind");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellPreEditorKind);
@@ -448,7 +475,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("DefaultGridCellPreEditorKind");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultGridCellPreEditorKind", __oldValue, __newValue);
@@ -664,7 +694,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -673,7 +706,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -784,7 +820,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ViewModelRef == null)
+				{
+					SetInitializedProperty("ViewModelRef");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelRef);
@@ -793,7 +832,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ViewModelRef");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);

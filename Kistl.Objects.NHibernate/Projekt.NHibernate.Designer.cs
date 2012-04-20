@@ -140,8 +140,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAufwandGes_IsValid;
-
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -176,7 +174,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -185,7 +186,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -341,7 +345,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -350,7 +357,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -939,7 +949,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         null,
                         obj => obj.AufwandGes,
                         null, // calculated property
-						obj => OnAufwandGes_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorNHibernateImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
@@ -1068,9 +1078,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyPreSave_Projekt")]
         public override void NotifyPreSave()
         {
+            FetchAufwandGesOrDefault();
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
-            FetchAufwandGesOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_Projekt != null) OnNotifyPreSave_Projekt(this);
@@ -1088,7 +1098,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyCreated_Projekt")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("AufwandGes");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Kundenname");

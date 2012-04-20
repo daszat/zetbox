@@ -90,10 +90,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ControlKind == null)
+                if ((value == null && _fk_ControlKind == null) || (value != null && value.ID == _fk_ControlKind))
+				{
+					SetInitializedProperty("ControlKind");
                     return;
-                else if (value != null && value.ID == _fk_ControlKind)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ControlKindImpl;
@@ -182,10 +183,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ControlRef == null)
+                if ((value == null && _fk_ControlRef == null) || (value != null && value.ID == _fk_ControlRef))
+				{
+					SetInitializedProperty("ControlRef");
                     return;
-                else if (value != null && value.ID == _fk_ControlRef)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ControlRefImpl;
@@ -345,10 +347,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Module == null)
+                if ((value == null && _fk_Module == null) || (value != null && value.ID == _fk_Module))
+				{
+					SetInitializedProperty("Module");
                     return;
-                else if (value != null && value.ID == _fk_Module)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ModuleImpl;

@@ -192,10 +192,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_MubBlah_Nav == null)
+                if ((value == null && _fk_MubBlah_Nav == null) || (value != null && value.ID == _fk_MubBlah_Nav))
+				{
+					SetInitializedProperty("MubBlah_Nav");
                     return;
-                else if (value != null && value.ID == _fk_MubBlah_Nav)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = MubBlah_NavImpl;
@@ -324,10 +325,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_MuhBlah_One_Nav == null)
+                if ((value == null && _fk_MuhBlah_One_Nav == null) || (value != null && value.ID == _fk_MuhBlah_One_Nav))
+				{
+					SetInitializedProperty("MuhBlah_One_Nav");
                     return;
-                else if (value != null && value.ID == _fk_MuhBlah_One_Nav)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = MuhBlah_One_NavImpl;
@@ -489,6 +491,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 
 					NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
 				}
+				else
+				{
+					SetInitializedProperty("PhoneNumberMobile");
+				}
             }
         }
         // END Kistl.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -547,6 +553,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                     }
 
 					NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
+				}
+				else
+				{
+					SetInitializedProperty("PhoneNumberOffice");
 				}
             }
         }

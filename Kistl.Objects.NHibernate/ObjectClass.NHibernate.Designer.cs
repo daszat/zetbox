@@ -117,7 +117,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.BaseObjectClass == null)
+				{
+					SetInitializedProperty("BaseObjectClass");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.BaseObjectClass);
@@ -126,7 +129,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("BaseObjectClass");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("BaseObjectClass", __oldValue, __newValue);
@@ -249,8 +255,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
@@ -285,7 +289,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultViewModelDescriptor == null)
+				{
+					SetInitializedProperty("DefaultViewModelDescriptor");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultViewModelDescriptor);
@@ -294,7 +301,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("DefaultViewModelDescriptor");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultViewModelDescriptor", __oldValue, __newValue);
@@ -1242,7 +1252,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectClass, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
@@ -1371,7 +1381,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("BaseObjectClass");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("DefaultViewModelDescriptor");
             SetNotInitializedProperty("IsAbstract");
             SetNotInitializedProperty("IsFrozenObject");

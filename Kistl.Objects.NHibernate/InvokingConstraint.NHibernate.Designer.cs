@@ -82,7 +82,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.GetErrorTextInvocation == null)
+				{
+					SetInitializedProperty("GetErrorTextInvocation");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.GetErrorTextInvocation);
@@ -91,7 +94,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("GetErrorTextInvocation");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("GetErrorTextInvocation", __oldValue, __newValue);
@@ -171,7 +177,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.IsValidInvocation == null)
+				{
+					SetInitializedProperty("IsValidInvocation");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.IsValidInvocation);
@@ -180,7 +189,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("IsValidInvocation");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("IsValidInvocation", __oldValue, __newValue);

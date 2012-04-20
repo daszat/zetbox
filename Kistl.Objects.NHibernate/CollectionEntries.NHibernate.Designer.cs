@@ -137,7 +137,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -146,7 +149,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -203,7 +209,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -212,7 +221,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -570,7 +582,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -579,7 +594,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -636,7 +654,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -645,7 +666,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -1003,7 +1027,10 @@ namespace at.dasz.DocumentManagement
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -1012,7 +1039,10 @@ namespace at.dasz.DocumentManagement
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -1099,7 +1129,10 @@ namespace at.dasz.DocumentManagement
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -1108,7 +1141,10 @@ namespace at.dasz.DocumentManagement
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -1529,7 +1565,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -1538,7 +1577,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -1593,7 +1635,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -1602,7 +1647,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -1914,7 +1962,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -1923,7 +1974,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -1980,7 +2034,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -1989,7 +2046,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -2312,7 +2372,10 @@ namespace Kistl.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -2321,7 +2384,10 @@ namespace Kistl.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -2376,7 +2442,10 @@ namespace Kistl.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -2385,7 +2454,10 @@ namespace Kistl.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -2662,7 +2734,10 @@ namespace Kistl.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -2671,7 +2746,10 @@ namespace Kistl.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -2726,7 +2804,10 @@ namespace Kistl.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -2735,7 +2816,10 @@ namespace Kistl.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -3047,7 +3131,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -3056,7 +3143,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -3113,7 +3203,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -3122,7 +3215,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -3480,7 +3576,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -3489,7 +3588,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -3546,7 +3648,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -3555,7 +3660,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -3913,7 +4021,10 @@ namespace Kistl.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -3922,7 +4033,10 @@ namespace Kistl.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -4009,7 +4123,10 @@ namespace Kistl.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -4018,7 +4135,10 @@ namespace Kistl.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -4474,7 +4594,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -4483,7 +4606,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -4570,7 +4696,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -4579,7 +4708,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -5035,7 +5167,10 @@ namespace ZBox.App.SchemaMigration
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -5044,7 +5179,10 @@ namespace ZBox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -5131,7 +5269,10 @@ namespace ZBox.App.SchemaMigration
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -5140,7 +5281,10 @@ namespace ZBox.App.SchemaMigration
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -5561,7 +5705,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.TemplateNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -5570,7 +5717,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -5625,7 +5775,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -5634,7 +5787,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -5911,7 +6067,10 @@ namespace Kistl.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.TestStudentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -5920,7 +6079,10 @@ namespace Kistl.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -5975,7 +6137,10 @@ namespace Kistl.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -5984,7 +6149,10 @@ namespace Kistl.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -6296,7 +6464,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -6305,7 +6476,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -6392,7 +6566,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -6401,7 +6578,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -6857,7 +7037,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -6866,7 +7049,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -6923,7 +7109,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -6932,7 +7121,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -7290,7 +7482,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -7299,7 +7494,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -7356,7 +7554,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -7365,7 +7566,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -7688,7 +7892,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -7697,7 +7904,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -7752,7 +7962,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -7761,7 +7974,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -8038,7 +8254,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
@@ -8047,7 +8266,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("A");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -8102,7 +8324,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
@@ -8111,7 +8336,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("B");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -8358,7 +8586,10 @@ namespace Kistl.App.Projekte
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Parent == null)
+				{
+					SetInitializedProperty("Parent");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
@@ -8367,7 +8598,10 @@ namespace Kistl.App.Projekte
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Parent");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Parent", __oldValue, __newValue);
@@ -8708,7 +8942,10 @@ namespace Kistl.App.Test
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Parent == null)
+				{
+					SetInitializedProperty("Parent");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
@@ -8717,7 +8954,10 @@ namespace Kistl.App.Test
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Parent");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Parent", __oldValue, __newValue);
@@ -8820,6 +9060,10 @@ namespace Kistl.App.Test
                     }
 
 					NotifyPropertyChanged("Value", __oldValue, __newValue);
+				}
+				else
+				{
+					SetInitializedProperty("Value");
 				}
             }
         }

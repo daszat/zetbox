@@ -264,8 +264,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.ObjectClass> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
@@ -1301,7 +1299,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorEfImpl<ObjectClass, Kistl.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
@@ -1429,7 +1427,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("BaseObjectClass");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("DefaultViewModelDescriptor");
             SetNotInitializedProperty("IsAbstract");
             SetNotInitializedProperty("IsFrozenObject");

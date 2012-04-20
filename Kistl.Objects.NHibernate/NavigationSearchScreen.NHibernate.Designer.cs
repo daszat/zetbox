@@ -604,7 +604,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RequestedEditorKind == null)
+				{
+					SetInitializedProperty("RequestedEditorKind");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedEditorKind);
@@ -613,7 +616,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("RequestedEditorKind");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
@@ -693,7 +699,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RequestedWorkspaceKind == null)
+				{
+					SetInitializedProperty("RequestedWorkspaceKind");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedWorkspaceKind);
@@ -702,7 +711,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("RequestedWorkspaceKind");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
@@ -1072,7 +1084,10 @@ namespace Kistl.App.GUI
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Type == null)
+				{
+					SetInitializedProperty("Type");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Type);
@@ -1081,7 +1096,10 @@ namespace Kistl.App.GUI
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Type");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Type", __oldValue, __newValue);

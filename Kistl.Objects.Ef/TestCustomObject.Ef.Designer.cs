@@ -558,6 +558,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 
                     NotifyPropertyChanged("PhoneNumberMobile", "PhoneNumberMobileImpl", __oldValue, value);
                 }
+				else
+				{
+					SetInitializedProperty("PhoneNumberMobile");
+				}
             }
         }
            // END Kistl.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -616,6 +620,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 
                     NotifyPropertyChanged("PhoneNumberOffice", "PhoneNumberOfficeImpl", __oldValue, value);
                 }
+				else
+				{
+					SetInitializedProperty("PhoneNumberOffice");
+				}
             }
         }
            // END Kistl.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate

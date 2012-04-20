@@ -90,10 +90,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_DefaultPropertyViewModelDescriptor == null)
+                if ((value == null && _fk_DefaultPropertyViewModelDescriptor == null) || (value != null && value.ID == _fk_DefaultPropertyViewModelDescriptor))
+				{
+					SetInitializedProperty("DefaultPropertyViewModelDescriptor");
                     return;
-                else if (value != null && value.ID == _fk_DefaultPropertyViewModelDescriptor)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = DefaultPropertyViewModelDescriptorImpl;

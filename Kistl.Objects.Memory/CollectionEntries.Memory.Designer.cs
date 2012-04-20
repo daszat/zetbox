@@ -174,10 +174,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -244,10 +245,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -583,10 +585,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -653,10 +656,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -992,10 +996,11 @@ namespace at.dasz.DocumentManagement
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -1093,10 +1098,11 @@ namespace at.dasz.DocumentManagement
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -1452,10 +1458,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -1521,10 +1528,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -1832,10 +1840,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -1902,10 +1911,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -2206,10 +2216,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -2275,10 +2286,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -2551,10 +2563,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -2620,10 +2633,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -2931,10 +2945,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -3001,10 +3016,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -3340,10 +3356,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -3410,10 +3427,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -3749,10 +3767,11 @@ namespace Kistl.App.Projekte
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -3850,10 +3869,11 @@ namespace Kistl.App.Projekte
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -4244,10 +4264,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -4345,10 +4366,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -4739,10 +4761,11 @@ namespace ZBox.App.SchemaMigration
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -4840,10 +4863,11 @@ namespace ZBox.App.SchemaMigration
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -5199,10 +5223,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -5268,10 +5293,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -5544,10 +5570,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -5613,10 +5640,11 @@ namespace Kistl.App.Test
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -5924,10 +5952,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -6025,10 +6054,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -6419,10 +6449,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -6489,10 +6520,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -6828,10 +6860,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -6898,10 +6931,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -7202,10 +7236,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -7271,10 +7306,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -7547,10 +7583,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_A == null)
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+				{
+					SetInitializedProperty("A");
                     return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AImpl;
@@ -7616,10 +7653,11 @@ namespace Kistl.App.GUI
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_B == null)
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+				{
+					SetInitializedProperty("B");
                     return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BImpl;
@@ -8203,6 +8241,10 @@ namespace Kistl.App.Test
                     }
 
 					NotifyPropertyChanged("Value", __oldValue, __newValue);
+				}
+				else
+				{
+					SetInitializedProperty("Value");
 				}
             }
         }

@@ -93,9 +93,12 @@ namespace Kistl.Generator.Templates
 
         protected virtual void ApplyPropertyIsValidEvent(Property p)
         {
-            this.WriteLine();
-            this.WriteObjects("        public static event PropertyIsValidHandler<", p.ObjectClass.GetDataTypeString(), "> On", p.Name, "_IsValid;");
-            this.WriteLine();
+            if (!p.IsCalculated())
+            {
+                this.WriteLine();
+                this.WriteObjects("        public static event PropertyIsValidHandler<", p.ObjectClass.GetDataTypeString(), "> On", p.Name, "_IsValid;");
+                this.WriteLine();
+            }
         }
 
         protected virtual void ApplyPropertyEvents(Property p, bool isReadOnly)

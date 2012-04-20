@@ -124,8 +124,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnAufwandGes_IsValid;
-
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -178,10 +176,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ChangedBy == null)
+                if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
-                else if (value != null && value.ID == _fk_ChangedBy)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -340,10 +339,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_CreatedBy == null)
+                if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
-                else if (value != null && value.ID == _fk_CreatedBy)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -910,7 +910,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         null,
                         obj => obj.AufwandGes,
                         null, // calculated property
-						obj => OnAufwandGes_IsValid), 
+						null), // no constraints on calculated properties
                     // else
                     new PropertyDescriptorMemoryImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
@@ -1055,7 +1055,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyCreated_Projekt")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("AufwandGes");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Kundenname");

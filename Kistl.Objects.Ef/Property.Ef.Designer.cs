@@ -329,8 +329,6 @@ namespace Kistl.App.Base
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.Property> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
@@ -2049,7 +2047,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<Property, ICollection<Kistl.App.Base.Constraint>>(
                         lazyCtx,
@@ -2242,7 +2240,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             SetNotInitializedProperty("CategoryTags");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("DefaultValue");
             SetNotInitializedProperty("Description");

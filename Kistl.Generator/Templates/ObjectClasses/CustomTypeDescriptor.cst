@@ -64,7 +64,7 @@
                         null,
                         obj => obj.<%= propertyName %>,
                         null, // CalculatedObjectReferenceProperty is a read-only property
-						obj => On<%= propertyName %>_IsValid),  
+						null), // no constraints on calculated properties 
 <%          } else { %>
 <%              var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; %>
                     // else
@@ -76,7 +76,7 @@
                         obj => obj.<%= propertyName %>,
 <%              if(isReadonly) { %>
                         null, // calculated property
-						obj => On<%= propertyName %>_IsValid), 
+						null), // no constraints on calculated properties
 <%              } else { %>
                         (obj, val) => obj.<%= propertyName %> = val,
 						obj => On<%= propertyName %>_IsValid), 

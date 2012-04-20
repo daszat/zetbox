@@ -71,7 +71,9 @@ namespace Kistl.App.Extensions
 
         public static bool IsCalculated(this Property p)
         {
-            return p is ValueTypeProperty && ((ValueTypeProperty)p).IsCalculated;
+            return (p is ValueTypeProperty && ((ValueTypeProperty)p).IsCalculated)
+                || (p is CalculatedObjectReferenceProperty)
+                || (p is CompoundObjectProperty && false /* ((CompoundObjectProperty)p).IsCalculated*/ ); 
         }
 
         public static bool HasLengthConstraint(this StringProperty prop)

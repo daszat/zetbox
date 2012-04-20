@@ -143,7 +143,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
@@ -152,7 +155,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
@@ -328,8 +334,6 @@ namespace Kistl.App.Base
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCodeTemplate_Getter;
 
-        public static event PropertyIsValidHandler<Kistl.App.Base.Property> OnCodeTemplate_IsValid;
-
         /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
@@ -401,7 +405,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
@@ -410,7 +417,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
@@ -566,7 +576,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.DefaultValue == null)
+				{
+					SetInitializedProperty("DefaultValue");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultValue);
@@ -575,7 +588,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("DefaultValue");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("DefaultValue", __oldValue, __newValue);
@@ -807,7 +823,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.FilterConfiguration == null)
+				{
+					SetInitializedProperty("FilterConfiguration");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FilterConfiguration);
@@ -816,7 +835,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("FilterConfiguration");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("FilterConfiguration", __oldValue, __newValue);
@@ -970,7 +992,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Module == null)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
@@ -979,7 +1004,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("Module");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Module", __oldValue, __newValue);
@@ -1117,7 +1145,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ObjectClass == null)
+				{
+					SetInitializedProperty("ObjectClass");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ObjectClass);
@@ -1126,7 +1157,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ObjectClass");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ObjectClass", __oldValue, __newValue);
@@ -1259,7 +1293,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.RequestedKind == null)
+				{
+					SetInitializedProperty("RequestedKind");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedKind);
@@ -1268,7 +1305,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("RequestedKind");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
@@ -1348,7 +1388,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ValueModelDescriptor == null)
+				{
+					SetInitializedProperty("ValueModelDescriptor");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ValueModelDescriptor);
@@ -1357,7 +1400,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("ValueModelDescriptor");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ValueModelDescriptor", __oldValue, __newValue);
@@ -1985,7 +2031,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
                         null,
                         obj => obj.CodeTemplate,
                         null, // calculated property
-						obj => OnCodeTemplate_IsValid), 
+						null), // no constraints on calculated properties
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<Property, ICollection<Kistl.App.Base.Constraint>>(
                         lazyCtx,
@@ -2160,10 +2206,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         [EventBasedMethod("OnNotifyPreSave_Property")]
         public override void NotifyPreSave()
         {
-            FetchExportGuidOrDefault();
             FetchChangedOnOrDefault();
-            FetchCreatedOnOrDefault();
             FetchCodeTemplateOrDefault();
+            FetchCreatedOnOrDefault();
+            FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_Property != null) OnNotifyPreSave_Property(this);
         }
@@ -2182,7 +2228,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             SetNotInitializedProperty("CategoryTags");
             SetNotInitializedProperty("ChangedBy");
-            SetNotInitializedProperty("CodeTemplate");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("DefaultValue");
             SetNotInitializedProperty("Description");

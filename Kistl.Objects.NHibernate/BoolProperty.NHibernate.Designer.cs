@@ -82,7 +82,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.FalseIcon == null)
+				{
+					SetInitializedProperty("FalseIcon");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FalseIcon);
@@ -91,7 +94,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("FalseIcon");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("FalseIcon", __oldValue, __newValue);
@@ -229,7 +235,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.NullIcon == null)
+				{
+					SetInitializedProperty("NullIcon");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.NullIcon);
@@ -238,7 +247,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("NullIcon");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("NullIcon", __oldValue, __newValue);
@@ -376,7 +388,10 @@ namespace Kistl.App.Base
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.TrueIcon == null)
+				{
+					SetInitializedProperty("TrueIcon");
                     return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TrueIcon);
@@ -385,7 +400,10 @@ namespace Kistl.App.Base
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
                 if (__oldValue == __newValue)
+				{
+					SetInitializedProperty("TrueIcon");
                     return;
+				}
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("TrueIcon", __oldValue, __newValue);

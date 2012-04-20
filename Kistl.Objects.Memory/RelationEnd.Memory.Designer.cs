@@ -90,10 +90,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_AParent == null)
+                if ((value == null && _fk_AParent == null) || (value != null && value.ID == _fk_AParent))
+				{
+					SetInitializedProperty("AParent");
                     return;
-                else if (value != null && value.ID == _fk_AParent)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = AParentImpl;
@@ -198,10 +199,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_BParent == null)
+                if ((value == null && _fk_BParent == null) || (value != null && value.ID == _fk_BParent))
+				{
+					SetInitializedProperty("BParent");
                     return;
-                else if (value != null && value.ID == _fk_BParent)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = BParentImpl;
@@ -305,10 +307,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_ChangedBy == null)
+                if ((value == null && _fk_ChangedBy == null) || (value != null && value.ID == _fk_ChangedBy))
+				{
+					SetInitializedProperty("ChangedBy");
                     return;
-                else if (value != null && value.ID == _fk_ChangedBy)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = ChangedByImpl;
@@ -467,10 +470,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_CreatedBy == null)
+                if ((value == null && _fk_CreatedBy == null) || (value != null && value.ID == _fk_CreatedBy))
+				{
+					SetInitializedProperty("CreatedBy");
                     return;
-                else if (value != null && value.ID == _fk_CreatedBy)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = CreatedByImpl;
@@ -817,10 +821,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Navigator == null)
+                if ((value == null && _fk_Navigator == null) || (value != null && value.ID == _fk_Navigator))
+				{
+					SetInitializedProperty("Navigator");
                     return;
-                else if (value != null && value.ID == _fk_Navigator)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = NavigatorImpl;
@@ -899,8 +904,6 @@ namespace Kistl.App.Base
         private bool _Parent_IsDirty = true; // Always true as it will not be stored in the database (yet)
         // END Kistl.Generator.Templates.Properties.CalculatedProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
-
-        public static event PropertyIsValidHandler<Kistl.App.Base.RelationEnd> OnParent_IsValid;
 
         /// <summary>
         /// This end&amp;apos;s role name in the relation
@@ -1013,10 +1016,11 @@ namespace Kistl.App.Base
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
                 // shortcut noops
-                if (value == null && _fk_Type == null)
+                if ((value == null && _fk_Type == null) || (value != null && value.ID == _fk_Type))
+				{
+					SetInitializedProperty("Type");
                     return;
-                else if (value != null && value.ID == _fk_Type)
-                    return;
+				}
 
                 // cache old value to remove inverse references later
                 var __oldValue = TypeImpl;
@@ -1149,6 +1153,7 @@ namespace Kistl.App.Base
         public override void SetNew()
         {
             base.SetNew();
+            _Parent_IsDirty = true;
         }
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
@@ -1389,7 +1394,7 @@ namespace Kistl.App.Base
                         null,
                         obj => obj.Parent,
                         null, // CalculatedObjectReferenceProperty is a read-only property
-						obj => OnParent_IsValid),  
+						null), // no constraints on calculated properties 
                     // else
                     new PropertyDescriptorMemoryImpl<RelationEnd, string>(
                         lazyCtx,
@@ -1478,9 +1483,9 @@ namespace Kistl.App.Base
             SetNotInitializedProperty("HasPersistentOrder");
             SetNotInitializedProperty("Multiplicity");
             SetNotInitializedProperty("Navigator");
-            SetNotInitializedProperty("Parent");
             SetNotInitializedProperty("RoleName");
             SetNotInitializedProperty("Type");
+            _Parent_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_RelationEnd != null) OnNotifyCreated_RelationEnd(this);
         }
