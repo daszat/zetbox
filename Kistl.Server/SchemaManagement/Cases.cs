@@ -2010,7 +2010,14 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var columns = GetUCColNames(uc);
             Log.InfoFormat("New Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
-            db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
+            try
+            {
+                db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
+            }
+            catch (Exception ex)
+            {
+                Log.ErrorFormat("Unable to create constraint, this may be a transient error while migrating: {0}", ex.Message);
+            }
         }
 
         internal static string[] GetUCColNames(IndexConstraint uc)
