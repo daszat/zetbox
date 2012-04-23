@@ -7,5 +7,6 @@
   <DatabaseSource Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=pg-server;Port=5432;Database=example;User Id=example;Password=foobar</DatabaseSource>
   <DatabaseTarget Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=jenkins;Port=5432;Database=example;User Id=example;Password=foobar</DatabaseTarget>
 
-  <AppServer Type="xsp"/>
+  <AppServer Type="xsp" Uri="http://jenkins:7007/%APP%/%GIT_BRANCH%/"/>
+  <!-- <AppServer Type="wcf" Uri="http://jenkins:7007/%APP%/%GIT_BRANCH%/"/> -->
 </EnvConfig>

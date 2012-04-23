@@ -307,22 +307,25 @@ namespace PrepareEnv
                 return;
 
             LogTitle("Enforcing app server");
-            var configTargetDir = Path.Combine(envConfig.BinaryTarget, "Configs");
-            foreach (var configPath in Directory.GetFiles(configTargetDir, "*.config", SearchOption.AllDirectories))
+            foreach (var configPath in Directory.GetFiles(envConfig.BinaryTarget, "*.config", SearchOption.AllDirectories))
             {
                 var doc = new XmlDocument();
                 doc.Load(configPath);
 
-                // check whether this is a KistlConfig
                 var endpoints = doc.SelectNodes("/configuration/system.serviceModel/client/endpoint");
-                if (endpoints.Count == 0)
-                    continue;
-
                 foreach (XmlElement endpoint in endpoints)
                 {
                     endpoint.Attributes["address"].Value = envConfig.AppServer.Uri;
+                    LogAction(string.Format("set endpoint address in {0}", configPath));
                 }
-                LogAction(string.Format("set enpoint address string in {0}", configPath));
+
+                var serviceUris = doc.SelectNodes("/configuration/appSettings/add[@key='serviceUri']");
+                foreach (XmlElement serviceUri in serviceUris)
+                {
+                    serviceUri.Attributes["value"].Value = envConfig.AppServer.Uri;
+                    LogAction(string.Format("set serviceUri address in {0}", configPath));
+                }
+
                 doc.Save(configPath);
             }
         }
