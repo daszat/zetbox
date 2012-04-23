@@ -821,11 +821,15 @@
 	    <MappingFragment StoreEntitySet="Projekt">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
+<ScalarProperty Name="Bis" ColumnName="Bis" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="KickOffAm" ColumnName="KickOffAm" />
+<ScalarProperty Name="KickOffBis" ColumnName="KickOffBis" />
 <ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
 <ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="Von" ColumnName="Von" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

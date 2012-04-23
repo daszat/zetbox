@@ -27,6 +27,30 @@ namespace Kistl.App.Projekte
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        DateTime? Bis {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        DateTime KickOffAm {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        DateTime? KickOffBis {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
         string Kundenname {
@@ -53,6 +77,14 @@ namespace Kistl.App.Projekte
         /// </summary>
 
         ICollection<Kistl.App.Projekte.Task> Tasks { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        DateTime Von {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 

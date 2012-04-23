@@ -1934,6 +1934,7 @@
                         FromRole="Projekt"
                         ToRole="Auftraege" />
     <Property Name="AufwandGes" Type="Double" Nullable="true"  />
+    <Property Name="Bis" Type="DateTime" Nullable="true"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Projekt_was_ChangedBy"
                         FromRole="Projekt"
@@ -1945,6 +1946,8 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <Property Name="KickOffAm" Type="DateTime" Nullable="false"  />
+    <Property Name="KickOffBis" Type="DateTime" Nullable="true"  />
     <Property Name="Kundenname" Type="String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="MitarbeiterImpl"
                         Relationship="Model.FK_Projekte_haben_Mitarbeiter_A"
@@ -1955,6 +1958,7 @@
                         Relationship="Model.FK_Projekt_has_Tasks"
                         FromRole="Projekt"
                         ToRole="Tasks" />
+    <Property Name="Von" Type="DateTime" Nullable="false"  />
     <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Projekte_Rights" FromRole="Projekt" ToRole="Projekt_Rights" />
   </EntityType>
   <EntityType Name="Projekt_Rights">
@@ -2335,7 +2339,7 @@
                         FromRole="Task"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="DatumBis" Type="DateTime" Nullable="false"  />
+    <Property Name="DatumBis" Type="DateTime" Nullable="true"  />
     <Property Name="DatumVon" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />

@@ -147,6 +147,67 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_Getter;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public DateTime? Bis
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Bis;
+                if (OnBis_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    OnBis_Getter(this, __e);
+                    __result = _Bis = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Bis != value)
+                {
+                    var __oldValue = _Bis;
+                    var __newValue = value;
+                    if (OnBis_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnBis_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Bis", __oldValue, __newValue);
+                    _Bis = __newValue;
+                    NotifyPropertyChanged("Bis", __oldValue, __newValue);
+
+                    if (OnBis_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnBis_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("Bis");
+				}
+            }
+        }
+        private DateTime? _Bis;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnBis_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnBis_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnBis_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnBis_IsValid;
+
+        /// <summary>
         /// Identity which changed this object
         /// </summary>
     /*
@@ -579,6 +640,128 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnExportGuid_IsValid;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public DateTime KickOffAm
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _KickOffAm;
+                if (OnKickOffAm_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnKickOffAm_Getter(this, __e);
+                    __result = _KickOffAm = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_KickOffAm != value)
+                {
+                    var __oldValue = _KickOffAm;
+                    var __newValue = value;
+                    if (OnKickOffAm_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnKickOffAm_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("KickOffAm", __oldValue, __newValue);
+                    _KickOffAm = __newValue;
+                    NotifyPropertyChanged("KickOffAm", __oldValue, __newValue);
+
+                    if (OnKickOffAm_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnKickOffAm_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("KickOffAm");
+				}
+            }
+        }
+        private DateTime _KickOffAm;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnKickOffAm_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnKickOffAm_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnKickOffAm_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnKickOffAm_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public DateTime? KickOffBis
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _KickOffBis;
+                if (OnKickOffBis_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    OnKickOffBis_Getter(this, __e);
+                    __result = _KickOffBis = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_KickOffBis != value)
+                {
+                    var __oldValue = _KickOffBis;
+                    var __newValue = value;
+                    if (OnKickOffBis_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnKickOffBis_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("KickOffBis", __oldValue, __newValue);
+                    _KickOffBis = __newValue;
+                    NotifyPropertyChanged("KickOffBis", __oldValue, __newValue);
+
+                    if (OnKickOffBis_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnKickOffBis_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("KickOffBis");
+				}
+            }
+        }
+        private DateTime? _KickOffBis;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnKickOffBis_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnKickOffBis_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnKickOffBis_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnKickOffBis_IsValid;
+
+        /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
         // value type property
@@ -810,6 +993,67 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         /// <summary>
         /// 
         /// </summary>
+        // value type property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public DateTime Von
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Von;
+                if (OnVon_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnVon_Getter(this, __e);
+                    __result = _Von = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Von != value)
+                {
+                    var __oldValue = _Von;
+                    var __newValue = value;
+                    if (OnVon_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnVon_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Von", __oldValue, __newValue);
+                    _Von = __newValue;
+                    NotifyPropertyChanged("Von", __oldValue, __newValue);
+
+                    if (OnVon_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnVon_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("Von");
+				}
+            }
+        }
+        private DateTime _Von;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnVon_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnVon_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnVon_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnVon_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetSummaryReport_Projekt")]
         public virtual System.Object GetSummaryReport(string title, Kistl.App.Base.DateTimeRange range)
@@ -883,11 +1127,15 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             var otherImpl = (ProjektEfImpl)obj;
             var me = (Projekt)this;
 
+            me.Bis = other.Bis;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
+            me.KickOffAm = other.KickOffAm;
+            me.KickOffBis = other.KickOffBis;
             me.Kundenname = other.Kundenname;
             me.Name = other.Name;
+            me.Von = other.Von;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
@@ -910,13 +1158,17 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // Do not audit calculated properties
             switch (property)
             {
+                case "Bis":
                 case "ChangedBy":
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
                 case "ExportGuid":
+                case "KickOffAm":
+                case "KickOffBis":
                 case "Kundenname":
                 case "Name":
+                case "Von":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -987,6 +1239,15 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         null, // calculated property
 						null), // no constraints on calculated properties
                     // else
+                    new PropertyDescriptorEfImpl<Projekt, DateTime?>(
+                        lazyCtx,
+                        new Guid("b1e079e3-9236-4774-8f21-7b2abfcf9fb0"),
+                        "Bis",
+                        null,
+                        obj => obj.Bis,
+                        (obj, val) => obj.Bis = val,
+						obj => OnBis_IsValid), 
+                    // else
                     new PropertyDescriptorEfImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("2fe9d894-c359-412f-b787-d3ed3a26a0a2"),
@@ -1032,6 +1293,24 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
                     // else
+                    new PropertyDescriptorEfImpl<Projekt, DateTime>(
+                        lazyCtx,
+                        new Guid("d9b9e70b-e9d2-4da4-8731-a4eee7bf6d87"),
+                        "KickOffAm",
+                        null,
+                        obj => obj.KickOffAm,
+                        (obj, val) => obj.KickOffAm = val,
+						obj => OnKickOffAm_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<Projekt, DateTime?>(
+                        lazyCtx,
+                        new Guid("a5057dbd-bd31-4e0a-81c2-e0fa551fa34d"),
+                        "KickOffBis",
+                        null,
+                        obj => obj.KickOffBis,
+                        (obj, val) => obj.KickOffBis = val,
+						obj => OnKickOffBis_IsValid), 
+                    // else
                     new PropertyDescriptorEfImpl<Projekt, string>(
                         lazyCtx,
                         new Guid("cd6be045-d1bd-4086-b848-c83249f5ca9b"),
@@ -1067,6 +1346,15 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         obj => obj.Tasks,
                         null, // lists are read-only properties
                         obj => OnTasks_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<Projekt, DateTime>(
+                        lazyCtx,
+                        new Guid("94ea407f-9816-470e-9e52-6607830c7c0b"),
+                        "Von",
+                        null,
+                        obj => obj.Von,
+                        (obj, val) => obj.Von = val,
+						obj => OnVon_IsValid), 
                     // position columns
                 };
             }
@@ -1130,10 +1418,14 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyCreated_Projekt")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Bis");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("KickOffAm");
+            SetNotInitializedProperty("KickOffBis");
             SetNotInitializedProperty("Kundenname");
             SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Von");
             _AufwandGes_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Projekt != null) OnNotifyCreated_Projekt(this);
@@ -1229,6 +1521,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._AufwandGes, binStream);
+            BinarySerializer.ToStream(this._Bis, binStream);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Projekt_was_ChangedBy", "ChangedBy").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
@@ -1249,8 +1542,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
+            BinarySerializer.ToStream(this._KickOffAm, binStream);
+            BinarySerializer.ToStream(this._KickOffBis, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
+            BinarySerializer.ToStream(this._Von, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1260,6 +1556,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._AufwandGes, binStream);
+            BinarySerializer.FromStream(out this._Bis, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
@@ -1274,8 +1571,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
+            BinarySerializer.FromStream(out this._KickOffAm, binStream);
+            BinarySerializer.FromStream(out this._KickOffBis, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
+            BinarySerializer.FromStream(out this._Von, binStream);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -1290,6 +1590,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._Bis, xml, "Bis", "Kistl.App.Projekte");
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Projekt_was_ChangedBy", "ChangedBy").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
@@ -1310,8 +1611,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
             }
+            XmlStreamer.ToStream(this._KickOffAm, xml, "KickOffAm", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._KickOffBis, xml, "KickOffBis", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._Von, xml, "Von", "Kistl.App.Projekte");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1321,6 +1625,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Bis, xml, "Bis", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
             if (this._isChangedOnSet) {
@@ -1335,8 +1640,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
             }
+            XmlStreamer.FromStream(ref this._KickOffAm, xml, "KickOffAm", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._KickOffBis, xml, "KickOffBis", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Von, xml, "Von", "Kistl.App.Projekte");
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -1351,12 +1659,16 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Bis, xml, "Bis", "Kistl.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._KickOffAm, xml, "KickOffAm", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._KickOffBis, xml, "KickOffBis", "Kistl.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Von, xml, "Von", "Kistl.App.Projekte");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1364,6 +1676,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Bis, xml, "Bis", "Kistl.App.Projekte");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
             this._isChangedOnSet = true;
@@ -1373,8 +1686,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
             this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._KickOffAm, xml, "KickOffAm", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._KickOffBis, xml, "KickOffBis", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Von, xml, "Von", "Kistl.App.Projekte");
         }
 
         #endregion

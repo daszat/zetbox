@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Enddatum
         /// </summary>
-        DateTime DatumBis {
+        DateTime? DatumBis {
             get;
             set;
         }

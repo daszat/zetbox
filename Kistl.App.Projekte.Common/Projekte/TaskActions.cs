@@ -47,14 +47,14 @@ namespace Kistl.App.Projekte
         [Invocation]
         public static void isValid_DatumVon(Task obj, PropertyIsValidEventArgs e)
         {
-            e.IsValid = !obj.IsInitialized("DatumBis") || obj.DatumBis >= obj.DatumVon;
+            e.IsValid = !obj.IsInitialized("DatumBis") || obj.DatumBis >= obj.DatumVon || obj.DatumBis == null;
             e.Error = e.IsValid ? string.Empty : "Falsches Zeitalter";
         }
 
         [Invocation]
         public static void isValid_DatumBis(Task obj, PropertyIsValidEventArgs e)
         {
-            e.IsValid = !obj.IsInitialized("DatumVon") || obj.DatumBis >= obj.DatumVon;
+            e.IsValid = !obj.IsInitialized("DatumVon") || obj.DatumBis >= obj.DatumVon || obj.DatumBis == null;
             e.Error = e.IsValid ? string.Empty : "Falsches Zeitalter";
         }
     }

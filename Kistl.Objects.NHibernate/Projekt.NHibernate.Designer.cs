@@ -141,6 +141,64 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, double?> OnAufwandGes_Getter;
 
         /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public DateTime? Bis
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.Bis;
+                if (OnBis_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    OnBis_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.Bis != value)
+                {
+                    var __oldValue = Proxy.Bis;
+                    var __newValue = value;
+                    if (OnBis_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnBis_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Bis", __oldValue, __newValue);
+                    Proxy.Bis = __newValue;
+                    NotifyPropertyChanged("Bis", __oldValue, __newValue);
+
+                    if (OnBis_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnBis_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("Bis");
+				}
+            }
+        }
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnBis_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnBis_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnBis_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnBis_IsValid;
+
+        /// <summary>
         /// Identity which changed this object
         /// </summary>
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -561,6 +619,122 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnExportGuid_IsValid;
 
         /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public DateTime KickOffAm
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.KickOffAm;
+                if (OnKickOffAm_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnKickOffAm_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.KickOffAm != value)
+                {
+                    var __oldValue = Proxy.KickOffAm;
+                    var __newValue = value;
+                    if (OnKickOffAm_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnKickOffAm_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("KickOffAm", __oldValue, __newValue);
+                    Proxy.KickOffAm = __newValue;
+                    NotifyPropertyChanged("KickOffAm", __oldValue, __newValue);
+
+                    if (OnKickOffAm_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnKickOffAm_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("KickOffAm");
+				}
+            }
+        }
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnKickOffAm_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnKickOffAm_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnKickOffAm_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnKickOffAm_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public DateTime? KickOffBis
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.KickOffBis;
+                if (OnKickOffBis_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    OnKickOffBis_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.KickOffBis != value)
+                {
+                    var __oldValue = Proxy.KickOffBis;
+                    var __newValue = value;
+                    if (OnKickOffBis_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnKickOffBis_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("KickOffBis", __oldValue, __newValue);
+                    Proxy.KickOffBis = __newValue;
+                    NotifyPropertyChanged("KickOffBis", __oldValue, __newValue);
+
+                    if (OnKickOffBis_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnKickOffBis_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("KickOffBis");
+				}
+            }
+        }
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnKickOffBis_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnKickOffBis_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime?> OnKickOffBis_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnKickOffBis_IsValid;
+
+        /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
 
@@ -745,6 +919,64 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         /// <summary>
         /// 
         /// </summary>
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public DateTime Von
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.Von;
+                if (OnVon_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime>(__result);
+                    OnVon_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.Von != value)
+                {
+                    var __oldValue = Proxy.Von;
+                    var __newValue = value;
+                    if (OnVon_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnVon_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Von", __oldValue, __newValue);
+                    Proxy.Von = __newValue;
+                    NotifyPropertyChanged("Von", __oldValue, __newValue);
+
+                    if (OnVon_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+                        OnVon_PostSetter(this, __e);
+                    }
+                }
+				else 
+				{
+					SetInitializedProperty("Von");
+				}
+            }
+        }
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnVon_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnVon_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Projekt, DateTime> OnVon_PostSetter;
+
+        public static event PropertyIsValidHandler<Kistl.App.Projekte.Projekt> OnVon_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetSummaryReport_Projekt")]
         public virtual System.Object GetSummaryReport(string title, Kistl.App.Base.DateTimeRange range)
@@ -818,11 +1050,15 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             var otherImpl = (ProjektNHibernateImpl)obj;
             var me = (Projekt)this;
 
+            me.Bis = other.Bis;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
+            me.KickOffAm = other.KickOffAm;
+            me.KickOffBis = other.KickOffBis;
             me.Kundenname = other.Kundenname;
             me.Name = other.Name;
+            me.Von = other.Von;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
@@ -874,13 +1110,17 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // Do not audit calculated properties
             switch (property)
             {
+                case "Bis":
                 case "ChangedBy":
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
                 case "ExportGuid":
+                case "KickOffAm":
+                case "KickOffBis":
                 case "Kundenname":
                 case "Name":
+                case "Von":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -951,6 +1191,15 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         null, // calculated property
 						null), // no constraints on calculated properties
                     // else
+                    new PropertyDescriptorNHibernateImpl<Projekt, DateTime?>(
+                        lazyCtx,
+                        new Guid("b1e079e3-9236-4774-8f21-7b2abfcf9fb0"),
+                        "Bis",
+                        null,
+                        obj => obj.Bis,
+                        (obj, val) => obj.Bis = val,
+						obj => OnBis_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<Projekt, Kistl.App.Base.Identity>(
                         lazyCtx,
                         new Guid("2fe9d894-c359-412f-b787-d3ed3a26a0a2"),
@@ -996,6 +1245,24 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<Projekt, DateTime>(
+                        lazyCtx,
+                        new Guid("d9b9e70b-e9d2-4da4-8731-a4eee7bf6d87"),
+                        "KickOffAm",
+                        null,
+                        obj => obj.KickOffAm,
+                        (obj, val) => obj.KickOffAm = val,
+						obj => OnKickOffAm_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Projekt, DateTime?>(
+                        lazyCtx,
+                        new Guid("a5057dbd-bd31-4e0a-81c2-e0fa551fa34d"),
+                        "KickOffBis",
+                        null,
+                        obj => obj.KickOffBis,
+                        (obj, val) => obj.KickOffBis = val,
+						obj => OnKickOffBis_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<Projekt, string>(
                         lazyCtx,
                         new Guid("cd6be045-d1bd-4086-b848-c83249f5ca9b"),
@@ -1031,6 +1298,15 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                         obj => obj.Tasks,
                         null, // lists are read-only properties
                         obj => OnTasks_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Projekt, DateTime>(
+                        lazyCtx,
+                        new Guid("94ea407f-9816-470e-9e52-6607830c7c0b"),
+                        "Von",
+                        null,
+                        obj => obj.Von,
+                        (obj, val) => obj.Von = val,
+						obj => OnVon_IsValid), 
                     // position columns
                 };
             }
@@ -1098,10 +1374,14 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         [EventBasedMethod("OnNotifyCreated_Projekt")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("Bis");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("KickOffAm");
+            SetNotInitializedProperty("KickOffBis");
             SetNotInitializedProperty("Kundenname");
             SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Von");
             _AufwandGes_IsDirty = true;
             base.NotifyCreated();
             if (OnNotifyCreated_Projekt != null) OnNotifyCreated_Projekt(this);
@@ -1160,6 +1440,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
 
             public virtual double? AufwandGes { get; set; }
 
+            public virtual DateTime? Bis { get; set; }
+
             public virtual Kistl.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
 
             public virtual DateTime ChangedOn { get; set; }
@@ -1170,6 +1452,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
 
             public virtual Guid ExportGuid { get; set; }
 
+            public virtual DateTime KickOffAm { get; set; }
+
+            public virtual DateTime? KickOffBis { get; set; }
+
             public virtual string Kundenname { get; set; }
 
             public virtual ICollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy> Mitarbeiter { get; set; }
@@ -1179,6 +1465,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             public virtual int? Projekte_pos { get; set; }
 
             public virtual ICollection<Kistl.App.Projekte.TaskNHibernateImpl.TaskProxy> Tasks { get; set; }
+
+            public virtual DateTime Von { get; set; }
 
             public virtual ICollection<Projekt_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 
@@ -1209,6 +1497,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.AufwandGes, binStream);
+            BinarySerializer.ToStream(this.Proxy.Bis, binStream);
             BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
@@ -1223,8 +1512,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
+            BinarySerializer.ToStream(this.Proxy.KickOffAm, binStream);
+            BinarySerializer.ToStream(this.Proxy.KickOffBis, binStream);
             BinarySerializer.ToStream(this.Proxy.Kundenname, binStream);
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
+            BinarySerializer.ToStream(this.Proxy.Von, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1237,6 +1529,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 double? tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.AufwandGes = tmp;
+            }
+            {
+                DateTime? tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.Bis = tmp;
             }
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
@@ -1259,6 +1556,16 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 this.Proxy.ExportGuid = tmp;
             }
             {
+                DateTime tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.KickOffAm = tmp;
+            }
+            {
+                DateTime? tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.KickOffBis = tmp;
+            }
+            {
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.Kundenname = tmp;
@@ -1267,6 +1574,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.Name = tmp;
+            }
+            {
+                DateTime tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.Von = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
@@ -1282,6 +1594,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.Proxy.Bis, xml, "Bis", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
             if (this._isChangedOnSet) {
@@ -1296,8 +1609,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
             }
+            XmlStreamer.ToStream(this.Proxy.KickOffAm, xml, "KickOffAm", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.Proxy.KickOffBis, xml, "KickOffBis", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.Proxy.Von, xml, "Von", "Kistl.App.Projekte");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1311,6 +1627,12 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 double? tmp = this.Proxy.AufwandGes;
                 XmlStreamer.FromStream(ref tmp, xml, "AufwandGes", "Kistl.App.Projekte");
                 this.Proxy.AufwandGes = tmp;
+            }
+            {
+                // yuck
+                DateTime? tmp = this.Proxy.Bis;
+                XmlStreamer.FromStream(ref tmp, xml, "Bis", "Kistl.App.Projekte");
+                this.Proxy.Bis = tmp;
             }
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
@@ -1337,6 +1659,18 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             }
             {
                 // yuck
+                DateTime tmp = this.Proxy.KickOffAm;
+                XmlStreamer.FromStream(ref tmp, xml, "KickOffAm", "Kistl.App.Projekte");
+                this.Proxy.KickOffAm = tmp;
+            }
+            {
+                // yuck
+                DateTime? tmp = this.Proxy.KickOffBis;
+                XmlStreamer.FromStream(ref tmp, xml, "KickOffBis", "Kistl.App.Projekte");
+                this.Proxy.KickOffBis = tmp;
+            }
+            {
+                // yuck
                 string tmp = this.Proxy.Kundenname;
                 XmlStreamer.FromStream(ref tmp, xml, "Kundenname", "Kistl.App.Projekte");
                 this.Proxy.Kundenname = tmp;
@@ -1346,6 +1680,12 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 string tmp = this.Proxy.Name;
                 XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Projekte");
                 this.Proxy.Name = tmp;
+            }
+            {
+                // yuck
+                DateTime tmp = this.Proxy.Von;
+                XmlStreamer.FromStream(ref tmp, xml, "Von", "Kistl.App.Projekte");
+                this.Proxy.Von = tmp;
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
@@ -1361,12 +1701,16 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Bis, xml, "Bis", "Kistl.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.KickOffAm, xml, "KickOffAm", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.KickOffBis, xml, "KickOffBis", "Kistl.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Von, xml, "Von", "Kistl.App.Projekte");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1378,6 +1722,12 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 double? tmp = this.Proxy.AufwandGes;
                 XmlStreamer.FromStream(ref tmp, xml, "AufwandGes", "Kistl.App.Projekte");
                 this.Proxy.AufwandGes = tmp;
+            }
+            {
+                // yuck
+                DateTime? tmp = this.Proxy.Bis;
+                XmlStreamer.FromStream(ref tmp, xml, "Bis", "Kistl.App.Projekte");
+                this.Proxy.Bis = tmp;
             }
             // Import must have default value set
             {
@@ -1405,6 +1755,18 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             }
             {
                 // yuck
+                DateTime tmp = this.Proxy.KickOffAm;
+                XmlStreamer.FromStream(ref tmp, xml, "KickOffAm", "Kistl.App.Projekte");
+                this.Proxy.KickOffAm = tmp;
+            }
+            {
+                // yuck
+                DateTime? tmp = this.Proxy.KickOffBis;
+                XmlStreamer.FromStream(ref tmp, xml, "KickOffBis", "Kistl.App.Projekte");
+                this.Proxy.KickOffBis = tmp;
+            }
+            {
+                // yuck
                 string tmp = this.Proxy.Kundenname;
                 XmlStreamer.FromStream(ref tmp, xml, "Kundenname", "Kistl.App.Projekte");
                 this.Proxy.Kundenname = tmp;
@@ -1414,6 +1776,12 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 string tmp = this.Proxy.Name;
                 XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Projekte");
                 this.Proxy.Name = tmp;
+            }
+            {
+                // yuck
+                DateTime tmp = this.Proxy.Von;
+                XmlStreamer.FromStream(ref tmp, xml, "Von", "Kistl.App.Projekte");
+                this.Proxy.Von = tmp;
             }
         }
 

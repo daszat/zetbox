@@ -2586,11 +2586,15 @@
     <Property Name="fk_ChangedBy" Type="int4" />
     <Property Name="fk_CreatedBy" Type="int4" />
     <Property Name="AufwandGes" Type="float8" Nullable="true" />
+    <Property Name="Bis" Type="timestamp" Nullable="true" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="KickOffAm" Type="timestamp" Nullable="false" />
+    <Property Name="KickOffBis" Type="timestamp" Nullable="true" />
     <Property Name="Kundenname" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Von" Type="timestamp" Nullable="false" />
   </EntityType>
     <EntityType Name="Projekt_Rights">
       <Key>
@@ -2886,7 +2890,7 @@
     <Property Name="Aufwand" Type="float8" Nullable="true" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="DatumBis" Type="timestamp" Nullable="false" />
+    <Property Name="DatumBis" Type="timestamp" Nullable="true" />
     <Property Name="DatumVon" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />

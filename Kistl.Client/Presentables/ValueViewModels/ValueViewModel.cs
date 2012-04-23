@@ -1068,27 +1068,34 @@ namespace Kistl.Client.Presentables.ValueViewModels
             protected override ParseResult<TimeSpan?> ParseValue(string str)
             {
                 ParseResult<TimeSpan?> result = new ParseResult<TimeSpan?>();
-                MatchCollection matches;
-                if (null != (matches = Regex.Matches(str, @"^(\d?\d):?(\d\d)$")))
+                if (AllowNullInput && string.IsNullOrEmpty(str))
                 {
-                    int hours, minutes;
-                    if (matches.Count == 1
-                        && matches[0].Groups.Count == 3
-                        && Int32.TryParse(matches[0].Groups[1].Captures[0].Value, out hours)
-                        && Int32.TryParse(matches[0].Groups[2].Captures[0].Value, out minutes)
-                        && hours >= 0 && hours < 24
-                        && minutes >= 0 && minutes < 60)
+                    result.Value = null;
+                }
+                else
+                {
+                    MatchCollection matches;
+                    if (null != (matches = Regex.Matches(str, @"^(\d?\d):?(\d\d)$")))
                     {
-                        result.Value = new TimeSpan(hours, minutes, 0);
+                        int hours, minutes;
+                        if (matches.Count == 1
+                            && matches[0].Groups.Count == 3
+                            && Int32.TryParse(matches[0].Groups[1].Captures[0].Value, out hours)
+                            && Int32.TryParse(matches[0].Groups[2].Captures[0].Value, out minutes)
+                            && hours >= 0 && hours < 24
+                            && minutes >= 0 && minutes < 60)
+                        {
+                            result.Value = new TimeSpan(hours, minutes, 0);
+                        }
+                        else
+                        {
+                            result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
+                        }
                     }
                     else
                     {
                         result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
                     }
-                }
-                else
-                {
-                    result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
                 }
                 return result;
             }
@@ -1109,7 +1116,23 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 else
                 {
                     var date = (Parent.GetValueFromModel() ?? DateTime.MinValue).Date;
-                    Parent.SetValueToModel(date + (value ?? TimeSpan.Zero));
+                    if (date == DateTime.MinValue.Date)
+                    {
+                        if (value == null || value == TimeSpan.Zero)
+                        {
+                            Parent.SetValueToModel(null);
+                        }
+                        else
+                        {
+                            Parent.SetValueToModel(date + (value ?? TimeSpan.Zero));
+                        }
+                        Parent.OnPropertyChanged("TimePart");
+                        Parent.OnPropertyChanged("TimePartString");
+                    }
+                    else
+                    {
+                        Parent.SetValueToModel(date + (value ?? TimeSpan.Zero));
+                    }
                 }
             }
 
@@ -1137,6 +1160,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 }
             }
 
+            protected override ParseResult<DateTime?> ParseValue(string str)
+            {
+                var val = base.ParseValue(str);
+                if (!AllowNullInput && val.Value == DateTime.MinValue)
+                {
+                    val.Error = ValueViewModelResources.DateIsRequired;
+                }
+
+                return val;
+            }
+
             protected override string FormatValue(DateTime? value)
             {
                 return value == null ? String.Empty : value.Value.ToShortDateString();
@@ -1144,7 +1178,23 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             protected override DateTime? GetValueFromModel()
             {
-                return Parent.GetValueFromModel() != null ? Parent.GetValueFromModel().Value.Date : (DateTime?)null;
+                var modelValue = Parent.GetValueFromModel();
+                if (modelValue.HasValue)
+                {
+                    var val = modelValue.Value;
+                    if (val.Date == DateTime.MinValue.Date)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return val.Date;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
             }
 
             protected override void SetValueToModel(DateTime? value)
@@ -1156,7 +1206,23 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 else
                 {
                     var time = (Parent.GetValueFromModel() ?? DateTime.MinValue).TimeOfDay;
-                    Parent.SetValueToModel((value ?? DateTime.MinValue) + time);
+                    if (time == DateTime.MinValue.TimeOfDay)
+                    {
+                        if (value == DateTime.MinValue)
+                        {
+                            Parent.SetValueToModel(null);
+                        }
+                        else
+                        {
+                            Parent.SetValueToModel(value);
+                        }
+                        Parent.OnPropertyChanged("TimePart");
+                        Parent.OnPropertyChanged("TimePartString");
+                    }
+                    else
+                    {
+                        Parent.SetValueToModel((value ?? DateTime.MinValue) + time);
+                    }
                 }
             }
 
@@ -1295,9 +1361,28 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                var errors = new[] { base.Error, _datePartViewModel.Error, _timePartViewModel.Error };
+                var errors = new[] { base.Error, GetDatePartError(), GetTimePartError() };
                 return string.Join("\n", errors.Where(i => !string.IsNullOrEmpty(i)).ToArray());
             }
+        }
+
+        private string GetTimePartError()
+        {
+            // both no null input allowed or there is a datepart => error
+            var timeIsNull = (!AllowNullInput && !_timePartViewModel.Value.HasValue)
+                || (_datePartViewModel.Value.HasValue && !_timePartViewModel.Value.HasValue)
+                ? ValueViewModelResources.TimeIsRequired
+                : string.Empty;
+            return string.Join("\n", new string[] { _timePartViewModel.Error, timeIsNull }.Where(s => !string.IsNullOrEmpty(s)).ToArray());
+        }
+
+        private string GetDatePartError()
+        {
+            var dateIsNull = (!AllowNullInput && !_datePartViewModel.Value.HasValue)
+                || (_timePartViewModel.Value.HasValue && !_datePartViewModel.Value.HasValue)
+                ? ValueViewModelResources.DateIsRequired
+                : string.Empty;
+            return string.Join("\n", new string[] { _datePartViewModel.Error, dateIsNull }.Where(s => !string.IsNullOrEmpty(s)).ToArray());
         }
 
         public override string this[string columnName]
@@ -1307,9 +1392,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 switch (columnName)
                 {
                     case "TimePartString":
-                        return _timePartViewModel.Error;
+                        return GetTimePartError();
                     case "DatePartString":
-                        return _datePartViewModel.Error;
+                        return GetDatePartError();
                     default:
                         return base[columnName];
                 }

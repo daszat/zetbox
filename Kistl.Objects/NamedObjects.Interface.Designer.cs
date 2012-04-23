@@ -2448,6 +2448,10 @@ namespace Kistl {
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("a26cec7d-1e5c-44f5-9c56-92af595739eb"); }
                                 }
+                                public static TypedGuid<global::Kistl.App.Base.Property> Bis
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("b1e079e3-9236-4774-8f21-7b2abfcf9fb0"); }
+                                }
                                 public static TypedGuid<global::Kistl.App.Base.Property> ChangedBy
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("2fe9d894-c359-412f-b787-d3ed3a26a0a2"); }
@@ -2468,6 +2472,14 @@ namespace Kistl {
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("df36d615-9f6e-4075-ae1c-8c5cd8a4ef91"); }
                                 }
+                                public static TypedGuid<global::Kistl.App.Base.Property> KickOffAm
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("d9b9e70b-e9d2-4da4-8731-a4eee7bf6d87"); }
+                                }
+                                public static TypedGuid<global::Kistl.App.Base.Property> KickOffBis
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("a5057dbd-bd31-4e0a-81c2-e0fa551fa34d"); }
+                                }
                                 public static TypedGuid<global::Kistl.App.Base.Property> Kundenname
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("cd6be045-d1bd-4086-b848-c83249f5ca9b"); }
@@ -2483,6 +2495,10 @@ namespace Kistl {
                                 public static TypedGuid<global::Kistl.App.Base.Property> Tasks
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f"); }
+                                }
+                                public static TypedGuid<global::Kistl.App.Base.Property> Von
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("94ea407f-9816-470e-9e52-6607830c7c0b"); }
                                 }
                             }
                             public static class Task_Properties

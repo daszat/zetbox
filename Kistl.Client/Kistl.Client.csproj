@@ -520,6 +520,7 @@
       <LastGenOutput>ObjectReferenceViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.de.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

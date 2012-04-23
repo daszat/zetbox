@@ -123,6 +123,9 @@
   <data name="ClearValueCommand_Tooltip" xml:space="preserve">
     <value>Sets the value to nothing</value>
   </data>
+  <data name="DateIsRequired" xml:space="preserve">
+    <value>A date value is required</value>
+  </data>
   <data name="DecimalOutOfRange" xml:space="preserve">
     <value>The value '{0}' is not in the allowed range (max. {1} places before the comma)</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="Null" xml:space="preserve">
     <value />
+  </data>
+  <data name="TimeIsRequired" xml:space="preserve">
+    <value>A time value is required</value>
   </data>
   <data name="True" xml:space="preserve">
     <value>True</value>

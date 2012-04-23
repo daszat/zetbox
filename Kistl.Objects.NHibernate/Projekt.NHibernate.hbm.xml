@@ -29,6 +29,10 @@
         <property name="AufwandGes" 
                   column="`AufwandGes`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Bis" type="Timestamp"
+                  column="`Bis`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
 
@@ -46,6 +50,14 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="KickOffAm" type="Timestamp"
+                  column="`KickOffAm`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="KickOffBis" type="Timestamp"
+                  column="`KickOffBis`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Kundenname" 
@@ -70,6 +82,10 @@
             <one-to-many class="Kistl.App.Projekte.TaskNHibernateImpl+TaskProxy, Kistl.Objects.NHibernateImpl" />
         </set>
 
+        <!-- ValueTypeProperty isValue -->
+        <property name="Von" type="Timestamp"
+                  column="`Von`" 
+                  optimistic-lock="false"/>
 
         <!-- map rights -->
         <set name="SecurityRightsCollectionImpl"

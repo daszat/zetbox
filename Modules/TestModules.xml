@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-19T16:16:41Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-23T15:15:58Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.664236Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -135,7 +135,7 @@ public static void NotifyDeleting(Mitarbeiter obj)
     <KistlBase:TableName>Mitarbeiter</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="885939e8-82e1-4fdf-b80e-5f612d5131d3">
-    <KistlBase:ChangedOn>2012-04-04T11:26:08.070755Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-23T13:15:58.756492Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1710903b-aa64-4a26-a9fe-cd97fa91d67f</GUI:DefaultIcon>
     <KistlBase:Description />
@@ -1502,6 +1502,43 @@ public static void isValid_AufwandGes(Projekt obj, PropertyIsValidEventArgs e)
     <KistlBase:IsCalculated>true</KistlBase:IsCalculated>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:DoubleProperty>
+  <KistlBase:DateTimeProperty ExportGuid="b1e079e3-9236-4774-8f21-7b2abfcf9fb0">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2012-04-23T13:15:58.756492Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Bis(Projekt obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Bis(Projekt obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Bis(Projekt obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Bis(Projekt obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Bis == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
+    <KistlBase:CreatedOn>2012-04-23T10:13:21.885764Z</KistlBase:CreatedOn>
+    <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Bis</KistlBase:Name>
+    <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>1005</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:DateTimeStyle>2</KistlBase:DateTimeStyle>
+  </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="2fe9d894-c359-412f-b787-d3ed3a26a0a2">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2012-04-04T11:26:18.498541Z</KistlBase:ChangedOn>
@@ -1652,7 +1689,7 @@ public static void isValid_CreatedOn(Projekt obj, PropertyIsValidEventArgs e)
   </KistlBase:DateTimeProperty>
   <KistlBase:GuidProperty ExportGuid="df36d615-9f6e-4075-ae1c-8c5cd8a4ef91">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2012-04-04T11:26:18.498541Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-04-23T13:15:58.756492Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Projekt obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -1682,12 +1719,86 @@ public static void isValid_ExportGuid(Projekt obj, PropertyIsValidEventArgs e)
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
     <KistlBase:Name>ExportGuid</KistlBase:Name>
     <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>1001</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>1002</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:GuidProperty>
+  <KistlBase:DateTimeProperty ExportGuid="d9b9e70b-e9d2-4da4-8731-a4eee7bf6d87">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2012-04-23T13:15:58.756492Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_KickOffAm(Projekt obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_KickOffAm(Projekt obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_KickOffAm(Projekt obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_KickOffAm(Projekt obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.KickOffAm == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
+    <KistlBase:CreatedOn>2012-04-23T13:15:58.756492Z</KistlBase:CreatedOn>
+    <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>KickOffAm</KistlBase:Name>
+    <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>102</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:DateTimeStyle>1</KistlBase:DateTimeStyle>
+  </KistlBase:DateTimeProperty>
+  <KistlBase:DateTimeProperty ExportGuid="a5057dbd-bd31-4e0a-81c2-e0fa551fa34d">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2012-04-23T13:15:58.756492Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_KickOffBis(Projekt obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_KickOffBis(Projekt obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_KickOffBis(Projekt obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_KickOffBis(Projekt obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.KickOffBis == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
+    <KistlBase:CreatedOn>2012-04-23T13:15:58.756492Z</KistlBase:CreatedOn>
+    <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>KickOffBis</KistlBase:Name>
+    <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>103</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:DateTimeStyle>3</KistlBase:DateTimeStyle>
+  </KistlBase:DateTimeProperty>
   <KistlBase:StringProperty ExportGuid="cd6be045-d1bd-4086-b848-c83249f5ca9b">
     <KistlBase:CategoryTags>Summary, Main</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2012-04-04T11:26:18.498541Z</KistlBase:ChangedOn>
@@ -1836,6 +1947,43 @@ public static void isValid_Tasks(Projekt obj, PropertyIsValidEventArgs e)
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>e8b582ca-641f-4457-963c-299d0df7cb96</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
+  <KistlBase:DateTimeProperty ExportGuid="94ea407f-9816-470e-9e52-6607830c7c0b">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2012-04-23T13:15:58.756492Z</KistlBase:ChangedOn>
+    <KistlBase:CodeTemplate>[Invocation]
+public static void get_Von(Projekt obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Von(Projekt obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Von(Projekt obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Von(Projekt obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Von == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</KistlBase:CodeTemplate>
+    <KistlBase:CreatedOn>2012-04-23T10:13:21.885764Z</KistlBase:CreatedOn>
+    <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Von</KistlBase:Name>
+    <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>1004</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsCalculated>false</KistlBase:IsCalculated>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:DateTimeStyle>2</KistlBase:DateTimeStyle>
+  </KistlBase:DateTimeProperty>
   <KistlBase:DoubleProperty ExportGuid="a28f7536-9b8a-49ca-bc97-d28e1c2c4d3e">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2012-04-04T11:26:18.498541Z</KistlBase:ChangedOn>
@@ -3073,6 +3221,11 @@ public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System
     <KistlBase:ConstrainedProperty>df36d615-9f6e-4075-ae1c-8c5cd8a4ef91</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2011-09-13T14:36:10.792827Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="cbb0bfe0-1a25-488b-a586-c2e023c67ee4">
+    <KistlBase:ChangedOn>2012-04-23T13:15:58.756492Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>d9b9e70b-e9d2-4da4-8731-a4eee7bf6d87</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2012-04-23T13:15:58.756492Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="339ba200-167c-4bc7-8409-a2350107c12a">
     <KistlBase:ChangedOn>2011-08-05T10:31:06.549911Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>cd6be045-d1bd-4086-b848-c83249f5ca9b</KistlBase:ConstrainedProperty>
@@ -3092,6 +3245,11 @@ public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System
     <KistlBase:MaxLength>100</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="8bf34754-0d38-4b74-ad40-9da9de75500e">
+    <KistlBase:ChangedOn>2012-04-23T10:13:21.885764Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>94ea407f-9816-470e-9e52-6607830c7c0b</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2012-04-23T10:13:21.885764Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:ClientReadOnlyConstraint ExportGuid="93cc1e8a-46eb-44cb-9066-11ed05ace543">
     <KistlBase:ChangedOn>2011-08-05T10:31:06.555911Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>3b21f893-b3d5-4074-99ef-bc8eb2afb240</KistlBase:ConstrainedProperty>
@@ -3121,11 +3279,6 @@ public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System
     <KistlBase:ChangedOn>2011-08-05T10:31:06.579912Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>10f730ed-fade-456d-89a4-f2ab99526705</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2011-07-20T14:16:49Z</KistlBase:CreatedOn>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="302da610-0b37-4ef3-bbdd-b0f17095c6b1">
-    <KistlBase:ChangedOn>2012-04-03T11:11:49.280917Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>2b705496-388a-43a8-82e8-b17b652a55fc</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2012-04-03T11:11:49.280917Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="ffe5c7fd-09e6-4f7a-ac6c-ea8d2f9311ba">
     <KistlBase:ChangedOn>2012-04-03T11:11:49.280917Z</KistlBase:ChangedOn>

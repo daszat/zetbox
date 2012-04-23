@@ -64,7 +64,7 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
 
         DateTime IAppointmentViewModel.Until
         {
-            get { return Task.DatumBis; }
+            get { return Task.DatumBis ?? Task.DatumVon.AddDays(1); }
         }
 
         string IAppointmentViewModel.Location
