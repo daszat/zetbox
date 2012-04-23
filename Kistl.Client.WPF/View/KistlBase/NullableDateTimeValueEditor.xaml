@@ -8,6 +8,7 @@
                      xmlns:ms="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
                      ToolTip="{Binding ToolTip}"
                      MinWidth="1"
+                     HorizontalAlignment="Left"
                      VerticalAlignment="Top">
   <DockPanel KeyboardNavigation.TabNavigation="Local">
     <TextBox x:Name="txtTime"
