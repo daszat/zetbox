@@ -234,7 +234,11 @@ namespace Kistl.Client.Presentables.Calendar
             if (a.From <= a.Until)
             {
                 List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
-                for (var current = a.From; current < a.Until; current = current.Date.AddDays(1))
+                var from = a.From;
+                var until = a.Until;
+                if (from < this.From) from = this.From;
+                if (until > this.To) until = this.To;
+                for (var current = from; current < until; current = current.Date.AddDays(1))
                 {
                     var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
                     .Invoke(
@@ -245,7 +249,7 @@ namespace Kistl.Client.Presentables.Calendar
                     vmdl.Until = current.Date == a.Until.Date ? a.Until : current.Date.AddDays(1);
 
                     vmdl.IsAllDay = vmdl.From.TimeOfDay == TimeSpan.Zero && vmdl.Until.TimeOfDay == TimeSpan.Zero;
-                    result.Add( vmdl);
+                    result.Add(vmdl);
                 }
                 return result;
             }
