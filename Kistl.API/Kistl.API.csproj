@@ -157,8 +157,12 @@
   </ItemGroup>
   <ItemGroup>
     <PrepareEnv Include="..\Libs\PrepareEnv.*" Exclude="..\Libs\PrepareEnv.vshost.*" />
-    <NpgsqlMono Include="..\Libs\Npgsql2\Npgsql*-bin-mono2.0\*.*" />
-    <NpgsqlMs Include="..\Libs\Npgsql2\Npgsql*-bin-ms.net3.5sp1\*.*" />
+    <NpgsqlMono Include="..\Libs\Npgsql2\Npgsql*-bin-mono2.0\*.*">
+      <Visible>false</Visible>
+    </NpgsqlMono>
+    <NpgsqlMs Include="..\Libs\Npgsql2\Npgsql*-bin-ms.net3.5sp1\*.*">
+      <Visible>false</Visible>
+    </NpgsqlMs>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
