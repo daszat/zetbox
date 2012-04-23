@@ -207,6 +207,10 @@ namespace Kistl.Client.Presentables.Calendar
         private void EnsureAppointments()
         {
             _allAppointments = _Source(From, To).ToList();
+            foreach (var a in _allAppointments)
+            {
+                a.PropertyChanged += AppointmentViewModelChanged;
+            }
 
             RecreateItems();
         }
@@ -230,7 +234,6 @@ namespace Kistl.Client.Presentables.Calendar
 
         private List<CalendarItemViewModel> CreateCalendarItemViewModel(IAppointmentViewModel a)
         {
-            a.PropertyChanged += AppointmentViewModelChanged;
             if (a.From <= a.Until)
             {
                 List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
