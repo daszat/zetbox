@@ -352,6 +352,7 @@ namespace Kistl.DalProvider.Ef
 
                 foreach (var entry in notifySaveList)
                 {
+                    _ctx.Refresh(RefreshMode.ClientWins, entry.Entity);
                     for (int i = 0; i < entry.CurrentValues.FieldCount; i++)
                     {
                         string name = entry.CurrentValues.GetName(i);
