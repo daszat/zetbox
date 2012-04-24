@@ -77,18 +77,19 @@ foreach (var prop in recalcProps) {
 #line 41 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                case \"",  prop.Name , "\":\r\n");
 this.WriteObjects("                    _",  prop.Name , "_IsDirty = true;\r\n");
+this.WriteObjects("                    NotifyPropertyChanging(property, null, null);\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(property, null, null);\r\n");
 this.WriteObjects("                    return;\r\n");
-#line 45 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
-}                                                                                                           
 #line 46 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+}                                                                                                           
+#line 47 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            base.Recalculate(property);\r\n");
 this.WriteObjects("        }\r\n");
-#line 50 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
-}                                                                                                                
 #line 51 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+}                                                                                                                
+#line 52 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
 
         }

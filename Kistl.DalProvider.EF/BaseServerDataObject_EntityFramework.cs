@@ -9,6 +9,7 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.API.Utils;
 
 namespace Kistl.DalProvider.Ef
 {
@@ -142,17 +143,19 @@ namespace Kistl.DalProvider.Ef
                 {
                     _changeTracker.EntityMemberChanged(efProperty);
                 }
-                catch (ArgumentException)
+                catch (ArgumentException ex)
                 {
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this ArgumentException
+                    Logging.Server.Warn(string.Format("EF throws an exception while change notification for property '{0}'", property), ex);
                 }
-                catch (InvalidOperationException)
+                catch (InvalidOperationException ex)
                 {
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this InvalidOperationException
+                    Logging.Server.Warn(string.Format("EF throws an exception while change notification for property '{0}'", property), ex);
                 }
             }
         }
@@ -175,17 +178,19 @@ namespace Kistl.DalProvider.Ef
                 {
                     _changeTracker.EntityMemberChanging(efProperty);
                 }
-                catch (ArgumentException)
+                catch (ArgumentException ex)
                 {
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this ArgumentException
+                    Logging.Server.Warn(string.Format("EF throws an exception while change notification for property '{0}'", property), ex);
                 }
-                catch (InvalidOperationException)
+                catch (InvalidOperationException ex)
                 {
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this InvalidOperationException
+                    Logging.Server.Warn(string.Format("EF throws an exception while change notification for property '{0}'", property), ex);
                 }
             }
         }
@@ -331,17 +336,19 @@ namespace Kistl.DalProvider.Ef
                 {
                     _changeTracker.EntityMemberChanged(efProperty);
                 }
-                catch (ArgumentException)
+                catch (ArgumentException ex)
                 {
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this ArgumentException
+                    Logging.Server.Warn(string.Format("EF throws an exception while change notification for property '{0}'", property), ex);
                 }
-                catch (InvalidOperationException)
+                catch (InvalidOperationException ex)
                 {
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this InvalidOperationException
+                    Logging.Server.Warn(string.Format("EF throws an exception while change notification for property '{0}'", property), ex);
                 }
             }
         }
@@ -364,17 +371,19 @@ namespace Kistl.DalProvider.Ef
                 {
                     _changeTracker.EntityMemberChanging(efProperty);
                 }
-                catch (ArgumentException)
+                catch (ArgumentException ex)
                 {
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this ArgumentException
+                    Logging.Server.Warn(string.Format("EF throws an exception while change notification for property '{0}'", property), ex);
                 }
-                catch (InvalidOperationException)
+                catch (InvalidOperationException ex)
                 {
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this InvalidOperationException
+                    Logging.Server.Warn(string.Format("EF throws an exception while change notification for property '{0}'", property), ex);
                 }
             }
         }

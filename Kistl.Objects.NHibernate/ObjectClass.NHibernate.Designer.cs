@@ -1180,6 +1180,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             {
                 case "CodeTemplate":
                     _CodeTemplate_IsDirty = true;
+                    NotifyPropertyChanging(property, null, null);
                     NotifyPropertyChanged(property, null, null);
                     return;
             }
