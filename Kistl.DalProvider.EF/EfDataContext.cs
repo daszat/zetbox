@@ -342,6 +342,24 @@ namespace Kistl.DalProvider.Ef
 
             try
             {
+                // Workaround for buggy Import/Deploy:
+                // During Import/Deploy, values are stored in the backing store so EF does not now about changes
+                // As Import/Deploy are using SubmitRestore, it's safe (for now) to mark EVERY Entity and Property as dirty
+                // NH does not have this problem, because it's change tracking the backing store (it' the proxy!)
+                var notifySaveList = _ctx.ObjectStateManager
+                    .GetObjectStateEntries(EntityState.Modified | EntityState.Unchanged)
+                    .Where(i => i.Entity is IPersistenceObject);
+
+                foreach (var entry in notifySaveList)
+                {
+                    for (int i = 0; i < entry.CurrentValues.FieldCount; i++)
+                    {
+                        string name = entry.CurrentValues.GetName(i);
+                        if (name == "ID") continue;
+                        entry.SetModifiedProperty(name);
+                    }
+                }
+
                 var result = _ctx.SaveChanges();
                 Logging.Log.InfoFormat("[{0}] changes submitted without Notifications.", result);
                 UpdateObjectState();
