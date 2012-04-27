@@ -102,7 +102,7 @@ namespace Kistl.Server.HttpService
                             reader.Read(out notificationRequests);
                             Log.DebugFormat("SetObjects(byte[{0}], ObjectNotificationRequest[{1}])", msg.Length, notificationRequests.Length);
                             var result = service.SetObjects(version, msg, notificationRequests);
-                            SendByteArray(context, result);
+                            SendByteArray(context, result, writerFactory);
                             break;
                         }
                     case "GetList": // byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
@@ -121,7 +121,7 @@ namespace Kistl.Server.HttpService
 
                             Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
                             var result = service.GetList(version, type, maxListCount, eagerLoadLists, filter, orderBy);
-                            SendByteArray(context, result);
+                            SendByteArray(context, result, writerFactory);
                             break;
                         }
                     case "GetListOf": // byte[] GetListOf(SerializableType type, int ID, string property);
@@ -132,7 +132,7 @@ namespace Kistl.Server.HttpService
 
                             Log.DebugFormat("GetListOf(type=[{0}], ID={1}, property=[{2}])", type, ID, property);
                             var result = service.GetListOf(version, type, ID, property);
-                            SendByteArray(context, result);
+                            SendByteArray(context, result, writerFactory);
                             break;
                         }
                     case "FetchRelation": // byte[] FetchRelation(Guid relId, int role, int ID)
@@ -143,7 +143,7 @@ namespace Kistl.Server.HttpService
 
                             Log.DebugFormat("FetchRelation(relId=[{0}], role={1}, ID=[{2}])", relId, role, ID);
                             var result = service.FetchRelation(version, relId, role, ID);
-                            SendByteArray(context, result);
+                            SendByteArray(context, result, writerFactory);
                             break;
                         }
                     case "GetBlobStream": // Stream GetBlobStream(int ID)
@@ -255,13 +255,13 @@ namespace Kistl.Server.HttpService
             }
         }
 
-        private void SendByteArray(HttpContext context, byte[] result)
+        private void SendByteArray(HttpContext context, byte[] result, KistlStreamWriter.Factory writerFactory)
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "application/octet-stream";
-            using (var writer = _writerFactory(new BinaryWriter(context.Response.OutputStream)))
+            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
             {
-                writer.Write(writer);
+                writer.Write(result);
             }
         }
     }
