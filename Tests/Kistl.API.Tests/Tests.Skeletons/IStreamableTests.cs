@@ -58,7 +58,7 @@ namespace Kistl.API.Tests.Skeletons
             if (!typeof(T).IsICompoundObject())
             {
                 var t = sr.ReadSerializableType();
-                Assert.That(t.GetType(), Is.AssignableTo<T>());
+                Assert.That(typeof(T).IsAssignableFrom(t.GetType()), string.Format("{0} not assignable to {1}", t, typeof(T)));
             }
 
             T result = new T();
