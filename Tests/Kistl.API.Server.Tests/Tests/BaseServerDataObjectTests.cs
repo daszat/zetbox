@@ -119,6 +119,7 @@ namespace Kistl.API.Server.Tests
             ms.Seek(0, SeekOrigin.Begin);
 
             var t = sr.ReadSerializableType();
+            Assert.That(t.GetType(), Is.AssignableTo<TestObjClass>());
 
             var obj = new TestObjClassImpl();
             obj.FromStream(sr);

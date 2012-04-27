@@ -11,6 +11,7 @@ namespace Kistl.DalProvider.Client.Tests
     using Kistl.API.Utils;
     using Kistl.DalProvider.Client.Mocks;
     using NUnit.Framework;
+    using Kistl.App.Test;
 
     [TestFixture]
     public class BaseClientDataObjectTests : Kistl.API.AbstractConsumerTests.AbstractTestFixture
@@ -122,6 +123,7 @@ namespace Kistl.DalProvider.Client.Tests
                 ms.Seek(0, SeekOrigin.Begin);
 
                 var t = sr.ReadSerializableType();
+                Assert.That(t.GetType(), Is.AssignableTo<ANewObjectClass>());
 
                 BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
                 result.FromStream(sr);
