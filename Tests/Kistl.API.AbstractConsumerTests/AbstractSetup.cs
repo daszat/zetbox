@@ -72,7 +72,7 @@ namespace Kistl.API.AbstractConsumerTests
                 // TODO: totally replace this with test mocks?
                 Log.Info("Adding Interface Module");
                 builder.RegisterModule<Kistl.Objects.InterfaceModule>();
-
+                builder.RegisterInstance<TypeMapAssembly>(new TypeMapAssembly(this.GetType().Assembly));
                 SetupBuilder(builder);
                 container = builder.Build();
                 SetUp(container);

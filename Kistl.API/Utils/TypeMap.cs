@@ -7,13 +7,47 @@ namespace Kistl.API.Utils
     using System.Reflection;
     using System.Text;
 
+    #region Autofac infrastructure
+
+    /// <summary>
+    /// Minor proxy class to allow automatic autofac instantiation.
+    /// </summary>
+    public sealed class TypeMapAssembly
+    {
+        private readonly Assembly _self;
+        public TypeMapAssembly(Assembly a)
+        {
+            if (a == null) throw new ArgumentNullException("a");
+            _self = a;
+        }
+        public Assembly Value { get { return _self; } }
+
+        public override bool Equals(object obj)
+        {
+            if (base.Equals(obj)) return true;
+
+            var other = obj as TypeMapAssembly;
+            return other != null && _self.Equals(other._self);
+        }
+
+        public override int GetHashCode()
+        {
+            return _self.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return _self.ToString();
+        }
+    }
+
+    #endregion
+
     /// <summary>
     /// This class maps from Guids to SerializableTypes and back. It is used to accelerate the serialization process.
     /// </summary>
     public class TypeMap
     {
-        public delegate TypeMap Factory(Assembly interfaces);
-
         private readonly Dictionary<Guid, SerializableType> _typeMap;
         private readonly Dictionary<SerializableType, Guid> _guidMap;
 
@@ -33,15 +67,15 @@ namespace Kistl.API.Utils
             }
         }
 
-        public TypeMap(InterfaceType.Factory iftFactory, Assembly interfaces)
+        public TypeMap(InterfaceType.Factory iftFactory, IEnumerable<TypeMapAssembly> assemblies)
         {
             if (iftFactory == null)
                 throw new ArgumentNullException("iftFactory");
-            if (interfaces == null)
-                throw new ArgumentNullException("interfaces");
+            if (assemblies == null)
+                throw new ArgumentNullException("assemblies");
 
             _typeMap = new Dictionary<Guid, SerializableType>();
-            foreach (var t in interfaces.GetTypes())
+            foreach (var t in assemblies.SelectMany(a => a.Value.GetTypes()))
             {
                 ExtractDefinitionGuid(iftFactory, t);
             }

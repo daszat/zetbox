@@ -52,6 +52,8 @@ this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<InterfaceTypeChecker>(c => new InterfaceTypeChecker(c.Resolve<Func<IEnumerable<IImplementationTypeChecker>>>()))\r\n");
 this.WriteObjects("                .As<IInterfaceTypeChecker>()\r\n");
 this.WriteObjects("                .SingleInstance();\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("            builder.RegisterInstance(new Kistl.API.Utils.TypeMapAssembly(typeof(InterfaceModule).Assembly));\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");

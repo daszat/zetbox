@@ -35,10 +35,9 @@ namespace Kistl.API.AbstractConsumerTests
 
         private void InitStreams()
         {
-            var map = scope.Resolve<TypeMap.Factory>().Invoke(GetTypeMapAssembly());
             ms = new MemoryStream();
-            sw = new KistlStreamWriter(map, new BinaryWriter(ms));
-            sr = new KistlStreamReader(map, new BinaryReader(ms));
+            sw = scope.Resolve<KistlStreamWriter.Factory>().Invoke(new BinaryWriter(ms));
+            sr = scope.Resolve<KistlStreamReader.Factory>().Invoke(new BinaryReader(ms));
         }
 
         protected void TestStream<T>(Action<T> write, Func<T> read, params T[] values)

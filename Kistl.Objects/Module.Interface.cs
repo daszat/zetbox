@@ -19,6 +19,8 @@ namespace Kistl.Objects
                 .Register<InterfaceTypeChecker>(c => new InterfaceTypeChecker(c.Resolve<Func<IEnumerable<IImplementationTypeChecker>>>()))
                 .As<IInterfaceTypeChecker>()
                 .SingleInstance();
+
+            builder.RegisterInstance(new Kistl.API.Utils.TypeMapAssembly(typeof(InterfaceModule).Assembly));
         }
     }
 
