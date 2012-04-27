@@ -179,7 +179,7 @@ namespace Kistl.API.Server
             {
                 var entry = Context.CreateCompoundObject<AuditEntry>();
                 entry.Identity = GetIdentity(Context as IKistlServerContext);
-                entry.MessageFormat = "object created";
+                entry.MessageFormat = ApiServerResources.ObjectCreated;
                 entry.PropertyName = String.Empty;
                 entry.OldValue = String.Empty;
                 entry.NewValue = String.Empty;

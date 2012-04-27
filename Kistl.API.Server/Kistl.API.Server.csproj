@@ -79,6 +79,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiServerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApiServerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="BaseKistlDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="DbTypeMapper.cs" />
@@ -134,6 +139,13 @@
   <ItemGroup>
     <None Include="ClassDiagram.Kistl.API.Server.cd" />
     <None Include="Kistl.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ApiServerResources.de.resx" />
+    <EmbeddedResource Include="ApiServerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApiServerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
