@@ -33,28 +33,28 @@ namespace Kistl.API.Utils
             }
         }
 
-        public TypeMap(IFrozenContext ctx, Assembly interfaces)
+        public TypeMap(InterfaceType.Factory iftFactory, Assembly interfaces)
         {
-            if (ctx == null)
-                throw new ArgumentNullException("ctx");
+            if (iftFactory == null)
+                throw new ArgumentNullException("iftFactory");
             if (interfaces == null)
                 throw new ArgumentNullException("interfaces");
 
             _typeMap = new Dictionary<Guid, SerializableType>();
             foreach (var t in interfaces.GetTypes())
             {
-                ExtractDefinitionGuid(ctx, t);
+                ExtractDefinitionGuid(iftFactory, t);
             }
 
             _guidMap = _typeMap.ToDictionary(k => k.Value, v => v.Key);
         }
 
-        private void ExtractDefinitionGuid(IFrozenContext ctx, Type t)
+        private void ExtractDefinitionGuid(InterfaceType.Factory iftFactory, Type t)
         {
             var guids = t.GetCustomAttributes(typeof(DefinitionGuidAttribute), false).OfType<DefinitionGuidAttribute>().ToArray();
             if (guids.Length > 0)
             {
-                _typeMap[guids[0].Guid] = ctx.GetInterfaceType(t).ToSerializableType();
+                _typeMap[guids[0].Guid] = iftFactory(t).ToSerializableType();
             }
         }
     }
