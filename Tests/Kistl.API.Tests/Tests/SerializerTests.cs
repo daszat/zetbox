@@ -41,7 +41,8 @@ namespace Kistl.API.Tests
             [Test]
             public void should_roundtrip_DateTime()
             {
-                TestStream<DateTime?>(v => sw.Write(v),
+                TestStream<DateTime>(
+                    v => sw.Write(v),
                     () => sr.ReadDateTime(),
                     DateTime.Now, DateTime.Today, DateTime.UtcNow, DateTime.Parse("2008-01-02"));
             }
@@ -49,7 +50,8 @@ namespace Kistl.API.Tests
             [Test]
             public void should_roundtrip_NullableDateTime()
             {
-                TestStream<DateTime?>(v => sw.Write(v),
+                TestStream<DateTime?>(
+                    v => sw.Write(v),
                     () => sr.ReadNullableDateTime(),
                     DateTime.Now, DateTime.Today, DateTime.UtcNow, DateTime.Parse("2008-01-02"), null);
             }
@@ -69,7 +71,7 @@ namespace Kistl.API.Tests
             }
 
             [Test]
-            public void should_roundtrip_nullable_int(int? value)
+            public void should_roundtrip_nullable_int()
             {
                 TestStream<int?>(v => sw.Write(v),
                     () => sr.ReadNullableInt32(),
@@ -77,7 +79,7 @@ namespace Kistl.API.Tests
             }
 
             [Test]
-            public void should_roundtrip_decimals(decimal value)
+            public void should_roundtrip_decimals()
             {
                 TestStream<decimal>(v => sw.Write(v),
                     () => sr.ReadDecimal(),
@@ -85,7 +87,7 @@ namespace Kistl.API.Tests
             }
 
             [Test]
-            public void should_roundtrip_nullable_decimals(decimal? value)
+            public void should_roundtrip_nullable_decimals()
             {
                 TestStream<decimal?>(v => sw.Write(v),
                     () => sr.ReadNullableDecimal(),
@@ -93,7 +95,7 @@ namespace Kistl.API.Tests
             }
 
             [Test]
-            public void should_roundtrip_doubles(double value)
+            public void should_roundtrip_doubles()
             {
                 TestStream<double>(v => sw.Write(v),
                     () => sr.ReadDouble(),
@@ -101,7 +103,7 @@ namespace Kistl.API.Tests
             }
 
             [Test]
-            public void should_roundtrip_nullable_doubles(double? value)
+            public void should_roundtrip_nullable_doubles()
             {
                 TestStream<double?>(v => sw.Write(v),
                     () => sr.ReadNullableDouble(),
@@ -109,7 +111,7 @@ namespace Kistl.API.Tests
             }
 
             [Test]
-            public void should_roundtrip_floats(float value)
+            public void should_roundtrip_floats()
             {
                 TestStream<float>(v => sw.Write(v),
                     () => sr.ReadFloat(),
@@ -119,7 +121,7 @@ namespace Kistl.API.Tests
             }
 
             [Test]
-            public void should_roundtrip_nullable_floats(float? value)
+            public void should_roundtrip_nullable_floats()
             {
                 TestStream<float?>(v => sw.Write(v),
                     () => sr.ReadNullableFloat(),
@@ -129,7 +131,7 @@ namespace Kistl.API.Tests
             }
 
             [Test]
-            public void should_roundtrip_strings(float value)
+            public void should_roundtrip_strings()
             {
                 TestStream<string>(v => sw.Write(v),
                     () => sr.ReadString(),
@@ -280,12 +282,6 @@ namespace Kistl.API.Tests
             public void can_roundtrip_list_with_no_entry()
             {
                 TestToFromStreamCollectionEntries(new List<TestCollectionEntry>());
-            }
-
-            [Test]
-            public void can_roundtrip_null_list()
-            {
-                TestToFromStreamCollectionEntries(null);
             }
 
             [Test]

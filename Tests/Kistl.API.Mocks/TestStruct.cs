@@ -52,5 +52,19 @@ namespace Kistl.API.Mocks
         {
             get { throw new NotImplementedException(); }
         }
+
+        public override bool Equals(object obj)
+        {
+            if (Object.ReferenceEquals(this, obj)) return true;
+            var other = obj as TestCompoundObjectImpl;
+            if (obj == null) return false;
+
+            return other.TestProperty == this.TestProperty;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() * TestProperty.GetHashCode();
+        }
     }
 }

@@ -20,10 +20,10 @@
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
     </Modules>
   </Client>
-  <SourceFileLocation>
+  <AssemblySearchPaths>
     <!-- default probe path -->
     <string>..\..\..\CodeGen\bin\Debug</string>
     <!-- common libaries -->
     <string>..\Common</string>
-  </SourceFileLocation>
+  </AssemblySearchPaths>
 </KistlConfig>

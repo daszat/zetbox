@@ -3,8 +3,8 @@ namespace Kistl.API.AbstractConsumerTests
 {
     using System;
     using System.IO;
-    using System.Reflection;
     using System.Linq;
+    using System.Reflection;
     using Autofac;
     using Kistl.API;
     using Kistl.API.Utils;
@@ -29,11 +29,16 @@ namespace Kistl.API.AbstractConsumerTests
         public override void SetUp()
         {
             base.SetUp();
+            iftFactory = scope.Resolve<InterfaceType.Factory>();
+            InitStreams();
+        }
+
+        private void InitStreams()
+        {
             var map = scope.Resolve<TypeMap.Factory>().Invoke(GetTypeMapAssembly());
             ms = new MemoryStream();
             sw = new KistlStreamWriter(map, new BinaryWriter(ms));
             sr = new KistlStreamReader(map, new BinaryReader(ms));
-            iftFactory = scope.Resolve<InterfaceType.Factory>();
         }
 
         protected void TestStream<T>(Action<T> write, Func<T> read, params T[] values)
@@ -41,6 +46,7 @@ namespace Kistl.API.AbstractConsumerTests
             Assert.That(values, Is.Not.Empty, "need values to test");
             foreach (var v in values)
             {
+                InitStreams();
                 write(v);
                 ms.Seek(0, SeekOrigin.Begin);
                 var output = read();
