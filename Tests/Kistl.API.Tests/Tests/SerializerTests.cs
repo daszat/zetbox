@@ -242,7 +242,6 @@ namespace Kistl.API.Tests
             [Test]
             public void should_serialize_complete_expressions()
             {
-                var expression = CreateExpression();
                 TestStream<SerializableExpression>(
                     v => sw.Write(v),
                     () => sr.ReadSerializableExpression(null),
