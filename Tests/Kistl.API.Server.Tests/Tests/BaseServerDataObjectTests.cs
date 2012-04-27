@@ -119,7 +119,7 @@ namespace Kistl.API.Server.Tests
             ms.Seek(0, SeekOrigin.Begin);
 
             var t = sr.ReadSerializableType();
-            Assert.That(t.GetType().IsAssignableFrom(typeof(TestObjClass)), string.Format("{0} not assignable to {1}", typeof(TestObjClass), t));
+            Assert.That(t.GetSystemType().IsAssignableFrom(typeof(TestObjClass)), string.Format("{0} not assignable to {1}", typeof(TestObjClass), t));
 
             var obj = new TestObjClassImpl();
             obj.FromStream(sr);
