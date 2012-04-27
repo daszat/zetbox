@@ -6,12 +6,11 @@ namespace Kistl.API.Server.Tests
     using System.IO;
     using System.Linq;
     using System.Text;
-
+    using Autofac;
     using Kistl.API.Mocks;
     using Kistl.API.Server.Mocks;
-
+    using Kistl.API.Utils;
     using NUnit.Framework;
-    using Autofac;
 
     [TestFixture]
     public class BaseServerDataObjectTests : AbstractApiServerTestFixture
@@ -85,15 +84,16 @@ namespace Kistl.API.Server.Tests
         [Test]
         public void ToStream_to_null_fails()
         {
-            Assert.That(() => obj.ToStream((BinaryWriter)null, null, false), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => obj.ToStream((KistlStreamWriter)null, null, false), Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]
         public void ToStream_creates_correct_Stream()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
+            var typeMap = scope.Resolve<TypeMap>();
+            var ms = new MemoryStream();
+            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
 
             InitialiseObject(obj);
             obj.ToStream(sw, null, false);
@@ -107,9 +107,10 @@ namespace Kistl.API.Server.Tests
         [Test]
         public void FromStream_creates_correct_Object()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms, UTF8Encoding.UTF8);
-            BinaryReader sr = new BinaryReader(ms, UTF8Encoding.UTF8);
+            var typeMap = scope.Resolve<TypeMap>();
+            var ms = new MemoryStream();
+            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
 
             TestObjClassSerializationMock.ToStream<TestObjClass, TestEnum>(sw, _iftFactory);
             sw.Flush();
@@ -117,8 +118,7 @@ namespace Kistl.API.Server.Tests
             Assert.That(ms.Length, Is.GreaterThan(0));
             ms.Seek(0, SeekOrigin.Begin);
 
-            SerializableType t;
-            BinarySerializer.FromStream(out t, sr);
+            var t = sr.ReadSerializableType();
 
             var obj = new TestObjClassImpl();
             obj.FromStream(sr);
@@ -131,15 +131,17 @@ namespace Kistl.API.Server.Tests
         public void FromStream_Null_StreamReader_fails()
         {
             TestObjClass result = new TestObjClassImpl();
-            Assert.That(() => result.FromStream((BinaryReader)null), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => result.FromStream((KistlStreamReader)null), Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]
         public void FromStream_Attached()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
+            var typeMap = scope.Resolve<TypeMap>();
+            var ms = new MemoryStream();
+            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
+
             obj.ToStream(sw, null, false);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
@@ -155,15 +157,15 @@ namespace Kistl.API.Server.Tests
         [Test]
         public void should_use_interfacetype_on_the_stream()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
+            var typeMap = scope.Resolve<TypeMap>();
+            var ms = new MemoryStream();
+            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
 
             obj.ToStream(sw, null, false);
             ms.Seek(0, SeekOrigin.Begin);
 
-            SerializableType t;
-            BinarySerializer.FromStream(out t, sr);
+            var t = sr.ReadSerializableType();
             Assert.That(t, Is.EqualTo(_iftFactory(typeof(TestObjClass)).ToSerializableType()));
         }
     }

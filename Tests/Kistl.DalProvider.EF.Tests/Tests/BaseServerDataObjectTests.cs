@@ -1,20 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.API.Tests.Skeletons;
-using Kistl.App.Base;
-using Kistl.DalProvider.Ef.Mocks;
-
-using NUnit.Framework;
-
 namespace Kistl.DalProvider.Ef.Tests
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.API.Tests.Skeletons;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.DalProvider.Ef.Mocks;
+    using NUnit.Framework;
+
     [TestFixture]
     public class BaseServerDataObjectTests
         : IDataObjectTests<ObjectClassEfImpl>
@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.Ef.Tests
             obj.IsFrozenObject = false;
             obj.IsSimpleObject = false;
             obj.Methods.Clear();
-            obj.Module = ctx.GetQuery<Module>().First();
+            obj.Module = ctx.GetQuery<Kistl.App.Base.Module>().First();
             obj.Properties.Clear();
             obj.SubClasses.Clear();
             obj.TableName = "testtablename";
@@ -48,10 +48,6 @@ namespace Kistl.DalProvider.Ef.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                MemoryStream ms = new MemoryStream();
-                BinaryWriter sw = new BinaryWriter(ms);
-                BinaryReader sr = new BinaryReader(ms);
-
                 InitialiseObject(ctx, obj);
 
                 var result = SerializationRoundtrip(obj);
@@ -69,65 +65,70 @@ namespace Kistl.DalProvider.Ef.Tests
                 Assert.That((ICollection)result.Properties, Is.EquivalentTo((ICollection)obj.Properties));
                 Assert.That((ICollection)result.SubClasses, Is.EquivalentTo((ICollection)obj.SubClasses));
                 Assert.That(result.TableName, Is.EqualTo(obj.TableName));
-
             }
         }
 
         [Test]
         public void ToStream_creates_correct_Stream()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
+            var typeMap = scope.Resolve<TypeMap>();
+            using (var ms = new MemoryStream())
+            using (var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms)))
+            using (var sr = new KistlStreamReader(typeMap, new BinaryReader(ms)))
+            {
+                InitialiseObject(ctx, obj);
+                obj.ToStream(sw, null, false);
 
-            InitialiseObject(ctx, obj);
-            obj.ToStream(sw, null, false);
+                Assert.That(ms.Length, Is.GreaterThan(0));
+                ms.Seek(0, SeekOrigin.Begin);
 
-            Assert.That(ms.Length, Is.GreaterThan(0));
-            ms.Seek(0, SeekOrigin.Begin);
-
-            Assert.Ignore("need to implement mocked serialization for ObjectClass");
-            //TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, int>(sr);
+                Assert.Ignore("need to implement mocked serialization for ObjectClass");
+                //TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, int>(sr);
+            }
         }
 
         [Test]
         public void FromStream_creates_correct_Object()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms, UTF8Encoding.UTF8);
-            BinaryReader sr = new BinaryReader(ms, UTF8Encoding.UTF8);
+            var typeMap = scope.Resolve<TypeMap>();
+            using (var ms = new MemoryStream())
+            using (var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms)))
+            using (var sr = new KistlStreamReader(typeMap, new BinaryReader(ms)))
+            {
+                Assert.Ignore("need to implement mocked serialization for ObjectClass");
 
-            Assert.Ignore("need to implement mocked serialization for ObjectClass");
+                //TestObjClassSerializationMock.ToStream<TestObjClass, int>(sw);
+                sw.Flush();
 
-            //TestObjClassSerializationMock.ToStream<TestObjClass, int>(sw);
-            sw.Flush();
+                Assert.That(ms.Length, Is.GreaterThan(0));
+                ms.Seek(0, SeekOrigin.Begin);
 
-            Assert.That(ms.Length, Is.GreaterThan(0));
-            ms.Seek(0, SeekOrigin.Begin);
+                obj.FromStream(sr);
 
-            obj.FromStream(sr);
-
-            //TestObjClassSerializationMock.AssertCorrectContentsInt<TestObjClass>(objImpl);
+                //TestObjClassSerializationMock.AssertCorrectContentsInt<TestObjClass>(objImpl);
+            }
         }
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
         public void FromStream_Attached_fails()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
-
-            obj.ToStream(sw, null, false);
-
-            Assert.That(ms.Length, Is.GreaterThan(0));
-
-            ms.Seek(0, SeekOrigin.Begin);
-
-            using (IKistlContext ctx = GetContext())
+            var typeMap = scope.Resolve<TypeMap>();
+            using (var ms = new MemoryStream())
+            using (var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms)))
+            using (var sr = new KistlStreamReader(typeMap, new BinaryReader(ms)))
             {
-                var result = ctx.Create<ObjectClass>();
-                result.FromStream(sr);
+                obj.ToStream(sw, null, false);
+
+                Assert.That(ms.Length, Is.GreaterThan(0));
+
+                ms.Seek(0, SeekOrigin.Begin);
+
+                using (var ctx = GetContext())
+                {
+                    var result = ctx.Create<ObjectClass>();
+                    result.FromStream(sr);
+                }
             }
         }
 

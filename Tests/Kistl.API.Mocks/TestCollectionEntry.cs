@@ -53,20 +53,6 @@ namespace Kistl.API.Mocks
             ((TestCollectionEntry)obj).TestName = this.TestName;
         }
 
-        public IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
-        {
-            BinarySerializer.FromStream(out _ID, sr);
-            BinarySerializer.FromStream(out _TestName, sr);
-            return null;
-        }
-
-        public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            BinarySerializer.ToStream(ReadOnlyContext.GetInterfaceType(this).ToSerializableType(), sw);
-            BinarySerializer.ToStream(ID, sw);
-            BinarySerializer.ToStream(TestName, sw);
-        }
-
         public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
         {
             sr.Read(out _ID);

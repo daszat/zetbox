@@ -95,12 +95,12 @@
     <Compile Include="Tests\AssemblyLoaderTests.cs" />
     <Compile Include="Tests\BaseCompoundObjects\should_serialize.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
-    <Compile Include="Tests\BinarySerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tests\SerializerTests.cs" />
     <Compile Include="Tests\DiffTests.cs" />
     <Compile Include="Tests\GenericObservableCollectionTestsBaseline.cs" />
     <Compile Include="Tests\BasicObservableCollectionTestsBaseline.cs" />

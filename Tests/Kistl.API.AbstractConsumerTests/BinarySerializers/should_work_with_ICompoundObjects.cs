@@ -47,16 +47,6 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
             return null;
         }
 
-        public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-
-        }
-
-        public IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
-        {
-            return null;
-        }
-
         public virtual void ToStream(System.Xml.XmlWriter xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");
@@ -133,23 +123,14 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
     }
 
     [TestFixture(typeof(MinimalCompoundObjectTest))]
-    public class should_work_with_ICompoundObjects<T> : AbstractTestFixture
+    public abstract class should_work_with_ICompoundObjects<T> : SerializerTestFixture
         where T : class, ICompoundObject, new()
     {
-        MemoryStream ms;
-        BinaryWriter sw;
-        BinaryReader sr;
-
         T test;
 
         public override void SetUp()
         {
             base.SetUp();
-
-            ms = new MemoryStream();
-            sw = new BinaryWriter(ms);
-            sr = new BinaryReader(ms);
-
             test = new T();
         }
 
@@ -164,19 +145,19 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
         [Test]
         public void when_serializing()
         {
-            BinarySerializer.ToStream(test, sw);
+            sw.Write(test);
         }
 
         [Test]
         public void when_deserializing()
         {
-            BinarySerializer.ToStream(test, sw);
+            sw.Write(test);
 
             RewindStreams();
 
             Assert.DoesNotThrow(() =>
             {
-                BinarySerializer.FromStream(out test, sr);
+                test = sr.ReadCompoundObject<T>();
             });
         }
     }

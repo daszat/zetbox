@@ -20,7 +20,9 @@ namespace Kistl.API.Client
                 .Register<ProxyImplementation>(c => new ProxyImplementation(
                     c.Resolve<InterfaceType.Factory>(),
                     c.Resolve<Kistl.API.Client.KistlService.IKistlService>(),
-                    c.Resolve<IPerfCounter>()
+                    c.Resolve<IPerfCounter>(),
+                    c.Resolve<KistlStreamReader.Factory>(),
+                    c.Resolve<KistlStreamWriter.Factory>()
                     ))
                 .Named<IProxy>("implementor")
                 .InstancePerDependency(); // No singleton!

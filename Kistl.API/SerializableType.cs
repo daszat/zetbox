@@ -121,46 +121,8 @@ namespace Kistl.API
             return String.Format(@"Type {{ TypeName=""{0}"", AssemblyQualifiedName=""{1}"" }}", TypeName, AssemblyQualifiedName);
         }
 
-        #region Serializer
-
         private SerializableType()
         {
         }
-
-        public void ToStream(BinaryWriter binStream)
-        {
-            if (binStream == null) throw new ArgumentNullException("binStream");
-
-            binStream.Write(TypeName);
-            binStream.Write(AssemblyQualifiedName);
-            foreach (var parameter in GenericTypeParameter)
-            {
-                binStream.Write(true);
-                parameter.ToStream(binStream);
-            }
-            binStream.Write(false);
-        }
-
-        public static SerializableType FromStream(BinaryReader binStream)
-        {
-            if (binStream == null) throw new ArgumentNullException("binStream");
-
-            var result = new SerializableType()
-            {
-                TypeName = binStream.ReadString(),
-                AssemblyQualifiedName = binStream.ReadString(),
-            };
-
-            var arguments = new List<SerializableType>();
-            while (binStream.ReadBoolean())
-            {
-                arguments.Add(SerializableType.FromStream(binStream));
-            }
-            result.GenericTypeParameter = arguments.ToArray();
-
-            return result;
-        }
-
-        #endregion
     }
 }

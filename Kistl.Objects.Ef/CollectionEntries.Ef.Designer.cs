@@ -8855,8 +8855,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             binStream.Read(out this._fk_Parent);
 			{
                 // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp;
-				binStream.Read(out tmp);
+				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectEfImpl>();
 	            this.ValueImpl = tmp ?? new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
                 this.ValueImpl.AttachToObject(this, "Value");
 	        }

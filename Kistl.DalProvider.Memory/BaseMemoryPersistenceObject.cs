@@ -55,17 +55,28 @@ namespace Kistl.DalProvider.Memory
             _objectState = DataObjectState.Modified;
         }
 
-        public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
-            BinarySerializer.ToStream((int)ObjectState, sw);
+            sw.Write((int)ObjectState);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
-            BinarySerializer.FromStreamConverter(i => _objectState = (DataObjectState)i, sr);
+            sr.ReadConverter(i => _objectState = (DataObjectState)i);
             return baseResult;
+        }
+
+        [Obsolete]
+        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+        }
+
+        [Obsolete]
+        public virtual IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
+        {
+            return null;
         }
 
         public override void SetUnmodified()

@@ -62,18 +62,18 @@ namespace Kistl.API.Client.Tests
             }
         }
 
-        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
-            BinarySerializer.ToStream(this.Value, sw);
-            BinarySerializer.ToStream(this.fk_Parent, sw);
+            sw.Write(this.Value);
+            sw.Write(this.fk_Parent);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
-            BinarySerializer.FromStream(out this._Value, sr);
-            BinarySerializer.FromStream(out this._fk_Parent, sr);
+            sr.Read(out this._Value);
+            sr.Read(out this._fk_Parent);
             return baseResult;
         }
 

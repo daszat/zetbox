@@ -190,16 +190,6 @@ namespace Kistl.API.Client.Mocks.OneNLists
 
         #region IStreamable Members
 
-        public void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             throw new NotImplementedException();

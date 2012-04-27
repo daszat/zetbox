@@ -906,17 +906,13 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             binStream.Read(out this._PersonName);
 			{
                 // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl tmp;
-				binStream.Read(out tmp);
-	            this.PhoneNumberMobileImpl = tmp;
+	            this.PhoneNumberMobileImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl>();
                 if (this.PhoneNumberMobileImpl != null)
                     this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
 	        }
 			{
                 // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl tmp;
-				binStream.Read(out tmp);
-	            this.PhoneNumberOfficeImpl = tmp;
+	            this.PhoneNumberOfficeImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl>();
                 if (this.PhoneNumberOfficeImpl != null)
                     this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
 	        }

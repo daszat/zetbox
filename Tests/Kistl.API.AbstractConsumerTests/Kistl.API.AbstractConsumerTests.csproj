@@ -115,6 +115,7 @@
     <Compile Include="PersistenceObjects\when_loaded.cs" />
     <Compile Include="ProjectDataFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializerTestFixture.cs" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>

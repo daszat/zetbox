@@ -1013,17 +1013,13 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             }
 			{
                 // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl tmp;
-				binStream.Read(out tmp);
-	            this.PhoneNumberMobileImpl = tmp;
+	            this.PhoneNumberMobileImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
                 if (this.PhoneNumberMobileImpl != null)
                     this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
 	        }
 			{
                 // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl tmp;
-				binStream.Read(out tmp);
-	            this.PhoneNumberOfficeImpl = tmp;
+	            this.PhoneNumberOfficeImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
                 if (this.PhoneNumberOfficeImpl != null)
                     this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
 	        }

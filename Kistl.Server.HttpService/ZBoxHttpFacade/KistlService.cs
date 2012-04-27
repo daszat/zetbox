@@ -22,6 +22,17 @@ namespace Kistl.Server.HttpService
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service.KistlServiceFacade");
 
         private readonly BinaryFormatter _formatter = new BinaryFormatter();
+        private readonly KistlStreamReader.Factory _readerFactory;
+        private readonly KistlStreamWriter.Factory _writerFactory;
+
+        public KistlServiceFacade(KistlStreamReader.Factory readerFactory, KistlStreamWriter.Factory writerFactory)
+        {
+            if (readerFactory == null) throw new ArgumentNullException("readerFactory");
+            if (writerFactory == null) throw new ArgumentNullException("writerFactory");
+
+            _readerFactory = readerFactory;
+            _writerFactory = writerFactory;
+        }
 
         public bool IsReusable
         {
@@ -82,18 +93,16 @@ namespace Kistl.Server.HttpService
                     context.Request.HttpMethod,
                     context.Request.Url,
                     username);
-                var reader = new BinaryReader(context.Request.InputStream);
-                Guid version;
-                BinarySerializer.FromStream(out version, reader);
+                var reader = _readerFactory(new BinaryReader(context.Request.InputStream));
 
+                var version = reader.ReadGuid();
                 switch (context.Request.Url.Segments.Last())
                 {
                     case "SetObjects": // byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
                         {
-                            byte[] msg;
-                            BinarySerializer.FromStream(out msg, reader);
+                            byte[] msg = reader.ReadByteArray();
                             ObjectNotificationRequest[] notificationRequests;
-                            BinarySerializer.FromStream(out notificationRequests, reader);
+                            reader.Read(out notificationRequests);
                             Log.DebugFormat("SetObjects(byte[{0}], ObjectNotificationRequest[{1}])", msg.Length, notificationRequests.Length);
                             var result = service.SetObjects(version, msg, notificationRequests);
                             SendByteArray(context, result);
@@ -101,22 +110,17 @@ namespace Kistl.Server.HttpService
                         }
                     case "GetList": // byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
                         {
-                            SerializableType type;
-                            BinarySerializer.FromStream(out type, reader);
-
-                            int maxListCount;
-                            BinarySerializer.FromStream(out maxListCount, reader);
-
-                            bool eagerLoadLists;
-                            BinarySerializer.FromStream(out eagerLoadLists, reader);
+                            var type = reader.ReadSerializableType();
+                            int maxListCount = reader.ReadInt32();
+                            bool eagerLoadLists = reader.ReadBoolean();
 
                             var iftFactory = scope.Resolve<InterfaceType.Factory>();
 
                             SerializableExpression[] filter;
-                            BinarySerializer.FromStream(out filter, reader, iftFactory);
+                            reader.Read(out filter, iftFactory);
 
                             OrderByContract[] orderBy;
-                            BinarySerializer.FromStream(out orderBy, reader, iftFactory);
+                            reader.Read(out orderBy, iftFactory);
 
                             Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
                             var result = service.GetList(version, type, maxListCount, eagerLoadLists, filter, orderBy);
@@ -125,14 +129,9 @@ namespace Kistl.Server.HttpService
                         }
                     case "GetListOf": // byte[] GetListOf(SerializableType type, int ID, string property);
                         {
-                            SerializableType type;
-                            BinarySerializer.FromStream(out type, reader);
-
-                            int ID;
-                            BinarySerializer.FromStream(out ID, reader);
-
-                            string property;
-                            BinarySerializer.FromStream(out property, reader);
+                            var type = reader.ReadSerializableType();
+                            int ID = reader.ReadInt32();
+                            string property = reader.ReadString();
 
                             Log.DebugFormat("GetListOf(type=[{0}], ID={1}, property=[{2}])", type, ID, property);
                             var result = service.GetListOf(version, type, ID, property);
@@ -141,14 +140,9 @@ namespace Kistl.Server.HttpService
                         }
                     case "FetchRelation": // byte[] FetchRelation(Guid relId, int role, int ID)
                         {
-                            Guid relId;
-                            BinarySerializer.FromStream(out relId, reader);
-
-                            int role;
-                            BinarySerializer.FromStream(out role, reader);
-
-                            int ID;
-                            BinarySerializer.FromStream(out ID, reader);
+                            Guid relId = reader.ReadGuid();
+                            int role = reader.ReadInt32();
+                            int ID = reader.ReadInt32();
 
                             Log.DebugFormat("FetchRelation(relId=[{0}], role={1}, ID=[{2}])", relId, role, ID);
                             var result = service.FetchRelation(version, relId, role, ID);
@@ -168,14 +162,9 @@ namespace Kistl.Server.HttpService
                         }
                     case "SetBlobStream": // BlobResponse SetBlobStream(BlobMessage blob)
                         {
-                            string fileName;
-                            BinarySerializer.FromStream(out fileName, reader);
-
-                            string mimeType;
-                            BinarySerializer.FromStream(out mimeType, reader);
-
-                            byte[] data;
-                            BinarySerializer.FromStream(out data, reader);
+                            string fileName = reader.ReadString();
+                            string mimeType = reader.ReadString();
+                            byte[] data = reader.ReadByteArray();
 
                             Log.DebugFormat("SetBlobStream(fileName=[{0}], mimeType=[{1}], Stream of {2} bytes)", fileName, mimeType, data.Length);
                             var result = service.SetBlobStream(new BlobMessage()
@@ -188,38 +177,27 @@ namespace Kistl.Server.HttpService
 
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            using (var writer = new BinaryWriter(context.Response.OutputStream))
+                            using (var writer = _writerFactory(new BinaryWriter(context.Response.OutputStream)))
                             using (var dataStream = new MemoryStream())
                             {
-                                BinarySerializer.ToStream(result.ID, writer);
+                                writer.Write(result.ID);
                                 result.BlobInstance.CopyTo(dataStream);
-                                var bytes = dataStream.ToArray();
-                                BinarySerializer.ToStream(bytes, writer);
+                                writer.Write(dataStream.ToArray());
                             }
                             break;
                         }
                     case "InvokeServerMethod": // byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
                         {
-                            SerializableType type;
-                            BinarySerializer.FromStream(out type, reader);
+                            var type = reader.ReadSerializableType();
+                            int ID = reader.ReadInt32();
+                            string method = reader.ReadString();
 
-                            int ID;
-                            BinarySerializer.FromStream(out ID, reader);
-
-                            string method;
-                            BinarySerializer.FromStream(out method, reader);
-
-                            SerializableType[] parameterTypes;
-                            BinarySerializer.FromStream(out parameterTypes, reader);
-
-                            byte[] parameter;
-                            BinarySerializer.FromStream(out parameter, reader);
-
-                            byte[] changedObjects;
-                            BinarySerializer.FromStream(out changedObjects, reader);
+                            SerializableType[] parameterTypes = reader.ReadSerializableTypeArray();
+                            byte[] parameter = reader.ReadByteArray();
+                            byte[] changedObjects = reader.ReadByteArray();
 
                             ObjectNotificationRequest[] notificationRequests;
-                            BinarySerializer.FromStream(out notificationRequests, reader);
+                            reader.Read(out notificationRequests);
 
                             Log.DebugFormat("InvokeServerMethod(type=[{0}], ID={1}, method=[{2}], SerializableType[{3}], byte[{4}], byte[{5}], ObjectNotificationRequest[{6}])",
                                 type,
@@ -235,10 +213,10 @@ namespace Kistl.Server.HttpService
 
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            using (var writer = new BinaryWriter(context.Response.OutputStream))
+                            using (var writer = _writerFactory(new BinaryWriter(context.Response.OutputStream)))
                             {
-                                BinarySerializer.ToStream(retChangedObjects, writer);
-                                BinarySerializer.ToStream(result, writer);
+                                writer.Write(retChangedObjects);
+                                writer.Write(result);
                             }
                             break;
                         }
@@ -284,9 +262,9 @@ namespace Kistl.Server.HttpService
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "application/octet-stream";
-            using (var writer = new BinaryWriter(context.Response.OutputStream))
+            using (var writer = _writerFactory(new BinaryWriter(context.Response.OutputStream)))
             {
-                BinarySerializer.ToStream(result, writer);
+                writer.Write(writer);
             }
         }
     }

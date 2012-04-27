@@ -9096,9 +9096,7 @@ namespace Kistl.App.Test
             binStream.Read(out this._fk_Parent);
 			{
                 // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl tmp;
-				binStream.Read(out tmp);
-	            this.ValueImpl = tmp;
+	            this.ValueImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
                 if (this.ValueImpl != null)
                     this.ValueImpl.AttachToObject(this, "Value");
 	        }

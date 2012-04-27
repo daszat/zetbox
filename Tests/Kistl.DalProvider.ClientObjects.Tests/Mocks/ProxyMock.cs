@@ -16,6 +16,7 @@ namespace Kistl.DalProvider.Client.Mocks
     using Kistl.App.Test;
     using Kistl.DalProvider.Memory;
     using Kistl.App.Base;
+    using Kistl.API.Utils;
 
     public class ProxyMock
         : IProxy
@@ -23,12 +24,14 @@ namespace Kistl.DalProvider.Client.Mocks
         private readonly InterfaceType.Factory _iftFactory;
         private readonly BaseMemoryContext _backingStore;
         private readonly MemoryObjectHandlerFactory _memoryFactory;
+        private readonly TypeMap _map;
 
-        public ProxyMock(InterfaceType.Factory iftFactory, BaseMemoryContext backingStore, IFrozenContext frozen)
+        public ProxyMock(InterfaceType.Factory iftFactory, BaseMemoryContext backingStore, IFrozenContext frozen, TypeMap map)
         {
             _iftFactory = iftFactory;
             _backingStore = backingStore;
             _memoryFactory = new MemoryObjectHandlerFactory();
+            _map = map;
 
             var generatedAssembly = System.Reflection.Assembly.Load(MemoryProvider.GeneratedAssemblyName);
             Importer.LoadFromXml(_backingStore, generatedAssembly.GetManifestResourceStream("Kistl.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenObjects.xml from assembly");
@@ -67,7 +70,7 @@ namespace Kistl.DalProvider.Client.Mocks
                 orderBy != null ? orderBy.ToList() : null);
             var bytes = SendObjects(objects, eagerLoadLists).ToArray();
 
-            using (var sr = new BinaryReader(new MemoryStream(bytes)))
+            using (var sr = new KistlStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
             {
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
             }
@@ -84,7 +87,7 @@ namespace Kistl.DalProvider.Client.Mocks
             var objects = handler.GetListOf(KistlGeneratedVersionAttribute.Current, _backingStore, ID, property);
             var bytes = SendObjects(objects, true).ToArray();
 
-            using (var sr = new BinaryReader(new MemoryStream(bytes)))
+            using (var sr = new KistlStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
             {
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
             }
@@ -99,7 +102,7 @@ namespace Kistl.DalProvider.Client.Mocks
 
             // Serialize
             using (var ms = new MemoryStream())
-            using (var sw = new BinaryWriter(ms))
+            using (var sw = new KistlStreamWriter(_map, new BinaryWriter(ms)))
             {
                 SendObjects(objects, sw);
 
@@ -109,7 +112,7 @@ namespace Kistl.DalProvider.Client.Mocks
                     .Cast<IStreamable>();
                 var bytes = SendObjects(changedObjects, true).ToArray();
 
-                using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                using (var sr = new KistlStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
                 {
                     // merge auxiliary objects into primary set objects result
                     List<IStreamable> auxObjects;
@@ -148,7 +151,7 @@ namespace Kistl.DalProvider.Client.Mocks
             var bytes = SendObjects(objects, true).ToArray();
 
             using (MemoryStream s = new MemoryStream(bytes))
-            using (var sr = new BinaryReader(s))
+            using (var sr = new KistlStreamReader(_map, new BinaryReader(s)))
             {
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
             }
@@ -175,7 +178,7 @@ namespace Kistl.DalProvider.Client.Mocks
             resp.ID = serverBlob.ID;
             resp.BlobInstance = SendObjects(new IDataObject[] { serverBlob }, true);
 
-            using (var sr = new BinaryReader(resp.BlobInstance))
+            using (var sr = new KistlStreamReader(_map, new BinaryReader(resp.BlobInstance)))
             {
                 result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
             }
@@ -185,72 +188,20 @@ namespace Kistl.DalProvider.Client.Mocks
         public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
         {
             throw new NotImplementedException();
-
-            //object result = null;
-            //IEnumerable<IPersistenceObject> tmpChangedObjects = null;
-
-            //BinaryFormatter bf = new BinaryFormatter();
-            //MemoryStream parameterStream = new MemoryStream();
-            //bf.Serialize(parameterStream, parameter);
-
-            //MemoryStream changedObjectsStream = new MemoryStream();
-            //BinaryWriter sw = new BinaryWriter(changedObjectsStream);
-            //SendObjects(objects, sw);
-
-            //byte[] retChangedObjectsArray;
-            //var resultStream = new MemoryStream(_service.InvokeServerMethod(
-            //    out retChangedObjectsArray,
-            //    ifType.ToSerializableType(),
-            //    ID,
-            //    method,
-            //    parameterTypes.Select(t => ifType.ToSerializableType()).ToArray(),
-            //    parameterStream.ToArray(),
-            //    changedObjectsStream.ToArray(),
-            //    notificationRequests.ToArray()));
-            //{
-            //    MemoryStream retChangedObjects = new MemoryStream(retChangedObjectsArray);
-            //    BinaryReader br = new BinaryReader(retChangedObjects);
-            //    tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
-            //}
-
-            //resultStream.Seek(0, SeekOrigin.Begin);
-
-            //if (retValType.IsIStreamable())
-            //{
-            //    BinaryReader br = new BinaryReader(resultStream);
-            //    result = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>().FirstOrDefault();
-            //}
-            //else if (retValType.IsIEnumerable() && retValType.FindElementTypes().First().IsIPersistenceObject())
-            //{
-            //    BinaryReader br = new BinaryReader(resultStream);
-            //    IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().First()));
-            //    foreach (object resultObj in ReceiveObjectList(ctx, br))
-            //    {
-            //        lst.Add(resultObj);
-            //    }
-            //    result = lst;
-            //}
-            //else
-            //{
-            //    result = bf.Deserialize(resultStream);
-            //}
-
-            //changedObjects = tmpChangedObjects;
-            //return result;
         }
 
         public void Dispose()
         {
         }
 
-        private static void SendObjects(IEnumerable<IPersistenceObject> objects, BinaryWriter sw)
+        private static void SendObjects(IEnumerable<IPersistenceObject> objects, KistlStreamWriter sw)
         {
             foreach (var obj in objects)
             {
-                BinarySerializer.ToStream(true, sw);
+                sw.Write(true);
                 obj.ToStream(sw, new HashSet<IStreamable>(), false);
             }
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
         }
 
         /// <summary>
@@ -259,28 +210,28 @@ namespace Kistl.DalProvider.Client.Mocks
         /// <param name="lst">the list of objects to send</param>
         /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
         /// <returns>a memory stream containing all objects and all eagerly loaded auxiliary objects</returns>
-        private static MemoryStream SendObjects(IEnumerable<IStreamable> lst, bool eagerLoadLists)
+        private MemoryStream SendObjects(IEnumerable<IStreamable> lst, bool eagerLoadLists)
         {
             HashSet<IStreamable> sentObjects = new HashSet<IStreamable>();
             HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
 
             MemoryStream result = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(result);
+            KistlStreamWriter sw = new KistlStreamWriter(_map, new BinaryWriter(result));
             foreach (IStreamable obj in lst)
             {
-                BinarySerializer.ToStream(true, sw);
+                sw.Write(true);
                 // don't check sentObjects here, because a list might contain items twice
                 obj.ToStream(sw, auxObjects, eagerLoadLists);
                 sentObjects.Add(obj);
             }
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
 
             SendAuxiliaryObjects(sw, auxObjects, sentObjects, eagerLoadLists);
 
             // https://connect.microsoft.com/VisualStudio/feedback/details/541494/wcf-streaming-issue
-            BinarySerializer.ToStream(false, sw);
-            BinarySerializer.ToStream(false, sw);
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
+            sw.Write(false);
+            sw.Write(false);
 
             result.Seek(0, SeekOrigin.Begin);
             return result;
@@ -293,7 +244,7 @@ namespace Kistl.DalProvider.Client.Mocks
         /// <param name="auxObjects">a set of objects to send; will not be modified by this call</param>
         /// <param name="sentObjects">a set objects already sent; receives all newly sent objects too</param>
         /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
-        private static void SendAuxiliaryObjects(BinaryWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
+        private static void SendAuxiliaryObjects(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
         {
             // clone auxObjects to avoid modification
             auxObjects = new HashSet<IStreamable>(auxObjects);
@@ -304,7 +255,7 @@ namespace Kistl.DalProvider.Client.Mocks
                 HashSet<IStreamable> secondTierAuxObjects = new HashSet<IStreamable>();
                 foreach (var aux in auxObjects.Where(o => o != null))
                 {
-                    BinarySerializer.ToStream(true, sw);
+                    sw.Write(true);
                     aux.ToStream(sw, secondTierAuxObjects, eagerLoadLists);
                     sentObjects.Add(aux);
                 }
@@ -313,31 +264,29 @@ namespace Kistl.DalProvider.Client.Mocks
                 auxObjects = secondTierAuxObjects;
             }
             // finish list
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
         }
 
-        private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, BinaryReader sr, out List<IStreamable> auxObjects)
+        private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, KistlStreamReader sr, out List<IStreamable> auxObjects)
         {
             var result = ReceiveObjectList(ctx, sr);
             auxObjects = ReceiveObjectList(ctx, sr);
             return result;
         }
 
-        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, BinaryReader sr)
+        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, KistlStreamReader sr)
         {
             List<IStreamable> result = new List<IStreamable>();
-            bool cont = true;
-            BinarySerializer.FromStream(out cont, sr);
+            var cont = sr.ReadBoolean();
             while (cont)
             {
-                SerializableType objType;
-                BinarySerializer.FromStream(out objType, sr);
+                var objType = sr.ReadSerializableType();
 
                 IStreamable obj = (IStreamable)ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
                 obj.FromStream(sr);
 
                 result.Add((IStreamable)obj);
-                BinarySerializer.FromStream(out cont, sr);
+                cont = sr.ReadBoolean();
             }
             return result;
         }

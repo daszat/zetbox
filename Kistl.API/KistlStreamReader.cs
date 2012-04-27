@@ -11,14 +11,14 @@ namespace Kistl.API
     using System.Text;
     using Kistl.API.Utils;
 
-    public class KistlStreamReader
+    public class KistlStreamReader : IDisposable
     {
-        public delegate TypeMap Factory(BinaryReader source);
+        public delegate KistlStreamReader Factory(BinaryReader source);
 
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Serialization");
-        
+
         private readonly TypeMap _typeMap;
-        
+
         private readonly BinaryReader _source;
 
         [Conditional("DEBUG_SERIALIZATION")]
@@ -80,6 +80,14 @@ namespace Kistl.API
             return result;
         }
 
+        public Stream BaseStream
+        {
+            get
+            {
+                return _source.BaseStream;
+            }
+        }
+
         public KistlStreamReader(TypeMap map, BinaryReader source)
         {
             if (map == null) throw new ArgumentNullException("map");
@@ -94,12 +102,21 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize a bool
         /// </summary>
+        public bool ReadBoolean()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadBoolean();
+            SerializerTrace("read bool {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a bool
+        /// </summary>
         /// <param name="val">Destination Value.</param>
         public void Read(out bool val)
         {
-            TraceCurrentPos();
-            val = _source.ReadBoolean();
-            SerializerTrace("read bool {0}", val);
+            val = ReadBoolean();
         }
 
         /// <summary>
@@ -110,10 +127,18 @@ namespace Kistl.API
         {
             if (consumer == null) { throw new ArgumentNullException("consumer"); }
 
+            consumer(ReadBoolean());
+        }
+
+        /// <summary>
+        /// Deserialize a nullable bool, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        public bool? ReadNullableBoolean()
+        {
             TraceCurrentPos();
-            var val = _source.ReadBoolean();
-            consumer(val);
-            SerializerTrace("read bool {0}", val);
+            var result = _source.ReadBoolean() ? (bool?)_source.ReadBoolean() : null;
+            SerializerTrace("read bool? {0}", result);
+            return result;
         }
 
         /// <summary>
@@ -122,23 +147,107 @@ namespace Kistl.API
         /// <param name="val">Destination Value.</param>
         public void Read(out bool? val)
         {
+            val = ReadNullableBoolean();
+        }
+
+        #endregion
+
+        #region byte
+
+        /// <summary>
+        /// Deserialize a byte
+        /// </summary>
+        public byte ReadByte()
+        {
             TraceCurrentPos();
-            val = _source.ReadBoolean() ? (bool?)_source.ReadBoolean() : null;
-            SerializerTrace("read bool? {0}", val);
+            var result = _source.ReadByte();
+            SerializerTrace("read byte {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a byte
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out byte val)
+        {
+            val = ReadByte();
+        }
+
+        /// <summary>
+        /// Deserialize a nullable byte, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        public byte? ReadNullableByte()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadBoolean() ? (byte?)_source.ReadByte() : null;
+            SerializerTrace("read byte? {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a nullable byte, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out byte? val)
+        {
+            val = ReadNullableByte();
+        }
+
+        /// <summary>
+        /// Deserialize an array of bytes
+        /// </summary>
+        /// <param name="bytes">data</param>
+        public void Read(out byte[] bytes)
+        {
+            bytes = ReadByteArray();
+        }
+
+        /// <summary>
+        /// Deserialize a byte[]
+        /// </summary>
+        public byte[] ReadByteArray()
+        {
+            TraceCurrentPos();
+            var len = _source.ReadInt32();
+            var result = _source.ReadBytes(len);
+            SerializerTrace("read {0} bytes", len);
+            return result;
         }
 
         #endregion
 
         #region DateTime
+
+        /// <summary>
+        /// Deserialize a DateTime
+        /// </summary>
+        public DateTime ReadDateTime()
+        {
+            TraceCurrentPos();
+            var result = DateTime.FromBinary(_source.ReadInt64());
+            SerializerTrace("read DateTime {0}", result);
+            return result;
+        }
+
         /// <summary>
         /// Deserialize a DateTime
         /// </summary>
         /// <param name="val">Destination Value.</param>
         public void Read(out DateTime val)
         {
+            val = ReadDateTime();
+        }
+
+        /// <summary>
+        /// Deserialize a DateTime
+        /// </summary>
+        public DateTime? ReadNullableDateTime()
+        {
             TraceCurrentPos();
-            val = DateTime.FromBinary(_source.ReadInt64());
-            SerializerTrace("read DateTime {0}", val);
+            var result = _source.ReadBoolean() ? (DateTime?)DateTime.FromBinary(_source.ReadInt64()) : null;
+            SerializerTrace("read DateTime {0}", result);
+            return result;
         }
 
         /// <summary>
@@ -147,126 +256,7 @@ namespace Kistl.API
         /// <param name="val">Destination Value.</param>
         public void Read(out DateTime? val)
         {
-            TraceCurrentPos();
-            val = _source.ReadBoolean() ? (DateTime?)DateTime.FromBinary(_source.ReadInt64()) : null;
-            SerializerTrace("read DateTime? {0}", val);
-        }
-
-        #endregion
-
-        #region double
-
-        /// <summary>
-        /// Deserialize a double
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out double val)
-        {
-            TraceCurrentPos();
-            val = _source.ReadDouble();
-            SerializerTrace("read double {0}", val);
-        }
-
-        /// <summary>
-        /// Deserialize a nullable double, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out double? val)
-        {
-            TraceCurrentPos();
-            val = _source.ReadBoolean() ? (double?)_source.ReadDouble() : null;
-            SerializerTrace("read double? {0}", val);
-        }
-
-        #endregion
-
-        #region float
-
-        /// <summary>
-        /// Deserialize a float
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out float val)
-        {
-            TraceCurrentPos();
-            val = _source.ReadSingle();
-            SerializerTrace("read float {0}", val);
-        }
-
-        /// <summary>
-        /// Deserialize a nullable float, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out float? val)
-        {
-            TraceCurrentPos();
-            val = _source.ReadBoolean() ? (float?)_source.ReadSingle() : null;
-            SerializerTrace("read float? {0}", val);
-        }
-
-        #endregion
-
-        #region Guid
-
-        /// <summary>
-        /// Deserialize a Guid
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out Guid val)
-        {
-            TraceCurrentPos();
-            val = new Guid(_source.ReadBytes(16));
-            SerializerTrace("read Guid {0}", val);
-        }
-
-        /// <summary>
-        /// Deserialize a nullable DateTime, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out Guid? val)
-        {
-            TraceCurrentPos();
-            val = _source.ReadBoolean() ? (Guid?)new Guid(_source.ReadString()) : null;
-            SerializerTrace("read Guid? {0}", val);
-        }
-
-        #endregion
-
-        #region int
-
-        /// <summary>
-        /// Deserialize a int
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out int val)
-        {
-            TraceCurrentPos();
-            val = _source.ReadInt32();
-            SerializerTrace("read int {0} (4 bytes)", val);
-        }
-
-        /// <summary>
-        /// Deserialize a nullable int, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out int? val)
-        {
-            TraceCurrentPos();
-            val = _source.ReadBoolean() ? (int?)_source.ReadInt32() : null;
-            SerializerTrace("read int? {0}", val);
-        }
-
-        /// <summary>
-        /// Deserialize an int and call a converter action on it
-        /// </summary>
-        /// <param name="conv"></param>
-        public void ReadConverter(Action<int> conv)
-        {
-            if (conv == null) { throw new ArgumentNullException("conv"); }
-            TraceCurrentPos();
-            int val = _source.ReadInt32();
-            conv(val);
-            SerializerTrace("read and converted int {0} (4 bytes)", val);
+            val = ReadNullableDateTime();
         }
 
         #endregion
@@ -276,12 +266,32 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize a decimal
         /// </summary>
+        public decimal ReadDecimal()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadDecimal();
+            SerializerTrace("read int {0} (4 bytes)", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a decimal
+        /// </summary>
         /// <param name="val">Destination Value.</param>
         public void Read(out decimal val)
         {
+            val = ReadDecimal();
+        }
+
+        /// <summary>
+        /// Deserialize a nullable decimal, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        public decimal? ReadNullableDecimal()
+        {
             TraceCurrentPos();
-            val = _source.ReadDecimal();
-            SerializerTrace("read int {0} (4 bytes)", val);
+            var result = _source.ReadBoolean() ? (decimal?)_source.ReadDecimal() : null;
+            SerializerTrace("read int? {0}", result);
+            return result;
         }
 
         /// <summary>
@@ -290,9 +300,193 @@ namespace Kistl.API
         /// <param name="val">Destination Value.</param>
         public void Read(out decimal? val)
         {
+            val = ReadNullableDecimal();
+        }
+
+        #endregion
+
+        #region double
+
+        /// <summary>
+        /// Deserialize a double
+        /// </summary>
+        public double ReadDouble()
+        {
             TraceCurrentPos();
-            val = _source.ReadBoolean() ? (decimal?)_source.ReadDecimal() : null;
-            SerializerTrace("read int? {0}", val);
+            var result = _source.ReadDouble();
+            SerializerTrace("read double {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a double
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out double val)
+        {
+            val = ReadDouble();
+        }
+
+        /// <summary>
+        /// Deserialize a double
+        /// </summary>
+        public double? ReadNullableDouble()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadBoolean() ? (double?)_source.ReadDouble() : null;
+            SerializerTrace("read double? {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a nullable double, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out double? val)
+        {
+            val = ReadNullableDouble();
+        }
+
+        #endregion
+
+        #region float
+
+        /// <summary>
+        /// Deserialize a float
+        /// </summary>
+        public float ReadFloat()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadSingle();
+            SerializerTrace("read float {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a float
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out float val)
+        {
+            val = ReadFloat();
+        }
+
+        /// <summary>
+        /// Deserialize a nullable float, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        public float? ReadNullableFloat()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadBoolean() ? (float?)_source.ReadSingle() : null;
+            SerializerTrace("read float? {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a nullable float, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out float? val)
+        {
+            val = ReadNullableFloat();
+        }
+
+        #endregion
+
+        #region Guid
+
+        /// <summary>
+        /// Deserialize a Guid
+        /// </summary>
+        public Guid ReadGuid()
+        {
+            TraceCurrentPos();
+            var result = new Guid(_source.ReadBytes(16));
+            SerializerTrace("read Guid {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a Guid
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out Guid val)
+        {
+            val = ReadGuid();
+        }
+
+        /// <summary>
+        /// Deserialize a nullable DateTime, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        public Guid? ReadNullableGuid()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadBoolean() ? (Guid?)ReadGuid() : null;
+            SerializerTrace("read Guid? {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a nullable DateTime, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out Guid? val)
+        {
+            val = ReadNullableGuid();
+        }
+
+        #endregion
+
+        #region int
+
+        /// <summary>
+        /// Deserialize a int
+        /// </summary>
+        public int ReadInt32()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadInt32();
+            SerializerTrace("read int {0} (4 bytes)", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a int
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out int val)
+        {
+            val = ReadInt32();
+        }
+
+        /// <summary>
+        /// Deserialize a int?
+        /// </summary>
+        public int? ReadNullableInt32()
+        {
+            TraceCurrentPos();
+            var result = _source.ReadBoolean() ? (int?)_source.ReadInt32() : null;
+            SerializerTrace("read int? {0}", result);
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a nullable int, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out int? val)
+        {
+            val = ReadNullableInt32();
+        }
+
+        /// <summary>
+        /// Deserialize an int and call a converter action on it
+        /// </summary>
+        /// <param name="converter"></param>
+        public void ReadConverter(Action<int> converter)
+        {
+            if (converter == null) { throw new ArgumentNullException("converter"); }
+            converter(ReadInt32());
         }
 
         #endregion
@@ -302,27 +496,42 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize a CompoundObject, expected format: NULL (true/false), Value (if not null).
         /// </summary>
+        public T ReadCompoundObject<T>()
+            where T : class, ICompoundObject, new()
+        {
+            return (T)ReadCompoundObject(typeof(T));
+        }
+
+        /// <summary>
+        /// Deserialize a CompoundObject, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
         /// <param name="val">Destination Value.</param>
         public void Read<T>(out T val)
             where T : class, ICompoundObject, new()
         {
-            ICompoundObject value;
-            Read(out value, typeof(T));
-            val = (T)value;
+            val = ReadCompoundObject<T>();
         }
 
-        public void Read(out ICompoundObject val, Type type)
+        /// <summary>
+        /// Deserialize a CompoundObject, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        public ICompoundObject ReadCompoundObject(Type t)
         {
+            ICompoundObject result;
             TraceCurrentPos();
-            val = null;
             if (_source.ReadBoolean())
             {
-                val = (ICompoundObject)Activator.CreateInstance(type);
-                val.FromStream(_source);
+                result = (ICompoundObject)Activator.CreateInstance(t);
+                result.FromStream(this);
                 // CompoundObjects cannot have lists
+                SerializerTrace("read {0} value: [{1}]", t, result);
             }
-
-            SerializerTrace("read {0} value: {1}", type, val);
+            else
+            {
+                result = null;
+                SerializerTrace("read {0} value: [null]", t);
+            }
+            return result;
         }
 
         #endregion
@@ -332,26 +541,33 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize a Linq Expression Tree.
         /// </summary>
+        /// <param name="iftFactory">InterfaceType.Factory to pass on the the read SerializableExpressions</param>
+        public SerializableExpression ReadSerializableExpression(InterfaceType.Factory iftFactory)
+        {
+            TraceCurrentPos();
+            if (_source.ReadBoolean())
+            {
+                return SerializableExpression.FromStream(this, iftFactory);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Deserialize a Linq Expression Tree.
+        /// </summary>
         /// <param name="e">Expression Tree.</param>
         /// <param name="iftFactory">InterfaceType.Factory to pass on the the read SerializableExpressions</param>
         public void Read(out SerializableExpression e, InterfaceType.Factory iftFactory)
         {
-            TraceCurrentPos();
-            e = null;
-            if (_source.ReadBoolean())
-            {
-                e = SerializableExpression.FromStream(_source, iftFactory);
-            }
+            e = ReadSerializableExpression(iftFactory);
         }
 
         public void Read(out SerializableExpression[] expressions, InterfaceType.Factory iftFactory)
         {
-            expressions = TraceArray(() =>
-            {
-                SerializableExpression result;
-                Read(out result, iftFactory);
-                return result;
-            });
+            expressions = TraceArray(() => ReadSerializableExpression(iftFactory));
         }
 
         #endregion
@@ -361,10 +577,10 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize a SerializableType.
         /// </summary>
-        /// <param name="type">SerializableType</param>
-        public void Read(out SerializableType type)
+        public SerializableType ReadSerializableType()
         {
             TraceCurrentPos();
+            SerializableType result;
 
             long beginPos = _source.BaseStream.CanSeek ? _source.BaseStream.Position : -1;
 
@@ -372,26 +588,44 @@ namespace Kistl.API
             Read(out guid);
             if (guid != Guid.Empty)
             {
-                type = _typeMap.Map[guid];
+                result = _typeMap.Map[guid];
             }
             else
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                type = (SerializableType)bf.Deserialize(_source.BaseStream);
+                result = (SerializableType)bf.Deserialize(_source.BaseStream);
             }
 
             long endPos = _source.BaseStream.CanSeek ? _source.BaseStream.Position : -1;
-            SerializerTrace("read SerializableType {0} ({1} bytes)", type, endPos - beginPos);
+            SerializerTrace("read SerializableType {0} ({1} bytes)", result, endPos - beginPos);
+
+            return result;
         }
 
+        /// <summary>
+        /// Deserialize a SerializableType.
+        /// </summary>
+        /// <param name="type">Destination Value.</param>
+        public void Read(out SerializableType type)
+        {
+            type = ReadSerializableType();
+        }
+
+        /// <summary>
+        /// Deserialize a SerializableType[].
+        /// </summary>
+        public SerializableType[] ReadSerializableTypeArray()
+        {
+            return TraceArray(ReadSerializableType);
+        }
+
+        /// <summary>
+        /// Deserialize an array of SerializableType.
+        /// </summary>
+        /// <param name="types">Destination Value.</param>
         public void Read(out SerializableType[] types)
         {
-            types = TraceArray(() =>
-            {
-                SerializableType result;
-                Read(out result);
-                return result;
-            });
+            types = ReadSerializableTypeArray();
         }
 
         #endregion
@@ -401,44 +635,43 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize a string, expected format: NULL (true/false), Value (if not null).
         /// </summary>
-        /// <param name="val">Destination Value.</param>
-        public void Read(out string val)
+        public string ReadString()
         {
             TraceCurrentPos();
             long beginPos = _source.BaseStream.CanSeek ? _source.BaseStream.Position : -1;
-            val = _source.ReadBoolean() ? _source.ReadString() : null;
+            var result = _source.ReadBoolean() ? _source.ReadString() : null;
             long endPos = _source.BaseStream.CanSeek ? _source.BaseStream.Position : -1;
-            if (val == null)
+
+            if (result == null)
             {
                 SerializerTrace("read null string ({0} bytes)", endPos - beginPos);
             }
             else
             {
-                SerializerTrace("read string ({0} chars, {1} bytes)", val.Length, endPos - beginPos);
+                SerializerTrace("read string ({0} chars, {1} bytes)", result.Length, endPos - beginPos);
             }
+            return result;
+        }
+
+        /// <summary>
+        /// Deserialize a string, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        public void Read(out string val)
+        {
+            val = ReadString();
         }
 
         /// <summary>
         /// Deserialize a string and call a converter action on it
         /// </summary>
-        /// <param name="conv"></param>
-        public void ReadConverter(Action<string> conv)
+        /// <param name="converter"></param>
+        public void ReadConverter(Action<string> converter)
         {
-            if (conv == null)
-                throw new ArgumentNullException("conv");
-            TraceCurrentPos();
-            bool hasValue = _source.ReadBoolean();
-            if (hasValue)
-            {
-                string val = _source.ReadString();
-                conv(val);
-                SerializerTrace("read and converted string \"{0}\"", val);
-            }
-            else
-            {
-                conv(null);
-                SerializerTrace("read and converted null string");
-            }
+            if (converter == null)
+                throw new ArgumentNullException("converter");
+
+            converter(ReadString());
         }
 
         #endregion
@@ -466,31 +699,9 @@ namespace Kistl.API
                 Read(out t);
 
                 T obj = new T();
-                obj.FromStream(_source);
+                obj.FromStream(this);
                 val.Add(obj);
                 SerializerTrace("read {0} value: {1}", typeof(T), val);
-            }
-        }
-
-        #endregion
-
-        #region byte[]
-
-        /// <summary>
-        /// Deserialize an array of bytes
-        /// </summary>
-        /// <param name="bytes">data</param>
-        public void Read(out byte[] bytes)
-        {
-            int len;
-            Read(out len);
-            if (len == -1)
-            {
-                bytes = null;
-            }
-            else
-            {
-                bytes = _source.ReadBytes(len);
             }
         }
 
@@ -658,9 +869,7 @@ namespace Kistl.API
             }
             else if (type.IsICompoundObject())
             {
-                ICompoundObject val;
-                Read(out val, type);
-                value = val;
+                value = ReadCompoundObject(type);
             }
             else
             {
@@ -670,5 +879,11 @@ namespace Kistl.API
         }
 
         #endregion
+
+        public void Dispose()
+        {
+            ((IDisposable)_source).Dispose();
+        }
+
     }
 }

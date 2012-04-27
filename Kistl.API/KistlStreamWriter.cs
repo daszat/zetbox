@@ -10,9 +10,9 @@ namespace Kistl.API
     using System.Text;
     using Kistl.API.Utils;
 
-    public sealed class KistlStreamWriter
+    public sealed class KistlStreamWriter : IDisposable
     {
-        public delegate TypeMap Factory(BinaryWriter destination);
+        public delegate KistlStreamWriter Factory(BinaryWriter destination);
 
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Serialization");
 
@@ -72,6 +72,14 @@ namespace Kistl.API
             long endPos = canSeek ? _dest.BaseStream.Position : -1;
             if (canSeek)
                 SerializerTrace("Wrote {0} bytes", endPos - beginPos);
+        }
+
+        public Stream BaseStream
+        {
+            get
+            {
+                return _dest.BaseStream;
+            }
         }
 
         public KistlStreamWriter(TypeMap map, BinaryWriter destination)
@@ -243,7 +251,7 @@ namespace Kistl.API
             if (val.HasValue)
             {
                 _dest.Write(true);
-                _dest.Write(val.Value.ToString());
+                _dest.Write(val.Value.ToByteArray());
             }
             else
             {
@@ -334,7 +342,7 @@ namespace Kistl.API
             if (val != null)
             {
                 _dest.Write(true);
-                val.ToStream(_dest, null, false);
+                val.ToStream(this, null, false);
             }
             else
             {
@@ -356,7 +364,7 @@ namespace Kistl.API
             if (e != null)
             {
                 _dest.Write(true);
-                e.ToStream(_dest);
+                e.ToStream(this);
             }
             else
             {
@@ -466,7 +474,7 @@ namespace Kistl.API
                     Write(true);
                     TraceCurrentPos();
                     SerializerTrace("Writing CollectionEntry {0}", val.ToString());
-                    obj.ToStream(_dest, null, false);
+                    obj.ToStream(this, null, false);
                 }
             }
 
@@ -492,6 +500,15 @@ namespace Kistl.API
                 _dest.Write(bytes.Length);
                 _dest.Write(bytes);
             }
+        }
+
+        /// <summary>
+        /// Write an array of bytes without any encoding.
+        /// </summary>
+        /// <param name="bytes">data to serialize.</param>
+        public void WriteRaw(byte[] bytes)
+        {
+            _dest.Write(bytes);
         }
 
         #endregion
@@ -624,5 +641,15 @@ namespace Kistl.API
         }
 
         #endregion
+
+        public void Dispose()
+        {
+            ((IDisposable)_dest).Dispose();
+        }
+
+        public void Flush()
+        {
+            _dest.Flush();
+        }
     }
 }

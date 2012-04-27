@@ -1009,15 +1009,13 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             binStream.Read(out this._PersonName);
 			{
                 // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp;
-				binStream.Read(out tmp);
+				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectEfImpl>();
 	            this.PhoneNumberMobileImpl = tmp ?? new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberMobile");
                 this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
 	        }
 			{
                 // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp;
-				binStream.Read(out tmp);
+				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectEfImpl>();
 	            this.PhoneNumberOfficeImpl = tmp ?? new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberOffice");
                 this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
 	        }

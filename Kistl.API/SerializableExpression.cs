@@ -38,16 +38,16 @@ namespace Kistl.API
             return this.Type.GetSystemType().GetMember(Name).SingleOrDefault();
         }
 
-        public virtual void ToStream(BinaryWriter binStream)
+        public virtual void ToStream(KistlStreamWriter binStream)
         {
             if (binStream == null) throw new ArgumentNullException("binStream");
 
             binStream.Write((byte)0);
             binStream.Write(Name);
-            Type.ToStream(binStream);
+            binStream.Write(Type);
         }
 
-        internal static SerializableMemberInfo FromStream(BinaryReader binReader)
+        internal static SerializableMemberInfo FromStream(KistlStreamReader binReader)
         {
             var type = binReader.ReadByte();
             switch (type)
@@ -56,13 +56,13 @@ namespace Kistl.API
                     return new SerializableMemberInfo()
                     {
                         Name = binReader.ReadString(),
-                        Type = SerializableType.FromStream(binReader),
+                        Type = binReader.ReadSerializableType(),
                     };
                 case 1:
                     return new SerializableConstructorInfo()
                     {
                         Name = binReader.ReadString(),
-                        Type = SerializableType.FromStream(binReader),
+                        Type = binReader.ReadSerializableType(),
                         ParameterTypes = SerializableExpression.ReadTypeArray(binReader)
                     };
                 default:
@@ -97,13 +97,13 @@ namespace Kistl.API
             return this.Type.GetSystemType().GetConstructor(this.ParameterTypes.Select(i => i.GetSystemType()).ToArray());
         }
 
-        public override void ToStream(BinaryWriter binStream)
+        public override void ToStream(KistlStreamWriter binStream)
         {
             if (binStream == null) throw new ArgumentNullException("binStream");
 
             binStream.Write((byte)1);
             binStream.Write(Name);
-            Type.ToStream(binStream);
+            binStream.Write(Type);
             SerializableExpression.WriteTypeArray(binStream, ParameterTypes);
         }
     }
@@ -311,7 +311,7 @@ namespace Kistl.API
         /// Writes this SerializableExpression to the specified stream.
         /// </summary>
         /// <param name="binStream"></param>
-        public void ToStream(BinaryWriter binStream)
+        public void ToStream(KistlStreamWriter binStream)
         {
             if (binStream == null) throw new ArgumentNullException("binStream");
 
@@ -320,29 +320,35 @@ namespace Kistl.API
             ToStream(binStream, ctx);
         }
 
-        internal SerializableExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
         {
             this.iftFactory = iftFactory;
-            SerializableType = SerializableType.FromStream(binReader);
-            NodeType = binReader.ReadInt32();
+
+            SerializableType t;
+            binReader.Read(out t);
+            this.SerializableType = t;
+
+            int nt;
+            binReader.Read(out nt);
+            NodeType = nt;
         }
 
         /// <remarks>
         /// Inheriting classes need to first write their SerializableExpressionType as byte to the stream, then call this method to write out basic infromation. Afterwards they are free to implement their own members.
         /// </remarks>
-        internal virtual void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal virtual void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
-            this.SerializableType.ToStream(binStream);
+            binStream.Write(this.SerializableType);
             binStream.Write(this.NodeType);
         }
 
-        public static SerializableExpression FromStream(BinaryReader binStream, InterfaceType.Factory iftFactory)
+        public static SerializableExpression FromStream(KistlStreamReader binStream, InterfaceType.Factory iftFactory)
         {
             StreamSerializationContext ctx = new StreamSerializationContext();
             return FromStream(binStream, ctx, iftFactory);
         }
 
-        internal static SerializableExpression FromStream(BinaryReader binStream, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal static SerializableExpression FromStream(KistlStreamReader binStream, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
         {
             var type = (SerializableExpressionType)binStream.ReadByte();
             switch (type)
@@ -378,24 +384,16 @@ namespace Kistl.API
             }
         }
 
-        internal static SerializableType[] ReadTypeArray(BinaryReader binReader)
+        // TODO: inline this
+        internal static SerializableType[] ReadTypeArray(KistlStreamReader binReader)
         {
-            var types = new List<SerializableType>();
-            while (binReader.ReadBoolean())
-            {
-                types.Add(SerializableType.FromStream(binReader));
-            }
-            return types.ToArray();
+            return binReader.ReadSerializableTypeArray();
         }
 
-        internal static void WriteTypeArray(BinaryWriter binStream, SerializableType[] types)
+        // TODO: inline this
+        internal static void WriteTypeArray(KistlStreamWriter binStream, SerializableType[] types)
         {
-            for (int i = 0; i < types.Length; i++)
-            {
-                binStream.Write(true);
-                types[i].ToStream(binStream);
-            }
-            binStream.Write(false);
+            binStream.Write(types);
         }
     }
 
@@ -413,7 +411,7 @@ namespace Kistl.API
             this.Children = new SerializableExpression[] { };
         }
 
-        internal SerializableCompoundExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableCompoundExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             var children = new List<SerializableExpression>();
@@ -430,7 +428,7 @@ namespace Kistl.API
         [DataMember(Name = "Children")]
         public SerializableExpression[] Children { get; set; }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             // do net render SerializableExpressionType for abstract, intermediate class
             base.ToStream(binStream, ctx);
@@ -458,7 +456,7 @@ namespace Kistl.API
             Children = new[] { SerializableExpression.FromExpression(e.Left, ctx, iftFactory), SerializableExpression.FromExpression(e.Right, ctx, iftFactory) };
         }
 
-        internal SerializableBinaryExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableBinaryExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
         }
@@ -468,7 +466,7 @@ namespace Kistl.API
             return Expression.MakeBinary((ExpressionType)NodeType, Children[0].ToExpressionInternal(ctx), Children[1].ToExpressionInternal(ctx));
         }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Binary);
             base.ToStream(binStream, ctx);
@@ -490,7 +488,7 @@ namespace Kistl.API
             Children = new[] { SerializableExpression.FromExpression(e.Operand, ctx, iftFactory) };
         }
 
-        internal SerializableUnaryExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableUnaryExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
         }
@@ -500,7 +498,7 @@ namespace Kistl.API
             return Expression.MakeUnary((ExpressionType)NodeType, Children[0].ToExpressionInternal(ctx), Type);
         }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Unary);
             base.ToStream(binStream, ctx);
@@ -530,11 +528,11 @@ namespace Kistl.API
             }
         }
 
-        internal SerializableConstantExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableConstantExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             object val;
-            BinarySerializer.FromStream(out val, Type, binReader);
+            binReader.Read(out val, Type);
             Value = val;
         }
 
@@ -561,12 +559,12 @@ namespace Kistl.API
         [DataMember(Name = "Value")]
         public object Value { get; set; }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Constant);
             base.ToStream(binStream, ctx);
 
-            BinarySerializer.ToStream(Value, binStream);
+            binStream.Write(Value);
         }
     }
     #endregion
@@ -586,7 +584,7 @@ namespace Kistl.API
             Children = new[] { SerializableExpression.FromExpression(e.Expression, ctx, iftFactory) };
         }
 
-        internal SerializableMemberExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableMemberExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             MemberName = binReader.ReadString();
@@ -605,7 +603,7 @@ namespace Kistl.API
         [DataMember(Name = "MemberName")]
         public string MemberName { get; set; }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Member);
             base.ToStream(binStream, ctx);
@@ -638,14 +636,14 @@ namespace Kistl.API
             }
         }
 
-        internal SerializableMethodCallExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableMethodCallExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             var hasObject = binReader.ReadBoolean();
             if (hasObject) ObjectExpression = SerializableExpression.FromStream(binReader, ctx, iftFactory);
 
             MethodName = binReader.ReadString();
-            SerializableMethodType = SerializableType.FromStream(binReader);
+            SerializableMethodType = binReader.ReadSerializableType();
             ParameterTypes = ReadTypeArray(binReader);
             GenericArguments = ReadTypeArray(binReader);
         }
@@ -760,7 +758,7 @@ namespace Kistl.API
                 Children.Select(e => e.ToExpressionInternal(ctx)));
         }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.MethodCall);
             base.ToStream(binStream, ctx);
@@ -774,7 +772,7 @@ namespace Kistl.API
                 binStream.Write(false);
             }
             binStream.Write(MethodName);
-            this.SerializableMethodType.ToStream(binStream);
+            binStream.Write(this.SerializableMethodType);
             WriteTypeArray(binStream, ParameterTypes);
             WriteTypeArray(binStream, GenericArguments);
         }
@@ -796,7 +794,7 @@ namespace Kistl.API
                 .Union(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx, iftFactory))).ToArray();
         }
 
-        internal SerializableLambdaExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableLambdaExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
         }
@@ -810,7 +808,7 @@ namespace Kistl.API
             return Expression.Lambda(Children[0].ToExpressionInternal(ctx), parameters.ToArray());
         }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Lambda);
             base.ToStream(binStream, ctx);
@@ -841,7 +839,7 @@ namespace Kistl.API
             }
         }
 
-        internal SerializableParameterExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory, Guid parameterGuid)
+        internal SerializableParameterExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory, Guid parameterGuid)
             : base(binReader, ctx, iftFactory)
         {
             this.Name = binReader.ReadString();
@@ -869,7 +867,7 @@ namespace Kistl.API
             return ctx.Parameter[Guid];
         }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Parameter);
             binStream.Write(this.Guid.ToString());
@@ -912,7 +910,7 @@ namespace Kistl.API
             Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToArray();
         }
 
-        internal SerializableNewExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableNewExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             Constructor = (SerializableConstructorInfo)SerializableMemberInfo.FromStream(binReader);
@@ -939,7 +937,7 @@ namespace Kistl.API
             }
         }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.New);
             base.ToStream(binStream, ctx);
@@ -977,7 +975,7 @@ namespace Kistl.API
             IfFalse = SerializableExpression.FromExpression(source.IfFalse, ctx, iftFactory);
         }
 
-        internal SerializableConditionalExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableConditionalExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             Test = SerializableExpression.FromStream(binReader, ctx, iftFactory);
@@ -992,7 +990,7 @@ namespace Kistl.API
                 IfFalse.ToExpressionInternal(ctx));
         }
 
-        internal override void ToStream(BinaryWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Conditional);
             base.ToStream(binStream, ctx);

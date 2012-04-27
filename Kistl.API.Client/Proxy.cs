@@ -47,13 +47,20 @@ namespace Kistl.API.Client
         private InterfaceType.Factory _iftFactory;
         private KistlService.IKistlService _service;
         private readonly IPerfCounter _perfCounter;
+        private readonly KistlStreamReader.Factory _readerFactory;
+        private readonly KistlStreamWriter.Factory _writerFactory;
 
-        public ProxyImplementation(InterfaceType.Factory iftFactory, Kistl.API.Client.KistlService.IKistlService service, IPerfCounter perfCounter)
+        public ProxyImplementation(InterfaceType.Factory iftFactory, Kistl.API.Client.KistlService.IKistlService service, IPerfCounter perfCounter, KistlStreamReader.Factory readerFactory, KistlStreamWriter.Factory writerFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
+            if (readerFactory == null) throw new ArgumentNullException("readerFactory");
+            if (writerFactory == null) throw new ArgumentNullException("writerFactory");
+
             _iftFactory = iftFactory;
             _service = service;
             _perfCounter = perfCounter;
+            _readerFactory = readerFactory;
+            _writerFactory = writerFactory;
         }
 
         private void MakeRequest(Action request)
@@ -123,7 +130,7 @@ namespace Kistl.API.Client
                 Logging.Facade.DebugFormat("GetList retrieved: {0:n0} bytes", bytes.Length);
 
                 IEnumerable<IDataObject> result = null;
-                using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
                 {
                     result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
@@ -153,7 +160,7 @@ namespace Kistl.API.Client
                 });
 
                 IEnumerable<IDataObject> result = null;
-                using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
                 {
                     result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
@@ -176,7 +183,7 @@ namespace Kistl.API.Client
                 IEnumerable<IPersistenceObject> result = null;
                 // Serialize
                 using (var ms = new MemoryStream())
-                using (var sw = new BinaryWriter(ms))
+                using (var sw = _writerFactory(new BinaryWriter(ms)))
                 {
                     SendObjects(objects, sw);
                     byte[] bytes = null;
@@ -188,7 +195,7 @@ namespace Kistl.API.Client
                         bytes = _service.SetObjects(KistlGeneratedVersionAttribute.Current, _ms, _nReq);
                     });
 
-                    using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                    using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
                     {
                         // merge auxiliary objects into primary set objects result
                         List<IStreamable> auxObjects;
@@ -205,17 +212,17 @@ namespace Kistl.API.Client
             }
         }
 
-        private static void SendObjects(IEnumerable<IPersistenceObject> objects, BinaryWriter sw)
+        private static void SendObjects(IEnumerable<IPersistenceObject> objects, KistlStreamWriter sw)
         {
             foreach (var obj in objects)
             {
-                BinarySerializer.ToStream(true, sw);
+                sw.Write(true);
                 obj.ToStream(sw, new HashSet<IStreamable>(), false);
             }
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
         }
 
-        private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, BinaryReader sr, out List<IStreamable> auxObjects)
+        private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, KistlStreamReader sr, out List<IStreamable> auxObjects)
         {
             var result = ReceiveObjectList(ctx, sr);
             auxObjects = ReceiveObjectList(ctx, sr);
@@ -223,25 +230,23 @@ namespace Kistl.API.Client
             return result;
         }
 
-        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, BinaryReader sr)
+        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, KistlStreamReader sr)
         {
             List<IStreamable> result = new List<IStreamable>();
-            bool cont = true;
-            BinarySerializer.FromStream(out cont, sr);
+            bool cont = sr.ReadBoolean();
             long dbgByteCounter = 0;
             long dbgObjTypeByteCounter = 0;
             while (cont)
             {
                 long dbgCurrentPos = sr.BaseStream.Position;
-                SerializableType objType;
-                BinarySerializer.FromStream(out objType, sr);
+                var objType = sr.ReadSerializableType();
                 dbgObjTypeByteCounter += sr.BaseStream.Position - dbgCurrentPos;
 
                 IStreamable obj = (IStreamable)ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
                 obj.FromStream(sr);
                 result.Add((IStreamable)obj);
 
-                BinarySerializer.FromStream(out cont, sr);
+                cont = sr.ReadBoolean();
                 long dbgSize = sr.BaseStream.Position - dbgCurrentPos;
                 dbgByteCounter += dbgSize;
             }
@@ -273,7 +278,7 @@ namespace Kistl.API.Client
                     bytes = _service.FetchRelation(KistlGeneratedVersionAttribute.Current, relationId, (int)role, parent.ID);
                 });
                 using (MemoryStream s = new MemoryStream(bytes))
-                using (var sr = new BinaryReader(s))
+                using (var sr = _readerFactory(new BinaryReader(s)))
                 {
                     result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
                 }
@@ -307,12 +312,12 @@ namespace Kistl.API.Client
             MakeRequest(() =>
             {
                 // Rewind stream to ensure complete files, e.g. after a fault
-                if(msg.Stream.Position != 0)
+                if (msg.Stream.Position != 0)
                     msg.Stream.Seek(0, SeekOrigin.Begin);
                 response = _service.SetBlobStream(msg);
             });
 
-            using (var sr = new BinaryReader(response.BlobInstance))
+            using (var sr = _readerFactory(new BinaryReader(response.BlobInstance)))
             {
                 // ignore auxObjects for blobs, which should not have them
                 result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
@@ -325,77 +330,85 @@ namespace Kistl.API.Client
             _perfCounter.IncrementServerMethodInvocation();
 
             object result = null;
-            IEnumerable<IPersistenceObject> tmpChangedObjects = null;
             auxObjects = null;
 
-            MemoryStream parameterStream = new MemoryStream();
-            var parameterWriter = new BinaryWriter(parameterStream);
-            foreach (var paramVal in parameter)
-            {
-                BinarySerializer.ToStream(paramVal, parameterWriter);
-            }
-
-            MemoryStream changedObjectsStream = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(changedObjectsStream);
-            SendObjects(objects, sw);
-
-            byte[] bytes = null;
             byte[] retChangedObjectsArray = null;
-            var _ifType = ifType.ToSerializableType();
-            var _parameterTypes = parameterTypes.Select(t => _iftFactory(t).ToSerializableType()).ToArray();
-            var _parameterStream = parameterStream.ToArray();
-            var _changedObjStream = changedObjectsStream.ToArray();
-            var _nReq = notificationRequests.ToArray();
+            byte[] bytes = null;
 
-            MakeRequest(() =>
+            using (var parameterStream = new MemoryStream())
+            using (var parameterWriter = _writerFactory(new BinaryWriter(parameterStream)))
             {
-                bytes = _service.InvokeServerMethod(
-                     out retChangedObjectsArray,
-                     KistlGeneratedVersionAttribute.Current,
-                     _ifType,
-                     ID,
-                     method,
-                     _parameterTypes,
-                     _parameterStream,
-                     _changedObjStream,
-                     _nReq);
-            });
-
-            var resultStream = new MemoryStream(bytes);
-            {
-                MemoryStream retChangedObjects = new MemoryStream(retChangedObjectsArray);
-                BinaryReader br = new BinaryReader(retChangedObjects);
-                tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
-            }
-
-            resultStream.Seek(0, SeekOrigin.Begin);
-
-            if (retValType.IsIStreamable())
-            {
-                BinaryReader br = new BinaryReader(resultStream);
-                result = ReceiveObjects(ctx, br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
-            }
-            else if (retValType.IsIEnumerable() && retValType.FindElementTypes().Any(t => t.IsIPersistenceObject()))
-            {
-                BinaryReader br = new BinaryReader(resultStream);
-                IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().Single(t => t.IsIPersistenceObject())));
-                foreach (object resultObj in ReceiveObjects(ctx, br, out auxObjects))
+                foreach (var paramVal in parameter)
                 {
-                    lst.Add(resultObj);
+                    parameterWriter.Write(paramVal);
                 }
-                result = lst;
-            }
-            else if (resultStream.Length > 0)
-            {
-                result = new BinaryFormatter().Deserialize(resultStream);
-            }
-            else
-            {
-                result = null;
+
+                using (var changedObjectsStream = new MemoryStream())
+                using (var sw = _writerFactory(new BinaryWriter(changedObjectsStream)))
+                {
+                    SendObjects(objects, sw);
+
+                    var _ifType = ifType.ToSerializableType();
+                    var _parameterTypes = parameterTypes.Select(t => _iftFactory(t).ToSerializableType()).ToArray();
+                    var _parameterStream = parameterStream.ToArray();
+                    var _changedObjStream = changedObjectsStream.ToArray();
+                    var _nReq = notificationRequests.ToArray();
+
+                    MakeRequest(() =>
+                    {
+                        bytes = _service.InvokeServerMethod(
+                             out retChangedObjectsArray,
+                             KistlGeneratedVersionAttribute.Current,
+                             _ifType,
+                             ID,
+                             method,
+                             _parameterTypes,
+                             _parameterStream,
+                             _changedObjStream,
+                             _nReq);
+                    });
+                }
             }
 
-            changedObjects = tmpChangedObjects;
-            return result;
+            IEnumerable<IPersistenceObject> tmpChangedObjects = null;
+
+            using (var resultStream = new MemoryStream(bytes))
+            {
+                using (var retChangedObjects = new MemoryStream(retChangedObjectsArray))
+                using (var br = _readerFactory(new BinaryReader(retChangedObjects)))
+                {
+                    tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
+                }
+
+                resultStream.Seek(0, SeekOrigin.Begin);
+
+                if (retValType.IsIStreamable())
+                {
+                    var br = _readerFactory(new BinaryReader(resultStream));
+                    result = ReceiveObjects(ctx, br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
+                }
+                else if (retValType.IsIEnumerable() && retValType.FindElementTypes().Any(t => t.IsIPersistenceObject()))
+                {
+                    var br = _readerFactory(new BinaryReader(resultStream));
+                    IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().Single(t => t.IsIPersistenceObject())));
+                    foreach (object resultObj in ReceiveObjects(ctx, br, out auxObjects))
+                    {
+                        lst.Add(resultObj);
+                    }
+                    result = lst;
+                }
+                else if (resultStream.Length > 0)
+                {
+                    result = new BinaryFormatter().Deserialize(resultStream);
+                }
+                else
+                {
+                    result = null;
+                }
+
+                changedObjects = tmpChangedObjects;
+                return result;
+            }
         }
 
         public void Dispose()

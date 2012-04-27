@@ -17,22 +17,18 @@ namespace Kistl.API.Server.Mocks
         public int TestInt { get; set; }
         public string TestString { get; set; }
 
-        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
-            BinarySerializer.ToStream(TestInt, sw);
-            BinarySerializer.ToStream(TestString, sw);
+            sw.Write(TestInt);
+            sw.Write(TestString);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
-            int _tmpi;
-            string _tmps;
-            BinarySerializer.FromStream(out _tmpi, sr);
-            BinarySerializer.FromStream(out _tmps, sr);
-            TestInt = _tmpi;
-            TestString = _tmps;
+            TestInt = sr.ReadInt32();
+            TestString = sr.ReadString();
             return baseResult;
         }
 

@@ -362,25 +362,24 @@ namespace Kistl.App.Test
         #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
-
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            BinarySerializer.ToStream(this._MyIntProperty, binStream);
-            BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
-            BinarySerializer.ToStream(this._StringProp, binStream);
-            BinarySerializer.ToStream((int?)((TestObjClass)this).TestEnumProp, binStream);
+            binStream.Write(this._MyIntProperty);
+            binStream.Write(this._fk_ObjectProp);
+            binStream.Write(this._StringProp);
+            binStream.Write((int?)((TestObjClass)this).TestEnumProp);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._MyIntProperty, binStream);
-            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
-            BinarySerializer.FromStream(out this._StringProp, binStream);
+            binStream.Read(out this._MyIntProperty);
+            binStream.Read(out this._fk_ObjectProp);
+            binStream.Read(out this._StringProp);
             {
                 int? baseValue;
-                BinarySerializer.FromStream(out baseValue, binStream);
+                binStream.Read(out baseValue);
                 ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)baseValue;
             }
             return baseResult;

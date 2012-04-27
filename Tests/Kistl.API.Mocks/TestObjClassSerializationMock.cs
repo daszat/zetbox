@@ -51,25 +51,25 @@ namespace Kistl.API.Mocks
         /// Serializes a test TestObjClass to the stream sw.
         /// </summary>
         /// <param name="sw"></param>
-        public static void ToStream<LOCALINTERFACE, ENUMTYPE>(BinaryWriter sw, InterfaceType.Factory iftFactory)
+        public static void ToStream<LOCALINTERFACE, ENUMTYPE>(KistlStreamWriter sw, InterfaceType.Factory iftFactory)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
 
             // BaseServerPersistenceObject
-            BinarySerializer.ToStream(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(iftFactory), sw);
-            BinarySerializer.ToStream(TestObjClassId, sw);
-            BinarySerializer.ToStream((int)TestObjectState, sw);
-            BinarySerializer.ToStream((int)AccessRights.Full, sw);
+            sw.Write(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(iftFactory));
+            sw.Write(TestObjClassId);
+            sw.Write((int)TestObjectState);
+            sw.Write((int)AccessRights.Full);
 
 
             // TestObjClass
 
             // BaseTestObjClass Reference
-            BinarySerializer.ToStream(TestBaseClassId, sw);
+            sw.Write(TestBaseClassId);
 
             // StringProp
-            BinarySerializer.ToStream(TestStringPropValue, sw);
+            sw.Write(TestStringPropValue);
 
             //// SubClasses are not serialized, but fetched lazily
             //foreach (int subClassID in TestSubClassesIds)
@@ -80,56 +80,53 @@ namespace Kistl.API.Mocks
             //BinarySerializer.ToStream(false, sw);
 
             // TestEnumProp
-            BinarySerializer.ToStream((int)TestEnum.TestSerializationValue, sw);
+            sw.Write((int)TestEnum.TestSerializationValue);
 
             // TestNames
             var ceType = GetSerializableCollectionEntryType<LOCALINTERFACE, ENUMTYPE>(iftFactory);
             for (int i = 0; i < TestTestNamesIds.Length; i++)
             {
-                BinarySerializer.ToStream(true, sw);
+                sw.Write(true);
 
-                BinarySerializer.ToStream(ceType, sw);
-                BinarySerializer.ToStream(TestTestNamesIds[i], sw);
-                BinarySerializer.ToStream((int)TestCollectionEntryState, sw);
-                BinarySerializer.ToStream((int)AccessRights.Full, sw);
+                sw.Write(ceType);
+                sw.Write(TestTestNamesIds[i]);
+                sw.Write((int)TestCollectionEntryState);
+                sw.Write((int)AccessRights.Full);
 
-                BinarySerializer.ToStream(TestTestNamesValues[i], sw);
+                sw.Write(TestTestNamesValues[i]);
             }
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
         }
 
-        public static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(BinaryReader sr, InterfaceType.Factory iftFactory)
+        public static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(KistlStreamReader sr, InterfaceType.Factory iftFactory)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
             Assert.That(sr, Is.Not.Null, "no stream to inspect");
 
-            SerializableType objType = null;
-            BinarySerializer.FromStream(out objType, sr);
+            var objType = sr.ReadSerializableType();
             Assert.That(objType, Is.EqualTo(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(iftFactory)), "wrong interface type found");
 
-            int testObjId;
-            BinarySerializer.FromStream(out testObjId, sr);
+            var testObjId = sr.ReadInt32();
             Assert.That(testObjId, Is.EqualTo(TestObjClassId), "wrong object ID found");
 
             DataObjectState? objectState = null;
-            BinarySerializer.FromStreamConverter(i => objectState = (DataObjectState)i, sr);
+            sr.ReadConverter(i => objectState = (DataObjectState)i);
             Assert.That(objectState, Is.EqualTo(TestObjectState), "wrong ObjectState found");
 
-            int accessRights;
-            BinarySerializer.FromStream(out accessRights, sr);
+            int accessRights = sr.ReadInt32();
             Assert.That(accessRights, Is.GreaterThan(0), "wrong Access Rights found");
 
             // TestObjClass
 
             // BaseTestObjClass Reference
             int? testObjRefId;
-            BinarySerializer.FromStream(out testObjRefId, sr);
+            sr.Read(out testObjRefId);
             Assert.That(testObjRefId, Is.EqualTo(TestBaseClassId), "wrong BaseObjClass ID found");
 
             // StringProp
             string testStringProp;
-            BinarySerializer.FromStream(out testStringProp, sr);
+            sr.Read(out testStringProp);
             Assert.That(testStringProp, Is.EqualTo(TestStringPropValue), "wrong StringProp Value found");
 
             //// SubClasses are not serialized, but fetched lazily
@@ -149,42 +146,34 @@ namespace Kistl.API.Mocks
             //Assert.That(continuationMarkerAfterSubClasses, Is.False, "wrong continuation marker after subClassIds");
 
             // TestEnumProp
-            int testEnum;
-            BinarySerializer.FromStream(out testEnum, sr);
-            Assert.That(testEnum, Is.EqualTo((int)TestEnum.TestSerializationValue), "wrong enum value found");
+            var testEnum = (TestEnum)sr.ReadInt32();
+            Assert.That(testEnum, Is.EqualTo(TestEnum.TestSerializationValue), "wrong enum value found");
 
             // TestNames
             for (int i = 0; i < TestTestNamesIds.Length; i++)
             {
-                bool continuationMarkerForCes = false;
-                BinarySerializer.FromStream(out continuationMarkerForCes, sr);
+                var continuationMarkerForCes = sr.ReadBoolean();
                 Assert.That(continuationMarkerForCes, Is.True, "wrong continuation marker for testName #{0}", i);
 
-                SerializableType ceType = null;
-                BinarySerializer.FromStream(out ceType, sr);
+                var ceType = sr.ReadSerializableType();
                 Assert.That(ceType, Is.EqualTo(GetSerializableCollectionEntryType<LOCALINTERFACE, ENUMTYPE>(iftFactory)), "wrong interface type found for collection entry #{0}", i);
 
-                int readCeId;
-                BinarySerializer.FromStream(out readCeId, sr);
+                var readCeId = sr.ReadInt32();
                 Assert.That(readCeId, Is.EqualTo(TestTestNamesIds[i]), "wrong id read for collection entry #{0}", i);
 
                 DataObjectState? ceObjectState = null;
-                BinarySerializer.FromStreamConverter(read => ceObjectState = (DataObjectState)read, sr);
+                sr.ReadConverter(read => ceObjectState = (DataObjectState)read);
                 Assert.That(ceObjectState, Is.EqualTo(TestCollectionEntryState), "wrong ObjectState found for collection entry #{0}", i);
 
-                int readCeAccessRights;
-                BinarySerializer.FromStream(out readCeAccessRights, sr);
+                var readCeAccessRights = sr.ReadInt32();
                 Assert.That(readCeAccessRights, Is.GreaterThan(0), "wrong access rights for collection entry #{0}", i);
 
-
-                string readValue;
-                BinarySerializer.FromStream(out readValue, sr);
+                var readValue = sr.ReadString();
                 Assert.That(readValue, Is.EqualTo(TestTestNamesValues[i]), "wrong value read for collection entry #{0}", i);
 
             }
 
-            bool continuationMarkerAfterCes = false;
-            BinarySerializer.FromStream(out continuationMarkerAfterCes, sr);
+            var continuationMarkerAfterCes = sr.ReadBoolean();
             Assert.That(continuationMarkerAfterCes, Is.False, "wrong continuation marker after testNames collection entries");
 
         }

@@ -146,36 +146,25 @@ namespace Kistl.API.Server.Mocks
             };
         }
 
-        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             int? id = this.BaseTestObjClass == null ? (int?)null : this.BaseTestObjClass.ID;
-            BinarySerializer.ToStream(id, sw);
-
-            BinarySerializer.ToStream(this._StringProp, sw);
-            BinarySerializer.ToStream((int)this.TestEnumProp, sw);
-            BinarySerializer.ToStreamCollectionEntries(this.TestNamesImpl, sw);
+            sw.Write(id);
+            sw.Write(this._StringProp);
+            sw.Write((int)this.TestEnumProp);
+            sw.WriteCollectionEntries(this.TestNamesImpl);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
             var result = new List<IPersistenceObject>();
 
-            int? id;
-            BinarySerializer.FromStream(out id, sr);
-            if (id.HasValue)
-            {
-                this.fk_BaseTestObjClass = id.Value;
-            }
-            else
-            {
-                this.fk_BaseTestObjClass = -1;
-            }
-
-            BinarySerializer.FromStream(out this._StringProp, sr);
-            BinarySerializer.FromStreamConverter(value => this._TestEnumProp = (TestEnum)value, sr);
-            BinarySerializer.FromStreamCollectionEntries(this, this.TestNamesImpl, sr);
+            this.fk_BaseTestObjClass = sr.ReadNullableInt32() ?? -1;
+            this._StringProp = sr.ReadString();
+            this._TestEnumProp = (TestEnum)sr.ReadInt32();
+            sr.ReadCollectionEntries(this, this.TestNamesImpl);
 
             result.AddRange(this.TestNamesImpl.Cast<IPersistenceObject>());
 

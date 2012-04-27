@@ -25,10 +25,14 @@ namespace Kistl.API.Client
         private readonly Uri SetBlobStreamUri;
         private readonly Uri InvokeServerMethodUri;
         private readonly ICredentialsResolver _credentialsResolver;
+        private readonly KistlStreamReader.Factory _readerFactory;
+        private readonly KistlStreamWriter.Factory _writerFactory;
 
-        public HttpServiceClient(ICredentialsResolver credentialsResolver)
+        public HttpServiceClient(ICredentialsResolver credentialsResolver, KistlStreamReader.Factory readerFactory, KistlStreamWriter.Factory writerFactory)
         {
             if (credentialsResolver == null) throw new ArgumentNullException("credentialsResolver");
+            if (readerFactory == null) throw new ArgumentNullException("readerFactory");
+            if (writerFactory == null) throw new ArgumentNullException("writerFactory");
 
             SetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetObjects");
             GetListUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetList");
@@ -39,27 +43,27 @@ namespace Kistl.API.Client
             InvokeServerMethodUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/InvokeServerMethod");
 
             _credentialsResolver = credentialsResolver;
+            _readerFactory = readerFactory;
+            _writerFactory = writerFactory;
         }
 
-        private byte[] MakeRequest(Uri destination, Action<BinaryWriter> sendRequest)
+        private byte[] MakeRequest(Uri destination, Action<KistlStreamWriter> sendRequest)
         {
             do
             {
                 var req = InitializeRequest(destination);
 
                 using (var reqStream = req.GetRequestStream())
-                using (var reqWriter = new BinaryWriter(reqStream))
+                using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
                 {
                     sendRequest(reqWriter);
                 }
                 try
                 {
                     using (var response = req.GetResponse())
-                    using (var input = new BinaryReader(response.GetResponseStream()))
+                    using (var input = _readerFactory(new BinaryReader(response.GetResponseStream())))
                     {
-                        byte[] result;
-                        BinarySerializer.FromStream(out result, input);
-                        return result;
+                        return input.ReadByteArray();
                     }
                 }
                 catch (WebException ex)
@@ -124,9 +128,9 @@ namespace Kistl.API.Client
             return MakeRequest(SetObjectsUri,
                 reqStream =>
                 {
-                    BinarySerializer.ToStream(version, reqStream);
-                    BinarySerializer.ToStream(msg, reqStream);
-                    BinarySerializer.ToStream(notificationRequests, reqStream);
+                    reqStream.Write(version);
+                    reqStream.Write(msg);
+                    reqStream.Write(notificationRequests);
                 });
         }
 
@@ -137,13 +141,13 @@ namespace Kistl.API.Client
             return MakeRequest(GetListUri,
                 reqStream =>
                 {
-                    BinarySerializer.ToStream(version, reqStream);
-                    BinarySerializer.ToStream(type, reqStream);
-                    BinarySerializer.ToStream(maxListCount, reqStream);
-                    BinarySerializer.ToStream(eagerLoadLists, reqStream);
-                    BinarySerializer.ToStream(filter, reqStream);
-                    BinarySerializer.ToStream(orderBy, reqStream);
-                    reqStream.Write("\n");// required for basic.authenticated POST to apache
+                    reqStream.Write(version);
+                    reqStream.Write(type);
+                    reqStream.Write(maxListCount);
+                    reqStream.Write(eagerLoadLists);
+                    reqStream.Write(filter);
+                    reqStream.Write(orderBy);
+                    reqStream.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
                 });
         }
 
@@ -155,11 +159,11 @@ namespace Kistl.API.Client
             return MakeRequest(GetListOfUri,
                 reqStream =>
                 {
-                    BinarySerializer.ToStream(version, reqStream);
-                    BinarySerializer.ToStream(type, reqStream);
-                    BinarySerializer.ToStream(ID, reqStream);
-                    BinarySerializer.ToStream(property, reqStream);
-                    reqStream.Write("\n");// required for basic.authenticated POST to apache
+                    reqStream.Write(version);
+                    reqStream.Write(type);
+                    reqStream.Write(ID);
+                    reqStream.Write(property);
+                    reqStream.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
                 });
         }
 
@@ -168,11 +172,11 @@ namespace Kistl.API.Client
             return MakeRequest(FetchRelationUri,
                 reqStream =>
                 {
-                    BinarySerializer.ToStream(version, reqStream);
-                    BinarySerializer.ToStream(relId, reqStream);
-                    BinarySerializer.ToStream(role, reqStream);
-                    BinarySerializer.ToStream(ID, reqStream);
-                    reqStream.Write("\n");// required for basic.authenticated POST to apache
+                    reqStream.Write(version);
+                    reqStream.Write(relId);
+                    reqStream.Write(role);
+                    reqStream.Write(ID);
+                    reqStream.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
                 });
         }
 
@@ -182,9 +186,9 @@ namespace Kistl.API.Client
             try
             {
                 using (var reqStream = req.GetRequestStream())
-                using (var reqWriter = new BinaryWriter(reqStream))
+                using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
                 {
-                    BinarySerializer.ToStream(version, reqWriter);
+                    reqWriter.Write(version);
                 }
                 using (var response = req.GetResponse())
                 using (var stream = response.GetResponseStream())
@@ -208,28 +212,28 @@ namespace Kistl.API.Client
 
             var req = InitializeRequest(SetBlobStreamUri);
             using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = new BinaryWriter(reqStream))
+            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
             using (var upload = new MemoryStream())
             {
-                BinarySerializer.ToStream(request.Version, reqWriter);
-                BinarySerializer.ToStream(request.FileName, reqWriter);
-                BinarySerializer.ToStream(request.MimeType, reqWriter);
+                reqWriter.Write(request.Version);
+                reqWriter.Write(request.FileName);
+                reqWriter.Write(request.MimeType);
                 request.Stream.CopyTo(upload);
-                var bytes = upload.ToArray();
-                BinarySerializer.ToStream(bytes, reqWriter);
-                reqWriter.Write("\n"); // required for basic.authenticated POST to apache
+                reqWriter.Write(upload.ToArray());
+                reqWriter.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
             }
             try
             {
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
-                using (var reader = new BinaryReader(input))
+                using (var reader = _readerFactory(new BinaryReader(input)))
                 {
                     int id;
-                    BinarySerializer.FromStream(out id, reader);
+                    reader.Read(out id);
 
                     byte[] data;
-                    BinarySerializer.FromStream(out data, reader);
+                    reader.Read(out data);
+
                     return new KistlService.BlobResponse()
                     {
                         ID = id,
@@ -251,27 +255,25 @@ namespace Kistl.API.Client
 
             var req = InitializeRequest(InvokeServerMethodUri);
             using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = new BinaryWriter(reqStream))
+            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
             {
-                BinarySerializer.ToStream(version, reqWriter);
-                BinarySerializer.ToStream(type, reqWriter);
-                BinarySerializer.ToStream(ID, reqWriter);
-                BinarySerializer.ToStream(method, reqWriter);
-                BinarySerializer.ToStream(parameterTypes, reqWriter);
-                BinarySerializer.ToStream(parameter, reqWriter);
-                BinarySerializer.ToStream(changedObjects, reqWriter);
-                BinarySerializer.ToStream(notificationRequests, reqWriter);
+                reqWriter.Write(version);
+                reqWriter.Write(type);
+                reqWriter.Write(ID);
+                reqWriter.Write(method);
+                reqWriter.Write(parameterTypes);
+                reqWriter.Write(parameter);
+                reqWriter.Write(changedObjects);
+                reqWriter.Write(notificationRequests);
             }
             try
             {
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
-                using (var reader = new BinaryReader(input))
+                using (var reader = _readerFactory(new BinaryReader(input)))
                 {
-                    BinarySerializer.FromStream(out retChangedObjects, reader);
-                    byte[] result;
-                    BinarySerializer.FromStream(out result, reader);
-                    return result;
+                    reader.Read(out retChangedObjects);
+                    return reader.ReadByteArray();
                 }
             }
             catch (WebException ex)

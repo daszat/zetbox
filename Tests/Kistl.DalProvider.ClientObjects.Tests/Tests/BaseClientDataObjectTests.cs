@@ -6,7 +6,9 @@ namespace Kistl.DalProvider.Client.Tests
     using System.IO;
     using System.Linq;
     using System.Text;
+    using Autofac;
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.DalProvider.Client.Mocks;
     using NUnit.Framework;
 
@@ -99,35 +101,35 @@ namespace Kistl.DalProvider.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_Null()
         {
-            obj.ToStream((BinaryWriter)null, null, false);
+            obj.ToStream((KistlStreamWriter)null, null, false);
         }
 
         [Test]
         public void Stream()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
-
-            using (var ctx = GetContext())
+            var typeMap = scope.Resolve<TypeMap>();
+            using (var ms = new MemoryStream())
+            using (var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms)))
+            using (var sr = new KistlStreamReader(typeMap, new BinaryReader(ms)))
             {
+                var ctx = GetContext();
+
                 ctx.Attach(obj);
                 obj.ToStream(sw, null, false);
 
                 Assert.That(ms.Length, Is.GreaterThan(0));
 
                 ms.Seek(0, SeekOrigin.Begin);
+
+                var t = sr.ReadSerializableType();
+
+                BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
+                result.FromStream(sr);
+
+                Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
+                Assert.That(result.ID, Is.EqualTo(obj.ID));
+                Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
             }
-
-            SerializableType t;
-            BinarySerializer.FromStream(out t, sr);
-
-            BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
-            result.FromStream(sr);
-
-            Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
-            Assert.That(result.ID, Is.EqualTo(obj.ID));
-            Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
         }
 
         [Test]
@@ -137,7 +139,7 @@ namespace Kistl.DalProvider.Client.Tests
             using (IKistlContext ctx = GetContext())
             {
                 BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
-                result.FromStream((BinaryReader)null);
+                result.FromStream((KistlStreamReader)null);
             }
         }
 

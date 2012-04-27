@@ -129,18 +129,18 @@ namespace Kistl.DalProvider.Base
             }
         }
 
-        public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
-            BinarySerializer.ToStream((int)ObjectState, sw);
-            BinarySerializer.ToStream((int)CurrentAccessRights, sw);
+            sw.Write((int)ObjectState);
+            sw.Write((int)CurrentAccessRights);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
-            BinarySerializer.FromStreamConverter(i => _ObjectState = (DataObjectState)i, sr);
-            BinarySerializer.FromStreamConverter(i => ApplyRightsFromStream((API.AccessRights)i), sr); 
+            sr.ReadConverter(i => _ObjectState = (DataObjectState)i);
+            sr.ReadConverter(i => ApplyRightsFromStream((API.AccessRights)i)); 
             return baseResult;
         }
 

@@ -1,36 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-
-using Kistl.API.Mocks;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Kistl.API.Tests.Serializables
 {
-    [TestFixture]
-    public class SerializerMockTests : AbstractApiTestFixture
-    {
-        MemoryStream ms;
-        BinaryWriter sw;
-        BinaryReader sr;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.AbstractConsumerTests;
+    using Kistl.API.Mocks;
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
 
+    [TestFixture]
+    public class SerializerMockTests : SerializerTestFixture
+    {
         interface LocalMock : TestObjClass<LocalMock, TestEnum> { }
 
-        public override void SetUp()
-        {
-            base.SetUp();
-            ms = new MemoryStream();
-            sw = new BinaryWriter(ms);
-            sr = new BinaryReader(ms);
-        }
-        
         [Test]
         public void AssertCorrectContents_correctly_identifies_ToStream_result()
         {
@@ -39,6 +28,5 @@ namespace Kistl.API.Tests.Serializables
             TestObjClassSerializationMock.AssertCorrectContents<LocalMock, TestEnum>(sr, iftFactory);
             Assert.That(ms.Position, Is.EqualTo(ms.Length), "AssertCorrectContents didn't read complete stream");
         }
-	
     }
 }

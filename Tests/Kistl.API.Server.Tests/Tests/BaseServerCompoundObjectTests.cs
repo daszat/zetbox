@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Kistl.API.Server.Mocks;
-
-using NUnit.Framework;
 
 namespace Kistl.API.Server.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.Server.Mocks;
+    using Kistl.API.Utils;
+    using NUnit.Framework;
+
     [TestFixture]
     public class BaseServerCompoundObjectTests : AbstractApiServerTestFixture
     {
@@ -30,20 +31,20 @@ namespace Kistl.API.Server.Tests
             Assert.That(c.TestString, Is.EqualTo(obj.TestString));
         }
 
-
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_Null()
         {
-            obj.ToStream((BinaryWriter)null, null, false);
+            obj.ToStream((KistlStreamWriter)null, null, false);
         }
 
         [Test]
         public void Stream()
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
+            var typeMap = scope.Resolve<TypeMap>();
+            var ms = new MemoryStream();
+            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
 
             obj.ToStream(sw, null, false);
 
@@ -63,7 +64,7 @@ namespace Kistl.API.Server.Tests
         public void FromStream_Null_StreamReader()
         {
             TestCompoundObject result = new TestCompoundObject();
-            result.FromStream((BinaryReader)null);
+            result.FromStream((KistlStreamReader)null);
         }
 
         [Test]

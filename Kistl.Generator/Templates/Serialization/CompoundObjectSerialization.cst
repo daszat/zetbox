@@ -30,9 +30,7 @@
 %>
 			{
                 // use backing store to avoid notifications
-				<%= backingStoreType %> tmp;
-				<%= streamName %>.Read(out tmp);
-	            this.<%= backingStoreName %> = tmp;
+	            this.<%= backingStoreName %> = <%= streamName %>.ReadCompoundObject<<%= backingStoreType %>>();
                 if (this.<%= backingStoreName %> != null)
                     this.<%= backingStoreName %>.AttachToObject(this, "<%= memberName %>");
 	        }

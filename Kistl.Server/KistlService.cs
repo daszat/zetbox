@@ -24,15 +24,22 @@ namespace Kistl.Server
         private readonly Func<IKistlContext> _ctxFactory;
         private readonly InterfaceType.Factory _iftFactory;
         private readonly IPerfCounter _perfCounter;
+        private readonly KistlStreamReader.Factory _readerFactory;
+        private readonly KistlStreamWriter.Factory _writerFactory;
 
-
-        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, InterfaceType.Factory iftFactory, IPerfCounter perfCounter, KistlStreamReader.Factory readerFactory, KistlStreamWriter.Factory writerFactory)
         {
+            if (readerFactory == null) throw new ArgumentNullException("readerFactory");
+            if (writerFactory == null) throw new ArgumentNullException("writerFactory");
+
             Logging.Facade.Debug("Creating new KistlService instance");
+
             _sohFactory = sohFactory;
             _ctxFactory = ctxFactory;
             _iftFactory = iftFactory;
             _perfCounter = perfCounter;
+            _readerFactory = readerFactory;
+            _writerFactory = writerFactory;
         }
 
         private static void DebugLogIdentity()
@@ -138,13 +145,13 @@ namespace Kistl.Server
         }
 
         /// <summary>
-        /// Sends a list of auxiliary objects to the specified BinaryWriter while avoiding to send objects twice.
+        /// Sends a list of auxiliary objects to the specified KistlStreamWriter while avoiding to send objects twice.
         /// </summary>
         /// <param name="sw">the stream to write to</param>
         /// <param name="auxObjects">a set of objects to send; will not be modified by this call</param>
         /// <param name="sentObjects">a set objects already sent; receives all newly sent objects too</param>
         /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
-        private static void SendAuxiliaryObjects(BinaryWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
+        private static void SendAuxiliaryObjects(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
         {
             // clone auxObjects to avoid modification
             auxObjects = new HashSet<IStreamable>(auxObjects);
@@ -155,7 +162,7 @@ namespace Kistl.Server
                 HashSet<IStreamable> secondTierAuxObjects = new HashSet<IStreamable>();
                 foreach (var aux in auxObjects.Where(o => o != null))
                 {
-                    BinarySerializer.ToStream(true, sw);
+                    sw.Write(true);
                     aux.ToStream(sw, secondTierAuxObjects, eagerLoadLists);
                     sentObjects.Add(aux);
                 }
@@ -164,7 +171,7 @@ namespace Kistl.Server
                 auxObjects = secondTierAuxObjects;
             }
             // finish list
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
         }
 
         /// <summary>
@@ -173,28 +180,28 @@ namespace Kistl.Server
         /// <param name="lst">the list of objects to send</param>
         /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
         /// <returns>a memory stream containing all objects and all eagerly loaded auxiliary objects</returns>
-        private static MemoryStream SendObjects(IEnumerable<IStreamable> lst, bool eagerLoadLists)
+        private MemoryStream SendObjects(IEnumerable<IStreamable> lst, bool eagerLoadLists)
         {
             HashSet<IStreamable> sentObjects = new HashSet<IStreamable>();
             HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
 
-            MemoryStream result = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(result);
+            var result = new MemoryStream();
+            var sw = _writerFactory(new BinaryWriter(result));
             foreach (IStreamable obj in lst)
             {
-                BinarySerializer.ToStream(true, sw);
+                sw.Write(true);
                 // don't check sentObjects here, because a list might contain items twice
                 obj.ToStream(sw, auxObjects, eagerLoadLists);
                 sentObjects.Add(obj);
             }
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
 
             SendAuxiliaryObjects(sw, auxObjects, sentObjects, eagerLoadLists);
 
             // https://connect.microsoft.com/VisualStudio/feedback/details/541494/wcf-streaming-issue
-            BinarySerializer.ToStream(false, sw);
-            BinarySerializer.ToStream(false, sw);
-            BinarySerializer.ToStream(false, sw);
+            sw.Write(false);
+            sw.Write(false);
+            sw.Write(false);
 
             Logging.Facade.DebugFormat("Sending {0} Objects with {1} with AuxObjects and EagerLoadLists = {2}", sentObjects.Count, auxObjects.Count, eagerLoadLists);
 
@@ -205,19 +212,15 @@ namespace Kistl.Server
         private List<IPersistenceObject> ReadObjects(Stream msg, IKistlContext ctx)
         {
             var objects = new List<IPersistenceObject>();
-            BinaryReader sr = new BinaryReader(msg);
-            bool @continue;
-            BinarySerializer.FromStream(out @continue, sr);
-            while (@continue)
+            var sr = _readerFactory(new BinaryReader(msg));
+            while (sr.ReadBoolean())
             {
                 // Deserialize
-                SerializableType objType;
-                BinarySerializer.FromStream(out objType, sr);
+                var objType = sr.ReadSerializableType();
 
                 var obj = ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
-                objects.Add(obj);
                 obj.FromStream(sr);
-                BinarySerializer.FromStream(out @continue, sr);
+                objects.Add(obj);
             }
             return objects;
         }
@@ -240,8 +243,7 @@ namespace Kistl.Server
                 {
                     if (type == null) { throw new ArgumentNullException("type"); }
 
-
-                    using (IKistlContext ctx = _ctxFactory())
+                    using (var ctx = _ctxFactory())
                     {
                         var ifType = _iftFactory(type.GetSystemType());
                         int resultCount = 0;
@@ -336,7 +338,6 @@ namespace Kistl.Server
             {
                 try
                 {
-
                     DebugLogIdentity();
 
                     using (IKistlContext ctx = _ctxFactory())
@@ -368,7 +369,6 @@ namespace Kistl.Server
                     throw new ArgumentNullException("blob");
                 try
                 {
-
                     DebugLogIdentity();
 
                     using (IKistlContext ctx = _ctxFactory())
@@ -418,15 +418,14 @@ namespace Kistl.Server
                         var parameter = new MemoryStream(parameterArray);
                         parameter.Seek(0, SeekOrigin.Begin);
                         List<object> parameterList = new List<object>();
-                        var parameterReader = new BinaryReader(parameter);
+                        var parameterReader = _readerFactory(new BinaryReader(parameter));
                         foreach (var t in parameterTypes)
                         {
                             object val;
-                            BinarySerializer.FromStream(out val,
+                            parameterReader.Read(out val,
                                 t.GetSystemType().IsIStreamable()
                                     ? ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type
-                                    : t.GetSystemType(),
-                                parameterReader);
+                                    : t.GetSystemType());
                             parameterList.Add(val);
                         }
 

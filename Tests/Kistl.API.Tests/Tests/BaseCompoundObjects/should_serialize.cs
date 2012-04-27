@@ -1,31 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using System.IO;
-using Kistl.API.Mocks;
 
 namespace Kistl.API.Tests.BaseCompoundObjects
 {
-
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.AbstractConsumerTests;
+    using Kistl.API.Mocks;
+    using NUnit.Framework;
+    
     [TestFixture]
-    public class should_serialize : AbstractApiTestFixture
+    public class should_serialize : SerializerTestFixture
     {
-
-        MemoryStream ms;
-        BinaryWriter sw;
-        BinaryReader sr;
-
         TestCompoundObjectImpl test;
 
         public override void SetUp()
         {
             base.SetUp();
-            ms = new MemoryStream();
-            sw = new BinaryWriter(ms);
-            sr = new BinaryReader(ms);
-
             test = new TestCompoundObjectImpl();
         }
 
@@ -63,7 +56,5 @@ namespace Kistl.API.Tests.BaseCompoundObjects
 
             Assert.That(test.TestProperty, Is.EqualTo(val), "To/FromStream of the mock didn't transport TestProperty");
         }
-
     }
-
 }

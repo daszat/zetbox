@@ -188,27 +188,12 @@ namespace Kistl.API
     public interface IStreamable
     {
         /// <summary>
-        /// Serialize this Object to a BinaryWriter
-        /// </summary>
-        /// <param name="sw">BinaryWriter to serialize to</param>
-        /// <param name="auxObjects">pass a HashSet here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
-        /// <param name="eagerLoadLists">True is lists should be eager loaded</param>
-        void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists);
-
-        /// <summary>
         /// Serialize this Object to a KistlStreamWriter
         /// </summary>
         /// <param name="sw">KistlStreamWriter to serialize to</param>
         /// <param name="auxObjects">pass a HashSet here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
         /// <param name="eagerLoadLists">True is lists should be eager loaded</param>
         void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists);
-
-        /// <summary>
-        /// Deserialize this Object from a BinaryReader
-        /// </summary>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        /// <returns>Returns a list of objects that were in-place serialized. This ensures that they can be processed like everything else in the stream. May return null to indicate absence of additional objects.</returns>
-        IEnumerable<IPersistenceObject> FromStream(BinaryReader sr);
 
         /// <summary>
         /// Deserialize this Object from a KistlStreamReader

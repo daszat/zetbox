@@ -71,18 +71,16 @@ namespace Kistl.API.Server.Mocks
 
         #endregion
 
-        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
-            BinarySerializer.ToStream(Value, sw);
+            sw.Write(Value);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
-            string s;
-            BinarySerializer.FromStream(out s, sr);
-            Value = s;
+            Value = sr.ReadString();
             return baseResult;
         }
 

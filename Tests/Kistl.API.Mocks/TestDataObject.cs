@@ -64,24 +64,6 @@ namespace Kistl.API.Mocks
             }
         }
 
-        public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            BinarySerializer.ToStream(ReadOnlyContext.GetInterfaceType(this).ToSerializableType(), sw);
-            BinarySerializer.ToStream(ID, sw);
-            BinarySerializer.ToStream(StringProperty, sw);
-            BinarySerializer.ToStream(IntProperty, sw);
-            BinarySerializer.ToStream(BoolProperty, sw);
-        }
-
-        public IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
-        {
-            BinarySerializer.FromStream(out _ID, sr);
-            BinarySerializer.FromStream(out _StringProperty, sr);
-            BinarySerializer.FromStream(out _IntProperty, sr);
-            BinarySerializer.FromStream(out _BoolProperty, sr);
-            return null;
-        }
-
         public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             sw.Write(ReadOnlyContext.GetInterfaceType(this).ToSerializableType());

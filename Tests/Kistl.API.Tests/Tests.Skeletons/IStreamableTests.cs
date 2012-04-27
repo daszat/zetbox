@@ -1,18 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using NUnit.Framework;
 
 namespace Kistl.API.Tests.Skeletons
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.AbstractConsumerTests;
+    using Kistl.API.Utils;
+    using NUnit.Framework;
 
-    public class IStreamableTests<T> : AbstractApiTestFixture
+    public class IStreamableTests<T> : SerializerTestFixture
         where T : IStreamable, new()
     {
-
         protected T obj;
 
         public override void SetUp()
@@ -26,19 +27,18 @@ namespace Kistl.API.Tests.Skeletons
             return new T();
         }
 
-
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_to_null_stream()
         {
-            obj.ToStream((BinaryWriter)null, null, false);
+            obj.ToStream((KistlStreamWriter)null, null, false);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_from_null_stream()
         {
-            obj.FromStream((BinaryReader)null);
+            obj.FromStream((KistlStreamReader)null);
         }
 
         [Test]
@@ -49,10 +49,6 @@ namespace Kistl.API.Tests.Skeletons
 
         protected T SerializationRoundtrip(T obj)
         {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
-
             obj.ToStream(sw, null, false);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
@@ -61,8 +57,7 @@ namespace Kistl.API.Tests.Skeletons
 
             if (!typeof(T).IsICompoundObject())
             {
-                SerializableType t;
-                BinarySerializer.FromStream(out t, sr);
+                var t = sr.ReadSerializableType();
             }
 
             T result = new T();
@@ -70,5 +65,4 @@ namespace Kistl.API.Tests.Skeletons
             return result;
         }
     }
-
 }
