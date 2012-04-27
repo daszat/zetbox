@@ -832,11 +832,11 @@ using System.Linq.Expressions;
             }
             else if (op == FilterOperators.IsNull)
             {
-                return string.Format("{0} is null", arg);
+                return string.Format("{0} = null", ValueSource.Expression);
             }
             else if (op == FilterOperators.IsNotNull)
             {
-                return string.Format("{0} is not null", arg);
+                return string.Format("{0} != null", ValueSource.Expression);
             }
             else
             {
