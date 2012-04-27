@@ -22,17 +22,11 @@ namespace Kistl.Server.HttpService
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service.KistlServiceFacade");
 
         private readonly BinaryFormatter _formatter = new BinaryFormatter();
-        private readonly KistlStreamReader.Factory _readerFactory;
-        private readonly KistlStreamWriter.Factory _writerFactory;
 
-        public KistlServiceFacade(KistlStreamReader.Factory readerFactory, KistlStreamWriter.Factory writerFactory)
-        {
-            if (readerFactory == null) throw new ArgumentNullException("readerFactory");
-            if (writerFactory == null) throw new ArgumentNullException("writerFactory");
-
-            _readerFactory = readerFactory;
-            _writerFactory = writerFactory;
-        }
+        /// <summary>
+        /// This class is instantiated by ASP.NET and thus needs an empty constructor.
+        /// </summary>
+        public KistlServiceFacade() { }
 
         public bool IsReusable
         {
@@ -78,6 +72,9 @@ namespace Kistl.Server.HttpService
             {
                 cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
                 var scope = cpa.ContainerProvider.RequestLifetime;
+                var readerFactory = scope.Resolve<KistlStreamReader.Factory>();
+                var writerFactory = scope.Resolve<KistlStreamWriter.Factory>();
+
                 var service = scope.Resolve<IKistlService>();
                 string username;
                 try
@@ -93,7 +90,7 @@ namespace Kistl.Server.HttpService
                     context.Request.HttpMethod,
                     context.Request.Url,
                     username);
-                var reader = _readerFactory(new BinaryReader(context.Request.InputStream));
+                var reader = readerFactory(new BinaryReader(context.Request.InputStream));
 
                 var version = reader.ReadGuid();
                 switch (context.Request.Url.Segments.Last())
@@ -177,7 +174,7 @@ namespace Kistl.Server.HttpService
 
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            using (var writer = _writerFactory(new BinaryWriter(context.Response.OutputStream)))
+                            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
                             using (var dataStream = new MemoryStream())
                             {
                                 writer.Write(result.ID);
@@ -213,7 +210,7 @@ namespace Kistl.Server.HttpService
 
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            using (var writer = _writerFactory(new BinaryWriter(context.Response.OutputStream)))
+                            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
                             {
                                 writer.Write(retChangedObjects);
                                 writer.Write(result);
