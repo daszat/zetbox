@@ -58,6 +58,7 @@ namespace Kistl.API.Tests.Skeletons
             if (!typeof(T).IsICompoundObject())
             {
                 var t = sr.ReadSerializableType();
+                Assert.That(t.GetType(), Is.AssignableTo<T>());
             }
 
             T result = new T();
