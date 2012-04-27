@@ -5,14 +5,13 @@ namespace Kistl.API
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Autofac;
     using NUnit.Framework;
 
     [SetUpFixture]
     public class SetUpFixture : AbstractConsumerTests.AbstractSetUpFixture
     {
-        protected override void SetupBuilder(Autofac.ContainerBuilder builder)
+        protected override void SetupBuilder(ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
 

@@ -154,8 +154,8 @@ namespace Kistl.API.Tests
             {
                 foreach (SerializableType value in CreateSerializableTypes())
                 {
-                    byte preGuardValue = 0xde;
-                    byte postGuardValue = 0xc0;
+                    int preGuardValue = 0x0eadbeef;
+                    int postGuardValue = 0x00c0ffee;
 
                     sw.Write(preGuardValue);
                     sw.Write(value);
@@ -164,11 +164,11 @@ namespace Kistl.API.Tests
 
                     ms.Seek(0, SeekOrigin.Begin);
 
-                    Assert.That(sr.ReadByte(), Is.EqualTo(preGuardValue), "inital guard wrong");
+                    Assert.That(sr.ReadInt32(), Is.EqualTo(preGuardValue), "inital guard wrong");
 
                     SerializableType fromval;
                     sr.Read(out fromval);
-                    Assert.That(sr.ReadByte(), Is.EqualTo(postGuardValue), "final guard wrong");
+                    Assert.That(sr.ReadInt32(), Is.EqualTo(postGuardValue), "final guard wrong");
 
                     Assert.That(fromval, Is.EqualTo(value));
                     Assert.That(ms.Position, Is.EqualTo(ms.Length), "stream not read completely");
@@ -191,8 +191,8 @@ namespace Kistl.API.Tests
             {
                 var value = CreateExpression();
 
-                byte preGuardValue = 0xde;
-                byte postGuardValue = 0xc0;
+                int preGuardValue = 0x0eadbeef;
+                int postGuardValue = 0x00c0ffee;
 
                 sw.Write(preGuardValue);
                 sw.Write(value);
@@ -201,11 +201,11 @@ namespace Kistl.API.Tests
 
                 ms.Seek(0, SeekOrigin.Begin);
 
-                Assert.That(sr.ReadByte(), Is.EqualTo(preGuardValue), "inital guard wrong");
+                Assert.That(sr.ReadInt32(), Is.EqualTo(preGuardValue), "inital guard wrong");
 
                 SerializableExpression fromval;
                 sr.Read(out fromval, null);
-                Assert.That(sr.ReadByte(), Is.EqualTo(postGuardValue), "final guard wrong");
+                Assert.That(sr.ReadInt32(), Is.EqualTo(postGuardValue), "final guard wrong");
 
                 Assert.That(fromval, Is.InstanceOf(value.GetType()));
                 Assert.That(ms.Position, Is.EqualTo(ms.Length), "stream not read completely");
@@ -216,8 +216,8 @@ namespace Kistl.API.Tests
             {
                 SerializableExpression value = null;
 
-                byte preGuardValue = 0xde;
-                byte postGuardValue = 0xc0;
+                int preGuardValue = 0x0eadbeef;
+                int postGuardValue = 0x00c0ffee;
 
                 sw.Write(preGuardValue);
                 sw.Write(value);
@@ -226,11 +226,11 @@ namespace Kistl.API.Tests
 
                 ms.Seek(0, SeekOrigin.Begin);
 
-                Assert.That(sr.ReadByte(), Is.EqualTo(preGuardValue), "inital guard wrong");
+                Assert.That(sr.ReadInt32(), Is.EqualTo(preGuardValue), "inital guard wrong");
 
                 SerializableExpression fromval;
                 sr.Read(out fromval, null);
-                Assert.That(sr.ReadByte(), Is.EqualTo(postGuardValue), "final guard wrong");
+                Assert.That(sr.ReadInt32(), Is.EqualTo(postGuardValue), "final guard wrong");
 
                 Assert.That(fromval, Is.Null);
                 Assert.That(ms.Position, Is.EqualTo(ms.Length), "stream not read completely");
