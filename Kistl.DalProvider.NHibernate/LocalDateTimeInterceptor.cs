@@ -36,7 +36,8 @@ namespace Kistl.DalProvider.NHibernate
             int index = 0;
             foreach (IType type in types)
             {
-                if ((type.ReturnedClass == typeof(DateTime)) && state[index] != null)
+                if(state[index] == null) continue;
+                if ((type.ReturnedClass == typeof(DateTime)))
                 {
                     DateTime cur = (DateTime)state[index];
                     switch (cur.Kind)
@@ -49,6 +50,24 @@ namespace Kistl.DalProvider.NHibernate
                         case DateTimeKind.Unspecified:
                             state[index] = DateTime.SpecifyKind(cur, DateTimeKind.Local);
                             break;
+                    }
+                }
+                else if ((type.ReturnedClass == typeof(DateTime?)))
+                {
+                    DateTime? cur = (DateTime?)state[index];
+                    if (cur != null)
+                    {
+                        switch (cur.Value.Kind)
+                        {
+                            case DateTimeKind.Local:
+                                break;
+                            case DateTimeKind.Utc:
+                                state[index] = cur.Value.ToLocalTime();
+                                break;
+                            case DateTimeKind.Unspecified:
+                                state[index] = DateTime.SpecifyKind(cur.Value, DateTimeKind.Local);
+                                break;
+                        }
                     }
                 }
 
