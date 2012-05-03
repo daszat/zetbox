@@ -398,10 +398,21 @@ namespace Kistl.App.Test
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
             var baseResult = base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
-            XmlStreamer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, xml, "TestEnumProp", "Kistl.App.Test");
+            switch (xml.NamespaceURI + "|" + xml.LocalName)
+            {
+                case "Kistl.App.Test|MyIntProperty":
+                    this._MyIntProperty = XmlStreamer.ReadNullableInt32(xml);
+                    break;
+                case "http://dasz.at/Kistl|ObjectProp":
+                    this._fk_ObjectProp = XmlStreamer.ReadNullableInt32(xml);
+                    break;
+                case "Kistl.App.Test|StringProp":
+                    this._StringProp = XmlStreamer.ReadString(xml);
+                    break;
+                case "Kistl.App.Test|TestEnumProp":
+                    this.TestEnumProp = (Kistl.App.Test.TestEnum)XmlStreamer.ReadInt32(xml);
+                    break;
+            }
             return baseResult;
         }
 
