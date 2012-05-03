@@ -329,7 +329,7 @@ namespace Kistl.App.Calendar
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value;
+                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -514,7 +514,7 @@ namespace Kistl.App.Calendar
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value;
+                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -921,7 +921,7 @@ namespace Kistl.App.Calendar
             get { return _ValidFrom_store; }
             set {
                 ReportEfPropertyChanging("ValidFrom");
-                _ValidFrom_store = value;
+                _ValidFrom_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("ValidFrom");
             }
         }
@@ -990,7 +990,7 @@ namespace Kistl.App.Calendar
             get { return _ValidUntil_store; }
             set {
                 ReportEfPropertyChanging("ValidUntil");
-                _ValidUntil_store = value;
+                _ValidUntil_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("ValidUntil");
             }
         }

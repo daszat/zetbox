@@ -386,7 +386,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value;
+                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -628,7 +628,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value;
+                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }

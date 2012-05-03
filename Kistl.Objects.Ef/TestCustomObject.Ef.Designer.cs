@@ -102,7 +102,7 @@ namespace Kistl.App.Test
             get { return _Birthday_store; }
             set {
                 ReportEfPropertyChanging("Birthday");
-                _Birthday_store = value;
+                _Birthday_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("Birthday");
             }
         }

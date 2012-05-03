@@ -504,7 +504,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             get { return _TestDateTime_store; }
             set {
                 ReportEfPropertyChanging("TestDateTime");
-                _TestDateTime_store = value;
+                _TestDateTime_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("TestDateTime");
             }
         }

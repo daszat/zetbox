@@ -114,7 +114,7 @@ namespace Kistl.App.Base
             get { return _From_store; }
             set {
                 ReportEfPropertyChanging("From");
-                _From_store = value;
+                _From_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("From");
             }
         }
@@ -181,7 +181,7 @@ namespace Kistl.App.Base
             get { return _Thru_store; }
             set {
                 ReportEfPropertyChanging("Thru");
-                _Thru_store = value;
+                _Thru_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("Thru");
             }
         }

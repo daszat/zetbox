@@ -464,7 +464,7 @@ namespace Kistl.App.Base
             get { return _Timestamp_store; }
             set {
                 ReportEfPropertyChanging("Timestamp");
-                _Timestamp_store = value;
+                _Timestamp_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("Timestamp");
             }
         }

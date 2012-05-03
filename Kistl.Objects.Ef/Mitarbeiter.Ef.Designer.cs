@@ -213,7 +213,7 @@ namespace Kistl.App.Projekte
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value;
+                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -398,7 +398,7 @@ namespace Kistl.App.Projekte
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value;
+                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -550,7 +550,7 @@ namespace Kistl.App.Projekte
             get { return _Geburtstag_store; }
             set {
                 ReportEfPropertyChanging("Geburtstag");
-                _Geburtstag_store = value;
+                _Geburtstag_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("Geburtstag");
             }
         }

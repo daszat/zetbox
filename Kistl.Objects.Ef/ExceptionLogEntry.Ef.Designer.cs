@@ -98,7 +98,7 @@ namespace Kistl.App.Base
             get { return _Date_store; }
             set {
                 ReportEfPropertyChanging("Date");
-                _Date_store = value;
+                _Date_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("Date");
             }
         }

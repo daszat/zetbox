@@ -212,7 +212,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
             get { return _Bis_store; }
             set {
                 ReportEfPropertyChanging("Bis");
-                _Bis_store = value;
+                _Bis_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("Bis");
             }
         }
@@ -396,7 +396,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value;
+                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -581,7 +581,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value;
+                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
@@ -733,7 +733,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
             get { return _KickOffAm_store; }
             set {
                 ReportEfPropertyChanging("KickOffAm");
-                _KickOffAm_store = value;
+                _KickOffAm_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("KickOffAm");
             }
         }
@@ -802,7 +802,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
             get { return _KickOffBis_store; }
             set {
                 ReportEfPropertyChanging("KickOffBis");
-                _KickOffBis_store = value;
+                _KickOffBis_store = value != null && value.Value.Kind == DateTimeKind.Unspecified ? (DateTime?)DateTime.SpecifyKind(value.Value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("KickOffBis");
             }
         }
@@ -1116,7 +1116,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             get { return _Von_store; }
             set {
                 ReportEfPropertyChanging("Von");
-                _Von_store = value;
+                _Von_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("Von");
             }
         }

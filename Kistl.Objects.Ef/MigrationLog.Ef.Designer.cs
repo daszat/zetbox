@@ -374,7 +374,7 @@ namespace ZBox.App.SchemaMigration
             get { return _Timestamp_store; }
             set {
                 ReportEfPropertyChanging("Timestamp");
-                _Timestamp_store = value;
+                _Timestamp_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("Timestamp");
             }
         }

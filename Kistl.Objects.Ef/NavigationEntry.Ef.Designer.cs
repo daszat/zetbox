@@ -213,7 +213,7 @@ namespace Kistl.App.GUI
             get { return _ChangedOn_store; }
             set {
                 ReportEfPropertyChanging("ChangedOn");
-                _ChangedOn_store = value;
+                _ChangedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("ChangedOn");
             }
         }
@@ -524,7 +524,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
             get { return _CreatedOn_store; }
             set {
                 ReportEfPropertyChanging("CreatedOn");
-                _CreatedOn_store = value;
+                _CreatedOn_store = value.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(value, DateTimeKind.Local) : value;
                 ReportEfPropertyChanged("CreatedOn");
             }
         }
