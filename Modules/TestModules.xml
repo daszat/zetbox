@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-23T15:15:58Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-23T15:15:58.756492Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.664236Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -2173,17 +2173,17 @@ public static void isValid_CreatedOn(Task obj, PropertyIsValidEventArgs e)
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2012-04-04T11:26:18.498541Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
-public static void get_DatumBis(Task obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_DatumBis(Task obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_DatumBis(Task obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_DatumBis(Task obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_DatumBis(Task obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_DatumBis(Task obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
