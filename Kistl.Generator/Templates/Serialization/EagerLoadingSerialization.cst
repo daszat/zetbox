@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Serialization.EagerLoadingSerialization"
-	ClassName="Kistl.Generator.Templates.Serialization.EagerLoadingSerialization" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+    Name="Serialization.EagerLoadingSerialization"
+    ClassName="Kistl.Generator.Templates.Serialization.EagerLoadingSerialization" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -19,58 +19,55 @@
 <%@ Parameter Name="serializeRelationEntries" Type="bool" %>
 
 <%
-	switch(direction)
-	{
-		case SerializerDirection.ToStream:
+    switch(direction)
+    {
+        case SerializerDirection.ToStream:
 %>
-			<%= streamName %>.Write(eagerLoadLists);
-			if (eagerLoadLists && auxObjects != null)
-			{
+            <%= streamName %>.Write(eagerLoadLists);
+            if (eagerLoadLists && auxObjects != null)
+            {
 <% if (serializeIds) {                                                          %>
-				<%= streamName %>.Write(true);
-				<%= streamName %>.Write(<%= collectionName %>.Count);
+                <%= streamName %>.Write(true);
+                <%= streamName %>.Write(<%= collectionName %>.Count);
 <% }                                                                            %>
-				foreach(var obj in <%= collectionName %>)
-				{
-					auxObjects.Add(obj);
+                foreach(var obj in <%= collectionName %>)
+                {
+                    auxObjects.Add(obj);
 <% if (serializeIds) {                                                          %>
-					<%= streamName %>.Write(obj.ID);
+                    <%= streamName %>.Write(obj.ID);
 <% }                                                                            %>
-				}
+                }
 <% if (serializeRelationEntries) { ApplyRelationEntrySerialization(); }         %>
-			}
+            }
 <% if (serializeIds) {                                                          %>
-			else
-			{
-				<%= streamName %>.Write(false);
-			}
+            else
+            {
+                <%= streamName %>.Write(false);
+            }
 <% }                                                                            %>
 <%
-			break;
-		case SerializerDirection.FromStream:
+            break;
+        case SerializerDirection.FromStream:
 %>
-			<%= streamName %>.Read(out <%= collectionName %>_was_eagerLoaded);
+            <%= collectionName %>_was_eagerLoaded = <%= streamName %>.ReadBoolean();
 <% if (serializeIds) {                                                          %>
-			{
-				bool containsList;
-				<%= streamName %>.Read(out containsList);
-				if (containsList)
-				{
-					int numElements;
-					<%= streamName %>.Read(out numElements);
-					<%= collectionName %>Ids = new List<int>(numElements);
-					while (numElements-- > 0) 
-					{
-						int id;
-						<%= streamName %>.Read(out id);
-						<%= collectionName %>Ids.Add(id);
-					}
-				}
-			}
+            {
+                bool containsList = <%= streamName %>.ReadBoolean();
+                if (containsList)
+                {
+                    int numElements = <%= streamName %>.ReadInt32();
+                    <%= collectionName %>Ids = new List<int>(numElements);
+                    while (numElements-- > 0) 
+                    {
+                        int id = <%= streamName %>.ReadInt32();
+                        <%= collectionName %>Ids.Add(id);
+                    }
+                }
+            }
 <% }                                                                            %>
 <%
-			break;
-		default:
-			throw new ArgumentOutOfRangeException("direction");
-	}
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
 %>

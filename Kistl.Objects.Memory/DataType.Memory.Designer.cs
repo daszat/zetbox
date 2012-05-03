@@ -1810,21 +1810,21 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 binStream.Write(this._ChangedOn);
             }
 
-			binStream.Write(eagerLoadLists);
-			if (eagerLoadLists && auxObjects != null)
-			{
-				binStream.Write(true);
-				binStream.Write(Constraints.Count);
-				foreach(var obj in Constraints)
-				{
-					auxObjects.Add(obj);
-					binStream.Write(obj.ID);
-				}
-			}
-			else
-			{
-				binStream.Write(false);
-			}
+            binStream.Write(eagerLoadLists);
+            if (eagerLoadLists && auxObjects != null)
+            {
+                binStream.Write(true);
+                binStream.Write(Constraints.Count);
+                foreach(var obj in Constraints)
+                {
+                    auxObjects.Add(obj);
+                    binStream.Write(obj.ID);
+                }
+            }
+            else
+            {
+                binStream.Write(false);
+            }
             binStream.Write(CreatedBy != null ? CreatedBy.ID : (int?)null);
             binStream.Write(this._isCreatedOnSet);
             if (this._isCreatedOnSet) {
@@ -1837,39 +1837,39 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 binStream.Write(this._ExportGuid);
             }
 
-			binStream.Write(eagerLoadLists);
-			if (eagerLoadLists && auxObjects != null)
-			{
-				binStream.Write(true);
-				binStream.Write(Methods.Count);
-				foreach(var obj in Methods)
-				{
-					auxObjects.Add(obj);
-					binStream.Write(obj.ID);
-				}
-			}
-			else
-			{
-				binStream.Write(false);
-			}
+            binStream.Write(eagerLoadLists);
+            if (eagerLoadLists && auxObjects != null)
+            {
+                binStream.Write(true);
+                binStream.Write(Methods.Count);
+                foreach(var obj in Methods)
+                {
+                    auxObjects.Add(obj);
+                    binStream.Write(obj.ID);
+                }
+            }
+            else
+            {
+                binStream.Write(false);
+            }
             binStream.Write(Module != null ? Module.ID : (int?)null);
             binStream.Write(this._Name);
 
-			binStream.Write(eagerLoadLists);
-			if (eagerLoadLists && auxObjects != null)
-			{
-				binStream.Write(true);
-				binStream.Write(Properties.Count);
-				foreach(var obj in Properties)
-				{
-					auxObjects.Add(obj);
-					binStream.Write(obj.ID);
-				}
-			}
-			else
-			{
-				binStream.Write(false);
-			}
+            binStream.Write(eagerLoadLists);
+            if (eagerLoadLists && auxObjects != null)
+            {
+                binStream.Write(true);
+                binStream.Write(Properties.Count);
+                foreach(var obj in Properties)
+                {
+                    auxObjects.Add(obj);
+                    binStream.Write(obj.ID);
+                }
+            }
+            else
+            {
+                binStream.Write(false);
+            }
             binStream.Write(RequestedKind != null ? RequestedKind.ID : (int?)null);
             binStream.Write(this._ShowIconInLists);
             binStream.Write(this._ShowIdInLists);
@@ -1882,149 +1882,75 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._fk_ChangedBy = binStream.ReadNullableInt32();
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                binStream.Read(out this._ChangedOn);
+                this._ChangedOn = binStream.ReadDateTime();
             }
 
-			binStream.Read(out Constraints_was_eagerLoaded);
-			{
-				bool containsList;
-				binStream.Read(out containsList);
-				if (containsList)
-				{
-					int numElements;
-					binStream.Read(out numElements);
-					ConstraintsIds = new List<int>(numElements);
-					while (numElements-- > 0) 
-					{
-						int id;
-						binStream.Read(out id);
-						ConstraintsIds.Add(id);
-					}
-				}
-			}
-            binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            Constraints_was_eagerLoaded = binStream.ReadBoolean();
+            {
+                bool containsList = binStream.ReadBoolean();
+                if (containsList)
+                {
+                    int numElements = binStream.ReadInt32();
+                    ConstraintsIds = new List<int>(numElements);
+                    while (numElements-- > 0) 
+                    {
+                        int id = binStream.ReadInt32();
+                        ConstraintsIds.Add(id);
+                    }
+                }
+            }
+            this._fk_CreatedBy = binStream.ReadNullableInt32();
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                binStream.Read(out this._CreatedOn);
+                this._CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._fk_DefaultIcon);
-            binStream.Read(out this._Description);
-            binStream.Read(out this._isExportGuidSet);
+            this._fk_DefaultIcon = binStream.ReadNullableInt32();
+            this._Description = binStream.ReadString();
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
 
-			binStream.Read(out Methods_was_eagerLoaded);
-			{
-				bool containsList;
-				binStream.Read(out containsList);
-				if (containsList)
-				{
-					int numElements;
-					binStream.Read(out numElements);
-					MethodsIds = new List<int>(numElements);
-					while (numElements-- > 0) 
-					{
-						int id;
-						binStream.Read(out id);
-						MethodsIds.Add(id);
-					}
-				}
-			}
-            binStream.Read(out this._fk_Module);
-            binStream.Read(out this._Name);
+            Methods_was_eagerLoaded = binStream.ReadBoolean();
+            {
+                bool containsList = binStream.ReadBoolean();
+                if (containsList)
+                {
+                    int numElements = binStream.ReadInt32();
+                    MethodsIds = new List<int>(numElements);
+                    while (numElements-- > 0) 
+                    {
+                        int id = binStream.ReadInt32();
+                        MethodsIds.Add(id);
+                    }
+                }
+            }
+            this._fk_Module = binStream.ReadNullableInt32();
+            this._Name = binStream.ReadString();
 
-			binStream.Read(out Properties_was_eagerLoaded);
-			{
-				bool containsList;
-				binStream.Read(out containsList);
-				if (containsList)
-				{
-					int numElements;
-					binStream.Read(out numElements);
-					PropertiesIds = new List<int>(numElements);
-					while (numElements-- > 0) 
-					{
-						int id;
-						binStream.Read(out id);
-						PropertiesIds.Add(id);
-					}
-				}
-			}
-            binStream.Read(out this._fk_RequestedKind);
-            binStream.Read(out this._ShowIconInLists);
-            binStream.Read(out this._ShowIdInLists);
-            binStream.Read(out this._ShowNameInLists);
+            Properties_was_eagerLoaded = binStream.ReadBoolean();
+            {
+                bool containsList = binStream.ReadBoolean();
+                if (containsList)
+                {
+                    int numElements = binStream.ReadInt32();
+                    PropertiesIds = new List<int>(numElements);
+                    while (numElements-- > 0) 
+                    {
+                        int id = binStream.ReadInt32();
+                        PropertiesIds.Add(id);
+                    }
+                }
+            }
+            this._fk_RequestedKind = binStream.ReadNullableInt32();
+            this._ShowIconInLists = binStream.ReadBoolean();
+            this._ShowIdInLists = binStream.ReadBoolean();
+            this._ShowNameInLists = binStream.ReadBoolean();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ID : (int?)null, xml, "DefaultIcon", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
-            XmlStreamer.ToStream(RequestedKind != null ? RequestedKind.ID : (int?)null, xml, "RequestedKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
-            if (this._isChangedOnSet) {
-                XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStream(ref this._fk_DefaultIcon, xml, "DefaultIcon", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_RequestedKind, xml, "RequestedKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2054,23 +1980,47 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            this._isChangedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            this._isCreatedOnSet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultIcon, xml, "DefaultIcon", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedKind, xml, "RequestedKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "Kistl.App.Base|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "Kistl.App.GUI|DefaultIcon":
+                this._fk_guid_DefaultIcon = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|Description":
+                this._Description = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Base|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.Base|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|Name":
+                this._Name = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|RequestedKind":
+                this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|ShowIconInLists":
+                this._ShowIconInLists = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowIdInLists":
+                this._ShowIdInLists = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowNameInLists":
+                this._ShowNameInLists = XmlStreamer.ReadBoolean(xml);
+                break;
+            }
         }
 
         #endregion

@@ -210,7 +210,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private DateTime _ChangedOn;
+        private DateTime _ChangedOn_store;
+        private DateTime _ChangedOn {
+            get { return _ChangedOn_store; }
+            set {
+                _ChangedOn_store = value;
+            }
+        }
         private bool _isChangedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, DateTime> OnChangedOn_Getter;
@@ -389,7 +395,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private DateTime _CreatedOn;
+        private DateTime _CreatedOn_store;
+        private DateTime _CreatedOn {
+            get { return _CreatedOn_store; }
+            set {
+                _CreatedOn_store = value;
+            }
+        }
         private bool _isCreatedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, DateTime> OnCreatedOn_Getter;
@@ -463,7 +475,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         private bool _isExportGuidSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, Guid> OnExportGuid_Getter;
@@ -525,7 +543,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private string _Label;
+        private string _Label_store;
+        private string _Label {
+            get { return _Label_store; }
+            set {
+                _Label_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, string> OnLabel_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, string> OnLabel_PreSetter;
@@ -692,7 +716,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _RefreshOnFilterChanged;
+        private bool? _RefreshOnFilterChanged_store;
+        private bool? _RefreshOnFilterChanged {
+            get { return _RefreshOnFilterChanged_store; }
+            set {
+                _RefreshOnFilterChanged_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_PreSetter;
@@ -859,7 +889,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool _Required;
+        private bool _Required_store;
+        private bool _Required {
+            get { return _Required_store; }
+            set {
+                _Required_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.FilterConfiguration, bool> OnRequired_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.FilterConfiguration, bool> OnRequired_PreSetter;
@@ -1488,103 +1524,27 @@ namespace Kistl.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                binStream.Read(out this._ChangedOn);
+                this._ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                binStream.Read(out this._CreatedOn);
+                this._CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
-            binStream.Read(out this._Label);
+            this._Label = binStream.ReadString();
             binStream.Read(out this._fk_Module);
-            binStream.Read(out this._RefreshOnFilterChanged);
+            this._RefreshOnFilterChanged = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_RequestedKind);
-            binStream.Read(out this._Required);
+            this._Required = binStream.ReadBoolean();
             binStream.Read(out this._fk_ViewModelDescriptor);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_FilterConfiguration_was_ChangedBy", "ChangedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ChangedBy", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.GUI");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_FilterConfiguration_was_CreatedBy", "CreatedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "CreatedBy", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.GUI");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._Label, xml, "Label", "Kistl.App.GUI");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleEfImpl>("Model.FK_FilterConfiguration_has_Module", "Module").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Module", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._RefreshOnFilterChanged, xml, "RefreshOnFilterChanged", "Kistl.App.GUI");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_FilterConfiguration_has_RequestedKind", "RequestedKind").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "RequestedKind", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._Required, xml, "Required", "Kistl.App.GUI");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_FilterConfiguration_has_ViewModelDescriptor", "ViewModelDescriptor").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ViewModelDescriptor", "Kistl.App.GUI");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.GUI");
-            if (this._isChangedOnSet) {
-                XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.GUI");
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.GUI");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.GUI");
-            }
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            }
-            XmlStreamer.FromStream(ref this._Label, xml, "Label", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._RefreshOnFilterChanged, xml, "RefreshOnFilterChanged", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_RequestedKind, xml, "RequestedKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._Required, xml, "Required", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_ViewModelDescriptor, xml, "ViewModelDescriptor", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1612,21 +1572,41 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.GUI");
-            this._isChangedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.GUI");
-            this._isCreatedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._Label, xml, "Label", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._RefreshOnFilterChanged, xml, "RefreshOnFilterChanged", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedKind, xml, "RequestedKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._Required, xml, "Required", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_ViewModelDescriptor, xml, "ViewModelDescriptor", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "Kistl.App.GUI|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "Kistl.App.GUI|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.GUI|Label":
+                this._Label = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|RefreshOnFilterChanged":
+                this._RefreshOnFilterChanged = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|RequestedKind":
+                this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|Required":
+                this._Required = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ViewModelDescriptor":
+                this._fk_guid_ViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion

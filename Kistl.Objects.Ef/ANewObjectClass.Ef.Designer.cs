@@ -93,7 +93,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private string _TestString;
+        private string _TestString_store;
+        private string _TestString {
+            get { return _TestString_store; }
+            set {
+                _TestString_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PreSetter;
@@ -299,32 +305,9 @@ namespace Kistl.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._TestString);
+            this._TestString = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._TestString, xml, "TestString", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._TestString, xml, "TestString", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

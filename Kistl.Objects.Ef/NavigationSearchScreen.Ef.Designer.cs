@@ -93,7 +93,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _AllowAddNew;
+        private bool? _AllowAddNew_store;
+        private bool? _AllowAddNew {
+            get { return _AllowAddNew_store; }
+            set {
+                _AllowAddNew_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowAddNew_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowAddNew_PreSetter;
@@ -154,7 +160,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _AllowDelete;
+        private bool? _AllowDelete_store;
+        private bool? _AllowDelete {
+            get { return _AllowDelete_store; }
+            set {
+                _AllowDelete_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowDelete_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowDelete_PreSetter;
@@ -215,7 +227,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _AllowSelectColumns;
+        private bool? _AllowSelectColumns_store;
+        private bool? _AllowSelectColumns {
+            get { return _AllowSelectColumns_store; }
+            set {
+                _AllowSelectColumns_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowSelectColumns_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowSelectColumns_PreSetter;
@@ -276,7 +294,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _AllowUserFilter;
+        private bool? _AllowUserFilter_store;
+        private bool? _AllowUserFilter {
+            get { return _AllowUserFilter_store; }
+            set {
+                _AllowUserFilter_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowUserFilter_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnAllowUserFilter_PreSetter;
@@ -337,7 +361,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _EnableAutoFilter;
+        private bool? _EnableAutoFilter_store;
+        private bool? _EnableAutoFilter {
+            get { return _EnableAutoFilter_store; }
+            set {
+                _EnableAutoFilter_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnEnableAutoFilter_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnEnableAutoFilter_PreSetter;
@@ -398,7 +428,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private string _InitialSort;
+        private string _InitialSort_store;
+        private string _InitialSort {
+            get { return _InitialSort_store; }
+            set {
+                _InitialSort_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, string> OnInitialSort_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, string> OnInitialSort_PreSetter;
@@ -452,9 +488,14 @@ namespace Kistl.App.GUI
                 }
             }
         }
-        
-        /// <summary>backing store for InitialSortDirection</summary>
-        private Kistl.App.GUI.ListSortDirection? _InitialSortDirection;
+
+        private Kistl.App.GUI.ListSortDirection? _InitialSortDirection_store;
+        private Kistl.App.GUI.ListSortDirection? _InitialSortDirection {
+            get { return _InitialSortDirection_store; }
+            set {
+                _InitialSortDirection_store = value;
+            }
+        }
         
         /// <summary>EF sees only this property, for InitialSortDirection</summary>
         [XmlIgnore()]
@@ -530,7 +571,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _IsEditable;
+        private bool? _IsEditable_store;
+        private bool? _IsEditable {
+            get { return _IsEditable_store; }
+            set {
+                _IsEditable_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnIsEditable_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnIsEditable_PreSetter;
@@ -591,7 +638,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _IsMultiselect;
+        private bool? _IsMultiselect_store;
+        private bool? _IsMultiselect {
+            get { return _IsMultiselect_store; }
+            set {
+                _IsMultiselect_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnIsMultiselect_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnIsMultiselect_PreSetter;
@@ -864,7 +917,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _RespectRequiredFilter;
+        private bool? _RespectRequiredFilter_store;
+        private bool? _RespectRequiredFilter {
+            get { return _RespectRequiredFilter_store; }
+            set {
+                _RespectRequiredFilter_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnRespectRequiredFilter_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnRespectRequiredFilter_PreSetter;
@@ -925,7 +984,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _ShowFilter;
+        private bool? _ShowFilter_store;
+        private bool? _ShowFilter {
+            get { return _ShowFilter_store; }
+            set {
+                _ShowFilter_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowFilter_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowFilter_PreSetter;
@@ -986,7 +1051,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _ShowMasterDetail;
+        private bool? _ShowMasterDetail_store;
+        private bool? _ShowMasterDetail {
+            get { return _ShowMasterDetail_store; }
+            set {
+                _ShowMasterDetail_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowMasterDetail_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowMasterDetail_PreSetter;
@@ -1047,7 +1118,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _ShowOpenCommand;
+        private bool? _ShowOpenCommand_store;
+        private bool? _ShowOpenCommand {
+            get { return _ShowOpenCommand_store; }
+            set {
+                _ShowOpenCommand_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowOpenCommand_PreSetter;
@@ -1108,7 +1185,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private bool? _ShowRefreshCommand;
+        private bool? _ShowRefreshCommand_store;
+        private bool? _ShowRefreshCommand {
+            get { return _ShowRefreshCommand_store; }
+            set {
+                _ShowRefreshCommand_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, bool?> OnShowRefreshCommand_PreSetter;
@@ -1268,9 +1351,14 @@ namespace Kistl.App.GUI
                 }
             }
         }
-        
-        /// <summary>backing store for ViewMethod</summary>
-        private Kistl.App.GUI.InstanceListViewMethod? _ViewMethod;
+
+        private Kistl.App.GUI.InstanceListViewMethod? _ViewMethod_store;
+        private Kistl.App.GUI.InstanceListViewMethod? _ViewMethod {
+            get { return _ViewMethod_store; }
+            set {
+                _ViewMethod_store = value;
+            }
+        }
         
         /// <summary>EF sees only this property, for ViewMethod</summary>
         [XmlIgnore()]
@@ -1780,100 +1868,26 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._AllowAddNew);
-            binStream.Read(out this._AllowDelete);
-            binStream.Read(out this._AllowSelectColumns);
-            binStream.Read(out this._AllowUserFilter);
-            binStream.Read(out this._EnableAutoFilter);
-            binStream.Read(out this._InitialSort);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)baseValue;
-            }
-            binStream.Read(out this._IsEditable);
-            binStream.Read(out this._IsMultiselect);
+            this._AllowAddNew = binStream.ReadNullableBoolean();
+            this._AllowDelete = binStream.ReadNullableBoolean();
+            this._AllowSelectColumns = binStream.ReadNullableBoolean();
+            this._AllowUserFilter = binStream.ReadNullableBoolean();
+            this._EnableAutoFilter = binStream.ReadNullableBoolean();
+            this._InitialSort = binStream.ReadString();
+            ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
+            this._IsEditable = binStream.ReadNullableBoolean();
+            this._IsMultiselect = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_RequestedEditorKind);
             binStream.Read(out this._fk_RequestedWorkspaceKind);
-            binStream.Read(out this._RespectRequiredFilter);
-            binStream.Read(out this._ShowFilter);
-            binStream.Read(out this._ShowMasterDetail);
-            binStream.Read(out this._ShowOpenCommand);
-            binStream.Read(out this._ShowRefreshCommand);
+            this._RespectRequiredFilter = binStream.ReadNullableBoolean();
+            this._ShowFilter = binStream.ReadNullableBoolean();
+            this._ShowMasterDetail = binStream.ReadNullableBoolean();
+            this._ShowOpenCommand = binStream.ReadNullableBoolean();
+            this._ShowRefreshCommand = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_Type);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)baseValue;
-            }
+            ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._AllowAddNew, xml, "AllowAddNew", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._AllowDelete, xml, "AllowDelete", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._AllowSelectColumns, xml, "AllowSelectColumns", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._AllowUserFilter, xml, "AllowUserFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._EnableAutoFilter, xml, "EnableAutoFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._InitialSort, xml, "InitialSort", "Kistl.App.GUI");
-            XmlStreamer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedEditorKind", "RequestedEditorKind").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedWorkspaceKind", "RequestedWorkspaceKind").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_SearchScreen_of_Type", "Type").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Type", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._AllowAddNew, xml, "AllowAddNew", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowDelete, xml, "AllowDelete", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowSelectColumns, xml, "AllowSelectColumns", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowUserFilter, xml, "AllowUserFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._EnableAutoFilter, xml, "EnableAutoFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._InitialSort, xml, "InitialSort", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)v, xml, "InitialSortDirection", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1910,24 +1924,62 @@ namespace Kistl.App.GUI
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._AllowAddNew, xml, "AllowAddNew", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowDelete, xml, "AllowDelete", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowSelectColumns, xml, "AllowSelectColumns", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowUserFilter, xml, "AllowUserFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._EnableAutoFilter, xml, "EnableAutoFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._InitialSort, xml, "InitialSort", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)v, xml, "InitialSortDirection", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|AllowAddNew":
+                this._AllowAddNew = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowDelete":
+                this._AllowDelete = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowSelectColumns":
+                this._AllowSelectColumns = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowUserFilter":
+                this._AllowUserFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|EnableAutoFilter":
+                this._EnableAutoFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|InitialSort":
+                this._InitialSort = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|InitialSortDirection":
+                ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            case "Kistl.App.GUI|IsEditable":
+                this._IsEditable = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|IsMultiselect":
+                this._IsMultiselect = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|RequestedEditorKind":
+                this._fk_guid_RequestedEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|RequestedWorkspaceKind":
+                this._fk_guid_RequestedWorkspaceKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|RespectRequiredFilter":
+                this._RespectRequiredFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowFilter":
+                this._ShowFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowMasterDetail":
+                this._ShowMasterDetail = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowOpenCommand":
+                this._ShowOpenCommand = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowRefreshCommand":
+                this._ShowRefreshCommand = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|Type":
+                this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|ViewMethod":
+                ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            }
         }
 
         #endregion

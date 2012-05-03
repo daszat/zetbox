@@ -834,17 +834,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
 
-            foreach(NHibernatePersistenceObject x in TestCustomObjects_List_Nav) {
-                x.ParentsToDelete.Add(this);
-                ChildrenToDelete.Add(x);
+            if (TestCustomObjects_One_Nav != null) {
+                ((NHibernatePersistenceObject)TestCustomObjects_One_Nav).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)TestCustomObjects_One_Nav);
             }
             if (TestCustomObjects_Nav != null) {
                 ((NHibernatePersistenceObject)TestCustomObjects_Nav).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)TestCustomObjects_Nav);
             }
-            if (TestCustomObjects_One_Nav != null) {
-                ((NHibernatePersistenceObject)TestCustomObjects_One_Nav).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)TestCustomObjects_One_Nav);
+            foreach(NHibernatePersistenceObject x in TestCustomObjects_List_Nav) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
             }
 
             TestCustomObjects_List_Nav.Clear();
@@ -912,78 +912,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.TestBool = tmp;
-            }
+            this.Proxy.TestBool = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_TestCustomObjects_Nav);
             binStream.Read(out this._fk_TestCustomObjects_One_Nav);
-            {
-                DateTime? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.TestDateTime = tmp;
-            }
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                Proxy.TestEnum = (Kistl.App.Test.TestEnum)baseValue;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.TestString = tmp;
-            }
+            this.Proxy.TestDateTime = binStream.ReadNullableDateTime();
+            Proxy.TestEnum = (Kistl.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this.Proxy.TestString = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.TestBool, xml, "TestBool", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.TestCustomObjects_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.TestCustomObjects_Nav) : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.TestCustomObjects_One_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.TestCustomObjects_One_Nav) : (int?)null, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
-            XmlStreamer.ToStream((int?)Proxy.TestEnum, xml, "TestEnum", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.TestString, xml, "TestString", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                bool? tmp = this.Proxy.TestBool;
-                XmlStreamer.FromStream(ref tmp, xml, "TestBool", "Kistl.App.Test");
-                this.Proxy.TestBool = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_Nav, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_One_Nav, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
-            {
-                // yuck
-                DateTime? tmp = this.Proxy.TestDateTime;
-                XmlStreamer.FromStream(ref tmp, xml, "TestDateTime", "Kistl.App.Test");
-                this.Proxy.TestDateTime = tmp;
-            }
-            XmlStreamer.FromStreamConverter(v => Proxy.TestEnum = (Kistl.App.Test.TestEnum)v, xml, "TestEnum", "Kistl.App.Test");
-            {
-                // yuck
-                string tmp = this.Proxy.TestString;
-                XmlStreamer.FromStream(ref tmp, xml, "TestString", "Kistl.App.Test");
-                this.Proxy.TestString = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

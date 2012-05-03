@@ -485,16 +485,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\Serialization\NotifyingDataPropertySerialization.Designer.cs">
-      <DependentUpon>NotifyingDataPropertySerialization.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.Designer.cs">
-      <DependentUpon>NotifyingDataPropertyWithDefaultSerialization.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Templates\Serialization\ObjectReferencePropertySerialization.Designer.cs">
       <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -508,11 +498,6 @@
     </Compile>
     <Compile Include="Templates\Serialization\SerializerTemplate.Designer.cs">
       <DependentUpon>SerializerTemplate.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Serialization\SimpleFieldSerialization.Designer.cs">
-      <DependentUpon>SimpleFieldSerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -716,14 +701,6 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>EnumBinarySerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Serialization\NotifyingDataPropertySerialization.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>NotifyingDataPropertySerialization.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>NotifyingDataPropertyWithDefaultSerialization.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
@@ -731,10 +708,6 @@
     <None Include="Templates\Serialization\SerializerTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SerializerTemplate.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Serialization\SimpleFieldSerialization.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>SimpleFieldSerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\TypeBase.cst">
       <Generator>Arebis Template Processor</Generator>

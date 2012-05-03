@@ -97,12 +97,6 @@ namespace <%= DataType.Module.Namespace %>
         Serialization.SerializerTemplate.Call(Host, ctx,
             Serialization.SerializerDirection.FromStream, this.MembersToSerialize, true, null);
 
-        Serialization.SerializerTemplate.Call(Host, ctx,
-            Serialization.SerializerDirection.ToXmlStream, this.MembersToSerialize, true, null);
-        
-        Serialization.SerializerTemplate.Call(Host, ctx,
-            Serialization.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, null);
-
         if ((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable())
         {
             ObjectClass cls = (ObjectClass)DataType;            

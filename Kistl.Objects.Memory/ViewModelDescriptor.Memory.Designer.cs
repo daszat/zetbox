@@ -1323,65 +1323,20 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._fk_DefaultDisplayKind);
-            binStream.Read(out this._fk_DefaultEditorKind);
-            binStream.Read(out this._fk_DefaultGridCellDisplayKind);
-            binStream.Read(out this._fk_DefaultGridCellEditorKind);
-            binStream.Read(out this._fk_DefaultGridCellPreEditorKind);
-            binStream.Read(out this._Description);
-            binStream.Read(out this._isExportGuidSet);
+            this._fk_DefaultDisplayKind = binStream.ReadNullableInt32();
+            this._fk_DefaultEditorKind = binStream.ReadNullableInt32();
+            this._fk_DefaultGridCellDisplayKind = binStream.ReadNullableInt32();
+            this._fk_DefaultGridCellEditorKind = binStream.ReadNullableInt32();
+            this._fk_DefaultGridCellPreEditorKind = binStream.ReadNullableInt32();
+            this._Description = binStream.ReadString();
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
-            binStream.Read(out this._fk_Module);
-            binStream.Read(out this._fk_ViewModelRef);
+            this._fk_Module = binStream.ReadNullableInt32();
+            this._fk_ViewModelRef = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(DefaultDisplayKind != null ? DefaultDisplayKind.ID : (int?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(DefaultEditorKind != null ? DefaultEditorKind.ID : (int?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(DefaultGridCellDisplayKind != null ? DefaultGridCellDisplayKind.ID : (int?)null, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(DefaultGridCellEditorKind != null ? DefaultGridCellEditorKind.ID : (int?)null, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(DefaultGridCellPreEditorKind != null ? DefaultGridCellPreEditorKind.ID : (int?)null, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.ToStream(ViewModelRef != null ? ViewModelRef.ID : (int?)null, xml, "ViewModelRef", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_DefaultDisplayKind, xml, "DefaultDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_DefaultEditorKind, xml, "DefaultEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_DefaultGridCellDisplayKind, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_DefaultGridCellEditorKind, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_DefaultGridCellPreEditorKind, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1407,17 +1362,37 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultDisplayKind, xml, "DefaultDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultEditorKind, xml, "DefaultEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellDisplayKind, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellEditorKind, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellPreEditorKind, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|DefaultDisplayKind":
+                this._fk_guid_DefaultDisplayKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|DefaultEditorKind":
+                this._fk_guid_DefaultEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|DefaultGridCellDisplayKind":
+                this._fk_guid_DefaultGridCellDisplayKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|DefaultGridCellEditorKind":
+                this._fk_guid_DefaultGridCellEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|DefaultGridCellPreEditorKind":
+                this._fk_guid_DefaultGridCellPreEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|Description":
+                this._Description = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.GUI|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|ViewModelRef":
+                this._fk_guid_ViewModelRef = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion

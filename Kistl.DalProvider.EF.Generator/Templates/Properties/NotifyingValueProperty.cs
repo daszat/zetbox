@@ -21,9 +21,12 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
         protected override void ApplyAttributesTemplate()
         {
             base.ApplyAttributesTemplate();
-            this.WriteLine("        [XmlIgnore()]");
-            this.WriteLine("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]");
-            this.WriteLine("        [EdmScalarProperty()]");
+            EfScalarPropHelper.ApplyAttributesTemplate(this);
+        }
+
+        protected override void ApplyBackingStoreDefinition()
+        {
+            EfScalarPropHelper.ApplyBackingStoreDefinition(this, type, backingName);
         }
     }
 }

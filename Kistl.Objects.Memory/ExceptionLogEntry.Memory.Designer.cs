@@ -618,47 +618,14 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Date);
-            binStream.Read(out this._Exception);
-            binStream.Read(out this._Level);
-            binStream.Read(out this._Logger);
-            binStream.Read(out this._Message);
-            binStream.Read(out this._Thread);
+            this._Date = binStream.ReadDateTime();
+            this._Exception = binStream.ReadString();
+            this._Level = binStream.ReadString();
+            this._Logger = binStream.ReadString();
+            this._Message = binStream.ReadString();
+            this._Thread = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Date, xml, "Date", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Exception, xml, "Exception", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Level, xml, "Level", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Logger, xml, "Logger", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Message, xml, "Message", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Thread, xml, "Thread", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Date, xml, "Date", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Exception, xml, "Exception", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Level, xml, "Level", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Logger, xml, "Logger", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Message, xml, "Message", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Thread, xml, "Thread", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

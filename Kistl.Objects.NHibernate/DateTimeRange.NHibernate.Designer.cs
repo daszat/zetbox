@@ -278,38 +278,11 @@ public bool CompoundObject_IsNull { get; set; }
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._From);
-            binStream.Read(out this._Thru);
-            binStream.Read(out this._TotalDays);
+            this._From = binStream.ReadNullableDateTime();
+            this._Thru = binStream.ReadNullableDateTime();
+            this._TotalDays = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._From, xml, "From", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Thru, xml, "Thru", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._TotalDays, xml, "TotalDays", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Thru, xml, "Thru", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._TotalDays, xml, "TotalDays", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

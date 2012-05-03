@@ -1045,21 +1045,21 @@ namespace ZBox.App.SchemaMigration
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceEnum != null) OnNotifyDeleting_SourceEnum(this);
 
-            if (SourceColumn != null) {
-                ((NHibernatePersistenceObject)SourceColumn).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)SourceColumn);
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
             }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
             if (DestinationValue != null) {
                 ((NHibernatePersistenceObject)DestinationValue).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DestinationValue);
+            }
+            if (SourceColumn != null) {
+                ((NHibernatePersistenceObject)SourceColumn).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)SourceColumn);
             }
 
             ChangedBy = null;
@@ -1135,103 +1135,24 @@ namespace ZBox.App.SchemaMigration
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ChangedOn = tmp;
+                this.Proxy.ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.CreatedOn = tmp;
+                this.Proxy.CreatedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_DestinationValue);
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
+                this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_SourceColumn);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.SourceValue = tmp;
-            }
+            this.Proxy.SourceValue = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "ZBox.App.SchemaMigration");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "ZBox.App.SchemaMigration");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream(this.Proxy.DestinationValue != null ? OurContext.GetIdFromProxy(this.Proxy.DestinationValue) : (int?)null, xml, "DestinationValue", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "ZBox.App.SchemaMigration");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream(this.Proxy.SourceColumn != null ? OurContext.GetIdFromProxy(this.Proxy.SourceColumn) : (int?)null, xml, "SourceColumn", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.SourceValue, xml, "SourceValue", "ZBox.App.SchemaMigration");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "ZBox.App.SchemaMigration");
-            if (this._isChangedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "ZBox.App.SchemaMigration");
-                this.Proxy.ChangedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "ZBox.App.SchemaMigration");
-            if (this._isCreatedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "ZBox.App.SchemaMigration");
-                this.Proxy.CreatedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_DestinationValue, xml, "DestinationValue", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "ZBox.App.SchemaMigration");
-            if (this._isExportGuidSet) {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_SourceColumn, xml, "SourceColumn", "ZBox.App.SchemaMigration");
-            {
-                // yuck
-                string tmp = this.Proxy.SourceValue;
-                XmlStreamer.FromStream(ref tmp, xml, "SourceValue", "ZBox.App.SchemaMigration");
-                this.Proxy.SourceValue = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1256,37 +1177,31 @@ namespace ZBox.App.SchemaMigration
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "ZBox.App.SchemaMigration");
-                this.Proxy.ChangedOn = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "ZBox.App.SchemaMigration|ChangedOn":
+                // Import must have default value set
+                this.Proxy.ChangedOn = XmlStreamer.ReadDateTime(xml);
                 this._isChangedOnSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "ZBox.App.SchemaMigration");
-                this.Proxy.CreatedOn = tmp;
+                break;
+            case "ZBox.App.SchemaMigration|CreatedOn":
+                // Import must have default value set
+                this.Proxy.CreatedOn = XmlStreamer.ReadDateTime(xml);
                 this._isCreatedOnSet = true;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_DestinationValue, xml, "DestinationValue", "ZBox.App.SchemaMigration");
-            // Import must have default value set
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-                this.Proxy.ExportGuid = tmp;
+                break;
+            case "ZBox.App.SchemaMigration|DestinationValue":
+                this._fk_guid_DestinationValue = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_SourceColumn, xml, "SourceColumn", "ZBox.App.SchemaMigration");
-            {
-                // yuck
-                string tmp = this.Proxy.SourceValue;
-                XmlStreamer.FromStream(ref tmp, xml, "SourceValue", "ZBox.App.SchemaMigration");
-                this.Proxy.SourceValue = tmp;
+                break;
+            case "ZBox.App.SchemaMigration|SourceColumn":
+                this._fk_guid_SourceColumn = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|SourceValue":
+                this.Proxy.SourceValue = XmlStreamer.ReadString(xml);
+                break;
             }
         }
 

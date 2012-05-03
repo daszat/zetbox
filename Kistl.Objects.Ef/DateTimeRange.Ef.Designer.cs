@@ -109,7 +109,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private DateTime? _From;
+        private DateTime? _From_store;
+        private DateTime? _From {
+            get { return _From_store; }
+            set {
+                _From_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DateTimeRange, DateTime?> OnFrom_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DateTimeRange, DateTime?> OnFrom_PreSetter;
@@ -168,7 +174,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private DateTime? _Thru;
+        private DateTime? _Thru_store;
+        private DateTime? _Thru {
+            get { return _Thru_store; }
+            set {
+                _Thru_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DateTimeRange, DateTime?> OnThru_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DateTimeRange, DateTime?> OnThru_PreSetter;
@@ -218,7 +230,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int? _TotalDays;
+        private int? _TotalDays_store;
+        private int? _TotalDays {
+            get { return _TotalDays_store; }
+            set {
+                _TotalDays_store = value;
+            }
+        }
         private bool _TotalDays_IsDirty = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DateTimeRange, int?> OnTotalDays_Getter;
@@ -291,38 +309,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._From);
-            binStream.Read(out this._Thru);
-            binStream.Read(out this._TotalDays);
+            this._From = binStream.ReadNullableDateTime();
+            this._Thru = binStream.ReadNullableDateTime();
+            this._TotalDays = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._From, xml, "From", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Thru, xml, "Thru", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._TotalDays, xml, "TotalDays", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Thru, xml, "Thru", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._TotalDays, xml, "TotalDays", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

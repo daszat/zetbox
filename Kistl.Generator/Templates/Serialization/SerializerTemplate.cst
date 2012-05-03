@@ -40,18 +40,6 @@
             methodName = "FromStream";
             serType = SerializerType.Binary;
             break;
-        case SerializerDirection.ToXmlStream:
-            argType = "System.Xml.XmlWriter";
-            argName = "xml";
-            methodName = "ToStream";
-            serType = SerializerType.Xml;
-            break;
-        case SerializerDirection.FromXmlStream:
-            argType = "System.Xml.XmlReader";
-            argName = "xml";
-            methodName = "FromStream";
-            serType = SerializerType.Xml;
-            break;
         case SerializerDirection.Export:
             argType = "System.Xml.XmlWriter";
             additionalArgs = ", string[] modules";
@@ -70,86 +58,68 @@
             throw new ArgumentOutOfRangeException("direction");
     }
 
+    var fieldList = fields.Where(f => (f.SerializerType & serType) == serType).ToList();
+
     switch(direction)
     {
         case SerializerDirection.ToStream:
-        case SerializerDirection.ToXmlStream:
         case SerializerDirection.Export:
-        case SerializerDirection.MergeImport:
 %>
         public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
         {
-<%
-    if (overrideAndCallBase)
-    {
-%>
+<% if (overrideAndCallBase) { %>
             base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
-<%
-    }
-    else if (direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
-    {
-%>
+<% } else if (direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore)) { %>
             xml.WriteAttributeString("ExportGuid", <%= exportGuidBackingStore %>.ToString());
-<%
-    }
-%>
+<% }                                                                                %>
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-<%
-    foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
-    {
-        if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
+<%  foreach(var serMember in fieldList)        %>
+<%  {                                                                                            %>
+<%      if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")        %>
+<%      {                                                                                        %>
+<%          continue;                                                                            %>
+<%      }                                                                                        %>
+<%      ApplySerializer(direction, serMember, argName);                                            %>
+<%  }                                                                                            %>
+        }
+<%          break;                                                                                %>
+<%      case SerializerDirection.MergeImport:                                                    %>
+        public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
         {
-            continue;
+<% if (overrideAndCallBase) {                                                        %>
+            base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
+<% }                                                                                %>
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+<% if(fieldList.Count > 0) {                                                                        %>
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+<%            foreach(var serMember in fieldList)    %>
+<%            {                                                                                        %>
+<%                ApplySerializer(direction, serMember, argName);                                        %>
+<%            }                                                                                        %>
+            }
+<% }                                                                                                %>
         }
-        ApplySerializer(direction, serMember, argName);
-    }
-%>
-        }
-<%
-            break;
-        case SerializerDirection.FromStream:
-        case SerializerDirection.FromXmlStream:
-%>
+<%          break;                                                                                    %>
+<%      case SerializerDirection.FromStream:                                                        %>
         public <%= overrideAndCallBase ? "override" : "virtual" %> IEnumerable<IPersistenceObject> <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
         {
-<%
-    if (overrideAndCallBase)
-    {
-%>
+<% if (overrideAndCallBase) {                                                        %>
             var baseResult = base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
             var result = new List<IPersistenceObject>();
-<%
-    }
-    else
-    {
-%>
+<% } else {                                                                            %>
             object baseResult = null;
             var result = new List<IPersistenceObject>();
-<%
-    }
-    
-    if (!overrideAndCallBase && direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
-    {
-%>
-            xml.WriteAttributeString("ExportGuid", <%= exportGuidBackingStore %>.ToString());
-<%
-    }
-%>
+<% }                                                                                %>
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-<%
-    foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
-    {
-        if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
-        {
-            continue;
-        }
-        ApplySerializer(direction, serMember, argName);
-    }
-%>
+<%            foreach(var serMember in fieldList)    %>
+<%            {                                                                                        %>
+<%                ApplySerializer(direction, serMember, argName);                                        %>
+<%            }                                                                                        %>
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

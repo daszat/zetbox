@@ -547,44 +547,13 @@ namespace ZBox.App.SchemaMigration
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Destination);
-            binStream.Read(out this._DestinationRows);
-            binStream.Read(out this._Source);
-            binStream.Read(out this._SourceRows);
-            binStream.Read(out this._Timestamp);
+            this._Destination = binStream.ReadString();
+            this._DestinationRows = binStream.ReadInt32();
+            this._Source = binStream.ReadString();
+            this._SourceRows = binStream.ReadInt32();
+            this._Timestamp = binStream.ReadDateTime();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Destination, xml, "Destination", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._Source, xml, "Source", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._SourceRows, xml, "SourceRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._Timestamp, xml, "Timestamp", "ZBox.App.SchemaMigration");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Destination, xml, "Destination", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Source, xml, "Source", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._SourceRows, xml, "SourceRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Timestamp, xml, "Timestamp", "ZBox.App.SchemaMigration");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

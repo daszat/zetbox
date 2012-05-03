@@ -93,7 +93,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private bool _BoolValue;
+        private bool _BoolValue_store;
+        private bool _BoolValue {
+            get { return _BoolValue_store; }
+            set {
+                _BoolValue_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.BoolDefaultValue, bool> OnBoolValue_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.BoolDefaultValue, bool> OnBoolValue_PreSetter;
@@ -331,32 +337,9 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._BoolValue);
+            this._BoolValue = binStream.ReadBoolean();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._BoolValue, xml, "BoolValue", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._BoolValue, xml, "BoolValue", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -376,7 +359,11 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._BoolValue, xml, "BoolValue", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|BoolValue":
+                this._BoolValue = XmlStreamer.ReadBoolean(xml);
+                break;
+            }
         }
 
         #endregion

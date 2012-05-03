@@ -428,53 +428,10 @@ namespace Kistl.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Day = tmp;
-            }
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Month = tmp;
-            }
+            this.Proxy.Day = binStream.ReadInt32();
+            this.Proxy.Month = binStream.ReadInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Day, xml, "Day", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this.Proxy.Month, xml, "Month", "Kistl.App.Calendar");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                int tmp = this.Proxy.Day;
-                XmlStreamer.FromStream(ref tmp, xml, "Day", "Kistl.App.Calendar");
-                this.Proxy.Day = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.Month;
-                XmlStreamer.FromStream(ref tmp, xml, "Month", "Kistl.App.Calendar");
-                this.Proxy.Month = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -495,17 +452,13 @@ namespace Kistl.App.Calendar
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                int tmp = this.Proxy.Day;
-                XmlStreamer.FromStream(ref tmp, xml, "Day", "Kistl.App.Calendar");
-                this.Proxy.Day = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.Month;
-                XmlStreamer.FromStream(ref tmp, xml, "Month", "Kistl.App.Calendar");
-                this.Proxy.Month = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Calendar|Day":
+                this.Proxy.Day = XmlStreamer.ReadInt32(xml);
+                break;
+            case "Kistl.App.Calendar|Month":
+                this.Proxy.Month = XmlStreamer.ReadInt32(xml);
+                break;
             }
         }
 

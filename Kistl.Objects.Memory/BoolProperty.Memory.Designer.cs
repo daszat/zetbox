@@ -1101,47 +1101,14 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._fk_FalseIcon);
-            binStream.Read(out this._FalseLabel);
-            binStream.Read(out this._fk_NullIcon);
-            binStream.Read(out this._NullLabel);
-            binStream.Read(out this._fk_TrueIcon);
-            binStream.Read(out this._TrueLabel);
+            this._fk_FalseIcon = binStream.ReadNullableInt32();
+            this._FalseLabel = binStream.ReadString();
+            this._fk_NullIcon = binStream.ReadNullableInt32();
+            this._NullLabel = binStream.ReadString();
+            this._fk_TrueIcon = binStream.ReadNullableInt32();
+            this._TrueLabel = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(FalseIcon != null ? FalseIcon.ID : (int?)null, xml, "FalseIcon", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
-            XmlStreamer.ToStream(NullIcon != null ? NullIcon.ID : (int?)null, xml, "NullIcon", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._NullLabel, xml, "NullLabel", "Kistl.App.Base");
-            XmlStreamer.ToStream(TrueIcon != null ? TrueIcon.ID : (int?)null, xml, "TrueIcon", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._TrueLabel, xml, "TrueLabel", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_FalseIcon, xml, "FalseIcon", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_NullIcon, xml, "NullIcon", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._NullLabel, xml, "NullLabel", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_TrueIcon, xml, "TrueIcon", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._TrueLabel, xml, "TrueLabel", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1166,12 +1133,26 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_FalseIcon, xml, "FalseIcon", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_NullIcon, xml, "NullIcon", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._NullLabel, xml, "NullLabel", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_TrueIcon, xml, "TrueIcon", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._TrueLabel, xml, "TrueLabel", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|FalseIcon":
+                this._fk_guid_FalseIcon = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|FalseLabel":
+                this._FalseLabel = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|NullIcon":
+                this._fk_guid_NullIcon = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|NullLabel":
+                this._NullLabel = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|TrueIcon":
+                this._fk_guid_TrueIcon = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|TrueLabel":
+                this._TrueLabel = XmlStreamer.ReadString(xml);
+                break;
+            }
         }
 
         #endregion

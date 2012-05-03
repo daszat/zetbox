@@ -210,7 +210,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private DateTime _ChangedOn;
+        private DateTime _ChangedOn_store;
+        private DateTime _ChangedOn {
+            get { return _ChangedOn_store; }
+            set {
+                _ChangedOn_store = value;
+            }
+        }
         private bool _isChangedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ServiceDescriptor, DateTime> OnChangedOn_Getter;
@@ -389,7 +395,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private DateTime _CreatedOn;
+        private DateTime _CreatedOn_store;
+        private DateTime _CreatedOn {
+            get { return _CreatedOn_store; }
+            set {
+                _CreatedOn_store = value;
+            }
+        }
         private bool _isCreatedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ServiceDescriptor, DateTime> OnCreatedOn_Getter;
@@ -444,9 +456,14 @@ namespace Kistl.App.Base
                 }
             }
         }
-        
-        /// <summary>backing store for DeploymentRestriction</summary>
-        private Kistl.App.Base.DeploymentRestriction? _DeploymentRestriction;
+
+        private Kistl.App.Base.DeploymentRestriction? _DeploymentRestriction_store;
+        private Kistl.App.Base.DeploymentRestriction? _DeploymentRestriction {
+            get { return _DeploymentRestriction_store; }
+            set {
+                _DeploymentRestriction_store = value;
+            }
+        }
         
         /// <summary>EF sees only this property, for DeploymentRestriction</summary>
         [XmlIgnore()]
@@ -522,7 +539,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _Description;
+        private string _Description_store;
+        private string _Description {
+            get { return _Description_store; }
+            set {
+                _Description_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ServiceDescriptor, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ServiceDescriptor, string> OnDescription_PreSetter;
@@ -595,7 +618,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         private bool _isExportGuidSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ServiceDescriptor, Guid> OnExportGuid_Getter;
@@ -1165,98 +1194,25 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                binStream.Read(out this._ChangedOn);
+                this._ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                binStream.Read(out this._CreatedOn);
+                this._CreatedOn = binStream.ReadDateTime();
             }
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.Base.ServiceDescriptor)this).DeploymentRestriction = (Kistl.App.Base.DeploymentRestriction?)baseValue;
-            }
-            binStream.Read(out this._Description);
-            binStream.Read(out this._isExportGuidSet);
+            ((Kistl.App.Base.ServiceDescriptor)this).DeploymentRestriction = (Kistl.App.Base.DeploymentRestriction?)binStream.ReadNullableInt32();
+            this._Description = binStream.ReadString();
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
             binStream.Read(out this._fk_TypeRef);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_ServiceDescriptor_was_ChangedBy", "ChangedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_ServiceDescriptor_was_CreatedBy", "CreatedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream((int?)((Kistl.App.Base.ServiceDescriptor)this).DeploymentRestriction, xml, "DeploymentRestriction", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleEfImpl>("Model.FK_ServiceDescriptor_has_Module", "Module").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Module", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_ServiceDescriptor_describes_a_TypeRef", "TypeRef").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "TypeRef", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
-            if (this._isChangedOnSet) {
-                XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Base.ServiceDescriptor)this).DeploymentRestriction = (Kistl.App.Base.DeploymentRestriction?)v, xml, "DeploymentRestriction", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_TypeRef, xml, "TypeRef", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1282,19 +1238,35 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            this._isChangedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            this._isCreatedOnSet = true;
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Base.ServiceDescriptor)this).DeploymentRestriction = (Kistl.App.Base.DeploymentRestriction?)v, xml, "DeploymentRestriction", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_TypeRef, xml, "TypeRef", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "Kistl.App.Base|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "Kistl.App.Base|DeploymentRestriction":
+                ((Kistl.App.Base.ServiceDescriptor)this).DeploymentRestriction = (Kistl.App.Base.DeploymentRestriction?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            case "Kistl.App.Base|Description":
+                this._Description = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Base|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.Base|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|TypeRef":
+                this._fk_guid_TypeRef = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion

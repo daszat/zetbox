@@ -355,41 +355,9 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.BoolValue = tmp;
-            }
+            this.Proxy.BoolValue = binStream.ReadBoolean();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.BoolValue, xml, "BoolValue", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                bool tmp = this.Proxy.BoolValue;
-                XmlStreamer.FromStream(ref tmp, xml, "BoolValue", "Kistl.App.Base");
-                this.Proxy.BoolValue = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -409,11 +377,10 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                bool tmp = this.Proxy.BoolValue;
-                XmlStreamer.FromStream(ref tmp, xml, "BoolValue", "Kistl.App.Base");
-                this.Proxy.BoolValue = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|BoolValue":
+                this.Proxy.BoolValue = XmlStreamer.ReadBoolean(xml);
+                break;
             }
         }
 

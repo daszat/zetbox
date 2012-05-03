@@ -945,43 +945,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.StringProp = tmp;
-            }
+            this.Proxy.StringProp = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Parent != null ? OurContext.GetIdFromProxy(this.Proxy.Parent) : (int?)null, xml, "Parent", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.StringProp, xml, "StringProp", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Test");
-            {
-                // yuck
-                string tmp = this.Proxy.StringProp;
-                XmlStreamer.FromStream(ref tmp, xml, "StringProp", "Kistl.App.Test");
-                this.Proxy.StringProp = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

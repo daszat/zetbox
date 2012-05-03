@@ -418,41 +418,9 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsCurrentYearDefault = tmp;
-            }
+            this.Proxy.IsCurrentYearDefault = binStream.ReadNullableBoolean();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.IsCurrentYearDefault, xml, "IsCurrentYearDefault", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                bool? tmp = this.Proxy.IsCurrentYearDefault;
-                XmlStreamer.FromStream(ref tmp, xml, "IsCurrentYearDefault", "Kistl.App.GUI");
-                this.Proxy.IsCurrentYearDefault = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -472,11 +440,10 @@ namespace Kistl.App.GUI
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                bool? tmp = this.Proxy.IsCurrentYearDefault;
-                XmlStreamer.FromStream(ref tmp, xml, "IsCurrentYearDefault", "Kistl.App.GUI");
-                this.Proxy.IsCurrentYearDefault = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|IsCurrentYearDefault":
+                this.Proxy.IsCurrentYearDefault = XmlStreamer.ReadNullableBoolean(xml);
+                break;
             }
         }
 

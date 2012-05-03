@@ -1039,92 +1039,14 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.HasPersistentOrder = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ImplementorRoleName = tmp;
-            }
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsList = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ItemRoleName = tmp;
-            }
+            this.Proxy.HasPersistentOrder = binStream.ReadBoolean();
+            this.Proxy.ImplementorRoleName = binStream.ReadString();
+            this.Proxy.IsList = binStream.ReadBoolean();
+            this.Proxy.ItemRoleName = binStream.ReadString();
             binStream.Read(out this._fk_ReferencedObjectClass);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Verb = tmp;
-            }
+            this.Proxy.Verb = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.ReferencedObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.ReferencedObjectClass) : (int?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Verb, xml, "Verb", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                bool tmp = this.Proxy.HasPersistentOrder;
-                XmlStreamer.FromStream(ref tmp, xml, "HasPersistentOrder", "Kistl.App.Base");
-                this.Proxy.HasPersistentOrder = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.ImplementorRoleName;
-                XmlStreamer.FromStream(ref tmp, xml, "ImplementorRoleName", "Kistl.App.Base");
-                this.Proxy.ImplementorRoleName = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsList;
-                XmlStreamer.FromStream(ref tmp, xml, "IsList", "Kistl.App.Base");
-                this.Proxy.IsList = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.ItemRoleName;
-                XmlStreamer.FromStream(ref tmp, xml, "ItemRoleName", "Kistl.App.Base");
-                this.Proxy.ItemRoleName = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_ReferencedObjectClass, xml, "ReferencedObjectClass", "Kistl.App.Base");
-            {
-                // yuck
-                string tmp = this.Proxy.Verb;
-                XmlStreamer.FromStream(ref tmp, xml, "Verb", "Kistl.App.Base");
-                this.Proxy.Verb = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1149,36 +1071,25 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                bool tmp = this.Proxy.HasPersistentOrder;
-                XmlStreamer.FromStream(ref tmp, xml, "HasPersistentOrder", "Kistl.App.Base");
-                this.Proxy.HasPersistentOrder = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.ImplementorRoleName;
-                XmlStreamer.FromStream(ref tmp, xml, "ImplementorRoleName", "Kistl.App.Base");
-                this.Proxy.ImplementorRoleName = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsList;
-                XmlStreamer.FromStream(ref tmp, xml, "IsList", "Kistl.App.Base");
-                this.Proxy.IsList = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.ItemRoleName;
-                XmlStreamer.FromStream(ref tmp, xml, "ItemRoleName", "Kistl.App.Base");
-                this.Proxy.ItemRoleName = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_ReferencedObjectClass, xml, "ReferencedObjectClass", "Kistl.App.Base");
-            {
-                // yuck
-                string tmp = this.Proxy.Verb;
-                XmlStreamer.FromStream(ref tmp, xml, "Verb", "Kistl.App.Base");
-                this.Proxy.Verb = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|HasPersistentOrder":
+                this.Proxy.HasPersistentOrder = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|ImplementorRoleName":
+                this.Proxy.ImplementorRoleName = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Base|IsList":
+                this.Proxy.IsList = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|ItemRoleName":
+                this.Proxy.ItemRoleName = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Base|ReferencedObjectClass":
+                this._fk_guid_ReferencedObjectClass = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|Verb":
+                this.Proxy.Verb = XmlStreamer.ReadString(xml);
+                break;
             }
         }
 

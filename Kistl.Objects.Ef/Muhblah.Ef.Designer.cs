@@ -93,7 +93,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private bool? _TestBool;
+        private bool? _TestBool_store;
+        private bool? _TestBool {
+            get { return _TestBool_store; }
+            set {
+                _TestBool_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_PreSetter;
@@ -495,7 +501,13 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 				}
             }
         }
-        private DateTime? _TestDateTime;
+        private DateTime? _TestDateTime_store;
+        private DateTime? _TestDateTime {
+            get { return _TestDateTime_store; }
+            set {
+                _TestDateTime_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_PreSetter;
@@ -549,9 +561,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 }
             }
         }
-        
-        /// <summary>backing store for TestEnum</summary>
-        private Kistl.App.Test.TestEnum _TestEnum;
+
+        private Kistl.App.Test.TestEnum _TestEnum_store;
+        private Kistl.App.Test.TestEnum _TestEnum {
+            get { return _TestEnum_store; }
+            set {
+                _TestEnum_store = value;
+            }
+        }
         
         /// <summary>EF sees only this property, for TestEnum</summary>
         [XmlIgnore()]
@@ -627,7 +644,13 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 				}
             }
         }
-        private string _TestString;
+        private string _TestString_store;
+        private string _TestString {
+            get { return _TestString_store; }
+            set {
+                _TestString_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_PreSetter;
@@ -936,57 +959,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._TestBool);
+            this._TestBool = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_TestCustomObjects_Nav);
             binStream.Read(out this._fk_TestCustomObjects_One_Nav);
-            binStream.Read(out this._TestDateTime);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.Test.Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)baseValue;
-            }
-            binStream.Read(out this._TestString);
+            this._TestDateTime = binStream.ReadNullableDateTime();
+            ((Kistl.App.Test.Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)binStream.ReadNullableInt32();
+            this._TestString = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._TestBool, xml, "TestBool", "Kistl.App.Test");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Lst_Role_hasOther_TCO_Role", "TCO_Role").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_One_Role_loves_TCO_One_Role", "TCO_One_Role").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
-            }
-            XmlStreamer.ToStream(this._TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
-            XmlStreamer.ToStream((int?)((Kistl.App.Test.Muhblah)this).TestEnum, xml, "TestEnum", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._TestString, xml, "TestString", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._TestBool, xml, "TestBool", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_Nav, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_One_Nav, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Test.Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)v, xml, "TestEnum", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._TestString, xml, "TestString", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

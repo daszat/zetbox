@@ -592,44 +592,13 @@ namespace Kistl.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Frage);
-            binStream.Read(out this._fk_Fragebogen);
-            binStream.Read(out this._gute_Antworten_pos);
-            binStream.Read(out this._FragenNummer);
-            binStream.Read(out this._GegebeneAntwort);
+            this._Frage = binStream.ReadString();
+            this._fk_Fragebogen = binStream.ReadNullableInt32();
+            this._gute_Antworten_pos = binStream.ReadNullableInt32();
+            this._FragenNummer = binStream.ReadInt32();
+            this._GegebeneAntwort = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Frage, xml, "Frage", "Kistl.App.Test");
-            XmlStreamer.ToStream(Fragebogen != null ? Fragebogen.ID : (int?)null, xml, "Fragebogen", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._gute_Antworten_pos, xml, "gute_Antworten_pos", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Frage, xml, "Frage", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_Fragebogen, xml, "Fragebogen", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._gute_Antworten_pos, xml, "gute_Antworten_pos", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

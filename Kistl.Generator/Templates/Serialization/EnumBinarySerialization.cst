@@ -30,27 +30,19 @@
             break;
         case SerializerDirection.FromStream:
 %>
-            {
-                int? baseValue;
-                <%= streamName %>.Read(out baseValue);
-                <%= backingStoreName %> = (<%= enumerationType %>)baseValue;
-            }
-<%
-            break;
-        case SerializerDirection.ToXmlStream:
-%>
-            XmlStreamer.ToStream((int?)<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%
-            break;
-        case SerializerDirection.FromXmlStream:
-        case SerializerDirection.MergeImport:
-%>
-            XmlStreamer.FromStreamConverter(v => <%= backingStoreName %> = (<%= enumerationType %>)v, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            <%= backingStoreName %> = (<%= enumerationType %>)<%= streamName %>.ReadNullableInt32();
 <%
             break;
         case SerializerDirection.Export:
 %>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream((int?)<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+            break;
+        case SerializerDirection.MergeImport:
+%>
+            case "<%= xmlnamespace %>|<%= xmlname %>":
+                <%= backingStoreName %> = (<%= enumerationType %>)XmlStreamer.ReadNullableInt32(<%= streamName %>);
+               break;
 <%
             break;
         default:

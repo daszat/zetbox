@@ -93,7 +93,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int? _MaxLength;
+        private int? _MaxLength_store;
+        private int? _MaxLength {
+            get { return _MaxLength_store; }
+            set {
+                _MaxLength_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_PreSetter;
@@ -154,7 +160,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int _MinLength;
+        private int _MinLength_store;
+        private int _MinLength {
+            get { return _MinLength_store; }
+            set {
+                _MinLength_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PreSetter;
@@ -468,35 +480,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._MaxLength);
-            binStream.Read(out this._MinLength);
+            this._MaxLength = binStream.ReadNullableInt32();
+            this._MinLength = binStream.ReadInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._MinLength, xml, "MinLength", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._MinLength, xml, "MinLength", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -517,8 +504,14 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._MinLength, xml, "MinLength", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|MaxLength":
+                this._MaxLength = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Kistl.App.Base|MinLength":
+                this._MinLength = XmlStreamer.ReadInt32(xml);
+                break;
+            }
         }
 
         #endregion

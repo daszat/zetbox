@@ -1326,40 +1326,40 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
 
-            // should fetch && remember parent for Application_opens_a_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_has_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for NavigationEntry_modeled_by_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for ObjectClass_has_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for Property_has_ViewModelDescriptor_RelationEntry
-            if (DefaultDisplayKind != null) {
-                ((NHibernatePersistenceObject)DefaultDisplayKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultDisplayKind);
+            if (ViewModelRef != null) {
+                ((NHibernatePersistenceObject)ViewModelRef).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelRef);
             }
             if (DefaultEditorKind != null) {
                 ((NHibernatePersistenceObject)DefaultEditorKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultEditorKind);
             }
-            if (DefaultGridCellDisplayKind != null) {
-                ((NHibernatePersistenceObject)DefaultGridCellDisplayKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellDisplayKind);
+            if (DefaultGridCellPreEditorKind != null) {
+                ((NHibernatePersistenceObject)DefaultGridCellPreEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellPreEditorKind);
             }
             if (DefaultGridCellEditorKind != null) {
                 ((NHibernatePersistenceObject)DefaultGridCellEditorKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellEditorKind);
             }
-            if (DefaultGridCellPreEditorKind != null) {
-                ((NHibernatePersistenceObject)DefaultGridCellPreEditorKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellPreEditorKind);
+            if (DefaultDisplayKind != null) {
+                ((NHibernatePersistenceObject)DefaultDisplayKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultDisplayKind);
             }
+            if (DefaultGridCellDisplayKind != null) {
+                ((NHibernatePersistenceObject)DefaultGridCellDisplayKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellDisplayKind);
+            }
+            // should fetch && remember parent for Property_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for NavigationEntry_modeled_by_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for Application_opens_a_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for CompoundObject_may_has_ViewModelDescriptor_RelationEntry
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            if (ViewModelRef != null) {
-                ((NHibernatePersistenceObject)ViewModelRef).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelRef);
-            }
-            // should fetch && remember parent for CompoundObject_may_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for ObjectClass_has_ViewModelDescriptor_RelationEntry
 
             SecondaryControlKinds.Clear();
             DefaultDisplayKind = null;
@@ -1442,74 +1442,15 @@ namespace Kistl.App.GUI
             binStream.Read(out this._fk_DefaultGridCellDisplayKind);
             binStream.Read(out this._fk_DefaultGridCellEditorKind);
             binStream.Read(out this._fk_DefaultGridCellPreEditorKind);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Description = tmp;
-            }
-            binStream.Read(out this._isExportGuidSet);
+            this.Proxy.Description = binStream.ReadString();
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
+                this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
             binStream.Read(out this._fk_ViewModelRef);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.DefaultDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultDisplayKind) : (int?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.DefaultEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultEditorKind) : (int?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellDisplayKind) : (int?)null, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.DefaultGridCellEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellEditorKind) : (int?)null, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.DefaultGridCellPreEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellPreEditorKind) : (int?)null, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.ViewModelRef != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelRef) : (int?)null, xml, "ViewModelRef", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_DefaultDisplayKind, xml, "DefaultDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_DefaultEditorKind, xml, "DefaultEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_DefaultGridCellDisplayKind, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_DefaultGridCellEditorKind, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_DefaultGridCellPreEditorKind, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");
-                this.Proxy.Description = tmp;
-            }
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
-            if (this._isExportGuidSet) {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1535,27 +1476,37 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultDisplayKind, xml, "DefaultDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultEditorKind, xml, "DefaultEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellDisplayKind, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellEditorKind, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellPreEditorKind, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");
-                this.Proxy.Description = tmp;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|DefaultDisplayKind":
+                this._fk_guid_DefaultDisplayKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|DefaultEditorKind":
+                this._fk_guid_DefaultEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|DefaultGridCellDisplayKind":
+                this._fk_guid_DefaultGridCellDisplayKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|DefaultGridCellEditorKind":
+                this._fk_guid_DefaultGridCellEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|DefaultGridCellPreEditorKind":
+                this._fk_guid_DefaultGridCellPreEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|Description":
+                this.Proxy.Description = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.GUI|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|ViewModelRef":
+                this._fk_guid_ViewModelRef = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         #endregion

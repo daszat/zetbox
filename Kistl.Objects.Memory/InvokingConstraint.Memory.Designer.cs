@@ -573,35 +573,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._fk_GetErrorTextInvocation);
-            binStream.Read(out this._fk_IsValidInvocation);
+            this._fk_GetErrorTextInvocation = binStream.ReadNullableInt32();
+            this._fk_IsValidInvocation = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(GetErrorTextInvocation != null ? GetErrorTextInvocation.ID : (int?)null, xml, "GetErrorTextInvocation", "Kistl.App.Base");
-            XmlStreamer.ToStream(IsValidInvocation != null ? IsValidInvocation.ID : (int?)null, xml, "IsValidInvocation", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_GetErrorTextInvocation, xml, "GetErrorTextInvocation", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_IsValidInvocation, xml, "IsValidInvocation", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -622,8 +597,14 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_GetErrorTextInvocation, xml, "GetErrorTextInvocation", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_IsValidInvocation, xml, "IsValidInvocation", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|GetErrorTextInvocation":
+                this._fk_guid_GetErrorTextInvocation = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|IsValidInvocation":
+                this._fk_guid_IsValidInvocation = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion

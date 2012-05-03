@@ -1396,101 +1396,32 @@ namespace Kistl.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._fk_Calendar);
-            binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._fk_Calendar = binStream.ReadNullableInt32();
+            this._fk_ChangedBy = binStream.ReadNullableInt32();
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                binStream.Read(out this._ChangedOn);
+                this._ChangedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._fk_CreatedBy = binStream.ReadNullableInt32();
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                binStream.Read(out this._CreatedOn);
+                this._CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
-            binStream.Read(out this._isIsWorkingDaySet);
+            this._isIsWorkingDaySet = binStream.ReadBoolean();
             if (this._isIsWorkingDaySet) {
-                binStream.Read(out this._IsWorkingDay);
+                this._IsWorkingDay = binStream.ReadBoolean();
             }
-            binStream.Read(out this._fk_Module);
-            binStream.Read(out this._Name);
-            binStream.Read(out this._ValidFrom);
-            binStream.Read(out this._ValidUntil);
-            binStream.Read(out this._WorkingHours);
+            this._fk_Module = binStream.ReadNullableInt32();
+            this._Name = binStream.ReadString();
+            this._ValidFrom = binStream.ReadNullableDateTime();
+            this._ValidUntil = binStream.ReadNullableDateTime();
+            this._WorkingHours = binStream.ReadDecimal();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(Calendar != null ? Calendar.ID : (int?)null, xml, "Calendar", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Calendar");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");
-            }
-            XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Calendar");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Calendar");
-            }
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Calendar");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Calendar");
-            }
-            XmlStreamer.ToStream(this._isIsWorkingDaySet, xml, "IsIsWorkingDaySet", "Kistl.App.Calendar");
-            if (this._isIsWorkingDaySet) {
-                XmlStreamer.ToStream(this._IsWorkingDay, xml, "IsWorkingDay", "Kistl.App.Calendar");
-            }
-            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._ValidFrom, xml, "ValidFrom", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._ValidUntil, xml, "ValidUntil", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._WorkingHours, xml, "WorkingHours", "Kistl.App.Calendar");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Calendar, xml, "Calendar", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Calendar");
-            if (this._isChangedOnSet) {
-                XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Calendar");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Calendar");
-            }
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Calendar");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Calendar");
-            }
-            XmlStreamer.FromStream(ref this._isIsWorkingDaySet, xml, "IsIsWorkingDaySet", "Kistl.App.Calendar");
-            if (this._isIsWorkingDaySet) {
-                XmlStreamer.FromStream(ref this._IsWorkingDay, xml, "IsWorkingDay", "Kistl.App.Calendar");
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._ValidFrom, xml, "ValidFrom", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._ValidUntil, xml, "ValidUntil", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._WorkingHours, xml, "WorkingHours", "Kistl.App.Calendar");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1520,24 +1451,46 @@ namespace Kistl.App.Calendar
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_Calendar, xml, "Calendar", "Kistl.App.Calendar");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");
-            this._isChangedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Calendar");
-            this._isCreatedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Calendar");
-            this._isExportGuidSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._IsWorkingDay, xml, "IsWorkingDay", "Kistl.App.Calendar");
-            this._isIsWorkingDaySet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._ValidFrom, xml, "ValidFrom", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._ValidUntil, xml, "ValidUntil", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._WorkingHours, xml, "WorkingHours", "Kistl.App.Calendar");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Calendar|Calendar":
+                this._fk_guid_Calendar = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Calendar|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "Kistl.App.Calendar|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "Kistl.App.Calendar|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.Calendar|IsWorkingDay":
+                // Import must have default value set
+                this._IsWorkingDay = XmlStreamer.ReadBoolean(xml);
+                this._isIsWorkingDaySet = true;
+                break;
+            case "Kistl.App.Calendar|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Calendar|Name":
+                this._Name = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Calendar|ValidFrom":
+                this._ValidFrom = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Kistl.App.Calendar|ValidUntil":
+                this._ValidUntil = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Kistl.App.Calendar|WorkingHours":
+                this._WorkingHours = XmlStreamer.ReadDecimal(xml);
+                break;
+            }
         }
 
         #endregion

@@ -59,31 +59,22 @@ break;
         case SerializerDirection.FromStream:
 
 #line 33 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                int? baseValue;\r\n");
-this.WriteObjects("                ",  streamName , ".Read(out baseValue);\r\n");
-this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")baseValue;\r\n");
-this.WriteObjects("            }\r\n");
-#line 39 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-break;
-        case SerializerDirection.ToXmlStream:
-
-#line 42 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStream((int?)",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 44 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-break;
-        case SerializerDirection.FromXmlStream:
-        case SerializerDirection.MergeImport:
-
-#line 48 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            XmlStreamer.FromStreamConverter(v => ",  backingStoreName , " = (",  enumerationType , ")v, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 50 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+this.WriteObjects("            ",  backingStoreName , " = (",  enumerationType , ")",  streamName , ".ReadNullableInt32();\r\n");
+#line 35 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 53 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+#line 38 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int?)",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 55 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+#line 40 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+break;
+        case SerializerDirection.MergeImport:
+
+#line 43 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")XmlStreamer.ReadNullableInt32(",  streamName , ");\r\n");
+this.WriteObjects("               break;\r\n");
+#line 47 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

@@ -272,47 +272,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -332,14 +296,17 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
         #endregion
@@ -717,47 +684,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -777,14 +708,17 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
         #endregion
@@ -1246,71 +1180,13 @@ namespace at.dasz.DocumentManagement
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.A_pos = tmp;
-            }
+            this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.B_pos = tmp;
-            }
+            this.Proxy.B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "at.dasz.DocumentManagement");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.DocumentManagement");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "at.dasz.DocumentManagement");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "at.dasz.DocumentManagement");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "at.dasz.DocumentManagement");
-                this.Proxy.B_pos = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1332,25 +1208,22 @@ namespace at.dasz.DocumentManagement
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "at.dasz.DocumentManagement");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "at.dasz.DocumentManagement");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "at.dasz.DocumentManagement");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "at.dasz.DocumentManagement");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "at.dasz.DocumentManagement");
-                this.Proxy.B_pos = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "at.dasz.DocumentManagement|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "at.dasz.DocumentManagement|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "at.dasz.DocumentManagement|A_pos":
+                this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "at.dasz.DocumentManagement|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "at.dasz.DocumentManagement|B_pos":
+                this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
             }
         }
 
@@ -1698,32 +1571,7 @@ namespace Kistl.App.Base
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2097,47 +1945,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2157,14 +1969,17 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
         #endregion
@@ -2505,32 +2320,7 @@ namespace Kistl.App.Test
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2867,32 +2657,7 @@ namespace Kistl.App.Test
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -3266,47 +3031,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -3326,14 +3055,17 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
         #endregion
@@ -3711,47 +3443,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -3771,14 +3467,17 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
         #endregion
@@ -4240,71 +3939,13 @@ namespace Kistl.App.Projekte
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.A_pos = tmp;
-            }
+            this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.B_pos = tmp;
-            }
+            this.Proxy.B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Kistl.App.Projekte");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Projekte");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Projekte");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Projekte");
-                this.Proxy.B_pos = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -4326,25 +3967,22 @@ namespace Kistl.App.Projekte
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Projekte");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Projekte");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Projekte");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Projekte");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Projekte");
-                this.Proxy.B_pos = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Projekte|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Projekte|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Projekte|A_pos":
+                this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Kistl.App.Projekte|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Projekte|B_pos":
+                this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
             }
         }
 
@@ -4813,71 +4451,13 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.A_pos = tmp;
-            }
+            this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.B_pos = tmp;
-            }
+            this.Proxy.B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Base");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Base");
-                this.Proxy.B_pos = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -4899,25 +4479,22 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Base");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Base");
-                this.Proxy.B_pos = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|A_pos":
+                this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B_pos":
+                this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
             }
         }
 
@@ -5386,71 +4963,13 @@ namespace ZBox.App.SchemaMigration
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.A_pos = tmp;
-            }
+            this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.B_pos = tmp;
-            }
+            this.Proxy.B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "ZBox.App.SchemaMigration");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "ZBox.App.SchemaMigration");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "ZBox.App.SchemaMigration");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "ZBox.App.SchemaMigration");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "ZBox.App.SchemaMigration");
-                this.Proxy.B_pos = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -5472,25 +4991,22 @@ namespace ZBox.App.SchemaMigration
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "ZBox.App.SchemaMigration");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "ZBox.App.SchemaMigration");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "ZBox.App.SchemaMigration");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "ZBox.App.SchemaMigration");
-                this.Proxy.B_pos = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "ZBox.App.SchemaMigration|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|A_pos":
+                this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "ZBox.App.SchemaMigration|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|B_pos":
+                this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
             }
         }
 
@@ -5838,32 +5354,7 @@ namespace Kistl.App.GUI
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -6200,32 +5691,7 @@ namespace Kistl.App.Test
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -6683,71 +6149,13 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.A_pos = tmp;
-            }
+            this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.B_pos = tmp;
-            }
+            this.Proxy.B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Base");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Base");
-                this.Proxy.B_pos = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -6769,25 +6177,22 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            {
-                // yuck
-                int? tmp = this.Proxy.A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Base");
-                this.Proxy.A_pos = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            {
-                // yuck
-                int? tmp = this.Proxy.B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Base");
-                this.Proxy.B_pos = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|A_pos":
+                this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B_pos":
+                this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
             }
         }
 
@@ -7172,47 +6577,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -7232,14 +6601,17 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
         #endregion
@@ -7617,47 +6989,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
-            }
+            this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -7677,14 +7013,17 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
         #endregion
@@ -8025,32 +7364,7 @@ namespace Kistl.App.GUI
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -8387,32 +7701,7 @@ namespace Kistl.App.GUI
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null, xml, "B", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -8718,43 +8007,9 @@ namespace Kistl.App.Projekte
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Value = tmp;
-            }
+            this.Proxy.Value = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Parent != null ? OurContext.GetIdFromProxy(this.Proxy.Parent) : (int?)null, xml, "Parent", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.Value, xml, "Value", "Kistl.App.Projekte");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Projekte");
-            {
-                // yuck
-                string tmp = this.Proxy.Value;
-                XmlStreamer.FromStream(ref tmp, xml, "Value", "Kistl.App.Projekte");
-                this.Proxy.Value = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -8772,11 +8027,10 @@ namespace Kistl.App.Projekte
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                string tmp = this.Proxy.Value;
-                XmlStreamer.FromStream(ref tmp, xml, "Value", "Kistl.App.Projekte");
-                this.Proxy.Value = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Projekte|Value":
+                this.Proxy.Value = XmlStreamer.ReadString(xml);
+                break;
             }
         }
 
@@ -9084,7 +8338,7 @@ namespace Kistl.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this.Proxy.Parent != null ? OurContext.GetIdFromProxy(this.Proxy.Parent) : (int?)null);
-			binStream.Write(this.Value);
+            binStream.Write(this.Value);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
@@ -9094,39 +8348,14 @@ namespace Kistl.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
-			{
+            {
                 // use backing store to avoid notifications
-	            this.ValueImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
+                this.ValueImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
                 if (this.ValueImpl != null)
                     this.ValueImpl.AttachToObject(this, "Value");
-	        }
+            }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Parent != null ? OurContext.GetIdFromProxy(this.Proxy.Parent) : (int?)null, xml, "Parent", "Kistl.App.Test");
-			// TODO: Add XML Serializer here
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Test");
-            // TODO: Add XML Serializer here
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

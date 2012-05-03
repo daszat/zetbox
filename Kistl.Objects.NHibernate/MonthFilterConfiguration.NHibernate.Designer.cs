@@ -418,41 +418,9 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsCurrentMonthDefault = tmp;
-            }
+            this.Proxy.IsCurrentMonthDefault = binStream.ReadNullableBoolean();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.IsCurrentMonthDefault, xml, "IsCurrentMonthDefault", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                bool? tmp = this.Proxy.IsCurrentMonthDefault;
-                XmlStreamer.FromStream(ref tmp, xml, "IsCurrentMonthDefault", "Kistl.App.GUI");
-                this.Proxy.IsCurrentMonthDefault = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -472,11 +440,10 @@ namespace Kistl.App.GUI
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                bool? tmp = this.Proxy.IsCurrentMonthDefault;
-                XmlStreamer.FromStream(ref tmp, xml, "IsCurrentMonthDefault", "Kistl.App.GUI");
-                this.Proxy.IsCurrentMonthDefault = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|IsCurrentMonthDefault":
+                this.Proxy.IsCurrentMonthDefault = XmlStreamer.ReadNullableBoolean(xml);
+                break;
             }
         }
 

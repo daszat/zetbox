@@ -92,9 +92,8 @@
                 }
             }
         }
-        
-        /// <summary>backing store for <%= UglyXmlEncode(name) %></summary>
-        private <%= enumType %> <%= backingName %>;
+
+<% EfScalarPropHelper.ApplyBackingStoreDefinition(this, enumType, backingName); %>
         
         /// <summary>EF sees only this property, for <%= UglyXmlEncode(name) %></summary>
         [XmlIgnore()]

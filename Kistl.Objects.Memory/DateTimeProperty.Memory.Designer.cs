@@ -578,36 +578,9 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.Base.DateTimeProperty)this).DateTimeStyle = (Kistl.App.Base.DateTimeStyles?)baseValue;
-            }
+            ((Kistl.App.Base.DateTimeProperty)this).DateTimeStyle = (Kistl.App.Base.DateTimeStyles?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream((int?)((Kistl.App.Base.DateTimeProperty)this).DateTimeStyle, xml, "DateTimeStyle", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Base.DateTimeProperty)this).DateTimeStyle = (Kistl.App.Base.DateTimeStyles?)v, xml, "DateTimeStyle", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -627,7 +600,11 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Base.DateTimeProperty)this).DateTimeStyle = (Kistl.App.Base.DateTimeStyles?)v, xml, "DateTimeStyle", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|DateTimeStyle":
+                ((Kistl.App.Base.DateTimeProperty)this).DateTimeStyle = (Kistl.App.Base.DateTimeStyles?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            }
         }
 
         #endregion

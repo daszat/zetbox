@@ -60,54 +60,28 @@ break;
         case SerializerDirection.FromStream:
 
 #line 33 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            ",  streamName , ".Read(out this.",  isSetFlagName , ");\r\n");
+this.WriteObjects("            this.",  isSetFlagName , " = ",  streamName , ".ReadBoolean();\r\n");
 this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
-this.WriteObjects("                ",  memberType , " tmp;\r\n");
-this.WriteObjects("                ",  streamName , ".Read(out tmp);\r\n");
-this.WriteObjects("                this.",  memberName , " = tmp;\r\n");
+this.WriteObjects("                this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\r\n");
 this.WriteObjects("            }\r\n");
-#line 40 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-break;
-        case SerializerDirection.ToXmlStream:
-
-#line 43 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStream(this.",  isSetFlagName , ", ",  streamName , ", \"Is",  xmlname , "Set\", \"",  xmlnamespace , "\");\r\n");
-this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
-this.WriteObjects("                XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-this.WriteObjects("            }\r\n");
-#line 48 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-break;
-        case SerializerDirection.FromXmlStream:
-
-#line 51 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            XmlStreamer.FromStream(ref this.",  isSetFlagName , ", ",  streamName , ", \"Is",  xmlname , "Set\", \"",  xmlnamespace , "\");\r\n");
-this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
-this.WriteObjects("                // yuck\r\n");
-this.WriteObjects("                ",  memberType , " tmp = this.",  memberName , ";\r\n");
-this.WriteObjects("                XmlStreamer.FromStream(ref tmp, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-this.WriteObjects("                this.",  memberName , " = tmp;\r\n");
-this.WriteObjects("            }\r\n");
-#line 59 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 38 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 62 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 41 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 this.WriteObjects("            System.Diagnostics.Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\r\n");
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 65 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 44 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 68 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            // Import must have default value set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                // yuck\r\n");
-this.WriteObjects("                ",  memberType , " tmp = this.",  memberName , ";\r\n");
-this.WriteObjects("                XmlStreamer.FromStream(ref tmp, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-this.WriteObjects("                this.",  memberName , " = tmp;\r\n");
+#line 47 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                // Import must have default value set\r\n");
+this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\r\n");
 this.WriteObjects("                this.",  isSetFlagName , " = true;\r\n");
-this.WriteObjects("            }\r\n");
-#line 77 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+this.WriteObjects("                break;\r\n");
+#line 53 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

@@ -1399,12 +1399,11 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectClass != null) OnNotifyDeleting_ObjectClass(this);
 
-            // should fetch && remember parent for NavigationSearchScreen_of_ObjectClass_RelationEntry
-            if (DefaultViewModelDescriptor != null) {
-                ((NHibernatePersistenceObject)DefaultViewModelDescriptor).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultViewModelDescriptor);
-            }
-            foreach(NHibernatePersistenceObject x in FilterConfigurations) {
+            // should fetch && remember children for SourceTable_created_ObjectClass_RelationEntry
+            // should fetch && remember parent for RelationEnd_has_ObjectClass_RelationEntry
+            // should fetch && remember parent for ObjectReferencePlaceholderProperty_ofType_ObjectClass_RelationEntry
+            // should fetch && remember parent for ObjectReferenceParameter_has_ObjectClass_RelationEntry
+            foreach(NHibernatePersistenceObject x in SubClasses) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
@@ -1413,14 +1412,15 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                 ChildrenToDelete.Add(x);
             }
             // should fetch && remember parent for CalculatedObjectReferenceProperty_references_ObjectClass_RelationEntry
-            foreach(NHibernatePersistenceObject x in SubClasses) {
+            foreach(NHibernatePersistenceObject x in FilterConfigurations) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
-            // should fetch && remember parent for ObjectReferenceParameter_has_ObjectClass_RelationEntry
-            // should fetch && remember parent for ObjectReferencePlaceholderProperty_ofType_ObjectClass_RelationEntry
-            // should fetch && remember parent for RelationEnd_has_ObjectClass_RelationEntry
-            // should fetch && remember children for SourceTable_created_ObjectClass_RelationEntry
+            if (DefaultViewModelDescriptor != null) {
+                ((NHibernatePersistenceObject)DefaultViewModelDescriptor).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultViewModelDescriptor);
+            }
+            // should fetch && remember parent for NavigationSearchScreen_of_ObjectClass_RelationEntry
 
             AccessControlList.Clear();
             FilterConfigurations.Clear();
@@ -1491,94 +1491,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_BaseObjectClass);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.CodeTemplate = tmp;
-            }
+            this.Proxy.CodeTemplate = binStream.ReadString();
             binStream.Read(out this._fk_DefaultViewModelDescriptor);
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsAbstract = tmp;
-            }
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsFrozenObject = tmp;
-            }
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsSimpleObject = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.TableName = tmp;
-            }
+            this.Proxy.IsAbstract = binStream.ReadBoolean();
+            this.Proxy.IsFrozenObject = binStream.ReadBoolean();
+            this.Proxy.IsSimpleObject = binStream.ReadBoolean();
+            this.Proxy.TableName = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.BaseObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.BaseObjectClass) : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultViewModelDescriptor) : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.TableName, xml, "TableName", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            {
-                // yuck
-                string tmp = this.Proxy.CodeTemplate;
-                XmlStreamer.FromStream(ref tmp, xml, "CodeTemplate", "Kistl.App.Base");
-                this.Proxy.CodeTemplate = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            {
-                // yuck
-                bool tmp = this.Proxy.IsAbstract;
-                XmlStreamer.FromStream(ref tmp, xml, "IsAbstract", "Kistl.App.Base");
-                this.Proxy.IsAbstract = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsFrozenObject;
-                XmlStreamer.FromStream(ref tmp, xml, "IsFrozenObject", "Kistl.App.Base");
-                this.Proxy.IsFrozenObject = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsSimpleObject;
-                XmlStreamer.FromStream(ref tmp, xml, "IsSimpleObject", "Kistl.App.GUI");
-                this.Proxy.IsSimpleObject = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.TableName;
-                XmlStreamer.FromStream(ref tmp, xml, "TableName", "Kistl.App.Base");
-                this.Proxy.TableName = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1604,37 +1524,28 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            {
-                // yuck
-                string tmp = this.Proxy.CodeTemplate;
-                XmlStreamer.FromStream(ref tmp, xml, "CodeTemplate", "Kistl.App.Base");
-                this.Proxy.CodeTemplate = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            {
-                // yuck
-                bool tmp = this.Proxy.IsAbstract;
-                XmlStreamer.FromStream(ref tmp, xml, "IsAbstract", "Kistl.App.Base");
-                this.Proxy.IsAbstract = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsFrozenObject;
-                XmlStreamer.FromStream(ref tmp, xml, "IsFrozenObject", "Kistl.App.Base");
-                this.Proxy.IsFrozenObject = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsSimpleObject;
-                XmlStreamer.FromStream(ref tmp, xml, "IsSimpleObject", "Kistl.App.GUI");
-                this.Proxy.IsSimpleObject = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.TableName;
-                XmlStreamer.FromStream(ref tmp, xml, "TableName", "Kistl.App.Base");
-                this.Proxy.TableName = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|BaseObjectClass":
+                this._fk_guid_BaseObjectClass = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|CodeTemplate":
+                this.Proxy.CodeTemplate = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|DefaultViewModelDescriptor":
+                this._fk_guid_DefaultViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|IsAbstract":
+                this.Proxy.IsAbstract = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|IsFrozenObject":
+                this.Proxy.IsFrozenObject = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.GUI|IsSimpleObject":
+                this.Proxy.IsSimpleObject = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|TableName":
+                this.Proxy.TableName = XmlStreamer.ReadString(xml);
+                break;
             }
         }
 

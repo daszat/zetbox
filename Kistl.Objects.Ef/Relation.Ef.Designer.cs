@@ -446,7 +446,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private DateTime _ChangedOn;
+        private DateTime _ChangedOn_store;
+        private DateTime _ChangedOn {
+            get { return _ChangedOn_store; }
+            set {
+                _ChangedOn_store = value;
+            }
+        }
         private bool _isChangedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, DateTime> OnChangedOn_Getter;
@@ -501,9 +507,14 @@ namespace Kistl.App.Base
                 }
             }
         }
-        
-        /// <summary>backing store for Containment</summary>
-        private Kistl.App.Base.ContainmentSpecification _Containment;
+
+        private Kistl.App.Base.ContainmentSpecification _Containment_store;
+        private Kistl.App.Base.ContainmentSpecification _Containment {
+            get { return _Containment_store; }
+            set {
+                _Containment_store = value;
+            }
+        }
         
         /// <summary>EF sees only this property, for Containment</summary>
         [XmlIgnore()]
@@ -696,7 +707,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private DateTime _CreatedOn;
+        private DateTime _CreatedOn_store;
+        private DateTime _CreatedOn {
+            get { return _CreatedOn_store; }
+            set {
+                _CreatedOn_store = value;
+            }
+        }
         private bool _isCreatedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, DateTime> OnCreatedOn_Getter;
@@ -758,7 +775,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _Description;
+        private string _Description_store;
+        private string _Description {
+            get { return _Description_store; }
+            set {
+                _Description_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnDescription_PreSetter;
@@ -831,7 +854,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         private bool _isExportGuidSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_Getter;
@@ -992,9 +1021,14 @@ namespace Kistl.App.Base
                 }
             }
         }
-        
-        /// <summary>backing store for Storage</summary>
-        private Kistl.App.Base.StorageType _Storage;
+
+        private Kistl.App.Base.StorageType _Storage_store;
+        private Kistl.App.Base.StorageType _Storage {
+            get { return _Storage_store; }
+            set {
+                _Storage_store = value;
+            }
+        }
         
         /// <summary>EF sees only this property, for Storage</summary>
         [XmlIgnore()]
@@ -1070,7 +1104,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _Verb;
+        private string _Verb_store;
+        private string _Verb {
+            get { return _Verb_store; }
+            set {
+                _Verb_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnVerb_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PreSetter;
@@ -1883,16 +1923,16 @@ namespace Kistl.App.Base
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEndEfImpl>("Model.FK_Relation_hasA_A", "A").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			if (auxObjects != null) {
-				auxObjects.Add(A);
-			}
+            if (auxObjects != null) {
+                auxObjects.Add(A);
+            }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEndEfImpl>("Model.FK_Relation_hasB_B", "B").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			if (auxObjects != null) {
-				auxObjects.Add(B);
-			}
+            if (auxObjects != null) {
+                auxObjects.Add(B);
+            }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Relation_was_ChangedBy", "ChangedBy").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
@@ -1932,112 +1972,26 @@ namespace Kistl.App.Base
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                binStream.Read(out this._ChangedOn);
+                this._ChangedOn = binStream.ReadDateTime();
             }
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.Base.Relation)this).Containment = (Kistl.App.Base.ContainmentSpecification)baseValue;
-            }
+            ((Kistl.App.Base.Relation)this).Containment = (Kistl.App.Base.ContainmentSpecification)binStream.ReadNullableInt32();
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                binStream.Read(out this._CreatedOn);
+                this._CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._Description);
-            binStream.Read(out this._isExportGuidSet);
+            this._Description = binStream.ReadString();
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.Base.Relation)this).Storage = (Kistl.App.Base.StorageType)baseValue;
-            }
-            binStream.Read(out this._Verb);
+            ((Kistl.App.Base.Relation)this).Storage = (Kistl.App.Base.StorageType)binStream.ReadNullableInt32();
+            this._Verb = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEndEfImpl>("Model.FK_Relation_hasA_A", "A").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEndEfImpl>("Model.FK_Relation_hasB_B", "B").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Relation_was_ChangedBy", "ChangedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream((int?)((Kistl.App.Base.Relation)this).Containment, xml, "Containment", "Kistl.App.Base");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Relation_was_CreatedBy", "CreatedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleEfImpl>("Model.FK_Module_has_Relation", "Module").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Module", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream((int?)((Kistl.App.Base.Relation)this).Storage, xml, "Storage", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
-            if (this._isChangedOnSet) {
-                XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Base.Relation)this).Containment = (Kistl.App.Base.ContainmentSpecification)v, xml, "Containment", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Base.Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2066,22 +2020,44 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            this._isChangedOnSet = true;
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Base.Relation)this).Containment = (Kistl.App.Base.ContainmentSpecification)v, xml, "Containment", "Kistl.App.Base");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            this._isCreatedOnSet = true;
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Base.Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "Kistl.App.Base|Containment":
+                ((Kistl.App.Base.Relation)this).Containment = (Kistl.App.Base.ContainmentSpecification)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            case "Kistl.App.Base|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "Kistl.App.Base|Description":
+                this._Description = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Base|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.Base|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|Storage":
+                ((Kistl.App.Base.Relation)this).Storage = (Kistl.App.Base.StorageType)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            case "Kistl.App.Base|Verb":
+                this._Verb = XmlStreamer.ReadString(xml);
+                break;
+            }
         }
 
         #endregion

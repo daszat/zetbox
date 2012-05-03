@@ -93,7 +93,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private string _Frage;
+        private string _Frage_store;
+        private string _Frage {
+            get { return _Frage_store; }
+            set {
+                _Frage_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, string> OnFrage_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, string> OnFrage_PreSetter;
@@ -243,7 +249,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private int? _gute_Antworten_pos;
+        private int? _gute_Antworten_pos_store;
+        private int? _gute_Antworten_pos {
+            get { return _gute_Antworten_pos_store; }
+            set {
+                _gute_Antworten_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, Kistl.App.Test.Fragebogen> OnFragebogen_Getter;
@@ -305,7 +317,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private int _FragenNummer;
+        private int _FragenNummer_store;
+        private int _FragenNummer {
+            get { return _FragenNummer_store; }
+            set {
+                _FragenNummer_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int> OnFragenNummer_PreSetter;
@@ -366,7 +384,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private int? _GegebeneAntwort;
+        private int? _GegebeneAntwort_store;
+        private int? _GegebeneAntwort {
+            get { return _GegebeneAntwort_store; }
+            set {
+                _GegebeneAntwort_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PreSetter;
@@ -631,47 +655,13 @@ namespace Kistl.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Frage);
+            this._Frage = binStream.ReadString();
             binStream.Read(out this._fk_Fragebogen);
-            binStream.Read(out this._gute_Antworten_pos);
-            binStream.Read(out this._FragenNummer);
-            binStream.Read(out this._GegebeneAntwort);
+            this._gute_Antworten_pos = binStream.ReadNullableInt32();
+            this._FragenNummer = binStream.ReadInt32();
+            this._GegebeneAntwort = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Frage, xml, "Frage", "Kistl.App.Test");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.FragebogenEfImpl>("Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten", "Ein_Fragebogen").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Fragebogen", "Kistl.App.Test");
-            }
-            XmlStreamer.ToStream(this._gute_Antworten_pos, xml, "gute_Antworten_pos", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Frage, xml, "Frage", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_Fragebogen, xml, "Fragebogen", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._gute_Antworten_pos, xml, "gute_Antworten_pos", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

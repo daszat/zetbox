@@ -1050,112 +1050,24 @@ namespace at.dasz.DocumentManagement
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ChangedOn = tmp;
+                this.Proxy.ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.CreatedOn = tmp;
+                this.Proxy.CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
+                this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Identity);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.MachineName = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.PickupDirectory = tmp;
-            }
+            this.Proxy.MachineName = binStream.ReadString();
+            this.Proxy.PickupDirectory = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "at.dasz.DocumentManagement");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "at.dasz.DocumentManagement");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "at.dasz.DocumentManagement");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this.Proxy.Identity != null ? OurContext.GetIdFromProxy(this.Proxy.Identity) : (int?)null, xml, "Identity", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this.Proxy.MachineName, xml, "MachineName", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this.Proxy.PickupDirectory, xml, "PickupDirectory", "at.dasz.DocumentManagement");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "at.dasz.DocumentManagement");
-            if (this._isChangedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "at.dasz.DocumentManagement");
-                this.Proxy.ChangedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "at.dasz.DocumentManagement");
-            if (this._isCreatedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "at.dasz.DocumentManagement");
-                this.Proxy.CreatedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "at.dasz.DocumentManagement");
-            if (this._isExportGuidSet) {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "at.dasz.DocumentManagement");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Identity, xml, "Identity", "at.dasz.DocumentManagement");
-            {
-                // yuck
-                string tmp = this.Proxy.MachineName;
-                XmlStreamer.FromStream(ref tmp, xml, "MachineName", "at.dasz.DocumentManagement");
-                this.Proxy.MachineName = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.PickupDirectory;
-                XmlStreamer.FromStream(ref tmp, xml, "PickupDirectory", "at.dasz.DocumentManagement");
-                this.Proxy.PickupDirectory = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1179,41 +1091,28 @@ namespace at.dasz.DocumentManagement
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "at.dasz.DocumentManagement");
-                this.Proxy.ChangedOn = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "at.dasz.DocumentManagement|ChangedOn":
+                // Import must have default value set
+                this.Proxy.ChangedOn = XmlStreamer.ReadDateTime(xml);
                 this._isChangedOnSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "at.dasz.DocumentManagement");
-                this.Proxy.CreatedOn = tmp;
+                break;
+            case "at.dasz.DocumentManagement|CreatedOn":
+                // Import must have default value set
+                this.Proxy.CreatedOn = XmlStreamer.ReadDateTime(xml);
                 this._isCreatedOnSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "at.dasz.DocumentManagement");
-                this.Proxy.ExportGuid = tmp;
+                break;
+            case "at.dasz.DocumentManagement|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.MachineName;
-                XmlStreamer.FromStream(ref tmp, xml, "MachineName", "at.dasz.DocumentManagement");
-                this.Proxy.MachineName = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.PickupDirectory;
-                XmlStreamer.FromStream(ref tmp, xml, "PickupDirectory", "at.dasz.DocumentManagement");
-                this.Proxy.PickupDirectory = tmp;
+                break;
+            case "at.dasz.DocumentManagement|MachineName":
+                this.Proxy.MachineName = XmlStreamer.ReadString(xml);
+                break;
+            case "at.dasz.DocumentManagement|PickupDirectory":
+                this.Proxy.PickupDirectory = XmlStreamer.ReadString(xml);
+                break;
             }
         }
 

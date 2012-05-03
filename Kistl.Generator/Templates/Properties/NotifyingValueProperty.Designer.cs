@@ -103,8 +103,12 @@ this.WriteObjects("        }\r\n");
 #line 61 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 ApplyBackingStoreDefinition(); 
 #line 62 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
-AddSerialization(serializationList, name); 
+ApplyBackingStoreIsDirtyDefinition(); 
 #line 63 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+ApplyTailTemplate(); 
+#line 64 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+AddSerialization(serializationList, name); 
+#line 65 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

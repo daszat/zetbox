@@ -643,80 +643,13 @@ namespace Kistl.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Frage = tmp;
-            }
+            this.Proxy.Frage = binStream.ReadString();
             binStream.Read(out this._fk_Fragebogen);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.gute_Antworten_pos = tmp;
-            }
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.FragenNummer = tmp;
-            }
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.GegebeneAntwort = tmp;
-            }
+            this.Proxy.gute_Antworten_pos = binStream.ReadNullableInt32();
+            this.Proxy.FragenNummer = binStream.ReadInt32();
+            this.Proxy.GegebeneAntwort = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Frage, xml, "Frage", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.Fragebogen != null ? OurContext.GetIdFromProxy(this.Proxy.Fragebogen) : (int?)null, xml, "Fragebogen", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.gute_Antworten_pos, xml, "gute_Antworten_pos", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                string tmp = this.Proxy.Frage;
-                XmlStreamer.FromStream(ref tmp, xml, "Frage", "Kistl.App.Test");
-                this.Proxy.Frage = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Fragebogen, xml, "Fragebogen", "Kistl.App.Test");
-            {
-                // yuck
-                int? tmp = this.Proxy.gute_Antworten_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "gute_Antworten_pos", "Kistl.App.Test");
-                this.Proxy.gute_Antworten_pos = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.FragenNummer;
-                XmlStreamer.FromStream(ref tmp, xml, "FragenNummer", "Kistl.App.Test");
-                this.Proxy.FragenNummer = tmp;
-            }
-            {
-                // yuck
-                int? tmp = this.Proxy.GegebeneAntwort;
-                XmlStreamer.FromStream(ref tmp, xml, "GegebeneAntwort", "Kistl.App.Test");
-                this.Proxy.GegebeneAntwort = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

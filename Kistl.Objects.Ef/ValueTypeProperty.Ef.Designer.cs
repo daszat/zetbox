@@ -93,7 +93,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private bool _HasPersistentOrder;
+        private bool _HasPersistentOrder_store;
+        private bool _HasPersistentOrder {
+            get { return _HasPersistentOrder_store; }
+            set {
+                _HasPersistentOrder_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PreSetter;
@@ -154,7 +160,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private bool _IsCalculated;
+        private bool _IsCalculated_store;
+        private bool _IsCalculated {
+            get { return _IsCalculated_store; }
+            set {
+                _IsCalculated_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsCalculated_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsCalculated_PreSetter;
@@ -215,7 +227,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private bool _IsList;
+        private bool _IsList_store;
+        private bool _IsList {
+            get { return _IsList_store; }
+            set {
+                _IsList_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PreSetter;
@@ -731,38 +749,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._HasPersistentOrder);
-            binStream.Read(out this._IsCalculated);
-            binStream.Read(out this._IsList);
+            this._HasPersistentOrder = binStream.ReadBoolean();
+            this._IsCalculated = binStream.ReadBoolean();
+            this._IsList = binStream.ReadBoolean();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsCalculated, xml, "IsCalculated", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsCalculated, xml, "IsCalculated", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -784,9 +775,17 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsCalculated, xml, "IsCalculated", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|HasPersistentOrder":
+                this._HasPersistentOrder = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|IsCalculated":
+                this._IsCalculated = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|IsList":
+                this._IsList = XmlStreamer.ReadBoolean(xml);
+                break;
+            }
         }
 
         #endregion

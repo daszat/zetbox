@@ -43,6 +43,17 @@ namespace Kistl.API
                 val = xml.ReadElementContentAsBoolean();
             }
         }
+
+        public static bool ReadBoolean(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsBoolean();
+        }
+        public static bool? ReadNullableBoolean(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsBoolean();
+        }
         #endregion
 
         #region DateTime
@@ -77,6 +88,17 @@ namespace Kistl.API
             {
                 val = xml.ReadElementContentAsDateTime().ToLocalTime();
             }
+        }
+
+        public static DateTime ReadDateTime(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsDateTime().ToLocalTime();
+        }
+        public static DateTime? ReadNullableDateTime(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsDateTime().ToLocalTime();
         }
         #endregion
 
@@ -113,6 +135,16 @@ namespace Kistl.API
                 val = new Guid(xml.ReadElementContentAsString());
             }
         }
+        public static Guid ReadGuid(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return new Guid(xml.ReadElementContentAsString());
+        }
+        public static Guid? ReadNullableGuid(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return new Guid(xml.ReadElementContentAsString());
+        }
         #endregion
 
         #region double
@@ -148,6 +180,16 @@ namespace Kistl.API
                 val = xml.ReadElementContentAsDouble();
             }
         }
+        public static double ReadDouble(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsDouble();
+        }
+        public static double? ReadNullableDouble(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsDouble();
+        }
         #endregion
 
         #region float
@@ -182,6 +224,16 @@ namespace Kistl.API
             {
                 val = xml.ReadElementContentAsFloat();
             }
+        }
+        public static float ReadFloat(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsFloat();
+        }
+        public static float? ReadNullableFloat(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsFloat();
         }
         #endregion
 
@@ -229,6 +281,16 @@ namespace Kistl.API
                 conv(val);
             }
         }
+        public static int ReadInt32(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsInt();
+        }
+        public static int? ReadNullableInt32(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsInt();
+        }
         #endregion
 
         #region decimal
@@ -263,6 +325,16 @@ namespace Kistl.API
             {
                 val = xml.ReadElementContentAsDecimal();
             }
+        }
+        public static decimal ReadDecimal(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsDecimal();
+        }
+        public static decimal? ReadNullableDecimal(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsDecimal();
         }
         #endregion
 
@@ -299,6 +371,11 @@ namespace Kistl.API
                 conv(val);
             }
         }
+        public static string ReadString(XmlReader xml)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            return xml.ReadElementContentAsString();
+        }
         #endregion
 
         #region Collection Entries
@@ -313,8 +390,12 @@ namespace Kistl.API
         public static void FromStreamCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, string name, string ns)
             where T : IValueCollectionEntry, IStreamable, new()
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
             // collection entries do not have sub-lists
-            ReadCollectionEntries<T>(parent,val, xml, name, ns, (obj, x) => obj.FromStream(x));
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
+            {
+                ReadCollectionEntries<T>(parent, val, xml, (obj, x) => obj.FromStream(x));
+            }
         }
 
         public static void ExportCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
@@ -326,7 +407,17 @@ namespace Kistl.API
         public static void MergeImportCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, string name, string ns)
             where T : IValueCollectionEntry, IExportableValueCollectionEntryInternal, new()
         {
-            ReadCollectionEntries<T>(parent, val, xml, name, ns, (obj, x) => obj.MergeImport(x));
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
+            {
+                ReadCollectionEntries<T>(parent, val, xml, (obj, x) => obj.MergeImport(x));
+            }
+        }
+
+        public static void MergeImportCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml)
+            where T : IValueCollectionEntry, IExportableValueCollectionEntryInternal, new()
+        {
+            ReadCollectionEntries<T>(parent, val, xml, (obj, x) => obj.MergeImport(x));
         }
 
         private static void WriteCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns, CallXmlFunction<T, XmlWriter> func)
@@ -344,46 +435,43 @@ namespace Kistl.API
             xml.WriteEndElement();
         }
 
-        private static void ReadCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, string name, string ns, CallXmlFunction<T, XmlReader> func)
+        private static void ReadCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, CallXmlFunction<T, XmlReader> func)
             where T : IValueCollectionEntry, new()
         {
             if (val == null) { throw new ArgumentNullException("val"); }
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
-            if (xml.LocalName == name && xml.NamespaceURI == ns)
-            {
-                //// reset target collection
-                //val.Clear();
+            //// reset target collection
+            //val.Clear();
 
-                using (var entries = xml.ReadSubtree())
+            using (var entries = xml.ReadSubtree())
+            {
+                while (entries.Read())
                 {
-                    while (entries.Read())
+                    if (entries.NodeType == XmlNodeType.Element && entries.LocalName == "CollectionEntry")
                     {
-                        if (entries.NodeType == XmlNodeType.Element && entries.LocalName == "CollectionEntry")
+                        var obj = new T();
+                        using (var children = xml.ReadSubtree())
                         {
-                            var obj = new T();
-                            using (var children = xml.ReadSubtree())
+                            while (children.Read())
                             {
-                                while (children.Read())
+                                if (children.NodeType == XmlNodeType.Element)
                                 {
-                                    if (children.NodeType == XmlNodeType.Element)
-                                    {
-                                        func(obj, children);
-                                    }
+                                    func(obj, children);
                                 }
                             }
-                            if (parent == null)
+                        }
+                        if (parent == null)
+                        {
+                            val.Add(obj);
+                        }
+                        else
+                        {
+                            if (parent.Context != null)
                             {
-                                val.Add(obj);
+                                parent.Context.Internals().AttachAsNew(obj);
                             }
-                            else
-                            {
-                                if (parent.Context != null)
-                                {
-                                    parent.Context.Internals().AttachAsNew(obj);
-                                }
-                                obj.ParentObject = parent;
-                            }
+                            obj.ParentObject = parent;
                         }
                     }
                 }

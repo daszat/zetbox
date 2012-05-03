@@ -93,7 +93,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private double? _Aufwand;
+        private double? _Aufwand_store;
+        private double? _Aufwand {
+            get { return _Aufwand_store; }
+            set {
+                _Aufwand_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, double?> OnAufwand_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, double?> OnAufwand_PreSetter;
@@ -271,7 +277,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private DateTime _ChangedOn;
+        private DateTime _ChangedOn_store;
+        private DateTime _ChangedOn {
+            get { return _ChangedOn_store; }
+            set {
+                _ChangedOn_store = value;
+            }
+        }
         private bool _isChangedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime> OnChangedOn_Getter;
@@ -450,7 +462,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private DateTime _CreatedOn;
+        private DateTime _CreatedOn_store;
+        private DateTime _CreatedOn {
+            get { return _CreatedOn_store; }
+            set {
+                _CreatedOn_store = value;
+            }
+        }
         private bool _isCreatedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime> OnCreatedOn_Getter;
@@ -512,7 +530,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private DateTime? _DatumBis;
+        private DateTime? _DatumBis_store;
+        private DateTime? _DatumBis {
+            get { return _DatumBis_store; }
+            set {
+                _DatumBis_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PreSetter;
@@ -573,7 +597,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private DateTime _DatumVon;
+        private DateTime _DatumVon_store;
+        private DateTime _DatumVon {
+            get { return _DatumVon_store; }
+            set {
+                _DatumVon_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumVon_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime> OnDatumVon_PreSetter;
@@ -646,7 +676,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         private bool _isExportGuidSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_Getter;
@@ -708,7 +744,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private string _Name;
+        private string _Name_store;
+        private string _Name {
+            get { return _Name_store; }
+            set {
+                _Name_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, string> OnName_PreSetter;
@@ -1218,95 +1260,27 @@ namespace Kistl.App.Projekte
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Aufwand);
+            this._Aufwand = binStream.ReadNullableDouble();
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                binStream.Read(out this._ChangedOn);
+                this._ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                binStream.Read(out this._CreatedOn);
+                this._CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._DatumBis);
-            binStream.Read(out this._DatumVon);
-            binStream.Read(out this._isExportGuidSet);
+            this._DatumBis = binStream.ReadNullableDateTime();
+            this._DatumVon = binStream.ReadDateTime();
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
-            binStream.Read(out this._Name);
+            this._Name = binStream.ReadString();
             binStream.Read(out this._fk_Projekt);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Task_was_ChangedBy", "ChangedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Task_was_CreatedBy", "CreatedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "CreatedBy", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Projekte");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektEfImpl>("Model.FK_Projekt_has_Tasks", "Projekt").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Projekt", "Kistl.App.Projekte");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
-            if (this._isChangedOnSet) {
-                XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Projekte");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
-            }
-            XmlStreamer.FromStream(ref this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
-            }
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "Kistl.App.Projekte");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1333,20 +1307,38 @@ namespace Kistl.App.Projekte
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
-            this._isChangedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
-            this._isCreatedOnSet = true;
-            XmlStreamer.FromStream(ref this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
-            this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._fk_guid_Projekt, xml, "Projekt", "Kistl.App.Projekte");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Projekte|Aufwand":
+                this._Aufwand = XmlStreamer.ReadNullableDouble(xml);
+                break;
+            case "Kistl.App.Projekte|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "Kistl.App.Projekte|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "Kistl.App.Projekte|DatumBis":
+                this._DatumBis = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Kistl.App.Projekte|DatumVon":
+                this._DatumVon = XmlStreamer.ReadDateTime(xml);
+                break;
+            case "Kistl.App.Projekte|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.Projekte|Name":
+                this._Name = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Projekte|Projekt":
+                this._fk_guid_Projekt = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion

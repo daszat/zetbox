@@ -49,56 +49,44 @@ namespace Kistl.Generator.Templates.Serialization
         {
 #line 22 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 if (direction == SerializerDirection.ToStream)
-	{
+    {
 
 #line 25 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("			",  streamName , ".Write(this.",  memberName , ");\r\n");
+this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\r\n");
 #line 27 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
-	else if (direction == SerializerDirection.FromStream)
-	{
+    else if (direction == SerializerDirection.FromStream)
+    {
 
 #line 31 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("			{\r\n");
+this.WriteObjects("            {\r\n");
 this.WriteObjects("                // use backing store to avoid notifications\r\n");
-this.WriteObjects("	            this.",  backingStoreName , " = ",  streamName , ".ReadCompoundObject<",  backingStoreType , ">();\r\n");
+this.WriteObjects("                this.",  backingStoreName , " = ",  streamName , ".ReadCompoundObject<",  backingStoreType , ">();\r\n");
 this.WriteObjects("                if (this.",  backingStoreName , " != null)\r\n");
 this.WriteObjects("                    this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\r\n");
-this.WriteObjects("	        }\r\n");
+this.WriteObjects("            }\r\n");
 #line 38 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
-	else if (direction == SerializerDirection.ToXmlStream)
-	{
+    else if (direction == SerializerDirection.Export)
+    {
 
 #line 42 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 44 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
-	else if (direction == SerializerDirection.FromXmlStream)
-	{
+    else if (direction == SerializerDirection.MergeImport)
+    {
 
 #line 48 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            // TODO: Add XML Serializer here\r\n");
-#line 50 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                XmlStreamer.FromStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
+#line 52 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
-	else if (direction == SerializerDirection.Export)
-	{
-
-#line 54 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 56 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-}
-	else if (direction == SerializerDirection.MergeImport)
-	{
-
-#line 60 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("			XmlStreamer.FromStream(this.",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 62 "P:\Kistl\Kistl.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-}
-	else
-	{
-		throw new ArgumentOutOfRangeException("direction");
-	}
+    else
+    {
+        throw new ArgumentOutOfRangeException("direction");
+    }
 
 
         }

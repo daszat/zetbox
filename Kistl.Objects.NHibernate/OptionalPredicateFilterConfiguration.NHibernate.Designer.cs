@@ -418,41 +418,9 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Predicate = tmp;
-            }
+            this.Proxy.Predicate = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Predicate, xml, "Predicate", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                string tmp = this.Proxy.Predicate;
-                XmlStreamer.FromStream(ref tmp, xml, "Predicate", "Kistl.App.GUI");
-                this.Proxy.Predicate = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -472,11 +440,10 @@ namespace Kistl.App.GUI
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                string tmp = this.Proxy.Predicate;
-                XmlStreamer.FromStream(ref tmp, xml, "Predicate", "Kistl.App.GUI");
-                this.Proxy.Predicate = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|Predicate":
+                this.Proxy.Predicate = XmlStreamer.ReadString(xml);
+                break;
             }
         }
 

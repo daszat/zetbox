@@ -581,15 +581,15 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Visual != null) OnNotifyDeleting_Visual(this);
 
-            // should fetch && remember parent for Template_has_Visual_RelationEntry
-            if (Method != null) {
-                ((NHibernatePersistenceObject)Method).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Method);
-            }
             if (Property != null) {
                 ((NHibernatePersistenceObject)Property).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Property);
             }
+            if (Method != null) {
+                ((NHibernatePersistenceObject)Method).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Method);
+            }
+            // should fetch && remember parent for Template_has_Visual_RelationEntry
 
             Children.Clear();
             ContextMenu.Clear();
@@ -647,47 +647,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Description = tmp;
-            }
+            this.Proxy.Description = binStream.ReadString();
             binStream.Read(out this._fk_Method);
             binStream.Read(out this._fk_Property);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Method != null ? OurContext.GetIdFromProxy(this.Proxy.Method) : (int?)null, xml, "Method", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Property != null ? OurContext.GetIdFromProxy(this.Proxy.Property) : (int?)null, xml, "Property", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                string tmp = this.Proxy.Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");
-                this.Proxy.Description = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

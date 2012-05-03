@@ -61,29 +61,19 @@ break;
 this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
 #line 33 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
-        case SerializerDirection.ToXmlStream:
-
-#line 36 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStream(",  sourceMember , " != null ? OurContext.GetIdFromProxy(",  sourceMember , ") : (int?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-break;
-        case SerializerDirection.FromXmlStream:
-
-#line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            XmlStreamer.FromStream(ref this.",  targetMember , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 43 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-break;
         case SerializerDirection.Export:
 
-#line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 36 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 48 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 51 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            XmlStreamer.FromStream(ref this.",  targetGuidMember , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 53 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                this.",  targetGuidMember , " = XmlStreamer.ReadNullableGuid(",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
+#line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

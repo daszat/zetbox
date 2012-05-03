@@ -98,7 +98,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -297,9 +303,9 @@ namespace Kistl.App.Base
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl>("Model.FK_CalculatedReference_dependsOn_InputProperties_A", "CalculatedReference").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			if (auxObjects != null) {
-				auxObjects.Add(A);
-			}
+            if (auxObjects != null) {
+                auxObjects.Add(A);
+            }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>("Model.FK_CalculatedReference_dependsOn_InputProperties_B", "InputProperties").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
@@ -312,44 +318,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl>("Model.FK_CalculatedReference_dependsOn_InputProperties_A", "CalculatedReference").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>("Model.FK_CalculatedReference_dependsOn_InputProperties_B", "InputProperties").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -369,9 +342,17 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion
@@ -537,7 +518,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -748,44 +735,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_A", "DataType").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_B", "ImplementedInterfaces").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -805,9 +759,17 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion
@@ -973,7 +935,13 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -1114,7 +1082,13 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        private int? _A_pos;
+        private int? _A_pos_store;
+        private int? _A_pos {
+            get { return _A_pos_store; }
+            set {
+                _A_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
@@ -1223,7 +1197,13 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        private int? _B_pos;
+        private int? _B_pos_store;
+        private int? _B_pos {
+            get { return _B_pos_store; }
+            set {
+                _B_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
@@ -1264,50 +1244,13 @@ namespace at.dasz.DocumentManagement
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            binStream.Read(out this._A_pos);
+            this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            binStream.Read(out this._B_pos);
+            this._B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.DocumentEfImpl>("Model.FK_Document_has_Revisions_A", "Document").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.BlobEfImpl>("Model.FK_Document_has_Revisions_B", "Revisions").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1329,11 +1272,23 @@ namespace at.dasz.DocumentManagement
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "at.dasz.DocumentManagement|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "at.dasz.DocumentManagement|A_pos":
+                this._A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "at.dasz.DocumentManagement|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "at.dasz.DocumentManagement|B_pos":
+                this._B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
         }
 
         #endregion
@@ -1675,38 +1630,7 @@ namespace Kistl.App.Base
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Identities_memberOf_Groups_A", "Identities").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>("Model.FK_Identities_memberOf_Groups_B", "Groups").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1870,7 +1794,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -2081,44 +2011,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IndexConstraintEfImpl>("Model.FK_UniqueContraints_ensures_unique_on_Properties_A", "UniqueContraints").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>("Model.FK_UniqueContraints_ensures_unique_on_Properties_B", "Properties").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2138,9 +2035,17 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion
@@ -2480,38 +2385,7 @@ namespace Kistl.App.Test
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>("Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A", "MB_Many_Role").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Test");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B", "TCO_ManyList_Role").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Test");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2849,38 +2723,7 @@ namespace Kistl.App.Test
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.N_to_M_relations_AEfImpl>("Model.FK_ASide_connectsTo_BSide_A", "ASide").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Test");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.N_to_M_relations_BEfImpl>("Model.FK_ASide_connectsTo_BSide_B", "BSide").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Test");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -3044,7 +2887,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -3243,9 +3092,9 @@ namespace Kistl.App.GUI
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			if (auxObjects != null) {
-				auxObjects.Add(A);
-			}
+            if (auxObjects != null) {
+                auxObjects.Add(A);
+            }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_B", "Groups").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
@@ -3258,44 +3107,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_B", "Groups").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.GUI");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -3315,9 +3131,17 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion
@@ -3483,7 +3307,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -3694,44 +3524,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyEfImpl>("Model.FK_ObjRefProp_shows_Methods_A", "ObjRefProp").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>("Model.FK_ObjRefProp_shows_Methods_B", "Methods").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.GUI");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -3751,9 +3548,17 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion
@@ -3919,7 +3724,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -4060,7 +3871,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private int? _A_pos;
+        private int? _A_pos_store;
+        private int? _A_pos {
+            get { return _A_pos_store; }
+            set {
+                _A_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
@@ -4169,7 +3986,13 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        private int? _B_pos;
+        private int? _B_pos_store;
+        private int? _B_pos {
+            get { return _B_pos_store; }
+            set {
+                _B_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
@@ -4210,50 +4033,13 @@ namespace Kistl.App.Projekte
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            binStream.Read(out this._A_pos);
+            this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            binStream.Read(out this._B_pos);
+            this._B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektEfImpl>("Model.FK_Projekte_haben_Mitarbeiter_A", "Projekte").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterEfImpl>("Model.FK_Projekte_haben_Mitarbeiter_B", "Mitarbeiter").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -4275,11 +4061,23 @@ namespace Kistl.App.Projekte
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Projekte|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Projekte|A_pos":
+                this._A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Kistl.App.Projekte|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Projekte|B_pos":
+                this._B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
         }
 
         #endregion
@@ -4447,7 +4245,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -4588,7 +4392,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int? _A_pos;
+        private int? _A_pos_store;
+        private int? _A_pos {
+            get { return _A_pos_store; }
+            set {
+                _A_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
@@ -4697,7 +4507,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int? _B_pos;
+        private int? _B_pos_store;
+        private int? _B_pos {
+            get { return _B_pos_store; }
+            set {
+                _B_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
@@ -4738,50 +4554,13 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            binStream.Read(out this._A_pos);
+            this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            binStream.Read(out this._B_pos);
+            this._B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RoleMembershipEfImpl>("Model.FK_RoleMembership_resolves_Relations_A", "RoleMembership").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEfImpl>("Model.FK_RoleMembership_resolves_Relations_B", "Relations").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -4803,11 +4582,23 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|A_pos":
+                this._A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B_pos":
+                this._B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
         }
 
         #endregion
@@ -4975,7 +4766,13 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -5116,7 +4913,13 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        private int? _A_pos;
+        private int? _A_pos_store;
+        private int? _A_pos {
+            get { return _A_pos_store; }
+            set {
+                _A_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
@@ -5225,7 +5028,13 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        private int? _B_pos;
+        private int? _B_pos_store;
+        private int? _B_pos {
+            get { return _B_pos_store; }
+            set {
+                _B_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
@@ -5252,9 +5061,9 @@ namespace ZBox.App.SchemaMigration
                 var key = this.RelationshipManager.GetRelatedReference<ZBox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_SourceColumn_created_Property_A", "SourceColumn").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			if (auxObjects != null) {
-				auxObjects.Add(A);
-			}
+            if (auxObjects != null) {
+                auxObjects.Add(A);
+            }
             binStream.Write(this._A_pos);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>("Model.FK_SourceColumn_created_Property_B", "Property").EntityKey;
@@ -5269,50 +5078,13 @@ namespace ZBox.App.SchemaMigration
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            binStream.Read(out this._A_pos);
+            this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            binStream.Read(out this._B_pos);
+            this._B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<ZBox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_SourceColumn_created_Property_A", "SourceColumn").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "ZBox.App.SchemaMigration");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>("Model.FK_SourceColumn_created_Property_B", "Property").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "ZBox.App.SchemaMigration");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "ZBox.App.SchemaMigration");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -5334,11 +5106,23 @@ namespace ZBox.App.SchemaMigration
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "ZBox.App.SchemaMigration");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|A_pos":
+                this._A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "ZBox.App.SchemaMigration|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|B_pos":
+                this._B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
         }
 
         #endregion
@@ -5680,38 +5464,7 @@ namespace Kistl.App.GUI
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.TemplateEfImpl>("Model.FK_Template_hasMenu_Menu_A", "Template").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Template_hasMenu_Menu_B", "Menu").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.GUI");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -6049,38 +5802,7 @@ namespace Kistl.App.Test
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestStudentEfImpl>("Model.FK_Student_füllt_aus_Testbogen_A", "Student").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Test");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.FragebogenEfImpl>("Model.FK_Student_füllt_aus_Testbogen_B", "Testbogen").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Test");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -6244,7 +5966,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -6385,7 +6113,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int? _A_pos;
+        private int? _A_pos_store;
+        private int? _A_pos {
+            get { return _A_pos_store; }
+            set {
+                _A_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
@@ -6494,7 +6228,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int? _B_pos;
+        private int? _B_pos_store;
+        private int? _B_pos {
+            get { return _B_pos_store; }
+            set {
+                _B_pos_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
@@ -6521,9 +6261,9 @@ namespace Kistl.App.Base
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_A", "TypeRef").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			if (auxObjects != null) {
-				auxObjects.Add(A);
-			}
+            if (auxObjects != null) {
+                auxObjects.Add(A);
+            }
             binStream.Write(this._A_pos);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_B", "GenericArguments").EntityKey;
@@ -6538,50 +6278,13 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
-            binStream.Read(out this._A_pos);
+            this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
-            binStream.Read(out this._B_pos);
+            this._B_pos = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_A", "TypeRef").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_B", "GenericArguments").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -6603,11 +6306,23 @@ namespace Kistl.App.Base
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.Base|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|A_pos":
+                this._A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Kistl.App.Base|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|B_pos":
+                this._B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
         }
 
         #endregion
@@ -6775,7 +6490,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -6974,9 +6695,9 @@ namespace Kistl.App.GUI
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewDescriptorEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "ViewDescriptor").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			if (auxObjects != null) {
-				auxObjects.Add(A);
-			}
+            if (auxObjects != null) {
+                auxObjects.Add(A);
+            }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B", "ViewModelTypeRefs").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
@@ -6989,44 +6710,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewDescriptorEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "ViewDescriptor").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B", "ViewModelTypeRefs").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.GUI");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -7046,9 +6734,17 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion
@@ -7214,7 +6910,13 @@ namespace Kistl.App.GUI
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
@@ -7425,44 +7127,11 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._ExportGuid);
+            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Presentable_displayedBy_SecondaryControlKinds_A", "Presentable").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Presentable_displayedBy_SecondaryControlKinds_B", "SecondaryControlKinds").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.GUI");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -7482,9 +7151,17 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Kistl.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion
@@ -7824,38 +7501,7 @@ namespace Kistl.App.GUI
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Visual_contains_Children_A", "Visual").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Visual_contains_Children_B", "Children").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.GUI");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -8193,38 +7839,7 @@ namespace Kistl.App.GUI
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Visual_hasContextMenu_ContextMenu_A", "Visual").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Visual_hasContextMenu_ContextMenu_B", "ContextMenu").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.GUI");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -8484,7 +8099,13 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
 				}
             }
         }
-        private string _Value;
+        private string _Value_store;
+        private string _Value {
+            get { return _Value_store; }
+            set {
+                _Value_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
         public object ValueObject
@@ -8516,37 +8137,9 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
-            binStream.Read(out this._Value);
+            this._Value = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeEfImpl>("Model.FK_Kunde_value_EMails", "Kunde").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Parent", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this._Value, xml, "Value", "Kistl.App.Projekte");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._Value, xml, "Value", "Kistl.App.Projekte");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -8564,7 +8157,11 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._Value, xml, "Value", "Kistl.App.Projekte");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Projekte|Value":
+                this._Value = XmlStreamer.ReadString(xml);
+                break;
+            }
         }
 
         #endregion
@@ -8843,7 +8440,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>("Model.FK_TestCustomObject_value_PhoneNumbersOther", "TestCustomObject").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			binStream.Write(this.Value);
+            binStream.Write(this.Value);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
@@ -8853,42 +8450,14 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
-			{
-                // use backing store to avoid notifications
-				Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectEfImpl>();
-	            this.ValueImpl = tmp ?? new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
-                this.ValueImpl.AttachToObject(this, "Value");
-	        }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>("Model.FK_TestCustomObject_value_PhoneNumbersOther", "TestCustomObject").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Parent", "Kistl.App.Test");
+                // use backing store to avoid notifications
+                Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectEfImpl>();
+                this.ValueImpl = tmp ?? new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
+                this.ValueImpl.AttachToObject(this, "Value");
             }
-			// TODO: Add XML Serializer here
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Test");
-            // TODO: Add XML Serializer here
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

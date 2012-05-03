@@ -71,5 +71,5 @@
         private int? <%= backingName %>;
 <%
     if (serializationList != null)
-        serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, backingName); // TODO: XML Namespace
+        serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, "int?", backingName); // TODO: XML Namespace
 %>

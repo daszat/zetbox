@@ -742,12 +742,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             base.NotifyDeleting();
             if (OnNotifyDeleting_Enumeration != null) OnNotifyDeleting_Enumeration(this);
 
+            // should fetch && remember parent for EnumParameter_has_Enumeration_RelationEntry
             foreach(NHibernatePersistenceObject x in EnumerationEntries) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
             // should fetch && remember parent for EnumerationProperty_has_Enumeration_RelationEntry
-            // should fetch && remember parent for EnumParameter_has_Enumeration_RelationEntry
 
             EnumerationEntries.Clear();
         }
@@ -790,41 +790,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.AreFlags = tmp;
-            }
+            this.Proxy.AreFlags = binStream.ReadBoolean();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.AreFlags, xml, "AreFlags", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                bool tmp = this.Proxy.AreFlags;
-                XmlStreamer.FromStream(ref tmp, xml, "AreFlags", "Kistl.App.Base");
-                this.Proxy.AreFlags = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -844,11 +812,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                bool tmp = this.Proxy.AreFlags;
-                XmlStreamer.FromStream(ref tmp, xml, "AreFlags", "Kistl.App.Base");
-                this.Proxy.AreFlags = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|AreFlags":
+                this.Proxy.AreFlags = XmlStreamer.ReadBoolean(xml);
+                break;
             }
         }
 

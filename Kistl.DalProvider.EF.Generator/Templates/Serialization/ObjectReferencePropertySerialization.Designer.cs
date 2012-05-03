@@ -70,32 +70,19 @@ break;
 this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
 #line 39 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
-        case SerializerDirection.ToXmlStream:
-
-#line 42 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                var key = this.RelationshipManager.GetRelatedReference<",  clsFullName , ">(\"Model.",  assocName , "\", \"",  targetRoleName , "\").EntityKey;\r\n");
-this.WriteObjects("                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-this.WriteObjects("            }\r\n");
-#line 47 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-break;
-        case SerializerDirection.FromXmlStream:
-
-#line 50 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            XmlStreamer.FromStream(ref this.",  targetMember , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 52 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-break;
         case SerializerDirection.Export:
 
-#line 55 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 42 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 57 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 44 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 60 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            XmlStreamer.FromStream(ref this.",  targetGuidMember , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 62 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 47 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                this.",  targetGuidMember , " = XmlStreamer.ReadNullableGuid(",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
+#line 51 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

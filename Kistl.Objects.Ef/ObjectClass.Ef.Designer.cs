@@ -259,7 +259,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
 				}
             }
         }
-        private string _CodeTemplate;
+        private string _CodeTemplate_store;
+        private string _CodeTemplate {
+            get { return _CodeTemplate_store; }
+            set {
+                _CodeTemplate_store = value;
+            }
+        }
         private bool _CodeTemplate_IsDirty = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
@@ -480,7 +486,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 				}
             }
         }
-        private bool _IsAbstract;
+        private bool _IsAbstract_store;
+        private bool _IsAbstract {
+            get { return _IsAbstract_store; }
+            set {
+                _IsAbstract_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_PreSetter;
@@ -541,7 +553,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 				}
             }
         }
-        private bool _IsFrozenObject;
+        private bool _IsFrozenObject_store;
+        private bool _IsFrozenObject {
+            get { return _IsFrozenObject_store; }
+            set {
+                _IsFrozenObject_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PreSetter;
@@ -602,7 +620,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 				}
             }
         }
-        private bool _IsSimpleObject;
+        private bool _IsSimpleObject_store;
+        private bool _IsSimpleObject {
+            get { return _IsSimpleObject_store; }
+            set {
+                _IsSimpleObject_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PreSetter;
@@ -720,7 +744,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
 				}
             }
         }
-        private string _TableName;
+        private string _TableName_store;
+        private string _TableName {
+            get { return _TableName_store; }
+            set {
+                _TableName_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
@@ -1483,55 +1513,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_BaseObjectClass);
-            binStream.Read(out this._CodeTemplate);
+            this._CodeTemplate = binStream.ReadString();
             binStream.Read(out this._fk_DefaultViewModelDescriptor);
-            binStream.Read(out this._IsAbstract);
-            binStream.Read(out this._IsFrozenObject);
-            binStream.Read(out this._IsSimpleObject);
-            binStream.Read(out this._TableName);
+            this._IsAbstract = binStream.ReadBoolean();
+            this._IsFrozenObject = binStream.ReadBoolean();
+            this._IsSimpleObject = binStream.ReadBoolean();
+            this._TableName = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_BaseObjectClass_has_SubClasses", "BaseObjectClass").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Presentable_has_DefaultViewModelDescriptor", "DefaultViewModelDescriptor").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1557,13 +1546,29 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|BaseObjectClass":
+                this._fk_guid_BaseObjectClass = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|CodeTemplate":
+                this._CodeTemplate = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|DefaultViewModelDescriptor":
+                this._fk_guid_DefaultViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|IsAbstract":
+                this._IsAbstract = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|IsFrozenObject":
+                this._IsFrozenObject = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.GUI|IsSimpleObject":
+                this._IsSimpleObject = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|TableName":
+                this._TableName = XmlStreamer.ReadString(xml);
+                break;
+            }
         }
 
         #endregion

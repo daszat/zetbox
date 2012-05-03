@@ -267,7 +267,13 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
 				}
             }
         }
-        private string _StringProp;
+        private string _StringProp_store;
+        private string _StringProp {
+            get { return _StringProp_store; }
+            set {
+                _StringProp_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.MethodTest, string> OnStringProp_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.MethodTest, string> OnStringProp_PreSetter;
@@ -948,37 +954,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
-            binStream.Read(out this._StringProp);
+            this._StringProp = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.MethodTestEfImpl>("Model.FK_Parent_has_Children", "Parent").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Parent", "Kistl.App.Test");
-            }
-            XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

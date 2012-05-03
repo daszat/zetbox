@@ -93,7 +93,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int _CurrentNumber;
+        private int _CurrentNumber_store;
+        private int _CurrentNumber {
+            get { return _CurrentNumber_store; }
+            set {
+                _CurrentNumber_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.SequenceData, int> OnCurrentNumber_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.SequenceData, int> OnCurrentNumber_PreSetter;
@@ -437,38 +443,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._CurrentNumber);
+            this._CurrentNumber = binStream.ReadInt32();
             binStream.Read(out this._fk_Sequence);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.SequenceEfImpl>("Model.FK_Sequence_has_Data", "Sequence").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Sequence", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_Sequence, xml, "Sequence", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

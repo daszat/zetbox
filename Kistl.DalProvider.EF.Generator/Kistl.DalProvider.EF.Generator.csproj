@@ -89,6 +89,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\Properties\EfScalarPropHelper.cs" />
     <Compile Include="Templates\Properties\ExportGuidProperty.cs" />
     <Compile Include="Templates\CollectionEntries\RelationEntry.cs" />
     <Compile Include="Templates\CollectionEntries\ValueCollectionEntry.cs" />

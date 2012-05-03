@@ -434,76 +434,76 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Identity != null) OnNotifyDeleting_Identity(this);
 
-            // should fetch && remember parent for Application_was_Identity_RelationEntry
-            // should fetch && remember parent for Application_was_Identity_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
-            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
-            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
-            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
-            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
-            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
-            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
-            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
-            // should fetch && remember parent for Blob_was_Identity_RelationEntry
-            // should fetch && remember parent for Blob_was_Identity_RelationEntry
-            // should fetch && remember parent for Constraint_was_Identity_RelationEntry
-            // should fetch && remember parent for Constraint_was_Identity_RelationEntry
-            // should fetch && remember parent for DataType_was_Identity_RelationEntry
-            // should fetch && remember parent for DataType_was_Identity_RelationEntry
-            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
-            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
-            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for Method_was_Identity_RelationEntry
-            // should fetch && remember parent for Method_was_Identity_RelationEntry
-            // should fetch && remember parent for Module_was_Identity_RelationEntry
-            // should fetch && remember parent for Module_was_Identity_RelationEntry
-            // should fetch && remember parent for Property_was_Identity_RelationEntry
-            // should fetch && remember parent for Property_was_Identity_RelationEntry
-            // should fetch && remember parent for Relation_was_Identity_RelationEntry
-            // should fetch && remember parent for Relation_was_Identity_RelationEntry
-            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
-            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
-            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
-            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
-            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
-            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
-            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
-            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
-            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
-            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
-            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
-            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
-            // should fetch && remember parent for File_was_Identity_RelationEntry
-            // should fetch && remember parent for File_was_Identity_RelationEntry
-            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for FileImportConfiguration_of_Identity_RelationEntry
-            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
-            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
-            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
-            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
-            // should fetch && remember parent for Auftrag_ChangedBy_Identity_RelationEntry
-            // should fetch && remember parent for Auftrag_CreatedBy_Identity_RelationEntry
-            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
-            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
+            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
+            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
             // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
             // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
             // should fetch && remember children for Mitarbeiter_is_a_Identity_RelationEntry
-            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
-            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
+            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
+            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
+            // should fetch && remember parent for Auftrag_CreatedBy_Identity_RelationEntry
+            // should fetch && remember parent for Auftrag_ChangedBy_Identity_RelationEntry
+            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
+            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
+            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
+            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_of_Identity_RelationEntry
+            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
+            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
+            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
+            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
+            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
+            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
+            // should fetch && remember parent for Property_was_Identity_RelationEntry
+            // should fetch && remember parent for Property_was_Identity_RelationEntry
+            // should fetch && remember parent for Method_was_Identity_RelationEntry
+            // should fetch && remember parent for Method_was_Identity_RelationEntry
+            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
+            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
+            // should fetch && remember parent for DataType_was_Identity_RelationEntry
+            // should fetch && remember parent for DataType_was_Identity_RelationEntry
+            // should fetch && remember parent for Constraint_was_Identity_RelationEntry
+            // should fetch && remember parent for Constraint_was_Identity_RelationEntry
+            // should fetch && remember parent for Blob_was_Identity_RelationEntry
+            // should fetch && remember parent for Blob_was_Identity_RelationEntry
+            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
+            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
+            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
+            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
+            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
+            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
+            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for Application_was_Identity_RelationEntry
+            // should fetch && remember parent for Application_was_Identity_RelationEntry
             // should fetch && remember parent for Task_was_Identity_RelationEntry
             // should fetch && remember parent for Task_was_Identity_RelationEntry
+            // should fetch && remember parent for File_was_Identity_RelationEntry
+            // should fetch && remember parent for File_was_Identity_RelationEntry
+            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
+            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
+            // should fetch && remember parent for Relation_was_Identity_RelationEntry
+            // should fetch && remember parent for Relation_was_Identity_RelationEntry
+            // should fetch && remember parent for Module_was_Identity_RelationEntry
+            // should fetch && remember parent for Module_was_Identity_RelationEntry
 
             Groups.Clear();
         }
@@ -555,65 +555,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.DisplayName = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Password = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.UserName = tmp;
-            }
+            this.Proxy.DisplayName = binStream.ReadString();
+            this.Proxy.Password = binStream.ReadString();
+            this.Proxy.UserName = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Password, xml, "Password", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.UserName, xml, "UserName", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                string tmp = this.Proxy.DisplayName;
-                XmlStreamer.FromStream(ref tmp, xml, "DisplayName", "Kistl.App.Base");
-                this.Proxy.DisplayName = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Password;
-                XmlStreamer.FromStream(ref tmp, xml, "Password", "Kistl.App.Base");
-                this.Proxy.Password = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.UserName;
-                XmlStreamer.FromStream(ref tmp, xml, "UserName", "Kistl.App.Base");
-                this.Proxy.UserName = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

@@ -914,17 +914,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 ChildrenToDelete.Add(x);
             }
 
-            if (MubBlah_Nav != null) {
-                ((NHibernatePersistenceObject)MubBlah_Nav).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)MubBlah_Nav);
+            if (MuhBlah_One_Nav != null) {
+                ((NHibernatePersistenceObject)MuhBlah_One_Nav).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)MuhBlah_One_Nav);
             }
             foreach(NHibernatePersistenceObject x in MubBlah_List_Nav) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
-            if (MuhBlah_One_Nav != null) {
-                ((NHibernatePersistenceObject)MuhBlah_One_Nav).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)MuhBlah_One_Nav);
+            if (MubBlah_Nav != null) {
+                ((NHibernatePersistenceObject)MubBlah_Nav).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)MubBlah_Nav);
             }
 
             MubBlah_List_Nav.Clear();
@@ -988,8 +988,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             binStream.Write(this.Proxy.MubBlah_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.MubBlah_Nav) : (int?)null);
             binStream.Write(this.Proxy.MuhBlah_One_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.MuhBlah_One_Nav) : (int?)null);
             binStream.Write(this.Proxy.PersonName);
-			binStream.Write(this.PhoneNumberMobile);
-			binStream.Write(this.PhoneNumberOffice);
+            binStream.Write(this.PhoneNumberMobile);
+            binStream.Write(this.PhoneNumberOffice);
             binStream.WriteCollectionEntries(this.PhoneNumbersOtherCollection);
         }
 
@@ -999,79 +999,25 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                DateTime? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Birthday = tmp;
-            }
+            this.Proxy.Birthday = binStream.ReadNullableDateTime();
             binStream.Read(out this._fk_MubBlah_Nav);
             binStream.Read(out this._fk_MuhBlah_One_Nav);
+            this.Proxy.PersonName = binStream.ReadString();
             {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.PersonName = tmp;
-            }
-			{
                 // use backing store to avoid notifications
-	            this.PhoneNumberMobileImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
+                this.PhoneNumberMobileImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
                 if (this.PhoneNumberMobileImpl != null)
                     this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
-	        }
-			{
+            }
+            {
                 // use backing store to avoid notifications
-	            this.PhoneNumberOfficeImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
+                this.PhoneNumberOfficeImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
                 if (this.PhoneNumberOfficeImpl != null)
                     this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
-	        }
+            }
             binStream.ReadCollectionEntries(this, this.PhoneNumbersOtherCollection);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Birthday, xml, "Birthday", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.MubBlah_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.MubBlah_Nav) : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.MuhBlah_One_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.MuhBlah_One_Nav) : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.PersonName, xml, "PersonName", "Kistl.App.Test");
-			// TODO: Add XML Serializer here
-			// TODO: Add XML Serializer here
-            XmlStreamer.ToStreamCollectionEntries(this.PhoneNumbersOtherCollection, xml, "PhoneNumbersOther", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                DateTime? tmp = this.Proxy.Birthday;
-                XmlStreamer.FromStream(ref tmp, xml, "Birthday", "Kistl.App.Test");
-                this.Proxy.Birthday = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
-            {
-                // yuck
-                string tmp = this.Proxy.PersonName;
-                XmlStreamer.FromStream(ref tmp, xml, "PersonName", "Kistl.App.Test");
-                this.Proxy.PersonName = tmp;
-            }
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            XmlStreamer.FromStreamCollectionEntries(this, this.PhoneNumbersOtherCollection, xml, "PhoneNumbersOther", "Kistl.App.Test");
-            result.AddRange(this.PhoneNumbersOtherCollection.Cast<IPersistenceObject>());
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

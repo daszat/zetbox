@@ -446,44 +446,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.CurrentNumber = tmp;
-            }
+            this.Proxy.CurrentNumber = binStream.ReadInt32();
             binStream.Read(out this._fk_Sequence);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Sequence != null ? OurContext.GetIdFromProxy(this.Proxy.Sequence) : (int?)null, xml, "Sequence", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                int tmp = this.Proxy.CurrentNumber;
-                XmlStreamer.FromStream(ref tmp, xml, "CurrentNumber", "Kistl.App.Base");
-                this.Proxy.CurrentNumber = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Sequence, xml, "Sequence", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

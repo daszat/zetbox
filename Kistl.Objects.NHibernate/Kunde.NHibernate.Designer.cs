@@ -1113,16 +1113,16 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 ChildrenToDelete.Add(x);
             }
 
-            // should fetch && remember parent for Auftrag_has_Kunde_RelationEntry
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
+            // should fetch && remember parent for TestObjClass_has_Kunde_RelationEntry
             if (CreatedBy != null) {
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for TestObjClass_has_Kunde_RelationEntry
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // should fetch && remember parent for Auftrag_has_Kunde_RelationEntry
 
             EMails.Clear();
             ChangedBy = null;
@@ -1209,150 +1209,28 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Adresse = tmp;
-            }
+            this.Proxy.Adresse = binStream.ReadString();
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ChangedOn = tmp;
+                this.Proxy.ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.CreatedOn = tmp;
+                this.Proxy.CreatedOn = binStream.ReadDateTime();
             }
             binStream.ReadCollectionEntries(this, this.EMailsCollection);
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
+                this.Proxy.ExportGuid = binStream.ReadGuid();
             }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Kundenname = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Land = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Ort = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.PLZ = tmp;
-            }
+            this.Proxy.Kundenname = binStream.ReadString();
+            this.Proxy.Land = binStream.ReadString();
+            this.Proxy.Ort = binStream.ReadString();
+            this.Proxy.PLZ = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Adresse, xml, "Adresse", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Projekte");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStreamCollectionEntries(this.EMailsCollection, xml, "EMails", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
-            }
-            XmlStreamer.ToStream(this.Proxy.Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.Land, xml, "Land", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.Ort, xml, "Ort", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.PLZ, xml, "PLZ", "Kistl.App.Projekte");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                string tmp = this.Proxy.Adresse;
-                XmlStreamer.FromStream(ref tmp, xml, "Adresse", "Kistl.App.Projekte");
-                this.Proxy.Adresse = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
-            if (this._isChangedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.Projekte");
-                this.Proxy.ChangedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Projekte");
-            if (this._isCreatedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Projekte");
-                this.Proxy.CreatedOn = tmp;
-            }
-            XmlStreamer.FromStreamCollectionEntries(this, this.EMailsCollection, xml, "EMails", "Kistl.App.Projekte");
-            result.AddRange(this.EMailsCollection.Cast<IPersistenceObject>());
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
-            if (this._isExportGuidSet) {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Projekte");
-                this.Proxy.ExportGuid = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Kundenname;
-                XmlStreamer.FromStream(ref tmp, xml, "Kundenname", "Kistl.App.Projekte");
-                this.Proxy.Kundenname = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Land;
-                XmlStreamer.FromStream(ref tmp, xml, "Land", "Kistl.App.Projekte");
-                this.Proxy.Land = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Ort;
-                XmlStreamer.FromStream(ref tmp, xml, "Ort", "Kistl.App.Projekte");
-                this.Proxy.Ort = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.PLZ;
-                XmlStreamer.FromStream(ref tmp, xml, "PLZ", "Kistl.App.Projekte");
-                this.Proxy.PLZ = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1380,60 +1258,40 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                string tmp = this.Proxy.Adresse;
-                XmlStreamer.FromStream(ref tmp, xml, "Adresse", "Kistl.App.Projekte");
-                this.Proxy.Adresse = tmp;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.Projekte");
-                this.Proxy.ChangedOn = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Projekte|Adresse":
+                this.Proxy.Adresse = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Projekte|ChangedOn":
+                // Import must have default value set
+                this.Proxy.ChangedOn = XmlStreamer.ReadDateTime(xml);
                 this._isChangedOnSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Projekte");
-                this.Proxy.CreatedOn = tmp;
+                break;
+            case "Kistl.App.Projekte|CreatedOn":
+                // Import must have default value set
+                this.Proxy.CreatedOn = XmlStreamer.ReadDateTime(xml);
                 this._isCreatedOnSet = true;
-            }
-            XmlStreamer.MergeImportCollectionEntries(this, this.EMailsCollection, xml, "EMails", "Kistl.App.Projekte");
-            // Import must have default value set
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Projekte");
-                this.Proxy.ExportGuid = tmp;
+                break;
+            case "Kistl.App.Projekte|EMails":
+                XmlStreamer.MergeImportCollectionEntries(this, this.EMailsCollection, xml);
+                break;
+            case "Kistl.App.Projekte|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Kundenname;
-                XmlStreamer.FromStream(ref tmp, xml, "Kundenname", "Kistl.App.Projekte");
-                this.Proxy.Kundenname = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Land;
-                XmlStreamer.FromStream(ref tmp, xml, "Land", "Kistl.App.Projekte");
-                this.Proxy.Land = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Ort;
-                XmlStreamer.FromStream(ref tmp, xml, "Ort", "Kistl.App.Projekte");
-                this.Proxy.Ort = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.PLZ;
-                XmlStreamer.FromStream(ref tmp, xml, "PLZ", "Kistl.App.Projekte");
-                this.Proxy.PLZ = tmp;
+                break;
+            case "Kistl.App.Projekte|Kundenname":
+                this.Proxy.Kundenname = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Projekte|Land":
+                this.Proxy.Land = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Projekte|Ort":
+                this.Proxy.Ort = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Projekte|PLZ":
+                this.Proxy.PLZ = XmlStreamer.ReadString(xml);
+                break;
             }
         }
 

@@ -441,65 +441,11 @@ namespace Kistl.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                decimal? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Large = tmp;
-            }
-            {
-                decimal? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.NoScale = tmp;
-            }
-            {
-                decimal? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.SmallDecimal = tmp;
-            }
+            this.Proxy.Large = binStream.ReadNullableDecimal();
+            this.Proxy.NoScale = binStream.ReadNullableDecimal();
+            this.Proxy.SmallDecimal = binStream.ReadNullableDecimal();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Large, xml, "Large", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.NoScale, xml, "NoScale", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.SmallDecimal, xml, "SmallDecimal", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                decimal? tmp = this.Proxy.Large;
-                XmlStreamer.FromStream(ref tmp, xml, "Large", "Kistl.App.Test");
-                this.Proxy.Large = tmp;
-            }
-            {
-                // yuck
-                decimal? tmp = this.Proxy.NoScale;
-                XmlStreamer.FromStream(ref tmp, xml, "NoScale", "Kistl.App.Test");
-                this.Proxy.NoScale = tmp;
-            }
-            {
-                // yuck
-                decimal? tmp = this.Proxy.SmallDecimal;
-                XmlStreamer.FromStream(ref tmp, xml, "SmallDecimal", "Kistl.App.Test");
-                this.Proxy.SmallDecimal = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

@@ -29,6 +29,29 @@ namespace Kistl.Generator.Extensions
             }
         }
 
+        public static string SerializerReadMethod(this string typeName)
+        {
+            var nullable = typeName.EndsWith("?");
+            if (nullable)
+                typeName = typeName.Substring(0, typeName.Length - 1);
+
+            string suffix;
+            switch (typeName)
+            {
+                case "bool":
+                    suffix = "Boolean";
+                    break;
+                case "int":
+                    suffix = "Int32";
+                    break;
+                default:
+                    suffix = typeName.Substring(0, 1).ToUpperInvariant() + typeName.Substring(1);
+                    break;
+            }
+
+            return "Read" + (nullable ? "Nullable" : string.Empty) + suffix;
+        }
+
         #region Relation naming standards
         public static string GetRelationClassName(this Relation rel)
         {

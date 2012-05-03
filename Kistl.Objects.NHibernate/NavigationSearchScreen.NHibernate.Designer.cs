@@ -1678,17 +1678,17 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationSearchScreen != null) OnNotifyDeleting_NavigationSearchScreen(this);
 
-            if (RequestedEditorKind != null) {
-                ((NHibernatePersistenceObject)RequestedEditorKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedEditorKind);
+            if (Type != null) {
+                ((NHibernatePersistenceObject)Type).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Type);
             }
             if (RequestedWorkspaceKind != null) {
                 ((NHibernatePersistenceObject)RequestedWorkspaceKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)RequestedWorkspaceKind);
             }
-            if (Type != null) {
-                ((NHibernatePersistenceObject)Type).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Type);
+            if (RequestedEditorKind != null) {
+                ((NHibernatePersistenceObject)RequestedEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedEditorKind);
             }
 
             RequestedEditorKind = null;
@@ -1782,208 +1782,26 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.AllowAddNew = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.AllowDelete = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.AllowSelectColumns = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.AllowUserFilter = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.EnableAutoFilter = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.InitialSort = tmp;
-            }
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                Proxy.InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)baseValue;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsEditable = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsMultiselect = tmp;
-            }
+            this.Proxy.AllowAddNew = binStream.ReadNullableBoolean();
+            this.Proxy.AllowDelete = binStream.ReadNullableBoolean();
+            this.Proxy.AllowSelectColumns = binStream.ReadNullableBoolean();
+            this.Proxy.AllowUserFilter = binStream.ReadNullableBoolean();
+            this.Proxy.EnableAutoFilter = binStream.ReadNullableBoolean();
+            this.Proxy.InitialSort = binStream.ReadString();
+            Proxy.InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
+            this.Proxy.IsEditable = binStream.ReadNullableBoolean();
+            this.Proxy.IsMultiselect = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_RequestedEditorKind);
             binStream.Read(out this._fk_RequestedWorkspaceKind);
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.RespectRequiredFilter = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ShowFilter = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ShowMasterDetail = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ShowOpenCommand = tmp;
-            }
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ShowRefreshCommand = tmp;
-            }
+            this.Proxy.RespectRequiredFilter = binStream.ReadNullableBoolean();
+            this.Proxy.ShowFilter = binStream.ReadNullableBoolean();
+            this.Proxy.ShowMasterDetail = binStream.ReadNullableBoolean();
+            this.Proxy.ShowOpenCommand = binStream.ReadNullableBoolean();
+            this.Proxy.ShowRefreshCommand = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_Type);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)baseValue;
-            }
+            Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.AllowAddNew, xml, "AllowAddNew", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.AllowDelete, xml, "AllowDelete", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.AllowSelectColumns, xml, "AllowSelectColumns", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.AllowUserFilter, xml, "AllowUserFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.EnableAutoFilter, xml, "EnableAutoFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.InitialSort, xml, "InitialSort", "Kistl.App.GUI");
-            XmlStreamer.ToStream((int?)Proxy.InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.IsEditable, xml, "IsEditable", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RequestedEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedEditorKind) : (int?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedWorkspaceKind) : (int?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Type != null ? OurContext.GetIdFromProxy(this.Proxy.Type) : (int?)null, xml, "Type", "Kistl.App.GUI");
-            XmlStreamer.ToStream((int?)Proxy.ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                bool? tmp = this.Proxy.AllowAddNew;
-                XmlStreamer.FromStream(ref tmp, xml, "AllowAddNew", "Kistl.App.GUI");
-                this.Proxy.AllowAddNew = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.AllowDelete;
-                XmlStreamer.FromStream(ref tmp, xml, "AllowDelete", "Kistl.App.GUI");
-                this.Proxy.AllowDelete = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.AllowSelectColumns;
-                XmlStreamer.FromStream(ref tmp, xml, "AllowSelectColumns", "Kistl.App.GUI");
-                this.Proxy.AllowSelectColumns = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.AllowUserFilter;
-                XmlStreamer.FromStream(ref tmp, xml, "AllowUserFilter", "Kistl.App.GUI");
-                this.Proxy.AllowUserFilter = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.EnableAutoFilter;
-                XmlStreamer.FromStream(ref tmp, xml, "EnableAutoFilter", "Kistl.App.GUI");
-                this.Proxy.EnableAutoFilter = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.InitialSort;
-                XmlStreamer.FromStream(ref tmp, xml, "InitialSort", "Kistl.App.GUI");
-                this.Proxy.InitialSort = tmp;
-            }
-            XmlStreamer.FromStreamConverter(v => Proxy.InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)v, xml, "InitialSortDirection", "Kistl.App.GUI");
-            {
-                // yuck
-                bool? tmp = this.Proxy.IsEditable;
-                XmlStreamer.FromStream(ref tmp, xml, "IsEditable", "Kistl.App.GUI");
-                this.Proxy.IsEditable = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.IsMultiselect;
-                XmlStreamer.FromStream(ref tmp, xml, "IsMultiselect", "Kistl.App.GUI");
-                this.Proxy.IsMultiselect = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            {
-                // yuck
-                bool? tmp = this.Proxy.RespectRequiredFilter;
-                XmlStreamer.FromStream(ref tmp, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-                this.Proxy.RespectRequiredFilter = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.ShowFilter;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowFilter", "Kistl.App.GUI");
-                this.Proxy.ShowFilter = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.ShowMasterDetail;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowMasterDetail", "Kistl.App.GUI");
-                this.Proxy.ShowMasterDetail = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.ShowOpenCommand;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowOpenCommand", "Kistl.App.GUI");
-                this.Proxy.ShowOpenCommand = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.ShowRefreshCommand;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-                this.Proxy.ShowRefreshCommand = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2020,89 +1838,62 @@ namespace Kistl.App.GUI
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                bool? tmp = this.Proxy.AllowAddNew;
-                XmlStreamer.FromStream(ref tmp, xml, "AllowAddNew", "Kistl.App.GUI");
-                this.Proxy.AllowAddNew = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|AllowAddNew":
+                this.Proxy.AllowAddNew = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowDelete":
+                this.Proxy.AllowDelete = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowSelectColumns":
+                this.Proxy.AllowSelectColumns = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowUserFilter":
+                this.Proxy.AllowUserFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|EnableAutoFilter":
+                this.Proxy.EnableAutoFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|InitialSort":
+                this.Proxy.InitialSort = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|InitialSortDirection":
+                Proxy.InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            case "Kistl.App.GUI|IsEditable":
+                this.Proxy.IsEditable = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|IsMultiselect":
+                this.Proxy.IsMultiselect = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|RequestedEditorKind":
+                this._fk_guid_RequestedEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|RequestedWorkspaceKind":
+                this._fk_guid_RequestedWorkspaceKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|RespectRequiredFilter":
+                this.Proxy.RespectRequiredFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowFilter":
+                this.Proxy.ShowFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowMasterDetail":
+                this.Proxy.ShowMasterDetail = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowOpenCommand":
+                this.Proxy.ShowOpenCommand = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowRefreshCommand":
+                this.Proxy.ShowRefreshCommand = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|Type":
+                this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|ViewMethod":
+                Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
+               break;
             }
-            {
-                // yuck
-                bool? tmp = this.Proxy.AllowDelete;
-                XmlStreamer.FromStream(ref tmp, xml, "AllowDelete", "Kistl.App.GUI");
-                this.Proxy.AllowDelete = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.AllowSelectColumns;
-                XmlStreamer.FromStream(ref tmp, xml, "AllowSelectColumns", "Kistl.App.GUI");
-                this.Proxy.AllowSelectColumns = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.AllowUserFilter;
-                XmlStreamer.FromStream(ref tmp, xml, "AllowUserFilter", "Kistl.App.GUI");
-                this.Proxy.AllowUserFilter = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.EnableAutoFilter;
-                XmlStreamer.FromStream(ref tmp, xml, "EnableAutoFilter", "Kistl.App.GUI");
-                this.Proxy.EnableAutoFilter = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.InitialSort;
-                XmlStreamer.FromStream(ref tmp, xml, "InitialSort", "Kistl.App.GUI");
-                this.Proxy.InitialSort = tmp;
-            }
-            XmlStreamer.FromStreamConverter(v => Proxy.InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)v, xml, "InitialSortDirection", "Kistl.App.GUI");
-            {
-                // yuck
-                bool? tmp = this.Proxy.IsEditable;
-                XmlStreamer.FromStream(ref tmp, xml, "IsEditable", "Kistl.App.GUI");
-                this.Proxy.IsEditable = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.IsMultiselect;
-                XmlStreamer.FromStream(ref tmp, xml, "IsMultiselect", "Kistl.App.GUI");
-                this.Proxy.IsMultiselect = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            {
-                // yuck
-                bool? tmp = this.Proxy.RespectRequiredFilter;
-                XmlStreamer.FromStream(ref tmp, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-                this.Proxy.RespectRequiredFilter = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.ShowFilter;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowFilter", "Kistl.App.GUI");
-                this.Proxy.ShowFilter = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.ShowMasterDetail;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowMasterDetail", "Kistl.App.GUI");
-                this.Proxy.ShowMasterDetail = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.ShowOpenCommand;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowOpenCommand", "Kistl.App.GUI");
-                this.Proxy.ShowOpenCommand = tmp;
-            }
-            {
-                // yuck
-                bool? tmp = this.Proxy.ShowRefreshCommand;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-                this.Proxy.ShowRefreshCommand = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
         }
 
         #endregion

@@ -385,21 +385,21 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
 
-			binStream.Write(eagerLoadLists);
-			if (eagerLoadLists && auxObjects != null)
-			{
-				binStream.Write(true);
-				binStream.Write(Antworten.Count);
-				foreach(var obj in Antworten)
-				{
-					auxObjects.Add(obj);
-					binStream.Write(obj.ID);
-				}
-			}
-			else
-			{
-				binStream.Write(false);
-			}
+            binStream.Write(eagerLoadLists);
+            if (eagerLoadLists && auxObjects != null)
+            {
+                binStream.Write(true);
+                binStream.Write(Antworten.Count);
+                foreach(var obj in Antworten)
+                {
+                    auxObjects.Add(obj);
+                    binStream.Write(obj.ID);
+                }
+            }
+            else
+            {
+                binStream.Write(false);
+            }
             binStream.Write(this.Proxy.BogenNummer);
         }
 
@@ -410,58 +410,23 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
 
-			binStream.Read(out Antworten_was_eagerLoaded);
-			{
-				bool containsList;
-				binStream.Read(out containsList);
-				if (containsList)
-				{
-					int numElements;
-					binStream.Read(out numElements);
-					AntwortenIds = new List<int>(numElements);
-					while (numElements-- > 0) 
-					{
-						int id;
-						binStream.Read(out id);
-						AntwortenIds.Add(id);
-					}
-				}
-			}
+            Antworten_was_eagerLoaded = binStream.ReadBoolean();
             {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.BogenNummer = tmp;
+                bool containsList = binStream.ReadBoolean();
+                if (containsList)
+                {
+                    int numElements = binStream.ReadInt32();
+                    AntwortenIds = new List<int>(numElements);
+                    while (numElements-- > 0) 
+                    {
+                        int id = binStream.ReadInt32();
+                        AntwortenIds.Add(id);
+                    }
+                }
             }
+            this.Proxy.BogenNummer = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.BogenNummer, xml, "BogenNummer", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                int? tmp = this.Proxy.BogenNummer;
-                XmlStreamer.FromStream(ref tmp, xml, "BogenNummer", "Kistl.App.Test");
-                this.Proxy.BogenNummer = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

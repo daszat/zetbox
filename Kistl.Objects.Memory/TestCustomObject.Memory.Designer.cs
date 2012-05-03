@@ -889,8 +889,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             binStream.Write(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null);
             binStream.Write(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null);
             binStream.Write(this._PersonName);
-			binStream.Write(this.PhoneNumberMobile);
-			binStream.Write(this.PhoneNumberOffice);
+            binStream.Write(this.PhoneNumberMobile);
+            binStream.Write(this.PhoneNumberOffice);
             binStream.WriteCollectionEntries(this._PhoneNumbersOtherCollection);
         }
 
@@ -900,61 +900,25 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Birthday);
-            binStream.Read(out this._fk_MubBlah_Nav);
-            binStream.Read(out this._fk_MuhBlah_One_Nav);
-            binStream.Read(out this._PersonName);
-			{
+            this._Birthday = binStream.ReadNullableDateTime();
+            this._fk_MubBlah_Nav = binStream.ReadNullableInt32();
+            this._fk_MuhBlah_One_Nav = binStream.ReadNullableInt32();
+            this._PersonName = binStream.ReadString();
+            {
                 // use backing store to avoid notifications
-	            this.PhoneNumberMobileImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl>();
+                this.PhoneNumberMobileImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl>();
                 if (this.PhoneNumberMobileImpl != null)
                     this.PhoneNumberMobileImpl.AttachToObject(this, "PhoneNumberMobile");
-	        }
-			{
+            }
+            {
                 // use backing store to avoid notifications
-	            this.PhoneNumberOfficeImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl>();
+                this.PhoneNumberOfficeImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl>();
                 if (this.PhoneNumberOfficeImpl != null)
                     this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
-	        }
+            }
             binStream.ReadCollectionEntries(this, this._PhoneNumbersOtherCollection);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "Kistl.App.Test");
-            XmlStreamer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
-            XmlStreamer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._PersonName, xml, "PersonName", "Kistl.App.Test");
-			// TODO: Add XML Serializer here
-			// TODO: Add XML Serializer here
-            XmlStreamer.ToStreamCollectionEntries(this._PhoneNumbersOtherCollection, xml, "PhoneNumbersOther", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._PersonName, xml, "PersonName", "Kistl.App.Test");
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            XmlStreamer.FromStreamCollectionEntries(this, this._PhoneNumbersOtherCollection, xml, "PhoneNumbersOther", "Kistl.App.Test");
-            result.AddRange(this._PhoneNumbersOtherCollection.Cast<IPersistenceObject>());
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

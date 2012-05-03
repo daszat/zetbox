@@ -499,55 +499,10 @@ namespace Kistl.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_OneEnd);
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.NEnds_pos = tmp;
-            }
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.OtherInt = tmp;
-            }
+            this.Proxy.NEnds_pos = binStream.ReadNullableInt32();
+            this.Proxy.OtherInt = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.OneEnd != null ? OurContext.GetIdFromProxy(this.Proxy.OneEnd) : (int?)null, xml, "OneEnd", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.NEnds_pos, xml, "NEnds_pos", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.OtherInt, xml, "OtherInt", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_OneEnd, xml, "OneEnd", "Kistl.App.Test");
-            {
-                // yuck
-                int? tmp = this.Proxy.NEnds_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "NEnds_pos", "Kistl.App.Test");
-                this.Proxy.NEnds_pos = tmp;
-            }
-            {
-                // yuck
-                int? tmp = this.Proxy.OtherInt;
-                XmlStreamer.FromStream(ref tmp, xml, "OtherInt", "Kistl.App.Test");
-                this.Proxy.OtherInt = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

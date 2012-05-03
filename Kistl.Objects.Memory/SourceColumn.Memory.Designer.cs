@@ -1746,14 +1746,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             binStream.Write((int?)((ZBox.App.SchemaMigration.SourceColumn)this).DbType);
             binStream.Write(this._Description);
 
-			binStream.Write(eagerLoadLists);
-			if (eagerLoadLists && auxObjects != null)
-			{
-				foreach(var obj in DestinationProperty)
-				{
-					auxObjects.Add(obj);
-				}
-			}
+            binStream.Write(eagerLoadLists);
+            if (eagerLoadLists && auxObjects != null)
+            {
+                foreach(var obj in DestinationProperty)
+                {
+                    auxObjects.Add(obj);
+                }
+            }
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
@@ -1772,120 +1772,37 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._fk_ChangedBy = binStream.ReadNullableInt32();
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                binStream.Read(out this._ChangedOn);
+                this._ChangedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._Comment);
-            binStream.Read(out this._isCompareNullsSet);
+            this._Comment = binStream.ReadString();
+            this._isCompareNullsSet = binStream.ReadBoolean();
             if (this._isCompareNullsSet) {
-                binStream.Read(out this._CompareNulls);
+                this._CompareNulls = binStream.ReadBoolean();
             }
-            binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._fk_CreatedBy = binStream.ReadNullableInt32();
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                binStream.Read(out this._CreatedOn);
+                this._CreatedOn = binStream.ReadDateTime();
             }
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((ZBox.App.SchemaMigration.SourceColumn)this).DbType = (ZBox.App.SchemaMigration.ColumnType)baseValue;
-            }
-            binStream.Read(out this._Description);
+            ((ZBox.App.SchemaMigration.SourceColumn)this).DbType = (ZBox.App.SchemaMigration.ColumnType)binStream.ReadNullableInt32();
+            this._Description = binStream.ReadString();
 
-			binStream.Read(out DestinationProperty_was_eagerLoaded);
-            binStream.Read(out this._isExportGuidSet);
+            DestinationProperty_was_eagerLoaded = binStream.ReadBoolean();
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
-            binStream.Read(out this._IsNullable);
-            binStream.Read(out this._Name);
-            binStream.Read(out this._fk_References);
-            binStream.Read(out this._Size);
-            binStream.Read(out this._fk_SourceTable);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((ZBox.App.SchemaMigration.SourceColumn)this).Status = (ZBox.App.SchemaMigration.MappingStatus?)baseValue;
-            }
+            this._IsNullable = binStream.ReadNullableBoolean();
+            this._Name = binStream.ReadString();
+            this._fk_References = binStream.ReadNullableInt32();
+            this._Size = binStream.ReadNullableInt32();
+            this._fk_SourceTable = binStream.ReadNullableInt32();
+            ((ZBox.App.SchemaMigration.SourceColumn)this).Status = (ZBox.App.SchemaMigration.MappingStatus?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "ZBox.App.SchemaMigration");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream(this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._isCompareNullsSet, xml, "IsCompareNullsSet", "ZBox.App.SchemaMigration");
-            if (this._isCompareNullsSet) {
-                XmlStreamer.ToStream(this._CompareNulls, xml, "CompareNulls", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "ZBox.App.SchemaMigration");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream((int?)((ZBox.App.SchemaMigration.SourceColumn)this).DbType, xml, "DbType", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._Description, xml, "Description", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "ZBox.App.SchemaMigration");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._Name, xml, "Name", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(References != null ? References.ID : (int?)null, xml, "References", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._Size, xml, "Size", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(SourceTable != null ? SourceTable.ID : (int?)null, xml, "SourceTable", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream((int?)((ZBox.App.SchemaMigration.SourceColumn)this).Status, xml, "Status", "ZBox.App.SchemaMigration");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "ZBox.App.SchemaMigration");
-            if (this._isChangedOnSet) {
-                XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.FromStream(ref this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._isCompareNullsSet, xml, "IsCompareNullsSet", "ZBox.App.SchemaMigration");
-            if (this._isCompareNullsSet) {
-                XmlStreamer.FromStream(ref this._CompareNulls, xml, "CompareNulls", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "ZBox.App.SchemaMigration");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.FromStreamConverter(v => ((ZBox.App.SchemaMigration.SourceColumn)this).DbType = (ZBox.App.SchemaMigration.ColumnType)v, xml, "DbType", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "ZBox.App.SchemaMigration");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-            }
-            XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._fk_References, xml, "References", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Size, xml, "Size", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._fk_SourceTable, xml, "SourceTable", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStreamConverter(v => ((ZBox.App.SchemaMigration.SourceColumn)this).Status = (ZBox.App.SchemaMigration.MappingStatus?)v, xml, "Status", "ZBox.App.SchemaMigration");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1918,27 +1835,55 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
-            this._isChangedOnSet = true;
-            XmlStreamer.FromStream(ref this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CompareNulls, xml, "CompareNulls", "ZBox.App.SchemaMigration");
-            this._isCompareNullsSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "ZBox.App.SchemaMigration");
-            this._isCreatedOnSet = true;
-            XmlStreamer.FromStreamConverter(v => ((ZBox.App.SchemaMigration.SourceColumn)this).DbType = (ZBox.App.SchemaMigration.ColumnType)v, xml, "DbType", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "ZBox.App.SchemaMigration");
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "ZBox.App.SchemaMigration");
-            this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._fk_guid_References, xml, "References", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Size, xml, "Size", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._fk_guid_SourceTable, xml, "SourceTable", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStreamConverter(v => ((ZBox.App.SchemaMigration.SourceColumn)this).Status = (ZBox.App.SchemaMigration.MappingStatus?)v, xml, "Status", "ZBox.App.SchemaMigration");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "ZBox.App.SchemaMigration|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "ZBox.App.SchemaMigration|Comment":
+                this._Comment = XmlStreamer.ReadString(xml);
+                break;
+            case "ZBox.App.SchemaMigration|CompareNulls":
+                // Import must have default value set
+                this._CompareNulls = XmlStreamer.ReadBoolean(xml);
+                this._isCompareNullsSet = true;
+                break;
+            case "ZBox.App.SchemaMigration|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "ZBox.App.SchemaMigration|DbType":
+                ((ZBox.App.SchemaMigration.SourceColumn)this).DbType = (ZBox.App.SchemaMigration.ColumnType)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            case "ZBox.App.SchemaMigration|Description":
+                this._Description = XmlStreamer.ReadString(xml);
+                break;
+            case "ZBox.App.SchemaMigration|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "ZBox.App.SchemaMigration|IsNullable":
+                this._IsNullable = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "ZBox.App.SchemaMigration|Name":
+                this._Name = XmlStreamer.ReadString(xml);
+                break;
+            case "ZBox.App.SchemaMigration|References":
+                this._fk_guid_References = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|Size":
+                this._Size = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "ZBox.App.SchemaMigration|SourceTable":
+                this._fk_guid_SourceTable = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "ZBox.App.SchemaMigration|Status":
+                ((ZBox.App.SchemaMigration.SourceColumn)this).Status = (ZBox.App.SchemaMigration.MappingStatus?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            }
         }
 
         #endregion

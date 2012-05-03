@@ -491,53 +491,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                int? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.MaxLength = tmp;
-            }
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.MinLength = tmp;
-            }
+            this.Proxy.MaxLength = binStream.ReadNullableInt32();
+            this.Proxy.MinLength = binStream.ReadInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.MaxLength, xml, "MaxLength", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.MinLength, xml, "MinLength", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                int? tmp = this.Proxy.MaxLength;
-                XmlStreamer.FromStream(ref tmp, xml, "MaxLength", "Kistl.App.Base");
-                this.Proxy.MaxLength = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.MinLength;
-                XmlStreamer.FromStream(ref tmp, xml, "MinLength", "Kistl.App.Base");
-                this.Proxy.MinLength = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -558,17 +515,13 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                int? tmp = this.Proxy.MaxLength;
-                XmlStreamer.FromStream(ref tmp, xml, "MaxLength", "Kistl.App.Base");
-                this.Proxy.MaxLength = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.MinLength;
-                XmlStreamer.FromStream(ref tmp, xml, "MinLength", "Kistl.App.Base");
-                this.Proxy.MinLength = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|MaxLength":
+                this.Proxy.MaxLength = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Kistl.App.Base|MinLength":
+                this.Proxy.MinLength = XmlStreamer.ReadInt32(xml);
+                break;
             }
         }
 

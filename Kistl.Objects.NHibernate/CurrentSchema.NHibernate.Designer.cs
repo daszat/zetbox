@@ -368,53 +368,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Schema = tmp;
-            }
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Version = tmp;
-            }
+            this.Proxy.Schema = binStream.ReadString();
+            this.Proxy.Version = binStream.ReadInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Schema, xml, "Schema", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Version, xml, "Version", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                string tmp = this.Proxy.Schema;
-                XmlStreamer.FromStream(ref tmp, xml, "Schema", "Kistl.App.Base");
-                this.Proxy.Schema = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.Version;
-                XmlStreamer.FromStream(ref tmp, xml, "Version", "Kistl.App.Base");
-                this.Proxy.Version = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

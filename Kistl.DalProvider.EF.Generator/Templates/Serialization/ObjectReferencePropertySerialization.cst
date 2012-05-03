@@ -37,19 +37,6 @@
             <%= streamName %>.Read(out this.<%= targetMember %>);
 <%
             break;
-        case SerializerDirection.ToXmlStream:
-%>
-            {
-                var key = this.RelationshipManager.GetRelatedReference<<%= clsFullName %>>("Model.<%= assocName %>", "<%= targetRoleName %>").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-            }
-<%
-            break;
-        case SerializerDirection.FromXmlStream:
-%>
-            XmlStreamer.FromStream(ref this.<%= targetMember %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%
-            break;
         case SerializerDirection.Export:
 %>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(<%= sourceMember %> != null ? <%= sourceMember %>.ExportGuid : (Guid?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
@@ -57,7 +44,9 @@
             break;
         case SerializerDirection.MergeImport:
 %>
-            XmlStreamer.FromStream(ref this.<%= targetGuidMember %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            case "<%= xmlnamespace %>|<%= xmlname %>":
+                this.<%= targetGuidMember %> = XmlStreamer.ReadNullableGuid(<%= streamName %>);
+                break;
 <%
             break;
         default:

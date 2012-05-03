@@ -587,89 +587,13 @@ namespace ZBox.App.SchemaMigration
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Destination = tmp;
-            }
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.DestinationRows = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Source = tmp;
-            }
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.SourceRows = tmp;
-            }
-            {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Timestamp = tmp;
-            }
+            this.Proxy.Destination = binStream.ReadString();
+            this.Proxy.DestinationRows = binStream.ReadInt32();
+            this.Proxy.Source = binStream.ReadString();
+            this.Proxy.SourceRows = binStream.ReadInt32();
+            this.Proxy.Timestamp = binStream.ReadDateTime();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Destination, xml, "Destination", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.Source, xml, "Source", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.SourceRows, xml, "SourceRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.Timestamp, xml, "Timestamp", "ZBox.App.SchemaMigration");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                string tmp = this.Proxy.Destination;
-                XmlStreamer.FromStream(ref tmp, xml, "Destination", "ZBox.App.SchemaMigration");
-                this.Proxy.Destination = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.DestinationRows;
-                XmlStreamer.FromStream(ref tmp, xml, "DestinationRows", "ZBox.App.SchemaMigration");
-                this.Proxy.DestinationRows = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Source;
-                XmlStreamer.FromStream(ref tmp, xml, "Source", "ZBox.App.SchemaMigration");
-                this.Proxy.Source = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.SourceRows;
-                XmlStreamer.FromStream(ref tmp, xml, "SourceRows", "ZBox.App.SchemaMigration");
-                this.Proxy.SourceRows = tmp;
-            }
-            {
-                // yuck
-                DateTime tmp = this.Proxy.Timestamp;
-                XmlStreamer.FromStream(ref tmp, xml, "Timestamp", "ZBox.App.SchemaMigration");
-                this.Proxy.Timestamp = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

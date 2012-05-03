@@ -733,6 +733,15 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             base.NotifyDeleting();
             if (OnNotifyDeleting_ControlKind != null) OnNotifyDeleting_ControlKind(this);
 
+            // should fetch && remember parent for ViewModelDescriptor_has_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewDescriptor_is_a_ControlKind_RelationEntry
+            // should fetch && remember parent for Property_may_request_ControlKind_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_has_ControlKind_RelationEntry
+            // should fetch && remember parent for DataType_may_request_ControlKind_RelationEntry
             if (Parent != null) {
                 ((NHibernatePersistenceObject)Parent).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Parent);
@@ -741,17 +750,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            // should fetch && remember parent for DataType_may_request_ControlKind_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_has_ControlKind_RelationEntry
             // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
             // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
-            // should fetch && remember parent for Property_may_request_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewDescriptor_is_a_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_has_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_ControlKind_RelationEntry
 
             ChildControlKinds.Clear();
             Parent = null;
@@ -810,64 +810,15 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
+                this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Name = tmp;
-            }
+            this.Proxy.Name = binStream.ReadString();
             binStream.Read(out this._fk_Parent);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Parent != null ? OurContext.GetIdFromProxy(this.Proxy.Parent) : (int?)null, xml, "Parent", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.Name;
-                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.GUI");
-                this.Proxy.Name = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -888,22 +839,22 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.GUI|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|Name":
+                this.Proxy.Name = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|Parent":
+                this._fk_guid_Parent = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.Name;
-                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.GUI");
-                this.Proxy.Name = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_Parent, xml, "Parent", "Kistl.App.GUI");
         }
 
         #endregion

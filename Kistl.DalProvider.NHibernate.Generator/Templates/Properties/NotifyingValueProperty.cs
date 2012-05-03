@@ -25,8 +25,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         protected override void ApplyBackingStoreDefinition()
         {
-            // the proxy store the valur, so we don't need a local backing store
+            // the proxy store the value, so we don't need a local backing store
             // base.ApplyBackingStoreDefinition();
+        }
+
+        protected override void ApplyBackingStoreIsDirtyDefinition()
+        {
+            // the proxy store the value, so we don't need a local backing store
+            // base.ApplyBackingStoreIsDirtyDefinition();
         }
 
         protected override void AddSerialization(Templates.Serialization.SerializationMembersList list, string name)

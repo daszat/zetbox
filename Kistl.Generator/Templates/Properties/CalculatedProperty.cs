@@ -46,7 +46,7 @@ namespace Kistl.Generator.Templates.Properties
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string name)
         {
             if (list != null)
-                list.Add(Serialization.SerializerType.All, modulenamespace, name, ApplyResultExpression());
+                list.Add(Serialization.SerializerType.All, modulenamespace, name, referencedType, ApplyResultExpression());
         }
     }
 }

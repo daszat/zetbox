@@ -93,7 +93,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _Schema;
+        private string _Schema_store;
+        private string _Schema {
+            get { return _Schema_store; }
+            set {
+                _Schema_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PreSetter;
@@ -154,7 +160,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int _Version;
+        private int _Version_store;
+        private int _Version {
+            get { return _Version_store; }
+            set {
+                _Version_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PreSetter;
@@ -373,35 +385,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Schema);
-            binStream.Read(out this._Version);
+            this._Schema = binStream.ReadString();
+            this._Version = binStream.ReadInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Schema, xml, "Schema", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Version, xml, "Version", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Schema, xml, "Schema", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Version, xml, "Version", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

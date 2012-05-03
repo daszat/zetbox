@@ -43,20 +43,20 @@ namespace Kistl.Generator.Templates.Serialization
         {
 #line 20 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 switch(direction)
-	{
-		case SerializerDirection.ToStream:
+    {
+        case SerializerDirection.ToStream:
 
 #line 24 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
-this.WriteObjects("			if (auxObjects != null) {\r\n");
-this.WriteObjects("				auxObjects.Add(",  propertyName , ");\r\n");
-this.WriteObjects("			}\r\n");
+this.WriteObjects("            if (auxObjects != null) {\r\n");
+this.WriteObjects("                auxObjects.Add(",  propertyName , ");\r\n");
+this.WriteObjects("            }\r\n");
 #line 28 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 break;
-		case SerializerDirection.FromStream:
-			break;
-		default:
-			throw new ArgumentOutOfRangeException("direction");
-	}
+        case SerializerDirection.FromStream:
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
 
 
         }

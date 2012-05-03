@@ -37,10 +37,12 @@ namespace Kistl.Generator.Templates.Properties
         /// </summary>
         protected virtual void ApplyAttributesTemplate() { }
 
+        protected virtual void ApplyTailTemplate() { }
+
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string name)
         {
             if (list != null)
-                list.Add(Serialization.SerializerType.All, modulenamespace, name, backingName);
+                list.Add(Serialization.SerializerType.All, modulenamespace, name, type, backingName);
         }
 
         protected virtual void ApplyOnGetTemplate() { }
@@ -51,6 +53,10 @@ namespace Kistl.Generator.Templates.Properties
         protected virtual void ApplyBackingStoreDefinition()
         {
             this.WriteLine("        private {0} {1};", type, backingName);
+        }
+
+        protected virtual void ApplyBackingStoreIsDirtyDefinition()
+        {
             if (isCalculated)
                 this.WriteLine("        private bool {0}_IsDirty = false;", backingName);
         }

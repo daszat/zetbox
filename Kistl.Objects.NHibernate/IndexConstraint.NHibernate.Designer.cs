@@ -486,46 +486,12 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._isIsUniqueSet);
+            this._isIsUniqueSet = binStream.ReadBoolean();
             if (this._isIsUniqueSet) {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsUnique = tmp;
+                this.Proxy.IsUnique = binStream.ReadBoolean();
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._isIsUniqueSet, xml, "IsIsUniqueSet", "Kistl.App.Base");
-            if (this._isIsUniqueSet) {
-                XmlStreamer.ToStream(this.Proxy.IsUnique, xml, "IsUnique", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._isIsUniqueSet, xml, "IsIsUniqueSet", "Kistl.App.Base");
-            if (this._isIsUniqueSet) {
-                // yuck
-                bool tmp = this.Proxy.IsUnique;
-                XmlStreamer.FromStream(ref tmp, xml, "IsUnique", "Kistl.App.Base");
-                this.Proxy.IsUnique = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -546,13 +512,12 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            {
-                // yuck
-                bool tmp = this.Proxy.IsUnique;
-                XmlStreamer.FromStream(ref tmp, xml, "IsUnique", "Kistl.App.Base");
-                this.Proxy.IsUnique = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|IsUnique":
+                // Import must have default value set
+                this.Proxy.IsUnique = XmlStreamer.ReadBoolean(xml);
                 this._isIsUniqueSet = true;
+                break;
             }
         }
 

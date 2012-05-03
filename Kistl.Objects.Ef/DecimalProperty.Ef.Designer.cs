@@ -93,7 +93,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int _Precision;
+        private int _Precision_store;
+        private int _Precision {
+            get { return _Precision_store; }
+            set {
+                _Precision_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DecimalProperty, int> OnPrecision_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DecimalProperty, int> OnPrecision_PreSetter;
@@ -154,7 +160,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private int _Scale;
+        private int _Scale_store;
+        private int _Scale {
+            get { return _Scale_store; }
+            set {
+                _Scale_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_PreSetter;
@@ -657,35 +669,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Precision);
-            binStream.Read(out this._Scale);
+            this._Precision = binStream.ReadInt32();
+            this._Scale = binStream.ReadInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Precision, xml, "Precision", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Scale, xml, "Scale", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Precision, xml, "Precision", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Scale, xml, "Scale", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -706,8 +693,14 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._Precision, xml, "Precision", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Scale, xml, "Scale", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|Precision":
+                this._Precision = XmlStreamer.ReadInt32(xml);
+                break;
+            case "Kistl.App.Base|Scale":
+                this._Scale = XmlStreamer.ReadInt32(xml);
+                break;
+            }
         }
 
         #endregion

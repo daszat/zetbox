@@ -210,7 +210,13 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        private DateTime _ChangedOn;
+        private DateTime _ChangedOn_store;
+        private DateTime _ChangedOn {
+            get { return _ChangedOn_store; }
+            set {
+                _ChangedOn_store = value;
+            }
+        }
         private bool _isChangedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnChangedOn_Getter;
@@ -389,7 +395,13 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        private DateTime _CreatedOn;
+        private DateTime _CreatedOn_store;
+        private DateTime _CreatedOn {
+            get { return _CreatedOn_store; }
+            set {
+                _CreatedOn_store = value;
+            }
+        }
         private bool _isCreatedOnSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, DateTime> OnCreatedOn_Getter;
@@ -463,7 +475,13 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        private Guid _ExportGuid;
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                _ExportGuid_store = value;
+            }
+        }
         private bool _isExportGuidSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Guid> OnExportGuid_Getter;
@@ -630,7 +648,13 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        private string _MachineName;
+        private string _MachineName_store;
+        private string _MachineName {
+            get { return _MachineName_store; }
+            set {
+                _MachineName_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnMachineName_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnMachineName_PreSetter;
@@ -691,7 +715,13 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        private string _PickupDirectory;
+        private string _PickupDirectory_store;
+        private string _PickupDirectory {
+            get { return _PickupDirectory_store; }
+            set {
+                _PickupDirectory_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnPickupDirectory_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, string> OnPickupDirectory_PreSetter;
@@ -1022,88 +1052,24 @@ namespace at.dasz.DocumentManagement
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                binStream.Read(out this._ChangedOn);
+                this._ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                binStream.Read(out this._CreatedOn);
+                this._CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                binStream.Read(out this._ExportGuid);
+                this._ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Identity);
-            binStream.Read(out this._MachineName);
-            binStream.Read(out this._PickupDirectory);
+            this._MachineName = binStream.ReadString();
+            this._PickupDirectory = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_FileImportConfiguration_was_ChangedBy", "ChangedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ChangedBy", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "at.dasz.DocumentManagement");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_FileImportConfiguration_was_CreatedBy", "CreatedBy").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "CreatedBy", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "at.dasz.DocumentManagement");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "at.dasz.DocumentManagement");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "at.dasz.DocumentManagement");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Configuration_of_Identity", "Identity").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Identity", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.ToStream(this._MachineName, xml, "MachineName", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this._PickupDirectory, xml, "PickupDirectory", "at.dasz.DocumentManagement");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "at.dasz.DocumentManagement");
-            if (this._isChangedOnSet) {
-                XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "at.dasz.DocumentManagement");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "at.dasz.DocumentManagement");
-            if (this._isExportGuidSet) {
-                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "at.dasz.DocumentManagement");
-            }
-            XmlStreamer.FromStream(ref this._fk_Identity, xml, "Identity", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._MachineName, xml, "MachineName", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._PickupDirectory, xml, "PickupDirectory", "at.dasz.DocumentManagement");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1127,17 +1093,29 @@ namespace at.dasz.DocumentManagement
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            this._isChangedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
-            this._isCreatedOnSet = true;
-            // Import must have default value set
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "at.dasz.DocumentManagement");
-            this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._MachineName, xml, "MachineName", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._PickupDirectory, xml, "PickupDirectory", "at.dasz.DocumentManagement");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "at.dasz.DocumentManagement|ChangedOn":
+                // Import must have default value set
+                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
+                this._isChangedOnSet = true;
+                break;
+            case "at.dasz.DocumentManagement|CreatedOn":
+                // Import must have default value set
+                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
+                this._isCreatedOnSet = true;
+                break;
+            case "at.dasz.DocumentManagement|ExportGuid":
+                // Import must have default value set
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                this._isExportGuidSet = true;
+                break;
+            case "at.dasz.DocumentManagement|MachineName":
+                this._MachineName = XmlStreamer.ReadString(xml);
+                break;
+            case "at.dasz.DocumentManagement|PickupDirectory":
+                this._PickupDirectory = XmlStreamer.ReadString(xml);
+                break;
+            }
         }
 
         #endregion

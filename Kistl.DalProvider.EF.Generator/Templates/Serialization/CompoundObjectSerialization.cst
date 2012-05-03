@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Serialization.CompoundObjectSerialization"
-	ClassName="Kistl.DalProvider.Ef.Generator.Templates.Serialization.CompoundObjectSerialization" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+    Name="Serialization.CompoundObjectSerialization"
+    ClassName="Kistl.DalProvider.Ef.Generator.Templates.Serialization.CompoundObjectSerialization" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -19,49 +19,39 @@
 <%@ Parameter Name="backingStoreType" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
 <%
-	if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.ToStream)
-	{
+    if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.ToStream)
+    {
 %>
-			<%= streamName %>.Write(this.<%= memberName %>);
-<%	
-	}
-	else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.FromStream)
-	{
+            <%= streamName %>.Write(this.<%= memberName %>);
+<%    
+    }
+    else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.FromStream)
+    {
 %>
-			{
+            {
                 // use backing store to avoid notifications
-				<%= backingStoreType %> tmp = <%= streamName %>.ReadCompoundObject<<%= backingStoreType %>>();
-	            this.<%= backingStoreName %> = tmp ?? new <%= backingStoreType %>(true, this, "<%= memberName %>");
+                <%= backingStoreType %> tmp = <%= streamName %>.ReadCompoundObject<<%= backingStoreType %>>();
+                this.<%= backingStoreName %> = tmp ?? new <%= backingStoreType %>(true, this, "<%= memberName %>");
                 this.<%= backingStoreName %>.AttachToObject(this, "<%= memberName %>");
-	        }
-<%	
-	}
-	else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.ToXmlStream)
-	{
-%>
-			// TODO: Add XML Serializer here
-<%
-	}
-	else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.FromXmlStream)
-	{
-%>
-            // TODO: Add XML Serializer here
-<%
-	}
-	else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.Export)
-	{
+            }
+<%    
+    }
+    else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.Export)
+    {
 %>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
-	}
-	else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.MergeImport)
-	{
+    }
+    else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.MergeImport)
+    {
 %>
-			XmlStreamer.FromStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            case "<%= xmlnamespace %>|<%= xmlname %>":
+                XmlStreamer.FromStream(this.<%= backingStoreName %>, <%= streamName %>);
+                break;
 <%
-	}
-	else
-	{
-		throw new ArgumentOutOfRangeException("direction");
-	}
+    }
+    else
+    {
+        throw new ArgumentOutOfRangeException("direction");
+    }
 %>

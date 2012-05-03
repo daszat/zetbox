@@ -120,6 +120,11 @@ namespace Kistl.Generator.Templates.Properties
         protected override void ApplyBackingStoreDefinition()
         {
             base.ApplyBackingStoreDefinition();
+        }
+
+        protected override void ApplyTailTemplate()
+        {
+            base.ApplyTailTemplate();
             if (HasDefaultValue)
             {
                 this.WriteObjects("        private bool ", IsSetFlagName, " = false;\r\n");
@@ -132,19 +137,21 @@ namespace Kistl.Generator.Templates.Properties
             {
                 if (HasDefaultValue)
                 {
-                    list.Add("Serialization.NotifyingDataPropertyWithDefaultSerialization",
+                    list.Add("Serialization.SimplePropertyWithDefaultSerialization",
                         Serialization.SerializerType.All,
                         _prop.Module.Namespace,
                         name,
+                        type,
                         backingName,
                         IsSetFlagName);
                 }
                 else
                 {
-                    list.Add("Serialization.NotifyingDataPropertySerialization",
+                    list.Add("Serialization.SimplePropertySerialization",
                         Serialization.SerializerType.All,
                         _prop.Module.Namespace,
                         name,
+                        type,
                         backingName);
                 }
             }

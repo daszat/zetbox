@@ -326,36 +326,9 @@ namespace Kistl.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek = (Kistl.App.Base.DayOfWeek)baseValue;
-            }
+            ((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek = (Kistl.App.Base.DayOfWeek)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream((int?)((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek, xml, "DayOfWeek", "Kistl.App.Calendar");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek = (Kistl.App.Base.DayOfWeek)v, xml, "DayOfWeek", "Kistl.App.Calendar");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -375,7 +348,11 @@ namespace Kistl.App.Calendar
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek = (Kistl.App.Base.DayOfWeek)v, xml, "DayOfWeek", "Kistl.App.Calendar");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Calendar|DayOfWeek":
+                ((Kistl.App.Calendar.DayOfWeekCalendarRule)this).DayOfWeek = (Kistl.App.Base.DayOfWeek)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            }
         }
 
         #endregion

@@ -97,7 +97,7 @@ this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
 #line 73 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
-        serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, backingName); // TODO: XML Namespace
+        serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, "int?", backingName); // TODO: XML Namespace
 
 
         }

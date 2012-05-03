@@ -660,101 +660,14 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Date = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Exception = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Level = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Logger = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Message = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Thread = tmp;
-            }
+            this.Proxy.Date = binStream.ReadDateTime();
+            this.Proxy.Exception = binStream.ReadString();
+            this.Proxy.Level = binStream.ReadString();
+            this.Proxy.Logger = binStream.ReadString();
+            this.Proxy.Message = binStream.ReadString();
+            this.Proxy.Thread = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Date, xml, "Date", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Exception, xml, "Exception", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Level, xml, "Level", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Logger, xml, "Logger", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Message, xml, "Message", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Thread, xml, "Thread", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                DateTime tmp = this.Proxy.Date;
-                XmlStreamer.FromStream(ref tmp, xml, "Date", "Kistl.App.Base");
-                this.Proxy.Date = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Exception;
-                XmlStreamer.FromStream(ref tmp, xml, "Exception", "Kistl.App.Base");
-                this.Proxy.Exception = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Level;
-                XmlStreamer.FromStream(ref tmp, xml, "Level", "Kistl.App.Base");
-                this.Proxy.Level = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Logger;
-                XmlStreamer.FromStream(ref tmp, xml, "Logger", "Kistl.App.Base");
-                this.Proxy.Logger = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Message;
-                XmlStreamer.FromStream(ref tmp, xml, "Message", "Kistl.App.Base");
-                this.Proxy.Message = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Thread;
-                XmlStreamer.FromStream(ref tmp, xml, "Thread", "Kistl.App.Base");
-                this.Proxy.Thread = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

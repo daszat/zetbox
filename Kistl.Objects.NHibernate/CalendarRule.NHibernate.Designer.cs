@@ -1410,10 +1410,6 @@ namespace Kistl.App.Calendar
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalendarRule != null) OnNotifyDeleting_CalendarRule(this);
 
-            if (Calendar != null) {
-                ((NHibernatePersistenceObject)Calendar).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Calendar);
-            }
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
@@ -1421,6 +1417,10 @@ namespace Kistl.App.Calendar
             if (CreatedBy != null) {
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            if (Calendar != null) {
+                ((NHibernatePersistenceObject)Calendar).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Calendar);
             }
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
@@ -1517,155 +1517,30 @@ namespace Kistl.App.Calendar
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_Calendar);
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ChangedOn = tmp;
+                this.Proxy.ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.CreatedOn = tmp;
+                this.Proxy.CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
+                this.Proxy.ExportGuid = binStream.ReadGuid();
             }
-            binStream.Read(out this._isIsWorkingDaySet);
+            this._isIsWorkingDaySet = binStream.ReadBoolean();
             if (this._isIsWorkingDaySet) {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsWorkingDay = tmp;
+                this.Proxy.IsWorkingDay = binStream.ReadBoolean();
             }
             binStream.Read(out this._fk_Module);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Name = tmp;
-            }
-            {
-                DateTime? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ValidFrom = tmp;
-            }
-            {
-                DateTime? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ValidUntil = tmp;
-            }
-            {
-                decimal tmp;
-                binStream.Read(out tmp);
-                this.Proxy.WorkingHours = tmp;
-            }
+            this.Proxy.Name = binStream.ReadString();
+            this.Proxy.ValidFrom = binStream.ReadNullableDateTime();
+            this.Proxy.ValidUntil = binStream.ReadNullableDateTime();
+            this.Proxy.WorkingHours = binStream.ReadDecimal();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Calendar != null ? OurContext.GetIdFromProxy(this.Proxy.Calendar) : (int?)null, xml, "Calendar", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Calendar");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");
-            }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Calendar");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Calendar");
-            }
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Calendar");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Calendar");
-            }
-            XmlStreamer.ToStream(this._isIsWorkingDaySet, xml, "IsIsWorkingDaySet", "Kistl.App.Calendar");
-            if (this._isIsWorkingDaySet) {
-                XmlStreamer.ToStream(this.Proxy.IsWorkingDay, xml, "IsWorkingDay", "Kistl.App.Calendar");
-            }
-            XmlStreamer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, xml, "Module", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this.Proxy.ValidFrom, xml, "ValidFrom", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this.Proxy.ValidUntil, xml, "ValidUntil", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this.Proxy.WorkingHours, xml, "WorkingHours", "Kistl.App.Calendar");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Calendar, xml, "Calendar", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Calendar");
-            if (this._isChangedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.Calendar");
-                this.Proxy.ChangedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Calendar");
-            if (this._isCreatedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Calendar");
-                this.Proxy.CreatedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Calendar");
-            if (this._isExportGuidSet) {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Calendar");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._isIsWorkingDaySet, xml, "IsIsWorkingDaySet", "Kistl.App.Calendar");
-            if (this._isIsWorkingDaySet) {
-                // yuck
-                bool tmp = this.Proxy.IsWorkingDay;
-                XmlStreamer.FromStream(ref tmp, xml, "IsWorkingDay", "Kistl.App.Calendar");
-                this.Proxy.IsWorkingDay = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Calendar");
-            {
-                // yuck
-                string tmp = this.Proxy.Name;
-                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Calendar");
-                this.Proxy.Name = tmp;
-            }
-            {
-                // yuck
-                DateTime? tmp = this.Proxy.ValidFrom;
-                XmlStreamer.FromStream(ref tmp, xml, "ValidFrom", "Kistl.App.Calendar");
-                this.Proxy.ValidFrom = tmp;
-            }
-            {
-                // yuck
-                DateTime? tmp = this.Proxy.ValidUntil;
-                XmlStreamer.FromStream(ref tmp, xml, "ValidUntil", "Kistl.App.Calendar");
-                this.Proxy.ValidUntil = tmp;
-            }
-            {
-                // yuck
-                decimal tmp = this.Proxy.WorkingHours;
-                XmlStreamer.FromStream(ref tmp, xml, "WorkingHours", "Kistl.App.Calendar");
-                this.Proxy.WorkingHours = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1695,63 +1570,45 @@ namespace Kistl.App.Calendar
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_Calendar, xml, "Calendar", "Kistl.App.Calendar");
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.Calendar");
-                this.Proxy.ChangedOn = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Calendar|Calendar":
+                this._fk_guid_Calendar = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Calendar|ChangedOn":
+                // Import must have default value set
+                this.Proxy.ChangedOn = XmlStreamer.ReadDateTime(xml);
                 this._isChangedOnSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Calendar");
-                this.Proxy.CreatedOn = tmp;
+                break;
+            case "Kistl.App.Calendar|CreatedOn":
+                // Import must have default value set
+                this.Proxy.CreatedOn = XmlStreamer.ReadDateTime(xml);
                 this._isCreatedOnSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Calendar");
-                this.Proxy.ExportGuid = tmp;
+                break;
+            case "Kistl.App.Calendar|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                bool tmp = this.Proxy.IsWorkingDay;
-                XmlStreamer.FromStream(ref tmp, xml, "IsWorkingDay", "Kistl.App.Calendar");
-                this.Proxy.IsWorkingDay = tmp;
+                break;
+            case "Kistl.App.Calendar|IsWorkingDay":
+                // Import must have default value set
+                this.Proxy.IsWorkingDay = XmlStreamer.ReadBoolean(xml);
                 this._isIsWorkingDaySet = true;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Calendar");
-            {
-                // yuck
-                string tmp = this.Proxy.Name;
-                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Calendar");
-                this.Proxy.Name = tmp;
-            }
-            {
-                // yuck
-                DateTime? tmp = this.Proxy.ValidFrom;
-                XmlStreamer.FromStream(ref tmp, xml, "ValidFrom", "Kistl.App.Calendar");
-                this.Proxy.ValidFrom = tmp;
-            }
-            {
-                // yuck
-                DateTime? tmp = this.Proxy.ValidUntil;
-                XmlStreamer.FromStream(ref tmp, xml, "ValidUntil", "Kistl.App.Calendar");
-                this.Proxy.ValidUntil = tmp;
-            }
-            {
-                // yuck
-                decimal tmp = this.Proxy.WorkingHours;
-                XmlStreamer.FromStream(ref tmp, xml, "WorkingHours", "Kistl.App.Calendar");
-                this.Proxy.WorkingHours = tmp;
+                break;
+            case "Kistl.App.Calendar|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Calendar|Name":
+                this.Proxy.Name = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Calendar|ValidFrom":
+                this.Proxy.ValidFrom = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Kistl.App.Calendar|ValidUntil":
+                this.Proxy.ValidUntil = XmlStreamer.ReadNullableDateTime(xml);
+                break;
+            case "Kistl.App.Calendar|WorkingHours":
+                this.Proxy.WorkingHours = XmlStreamer.ReadDecimal(xml);
+                break;
             }
         }
 

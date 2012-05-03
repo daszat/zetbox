@@ -1417,50 +1417,15 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._fk_BaseObjectClass);
-            binStream.Read(out this._CodeTemplate);
-            binStream.Read(out this._fk_DefaultViewModelDescriptor);
-            binStream.Read(out this._IsAbstract);
-            binStream.Read(out this._IsFrozenObject);
-            binStream.Read(out this._IsSimpleObject);
-            binStream.Read(out this._TableName);
+            this._fk_BaseObjectClass = binStream.ReadNullableInt32();
+            this._CodeTemplate = binStream.ReadString();
+            this._fk_DefaultViewModelDescriptor = binStream.ReadNullableInt32();
+            this._IsAbstract = binStream.ReadBoolean();
+            this._IsFrozenObject = binStream.ReadBoolean();
+            this._IsSimpleObject = binStream.ReadBoolean();
+            this._TableName = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
-            XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1486,13 +1451,29 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._CodeTemplate, xml, "CodeTemplate", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|BaseObjectClass":
+                this._fk_guid_BaseObjectClass = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|CodeTemplate":
+                this._CodeTemplate = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|DefaultViewModelDescriptor":
+                this._fk_guid_DefaultViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|IsAbstract":
+                this._IsAbstract = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|IsFrozenObject":
+                this._IsFrozenObject = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.GUI|IsSimpleObject":
+                this._IsSimpleObject = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|TableName":
+                this._TableName = XmlStreamer.ReadString(xml);
+                break;
+            }
         }
 
         #endregion

@@ -440,38 +440,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._DisplayName);
-            binStream.Read(out this._Password);
-            binStream.Read(out this._UserName);
+            this._DisplayName = binStream.ReadString();
+            this._Password = binStream.ReadString();
+            this._UserName = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Password, xml, "Password", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._UserName, xml, "UserName", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Password, xml, "Password", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._UserName, xml, "UserName", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

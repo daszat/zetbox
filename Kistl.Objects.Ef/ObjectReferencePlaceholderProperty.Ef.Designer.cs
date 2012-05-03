@@ -93,7 +93,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private bool _HasPersistentOrder;
+        private bool _HasPersistentOrder_store;
+        private bool _HasPersistentOrder {
+            get { return _HasPersistentOrder_store; }
+            set {
+                _HasPersistentOrder_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PreSetter;
@@ -154,7 +160,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _ImplementorRoleName;
+        private string _ImplementorRoleName_store;
+        private string _ImplementorRoleName {
+            get { return _ImplementorRoleName_store; }
+            set {
+                _ImplementorRoleName_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PreSetter;
@@ -215,7 +227,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private bool _IsList;
+        private bool _IsList_store;
+        private bool _IsList {
+            get { return _IsList_store; }
+            set {
+                _IsList_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PreSetter;
@@ -276,7 +294,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _ItemRoleName;
+        private string _ItemRoleName_store;
+        private string _ItemRoleName {
+            get { return _ItemRoleName_store; }
+            set {
+                _ItemRoleName_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PreSetter;
@@ -443,7 +467,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _Verb;
+        private string _Verb_store;
+        private string _Verb {
+            get { return _Verb_store; }
+            set {
+                _Verb_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PreSetter;
@@ -1000,9 +1030,9 @@ namespace Kistl.App.Base
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass", "ReferencedObjectClass").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
-			if (auxObjects != null) {
-				auxObjects.Add(ReferencedObjectClass);
-			}
+            if (auxObjects != null) {
+                auxObjects.Add(ReferencedObjectClass);
+            }
             binStream.Write(this._Verb);
         }
 
@@ -1012,50 +1042,14 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._HasPersistentOrder);
-            binStream.Read(out this._ImplementorRoleName);
-            binStream.Read(out this._IsList);
-            binStream.Read(out this._ItemRoleName);
+            this._HasPersistentOrder = binStream.ReadBoolean();
+            this._ImplementorRoleName = binStream.ReadString();
+            this._IsList = binStream.ReadBoolean();
+            this._ItemRoleName = binStream.ReadString();
             binStream.Read(out this._fk_ReferencedObjectClass);
-            binStream.Read(out this._Verb);
+            this._Verb = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass", "ReferencedObjectClass").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_ReferencedObjectClass, xml, "ReferencedObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1080,12 +1074,26 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_ReferencedObjectClass, xml, "ReferencedObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|HasPersistentOrder":
+                this._HasPersistentOrder = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|ImplementorRoleName":
+                this._ImplementorRoleName = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Base|IsList":
+                this._IsList = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|ItemRoleName":
+                this._ItemRoleName = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.Base|ReferencedObjectClass":
+                this._fk_guid_ReferencedObjectClass = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|Verb":
+                this._Verb = XmlStreamer.ReadString(xml);
+                break;
+            }
         }
 
         #endregion

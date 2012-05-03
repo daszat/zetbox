@@ -1094,13 +1094,13 @@ namespace Kistl.App.Base
                 ((NHibernatePersistenceObject)FalseIcon).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)FalseIcon);
             }
-            if (NullIcon != null) {
-                ((NHibernatePersistenceObject)NullIcon).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)NullIcon);
-            }
             if (TrueIcon != null) {
                 ((NHibernatePersistenceObject)TrueIcon).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)TrueIcon);
+            }
+            if (NullIcon != null) {
+                ((NHibernatePersistenceObject)NullIcon).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)NullIcon);
             }
 
             FalseIcon = null;
@@ -1159,73 +1159,13 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_FalseIcon);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.FalseLabel = tmp;
-            }
+            this.Proxy.FalseLabel = binStream.ReadString();
             binStream.Read(out this._fk_NullIcon);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.NullLabel = tmp;
-            }
+            this.Proxy.NullLabel = binStream.ReadString();
             binStream.Read(out this._fk_TrueIcon);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.TrueLabel = tmp;
-            }
+            this.Proxy.TrueLabel = binStream.ReadString();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.FalseIcon != null ? OurContext.GetIdFromProxy(this.Proxy.FalseIcon) : (int?)null, xml, "FalseIcon", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.NullIcon != null ? OurContext.GetIdFromProxy(this.Proxy.NullIcon) : (int?)null, xml, "NullIcon", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.NullLabel, xml, "NullLabel", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.TrueIcon != null ? OurContext.GetIdFromProxy(this.Proxy.TrueIcon) : (int?)null, xml, "TrueIcon", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.TrueLabel, xml, "TrueLabel", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_FalseIcon, xml, "FalseIcon", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.FalseLabel;
-                XmlStreamer.FromStream(ref tmp, xml, "FalseLabel", "Kistl.App.Base");
-                this.Proxy.FalseLabel = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_NullIcon, xml, "NullIcon", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.NullLabel;
-                XmlStreamer.FromStream(ref tmp, xml, "NullLabel", "Kistl.App.Base");
-                this.Proxy.NullLabel = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_TrueIcon, xml, "TrueIcon", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.TrueLabel;
-                XmlStreamer.FromStream(ref tmp, xml, "TrueLabel", "Kistl.App.Base");
-                this.Proxy.TrueLabel = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1250,26 +1190,25 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_FalseIcon, xml, "FalseIcon", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.FalseLabel;
-                XmlStreamer.FromStream(ref tmp, xml, "FalseLabel", "Kistl.App.Base");
-                this.Proxy.FalseLabel = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_NullIcon, xml, "NullIcon", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.NullLabel;
-                XmlStreamer.FromStream(ref tmp, xml, "NullLabel", "Kistl.App.Base");
-                this.Proxy.NullLabel = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_TrueIcon, xml, "TrueIcon", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.TrueLabel;
-                XmlStreamer.FromStream(ref tmp, xml, "TrueLabel", "Kistl.App.Base");
-                this.Proxy.TrueLabel = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|FalseIcon":
+                this._fk_guid_FalseIcon = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|FalseLabel":
+                this.Proxy.FalseLabel = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|NullIcon":
+                this._fk_guid_NullIcon = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|NullLabel":
+                this.Proxy.NullLabel = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|TrueIcon":
+                this._fk_guid_TrueIcon = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|TrueLabel":
+                this.Proxy.TrueLabel = XmlStreamer.ReadString(xml);
+                break;
             }
         }
 

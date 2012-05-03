@@ -93,7 +93,13 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        private string _Destination;
+        private string _Destination_store;
+        private string _Destination {
+            get { return _Destination_store; }
+            set {
+                _Destination_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnDestination_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnDestination_PreSetter;
@@ -154,7 +160,13 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        private int _DestinationRows;
+        private int _DestinationRows_store;
+        private int _DestinationRows {
+            get { return _DestinationRows_store; }
+            set {
+                _DestinationRows_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnDestinationRows_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnDestinationRows_PreSetter;
@@ -215,7 +227,13 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        private string _Source;
+        private string _Source_store;
+        private string _Source {
+            get { return _Source_store; }
+            set {
+                _Source_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnSource_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, string> OnSource_PreSetter;
@@ -276,7 +294,13 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        private int _SourceRows;
+        private int _SourceRows_store;
+        private int _SourceRows {
+            get { return _SourceRows_store; }
+            set {
+                _SourceRows_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnSourceRows_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, int> OnSourceRows_PreSetter;
@@ -337,7 +361,13 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        private DateTime _Timestamp;
+        private DateTime _Timestamp_store;
+        private DateTime _Timestamp {
+            get { return _Timestamp_store; }
+            set {
+                _Timestamp_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationLog, DateTime> OnTimestamp_Getter;
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationLog, DateTime> OnTimestamp_PreSetter;
@@ -595,44 +625,13 @@ namespace ZBox.App.SchemaMigration
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Destination);
-            binStream.Read(out this._DestinationRows);
-            binStream.Read(out this._Source);
-            binStream.Read(out this._SourceRows);
-            binStream.Read(out this._Timestamp);
+            this._Destination = binStream.ReadString();
+            this._DestinationRows = binStream.ReadInt32();
+            this._Source = binStream.ReadString();
+            this._SourceRows = binStream.ReadInt32();
+            this._Timestamp = binStream.ReadDateTime();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Destination, xml, "Destination", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._Source, xml, "Source", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._SourceRows, xml, "SourceRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this._Timestamp, xml, "Timestamp", "ZBox.App.SchemaMigration");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Destination, xml, "Destination", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Source, xml, "Source", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._SourceRows, xml, "SourceRows", "ZBox.App.SchemaMigration");
-            XmlStreamer.FromStream(ref this._Timestamp, xml, "Timestamp", "ZBox.App.SchemaMigration");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

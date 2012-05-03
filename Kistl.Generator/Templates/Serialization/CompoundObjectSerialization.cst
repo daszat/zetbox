@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Serialization.CompoundObjectSerialization"
-	ClassName="Kistl.Generator.Templates.Serialization.CompoundObjectSerialization" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+    Name="Serialization.CompoundObjectSerialization"
+    ClassName="Kistl.Generator.Templates.Serialization.CompoundObjectSerialization" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -19,49 +19,39 @@
 <%@ Parameter Name="backingStoreType" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
 <%
-	if (direction == SerializerDirection.ToStream)
-	{
+    if (direction == SerializerDirection.ToStream)
+    {
 %>
-			<%= streamName %>.Write(this.<%= memberName %>);
-<%	
-	}
-	else if (direction == SerializerDirection.FromStream)
-	{
+            <%= streamName %>.Write(this.<%= memberName %>);
+<%    
+    }
+    else if (direction == SerializerDirection.FromStream)
+    {
 %>
-			{
+            {
                 // use backing store to avoid notifications
-	            this.<%= backingStoreName %> = <%= streamName %>.ReadCompoundObject<<%= backingStoreType %>>();
+                this.<%= backingStoreName %> = <%= streamName %>.ReadCompoundObject<<%= backingStoreType %>>();
                 if (this.<%= backingStoreName %> != null)
                     this.<%= backingStoreName %>.AttachToObject(this, "<%= memberName %>");
-	        }
-<%	
-	}
-	else if (direction == SerializerDirection.ToXmlStream)
-	{
-%>
-			// TODO: Add XML Serializer here
-<%
-	}
-	else if (direction == SerializerDirection.FromXmlStream)
-	{
-%>
-            // TODO: Add XML Serializer here
-<%
-	}
-	else if (direction == SerializerDirection.Export)
-	{
+            }
+<%    
+    }
+    else if (direction == SerializerDirection.Export)
+    {
 %>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
-	}
-	else if (direction == SerializerDirection.MergeImport)
-	{
+    }
+    else if (direction == SerializerDirection.MergeImport)
+    {
 %>
-			XmlStreamer.FromStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            case "<%= xmlnamespace %>|<%= xmlname %>":
+                XmlStreamer.FromStream(this.<%= backingStoreName %>, <%= streamName %>);
+                break;
 <%
-	}
-	else
-	{
-		throw new ArgumentOutOfRangeException("direction");
-	}
+    }
+    else
+    {
+        throw new ArgumentOutOfRangeException("direction");
+    }
 %>

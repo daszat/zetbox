@@ -1422,17 +1422,17 @@ namespace Kistl.App.GUI
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            if (Module != null) {
-                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            if (ViewModelDescriptor != null) {
+                ((NHibernatePersistenceObject)ViewModelDescriptor).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelDescriptor);
             }
             if (RequestedKind != null) {
                 ((NHibernatePersistenceObject)RequestedKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)RequestedKind);
             }
-            if (ViewModelDescriptor != null) {
-                ((NHibernatePersistenceObject)ViewModelDescriptor).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelDescriptor);
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
 
             ChangedBy = null;
@@ -1518,130 +1518,27 @@ namespace Kistl.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_ChangedBy);
-            binStream.Read(out this._isChangedOnSet);
+            this._isChangedOnSet = binStream.ReadBoolean();
             if (this._isChangedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ChangedOn = tmp;
+                this.Proxy.ChangedOn = binStream.ReadDateTime();
             }
             binStream.Read(out this._fk_CreatedBy);
-            binStream.Read(out this._isCreatedOnSet);
+            this._isCreatedOnSet = binStream.ReadBoolean();
             if (this._isCreatedOnSet) {
-                DateTime tmp;
-                binStream.Read(out tmp);
-                this.Proxy.CreatedOn = tmp;
+                this.Proxy.CreatedOn = binStream.ReadDateTime();
             }
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
+                this.Proxy.ExportGuid = binStream.ReadGuid();
             }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Label = tmp;
-            }
+            this.Proxy.Label = binStream.ReadString();
             binStream.Read(out this._fk_Module);
-            {
-                bool? tmp;
-                binStream.Read(out tmp);
-                this.Proxy.RefreshOnFilterChanged = tmp;
-            }
+            this.Proxy.RefreshOnFilterChanged = binStream.ReadNullableBoolean();
             binStream.Read(out this._fk_RequestedKind);
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Required = tmp;
-            }
+            this.Proxy.Required = binStream.ReadBoolean();
             binStream.Read(out this._fk_ViewModelDescriptor);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.GUI");
-            if (this._isChangedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.GUI");
-            if (this._isCreatedOnSet) {
-                XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            }
-            XmlStreamer.ToStream(this.Proxy.Label, xml, "Label", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RefreshOnFilterChanged, xml, "RefreshOnFilterChanged", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RequestedKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedKind) : (int?)null, xml, "RequestedKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Required, xml, "Required", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.ViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelDescriptor) : (int?)null, xml, "ViewModelDescriptor", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.GUI");
-            if (this._isChangedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.GUI");
-                this.Proxy.ChangedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.GUI");
-            if (this._isCreatedOnSet) {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.GUI");
-                this.Proxy.CreatedOn = tmp;
-            }
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
-            if (this._isExportGuidSet) {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.Label;
-                XmlStreamer.FromStream(ref tmp, xml, "Label", "Kistl.App.GUI");
-                this.Proxy.Label = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
-            {
-                // yuck
-                bool? tmp = this.Proxy.RefreshOnFilterChanged;
-                XmlStreamer.FromStream(ref tmp, xml, "RefreshOnFilterChanged", "Kistl.App.GUI");
-                this.Proxy.RefreshOnFilterChanged = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_RequestedKind, xml, "RequestedKind", "Kistl.App.GUI");
-            {
-                // yuck
-                bool tmp = this.Proxy.Required;
-                XmlStreamer.FromStream(ref tmp, xml, "Required", "Kistl.App.GUI");
-                this.Proxy.Required = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_ViewModelDescriptor, xml, "ViewModelDescriptor", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1669,51 +1566,41 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.ChangedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.GUI");
-                this.Proxy.ChangedOn = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|ChangedOn":
+                // Import must have default value set
+                this.Proxy.ChangedOn = XmlStreamer.ReadDateTime(xml);
                 this._isChangedOnSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                DateTime tmp = this.Proxy.CreatedOn;
-                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.GUI");
-                this.Proxy.CreatedOn = tmp;
+                break;
+            case "Kistl.App.GUI|CreatedOn":
+                // Import must have default value set
+                this.Proxy.CreatedOn = XmlStreamer.ReadDateTime(xml);
                 this._isCreatedOnSet = true;
-            }
-            // Import must have default value set
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this.Proxy.ExportGuid = tmp;
+                break;
+            case "Kistl.App.GUI|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.GUI|Label":
+                this.Proxy.Label = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|RefreshOnFilterChanged":
+                this.Proxy.RefreshOnFilterChanged = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|RequestedKind":
+                this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|Required":
+                this.Proxy.Required = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ViewModelDescriptor":
+                this._fk_guid_ViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            {
-                // yuck
-                string tmp = this.Proxy.Label;
-                XmlStreamer.FromStream(ref tmp, xml, "Label", "Kistl.App.GUI");
-                this.Proxy.Label = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
-            {
-                // yuck
-                bool? tmp = this.Proxy.RefreshOnFilterChanged;
-                XmlStreamer.FromStream(ref tmp, xml, "RefreshOnFilterChanged", "Kistl.App.GUI");
-                this.Proxy.RefreshOnFilterChanged = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedKind, xml, "RequestedKind", "Kistl.App.GUI");
-            {
-                // yuck
-                bool tmp = this.Proxy.Required;
-                XmlStreamer.FromStream(ref tmp, xml, "Required", "Kistl.App.GUI");
-                this.Proxy.Required = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_ViewModelDescriptor, xml, "ViewModelDescriptor", "Kistl.App.GUI");
         }
 
         #endregion

@@ -597,45 +597,12 @@ namespace Kistl.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._MyIntProperty);
-            binStream.Read(out this._fk_ObjectProp);
-            binStream.Read(out this._StringProp);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.Test.TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)baseValue;
-            }
+            this._MyIntProperty = binStream.ReadNullableInt32();
+            this._fk_ObjectProp = binStream.ReadNullableInt32();
+            this._StringProp = binStream.ReadString();
+            ((Kistl.App.Test.TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, xml, "ObjectProp", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");
-            XmlStreamer.ToStream((int?)((Kistl.App.Test.TestObjClass)this).TestEnumProp, xml, "TestEnumProp", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.Test.TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, xml, "TestEnumProp", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

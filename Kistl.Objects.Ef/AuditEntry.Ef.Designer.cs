@@ -109,7 +109,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _Identity;
+        private string _Identity_store;
+        private string _Identity {
+            get { return _Identity_store; }
+            set {
+                _Identity_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.AuditEntry, string> OnIdentity_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AuditEntry, string> OnIdentity_PreSetter;
@@ -168,7 +174,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _MessageFormat;
+        private string _MessageFormat_store;
+        private string _MessageFormat {
+            get { return _MessageFormat_store; }
+            set {
+                _MessageFormat_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.AuditEntry, string> OnMessageFormat_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AuditEntry, string> OnMessageFormat_PreSetter;
@@ -227,7 +239,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _NewValue;
+        private string _NewValue_store;
+        private string _NewValue {
+            get { return _NewValue_store; }
+            set {
+                _NewValue_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.AuditEntry, string> OnNewValue_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AuditEntry, string> OnNewValue_PreSetter;
@@ -286,7 +304,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _OldValue;
+        private string _OldValue_store;
+        private string _OldValue {
+            get { return _OldValue_store; }
+            set {
+                _OldValue_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.AuditEntry, string> OnOldValue_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AuditEntry, string> OnOldValue_PreSetter;
@@ -345,7 +369,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private string _PropertyName;
+        private string _PropertyName_store;
+        private string _PropertyName {
+            get { return _PropertyName_store; }
+            set {
+                _PropertyName_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.AuditEntry, string> OnPropertyName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AuditEntry, string> OnPropertyName_PreSetter;
@@ -419,7 +449,13 @@ namespace Kistl.App.Base
 				}
             }
         }
-        private DateTime? _Timestamp;
+        private DateTime? _Timestamp_store;
+        private DateTime? _Timestamp {
+            get { return _Timestamp_store; }
+            set {
+                _Timestamp_store = value;
+            }
+        }
         private bool _isTimestampSet = false;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Base.AuditEntry, DateTime?> OnTimestamp_Getter;
@@ -504,56 +540,17 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Identity);
-            binStream.Read(out this._MessageFormat);
-            binStream.Read(out this._NewValue);
-            binStream.Read(out this._OldValue);
-            binStream.Read(out this._PropertyName);
-            binStream.Read(out this._isTimestampSet);
+            this._Identity = binStream.ReadString();
+            this._MessageFormat = binStream.ReadString();
+            this._NewValue = binStream.ReadString();
+            this._OldValue = binStream.ReadString();
+            this._PropertyName = binStream.ReadString();
+            this._isTimestampSet = binStream.ReadBoolean();
             if (this._isTimestampSet) {
-                binStream.Read(out this._Timestamp);
+                this._Timestamp = binStream.ReadNullableDateTime();
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Identity, xml, "Identity", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._MessageFormat, xml, "MessageFormat", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._NewValue, xml, "NewValue", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._OldValue, xml, "OldValue", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._isTimestampSet, xml, "IsTimestampSet", "Kistl.App.Base");
-            if (this._isTimestampSet) {
-                XmlStreamer.ToStream(this._Timestamp, xml, "Timestamp", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Identity, xml, "Identity", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._MessageFormat, xml, "MessageFormat", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._NewValue, xml, "NewValue", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._OldValue, xml, "OldValue", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isTimestampSet, xml, "IsTimestampSet", "Kistl.App.Base");
-            if (this._isTimestampSet) {
-                XmlStreamer.FromStream(ref this._Timestamp, xml, "Timestamp", "Kistl.App.Base");
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

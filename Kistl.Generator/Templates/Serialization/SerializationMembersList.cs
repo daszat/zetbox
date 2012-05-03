@@ -12,7 +12,7 @@ namespace Kistl.Generator.Templates.Serialization
     /// This will be filled while building a data type. In the end, the 
     /// ToStream and FromStream methods are built from this list.
     // TODO: enhance with versioning and type information
-    public class SerializationMembersList 
+    public class SerializationMembersList
         : List<SerializationMember>
     {
         /// <summary>
@@ -25,11 +25,11 @@ namespace Kistl.Generator.Templates.Serialization
         }
 
         /// <summary>
-        /// Add a SimpleFieldSerialization entry for this membername
+        /// Add a SimplePropertySerialization entry for this membername
         /// </summary>
-        public void Add(SerializerType type, string xmlns, string xmlname, string membername)
+        public void Add(SerializerType type, string xmlns, string xmlname, string memberType, string memberName)
         {
-            this.Add(new SerializationMember("Serialization.SimpleFieldSerialization", type, xmlns, xmlname, membername));
+            this.Add(new SerializationMember("Serialization.SimplePropertySerialization", type, xmlns, xmlname, memberType, memberName));
         }
     }
 }

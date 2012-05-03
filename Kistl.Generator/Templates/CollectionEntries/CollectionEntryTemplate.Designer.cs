@@ -92,12 +92,6 @@ Serialization.SerializerTemplate.Call(Host, ctx,
     Serialization.SerializerTemplate.Call(Host, ctx,
         Serialization.SerializerDirection.FromStream, this.MembersToSerialize, true, null);
 
-    Serialization.SerializerTemplate.Call(Host, ctx,
-        Serialization.SerializerDirection.ToXmlStream, this.MembersToSerialize, true, null);
-
-    Serialization.SerializerTemplate.Call(Host, ctx,
-        Serialization.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, null);
-
     if (IsExportable())
     {
         Serialization.SerializerTemplate.Call(Host, ctx,
@@ -107,7 +101,7 @@ Serialization.SerializerTemplate.Call(Host, ctx,
             Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, false, GetExportGuidBackingStoreReference());
     }
 
-#line 80 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 74 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion\r\n");
 this.WriteObjects("\r\n");
@@ -122,10 +116,10 @@ this.WriteObjects("            base.ApplyChangesFrom(obj);\r\n");
 this.WriteObjects("            var other = (",  GetCeClassName() , ")obj;\r\n");
 this.WriteObjects("            var me = (",  GetCeClassName() , ")this;\r\n");
 this.WriteObjects("\r\n");
-#line 95 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 89 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyChangesFromBody();
 
-#line 97 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 91 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
@@ -134,17 +128,17 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            // Do not reload references if the current object has been deleted.\r\n");
 this.WriteObjects("            // TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
 this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
-#line 106 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 100 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyReloadReferenceBody();
 
-#line 108 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 102 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 112 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 106 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyClassTailTemplate();
 
-#line 114 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 108 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("    }\r\n");
 this.WriteObjects("    // END ",  this.GetType().FullName , "\r\n");
 

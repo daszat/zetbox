@@ -482,56 +482,17 @@ public bool CompoundObject_IsNull { get; set; }
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Identity);
-            binStream.Read(out this._MessageFormat);
-            binStream.Read(out this._NewValue);
-            binStream.Read(out this._OldValue);
-            binStream.Read(out this._PropertyName);
-            binStream.Read(out this._isTimestampSet);
+            this._Identity = binStream.ReadString();
+            this._MessageFormat = binStream.ReadString();
+            this._NewValue = binStream.ReadString();
+            this._OldValue = binStream.ReadString();
+            this._PropertyName = binStream.ReadString();
+            this._isTimestampSet = binStream.ReadBoolean();
             if (this._isTimestampSet) {
-                binStream.Read(out this._Timestamp);
+                this._Timestamp = binStream.ReadNullableDateTime();
             }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Identity, xml, "Identity", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._MessageFormat, xml, "MessageFormat", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._NewValue, xml, "NewValue", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._OldValue, xml, "OldValue", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._isTimestampSet, xml, "IsTimestampSet", "Kistl.App.Base");
-            if (this._isTimestampSet) {
-                XmlStreamer.ToStream(this._Timestamp, xml, "Timestamp", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Identity, xml, "Identity", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._MessageFormat, xml, "MessageFormat", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._NewValue, xml, "NewValue", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._OldValue, xml, "OldValue", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._isTimestampSet, xml, "IsTimestampSet", "Kistl.App.Base");
-            if (this._isTimestampSet) {
-                XmlStreamer.FromStream(ref this._Timestamp, xml, "Timestamp", "Kistl.App.Base");
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

@@ -792,19 +792,19 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Icon != null) OnNotifyDeleting_Icon(this);
 
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
-            // should fetch && remember parent for DataType_has_Icon_RelationEntry
+            // should fetch && remember parent for Method_has_Icon_RelationEntry
             if (Blob != null) {
                 ((NHibernatePersistenceObject)Blob).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Blob);
             }
+            // should fetch && remember parent for DataType_has_Icon_RelationEntry
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            // should fetch && remember parent for Method_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
 
         }
         public static event ObjectEventHandler<Icon> OnNotifyDeleting_Icon;
@@ -859,63 +859,14 @@ namespace Kistl.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_Blob);
-            binStream.Read(out this._isExportGuidSet);
+            this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
-                Guid tmp;
-                binStream.Read(out tmp);
-                this.Proxy.ExportGuid = tmp;
+                this.Proxy.ExportGuid = binStream.ReadGuid();
             }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IconFile = tmp;
-            }
+            this.Proxy.IconFile = binStream.ReadString();
             binStream.Read(out this._fk_Module);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Blob != null ? OurContext.GetIdFromProxy(this.Proxy.Blob) : (int?)null, xml, "Blob", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            }
-            XmlStreamer.ToStream(this.Proxy.IconFile, xml, "IconFile", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, xml, "Module", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_Blob, xml, "Blob", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
-            if (this._isExportGuidSet) {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.IconFile;
-                XmlStreamer.FromStream(ref tmp, xml, "IconFile", "Kistl.App.GUI");
-                this.Proxy.IconFile = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -936,22 +887,22 @@ namespace Kistl.App.GUI
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._fk_guid_Blob, xml, "Blob", "Kistl.App.GUI");
-            // Import must have default value set
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|Blob":
+                this._fk_guid_Blob = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.Base|ExportGuid":
+                // Import must have default value set
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Kistl.App.GUI|IconFile":
+                this.Proxy.IconFile = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|Module":
+                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
+                break;
             }
-            {
-                // yuck
-                string tmp = this.Proxy.IconFile;
-                XmlStreamer.FromStream(ref tmp, xml, "IconFile", "Kistl.App.GUI");
-                this.Proxy.IconFile = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
         }
 
         #endregion

@@ -1701,91 +1701,26 @@ namespace Kistl.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._AllowAddNew);
-            binStream.Read(out this._AllowDelete);
-            binStream.Read(out this._AllowSelectColumns);
-            binStream.Read(out this._AllowUserFilter);
-            binStream.Read(out this._EnableAutoFilter);
-            binStream.Read(out this._InitialSort);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)baseValue;
-            }
-            binStream.Read(out this._IsEditable);
-            binStream.Read(out this._IsMultiselect);
-            binStream.Read(out this._fk_RequestedEditorKind);
-            binStream.Read(out this._fk_RequestedWorkspaceKind);
-            binStream.Read(out this._RespectRequiredFilter);
-            binStream.Read(out this._ShowFilter);
-            binStream.Read(out this._ShowMasterDetail);
-            binStream.Read(out this._ShowOpenCommand);
-            binStream.Read(out this._ShowRefreshCommand);
-            binStream.Read(out this._fk_Type);
-            {
-                int? baseValue;
-                binStream.Read(out baseValue);
-                ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)baseValue;
-            }
+            this._AllowAddNew = binStream.ReadNullableBoolean();
+            this._AllowDelete = binStream.ReadNullableBoolean();
+            this._AllowSelectColumns = binStream.ReadNullableBoolean();
+            this._AllowUserFilter = binStream.ReadNullableBoolean();
+            this._EnableAutoFilter = binStream.ReadNullableBoolean();
+            this._InitialSort = binStream.ReadString();
+            ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)binStream.ReadNullableInt32();
+            this._IsEditable = binStream.ReadNullableBoolean();
+            this._IsMultiselect = binStream.ReadNullableBoolean();
+            this._fk_RequestedEditorKind = binStream.ReadNullableInt32();
+            this._fk_RequestedWorkspaceKind = binStream.ReadNullableInt32();
+            this._RespectRequiredFilter = binStream.ReadNullableBoolean();
+            this._ShowFilter = binStream.ReadNullableBoolean();
+            this._ShowMasterDetail = binStream.ReadNullableBoolean();
+            this._ShowOpenCommand = binStream.ReadNullableBoolean();
+            this._ShowRefreshCommand = binStream.ReadNullableBoolean();
+            this._fk_Type = binStream.ReadNullableInt32();
+            ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._AllowAddNew, xml, "AllowAddNew", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._AllowDelete, xml, "AllowDelete", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._AllowSelectColumns, xml, "AllowSelectColumns", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._AllowUserFilter, xml, "AllowUserFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._EnableAutoFilter, xml, "EnableAutoFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._InitialSort, xml, "InitialSort", "Kistl.App.GUI");
-            XmlStreamer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            XmlStreamer.ToStream(RequestedEditorKind != null ? RequestedEditorKind.ID : (int?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ID : (int?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            XmlStreamer.ToStream(Type != null ? Type.ID : (int?)null, xml, "Type", "Kistl.App.GUI");
-            XmlStreamer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._AllowAddNew, xml, "AllowAddNew", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowDelete, xml, "AllowDelete", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowSelectColumns, xml, "AllowSelectColumns", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowUserFilter, xml, "AllowUserFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._EnableAutoFilter, xml, "EnableAutoFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._InitialSort, xml, "InitialSort", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)v, xml, "InitialSortDirection", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1822,24 +1757,62 @@ namespace Kistl.App.GUI
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._AllowAddNew, xml, "AllowAddNew", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowDelete, xml, "AllowDelete", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowSelectColumns, xml, "AllowSelectColumns", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._AllowUserFilter, xml, "AllowUserFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._EnableAutoFilter, xml, "EnableAutoFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._InitialSort, xml, "InitialSort", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)v, xml, "InitialSortDirection", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.GUI|AllowAddNew":
+                this._AllowAddNew = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowDelete":
+                this._AllowDelete = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowSelectColumns":
+                this._AllowSelectColumns = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|AllowUserFilter":
+                this._AllowUserFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|EnableAutoFilter":
+                this._EnableAutoFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|InitialSort":
+                this._InitialSort = XmlStreamer.ReadString(xml);
+                break;
+            case "Kistl.App.GUI|InitialSortDirection":
+                ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            case "Kistl.App.GUI|IsEditable":
+                this._IsEditable = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|IsMultiselect":
+                this._IsMultiselect = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|RequestedEditorKind":
+                this._fk_guid_RequestedEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|RequestedWorkspaceKind":
+                this._fk_guid_RequestedWorkspaceKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|RespectRequiredFilter":
+                this._RespectRequiredFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowFilter":
+                this._ShowFilter = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowMasterDetail":
+                this._ShowMasterDetail = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowOpenCommand":
+                this._ShowOpenCommand = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|ShowRefreshCommand":
+                this._ShowRefreshCommand = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.GUI|Type":
+                this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Kistl.App.GUI|ViewMethod":
+                ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)XmlStreamer.ReadNullableInt32(xml);
+               break;
+            }
         }
 
         #endregion

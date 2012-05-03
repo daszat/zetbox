@@ -282,11 +282,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\Serialization\ProxySerialization.Designer.cs">
-      <DependentUpon>ProxySerialization.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Templates\TypeChecker.Designer.cs">
       <DependentUpon>TypeChecker.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -416,10 +411,6 @@
     <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Serialization\ProxySerialization.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>ProxySerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\TypeChecker.cst">
       <Generator>Arebis Template Processor</Generator>

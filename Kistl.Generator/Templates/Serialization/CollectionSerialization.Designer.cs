@@ -62,30 +62,19 @@ break;
 this.WriteObjects("            ",  streamName , ".ReadCollectionEntries(this, this.",  collectionName , ");\r\n");
 #line 34 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
-            case SerializerDirection.ToXmlStream:
+        case SerializerDirection.Export:
 
 #line 37 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStreamCollectionEntries(this.",  collectionName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ExportCollectionEntries(this.",  collectionName , "",  orderByValue ? ".OrderBy(i => i.Value)" : String.Empty , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 39 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-break;
-            case SerializerDirection.FromXmlStream:
-
-#line 42 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            XmlStreamer.FromStreamCollectionEntries(this, this.",  collectionName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-this.WriteObjects("            result.AddRange(this.",  collectionName , ".Cast<IPersistenceObject>());\r\n");
-#line 45 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             case SerializerDirection.MergeImport:
 
-#line 48 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            XmlStreamer.MergeImportCollectionEntries(this, this.",  collectionName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 50 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-break;
-        case SerializerDirection.Export:
-
-#line 53 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ExportCollectionEntries(this.",  collectionName , "",  orderByValue ? ".OrderBy(i => i.Value)" : String.Empty , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 55 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
+#line 42 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                XmlStreamer.MergeImportCollectionEntries(this, this.",  collectionName , ", ",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
+#line 46 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             default:
                 throw new ArgumentOutOfRangeException("direction");

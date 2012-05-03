@@ -674,13 +674,13 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Template != null) OnNotifyDeleting_Template(this);
 
-            if (DisplayedTypeAssembly != null) {
-                ((NHibernatePersistenceObject)DisplayedTypeAssembly).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DisplayedTypeAssembly);
-            }
             if (VisualTree != null) {
                 ((NHibernatePersistenceObject)VisualTree).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)VisualTree);
+            }
+            if (DisplayedTypeAssembly != null) {
+                ((NHibernatePersistenceObject)DisplayedTypeAssembly).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DisplayedTypeAssembly);
             }
 
             Menu.Clear();
@@ -739,58 +739,11 @@ namespace Kistl.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             binStream.Read(out this._fk_DisplayedTypeAssembly);
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.DisplayedTypeFullName = tmp;
-            }
-            {
-                string tmp;
-                binStream.Read(out tmp);
-                this.Proxy.DisplayName = tmp;
-            }
+            this.Proxy.DisplayedTypeFullName = binStream.ReadString();
+            this.Proxy.DisplayName = binStream.ReadString();
             binStream.Read(out this._fk_VisualTree);
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.DisplayedTypeAssembly != null ? OurContext.GetIdFromProxy(this.Proxy.DisplayedTypeAssembly) : (int?)null, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.VisualTree != null ? OurContext.GetIdFromProxy(this.Proxy.VisualTree) : (int?)null, xml, "VisualTree", "Kistl.App.GUI");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
-            {
-                // yuck
-                string tmp = this.Proxy.DisplayedTypeFullName;
-                XmlStreamer.FromStream(ref tmp, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
-                this.Proxy.DisplayedTypeFullName = tmp;
-            }
-            {
-                // yuck
-                string tmp = this.Proxy.DisplayName;
-                XmlStreamer.FromStream(ref tmp, xml, "DisplayName", "Kistl.App.GUI");
-                this.Proxy.DisplayName = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_VisualTree, xml, "VisualTree", "Kistl.App.GUI");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

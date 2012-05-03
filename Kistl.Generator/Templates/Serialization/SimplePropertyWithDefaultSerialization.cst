@@ -30,30 +30,9 @@
             break;
         case SerializerDirection.FromStream:
 %>
-            <%= streamName %>.Read(out this.<%= isSetFlagName %>);
+            this.<%= isSetFlagName %> = <%= streamName %>.ReadBoolean();
             if (this.<%= isSetFlagName %>) {
-                <%= memberType %> tmp;
-                <%= streamName %>.Read(out tmp);
-                this.<%= memberName %> = tmp;
-            }
-<%
-            break;
-        case SerializerDirection.ToXmlStream:
-%>
-            XmlStreamer.ToStream(this.<%= isSetFlagName %>, <%= streamName %>, "Is<%= xmlname %>Set", "<%= xmlnamespace %>");
-            if (this.<%= isSetFlagName %>) {
-                XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-            }
-<%
-            break;
-        case SerializerDirection.FromXmlStream:
-%>
-            XmlStreamer.FromStream(ref this.<%= isSetFlagName %>, <%= streamName %>, "Is<%= xmlname %>Set", "<%= xmlnamespace %>");
-            if (this.<%= isSetFlagName %>) {
-                // yuck
-                <%= memberType %> tmp = this.<%= memberName %>;
-                XmlStreamer.FromStream(ref tmp, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-                this.<%= memberName %> = tmp;
+                this.<%= memberName %> = <%= streamName %>.<%= memberType.SerializerReadMethod() %>();
             }
 <%
             break;
@@ -65,14 +44,11 @@
             break;
         case SerializerDirection.MergeImport:
 %>
-            // Import must have default value set
-            {
-                // yuck
-                <%= memberType %> tmp = this.<%= memberName %>;
-                XmlStreamer.FromStream(ref tmp, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-                this.<%= memberName %> = tmp;
+            case "<%= xmlnamespace %>|<%= xmlname %>":
+                // Import must have default value set
+                this.<%= memberName %> = XmlStreamer.<%= memberType.SerializerReadMethod() %>(<%= streamName %>);
                 this.<%= isSetFlagName %> = true;
-            }
+                break;
 <%
             break;
         default:

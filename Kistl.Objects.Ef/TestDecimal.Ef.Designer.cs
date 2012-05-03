@@ -93,7 +93,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private decimal? _Large;
+        private decimal? _Large_store;
+        private decimal? _Large {
+            get { return _Large_store; }
+            set {
+                _Large_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnLarge_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnLarge_PreSetter;
@@ -154,7 +160,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private decimal? _NoScale;
+        private decimal? _NoScale_store;
+        private decimal? _NoScale {
+            get { return _NoScale_store; }
+            set {
+                _NoScale_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnNoScale_PreSetter;
@@ -215,7 +227,13 @@ namespace Kistl.App.Test
 				}
             }
         }
-        private decimal? _SmallDecimal;
+        private decimal? _SmallDecimal_store;
+        private decimal? _SmallDecimal {
+            get { return _SmallDecimal_store; }
+            set {
+                _SmallDecimal_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnSmallDecimal_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestDecimal, decimal?> OnSmallDecimal_PreSetter;
@@ -447,38 +465,11 @@ namespace Kistl.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Large);
-            binStream.Read(out this._NoScale);
-            binStream.Read(out this._SmallDecimal);
+            this._Large = binStream.ReadNullableDecimal();
+            this._NoScale = binStream.ReadNullableDecimal();
+            this._SmallDecimal = binStream.ReadNullableDecimal();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Large, xml, "Large", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._NoScale, xml, "NoScale", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._SmallDecimal, xml, "SmallDecimal", "Kistl.App.Test");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Large, xml, "Large", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._NoScale, xml, "NoScale", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._SmallDecimal, xml, "SmallDecimal", "Kistl.App.Test");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

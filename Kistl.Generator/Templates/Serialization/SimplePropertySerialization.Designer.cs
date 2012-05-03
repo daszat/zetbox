@@ -55,36 +55,22 @@ break;
         case SerializerDirection.FromStream:
 
 #line 29 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                ",  memberType , " tmp;\r\n");
-this.WriteObjects("                ",  streamName , ".Read(out tmp);\r\n");
-this.WriteObjects("                this.",  memberName , " = tmp;\r\n");
-this.WriteObjects("            }\r\n");
-#line 35 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-break;
-        case SerializerDirection.ToXmlStream:
-
-#line 38 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 40 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-break;
-        case SerializerDirection.FromXmlStream:
-        case SerializerDirection.MergeImport:
-
-#line 44 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                // yuck\r\n");
-this.WriteObjects("                ",  memberType , " tmp = this.",  memberName , ";\r\n");
-this.WriteObjects("                XmlStreamer.FromStream(ref tmp, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-this.WriteObjects("                this.",  memberName , " = tmp;\r\n");
-this.WriteObjects("            }\r\n");
-#line 51 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+this.WriteObjects("            this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\r\n");
+#line 31 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 54 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 34 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 56 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 36 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+break;
+        case SerializerDirection.MergeImport:
+
+#line 39 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
+#line 43 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

@@ -897,38 +897,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._EagerLoading);
-            binStream.Read(out this._IsInlineEditable);
-            binStream.Read(out this._fk_RelationEnd);
+            this._EagerLoading = binStream.ReadBoolean();
+            this._IsInlineEditable = binStream.ReadNullableBoolean();
+            this._fk_RelationEnd = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsInlineEditable, xml, "IsInlineEditable", "Kistl.App.GUI");
-            XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, xml, "RelationEnd", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsInlineEditable, xml, "IsInlineEditable", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -950,9 +923,17 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsInlineEditable, xml, "IsInlineEditable", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|EagerLoading":
+                this._EagerLoading = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.GUI|IsInlineEditable":
+                this._IsInlineEditable = XmlStreamer.ReadNullableBoolean(xml);
+                break;
+            case "Kistl.App.Base|RelationEnd":
+                this._fk_guid_RelationEnd = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
         }
 
         #endregion

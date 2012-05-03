@@ -135,12 +135,6 @@ Serialization.SerializerTemplate.Call(Host, ctx,
         Serialization.SerializerTemplate.Call(Host, ctx,
             Serialization.SerializerDirection.FromStream, this.MembersToSerialize, true, null);
 
-        Serialization.SerializerTemplate.Call(Host, ctx,
-            Serialization.SerializerDirection.ToXmlStream, this.MembersToSerialize, true, null);
-        
-        Serialization.SerializerTemplate.Call(Host, ctx,
-            Serialization.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, null);
-
         if ((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable())
         {
             ObjectClass cls = (ObjectClass)DataType;            
@@ -151,14 +145,14 @@ Serialization.SerializerTemplate.Call(Host, ctx,
                 Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, GetExportGuidBackingStoreReference());
         }
 
-#line 116 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 110 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
-#line 120 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 114 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 ApplyNamespaceTailTemplate(); 
-#line 121 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 115 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("}");
 
         }

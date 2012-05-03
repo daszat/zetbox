@@ -753,65 +753,11 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.HasPersistentOrder = tmp;
-            }
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsCalculated = tmp;
-            }
-            {
-                bool tmp;
-                binStream.Read(out tmp);
-                this.Proxy.IsList = tmp;
-            }
+            this.Proxy.HasPersistentOrder = binStream.ReadBoolean();
+            this.Proxy.IsCalculated = binStream.ReadBoolean();
+            this.Proxy.IsList = binStream.ReadBoolean();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.IsCalculated, xml, "IsCalculated", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.IsList, xml, "IsList", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                bool tmp = this.Proxy.HasPersistentOrder;
-                XmlStreamer.FromStream(ref tmp, xml, "HasPersistentOrder", "Kistl.App.Base");
-                this.Proxy.HasPersistentOrder = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsCalculated;
-                XmlStreamer.FromStream(ref tmp, xml, "IsCalculated", "Kistl.App.Base");
-                this.Proxy.IsCalculated = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsList;
-                XmlStreamer.FromStream(ref tmp, xml, "IsList", "Kistl.App.Base");
-                this.Proxy.IsList = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -833,23 +779,16 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                bool tmp = this.Proxy.HasPersistentOrder;
-                XmlStreamer.FromStream(ref tmp, xml, "HasPersistentOrder", "Kistl.App.Base");
-                this.Proxy.HasPersistentOrder = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsCalculated;
-                XmlStreamer.FromStream(ref tmp, xml, "IsCalculated", "Kistl.App.Base");
-                this.Proxy.IsCalculated = tmp;
-            }
-            {
-                // yuck
-                bool tmp = this.Proxy.IsList;
-                XmlStreamer.FromStream(ref tmp, xml, "IsList", "Kistl.App.Base");
-                this.Proxy.IsList = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|HasPersistentOrder":
+                this.Proxy.HasPersistentOrder = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|IsCalculated":
+                this.Proxy.IsCalculated = XmlStreamer.ReadBoolean(xml);
+                break;
+            case "Kistl.App.Base|IsList":
+                this.Proxy.IsList = XmlStreamer.ReadBoolean(xml);
+                break;
             }
         }
 

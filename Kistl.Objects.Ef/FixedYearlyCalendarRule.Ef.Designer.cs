@@ -93,7 +93,13 @@ namespace Kistl.App.Calendar
 				}
             }
         }
-        private int _Day;
+        private int _Day_store;
+        private int _Day {
+            get { return _Day_store; }
+            set {
+                _Day_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnDay_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnDay_PreSetter;
@@ -154,7 +160,13 @@ namespace Kistl.App.Calendar
 				}
             }
         }
-        private int _Month;
+        private int _Month_store;
+        private int _Month {
+            get { return _Month_store; }
+            set {
+                _Month_store = value;
+            }
+        }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Calendar.FixedYearlyCalendarRule, int> OnMonth_PreSetter;
@@ -405,35 +417,10 @@ namespace Kistl.App.Calendar
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            binStream.Read(out this._Day);
-            binStream.Read(out this._Month);
+            this._Day = binStream.ReadInt32();
+            this._Month = binStream.ReadInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._Day, xml, "Day", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this._Month, xml, "Month", "Kistl.App.Calendar");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._Day, xml, "Day", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._Month, xml, "Month", "Kistl.App.Calendar");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -454,8 +441,14 @@ namespace Kistl.App.Calendar
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._Day, xml, "Day", "Kistl.App.Calendar");
-            XmlStreamer.FromStream(ref this._Month, xml, "Month", "Kistl.App.Calendar");
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Calendar|Day":
+                this._Day = XmlStreamer.ReadInt32(xml);
+                break;
+            case "Kistl.App.Calendar|Month":
+                this._Month = XmlStreamer.ReadInt32(xml);
+                break;
+            }
         }
 
         #endregion

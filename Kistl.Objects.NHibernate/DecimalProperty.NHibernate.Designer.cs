@@ -680,53 +680,10 @@ namespace Kistl.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Precision = tmp;
-            }
-            {
-                int tmp;
-                binStream.Read(out tmp);
-                this.Proxy.Scale = tmp;
-            }
+            this.Proxy.Precision = binStream.ReadInt32();
+            this.Proxy.Scale = binStream.ReadInt32();
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Precision, xml, "Precision", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Scale, xml, "Scale", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                int tmp = this.Proxy.Precision;
-                XmlStreamer.FromStream(ref tmp, xml, "Precision", "Kistl.App.Base");
-                this.Proxy.Precision = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.Scale;
-                XmlStreamer.FromStream(ref tmp, xml, "Scale", "Kistl.App.Base");
-                this.Proxy.Scale = tmp;
-            }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
+            return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -747,17 +704,13 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                int tmp = this.Proxy.Precision;
-                XmlStreamer.FromStream(ref tmp, xml, "Precision", "Kistl.App.Base");
-                this.Proxy.Precision = tmp;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.Scale;
-                XmlStreamer.FromStream(ref tmp, xml, "Scale", "Kistl.App.Base");
-                this.Proxy.Scale = tmp;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Kistl.App.Base|Precision":
+                this.Proxy.Precision = XmlStreamer.ReadInt32(xml);
+                break;
+            case "Kistl.App.Base|Scale":
+                this.Proxy.Scale = XmlStreamer.ReadInt32(xml);
+                break;
             }
         }
 
