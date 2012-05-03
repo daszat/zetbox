@@ -7,6 +7,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
+    using Kistl.App.Base;
 
     public static class EfScalarPropHelper
     {
@@ -43,6 +44,29 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
             template.WriteLine();
             template.WriteObjects("        }");
             template.WriteLine();
+        }
+
+        public static string GetEfPropName(Property prop)
+        {
+            if (prop is EnumerationProperty)
+            {
+                return prop.Name + Kistl.API.Helper.ImplementationSuffix;
+            }
+            else if (prop is CompoundObjectProperty)
+            {
+                if (((CompoundObjectProperty)prop).IsList)
+                {
+                    return "Value" + Kistl.API.Helper.ImplementationSuffix;
+                }
+                else
+                {
+                    return prop.Name + Kistl.API.Helper.ImplementationSuffix;
+                }
+            }
+            else
+            {
+                return prop.Name;
+            }
         }
     }
 }

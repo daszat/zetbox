@@ -39,9 +39,9 @@
             {
 <%      foreach (var prop in recalcProps) {                                                                         %>
                 case "<%= prop.Name %>":
+<%          ApplyNotifyPropertyChanging(prop);                                                                      %>
                     _<%= prop.Name %>_IsDirty = true;
-                    NotifyPropertyChanging(property, null, null);
-                    NotifyPropertyChanged(property, null, null);
+<%          ApplyNotifyPropertyChanged(prop);                                                                       %>
                     return;
 <%      }                                                                                                           %>
             }

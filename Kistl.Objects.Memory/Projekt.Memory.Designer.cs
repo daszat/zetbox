@@ -1092,8 +1092,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             switch (property)
             {
                 case "AufwandGes":
-                    _AufwandGes_IsDirty = true;
                     NotifyPropertyChanging(property, null, null);
+                    _AufwandGes_IsDirty = true;
                     NotifyPropertyChanged(property, null, null);
                     return;
             }

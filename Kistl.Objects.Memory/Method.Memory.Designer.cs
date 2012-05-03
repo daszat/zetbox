@@ -1443,8 +1443,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             switch (property)
             {
                 case "CodeTemplate":
-                    _CodeTemplate_IsDirty = true;
                     NotifyPropertyChanging(property, null, null);
+                    _CodeTemplate_IsDirty = true;
                     NotifyPropertyChanged(property, null, null);
                     return;
             }

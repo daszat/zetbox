@@ -1269,8 +1269,8 @@ namespace Kistl.App.Base
             switch (property)
             {
                 case "Parent":
-                    _Parent_IsDirty = true;
                     NotifyPropertyChanging(property, null, null);
+                    _Parent_IsDirty = true;
                     NotifyPropertyChanged(property, null, null);
                     return;
             }

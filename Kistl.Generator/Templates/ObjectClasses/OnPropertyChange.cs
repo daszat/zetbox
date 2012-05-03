@@ -25,5 +25,15 @@ namespace Kistl.Generator.Templates.ObjectClasses
                 .OrderBy(p => p.Name)
                 .ToList();
         }
+
+        protected virtual void ApplyNotifyPropertyChanging(Property prop)
+        {
+            this.WriteLine("                    NotifyPropertyChanging(property, null, null);");
+        }
+
+        protected virtual void ApplyNotifyPropertyChanged(Property prop)
+        {
+            this.WriteLine("                    NotifyPropertyChanged(property, null, null);");
+        }
     }
 }

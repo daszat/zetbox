@@ -299,10 +299,10 @@ namespace at.dasz.DocumentManagement
         {
             base.SetNew();
         }
-        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #region Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
 
-        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

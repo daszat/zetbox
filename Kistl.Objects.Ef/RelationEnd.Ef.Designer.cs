@@ -1287,7 +1287,7 @@ namespace Kistl.App.Base
             base.SetNew();
             _Parent_IsDirty = true;
         }
-        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #region Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
@@ -1318,15 +1318,17 @@ namespace Kistl.App.Base
             switch (property)
             {
                 case "Parent":
-                    _Parent_IsDirty = true;
                     NotifyPropertyChanging(property, null, null);
+                    ReportEfPropertyChanging("Parent");
+                    _Parent_IsDirty = true;
+                    ReportEfPropertyChanged("Parent");
                     NotifyPropertyChanged(property, null, null);
                     return;
             }
 
             base.Recalculate(property);
         }
-        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {

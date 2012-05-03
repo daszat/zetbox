@@ -523,7 +523,7 @@ namespace Kistl.App.GUI
         {
             base.SetNew();
         }
-        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #region Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
@@ -541,7 +541,7 @@ namespace Kistl.App.GUI
             }
         }
 
-        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
