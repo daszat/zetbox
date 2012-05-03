@@ -114,8 +114,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.AssemblyEfImpl __newValue = (Kistl.App.Base.AssemblyEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DisplayedTypeAssembly", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, __newValue);
 
                 if (OnDisplayedTypeAssembly_PreSetter != null)
                 {
@@ -133,8 +132,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DisplayedTypeAssembly", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
             }
         }
 
@@ -202,7 +200,9 @@ namespace Kistl.App.GUI
         private string _DisplayedTypeFullName {
             get { return _DisplayedTypeFullName_store; }
             set {
+                ReportEfPropertyChanging("DisplayedTypeFullName");
                 _DisplayedTypeFullName_store = value;
+                ReportEfPropertyChanged("DisplayedTypeFullName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -269,7 +269,9 @@ namespace Kistl.App.GUI
         private string _DisplayName {
             get { return _DisplayName_store; }
             set {
+                ReportEfPropertyChanging("DisplayName");
                 _DisplayName_store = value;
+                ReportEfPropertyChanged("DisplayName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -403,8 +405,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.VisualEfImpl __newValue = (Kistl.App.GUI.VisualEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("VisualTree", null, __oldValue, __newValue);
+                NotifyPropertyChanging("VisualTree", __oldValue, __newValue);
 
                 if (OnVisualTree_PreSetter != null)
                 {
@@ -422,8 +423,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("VisualTree", null, __oldValue, __newValue);
+                NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
             }
         }
 

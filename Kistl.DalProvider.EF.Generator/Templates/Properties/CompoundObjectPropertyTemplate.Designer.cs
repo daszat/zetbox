@@ -57,7 +57,9 @@ this.WriteObjects("            set { ",  backingPropertyName , " = (",  coImplem
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\r\n");
-this.WriteObjects("        private ",  coImplementationType , " ",  backingStoreName , ";\r\n");
+#line 30 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+EfScalarPropHelper.ApplyBackingStoreDefinition(this, coImplementationType, backingStoreName, backingPropertyName); 
+#line 31 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values, mapped via EF</summary>\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -85,7 +87,7 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var __oldValue = ",  backingStoreName , ";\r\n");
 this.WriteObjects("					var __newValue = value;\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  propName , "\", \"",  backingPropertyName , "\", __oldValue, __newValue);\r\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  propName , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                    if (",  backingStoreName , " != null)\r\n");
 this.WriteObjects("                    {\r\n");
@@ -101,7 +103,7 @@ this.WriteObjects("                        ",  backingStoreName , " = (",  coImp
 this.WriteObjects("                        ",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\r\n");
 this.WriteObjects("                    }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  propName , "\", \"",  backingPropertyName , "\", __oldValue, value);\r\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  propName , "\", __oldValue, value);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("				else\r\n");
 this.WriteObjects("				{\r\n");

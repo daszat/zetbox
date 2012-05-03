@@ -166,8 +166,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.ObjectClassEfImpl __newValue = (Kistl.App.Base.ObjectClassEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ReferencedClass", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ReferencedClass", __oldValue, __newValue);
 
                 if (OnReferencedClass_PreSetter != null)
                 {
@@ -185,8 +184,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ReferencedClass", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
             }
         }
 

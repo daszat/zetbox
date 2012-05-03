@@ -97,7 +97,9 @@ namespace Kistl.App.Test
         private bool? _TestBool {
             get { return _TestBool_store; }
             set {
+                ReportEfPropertyChanging("TestBool");
                 _TestBool_store = value;
+                ReportEfPropertyChanged("TestBool");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -130,10 +132,10 @@ namespace Kistl.App.Test
                 {
                     _TestCustomObjects_List_Nav = new EntityCollectionWrapper<Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObjectEfImpl>(
                             this.Context, TestCustomObjects_List_NavImpl,
-                            () => this.NotifyPropertyChanging("TestCustomObjects_List_Nav", null, null, null),
-                            () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("MubBlah_Nav", null, null, null),
-                            (item) => item.NotifyPropertyChanged("MubBlah_Nav", null, null, null));
+                            () => this.NotifyPropertyChanging("TestCustomObjects_List_Nav", null, null),
+                            () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("MubBlah_Nav", null, null),
+                            (item) => item.NotifyPropertyChanged("MubBlah_Nav", null, null));
                 }
                 return _TestCustomObjects_List_Nav;
             }
@@ -288,13 +290,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 Kistl.App.Test.TestCustomObjectEfImpl __newValue = (Kistl.App.Test.TestCustomObjectEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("TestCustomObjects_Nav", null, __oldValue, __newValue);
+                NotifyPropertyChanging("TestCustomObjects_Nav", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("MubBlah_List_Nav", null, null, null);
+                    __oldValue.NotifyPropertyChanging("MubBlah_List_Nav", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("MubBlah_List_Nav", null, null, null);
+                    __newValue.NotifyPropertyChanging("MubBlah_List_Nav", null, null);
                 }
 
                 if (OnTestCustomObjects_Nav_PreSetter != null)
@@ -313,13 +314,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("TestCustomObjects_Nav", null, __oldValue, __newValue);
+                NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("MubBlah_List_Nav", null, null, null);
+                    __oldValue.NotifyPropertyChanged("MubBlah_List_Nav", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("MubBlah_List_Nav", null, null, null);
+                    __newValue.NotifyPropertyChanged("MubBlah_List_Nav", null, null);
                 }
             }
         }
@@ -405,13 +405,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 Kistl.App.Test.TestCustomObjectEfImpl __newValue = (Kistl.App.Test.TestCustomObjectEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("TestCustomObjects_One_Nav", null, __oldValue, __newValue);
+                NotifyPropertyChanging("TestCustomObjects_One_Nav", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("MuhBlah_One_Nav", null, null, null);
+                    __oldValue.NotifyPropertyChanging("MuhBlah_One_Nav", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("MuhBlah_One_Nav", null, null, null);
+                    __newValue.NotifyPropertyChanging("MuhBlah_One_Nav", null, null);
                 }
 
                 if (OnTestCustomObjects_One_Nav_PreSetter != null)
@@ -430,13 +429,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("TestCustomObjects_One_Nav", null, __oldValue, __newValue);
+                NotifyPropertyChanged("TestCustomObjects_One_Nav", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("MuhBlah_One_Nav", null, null, null);
+                    __oldValue.NotifyPropertyChanged("MuhBlah_One_Nav", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("MuhBlah_One_Nav", null, null, null);
+                    __newValue.NotifyPropertyChanged("MuhBlah_One_Nav", null, null);
                 }
             }
         }
@@ -505,7 +503,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         private DateTime? _TestDateTime {
             get { return _TestDateTime_store; }
             set {
+                ReportEfPropertyChanging("TestDateTime");
                 _TestDateTime_store = value;
+                ReportEfPropertyChanged("TestDateTime");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -549,9 +549,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("TestEnum", "TestEnumImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("TestEnum", __oldValue, __newValue);
                     _TestEnum = value;
-                    NotifyPropertyChanged("TestEnum", "TestEnumImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("TestEnum", __oldValue, __newValue);
                     if(OnTestEnum_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
@@ -566,7 +566,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         private Kistl.App.Test.TestEnum _TestEnum {
             get { return _TestEnum_store; }
             set {
+                ReportEfPropertyChanging("TestEnumImpl");
                 _TestEnum_store = value;
+                ReportEfPropertyChanged("TestEnumImpl");
             }
         }
         
@@ -648,7 +650,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         private string _TestString {
             get { return _TestString_store; }
             set {
+                ReportEfPropertyChanging("TestString");
                 _TestString_store = value;
+                ReportEfPropertyChanged("TestString");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

@@ -97,7 +97,9 @@ namespace Kistl.App.GUI
         private bool? _IsCurrentMonthDefault {
             get { return _IsCurrentMonthDefault_store; }
             set {
+                ReportEfPropertyChanging("IsCurrentMonthDefault");
                 _IsCurrentMonthDefault_store = value;
+                ReportEfPropertyChanged("IsCurrentMonthDefault");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

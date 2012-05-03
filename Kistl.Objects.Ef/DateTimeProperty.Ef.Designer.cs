@@ -74,9 +74,9 @@ namespace Kistl.App.Base
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("DateTimeStyle", "DateTimeStyleImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("DateTimeStyle", __oldValue, __newValue);
                     _DateTimeStyle = value;
-                    NotifyPropertyChanged("DateTimeStyle", "DateTimeStyleImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("DateTimeStyle", __oldValue, __newValue);
                     if(OnDateTimeStyle_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.DateTimeStyles?>(__oldValue, __newValue);
@@ -91,7 +91,9 @@ namespace Kistl.App.Base
         private Kistl.App.Base.DateTimeStyles? _DateTimeStyle {
             get { return _DateTimeStyle_store; }
             set {
+                ReportEfPropertyChanging("DateTimeStyleImpl");
                 _DateTimeStyle_store = value;
+                ReportEfPropertyChanged("DateTimeStyleImpl");
             }
         }
         

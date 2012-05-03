@@ -63,10 +63,10 @@ namespace Kistl.App.Test
                 {
                     _NEnds = new EntityListWrapper<Kistl.App.Test.OrderedNEnd, Kistl.App.Test.OrderedNEndEfImpl>(
                             this.Context, NEndsImpl,
-                            () => this.NotifyPropertyChanging("NEnds", null, null, null),
-                            () => { this.NotifyPropertyChanged("NEnds", null, null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("OneEnd", null, null, null),
-                            (item) => item.NotifyPropertyChanged("OneEnd", null, null, null), "OneEnd", "NEnds_pos");
+                            () => this.NotifyPropertyChanging("NEnds", null, null),
+                            () => { this.NotifyPropertyChanged("NEnds", null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("OneEnd", null, null),
+                            (item) => item.NotifyPropertyChanged("OneEnd", null, null), "OneEnd", "NEnds_pos");
                 }
                 return _NEnds;
             }
@@ -154,7 +154,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         private int? _SomeInt {
             get { return _SomeInt_store; }
             set {
+                ReportEfPropertyChanging("SomeInt");
                 _SomeInt_store = value;
+                ReportEfPropertyChanged("SomeInt");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

@@ -97,7 +97,9 @@ namespace Kistl.App.GUI
         private string _Predicate {
             get { return _Predicate_store; }
             set {
+                ReportEfPropertyChanging("Predicate");
                 _Predicate_store = value;
+                ReportEfPropertyChanged("Predicate");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

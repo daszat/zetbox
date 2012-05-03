@@ -74,9 +74,9 @@
 <%
 					}
 %>					
-                    NotifyPropertyChanging("<%= name %>", "<%= efName %>", __oldValue, __newValue);
+                    NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = value;
-                    NotifyPropertyChanged("<%= name %>", "<%= efName %>", __oldValue, __newValue);
+                    NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
 <%
 					if(callGetterSetterEvents)
 					{
@@ -93,7 +93,7 @@
             }
         }
 
-<% EfScalarPropHelper.ApplyBackingStoreDefinition(this, enumType, backingName); %>
+<% EfScalarPropHelper.ApplyBackingStoreDefinition(this, enumType, backingName, efName); %>
         
         /// <summary>EF sees only this property, for <%= UglyXmlEncode(name) %></summary>
         [XmlIgnore()]

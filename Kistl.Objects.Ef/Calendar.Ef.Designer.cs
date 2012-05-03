@@ -115,13 +115,12 @@ namespace Kistl.App.Calendar
                 Kistl.App.Calendar.CalendarEfImpl __newValue = (Kistl.App.Calendar.CalendarEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("BaseCalendar", null, __oldValue, __newValue);
+                NotifyPropertyChanging("BaseCalendar", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("ChildCalendar", null, null, null);
+                    __oldValue.NotifyPropertyChanging("ChildCalendar", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("ChildCalendar", null, null, null);
+                    __newValue.NotifyPropertyChanging("ChildCalendar", null, null);
                 }
 
                 if (OnBaseCalendar_PreSetter != null)
@@ -140,13 +139,12 @@ namespace Kistl.App.Calendar
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("BaseCalendar", null, __oldValue, __newValue);
+                NotifyPropertyChanged("BaseCalendar", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("ChildCalendar", null, null, null);
+                    __oldValue.NotifyPropertyChanged("ChildCalendar", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("ChildCalendar", null, null, null);
+                    __newValue.NotifyPropertyChanged("ChildCalendar", null, null);
                 }
             }
         }
@@ -181,10 +179,10 @@ namespace Kistl.App.Calendar
                 {
                     _CalendarRules = new EntityCollectionWrapper<Kistl.App.Calendar.CalendarRule, Kistl.App.Calendar.CalendarRuleEfImpl>(
                             this.Context, CalendarRulesImpl,
-                            () => this.NotifyPropertyChanging("CalendarRules", null, null, null),
-                            () => { this.NotifyPropertyChanged("CalendarRules", null, null, null); if(OnCalendarRules_PostSetter != null && IsAttached) OnCalendarRules_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("Calendar", null, null, null),
-                            (item) => item.NotifyPropertyChanged("Calendar", null, null, null));
+                            () => this.NotifyPropertyChanging("CalendarRules", null, null),
+                            () => { this.NotifyPropertyChanged("CalendarRules", null, null); if(OnCalendarRules_PostSetter != null && IsAttached) OnCalendarRules_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("Calendar", null, null),
+                            (item) => item.NotifyPropertyChanged("Calendar", null, null));
                 }
                 return _CalendarRules;
             }
@@ -289,8 +287,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
@@ -308,8 +305,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
             }
         }
 
@@ -389,7 +385,9 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
         private DateTime _ChangedOn {
             get { return _ChangedOn_store; }
             set {
+                ReportEfPropertyChanging("ChangedOn");
                 _ChangedOn_store = value;
+                ReportEfPropertyChanged("ChangedOn");
             }
         }
         private bool _isChangedOnSet = false;
@@ -423,10 +421,10 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
                 {
                     _ChildCalendar = new EntityCollectionWrapper<Kistl.App.Calendar.Calendar, Kistl.App.Calendar.CalendarEfImpl>(
                             this.Context, ChildCalendarImpl,
-                            () => this.NotifyPropertyChanging("ChildCalendar", null, null, null),
-                            () => { this.NotifyPropertyChanged("ChildCalendar", null, null, null); if(OnChildCalendar_PostSetter != null && IsAttached) OnChildCalendar_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("BaseCalendar", null, null, null),
-                            (item) => item.NotifyPropertyChanged("BaseCalendar", null, null, null));
+                            () => this.NotifyPropertyChanging("ChildCalendar", null, null),
+                            () => { this.NotifyPropertyChanged("ChildCalendar", null, null); if(OnChildCalendar_PostSetter != null && IsAttached) OnChildCalendar_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("BaseCalendar", null, null),
+                            (item) => item.NotifyPropertyChanged("BaseCalendar", null, null));
                 }
                 return _ChildCalendar;
             }
@@ -531,8 +529,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
@@ -550,8 +547,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
             }
         }
 
@@ -631,7 +627,9 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         private DateTime _CreatedOn {
             get { return _CreatedOn_store; }
             set {
+                ReportEfPropertyChanging("CreatedOn");
                 _CreatedOn_store = value;
+                ReportEfPropertyChanged("CreatedOn");
             }
         }
         private bool _isCreatedOnSet = false;
@@ -711,7 +709,9 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -797,8 +797,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                 Kistl.App.Base.ModuleEfImpl __newValue = (Kistl.App.Base.ModuleEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Module", __oldValue, __newValue);
 
                 if (OnModule_PreSetter != null)
                 {
@@ -816,8 +815,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Module", __oldValue, __newValue);
             }
         }
 
@@ -885,7 +883,9 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         private string _Name {
             get { return _Name_store; }
             set {
+                ReportEfPropertyChanging("Name");
                 _Name_store = value;
+                ReportEfPropertyChanged("Name");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

@@ -97,7 +97,9 @@ namespace Kistl.App.Test
         private int? _MyIntProperty {
             get { return _MyIntProperty_store; }
             set {
+                ReportEfPropertyChanging("MyIntProperty");
                 _MyIntProperty_store = value;
+                ReportEfPropertyChanged("MyIntProperty");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -181,8 +183,7 @@ namespace Kistl.App.Test
                 Kistl.App.Projekte.KundeEfImpl __newValue = (Kistl.App.Projekte.KundeEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ObjectProp", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ObjectProp", __oldValue, __newValue);
 
                 if (OnObjectProp_PreSetter != null)
                 {
@@ -200,8 +201,7 @@ namespace Kistl.App.Test
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ObjectProp", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ObjectProp", __oldValue, __newValue);
             }
         }
 
@@ -269,7 +269,9 @@ namespace Kistl.App.Test
         private string _StringProp {
             get { return _StringProp_store; }
             set {
+                ReportEfPropertyChanging("StringProp");
                 _StringProp_store = value;
+                ReportEfPropertyChanged("StringProp");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -313,9 +315,9 @@ namespace Kistl.App.Test
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("TestEnumProp", "TestEnumPropImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("TestEnumProp", __oldValue, __newValue);
                     _TestEnumProp = value;
-                    NotifyPropertyChanged("TestEnumProp", "TestEnumPropImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("TestEnumProp", __oldValue, __newValue);
                     if(OnTestEnumProp_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
@@ -330,7 +332,9 @@ namespace Kistl.App.Test
         private Kistl.App.Test.TestEnum _TestEnumProp {
             get { return _TestEnumProp_store; }
             set {
+                ReportEfPropertyChanging("TestEnumPropImpl");
                 _TestEnumProp_store = value;
+                ReportEfPropertyChanged("TestEnumPropImpl");
             }
         }
         

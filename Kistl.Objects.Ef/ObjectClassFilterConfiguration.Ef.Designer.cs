@@ -115,13 +115,12 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.ObjectClassEfImpl __newValue = (Kistl.App.Base.ObjectClassEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ObjectClass", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ObjectClass", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("FilterConfigurations", null, null, null);
+                    __oldValue.NotifyPropertyChanging("FilterConfigurations", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("FilterConfigurations", null, null, null);
+                    __newValue.NotifyPropertyChanging("FilterConfigurations", null, null);
                 }
 
                 if (OnObjectClass_PreSetter != null)
@@ -140,13 +139,12 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ObjectClass", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ObjectClass", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("FilterConfigurations", null, null, null);
+                    __oldValue.NotifyPropertyChanged("FilterConfigurations", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("FilterConfigurations", null, null, null);
+                    __newValue.NotifyPropertyChanged("FilterConfigurations", null, null);
                 }
             }
         }

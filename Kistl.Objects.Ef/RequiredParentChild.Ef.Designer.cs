@@ -97,7 +97,9 @@ namespace Kistl.App.Test
         private string _Name {
             get { return _Name_store; }
             set {
+                ReportEfPropertyChanging("Name");
                 _Name_store = value;
+                ReportEfPropertyChanged("Name");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -181,13 +183,12 @@ namespace Kistl.App.Test
                 Kistl.App.Test.RequiredParentEfImpl __newValue = (Kistl.App.Test.RequiredParentEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Parent", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Parent", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Children", null, null, null);
+                    __oldValue.NotifyPropertyChanging("Children", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Children", null, null, null);
+                    __newValue.NotifyPropertyChanging("Children", null, null);
                 }
 
                 if (OnParent_PreSetter != null)
@@ -206,13 +207,12 @@ namespace Kistl.App.Test
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Parent", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Parent", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("Children", null, null, null);
+                    __oldValue.NotifyPropertyChanged("Children", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("Children", null, null, null);
+                    __newValue.NotifyPropertyChanged("Children", null, null);
                 }
             }
         }

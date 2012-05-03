@@ -81,7 +81,7 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , ", EntityCollection<",  referencedCollectionEntry , ">>(\r\n");
 this.WriteObjects("						this.Context,\r\n");
 this.WriteObjects("                        this,\r\n");
-this.WriteObjects("              			() => { this.NotifyPropertyChanged(\"",  name , "\", null, null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
+this.WriteObjects("              			() => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
 this.WriteObjects("          	            ",  efName , ");\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");

@@ -109,7 +109,9 @@ namespace Kistl.App.Base
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -195,8 +197,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.TypeRefEfImpl __newValue = (Kistl.App.Base.TypeRefEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Implementor", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Implementor", __oldValue, __newValue);
 
                 if (OnImplementor_PreSetter != null)
                 {
@@ -214,8 +215,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Implementor", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Implementor", __oldValue, __newValue);
             }
         }
 
@@ -283,7 +283,9 @@ namespace Kistl.App.Base
         private string _MemberName {
             get { return _MemberName_store; }
             set {
+                ReportEfPropertyChanging("MemberName");
                 _MemberName_store = value;
+                ReportEfPropertyChanged("MemberName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

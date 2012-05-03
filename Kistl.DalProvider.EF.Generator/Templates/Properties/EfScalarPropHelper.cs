@@ -19,7 +19,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
             template.WriteLine("        [EdmScalarProperty()]");
         }
 
-        public static void ApplyBackingStoreDefinition(CodeTemplate template, string type, string backingName)
+        public static void ApplyBackingStoreDefinition(CodeTemplate template, string type, string backingName, string efName)
         {
             if (template == null) throw new ArgumentNullException("template");
             if (string.IsNullOrEmpty(type)) throw new ArgumentNullException("type");
@@ -33,7 +33,11 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
             template.WriteLine();
             template.WriteObjects("            set {");
             template.WriteLine();
+            template.WriteObjects("                ReportEfPropertyChanging(\"", efName, "\");");
+            template.WriteLine();
             template.WriteObjects("                ", backingName, "_store = value;");
+            template.WriteLine();
+            template.WriteObjects("                ReportEfPropertyChanged(\"", efName, "\");");
             template.WriteLine();
             template.WriteObjects("            }");
             template.WriteLine();

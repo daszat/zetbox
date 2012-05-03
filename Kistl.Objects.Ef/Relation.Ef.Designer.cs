@@ -115,13 +115,12 @@ namespace Kistl.App.Base
                 Kistl.App.Base.RelationEndEfImpl __newValue = (Kistl.App.Base.RelationEndEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("A", null, __oldValue, __newValue);
+                NotifyPropertyChanging("A", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("AParent", null, null, null);
+                    __oldValue.NotifyPropertyChanging("AParent", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("AParent", null, null, null);
+                    __newValue.NotifyPropertyChanging("AParent", null, null);
                 }
 
                 if (OnA_PreSetter != null)
@@ -140,13 +139,12 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("A", null, __oldValue, __newValue);
+                NotifyPropertyChanged("A", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("AParent", null, null, null);
+                    __oldValue.NotifyPropertyChanged("AParent", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("AParent", null, null, null);
+                    __newValue.NotifyPropertyChanged("AParent", null, null);
                 }
             }
         }
@@ -233,13 +231,12 @@ namespace Kistl.App.Base
                 Kistl.App.Base.RelationEndEfImpl __newValue = (Kistl.App.Base.RelationEndEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("B", null, __oldValue, __newValue);
+                NotifyPropertyChanging("B", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("BParent", null, null, null);
+                    __oldValue.NotifyPropertyChanging("BParent", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("BParent", null, null, null);
+                    __newValue.NotifyPropertyChanging("BParent", null, null);
                 }
 
                 if (OnB_PreSetter != null)
@@ -258,13 +255,12 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("B", null, __oldValue, __newValue);
+                NotifyPropertyChanged("B", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("BParent", null, null, null);
+                    __oldValue.NotifyPropertyChanged("BParent", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("BParent", null, null, null);
+                    __newValue.NotifyPropertyChanged("BParent", null, null);
                 }
             }
         }
@@ -350,8 +346,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
@@ -369,8 +364,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
             }
         }
 
@@ -450,7 +444,9 @@ namespace Kistl.App.Base
         private DateTime _ChangedOn {
             get { return _ChangedOn_store; }
             set {
+                ReportEfPropertyChanging("ChangedOn");
                 _ChangedOn_store = value;
+                ReportEfPropertyChanged("ChangedOn");
             }
         }
         private bool _isChangedOnSet = false;
@@ -495,9 +491,9 @@ namespace Kistl.App.Base
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("Containment", "ContainmentImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("Containment", __oldValue, __newValue);
                     _Containment = value;
-                    NotifyPropertyChanged("Containment", "ContainmentImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("Containment", __oldValue, __newValue);
                     if(OnContainment_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.ContainmentSpecification>(__oldValue, __newValue);
@@ -512,7 +508,9 @@ namespace Kistl.App.Base
         private Kistl.App.Base.ContainmentSpecification _Containment {
             get { return _Containment_store; }
             set {
+                ReportEfPropertyChanging("ContainmentImpl");
                 _Containment_store = value;
+                ReportEfPropertyChanged("ContainmentImpl");
             }
         }
         
@@ -611,8 +609,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
@@ -630,8 +627,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
             }
         }
 
@@ -711,7 +707,9 @@ namespace Kistl.App.Base
         private DateTime _CreatedOn {
             get { return _CreatedOn_store; }
             set {
+                ReportEfPropertyChanging("CreatedOn");
                 _CreatedOn_store = value;
+                ReportEfPropertyChanged("CreatedOn");
             }
         }
         private bool _isCreatedOnSet = false;
@@ -779,7 +777,9 @@ namespace Kistl.App.Base
         private string _Description {
             get { return _Description_store; }
             set {
+                ReportEfPropertyChanging("Description");
                 _Description_store = value;
+                ReportEfPropertyChanged("Description");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -858,7 +858,9 @@ namespace Kistl.App.Base
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -944,8 +946,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.ModuleEfImpl __newValue = (Kistl.App.Base.ModuleEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Module", __oldValue, __newValue);
 
                 if (OnModule_PreSetter != null)
                 {
@@ -963,8 +964,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Module", __oldValue, __newValue);
             }
         }
 
@@ -1009,9 +1009,9 @@ namespace Kistl.App.Base
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("Storage", "StorageImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("Storage", __oldValue, __newValue);
                     _Storage = value;
-                    NotifyPropertyChanged("Storage", "StorageImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("Storage", __oldValue, __newValue);
                     if(OnStorage_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.StorageType>(__oldValue, __newValue);
@@ -1026,7 +1026,9 @@ namespace Kistl.App.Base
         private Kistl.App.Base.StorageType _Storage {
             get { return _Storage_store; }
             set {
+                ReportEfPropertyChanging("StorageImpl");
                 _Storage_store = value;
+                ReportEfPropertyChanged("StorageImpl");
             }
         }
         
@@ -1108,7 +1110,9 @@ namespace Kistl.App.Base
         private string _Verb {
             get { return _Verb_store; }
             set {
+                ReportEfPropertyChanging("Verb");
                 _Verb_store = value;
+                ReportEfPropertyChanged("Verb");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

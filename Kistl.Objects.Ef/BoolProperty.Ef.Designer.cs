@@ -115,8 +115,7 @@ namespace Kistl.App.Base
                 Kistl.App.GUI.IconEfImpl __newValue = (Kistl.App.GUI.IconEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("FalseIcon", null, __oldValue, __newValue);
+                NotifyPropertyChanging("FalseIcon", __oldValue, __newValue);
 
                 if (OnFalseIcon_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("FalseIcon", null, __oldValue, __newValue);
+                NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
             }
         }
 
@@ -203,7 +201,9 @@ namespace Kistl.App.Base
         private string _FalseLabel {
             get { return _FalseLabel_store; }
             set {
+                ReportEfPropertyChanging("FalseLabel");
                 _FalseLabel_store = value;
+                ReportEfPropertyChanged("FalseLabel");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -288,8 +288,7 @@ namespace Kistl.App.Base
                 Kistl.App.GUI.IconEfImpl __newValue = (Kistl.App.GUI.IconEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("NullIcon", null, __oldValue, __newValue);
+                NotifyPropertyChanging("NullIcon", __oldValue, __newValue);
 
                 if (OnNullIcon_PreSetter != null)
                 {
@@ -307,8 +306,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("NullIcon", null, __oldValue, __newValue);
+                NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
             }
         }
 
@@ -376,7 +374,9 @@ namespace Kistl.App.Base
         private string _NullLabel {
             get { return _NullLabel_store; }
             set {
+                ReportEfPropertyChanging("NullLabel");
                 _NullLabel_store = value;
+                ReportEfPropertyChanged("NullLabel");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -461,8 +461,7 @@ namespace Kistl.App.Base
                 Kistl.App.GUI.IconEfImpl __newValue = (Kistl.App.GUI.IconEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("TrueIcon", null, __oldValue, __newValue);
+                NotifyPropertyChanging("TrueIcon", __oldValue, __newValue);
 
                 if (OnTrueIcon_PreSetter != null)
                 {
@@ -480,8 +479,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("TrueIcon", null, __oldValue, __newValue);
+                NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
             }
         }
 
@@ -549,7 +547,9 @@ namespace Kistl.App.Base
         private string _TrueLabel {
             get { return _TrueLabel_store; }
             set {
+                ReportEfPropertyChanging("TrueLabel");
                 _TrueLabel_store = value;
+                ReportEfPropertyChanged("TrueLabel");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private string _Schema {
             get { return _Schema_store; }
             set {
+                ReportEfPropertyChanging("Schema");
                 _Schema_store = value;
+                ReportEfPropertyChanged("Schema");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Base
         private int _Version {
             get { return _Version_store; }
             set {
+                ReportEfPropertyChanging("Version");
                 _Version_store = value;
+                ReportEfPropertyChanged("Version");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

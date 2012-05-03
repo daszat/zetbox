@@ -115,13 +115,12 @@ namespace Kistl.App.Calendar
                 Kistl.App.Calendar.CalendarEfImpl __newValue = (Kistl.App.Calendar.CalendarEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Calendar", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Calendar", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("CalendarRules", null, null, null);
+                    __oldValue.NotifyPropertyChanging("CalendarRules", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("CalendarRules", null, null, null);
+                    __newValue.NotifyPropertyChanging("CalendarRules", null, null);
                 }
 
                 if (OnCalendar_PreSetter != null)
@@ -140,13 +139,12 @@ namespace Kistl.App.Calendar
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Calendar", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Calendar", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("CalendarRules", null, null, null);
+                    __oldValue.NotifyPropertyChanged("CalendarRules", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("CalendarRules", null, null, null);
+                    __newValue.NotifyPropertyChanged("CalendarRules", null, null);
                 }
             }
         }
@@ -232,8 +230,7 @@ namespace Kistl.App.Calendar
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
@@ -251,8 +248,7 @@ namespace Kistl.App.Calendar
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
             }
         }
 
@@ -332,7 +328,9 @@ namespace Kistl.App.Calendar
         private DateTime _ChangedOn {
             get { return _ChangedOn_store; }
             set {
+                ReportEfPropertyChanging("ChangedOn");
                 _ChangedOn_store = value;
+                ReportEfPropertyChanged("ChangedOn");
             }
         }
         private bool _isChangedOnSet = false;
@@ -417,8 +415,7 @@ namespace Kistl.App.Calendar
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
@@ -436,8 +433,7 @@ namespace Kistl.App.Calendar
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
             }
         }
 
@@ -517,7 +513,9 @@ namespace Kistl.App.Calendar
         private DateTime _CreatedOn {
             get { return _CreatedOn_store; }
             set {
+                ReportEfPropertyChanging("CreatedOn");
                 _CreatedOn_store = value;
+                ReportEfPropertyChanged("CreatedOn");
             }
         }
         private bool _isCreatedOnSet = false;
@@ -597,7 +595,9 @@ namespace Kistl.App.Calendar
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -677,7 +677,9 @@ namespace Kistl.App.Calendar
         private bool _IsWorkingDay {
             get { return _IsWorkingDay_store; }
             set {
+                ReportEfPropertyChanging("IsWorkingDay");
                 _IsWorkingDay_store = value;
+                ReportEfPropertyChanged("IsWorkingDay");
             }
         }
         private bool _isIsWorkingDaySet = false;
@@ -763,8 +765,7 @@ namespace Kistl.App.Calendar
                 Kistl.App.Base.ModuleEfImpl __newValue = (Kistl.App.Base.ModuleEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Module", __oldValue, __newValue);
 
                 if (OnModule_PreSetter != null)
                 {
@@ -782,8 +783,7 @@ namespace Kistl.App.Calendar
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Module", __oldValue, __newValue);
             }
         }
 
@@ -851,7 +851,9 @@ namespace Kistl.App.Calendar
         private string _Name {
             get { return _Name_store; }
             set {
+                ReportEfPropertyChanging("Name");
                 _Name_store = value;
+                ReportEfPropertyChanged("Name");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -918,7 +920,9 @@ namespace Kistl.App.Calendar
         private DateTime? _ValidFrom {
             get { return _ValidFrom_store; }
             set {
+                ReportEfPropertyChanging("ValidFrom");
                 _ValidFrom_store = value;
+                ReportEfPropertyChanged("ValidFrom");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -985,7 +989,9 @@ namespace Kistl.App.Calendar
         private DateTime? _ValidUntil {
             get { return _ValidUntil_store; }
             set {
+                ReportEfPropertyChanging("ValidUntil");
                 _ValidUntil_store = value;
+                ReportEfPropertyChanged("ValidUntil");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -1052,7 +1058,9 @@ namespace Kistl.App.Calendar
         private decimal _WorkingHours {
             get { return _WorkingHours_store; }
             set {
+                ReportEfPropertyChanging("WorkingHours");
                 _WorkingHours_store = value;
+                ReportEfPropertyChanged("WorkingHours");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

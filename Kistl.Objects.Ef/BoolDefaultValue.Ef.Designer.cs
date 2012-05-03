@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private bool _BoolValue {
             get { return _BoolValue_store; }
             set {
+                ReportEfPropertyChanging("BoolValue");
                 _BoolValue_store = value;
+                ReportEfPropertyChanged("BoolValue");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

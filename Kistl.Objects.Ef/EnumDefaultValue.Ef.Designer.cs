@@ -115,8 +115,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.EnumerationEntryEfImpl __newValue = (Kistl.App.Base.EnumerationEntryEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("EnumValue", null, __oldValue, __newValue);
+                NotifyPropertyChanging("EnumValue", __oldValue, __newValue);
 
                 if (OnEnumValue_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("EnumValue", null, __oldValue, __newValue);
+                NotifyPropertyChanged("EnumValue", __oldValue, __newValue);
             }
         }
 

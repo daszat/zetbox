@@ -97,7 +97,9 @@ namespace Kistl.App.Test
         private string _Frage {
             get { return _Frage_store; }
             set {
+                ReportEfPropertyChanging("Frage");
                 _Frage_store = value;
+                ReportEfPropertyChanged("Frage");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -181,13 +183,12 @@ namespace Kistl.App.Test
                 Kistl.App.Test.FragebogenEfImpl __newValue = (Kistl.App.Test.FragebogenEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Fragebogen", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Fragebogen", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Antworten", null, null, null);
+                    __oldValue.NotifyPropertyChanging("Antworten", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Antworten", null, null, null);
+                    __newValue.NotifyPropertyChanging("Antworten", null, null);
                 }
 
                 if (OnFragebogen_PreSetter != null)
@@ -206,13 +207,12 @@ namespace Kistl.App.Test
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Fragebogen", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Fragebogen", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("Antworten", null, null, null);
+                    __oldValue.NotifyPropertyChanged("Antworten", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("Antworten", null, null, null);
+                    __newValue.NotifyPropertyChanged("Antworten", null, null);
                 }
             }
         }
@@ -253,7 +253,9 @@ namespace Kistl.App.Test
         private int? _gute_Antworten_pos {
             get { return _gute_Antworten_pos_store; }
             set {
+                ReportEfPropertyChanging("gute_Antworten_pos");
                 _gute_Antworten_pos_store = value;
+                ReportEfPropertyChanged("gute_Antworten_pos");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -321,7 +323,9 @@ namespace Kistl.App.Test
         private int _FragenNummer {
             get { return _FragenNummer_store; }
             set {
+                ReportEfPropertyChanging("FragenNummer");
                 _FragenNummer_store = value;
+                ReportEfPropertyChanged("FragenNummer");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -388,7 +392,9 @@ namespace Kistl.App.Test
         private int? _GegebeneAntwort {
             get { return _GegebeneAntwort_store; }
             set {
+                ReportEfPropertyChanging("GegebeneAntwort");
                 _GegebeneAntwort_store = value;
+                ReportEfPropertyChanged("GegebeneAntwort");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

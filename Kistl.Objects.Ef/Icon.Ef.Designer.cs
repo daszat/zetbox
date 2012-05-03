@@ -115,8 +115,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.BlobEfImpl __newValue = (Kistl.App.Base.BlobEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Blob", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Blob", __oldValue, __newValue);
 
                 if (OnBlob_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Blob", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Blob", __oldValue, __newValue);
             }
         }
 
@@ -215,7 +213,9 @@ namespace Kistl.App.GUI
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -283,7 +283,9 @@ namespace Kistl.App.GUI
         private string _IconFile {
             get { return _IconFile_store; }
             set {
+                ReportEfPropertyChanging("IconFile");
                 _IconFile_store = value;
+                ReportEfPropertyChanged("IconFile");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -368,8 +370,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.ModuleEfImpl __newValue = (Kistl.App.Base.ModuleEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Module", __oldValue, __newValue);
 
                 if (OnModule_PreSetter != null)
                 {
@@ -387,8 +388,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Module", __oldValue, __newValue);
             }
         }
 

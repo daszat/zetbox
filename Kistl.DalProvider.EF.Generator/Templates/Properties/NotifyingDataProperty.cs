@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
         protected override void ApplyBackingStoreDefinition()
         {
-            EfScalarPropHelper.ApplyBackingStoreDefinition(this, type, backingName);
+            EfScalarPropHelper.ApplyBackingStoreDefinition(this, type, backingName, name);
         }
     }
 }

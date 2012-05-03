@@ -113,7 +113,9 @@ namespace Kistl.App.Base
         private string _Identity {
             get { return _Identity_store; }
             set {
+                ReportEfPropertyChanging("Identity");
                 _Identity_store = value;
+                ReportEfPropertyChanged("Identity");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -178,7 +180,9 @@ namespace Kistl.App.Base
         private string _MessageFormat {
             get { return _MessageFormat_store; }
             set {
+                ReportEfPropertyChanging("MessageFormat");
                 _MessageFormat_store = value;
+                ReportEfPropertyChanged("MessageFormat");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -243,7 +247,9 @@ namespace Kistl.App.Base
         private string _NewValue {
             get { return _NewValue_store; }
             set {
+                ReportEfPropertyChanging("NewValue");
                 _NewValue_store = value;
+                ReportEfPropertyChanged("NewValue");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -308,7 +314,9 @@ namespace Kistl.App.Base
         private string _OldValue {
             get { return _OldValue_store; }
             set {
+                ReportEfPropertyChanging("OldValue");
                 _OldValue_store = value;
+                ReportEfPropertyChanged("OldValue");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -373,7 +381,9 @@ namespace Kistl.App.Base
         private string _PropertyName {
             get { return _PropertyName_store; }
             set {
+                ReportEfPropertyChanging("PropertyName");
                 _PropertyName_store = value;
+                ReportEfPropertyChanged("PropertyName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -453,7 +463,9 @@ namespace Kistl.App.Base
         private DateTime? _Timestamp {
             get { return _Timestamp_store; }
             set {
+                ReportEfPropertyChanging("Timestamp");
                 _Timestamp_store = value;
+                ReportEfPropertyChanged("Timestamp");
             }
         }
         private bool _isTimestampSet = false;

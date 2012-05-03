@@ -147,7 +147,9 @@ namespace Kistl.App.Test
         private string _Name {
             get { return _Name_store; }
             set {
+                ReportEfPropertyChanging("Name");
                 _Name_store = value;
+                ReportEfPropertyChanged("Name");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

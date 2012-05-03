@@ -63,10 +63,10 @@ namespace Kistl.App.Test
                 {
                     _Antworten = new EntityListWrapper<Kistl.App.Test.Antwort, Kistl.App.Test.AntwortEfImpl>(
                             this.Context, AntwortenImpl,
-                            () => this.NotifyPropertyChanging("Antworten", null, null, null),
-                            () => { this.NotifyPropertyChanged("Antworten", null, null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("Fragebogen", null, null, null),
-                            (item) => item.NotifyPropertyChanged("Fragebogen", null, null, null), "Ein_Fragebogen", "gute_Antworten_pos");
+                            () => this.NotifyPropertyChanging("Antworten", null, null),
+                            () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("Fragebogen", null, null),
+                            (item) => item.NotifyPropertyChanged("Fragebogen", null, null), "Ein_Fragebogen", "gute_Antworten_pos");
                 }
                 return _Antworten;
             }
@@ -156,7 +156,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         private int? _BogenNummer {
             get { return _BogenNummer_store; }
             set {
+                ReportEfPropertyChanging("BogenNummer");
                 _BogenNummer_store = value;
+                ReportEfPropertyChanged("BogenNummer");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

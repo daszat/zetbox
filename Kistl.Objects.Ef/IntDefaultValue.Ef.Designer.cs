@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private int _IntValue {
             get { return _IntValue_store; }
             set {
+                ReportEfPropertyChanging("IntValue");
                 _IntValue_store = value;
+                ReportEfPropertyChanged("IntValue");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

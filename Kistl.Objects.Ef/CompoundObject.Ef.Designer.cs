@@ -115,8 +115,7 @@ namespace Kistl.App.Base
                 Kistl.App.GUI.ViewModelDescriptorEfImpl __newValue = (Kistl.App.GUI.ViewModelDescriptorEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DefaultPropertyViewModelDescriptor", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
 
                 if (OnDefaultPropertyViewModelDescriptor_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
             }
         }
 

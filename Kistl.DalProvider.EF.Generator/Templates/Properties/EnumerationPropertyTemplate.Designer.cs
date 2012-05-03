@@ -105,9 +105,9 @@ this.WriteObjects("                    }\r\n");
 
 #line 76 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("					\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", \"",  efName , "\", __oldValue, __newValue);\r\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  backingName , " = value;\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", \"",  efName , "\", __oldValue, __newValue);\r\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
 #line 81 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 if(callGetterSetterEvents)
 					{
@@ -128,7 +128,7 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 #line 96 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-EfScalarPropHelper.ApplyBackingStoreDefinition(this, enumType, backingName); 
+EfScalarPropHelper.ApplyBackingStoreDefinition(this, enumType, backingName, efName); 
 #line 97 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("        \r\n");
 this.WriteObjects("        /// <summary>EF sees only this property, for ",  UglyXmlEncode(name) , "</summary>\r\n");

@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private int _Max {
             get { return _Max_store; }
             set {
+                ReportEfPropertyChanging("Max");
                 _Max_store = value;
+                ReportEfPropertyChanged("Max");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Base
         private int _Min {
             get { return _Min_store; }
             set {
+                ReportEfPropertyChanging("Min");
                 _Min_store = value;
+                ReportEfPropertyChanged("Min");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

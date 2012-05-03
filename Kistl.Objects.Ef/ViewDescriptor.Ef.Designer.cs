@@ -115,8 +115,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ControlKind", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ControlKind", __oldValue, __newValue);
 
                 if (OnControlKind_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ControlKind", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ControlKind", __oldValue, __newValue);
             }
         }
 
@@ -221,8 +219,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.TypeRefEfImpl __newValue = (Kistl.App.Base.TypeRefEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ControlRef", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ControlRef", __oldValue, __newValue);
 
                 if (OnControlRef_PreSetter != null)
                 {
@@ -240,8 +237,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ControlRef", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
             }
         }
 
@@ -321,7 +317,9 @@ namespace Kistl.App.GUI
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -407,8 +405,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.ModuleEfImpl __newValue = (Kistl.App.Base.ModuleEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Module", __oldValue, __newValue);
 
                 if (OnModule_PreSetter != null)
                 {
@@ -426,8 +423,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Module", __oldValue, __newValue);
             }
         }
 
@@ -523,9 +519,9 @@ namespace Kistl.App.GUI
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("Toolkit", "ToolkitImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("Toolkit", __oldValue, __newValue);
                     _Toolkit = value;
-                    NotifyPropertyChanged("Toolkit", "ToolkitImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("Toolkit", __oldValue, __newValue);
                     if(OnToolkit_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.Toolkit>(__oldValue, __newValue);
@@ -540,7 +536,9 @@ namespace Kistl.App.GUI
         private Kistl.App.GUI.Toolkit _Toolkit {
             get { return _Toolkit_store; }
             set {
+                ReportEfPropertyChanging("ToolkitImpl");
                 _Toolkit_store = value;
+                ReportEfPropertyChanged("ToolkitImpl");
             }
         }
         

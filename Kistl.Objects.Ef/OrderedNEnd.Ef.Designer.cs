@@ -114,13 +114,12 @@ namespace Kistl.App.Test
                 Kistl.App.Test.OrderedOneEndEfImpl __newValue = (Kistl.App.Test.OrderedOneEndEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("OneEnd", null, __oldValue, __newValue);
+                NotifyPropertyChanging("OneEnd", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("NEnds", null, null, null);
+                    __oldValue.NotifyPropertyChanging("NEnds", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("NEnds", null, null, null);
+                    __newValue.NotifyPropertyChanging("NEnds", null, null);
                 }
 
                 if (OnOneEnd_PreSetter != null)
@@ -139,13 +138,12 @@ namespace Kistl.App.Test
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("OneEnd", null, __oldValue, __newValue);
+                NotifyPropertyChanged("OneEnd", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("NEnds", null, null, null);
+                    __oldValue.NotifyPropertyChanged("NEnds", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("NEnds", null, null, null);
+                    __newValue.NotifyPropertyChanged("NEnds", null, null);
                 }
             }
         }
@@ -186,7 +184,9 @@ namespace Kistl.App.Test
         private int? _NEnds_pos {
             get { return _NEnds_pos_store; }
             set {
+                ReportEfPropertyChanging("NEnds_pos");
                 _NEnds_pos_store = value;
+                ReportEfPropertyChanged("NEnds_pos");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -254,7 +254,9 @@ namespace Kistl.App.Test
         private int? _OtherInt {
             get { return _OtherInt_store; }
             set {
+                ReportEfPropertyChanging("OtherInt");
                 _OtherInt_store = value;
+                ReportEfPropertyChanged("OtherInt");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

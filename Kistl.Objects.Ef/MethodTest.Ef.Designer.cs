@@ -63,10 +63,10 @@ namespace Kistl.App.Test
                 {
                     _Children = new EntityCollectionWrapper<Kistl.App.Test.MethodTest, Kistl.App.Test.MethodTestEfImpl>(
                             this.Context, ChildrenImpl,
-                            () => this.NotifyPropertyChanging("Children", null, null, null),
-                            () => { this.NotifyPropertyChanged("Children", null, null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("Parent", null, null, null),
-                            (item) => item.NotifyPropertyChanged("Parent", null, null, null));
+                            () => this.NotifyPropertyChanging("Children", null, null),
+                            () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("Parent", null, null),
+                            (item) => item.NotifyPropertyChanged("Parent", null, null));
                 }
                 return _Children;
             }
@@ -171,13 +171,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                 Kistl.App.Test.MethodTestEfImpl __newValue = (Kistl.App.Test.MethodTestEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Parent", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Parent", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Children", null, null, null);
+                    __oldValue.NotifyPropertyChanging("Children", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Children", null, null, null);
+                    __newValue.NotifyPropertyChanging("Children", null, null);
                 }
 
                 if (OnParent_PreSetter != null)
@@ -196,13 +195,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Parent", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Parent", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("Children", null, null, null);
+                    __oldValue.NotifyPropertyChanged("Children", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("Children", null, null, null);
+                    __newValue.NotifyPropertyChanged("Children", null, null);
                 }
             }
         }
@@ -271,7 +269,9 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
         private string _StringProp {
             get { return _StringProp_store; }
             set {
+                ReportEfPropertyChanging("StringProp");
                 _StringProp_store = value;
+                ReportEfPropertyChanged("StringProp");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

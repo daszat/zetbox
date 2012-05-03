@@ -115,8 +115,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.GroupEfImpl __newValue = (Kistl.App.Base.GroupEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Group", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Group", __oldValue, __newValue);
 
                 if (OnGroup_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Group", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Group", __oldValue, __newValue);
             }
         }
 

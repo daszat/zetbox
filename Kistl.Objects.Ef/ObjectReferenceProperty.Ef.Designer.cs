@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private bool _EagerLoading {
             get { return _EagerLoading_store; }
             set {
+                ReportEfPropertyChanging("EagerLoading");
                 _EagerLoading_store = value;
+                ReportEfPropertyChanged("EagerLoading");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Base
         private bool? _IsInlineEditable {
             get { return _IsInlineEditable_store; }
             set {
+                ReportEfPropertyChanging("IsInlineEditable");
                 _IsInlineEditable_store = value;
+                ReportEfPropertyChanged("IsInlineEditable");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -299,13 +303,12 @@ namespace Kistl.App.Base
                 Kistl.App.Base.RelationEndEfImpl __newValue = (Kistl.App.Base.RelationEndEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("RelationEnd", null, __oldValue, __newValue);
+                NotifyPropertyChanging("RelationEnd", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Navigator", null, null, null);
+                    __oldValue.NotifyPropertyChanging("Navigator", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Navigator", null, null, null);
+                    __newValue.NotifyPropertyChanging("Navigator", null, null);
                 }
 
                 if (OnRelationEnd_PreSetter != null)
@@ -324,13 +327,12 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("RelationEnd", null, __oldValue, __newValue);
+                NotifyPropertyChanged("RelationEnd", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("Navigator", null, null, null);
+                    __oldValue.NotifyPropertyChanged("Navigator", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("Navigator", null, null, null);
+                    __newValue.NotifyPropertyChanged("Navigator", null, null);
                 }
             }
         }

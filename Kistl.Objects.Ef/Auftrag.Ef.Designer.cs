@@ -97,7 +97,9 @@ namespace Kistl.App.Projekte
         private string _Auftragsname {
             get { return _Auftragsname_store; }
             set {
+                ReportEfPropertyChanging("Auftragsname");
                 _Auftragsname_store = value;
+                ReportEfPropertyChanged("Auftragsname");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Projekte
         private double? _Auftragswert {
             get { return _Auftragswert_store; }
             set {
+                ReportEfPropertyChanging("Auftragswert");
                 _Auftragswert_store = value;
+                ReportEfPropertyChanged("Auftragswert");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -248,8 +252,7 @@ namespace Kistl.App.Projekte
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
@@ -267,8 +270,7 @@ namespace Kistl.App.Projekte
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
             }
         }
 
@@ -348,7 +350,9 @@ namespace Kistl.App.Projekte
         private DateTime _ChangedOn {
             get { return _ChangedOn_store; }
             set {
+                ReportEfPropertyChanging("ChangedOn");
                 _ChangedOn_store = value;
+                ReportEfPropertyChanged("ChangedOn");
             }
         }
         private bool _isChangedOnSet = false;
@@ -433,8 +437,7 @@ namespace Kistl.App.Projekte
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
@@ -452,8 +455,7 @@ namespace Kistl.App.Projekte
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
             }
         }
 
@@ -533,7 +535,9 @@ namespace Kistl.App.Projekte
         private DateTime _CreatedOn {
             get { return _CreatedOn_store; }
             set {
+                ReportEfPropertyChanging("CreatedOn");
                 _CreatedOn_store = value;
+                ReportEfPropertyChanged("CreatedOn");
             }
         }
         private bool _isCreatedOnSet = false;
@@ -613,7 +617,9 @@ namespace Kistl.App.Projekte
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -699,8 +705,7 @@ namespace Kistl.App.Projekte
                 Kistl.App.Projekte.KundeEfImpl __newValue = (Kistl.App.Projekte.KundeEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Kunde", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Kunde", __oldValue, __newValue);
 
                 if (OnKunde_PreSetter != null)
                 {
@@ -718,8 +723,7 @@ namespace Kistl.App.Projekte
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Kunde", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Kunde", __oldValue, __newValue);
             }
         }
 
@@ -805,8 +809,7 @@ namespace Kistl.App.Projekte
                 Kistl.App.Projekte.MitarbeiterEfImpl __newValue = (Kistl.App.Projekte.MitarbeiterEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Mitarbeiter", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Mitarbeiter", __oldValue, __newValue);
 
                 if (OnMitarbeiter_PreSetter != null)
                 {
@@ -824,8 +827,7 @@ namespace Kistl.App.Projekte
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Mitarbeiter", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Mitarbeiter", __oldValue, __newValue);
             }
         }
 
@@ -911,13 +913,12 @@ namespace Kistl.App.Projekte
                 Kistl.App.Projekte.ProjektEfImpl __newValue = (Kistl.App.Projekte.ProjektEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Projekt", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Projekt", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Auftraege", null, null, null);
+                    __oldValue.NotifyPropertyChanging("Auftraege", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Auftraege", null, null, null);
+                    __newValue.NotifyPropertyChanging("Auftraege", null, null);
                 }
 
                 if (OnProjekt_PreSetter != null)
@@ -936,13 +937,12 @@ namespace Kistl.App.Projekte
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Projekt", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Projekt", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("Auftraege", null, null, null);
+                    __oldValue.NotifyPropertyChanged("Auftraege", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("Auftraege", null, null, null);
+                    __newValue.NotifyPropertyChanged("Auftraege", null, null);
                 }
             }
         }

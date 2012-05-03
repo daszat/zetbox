@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private int? _MaxLength {
             get { return _MaxLength_store; }
             set {
+                ReportEfPropertyChanging("MaxLength");
                 _MaxLength_store = value;
+                ReportEfPropertyChanged("MaxLength");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Base
         private int _MinLength {
             get { return _MinLength_store; }
             set {
+                ReportEfPropertyChanging("MinLength");
                 _MinLength_store = value;
+                ReportEfPropertyChanged("MinLength");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

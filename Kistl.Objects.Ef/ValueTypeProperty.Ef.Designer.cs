@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private bool _HasPersistentOrder {
             get { return _HasPersistentOrder_store; }
             set {
+                ReportEfPropertyChanging("HasPersistentOrder");
                 _HasPersistentOrder_store = value;
+                ReportEfPropertyChanged("HasPersistentOrder");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Base
         private bool _IsCalculated {
             get { return _IsCalculated_store; }
             set {
+                ReportEfPropertyChanging("IsCalculated");
                 _IsCalculated_store = value;
+                ReportEfPropertyChanged("IsCalculated");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -231,7 +235,9 @@ namespace Kistl.App.Base
         private bool _IsList {
             get { return _IsList_store; }
             set {
+                ReportEfPropertyChanging("IsList");
                 _IsList_store = value;
+                ReportEfPropertyChanged("IsList");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

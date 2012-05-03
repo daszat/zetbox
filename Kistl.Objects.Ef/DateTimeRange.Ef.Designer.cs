@@ -113,7 +113,9 @@ namespace Kistl.App.Base
         private DateTime? _From {
             get { return _From_store; }
             set {
+                ReportEfPropertyChanging("From");
                 _From_store = value;
+                ReportEfPropertyChanged("From");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -178,7 +180,9 @@ namespace Kistl.App.Base
         private DateTime? _Thru {
             get { return _Thru_store; }
             set {
+                ReportEfPropertyChanging("Thru");
                 _Thru_store = value;
+                ReportEfPropertyChanged("Thru");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -234,7 +238,9 @@ namespace Kistl.App.Base
         private int? _TotalDays {
             get { return _TotalDays_store; }
             set {
+                ReportEfPropertyChanging("TotalDays");
                 _TotalDays_store = value;
+                ReportEfPropertyChanged("TotalDays");
             }
         }
         private bool _TotalDays_IsDirty = false;

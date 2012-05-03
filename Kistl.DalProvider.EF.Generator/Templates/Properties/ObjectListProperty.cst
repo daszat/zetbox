@@ -58,10 +58,10 @@
                 {
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
                             this.Context, <%= efName %>,
-                            () => this.NotifyPropertyChanging("<%= name %>", null, null, null),
-                            () => { this.NotifyPropertyChanged("<%= name %>", null, null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
-                            (item) => item.NotifyPropertyChanging("<%= otherName %>", null, null, null),
-                            (item) => item.NotifyPropertyChanged("<%= otherName %>", null, null, null)<%
+                            () => this.NotifyPropertyChanging("<%= name %>", null, null),
+                            () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
+                            (item) => item.NotifyPropertyChanging("<%= otherName %>", null, null),
+                            (item) => item.NotifyPropertyChanged("<%= otherName %>", null, null)<%
     // TODO: improve this!
     if (rel.NeedsPositionStorage(otherEnd.GetRole()))
     {

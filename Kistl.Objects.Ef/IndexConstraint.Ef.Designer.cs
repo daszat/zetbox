@@ -109,7 +109,9 @@ namespace Kistl.App.Base
         private bool _IsUnique {
             get { return _IsUnique_store; }
             set {
+                ReportEfPropertyChanging("IsUnique");
                 _IsUnique_store = value;
+                ReportEfPropertyChanged("IsUnique");
             }
         }
         private bool _isIsUniqueSet = false;

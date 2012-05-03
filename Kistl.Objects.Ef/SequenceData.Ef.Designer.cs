@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private int _CurrentNumber {
             get { return _CurrentNumber_store; }
             set {
+                ReportEfPropertyChanging("CurrentNumber");
                 _CurrentNumber_store = value;
+                ReportEfPropertyChanged("CurrentNumber");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -181,13 +183,12 @@ namespace Kistl.App.Base
                 Kistl.App.Base.SequenceEfImpl __newValue = (Kistl.App.Base.SequenceEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Sequence", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Sequence", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Data", null, null, null);
+                    __oldValue.NotifyPropertyChanging("Data", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Data", null, null, null);
+                    __newValue.NotifyPropertyChanging("Data", null, null);
                 }
 
                 if (OnSequence_PreSetter != null)
@@ -206,13 +207,12 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Sequence", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Sequence", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("Data", null, null, null);
+                    __oldValue.NotifyPropertyChanged("Data", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("Data", null, null, null);
+                    __newValue.NotifyPropertyChanged("Data", null, null);
                 }
             }
         }

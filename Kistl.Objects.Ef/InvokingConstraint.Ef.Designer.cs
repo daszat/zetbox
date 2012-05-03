@@ -115,8 +115,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.ConstraintInvocationEfImpl __newValue = (Kistl.App.Base.ConstraintInvocationEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("GetErrorTextInvocation", null, __oldValue, __newValue);
+                NotifyPropertyChanging("GetErrorTextInvocation", __oldValue, __newValue);
 
                 if (OnGetErrorTextInvocation_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("GetErrorTextInvocation", null, __oldValue, __newValue);
+                NotifyPropertyChanged("GetErrorTextInvocation", __oldValue, __newValue);
             }
         }
 
@@ -221,8 +219,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.ConstraintInvocationEfImpl __newValue = (Kistl.App.Base.ConstraintInvocationEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("IsValidInvocation", null, __oldValue, __newValue);
+                NotifyPropertyChanging("IsValidInvocation", __oldValue, __newValue);
 
                 if (OnIsValidInvocation_PreSetter != null)
                 {
@@ -240,8 +237,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("IsValidInvocation", null, __oldValue, __newValue);
+                NotifyPropertyChanged("IsValidInvocation", __oldValue, __newValue);
             }
         }
 

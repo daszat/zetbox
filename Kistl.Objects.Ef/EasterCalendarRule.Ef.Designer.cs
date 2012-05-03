@@ -97,7 +97,9 @@ namespace Kistl.App.Calendar
         private int? _Offset {
             get { return _Offset_store; }
             set {
+                ReportEfPropertyChanging("Offset");
                 _Offset_store = value;
+                ReportEfPropertyChanged("Offset");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

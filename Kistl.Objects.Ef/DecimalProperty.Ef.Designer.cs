@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private int _Precision {
             get { return _Precision_store; }
             set {
+                ReportEfPropertyChanging("Precision");
                 _Precision_store = value;
+                ReportEfPropertyChanged("Precision");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Base
         private int _Scale {
             get { return _Scale_store; }
             set {
+                ReportEfPropertyChanging("Scale");
                 _Scale_store = value;
+                ReportEfPropertyChanged("Scale");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

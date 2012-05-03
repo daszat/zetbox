@@ -114,8 +114,7 @@ namespace ZBox.App.SchemaMigration
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
@@ -133,8 +132,7 @@ namespace ZBox.App.SchemaMigration
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
             }
         }
 
@@ -214,7 +212,9 @@ namespace ZBox.App.SchemaMigration
         private DateTime _ChangedOn {
             get { return _ChangedOn_store; }
             set {
+                ReportEfPropertyChanging("ChangedOn");
                 _ChangedOn_store = value;
+                ReportEfPropertyChanged("ChangedOn");
             }
         }
         private bool _isChangedOnSet = false;
@@ -282,7 +282,9 @@ namespace ZBox.App.SchemaMigration
         private string _Comment {
             get { return _Comment_store; }
             set {
+                ReportEfPropertyChanging("Comment");
                 _Comment_store = value;
+                ReportEfPropertyChanged("Comment");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -366,8 +368,7 @@ namespace ZBox.App.SchemaMigration
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
@@ -385,8 +386,7 @@ namespace ZBox.App.SchemaMigration
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
             }
         }
 
@@ -466,7 +466,9 @@ namespace ZBox.App.SchemaMigration
         private DateTime _CreatedOn {
             get { return _CreatedOn_store; }
             set {
+                ReportEfPropertyChanging("CreatedOn");
                 _CreatedOn_store = value;
+                ReportEfPropertyChanged("CreatedOn");
             }
         }
         private bool _isCreatedOnSet = false;
@@ -534,7 +536,9 @@ namespace ZBox.App.SchemaMigration
         private string _Description {
             get { return _Description_store; }
             set {
+                ReportEfPropertyChanging("Description");
                 _Description_store = value;
+                ReportEfPropertyChanged("Description");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -619,8 +623,7 @@ namespace ZBox.App.SchemaMigration
                 Kistl.App.Base.ObjectClassEfImpl __newValue = (Kistl.App.Base.ObjectClassEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DestinationObjectClass", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DestinationObjectClass", __oldValue, __newValue);
 
                 if (OnDestinationObjectClass_PreSetter != null)
                 {
@@ -638,8 +641,7 @@ namespace ZBox.App.SchemaMigration
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DestinationObjectClass", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DestinationObjectClass", __oldValue, __newValue);
             }
         }
 
@@ -719,7 +721,9 @@ namespace ZBox.App.SchemaMigration
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -787,7 +791,9 @@ namespace ZBox.App.SchemaMigration
         private string _Name {
             get { return _Name_store; }
             set {
+                ReportEfPropertyChanging("Name");
                 _Name_store = value;
+                ReportEfPropertyChanged("Name");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -820,10 +826,10 @@ namespace ZBox.App.SchemaMigration
                 {
                     _SourceColumn = new EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnEfImpl>(
                             this.Context, SourceColumnImpl,
-                            () => this.NotifyPropertyChanging("SourceColumn", null, null, null),
-                            () => { this.NotifyPropertyChanged("SourceColumn", null, null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("SourceTable", null, null, null),
-                            (item) => item.NotifyPropertyChanged("SourceTable", null, null, null));
+                            () => this.NotifyPropertyChanging("SourceColumn", null, null),
+                            () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("SourceTable", null, null),
+                            (item) => item.NotifyPropertyChanged("SourceTable", null, null));
                 }
                 return _SourceColumn;
             }
@@ -929,13 +935,12 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                 ZBox.App.SchemaMigration.StagingDatabaseEfImpl __newValue = (ZBox.App.SchemaMigration.StagingDatabaseEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("StagingDatabase", null, __oldValue, __newValue);
+                NotifyPropertyChanging("StagingDatabase", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("SourceTables", null, null, null);
+                    __oldValue.NotifyPropertyChanging("SourceTables", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("SourceTables", null, null, null);
+                    __newValue.NotifyPropertyChanging("SourceTables", null, null);
                 }
 
                 if (OnStagingDatabase_PreSetter != null)
@@ -954,13 +959,12 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("StagingDatabase", null, __oldValue, __newValue);
+                NotifyPropertyChanged("StagingDatabase", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("SourceTables", null, null, null);
+                    __oldValue.NotifyPropertyChanged("SourceTables", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("SourceTables", null, null, null);
+                    __newValue.NotifyPropertyChanged("SourceTables", null, null);
                 }
             }
         }
@@ -1006,9 +1010,9 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("Status", "StatusImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("Status", __oldValue, __newValue);
                     _Status = value;
-                    NotifyPropertyChanged("Status", "StatusImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("Status", __oldValue, __newValue);
                     if(OnStatus_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<ZBox.App.SchemaMigration.MappingStatus?>(__oldValue, __newValue);
@@ -1023,7 +1027,9 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         private ZBox.App.SchemaMigration.MappingStatus? _Status {
             get { return _Status_store; }
             set {
+                ReportEfPropertyChanging("StatusImpl");
                 _Status_store = value;
+                ReportEfPropertyChanged("StatusImpl");
             }
         }
         

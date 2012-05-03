@@ -97,7 +97,9 @@ namespace Kistl.App.GUI
         private bool? _IsCurrentMonthDefault {
             get { return _IsCurrentMonthDefault_store; }
             set {
+                ReportEfPropertyChanging("IsCurrentMonthDefault");
                 _IsCurrentMonthDefault_store = value;
+                ReportEfPropertyChanged("IsCurrentMonthDefault");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.GUI
         private bool? _IsCurrentQuaterDefault {
             get { return _IsCurrentQuaterDefault_store; }
             set {
+                ReportEfPropertyChanging("IsCurrentQuaterDefault");
                 _IsCurrentQuaterDefault_store = value;
+                ReportEfPropertyChanged("IsCurrentQuaterDefault");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -231,7 +235,9 @@ namespace Kistl.App.GUI
         private bool? _IsCurrentYearDefault {
             get { return _IsCurrentYearDefault_store; }
             set {
+                ReportEfPropertyChanging("IsCurrentYearDefault");
                 _IsCurrentYearDefault_store = value;
+                ReportEfPropertyChanged("IsCurrentYearDefault");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

@@ -20,8 +20,8 @@ namespace Kistl.DalProvider.Ef
 
     internal interface IEntityFrameworkNotifyingObject
     {
-        void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue);
-        void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue);
+        void ReportEfPropertyChanging(string efProperty);
+        void ReportEfPropertyChanged(string efProperty);
     }
 
     public abstract class BaseServerDataObject_EntityFramework
@@ -199,6 +199,24 @@ namespace Kistl.DalProvider.Ef
         {
             // EF keeps tabs for us, so we do nothing.
         }
+
+        #region IEntityFrameworkNotifyingObject
+        public void ReportEfPropertyChanging(string efProperty)
+        {
+            if (_changeTracker != null)
+            {
+                _changeTracker.EntityMemberChanging(efProperty);
+            }
+        }
+
+        public void ReportEfPropertyChanged(string efProperty)
+        {
+            if (_changeTracker != null)
+            {
+                _changeTracker.EntityMemberChanged(efProperty);
+            }
+        }
+        #endregion
     }
 
     public abstract class BaseServerCollectionEntry_EntityFramework
@@ -398,6 +416,24 @@ namespace Kistl.DalProvider.Ef
         {
             // EF keeps tabs for us, so we do nothing.
         }
+
+        #region IEntityFrameworkNotifyingObject
+        public void ReportEfPropertyChanging(string efProperty)
+        {
+            if (_changeTracker != null)
+            {
+                _changeTracker.EntityMemberChanging(efProperty);
+            }
+        }
+
+        public void ReportEfPropertyChanged(string efProperty)
+        {
+            if (_changeTracker != null)
+            {
+                _changeTracker.EntityMemberChanged(efProperty);
+            }
+        }
+        #endregion
     }
 
     /// <summary>
@@ -405,12 +441,32 @@ namespace Kistl.DalProvider.Ef
     /// parent objects. Every change will notify the parent also.
     /// </summary>
     public abstract class BaseServerCompoundObject_EntityFramework
-        : BaseServerCompoundObject
+        : BaseServerCompoundObject, IEntityFrameworkNotifyingObject
     {
         protected BaseServerCompoundObject_EntityFramework(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
+
+        #region IEntityFrameworkNotifyingObject
+        public void ReportEfPropertyChanging(string efProperty)
+        {
+            if (ParentObject != null)
+            {
+                ((IEntityFrameworkNotifyingObject)ParentObject)
+                    .ReportEfPropertyChanging(this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
+            }
+        }
+
+        public void ReportEfPropertyChanged(string efProperty)
+        {
+            if (ParentObject != null)
+            {
+                ((IEntityFrameworkNotifyingObject)ParentObject)
+                    .ReportEfPropertyChanged(this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
+            }
+        }
+        #endregion
 
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {
@@ -418,7 +474,7 @@ namespace Kistl.DalProvider.Ef
             if (ParentObject != null)
             {
                 ((IEntityFrameworkNotifyingObject)ParentObject)
-                    .NotifyPropertyChanging(this.ParentProperty + "." + property, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
+                    .ReportEfPropertyChanging(this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
             }
         }
 
@@ -428,7 +484,7 @@ namespace Kistl.DalProvider.Ef
             if (ParentObject != null)
             {
                 ((IEntityFrameworkNotifyingObject)ParentObject)
-                    .NotifyPropertyChanged(this.ParentProperty + "." + property, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
+                    .ReportEfPropertyChanged(this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
             }
         }
 

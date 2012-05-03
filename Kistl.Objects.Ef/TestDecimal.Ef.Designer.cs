@@ -97,7 +97,9 @@ namespace Kistl.App.Test
         private decimal? _Large {
             get { return _Large_store; }
             set {
+                ReportEfPropertyChanging("Large");
                 _Large_store = value;
+                ReportEfPropertyChanged("Large");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Test
         private decimal? _NoScale {
             get { return _NoScale_store; }
             set {
+                ReportEfPropertyChanging("NoScale");
                 _NoScale_store = value;
+                ReportEfPropertyChanged("NoScale");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -231,7 +235,9 @@ namespace Kistl.App.Test
         private decimal? _SmallDecimal {
             get { return _SmallDecimal_store; }
             set {
+                ReportEfPropertyChanging("SmallDecimal");
                 _SmallDecimal_store = value;
+                ReportEfPropertyChanged("SmallDecimal");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

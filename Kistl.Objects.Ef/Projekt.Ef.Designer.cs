@@ -63,10 +63,10 @@ namespace Kistl.App.Projekte
                 {
                     _Auftraege = new EntityCollectionWrapper<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.AuftragEfImpl>(
                             this.Context, AuftraegeImpl,
-                            () => this.NotifyPropertyChanging("Auftraege", null, null, null),
-                            () => { this.NotifyPropertyChanged("Auftraege", null, null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("Projekt", null, null, null),
-                            (item) => item.NotifyPropertyChanged("Projekt", null, null, null));
+                            () => this.NotifyPropertyChanging("Auftraege", null, null),
+                            () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("Projekt", null, null),
+                            (item) => item.NotifyPropertyChanged("Projekt", null, null));
                 }
                 return _Auftraege;
             }
@@ -145,7 +145,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private double? _AufwandGes {
             get { return _AufwandGes_store; }
             set {
+                ReportEfPropertyChanging("AufwandGes");
                 _AufwandGes_store = value;
+                ReportEfPropertyChanged("AufwandGes");
             }
         }
         private bool _AufwandGes_IsDirty = false;
@@ -209,7 +211,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private DateTime? _Bis {
             get { return _Bis_store; }
             set {
+                ReportEfPropertyChanging("Bis");
                 _Bis_store = value;
+                ReportEfPropertyChanged("Bis");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -293,8 +297,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
@@ -312,8 +315,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
             }
         }
 
@@ -393,7 +395,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private DateTime _ChangedOn {
             get { return _ChangedOn_store; }
             set {
+                ReportEfPropertyChanging("ChangedOn");
                 _ChangedOn_store = value;
+                ReportEfPropertyChanged("ChangedOn");
             }
         }
         private bool _isChangedOnSet = false;
@@ -478,8 +482,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
@@ -497,8 +500,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
             }
         }
 
@@ -578,7 +580,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private DateTime _CreatedOn {
             get { return _CreatedOn_store; }
             set {
+                ReportEfPropertyChanging("CreatedOn");
                 _CreatedOn_store = value;
+                ReportEfPropertyChanged("CreatedOn");
             }
         }
         private bool _isCreatedOnSet = false;
@@ -658,7 +662,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -726,7 +732,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private DateTime _KickOffAm {
             get { return _KickOffAm_store; }
             set {
+                ReportEfPropertyChanging("KickOffAm");
                 _KickOffAm_store = value;
+                ReportEfPropertyChanged("KickOffAm");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -793,7 +801,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private DateTime? _KickOffBis {
             get { return _KickOffBis_store; }
             set {
+                ReportEfPropertyChanging("KickOffBis");
                 _KickOffBis_store = value;
+                ReportEfPropertyChanged("KickOffBis");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -860,7 +870,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private string _Kundenname {
             get { return _Kundenname_store; }
             set {
+                ReportEfPropertyChanging("Kundenname");
                 _Kundenname_store = value;
+                ReportEfPropertyChanged("Kundenname");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -977,7 +989,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         private string _Name {
             get { return _Name_store; }
             set {
+                ReportEfPropertyChanging("Name");
                 _Name_store = value;
+                ReportEfPropertyChanged("Name");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -1010,10 +1024,10 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
                 {
                     _Tasks = new EntityCollectionWrapper<Kistl.App.Projekte.Task, Kistl.App.Projekte.TaskEfImpl>(
                             this.Context, TasksImpl,
-                            () => this.NotifyPropertyChanging("Tasks", null, null, null),
-                            () => { this.NotifyPropertyChanged("Tasks", null, null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("Projekt", null, null, null),
-                            (item) => item.NotifyPropertyChanged("Projekt", null, null, null));
+                            () => this.NotifyPropertyChanging("Tasks", null, null),
+                            () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("Projekt", null, null),
+                            (item) => item.NotifyPropertyChanged("Projekt", null, null));
                 }
                 return _Tasks;
             }
@@ -1101,7 +1115,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         private DateTime _Von {
             get { return _Von_store; }
             set {
+                ReportEfPropertyChanging("Von");
                 _Von_store = value;
+                ReportEfPropertyChanged("Von");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

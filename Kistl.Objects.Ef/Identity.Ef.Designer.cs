@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private string _DisplayName {
             get { return _DisplayName_store; }
             set {
+                ReportEfPropertyChanging("DisplayName");
                 _DisplayName_store = value;
+                ReportEfPropertyChanged("DisplayName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -214,7 +216,9 @@ namespace Kistl.App.Base
         private string _Password {
             get { return _Password_store; }
             set {
+                ReportEfPropertyChanging("Password");
                 _Password_store = value;
+                ReportEfPropertyChanged("Password");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -281,7 +285,9 @@ namespace Kistl.App.Base
         private string _UserName {
             get { return _UserName_store; }
             set {
+                ReportEfPropertyChanging("UserName");
                 _UserName_store = value;
+                ReportEfPropertyChanged("UserName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

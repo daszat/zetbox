@@ -90,10 +90,10 @@ this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , ">(\r\n");
 this.WriteObjects("                            this.Context, ",  efName , ",\r\n");
-this.WriteObjects("                            () => this.NotifyPropertyChanging(\"",  name , "\", null, null, null),\r\n");
-this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
-this.WriteObjects("                            (item) => item.NotifyPropertyChanging(\"",  otherName , "\", null, null, null),\r\n");
-this.WriteObjects("                            (item) => item.NotifyPropertyChanged(\"",  otherName , "\", null, null, null)");
+this.WriteObjects("                            () => this.NotifyPropertyChanging(\"",  name , "\", null, null),\r\n");
+this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
+this.WriteObjects("                            (item) => item.NotifyPropertyChanging(\"",  otherName , "\", null, null),\r\n");
+this.WriteObjects("                            (item) => item.NotifyPropertyChanged(\"",  otherName , "\", null, null)");
 #line 65 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 // TODO: improve this!
     if (rel.NeedsPositionStorage(otherEnd.GetRole()))

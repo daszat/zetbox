@@ -63,10 +63,10 @@ namespace Kistl.App.Base
                 {
                     _AccessControlList = new EntityCollectionWrapper<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessControlEfImpl>(
                             this.Context, AccessControlListImpl,
-                            () => this.NotifyPropertyChanging("AccessControlList", null, null, null),
-                            () => { this.NotifyPropertyChanged("AccessControlList", null, null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("ObjectClass", null, null, null),
-                            (item) => item.NotifyPropertyChanged("ObjectClass", null, null, null));
+                            () => this.NotifyPropertyChanging("AccessControlList", null, null),
+                            () => { this.NotifyPropertyChanged("AccessControlList", null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("ObjectClass", null, null),
+                            (item) => item.NotifyPropertyChanged("ObjectClass", null, null));
                 }
                 return _AccessControlList;
             }
@@ -172,13 +172,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 Kistl.App.Base.ObjectClassEfImpl __newValue = (Kistl.App.Base.ObjectClassEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("BaseObjectClass", null, __oldValue, __newValue);
+                NotifyPropertyChanging("BaseObjectClass", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("SubClasses", null, null, null);
+                    __oldValue.NotifyPropertyChanging("SubClasses", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("SubClasses", null, null, null);
+                    __newValue.NotifyPropertyChanging("SubClasses", null, null);
                 }
 
                 if (OnBaseObjectClass_PreSetter != null)
@@ -197,13 +196,12 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("BaseObjectClass", null, __oldValue, __newValue);
+                NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("SubClasses", null, null, null);
+                    __oldValue.NotifyPropertyChanged("SubClasses", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("SubClasses", null, null, null);
+                    __newValue.NotifyPropertyChanged("SubClasses", null, null);
                 }
             }
         }
@@ -263,7 +261,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         private string _CodeTemplate {
             get { return _CodeTemplate_store; }
             set {
+                ReportEfPropertyChanging("CodeTemplate");
                 _CodeTemplate_store = value;
+                ReportEfPropertyChanged("CodeTemplate");
             }
         }
         private bool _CodeTemplate_IsDirty = false;
@@ -345,8 +345,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 Kistl.App.GUI.ViewModelDescriptorEfImpl __newValue = (Kistl.App.GUI.ViewModelDescriptorEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DefaultViewModelDescriptor", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DefaultViewModelDescriptor", __oldValue, __newValue);
 
                 if (OnDefaultViewModelDescriptor_PreSetter != null)
                 {
@@ -364,8 +363,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DefaultViewModelDescriptor", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
             }
         }
 
@@ -399,10 +397,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
                 {
                     _FilterConfigurations = new EntityCollectionWrapper<Kistl.App.GUI.ObjectClassFilterConfiguration, Kistl.App.GUI.ObjectClassFilterConfigurationEfImpl>(
                             this.Context, FilterConfigurationsImpl,
-                            () => this.NotifyPropertyChanging("FilterConfigurations", null, null, null),
-                            () => { this.NotifyPropertyChanged("FilterConfigurations", null, null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("ObjectClass", null, null, null),
-                            (item) => item.NotifyPropertyChanged("ObjectClass", null, null, null));
+                            () => this.NotifyPropertyChanging("FilterConfigurations", null, null),
+                            () => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("ObjectClass", null, null),
+                            (item) => item.NotifyPropertyChanged("ObjectClass", null, null));
                 }
                 return _FilterConfigurations;
             }
@@ -490,7 +488,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         private bool _IsAbstract {
             get { return _IsAbstract_store; }
             set {
+                ReportEfPropertyChanging("IsAbstract");
                 _IsAbstract_store = value;
+                ReportEfPropertyChanged("IsAbstract");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -557,7 +557,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         private bool _IsFrozenObject {
             get { return _IsFrozenObject_store; }
             set {
+                ReportEfPropertyChanging("IsFrozenObject");
                 _IsFrozenObject_store = value;
+                ReportEfPropertyChanged("IsFrozenObject");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -624,7 +626,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         private bool _IsSimpleObject {
             get { return _IsSimpleObject_store; }
             set {
+                ReportEfPropertyChanging("IsSimpleObject");
                 _IsSimpleObject_store = value;
+                ReportEfPropertyChanged("IsSimpleObject");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -657,10 +661,10 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
                 {
                     _SubClasses = new EntityCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClassEfImpl>(
                             this.Context, SubClassesImpl,
-                            () => this.NotifyPropertyChanging("SubClasses", null, null, null),
-                            () => { this.NotifyPropertyChanged("SubClasses", null, null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("BaseObjectClass", null, null, null),
-                            (item) => item.NotifyPropertyChanged("BaseObjectClass", null, null, null));
+                            () => this.NotifyPropertyChanging("SubClasses", null, null),
+                            () => { this.NotifyPropertyChanged("SubClasses", null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("BaseObjectClass", null, null),
+                            (item) => item.NotifyPropertyChanged("BaseObjectClass", null, null));
                 }
                 return _SubClasses;
             }
@@ -748,7 +752,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         private string _TableName {
             get { return _TableName_store; }
             set {
+                ReportEfPropertyChanging("TableName");
                 _TableName_store = value;
+                ReportEfPropertyChanged("TableName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

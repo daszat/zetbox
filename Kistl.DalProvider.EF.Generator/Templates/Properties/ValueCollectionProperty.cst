@@ -58,7 +58,7 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>, EntityCollection<<%= referencedCollectionEntry %>>>(
 						this.Context,
                         this,
-              			() => { this.NotifyPropertyChanged("<%= name %>", null, null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
+              			() => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
           	            <%= efName %>);
                 }
                 return <%= wrapperName %>;

@@ -97,7 +97,9 @@ namespace Kistl.App.Calendar
         private int _Day {
             get { return _Day_store; }
             set {
+                ReportEfPropertyChanging("Day");
                 _Day_store = value;
+                ReportEfPropertyChanged("Day");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Calendar
         private int _Month {
             get { return _Month_store; }
             set {
+                ReportEfPropertyChanging("Month");
                 _Month_store = value;
+                ReportEfPropertyChanged("Month");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

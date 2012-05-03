@@ -115,8 +115,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.CompoundObjectEfImpl __newValue = (Kistl.App.Base.CompoundObjectEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CompoundObject", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CompoundObject", __oldValue, __newValue);
 
                 if (OnCompoundObject_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CompoundObject", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CompoundObject", __oldValue, __newValue);
             }
         }
 

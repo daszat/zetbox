@@ -63,10 +63,10 @@ namespace Kistl.App.GUI
                 {
                     _ChildControlKinds = new EntityCollectionWrapper<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKindEfImpl>(
                             this.Context, ChildControlKindsImpl,
-                            () => this.NotifyPropertyChanging("ChildControlKinds", null, null, null),
-                            () => { this.NotifyPropertyChanged("ChildControlKinds", null, null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("Parent", null, null, null),
-                            (item) => item.NotifyPropertyChanged("Parent", null, null, null));
+                            () => this.NotifyPropertyChanging("ChildControlKinds", null, null),
+                            () => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("Parent", null, null),
+                            (item) => item.NotifyPropertyChanged("Parent", null, null));
                 }
                 return _ChildControlKinds;
             }
@@ -166,7 +166,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -252,8 +254,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                 Kistl.App.Base.ModuleEfImpl __newValue = (Kistl.App.Base.ModuleEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Module", __oldValue, __newValue);
 
                 if (OnModule_PreSetter != null)
                 {
@@ -271,8 +272,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Module", __oldValue, __newValue);
             }
         }
 
@@ -340,7 +340,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         private string _Name {
             get { return _Name_store; }
             set {
+                ReportEfPropertyChanging("Name");
                 _Name_store = value;
+                ReportEfPropertyChanged("Name");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -425,13 +427,12 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Parent", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Parent", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("ChildControlKinds", null, null, null);
+                    __oldValue.NotifyPropertyChanging("ChildControlKinds", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("ChildControlKinds", null, null, null);
+                    __newValue.NotifyPropertyChanging("ChildControlKinds", null, null);
                 }
 
                 if (OnParent_PreSetter != null)
@@ -450,13 +451,12 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Parent", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Parent", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("ChildControlKinds", null, null, null);
+                    __oldValue.NotifyPropertyChanged("ChildControlKinds", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("ChildControlKinds", null, null, null);
+                    __newValue.NotifyPropertyChanged("ChildControlKinds", null, null);
                 }
             }
         }

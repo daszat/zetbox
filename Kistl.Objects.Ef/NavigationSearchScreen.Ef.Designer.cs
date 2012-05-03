@@ -97,7 +97,9 @@ namespace Kistl.App.GUI
         private bool? _AllowAddNew {
             get { return _AllowAddNew_store; }
             set {
+                ReportEfPropertyChanging("AllowAddNew");
                 _AllowAddNew_store = value;
+                ReportEfPropertyChanged("AllowAddNew");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.GUI
         private bool? _AllowDelete {
             get { return _AllowDelete_store; }
             set {
+                ReportEfPropertyChanging("AllowDelete");
                 _AllowDelete_store = value;
+                ReportEfPropertyChanged("AllowDelete");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -231,7 +235,9 @@ namespace Kistl.App.GUI
         private bool? _AllowSelectColumns {
             get { return _AllowSelectColumns_store; }
             set {
+                ReportEfPropertyChanging("AllowSelectColumns");
                 _AllowSelectColumns_store = value;
+                ReportEfPropertyChanged("AllowSelectColumns");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -298,7 +304,9 @@ namespace Kistl.App.GUI
         private bool? _AllowUserFilter {
             get { return _AllowUserFilter_store; }
             set {
+                ReportEfPropertyChanging("AllowUserFilter");
                 _AllowUserFilter_store = value;
+                ReportEfPropertyChanged("AllowUserFilter");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -365,7 +373,9 @@ namespace Kistl.App.GUI
         private bool? _EnableAutoFilter {
             get { return _EnableAutoFilter_store; }
             set {
+                ReportEfPropertyChanging("EnableAutoFilter");
                 _EnableAutoFilter_store = value;
+                ReportEfPropertyChanged("EnableAutoFilter");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -432,7 +442,9 @@ namespace Kistl.App.GUI
         private string _InitialSort {
             get { return _InitialSort_store; }
             set {
+                ReportEfPropertyChanging("InitialSort");
                 _InitialSort_store = value;
+                ReportEfPropertyChanged("InitialSort");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -476,9 +488,9 @@ namespace Kistl.App.GUI
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("InitialSortDirection", "InitialSortDirectionImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("InitialSortDirection", __oldValue, __newValue);
                     _InitialSortDirection = value;
-                    NotifyPropertyChanged("InitialSortDirection", "InitialSortDirectionImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("InitialSortDirection", __oldValue, __newValue);
                     if(OnInitialSortDirection_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ListSortDirection?>(__oldValue, __newValue);
@@ -493,7 +505,9 @@ namespace Kistl.App.GUI
         private Kistl.App.GUI.ListSortDirection? _InitialSortDirection {
             get { return _InitialSortDirection_store; }
             set {
+                ReportEfPropertyChanging("InitialSortDirectionImpl");
                 _InitialSortDirection_store = value;
+                ReportEfPropertyChanged("InitialSortDirectionImpl");
             }
         }
         
@@ -575,7 +589,9 @@ namespace Kistl.App.GUI
         private bool? _IsEditable {
             get { return _IsEditable_store; }
             set {
+                ReportEfPropertyChanging("IsEditable");
                 _IsEditable_store = value;
+                ReportEfPropertyChanged("IsEditable");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -642,7 +658,9 @@ namespace Kistl.App.GUI
         private bool? _IsMultiselect {
             get { return _IsMultiselect_store; }
             set {
+                ReportEfPropertyChanging("IsMultiselect");
                 _IsMultiselect_store = value;
+                ReportEfPropertyChanged("IsMultiselect");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -727,8 +745,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("RequestedEditorKind", null, __oldValue, __newValue);
+                NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
 
                 if (OnRequestedEditorKind_PreSetter != null)
                 {
@@ -746,8 +763,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("RequestedEditorKind", null, __oldValue, __newValue);
+                NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
             }
         }
 
@@ -833,8 +849,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("RequestedWorkspaceKind", null, __oldValue, __newValue);
+                NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
 
                 if (OnRequestedWorkspaceKind_PreSetter != null)
                 {
@@ -852,8 +867,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("RequestedWorkspaceKind", null, __oldValue, __newValue);
+                NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
             }
         }
 
@@ -921,7 +935,9 @@ namespace Kistl.App.GUI
         private bool? _RespectRequiredFilter {
             get { return _RespectRequiredFilter_store; }
             set {
+                ReportEfPropertyChanging("RespectRequiredFilter");
                 _RespectRequiredFilter_store = value;
+                ReportEfPropertyChanged("RespectRequiredFilter");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -988,7 +1004,9 @@ namespace Kistl.App.GUI
         private bool? _ShowFilter {
             get { return _ShowFilter_store; }
             set {
+                ReportEfPropertyChanging("ShowFilter");
                 _ShowFilter_store = value;
+                ReportEfPropertyChanged("ShowFilter");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -1055,7 +1073,9 @@ namespace Kistl.App.GUI
         private bool? _ShowMasterDetail {
             get { return _ShowMasterDetail_store; }
             set {
+                ReportEfPropertyChanging("ShowMasterDetail");
                 _ShowMasterDetail_store = value;
+                ReportEfPropertyChanged("ShowMasterDetail");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -1122,7 +1142,9 @@ namespace Kistl.App.GUI
         private bool? _ShowOpenCommand {
             get { return _ShowOpenCommand_store; }
             set {
+                ReportEfPropertyChanging("ShowOpenCommand");
                 _ShowOpenCommand_store = value;
+                ReportEfPropertyChanged("ShowOpenCommand");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -1189,7 +1211,9 @@ namespace Kistl.App.GUI
         private bool? _ShowRefreshCommand {
             get { return _ShowRefreshCommand_store; }
             set {
+                ReportEfPropertyChanging("ShowRefreshCommand");
                 _ShowRefreshCommand_store = value;
+                ReportEfPropertyChanged("ShowRefreshCommand");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -1274,8 +1298,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.ObjectClassEfImpl __newValue = (Kistl.App.Base.ObjectClassEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Type", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Type", __oldValue, __newValue);
 
                 if (OnType_PreSetter != null)
                 {
@@ -1293,8 +1316,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Type", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Type", __oldValue, __newValue);
             }
         }
 
@@ -1339,9 +1361,9 @@ namespace Kistl.App.GUI
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("ViewMethod", "ViewMethodImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("ViewMethod", __oldValue, __newValue);
                     _ViewMethod = value;
-                    NotifyPropertyChanged("ViewMethod", "ViewMethodImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("ViewMethod", __oldValue, __newValue);
                     if(OnViewMethod_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
@@ -1356,7 +1378,9 @@ namespace Kistl.App.GUI
         private Kistl.App.GUI.InstanceListViewMethod? _ViewMethod {
             get { return _ViewMethod_store; }
             set {
+                ReportEfPropertyChanging("ViewMethodImpl");
                 _ViewMethod_store = value;
+                ReportEfPropertyChanged("ViewMethodImpl");
             }
         }
         

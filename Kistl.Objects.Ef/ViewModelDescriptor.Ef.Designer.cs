@@ -115,8 +115,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DefaultDisplayKind", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DefaultDisplayKind", __oldValue, __newValue);
 
                 if (OnDefaultDisplayKind_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DefaultDisplayKind", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DefaultDisplayKind", __oldValue, __newValue);
             }
         }
 
@@ -221,8 +219,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DefaultEditorKind", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DefaultEditorKind", __oldValue, __newValue);
 
                 if (OnDefaultEditorKind_PreSetter != null)
                 {
@@ -240,8 +237,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DefaultEditorKind", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DefaultEditorKind", __oldValue, __newValue);
             }
         }
 
@@ -327,8 +323,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DefaultGridCellDisplayKind", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DefaultGridCellDisplayKind", __oldValue, __newValue);
 
                 if (OnDefaultGridCellDisplayKind_PreSetter != null)
                 {
@@ -346,8 +341,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DefaultGridCellDisplayKind", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DefaultGridCellDisplayKind", __oldValue, __newValue);
             }
         }
 
@@ -433,8 +427,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DefaultGridCellEditorKind", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DefaultGridCellEditorKind", __oldValue, __newValue);
 
                 if (OnDefaultGridCellEditorKind_PreSetter != null)
                 {
@@ -452,8 +445,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DefaultGridCellEditorKind", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DefaultGridCellEditorKind", __oldValue, __newValue);
             }
         }
 
@@ -539,8 +531,7 @@ namespace Kistl.App.GUI
                 Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("DefaultGridCellPreEditorKind", null, __oldValue, __newValue);
+                NotifyPropertyChanging("DefaultGridCellPreEditorKind", __oldValue, __newValue);
 
                 if (OnDefaultGridCellPreEditorKind_PreSetter != null)
                 {
@@ -558,8 +549,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("DefaultGridCellPreEditorKind", null, __oldValue, __newValue);
+                NotifyPropertyChanged("DefaultGridCellPreEditorKind", __oldValue, __newValue);
             }
         }
 
@@ -627,7 +617,9 @@ namespace Kistl.App.GUI
         private string _Description {
             get { return _Description_store; }
             set {
+                ReportEfPropertyChanging("Description");
                 _Description_store = value;
+                ReportEfPropertyChanged("Description");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -706,7 +698,9 @@ namespace Kistl.App.GUI
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -792,8 +786,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.ModuleEfImpl __newValue = (Kistl.App.Base.ModuleEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Module", __oldValue, __newValue);
 
                 if (OnModule_PreSetter != null)
                 {
@@ -811,8 +804,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Module", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Module", __oldValue, __newValue);
             }
         }
 
@@ -948,8 +940,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.TypeRefEfImpl __newValue = (Kistl.App.Base.TypeRefEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ViewModelRef", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
 
                 if (OnViewModelRef_PreSetter != null)
                 {
@@ -967,8 +958,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ViewModelRef", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
             }
         }
 

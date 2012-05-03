@@ -27,7 +27,7 @@
         }
 
         /// <summary>backing store for <%= UglyXmlEncode(propName) %></summary>
-        private <%= coImplementationType %> <%= backingStoreName %>;
+<% EfScalarPropHelper.ApplyBackingStoreDefinition(this, coImplementationType, backingStoreName, backingPropertyName); %>
 
         /// <summary>backing property for <%= UglyXmlEncode(propName) %>, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
@@ -51,7 +51,7 @@
                     var __oldValue = <%= backingStoreName %>;
 					var __newValue = value;
 
-                    NotifyPropertyChanging("<%= propName %>", "<%= backingPropertyName %>", __oldValue, __newValue);
+                    NotifyPropertyChanging("<%= propName %>", __oldValue, __newValue);
 
                     if (<%= backingStoreName %> != null)
                     {
@@ -67,7 +67,7 @@
                         <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
                     }
 
-                    NotifyPropertyChanged("<%= propName %>", "<%= backingPropertyName %>", __oldValue, value);
+                    NotifyPropertyChanged("<%= propName %>", __oldValue, value);
                 }
 				else
 				{

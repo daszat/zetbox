@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private bool _HasPersistentOrder {
             get { return _HasPersistentOrder_store; }
             set {
+                ReportEfPropertyChanging("HasPersistentOrder");
                 _HasPersistentOrder_store = value;
+                ReportEfPropertyChanged("HasPersistentOrder");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Base
         private string _ImplementorRoleName {
             get { return _ImplementorRoleName_store; }
             set {
+                ReportEfPropertyChanging("ImplementorRoleName");
                 _ImplementorRoleName_store = value;
+                ReportEfPropertyChanged("ImplementorRoleName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -231,7 +235,9 @@ namespace Kistl.App.Base
         private bool _IsList {
             get { return _IsList_store; }
             set {
+                ReportEfPropertyChanging("IsList");
                 _IsList_store = value;
+                ReportEfPropertyChanged("IsList");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -298,7 +304,9 @@ namespace Kistl.App.Base
         private string _ItemRoleName {
             get { return _ItemRoleName_store; }
             set {
+                ReportEfPropertyChanging("ItemRoleName");
                 _ItemRoleName_store = value;
+                ReportEfPropertyChanged("ItemRoleName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -383,8 +391,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.ObjectClassEfImpl __newValue = (Kistl.App.Base.ObjectClassEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ReferencedObjectClass", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ReferencedObjectClass", __oldValue, __newValue);
 
                 if (OnReferencedObjectClass_PreSetter != null)
                 {
@@ -402,8 +409,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ReferencedObjectClass", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ReferencedObjectClass", __oldValue, __newValue);
             }
         }
 
@@ -471,7 +477,9 @@ namespace Kistl.App.Base
         private string _Verb {
             get { return _Verb_store; }
             set {
+                ReportEfPropertyChanging("Verb");
                 _Verb_store = value;
+                ReportEfPropertyChanged("Verb");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

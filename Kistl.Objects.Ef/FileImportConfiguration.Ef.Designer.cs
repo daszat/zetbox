@@ -114,8 +114,7 @@ namespace at.dasz.DocumentManagement
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
@@ -133,8 +132,7 @@ namespace at.dasz.DocumentManagement
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
             }
         }
 
@@ -214,7 +212,9 @@ namespace at.dasz.DocumentManagement
         private DateTime _ChangedOn {
             get { return _ChangedOn_store; }
             set {
+                ReportEfPropertyChanging("ChangedOn");
                 _ChangedOn_store = value;
+                ReportEfPropertyChanged("ChangedOn");
             }
         }
         private bool _isChangedOnSet = false;
@@ -299,8 +299,7 @@ namespace at.dasz.DocumentManagement
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
@@ -318,8 +317,7 @@ namespace at.dasz.DocumentManagement
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
             }
         }
 
@@ -399,7 +397,9 @@ namespace at.dasz.DocumentManagement
         private DateTime _CreatedOn {
             get { return _CreatedOn_store; }
             set {
+                ReportEfPropertyChanging("CreatedOn");
                 _CreatedOn_store = value;
+                ReportEfPropertyChanged("CreatedOn");
             }
         }
         private bool _isCreatedOnSet = false;
@@ -479,7 +479,9 @@ namespace at.dasz.DocumentManagement
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -564,8 +566,7 @@ namespace at.dasz.DocumentManagement
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Identity", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Identity", __oldValue, __newValue);
 
                 if (OnIdentity_PreSetter != null)
                 {
@@ -583,8 +584,7 @@ namespace at.dasz.DocumentManagement
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Identity", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Identity", __oldValue, __newValue);
             }
         }
 
@@ -652,7 +652,9 @@ namespace at.dasz.DocumentManagement
         private string _MachineName {
             get { return _MachineName_store; }
             set {
+                ReportEfPropertyChanging("MachineName");
                 _MachineName_store = value;
+                ReportEfPropertyChanged("MachineName");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -719,7 +721,9 @@ namespace at.dasz.DocumentManagement
         private string _PickupDirectory {
             get { return _PickupDirectory_store; }
             set {
+                ReportEfPropertyChanging("PickupDirectory");
                 _PickupDirectory_store = value;
+                ReportEfPropertyChanged("PickupDirectory");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

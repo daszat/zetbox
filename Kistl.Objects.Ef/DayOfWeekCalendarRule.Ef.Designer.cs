@@ -74,9 +74,9 @@ namespace Kistl.App.Calendar
 						__newValue = e.Result;
                     }
 					
-                    NotifyPropertyChanging("DayOfWeek", "DayOfWeekImpl", __oldValue, __newValue);
+                    NotifyPropertyChanging("DayOfWeek", __oldValue, __newValue);
                     _DayOfWeek = value;
-                    NotifyPropertyChanged("DayOfWeek", "DayOfWeekImpl", __oldValue, __newValue);
+                    NotifyPropertyChanged("DayOfWeek", __oldValue, __newValue);
                     if(OnDayOfWeek_PostSetter != null)
                     {
 						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.DayOfWeek>(__oldValue, __newValue);
@@ -91,7 +91,9 @@ namespace Kistl.App.Calendar
         private Kistl.App.Base.DayOfWeek _DayOfWeek {
             get { return _DayOfWeek_store; }
             set {
+                ReportEfPropertyChanging("DayOfWeekImpl");
                 _DayOfWeek_store = value;
+                ReportEfPropertyChanged("DayOfWeekImpl");
             }
         }
         

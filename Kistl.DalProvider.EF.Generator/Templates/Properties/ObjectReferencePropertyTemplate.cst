@@ -98,14 +98,13 @@
                 <%= referencedImplementation %> __newValue = (<%= referencedImplementation %>)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("<%= name %>", null, __oldValue, __newValue);
+                NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
 <% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null, null);
+                    __oldValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null, null);
+                    __newValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null);
                 }
 <% } %>
 
@@ -129,14 +128,13 @@
 
 <% } %>
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("<%= name %>", null, __oldValue, __newValue);
+                NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
 <% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null, null);
+                    __oldValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null, null);
+                    __newValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null);
                 }
 <% } %>
             }

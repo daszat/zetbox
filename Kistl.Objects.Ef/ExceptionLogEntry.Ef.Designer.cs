@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private DateTime _Date {
             get { return _Date_store; }
             set {
+                ReportEfPropertyChanging("Date");
                 _Date_store = value;
+                ReportEfPropertyChanged("Date");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace Kistl.App.Base
         private string _Exception {
             get { return _Exception_store; }
             set {
+                ReportEfPropertyChanging("Exception");
                 _Exception_store = value;
+                ReportEfPropertyChanged("Exception");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -231,7 +235,9 @@ namespace Kistl.App.Base
         private string _Level {
             get { return _Level_store; }
             set {
+                ReportEfPropertyChanging("Level");
                 _Level_store = value;
+                ReportEfPropertyChanged("Level");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -298,7 +304,9 @@ namespace Kistl.App.Base
         private string _Logger {
             get { return _Logger_store; }
             set {
+                ReportEfPropertyChanging("Logger");
                 _Logger_store = value;
+                ReportEfPropertyChanged("Logger");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -365,7 +373,9 @@ namespace Kistl.App.Base
         private string _Message {
             get { return _Message_store; }
             set {
+                ReportEfPropertyChanging("Message");
                 _Message_store = value;
+                ReportEfPropertyChanged("Message");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -432,7 +442,9 @@ namespace Kistl.App.Base
         private string _Thread {
             get { return _Thread_store; }
             set {
+                ReportEfPropertyChanging("Thread");
                 _Thread_store = value;
+                ReportEfPropertyChanged("Thread");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

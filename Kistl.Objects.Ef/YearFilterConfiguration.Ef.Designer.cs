@@ -97,7 +97,9 @@ namespace Kistl.App.GUI
         private bool? _IsCurrentYearDefault {
             get { return _IsCurrentYearDefault_store; }
             set {
+                ReportEfPropertyChanging("IsCurrentYearDefault");
                 _IsCurrentYearDefault_store = value;
+                ReportEfPropertyChanged("IsCurrentYearDefault");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

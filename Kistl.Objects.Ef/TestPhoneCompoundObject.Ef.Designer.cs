@@ -113,7 +113,9 @@ namespace Kistl.App.Test
         private string _AreaCode {
             get { return _AreaCode_store; }
             set {
+                ReportEfPropertyChanging("AreaCode");
                 _AreaCode_store = value;
+                ReportEfPropertyChanged("AreaCode");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -178,7 +180,9 @@ namespace Kistl.App.Test
         private string _Number {
             get { return _Number_store; }
             set {
+                ReportEfPropertyChanging("Number");
                 _Number_store = value;
+                ReportEfPropertyChanged("Number");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

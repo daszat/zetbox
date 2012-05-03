@@ -97,7 +97,9 @@ namespace ZBox.App.SchemaMigration
         private string _Destination {
             get { return _Destination_store; }
             set {
+                ReportEfPropertyChanging("Destination");
                 _Destination_store = value;
+                ReportEfPropertyChanged("Destination");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -164,7 +166,9 @@ namespace ZBox.App.SchemaMigration
         private int _DestinationRows {
             get { return _DestinationRows_store; }
             set {
+                ReportEfPropertyChanging("DestinationRows");
                 _DestinationRows_store = value;
+                ReportEfPropertyChanged("DestinationRows");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -231,7 +235,9 @@ namespace ZBox.App.SchemaMigration
         private string _Source {
             get { return _Source_store; }
             set {
+                ReportEfPropertyChanging("Source");
                 _Source_store = value;
+                ReportEfPropertyChanged("Source");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -298,7 +304,9 @@ namespace ZBox.App.SchemaMigration
         private int _SourceRows {
             get { return _SourceRows_store; }
             set {
+                ReportEfPropertyChanging("SourceRows");
                 _SourceRows_store = value;
+                ReportEfPropertyChanged("SourceRows");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -365,7 +373,9 @@ namespace ZBox.App.SchemaMigration
         private DateTime _Timestamp {
             get { return _Timestamp_store; }
             set {
+                ReportEfPropertyChanging("Timestamp");
                 _Timestamp_store = value;
+                ReportEfPropertyChanged("Timestamp");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

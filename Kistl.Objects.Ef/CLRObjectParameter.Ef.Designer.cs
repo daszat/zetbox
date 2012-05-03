@@ -115,8 +115,7 @@ namespace Kistl.App.Base
                 Kistl.App.Base.TypeRefEfImpl __newValue = (Kistl.App.Base.TypeRefEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Type", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Type", __oldValue, __newValue);
 
                 if (OnType_PreSetter != null)
                 {
@@ -134,8 +133,7 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Type", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Type", __oldValue, __newValue);
             }
         }
 

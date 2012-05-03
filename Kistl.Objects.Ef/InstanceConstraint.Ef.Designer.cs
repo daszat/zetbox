@@ -115,13 +115,12 @@ namespace Kistl.App.Base
                 Kistl.App.Base.DataTypeEfImpl __newValue = (Kistl.App.Base.DataTypeEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Constrained", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Constrained", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Constraints", null, null, null);
+                    __oldValue.NotifyPropertyChanging("Constraints", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Constraints", null, null, null);
+                    __newValue.NotifyPropertyChanging("Constraints", null, null);
                 }
 
                 if (OnConstrained_PreSetter != null)
@@ -140,13 +139,12 @@ namespace Kistl.App.Base
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Constrained", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Constrained", __oldValue, __newValue);
                 if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("Constraints", null, null, null);
+                    __oldValue.NotifyPropertyChanged("Constraints", null, null);
                 }
                 if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("Constraints", null, null, null);
+                    __newValue.NotifyPropertyChanged("Constraints", null, null);
                 }
             }
         }
@@ -227,7 +225,9 @@ namespace Kistl.App.Base
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -295,7 +295,9 @@ namespace Kistl.App.Base
         private string _Reason {
             get { return _Reason_store; }
             set {
+                ReportEfPropertyChanging("Reason");
                 _Reason_store = value;
+                ReportEfPropertyChanged("Reason");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private string _DefaultValue {
             get { return _DefaultValue_store; }
             set {
+                ReportEfPropertyChanging("DefaultValue");
                 _DefaultValue_store = value;
+                ReportEfPropertyChanged("DefaultValue");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

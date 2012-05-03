@@ -197,7 +197,9 @@ namespace Kistl.App.GUI
         private string _Description {
             get { return _Description_store; }
             set {
+                ReportEfPropertyChanging("Description");
                 _Description_store = value;
+                ReportEfPropertyChanged("Description");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -281,8 +283,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.MethodEfImpl __newValue = (Kistl.App.Base.MethodEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Method", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Method", __oldValue, __newValue);
 
                 if (OnMethod_PreSetter != null)
                 {
@@ -300,8 +301,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Method", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Method", __oldValue, __newValue);
             }
         }
 
@@ -386,8 +386,7 @@ namespace Kistl.App.GUI
                 Kistl.App.Base.PropertyEfImpl __newValue = (Kistl.App.Base.PropertyEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("Property", null, __oldValue, __newValue);
+                NotifyPropertyChanging("Property", __oldValue, __newValue);
 
                 if (OnProperty_PreSetter != null)
                 {
@@ -405,8 +404,7 @@ namespace Kistl.App.GUI
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("Property", null, __oldValue, __newValue);
+                NotifyPropertyChanged("Property", __oldValue, __newValue);
             }
         }
 

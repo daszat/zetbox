@@ -97,7 +97,9 @@ namespace Kistl.App.Projekte
         private string _Adresse {
             get { return _Adresse_store; }
             set {
+                ReportEfPropertyChanging("Adresse");
                 _Adresse_store = value;
+                ReportEfPropertyChanged("Adresse");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -181,8 +183,7 @@ namespace Kistl.App.Projekte
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
@@ -200,8 +201,7 @@ namespace Kistl.App.Projekte
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("ChangedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
             }
         }
 
@@ -281,7 +281,9 @@ namespace Kistl.App.Projekte
         private DateTime _ChangedOn {
             get { return _ChangedOn_store; }
             set {
+                ReportEfPropertyChanging("ChangedOn");
                 _ChangedOn_store = value;
+                ReportEfPropertyChanged("ChangedOn");
             }
         }
         private bool _isChangedOnSet = false;
@@ -366,8 +368,7 @@ namespace Kistl.App.Projekte
                 Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
@@ -385,8 +386,7 @@ namespace Kistl.App.Projekte
                 }
 
                 // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("CreatedBy", null, __oldValue, __newValue);
+                NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
             }
         }
 
@@ -466,7 +466,9 @@ namespace Kistl.App.Projekte
         private DateTime _CreatedOn {
             get { return _CreatedOn_store; }
             set {
+                ReportEfPropertyChanging("CreatedOn");
                 _CreatedOn_store = value;
+                ReportEfPropertyChanged("CreatedOn");
             }
         }
         private bool _isCreatedOnSet = false;
@@ -494,7 +496,7 @@ namespace Kistl.App.Projekte
                     _EMails = new EfValueCollectionWrapper<Kunde, string, Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>>(
 						this.Context,
                         this,
-              			() => { this.NotifyPropertyChanged("EMails", null, null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
+              			() => { this.NotifyPropertyChanged("EMails", null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
           	            EMailsImpl);
                 }
                 return _EMails;
@@ -593,7 +595,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         private Guid _ExportGuid {
             get { return _ExportGuid_store; }
             set {
+                ReportEfPropertyChanging("ExportGuid");
                 _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
             }
         }
         private bool _isExportGuidSet = false;
@@ -661,7 +665,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         private string _Kundenname {
             get { return _Kundenname_store; }
             set {
+                ReportEfPropertyChanging("Kundenname");
                 _Kundenname_store = value;
+                ReportEfPropertyChanged("Kundenname");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -728,7 +734,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         private string _Land {
             get { return _Land_store; }
             set {
+                ReportEfPropertyChanging("Land");
                 _Land_store = value;
+                ReportEfPropertyChanged("Land");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -795,7 +803,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         private string _Ort {
             get { return _Ort_store; }
             set {
+                ReportEfPropertyChanging("Ort");
                 _Ort_store = value;
+                ReportEfPropertyChanged("Ort");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -862,7 +872,9 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         private string _PLZ {
             get { return _PLZ_store; }
             set {
+                ReportEfPropertyChanging("PLZ");
                 _PLZ_store = value;
+                ReportEfPropertyChanged("PLZ");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

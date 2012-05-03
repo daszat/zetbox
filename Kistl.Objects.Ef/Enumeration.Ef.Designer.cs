@@ -97,7 +97,9 @@ namespace Kistl.App.Base
         private bool _AreFlags {
             get { return _AreFlags_store; }
             set {
+                ReportEfPropertyChanging("AreFlags");
                 _AreFlags_store = value;
+                ReportEfPropertyChanged("AreFlags");
             }
         }
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -130,10 +132,10 @@ namespace Kistl.App.Base
                 {
                     _EnumerationEntries = new EntityListWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntryEfImpl>(
                             this.Context, EnumerationEntriesImpl,
-                            () => this.NotifyPropertyChanging("EnumerationEntries", null, null, null),
-                            () => { this.NotifyPropertyChanged("EnumerationEntries", null, null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
-                            (item) => item.NotifyPropertyChanging("Enumeration", null, null, null),
-                            (item) => item.NotifyPropertyChanged("Enumeration", null, null, null), "Enumeration", "EnumerationEntries_pos");
+                            () => this.NotifyPropertyChanging("EnumerationEntries", null, null),
+                            () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
+                            (item) => item.NotifyPropertyChanging("Enumeration", null, null),
+                            (item) => item.NotifyPropertyChanged("Enumeration", null, null), "Enumeration", "EnumerationEntries_pos");
                 }
                 return _EnumerationEntries;
             }
