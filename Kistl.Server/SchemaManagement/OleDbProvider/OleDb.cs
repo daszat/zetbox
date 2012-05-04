@@ -189,7 +189,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public bool CheckColumnContainsUniqueValues(TableRef tblName, string colName)
+        public bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName)
         {
             using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NOT NULL GROUP BY [{1}] HAVING COUNT([{1}]) > 1) AS tbl", tblName, colName), db, tx))
             {
@@ -835,6 +835,9 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-
+        bool ISchemaProvider.CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

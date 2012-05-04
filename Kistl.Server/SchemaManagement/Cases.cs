@@ -861,7 +861,7 @@ namespace Kistl.Server.SchemaManagement
             bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
             string srcIndexName = Construct.ListPositionColumnName(otherEnd);
 
-            if (!db.CheckColumnContainsUniqueValues(srcTblName, srcColName))
+            if (!db.CheckFKColumnContainsUniqueValues(srcTblName, srcColName))
             {
                 Log.ErrorFormat("Unable to change Relation '{0}' from 1:n to 1:1. Data is not unique", srcAssocName);
                 return;
@@ -1015,7 +1015,7 @@ namespace Kistl.Server.SchemaManagement
                 var srcColName = rel.GetRelationFkColumnName(RelationEndRole.B);
                 var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.A);
 
-                if (!db.CheckColumnContainsUniqueValues(srcTblName, srcColName))
+                if (!db.CheckFKColumnContainsUniqueValues(srcTblName, srcColName))
                 {
                     Log.ErrorFormat("Unable to change Relation '{0}' from n:m to 1:1. Data is not unique", destAssocName);
                     return;
@@ -1029,7 +1029,7 @@ namespace Kistl.Server.SchemaManagement
                 var srcColName = rel.GetRelationFkColumnName(RelationEndRole.A);
                 var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.B);
 
-                if (!db.CheckColumnContainsUniqueValues(srcTblName, srcColName))
+                if (!db.CheckFKColumnContainsUniqueValues(srcTblName, srcColName))
                 {
                     Log.ErrorFormat("Unable to change Relation '{0}' from n:m to 1:1. Data is not unique", destAssocName);
                     return;
@@ -1078,7 +1078,7 @@ namespace Kistl.Server.SchemaManagement
             var srcCol = saved.GetRelationFkColumnName(otherEnd.GetRole());
             var srcFKCol = saved.GetRelationFkColumnName(relEnd.GetRole());
 
-            if (!db.CheckColumnContainsUniqueValues(srcTbl, srcCol))
+            if (!db.CheckFKColumnContainsUniqueValues(srcTbl, srcCol))
             {
                 Log.ErrorFormat("Unable to change Relation '{0}' from n:m to 1:n. Data is not unique", destAssocName);
                 return;
@@ -1505,7 +1505,10 @@ namespace Kistl.Server.SchemaManagement
 
             CreateFKColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
-            db.CreateIndex(tblName, idxName, true, false, colName);
+            if (db.CheckIndexPossible(tblName, idxName, true, false, colName))
+                db.CreateIndex(tblName, idxName, true, false, colName);
+            else
+                Log.WarnFormat("Cannot create index: {0}", idxName);
 
             if (rel.NeedsPositionStorage(role))
             {
@@ -2045,14 +2048,10 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var columns = GetUCColNames(uc);
             Log.InfoFormat("New Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
-            try
-            {
+            if (db.CheckIndexPossible(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns))
                 db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
-            }
-            catch (Exception ex)
-            {
-                Log.ErrorFormat("Unable to create constraint, this may be a transient error while migrating: {0}", ex.Message);
-            }
+            else
+                Log.WarnFormat("Cannot create Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
         }
 
         internal static string[] GetUCColNames(IndexConstraint uc)
@@ -2128,7 +2127,7 @@ namespace Kistl.Server.SchemaManagement
             var procName = db.GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName());
             if (db.CheckProcedureExists(procName))
                 db.DropProcedure(procName);
-            
+
             var refreshProcNames = allACLTables
                 .Select(i => db.GetProcedureName(i.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(i)))
                 .ToList();

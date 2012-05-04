@@ -667,7 +667,7 @@ namespace Kistl.API.Server
 
         bool CheckTableContainsData(TableRef tblName);
         bool CheckColumnContainsNulls(TableRef tblName, string colName);
-        bool CheckColumnContainsUniqueValues(TableRef tblName, string colName);
+        bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName);
         bool CheckColumnContainsValues(TableRef tblName, string colName);
         long CountRows(TableRef tableRef);
 
@@ -686,6 +686,8 @@ namespace Kistl.API.Server
         void DropFKConstraint(TableRef tblName, string constraintName);
 
         bool CheckIndexExists(TableRef tblName, string idxName);
+        bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
+        void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void DropIndex(TableRef tblName, string idxName);
 
         #endregion
@@ -735,7 +737,6 @@ namespace Kistl.API.Server
         void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);
 
-        void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
 
         void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList);
         void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);

@@ -420,7 +420,7 @@ namespace Kistl.Server.SchemaManagement
 
         public abstract bool CheckColumnContainsNulls(TableRef tblName, string colName);
 
-        public abstract bool CheckColumnContainsUniqueValues(TableRef tblName, string colName);
+        public abstract bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName);
 
         public abstract bool CheckColumnContainsValues(TableRef tblName, string colName);
 
@@ -447,6 +447,19 @@ namespace Kistl.Server.SchemaManagement
         }
 
         public abstract bool CheckIndexExists(TableRef tblName, string idxName);
+
+        public virtual bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            if (!unique && !clustered) return true;
+
+            return 0 < (int)ExecuteScalar(
+                string.Format("SELECT COUNT(*) FROM (SELECT {0} FROM {1} GROUP BY {0} HAVING COUNT(*) > 1) data",
+                    String.Join(", ", columns.Select(c => QuoteIdentifier(c)).ToArray()),
+                    FormatSchemaName(tblName)
+                ));
+        }
+
+        public abstract void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         public abstract void DropIndex(TableRef tblName, string idxName);
 
         #endregion
@@ -590,8 +603,6 @@ namespace Kistl.Server.SchemaManagement
         public abstract void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
         public abstract void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         public abstract void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);
-
-        public abstract void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
 
         public abstract void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList);
         public abstract void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);

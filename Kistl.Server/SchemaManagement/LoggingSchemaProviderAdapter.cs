@@ -184,9 +184,9 @@ namespace Kistl.Server.SchemaManagement
             return _provider.CheckColumnContainsNulls(tblName, colName);
         }
 
-        public bool CheckColumnContainsUniqueValues(TableRef tblName, string colName)
+        public bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName)
         {
-            return _provider.CheckColumnContainsUniqueValues(tblName, colName);
+            return _provider.CheckFKColumnContainsUniqueValues(tblName, colName);
         }
 
         public bool CheckColumnContainsValues(TableRef tblName, string colName)
@@ -547,6 +547,11 @@ namespace Kistl.Server.SchemaManagement
             {
                 _provider.DropFunction(funcName);
             }
+        }
+
+        public bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            return _provider.CheckIndexPossible(tblName, idxName, unique, clustered, columns);
         }
     }
 }

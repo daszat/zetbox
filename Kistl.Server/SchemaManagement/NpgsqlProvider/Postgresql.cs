@@ -595,7 +595,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier(colName)));
         }
 
-        public override bool CheckColumnContainsUniqueValues(TableRef tbl, string colName)
+        public override bool CheckFKColumnContainsUniqueValues(TableRef tbl, string colName)
         {
             return (bool)ExecuteScalar(String.Format(
                 @"SELECT COUNT(*) = 0 FROM (
@@ -695,6 +695,23 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                     { "@table", tblName.Name },
                     { "@index", idxName },
                 });
+        }
+
+        public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            ExecuteNonQuery(String.Format(
+                "CREATE {0}INDEX {1} ON {2} ({3})",
+                unique ? "UNIQUE " : String.Empty,
+                QuoteIdentifier(idxName),
+                FormatSchemaName(tblName),
+                String.Join(", ", columns.Select(c => QuoteIdentifier(c)).ToArray())));
+
+            if (clustered)
+            {
+                ExecuteNonQuery(String.Format("CLUSTER {0} USING {1}",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(idxName)));
+            }
         }
 
         public override void DropIndex(TableRef tblName, string idxName)
@@ -982,23 +999,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier(colName),    // 3
                 QuoteIdentifier(srcFkColName),  // 4
                 QuoteIdentifier("ID")));     // 5
-        }
-
-        public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
-        {
-            ExecuteNonQuery(String.Format(
-                "CREATE {0}INDEX {1} ON {2} ({3})",
-                unique ? "UNIQUE " : String.Empty,
-                QuoteIdentifier(idxName),
-                FormatSchemaName(tblName),
-                String.Join(", ", columns.Select(c => QuoteIdentifier(c)).ToArray())));
-
-            if (clustered)
-            {
-                ExecuteNonQuery(String.Format("CLUSTER {0} USING {1}",
-                    FormatSchemaName(tblName),
-                    QuoteIdentifier(idxName)));
-            }
         }
 
         public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)

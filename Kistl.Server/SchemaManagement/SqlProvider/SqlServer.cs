@@ -613,7 +613,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 QuoteIdentifier(colName))) > 0;
         }
 
-        public override bool CheckColumnContainsUniqueValues(TableRef tbl, string colName)
+        public override bool CheckFKColumnContainsUniqueValues(TableRef tbl, string colName)
         {
             return (int)ExecuteScalar(String.Format(
                 @"SELECT COUNT(*) FROM (
@@ -698,6 +698,42 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     { "@tbl", FormatSchemaName(tblName) },
                     { "@index", idxName },
                 }) > 0;
+        }
+
+        public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            if (columns == null) throw new ArgumentNullException("columns");
+            if (columns.Length == 0) throw new ArgumentOutOfRangeException("columns");
+
+            string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
+
+            Log.DebugFormat("Creating index {0}.[{1}] ({2})", FormatSchemaName(tblName), idxName, colSpec);
+
+            string appendIndexFilter = string.Empty;
+            if (unique && !clustered && columns.Length == 1)
+            {
+                bool isNullable = GetIsColumnNullable(tblName, columns.First());
+                int dbVer = GetSQLServerVersion();
+                // Special checks
+                if (isNullable && dbVer < 10)
+                {
+                    Log.WarnFormat("Warning: Unable to create unique index on nullable column [{0}].[{1}]. Creating non unique index.", tblName, columns);
+                    unique = false;
+                }
+                else if (isNullable && dbVer >= 10)
+                {
+                    appendIndexFilter = string.Format(" WHERE [{0}] IS NOT NULL", columns.First());
+                }
+            }
+
+            ExecuteNonQuery(string.Format("CREATE {0} {1} INDEX {2} ON [{3}].[{4}] ({5}){6}",
+                unique ? "UNIQUE" : string.Empty,
+                clustered ? "CLUSTERED" : string.Empty,
+                idxName,
+                tblName.Schema,
+                tblName.Name,
+                colSpec,
+                appendIndexFilter));
         }
 
         public override void DropIndex(TableRef tblName, string idxName)
@@ -879,42 +915,6 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             return int.TryParse(verStr.Split('.').First(), out result)
                 ? result
                 : -1;
-        }
-
-        public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
-        {
-            if (columns == null) throw new ArgumentNullException("columns");
-            if (columns.Length == 0) throw new ArgumentOutOfRangeException("columns");
-
-            string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
-
-            Log.DebugFormat("Creating index {0}.[{1}] ({2})", FormatSchemaName(tblName), idxName, colSpec);
-
-            string appendIndexFilter = string.Empty;
-            if (unique && !clustered && columns.Length == 1)
-            {
-                bool isNullable = GetIsColumnNullable(tblName, columns.First());
-                int dbVer = GetSQLServerVersion();
-                // Special checks
-                if (isNullable && dbVer < 10)
-                {
-                    Log.WarnFormat("Warning: Unable to create unique index on nullable column [{0}].[{1}]. Creating non unique index.", tblName, columns);
-                    unique = false;
-                }
-                else if (isNullable && dbVer >= 10)
-                {
-                    appendIndexFilter = string.Format(" WHERE [{0}] IS NOT NULL", columns.First());
-                }
-            }
-
-            ExecuteNonQuery(string.Format("CREATE {0} {1} INDEX {2} ON [{3}].[{4}] ({5}){6}",
-                unique ? "UNIQUE" : string.Empty,
-                clustered ? "CLUSTERED" : string.Empty,
-                idxName,
-                tblName.Schema,
-                tblName.Name,
-                colSpec,
-                appendIndexFilter));
         }
 
         public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
