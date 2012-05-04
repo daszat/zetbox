@@ -66,7 +66,8 @@ namespace Kistl.Server.SchemaManagement
 
             var tbl = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             Log.InfoFormat("Drop Table: {0}", tbl);
-            db.DropTable(tbl);
+            if (db.CheckTableExists(tbl))
+                db.DropTable(tbl);
         }
         #endregion
 
@@ -77,7 +78,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewObjectClass(ObjectClass objClass)
         {
-            var tblName= db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             Log.InfoFormat("New Table: {0}", tblName);
             if (!db.CheckTableExists(tblName))
                 db.CreateTable(tblName, objClass.BaseObjectClass == null);
@@ -159,7 +160,8 @@ namespace Kistl.Server.SchemaManagement
                     }
                 }
 
-                db.DropColumn(srcTblName, srcColName);
+                if (db.CheckColumnExists(srcTblName, srcColName))
+                    db.DropColumn(srcTblName, srcColName);
             }
             else if (movedDown)
             {
@@ -173,7 +175,8 @@ namespace Kistl.Server.SchemaManagement
                     db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), defConstr);
                 }
 
-                db.DropColumn(srcTblName, srcColName);
+                if (db.CheckColumnExists(srcTblName, srcColName))
+                    db.DropColumn(srcTblName, srcColName);
             }
             else
             {
@@ -488,7 +491,8 @@ namespace Kistl.Server.SchemaManagement
                 return;
             }
 
-            db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
+            if (db.CheckColumnExists(tblName, Construct.ListPositionColumnName(otherEnd)))
+                db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
         }
         #endregion
 
@@ -604,14 +608,16 @@ namespace Kistl.Server.SchemaManagement
                 return;
             }
 
-            db.DropFKConstraint(tblName, assocName);
+            if (db.CheckFKConstraintExists(tblName, assocName))
+                db.DropFKConstraint(tblName, assocName);
 
             string colName = Construct.ForeignKeyColumnName(otherEnd);
-            db.DropColumn(tblName, colName);
-            if (isIndexed)
-            {
+
+            if (db.CheckColumnExists(tblName, colName))
+                db.DropColumn(tblName, colName);
+
+            if (isIndexed && db.CheckColumnExists(tblName, Construct.ListPositionColumnName(otherEnd)))
                 db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
-            }
         }
         #endregion
 
@@ -730,10 +736,12 @@ namespace Kistl.Server.SchemaManagement
                 srcColName = Construct.ForeignKeyColumnName(saved.B);
                 var srcAssocName = saved.GetRelationAssociationName(RelationEndRole.A);
 
-                db.DropFKConstraint(srcTblRef, srcAssocName);
+                if (db.CheckFKConstraintExists(srcTblRef, srcAssocName))
+                    db.DropFKConstraint(srcTblRef, srcAssocName);
                 if (srcTblRef != destTblRef || srcColName != destColName)
                 {
-                    db.DropColumn(srcTblRef, srcColName);
+                    if (db.CheckColumnExists(srcTblRef, srcColName))
+                        db.DropColumn(srcTblRef, srcColName);
                 }
             }
             if (saved.HasStorage(RelationEndRole.B))
@@ -742,10 +750,12 @@ namespace Kistl.Server.SchemaManagement
                 srcColName = Construct.ForeignKeyColumnName(saved.A);
                 var srcAssocName = saved.GetRelationAssociationName(RelationEndRole.B);
 
-                db.DropFKConstraint(srcTblRef, srcAssocName);
+                if (db.CheckFKConstraintExists(srcTblRef, srcAssocName))
+                    db.DropFKConstraint(srcTblRef, srcAssocName);
                 if (srcTblRef != destTblRef || srcColName != destColName)
                 {
-                    db.DropColumn(srcTblRef, srcColName);
+                    if (db.CheckColumnExists(srcTblRef, srcColName))
+                        db.DropColumn(srcTblRef, srcColName);
                 }
             }
         }
@@ -792,9 +802,11 @@ namespace Kistl.Server.SchemaManagement
 
             // Drop relations first as 1:1 and n:m relations share the same names
             var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
-            if (db.CheckFKConstraintExists(db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), srcAssocA)) db.DropFKConstraint(db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), srcAssocA);
+            if (db.CheckFKConstraintExists(db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), srcAssocA))
+                db.DropFKConstraint(db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), srcAssocA);
             var srcAssocB = saved.GetRelationAssociationName(RelationEndRole.B);
-            if (db.CheckFKConstraintExists(db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), srcAssocB)) db.DropFKConstraint(db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), srcAssocB);
+            if (db.CheckFKConstraintExists(db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), srcAssocB))
+                db.DropFKConstraint(db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), srcAssocB);
 
             DoNew_N_M_Relation(rel);
             db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
@@ -802,11 +814,13 @@ namespace Kistl.Server.SchemaManagement
             // Drop columns
             if (saved.Storage == StorageType.MergeIntoA || saved.Storage == StorageType.Replicate)
             {
-                db.DropColumn(db.GetTableName(saved.A.Type.Module.SchemaName, saved.A.Type.TableName), Construct.ForeignKeyColumnName(saved.B));
+                if (db.CheckColumnExists(db.GetTableName(saved.A.Type.Module.SchemaName, saved.A.Type.TableName), Construct.ForeignKeyColumnName(saved.B)))
+                    db.DropColumn(db.GetTableName(saved.A.Type.Module.SchemaName, saved.A.Type.TableName), Construct.ForeignKeyColumnName(saved.B));
             }
             if (saved.Storage == StorageType.MergeIntoB || saved.Storage == StorageType.Replicate)
             {
-                db.DropColumn(db.GetTableName(saved.B.Type.Module.SchemaName, saved.B.Type.TableName), Construct.ForeignKeyColumnName(saved.A));
+                if (db.CheckColumnExists(db.GetTableName(saved.B.Type.Module.SchemaName, saved.B.Type.TableName), Construct.ForeignKeyColumnName(saved.A)))
+                    db.DropColumn(db.GetTableName(saved.B.Type.Module.SchemaName, saved.B.Type.TableName), Construct.ForeignKeyColumnName(saved.A));
             }
         }
         #endregion
@@ -853,11 +867,10 @@ namespace Kistl.Server.SchemaManagement
                 return;
             }
 
-            db.DropFKConstraint(srcTblName, srcAssocName);
-            if (srcIsIndexed)
-            {
+            if (db.CheckFKConstraintExists(srcTblName, srcAssocName))
+                db.DropFKConstraint(srcTblName, srcAssocName);
+            if (srcIsIndexed && db.CheckColumnExists(srcTblName, srcIndexName))
                 db.DropColumn(srcTblName, srcIndexName);
-            }
             if (db.CheckIndexExists(srcTblName, Construct.IndexName(srcTblName.Name, srcColName)))
                 db.DropIndex(srcTblName, Construct.IndexName(srcTblName.Name, srcColName));
 
@@ -920,7 +933,8 @@ namespace Kistl.Server.SchemaManagement
                 srcColWasReused = true;
             }
 
-            if (!srcColWasReused) db.DropColumn(srcTblName, srcColName);
+            if (!srcColWasReused && db.CheckColumnExists(srcTblName, srcColName))
+                db.DropColumn(srcTblName, srcColName);
         }
         #endregion
 
@@ -986,9 +1000,11 @@ namespace Kistl.Server.SchemaManagement
 
             // Drop relations first as 1:1 and n:m relations share the same names
             var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
-            db.DropFKConstraint(srcTblName, srcAssocA);
+            if (db.CheckFKConstraintExists(srcTblName, srcAssocA))
+                db.DropFKConstraint(srcTblName, srcAssocA);
             var srcAssocB = saved.GetRelationAssociationName(RelationEndRole.B);
-            db.DropFKConstraint(srcTblName, srcAssocB);
+            if (db.CheckFKConstraintExists(srcTblName, srcAssocB))
+                db.DropFKConstraint(srcTblName, srcAssocB);
 
             DoNew_1_1_Relation(rel);
 
@@ -1021,7 +1037,8 @@ namespace Kistl.Server.SchemaManagement
                 db.CopyFKs(srcTblName, srcColName, destTblName, destColName, srcFKColName);
             }
 
-            db.DropTable(srcTblName);
+            if (db.CheckTableExists(srcTblName))
+                db.DropTable(srcTblName);
         }
         #endregion
 
@@ -1101,8 +1118,10 @@ namespace Kistl.Server.SchemaManagement
                         string assocName = rel.GetAssociationName();
                         Log.InfoFormat("Rewiring N:M Relation: {0}", assocName);
 
-                        db.DropFKConstraint(oldTblName, saved.GetRelationAssociationName(RelationEndRole.A));
-                        db.DropFKConstraint(oldTblName, saved.GetRelationAssociationName(RelationEndRole.B));
+                        if (db.CheckFKConstraintExists(oldTblName, saved.GetRelationAssociationName(RelationEndRole.A)))
+                            db.DropFKConstraint(oldTblName, saved.GetRelationAssociationName(RelationEndRole.A));
+                        if (db.CheckFKConstraintExists(oldTblName, saved.GetRelationAssociationName(RelationEndRole.B)))
+                            db.DropFKConstraint(oldTblName, saved.GetRelationAssociationName(RelationEndRole.B));
 
                         // renaming is handled by DoChangeRelationName
                         //db.RenameTable(oldTblName, newTblName);
@@ -1347,7 +1366,8 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var fkName = rel.GetRelationFkColumnName(role);
 
-            db.DropColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix);
+            if (db.CheckColumnExists(tblName, fkName + Kistl.API.Helper.PositionSuffix))
+                db.DropColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix);
         }
         #endregion
 
@@ -1363,10 +1383,13 @@ namespace Kistl.Server.SchemaManagement
 
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
 
-            db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.A));
-            db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.B));
+            if (db.CheckFKConstraintExists(tblName, rel.GetRelationAssociationName(RelationEndRole.A)))
+                db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.A));
+            if (db.CheckFKConstraintExists(tblName, rel.GetRelationAssociationName(RelationEndRole.B)))
+                db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.B));
 
-            db.DropTable(tblName);
+            if (db.CheckTableExists(tblName))
+                db.DropTable(tblName);
         }
         #endregion
 
@@ -1442,13 +1465,13 @@ namespace Kistl.Server.SchemaManagement
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
 
-            db.DropFKConstraint(tblName, assocName);
-            db.DropColumn(tblName, colName);
+            if (db.CheckFKConstraintExists(tblName, assocName))
+                db.DropFKConstraint(tblName, assocName);
+            if (db.CheckColumnExists(tblName, colName))
+                db.DropColumn(tblName, colName);
 
-            if (rel.NeedsPositionStorage(role))
-            {
+            if (rel.NeedsPositionStorage(role) && db.CheckColumnExists(tblName, Construct.ListPositionColumnName(otherEnd)))
                 db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
-            }
         }
         #endregion
 
@@ -1699,7 +1722,8 @@ namespace Kistl.Server.SchemaManagement
 
             Log.InfoFormat("Remove ObjectClass Inheritance: {0} -> {1}: {2}", savedObjClass.Name, savedObjClass.BaseObjectClass.Name, assocName);
 
-            db.DropFKConstraint(tblName, assocName);
+            if (db.CheckFKConstraintExists(tblName, assocName))
+                db.DropFKConstraint(tblName, assocName);
         }
         #endregion
 
@@ -1778,7 +1802,8 @@ namespace Kistl.Server.SchemaManagement
         {
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(tblName, updateRightsTriggerName);
+            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                db.DropTrigger(tblName, updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
             tblList.Add(new RightsTrigger()
@@ -1829,7 +1854,8 @@ namespace Kistl.Server.SchemaManagement
         {
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(tblName, updateRightsTriggerName);
+            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                db.DropTrigger(tblName, updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
 
@@ -1912,7 +1938,8 @@ namespace Kistl.Server.SchemaManagement
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
-            db.DropView(rightsViewUnmaterializedName);
+            if (db.CheckViewExists(rightsViewUnmaterializedName))
+                db.DropView(rightsViewUnmaterializedName);
             DoCreateRightsViewUnmaterialized(objClass);
             db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
         }
@@ -1935,10 +1962,17 @@ namespace Kistl.Server.SchemaManagement
 
             Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.Name);
 
-            db.DropTrigger(tblName, updateRightsTriggerName);
-            db.DropProcedure(db.GetProcedureName(objClass.Module.SchemaName, refreshRightsOnProcedureName));
-            db.DropView(rightsViewUnmaterializedName);
-            db.DropTable(tblRightsName);
+            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                db.DropTrigger(tblName, updateRightsTriggerName);
+
+            if (db.CheckProcedureExists(db.GetProcedureName(objClass.Module.SchemaName, refreshRightsOnProcedureName)))
+                db.DropProcedure(db.GetProcedureName(objClass.Module.SchemaName, refreshRightsOnProcedureName));
+
+            if (db.CheckViewExists(rightsViewUnmaterializedName))
+                db.DropView(rightsViewUnmaterializedName);
+
+            if (db.CheckTableExists(tblRightsName))
+                db.DropTable(tblRightsName);
         }
         #endregion
 
@@ -1953,7 +1987,8 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var colName = Construct.NestedColumnName(prop, prefix);
             Log.InfoFormat("Drop Column: {0}.{1}", tblName, colName);
-            db.DropColumn(tblName, colName);
+            if (db.CheckColumnExists(tblName, colName))
+                db.DropColumn(tblName, colName);
         }
         #endregion
 
@@ -2041,7 +2076,8 @@ namespace Kistl.Server.SchemaManagement
             if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
             {
                 Log.InfoFormat("Drop Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
-                db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
+                if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
+                    db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
             }
         }
         #endregion
@@ -2091,9 +2127,8 @@ namespace Kistl.Server.SchemaManagement
         {
             var procName = db.GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName());
             if (db.CheckProcedureExists(procName))
-            {
                 db.DropProcedure(procName);
-            }
+            
             var refreshProcNames = allACLTables
                 .Select(i => db.GetProcedureName(i.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(i)))
                 .ToList();
