@@ -343,20 +343,17 @@ namespace Kistl.API
             }
         }
 
-        public static void FromStream(ICompoundObject val, XmlReader xml, string name, string ns)
+        public static void FromStream(ICompoundObject val, XmlReader xml)
         {
             if (xml == null) { throw new ArgumentNullException("xml"); }
             if (val == null) { throw new ArgumentNullException("val"); }
 
-            if (xml.LocalName == name && xml.NamespaceURI == ns)
+            using (var entries = xml.ReadSubtree())
             {
-                using (var entries = xml.ReadSubtree())
+                while (entries.Read())
                 {
-                    while (entries.Read())
-                    {
-                        // compound objects do not have sub-lists
-                        val.FromStream(xml);
-                    }
+                    // compound objects do not have sub-lists
+                    val.FromStream(xml);
                 }
             }
         }
