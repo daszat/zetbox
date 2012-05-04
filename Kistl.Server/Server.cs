@@ -111,9 +111,11 @@ namespace Kistl.Server
                 var files = Directory.GetFiles("Modules", "*.xml", SearchOption.TopDirectoryOnly);
                 if (files == null || files.Length == 0) throw new InvalidOperationException("No files found to deploy");
                 Logging.Server.InfoFormat("Found {0} files to deploy", files.Length);
+                // TODO: remove this as it is only a temporary workaround for introducing calculated properties
+                CheckSchema(true);
                 UpdateSchema(files);
                 Deploy(files);
-                CheckSchema(true);
+                CheckSchema(false);
             }
         }
 
