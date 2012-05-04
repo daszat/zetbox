@@ -34,7 +34,7 @@ namespace Kistl.API.Tests.BinarySerializers
         private void ResetStream()
         {
             // Use this to dump out the transferred bytes
-            //Console.WriteLine("new byte[] { " + string.Join(", ", stream.ToArray().Select(b => b.ToString()).ToArray()) + " }");
+            Console.WriteLine("new byte[] { " + string.Join(", ", stream.ToArray().Select(b => b.ToString()).ToArray()) + " }");
 
             stream.Seek(0, SeekOrigin.Begin);
         }
