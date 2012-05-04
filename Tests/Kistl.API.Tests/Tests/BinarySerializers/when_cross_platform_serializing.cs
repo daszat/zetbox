@@ -5,6 +5,7 @@ namespace Kistl.API.Tests.BinarySerializers
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
     using Autofac;
     using NUnit.Framework;
@@ -32,7 +33,8 @@ namespace Kistl.API.Tests.BinarySerializers
 
         private void ResetStream()
         {
-            Console.WriteLine("new byte[] { " + string.Join(", ", stream.ToArray().Select(b => b.ToString()).ToArray()) + " }");
+            // Use this to dump out the transferred bytes
+            //Console.WriteLine("new byte[] { " + string.Join(", ", stream.ToArray().Select(b => b.ToString()).ToArray()) + " }");
 
             stream.Seek(0, SeekOrigin.Begin);
         }
@@ -86,8 +88,6 @@ namespace Kistl.API.Tests.BinarySerializers
             writer.Write(dblTest);
             ResetStream();
             Assert.That(stream.ToArray(), Is.EqualTo(dblExpected));
-            var result = reader.ReadDouble();
-            Assert.That(result, Is.EqualTo(dblTest));
         }
 
         [Test]
@@ -97,8 +97,6 @@ namespace Kistl.API.Tests.BinarySerializers
             writer.Write(st);
             ResetStream();
             Assert.That(stream.ToArray(), Is.EqualTo(serializableTypeExpected));
-            var result = reader.ReadSerializableType();
-            Assert.That(result, Is.EqualTo(st));
         }
 
         [Test]
@@ -108,8 +106,62 @@ namespace Kistl.API.Tests.BinarySerializers
             writer.Write(st);
             ResetStream();
             Assert.That(stream.ToArray(), Is.EqualTo(serializableTypeIListStringExpected));
+        }
+
+        [Test]
+        public void should_read_double()
+        {
+            writer.WriteRaw(dblExpected);
+            ResetStream();
+            Assert.That(stream.ToArray(), Is.EqualTo(dblExpected));
+            var result = reader.ReadDouble();
+            Assert.That(result, Is.EqualTo(dblTest));
+        }
+
+        [Test]
+        public void should_read_SerializableType_string()
+        {
+            writer.WriteRaw(serializableTypeExpected);
+            ResetStream();
+            Assert.That(stream.ToArray(), Is.EqualTo(serializableTypeExpected));
+
+            var st = iftFactory(typeof(string)).ToSerializableType();
             var result = reader.ReadSerializableType();
             Assert.That(result, Is.EqualTo(st));
+        }
+
+        [Test]
+        public void should_read_SerializableType_IListString()
+        {
+            writer.WriteRaw(serializableTypeIListStringExpected);
+            ResetStream();
+            Assert.That(stream.ToArray(), Is.EqualTo(serializableTypeIListStringExpected));
+
+            var st = iftFactory(typeof(IList<string>)).ToSerializableType();
+            var result = reader.ReadSerializableType();
+            Assert.That(result, Is.EqualTo(st));
+        }
+
+        private readonly byte[] binFormatterExpected = new byte[] { 0, 1, 0, 0, 0, 255, 255, 255, 255, 1, 0, 0, 0, 0, 0, 0, 0, 17, 1, 0, 0, 0, 2, 0, 0, 0, 6, 2, 0, 0, 0, 1, 97, 6, 3, 0, 0, 0, 1, 98, 11 };
+
+        [Test]
+        public void basic_BinaryFormatter_write()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(stream, new string[] { "a", "b" });
+            ResetStream();
+            Assert.That(stream.ToArray(), Is.EqualTo(binFormatterExpected));
+        }
+
+        [Test]
+        public void basic_BinaryFormatter_read()
+        {
+            stream.Write(binFormatterExpected, 0, binFormatterExpected.Length);
+            ResetStream();
+
+            BinaryFormatter bf = new BinaryFormatter();
+            var result = bf.Deserialize(stream);
+            Assert.That(result, Is.EqualTo(new string[] { "a", "b" }));
         }
     }
 }
