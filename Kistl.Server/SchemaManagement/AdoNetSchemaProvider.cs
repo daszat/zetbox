@@ -224,8 +224,14 @@ namespace Kistl.Server.SchemaManagement
         {
             if (tx != null)
             {
-                tx.Commit();
-                tx = null;
+                try
+                {
+                    tx.Commit();
+                }
+                finally
+                {
+                    tx = null;
+                }
             }
         }
 
@@ -233,8 +239,14 @@ namespace Kistl.Server.SchemaManagement
         {
             if (tx != null)
             {
-                tx.Rollback();
-                tx = null;
+                try
+                {
+                    tx.Rollback();
+                }
+                finally
+                {
+                    tx = null;
+                }
             }
         }
 
@@ -244,16 +256,28 @@ namespace Kistl.Server.SchemaManagement
         {
             if (tx != null)
             {
-                tx.Rollback();
-                tx.Dispose();
-                tx = null;
+                try
+                {
+                    tx.Rollback();
+                    tx.Dispose();
+                }
+                finally
+                {
+                    tx = null;
+                }
             }
 
             if (db != null)
             {
-                db.Close();
-                db.Dispose();
-                db = null;
+                try
+                {
+                    db.Close();
+                    db.Dispose();
+                }
+                finally
+                {
+                    db = null;
+                }
             }
         }
 
