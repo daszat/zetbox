@@ -568,6 +568,8 @@ namespace Kistl.Server.SchemaManagement
                 else
                 {
                     Log.WarnFormat("Table '{0}' is missing", objClass.TableName);
+                    if (repair)
+                        Case.DoNewObjectClass(objClass);
                 }
             }
         }
