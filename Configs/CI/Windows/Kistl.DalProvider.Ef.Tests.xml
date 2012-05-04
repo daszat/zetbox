@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.DalProvider.NHibernate's Test PostgreSQL Configuration</ConfigName>
+  <ConfigName>Kistl.DalProvider.EF's Test PostgreSQL Configuration</ConfigName>
   <Server StartServer="true">
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
+      <Module>Kistl.Tests.Utilities.MsSql.UtilityModule, Kistl.Tests.Utilities.MsSql</Module>
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
     </Modules>
