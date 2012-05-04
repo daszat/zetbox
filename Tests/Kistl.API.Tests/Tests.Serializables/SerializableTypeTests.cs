@@ -1,16 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API.Mocks;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using Autofac;
 
 namespace Kistl.API.Tests.Serializables
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.Mocks;
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
+
     [TestFixture]
     public class SerializableTypeTests : AbstractApiTestFixture
     {
@@ -51,6 +50,5 @@ namespace Kistl.API.Tests.Serializables
             t.TypeName = "Invalid Test Class Name";
             t.GetSystemType();
         }
-
     }
 }

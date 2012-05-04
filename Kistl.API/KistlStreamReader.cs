@@ -401,7 +401,10 @@ namespace Kistl.API
         public Guid ReadGuid()
         {
             TraceCurrentPos();
-            var result = new Guid(_source.ReadBytes(16));
+            var data = _source.ReadBytes(16);
+            if (data.Length != 16)
+                Log.Error("Failed reading 16 bytes for a GUID");
+            var result = new Guid(data);
             SerializerTrace("read Guid {0}", result);
             return result;
         }
@@ -584,8 +587,7 @@ namespace Kistl.API
 
             long beginPos = _source.BaseStream.CanSeek ? _source.BaseStream.Position : -1;
 
-            Guid guid;
-            Read(out guid);
+            Guid guid = ReadGuid();
             if (guid != Guid.Empty)
             {
                 result = _typeMap.Map[guid];
