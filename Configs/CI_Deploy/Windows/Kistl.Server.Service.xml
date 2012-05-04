@@ -32,6 +32,7 @@
     <string>Server\Core</string>
     <string>Server\EF</string>
     <string>Server\EF.Generated</string>
+    <string>Server\EF.Fallback</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
   </AssemblySearchPaths>
