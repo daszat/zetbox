@@ -125,6 +125,40 @@ namespace Kistl.API
 
         #endregion
 
+        #region byte
+
+        /// <summary>
+        /// Serialize a byte
+        /// </summary>
+        /// <param name="val">Value to serialize</param>
+        public void Write(byte val)
+        {
+            TraceCurrentPos();
+            SerializerTrace("Writing byte {0} (1 byte)", val);
+            _dest.Write(val);
+        }
+
+        /// <summary>
+        /// Serialize a nullable byte. Format is: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Value to serialize</param>
+        public void Write(byte? val)
+        {
+            TraceCurrentPos();
+            SerializerTrace("Writing byte? {0}", val);
+            if (val.HasValue)
+            {
+                _dest.Write(true);
+                _dest.Write(val.Value);
+            }
+            else
+            {
+                _dest.Write(false);
+            }
+        }
+
+        #endregion
+
         #region DateTime
 
         /// <summary>
