@@ -402,15 +402,14 @@ namespace Kistl.API
             else
             {
                 Write(Guid.Empty);
-
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(_dest.BaseStream, type);
+                Write(type.TypeName);
+                Write(type.AssemblyQualifiedName);
+                Write(type.GenericTypeParameter);
             }
 
             long endPos = _dest.BaseStream.CanSeek ? _dest.BaseStream.Position : -1;
             SerializerTrace("({0} bytes)", endPos - beginPos);
         }
-
         public void Write(SerializableType[] types)
         {
             TraceArray(types, Write);

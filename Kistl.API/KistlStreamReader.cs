@@ -18,7 +18,6 @@ namespace Kistl.API
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Serialization");
 
         private readonly TypeMap _typeMap;
-
         private readonly BinaryReader _source;
 
         [Conditional("DEBUG_SERIALIZATION")]
@@ -594,8 +593,11 @@ namespace Kistl.API
             }
             else
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                result = (SerializableType)bf.Deserialize(_source.BaseStream);
+                var typeName = ReadString();
+                var assemblyQualifiedName = ReadString();
+                var genericTypeParameter = ReadSerializableTypeArray();
+
+                result = new SerializableType(typeName, assemblyQualifiedName, genericTypeParameter);
             }
 
             long endPos = _source.BaseStream.CanSeek ? _source.BaseStream.Position : -1;

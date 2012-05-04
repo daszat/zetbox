@@ -51,6 +51,13 @@ namespace Kistl.API
                 throw new NotSupportedException("AssemblyQualifiedName must not be null or empty - maybe this Type is a Generic Parameter or something similarily strange.");
         }
 
+        internal SerializableType(string typeName, string assemblyQualifiedName, SerializableType[] genericTypeParameter)
+        {
+            TypeName = typeName;
+            AssemblyQualifiedName = assemblyQualifiedName;
+            GenericTypeParameter = genericTypeParameter;
+        }
+
         /// <summary>
         /// Full Type Name
         /// </summary>
