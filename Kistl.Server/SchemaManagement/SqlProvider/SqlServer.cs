@@ -700,6 +700,17 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 }) > 0;
         }
 
+        public override bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            if (!unique && !clustered) return true;
+
+            return (int)ExecuteScalar(
+                string.Format("SELECT COUNT(*) FROM (SELECT {0} FROM {1} GROUP BY {0} HAVING COUNT(*) > 1) data",
+                    String.Join(", ", columns.Select(c => QuoteIdentifier(c)).ToArray()),
+                    FormatSchemaName(tblName)
+                )) == 0;
+        }
+
         public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             if (columns == null) throw new ArgumentNullException("columns");

@@ -448,16 +448,7 @@ namespace Kistl.Server.SchemaManagement
 
         public abstract bool CheckIndexExists(TableRef tblName, string idxName);
 
-        public virtual bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
-        {
-            if (!unique && !clustered) return true;
-
-            return 0 < (int)ExecuteScalar(
-                string.Format("SELECT COUNT(*) FROM (SELECT {0} FROM {1} GROUP BY {0} HAVING COUNT(*) > 1) data",
-                    String.Join(", ", columns.Select(c => QuoteIdentifier(c)).ToArray()),
-                    FormatSchemaName(tblName)
-                ));
-        }
+        public abstract bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
 
         public abstract void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         public abstract void DropIndex(TableRef tblName, string idxName);
