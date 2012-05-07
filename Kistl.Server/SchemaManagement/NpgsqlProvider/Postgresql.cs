@@ -683,7 +683,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             if (!unique && !clustered) return true;
 
             return (bool)ExecuteScalar(
-                string.Format("SELECT COUNT(*) == 0 FROM (SELECT {0} FROM {1} GROUP BY {0} HAVING COUNT(*) > 1) data",
+                string.Format("SELECT COUNT(*) = 0 FROM (SELECT {0} FROM {1} GROUP BY {0} HAVING COUNT(*) > 1) data",
                     String.Join(", ", columns.Select(c => QuoteIdentifier(c)).ToArray()),
                     FormatSchemaName(tblName)
                 ));
