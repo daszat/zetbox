@@ -344,7 +344,8 @@ namespace Kistl.Server
                     var ctx = subContainer.Resolve<IKistlServerContext>();
                     if (properties == null)
                     {
-                        properties = propertyCtx.GetQuery<Property>().ToList().Where(p => p.IsCalculated()).ToArray();
+                        properties = propertyCtx.GetQuery<ValueTypeProperty>().Where(p => p.IsCalculated).ToArray();
+                        // TODO: .Concat(propertyCtx.GetQuery<CompoundObjectProperty>().Where(p => p.IsCalculated))
                     }
                     int objCounter = 0;
                     foreach (var clsGroup in properties.GroupBy(p => p.ObjectClass).OrderBy(g => g.Key.Name).ThenBy(g => g.Key.ID))

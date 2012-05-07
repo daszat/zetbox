@@ -231,7 +231,10 @@ namespace Kistl.API.Server
                     continue;
                 }
 
-                var obj = ctx.GetQuery<App.Base.Property>().FirstOrDefault(p => p.Name == parts[2] && p.ObjectClass.Name == parts[1] && p.ObjectClass.Module.Name == parts[0]);
+                var propName = parts[2];
+                var clsName = parts[1];
+                var moduleName = parts[0];
+                var obj = ctx.GetQuery<App.Base.Property>().FirstOrDefault(p => p.Name == propName && p.ObjectClass.Name == clsName && p.ObjectClass.Module.Name == moduleName);
                 if (obj == null)
                 {
                     Logging.Log.ErrorFormat("Property '{0}' was not found in ObjectClass '{1}' in Module '{2}'", parts[2], parts[1], parts[0]);

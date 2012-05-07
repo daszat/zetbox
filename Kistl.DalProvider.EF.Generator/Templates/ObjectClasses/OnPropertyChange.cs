@@ -18,13 +18,27 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
         protected override void ApplyNotifyPropertyChanging(Property prop)
         {
             base.ApplyNotifyPropertyChanging(prop);
-            this.WriteLine("                    ReportEfPropertyChanging(\"{0}\");", Properties.EfScalarPropHelper.GetEfPropName(prop));
+            if (prop is CalculatedObjectReferenceProperty)
+            {
+                // Not implemented yet, maybe in a far, far future in a far, far away galaxy
+            }
+            else
+            {
+                this.WriteLine("                    ReportEfPropertyChanging(\"{0}\");", Properties.EfScalarPropHelper.GetEfPropName(prop));
+            }
         }
 
         protected override void ApplyNotifyPropertyChanged(Property prop)
         {
             this.WriteLine("                    ReportEfPropertyChanged(\"{0}\");", Properties.EfScalarPropHelper.GetEfPropName(prop));
-            base.ApplyNotifyPropertyChanged(prop);
+            if (prop is CalculatedObjectReferenceProperty)
+            {
+                // Not implemented yet, maybe in a far, far future in a far, far away galaxy
+            }
+            else
+            {
+                base.ApplyNotifyPropertyChanged(prop);
+            }
         }
     }
 }
