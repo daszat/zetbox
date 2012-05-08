@@ -249,9 +249,18 @@ namespace Kistl.DalProvider.Ef
             {
                 CheckDisposed();
                 // Must use OfType -> ObjectStateManager also contains RelationshipEntities
-                return _ctx.ObjectStateManager
+                var result = _ctx.ObjectStateManager
                     .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted | EntityState.Unchanged)
-                    .Select(e => e.Entity).OfType<IPersistenceObject>();
+                    .Select(e => e.Entity)
+                    .OfType<IPersistenceObject>()
+                    .ToList();
+                foreach (var obj in result)
+                {
+                    // Attach entities if the where loaded by EF
+                    if (obj.Context == null) 
+                        obj.AttachToContext(this);
+                }
+                return result;
             }
         }
 
