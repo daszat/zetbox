@@ -15,6 +15,12 @@ namespace Kistl.App.Base
     public static class SequenceActions
     {
         [Invocation]
+        public static void ToString(Sequence obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Name;
+        }
+
+        [Invocation]
         public static void GetName(Sequence obj, MethodReturnEventArgs<string> e)
         {
             if (!string.IsNullOrEmpty(obj.Name) && obj.Module != null && !string.IsNullOrEmpty(obj.Module.Name))

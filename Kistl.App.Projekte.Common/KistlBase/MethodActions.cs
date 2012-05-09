@@ -58,16 +58,18 @@ namespace Kistl.App.Base
         public static void get_CodeTemplate(Method obj, PropertyGetterEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("[Invocation]\npublic static void {0}(", obj.Name);
 
+            string objParameter;
             if (obj.ObjectClass != null)
             {
-                sb.AppendFormat("{0} obj", obj.ObjectClass.Name);
+                objParameter = string.Format("{0} obj", obj.ObjectClass.Name);
             }
             else
             {
-                sb.Append("<<TYPE>> obj");
+                objParameter = "<<TYPE>> obj";
             }
+
+            sb.AppendFormat("[Invocation]\npublic static void {0}({1}", obj.Name, objParameter);
 
             var returnParam = obj.GetReturnParameter();
             if (returnParam != null)
@@ -82,9 +84,13 @@ namespace Kistl.App.Base
                     param.Name);
             }
 
-            sb.AppendLine(")");
-            sb.AppendLine("{");
-            sb.AppendLine("}");
+            sb.AppendLine(")\n{\n}");
+
+            sb.AppendLine();
+            sb.AppendFormat("[Invocation]\npublic static void {0}CanExec({1}, MethodReturnEventArgs<bool> e)\n{{\n}}\n", obj.Name, objParameter);
+
+            sb.AppendLine();
+            sb.AppendFormat("[Invocation]\npublic static void {0}CanExecReason({1}, MethodReturnEventArgs<string> e)\n{{\n}}\n", obj.Name, objParameter);
 
             e.Result = sb.ToString();
         }

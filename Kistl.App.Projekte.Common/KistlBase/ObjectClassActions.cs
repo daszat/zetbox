@@ -25,6 +25,7 @@ namespace Kistl.App.Base
             sb.AppendFormat("[Invocation]\npublic static void NotifyPostSave({0} obj)\n{{\n}}\n\n", type);
             sb.AppendFormat("[Invocation]\npublic static void NotifyCreated({0} obj)\n{{\n}}\n\n", type);
             sb.AppendFormat("[Invocation]\npublic static void NotifyDeleting({0} obj)\n{{\n}}\n\n", type);
+            sb.AppendFormat("[Invocation]\npublic static void ObjectIsValid({0} obj, ObjectIsValidEventArgs e)\n{{\n}}\n\n", type);
 
             e.Result = sb.ToString();
         }
