@@ -71,7 +71,7 @@ namespace Kistl.API.AbstractConsumerTests.ContextTests
         {
             ctx.Delete(n2);
 
-            Assert.That(one.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(one.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(n1.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(n2.ObjectState, Is.EqualTo(DataObjectState.Deleted));
 
@@ -85,7 +85,7 @@ namespace Kistl.API.AbstractConsumerTests.ContextTests
             one.NSide.Remove(n2);
             ctx.Delete(n2);
 
-            Assert.That(one.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(one.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(n1.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(n2.ObjectState, Is.EqualTo(DataObjectState.Deleted));
 

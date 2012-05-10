@@ -61,11 +61,11 @@ namespace Kistl.API.AbstractConsumerTests.optional_parent
         }
 
         [Test]
-        public void should_set_one_side_modified()
+        public void should_not_set_one_side_modified()
         {
             DoModification();
 
-            Assert.That(oneSide1.ObjectState, Is.EqualTo(GetExpectedModifiedState()));
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Unmodified).Or.EqualTo(DataObjectState.New));
         }
 
         [Test]

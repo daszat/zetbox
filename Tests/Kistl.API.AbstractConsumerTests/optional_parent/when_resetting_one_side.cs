@@ -32,9 +32,9 @@ namespace Kistl.API.AbstractConsumerTests.optional_parent
 
             Assert.That(nSide1.OneSide, Is.SameAs(oneSide1), "Setting the first property destroyed the object reference");
             Assert.That(oneSide1.NSide, Is.EquivalentTo(new[] { nSide1 }), "first NSide list not correct");
-            Assert.That(oneSide1.ObjectState, Is.EqualTo(GetExpectedModifiedState()));
-            Assert.That(oneSide2.ObjectState, Is.EqualTo(GetExpectedUnmodifiedState()));
-            Assert.That(nSide1.ObjectState, Is.EqualTo(GetExpectedModifiedState()));
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(GetExpectedUnmodifiedState()), "oneSide1 unmodified #1");
+            Assert.That(oneSide2.ObjectState, Is.EqualTo(GetExpectedUnmodifiedState()), "oneSide unmodified #1");
+            Assert.That(nSide1.ObjectState, Is.EqualTo(GetExpectedModifiedState()), "nSide1 modified #3");
 
             nSide1.OneSide = oneSide2;
 
@@ -42,18 +42,18 @@ namespace Kistl.API.AbstractConsumerTests.optional_parent
             Assert.That(oneSide1.NSide, Is.Empty, "first NSide list was not cleared");
             Assert.That(oneSide2.NSide.ToArray(), Is.EquivalentTo(new[] { nSide1 }), "second NSide list not correct");
 
-            Assert.That(oneSide1.ObjectState, Is.EqualTo(GetExpectedModifiedState()));
-            Assert.That(oneSide2.ObjectState, Is.EqualTo(GetExpectedModifiedState()));
-            Assert.That(nSide1.ObjectState, Is.EqualTo(GetExpectedModifiedState()));
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(GetExpectedUnmodifiedState()), "oneSide1 unmodified #2");
+            Assert.That(oneSide2.ObjectState, Is.EqualTo(GetExpectedUnmodifiedState()), "oneSide2 unmodified #2");
+            Assert.That(nSide1.ObjectState, Is.EqualTo(GetExpectedModifiedState()), "nSide1 modified #3");
 
             SubmitAndReload();
 
             Assert.That(nSide1.OneSide, Is.SameAs(oneSide2), "reloading destroyed the object reference");
             Assert.That(oneSide1.NSide, Is.Empty, "reloading destroyed the first NSide list");
             Assert.That(oneSide2.NSide.ToArray(), Is.EquivalentTo(new[] { nSide1 }), "reloading destroyed the second NSide list");
-            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-            Assert.That(oneSide2.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Unmodified), "oneSide1 unmodified #3");
+            Assert.That(oneSide2.ObjectState, Is.EqualTo(DataObjectState.Unmodified), "oneSide2 unmodified #3");
+            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Unmodified), "nSide1 modified #3");
         }
     }
 }
