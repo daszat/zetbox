@@ -898,6 +898,16 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "StagingDatabases":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

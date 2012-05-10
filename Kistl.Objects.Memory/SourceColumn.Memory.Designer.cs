@@ -1413,6 +1413,18 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "DestinationProperty":
+                case "EnumEntries":
+                case "Referers":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

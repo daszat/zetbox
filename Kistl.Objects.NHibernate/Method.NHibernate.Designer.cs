@@ -1509,6 +1509,18 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
 
             base.Recalculate(property);
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Parameter":
+                case "ShowByProperties":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1810,31 +1822,37 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
             base.NotifyDeleting();
             if (OnNotifyDeleting_Method != null) OnNotifyDeleting_Method(this);
 
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            // FK_Method_has_Icon
+            if (Icon != null) {
+                ((NHibernatePersistenceObject)Icon).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Icon);
             }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            // FK_Method_has_Module
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
+            // FK_Method_has_Parameter ZeroOrMore
             foreach(NHibernatePersistenceObject x in Parameter) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
+            // FK_Method_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_Method_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            // FK_ObjectClass_has_Methods
             if (ObjectClass != null) {
                 ((NHibernatePersistenceObject)ObjectClass).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ObjectClass);
             }
             // should fetch && remember parent for Visual_has_Method_RelationEntry
-            if (Icon != null) {
-                ((NHibernatePersistenceObject)Icon).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Icon);
-            }
-            if (Module != null) {
-                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
-            }
 
             Parameter.Clear();
             ShowByProperties.Clear();

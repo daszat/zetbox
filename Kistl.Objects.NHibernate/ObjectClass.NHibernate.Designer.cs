@@ -1187,6 +1187,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
 
             base.Recalculate(property);
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "AccessControlList":
+                case "FilterConfigurations":
+                case "SubClasses":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1399,28 +1412,32 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectClass != null) OnNotifyDeleting_ObjectClass(this);
 
-            // should fetch && remember children for SourceTable_created_ObjectClass_RelationEntry
-            // should fetch && remember parent for RelationEnd_has_ObjectClass_RelationEntry
-            // should fetch && remember parent for ObjectReferencePlaceholderProperty_ofType_ObjectClass_RelationEntry
-            // should fetch && remember parent for ObjectReferenceParameter_has_ObjectClass_RelationEntry
+            // FK_BaseObjectClass_has_SubClasses ZeroOrMore
             foreach(NHibernatePersistenceObject x in SubClasses) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
+            // should fetch && remember parent for CalculatedObjectReferenceProperty_references_ObjectClass_RelationEntry
+            // FK_ObjectClass_has_AccessControlList ZeroOrMore
             foreach(NHibernatePersistenceObject x in AccessControlList) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
-            // should fetch && remember parent for CalculatedObjectReferenceProperty_references_ObjectClass_RelationEntry
+            // FK_ObjectClass_Has_FilterConfigurations ZeroOrMore
             foreach(NHibernatePersistenceObject x in FilterConfigurations) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
+            // should fetch && remember parent for ObjectReferenceParameter_has_ObjectClass_RelationEntry
+            // should fetch && remember parent for ObjectReferencePlaceholderProperty_ofType_ObjectClass_RelationEntry
+            // FK_Presentable_has_DefaultViewModelDescriptor
             if (DefaultViewModelDescriptor != null) {
                 ((NHibernatePersistenceObject)DefaultViewModelDescriptor).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultViewModelDescriptor);
             }
+            // should fetch && remember parent for RelationEnd_has_ObjectClass_RelationEntry
             // should fetch && remember parent for NavigationSearchScreen_of_ObjectClass_RelationEntry
+            // should fetch && remember children for SourceTable_created_ObjectClass_RelationEntry
 
             AccessControlList.Clear();
             FilterConfigurations.Clear();

@@ -547,6 +547,16 @@ namespace Kistl.App.Base
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Inputs":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -672,6 +682,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_CalculatedObjectReferenceProperty != null) OnNotifyDeleting_CalculatedObjectReferenceProperty(this);
 
+            // FK_CalculatedReference_references_ReferencedClass
             if (ReferencedClass != null) {
                 ((NHibernatePersistenceObject)ReferencedClass).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ReferencedClass);

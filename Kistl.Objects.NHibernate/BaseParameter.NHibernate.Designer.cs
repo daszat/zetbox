@@ -1278,7 +1278,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1525,17 +1524,20 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_BaseParameter != null) OnNotifyDeleting_BaseParameter(this);
 
-            if (Method != null) {
-                ((NHibernatePersistenceObject)Method).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Method);
+            // FK_BaseParameter_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
             }
+            // FK_BaseParameter_was_CreatedBy
             if (CreatedBy != null) {
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            // FK_Method_has_Parameter
+            if (Method != null) {
+                ((NHibernatePersistenceObject)Method).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Method);
             }
 
             ChangedBy = null;

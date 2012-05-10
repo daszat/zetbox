@@ -867,7 +867,6 @@ namespace Kistl.App.Projekte
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

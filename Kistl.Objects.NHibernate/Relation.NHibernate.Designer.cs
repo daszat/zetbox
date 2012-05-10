@@ -1582,7 +1582,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1835,25 +1834,30 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Relation != null) OnNotifyDeleting_Relation(this);
 
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            // FK_Module_has_Relation
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (B != null) {
-                ((NHibernatePersistenceObject)B).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)B);
-            }
+            // FK_Relation_hasA_A
             if (A != null) {
                 ((NHibernatePersistenceObject)A).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)A);
             }
-            if (Module != null) {
-                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            // FK_Relation_hasB_B
+            if (B != null) {
+                ((NHibernatePersistenceObject)B).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)B);
+            }
+            // FK_Relation_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_Relation_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             ChangedBy = null;

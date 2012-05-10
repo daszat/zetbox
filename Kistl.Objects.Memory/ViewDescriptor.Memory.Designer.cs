@@ -555,6 +555,16 @@ namespace Kistl.App.GUI
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "SupportedViewModels":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

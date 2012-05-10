@@ -1100,6 +1100,19 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
 
             base.Recalculate(property);
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Auftraege":
+                case "Mitarbeiter":
+                case "Tasks":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

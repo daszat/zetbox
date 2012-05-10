@@ -175,6 +175,16 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "NEnds":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

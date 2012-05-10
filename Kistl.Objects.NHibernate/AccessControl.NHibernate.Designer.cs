@@ -960,7 +960,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1185,18 +1184,22 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_AccessControl != null) OnNotifyDeleting_AccessControl(this);
 
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
+            // FK_AccessControl_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
+            // FK_AccessControl_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_AccessControl_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            // FK_ObjectClass_has_AccessControlList
             if (ObjectClass != null) {
                 ((NHibernatePersistenceObject)ObjectClass).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ObjectClass);

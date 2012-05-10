@@ -425,6 +425,17 @@ namespace Kistl.App.GUI
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Children":
+                case "ContextMenu":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -581,15 +592,17 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Visual != null) OnNotifyDeleting_Visual(this);
 
-            if (Property != null) {
-                ((NHibernatePersistenceObject)Property).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Property);
-            }
+            // should fetch && remember parent for Template_has_Visual_RelationEntry
+            // FK_Visual_has_Method
             if (Method != null) {
                 ((NHibernatePersistenceObject)Method).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Method);
             }
-            // should fetch && remember parent for Template_has_Visual_RelationEntry
+            // FK_Visual_has_Property
+            if (Property != null) {
+                ((NHibernatePersistenceObject)Property).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Property);
+            }
 
             Children.Clear();
             ContextMenu.Clear();

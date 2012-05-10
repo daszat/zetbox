@@ -873,6 +873,16 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "StagingDatabases":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1068,21 +1078,25 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
             base.NotifyDeleting();
             if (OnNotifyDeleting_MigrationProject != null) OnNotifyDeleting_MigrationProject(this);
 
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            // FK_MigrationProject_migrates_to_Module
+            if (DestinationModule != null) {
+                ((NHibernatePersistenceObject)DestinationModule).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DestinationModule);
             }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
+            // FK_MigrationProject_reads_from_StagingDatabases ZeroOrMore
             foreach(NHibernatePersistenceObject x in StagingDatabases) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
-            if (DestinationModule != null) {
-                ((NHibernatePersistenceObject)DestinationModule).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DestinationModule);
+            // FK_MigrationProject_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_MigrationProject_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             StagingDatabases.Clear();

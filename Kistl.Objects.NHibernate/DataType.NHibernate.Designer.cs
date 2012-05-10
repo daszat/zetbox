@@ -1497,6 +1497,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Constraints":
+                case "ImplementsInterfaces":
+                case "Methods":
+                case "Properties":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1795,35 +1808,43 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             base.NotifyDeleting();
             if (OnNotifyDeleting_DataType != null) OnNotifyDeleting_DataType(this);
 
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            foreach(NHibernatePersistenceObject x in Properties) {
+            // FK_Constraint_on_Constrained ZeroOrMore
+            foreach(NHibernatePersistenceObject x in Constraints) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
-            foreach(NHibernatePersistenceObject x in Methods) {
-                x.ParentsToDelete.Add(this);
-                ChildrenToDelete.Add(x);
-            }
-            if (RequestedKind != null) {
-                ((NHibernatePersistenceObject)RequestedKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedKind);
-            }
+            // FK_DataType_has_DefaultIcon
             if (DefaultIcon != null) {
                 ((NHibernatePersistenceObject)DefaultIcon).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultIcon);
             }
+            // FK_DataType_may_request_ControlKind
+            if (RequestedKind != null) {
+                ((NHibernatePersistenceObject)RequestedKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedKind);
+            }
+            // FK_DataType_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_DataType_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            // FK_Module_contains_DataTypes
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            foreach(NHibernatePersistenceObject x in Constraints) {
+            // FK_ObjectClass_has_Methods ZeroOrMore
+            foreach(NHibernatePersistenceObject x in Methods) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            // FK_ObjectClass_has_Properties ZeroOrMore
+            foreach(NHibernatePersistenceObject x in Properties) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }

@@ -1489,6 +1489,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Constraints":
+                case "ImplementsInterfaces":
+                case "Methods":
+                case "Properties":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

@@ -432,7 +432,6 @@ namespace Kistl.App.Test
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -586,6 +585,7 @@ namespace Kistl.App.Test
             base.NotifyDeleting();
             if (OnNotifyDeleting_Antwort != null) OnNotifyDeleting_Antwort(this);
 
+            // FK_Ein_Fragebogen_enthaelt_gute_Antworten
             if (Fragebogen != null) {
                 ((NHibernatePersistenceObject)Fragebogen).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Fragebogen);

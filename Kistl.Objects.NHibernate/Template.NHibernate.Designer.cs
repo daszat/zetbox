@@ -517,6 +517,16 @@ namespace Kistl.App.GUI
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Menu":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -674,13 +684,15 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Template != null) OnNotifyDeleting_Template(this);
 
-            if (VisualTree != null) {
-                ((NHibernatePersistenceObject)VisualTree).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)VisualTree);
-            }
+            // FK_Template_has_DisplayedTypeAssembly
             if (DisplayedTypeAssembly != null) {
                 ((NHibernatePersistenceObject)DisplayedTypeAssembly).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DisplayedTypeAssembly);
+            }
+            // FK_Template_has_VisualTree
+            if (VisualTree != null) {
+                ((NHibernatePersistenceObject)VisualTree).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)VisualTree);
             }
 
             Menu.Clear();

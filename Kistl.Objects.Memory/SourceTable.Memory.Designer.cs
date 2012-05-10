@@ -1139,6 +1139,16 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "SourceColumn":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

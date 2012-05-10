@@ -388,7 +388,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -507,6 +506,7 @@ namespace Kistl.App.Base
 
             // should fetch && remember parent for CompoundObjectProperty_has_CompoundObject_RelationEntry
             // should fetch && remember parent for CompoundObjectParameter_has_CompoundObject_RelationEntry
+            // FK_Presentable_may_has_DefaultPropViewModelDescriptor
             if (DefaultPropertyViewModelDescriptor != null) {
                 ((NHibernatePersistenceObject)DefaultPropertyViewModelDescriptor).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultPropertyViewModelDescriptor);

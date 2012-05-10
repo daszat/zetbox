@@ -214,6 +214,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Antworten":
+                case "Student":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -340,6 +351,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
             base.NotifyDeleting();
             if (OnNotifyDeleting_Fragebogen != null) OnNotifyDeleting_Fragebogen(this);
 
+            // FK_Ein_Fragebogen_enthaelt_gute_Antworten ZeroOrMore
             foreach(NHibernatePersistenceObject x in Antworten) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);

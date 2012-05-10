@@ -1469,6 +1469,18 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "DestinationProperty":
+                case "EnumEntries":
+                case "Referers":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1770,25 +1782,30 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceColumn != null) OnNotifyDeleting_SourceColumn(this);
 
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
+            // FK_FK_Column_references_PK_Column
             if (References != null) {
                 ((NHibernatePersistenceObject)References).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)References);
             }
+            // FK_SourceColumn_belongs_to_SourceTable
+            if (SourceTable != null) {
+                ((NHibernatePersistenceObject)SourceTable).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)SourceTable);
+            }
+            // FK_SourceColumn_may_have_EnumEntries ZeroOrMore
             foreach(NHibernatePersistenceObject x in EnumEntries) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
-            if (SourceTable != null) {
-                ((NHibernatePersistenceObject)SourceTable).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)SourceTable);
+            // FK_SourceColumn_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_SourceColumn_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             DestinationProperty.Clear();

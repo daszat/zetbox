@@ -950,6 +950,16 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "SourceTables":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1175,21 +1185,25 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
             base.NotifyDeleting();
             if (OnNotifyDeleting_StagingDatabase != null) OnNotifyDeleting_StagingDatabase(this);
 
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            // FK_MigrationProject_reads_from_StagingDatabases
+            if (MigrationProject != null) {
+                ((NHibernatePersistenceObject)MigrationProject).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)MigrationProject);
             }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
+            // FK_SourceTables_are_contained_in_StagingDatabase ZeroOrMore
             foreach(NHibernatePersistenceObject x in SourceTables) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
-            if (MigrationProject != null) {
-                ((NHibernatePersistenceObject)MigrationProject).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)MigrationProject);
+            // FK_StagingDatabase_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_StagingDatabase_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             SourceTables.Clear();

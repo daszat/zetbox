@@ -1277,6 +1277,19 @@ namespace Kistl.App.Base
 
             base.Recalculate(property);
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "AParent":
+                case "BParent":
+                case "Navigator":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1547,29 +1560,35 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_RelationEnd != null) OnNotifyDeleting_RelationEnd(this);
 
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
-            if (Navigator != null) {
-                ((NHibernatePersistenceObject)Navigator).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Navigator);
-            }
-            if (BParent != null) {
-                ((NHibernatePersistenceObject)BParent).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)BParent);
-            }
+            // FK_Relation_hasA_A
             if (AParent != null) {
                 ((NHibernatePersistenceObject)AParent).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)AParent);
             }
+            // FK_Relation_hasB_B
+            if (BParent != null) {
+                ((NHibernatePersistenceObject)BParent).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)BParent);
+            }
+            // FK_RelationEnd_has_Navigator
+            if (Navigator != null) {
+                ((NHibernatePersistenceObject)Navigator).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Navigator);
+            }
+            // FK_RelationEnd_has_Type
             if (Type != null) {
                 ((NHibernatePersistenceObject)Type).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Type);
+            }
+            // FK_RelationEnd_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_RelationEnd_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             ChangedBy = null;

@@ -1103,6 +1103,17 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "CalendarRules":
+                case "ChildCalendar":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1325,25 +1336,30 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             base.NotifyDeleting();
             if (OnNotifyDeleting_Calendar != null) OnNotifyDeleting_Calendar(this);
 
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
-            foreach(NHibernatePersistenceObject x in CalendarRules) {
-                x.ParentsToDelete.Add(this);
-                ChildrenToDelete.Add(x);
-            }
+            // FK_BaseCalendar_has_ChildCalendar ZeroOrMore
             foreach(NHibernatePersistenceObject x in ChildCalendar) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
+            // FK_Calendar_has_CalendarRules ZeroOrMore
+            foreach(NHibernatePersistenceObject x in CalendarRules) {
+                x.ParentsToDelete.Add(this);
+                ChildrenToDelete.Add(x);
+            }
+            // FK_Calendar_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            // FK_Calendar_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_Calendar_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             CalendarRules.Clear();

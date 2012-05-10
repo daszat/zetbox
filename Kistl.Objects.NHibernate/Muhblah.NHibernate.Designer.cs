@@ -648,6 +648,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "TestCustomObjects_List_Nav":
+                case "TestCustomObjects_ManyList_Nav":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -834,14 +845,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             base.NotifyDeleting();
             if (OnNotifyDeleting_Muhblah != null) OnNotifyDeleting_Muhblah(this);
 
-            if (TestCustomObjects_One_Nav != null) {
-                ((NHibernatePersistenceObject)TestCustomObjects_One_Nav).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)TestCustomObjects_One_Nav);
-            }
+            // FK_MB_Lst_Role_hasOther_TCO_Role
             if (TestCustomObjects_Nav != null) {
                 ((NHibernatePersistenceObject)TestCustomObjects_Nav).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)TestCustomObjects_Nav);
             }
+            // FK_MB_One_Role_loves_TCO_One_Role
+            if (TestCustomObjects_One_Nav != null) {
+                ((NHibernatePersistenceObject)TestCustomObjects_One_Nav).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)TestCustomObjects_One_Nav);
+            }
+            // FK_MB_Role_has_TCO_Lst_Role ZeroOrMore
             foreach(NHibernatePersistenceObject x in TestCustomObjects_List_Nav) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);

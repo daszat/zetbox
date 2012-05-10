@@ -673,6 +673,18 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "MubBlah_List_Nav":
+                case "MuhBlah_ManyList_Nav":
+                case "MuhBlah_One_Nav":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

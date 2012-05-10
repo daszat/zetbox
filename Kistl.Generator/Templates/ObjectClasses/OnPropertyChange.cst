@@ -13,6 +13,7 @@
 <%@ Parameter Name="dt" Type="DataType" %>
 <% var recalcProps = GetRecalcProperties();                                                                         %>
 <% var auditProps = GetAuditProperties();                                                                           %>
+<% var nonModProps = GetNonModifyingProperties();                                                                   %>
         #region <%= this.GetType() %>
 
 <% if (auditProps.Count > 0 && !(dt is CompoundObject)) {                                                           %>
@@ -31,8 +32,8 @@
             }
         }
 <% }                                                                                                                %>
-
 <% if (recalcProps.Count > 0 && !(dt is CompoundObject)) {                                                          %>
+
         public override void Recalculate(string property)
         {
             switch (property)
@@ -47,6 +48,21 @@
             }
 
             base.Recalculate(property);
+        }
+<% }                                                                                                                %>
+<% if (nonModProps.Count > 0) {                                                                                     %>
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+<%      foreach (var prop in nonModProps) {                                                                         %>
+                case "<%= prop.Name %>":
+<%      }                                                                                                           %>
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
         }
 <% }                                                                                                                %>
         #endregion // <%= this.GetType() %>

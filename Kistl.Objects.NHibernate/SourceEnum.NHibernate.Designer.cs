@@ -840,7 +840,6 @@ namespace ZBox.App.SchemaMigration
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1045,21 +1044,25 @@ namespace ZBox.App.SchemaMigration
             base.NotifyDeleting();
             if (OnNotifyDeleting_SourceEnum != null) OnNotifyDeleting_SourceEnum(this);
 
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            // FK_SourceColumn_may_have_EnumEntries
+            if (SourceColumn != null) {
+                ((NHibernatePersistenceObject)SourceColumn).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)SourceColumn);
             }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
+            // FK_SourceEnum_mapps_to_DestinationValue
             if (DestinationValue != null) {
                 ((NHibernatePersistenceObject)DestinationValue).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DestinationValue);
             }
-            if (SourceColumn != null) {
-                ((NHibernatePersistenceObject)SourceColumn).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)SourceColumn);
+            // FK_SourceEnum_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_SourceEnum_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             ChangedBy = null;

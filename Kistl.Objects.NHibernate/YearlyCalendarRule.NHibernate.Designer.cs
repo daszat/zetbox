@@ -137,7 +137,6 @@ namespace Kistl.App.Calendar
 
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

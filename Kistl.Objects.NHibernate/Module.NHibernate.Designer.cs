@@ -849,7 +849,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1048,34 +1047,36 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Module != null) OnNotifyDeleting_Module(this);
 
-            // should fetch && remember parent for MigrationProject_migrates_to_Module_RelationEntry
-            // should fetch && remember parent for CalendarRule_has_Module_RelationEntry
-            // should fetch && remember parent for Calendar_has_Module_RelationEntry
-            // should fetch && remember parent for ServiceDescriptor_has_Module_RelationEntry
-            // should fetch && remember parent for Sequence_has_Module_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_has_Module_RelationEntry
+            // should fetch && remember parent for AccessControl_has_Module_RelationEntry
+            // should fetch && remember parent for Application_has_Module_RelationEntry
             // should fetch && remember parent for Property_has_Module_RelationEntry
+            // should fetch && remember parent for Calendar_has_Module_RelationEntry
+            // should fetch && remember parent for CalendarRule_has_Module_RelationEntry
+            // should fetch && remember parent for ControlKind_has_Module_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_has_Module_RelationEntry
+            // should fetch && remember parent for Group_has_Module_RelationEntry
+            // should fetch && remember parent for Icon_has_Module_RelationEntry
+            // should fetch && remember parent for Method_has_Module_RelationEntry
+            // should fetch && remember parent for MigrationProject_migrates_to_Module_RelationEntry
+            // should fetch && remember parent for Module_contains_Assembly_RelationEntry
+            // should fetch && remember parent for Module_contains_DataType_RelationEntry
+            // should fetch && remember parent for Module_has_Relation_RelationEntry
+            // FK_Module_was_ChangedBy
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
             }
+            // FK_Module_was_CreatedBy
             if (CreatedBy != null) {
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for Module_has_Relation_RelationEntry
-            // should fetch && remember parent for Module_contains_DataType_RelationEntry
-            // should fetch && remember parent for Module_contains_Assembly_RelationEntry
-            // should fetch && remember parent for Method_has_Module_RelationEntry
-            // should fetch && remember parent for Group_has_Module_RelationEntry
-            // should fetch && remember parent for AccessControl_has_Module_RelationEntry
-            // should fetch && remember parent for AbstractModuleMember_has_Module_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_has_Module_RelationEntry
-            // should fetch && remember parent for ViewDescriptor_has_Module_RelationEntry
             // should fetch && remember parent for NavigationEntry_has_Module_RelationEntry
-            // should fetch && remember parent for Icon_has_Module_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_has_Module_RelationEntry
-            // should fetch && remember parent for ControlKind_has_Module_RelationEntry
-            // should fetch && remember parent for Application_has_Module_RelationEntry
+            // should fetch && remember parent for Sequence_has_Module_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_has_Module_RelationEntry
+            // should fetch && remember parent for ViewDescriptor_has_Module_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_has_Module_RelationEntry
 
             ChangedBy = null;
             CreatedBy = null;

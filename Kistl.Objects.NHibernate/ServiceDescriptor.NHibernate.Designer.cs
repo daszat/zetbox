@@ -877,7 +877,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1092,21 +1091,25 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_ServiceDescriptor != null) OnNotifyDeleting_ServiceDescriptor(this);
 
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
+            // FK_ServiceDescriptor_describes_a_TypeRef
             if (TypeRef != null) {
                 ((NHibernatePersistenceObject)TypeRef).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)TypeRef);
             }
+            // FK_ServiceDescriptor_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            // FK_ServiceDescriptor_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_ServiceDescriptor_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             ChangedBy = null;

@@ -1319,14 +1319,25 @@ namespace Kistl.App.Base
             {
                 case "Parent":
                     NotifyPropertyChanging(property, null, null);
-                    ReportEfPropertyChanging("Parent");
                     _Parent_IsDirty = true;
                     ReportEfPropertyChanged("Parent");
-                    NotifyPropertyChanged(property, null, null);
                     return;
             }
 
             base.Recalculate(property);
+        }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "AParent":
+                case "BParent":
+                case "Navigator":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
         }
         #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 

@@ -256,6 +256,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Antworten":
+                case "Student":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

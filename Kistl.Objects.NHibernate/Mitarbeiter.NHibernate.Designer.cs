@@ -985,6 +985,16 @@ namespace Kistl.App.Projekte
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Projekte":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1207,19 +1217,22 @@ namespace Kistl.App.Projekte
             base.NotifyDeleting();
             if (OnNotifyDeleting_Mitarbeiter != null) OnNotifyDeleting_Mitarbeiter(this);
 
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
+            // should fetch && remember parent for Auftrag_has_Mitarbeiter_RelationEntry
+            // FK_Mitarbeiter_is_a_Identity
             if (Identity != null) {
                 ((NHibernatePersistenceObject)Identity).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Identity);
             }
-            // should fetch && remember parent for Auftrag_has_Mitarbeiter_RelationEntry
+            // FK_Mitarbeiter_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_Mitarbeiter_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
 
             Projekte.Clear();
             ChangedBy = null;

@@ -1231,6 +1231,19 @@ namespace Kistl.App.Base
 
             base.Recalculate(property);
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "AParent":
+                case "BParent":
+                case "Navigator":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

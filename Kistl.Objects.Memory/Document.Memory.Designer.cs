@@ -275,6 +275,16 @@ namespace at.dasz.DocumentManagement
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Revisions":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

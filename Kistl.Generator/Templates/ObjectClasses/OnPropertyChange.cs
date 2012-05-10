@@ -6,6 +6,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
     using System.Linq;
     using System.Text;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
 
     public partial class OnPropertyChange
     {
@@ -13,7 +14,8 @@ namespace Kistl.Generator.Templates.ObjectClasses
         {
             return dt.Properties.OfType<ValueTypeProperty>().Where(p => p.IsCalculated).Cast<Property>()
                 .Concat(dt.Properties.OfType<CalculatedObjectReferenceProperty>().Cast<Property>())
-                .OrderBy(p => p.Name).ToList();
+                .OrderBy(p => p.Name)
+                .ToList();
         }
 
         public List<Property> GetAuditProperties()
@@ -22,6 +24,14 @@ namespace Kistl.Generator.Templates.ObjectClasses
                 .OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).Cast<Property>()
                 .Concat(dt.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.GetIsList()).Cast<Property>())
                 .Concat(dt.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList /* && !p.IsCalculated */).Cast<Property>())
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
+
+        protected virtual List<ObjectReferenceProperty> GetNonModifyingProperties()
+        {
+            return dt.Properties.OfType<ObjectReferenceProperty>()
+                .Where(p => !p.RelationEnd.Parent.HasStorage(p.RelationEnd.GetRole()))
                 .OrderBy(p => p.Name)
                 .ToList();
         }

@@ -414,7 +414,6 @@ namespace Kistl.App.GUI
                     break;
             }
         }
-
         #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

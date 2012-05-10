@@ -1375,7 +1375,6 @@ namespace Kistl.App.GUI
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1678,17 +1677,20 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationSearchScreen != null) OnNotifyDeleting_NavigationSearchScreen(this);
 
-            if (Type != null) {
-                ((NHibernatePersistenceObject)Type).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Type);
+            // FK_Search_has_RequestedEditorKind
+            if (RequestedEditorKind != null) {
+                ((NHibernatePersistenceObject)RequestedEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedEditorKind);
             }
+            // FK_Search_has_RequestedWorkspaceKind
             if (RequestedWorkspaceKind != null) {
                 ((NHibernatePersistenceObject)RequestedWorkspaceKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)RequestedWorkspaceKind);
             }
-            if (RequestedEditorKind != null) {
-                ((NHibernatePersistenceObject)RequestedEditorKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)RequestedEditorKind);
+            // FK_SearchScreen_of_Type
+            if (Type != null) {
+                ((NHibernatePersistenceObject)Type).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Type);
             }
 
             RequestedEditorKind = null;

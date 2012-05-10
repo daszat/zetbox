@@ -1171,7 +1171,6 @@ namespace Kistl.App.GUI
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1414,25 +1413,30 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_FilterConfiguration != null) OnNotifyDeleting_FilterConfiguration(this);
 
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            // FK_FilterConfiguration_has_Module
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (ViewModelDescriptor != null) {
-                ((NHibernatePersistenceObject)ViewModelDescriptor).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelDescriptor);
-            }
+            // FK_FilterConfiguration_has_RequestedKind
             if (RequestedKind != null) {
                 ((NHibernatePersistenceObject)RequestedKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)RequestedKind);
             }
-            if (Module != null) {
-                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            // FK_FilterConfiguration_has_ViewModelDescriptor
+            if (ViewModelDescriptor != null) {
+                ((NHibernatePersistenceObject)ViewModelDescriptor).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelDescriptor);
+            }
+            // FK_FilterConfiguration_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_FilterConfiguration_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             ChangedBy = null;

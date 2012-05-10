@@ -625,6 +625,16 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "EnumerationEntries":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -742,12 +752,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             base.NotifyDeleting();
             if (OnNotifyDeleting_Enumeration != null) OnNotifyDeleting_Enumeration(this);
 
-            // should fetch && remember parent for EnumParameter_has_Enumeration_RelationEntry
+            // FK_Enumeration_has_EnumerationEntries ZeroOrMore
             foreach(NHibernatePersistenceObject x in EnumerationEntries) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
             // should fetch && remember parent for EnumerationProperty_has_Enumeration_RelationEntry
+            // should fetch && remember parent for EnumParameter_has_Enumeration_RelationEntry
 
             EnumerationEntries.Clear();
         }

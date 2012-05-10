@@ -862,7 +862,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1049,17 +1048,20 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Constraint != null) OnNotifyDeleting_Constraint(this);
 
+            // FK_ConstrainedProperty_has_Constraints
             if (ConstrainedProperty != null) {
                 ((NHibernatePersistenceObject)ConstrainedProperty).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ConstrainedProperty);
             }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
+            // FK_Constraint_was_ChangedBy
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_Constraint_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             ChangedBy = null;

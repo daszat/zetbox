@@ -1073,6 +1073,16 @@ namespace Kistl.App.GUI
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "SecondaryControlKinds":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1326,40 +1336,47 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
 
+            // should fetch && remember parent for Application_opens_a_ViewModelDescriptor_RelationEntry
+            // FK_Descriptor_has_ViewModelRef
             if (ViewModelRef != null) {
                 ((NHibernatePersistenceObject)ViewModelRef).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelRef);
             }
+            // should fetch && remember parent for FilterConfiguration_has_ViewModelDescriptor_RelationEntry
+            // FK_Presentable_has_DefaultKind
             if (DefaultEditorKind != null) {
                 ((NHibernatePersistenceObject)DefaultEditorKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultEditorKind);
             }
-            if (DefaultGridCellPreEditorKind != null) {
-                ((NHibernatePersistenceObject)DefaultGridCellPreEditorKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellPreEditorKind);
-            }
-            if (DefaultGridCellEditorKind != null) {
-                ((NHibernatePersistenceObject)DefaultGridCellEditorKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellEditorKind);
-            }
+            // should fetch && remember parent for ObjectClass_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for CompoundObject_may_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for Property_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for NavigationEntry_modeled_by_ViewModelDescriptor_RelationEntry
+            // FK_ViewModel_displayed_by_DefaultDisplayKind
             if (DefaultDisplayKind != null) {
                 ((NHibernatePersistenceObject)DefaultDisplayKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultDisplayKind);
             }
+            // FK_ViewModel_displayed_by_DefaultGridCellEditorKind
+            if (DefaultGridCellEditorKind != null) {
+                ((NHibernatePersistenceObject)DefaultGridCellEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellEditorKind);
+            }
+            // FK_ViewModel_displayed_by_DefaultGridDisplayKind
             if (DefaultGridCellDisplayKind != null) {
                 ((NHibernatePersistenceObject)DefaultGridCellDisplayKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellDisplayKind);
             }
-            // should fetch && remember parent for Property_has_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for NavigationEntry_modeled_by_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_has_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for Application_opens_a_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for CompoundObject_may_has_ViewModelDescriptor_RelationEntry
+            // FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind
+            if (DefaultGridCellPreEditorKind != null) {
+                ((NHibernatePersistenceObject)DefaultGridCellPreEditorKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultGridCellPreEditorKind);
+            }
+            // FK_ViewModelDescriptor_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            // should fetch && remember parent for ObjectClass_has_ViewModelDescriptor_RelationEntry
 
             SecondaryControlKinds.Clear();
             DefaultDisplayKind = null;

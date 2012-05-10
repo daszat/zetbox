@@ -389,7 +389,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -506,6 +505,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumParameter != null) OnNotifyDeleting_EnumParameter(this);
 
+            // FK_EnumParameter_has_Enumeration
             if (Enumeration != null) {
                 ((NHibernatePersistenceObject)Enumeration).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Enumeration);

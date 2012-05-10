@@ -1223,6 +1223,16 @@ namespace Kistl.App.Base
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "GenericArguments":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1456,27 +1466,31 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_TypeRef != null) OnNotifyDeleting_TypeRef(this);
 
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
+            // FK_Child_has_Parent
             if (Parent != null) {
                 ((NHibernatePersistenceObject)Parent).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Parent);
             }
+            // should fetch && remember parent for CLRObjectParameter_isOf_TypeRef_RelationEntry
+            // should fetch && remember parent for ConstraintInvocation_has_TypeRef_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_has_TypeRef_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_describes_a_TypeRef_RelationEntry
+            // FK_TypeRef_has_Assembly
             if (Assembly != null) {
                 ((NHibernatePersistenceObject)Assembly).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Assembly);
             }
-            // should fetch && remember parent for ServiceDescriptor_describes_a_TypeRef_RelationEntry
-            // should fetch && remember parent for ConstraintInvocation_has_TypeRef_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_has_TypeRef_RelationEntry
+            // FK_TypeRef_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_TypeRef_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
             // should fetch && remember parent for ViewDescriptor_has_TypeRef_RelationEntry
-            // should fetch && remember parent for CLRObjectParameter_isOf_TypeRef_RelationEntry
 
             GenericArguments.Clear();
             ChangedBy = null;

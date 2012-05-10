@@ -181,6 +181,16 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "NEnds":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -298,6 +308,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
             base.NotifyDeleting();
             if (OnNotifyDeleting_OrderedOneEnd != null) OnNotifyDeleting_OrderedOneEnd(this);
 
+            // FK_OneEnd_hasMany_NEnds ZeroOrMore
             foreach(NHibernatePersistenceObject x in NEnds) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);

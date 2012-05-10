@@ -838,7 +838,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

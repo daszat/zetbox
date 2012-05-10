@@ -983,7 +983,6 @@ namespace Kistl.App.GUI
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1216,25 +1215,30 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Application != null) OnNotifyDeleting_Application(this);
 
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            // FK_Application_has_Module
+            if (Module != null) {
+                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (WorkspaceViewModel != null) {
-                ((NHibernatePersistenceObject)WorkspaceViewModel).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)WorkspaceViewModel);
-            }
+            // FK_Application_has_RootScreen
             if (RootScreen != null) {
                 ((NHibernatePersistenceObject)RootScreen).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)RootScreen);
             }
-            if (Module != null) {
-                ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            // FK_Application_opens_a_WorkspaceViewModel
+            if (WorkspaceViewModel != null) {
+                ((NHibernatePersistenceObject)WorkspaceViewModel).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)WorkspaceViewModel);
+            }
+            // FK_Application_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_Application_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             ChangedBy = null;

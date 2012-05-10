@@ -942,7 +942,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     break;
             }
         }
-
         #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

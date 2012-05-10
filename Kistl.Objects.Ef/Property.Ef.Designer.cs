@@ -1989,6 +1989,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
             base.Recalculate(property);
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Constraints":
+                case "DefaultValue":
+                case "FilterConfiguration":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

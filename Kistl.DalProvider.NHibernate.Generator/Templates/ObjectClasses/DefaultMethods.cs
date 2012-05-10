@@ -45,7 +45,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             var cls = dt as ObjectClass;
             if (cls != null)
             {
-                foreach (var rel in cls.GetRelations())
+                foreach (var rel in cls.GetRelations().OrderBy(r => r.GetAssociationName()))
                 {
                     if (rel.A.Type == cls && rel.GetRelationType() != RelationType.n_m && rel.Storage != StorageType.Separate)
                     {
@@ -69,6 +69,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 if (relEnd.Navigator != null)
                 {
                     var prop = relEnd.Navigator;
+                    this.WriteObjects("            // ", rel.GetAssociationName(), " ZeroOrMore\r\n");
                     this.WriteObjects("            foreach(NHibernatePersistenceObject x in ", prop.Name, ") {\r\n");
                     this.WriteObjects("                x.ParentsToDelete.Add(this);\r\n");
                     this.WriteObjects("                ChildrenToDelete.Add(x);\r\n");
@@ -84,6 +85,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 if (relEnd.Navigator != null)
                 {
                     var prop = relEnd.Navigator;
+                    this.WriteObjects("            // ", rel.GetAssociationName(), "\r\n");
                     this.WriteObjects("            if (", prop.Name, " != null) {\r\n");
                     this.WriteObjects("                ((NHibernatePersistenceObject)", prop.Name, ").ChildrenToDelete.Add(this);\r\n");
                     this.WriteObjects("                ParentsToDelete.Add((NHibernatePersistenceObject)", prop.Name, ");\r\n");

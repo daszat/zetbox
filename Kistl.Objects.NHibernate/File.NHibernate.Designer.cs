@@ -901,7 +901,6 @@ namespace at.dasz.DocumentManagement
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1088,17 +1087,20 @@ namespace at.dasz.DocumentManagement
             base.NotifyDeleting();
             if (OnNotifyDeleting_File != null) OnNotifyDeleting_File(this);
 
+            // FK_File_has_Blob
+            if (Blob != null) {
+                ((NHibernatePersistenceObject)Blob).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Blob);
+            }
+            // FK_File_was_ChangedBy
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
             }
+            // FK_File_was_CreatedBy
             if (CreatedBy != null) {
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (Blob != null) {
-                ((NHibernatePersistenceObject)Blob).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Blob);
             }
 
             ChangedBy = null;

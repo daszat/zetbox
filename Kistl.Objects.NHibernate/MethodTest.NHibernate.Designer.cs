@@ -759,6 +759,16 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Children":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -891,6 +901,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.MethodTest> OnChil
             base.NotifyDeleting();
             if (OnNotifyDeleting_MethodTest != null) OnNotifyDeleting_MethodTest(this);
 
+            // FK_Parent_has_Children ZeroOrMore
             foreach(NHibernatePersistenceObject x in Children) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);

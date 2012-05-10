@@ -891,7 +891,6 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1113,16 +1112,18 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 ChildrenToDelete.Add(x);
             }
 
-            // should fetch && remember parent for TestObjClass_has_Kunde_RelationEntry
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
+            // should fetch && remember parent for Auftrag_has_Kunde_RelationEntry
+            // FK_Kunde_was_ChangedBy
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
             }
-            // should fetch && remember parent for Auftrag_has_Kunde_RelationEntry
+            // FK_Kunde_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            // should fetch && remember parent for TestObjClass_has_Kunde_RelationEntry
 
             EMails.Clear();
             ChangedBy = null;

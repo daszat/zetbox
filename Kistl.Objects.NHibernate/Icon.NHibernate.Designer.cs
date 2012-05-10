@@ -637,7 +637,6 @@ namespace Kistl.App.GUI
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -792,19 +791,21 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Icon != null) OnNotifyDeleting_Icon(this);
 
-            // should fetch && remember parent for Method_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for DataType_has_Icon_RelationEntry
+            // FK_Icon_has_Blob
             if (Blob != null) {
                 ((NHibernatePersistenceObject)Blob).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Blob);
             }
-            // should fetch && remember parent for DataType_has_Icon_RelationEntry
+            // FK_Icon_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
+            // should fetch && remember parent for Method_has_Icon_RelationEntry
 
         }
         public static event ObjectEventHandler<Icon> OnNotifyDeleting_Icon;

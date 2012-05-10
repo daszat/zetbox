@@ -441,7 +441,6 @@ namespace Kistl.App.Test
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -585,6 +584,7 @@ namespace Kistl.App.Test
             base.NotifyDeleting();
             if (OnNotifyDeleting_TestObjClass != null) OnNotifyDeleting_TestObjClass(this);
 
+            // FK_TestObjClass_has_ObjectProp
             if (ObjectProp != null) {
                 ((NHibernatePersistenceObject)ObjectProp).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ObjectProp);

@@ -1069,7 +1069,6 @@ namespace Kistl.App.Projekte
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1302,25 +1301,30 @@ namespace Kistl.App.Projekte
             base.NotifyDeleting();
             if (OnNotifyDeleting_Auftrag != null) OnNotifyDeleting_Auftrag(this);
 
-            if (Projekt != null) {
-                ((NHibernatePersistenceObject)Projekt).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Projekt);
+            // FK_Auftrag_ChangedBy_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
             }
-            if (Mitarbeiter != null) {
-                ((NHibernatePersistenceObject)Mitarbeiter).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Mitarbeiter);
-            }
-            if (Kunde != null) {
-                ((NHibernatePersistenceObject)Kunde).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)Kunde);
-            }
+            // FK_Auftrag_CreatedBy_CreatedBy
             if (CreatedBy != null) {
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            // FK_Auftrag_has_Kunde
+            if (Kunde != null) {
+                ((NHibernatePersistenceObject)Kunde).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Kunde);
+            }
+            // FK_Auftrag_has_Mitarbeiter
+            if (Mitarbeiter != null) {
+                ((NHibernatePersistenceObject)Mitarbeiter).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Mitarbeiter);
+            }
+            // FK_Projekt_has_Auftraege
+            if (Projekt != null) {
+                ((NHibernatePersistenceObject)Projekt).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)Projekt);
             }
 
             ChangedBy = null;

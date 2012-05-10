@@ -437,6 +437,16 @@ namespace Kistl.App.Base
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Member":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -582,11 +592,12 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Group != null) OnNotifyDeleting_Group(this);
 
-            // should fetch && remember parent for GroupMembership_has_Group_RelationEntry
+            // FK_Group_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
+            // should fetch && remember parent for GroupMembership_has_Group_RelationEntry
 
             Member.Clear();
         }

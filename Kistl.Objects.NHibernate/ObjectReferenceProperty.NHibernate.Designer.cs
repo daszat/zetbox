@@ -747,6 +747,16 @@ namespace Kistl.App.Base
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Methods":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -892,6 +902,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_ObjectReferenceProperty != null) OnNotifyDeleting_ObjectReferenceProperty(this);
 
+            // FK_RelationEnd_has_Navigator
             if (RelationEnd != null) {
                 ((NHibernatePersistenceObject)RelationEnd).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)RelationEnd);

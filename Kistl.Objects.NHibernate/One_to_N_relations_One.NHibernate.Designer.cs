@@ -181,6 +181,16 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "NSide":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -298,6 +308,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
             base.NotifyDeleting();
             if (OnNotifyDeleting_One_to_N_relations_One != null) OnNotifyDeleting_One_to_N_relations_One(this);
 
+            // FK_OneSide_connectsTo_NSide ZeroOrMore
             foreach(NHibernatePersistenceObject x in NSide) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);

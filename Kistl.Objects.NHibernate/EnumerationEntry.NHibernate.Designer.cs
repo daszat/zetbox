@@ -1009,7 +1009,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1236,20 +1235,23 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumerationEntry != null) OnNotifyDeleting_EnumerationEntry(this);
 
-            // should fetch && remember parent for SourceEnum_mapps_to_EnumerationEntry_RelationEntry
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
+            // should fetch && remember parent for EnumDefaultValue_defaults_to_EnumerationEntry_RelationEntry
+            // FK_Enumeration_has_EnumerationEntries
             if (Enumeration != null) {
                 ((NHibernatePersistenceObject)Enumeration).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Enumeration);
             }
-            // should fetch && remember parent for EnumDefaultValue_defaults_to_EnumerationEntry_RelationEntry
+            // FK_EnumerationEntry_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_EnumerationEntry_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
+            }
+            // should fetch && remember parent for SourceEnum_mapps_to_EnumerationEntry_RelationEntry
 
             ChangedBy = null;
             CreatedBy = null;

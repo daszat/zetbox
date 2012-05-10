@@ -835,7 +835,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1032,20 +1031,23 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Assembly != null) OnNotifyDeleting_Assembly(this);
 
-            // should fetch && remember parent for TypeRef_has_Assembly_RelationEntry
+            // FK_Assembly_was_ChangedBy
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
             }
+            // FK_Assembly_was_CreatedBy
             if (CreatedBy != null) {
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for Template_has_Assembly_RelationEntry
+            // FK_Module_contains_Assemblies
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
+            // should fetch && remember parent for Template_has_Assembly_RelationEntry
+            // should fetch && remember parent for TypeRef_has_Assembly_RelationEntry
 
             ChangedBy = null;
             CreatedBy = null;

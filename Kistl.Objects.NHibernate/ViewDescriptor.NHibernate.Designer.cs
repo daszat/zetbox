@@ -585,6 +585,16 @@ namespace Kistl.App.GUI
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "SupportedViewModels":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -766,17 +776,20 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
 
-            if (ControlKind != null) {
-                ((NHibernatePersistenceObject)ControlKind).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ControlKind);
-            }
+            // FK_View_has_ControlRef
             if (ControlRef != null) {
                 ((NHibernatePersistenceObject)ControlRef).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ControlRef);
             }
+            // FK_ViewDescriptor_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
+            }
+            // FK_ViewDescriptor_is_a_ControlKind
+            if (ControlKind != null) {
+                ((NHibernatePersistenceObject)ControlKind).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ControlKind);
             }
 
             SupportedViewModels.Clear();

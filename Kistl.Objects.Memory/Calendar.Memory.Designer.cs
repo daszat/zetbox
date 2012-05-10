@@ -1066,6 +1066,17 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "CalendarRules":
+                case "ChildCalendar":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

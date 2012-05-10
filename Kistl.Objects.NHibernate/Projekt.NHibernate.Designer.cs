@@ -1139,6 +1139,19 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
 
             base.Recalculate(property);
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Auftraege":
+                case "Mitarbeiter":
+                case "Tasks":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1395,21 +1408,25 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
             base.NotifyDeleting();
             if (OnNotifyDeleting_Projekt != null) OnNotifyDeleting_Projekt(this);
 
-            if (ChangedBy != null) {
-                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
-            }
-            if (CreatedBy != null) {
-                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
-            }
+            // FK_Projekt_has_Auftraege ZeroOrMore
             foreach(NHibernatePersistenceObject x in Auftraege) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
+            // FK_Projekt_has_Tasks ZeroOrMore
             foreach(NHibernatePersistenceObject x in Tasks) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
+            }
+            // FK_Projekt_was_ChangedBy
+            if (ChangedBy != null) {
+                ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
+            }
+            // FK_Projekt_was_CreatedBy
+            if (CreatedBy != null) {
+                ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
 
             Auftraege.Clear();

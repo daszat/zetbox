@@ -1175,6 +1175,19 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
 
             base.Recalculate(property);
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "AccessControlList":
+                case "FilterConfigurations":
+                case "SubClasses":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

@@ -443,7 +443,6 @@ namespace at.dasz.DocumentManagement
         }
         #region Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
-
         #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

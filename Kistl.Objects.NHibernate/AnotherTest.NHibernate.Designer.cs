@@ -74,7 +74,6 @@ namespace Kistl.App.Test
 
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

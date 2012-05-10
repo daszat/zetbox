@@ -106,6 +106,16 @@ namespace Kistl.App.Base
         #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Relations":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

@@ -730,7 +730,6 @@ namespace at.dasz.DocumentManagement
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()

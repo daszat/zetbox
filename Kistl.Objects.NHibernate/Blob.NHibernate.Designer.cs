@@ -852,7 +852,6 @@ namespace Kistl.App.Base
                     break;
             }
         }
-
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -1041,16 +1040,18 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Blob != null) OnNotifyDeleting_Blob(this);
 
+            // FK_Document_was_ChangedBy
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ChangedBy);
             }
+            // FK_Document_was_CreatedBy
             if (CreatedBy != null) {
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember children for Icon_has_Blob_RelationEntry
             // should fetch && remember parent for File_has_Blob_RelationEntry
+            // should fetch && remember children for Icon_has_Blob_RelationEntry
 
             ChangedBy = null;
             CreatedBy = null;

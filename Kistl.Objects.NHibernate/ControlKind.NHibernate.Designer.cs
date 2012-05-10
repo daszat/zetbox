@@ -570,6 +570,16 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "ChildControlKinds":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -733,25 +743,27 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             base.NotifyDeleting();
             if (OnNotifyDeleting_ControlKind != null) OnNotifyDeleting_ControlKind(this);
 
-            // should fetch && remember parent for ViewModelDescriptor_has_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewDescriptor_is_a_ControlKind_RelationEntry
-            // should fetch && remember parent for Property_may_request_ControlKind_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_has_ControlKind_RelationEntry
-            // should fetch && remember parent for DataType_may_request_ControlKind_RelationEntry
+            // FK_ChildControlKinds_have_a_Parent
             if (Parent != null) {
                 ((NHibernatePersistenceObject)Parent).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Parent);
             }
+            // FK_ControlKind_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
+            // should fetch && remember parent for DataType_may_request_ControlKind_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_has_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_has_ControlKind_RelationEntry
+            // should fetch && remember parent for Property_may_request_ControlKind_RelationEntry
             // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
             // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewDescriptor_is_a_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_ControlKind_RelationEntry
 
             ChildControlKinds.Clear();
             Parent = null;

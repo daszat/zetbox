@@ -297,6 +297,16 @@ namespace Kistl.App.Base
             }
         }
 
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Groups":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -434,76 +444,76 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_Identity != null) OnNotifyDeleting_Identity(this);
 
-            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
-            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
-            // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
-            // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
-            // should fetch && remember children for Mitarbeiter_is_a_Identity_RelationEntry
-            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
-            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
-            // should fetch && remember parent for Auftrag_CreatedBy_Identity_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
+            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
+            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
+            // should fetch && remember parent for Application_was_Identity_RelationEntry
+            // should fetch && remember parent for Application_was_Identity_RelationEntry
+            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
+            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
             // should fetch && remember parent for Auftrag_ChangedBy_Identity_RelationEntry
-            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
-            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
-            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
-            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
-            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for Auftrag_CreatedBy_Identity_RelationEntry
+            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
+            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
+            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
+            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
+            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
             // should fetch && remember parent for FileImportConfiguration_of_Identity_RelationEntry
-            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
-            // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
-            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
-            // should fetch && remember parent for Calendar_was_Identity_RelationEntry
-            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
-            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
-            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
-            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
-            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
-            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
-            // should fetch && remember parent for Property_was_Identity_RelationEntry
-            // should fetch && remember parent for Property_was_Identity_RelationEntry
-            // should fetch && remember parent for Method_was_Identity_RelationEntry
-            // should fetch && remember parent for Method_was_Identity_RelationEntry
-            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
-            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
-            // should fetch && remember parent for DataType_was_Identity_RelationEntry
-            // should fetch && remember parent for DataType_was_Identity_RelationEntry
             // should fetch && remember parent for Constraint_was_Identity_RelationEntry
             // should fetch && remember parent for Constraint_was_Identity_RelationEntry
+            // should fetch && remember parent for DataType_was_Identity_RelationEntry
+            // should fetch && remember parent for DataType_was_Identity_RelationEntry
+            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
+            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
             // should fetch && remember parent for Blob_was_Identity_RelationEntry
             // should fetch && remember parent for Blob_was_Identity_RelationEntry
-            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
-            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
-            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
-            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
-            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
-            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
-            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
-            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
-            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for Application_was_Identity_RelationEntry
-            // should fetch && remember parent for Application_was_Identity_RelationEntry
-            // should fetch && remember parent for Task_was_Identity_RelationEntry
-            // should fetch && remember parent for Task_was_Identity_RelationEntry
+            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
             // should fetch && remember parent for File_was_Identity_RelationEntry
             // should fetch && remember parent for File_was_Identity_RelationEntry
-            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
-            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
-            // should fetch && remember parent for Relation_was_Identity_RelationEntry
-            // should fetch && remember parent for Relation_was_Identity_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
+            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
+            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
+            // should fetch && remember parent for Method_was_Identity_RelationEntry
+            // should fetch && remember parent for Method_was_Identity_RelationEntry
+            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
+            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
+            // should fetch && remember children for Mitarbeiter_is_a_Identity_RelationEntry
+            // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
+            // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
             // should fetch && remember parent for Module_was_Identity_RelationEntry
             // should fetch && remember parent for Module_was_Identity_RelationEntry
+            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
+            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
+            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
+            // should fetch && remember parent for Property_was_Identity_RelationEntry
+            // should fetch && remember parent for Property_was_Identity_RelationEntry
+            // should fetch && remember parent for Relation_was_Identity_RelationEntry
+            // should fetch && remember parent for Relation_was_Identity_RelationEntry
+            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
+            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
+            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
+            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
+            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
+            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
+            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
+            // should fetch && remember parent for Task_was_Identity_RelationEntry
+            // should fetch && remember parent for Task_was_Identity_RelationEntry
+            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
+            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
 
             Groups.Clear();
         }
