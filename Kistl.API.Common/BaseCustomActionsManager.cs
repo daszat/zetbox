@@ -94,7 +94,7 @@ namespace Kistl.App.Extensions
                 if (_initImpls.ContainsKey(implType)) return;
                 try
                 {
-                    Log.InfoFormat("Initialising Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name);
+                    Log.InfoFormat("Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name);
                     Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
                     ReflectMethods(ctx);
