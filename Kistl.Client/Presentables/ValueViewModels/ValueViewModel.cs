@@ -9,11 +9,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.Text;
     using System.Text.RegularExpressions;
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.GUI;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.GUI;
-    using Kistl.API.Utils;
 
     public enum ValueViewModelState
     {
@@ -105,7 +105,23 @@ namespace Kistl.Client.Presentables.ValueViewModels
             OnPropertyChanged("IsNull");
             OnPropertyChanged("HasValue");
             OnPropertyChanged("Name");
+            OnErrorChanged();
         }
+
+        protected virtual void OnErrorChanged()
+        {
+            OnPropertyChanged("Error");
+            if (!string.IsNullOrEmpty(this.Error))
+            {
+                // Register with a IContextViewModel
+                var ctxVmdl = ViewModelFactory.GetWorkspace(DataContext) as IContextViewModel;
+                if (ctxVmdl != null)
+                {
+                    ctxVmdl.RegisterError(this);
+                }
+            }
+        }
+
         #endregion
 
         #region IValueViewModel Members
@@ -416,21 +432,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 }
             }
         }
-
-        protected virtual void OnErrorChanged()
-        {
-            OnPropertyChanged("Error");
-            if (!string.IsNullOrEmpty(this.Error))
-            {
-                // Register with a IContextViewModel
-                var ctxVmdl = ViewModelFactory.GetWorkspace(DataContext) as IContextViewModel;
-                if (ctxVmdl != null)
-                {
-                    ctxVmdl.RegisterError(this);
-                }
-            }
-        }
-
         #endregion
 
         #region State Machine
