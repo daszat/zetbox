@@ -1368,6 +1368,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         private string GetTimePartError()
         {
+            // Only complain if time is visible
+            if (!TimePartVisible) return string.Empty;
+
             // both no null input allowed or there is a datepart => error
             var timeIsNull = (!AllowNullInput && !_timePartViewModel.Value.HasValue)
                 || (_datePartViewModel.Value.HasValue && !_timePartViewModel.Value.HasValue)
@@ -1378,6 +1381,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         private string GetDatePartError()
         {
+            // Only complain if date is visible
+            if (!DatePartVisible) return string.Empty;
+
             var dateIsNull = (!AllowNullInput && !_datePartViewModel.Value.HasValue)
                 || (_timePartViewModel.Value.HasValue && !_datePartViewModel.Value.HasValue)
                 ? ValueViewModelResources.DateIsRequired
