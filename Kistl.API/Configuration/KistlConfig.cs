@@ -94,7 +94,7 @@ namespace Kistl.API.Configuration
                 EnableShadowCopy = true;
             }
 
-            [XmlAttribute("enableShadowCopy")]
+            [XmlAttribute("EnableShadowCopy")]
             public bool EnableShadowCopy { get; set; }
             [XmlElement("string")]
             public string[] Paths { get; set; }
