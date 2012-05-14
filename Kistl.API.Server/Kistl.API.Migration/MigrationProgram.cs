@@ -120,7 +120,7 @@ namespace Kistl.API.Migration
 
             try
             {
-                return KistlConfig.FromFile(configFilePath, "Ini50.Migrate.xml");
+                return KistlConfig.FromFile(configFilePath, "");
             }
             catch (Exception ex)
             {
