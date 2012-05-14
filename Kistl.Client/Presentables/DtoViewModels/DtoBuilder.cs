@@ -31,11 +31,26 @@ namespace Kistl.Client.Presentables.DtoViewModels
             if (parentProp != null && parentProp.PropertyType.IsAssignableFrom(dto.GetType()))
             {
                 var propertyType = dto.GetType();
-                if (typeof(long).IsAssignableFrom(propertyType)
+                if (   typeof(byte).IsAssignableFrom(propertyType)
                     || typeof(int).IsAssignableFrom(propertyType)
+                    || typeof(uint).IsAssignableFrom(propertyType)
+                    || typeof(long).IsAssignableFrom(propertyType)
+                    || typeof(ulong).IsAssignableFrom(propertyType)
                     || typeof(double).IsAssignableFrom(propertyType)
                     || typeof(float).IsAssignableFrom(propertyType)
                     || typeof(decimal).IsAssignableFrom(propertyType)
+                    || typeof(DateTime).IsAssignableFrom(propertyType)
+
+                    || typeof(byte?).IsAssignableFrom(propertyType)
+                    || typeof(int?).IsAssignableFrom(propertyType)
+                    || typeof(uint?).IsAssignableFrom(propertyType)
+                    || typeof(long?).IsAssignableFrom(propertyType)
+                    || typeof(ulong?).IsAssignableFrom(propertyType)
+                    || typeof(double?).IsAssignableFrom(propertyType)
+                    || typeof(float?).IsAssignableFrom(propertyType)
+                    || typeof(decimal?).IsAssignableFrom(propertyType)
+                    || typeof(DateTime?).IsAssignableFrom(propertyType)
+
                     || typeof(string).IsAssignableFrom(propertyType))
                 {
                     return FormatValue(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
