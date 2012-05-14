@@ -277,6 +277,23 @@ namespace Kistl.API
                                 {
                                     File.Copy(sourcePDBFile, targetPDBFile, true);
                                 }
+
+                                // and all resources
+                                foreach (var res in Directory.GetFiles(Path.GetDirectoryName(sourceDll), Path.GetFileNameWithoutExtension(sourceDll) + ".resources.dll", SearchOption.AllDirectories))
+                                {
+                                    try
+                                    {
+                                        var lang = Path.GetFileName(Path.GetDirectoryName(res));
+                                        var targetRes = Path.Combine(Path.GetDirectoryName(dllToLoad), lang);
+                                        targetRes = Path.Combine(targetRes, Path.GetFileName(res));
+                                        Directory.CreateDirectory(Path.GetDirectoryName(targetRes));
+                                        File.Copy(res, targetRes, true);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Log.Warn("Error loading satellite assembly: " + ex.Message);
+                                    }
+                                }
                             }
                         }
                         catch (Exception ex)
