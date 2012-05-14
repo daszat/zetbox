@@ -13,7 +13,7 @@
                              Height="25"
                              Width="25"
                              Style="{StaticResource ImageButton}"
-                             Image="/Kistl.Client.WPF;component/Images/pen.png"/>
+                             Image="/;component/Images/pen.png"/>
         <TextBlock Text="{Binding ShortText, Mode=OneWay}"
                    ToolTip="{Binding Value, Mode=OneWay}"/>
     </DockPanel>

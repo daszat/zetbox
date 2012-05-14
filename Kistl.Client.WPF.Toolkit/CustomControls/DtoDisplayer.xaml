@@ -68,7 +68,7 @@
                                CommandViewModel="{Binding PrintCommand}"
                                Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
                                Style="{StaticResource ImageButton}"
-                               Image="pack://application:,,,/Images/Printer.png" />
+                               Image="/;component/Images/Printer.png" />
         </StackPanel>
         <TextBlock x:Name="Description"
                            DockPanel.Dock="Bottom"
@@ -161,7 +161,7 @@
                                  CommandViewModel="{Binding PrintCommand}"
                                  Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
                                  Style="{StaticResource ImageButton}"
-                                 Image="pack://application:,,,/Images/Printer.png" />
+                                 Image="/;component/Images/Printer.png" />
           </StackPanel>
         </StackPanel>
       </ScrollViewer>
@@ -193,7 +193,7 @@
                                CommandViewModel="{Binding PrintCommand}"
                                Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
                                Style="{StaticResource ImageButton}"
-                               Image="pack://application:,,,/Images/Printer.png"/>
+                               Image="/;component/Images/Printer.png"/>
         </StackPanel>
         <ItemsControl x:Name="Items"
                       Margin="3,0"
