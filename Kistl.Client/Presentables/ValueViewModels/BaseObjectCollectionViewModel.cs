@@ -59,6 +59,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             OnPropertyChanged("AllowAddNew");
             OnPropertyChanged("AllowDelete");
+            CreateCommands();
         }
 
         public IObjectCollectionValueModel<TModelCollection> ObjectCollectionModel { get; private set; }
