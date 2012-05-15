@@ -32,8 +32,8 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
                 Months = new List<MonthEntry>();
             }
 
-            //public DateTime From { get; set; }
-            //public DateTime Until { get; set; }
+            public DateTime From { get; set; }
+            public DateTime Until { get; set; }
 
             public decimal Total { get; set; }
             public decimal TotalCorrected { get; set; }
@@ -54,7 +54,7 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
 
         protected override object LoadStatistic(DateTime from, DateTime until)
         {
-            var rpt = new Report() { Total = 1, TotalCorrected = 2 };
+            var rpt = new Report() { Total = 1, TotalCorrected = 2, From = from, Until = until };
             rpt.Months.Add(new Report.MonthEntry() { Month = "01", Year = "2012", Total = 1, TotalCorrected = 10 });
             rpt.Months.Add(new Report.MonthEntry() { Month = "02", Year = "2012", Total = 2, TotalCorrected = 10 });
             rpt.Months.Add(new Report.MonthEntry() { Month = "03", Year = "2012", Total = 3, TotalCorrected = 10 });

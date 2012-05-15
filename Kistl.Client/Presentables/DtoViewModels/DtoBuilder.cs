@@ -531,6 +531,23 @@ namespace Kistl.Client.Presentables.DtoViewModels
                     valueModel.Background = background;
                 }
             }
+            else if (typeof(DateTime).IsAssignableFrom(propertyType))
+            {
+                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
+                {
+                    Value = dto != null ? ((DateTime)dto).ToShortDateString() : string.Empty,
+                    Title = title,
+                    Description = description,
+                    Formatting = ExtractFormatting(parentProp, dto),
+                    IsPrintableRoot = ExtractIsPrintableRoot(parentProp, dto),
+                    Root = root,
+                    Data = dto,
+                };
+                if (!string.IsNullOrEmpty(background))
+                {
+                    valueModel.Background = background;
+                }
+            }
             else
             {
                 valueModel = BuildFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
