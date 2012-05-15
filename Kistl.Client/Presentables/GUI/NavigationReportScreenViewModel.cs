@@ -17,15 +17,13 @@ namespace Kistl.Client.Presentables.GUI
     {
         public new delegate NavigationReportScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        private readonly Func<IKistlContext> _ctxFactory;
         private readonly IViewModelDependencies _appCtx;
         private readonly IFileOpener _fileOpener;
 
-        public NavigationReportScreenViewModel(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
+        public NavigationReportScreenViewModel(IViewModelDependencies appCtx,
             IKistlContext dataCtx, ViewModel parent, NavigationScreen screen, IFileOpener fileOpener)
             : base(appCtx, dataCtx, parent, screen)
         {
-            _ctxFactory = ctxFactory;
             _appCtx = appCtx;
             _fileOpener = fileOpener;
         }
