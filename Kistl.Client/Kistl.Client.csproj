@@ -165,6 +165,7 @@
     <Compile Include="Presentables\DtoViewModels\DtoValueViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationActionViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationReportScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationSearchScreenViewModel.cs" />
     <Compile Include="Presentables\IContextViewModel.cs" />

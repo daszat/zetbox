@@ -3374,6 +3374,10 @@ namespace Kistl {
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b8391867-7c76-40fe-b387-96ab5597fd0d"); }
                 }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_NavigationReportScreen
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("ae79eb38-a00c-47be-b886-7bcc2b48020c"); }
+                }
                 public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_NavigationScreen
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b2be0e95-d69e-44ff-8d19-2ccd70da2512"); }
@@ -3654,6 +3658,10 @@ namespace Kistl {
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("5c674594-0416-4d5f-9d9f-1388a8df629a"); }
                 }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_App_Projekte_Client_ViewModel_Projekte_ReportScreenViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("3643897e-b586-493c-9e23-3f37129cca03"); }
+                }
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_App_Projekte_Client_ViewModel_Projekte_ShowCalendarNavigationActionViewModel
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("ec83ad5c-a62a-4407-81d4-6f6ab15ef633"); }
@@ -3753,6 +3761,10 @@ namespace Kistl {
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_NavigationEntryViewModel
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("1c9e10f1-48bc-44a5-b7de-f7b9527e317c"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_NavigationReportScreenViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("da694124-b822-462c-bfd6-931095383786"); }
                 }
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_NavigationScreenViewModel
                 {

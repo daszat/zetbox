@@ -203,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\GUI\NavigationReportScreenDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\GUI\NavigationSearchScreenDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -612,6 +616,9 @@
     <Compile Include="View\Filters\DateRangeFilterEditor.xaml.cs">
       <DependentUpon>DateRangeFilterEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GUI\NavigationReportScreenDisplay.xaml.cs">
+      <DependentUpon>NavigationReportScreenDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GUI\NavigationSearchScreenDisplay.xaml.cs">
       <DependentUpon>NavigationSearchScreenDisplay.xaml</DependentUpon>
     </Compile>
@@ -949,6 +956,9 @@
   <ItemGroup>
     <Resource Include="Images\back.png" />
     <Resource Include="Images\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\printer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -53,13 +53,13 @@
       <ctrls:CommandButton DockPanel.Dock="Left"
                            CommandViewModel="{Binding ReportProblemCommand}"
                            Style="{StaticResource ImageButton}"
-                           Image="/;component/Images/info.png"
+                           Image="/Kistl.Client.WPF;component/Images/info.png"
                            Margin="5"
                            Height="30"/>
       <ctrls:CommandButton DockPanel.Dock="Right"
                            CommandViewModel="{Binding BackCommand}"
                            Style="{StaticResource ImageButton}"
-                           Image="/;component/Images/back.png"
+                           Image="/Kistl.Client.WPF;component/Images/back.png"
                            Margin="5"
                            Height="30"/>
       <TextBlock   TextAlignment="Center"

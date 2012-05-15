@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-04-23T15:15:58Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-05-15T14:32:08Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T12:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T16:03:02Z</KistlBase:CreatedOn>
@@ -11574,6 +11574,20 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:Parent>f0450519-306f-424e-9fee-bc457d379fb4</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.Models.DateTimeValueModel</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="ace2dd97-5620-4466-a292-2de7904c1c19">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Models.DecimalPropertyValueModel</KistlBase:FullName>
+    <KistlBase:Parent>17e1208a-22c6-4358-aa11-427b9b74ef0b</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="652daac5-69fd-4804-8baa-76380b167ffa">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Models.DecimalValueModel</KistlBase:FullName>
+    <KistlBase:Parent>3ab875ac-9ed7-44ea-a75c-727c44bf2a2e</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="0efad02f-023e-4973-8ca9-131bee1d2d4e">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-08-05T12:31:13.134287Z</KistlBase:ChangedOn>
@@ -11671,6 +11685,12 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:CreatedOn>2010-10-08T13:46:36Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Models.IDateTimeValueModel</KistlBase:FullName>
     <KistlBase:ToStringCache>Kistl.Client.Models.IDateTimeValueModel</KistlBase:ToStringCache>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="ac4aebea-6e79-4ce4-8606-7dfdaff91f6b">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Models.IDecimalValueModel</KistlBase:FullName>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="1d8d65e5-f3f7-4488-90e6-4ab7e8f3de52">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -11776,6 +11796,13 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:Parent>eeea7f5f-af2a-4e12-985e-12f03483a524</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.Models.NullableStructMethodResultModel`1</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="17e1208a-22c6-4358-aa11-427b9b74ef0b">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Models.NullableStructPropertyValueModel`1</KistlBase:FullName>
+    <KistlBase:Parent>46042adb-f4a7-426b-9090-4b1620e15b04</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="5dc01257-054c-4253-bd05-e04a6312675a">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-08-05T12:31:13.133287Z</KistlBase:ChangedOn>
@@ -11805,6 +11832,13 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:CreatedOn>2011-06-08T12:40:09Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Models.NullableStructValueModel`1</KistlBase:FullName>
     <KistlBase:Parent>56d10e12-537b-4db5-bb52-da81e11b8954</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="3ab875ac-9ed7-44ea-a75c-727c44bf2a2e">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Models.NullableStructValueModel`1</KistlBase:FullName>
+    <KistlBase:Parent>7b05e632-717f-45fe-8140-46fb1064f47b</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="be7ca431-ccdc-46e5-bbee-6293ba9968b6">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -11886,6 +11920,13 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:FullName>Kistl.Client.Models.PropertyValueModel`1</KistlBase:FullName>
     <KistlBase:Parent>862eab8e-a984-4767-a2dd-640689bdfc70</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.Models.PropertyValueModel`1</KistlBase:ToStringCache>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="46042adb-f4a7-426b-9090-4b1620e15b04">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Models.PropertyValueModel`1</KistlBase:FullName>
+    <KistlBase:Parent>862eab8e-a984-4767-a2dd-640689bdfc70</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="4b8e2223-15bd-4e2a-8a52-457da8deb0b1">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -12004,6 +12045,13 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:FullName>Kistl.Client.Models.ValueModel`1</KistlBase:FullName>
     <KistlBase:Parent>00b58020-50f4-42e3-90dc-a06e4621f5aa</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="7b05e632-717f-45fe-8140-46fb1064f47b">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Models.ValueModel`1</KistlBase:FullName>
+    <KistlBase:Parent>00b58020-50f4-42e3-90dc-a06e4621f5aa</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="8592ec41-9919-4299-b633-54dc70818594">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-08-05T12:31:13.134287Z</KistlBase:ChangedOn>
@@ -12038,10 +12086,10 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="cd9797e0-ad1b-4dd7-b66b-1f2528f7a50c">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2011-08-05T12:31:13.124287Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T18:08:05Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.ActionViewModel</KistlBase:FullName>
-    <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+    <KistlBase:Parent>34a220b5-e8b0-481e-beed-8948acf5173e</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.Presentables.ActionViewModel</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="22fe700b-85dd-4351-89be-55fbdcaf8e0e">
@@ -12730,6 +12778,20 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:ChangedOn>2011-10-18T16:54:22.331798Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-10-18T16:54:22.331798Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.GUI.NavigationEntryViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="0ddd43e0-5e6a-47cf-9610-26f13273fe22">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:20:30.177022Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:20:30.177022Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.GUI.NavigationReportScreenViewModel</KistlBase:FullName>
+    <KistlBase:Parent>353304f7-dc53-472a-a800-c9fa64977418</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="71cfdaef-96d9-4b53-8137-90c02622cc21">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.GUI.NavigationReportScreenViewModel+Factory</KistlBase:FullName>
     <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="353304f7-dc53-472a-a800-c9fa64977418">
@@ -15077,6 +15139,13 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.Presentables.ValueViewModels.ObjectListViewModel+Factory</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="72ce5d51-d8c0-48eb-9ea4-e0f07d26cd31">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:32:08.557789Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:32:08.557789Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ValueViewModels.ObjectReferenceHelper</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="59136763-5a94-4ae5-b9ab-6d679e86245a">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-08-05T12:31:13.039282Z</KistlBase:ChangedOn>
@@ -15937,6 +16006,13 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:Parent>562a3a20-007d-464f-bf35-169f4c7e6c93</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.WPF.View.CacheDebuggerDisplay</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="2f09330f-41bf-46e4-9e58-b39218738c6a">
+    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:21:07.528158Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:21:07.528158Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.WPF.View.Calendar.CalendarAllDay</KistlBase:FullName>
+    <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="1ffaed7b-f448-4839-95ce-81f249a078d0">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-08-05T12:31:13.144288Z</KistlBase:ChangedOn>
@@ -16163,6 +16239,13 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:Deleted>true</KistlBase:Deleted>
     <KistlBase:FullName>Kistl.Client.WPF.View.GUI.NavigationActionDisplay</KistlBase:FullName>
     <KistlBase:Parent>7332b744-15de-473c-8c3e-f1f2826adde6</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="2f8a7579-7635-4c2b-b548-f8deedc9f0ad">
+    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:21:07.528158Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:21:07.528158Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.WPF.View.GUI.NavigationReportScreenDisplay</KistlBase:FullName>
+    <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="5b286939-6ef9-4804-b651-c6429df8f9c5">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
@@ -17498,6 +17581,12 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:B>e0559b37-e9bc-4867-acff-2f86262cedc8</KistlBase:B>
     <KistlBase:B_pos>2147483647</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="8f5ed9ef-7213-43fb-ab37-0422b3856c93">
+    <KistlBase:A>17e1208a-22c6-4358-aa11-427b9b74ef0b</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>ad357f7c-1c80-4123-9b41-37635dfe6bbd</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="505d781b-a0a0-4963-a30a-37d92b10a72f">
     <KistlBase:A>b5ac820f-275c-4055-a21c-40b91059a310</KistlBase:A>
     <KistlBase:A_pos>0</KistlBase:A_pos>
@@ -17515,6 +17604,12 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:A_pos>0</KistlBase:A_pos>
     <KistlBase:B>e0559b37-e9bc-4867-acff-2f86262cedc8</KistlBase:B>
     <KistlBase:B_pos>2147483647</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="76e75cfc-61af-4179-be98-00abc55c63ce">
+    <KistlBase:A>3ab875ac-9ed7-44ea-a75c-727c44bf2a2e</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>ad357f7c-1c80-4123-9b41-37635dfe6bbd</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="a7c42380-a6b9-41de-9d17-a1d3ec8f942f">
     <KistlBase:A>be7ca431-ccdc-46e5-bbee-6293ba9968b6</KistlBase:A>
@@ -17558,6 +17653,12 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:B>0d25af45-d481-42b6-934b-061cced2df91</KistlBase:B>
     <KistlBase:B_pos>2147483647</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="af65c990-0533-4c0e-b954-c74937019095">
+    <KistlBase:A>46042adb-f4a7-426b-9090-4b1620e15b04</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>80d51963-26e7-4f3f-ac83-9a1e6ab54fdf</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="0cff4f09-8d75-4847-974d-540872cf71af">
     <KistlBase:A>0b75ee13-2cdf-4159-8d52-84f306319140</KistlBase:A>
     <KistlBase:A_pos>0</KistlBase:A_pos>
@@ -17575,6 +17676,12 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <KistlBase:A_pos>0</KistlBase:A_pos>
     <KistlBase:B>0d25af45-d481-42b6-934b-061cced2df91</KistlBase:B>
     <KistlBase:B_pos>2147483647</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="d1d0e469-89d4-4eb8-b0b1-3f929c1cc2bb">
+    <KistlBase:A>7b05e632-717f-45fe-8140-46fb1064f47b</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>80d51963-26e7-4f3f-ac83-9a1e6ab54fdf</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="1582aa8a-a838-4d74-82d1-fafe0a9f0927">
     <KistlBase:A>a1c64886-b50d-4e06-b806-dc359e605626</KistlBase:A>
@@ -18077,6 +18184,12 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelRef>46f911ca-722a-4e6e-b3df-a7f22a158668</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="da694124-b822-462c-bfd6-931095383786">
+    <GUI:DefaultEditorKind>ae79eb38-a00c-47be-b886-7bcc2b48020c</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for Navigation Report Screens</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelRef>0ddd43e0-5e6a-47cf-9610-26f13273fe22</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ce563605-37f5-4280-af7c-42eb7598e079">
     <GUI:DefaultEditorKind>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:DefaultEditorKind>
     <GUI:Description>Displays the NavigationScreen and the reachable Children, either as list or tree.</GUI:Description>
@@ -18236,6 +18349,12 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
   <GUI:ViewDescriptor ExportGuid="3f530b14-b40e-44a0-9aa9-40676b4162fe">
     <GUI:ControlKind>ac155a59-74bd-46c1-b63a-120f68118af2</GUI:ControlKind>
     <GUI:ControlRef>e3877431-6d33-4de4-9aa5-67a626fe4c61</GUI:ControlRef>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="3534470a-1aaf-4bf9-83ae-85abc988e3f1">
+    <GUI:ControlKind>ae79eb38-a00c-47be-b886-7bcc2b48020c</GUI:ControlKind>
+    <GUI:ControlRef>2f8a7579-7635-4c2b-b548-f8deedc9f0ad</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -18525,6 +18644,11 @@ public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;str
   <GUI:ControlKind ExportGuid="ace074dc-845d-4796-841e-973939a1e98f">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Kistl.App.GUI.OptionalPredicateFilterKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="ae79eb38-a00c-47be-b886-7bcc2b48020c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.NavigationReportScreen</GUI:Name>
+    <GUI:Parent>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:Parent>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="aee9072d-6d36-48ed-b94e-e7eff7321e46">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -39828,6 +39952,27 @@ public static void UpdateToStringCache(TypeRef obj)
     <KistlBase:FullName>Kistl.App.Projekte.Client.ViewModel.Projekte.CalendarWorkspaceViewModel+Factory</KistlBase:FullName>
     <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="ea530e24-b1fb-499e-9eb4-1b12643092b4">
+    <KistlBase:Assembly>8937dfc1-288e-49ca-a6c6-701e9c230b07</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:20:30.177022Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:20:30.177022Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.App.Projekte.Client.ViewModel.Projekte.ReportScreenViewModel</KistlBase:FullName>
+    <KistlBase:Parent>0ddd43e0-5e6a-47cf-9610-26f13273fe22</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="c1618276-ac33-43aa-80a7-b4a907b0c038">
+    <KistlBase:Assembly>8937dfc1-288e-49ca-a6c6-701e9c230b07</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:20:30.177022Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:20:30.177022Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.App.Projekte.Client.ViewModel.Projekte.ReportScreenViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="ebe9bcc9-8af1-49e8-b424-35638f9a489c">
+    <KistlBase:Assembly>8937dfc1-288e-49ca-a6c6-701e9c230b07</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2012-05-15T12:20:30.177022Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2012-05-15T12:20:30.177022Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.App.Projekte.Client.ViewModel.Projekte.ReportScreenViewModel+Report</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="348c7a43-1571-4c17-9e5c-2a86506752f7">
     <KistlBase:Assembly>8937dfc1-288e-49ca-a6c6-701e9c230b07</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-10-18T17:57:26.426196Z</KistlBase:ChangedOn>
@@ -42757,6 +42902,12 @@ public static void UpdateToStringCache(TypeRef obj)
     <KistlBase:B>e0559b37-e9bc-4867-acff-2f86262cedc8</KistlBase:B>
     <KistlBase:B_pos>2147483647</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="8f5ed9ef-7213-43fb-ab37-0422b3856c93">
+    <KistlBase:A>17e1208a-22c6-4358-aa11-427b9b74ef0b</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>ad357f7c-1c80-4123-9b41-37635dfe6bbd</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="505d781b-a0a0-4963-a30a-37d92b10a72f">
     <KistlBase:A>b5ac820f-275c-4055-a21c-40b91059a310</KistlBase:A>
     <KistlBase:A_pos>0</KistlBase:A_pos>
@@ -42774,6 +42925,12 @@ public static void UpdateToStringCache(TypeRef obj)
     <KistlBase:A_pos>0</KistlBase:A_pos>
     <KistlBase:B>e0559b37-e9bc-4867-acff-2f86262cedc8</KistlBase:B>
     <KistlBase:B_pos>2147483647</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="76e75cfc-61af-4179-be98-00abc55c63ce">
+    <KistlBase:A>3ab875ac-9ed7-44ea-a75c-727c44bf2a2e</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>ad357f7c-1c80-4123-9b41-37635dfe6bbd</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="a7c42380-a6b9-41de-9d17-a1d3ec8f942f">
     <KistlBase:A>be7ca431-ccdc-46e5-bbee-6293ba9968b6</KistlBase:A>
@@ -42817,6 +42974,12 @@ public static void UpdateToStringCache(TypeRef obj)
     <KistlBase:B>0d25af45-d481-42b6-934b-061cced2df91</KistlBase:B>
     <KistlBase:B_pos>2147483647</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="af65c990-0533-4c0e-b954-c74937019095">
+    <KistlBase:A>46042adb-f4a7-426b-9090-4b1620e15b04</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>80d51963-26e7-4f3f-ac83-9a1e6ab54fdf</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="0cff4f09-8d75-4847-974d-540872cf71af">
     <KistlBase:A>0b75ee13-2cdf-4159-8d52-84f306319140</KistlBase:A>
     <KistlBase:A_pos>0</KistlBase:A_pos>
@@ -42834,6 +42997,12 @@ public static void UpdateToStringCache(TypeRef obj)
     <KistlBase:A_pos>0</KistlBase:A_pos>
     <KistlBase:B>0d25af45-d481-42b6-934b-061cced2df91</KistlBase:B>
     <KistlBase:B_pos>2147483647</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="d1d0e469-89d4-4eb8-b0b1-3f929c1cc2bb">
+    <KistlBase:A>7b05e632-717f-45fe-8140-46fb1064f47b</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>80d51963-26e7-4f3f-ac83-9a1e6ab54fdf</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="1582aa8a-a838-4d74-82d1-fafe0a9f0927">
     <KistlBase:A>a1c64886-b50d-4e06-b806-dc359e605626</KistlBase:A>
@@ -46497,17 +46666,17 @@ public static void isValid_CreatedOn(Task obj, PropertyIsValidEventArgs e)
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2012-04-04T13:26:18.498541Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
-public static void get_DatumBis(Task obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+public static void get_DatumBis(Task obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_DatumBis(Task obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+public static void preSet_DatumBis(Task obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_DatumBis(Task obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+public static void postSet_DatumBis(Task obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
@@ -47766,8 +47935,13 @@ public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:ViewModelRef>42e9d44a-70df-4b32-8e2f-3fd9520ac4e2</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="3643897e-b586-493c-9e23-3f37129cca03">
+    <GUI:Description>ViewModel für Projekte Navigation Action, showing a report</GUI:Description>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:ViewModelRef>ea530e24-b1fb-499e-9eb4-1b12643092b4</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ec83ad5c-a62a-4407-81d4-6f6ab15ef633">
-    <GUI:Description>ViewModel fpr Projekte Navigation Action, showing a calendar</GUI:Description>
+    <GUI:Description>ViewModel für Projekte Navigation Action, showing a calendar</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:ViewModelRef>348c7a43-1571-4c17-9e5c-2a86506752f7</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
@@ -47803,12 +47977,13 @@ public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System
     <GUI:Title>Root</GUI:Title>
   </GUI:NavigationScreen>
   <GUI:NavigationScreen ExportGuid="ddaaaa2a-0f6d-42f6-9643-0ad7f111b76a">
-    <GUI:ChangedOn>2011-10-18T13:06:40.027207Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2012-05-15T12:33:24.059969Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-10-18T13:06:40.027207Z</GUI:CreatedOn>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
     <GUI:Children_pos>100</GUI:Children_pos>
     <GUI:Title>Statistik</GUI:Title>
+    <GUI:ViewModelDescriptor>3643897e-b586-493c-9e23-3f37129cca03</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
   <KistlBase:GroupMembership ExportGuid="b4abcf53-5464-4942-a36b-bbc124315df2">
     <KistlBase:ChangedOn>2011-08-05T12:31:12.610257Z</KistlBase:ChangedOn>
