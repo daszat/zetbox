@@ -27,3 +27,6 @@ VersionInfo.Designer.cs
 /Libs/PrepareEnv/PrepareEnv/Examples/env.xml
 /packages/log4net.2.0.0
 /packages/NUnit.2.6.0.12054
+/packages/Autofac.2.6.1.841
+/packages/Autofac.Wcf.2.6.1.841
+/packages/Autofac.Web.2.6.1.841

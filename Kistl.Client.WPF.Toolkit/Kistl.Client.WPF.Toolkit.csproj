@@ -52,8 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
+      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="GraphSharp">
