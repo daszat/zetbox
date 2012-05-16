@@ -17,11 +17,5 @@ namespace Kistl.App.Projekte
         public static void NotifyPreSave(Projekt obj)
         {
         }
-
-        [Invocation]
-        public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs<System.Object> e, string title, Kistl.App.Base.DateTimeRange range)
-        {
-            e.Result = string.Format("This will be a summary report '{0}' in the range {1}", title, range);
-        }
     }
 }

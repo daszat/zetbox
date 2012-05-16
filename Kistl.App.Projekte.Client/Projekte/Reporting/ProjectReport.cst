@@ -1,0 +1,21 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="ProjectReport"
+    ClassName="Kistl.App.Projekte.Client.Projekte.Reporting.ProjectReport"
+    Inherits="Kistl.App.Projekte.Client.Projekte.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+
+\document [
+<% Common.DocumentInfo.Call(Host, "Invoice", null); %>
+] {
+<% Common.DocumentStyles.Call(Host); %>
+
+\section [
+<% PageSetup(); %>
+	] {
+        \paragraph [ Style = "Title" Format { SpaceBefore = "2cm" } ] {
+            <%= GetTitle() %>
+        }
+    }
+}

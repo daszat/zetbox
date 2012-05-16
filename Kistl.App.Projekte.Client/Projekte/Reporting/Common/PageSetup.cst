@@ -1,0 +1,16 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Common.PageSetup"
+    ClassName="Kistl.App.Projekte.Client.Projekte.Reporting.Common.PageSetup"
+    Inherits="Kistl.App.Projekte.Client.Projekte.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Parameter Name="Orientation" Type="string" %>
+
+PageSetup
+{
+	Orientation = <%= Orientation %>
+	PageFormat = A4
+	TopMargin = 40
+	StartingNumber = 1
+}

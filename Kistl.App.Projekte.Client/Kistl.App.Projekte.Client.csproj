@@ -79,6 +79,14 @@
     <Reference Include="PdfSharp.Charting">
       <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.3879.0\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(AREBISROOT)\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Arebis.CodeGenerator, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(AREBISROOT)\Arebis.CodeGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -126,8 +134,34 @@
     <Compile Include="KistlBase\BlobActions.cs" />
     <Compile Include="KistlBase\ObjectClassActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
+    <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Projekte\CalendarTaskViewModel.cs" />
+    <Compile Include="Projekte\Reporting\Common\DocumentInfo1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocumentInfo.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Projekte\Reporting\Common\DocumentStyles1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocumentStyles.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Projekte\Reporting\Common\PageSetup1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageSetup.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Projekte\Reporting\ProjectReport.cs">
+      <DependentUpon>ProjectReport.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Projekte\Reporting\ProjectReport1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectReport.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Projekte\Reporting\ReportingHost.cs" />
+    <Compile Include="Projekte\Reporting\ReportTemplate.cs" />
     <Compile Include="ViewModel\Projekte\ReportScreenViewModel.cs" />
     <Compile Include="ViewModel\Projekte\ShowCalendarNavigationActionViewModel.cs" />
     <Compile Include="ViewModel\Projekte\CalendarWorkspaceViewModel.cs" />
@@ -144,6 +178,22 @@
     <Compile Include="SchemaMigration\SourceColumnActions.cs" />
     <Compile Include="SchemaMigration\SourceTableActions.cs" />
     <Compile Include="SchemaMigration\StagingDatabaseActions.cs" />
+    <None Include="Projekte\Reporting\Common\DocumentInfo.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DocumentInfo1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Projekte\Reporting\Common\DocumentStyles.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DocumentStyles1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Projekte\Reporting\Common\PageSetup.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>PageSetup1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Projekte\Reporting\ProjectReport.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ProjectReport1.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
@@ -175,6 +225,7 @@
   <ItemGroup>
     <None Include="Kistl.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -62,10 +62,39 @@
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>..\Libs\PDFsharp\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>..\Libs\PDFsharp\MigraDoc.Rendering.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering">
+      <HintPath>..\Libs\PDFsharp\MigraDoc.RtfRendering.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\Libs\PDFsharp\PdfSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\Libs\PDFsharp\PdfSharp.Charting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(AREBISROOT)\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Arebis.CodeGenerator, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(AREBISROOT)\Arebis.CodeGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -99,6 +128,8 @@
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="RelationExtensions.cs" />
     <Compile Include="ObjectClassExtensions.cs" />
+    <Compile Include="Reporting\AbstractReportingHost.cs" />
+    <Compile Include="Reporting\ReportTemplate.cs" />
     <Compile Include="StreamExtensions.cs" />
     <Compile Include="ThreadPrincipalResolver.cs" />
     <Compile Include="TypeRefExtensions.cs" />

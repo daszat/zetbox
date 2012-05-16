@@ -19,6 +19,12 @@ namespace Kistl.App.Projekte.Client
             moduleBuilder.RegisterViewModels(typeof(CustomClientActionsModule).Assembly);
 
             // Register explicit overrides here
+            moduleBuilder
+                .Register<Kistl.App.Projekte.Client.Projekte.Reporting.ReportingHost>(c => new Kistl.App.Projekte.Client.Projekte.Reporting.ReportingHost(
+                        c.Resolve<IFileOpener>()
+                    )
+                )
+                .InstancePerDependency();
         }
     }
 }

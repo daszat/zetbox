@@ -1,0 +1,120 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Common.DocumentStyles"
+    ClassName="Kistl.App.Projekte.Client.Projekte.Reporting.Common.DocumentStyles"
+    Inherits="Kistl.App.Projekte.Client.Projekte.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+  \styles {
+    Normal {
+      Font { Name = "Verdana" Size = 10 }
+      ParagraphFormat {
+        SpaceBefore = 6
+        SpaceAfter = 6
+      }
+    }
+
+    Compact : Normal {
+      ParagraphFormat {
+        SpaceBefore = "0.07cm"
+        SpaceAfter = "0.07cm"
+      }
+    }
+
+    Title : Normal {
+      Font { Size = 16 Bold = true }
+    }
+	
+    Heading1 {
+      Font { Size = 14 Bold = true }
+      ParagraphFormat {
+		SpaceBefore = 6
+        SpaceAfter = 6
+        PageBreakBefore = false
+        OutlineLevel = Level1
+		KeepWithNext = True
+      }
+    }
+
+    Heading2 {
+      Font { Size = 12 Bold = true }
+      ParagraphFormat {
+        SpaceBefore = 6
+		SpaceAfter = 3
+        OutlineLevel = Level2
+		KeepWithNext = True
+      }
+    }
+
+    Heading3 {
+      Font { Size = 11 Bold = true }
+      ParagraphFormat {
+        SpaceAfter = 3
+        OutlineLevel = Level3
+		KeepWithNext = True
+      }
+    }
+
+    Heading4 {
+      Font { Size = 10 Bold = true }
+      ParagraphFormat {
+        SpaceAfter = 2
+        OutlineLevel = Level4
+		KeepWithNext = True
+      }
+    }
+
+    Heading5 { ParagraphFormat { OutlineLevel = Level5 } }
+	Heading6 { ParagraphFormat { OutlineLevel = Level6 } }
+	Heading7 { ParagraphFormat { OutlineLevel = Level7 } }
+	Heading8 { ParagraphFormat { OutlineLevel = Level8 } }
+	Heading9 { ParagraphFormat { OutlineLevel = Level9 } }
+
+    Header {
+      ParagraphFormat {
+        TabStops += {
+          Position = "16cm"
+          Alignment = Right
+        }
+      }
+    }
+
+    Footer {
+      ParagraphFormat {
+        TabStops += {
+          Position = "8cm"
+          Alignment = Center
+        }
+      }
+    }
+
+    InvalidStyleName {
+      Font { Bold = true Underline = Dash Color = Red }
+    }
+
+    TextBox : Normal {
+      ParagraphFormat {
+        Alignment = Justify
+        Borders
+        {
+          Width = 2.5
+          DistanceFromTop = 3
+          DistanceFromBottom = 3
+          DistanceFromLeft = 3
+          DistanceFromRight = 3
+        }
+        Shading { Color = SkyBlue }
+      }
+    }
+
+    TOC : Normal {
+      Font { }
+      ParagraphFormat {
+        TabStops += {
+          Position = "16cm"
+          Alignment = Right
+          Leader = Dots
+        }
+      }
+    }
+  }

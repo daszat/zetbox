@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-05-15T14:32:08Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-05-16T16:29:28Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2011-08-05T12:30:47.664236Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T18:08:05Z</KistlBase:CreatedOn>
@@ -2852,14 +2852,14 @@ public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs
     <KistlBase:ObjectClass>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="dbb73c2e-e751-4249-b63a-f4417c3177b4">
-    <KistlBase:ChangedOn>2012-04-04T13:26:07.103536Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2012-05-16T16:29:28.307352Z</KistlBase:ChangedOn>
     <KistlBase:CodeTemplate>[Invocation]
 public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, string title, Kistl.App.Base.DateTimeRange range)
 {
 }
 </KistlBase:CodeTemplate>
     <KistlBase:CreatedOn>2011-10-28T12:29:13.184716Z</KistlBase:CreatedOn>
-    <KistlBase:InvokeOnServer>true</KistlBase:InvokeOnServer>
+    <KistlBase:InvokeOnServer>false</KistlBase:InvokeOnServer>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <KistlBase:Label>Summary Report</KistlBase:Label>
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>

@@ -1,0 +1,15 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Common.DocumentInfo"
+    ClassName="Kistl.App.Projekte.Client.Projekte.Reporting.Common.DocumentInfo"
+    Inherits="Kistl.App.Projekte.Client.Projekte.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Parameter Name="Subject" Type="string" %>
+<%@ Parameter Name="Author" Type="string" %>
+Info
+{
+	Title = "<%= Subject %>"
+	Subject = "<%= Subject %>"
+	Author = "<%= Author %>"
+}
