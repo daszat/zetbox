@@ -58,18 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AjaxDataControls.dll</HintPath>
     </Reference>
-    <Reference Include="AntiXSSLibrary">
-      <HintPath>..\packages\AjaxControlToolkit.4.1.60501\lib\35\SanitizerProviders\AntiXSSLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="HtmlSanitizationLibrary">
-      <HintPath>..\packages\AjaxControlToolkit.4.1.60501\lib\35\SanitizerProviders\HtmlSanitizationLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="SanitizerProviders">
-      <HintPath>..\packages\AjaxControlToolkit.4.1.60501\lib\35\SanitizerProviders\SanitizerProviders.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
