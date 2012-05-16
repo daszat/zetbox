@@ -56,11 +56,6 @@
       <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="log4net">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\log4net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="GraphSharp">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\GraphSharp 1.0\GraphSharp.dll</HintPath>
@@ -68,6 +63,10 @@
     <Reference Include="GraphSharp.Controls">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\GraphSharp 1.0\GraphSharp.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -140,6 +139,7 @@
     <Compile Include="CustomControls\ZBoxListView.cs" />
     <Compile Include="WPFHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>

@@ -57,8 +57,8 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel">
       <HintPath>..\Libs\PDFsharp\MigraDoc.DocumentObjectModel.dll</HintPath>
@@ -352,6 +352,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>
