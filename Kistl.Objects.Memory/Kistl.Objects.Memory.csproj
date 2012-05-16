@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{01E60FD5-CD96-466a-83B1-8EFC7452B47C}</ProjectGuid>
+    <ProjectGuid>{01E60FD5-CD96-466A-83B1-8EFC7452B47C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Kistl.Objects.MemoryImpl</RootNamespace>
     <AssemblyName>Kistl.Objects.MemoryImpl</AssemblyName>
@@ -15,6 +15,8 @@
     <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
     <RelativeOutputPath>Common\Core</RelativeOutputPath>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Kistl\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -263,7 +265,7 @@
     <None Include="Kistl.Objects.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FrozenObjects.xml"/>
+    <EmbeddedResource Include="FrozenObjects.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -273,4 +275,5 @@
   -->
   <Target Name="AfterBuild">
   </Target>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
