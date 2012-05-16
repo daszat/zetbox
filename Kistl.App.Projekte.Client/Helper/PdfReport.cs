@@ -92,7 +92,7 @@ namespace Kistl.App.Projekte.Client.Helper
             s.Font.Size = 11;
             s.ParagraphFormat.SpaceBefore = "1cm";
             s.ParagraphFormat.SpaceAfter = "0.5cm";
-            s.ParagraphFormat.ListInfo.ListType = ListType.None;
+            s.ParagraphFormat.ListInfo.ListType = ListType.BulletList1;
             s.ParagraphFormat.ListInfo.ContinuePreviousList = false;
 
             s = Document.Styles.AddStyle(styleTableHeader, StyleNames.Normal);
@@ -100,7 +100,7 @@ namespace Kistl.App.Projekte.Client.Helper
             s.ParagraphFormat.Font.Bold = true;
 
             s = Document.Styles.AddStyle(styleAppendixHeading, StyleNames.Heading1);
-            s.ParagraphFormat.ListInfo.ListType = ListType.None;
+            s.ParagraphFormat.ListInfo.ListType = ListType.BulletList1;
         }
 
         protected virtual void NewSection()
