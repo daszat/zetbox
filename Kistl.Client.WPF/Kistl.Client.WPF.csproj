@@ -130,9 +130,7 @@
     </Reference>
     <Reference Include="WindowsFormsIntegration" />
     <Reference Include="WPFExtensions">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\WPFExtensions.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
     </Reference>
     <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>False</Private>
