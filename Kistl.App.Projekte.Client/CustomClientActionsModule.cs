@@ -21,6 +21,8 @@ namespace Kistl.App.Projekte.Client
             // Register explicit overrides here
             moduleBuilder
                 .Register<Kistl.App.Projekte.Client.Projekte.Reporting.ReportingHost>(c => new Kistl.App.Projekte.Client.Projekte.Reporting.ReportingHost(
+                        "Kistl.App.Projekte.Client.DerivedReportTest",
+                        typeof(CustomClientActionsModule).Assembly,
                         c.Resolve<IFileOpener>()
                     )
                 )

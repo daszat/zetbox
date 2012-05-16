@@ -102,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomClientActionsModule.cs" />
+    <Compile Include="DerivedReportTest\Common\DocumentStyles1.Designer.cs">
+      <DependentUpon>DocumentStyles.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DerivedReportTest\ProjectReport.cs" />
     <Compile Include="DocumentManagement\FileActions.cs" />
     <Compile Include="Gui\NavigationActionActions.cs" />
     <Compile Include="Gui\NavigationSearchScreenActions.cs" />
@@ -166,6 +172,10 @@
     <Compile Include="ViewModel\Projekte\ShowCalendarNavigationActionViewModel.cs" />
     <Compile Include="ViewModel\Projekte\CalendarWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Projekte\TaskViewModel.cs" />
+    <None Include="DerivedReportTest\Common\DocumentStyles.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DocumentStyles1.Designer.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
