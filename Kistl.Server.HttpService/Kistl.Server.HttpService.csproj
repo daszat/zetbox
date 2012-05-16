@@ -13,7 +13,7 @@
     <RootNamespace>Kistl.Server.HttpService</RootNamespace>
     <AssemblyName>Kistl.Server.HttpService</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Kistl\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <UseIISExpress>false</UseIISExpress>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>

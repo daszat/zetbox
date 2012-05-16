@@ -62,10 +62,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
         protected override void ApplyAdditionalItemGroups()
         {
             base.ApplyAdditionalItemGroups();
-            this.WriteLine(@"    <ItemGroup>");
-            this.WriteLine(@"        <EmbeddedResource Include=""*.hbm.xml"" />");
-            this.WriteLine(@"        <EmbeddedResource Include=""*/*.hbm.xml"" />");
-            this.WriteLine(@"    </ItemGroup>");
+            this.WriteLine(@"  <ItemGroup>");
+            this.WriteLine(@"    <EmbeddedResource Include=""*.hbm.xml"" />");
+            this.WriteLine(@"    <EmbeddedResource Include=""*/*.hbm.xml"" />");
+            this.WriteLine(@"  </ItemGroup>");
         }
 
         protected override string GetRelativeOutputPath()

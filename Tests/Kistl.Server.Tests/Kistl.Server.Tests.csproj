@@ -17,7 +17,7 @@
     <StartArguments>Kistl.ServerTests.nunit /config:Studio</StartArguments>
     <StartWorkingDirectory>..\..\bin\Debug\Tests</StartWorkingDirectory>
     <NoWarn>1591,0618</NoWarn>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\Kistl\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
