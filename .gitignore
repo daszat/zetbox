@@ -26,3 +26,4 @@ VersionInfo.Designer.cs
 
 /Libs/PrepareEnv/PrepareEnv/Examples/env.xml
 /packages/log4net.2.0.0
+/packages/NUnit.2.6.0.12054
