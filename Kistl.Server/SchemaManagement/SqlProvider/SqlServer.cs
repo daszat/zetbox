@@ -527,8 +527,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             // Drop an existing constraint
             if (!add)
             {
-                ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {0}", QuoteIdentifier(defConstrName), FormatSchemaName(tblName)));
-                ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {0}", QuoteIdentifier(checkConstrName), FormatSchemaName(tblName)));
+                ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {2}",
+                    FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, defConstrName)),
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(defConstrName)));
+                ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {2}",
+                    FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, checkConstrName)),
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(checkConstrName)));
             }
 
             // Construct statement
