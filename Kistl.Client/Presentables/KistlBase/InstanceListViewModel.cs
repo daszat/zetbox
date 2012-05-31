@@ -415,8 +415,42 @@ namespace Kistl.Client.Presentables.KistlBase
 
         private void NewObject()
         {
+            ObjectClass baseclass = _type;
+
+            var children = new List<ObjectClass>();
+            if (baseclass.IsAbstract == false)
+            {
+                children.Add(baseclass);
+            }
+            baseclass.CollectChildClasses(FrozenContext, children, false);
+
+            if (children.Count == 1)
+            {
+                CreateNewObjectAndNotify(children.Single());
+            }
+            else
+            {
+                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+                                        DataContext, this,
+                                        typeof(ObjectClass).GetObjectClass(FrozenContext),
+                                        () => children.AsQueryable(),
+                                        (chosen) =>
+                                        {
+                                            if (chosen != null)
+                                            {
+                                                CreateNewObjectAndNotify((ObjectClass)chosen.First().Object);
+                                            }
+                                        }, null);
+                lstMdl.ListViewModel.ShowCommands = false;
+
+                ViewModelFactory.ShowDialog(lstMdl);
+            }
+        }
+
+        private void CreateNewObjectAndNotify(ObjectClass type)
+        {
             var workingCtx = workingCtxFactory();
-            var obj = workingCtx.Create(DataContext.GetInterfaceType(_type.GetDataType()));
+            var obj = workingCtx.Create(DataContext.GetInterfaceType(type.GetDataType()));
             OnObjectCreated(obj);
 
             if (isEmbedded(workingCtx))

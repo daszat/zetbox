@@ -239,7 +239,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             if (children.Count == 1)
             {
-                var targetType = baseclass.GetDescribedInterfaceType();
+                var targetType = children.Single().GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
                 var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
 
