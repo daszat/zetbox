@@ -12,11 +12,15 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Server.PerfCounter;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
 
     public class NHibernateProvider
         : Autofac.Module
     {
         public static readonly string ServerAssembly = "Kistl.Objects.NHibernateImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        private static readonly object _initLock = new object();
+        private static bool _initQueryDone = false;
 
         protected override void Load(ContainerBuilder moduleBuilder)
         {
@@ -59,6 +63,19 @@ namespace Kistl.DalProvider.NHibernate
                 {
                     var manager = args.Context.Resolve<INHibernateActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
+                    if (!_initQueryDone)
+                    {
+                        lock (_initLock)
+                        {
+                            if (!_initQueryDone)
+                            {
+                                var cls = args.Instance.GetQuery<ObjectClass>().FirstOrDefault();
+                                // need to repeat initialization until the first proxy was created
+                                _initQueryDone = cls != null;
+                                Logging.Log.InfoFormat("Initialized NHibernate synchronously: done = {0}", _initQueryDone);
+                            }
+                        }
+                    }
                 })
                 .InstancePerDependency();
 
