@@ -12,11 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GraphSharp.Controls;
 using Kistl.App.Base;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables.ModuleEditor;
-using QuickGraph;
 
 namespace Kistl.Client.WPF.View.ModuleEditor
 {

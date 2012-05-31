@@ -78,10 +78,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.3879.0\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="QuickGraph">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\GraphSharp 1.0\QuickGraph.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -338,7 +334,6 @@
     </Compile>
     <Compile Include="Presentables\ViewModelCache.cs" />
     <Compile Include="Presentables\ViewModelFactory.cs" />
-    <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\ModuleViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModel.cs" />

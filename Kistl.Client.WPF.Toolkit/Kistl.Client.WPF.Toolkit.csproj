@@ -55,14 +55,6 @@
       <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="GraphSharp">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\GraphSharp 1.0\GraphSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="GraphSharp.Controls">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\GraphSharp 1.0\GraphSharp.Controls.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
       <Private>False</Private>
