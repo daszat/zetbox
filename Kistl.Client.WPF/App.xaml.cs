@@ -145,8 +145,6 @@ namespace Kistl.Client.WPF
 
             container = CreateMasterContainer(config);
 
-            TestTempFileService(container);
-
             StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
 
             // Make Gendarme happy
@@ -220,18 +218,6 @@ namespace Kistl.Client.WPF
             // they are needed.
             var launcher = container.Resolve<Launcher>();
             launcher.Show(args);
-        }
-
-        private void TestTempFileService(IContainer container)
-        {
-            var tmp = container.Resolve<ITempFileService>();
-            
-            string path;
-
-            path = tmp.CreateTempFile();
-            path = tmp.CreateTempFile(".png");
-            path = tmp.CreateTempFolder();
-            path = tmp.CreateTempFolder("myreport.pdf");
         }
 
         // Focus nightmare

@@ -28,10 +28,9 @@ namespace Kistl.API
         private readonly string _currentTempFolder;
         private readonly string _rootTempFolder;
 
-        public TempFileService(KistlConfig cfg)
+        public TempFileService()
         {
-            if (cfg == null) throw new ArgumentNullException("cfg");
-            _rootTempFolder = cfg.TempFolder;
+            _rootTempFolder = Path.Combine(Path.GetTempPath(), Path.Combine("zetbox", "tmp"));
             _currentTempFolder = Path.Combine(_rootTempFolder, DateTime.Today.ToString("yyMMdd"));
             
             if (!Directory.Exists(_currentTempFolder))
@@ -91,16 +90,24 @@ namespace Kistl.API
                         else
                         {
                             result = Path.Combine(_currentTempFolder, probe + (ext ?? string.Empty));
-                            using (var fs = File.Create(result))
+                            try
                             {
-                                fs.Flush();
-                                fs.Close();
+                                using (var fs = File.Open(result, FileMode.CreateNew))
+                                {
+                                    fs.Flush();
+                                    fs.Close();
+                                }
+                            }
+                            catch (IOException)
+                            {
+                                // File already exists - continue
+                                continue;
                             }
                         }
                         return result;
                     }
                 }
-                throw new InvalidOperationException("Unable to create a uniqe tempfile");
+                throw new InvalidOperationException("Unable to create a unique tempfile");
             }
         }
 
