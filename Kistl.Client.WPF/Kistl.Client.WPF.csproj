@@ -849,7 +849,7 @@
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.Client.WPF.Toolkit\Kistl.Client.WPF.Toolkit.csproj">
       <Project>{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}</Project>

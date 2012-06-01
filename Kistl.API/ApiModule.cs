@@ -67,6 +67,11 @@ namespace Kistl.API
                 .RegisterType<TypeMap>()
                 .AsSelf()
                 .SingleInstance();
+
+            builder
+                .RegisterType<TempFileService>()
+                .As<ITempFileService>()
+                .SingleInstance();
         }
     }
 }

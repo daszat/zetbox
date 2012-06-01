@@ -402,10 +402,10 @@ namespace Kistl.API.Configuration
 
         /// <summary>
         /// The TempFolder of this application contains all local state of the app.
-        /// The Path is [TEMPPATH]\dasz\zetbox\[Current Configuration Name]\[AppDomain.FriendlyName]\
+        /// The Path is [TEMPPATH]\zetbox\[Current Configuration Name]\[AppDomain.FriendlyName]\
         /// </summary>
         /// <remarks>
-        /// eg.: C:\Temp\dasz\zetbox\Arthur's Configuration\Kistl.Client.exe\
+        /// eg.: C:\Temp\zetbox\Arthur's Configuration\Kistl.Client.exe\
         /// </remarks>
         [XmlIgnore]
         public string TempFolder
@@ -414,7 +414,6 @@ namespace Kistl.API.Configuration
             {
                 string workingFolder = Path.GetTempPath();
 
-                workingFolder = Path.Combine(workingFolder, "dasz");
                 workingFolder = Path.Combine(workingFolder, "zetbox");
                 workingFolder = Path.Combine(workingFolder, Helper.GetLegalFileName(this.ConfigName));
 
