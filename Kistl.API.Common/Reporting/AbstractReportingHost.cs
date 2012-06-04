@@ -81,6 +81,14 @@ namespace Kistl.API.Common.Reporting
             ErrorsAreFatal = false;
         }
 
+        public ITempFileService TempService
+        {
+            get
+            {
+                return _tmpService;
+            }
+        }
+
         public void Initialize(NameValueCollection settings)
         {
             if (settings == null) { throw new ArgumentNullException("settings"); }
