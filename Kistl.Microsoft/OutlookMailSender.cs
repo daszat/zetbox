@@ -17,15 +17,19 @@ using Kistl.Client.Presentables;
     /// <summary>
     /// Sends MailMessages using Outlook
     /// </summary>
-    public class OutlookMailSender : IMailSender, IDisposable
+    public class OutlookMailSender : IMailSender
     {
         private const int E_ABORT = -2147467260;
 
         private readonly IViewModelFactory _vmf;
-        public OutlookMailSender(IViewModelFactory vmf)
+        private readonly ITempFileService _tmpService;
+
+        public OutlookMailSender(IViewModelFactory vmf, ITempFileService tmpService)
         {
             if (vmf == null) throw new ArgumentNullException("vmf");
+            if (tmpService == null) throw new ArgumentNullException("tmpService");
             _vmf = vmf;
+            _tmpService = tmpService;
         }
 
         public void Send(MailMessage msg)
@@ -69,7 +73,7 @@ using Kistl.Client.Presentables;
 
                 foreach (var a in msg.Attachments)
                 {
-                    var tmpFile = CreateTempFile(a.Name);
+                    var tmpFile = _tmpService.Create(a.Name);
                     using (var fs = File.OpenWrite(tmpFile))
                     {
                         a.ContentStream.CopyTo(fs);
@@ -93,18 +97,6 @@ using Kistl.Client.Presentables;
             }
         }
 
-        private List<string> _tempFiles = new List<string>();
-
-        protected string CreateTempFile(string filename)
-        {
-            // TODO: Move that to a global helper and delete files on shutdown
-            var tmp = Path.GetTempFileName();
-            if (File.Exists(tmp)) File.Delete(tmp);
-            Directory.CreateDirectory(tmp);
-            _tempFiles.Add(tmp);
-            return Path.Combine(tmp, filename);
-        }
-
         public class Module : Autofac.Module
         {
             protected override void Load(Autofac.ContainerBuilder builder)
@@ -116,25 +108,6 @@ using Kistl.Client.Presentables;
                     .As<IMailSender>()
                     .SingleInstance(); // Stateless
             }
-        }
-
-        public void Dispose()
-        {
-            foreach (var tmp in _tempFiles)
-            {
-                try
-                {
-                    if (Directory.Exists(tmp))
-                    {
-                        Directory.Delete(tmp, true);
-                    }
-                }
-                catch
-                {
-                    // Who cares
-                }
-            }
-            _tempFiles.Clear();
         }
     }
 }

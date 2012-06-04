@@ -23,7 +23,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
             //    .AsImplementedInterfaces();
 
             moduleBuilder
-                .Register<PostgreSqlResetter>(c => new PostgreSqlResetter(c.Resolve<KistlConfig>(), c.ResolveNamed<ISchemaProvider>("POSTGRESQL")))
+                .Register<PostgreSqlResetter>(c => new PostgreSqlResetter(c.Resolve<KistlConfig>(), c.ResolveNamed<ISchemaProvider>("POSTGRESQL"), c.Resolve<Kistl.API.ITempFileService>()))
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
         }

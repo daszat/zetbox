@@ -12,8 +12,6 @@ namespace Kistl.App.Projekte.Client.Helper
     [CLSCompliant(false)]
     public abstract class PdfReport : IDisposable
     {
-        private List<string> _tempFiles = new List<string>();
-
         public PdfReport()
         {
         }
@@ -144,29 +142,10 @@ namespace Kistl.App.Projekte.Client.Helper
             pdf.Save(filename);
         }
 
-        protected string CreateTempFile(string ext)
-        {
-            var tmp = Path.GetTempFileName();
-            tmp = Path.ChangeExtension(tmp, ext);
-            _tempFiles.Add(tmp);
-            return tmp;
-        }
-
         #region IDisposable Members
 
         public void Dispose()
         {
-            foreach (var f in _tempFiles)
-            {
-                try
-                {
-                    System.IO.File.Delete(f);
-                }
-                catch
-                {
-                    // dont care
-                }
-            }
         }
 
         #endregion
