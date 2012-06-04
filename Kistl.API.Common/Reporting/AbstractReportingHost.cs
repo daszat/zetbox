@@ -378,7 +378,7 @@ namespace Kistl.API.Common.Reporting
         public virtual Stream GetStreamRtf()
         {
             var rtf = new RtfDocumentRenderer();
-            var workingDir = Path.GetTempPath();
+            var workingDir = _tmpService.CreateFolder();
 
             var s = new NonClosingMemStream();
             rtf.Render(GetDocument(), s, workingDir);

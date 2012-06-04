@@ -15,6 +15,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
     using Kistl.API.Utils;
     using Npgsql;
     using NUnit.Framework;
+    using Kistl.API;
 
     public sealed class PostgreSqlResetter
         : IDatabaseResetter
@@ -23,16 +24,18 @@ namespace Kistl.Tests.Utilities.PostgreSql
 
         private readonly KistlConfig config;
         private readonly ISchemaProvider schemaManager;
+        private readonly ITempFileService tmpService;
 
         /// <summary>
         /// number of seconds to wait before cancelling _test reset.
         /// </summary>
         private const int RESET_TIMEOUT = 4 * 60;
 
-        public PostgreSqlResetter(KistlConfig config, ISchemaProvider schemaManager)
+        public PostgreSqlResetter(KistlConfig config, ISchemaProvider schemaManager, ITempFileService tmpService)
         {
             this.config = config;
             this.schemaManager = schemaManager;
+            this.tmpService = tmpService;
         }
 
         public string ForceTestDB(string connectionString)
@@ -64,11 +67,8 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
                     var destDB = cb.Database;
                     var userCmdString = "--username=sa --no-password";
-                    var dumpFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".zbox.backup");
-                    while (File.Exists(dumpFile))
-                    {
-                        dumpFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".zbox.backup");
-                    }
+                    var dumpFile = tmpService.CreateWithExtension(".zbox.backup");
+
                     try
                     {
                         var exitCode = RunPgUtil("pg_dump", String.Format("--format c {0} --file={1} {2}", userCmdString, dumpFile, srcDB));
