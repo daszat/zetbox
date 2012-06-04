@@ -228,7 +228,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             pdf.Document = doc;
             pdf.RenderDocument();
 
-            var tmp = _tmpService.CreateTempFile(".pdf");
+            var tmp = _tmpService.CreateWithExtension(".pdf");
             pdf.Save(tmp);
             _fileOpener.ShellExecute(tmp);
         }

@@ -696,7 +696,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
 
-            var filename = tmpService.CreateTempFolder("Export.pdf");
+            var filename = tmpService.Create("Export.pdf");
 
             var pdf = new MigraDoc.Rendering.PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.None);
             pdf.Document = doc;
@@ -724,7 +724,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public void Export()
         {
-            var tmpFile = tmpService.CreateTempFolder("Export.csv");
+            var tmpFile = tmpService.Create("Export.csv");
             StreamWriter sw;
             // http://stackoverflow.com/questions/545666/how-to-translate-ms-windows-os-version-numbers-into-product-names-in-net
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Major <= 5) // assuming Windox XP or lower

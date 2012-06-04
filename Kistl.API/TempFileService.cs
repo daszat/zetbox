@@ -10,15 +10,32 @@ namespace Kistl.API
 {
     public interface ITempFileService
     {
-        string CreateTempFolder();
-        string CreateTempFolder(string filename);
-        string CreateTempFile();
         /// <summary>
+        /// Creates an empty tempfile with the extension .tmp
+        /// </summary>
+        /// <returns></returns>
+        string Create();
+        /// <summary>
+        /// Creates a tempfile with the specified filename.
+        /// </summary>
+        /// <remarks>
+        /// Creates a temp folder and returns the path to it, combined with the given filename.
+        /// </remarks>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        string Create(string filename);
+        /// <summary>
+        /// Creates an empty tempfile with the given extension.
         /// Extension should have a "." in it, otherwise it's a suffix
         /// </summary>
         /// <param name="ext"></param>
         /// <returns></returns>
-        string CreateTempFile(string ext);    
+        string CreateWithExtension(string ext);
+        /// <summary>
+        /// Creates an empty temp folder.
+        /// </summary>
+        /// <returns></returns>
+        string CreateFolder();
     }
 
     public class TempFileService : ITempFileService
@@ -111,26 +128,27 @@ namespace Kistl.API
             }
         }
 
-        public string CreateTempFolder()
+        public string Create()
         {
-            return GetTempName(true, null);            
+            return CreateWithExtension(".tmp");
         }
 
-        public string CreateTempFolder(string filename)
+        public string Create(string filename)
         {
-            var tmp = GetTempName(true, null);
+            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
+            var tmp = CreateFolder();
             return Path.Combine(tmp, filename);
         }
 
-        public string CreateTempFile()
-        {
-            return CreateTempFile(".tmp");
-        }
-
-        public string CreateTempFile(string ext)
+        public string CreateWithExtension(string ext)
         {
             if (string.IsNullOrEmpty(ext)) throw new ArgumentNullException("ext");
             return GetTempName(false, ext);
+        }
+
+        public string CreateFolder()
+        {
+            return GetTempName(true, null);
         }
     }
 }
