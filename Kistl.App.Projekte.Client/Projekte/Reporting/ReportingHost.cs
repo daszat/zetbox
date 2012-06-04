@@ -9,20 +9,25 @@ namespace Kistl.App.Projekte.Client.Projekte.Reporting
 {
     public class ReportingHost : AbstractReportingHost
     {
-        public ReportingHost(IFileOpener fileOpener)
-            : base(null, null, fileOpener)
+        /// <summary>
+        /// Creates a new reporting host
+        /// </summary>
+        /// <param name="fileOpener"></param>
+        /// <param name="tmpService"></param>
+        public ReportingHost(IFileOpener fileOpener, ITempFileService tmpService)
+            : base(null, null, fileOpener, tmpService)
         {
         }
 
-        // TODO: Move that class into a common reporting assembly and create a own derived class with configuration
         /// <summary>
         /// Creates a new reporting host
         /// </summary>
         /// <param name="overrideTemplateNamespace">null or empty, if default templates should be used, else a assembly with templates.</param>
         /// <param name="overrideTemplateAssembly">null, if default templates should be used, else a assembly with templates.</param>
         /// <param name="fileOpener"></param>
-        public ReportingHost(string overrideTemplateNamespace, System.Reflection.Assembly overrideTemplateAssembly, IFileOpener fileOpener)
-            : base(overrideTemplateNamespace, overrideTemplateAssembly, fileOpener)
+        /// <param name="tmpService"></param>
+        public ReportingHost(string overrideTemplateNamespace, System.Reflection.Assembly overrideTemplateAssembly, IFileOpener fileOpener, ITempFileService tmpService)
+            : base(overrideTemplateNamespace, overrideTemplateAssembly, fileOpener, tmpService)
         {
         }
     }

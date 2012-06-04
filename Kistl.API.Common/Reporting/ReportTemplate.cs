@@ -44,7 +44,7 @@ namespace Kistl.API.Common.Reporting
         protected virtual string GetResourceImageFile(System.Reflection.Assembly assembly, string image)
         {
             var img = System.Drawing.Bitmap.FromStream(assembly.GetManifestResourceStream(image));
-            var result = AbstractReportingHost.CreateTempFile("png", "tmp.png");
+            var result = CreateTempFile("png", "tmp.png");
             img.Save(result, ImageFormat.Png); // Always convert to a PNG
             return result.Replace('\\', '/');
         }
@@ -66,7 +66,7 @@ namespace Kistl.API.Common.Reporting
                     break;
             }
 
-            using (var tmpFile = File.OpenWrite(AbstractReportingHost.CreateTempFile(ext, "tmp." + ext)))
+            using (var tmpFile = File.OpenWrite(CreateTempFile(ext, "tmp." + ext)))
             {
                 imageStream.WriteAllTo(tmpFile);
                 return tmpFile.Name.Replace('\\', '/');
@@ -175,6 +175,24 @@ namespace Kistl.API.Common.Reporting
         protected virtual string ToDo(string message)
         {
             return @"\bold{\fontcolor(red){TODO: " + message + "!}}";
+        }
+        #endregion
+
+        #region Legacy Tempfile handling
+        /// <summary>
+        /// No idea how to inject that by autofac...
+        /// </summary>
+        /// <param name="ext"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        private static string CreateTempFile(string ext, string filename)
+        {
+            // TODO: Move that to a global helper and delete files on shutdown
+            var tmp = Path.GetTempFileName();
+            if (File.Exists(tmp)) File.Delete(tmp);
+            Directory.CreateDirectory(tmp);
+            //_tempDirs.Add(tmp);
+            return Path.Combine(tmp, filename);
         }
         #endregion
     }

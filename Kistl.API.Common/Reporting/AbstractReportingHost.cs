@@ -34,6 +34,7 @@ namespace Kistl.API.Common.Reporting
         private Dictionary<string, TemplateInfo> templates;
         private NameValueCollection settings;
         private readonly IFileOpener _fileOpener;
+        private readonly ITempFileService _tmpService;
 
         private TextWriter contextWriter = null;
         //private List<string> _tempDirs = new List<string>();
@@ -42,8 +43,9 @@ namespace Kistl.API.Common.Reporting
         /// Creates a new reporting host
         /// </summary>
         /// <param name="fileOpener"></param>
-        public AbstractReportingHost(IFileOpener fileOpener)
-            : this(null, null, fileOpener)
+        /// <param name="tmpService"></param>
+        public AbstractReportingHost(IFileOpener fileOpener, ITempFileService tmpService)
+            : this(null, null, fileOpener, tmpService)
         {
         }
 
@@ -54,11 +56,14 @@ namespace Kistl.API.Common.Reporting
         /// <param name="overrideTemplateNamespace">null or empty, if default templates should be used, else a assembly with templates.</param>
         /// <param name="overrideTemplateAssembly">null, if default templates should be used, else a assembly with templates.</param>
         /// <param name="fileOpener"></param>
-        public AbstractReportingHost(string overrideTemplateNamespace, Assembly overrideTemplateAssembly, IFileOpener fileOpener)
+        /// <param name="tmpService"></param>
+        public AbstractReportingHost(string overrideTemplateNamespace, Assembly overrideTemplateAssembly, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (fileOpener == null) throw new ArgumentNullException("fileOpener");
+            if (tmpService == null) throw new ArgumentNullException("tmpService");
 
             _fileOpener = fileOpener;
+            _tmpService = tmpService;
 
             var settings = new NameValueCollection();
             settings["overrideReportTemplateNamespace"] = overrideTemplateNamespace;
@@ -373,34 +378,16 @@ namespace Kistl.API.Common.Reporting
             return s;
         }
 
-        public static string CreateTempFile(string ext, string filename)
-        {
-            // TODO: Move that to a global helper and delete files on shutdown
-            var tmp = Path.GetTempFileName();
-            if (File.Exists(tmp)) File.Delete(tmp);
-            Directory.CreateDirectory(tmp);
-            //_tempDirs.Add(tmp);
-            return Path.Combine(tmp, filename);
-        }
-
         public virtual string SaveTemp(string filename)
         {
-            var tmp = CreateTempFile("pdf", filename);
+            var tmp = _tmpService.CreateTempFile(filename);
             Save(tmp);
             return tmp;
         }
 
         public virtual string Open(string filename)
         {
-            var tmp = CreateTempFile("pdf", filename);
-            Save(tmp);
-            _fileOpener.ShellExecute(tmp);
-            return tmp;
-        }
-
-        public virtual string OpenRtf(string filename)
-        {
-            var tmp = CreateTempFile("rtf", filename);
+            var tmp = _tmpService.CreateTempFile(filename);
             Save(tmp);
             _fileOpener.ShellExecute(tmp);
             return tmp;

@@ -23,7 +23,8 @@ namespace Kistl.App.Projekte.Client
                 .Register<Kistl.App.Projekte.Client.Projekte.Reporting.ReportingHost>(c => new Kistl.App.Projekte.Client.Projekte.Reporting.ReportingHost(
                         "Kistl.App.Projekte.Client.DerivedReportTest",
                         typeof(CustomClientActionsModule).Assembly,
-                        c.Resolve<IFileOpener>()
+                        c.Resolve<IFileOpener>(),
+                        c.Resolve<ITempFileService>()
                     )
                 )
                 .InstancePerDependency();
