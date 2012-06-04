@@ -724,7 +724,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public void Export()
         {
-            var tmpFile = tmpService.Create("Export.csv");
+            var tmpFile = tmpService.CreateWithExtension("_Export.csv"); // Excel can't open two files with the same name, located in another folder!
             StreamWriter sw;
             // http://stackoverflow.com/questions/545666/how-to-translate-ms-windows-os-version-numbers-into-product-names-in-net
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Major <= 5) // assuming Windox XP or lower
