@@ -18,12 +18,12 @@ namespace Kistl.Client.Presentables.DtoViewModels
     public class DtoBuilder
     {
         // looks, sounds and smells like fetch?
-        public static DtoBaseViewModel BuildFrom(object root, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener)
+        public static DtoBaseViewModel BuildFrom(object root, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
-            return BuildFrom(root, null, root, dependencies, dataCtx, parent, fileOpener);
+            return BuildFrom(root, null, root, dependencies, dataCtx, parent, fileOpener, tmpService);
         }
 
-        private static DtoBaseViewModel BuildFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener)
+        private static DtoBaseViewModel BuildFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) return null;
 
@@ -53,7 +53,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
                     || typeof(string).IsAssignableFrom(propertyType))
                 {
-                    return FormatValue(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                    return FormatValue(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
                 }
                 else
                 {
@@ -62,15 +62,15 @@ namespace Kistl.Client.Presentables.DtoViewModels
                     {
                         if (attr is GuiTabbedAttribute)
                         {
-                            return BuildTabbedFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                            return BuildTabbedFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
                         }
                         else if (attr is GuiGridAttribute)
                         {
-                            return BuildGridFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                            return BuildGridFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
                         }
                         else if (attr is GuiTableAttribute)
                         {
-                            return BuildTableFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                            return BuildTableFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
                         }
                     }
                 }
@@ -80,7 +80,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             var skipAttr = type.GetCustomAttributes(typeof(GuiSkipViewModelAttribute), false);
             if (skipAttr.Length > 0)
             {
-                return BuildEmptyFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                return BuildEmptyFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
             }
 
             var attrs = type.GetCustomAttributes(false);
@@ -88,33 +88,33 @@ namespace Kistl.Client.Presentables.DtoViewModels
             {
                 if (attr is GuiTabbedAttribute)
                 {
-                    return BuildTabbedFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                    return BuildTabbedFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
                 }
                 else if (attr is GuiGridAttribute)
                 {
-                    return BuildGridFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                    return BuildGridFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
                 }
                 else if (attr is GuiTableAttribute)
                 {
-                    return BuildTableFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                    return BuildTableFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
                 }
             }
 
             if (dto.GetType().HasGenericDefinition(typeof(XmlDictionary<,>)))
             {
-                return BuildTabbedFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                return BuildTabbedFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
             }
             else if (typeof(IEnumerable).IsAssignableFrom(dto.GetType()))
             {
-                return BuildTableFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                return BuildTableFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
             }
             else
             {
-                return BuildGroupFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                return BuildGroupFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
             }
         }
 
-        private static DtoBaseViewModel BuildEmptyFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener)
+        private static DtoBaseViewModel BuildEmptyFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null)
             {
@@ -132,7 +132,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             foreach (var prop in dataProps)
             {
                 var value = dto.GetPropertyValue<object>(prop.Name);
-                var viewModel = BuildFrom(root, prop, value, dependencies, dataCtx, parent, fileOpener);
+                var viewModel = BuildFrom(root, prop, value, dependencies, dataCtx, parent, fileOpener, tmpService);
                 if (viewModel == null) continue; // do not add without content
 
                 var valueModel = viewModel as DtoValueViewModel;
@@ -167,7 +167,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
         /// <summary>
         /// Creates a descriptive grouping of the specified object
         /// </summary>
-        public static DtoGroupedViewModel BuildGroupFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener)
+        public static DtoGroupedViewModel BuildGroupFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null)
             {
@@ -177,7 +177,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             var debugInfo = parentProp == null
                 ? string.Format("topgroup:{0}", dto.GetType())
                 : string.Format("group:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType());
-            var result = new DtoGroupedViewModel(dependencies, dataCtx, parent, fileOpener, debugInfo)
+            var result = new DtoGroupedViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
             {
                 Title = ExtractTitle(parentProp, dto),
                 Description = ExtractDescription(parentProp, dto),
@@ -195,7 +195,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             foreach (var prop in dataProps)
             {
                 var value = dto.GetPropertyValue<object>(prop.Name);
-                var viewModel = BuildFrom(root, prop, value, dependencies, dataCtx, parent, fileOpener);
+                var viewModel = BuildFrom(root, prop, value, dependencies, dataCtx, parent, fileOpener, tmpService);
                 if (viewModel == null) continue; // do not add without content
 
                 var valueModel = viewModel as DtoValueViewModel;
@@ -214,7 +214,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
         /// <summary>
         /// Creates a table out of a list of DTOs
         /// </summary>
-        public static DtoTableViewModel BuildTableFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener)
+        public static DtoTableViewModel BuildTableFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) return null;
 
@@ -227,7 +227,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             var debugInfo = parentProp == null
                 ? string.Format("topTable: {0}", dto.GetType())
                 : string.Format("table:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType());
-            var result = new DtoTableViewModel(dependencies, dataCtx, parent, fileOpener, debugInfo)
+            var result = new DtoTableViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
             {
                 IsDataTable = true,
                 Title = ExtractTitle(parentProp, dto),
@@ -249,7 +249,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             int columnIdx = 0;
             foreach (var prop in dataProps)
             {
-                var column = new DtoColumnViewModel(dependencies, dataCtx, result, fileOpener, columnIdx, string.Format("column:{0}.{1}", dto.GetType(), prop.Name))
+                var column = new DtoColumnViewModel(dependencies, dataCtx, result, fileOpener, tmpService, columnIdx, string.Format("column:{0}.{1}", dto.GetType(), prop.Name))
                 {
                     Title = ExtractTitle(prop, null),
                     Description = ExtractDescription(prop, null),
@@ -263,7 +263,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             int rowIdx = 0;
             foreach (var line in (IEnumerable)dto)
             {
-                var row = new DtoRowViewModel(dependencies, dataCtx, result, fileOpener, rowIdx, string.Format("row:{0}[{1}]", dto.GetType(), rowIdx));
+                var row = new DtoRowViewModel(dependencies, dataCtx, result, fileOpener, tmpService, rowIdx, string.Format("row:{0}[{1}]", dto.GetType(), rowIdx));
                 if (rowIdx % 2 == 0)
                 {
                     row.Background = result.AlternateBackground;
@@ -276,7 +276,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
                 {
                     var propName = prop.Name;
                     columnIdx += 1;
-                    var viewModel = BuildFrom(root, prop, line.GetPropertyValue<object>(propName), dependencies, dataCtx, row, fileOpener);
+                    var viewModel = BuildFrom(root, prop, line.GetPropertyValue<object>(propName), dependencies, dataCtx, row, fileOpener, tmpService);
                     if (viewModel == null) continue; // do not add cell without content
 
                     viewModel.Title = null; // do not display title in table
@@ -290,7 +290,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
                     var cellDebugInfo = parentProp == null
                         ? string.Format("topCell:[{0}].{1}", rowIdx, propName)
                         : string.Format("cell:{0}.{1}[{2}].{3}", parentProp.DeclaringType, parentProp.Name, rowIdx, propName);
-                    var cell = new DtoCellViewModel(dependencies, dataCtx, result, fileOpener, row, allColumns[prop], new GuiGridLocationAttribute(rowIdx, columnIdx), viewModel, cellDebugInfo);
+                    var cell = new DtoCellViewModel(dependencies, dataCtx, result, fileOpener, tmpService, row, allColumns[prop], new GuiGridLocationAttribute(rowIdx, columnIdx), viewModel, cellDebugInfo);
                     result.Cells.Add(cell);
                 }
 
@@ -303,14 +303,14 @@ namespace Kistl.Client.Presentables.DtoViewModels
         /// <summary>
         /// Arranges the contained Objects in a grid. Use GridLocation to specify where
         /// </summary>
-        public static DtoTableViewModel BuildGridFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener)
+        public static DtoTableViewModel BuildGridFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) return null;
 
             var debugInfo = parentProp == null
                 ? string.Format("topGrid:{0}", dto.GetType())
                 : string.Format("grid:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType());
-            var result = new DtoTableViewModel(dependencies, dataCtx, parent, fileOpener, debugInfo)
+            var result = new DtoTableViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
             {
                 IsDataTable = false,
                 Title = ExtractTitle(parentProp, dto),
@@ -349,7 +349,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
                 foreach (var prop in dataProps)
                 {
-                    var value = BuildFrom(root, prop, dto.GetPropertyValue<object>(prop.Name), dependencies, dataCtx, result, fileOpener);
+                    var value = BuildFrom(root, prop, dto.GetPropertyValue<object>(prop.Name), dependencies, dataCtx, result, fileOpener, tmpService);
                     if (value == null) continue; // do not add without content
 
                     // struct initialises to (0,0) by default
@@ -384,18 +384,18 @@ namespace Kistl.Client.Presentables.DtoViewModels
             var allRows = new Dictionary<int, DtoRowViewModel>();
             for (int i = cells.Keys.Select(k => k.Row).Max(); i >= 0; i--)
             {
-                allRows[i] = new DtoRowViewModel(dependencies, dataCtx, result, fileOpener, i, string.Format("gridrow:{0}.[{1}]", dto.GetType(), i));
+                allRows[i] = new DtoRowViewModel(dependencies, dataCtx, result, fileOpener, tmpService, i, string.Format("gridrow:{0}.[{1}]", dto.GetType(), i));
             }
 
             var allColumns = new Dictionary<int, DtoColumnViewModel>();
             for (int i = cells.Keys.Select(k => k.Column).Max(); i >= 0; i--)
             {
-                allColumns[i] = new DtoColumnViewModel(dependencies, dataCtx, result, fileOpener, i, string.Format("gridcolum:{0}.[][{1}]", dto.GetType(), i));
+                allColumns[i] = new DtoColumnViewModel(dependencies, dataCtx, result, fileOpener, tmpService, i, string.Format("gridcolum:{0}.[][{1}]", dto.GetType(), i));
             }
 
             foreach (var kvp in cells)
             {
-                result.Cells.Add(new DtoCellViewModel(dependencies, dataCtx, result, fileOpener, allRows[kvp.Key.Row], allColumns[kvp.Key.Column], kvp.Key, kvp.Value, string.Format("gridcell[{0}][{1}]", kvp.Key.Row, kvp.Key.Column)));
+                result.Cells.Add(new DtoCellViewModel(dependencies, dataCtx, result, fileOpener, tmpService, allRows[kvp.Key.Row], allColumns[kvp.Key.Column], kvp.Key, kvp.Value, string.Format("gridcell[{0}][{1}]", kvp.Key.Row, kvp.Key.Column)));
             }
 
             allRows.Values.ForEach(result.Rows.Add);
@@ -407,14 +407,14 @@ namespace Kistl.Client.Presentables.DtoViewModels
         /// <summary>
         /// Build a tabbed interface from the specified object. Page oriented output might create new pages for each tab or similar.
         /// </summary>
-        public static DtoTabbedViewModel BuildTabbedFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener)
+        public static DtoTabbedViewModel BuildTabbedFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) return null;
 
             var debugInfo = parentProp == null
                 ? string.Format("topTabbed:{0}", dto.GetType())
                 : string.Format("tabbed:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType());
-            var result = new DtoTabbedViewModel(dependencies, dataCtx, parent, fileOpener, debugInfo)
+            var result = new DtoTabbedViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
             {
                 Title = ExtractTitle(parentProp, dto),
                 Description = ExtractDescription(parentProp, dto),
@@ -431,7 +431,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             {
                 foreach (var kvp in dtoData.DtoData.OrderBy(e => e.Key))
                 {
-                    var item = BuildFrom(root, parentProp, kvp.Value, dependencies, dataCtx, result, fileOpener);
+                    var item = BuildFrom(root, parentProp, kvp.Value, dependencies, dataCtx, result, fileOpener, tmpService);
                     if (item != null) result.Items.Add(item);
                 }
             }
@@ -439,7 +439,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             {
                 foreach (var element in ((IEnumerable)dto))
                 {
-                    var item = BuildFrom(root, parentProp, element, dependencies, dataCtx, result, fileOpener);
+                    var item = BuildFrom(root, parentProp, element, dependencies, dataCtx, result, fileOpener, tmpService);
                     if (item != null) result.Items.Add(item);
                 }
             }
@@ -457,7 +457,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
                 foreach (var prop in dataProps)
                 {
                     var val = dto.GetPropertyValue<object>(prop.Name);
-                    var item = BuildFrom(root, prop, val, dependencies, dataCtx, result, fileOpener);
+                    var item = BuildFrom(root, prop, val, dependencies, dataCtx, result, fileOpener, tmpService);
                     if (item != null) result.Items.Add(item);
                 }
             }
@@ -465,7 +465,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             return result;
         }
 
-        private static DtoBaseViewModel FormatValue(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener)
+        private static DtoBaseViewModel FormatValue(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) throw new ArgumentNullException("dto");
             if (parentProp == null) throw new ArgumentNullException("parentProp");
@@ -480,7 +480,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
             if (typeof(long).IsAssignableFrom(propertyType) || typeof(int).IsAssignableFrom(propertyType) || typeof(short).IsAssignableFrom(propertyType))
             {
-                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
+                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
                 {
                     Value = asPercent ? string.Format("{0} %", 100 * Convert.ToInt64(dto)) : string.Format(formatString ?? "{0}", dto),
                     ValueAlignment = ContentAlignment.MiddleRight,
@@ -498,7 +498,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             }
             else if (typeof(double).IsAssignableFrom(propertyType) || typeof(decimal).IsAssignableFrom(propertyType) || typeof(float).IsAssignableFrom(propertyType))
             {
-                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
+                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
                 {
                     Value = asPercent ? string.Format("{0:0.00} %", 100 * Convert.ToDouble(dto)) : string.Format(formatString ?? "{0:0.00}", dto),
                     ValueAlignment = ContentAlignment.MiddleRight,
@@ -516,7 +516,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             }
             else if (typeof(string).IsAssignableFrom(propertyType))
             {
-                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
+                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
                 {
                     Value = (dto ?? string.Empty).ToString(),
                     Title = title,
@@ -533,7 +533,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             }
             else if (typeof(DateTime).IsAssignableFrom(propertyType))
             {
-                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
+                valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
                 {
                     Value = dto != null ? ((DateTime)dto).ToShortDateString() : string.Empty,
                     Title = title,
@@ -550,7 +550,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             }
             else
             {
-                valueModel = BuildFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener);
+                valueModel = BuildFrom(root, parentProp, dto, dependencies, dataCtx, parent, fileOpener, tmpService);
             }
 
             if (valueModel == null)

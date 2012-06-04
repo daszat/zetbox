@@ -380,14 +380,14 @@ namespace Kistl.API.Common.Reporting
 
         public virtual string SaveTemp(string filename)
         {
-            var tmp = _tmpService.CreateTempFile(filename);
+            var tmp = _tmpService.CreateTempFolder(filename);
             Save(tmp);
             return tmp;
         }
 
         public virtual string Open(string filename)
         {
-            var tmp = _tmpService.CreateTempFile(filename);
+            var tmp = _tmpService.CreateTempFolder(filename);
             Save(tmp);
             _fileOpener.ShellExecute(tmp);
             return tmp;

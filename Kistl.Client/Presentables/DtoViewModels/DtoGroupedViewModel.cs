@@ -11,8 +11,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public class DtoGroupedViewModel : DtoBaseViewModel
     {
-        public DtoGroupedViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, object debugInfo)
-            : base(dependencies, dataCtx, parent, fileOpener, debugInfo)
+        public DtoGroupedViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService, object debugInfo)
+            : base(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
         {
             Items = new ObservableCollection<DtoBaseViewModel>();
         }

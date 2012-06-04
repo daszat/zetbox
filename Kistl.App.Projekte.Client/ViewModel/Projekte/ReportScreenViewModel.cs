@@ -17,8 +17,8 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
         public new delegate ReportScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
 
         public ReportScreenViewModel(IViewModelDependencies appCtx, 
-            IKistlContext dataCtx, ViewModel parent, NavigationScreen screen, IFileOpener fileOpener)
-            : base(appCtx, dataCtx, parent, screen, fileOpener)
+            IKistlContext dataCtx, ViewModel parent, NavigationScreen screen, IFileOpener fileOpener, ITempFileService tmpService)
+            : base(appCtx, dataCtx, parent, screen, fileOpener, tmpService)
         {
         }
 

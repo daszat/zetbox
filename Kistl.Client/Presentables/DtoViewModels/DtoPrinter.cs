@@ -16,9 +16,15 @@ namespace Kistl.Client.Presentables.DtoViewModels
     public class DtoPrinter
     {
         private readonly IFileOpener _fileOpener;
-        public DtoPrinter(IFileOpener fileOpener)
+        private readonly ITempFileService _tmpService;
+
+        public DtoPrinter(IFileOpener fileOpener, ITempFileService tmpService)
         {
+            if (fileOpener == null) throw new ArgumentNullException("fileOpener");
+            if (tmpService == null) throw new ArgumentNullException("tmpService");
+
             _fileOpener = fileOpener;
+            _tmpService = tmpService;
         }
 
         /// <summary>
@@ -222,8 +228,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             pdf.Document = doc;
             pdf.RenderDocument();
 
-            var tmp = Path.GetTempFileName();
-            tmp = Path.ChangeExtension(tmp, "pdf");
+            var tmp = _tmpService.CreateTempFile(".pdf");
             pdf.Save(tmp);
             _fileOpener.ShellExecute(tmp);
         }

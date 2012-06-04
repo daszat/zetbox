@@ -12,9 +12,10 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public abstract class DtoBaseViewModel : Kistl.Client.Presentables.ViewModel
     {
-                private readonly IFileOpener _fileOpener;
+        private readonly IFileOpener _fileOpener;
+        private readonly ITempFileService _tmpService;
 
-        public DtoBaseViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, object debugInfo)
+        public DtoBaseViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService, object debugInfo)
             : base(dependencies, dataCtx, parent)
         {
             var dtoParent = parent as DtoBaseViewModel;
@@ -23,6 +24,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
                 _background = dtoParent.Background;
             }
             _fileOpener = fileOpener;
+            _tmpService = tmpService;
             this._debugInfo = debugInfo;
         }
 
@@ -122,7 +124,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
         public void Print()
         {
-            var printer = new DtoPrinter(_fileOpener);
+            var printer = new DtoPrinter(_fileOpener, _tmpService);
             printer.PrintAsList(this);
         }
 

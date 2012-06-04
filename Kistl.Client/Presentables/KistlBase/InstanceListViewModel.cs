@@ -35,6 +35,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         protected readonly Func<IKistlContext> workingCtxFactory;
         protected readonly IFileOpener fileOpener;
+        protected readonly ITempFileService tmpService;
 
         /// <summary>
         /// Initializes a new instance of the DataTypeViewModel class.
@@ -42,6 +43,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="appCtx">the application context to use</param>
         /// <param name="config"></param>
         /// <param name="fileOpener"></param>
+        /// <param name="tmpService"></param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">Parent ViewModel</param>
         /// <param name="workingCtxFactory">A factory for creating a working context. If the InstanceList is embedded in a workspace which the user has to submit manually, the factory should return the same context as passed in the dataCtx parameter.</param>
@@ -51,6 +53,7 @@ namespace Kistl.Client.Presentables.KistlBase
             IViewModelDependencies appCtx,
             KistlConfig config,
             IFileOpener fileOpener,
+            ITempFileService tmpService,
             IKistlContext dataCtx, ViewModel parent,
             Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
@@ -61,7 +64,9 @@ namespace Kistl.Client.Presentables.KistlBase
             if (workingCtxFactory == null) throw new ArgumentNullException("workingCtxFactory");
             if (type == null) throw new ArgumentNullException("type");
             if (fileOpener == null) throw new ArgumentNullException("fileOpener");
+            if (tmpService == null) throw new ArgumentNullException("tmpService");
             this.fileOpener = fileOpener;
+            this.tmpService = tmpService;
 
             _type = type;
             if (qry == null)
@@ -691,7 +696,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
 
-            var filename = CreateTempFile("Export.pdf");
+            var filename = tmpService.CreateTempFolder("Export.pdf");
 
             var pdf = new MigraDoc.Rendering.PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.None);
             pdf.Document = doc;
@@ -719,7 +724,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public void Export()
         {
-            var tmpFile = CreateTempFile("Export.csv");
+            var tmpFile = tmpService.CreateTempFolder("Export.csv");
             StreamWriter sw;
             // http://stackoverflow.com/questions/545666/how-to-translate-ms-windows-os-version-numbers-into-product-names-in-net
             if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Major <= 5) // assuming Windox XP or lower
@@ -780,15 +785,6 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
                 return _ExportContainerCommand;
             }
-        }
-
-        protected string CreateTempFile(string filename)
-        {
-            // TODO: Move that to a global helper and delete files on shutdown
-            var tmp = Path.GetTempFileName();
-            if (File.Exists(tmp)) File.Delete(tmp);
-            Directory.CreateDirectory(tmp);
-            return Path.Combine(tmp, filename);
         }
         #endregion
 

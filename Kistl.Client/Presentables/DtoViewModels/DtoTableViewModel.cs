@@ -11,8 +11,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public class DtoTableViewModel : DtoGroupedViewModel
     {
-        public DtoTableViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, object debugInfo)
-            : base(dependencies, dataCtx, parent, fileOpener, debugInfo)
+        public DtoTableViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService, object debugInfo)
+            : base(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
         {
             Rows = new ObservableCollection<DtoRowViewModel>();
             Columns = new ObservableCollection<DtoColumnViewModel>();
@@ -56,8 +56,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public class DtoRowViewModel : DtoBaseViewModel
     {
-        public DtoRowViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DtoTableViewModel parent, IFileOpener fileOpener, int rowIdx, object debugInfo)
-            : base(dependencies, dataCtx, parent, fileOpener, debugInfo)
+        public DtoRowViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DtoTableViewModel parent, IFileOpener fileOpener, ITempFileService tmpService, int rowIdx, object debugInfo)
+            : base(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
         {
             this.Parent = parent;
             this._row = rowIdx;
@@ -95,8 +95,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public class DtoColumnViewModel : DtoBaseViewModel
     {
-        public DtoColumnViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DtoTableViewModel parent, IFileOpener fileOpener, int columnIdx, object debugInfo)
-            : base(dependencies, dataCtx, parent, fileOpener, debugInfo)
+        public DtoColumnViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DtoTableViewModel parent, IFileOpener fileOpener, ITempFileService tmpService, int columnIdx, object debugInfo)
+            : base(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
         {
             this.Parent = parent;
             this._column = columnIdx;
@@ -133,8 +133,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
     public class DtoCellViewModel : DtoBaseViewModel
     {
-        public DtoCellViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DtoTableViewModel parent, IFileOpener fileOpener, DtoRowViewModel row, DtoColumnViewModel column, GuiGridLocationAttribute location, ViewModel value, object debugInfo)
-            : base(dependencies, dataCtx, parent, fileOpener, debugInfo)
+        public DtoCellViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DtoTableViewModel parent, IFileOpener fileOpener, ITempFileService tmpService, DtoRowViewModel row, DtoColumnViewModel column, GuiGridLocationAttribute location, ViewModel value, object debugInfo)
+            : base(dependencies, dataCtx, parent, fileOpener, tmpService, debugInfo)
         {
             this.Parent = parent;
             this.Row = row;

@@ -18,11 +18,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
             IViewModelDependencies appCtx,
             KistlConfig config,
             IFileOpener fileOpener,
+            ITempFileService tmpService,
             IKistlContext dataCtx, ViewModel parent,
             Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
             Func<IQueryable> qry)
-            : base(appCtx, config, fileOpener, dataCtx, parent, workingCtxFactory, type, qry)
+            : base(appCtx, config, fileOpener, tmpService, dataCtx, parent, workingCtxFactory, type, qry)
         {
         }
 
