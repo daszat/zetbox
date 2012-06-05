@@ -89,7 +89,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompleteTests", "Tests\Comp
 		{379A67E8-388E-47B6-A591-5D4C05DAFBDB} = {379A67E8-388E-47B6-A591-5D4C05DAFBDB}
 		{DD11A4F6-24C2-4935-8042-DE49CA6B32C0} = {DD11A4F6-24C2-4935-8042-DE49CA6B32C0}
 		{4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545} = {4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545}
-		{B93076F9-B551-4EBD-B707-205F905BCC99} = {B93076F9-B551-4EBD-B707-205F905BCC99}
 		{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711} = {52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}
 	EndProjectSection
 EndProject
@@ -97,7 +96,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Tests", "Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.Tests", "Tests\Kistl.Server.Tests\Kistl.Server.Tests.csproj", "{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Ef.Tests", "Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.csproj", "{980874F0-D9C1-4EDB-8143-AD51C1E2666F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.EF.Tests", "Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.csproj", "{980874F0-D9C1-4EDB-8143-AD51C1E2666F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C0992804-A195-4087-B77C-910ABEAB74B9} = {C0992804-A195-4087-B77C-910ABEAB74B9}
 		{7E3CE048-00C1-4357-BE27-801AB5B75FE3} = {7E3CE048-00C1-4357-BE27-801AB5B75FE3}
@@ -220,8 +219,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Tests.Utilities.MsSql", "Tests\Kistl.Tests.Utilities.MsSql\Kistl.Tests.Utilities.MsSql.csproj", "{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Tests.Utilities.PostgreSql", "Tests\Kistl.Tests.Utilities.PostgreSql\Kistl.Tests.Utilities.PostgreSql.csproj", "{C0992804-A195-4087-B77C-910ABEAB74B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Generator.ClickOnce", "Kistl.Generator.ClickOnce\Kistl.Generator.ClickOnce.csproj", "{B93076F9-B551-4EBD-B707-205F905BCC99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Bootstrapper", "Kistl.Client.Bootstrapper\Kistl.Client.Bootstrapper.csproj", "{8D980F88-514B-44F0-A9B3-B9195FAD33FD}"
 EndProject
@@ -1141,23 +1138,6 @@ Global
 		{C0992804-A195-4087-B77C-910ABEAB74B9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C0992804-A195-4087-B77C-910ABEAB74B9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C0992804-A195-4087-B77C-910ABEAB74B9}.Release|x86.ActiveCfg = Release|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|.NET.Build.0 = Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Linux.Debug|.NET.ActiveCfg = Linux.Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Linux.Debug|Any CPU.ActiveCfg = Linux.Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Linux.Debug|Mixed Platforms.ActiveCfg = Linux.Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Linux.Debug|x86.ActiveCfg = Linux.Debug|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|.NET.ActiveCfg = Release|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|x86.ActiveCfg = Release|Any CPU
 		{8D980F88-514B-44F0-A9B3-B9195FAD33FD}.Debug|.NET.ActiveCfg = Debug|x86
 		{8D980F88-514B-44F0-A9B3-B9195FAD33FD}.Debug|.NET.Build.0 = Debug|x86
 		{8D980F88-514B-44F0-A9B3-B9195FAD33FD}.Debug|Any CPU.ActiveCfg = Debug|x86
