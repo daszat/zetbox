@@ -15,6 +15,7 @@ namespace Kistl.Server.HttpService
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
+    using System.Text.RegularExpressions;
 
     public class Global : System.Web.HttpApplication, IContainerProviderAccessor
     {
@@ -71,10 +72,48 @@ namespace Kistl.Server.HttpService
 
         }
 
+        #region url rewrite for bootstrappper
+        private class Rewrite
+        {
+            public Rewrite(string url, string to)
+            {
+                this.Url = new Regex(url, RegexOptions.IgnoreCase);
+                this.To = to;
+            }
+            public Regex Url { get; private set; }
+            public string To { get; private set; }
+
+            public bool IsMatch(Uri uri)
+            {
+                return Url.IsMatch(uri.AbsoluteUri);
+            }
+
+            public string GetRewriteUrl(Uri uri)
+            {
+                return Url.Replace(uri.AbsolutePath, To);
+            }
+        }
+
+        private static readonly List<Rewrite> _rewrite = new List<Rewrite>() {
+            new Rewrite("^(.*)/Bootstrapper.svc/([^/]+)$", "$1/Bootstrapper.facade?action=$2"),
+            new Rewrite("^(.*)/Bootstrapper.svc/([^/]+)/(.+)", "$1/Bootstrapper.facade?action=$2&path=$3") 
+        };
+
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            // In a web application the http facade is responsible to handling
+            // bootstrapper requests. In a WCF selfhostetd scenario not - wcf itself is responsible
+            // this limitation is only for simpler configuration
+            foreach (var r in _rewrite)
+            {
+                if (r.IsMatch(Request.Url))
+                {
+                    Context.RewritePath(r.GetRewriteUrl(Request.Url));
+                    break;
+                }
+            }
         }
+        #endregion
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
