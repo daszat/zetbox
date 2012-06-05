@@ -5,7 +5,7 @@ echo Afterwards the basic modules are published again to see that nothing has ch
 echo Use this to get a really clean environment and verify changes to infrastructure code.
 echo ********************************************************************************
 
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m CCNet.msbuild /p:SourceLocation=P:\Kistl /p:ArebisMsBuildPath=P:\Kistl\Libs\ArebisCGen\Arebis.CodeGeneration.MsBuild
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m CCNet.msbuild /p:SourceLocation=P:\Kistl
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem regenerate modules to prove roundtrippability

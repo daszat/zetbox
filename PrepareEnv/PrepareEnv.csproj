@@ -90,6 +90,14 @@
     <EmbeddedResource Include="EmbeddedLibs\Npgsql201193binmsnet35sp1\Mono.Security.dll" />
     <EmbeddedResource Include="EmbeddedLibs\Npgsql201193binmsnet35sp1\Npgsql.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <NpgsqlMono Include="EmbeddedLibs\Npgsql201193binmono20\*.*">
+      <Visible>false</Visible>
+    </NpgsqlMono>
+    <NpgsqlMs Include="EmbeddedLibs\Npgsql201193binmsnet35sp1\*.*">
+      <Visible>false</Visible>
+    </NpgsqlMs>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MSBuildVersioning.targets" />
@@ -102,5 +110,7 @@
   -->
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+    <Copy SourceFiles="@(NpgsqlMono)" DestinationFolder="$(OutputPath)..\..\Server\Npgsql.Mono" />
+    <Copy SourceFiles="@(NpgsqlMs)" DestinationFolder="$(OutputPath)..\..\Server\Npgsql.Microsoft" />
   </Target>
 </Project>
