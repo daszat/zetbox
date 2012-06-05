@@ -110,7 +110,7 @@
   -->
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
-    <Copy SourceFiles="@(NpgsqlMono)" DestinationFolder="$(OutputPath)..\..\Server\Npgsql.Mono" />
-    <Copy SourceFiles="@(NpgsqlMs)" DestinationFolder="$(OutputPath)..\..\Server\Npgsql.Microsoft" />
+    <Copy SourceFiles="@(NpgsqlMono)" DestinationFolder="$(OutputPath)\Server\Npgsql.Mono" />
+    <Copy SourceFiles="@(NpgsqlMs)" DestinationFolder="$(OutputPath)\Server\Npgsql.Microsoft" />
   </Target>
 </Project>
