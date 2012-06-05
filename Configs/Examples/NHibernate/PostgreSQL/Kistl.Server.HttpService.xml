@@ -49,5 +49,6 @@
     <string>Server\NH.Fallback</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
+	<string>Server\Npgsql.Microsoft</string>
   </AssemblySearchPaths>
 </KistlConfig>
