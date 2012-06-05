@@ -55,8 +55,7 @@
       <HintPath>..\packages\AjaxControlToolkit.4.1.60501\lib\35\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="AjaxDataControls, Version=1.0.3112.29763, Culture=neutral, PublicKeyToken=a78e2b3b94f1c8be, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\AjaxDataControls.dll</HintPath>
+      <HintPath>..\packages\zetbox.dependencies.1.0\lib\net35\AjaxDataControls.dll</HintPath>
     </Reference>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
