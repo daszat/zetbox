@@ -53,10 +53,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Arebis.CodeGeneration">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(AREBISROOT)\Arebis.CodeGeneration.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.1, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Arebis.CodeGenerator.1.2.0.1\lib\net35\Arebis.CodeGeneration.dll</HintPath>
     </Reference>
     <Reference Include="Autofac, Version=2.6.1.841, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
@@ -135,7 +133,7 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(AREBISROOT)\ArebisGenTask.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Arebis Generation Tools\ArebisGenTask.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
