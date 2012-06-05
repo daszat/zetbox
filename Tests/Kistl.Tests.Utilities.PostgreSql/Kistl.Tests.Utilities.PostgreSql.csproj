@@ -57,9 +57,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Npgsql">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\Npgsql2\Npgsql.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\packages\Npgsql.2.0.11.92\lib\net35\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
