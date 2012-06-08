@@ -1,0 +1,5 @@
+﻿<zb:App x:Class="Zetbox.WPF.App"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:zb="clr-namespace:Zetbox.Client.WPF;assembly=Zetbox.Client.WPF">
+</zb:App>

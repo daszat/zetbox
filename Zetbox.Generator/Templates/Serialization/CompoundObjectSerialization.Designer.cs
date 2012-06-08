@@ -54,35 +54,35 @@ if (direction == SerializerDirection.ToStream)
     {
 
 #line 41 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\n");
+this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\r\n");
 #line 43 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else if (direction == SerializerDirection.FromStream)
     {
 
 #line 47 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            {\n");
-this.WriteObjects("                // use backing store to avoid notifications\n");
-this.WriteObjects("                this.",  backingStoreName , " = ",  streamName , ".ReadCompoundObject<",  backingStoreType , ">();\n");
-this.WriteObjects("                if (this.",  backingStoreName , " != null)\n");
-this.WriteObjects("                    this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                // use backing store to avoid notifications\r\n");
+this.WriteObjects("                this.",  backingStoreName , " = ",  streamName , ".ReadCompoundObject<",  backingStoreType , ">();\r\n");
+this.WriteObjects("                if (this.",  backingStoreName , " != null)\r\n");
+this.WriteObjects("                    this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\r\n");
+this.WriteObjects("            }\r\n");
 #line 54 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else if (direction == SerializerDirection.Export)
     {
 
 #line 58 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 60 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else if (direction == SerializerDirection.MergeImport)
     {
 
 #line 64 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
-this.WriteObjects("                XmlStreamer.FromStream(this.",  backingStoreName , ", ",  streamName , ");\n");
-this.WriteObjects("                break;\n");
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                XmlStreamer.FromStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
 #line 68 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else

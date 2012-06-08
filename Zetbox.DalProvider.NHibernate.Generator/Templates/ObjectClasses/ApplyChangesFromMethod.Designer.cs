@@ -42,28 +42,28 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 #line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("");
 #line 33 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("\n");
-this.WriteObjects("        public override void ApplyChangesFrom(",  otherInterface , " obj)\n");
-this.WriteObjects("        {\n");
-this.WriteObjects("            base.ApplyChangesFrom(obj);\n");
-this.WriteObjects("            var other = (",  clsName , ")obj;\n");
-this.WriteObjects("            var otherImpl = (",  implName , ")obj;\n");
-this.WriteObjects("            var me = (",  clsName , ")this;\n");
-this.WriteObjects("\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        public override void ApplyChangesFrom(",  otherInterface , " obj)\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            base.ApplyChangesFrom(obj);\r\n");
+this.WriteObjects("            var other = (",  clsName , ")obj;\r\n");
+this.WriteObjects("            var otherImpl = (",  implName , ")obj;\r\n");
+this.WriteObjects("            var me = (",  clsName , ")this;\r\n");
+this.WriteObjects("\r\n");
 #line 41 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsCalculated).OrderBy(p => p.Name)) { 
 #line 42 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 if (prop.IsList && prop.HasPersistentOrder) { 
 #line 43 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            SynchronizeLists(this.",  prop.Name , "Collection, otherImpl.",  prop.Name , "Collection);\n");
+this.WriteObjects("            SynchronizeLists(this.",  prop.Name , "Collection, otherImpl.",  prop.Name , "Collection);\r\n");
 #line 44 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else if (prop.IsList && !prop.HasPersistentOrder) { 
 #line 45 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            SynchronizeCollections(this.",  prop.Name , "Collection, otherImpl.",  prop.Name , "Collection);\n");
+this.WriteObjects("            SynchronizeCollections(this.",  prop.Name , "Collection, otherImpl.",  prop.Name , "Collection);\r\n");
 #line 46 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else { 
 #line 47 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            me.",  prop.Name , " = other.",  prop.Name , ";\n");
+this.WriteObjects("            me.",  prop.Name , " = other.",  prop.Name , ";\r\n");
 #line 48 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
 #line 49 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
@@ -73,21 +73,21 @@ foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>()/*.Where(p =>
 #line 51 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 if (prop.IsList && prop.HasPersistentOrder) { 
 #line 52 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            SynchronizeLists(this.",  prop.Name , "Collection, otherImpl.",  prop.Name , "Collection);\n");
+this.WriteObjects("            SynchronizeLists(this.",  prop.Name , "Collection, otherImpl.",  prop.Name , "Collection);\r\n");
 #line 53 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else if (prop.IsList && !prop.HasPersistentOrder) { 
 #line 54 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            SynchronizeCollections(this.",  prop.Name , "Collection, otherImpl.",  prop.Name , "Collection);\n");
+this.WriteObjects("            SynchronizeCollections(this.",  prop.Name , "Collection, otherImpl.",  prop.Name , "Collection);\r\n");
 #line 55 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else { 
 #line 56 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            if (me.",  prop.Name , " == null && other.",  prop.Name , " != null) {\n");
-this.WriteObjects("                me.",  prop.Name , " = (",  prop.GetElementTypeString() , ")other.",  prop.Name , ".Clone();\n");
-this.WriteObjects("            } else if (me.",  prop.Name , " != null && other.",  prop.Name , " == null) {\n");
-this.WriteObjects("                me.",  prop.Name , " = null;\n");
-this.WriteObjects("            } else if (me.",  prop.Name , " != null && other.",  prop.Name , " != null) {\n");
-this.WriteObjects("                me.",  prop.Name , ".ApplyChangesFrom(other.",  prop.Name , ");\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("            if (me.",  prop.Name , " == null && other.",  prop.Name , " != null) {\r\n");
+this.WriteObjects("                me.",  prop.Name , " = (",  prop.GetElementTypeString() , ")other.",  prop.Name , ".Clone();\r\n");
+this.WriteObjects("            } else if (me.",  prop.Name , " != null && other.",  prop.Name , " == null) {\r\n");
+this.WriteObjects("                me.",  prop.Name , " = null;\r\n");
+this.WriteObjects("            } else if (me.",  prop.Name , " != null && other.",  prop.Name , " != null) {\r\n");
+this.WriteObjects("                me.",  prop.Name , ".ApplyChangesFrom(other.",  prop.Name , ");\r\n");
+this.WriteObjects("            }\r\n");
 #line 63 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
 #line 64 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
@@ -98,15 +98,15 @@ foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => 
             var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);
 
 #line 69 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            this.",  positionPropertyName , " = otherImpl.",  positionPropertyName , ";\n");
+this.WriteObjects("            this.",  positionPropertyName , " = otherImpl.",  positionPropertyName , ";\r\n");
 #line 70 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
 #line 71 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            this._fk_",  prop.Name , " = otherImpl._fk_",  prop.Name , ";\n");
+this.WriteObjects("            this._fk_",  prop.Name , " = otherImpl._fk_",  prop.Name , ";\r\n");
 #line 72 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
 #line 73 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("        }\n");
+this.WriteObjects("        }\r\n");
 
         }
 

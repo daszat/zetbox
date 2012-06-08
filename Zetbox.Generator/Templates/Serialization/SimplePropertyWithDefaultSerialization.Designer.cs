@@ -53,36 +53,36 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 41 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write(this.",  isSetFlagName , ");\n");
-this.WriteObjects("            if (this.",  isSetFlagName , ") {\n");
-this.WriteObjects("                ",  streamName , ".Write(this.",  memberName , ");\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("            ",  streamName , ".Write(this.",  isSetFlagName , ");\r\n");
+this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
+this.WriteObjects("                ",  streamName , ".Write(this.",  memberName , ");\r\n");
+this.WriteObjects("            }\r\n");
 #line 46 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 49 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            this.",  isSetFlagName , " = ",  streamName , ".ReadBoolean();\n");
-this.WriteObjects("            if (this.",  isSetFlagName , ") {\n");
-this.WriteObjects("                this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("            this.",  isSetFlagName , " = ",  streamName , ".ReadBoolean();\r\n");
+this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
+this.WriteObjects("                this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\r\n");
+this.WriteObjects("            }\r\n");
 #line 54 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.Export:
 
 #line 57 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            System.Diagnostics.Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\n");
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+this.WriteObjects("            System.Diagnostics.Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\r\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 60 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
 #line 63 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
-this.WriteObjects("                // Import must have default value set\n");
-this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\n");
-this.WriteObjects("                this.",  isSetFlagName , " = true;\n");
-this.WriteObjects("                break;\n");
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                // Import must have default value set\r\n");
+this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\r\n");
+this.WriteObjects("                this.",  isSetFlagName , " = true;\r\n");
+this.WriteObjects("                break;\r\n");
 #line 69 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         default:

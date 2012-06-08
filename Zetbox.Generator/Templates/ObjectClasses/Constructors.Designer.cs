@@ -40,22 +40,22 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("");
 #line 33 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("        [Obsolete]\n");
-this.WriteObjects("        public ",  className , "()\n");
-this.WriteObjects("            : base(null)\n");
-this.WriteObjects("        {\n");
+this.WriteObjects("        [Obsolete]\r\n");
+this.WriteObjects("        public ",  className , "()\r\n");
+this.WriteObjects("            : base(null)\r\n");
+this.WriteObjects("        {\r\n");
 #line 37 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
 #line 38 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("        }\n");
-this.WriteObjects("\n");
-this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\n");
-this.WriteObjects("            : base(lazyCtx)\n");
-this.WriteObjects("        {\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\r\n");
+this.WriteObjects("            : base(lazyCtx)\r\n");
+this.WriteObjects("        {\r\n");
 #line 43 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
 #line 44 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("        }\n");
+this.WriteObjects("        }\r\n");
 
         }
 

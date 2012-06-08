@@ -46,21 +46,21 @@ ApplyAttributesTemplate();
 	var backingName = BackingMemberFromName(name);
 
 #line 37 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
-this.WriteObjects("   		// ",  this.GetType() , "\n");
-this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\n");
-this.WriteObjects("        {\n");
-this.WriteObjects("            get\n");
-this.WriteObjects("            {\n");
-this.WriteObjects("                if (",  backingName , " == null)\n");
-this.WriteObjects("                    ",  backingName , " = ",  GetInitialisationExpression() , ";\n");
-this.WriteObjects("                return ",  backingName , ";\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("   		// ",  this.GetType() , "\r\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            get\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                if (",  backingName , " == null)\r\n");
+this.WriteObjects("                    ",  backingName , " = ",  GetInitialisationExpression() , ";\r\n");
+this.WriteObjects("                return ",  backingName , ";\r\n");
+this.WriteObjects("            }\r\n");
 #line 47 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 ApplySettor();
 
 #line 49 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
-this.WriteObjects("        }\n");
-this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";\r\n");
 #line 52 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 AddSerialization(serializationList, name);
 

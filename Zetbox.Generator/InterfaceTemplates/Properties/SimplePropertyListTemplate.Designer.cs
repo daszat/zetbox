@@ -35,10 +35,10 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 #line 17 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
 this.WriteObjects("");
 #line 27 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
-this.WriteObjects("\n");
+this.WriteObjects("\r\n");
 #line 30 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
-this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\n");
-this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\n");
+this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
+this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\r\n");
 
         }
 

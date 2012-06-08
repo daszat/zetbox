@@ -42,7 +42,7 @@ namespace Zetbox.Generator.Templates.Properties
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
 this.WriteObjects("");
 #line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
-this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(",  isNull ? "true": "false" , ", this, \"",  propertyName , "\");\n");
+this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(",  isNull ? "true": "false" , ", this, \"",  propertyName , "\");\r\n");
 
         }
 

@@ -60,30 +60,30 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 45 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            {\n");
-this.WriteObjects("                var key = this.RelationshipManager.GetRelatedReference<",  clsFullName , ">(\"Model.",  assocName , "\", \"",  targetRoleName , "\").EntityKey;\n");
-this.WriteObjects("                ",  streamName , ".Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                var key = this.RelationshipManager.GetRelatedReference<",  clsFullName , ">(\"Model.",  assocName , "\", \"",  targetRoleName , "\").EntityKey;\r\n");
+this.WriteObjects("                ",  streamName , ".Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);\r\n");
+this.WriteObjects("            }\r\n");
 #line 50 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 53 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\n");
+this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
 #line 55 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.Export:
 
 #line 58 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 60 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
 #line 63 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
-this.WriteObjects("                this.",  targetGuidMember , " = XmlStreamer.ReadNullableGuid(",  streamName , ");\n");
-this.WriteObjects("                break;\n");
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                this.",  targetGuidMember , " = XmlStreamer.ReadNullableGuid(",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
 #line 67 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         default:

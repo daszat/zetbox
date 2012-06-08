@@ -55,8 +55,8 @@ this.WriteObjects("");
 		{
 
 #line 47 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
-this.WriteObjects("		\n");
-this.WriteObjects("    <Property Name=\"",  Construct.NestedColumnName(p, prefix) , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Boolean) , "\" Nullable=\"false\" />\n");
+this.WriteObjects("		\r\n");
+this.WriteObjects("    <Property Name=\"",  Construct.NestedColumnName(p, prefix) , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Boolean) , "\" Nullable=\"false\" />\r\n");
 #line 50 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
@@ -99,7 +99,7 @@ ApplyEntityTypeColumnDefs(
 			}
 
 #line 90 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
-this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\n");
+this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\r\n");
 #line 92 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 	}

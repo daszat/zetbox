@@ -32,9 +32,9 @@ namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
 #line 17 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("");
 #line 28 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
-this.WriteObjects("        // BEGIN ",  this.GetType() , "\n");
-this.WriteObjects("\n");
-this.WriteObjects("        ",  GetModifiers() , " ",  GetReturnType() , " ",  m.Name , "(",  GetParameterDefinitions() , ")\n");
+this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  GetReturnType() , " ",  m.Name , "(",  GetParameterDefinitions() , ")\r\n");
 #line 32 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
@@ -54,18 +54,18 @@ var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnPar
     {
 
 #line 49 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
-this.WriteObjects("        {\n");
-this.WriteObjects("            Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", typeof(",  GetReturnType() , "), ",  argumentTypes, "",  argumentDefs , ");\n");
-this.WriteObjects("        }\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", typeof(",  GetReturnType() , "), ",  argumentTypes, "",  argumentDefs , ");\r\n");
+this.WriteObjects("        }\r\n");
 #line 53 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 }
     else
     {
 
 #line 57 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
-this.WriteObjects("        {\n");
-this.WriteObjects("            return (",  GetReturnType() , ")Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", typeof(",  GetReturnType() , "), ",  argumentTypes , "",  argumentDefs , ");\n");
-this.WriteObjects("        }\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            return (",  GetReturnType() , ")Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", typeof(",  GetReturnType() , "), ",  argumentTypes , "",  argumentDefs , ");\r\n");
+this.WriteObjects("        }\r\n");
 #line 61 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 }
 
@@ -75,7 +75,7 @@ if(index == 0) {
 }
 
 #line 68 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
-this.WriteObjects("        // END ",  this.GetType() , "\n");
+this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
 

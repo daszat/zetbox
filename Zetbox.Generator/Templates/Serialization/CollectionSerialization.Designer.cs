@@ -55,27 +55,27 @@ if (ShouldSerialize())
             case SerializerDirection.ToStream:
 
 #line 43 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            ",  streamName , ".WriteCollectionEntries(this.",  collectionName , ");\n");
+this.WriteObjects("            ",  streamName , ".WriteCollectionEntries(this.",  collectionName , ");\r\n");
 #line 45 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             case SerializerDirection.FromStream:
 
 #line 48 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            ",  streamName , ".ReadCollectionEntries(this, this.",  collectionName , ");\n");
+this.WriteObjects("            ",  streamName , ".ReadCollectionEntries(this, this.",  collectionName , ");\r\n");
 #line 50 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
         case SerializerDirection.Export:
 
 #line 53 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ExportCollectionEntries(this.",  collectionName , "",  orderByValue ? ".OrderBy(i => i.Value)" : String.Empty , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ExportCollectionEntries(this.",  collectionName , "",  orderByValue ? ".OrderBy(i => i.Value)" : String.Empty , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 55 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             case SerializerDirection.MergeImport:
 
 #line 58 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
-this.WriteObjects("                XmlStreamer.MergeImportCollectionEntries(this, this.",  collectionName , ", ",  streamName , ");\n");
-this.WriteObjects("                break;\n");
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                XmlStreamer.MergeImportCollectionEntries(this, this.",  collectionName , ", ",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
 #line 62 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             default:

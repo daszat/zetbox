@@ -48,46 +48,46 @@ namespace Zetbox.Generator.Templates.Serialization
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 this.WriteObjects("");
 #line 36 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("\n");
+this.WriteObjects("\r\n");
 #line 38 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
 #line 42 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write(eagerLoadLists);\n");
-this.WriteObjects("            if (eagerLoadLists && auxObjects != null)\n");
-this.WriteObjects("            {\n");
+this.WriteObjects("            ",  streamName , ".Write(eagerLoadLists);\r\n");
+this.WriteObjects("            if (eagerLoadLists && auxObjects != null)\r\n");
+this.WriteObjects("            {\r\n");
 #line 45 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 if (serializeIds) {                                                          
 #line 46 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("                ",  streamName , ".Write(true);\n");
-this.WriteObjects("                ",  streamName , ".Write(",  collectionName , ".Count);\n");
+this.WriteObjects("                ",  streamName , ".Write(true);\r\n");
+this.WriteObjects("                ",  streamName , ".Write(",  collectionName , ".Count);\r\n");
 #line 48 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 }                                                                            
 #line 49 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("                foreach(var obj in ",  collectionName , ")\n");
-this.WriteObjects("                {\n");
-this.WriteObjects("                    auxObjects.Add(obj);\n");
+this.WriteObjects("                foreach(var obj in ",  collectionName , ")\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    auxObjects.Add(obj);\r\n");
 #line 52 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 if (serializeIds) {                                                          
 #line 53 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("                    ",  streamName , ".Write(obj.ID);\n");
+this.WriteObjects("                    ",  streamName , ".Write(obj.ID);\r\n");
 #line 54 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 }                                                                            
 #line 55 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("                }\n");
+this.WriteObjects("                }\r\n");
 #line 56 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 if (serializeRelationEntries) { ApplyRelationEntrySerialization(); }         
 #line 57 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("            }\n");
+this.WriteObjects("            }\r\n");
 #line 58 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 if (serializeIds) {                                                          
 #line 59 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("            else\n");
-this.WriteObjects("            {\n");
-this.WriteObjects("                ",  streamName , ".Write(false);\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("            else\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                ",  streamName , ".Write(false);\r\n");
+this.WriteObjects("            }\r\n");
 #line 63 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 }                                                                            
 #line 65 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
@@ -95,23 +95,23 @@ break;
         case SerializerDirection.FromStream:
 
 #line 68 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("            ",  collectionName , "_was_eagerLoaded = ",  streamName , ".ReadBoolean();\n");
+this.WriteObjects("            ",  collectionName , "_was_eagerLoaded = ",  streamName , ".ReadBoolean();\r\n");
 #line 69 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 if (serializeIds) {                                                          
 #line 70 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
-this.WriteObjects("            {\n");
-this.WriteObjects("                bool containsList = ",  streamName , ".ReadBoolean();\n");
-this.WriteObjects("                if (containsList)\n");
-this.WriteObjects("                {\n");
-this.WriteObjects("                    int numElements = ",  streamName , ".ReadInt32();\n");
-this.WriteObjects("                    ",  collectionName , "Ids = new List<int>(numElements);\n");
-this.WriteObjects("                    while (numElements-- > 0) \n");
-this.WriteObjects("                    {\n");
-this.WriteObjects("                        int id = ",  streamName , ".ReadInt32();\n");
-this.WriteObjects("                        ",  collectionName , "Ids.Add(id);\n");
-this.WriteObjects("                    }\n");
-this.WriteObjects("                }\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                bool containsList = ",  streamName , ".ReadBoolean();\r\n");
+this.WriteObjects("                if (containsList)\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    int numElements = ",  streamName , ".ReadInt32();\r\n");
+this.WriteObjects("                    ",  collectionName , "Ids = new List<int>(numElements);\r\n");
+this.WriteObjects("                    while (numElements-- > 0) \r\n");
+this.WriteObjects("                    {\r\n");
+this.WriteObjects("                        int id = ",  streamName , ".ReadInt32();\r\n");
+this.WriteObjects("                        ",  collectionName , "Ids.Add(id);\r\n");
+this.WriteObjects("                    }\r\n");
+this.WriteObjects("                }\r\n");
+this.WriteObjects("            }\r\n");
 #line 83 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 }                                                                            
 #line 85 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerLoadingSerialization.cst"

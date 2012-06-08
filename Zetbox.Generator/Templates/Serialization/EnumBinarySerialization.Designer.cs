@@ -55,27 +55,27 @@ this.WriteObjects("");
         case SerializerDirection.ToStream:
 
 #line 44 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write((int?)",  backingStoreName , ");\n");
+this.WriteObjects("            ",  streamName , ".Write((int?)",  backingStoreName , ");\r\n");
 #line 46 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 49 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            ",  backingStoreName , " = (",  enumerationType , ")",  streamName , ".ReadNullableInt32();\n");
+this.WriteObjects("            ",  backingStoreName , " = (",  enumerationType , ")",  streamName , ".ReadNullableInt32();\r\n");
 #line 51 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         case SerializerDirection.Export:
 
 #line 54 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int?)",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int?)",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 56 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
 #line 59 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
-this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")XmlStreamer.ReadNullableInt32(",  streamName , ");\n");
-this.WriteObjects("               break;\n");
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")XmlStreamer.ReadNullableInt32(",  streamName , ");\r\n");
+this.WriteObjects("               break;\r\n");
 #line 63 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         default:

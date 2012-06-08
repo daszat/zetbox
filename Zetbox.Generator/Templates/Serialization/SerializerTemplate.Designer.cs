@@ -43,7 +43,7 @@ namespace Zetbox.Generator.Templates.Serialization
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("");
 #line 34 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("\n");
+this.WriteObjects("\r\n");
 #line 36 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 string methodName = direction.ToString();
     string argName;
@@ -94,21 +94,21 @@ string methodName = direction.ToString();
         case SerializerDirection.Export:
 
 #line 84 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\n");
-this.WriteObjects("        {\n");
+this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
+this.WriteObjects("        {\r\n");
 #line 86 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 if (overrideAndCallBase) { 
 #line 87 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\n");
+this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
 #line 88 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 } else if (direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore)) { 
 #line 89 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  exportGuidBackingStore , ".ToString());\n");
+this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  exportGuidBackingStore , ".ToString());\r\n");
 #line 90 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 }                                                                                
 #line 91 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            // it may be only an empty shell to stand-in for unreadable data\n");
-this.WriteObjects("            if (!CurrentAccessRights.HasReadRights()) return;\n");
+this.WriteObjects("            // it may be only an empty shell to stand-in for unreadable data\r\n");
+this.WriteObjects("            if (!CurrentAccessRights.HasReadRights()) return;\r\n");
 #line 93 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 foreach(var serMember in fieldList)        
 #line 94 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
@@ -126,27 +126,27 @@ ApplySerializer(direction, serMember, argName);
 #line 100 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 }                                                                                            
 #line 101 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("        }\n");
+this.WriteObjects("        }\r\n");
 #line 102 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 break;                                                                                
 #line 103 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 case SerializerDirection.MergeImport:                                                    
 #line 104 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\n");
-this.WriteObjects("        {\n");
+this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
+this.WriteObjects("        {\r\n");
 #line 106 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 if (overrideAndCallBase) {                                                        
 #line 107 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\n");
+this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
 #line 108 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 }                                                                                
 #line 109 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            // it may be only an empty shell to stand-in for unreadable data\n");
-this.WriteObjects("            if (!CurrentAccessRights.HasReadRights()) return;\n");
+this.WriteObjects("            // it may be only an empty shell to stand-in for unreadable data\r\n");
+this.WriteObjects("            if (!CurrentAccessRights.HasReadRights()) return;\r\n");
 #line 111 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 if(fieldList.Count > 0) {                                                                        
 #line 112 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            switch (xml.NamespaceURI + \"|\" + xml.LocalName) {\n");
+this.WriteObjects("            switch (xml.NamespaceURI + \"|\" + xml.LocalName) {\r\n");
 #line 113 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 foreach(var serMember in fieldList)    
 #line 114 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
@@ -156,33 +156,33 @@ ApplySerializer(direction, serMember, argName);
 #line 116 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 }                                                                                        
 #line 117 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            }\n");
+this.WriteObjects("            }\r\n");
 #line 118 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 }                                                                                                
 #line 119 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("        }\n");
+this.WriteObjects("        }\r\n");
 #line 120 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 break;                                                                                    
 #line 121 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 case SerializerDirection.FromStream:                                                        
 #line 122 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " IEnumerable<IPersistenceObject> ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\n");
-this.WriteObjects("        {\n");
+this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " IEnumerable<IPersistenceObject> ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
+this.WriteObjects("        {\r\n");
 #line 124 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 if (overrideAndCallBase) {                                                        
 #line 125 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            var baseResult = base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\n");
-this.WriteObjects("            var result = new List<IPersistenceObject>();\n");
+this.WriteObjects("            var baseResult = base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
+this.WriteObjects("            var result = new List<IPersistenceObject>();\r\n");
 #line 127 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 } else {                                                                            
 #line 128 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            object baseResult = null;\n");
-this.WriteObjects("            var result = new List<IPersistenceObject>();\n");
+this.WriteObjects("            object baseResult = null;\r\n");
+this.WriteObjects("            var result = new List<IPersistenceObject>();\r\n");
 #line 130 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 }                                                                                
 #line 131 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            // it may be only an empty shell to stand-in for unreadable data\n");
-this.WriteObjects("            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {\n");
+this.WriteObjects("            // it may be only an empty shell to stand-in for unreadable data\r\n");
+this.WriteObjects("            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {\r\n");
 #line 133 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 foreach(var serMember in fieldList)    
 #line 134 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
@@ -192,13 +192,13 @@ ApplySerializer(direction, serMember, argName);
 #line 136 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 }                                                                                        
 #line 137 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)\n");
-this.WriteObjects("            return baseResult == null\n");
-this.WriteObjects("                ? result.Count == 0\n");
-this.WriteObjects("                    ? null\n");
-this.WriteObjects("                    : result\n");
-this.WriteObjects("                : baseResult.Concat(result);\n");
-this.WriteObjects("        }\n");
+this.WriteObjects("            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)\r\n");
+this.WriteObjects("            return baseResult == null\r\n");
+this.WriteObjects("                ? result.Count == 0\r\n");
+this.WriteObjects("                    ? null\r\n");
+this.WriteObjects("                    : result\r\n");
+this.WriteObjects("                : baseResult.Concat(result);\r\n");
+this.WriteObjects("        }\r\n");
 #line 145 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SerializerTemplate.cst"
 break;
         }

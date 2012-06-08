@@ -51,27 +51,27 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 40 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\n");
+this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\r\n");
 #line 42 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 45 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\n");
+this.WriteObjects("            this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\r\n");
 #line 47 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.Export:
 
 #line 50 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 52 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
 #line 55 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
-this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\n");
-this.WriteObjects("                break;\n");
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
 #line 59 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         default:

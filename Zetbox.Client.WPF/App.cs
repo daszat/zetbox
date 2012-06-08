@@ -32,8 +32,6 @@ namespace Zetbox.Client.WPF
     using Zetbox.API.Client;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using Zetbox.App.Extensions;
-    using Zetbox.App.GUI;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.WPF.Converter;
     using Zetbox.Client.WPF.Toolkit;
@@ -55,6 +53,12 @@ namespace Zetbox.Client.WPF
                 typeof(FrameworkElement),
                 new FrameworkPropertyMetadata(
                     XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+        }
+
+        public App()
+        {
+            this.ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
+            this.DispatcherUnhandledException += Application_DispatcherUnhandledException;
         }
 
         private static ServerDomainManager serverDomain;
@@ -95,8 +99,10 @@ namespace Zetbox.Client.WPF
             return builder.Build();
         }
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+
             try
             {
                 if (System.Configuration.ConfigurationManager.AppSettings["ShowDebugConsole"] == "true")
@@ -114,8 +120,6 @@ namespace Zetbox.Client.WPF
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                     InitCulture(config);
-                    StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6);
-
                     InitializeClient(args, config);
                 }
             }
@@ -145,6 +149,7 @@ namespace Zetbox.Client.WPF
         // Move to another method to avoid loading Zetbox.Objects
         private void InitializeClient(string[] args, ZetboxConfig config)
         {
+            StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6);
             if (config.Server != null && config.Server.StartServer)
             {
                 StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Server);
@@ -165,6 +170,7 @@ namespace Zetbox.Client.WPF
             var resources = this.Resources;
 
             resources.BeginInit();
+            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/AppResources.xaml", UriKind.Relative) });
 
             // Create icon converter
             var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<Func<IZetboxContext>>());
@@ -262,8 +268,10 @@ namespace Zetbox.Client.WPF
             }
         }
 
-        private void Application_Exit(object sender, ExitEventArgs e)
+        protected override void OnExit(ExitEventArgs e)
         {
+            base.OnExit(e);
+
             Logging.Log.Info("Stopping Zetbox Services");
             IServiceControlManager scm = null;
             if (container.TryResolve<IServiceControlManager>(out scm))

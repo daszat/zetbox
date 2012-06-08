@@ -52,102 +52,102 @@ string interfaceName = prop.ObjectClass.Name;
 
 
 #line 45 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("   		// ",  this.GetType() , "\n");
-this.WriteObjects("        // implement the user-visible interface\n");
-this.WriteObjects("        public ",  enumType , " ",  name , "\n");
-this.WriteObjects("        {\n");
-this.WriteObjects("            get\n");
-this.WriteObjects("            {\n");
-this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return default(",  enumType , ");\n");
+this.WriteObjects("   		// ",  this.GetType() , "\r\n");
+this.WriteObjects("        // implement the user-visible interface\r\n");
+this.WriteObjects("        public ",  enumType , " ",  name , "\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            get\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return default(",  enumType , ");\r\n");
 #line 53 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 if(callGetterSetterEvents)
 				{
 
 #line 56 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("				var __value = ",  backingName , ";\n");
-this.WriteObjects("				if(",  eventName , "_Getter != null)\n");
-this.WriteObjects("				{\n");
-this.WriteObjects("					var e = new PropertyGetterEventArgs<",  enumType , ">(__value);\n");
-this.WriteObjects("					",  eventName , "_Getter(this, e);\n");
-this.WriteObjects("					__value = e.Result;\n");
-this.WriteObjects("				}\n");
-this.WriteObjects("                return __value;\n");
+this.WriteObjects("				var __value = ",  backingName , ";\r\n");
+this.WriteObjects("				if(",  eventName , "_Getter != null)\r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("					var e = new PropertyGetterEventArgs<",  enumType , ">(__value);\r\n");
+this.WriteObjects("					",  eventName , "_Getter(this, e);\r\n");
+this.WriteObjects("					__value = e.Result;\r\n");
+this.WriteObjects("				}\r\n");
+this.WriteObjects("                return __value;\r\n");
 #line 65 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 }
 				else
 				{
 
 #line 69 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("				return ",  backingName , ";\n");
+this.WriteObjects("				return ",  backingName , ";\r\n");
 #line 71 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 }
 
 #line 72 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("            }\n");
-this.WriteObjects("            set\n");
-this.WriteObjects("            {\n");
-this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\n");
-this.WriteObjects("                if (",  backingName , " != value)\n");
-this.WriteObjects("                {\n");
-this.WriteObjects("					var __oldValue = ",  backingName , ";\n");
-this.WriteObjects("					var __newValue = value;\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("            set\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
+this.WriteObjects("                if (",  backingName , " != value)\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("					var __oldValue = ",  backingName , ";\r\n");
+this.WriteObjects("					var __newValue = value;\r\n");
 #line 81 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 if(callGetterSetterEvents)
 					{
 
 #line 84 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("                    if(",  eventName , "_PreSetter != null)\n");
-this.WriteObjects("                    {\n");
-this.WriteObjects("						var e = new PropertyPreSetterEventArgs<",  enumType , ">(__oldValue, __newValue);\n");
-this.WriteObjects("						",  eventName , "_PreSetter(this, e);\n");
-this.WriteObjects("						__newValue = e.Result;\n");
-this.WriteObjects("                    }\n");
+this.WriteObjects("                    if(",  eventName , "_PreSetter != null)\r\n");
+this.WriteObjects("                    {\r\n");
+this.WriteObjects("						var e = new PropertyPreSetterEventArgs<",  enumType , ">(__oldValue, __newValue);\r\n");
+this.WriteObjects("						",  eventName , "_PreSetter(this, e);\r\n");
+this.WriteObjects("						__newValue = e.Result;\r\n");
+this.WriteObjects("                    }\r\n");
 #line 91 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 }
 
 #line 92 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("					\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\n");
-this.WriteObjects("                    ",  backingName , " = value;\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\n");
+this.WriteObjects("					\r\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
+this.WriteObjects("                    ",  backingName , " = value;\r\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
 #line 97 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 if(callGetterSetterEvents)
 					{
 
 #line 100 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("                    if(",  eventName , "_PostSetter != null)\n");
-this.WriteObjects("                    {\n");
-this.WriteObjects("						var e = new PropertyPostSetterEventArgs<",  enumType , ">(__oldValue, __newValue);\n");
-this.WriteObjects("						",  eventName , "_PostSetter(this, e);\n");
-this.WriteObjects("                    }\n");
+this.WriteObjects("                    if(",  eventName , "_PostSetter != null)\r\n");
+this.WriteObjects("                    {\r\n");
+this.WriteObjects("						var e = new PropertyPostSetterEventArgs<",  enumType , ">(__oldValue, __newValue);\r\n");
+this.WriteObjects("						",  eventName , "_PostSetter(this, e);\r\n");
+this.WriteObjects("                    }\r\n");
 #line 106 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 }
 
 #line 107 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("                    \n");
-this.WriteObjects("                }\n");
-this.WriteObjects("            }\n");
-this.WriteObjects("        }\n");
-this.WriteObjects("\n");
+this.WriteObjects("                    \r\n");
+this.WriteObjects("                }\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
 #line 112 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 EfScalarPropHelper.ApplyBackingStoreDefinition(this, enumType, backingName, efName); 
 #line 113 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
-this.WriteObjects("        \n");
-this.WriteObjects("        /// <summary>EF sees only this property, for ",  UglyXmlEncode(name) , "</summary>\n");
-this.WriteObjects("        [XmlIgnore()]\n");
-this.WriteObjects("        [EdmScalarProperty()]\n");
-this.WriteObjects("        public int",  isNullable ? "?" : String.Empty , " ",  efName , "\n");
-this.WriteObjects("        {\n");
-this.WriteObjects("            get\n");
-this.WriteObjects("            {\n");
-this.WriteObjects("                return (int",  isNullable ? "?" : String.Empty , ")this.",  name , ";\n");
-this.WriteObjects("            }\n");
-this.WriteObjects("            set\n");
-this.WriteObjects("            {\n");
-this.WriteObjects("                this.",  name , " = (",  enumType , ")value;\n");
-this.WriteObjects("            }\n");
-this.WriteObjects("        }\n");
-this.WriteObjects("        \n");
+this.WriteObjects("        \r\n");
+this.WriteObjects("        /// <summary>EF sees only this property, for ",  UglyXmlEncode(name) , "</summary>\r\n");
+this.WriteObjects("        [XmlIgnore()]\r\n");
+this.WriteObjects("        [EdmScalarProperty()]\r\n");
+this.WriteObjects("        public int",  isNullable ? "?" : String.Empty , " ",  efName , "\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            get\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                return (int",  isNullable ? "?" : String.Empty , ")this.",  name , ";\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("            set\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                this.",  name , " = (",  enumType , ")value;\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("        \r\n");
 #line 130 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 AddSerialization(serializationList);
 

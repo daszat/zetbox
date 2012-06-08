@@ -54,27 +54,27 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 42 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write(",  sourceMember , " != null ? OurContext.GetIdFromProxy(",  sourceMember , ") : (int?)null);\n");
+this.WriteObjects("            ",  streamName , ".Write(",  sourceMember , " != null ? OurContext.GetIdFromProxy(",  sourceMember , ") : (int?)null);\r\n");
 #line 44 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
 #line 47 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\n");
+this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
 #line 49 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.Export:
 
 #line 52 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 54 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
 #line 57 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
-this.WriteObjects("                this.",  targetGuidMember , " = XmlStreamer.ReadNullableGuid(",  streamName , ");\n");
-this.WriteObjects("                break;\n");
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
+this.WriteObjects("                this.",  targetGuidMember , " = XmlStreamer.ReadNullableGuid(",  streamName , ");\r\n");
+this.WriteObjects("                break;\r\n");
 #line 61 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         default:

@@ -80,21 +80,21 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
 	var eventName = "On" + name + "_PostSetter";
 
 #line 65 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
-this.WriteObjects("           // ",  this.GetType() , "\n");
-this.WriteObjects("        // implement the user-visible interface\n");
-this.WriteObjects("        [XmlIgnore()]\n");
-this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\n");
-this.WriteObjects("        public ",  exposedListType , "<",  referencedInterface , "> ",  name , "\n");
-this.WriteObjects("        {\n");
-this.WriteObjects("            get\n");
-this.WriteObjects("            {\n");
-this.WriteObjects("                if (",  wrapperName , " == null)\n");
-this.WriteObjects("                {\n");
-this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , ">(\n");
-this.WriteObjects("                            this.Context, ",  efName , ",\n");
-this.WriteObjects("                            () => this.NotifyPropertyChanging(\"",  name , "\", null, null),\n");
-this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\n");
-this.WriteObjects("                            (item) => item.NotifyPropertyChanging(\"",  otherName , "\", null, null),\n");
+this.WriteObjects("           // ",  this.GetType() , "\r\n");
+this.WriteObjects("        // implement the user-visible interface\r\n");
+this.WriteObjects("        [XmlIgnore()]\r\n");
+this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
+this.WriteObjects("        public ",  exposedListType , "<",  referencedInterface , "> ",  name , "\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            get\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , ">(\r\n");
+this.WriteObjects("                            this.Context, ",  efName , ",\r\n");
+this.WriteObjects("                            () => this.NotifyPropertyChanging(\"",  name , "\", null, null),\r\n");
+this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
+this.WriteObjects("                            (item) => item.NotifyPropertyChanging(\"",  otherName , "\", null, null),\r\n");
 this.WriteObjects("                            (item) => item.NotifyPropertyChanged(\"",  otherName , "\", null, null)");
 #line 81 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 // TODO: improve this!
@@ -104,37 +104,37 @@ this.WriteObjects("                            (item) => item.NotifyPropertyChan
     }
                             
 #line 86 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
-this.WriteObjects("",  positionPropertyNameArgument , ");\n");
-this.WriteObjects("                }\n");
-this.WriteObjects("                return ",  wrapperName , ";\n");
-this.WriteObjects("            }\n");
-this.WriteObjects("        }\n");
-this.WriteObjects("    \n");
-this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  assocName , "\", \"",  targetRoleName , "\")]\n");
-this.WriteObjects("        public EntityCollection<",  referencedImplementation , "> ",  efName , "\n");
-this.WriteObjects("        {\n");
-this.WriteObjects("            get\n");
-this.WriteObjects("            {\n");
-this.WriteObjects("                var c = ((IEntityWithRelationships)(this)).RelationshipManager\n");
-this.WriteObjects("                    .GetRelatedCollection<",  referencedImplementation , ">(\n");
-this.WriteObjects("                        \"Model.",  assocName , "\",\n");
-this.WriteObjects("                        \"",  targetRoleName , "\");\n");
-this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\n");
-this.WriteObjects("                    && !c.IsLoaded)\n");
-this.WriteObjects("                {\n");
-this.WriteObjects("                    c.Load();\n");
-this.WriteObjects("                }\n");
-this.WriteObjects("                c.ForEach(i => i.AttachToContext(Context));\n");
-this.WriteObjects("                return c;\n");
-this.WriteObjects("            }\n");
-this.WriteObjects("        }\n");
-this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , "> ",  wrapperName , ";\n");
-this.WriteObjects("\n");
+this.WriteObjects("",  positionPropertyNameArgument , ");\r\n");
+this.WriteObjects("                }\r\n");
+this.WriteObjects("                return ",  wrapperName , ";\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("    \r\n");
+this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  assocName , "\", \"",  targetRoleName , "\")]\r\n");
+this.WriteObjects("        public EntityCollection<",  referencedImplementation , "> ",  efName , "\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            get\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                var c = ((IEntityWithRelationships)(this)).RelationshipManager\r\n");
+this.WriteObjects("                    .GetRelatedCollection<",  referencedImplementation , ">(\r\n");
+this.WriteObjects("                        \"Model.",  assocName , "\",\r\n");
+this.WriteObjects("                        \"",  targetRoleName , "\");\r\n");
+this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\r\n");
+this.WriteObjects("                    && !c.IsLoaded)\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    c.Load();\r\n");
+this.WriteObjects("                }\r\n");
+this.WriteObjects("                c.ForEach(i => i.AttachToContext(Context));\r\n");
+this.WriteObjects("                return c;\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , "> ",  wrapperName , ";\r\n");
+this.WriteObjects("\r\n");
 #line 112 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading) { 
 #line 113 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
-this.WriteObjects("        private List<int> ",  name , "Ids;\n");
-this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\n");
+this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
+this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
 #line 116 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (serializationList != null)
         {
@@ -143,7 +143,7 @@ if (serializationList != null)
     }
 
 #line 122 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
-this.WriteObjects("\n");
+this.WriteObjects("\r\n");
 
         }
 

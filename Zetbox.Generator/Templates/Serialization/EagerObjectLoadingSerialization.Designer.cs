@@ -49,9 +49,9 @@ switch(direction)
         case SerializerDirection.ToStream:
 
 #line 40 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
-this.WriteObjects("            if (auxObjects != null) {\n");
-this.WriteObjects("                auxObjects.Add(",  propertyName , ");\n");
-this.WriteObjects("            }\n");
+this.WriteObjects("            if (auxObjects != null) {\r\n");
+this.WriteObjects("                auxObjects.Add(",  propertyName , ");\r\n");
+this.WriteObjects("            }\r\n");
 #line 44 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 break;
         case SerializerDirection.FromStream:

@@ -33,7 +33,7 @@ namespace Zetbox.Generator.Templates.Properties
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst"
 this.WriteObjects("");
 #line 26 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst"
-this.WriteObjects("",  GetModifiers() , " event PropertyListChangedHandler<",  objType , "> ",  eventName , ";\n");
+this.WriteObjects("",  GetModifiers() , " event PropertyListChangedHandler<",  objType , "> ",  eventName , ";\r\n");
 
         }
 

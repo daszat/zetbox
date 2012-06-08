@@ -41,20 +41,20 @@ string name = prop.Name;
     string type = prop.GetPropertyTypeString();
 
 #line 34 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
-this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\n");
-this.WriteObjects("        ",  type , " ",  name , " {\n");
-this.WriteObjects("            get;\n");
+this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
+this.WriteObjects("        ",  type , " ",  name , " {\r\n");
+this.WriteObjects("            get;\r\n");
 #line 38 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 if (!isReadonly)
     {
 
 #line 41 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
-this.WriteObjects("            set;\n");
+this.WriteObjects("            set;\r\n");
 #line 43 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 }
 
 #line 45 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
-this.WriteObjects("        }\n");
+this.WriteObjects("        }\r\n");
 
         }
 

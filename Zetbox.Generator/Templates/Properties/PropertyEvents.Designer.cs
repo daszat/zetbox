@@ -41,14 +41,14 @@ this.WriteObjects("");
 #line 29 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasGetters) { 
 #line 30 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
-this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\n");
+this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
 #line 31 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 #line 32 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasSetters) { 
 #line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
-this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\n");
-this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\n");
+this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
+this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\r\n");
 #line 35 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 
