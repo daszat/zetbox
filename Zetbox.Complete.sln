@@ -1272,12 +1272,6 @@ Global
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Debug|x86.ActiveCfg = Debug|x86
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Debug|x86.Build.0 = Debug|x86
-		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Linux.Debug|.NET.ActiveCfg = Debug|x86
-		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Linux.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Linux.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Linux.Debug|x86.ActiveCfg = Debug|x86
-		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Linux.Debug|x86.Build.0 = Debug|x86
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Release|.NET.ActiveCfg = Release|x86
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Release|Any CPU.ActiveCfg = Release|x86
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Release|Mixed Platforms.ActiveCfg = Release|x86
