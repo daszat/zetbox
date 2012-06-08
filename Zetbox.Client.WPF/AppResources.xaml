@@ -40,7 +40,6 @@
 
   <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
 
-
   <converter:HorizontalContentAlignmentConverter x:Key="HorizontalContentAlignmentConverter"/>
   <converter:VerticalContentAlignmentConverter x:Key="VerticalContentAlignmentConverter"/>
   <converter:EmptyStringToCollapsedConverter x:Key="EmptyStringToCollapsedConverter"/>
@@ -81,4 +80,5 @@
                    Value="33"/>
     </Grid>
   </DataTemplate>
+
 </ResourceDictionary>

@@ -23,10 +23,7 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <Border>
-    <Border.Background>
-      <ImageBrush ImageSource="/Zetbox.Client.WPF;component/SplashScreenImage.png" />
-    </Border.Background>
+  <Border Background="{StaticResource SplashScreenImage}">
     <StackPanel VerticalAlignment="Bottom">
       <!--<TextBlock HorizontalAlignment="Center" Margin="0 30 0 0" FontWeight="Bold"
              Text="{Binding Message}" /> -->

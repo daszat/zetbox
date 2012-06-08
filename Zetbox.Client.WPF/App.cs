@@ -36,6 +36,8 @@ namespace Zetbox.Client.WPF
     using Zetbox.Client.WPF.Converter;
     using Zetbox.Client.WPF.Toolkit;
     using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -149,6 +151,8 @@ namespace Zetbox.Client.WPF
         // Move to another method to avoid loading Zetbox.Objects
         private void InitializeClient(string[] args, ZetboxConfig config)
         {
+            InitializeSplashScreenImageResource();
+
             StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6);
             if (config.Server != null && config.Server.StartServer)
             {
@@ -238,6 +242,14 @@ namespace Zetbox.Client.WPF
             // they are needed.
             var launcher = container.Resolve<Launcher>();
             launcher.Show(args);
+        }
+
+        protected virtual void InitializeSplashScreenImageResource()
+        {
+            if (!this.Resources.Contains("SplashScreenImage"))
+            {
+                this.Resources["SplashScreenImage"] = new ImageBrush() { ImageSource = new BitmapImage(new Uri("pack://application:,,,/Zetbox.Client.WPF;component/SplashScreenImage.png")) };
+            }
         }
 
         // Focus nightmare

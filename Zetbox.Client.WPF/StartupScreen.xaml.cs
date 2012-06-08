@@ -40,7 +40,6 @@ namespace Zetbox.Client.WPF
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
-
             Steps = 10;
             CurrentStep = 0;
             InitializeComponent();
