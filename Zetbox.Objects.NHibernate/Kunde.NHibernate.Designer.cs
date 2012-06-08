@@ -22,7 +22,7 @@ namespace Zetbox.App.Projekte
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Kunde")]
-    public class KundeNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Zetbox.API.IExportableInternal, Kunde
+    public class KundeNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Kunde, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("b9ddd097-4f45-40c5-87e9-7331ab58727c");
         public override Guid ObjectClassID { get { return _objectClassID; } }

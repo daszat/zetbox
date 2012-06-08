@@ -4,7 +4,7 @@ using Zetbox.API;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst")]
     public partial class PropertyEvents : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -36,18 +36,18 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 13 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 13 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasGetters) { 
-#line 14 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 14 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
-#line 15 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 15 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
-#line 16 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 16 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasSetters) { 
-#line 17 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
 this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\r\n");
-#line 19 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 19 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 
         }

@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// Describes a Relation between two Object Classes
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Relation")]
-    public class RelationMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, Relation
+    public class RelationMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Relation, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("1c0e894f-4eb4-422f-8094-3095735b4917");
         public override Guid ObjectClassID { get { return _objectClassID; } }

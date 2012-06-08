@@ -21,7 +21,7 @@ namespace Zetbox.App.SchemaMigration
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("SourceTable")]
-    public class SourceTableMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, SourceTable
+    public class SourceTableMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, SourceTable, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("7f95aa3e-0150-4073-8b9e-803226872cc2");
         public override Guid ObjectClassID { get { return _objectClassID; } }

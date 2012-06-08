@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// Metadefinition Object for Modules.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Module")]
-    public class ModuleNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Zetbox.API.IExportableInternal, Module
+    public class ModuleNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Module, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("8a1ace7c-77f2-4b48-9b0b-bcb68c660d11");
         public override Guid ObjectClassID { get { return _objectClassID; } }

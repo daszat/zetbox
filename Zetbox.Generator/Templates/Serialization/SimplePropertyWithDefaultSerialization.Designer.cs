@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst")]
     public partial class SimplePropertyWithDefaultSerialization : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -45,43 +45,43 @@ namespace Zetbox.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 21 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 21 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
-#line 25 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 25 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 this.WriteObjects("            ",  streamName , ".Write(this.",  isSetFlagName , ");\r\n");
 this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
 this.WriteObjects("                ",  streamName , ".Write(this.",  memberName , ");\r\n");
 this.WriteObjects("            }\r\n");
-#line 30 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 30 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
-#line 33 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 33 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 this.WriteObjects("            this.",  isSetFlagName , " = ",  streamName , ".ReadBoolean();\r\n");
 this.WriteObjects("            if (this.",  isSetFlagName , ") {\r\n");
 this.WriteObjects("                this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\r\n");
 this.WriteObjects("            }\r\n");
-#line 38 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 38 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 41 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 41 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 this.WriteObjects("            System.Diagnostics.Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\r\n");
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 44 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 44 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 47 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 47 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                // Import must have default value set\r\n");
 this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\r\n");
 this.WriteObjects("                this.",  isSetFlagName , " = true;\r\n");
 this.WriteObjects("                break;\r\n");
-#line 53 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 53 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

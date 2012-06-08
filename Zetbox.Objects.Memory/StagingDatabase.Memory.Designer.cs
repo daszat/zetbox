@@ -21,7 +21,7 @@ namespace Zetbox.App.SchemaMigration
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("StagingDatabase")]
-    public class StagingDatabaseMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, StagingDatabase
+    public class StagingDatabaseMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, StagingDatabase, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("4faf24fe-d732-4a1c-9156-2cbb7ec4be56");
         public override Guid ObjectClassID { get { return _objectClassID; } }

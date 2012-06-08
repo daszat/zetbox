@@ -8,11 +8,11 @@ namespace Zetbox.Objects
     using System.Text;
     using Autofac;
 	using Zetbox.API;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using Zetbox.API.Server;
     using Zetbox.App.Extensions;
     using Zetbox.DalProvider.Ef;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
 
     public class EfModule
         : Autofac.Module

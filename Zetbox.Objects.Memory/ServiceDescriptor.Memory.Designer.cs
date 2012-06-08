@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// Descriptor Object for Zetbox Services
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("ServiceDescriptor")]
-    public class ServiceDescriptorMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, ServiceDescriptor
+    public class ServiceDescriptorMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, ServiceDescriptor, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("d1bf8a7e-a8c0-435b-9dfe-b5ab61e71d1a");
         public override Guid ObjectClassID { get { return _objectClassID; } }

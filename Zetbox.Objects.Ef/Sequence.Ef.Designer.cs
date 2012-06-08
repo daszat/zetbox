@@ -14,17 +14,17 @@ namespace Zetbox.App.Base
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Provides the definition of a database sequence
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Sequence")]
     [System.Diagnostics.DebuggerDisplay("Sequence")]
-    public class SequenceEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, Sequence
+    public class SequenceEfImpl : BaseServerDataObject_EntityFramework, Sequence, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("8745716a-a9e7-4b2f-b7e8-948b992aaafb");
         public override Guid ObjectClassID { get { return _objectClassID; } }

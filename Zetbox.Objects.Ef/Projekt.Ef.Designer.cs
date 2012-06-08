@@ -14,17 +14,17 @@ namespace Zetbox.App.Projekte
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// 
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Projekt")]
     [System.Diagnostics.DebuggerDisplay("Projekt")]
-    public class ProjektEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, Projekt
+    public class ProjektEfImpl : BaseServerDataObject_EntityFramework, Projekt, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("885939e8-82e1-4fdf-b80e-5f612d5131d3");
         public override Guid ObjectClassID { get { return _objectClassID; } }

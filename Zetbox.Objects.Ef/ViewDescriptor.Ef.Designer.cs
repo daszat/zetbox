@@ -14,17 +14,17 @@ namespace Zetbox.App.GUI
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// 
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="ViewDescriptor")]
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
-    public class ViewDescriptorEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, ViewDescriptor
+    public class ViewDescriptorEfImpl : BaseServerDataObject_EntityFramework, ViewDescriptor, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("ffda4604-1536-43b6-b951-f8753d5092ca");
         public override Guid ObjectClassID { get { return _objectClassID; } }

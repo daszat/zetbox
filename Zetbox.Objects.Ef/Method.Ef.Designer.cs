@@ -14,17 +14,17 @@ namespace Zetbox.App.Base
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Metadefinition Object for Methods.
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Method")]
     [System.Diagnostics.DebuggerDisplay("Method")]
-    public class MethodEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, Method
+    public class MethodEfImpl : BaseServerDataObject_EntityFramework, Method, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("ef79c0b9-55e0-45ad-8233-1ff8f852661f");
         public override Guid ObjectClassID { get { return _objectClassID; } }

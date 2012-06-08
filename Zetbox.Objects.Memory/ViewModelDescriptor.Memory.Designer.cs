@@ -21,7 +21,7 @@ namespace Zetbox.App.GUI
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor")]
-    public class ViewModelDescriptorMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, ViewModelDescriptor
+    public class ViewModelDescriptorMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, ViewModelDescriptor, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("5d152c6f-6c1e-48b7-b03e-669e30468808");
         public override Guid ObjectClassID { get { return _objectClassID; } }

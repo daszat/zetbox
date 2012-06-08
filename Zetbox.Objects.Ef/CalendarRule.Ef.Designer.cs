@@ -14,10 +14,10 @@ namespace Zetbox.App.Calendar
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Abstract base class for Calendar Rules describing recurrent working hours

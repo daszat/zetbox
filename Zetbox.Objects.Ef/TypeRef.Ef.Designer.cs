@@ -14,17 +14,17 @@ namespace Zetbox.App.Base
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="TypeRef")]
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
-    public class TypeRefEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, TypeRef
+    public class TypeRefEfImpl : BaseServerDataObject_EntityFramework, TypeRef, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("87766ae2-89a4-4c37-ab25-583a710c55e5");
         public override Guid ObjectClassID { get { return _objectClassID; } }

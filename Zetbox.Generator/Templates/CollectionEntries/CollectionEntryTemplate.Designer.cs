@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.CollectionEntries
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst")]
     public partial class CollectionEntryTemplate : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -31,61 +31,61 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 13 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 13 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("    // BEGIN ",  this.GetType().FullName , "\r\n");
-#line 15 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 15 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyClassAttributeTemplate();
 
-#line 17 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  GetCeClassName() , "\")]\r\n");
 this.WriteObjects("    public class ",  GetCeClassName() , " ",  GetInheritance() , "\r\n");
 this.WriteObjects("    {\r\n");
-#line 20 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 20 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyConstructorTemplate(); 
-#line 21 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 21 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyClassHeadTemplate(); 
-#line 22 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 22 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// the A-side value of this CollectionEntry\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 27 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 27 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyAPropertyTemplate();
 
-#line 29 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 29 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// the B-side value of this CollectionEntry\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 34 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 34 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyBPropertyTemplate();
 
 
     if (IsOrdered())
     {
 
-#line 40 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 40 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// Index into the A-side list of this relation\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 45 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 45 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyAIndexPropertyTemplate();
 
-#line 47 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 47 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// Index into the B-side list of this relation\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 52 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 52 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyBIndexPropertyTemplate();
     }
 
-#line 55 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 55 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #region Serializer\r\n");
 this.WriteObjects("\r\n");
-#line 59 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 59 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 Serialization.SerializerTemplate.Call(Host, ctx,
         Serialization.SerializerDirection.ToStream, this.MembersToSerialize, true, null);
 
@@ -101,7 +101,7 @@ Serialization.SerializerTemplate.Call(Host, ctx,
             Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, false, GetExportGuidBackingStoreReference());
     }
 
-#line 74 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 74 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion\r\n");
 this.WriteObjects("\r\n");
@@ -116,10 +116,10 @@ this.WriteObjects("            base.ApplyChangesFrom(obj);\r\n");
 this.WriteObjects("            var other = (",  GetCeClassName() , ")obj;\r\n");
 this.WriteObjects("            var me = (",  GetCeClassName() , ")this;\r\n");
 this.WriteObjects("\r\n");
-#line 89 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 89 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyChangesFromBody();
 
-#line 91 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 91 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
@@ -128,17 +128,17 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            // Do not reload references if the current object has been deleted.\r\n");
 this.WriteObjects("            // TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
 this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
-#line 100 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 100 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyReloadReferenceBody();
 
-#line 102 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 102 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 106 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 106 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyClassTailTemplate();
 
-#line 108 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
+#line 108 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("    }\r\n");
 this.WriteObjects("    // END ",  this.GetType().FullName , "\r\n");
 

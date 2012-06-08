@@ -21,7 +21,7 @@ namespace Zetbox.App.Projekte
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Task")]
-    public class TaskMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, Task
+    public class TaskMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Task, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("3fbb42ca-a084-491d-9135-85ed24f1ef78");
         public override Guid ObjectClassID { get { return _objectClassID; } }

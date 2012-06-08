@@ -2637,7 +2637,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl")]
-    public class NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
+    public class NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, NavigationEntry_accessed_by_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl()
@@ -3029,7 +3029,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl")]
-    public class ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyMemoryImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodMemoryImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ObjectReferenceProperty_shows_Method_RelationEntry
+    public class ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyMemoryImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodMemoryImpl>, ObjectReferenceProperty_shows_Method_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl()
@@ -3421,7 +3421,7 @@ namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl")]
-    public class Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektMemoryImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterMemoryImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, Projekt_haben_Mitarbeiter_RelationEntry
+    public class Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektMemoryImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterMemoryImpl>, Projekt_haben_Mitarbeiter_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl()
@@ -3899,7 +3899,7 @@ namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("RoleMembership_resolves_Relation_RelationEntryMemoryImpl")]
-    public class RoleMembership_resolves_Relation_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipMemoryImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationMemoryImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, RoleMembership_resolves_Relation_RelationEntry
+    public class RoleMembership_resolves_Relation_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipMemoryImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationMemoryImpl>, RoleMembership_resolves_Relation_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public RoleMembership_resolves_Relation_RelationEntryMemoryImpl()
@@ -4377,7 +4377,7 @@ namespace Zetbox.App.SchemaMigration
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryMemoryImpl")]
-    public class SourceColumn_created_Property_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnMemoryImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyMemoryImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, SourceColumn_created_Property_RelationEntry
+    public class SourceColumn_created_Property_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnMemoryImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyMemoryImpl>, SourceColumn_created_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public SourceColumn_created_Property_RelationEntryMemoryImpl()
@@ -5499,7 +5499,7 @@ namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl")]
-    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, TypeRef_hasGenericArguments_TypeRef_RelationEntry
+    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl>, TypeRef_hasGenericArguments_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl()
@@ -5977,7 +5977,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl")]
-    public class ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorMemoryImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry
+    public class ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorMemoryImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl>, ViewDescriptor_supports_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl()
@@ -6369,7 +6369,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl")]
-    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorMemoryImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindMemoryImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry
+    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorMemoryImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindMemoryImpl>, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl()
@@ -7405,7 +7405,7 @@ namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntryMemoryImpl")]
-    public class Kunde_EMails_CollectionEntryMemoryImpl : Zetbox.DalProvider.Memory.ValueCollectionEntryMemoryImpl<Zetbox.App.Projekte.Kunde, Zetbox.App.Projekte.KundeMemoryImpl, string>, Zetbox.API.IExportableValueCollectionEntryInternal, Kunde_EMails_CollectionEntry
+    public class Kunde_EMails_CollectionEntryMemoryImpl : Zetbox.DalProvider.Memory.ValueCollectionEntryMemoryImpl<Zetbox.App.Projekte.Kunde, Zetbox.App.Projekte.KundeMemoryImpl, string>, Kunde_EMails_CollectionEntry, Zetbox.API.IExportableValueCollectionEntryInternal
     {
         [Obsolete]
         public Kunde_EMails_CollectionEntryMemoryImpl()

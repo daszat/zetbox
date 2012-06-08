@@ -14,17 +14,17 @@ namespace Zetbox.App.Base
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Metadefinition Object for Modules.
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Module")]
     [System.Diagnostics.DebuggerDisplay("Module")]
-    public class ModuleEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, Module
+    public class ModuleEfImpl : BaseServerDataObject_EntityFramework, Module, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("8a1ace7c-77f2-4b48-9b0b-bcb68c660d11");
         public override Guid ObjectClassID { get { return _objectClassID; } }

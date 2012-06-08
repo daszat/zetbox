@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// Metadefinition Object for Properties. This class is abstract.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Property")]
-    public abstract class PropertyNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Zetbox.API.IExportableInternal, Property
+    public abstract class PropertyNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Property, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("e5f93f63-9cb8-40a5-8118-d1d9e479370c");
         public override Guid ObjectClassID { get { return _objectClassID; } }

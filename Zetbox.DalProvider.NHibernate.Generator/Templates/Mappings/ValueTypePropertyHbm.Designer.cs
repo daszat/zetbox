@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst")]
     public partial class ValueTypePropertyHbm : Zetbox.Generator.ResourceTemplate
     {
 		protected string prefix;
@@ -43,22 +43,22 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 17 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 if (isList) {                                                                    
-#line 18 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 18 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isList -->\r\n");
 this.WriteObjects("        <set name=\"",  propName , "\" ",  typeAttr , " inverse=\"true\" batch-size=\"100\">\r\n");
 this.WriteObjects("            <key column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
 this.WriteObjects("            <one-to-many ",  ceClassAttr , " />\r\n");
 this.WriteObjects("        </set>\r\n");
-#line 23 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 23 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 } else {                                                                         
-#line 24 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 24 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isValue -->\r\n");
 this.WriteObjects("        <property name=\"",  propName , "\" ",  typeAttr , "\r\n");
 this.WriteObjects("                  column=\"`",  prefix , "",  columnName , "`\" \r\n");
 this.WriteObjects("                  optimistic-lock=\"",  optimisticLock ? "true" : "false" , "\"/>\r\n");
-#line 28 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 28 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 }                                                                                
 
         }

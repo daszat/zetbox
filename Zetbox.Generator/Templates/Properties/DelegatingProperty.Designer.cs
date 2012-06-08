@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\DelegatingProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\DelegatingProperty.cst")]
     public partial class DelegatingProperty : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -39,7 +39,7 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\Zetbox\Zetbox.Generator\Templates\Properties\DelegatingProperty.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\DelegatingProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  propName , "\r\n");
 this.WriteObjects("        {\r\n");

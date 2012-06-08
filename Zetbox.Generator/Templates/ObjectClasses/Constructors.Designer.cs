@@ -11,7 +11,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst")]
     public partial class Constructors : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -37,22 +37,22 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        [Obsolete]\r\n");
 this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : base(null)\r\n");
 this.WriteObjects("        {\r\n");
-#line 21 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 21 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 22 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 22 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\r\n");
 this.WriteObjects("            : base(lazyCtx)\r\n");
 this.WriteObjects("        {\r\n");
-#line 27 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 27 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 28 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 28 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 
         }

@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
-    public class TypeRefMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, TypeRef
+    public class TypeRefMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, TypeRef, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("87766ae2-89a4-4c37-ab25-583a710c55e5");
         public override Guid ObjectClassID { get { return _objectClassID; } }

@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// Describes one end of a relation between two object classes
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("RelationEnd")]
-    public class RelationEndMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, RelationEnd
+    public class RelationEndMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, RelationEnd, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("07817322-d4b9-4dd8-8464-bcb6745fef34");
         public override Guid ObjectClassID { get { return _objectClassID; } }

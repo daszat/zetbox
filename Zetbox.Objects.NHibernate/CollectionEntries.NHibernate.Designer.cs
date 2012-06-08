@@ -2777,7 +2777,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl")]
-    public class NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryNHibernateImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
+    public class NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryNHibernateImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupNHibernateImpl>, NavigationEntry_accessed_by_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl()
             : this(null)
@@ -3189,7 +3189,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl")]
-    public class ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ObjectReferenceProperty_shows_Method_RelationEntry
+    public class ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodNHibernateImpl>, ObjectReferenceProperty_shows_Method_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl()
             : this(null)
@@ -3601,7 +3601,7 @@ namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl")]
-    public class Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektNHibernateImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, Projekt_haben_Mitarbeiter_RelationEntry
+    public class Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektNHibernateImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterNHibernateImpl>, Projekt_haben_Mitarbeiter_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl()
             : this(null)
@@ -4113,7 +4113,7 @@ namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("RoleMembership_resolves_Relation_RelationEntryNHibernateImpl")]
-    public class RoleMembership_resolves_Relation_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipNHibernateImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, RoleMembership_resolves_Relation_RelationEntry
+    public class RoleMembership_resolves_Relation_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipNHibernateImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationNHibernateImpl>, RoleMembership_resolves_Relation_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public RoleMembership_resolves_Relation_RelationEntryNHibernateImpl()
             : this(null)
@@ -4625,7 +4625,7 @@ namespace Zetbox.App.SchemaMigration
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryNHibernateImpl")]
-    public class SourceColumn_created_Property_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, SourceColumn_created_Property_RelationEntry
+    public class SourceColumn_created_Property_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyNHibernateImpl>, SourceColumn_created_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public SourceColumn_created_Property_RelationEntryNHibernateImpl()
             : this(null)
@@ -5811,7 +5811,7 @@ namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl")]
-    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, TypeRef_hasGenericArguments_TypeRef_RelationEntry
+    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl>, TypeRef_hasGenericArguments_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl()
             : this(null)
@@ -6323,7 +6323,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl")]
-    public class ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorNHibernateImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry
+    public class ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorNHibernateImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl>, ViewDescriptor_supports_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl()
             : this(null)
@@ -6735,7 +6735,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl")]
-    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry
+    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindNHibernateImpl>, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl()
             : this(null)
@@ -7821,7 +7821,7 @@ namespace Zetbox.App.Projekte
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntryNHibernateImpl")]
-    public class Kunde_EMails_CollectionEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.ValueCollectionEntryNHibernateImpl<Zetbox.App.Projekte.Kunde, Zetbox.App.Projekte.KundeNHibernateImpl, string>, Zetbox.API.IExportableValueCollectionEntryInternal, Kunde_EMails_CollectionEntry
+    public class Kunde_EMails_CollectionEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.ValueCollectionEntryNHibernateImpl<Zetbox.App.Projekte.Kunde, Zetbox.App.Projekte.KundeNHibernateImpl, string>, Kunde_EMails_CollectionEntry, Zetbox.API.IExportableValueCollectionEntryInternal
     {
         public Kunde_EMails_CollectionEntryNHibernateImpl()
             : this(null)

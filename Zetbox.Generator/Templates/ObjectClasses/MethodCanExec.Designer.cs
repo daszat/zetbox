@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst")]
     public partial class MethodCanExec : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -37,13 +37,13 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 16 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 16 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("		// CanExec\r\n");
-#line 19 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 19 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 var eventName_CanExec = eventName + "_CanExec";
 
-#line 21 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 21 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("		public static event CanExecMethodEventHandler<",  dt.Name , "> ",  eventName_CanExec , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"",  eventName_CanExec , "\")]\r\n");
@@ -58,27 +58,27 @@ this.WriteObjects("					",  eventName_CanExec , "(this, e);\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				else\r\n");
 this.WriteObjects("				{\r\n");
-#line 35 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 35 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 if (m.ObjectClass == dt || !(dt is ObjectClass)) { 
-#line 36 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 36 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("					e.Result = true;\r\n");
-#line 37 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 37 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 } else { 
-#line 38 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 38 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("					e.Result = base.",  m.Name , "CanExec;\r\n");
-#line 39 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 39 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 } 
-#line 40 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 40 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				return e.Result;\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		// CanExecReason\r\n");
-#line 47 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 47 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 var eventName_CanExecReason = eventName + "_CanExecReason";
 
-#line 49 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 49 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("		public static event CanExecReasonMethodEventHandler<",  dt.Name , "> ",  eventName_CanExecReason , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"",  eventName_CanExecReason , "\")]\r\n");
@@ -93,17 +93,17 @@ this.WriteObjects("					",  eventName_CanExecReason , "(this, e);\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				else\r\n");
 this.WriteObjects("				{\r\n");
-#line 63 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 63 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 if (m.ObjectClass == dt || !(dt is ObjectClass)) { 
-#line 64 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 64 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("					e.Result = string.Empty;\r\n");
-#line 65 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 65 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 } else { 
-#line 66 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 66 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("					e.Result = base.",  m.Name , "CanExecReason;\r\n");
-#line 67 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 67 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 } 
-#line 68 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
+#line 68 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				return e.Result;\r\n");
 this.WriteObjects("			}\r\n");

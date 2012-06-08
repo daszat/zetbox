@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.CompoundObjects
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst")]
     public partial class DefaultMethods : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -33,7 +33,7 @@ namespace Zetbox.Generator.Templates.CompoundObjects
 
         public override void Generate()
         {
-#line 14 "P:\Zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst"
+#line 14 "P:\zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst"
 this.WriteObjects("        #region ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerHidden()]\r\n");

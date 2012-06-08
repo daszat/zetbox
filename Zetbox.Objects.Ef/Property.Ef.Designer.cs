@@ -14,17 +14,17 @@ namespace Zetbox.App.Base
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Metadefinition Object for Properties. This class is abstract.
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Property")]
     [System.Diagnostics.DebuggerDisplay("Property")]
-    public abstract class PropertyEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, Property
+    public abstract class PropertyEfImpl : BaseServerDataObject_EntityFramework, Property, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("e5f93f63-9cb8-40a5-8118-d1d9e479370c");
         public override Guid ObjectClassID { get { return _objectClassID; } }

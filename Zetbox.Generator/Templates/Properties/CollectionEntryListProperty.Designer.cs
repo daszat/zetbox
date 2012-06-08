@@ -8,7 +8,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst")]
     public partial class CollectionEntryListProperty : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -56,7 +56,7 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 25 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 25 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
@@ -64,24 +64,24 @@ this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				if (",  backingName , " == null)\r\n");
 this.WriteObjects("				{\r\n");
-#line 33 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 // eagerly loaded relation already has the objects loaded
 	if (!eagerLoading)
 	{
 
-#line 37 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 37 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("					Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-#line 39 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 39 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
 	else
 	{
 
-#line 43 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 43 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("					if (!",  name , "_was_eagerLoaded) Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-#line 45 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 45 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
 
-#line 47 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 47 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("					",  backingName , " \r\n");
 this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">>(\r\n");
 this.WriteObjects("							this, \r\n");
@@ -92,14 +92,14 @@ this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">> ",  backingName , ";\r\n");
-#line 58 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 58 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (eagerLoading)
 	{
 
-#line 60 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 60 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("		\r\n");
 this.WriteObjects("		private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 63 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 63 "P:\zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
         AddSerialization(serializationList, name, eagerLoading);
 

@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// Metadefinition Object for Methods.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Method")]
-    public class MethodNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Zetbox.API.IExportableInternal, Method
+    public class MethodNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Method, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("ef79c0b9-55e0-45ad-8233-1ff8f852661f");
         public override Guid ObjectClassID { get { return _objectClassID; } }

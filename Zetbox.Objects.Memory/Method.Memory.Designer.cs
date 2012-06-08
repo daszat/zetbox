@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// Metadefinition Object for Methods.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Method")]
-    public class MethodMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, Method
+    public class MethodMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Method, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("ef79c0b9-55e0-45ad-8233-1ff8f852661f");
         public override Guid ObjectClassID { get { return _objectClassID; } }

@@ -22,7 +22,7 @@ namespace Zetbox.App.SchemaMigration
     /// Mapps an Enum
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("SourceEnum")]
-    public class SourceEnumNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Zetbox.API.IExportableInternal, SourceEnum
+    public class SourceEnumNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, SourceEnum, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("138d462f-e432-46a0-8ce2-e7f9893654d4");
         public override Guid ObjectClassID { get { return _objectClassID; } }

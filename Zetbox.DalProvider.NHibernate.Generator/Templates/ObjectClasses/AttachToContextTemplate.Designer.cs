@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst")]
     public partial class AttachToContextTemplate : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -33,27 +33,27 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 14 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 14 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void AttachToContext(IZetboxContext ctx)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.AttachToContext(ctx);\r\n");
 this.WriteObjects("            var nhCtx = (NHibernateContext)ctx;\r\n");
-#line 19 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 19 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name)) { 
-#line 20 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 20 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
 this.WriteObjects("                this.Proxy.",  prop.Name , ".ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));\r\n");
-#line 22 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 22 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 } 
-#line 23 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 23 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name)) { 
-#line 24 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 24 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
 this.WriteObjects("                this.Proxy.",  prop.Name , ".ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));\r\n");
-#line 26 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 26 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 } 
-#line 27 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 27 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

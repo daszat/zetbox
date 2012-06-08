@@ -14,17 +14,17 @@ namespace Zetbox.App.Base
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Descriptor Object for Zetbox Services
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="ServiceDescriptor")]
     [System.Diagnostics.DebuggerDisplay("ServiceDescriptor")]
-    public class ServiceDescriptorEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, ServiceDescriptor
+    public class ServiceDescriptorEfImpl : BaseServerDataObject_EntityFramework, ServiceDescriptor, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("d1bf8a7e-a8c0-435b-9dfe-b5ab61e71d1a");
         public override Guid ObjectClassID { get { return _objectClassID; } }

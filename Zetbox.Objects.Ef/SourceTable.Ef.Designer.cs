@@ -14,17 +14,17 @@ namespace Zetbox.App.SchemaMigration
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// 
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="SourceTable")]
     [System.Diagnostics.DebuggerDisplay("SourceTable")]
-    public class SourceTableEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, SourceTable
+    public class SourceTableEfImpl : BaseServerDataObject_EntityFramework, SourceTable, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("7f95aa3e-0150-4073-8b9e-803226872cc2");
         public override Guid ObjectClassID { get { return _objectClassID; } }

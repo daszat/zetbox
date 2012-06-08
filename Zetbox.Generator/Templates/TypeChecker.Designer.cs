@@ -6,7 +6,7 @@ using Zetbox.API;
 
 namespace Zetbox.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\TypeChecker.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\TypeChecker.cst")]
     public partial class TypeChecker : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -30,7 +30,7 @@ namespace Zetbox.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\Zetbox\Zetbox.Generator\Templates\TypeChecker.cst"
+#line 11 "P:\zetbox\Zetbox.Generator\Templates\TypeChecker.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\r\n");
 this.WriteObjects("        : Zetbox.API.BaseImplementationTypeChecker, I",  shortName , "ImplementationTypeChecker\r\n");

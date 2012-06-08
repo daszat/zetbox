@@ -14,17 +14,17 @@ namespace Zetbox.App.SchemaMigration
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// 
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="SourceColumn")]
     [System.Diagnostics.DebuggerDisplay("SourceColumn")]
-    public class SourceColumnEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, SourceColumn
+    public class SourceColumnEfImpl : BaseServerDataObject_EntityFramework, SourceColumn, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("e921bb2f-2cac-46d1-a7f4-120bb1a4afe2");
         public override Guid ObjectClassID { get { return _objectClassID; } }

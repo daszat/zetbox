@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst")]
     public partial class CompoundObjectPropertyInitialisation : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -39,7 +39,7 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
 this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(",  isNull ? "true": "false" , ", this, \"",  propertyName , "\");\r\n");
 
         }

@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor")]
-    public class ViewModelDescriptorNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Zetbox.API.IExportableInternal, ViewModelDescriptor
+    public class ViewModelDescriptorNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, ViewModelDescriptor, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("5d152c6f-6c1e-48b7-b03e-669e30468808");
         public override Guid ObjectClassID { get { return _objectClassID; } }

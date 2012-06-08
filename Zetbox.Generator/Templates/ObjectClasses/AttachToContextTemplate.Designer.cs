@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst")]
     public partial class AttachToContextTemplate : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -33,31 +33,31 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 14 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 14 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void AttachToContext(IZetboxContext ctx)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.AttachToContext(ctx);\r\n");
-#line 19 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 19 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
             {
 
-#line 22 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 22 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("            if (_",  prop.Name , "Collection != null)\r\n");
 this.WriteObjects("                _",  prop.Name , "Collection.ForEach<IPersistenceObject>(i => ctx.Attach(i));\r\n");
-#line 25 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 25 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 }
 
             foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
             {
 
-#line 30 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 30 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("            if (_",  prop.Name , "Collection != null)\r\n");
 this.WriteObjects("                _",  prop.Name , "Collection.ForEach<IPersistenceObject>(i => ctx.Attach(i));\r\n");
-#line 33 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 33 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 }
 
-#line 35 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 35 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

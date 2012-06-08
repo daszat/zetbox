@@ -14,17 +14,17 @@ namespace Zetbox.App.Base
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Describes one end of a relation between two object classes
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="RelationEnd")]
     [System.Diagnostics.DebuggerDisplay("RelationEnd")]
-    public class RelationEndEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, RelationEnd
+    public class RelationEndEfImpl : BaseServerDataObject_EntityFramework, RelationEnd, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("07817322-d4b9-4dd8-8464-bcb6745fef34");
         public override Guid ObjectClassID { get { return _objectClassID; } }

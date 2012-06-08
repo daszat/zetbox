@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst")]
     public partial class CompoundObjectPropertyTemplate : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -47,7 +47,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 21 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 21 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  coType , " ",  propName , "\r\n");
@@ -57,9 +57,9 @@ this.WriteObjects("            set { ",  backingPropertyName , " = (",  coImplem
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\r\n");
-#line 30 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 30 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 EfScalarPropHelper.ApplyBackingStoreDefinition(this, coImplementationType, backingStoreName, backingPropertyName); 
-#line 31 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 31 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values, mapped via EF</summary>\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -74,14 +74,14 @@ this.WriteObjects("			}\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 45 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 45 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 if (!isNullable) { 
-#line 46 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 46 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 48 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 48 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 } 
-#line 49 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 49 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var __oldValue = ",  backingStoreName , ";\r\n");
@@ -111,10 +111,10 @@ this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 79 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 79 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 81 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 81 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("           // END ",  this.GetType() , "");
 
         }

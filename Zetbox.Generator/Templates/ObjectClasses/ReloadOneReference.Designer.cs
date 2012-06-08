@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst")]
     public partial class ReloadOneReference : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -46,17 +46,17 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 21 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+#line 21 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("\r\n");
-#line 22 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+#line 22 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 if (isExportable) { 
-#line 23 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+#line 23 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("            if (",  fkGuidBackingName , ".HasValue)\r\n");
 this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")Context.FindPersistenceObject<",  referencedInterface , ">(",  fkGuidBackingName , ".Value);\r\n");
 this.WriteObjects("            else\r\n");
-#line 26 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+#line 26 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 } 
-#line 27 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+#line 27 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 this.WriteObjects("            if (",  fkBackingName , ".HasValue)\r\n");
 this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")Context.Find<",  referencedInterface , ">(",  fkBackingName , ".Value);\r\n");
 this.WriteObjects("            else\r\n");

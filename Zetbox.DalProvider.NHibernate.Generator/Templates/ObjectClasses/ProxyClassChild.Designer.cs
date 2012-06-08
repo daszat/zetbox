@@ -11,7 +11,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst")]
     public partial class ProxyClassChild : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -41,34 +41,34 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 19 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 19 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public class ",  className , "Proxy\r\n");
 this.WriteObjects("            : ",  parentClassName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            public ",  className , "Proxy()\r\n");
 this.WriteObjects("            {\r\n");
-#line 25 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 25 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 foreach(var p in nameAndInitialiserList) { 
-#line 26 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 26 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 this.WriteObjects("                ",  p.Key , " = ",  p.Value , ";\r\n");
-#line 27 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 27 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 } 
-#line 28 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 28 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            public override Type ZetboxWrapper { get { return typeof(",  className , "",  ImplementationSuffix , "); } }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            public override Type ZetboxProxy { get { return typeof(",  className , "Proxy); } }\r\n");
 this.WriteObjects("\r\n");
-#line 34 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 34 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 foreach(var p in typeAndNameList) { 
-#line 35 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 35 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 this.WriteObjects("            public virtual ",  p.Key , " ",  p.Value , " { get; set; }\r\n");
 this.WriteObjects("\r\n");
-#line 37 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 37 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 } 
-#line 38 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 38 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 this.WriteObjects("        }\r\n");
 
         }

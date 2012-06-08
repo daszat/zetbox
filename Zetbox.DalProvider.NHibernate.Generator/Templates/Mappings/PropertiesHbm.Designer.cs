@@ -12,7 +12,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst")]
     public partial class PropertiesHbm : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -40,7 +40,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 21 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
+#line 21 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
 /*
      * TODO: Actually, all this should die and become a bunch of polymorphic calls.
      * See also Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdlEntityTypeFields

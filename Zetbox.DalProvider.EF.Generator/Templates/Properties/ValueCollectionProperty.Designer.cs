@@ -11,7 +11,7 @@ using Zetbox.App.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst")]
     public partial class ValueCollectionProperty : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -37,7 +37,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 19 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 19 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
 Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList);
 	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
 
@@ -67,7 +67,7 @@ Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((Co
     AddSerialization(serializationList, efName);
 	var eventName = "On" + name + "_PostSetter";
 
-#line 48 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 48 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");

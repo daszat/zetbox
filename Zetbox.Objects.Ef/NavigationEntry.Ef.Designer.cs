@@ -14,17 +14,17 @@ namespace Zetbox.App.GUI
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Abstract base class for Navigation Entries
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="NavigationEntry")]
     [System.Diagnostics.DebuggerDisplay("NavigationEntry")]
-    public abstract class NavigationEntryEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, NavigationEntry
+    public abstract class NavigationEntryEfImpl : BaseServerDataObject_EntityFramework, NavigationEntry, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("9a640b13-a8c2-4a90-899a-954f0c57c1ab");
         public override Guid ObjectClassID { get { return _objectClassID; } }

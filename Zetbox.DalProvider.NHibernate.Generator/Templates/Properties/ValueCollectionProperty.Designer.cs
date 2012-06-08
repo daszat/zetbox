@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst")]
     public partial class ValueCollectionProperty : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -62,16 +62,16 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 29 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 29 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("\r\n");
-#line 31 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 31 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 var eventName = "On" + name + "_PostSetter";
 
-#line 33 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 33 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-#line 34 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 34 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName); 
-#line 35 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 35 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");

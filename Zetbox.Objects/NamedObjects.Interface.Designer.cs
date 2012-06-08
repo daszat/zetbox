@@ -2545,6 +2545,299 @@ namespace Zetbox {
                                 }
                             }
                         }
+                        public static class SchemaMigration
+                        {
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> MigrationLog
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("49745ac0-db34-41ee-875f-0f09f1432ab0"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> MigrationProject
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("f2b4fe26-9d57-47c7-88b2-b30a38ebbd97"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SourceColumn
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("e921bb2f-2cac-46d1-a7f4-120bb1a4afe2"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SourceEnum
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("138d462f-e432-46a0-8ce2-e7f9893654d4"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SourceTable
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("7f95aa3e-0150-4073-8b9e-803226872cc2"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> StagingDatabase
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("4faf24fe-d732-4a1c-9156-2cbb7ec4be56"); }
+                            }
+                            public static class MigrationLog_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Destination
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("bad56a8d-e23e-47e3-8545-ee4c2689aab8"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationRows
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6b2ac709-a61b-4d22-96e6-e36f4bcbce84"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Source
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("fd0e1581-c4f0-476e-af24-2905e4aa377d"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceRows
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("52a3ddb3-c724-4427-a2e1-95bbf347906a"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Timestamp
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9e3a70c6-04f9-4464-93c9-68c1eec6b94f"); }
+                                }
+                            }
+                            public static class MigrationProject_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("339fa8af-5760-4e31-a112-5aa29e7a0d28"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("133f7c7e-fcf4-4e90-b6e9-f3500dfcf1b9"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("e11cb99e-3e4b-4c96-ba62-42b6a66618f3"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("51ceaa28-d616-464b-8c6b-aadf7461aa4d"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("17634aec-04e4-40f8-a585-51989e5cd95f"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationModule
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ed7a3291-b69b-42f3-9b60-dd06e374f856"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0851878a-0753-425e-a053-c4642ce3f28b"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> StagingDatabases
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("3750005b-3850-4697-8b80-b5a7854fc344"); }
+                                }
+                            }
+                            public static class SourceColumn_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4f2f1af0-f33b-4d98-89bb-2a386e11a29a"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ddd4df6a-e085-45fe-b900-f3995dcb1845"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Comment
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("66bcca34-2297-4e06-84e8-ff19c5d4af35"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CompareNulls
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("09607800-4b5c-4d8a-a0cf-b508986c2f17"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6c0d8f0c-2937-4d6a-972a-299c085e8b5d"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("bb5f31d0-072d-45ec-a455-0234ccc31867"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DbType
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("78873431-d503-4192-b658-5c5bc6442180"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6273444e-5309-4481-8d2a-99a7a8a1b059"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationProperty
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("38dce431-bb65-44c5-b67a-1f28202e51d9"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> EnumEntries
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("a040ea6b-c105-4815-815b-e36f0778e4cb"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("52ba9fcd-dbeb-42da-9146-6f40976c1c83"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> IsNullable
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("817ccb79-7051-4b09-8386-941a21575bfc"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("a27f7d36-fd56-4271-bac0-88e22bc65027"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> References
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4d6faa25-d610-4e23-b12f-7ee4c78da70b"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Referers
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("71bed80f-57ec-4038-a9a4-9aabc0c2f60d"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Size
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("5a1dc7f1-7743-4603-9b65-1b31ca17d55d"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceTable
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("d1dca069-f6b5-4da1-beee-a51853c109ba"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Status
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("bba3aa19-0097-4692-b649-d51fbc626182"); }
+                                }
+                            }
+                            public static class SourceEnum_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("55366c31-0051-4be7-a3ac-66e783f68780"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9fefd927-1080-44d0-80ae-8afacf6620d3"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ab0d1cc0-622f-49d9-8dfa-d9461e50b4d6"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4b5066bd-3dac-4520-87f0-4548f3bff8e4"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationValue
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0d29a48f-6791-4640-be97-7e93d246a389"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ecac7622-18c7-4364-b109-c390cb911ce5"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceColumn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b7195fb9-e6da-493f-b1be-9465e4d9d5ae"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceValue
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("885a90e0-62e0-426a-a3b5-64dca3a38d18"); }
+                                }
+                            }
+                            public static class SourceTable_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("1156b3eb-af9b-4a44-8ed3-e64fa3fbb251"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("42040e80-e6a4-4d19-959f-033080669059"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Comment
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("86a05242-c667-4181-a7a7-1d50d20f9d0f"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("c32e650b-4c12-4eeb-9f93-46df426e38de"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0a19a3eb-ffa2-4eef-861f-824cc327ab27"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8b93e1d4-1e2a-44a8-91c3-0c71541934c6"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationObjectClass
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ec638748-894e-4e61-b618-7d8fbacec2fe"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("7f6f277e-78fa-4955-925c-554a6cfd466a"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("f01c1095-cf9b-41f5-b89c-532a86a78cc5"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceColumn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0e435261-9490-4fbb-8268-f7f1f6607d2c"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> StagingDatabase
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("d57c1138-b611-44b6-bd30-9b6d6a91cbed"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Status
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6029f896-82fd-4372-8cfd-76ca7e31ebf6"); }
+                                }
+                            }
+                            public static class StagingDatabase_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ee3476a8-1715-4dc2-a2b2-13e4a2a27e10"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("16652536-fb87-4b1b-866e-ec2fb68a8ae2"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ConnectionStringKey
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6aa09a38-a4be-4095-bf8d-9799bd56a14d"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9db15b1e-a55e-444c-9fa7-9dd66d9b13f6"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("d402f8a4-dc92-4041-a295-50257057e656"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("157ecaf4-3ee5-4d78-8148-ab936de50523"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6bc56e55-16c4-4c94-8c20-12861844e053"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> MigrationProject
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8edc845c-6d39-45f7-ae28-434f0a1ef503"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> OriginConnectionStringKey
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("f82f3e1f-3275-4fcf-a362-71f7175f40f1"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Schema
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("601a0dc6-ec58-4092-a53c-c902fcc85379"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceTables
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("e468c835-8c9c-4776-83ce-f54b1f4634a4"); }
+                                }
+                            }
+                        }
                         public static class Test
                         {
                             public static TypedGuid<global::Zetbox.App.Base.DataType> ANewObjectClass
@@ -2896,305 +3189,6 @@ namespace Zetbox {
                         }
                     }
                 }
-                public static class Zetbox
-                {
-                    public static class App
-                    {
-                        public static class SchemaMigration
-                        {
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> MigrationLog
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("49745ac0-db34-41ee-875f-0f09f1432ab0"); }
-                            }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> MigrationProject
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("f2b4fe26-9d57-47c7-88b2-b30a38ebbd97"); }
-                            }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> SourceColumn
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("e921bb2f-2cac-46d1-a7f4-120bb1a4afe2"); }
-                            }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> SourceEnum
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("138d462f-e432-46a0-8ce2-e7f9893654d4"); }
-                            }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> SourceTable
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("7f95aa3e-0150-4073-8b9e-803226872cc2"); }
-                            }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> StagingDatabase
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("4faf24fe-d732-4a1c-9156-2cbb7ec4be56"); }
-                            }
-                            public static class MigrationLog_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Destination
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("bad56a8d-e23e-47e3-8545-ee4c2689aab8"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationRows
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6b2ac709-a61b-4d22-96e6-e36f4bcbce84"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Source
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("fd0e1581-c4f0-476e-af24-2905e4aa377d"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceRows
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("52a3ddb3-c724-4427-a2e1-95bbf347906a"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Timestamp
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9e3a70c6-04f9-4464-93c9-68c1eec6b94f"); }
-                                }
-                            }
-                            public static class MigrationProject_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("339fa8af-5760-4e31-a112-5aa29e7a0d28"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("133f7c7e-fcf4-4e90-b6e9-f3500dfcf1b9"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("e11cb99e-3e4b-4c96-ba62-42b6a66618f3"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("51ceaa28-d616-464b-8c6b-aadf7461aa4d"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("17634aec-04e4-40f8-a585-51989e5cd95f"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationModule
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ed7a3291-b69b-42f3-9b60-dd06e374f856"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0851878a-0753-425e-a053-c4642ce3f28b"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> StagingDatabases
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("3750005b-3850-4697-8b80-b5a7854fc344"); }
-                                }
-                            }
-                            public static class SourceColumn_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4f2f1af0-f33b-4d98-89bb-2a386e11a29a"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ddd4df6a-e085-45fe-b900-f3995dcb1845"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Comment
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("66bcca34-2297-4e06-84e8-ff19c5d4af35"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CompareNulls
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("09607800-4b5c-4d8a-a0cf-b508986c2f17"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6c0d8f0c-2937-4d6a-972a-299c085e8b5d"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("bb5f31d0-072d-45ec-a455-0234ccc31867"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DbType
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("78873431-d503-4192-b658-5c5bc6442180"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6273444e-5309-4481-8d2a-99a7a8a1b059"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationProperty
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("38dce431-bb65-44c5-b67a-1f28202e51d9"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> EnumEntries
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("a040ea6b-c105-4815-815b-e36f0778e4cb"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("52ba9fcd-dbeb-42da-9146-6f40976c1c83"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> IsNullable
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("817ccb79-7051-4b09-8386-941a21575bfc"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("a27f7d36-fd56-4271-bac0-88e22bc65027"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> References
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4d6faa25-d610-4e23-b12f-7ee4c78da70b"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Referers
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("71bed80f-57ec-4038-a9a4-9aabc0c2f60d"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Size
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("5a1dc7f1-7743-4603-9b65-1b31ca17d55d"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceTable
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("d1dca069-f6b5-4da1-beee-a51853c109ba"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Status
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("bba3aa19-0097-4692-b649-d51fbc626182"); }
-                                }
-                            }
-                            public static class SourceEnum_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("55366c31-0051-4be7-a3ac-66e783f68780"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9fefd927-1080-44d0-80ae-8afacf6620d3"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ab0d1cc0-622f-49d9-8dfa-d9461e50b4d6"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4b5066bd-3dac-4520-87f0-4548f3bff8e4"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationValue
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0d29a48f-6791-4640-be97-7e93d246a389"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ecac7622-18c7-4364-b109-c390cb911ce5"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceColumn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b7195fb9-e6da-493f-b1be-9465e4d9d5ae"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceValue
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("885a90e0-62e0-426a-a3b5-64dca3a38d18"); }
-                                }
-                            }
-                            public static class SourceTable_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("1156b3eb-af9b-4a44-8ed3-e64fa3fbb251"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("42040e80-e6a4-4d19-959f-033080669059"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Comment
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("86a05242-c667-4181-a7a7-1d50d20f9d0f"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("c32e650b-4c12-4eeb-9f93-46df426e38de"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0a19a3eb-ffa2-4eef-861f-824cc327ab27"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8b93e1d4-1e2a-44a8-91c3-0c71541934c6"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DestinationObjectClass
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ec638748-894e-4e61-b618-7d8fbacec2fe"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("7f6f277e-78fa-4955-925c-554a6cfd466a"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("f01c1095-cf9b-41f5-b89c-532a86a78cc5"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceColumn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0e435261-9490-4fbb-8268-f7f1f6607d2c"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> StagingDatabase
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("d57c1138-b611-44b6-bd30-9b6d6a91cbed"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Status
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6029f896-82fd-4372-8cfd-76ca7e31ebf6"); }
-                                }
-                            }
-                            public static class StagingDatabase_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ee3476a8-1715-4dc2-a2b2-13e4a2a27e10"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ChangedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("16652536-fb87-4b1b-866e-ec2fb68a8ae2"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ConnectionStringKey
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6aa09a38-a4be-4095-bf8d-9799bd56a14d"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedBy
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9db15b1e-a55e-444c-9fa7-9dd66d9b13f6"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> CreatedOn
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("d402f8a4-dc92-4041-a295-50257057e656"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("157ecaf4-3ee5-4d78-8148-ab936de50523"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6bc56e55-16c4-4c94-8c20-12861844e053"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> MigrationProject
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8edc845c-6d39-45f7-ae28-434f0a1ef503"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> OriginConnectionStringKey
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("f82f3e1f-3275-4fcf-a362-71f7175f40f1"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Schema
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("601a0dc6-ec58-4092-a53c-c902fcc85379"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> SourceTables
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("e468c835-8c9c-4776-83ce-f54b1f4634a4"); }
-                                }
-                            }
-                        }
-                    }
-                }
             }
             public static class Groups
             {
@@ -3350,10 +3344,6 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c"); }
                 }
-                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_ZetboxDebuggerKind
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("59253ed1-a3a5-4574-b3bb-3c4fa535d21c"); }
-                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_LauncherKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("90d5ff7f-0c82-4278-bb8d-49c240f6bc2c"); }
@@ -3497,6 +3487,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_WorkspaceKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("329837fd-1146-48b2-9f4e-79aec8958b1e"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_ZetboxDebuggerKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("59253ed1-a3a5-4574-b3bb-3c4fa535d21c"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_SchemaMigration_DestinationPropertyEditor
                 {
@@ -3778,46 +3772,6 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("94be5252-6aeb-4a0d-b6eb-6f7ae07728e8"); }
                 }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_AuditJournalViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("b8e11c28-a64b-4e9b-a18d-1e0f006faedc"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_FilterListEntryViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("afc4b471-3aea-44cb-a1df-859594a3c1cf"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_FilterListViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("00493346-865e-4784-8fe7-8f3b252d4369"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_InstanceListViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("0d3a2e45-9a49-4e29-afea-619baa8d3871"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_MethodInvocationViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("caf3e708-2f31-4084-9957-ca11fccc1374"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_PropertySelectionTaskViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("c5020414-f8cb-4e19-a0d7-c429dfdcdd5b"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_RelationChainViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("7a499c86-2151-4cb3-ae20-7d3edbb1b278"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_RoleMembershipViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("882ba118-6545-4ba8-83de-0e973a38fc3e"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_TypeRefPropertyViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("d96d030e-eebe-4b7f-8b55-dca30cbd4bde"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxDebuggerAsViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("b1df266b-a841-4669-9199-a6a01f6dbfcc"); }
-                }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ModuleEditor_ControlKindHierarchyViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("16c4762d-451a-48f6-a460-b987d63edaa0"); }
@@ -3969,6 +3923,46 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ValueViewModels_ObjectReferenceViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("83aae6fd-0fae-4348-b313-737a6e751027"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_AuditJournalViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("b8e11c28-a64b-4e9b-a18d-1e0f006faedc"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_FilterListEntryViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("afc4b471-3aea-44cb-a1df-859594a3c1cf"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_FilterListViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("00493346-865e-4784-8fe7-8f3b252d4369"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_InstanceListViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("0d3a2e45-9a49-4e29-afea-619baa8d3871"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_MethodInvocationViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("caf3e708-2f31-4084-9957-ca11fccc1374"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_PropertySelectionTaskViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("c5020414-f8cb-4e19-a0d7-c429dfdcdd5b"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_RelationChainViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("7a499c86-2151-4cb3-ae20-7d3edbb1b278"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_RoleMembershipViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("882ba118-6545-4ba8-83de-0e973a38fc3e"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_TypeRefPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("d96d030e-eebe-4b7f-8b55-dca30cbd4bde"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxDebuggerAsViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("b1df266b-a841-4669-9199-a6a01f6dbfcc"); }
                 }
             }
         }

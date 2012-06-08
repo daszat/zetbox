@@ -8,7 +8,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst")]
     public partial class EfListWrapper : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -38,7 +38,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 16 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst"
+#line 16 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        [EdmRelationshipNavigationPropertyAttribute(\"Model\", \"",  associationName , "\", \"",  roleName , "\")]\r\n");
 this.WriteObjects("        public EntityCollection<",  referencedCollectionEntry , "> ",  name , "\r\n");

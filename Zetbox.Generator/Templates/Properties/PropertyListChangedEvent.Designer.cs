@@ -4,7 +4,7 @@ using Zetbox.API;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst")]
     public partial class PropertyListChangedEvent : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -30,7 +30,7 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 10 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst"
+#line 10 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst"
 this.WriteObjects("",  GetModifiers() , " event PropertyListChangedHandler<",  objType , "> ",  eventName , ";\r\n");
 
         }

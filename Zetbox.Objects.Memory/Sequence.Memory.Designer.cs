@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// Provides the definition of a database sequence
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Sequence")]
-    public class SequenceMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, Sequence
+    public class SequenceMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Sequence, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("8745716a-a9e7-4b2f-b7e8-948b992aaafb");
         public override Guid ObjectClassID { get { return _objectClassID; } }

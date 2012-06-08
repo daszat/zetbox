@@ -10,7 +10,7 @@ using Zetbox.Generator.Templates.Serialization;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst")]
     public partial class ObjectReferencePropertySerialization : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -46,34 +46,34 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 22 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 22 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
-#line 26 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 26 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            ",  streamName , ".Write(",  sourceMember , " != null ? OurContext.GetIdFromProxy(",  sourceMember , ") : (int?)null);\r\n");
-#line 28 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 28 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
-#line 31 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 31 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            ",  streamName , ".Read(out this.",  targetMember , ");\r\n");
-#line 33 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 33 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 36 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 36 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  sourceMember , " != null ? ",  sourceMember , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 38 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 38 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 41 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 41 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                this.",  targetGuidMember , " = XmlStreamer.ReadNullableGuid(",  streamName , ");\r\n");
 this.WriteObjects("                break;\r\n");
-#line 45 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
+#line 45 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

@@ -11,7 +11,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst")]
     public partial class RightsClass : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -35,7 +35,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 16 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
+#line 16 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public class ",  className , "",  ImplementationSuffix , "\r\n");
 this.WriteObjects("        {\r\n");

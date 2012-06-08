@@ -22,7 +22,7 @@ namespace Zetbox.App.GUI
     /// Abstract base class for Navigation Entries
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("NavigationEntry")]
-    public abstract class NavigationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Zetbox.API.IExportableInternal, NavigationEntry
+    public abstract class NavigationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, NavigationEntry, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("9a640b13-a8c2-4a90-899a-954f0c57c1ab");
         public override Guid ObjectClassID { get { return _objectClassID; } }

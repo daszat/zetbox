@@ -21,7 +21,7 @@ namespace Zetbox.App.SchemaMigration
     /// Defines a Schema Migration Project
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("MigrationProject")]
-    public class MigrationProjectMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, MigrationProject
+    public class MigrationProjectMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, MigrationProject, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("f2b4fe26-9d57-47c7-88b2-b30a38ebbd97");
         public override Guid ObjectClassID { get { return _objectClassID; } }

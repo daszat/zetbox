@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst")]
     public partial class EagerObjectLoadingSerialization : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -41,16 +41,16 @@ namespace Zetbox.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 20 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
+#line 20 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
-#line 24 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
+#line 24 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 this.WriteObjects("            if (auxObjects != null) {\r\n");
 this.WriteObjects("                auxObjects.Add(",  propertyName , ");\r\n");
 this.WriteObjects("            }\r\n");
-#line 28 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
+#line 28 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 break;
         case SerializerDirection.FromStream:
             break;

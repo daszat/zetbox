@@ -14,17 +14,17 @@ namespace Zetbox.App.SchemaMigration
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Defines a Schema Migration Project
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="MigrationProject")]
     [System.Diagnostics.DebuggerDisplay("MigrationProject")]
-    public class MigrationProjectEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, MigrationProject
+    public class MigrationProjectEfImpl : BaseServerDataObject_EntityFramework, MigrationProject, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("f2b4fe26-9d57-47c7-88b2-b30a38ebbd97");
         public override Guid ObjectClassID { get { return _objectClassID; } }

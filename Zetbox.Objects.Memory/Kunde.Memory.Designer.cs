@@ -21,7 +21,7 @@ namespace Zetbox.App.Projekte
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Kunde")]
-    public class KundeMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Zetbox.API.IExportableInternal, Kunde
+    public class KundeMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Kunde, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("b9ddd097-4f45-40c5-87e9-7331ab58727c");
         public override Guid ObjectClassID { get { return _objectClassID; } }

@@ -14,17 +14,17 @@ namespace Zetbox.App.Base
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Describes a Relation between two Object Classes
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Relation")]
     [System.Diagnostics.DebuggerDisplay("Relation")]
-    public class RelationEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, Relation
+    public class RelationEfImpl : BaseServerDataObject_EntityFramework, Relation, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("1c0e894f-4eb4-422f-8094-3095735b4917");
         public override Guid ObjectClassID { get { return _objectClassID; } }

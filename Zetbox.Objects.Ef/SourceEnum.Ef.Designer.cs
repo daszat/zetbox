@@ -14,17 +14,17 @@ namespace Zetbox.App.SchemaMigration
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Zetbox.API.Server;
-    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
 
     /// <summary>
     /// Mapps an Enum
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="SourceEnum")]
     [System.Diagnostics.DebuggerDisplay("SourceEnum")]
-    public class SourceEnumEfImpl : BaseServerDataObject_EntityFramework, Zetbox.API.IExportableInternal, SourceEnum
+    public class SourceEnumEfImpl : BaseServerDataObject_EntityFramework, SourceEnum, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("138d462f-e432-46a0-8ce2-e7f9893654d4");
         public override Guid ObjectClassID { get { return _objectClassID; } }
