@@ -32,8 +32,6 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
-this.WriteObjects("");
 #line 27 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
 this.WriteObjects("\r\n");
 #line 30 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"

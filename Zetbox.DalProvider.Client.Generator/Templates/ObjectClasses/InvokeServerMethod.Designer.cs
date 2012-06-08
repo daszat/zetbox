@@ -29,8 +29,6 @@ namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
-this.WriteObjects("");
 #line 28 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");

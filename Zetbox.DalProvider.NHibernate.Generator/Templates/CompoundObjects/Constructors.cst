@@ -14,7 +14,7 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-﻿<%@ CodeTemplate Language="C#" 
+<%@ CodeTemplate Language="C#" 
     Name="CompoundObjects.Constructors"
     ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects.Constructors" 
     Inherits="Zetbox.Generator.ResourceTemplate" %>

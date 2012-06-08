@@ -45,8 +45,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("");
 #line 37 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : this(null)\r\n");

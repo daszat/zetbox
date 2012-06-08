@@ -41,8 +41,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
-this.WriteObjects("");
 #line 35 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public class ",  className , "Proxy\r\n");

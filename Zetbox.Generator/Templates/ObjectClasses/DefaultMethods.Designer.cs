@@ -33,8 +33,6 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
-this.WriteObjects("");
 #line 30 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        #region ",  this.GetType() , "\r\n");
 #line 31 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"

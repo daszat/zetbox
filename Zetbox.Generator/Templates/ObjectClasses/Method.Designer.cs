@@ -41,8 +41,6 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
-this.WriteObjects("");
 #line 34 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 #line 36 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Method.cst"

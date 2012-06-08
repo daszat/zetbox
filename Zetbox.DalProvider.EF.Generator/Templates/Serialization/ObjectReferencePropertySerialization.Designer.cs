@@ -52,8 +52,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("");
 #line 41 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 switch(direction)
     {

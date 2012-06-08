@@ -37,8 +37,6 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
-this.WriteObjects("");
 #line 32 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\MethodCanExec.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("		// CanExec\r\n");

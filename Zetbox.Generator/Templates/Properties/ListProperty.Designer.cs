@@ -38,8 +38,6 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
-this.WriteObjects("");
 #line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 ApplyAttributesTemplate();
 

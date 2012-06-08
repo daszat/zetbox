@@ -40,8 +40,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
-this.WriteObjects("");
 #line 34 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    [System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName=\"Model\", Name=\"",  targetRoleName , "\")]\r\n");

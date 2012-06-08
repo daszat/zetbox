@@ -58,8 +58,6 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\ValueCollectionProperty.cst"
-this.WriteObjects("");
 #line 45 "P:\zetbox\Zetbox.Generator\Templates\Properties\ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName);
 	var eventName = "On" + name + "_PostSetter";

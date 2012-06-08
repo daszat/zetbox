@@ -38,8 +38,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst"
-this.WriteObjects("");
 #line 32 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        [EdmRelationshipNavigationPropertyAttribute(\"Model\", \"",  associationName , "\", \"",  roleName , "\")]\r\n");

@@ -46,8 +46,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("");
 #line 38 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Serialization\ObjectReferencePropertySerialization.cst"
 switch(direction)
     {

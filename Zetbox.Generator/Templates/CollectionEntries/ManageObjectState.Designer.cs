@@ -29,8 +29,6 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ManageObjectState.cst"
-this.WriteObjects("");
 #line 28 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ManageObjectState.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        protected override void OnPropertyChanged(string property, object oldValue, object newValue)\r\n");

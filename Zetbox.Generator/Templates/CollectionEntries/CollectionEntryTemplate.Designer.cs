@@ -31,8 +31,6 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
-this.WriteObjects("");
 #line 29 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("    // BEGIN ",  this.GetType().FullName , "\r\n");
 #line 31 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"

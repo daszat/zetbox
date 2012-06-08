@@ -55,8 +55,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-this.WriteObjects("");
 #line 42 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 this.WriteObjects("        <joined-subclass name=\"",  qualifiedImplementationName , "\"\r\n");
 this.WriteObjects("                         proxy=\"",  qualifiedImplementationName , "\"\r\n");

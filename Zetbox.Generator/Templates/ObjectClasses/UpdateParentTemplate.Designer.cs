@@ -34,8 +34,6 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
-this.WriteObjects("");
 #line 32 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 this.WriteObjects("\r\n");
 #line 33 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"

@@ -40,8 +40,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
-this.WriteObjects("");
 #line 37 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
 /*
      * TODO: Actually, all this should die and become a bunch of polymorphic calls.

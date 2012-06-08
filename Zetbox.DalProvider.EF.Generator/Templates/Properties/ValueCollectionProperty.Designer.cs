@@ -37,8 +37,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
-this.WriteObjects("");
 #line 35 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
 Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList);
 	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;

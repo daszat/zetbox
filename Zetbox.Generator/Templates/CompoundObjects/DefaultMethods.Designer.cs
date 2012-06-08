@@ -33,8 +33,6 @@ namespace Zetbox.Generator.Templates.CompoundObjects
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst"
-this.WriteObjects("");
 #line 30 "P:\zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst"
 this.WriteObjects("        #region ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");

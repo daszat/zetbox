@@ -47,8 +47,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("");
 #line 38 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.ToStream)
     {

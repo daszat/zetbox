@@ -40,8 +40,6 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("");
 #line 31 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  referencedType , " ",  propertyName , "\r\n");

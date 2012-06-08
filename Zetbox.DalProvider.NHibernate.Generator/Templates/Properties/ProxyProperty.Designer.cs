@@ -63,8 +63,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
-this.WriteObjects("");
 #line 46 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");

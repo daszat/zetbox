@@ -43,8 +43,6 @@ namespace Zetbox.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("");
 #line 36 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 switch(direction)
     {

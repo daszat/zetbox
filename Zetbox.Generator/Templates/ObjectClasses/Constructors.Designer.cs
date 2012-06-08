@@ -37,8 +37,6 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("");
 #line 33 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        [Obsolete]\r\n");
 this.WriteObjects("        public ",  className , "()\r\n");

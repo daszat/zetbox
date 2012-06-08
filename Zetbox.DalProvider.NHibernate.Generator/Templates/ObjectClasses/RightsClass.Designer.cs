@@ -35,8 +35,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
-this.WriteObjects("");
 #line 32 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public class ",  className , "",  ImplementationSuffix , "\r\n");

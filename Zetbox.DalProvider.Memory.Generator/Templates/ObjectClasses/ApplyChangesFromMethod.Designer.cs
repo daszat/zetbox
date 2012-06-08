@@ -39,8 +39,6 @@ namespace Zetbox.DalProvider.Memory.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("");
 #line 33 "P:\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void ApplyChangesFrom(",  otherInterface , " obj)\r\n");

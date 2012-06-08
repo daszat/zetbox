@@ -42,8 +42,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
-this.WriteObjects("");
 #line 35 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        private Zetbox.API.AccessRights? __currentAccessRights;\r\n");

@@ -36,8 +36,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
-this.WriteObjects("");
 #line 35 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 /*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.

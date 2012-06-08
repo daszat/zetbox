@@ -40,8 +40,6 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("");
 #line 34 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("        #region ",  this.GetType() , "\r\n");
 #line 36 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"

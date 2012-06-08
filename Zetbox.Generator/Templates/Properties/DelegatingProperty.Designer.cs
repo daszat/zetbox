@@ -39,8 +39,6 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\DelegatingProperty.cst"
-this.WriteObjects("");
 #line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\DelegatingProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  propName , "\r\n");

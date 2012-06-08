@@ -34,8 +34,6 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
-this.WriteObjects("");
 #line 31 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 string name = prop.Name;
     string type = prop.GetPropertyTypeString();

@@ -30,8 +30,6 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\DefaultProperty.cst"
-this.WriteObjects("");
 #line 26 "P:\zetbox\Zetbox.Generator\Templates\Properties\DefaultProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  propName , " { get; set; }\r\n");

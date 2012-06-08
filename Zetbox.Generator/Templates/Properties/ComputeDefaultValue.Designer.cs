@@ -47,8 +47,6 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\ComputeDefaultValue.cst"
-this.WriteObjects("");
 #line 37 "P:\zetbox\Zetbox.Generator\Templates\Properties\ComputeDefaultValue.cst"
 this.WriteObjects("                if (!",  isSetFlagName , " && ObjectState == DataObjectState.New) {\r\n");
 this.WriteObjects("                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid(\"",  propertyGuid , "\"));\r\n");

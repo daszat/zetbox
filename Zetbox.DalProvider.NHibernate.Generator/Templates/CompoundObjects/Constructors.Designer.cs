@@ -41,8 +41,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
-this.WriteObjects("");
 #line 35 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CompoundObjects\Constructors.cst"
 this.WriteObjects("        // used by NHibernate\r\n");
 this.WriteObjects("        public ",  className , "()\r\n");

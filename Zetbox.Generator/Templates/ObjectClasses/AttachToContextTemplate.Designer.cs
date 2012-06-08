@@ -33,8 +33,6 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("");
 #line 30 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void AttachToContext(IZetboxContext ctx)\r\n");

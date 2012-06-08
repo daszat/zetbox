@@ -30,8 +30,6 @@ namespace Zetbox.Generator.Templates
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Registrations.cst"
-this.WriteObjects("");
 #line 27 "P:\zetbox\Zetbox.Generator\Templates\Registrations.cst"
 this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<",  shortName , "ImplementationTypeChecker>(\r\n");

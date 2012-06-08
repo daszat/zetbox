@@ -14,7 +14,7 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-﻿<%@ CodeTemplate Language="C#"
+<%@ CodeTemplate Language="C#"
     Name="CollectionEntries.CollectionEntryTemplate"
     ClassName="Zetbox.Generator.Templates.CollectionEntries.CollectionEntryTemplate"
     Inherits="Zetbox.Generator.ResourceTemplate" %>

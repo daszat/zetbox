@@ -32,8 +32,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\RelationDebugTemplate.cst"
-this.WriteObjects("");
 #line 29 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\RelationDebugTemplate.cst"
 this.WriteObjects("    Relation: ",  rel.GetAssociationName() , "\r\n");
 this.WriteObjects("    A: ",  rel.A.Multiplicity , " ",  rel.A.Type.Name , " as ",  rel.A.RoleName , "\r\n");

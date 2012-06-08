@@ -34,8 +34,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
-this.WriteObjects("");
 #line 32 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("using System.Data.Metadata.Edm;\r\n");
 this.WriteObjects("using System.Data.Objects.DataClasses;\r\n");

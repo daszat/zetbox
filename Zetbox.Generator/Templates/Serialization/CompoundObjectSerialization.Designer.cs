@@ -47,8 +47,6 @@ namespace Zetbox.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("");
 #line 38 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 if (direction == SerializerDirection.ToStream)
     {

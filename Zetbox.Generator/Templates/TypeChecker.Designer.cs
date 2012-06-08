@@ -30,8 +30,6 @@ namespace Zetbox.Generator.Templates
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\TypeChecker.cst"
-this.WriteObjects("");
 #line 27 "P:\zetbox\Zetbox.Generator\Templates\TypeChecker.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\r\n");

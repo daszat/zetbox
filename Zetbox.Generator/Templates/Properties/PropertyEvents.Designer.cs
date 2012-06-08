@@ -36,8 +36,6 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
-this.WriteObjects("");
 #line 29 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasGetters) { 
 #line 30 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"

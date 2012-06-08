@@ -35,8 +35,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-this.WriteObjects("");
 #line 32 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override List<NHibernatePersistenceObject> GetParentsToDelete()\r\n");
