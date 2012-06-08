@@ -69,143 +69,145 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 32 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("        // BEGIN ",  this.GetType() , " for ",  name , "\r\n");
-this.WriteObjects("        // fkBackingName=",  fkBackingName , "; fkGuidBackingName=",  fkGuidBackingName , ";\r\n");
-this.WriteObjects("        // referencedInterface=",  referencedInterface , "; moduleNamespace=",  moduleNamespace , ";\r\n");
-this.WriteObjects("        // inverse Navigator=",  String.IsNullOrEmpty(inverseNavigatorName) ? "none" : inverseNavigatorName , "; ",  inverseNavigatorIsList ? "is list" : "is reference" , ";\r\n");
-this.WriteObjects("        // PositionStorage=",  String.IsNullOrEmpty(positionPropertyName) ? "none" : positionPropertyName , ";\r\n");
-this.WriteObjects("        // Target ",  relDataTypeExportable ? String.Empty : "not " , "exportable\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        // implement the user-visible interface\r\n");
-this.WriteObjects("        [XmlIgnore()]\r\n");
-this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
-this.WriteObjects("        public ",  referencedInterface , " ",  name , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get { return ",  implName , "; }\r\n");
-this.WriteObjects("            set { ",  implName , " = (",  referencedImplementation , ")value; }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        private int? ",  fkBackingName , ";\r\n");
-this.WriteObjects("\r\n");
-#line 50 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("");
+#line 48 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("        // BEGIN ",  this.GetType() , " for ",  name , "\n");
+this.WriteObjects("        // fkBackingName=",  fkBackingName , "; fkGuidBackingName=",  fkGuidBackingName , ";\n");
+this.WriteObjects("        // referencedInterface=",  referencedInterface , "; moduleNamespace=",  moduleNamespace , ";\n");
+this.WriteObjects("        // inverse Navigator=",  String.IsNullOrEmpty(inverseNavigatorName) ? "none" : inverseNavigatorName , "; ",  inverseNavigatorIsList ? "is list" : "is reference" , ";\n");
+this.WriteObjects("        // PositionStorage=",  String.IsNullOrEmpty(positionPropertyName) ? "none" : positionPropertyName , ";\n");
+this.WriteObjects("        // Target ",  relDataTypeExportable ? String.Empty : "not " , "exportable\n");
+this.WriteObjects("\n");
+this.WriteObjects("        // implement the user-visible interface\n");
+this.WriteObjects("        [XmlIgnore()]\n");
+this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\n");
+this.WriteObjects("        public ",  referencedInterface , " ",  name , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get { return ",  implName , "; }\n");
+this.WriteObjects("            set { ",  implName , " = (",  referencedImplementation , ")value; }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        private int? ",  fkBackingName , ";\n");
+this.WriteObjects("\n");
+#line 66 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (relDataTypeExportable) { 
-#line 51 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n");
-#line 52 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 67 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\n");
+#line 68 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } 
-#line 53 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        // internal implementation, EF sees only this property\r\n");
-this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  associationName , "\", \"",  targetRoleName , "\")]\r\n");
-this.WriteObjects("        public ",  referencedImplementation , " ",  implName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
-this.WriteObjects("                ",  referencedImplementation , " __value;\r\n");
-this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\r\n");
-this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  referencedImplementation , ">(\r\n");
-this.WriteObjects("                        \"Model.",  associationName , "\",\r\n");
-this.WriteObjects("                        \"",  targetRoleName , "\");\r\n");
-this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\r\n");
-this.WriteObjects("                    && !r.IsLoaded)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    r.Load();\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                if (r.Value != null) r.Value.AttachToContext(this.Context);\r\n");
-this.WriteObjects("                __value = r.Value;\r\n");
-#line 73 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 69 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("\n");
+this.WriteObjects("        // internal implementation, EF sees only this property\n");
+this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  associationName , "\", \"",  targetRoleName , "\")]\n");
+this.WriteObjects("        public ",  referencedImplementation , " ",  implName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\n");
+this.WriteObjects("                ",  referencedImplementation , " __value;\n");
+this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\n");
+this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  referencedImplementation , ">(\n");
+this.WriteObjects("                        \"Model.",  associationName , "\",\n");
+this.WriteObjects("                        \"",  targetRoleName , "\");\n");
+this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\n");
+this.WriteObjects("                    && !r.IsLoaded)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    r.Load();\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("                if (r.Value != null) r.Value.AttachToContext(this.Context);\n");
+this.WriteObjects("                __value = r.Value;\n");
+#line 89 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (callGetterSetterEvents) { 
-#line 74 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if (",  eventName , "_Getter != null)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedInterface , ">(__value);\r\n");
-this.WriteObjects("                    ",  eventName , "_Getter(this, e);\r\n");
-this.WriteObjects("                    __value = (",  referencedImplementation , ")e.Result;\r\n");
-this.WriteObjects("                }\r\n");
-#line 80 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 90 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("                if (",  eventName , "_Getter != null)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedInterface , ">(__value);\n");
+this.WriteObjects("                    ",  eventName , "_Getter(this, e);\n");
+this.WriteObjects("                    __value = (",  referencedImplementation , ")e.Result;\n");
+this.WriteObjects("                }\n");
+#line 96 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } 
-#line 81 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                return __value;\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-this.WriteObjects("                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\r\n");
-this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  referencedImplementation , ">(\r\n");
-this.WriteObjects("                        \"Model.",  associationName , "\",\r\n");
-this.WriteObjects("                        \"",  targetRoleName , "\");\r\n");
-this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\r\n");
-this.WriteObjects("                    && !r.IsLoaded)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    r.Load();\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                ",  referencedImplementation , " __oldValue = (",  referencedImplementation , ")r.Value;\r\n");
-this.WriteObjects("                ",  referencedImplementation , " __newValue = (",  referencedImplementation , ")value;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                // Changing Event fires before anything is touched\r\n");
-this.WriteObjects("                NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
-#line 102 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 97 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("                return __value;\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("            set\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\n");
+this.WriteObjects("                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();\n");
+this.WriteObjects("\n");
+this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\n");
+this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  referencedImplementation , ">(\n");
+this.WriteObjects("                        \"Model.",  associationName , "\",\n");
+this.WriteObjects("                        \"",  targetRoleName , "\");\n");
+this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\n");
+this.WriteObjects("                    && !r.IsLoaded)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    r.Load();\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("                ",  referencedImplementation , " __oldValue = (",  referencedImplementation , ")r.Value;\n");
+this.WriteObjects("                ",  referencedImplementation , " __newValue = (",  referencedImplementation , ")value;\n");
+this.WriteObjects("\n");
+this.WriteObjects("                // Changing Event fires before anything is touched\n");
+this.WriteObjects("                NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\n");
+#line 118 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
-#line 103 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if (__oldValue != null) {\r\n");
-this.WriteObjects("                    __oldValue.NotifyPropertyChanging(\"",  inverseNavigatorName , "\", null, null);\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                if (__newValue != null) {\r\n");
-this.WriteObjects("                    __newValue.NotifyPropertyChanging(\"",  inverseNavigatorName , "\", null, null);\r\n");
-this.WriteObjects("                }\r\n");
-#line 109 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} 
-#line 110 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("\r\n");
-#line 111 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (callGetterSetterEvents) { 
-#line 112 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if (",  eventName , "_PreSetter != null)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    var e = new PropertyPreSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
-this.WriteObjects("                    ",  eventName , "_PreSetter(this, e);\r\n");
-this.WriteObjects("                    __newValue = (",  referencedImplementation , ")e.Result;\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("\r\n");
 #line 119 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("                if (__oldValue != null) {\n");
+this.WriteObjects("                    __oldValue.NotifyPropertyChanging(\"",  inverseNavigatorName , "\", null, null);\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("                if (__newValue != null) {\n");
+this.WriteObjects("                    __newValue.NotifyPropertyChanging(\"",  inverseNavigatorName , "\", null, null);\n");
+this.WriteObjects("                }\n");
+#line 125 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } 
-#line 120 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                r.Value = (",  referencedImplementation , ")__newValue;\r\n");
-this.WriteObjects("\r\n");
-#line 122 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 126 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("\n");
+#line 127 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (callGetterSetterEvents) { 
-#line 123 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if (",  eventName , "_PostSetter != null)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
-this.WriteObjects("                    ",  eventName , "_PostSetter(this, e);\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("\r\n");
-#line 129 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 128 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("                if (",  eventName , "_PreSetter != null)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    var e = new PropertyPreSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\n");
+this.WriteObjects("                    ",  eventName , "_PreSetter(this, e);\n");
+this.WriteObjects("                    __newValue = (",  referencedImplementation , ")e.Result;\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("\n");
+#line 135 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } 
-#line 130 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                // everything is done. fire the Changed event\r\n");
-this.WriteObjects("                NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
-#line 132 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
-#line 133 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if (__oldValue != null) {\r\n");
-this.WriteObjects("                    __oldValue.NotifyPropertyChanged(\"",  inverseNavigatorName , "\", null, null);\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                if (__newValue != null) {\r\n");
-this.WriteObjects("                    __newValue.NotifyPropertyChanged(\"",  inverseNavigatorName , "\", null, null);\r\n");
-this.WriteObjects("                }\r\n");
+#line 136 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("                r.Value = (",  referencedImplementation , ")__newValue;\n");
+this.WriteObjects("\n");
+#line 138 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (callGetterSetterEvents) { 
 #line 139 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("                if (",  eventName , "_PostSetter != null)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\n");
+this.WriteObjects("                    ",  eventName , "_PostSetter(this, e);\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("\n");
+#line 145 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } 
-#line 140 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-#line 144 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 146 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("                // everything is done. fire the Changed event\n");
+this.WriteObjects("                NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\n");
+#line 148 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
+#line 149 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("                if (__oldValue != null) {\n");
+this.WriteObjects("                    __oldValue.NotifyPropertyChanged(\"",  inverseNavigatorName , "\", null, null);\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("                if (__newValue != null) {\n");
+this.WriteObjects("                    __newValue.NotifyPropertyChanged(\"",  inverseNavigatorName , "\", null, null);\n");
+this.WriteObjects("                }\n");
+#line 155 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+} 
+#line 156 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+#line 160 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName, referencedImplementation, associationName, targetRoleName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
@@ -215,8 +217,8 @@ AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName, refe
             "int?", positionPropertyName, moduleNamespace, false);
     }
 
-#line 153 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("        // END ",  this.GetType() , " for ",  name , "\r\n");
+#line 169 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("        // END ",  this.GetType() , " for ",  name , "\n");
 
         }
 

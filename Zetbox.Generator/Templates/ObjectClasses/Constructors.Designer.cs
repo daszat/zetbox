@@ -38,22 +38,24 @@ namespace Zetbox.Generator.Templates.ObjectClasses
         public override void Generate()
         {
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("        [Obsolete]\r\n");
-this.WriteObjects("        public ",  className , "()\r\n");
-this.WriteObjects("            : base(null)\r\n");
-this.WriteObjects("        {\r\n");
-#line 21 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+this.WriteObjects("");
+#line 33 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+this.WriteObjects("        [Obsolete]\n");
+this.WriteObjects("        public ",  className , "()\n");
+this.WriteObjects("            : base(null)\n");
+this.WriteObjects("        {\n");
+#line 37 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 22 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\r\n");
-this.WriteObjects("            : base(lazyCtx)\r\n");
-this.WriteObjects("        {\r\n");
-#line 27 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 38 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\n");
+this.WriteObjects("            : base(lazyCtx)\n");
+this.WriteObjects("        {\n");
+#line 43 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 28 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("        }\r\n");
+#line 44 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+this.WriteObjects("        }\n");
 
         }
 

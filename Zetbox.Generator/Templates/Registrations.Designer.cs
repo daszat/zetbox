@@ -30,22 +30,24 @@ namespace Zetbox.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\zetbox\Zetbox.Generator\Templates\Registrations.cst"
-this.WriteObjects("            builder\r\n");
-this.WriteObjects("                .Register<",  shortName , "ImplementationTypeChecker>(\r\n");
-this.WriteObjects("                    c => new ",  shortName , "ImplementationTypeChecker(\r\n");
-this.WriteObjects("                        c.Resolve<Func<IEnumerable<IImplementationTypeChecker>>>()))\r\n");
-this.WriteObjects("                .As<I",  shortName , "ImplementationTypeChecker>()\r\n");
-this.WriteObjects("                .As<IImplementationTypeChecker>()\r\n");
-this.WriteObjects("                .InstancePerDependency();\r\n");
-this.WriteObjects("                \r\n");
-this.WriteObjects("            builder\r\n");
-this.WriteObjects("                .Register<",  shortName , "ActionsManager>(\r\n");
-this.WriteObjects("                    c => new ",  shortName , "ActionsManager(\r\n");
-this.WriteObjects("                        c.Resolve<ILifetimeScope>(),\r\n");
-this.WriteObjects("                        c.Resolve<IDeploymentRestrictor>()))\r\n");
-this.WriteObjects("                .As<I",  shortName , "ActionsManager>()\r\n");
-this.WriteObjects("                .InstancePerLifetimeScope();\r\n");
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Registrations.cst"
+this.WriteObjects("");
+#line 27 "P:\zetbox\Zetbox.Generator\Templates\Registrations.cst"
+this.WriteObjects("            builder\n");
+this.WriteObjects("                .Register<",  shortName , "ImplementationTypeChecker>(\n");
+this.WriteObjects("                    c => new ",  shortName , "ImplementationTypeChecker(\n");
+this.WriteObjects("                        c.Resolve<Func<IEnumerable<IImplementationTypeChecker>>>()))\n");
+this.WriteObjects("                .As<I",  shortName , "ImplementationTypeChecker>()\n");
+this.WriteObjects("                .As<IImplementationTypeChecker>()\n");
+this.WriteObjects("                .InstancePerDependency();\n");
+this.WriteObjects("                \n");
+this.WriteObjects("            builder\n");
+this.WriteObjects("                .Register<",  shortName , "ActionsManager>(\n");
+this.WriteObjects("                    c => new ",  shortName , "ActionsManager(\n");
+this.WriteObjects("                        c.Resolve<ILifetimeScope>(),\n");
+this.WriteObjects("                        c.Resolve<IDeploymentRestrictor>()))\n");
+this.WriteObjects("                .As<I",  shortName , "ActionsManager>()\n");
+this.WriteObjects("                .InstancePerLifetimeScope();\n");
 
         }
 

@@ -36,18 +36,20 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 13 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
-if (hasGetters) { 
-#line 14 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
-this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
-#line 15 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
-} 
-#line 16 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
-if (hasSetters) { 
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
-this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
-this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\r\n");
-#line 19 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+this.WriteObjects("");
+#line 29 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+if (hasGetters) { 
+#line 30 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\n");
+#line 31 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+} 
+#line 32 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+if (hasSetters) { 
+#line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\n");
+this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\n");
+#line 35 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 
         }

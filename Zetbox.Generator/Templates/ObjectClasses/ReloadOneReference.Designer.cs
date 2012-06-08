@@ -46,21 +46,23 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 21 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
-this.WriteObjects("\r\n");
-#line 22 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+this.WriteObjects("");
+#line 37 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+this.WriteObjects("\n");
+#line 38 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 if (isExportable) { 
-#line 23 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
-this.WriteObjects("            if (",  fkGuidBackingName , ".HasValue)\r\n");
-this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")Context.FindPersistenceObject<",  referencedInterface , ">(",  fkGuidBackingName , ".Value);\r\n");
-this.WriteObjects("            else\r\n");
-#line 26 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+#line 39 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+this.WriteObjects("            if (",  fkGuidBackingName , ".HasValue)\n");
+this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")Context.FindPersistenceObject<",  referencedInterface , ">(",  fkGuidBackingName , ".Value);\n");
+this.WriteObjects("            else\n");
+#line 42 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
 } 
-#line 27 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
-this.WriteObjects("            if (",  fkBackingName , ".HasValue)\r\n");
-this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")Context.Find<",  referencedInterface , ">(",  fkBackingName , ".Value);\r\n");
-this.WriteObjects("            else\r\n");
-this.WriteObjects("                ",  implName , " = null;\r\n");
+#line 43 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
+this.WriteObjects("            if (",  fkBackingName , ".HasValue)\n");
+this.WriteObjects("                ",  implName , " = (",  referencedImplementation , ")Context.Find<",  referencedInterface , ">(",  fkBackingName , ".Value);\n");
+this.WriteObjects("            else\n");
+this.WriteObjects("                ",  implName , " = null;\n");
 
         }
 

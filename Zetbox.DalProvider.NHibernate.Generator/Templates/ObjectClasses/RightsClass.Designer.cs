@@ -35,18 +35,20 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 16 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        public class ",  className , "",  ImplementationSuffix , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            public ",  className , "",  ImplementationSuffix , "()\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("            public virtual int ID { get; set; }\r\n");
-this.WriteObjects("            public virtual int Identity { get; set; }\r\n");
-this.WriteObjects("            public virtual int Right { get; set; }\r\n");
-this.WriteObjects("        }\r\n");
+#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
+this.WriteObjects("");
+#line 32 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
+this.WriteObjects("\n");
+this.WriteObjects("        public class ",  className , "",  ImplementationSuffix , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            public ",  className , "",  ImplementationSuffix , "()\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("\n");
+this.WriteObjects("            public virtual int ID { get; set; }\n");
+this.WriteObjects("            public virtual int Identity { get; set; }\n");
+this.WriteObjects("            public virtual int Right { get; set; }\n");
+this.WriteObjects("        }\n");
 
         }
 

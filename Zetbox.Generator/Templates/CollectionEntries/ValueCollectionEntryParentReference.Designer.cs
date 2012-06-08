@@ -39,63 +39,65 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 18 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+this.WriteObjects("");
+#line 34 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 string cacheName = "_" + propertyName + "Cache";
     string fkName = "fk_" + propertyName;
     string backingName = "_" + fkName;
 
-#line 22 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
-this.WriteObjects("        public ",  referencedInterface , " ",  propertyName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (",  cacheName , " != null && ",  cacheName , ".ID == ",  backingName , ")\r\n");
-this.WriteObjects("                    return ",  cacheName , ";\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                if (",  backingName , ".HasValue)\r\n");
-this.WriteObjects("                    ",  cacheName , " = this.Context.Find<",  referencedInterface , ">(",  backingName , ".Value);\r\n");
-this.WriteObjects("                else\r\n");
-this.WriteObjects("                    ",  cacheName , " = null;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                return ",  cacheName , ";\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (value == null && !",  backingName , ".HasValue)\r\n");
-this.WriteObjects("                    return;\r\n");
-this.WriteObjects("                if (value != null && ",  backingName , ".HasValue && value.ID == ",  backingName , ".Value)\r\n");
-this.WriteObjects("                    return;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                ",  cacheName , " = value;\r\n");
-this.WriteObjects("                if (value != null)\r\n");
-this.WriteObjects("                    ",  fkName , " = value.ID;\r\n");
-this.WriteObjects("                else\r\n");
-this.WriteObjects("                    ",  fkName , " = null;\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  referencedInterface , " ",  cacheName , ";\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        public int? ",  fkName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                return ",  backingName , ";\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (",  backingName , " != value)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    var __oldValue = ",  backingName , ";\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  propertyName , "\", __oldValue, value);\r\n");
-this.WriteObjects("                    ",  backingName , " = value;\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName , "\", __oldValue, value);\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        // backing store for serialization\r\n");
-this.WriteObjects("        private int? ",  backingName , ";\r\n");
-#line 73 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 38 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+this.WriteObjects("        public ",  referencedInterface , " ",  propertyName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (",  cacheName , " != null && ",  cacheName , ".ID == ",  backingName , ")\n");
+this.WriteObjects("                    return ",  cacheName , ";\n");
+this.WriteObjects("\n");
+this.WriteObjects("                if (",  backingName , ".HasValue)\n");
+this.WriteObjects("                    ",  cacheName , " = this.Context.Find<",  referencedInterface , ">(",  backingName , ".Value);\n");
+this.WriteObjects("                else\n");
+this.WriteObjects("                    ",  cacheName , " = null;\n");
+this.WriteObjects("\n");
+this.WriteObjects("                return ",  cacheName , ";\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("            set\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (value == null && !",  backingName , ".HasValue)\n");
+this.WriteObjects("                    return;\n");
+this.WriteObjects("                if (value != null && ",  backingName , ".HasValue && value.ID == ",  backingName , ".Value)\n");
+this.WriteObjects("                    return;\n");
+this.WriteObjects("\n");
+this.WriteObjects("                ",  cacheName , " = value;\n");
+this.WriteObjects("                if (value != null)\n");
+this.WriteObjects("                    ",  fkName , " = value.ID;\n");
+this.WriteObjects("                else\n");
+this.WriteObjects("                    ",  fkName , " = null;\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("        private ",  referencedInterface , " ",  cacheName , ";\n");
+this.WriteObjects("\n");
+this.WriteObjects("        public int? ",  fkName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                return ",  backingName , ";\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("            set\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (",  backingName , " != value)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    var __oldValue = ",  backingName , ";\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  propertyName , "\", __oldValue, value);\n");
+this.WriteObjects("                    ",  backingName , " = value;\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName , "\", __oldValue, value);\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        // backing store for serialization\n");
+this.WriteObjects("        private int? ",  backingName , ";\n");
+#line 89 "P:\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
         serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, "int?", backingName); // TODO: XML Namespace
 

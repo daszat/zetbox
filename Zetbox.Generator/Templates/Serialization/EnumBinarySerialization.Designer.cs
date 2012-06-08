@@ -44,7 +44,9 @@ namespace Zetbox.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 21 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+this.WriteObjects("");
+#line 37 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 ////
     ////  This class always serializes as int? to avoid complicating the code
     ////
@@ -52,29 +54,29 @@ namespace Zetbox.Generator.Templates.Serialization
     switch(direction){
         case SerializerDirection.ToStream:
 
-#line 28 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write((int?)",  backingStoreName , ");\r\n");
-#line 30 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+#line 44 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+this.WriteObjects("            ",  streamName , ".Write((int?)",  backingStoreName , ");\n");
+#line 46 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
-#line 33 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            ",  backingStoreName , " = (",  enumerationType , ")",  streamName , ".ReadNullableInt32();\r\n");
-#line 35 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+#line 49 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+this.WriteObjects("            ",  backingStoreName , " = (",  enumerationType , ")",  streamName , ".ReadNullableInt32();\n");
+#line 51 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 38 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int?)",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 40 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+#line 54 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int?)",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+#line 56 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 43 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
-this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")XmlStreamer.ReadNullableInt32(",  streamName , ");\r\n");
-this.WriteObjects("               break;\r\n");
-#line 47 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+#line 59 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
+this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")XmlStreamer.ReadNullableInt32(",  streamName , ");\n");
+this.WriteObjects("               break;\n");
+#line 63 "P:\zetbox\Zetbox.Generator\Templates\Serialization\EnumBinarySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

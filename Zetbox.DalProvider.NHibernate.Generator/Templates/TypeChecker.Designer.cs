@@ -30,33 +30,35 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\TypeChecker.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\r\n");
-this.WriteObjects("        : Zetbox.API.BaseTypeChecker, I",  shortName , "ImplementationTypeChecker\r\n");
-this.WriteObjects("    {\r\n");
-this.WriteObjects("        public ",  shortName , "ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)\r\n");
-this.WriteObjects("            : base(implTypeCheckersFactory)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        public bool IsImplementationType(Type type)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            if (type == null) { throw new ArgumentNullException(\"type\"); }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("			var myAssembly = typeof(",  shortName , "ImplementationTypeChecker).Assembly;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("            // Allow all top-level types from the generated assembly\r\n");
-this.WriteObjects("            if (type.Assembly == myAssembly && type.DeclaringType == null)\r\n");
-this.WriteObjects("                return true;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("            // Allow all generic types which have only implementation types as arguments\r\n");
-this.WriteObjects("            if (type.IsGenericType)\r\n");
-this.WriteObjects("                return type.GetGenericArguments().All(t => IsImplementationType(t));\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("            return false;\r\n");
-this.WriteObjects("		}\r\n");
-this.WriteObjects("	}\r\n");
+#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\TypeChecker.cst"
+this.WriteObjects("");
+#line 27 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\TypeChecker.cst"
+this.WriteObjects("\n");
+this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\n");
+this.WriteObjects("        : Zetbox.API.BaseTypeChecker, I",  shortName , "ImplementationTypeChecker\n");
+this.WriteObjects("    {\n");
+this.WriteObjects("        public ",  shortName , "ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)\n");
+this.WriteObjects("            : base(implTypeCheckersFactory)\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        public bool IsImplementationType(Type type)\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            if (type == null) { throw new ArgumentNullException(\"type\"); }\n");
+this.WriteObjects("\n");
+this.WriteObjects("			var myAssembly = typeof(",  shortName , "ImplementationTypeChecker).Assembly;\n");
+this.WriteObjects("\n");
+this.WriteObjects("            // Allow all top-level types from the generated assembly\n");
+this.WriteObjects("            if (type.Assembly == myAssembly && type.DeclaringType == null)\n");
+this.WriteObjects("                return true;\n");
+this.WriteObjects("\n");
+this.WriteObjects("            // Allow all generic types which have only implementation types as arguments\n");
+this.WriteObjects("            if (type.IsGenericType)\n");
+this.WriteObjects("                return type.GetGenericArguments().All(t => IsImplementationType(t));\n");
+this.WriteObjects("\n");
+this.WriteObjects("            return false;\n");
+this.WriteObjects("		}\n");
+this.WriteObjects("	}\n");
 
         }
 

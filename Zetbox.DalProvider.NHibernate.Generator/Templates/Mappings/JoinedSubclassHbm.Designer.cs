@@ -55,27 +55,29 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 26 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-this.WriteObjects("        <joined-subclass name=\"",  qualifiedImplementationName , "\"\r\n");
-this.WriteObjects("                         proxy=\"",  qualifiedImplementationName , "\"\r\n");
-this.WriteObjects("                         schema=\"`",  schemaName , "`\"\r\n");
-this.WriteObjects("                         table=\"`",  tableName , "`\"\r\n");
-this.WriteObjects("                         dynamic-update=\"",  needsConcurrency ? "true" : "false" , "\">\r\n");
-this.WriteObjects("            \r\n");
-this.WriteObjects("            <!-- base class reference -->\r\n");
-this.WriteObjects("            <key column=\"`ID`\" />\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("            <!-- define the properties -->\r\n");
-#line 36 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+this.WriteObjects("");
+#line 42 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+this.WriteObjects("        <joined-subclass name=\"",  qualifiedImplementationName , "\"\n");
+this.WriteObjects("                         proxy=\"",  qualifiedImplementationName , "\"\n");
+this.WriteObjects("                         schema=\"`",  schemaName , "`\"\n");
+this.WriteObjects("                         table=\"`",  tableName , "`\"\n");
+this.WriteObjects("                         dynamic-update=\"",  needsConcurrency ? "true" : "false" , "\">\n");
+this.WriteObjects("            \n");
+this.WriteObjects("            <!-- base class reference -->\n");
+this.WriteObjects("            <key column=\"`ID`\" />\n");
+this.WriteObjects("\n");
+this.WriteObjects("            <!-- define the properties -->\n");
+#line 52 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 ApplyPropertyDefinitions(properties); 
-#line 37 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("            <!-- define the subclasses -->\r\n");
-#line 39 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+#line 53 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+this.WriteObjects("\n");
+this.WriteObjects("            <!-- define the subclasses -->\n");
+#line 55 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 ApplyJoinedSubclasses(subClasses); 
-#line 40 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        </joined-subclass>\r\n");
+#line 56 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+this.WriteObjects("\n");
+this.WriteObjects("        </joined-subclass>\n");
 
         }
 

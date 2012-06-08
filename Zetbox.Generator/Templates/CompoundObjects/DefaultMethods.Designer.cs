@@ -33,40 +33,42 @@ namespace Zetbox.Generator.Templates.CompoundObjects
 
         public override void Generate()
         {
-#line 14 "P:\zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst"
-this.WriteObjects("        #region ",  this.GetType() , "\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        [System.Diagnostics.DebuggerHidden()]\r\n");
-this.WriteObjects("        [EventBasedMethod(\"OnToString_",  dt.Name , "\")]\r\n");
-this.WriteObjects("        public override string ToString()\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();\r\n");
-this.WriteObjects("            e.Result = base.ToString();\r\n");
-this.WriteObjects("            if (OnToString_",  dt.Name , " != null)\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                OnToString_",  dt.Name , "(this, e);\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            return e.Result;\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("        public static event ToStringHandler<",  dt.Name , "> OnToString_",  dt.Name , ";\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("		[System.Diagnostics.DebuggerHidden()]\r\n");
-this.WriteObjects("        [EventBasedMethod(\"OnObjectIsValid_",  dt.Name , "\")]\r\n");
-this.WriteObjects("        protected override ObjectIsValidResult ObjectIsValid()\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();\r\n");
-this.WriteObjects("			var b = base.ObjectIsValid();\r\n");
-this.WriteObjects("            e.IsValid = b.IsValid;\r\n");
-this.WriteObjects("			e.Errors.AddRange(b.Errors);\r\n");
-this.WriteObjects("            if (OnObjectIsValid_",  dt.Name , " != null)\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                OnObjectIsValid_",  dt.Name , "(this, e);\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            return new ObjectIsValidResult(e.IsValid, e.Errors);\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("        public static event ObjectIsValidHandler<",  dt.Name , "> OnObjectIsValid_",  dt.Name , ";\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst"
+this.WriteObjects("");
+#line 30 "P:\zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst"
+this.WriteObjects("        #region ",  this.GetType() , "\n");
+this.WriteObjects("\n");
+this.WriteObjects("        [System.Diagnostics.DebuggerHidden()]\n");
+this.WriteObjects("        [EventBasedMethod(\"OnToString_",  dt.Name , "\")]\n");
+this.WriteObjects("        public override string ToString()\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();\n");
+this.WriteObjects("            e.Result = base.ToString();\n");
+this.WriteObjects("            if (OnToString_",  dt.Name , " != null)\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                OnToString_",  dt.Name , "(this, e);\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("            return e.Result;\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("        public static event ToStringHandler<",  dt.Name , "> OnToString_",  dt.Name , ";\n");
+this.WriteObjects("\n");
+this.WriteObjects("		[System.Diagnostics.DebuggerHidden()]\n");
+this.WriteObjects("        [EventBasedMethod(\"OnObjectIsValid_",  dt.Name , "\")]\n");
+this.WriteObjects("        protected override ObjectIsValidResult ObjectIsValid()\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();\n");
+this.WriteObjects("			var b = base.ObjectIsValid();\n");
+this.WriteObjects("            e.IsValid = b.IsValid;\n");
+this.WriteObjects("			e.Errors.AddRange(b.Errors);\n");
+this.WriteObjects("            if (OnObjectIsValid_",  dt.Name , " != null)\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                OnObjectIsValid_",  dt.Name , "(this, e);\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("            return new ObjectIsValidResult(e.IsValid, e.Errors);\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("        public static event ObjectIsValidHandler<",  dt.Name , "> OnObjectIsValid_",  dt.Name , ";\n");
+this.WriteObjects("\n");
+this.WriteObjects("        #endregion // ",  this.GetType() , "\n");
 
         }
 

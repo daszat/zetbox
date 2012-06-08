@@ -34,25 +34,27 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 
         public override void Generate()
         {
-#line 15 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+this.WriteObjects("");
+#line 31 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 string name = prop.Name;
     string type = prop.GetPropertyTypeString();
 
-#line 18 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
-this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
-this.WriteObjects("        ",  type , " ",  name , " {\r\n");
-this.WriteObjects("            get;\r\n");
-#line 22 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 34 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\n");
+this.WriteObjects("        ",  type , " ",  name , " {\n");
+this.WriteObjects("            get;\n");
+#line 38 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 if (!isReadonly)
     {
 
-#line 25 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
-this.WriteObjects("            set;\r\n");
-#line 27 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 41 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+this.WriteObjects("            set;\n");
+#line 43 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 }
 
-#line 29 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
-this.WriteObjects("        }\r\n");
+#line 45 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+this.WriteObjects("        }\n");
 
         }
 

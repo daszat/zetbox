@@ -35,34 +35,36 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 16 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        public override List<NHibernatePersistenceObject> GetParentsToDelete()\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            var result = base.GetParentsToDelete();\r\n");
-this.WriteObjects("\r\n");
-#line 21 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-if (!string.IsNullOrEmpty(aName)) { 
-#line 22 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-this.WriteObjects("            // Follow ",  aName , "\r\n");
-this.WriteObjects("            if (this.",  aName , " != null && this.",  aName , ".ObjectState == DataObjectState.Deleted)\r\n");
-this.WriteObjects("                result.Add((NHibernatePersistenceObject)this.",  aName , ");\r\n");
-#line 25 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-} 
-#line 26 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-this.WriteObjects("\r\n");
-#line 27 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-if (!string.IsNullOrEmpty(bName)) { 
-#line 28 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-this.WriteObjects("            // Follow ",  bName , "\r\n");
-this.WriteObjects("            if (this.",  bName , " != null && this.",  bName , ".ObjectState == DataObjectState.Deleted)\r\n");
-this.WriteObjects("                result.Add((NHibernatePersistenceObject)this.",  bName , ");\r\n");
-this.WriteObjects("\r\n");
+#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+this.WriteObjects("");
 #line 32 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+this.WriteObjects("\n");
+this.WriteObjects("        public override List<NHibernatePersistenceObject> GetParentsToDelete()\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            var result = base.GetParentsToDelete();\n");
+this.WriteObjects("\n");
+#line 37 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+if (!string.IsNullOrEmpty(aName)) { 
+#line 38 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+this.WriteObjects("            // Follow ",  aName , "\n");
+this.WriteObjects("            if (this.",  aName , " != null && this.",  aName , ".ObjectState == DataObjectState.Deleted)\n");
+this.WriteObjects("                result.Add((NHibernatePersistenceObject)this.",  aName , ");\n");
+#line 41 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
 } 
-#line 33 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
-this.WriteObjects("            return result;\r\n");
-this.WriteObjects("        }\r\n");
+#line 42 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+this.WriteObjects("\n");
+#line 43 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+if (!string.IsNullOrEmpty(bName)) { 
+#line 44 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+this.WriteObjects("            // Follow ",  bName , "\n");
+this.WriteObjects("            if (this.",  bName , " != null && this.",  bName , ".ObjectState == DataObjectState.Deleted)\n");
+this.WriteObjects("                result.Add((NHibernatePersistenceObject)this.",  bName , ");\n");
+this.WriteObjects("\n");
+#line 48 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+} 
+#line 49 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\CollectionEntries\GetDeletedRelatives.cst"
+this.WriteObjects("            return result;\n");
+this.WriteObjects("        }\n");
 
         }
 

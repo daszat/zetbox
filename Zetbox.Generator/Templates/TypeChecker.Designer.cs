@@ -30,21 +30,23 @@ namespace Zetbox.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\zetbox\Zetbox.Generator\Templates\TypeChecker.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\r\n");
-this.WriteObjects("        : Zetbox.API.BaseImplementationTypeChecker, I",  shortName , "ImplementationTypeChecker\r\n");
-this.WriteObjects("    {\r\n");
-this.WriteObjects("        public ",  shortName , "ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)\r\n");
-this.WriteObjects("            : base(implTypeCheckersFactory)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        protected override System.Reflection.Assembly GetAssembly()\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            return typeof(",  shortName , "ImplementationTypeChecker).Assembly;\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("    }\r\n");
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\TypeChecker.cst"
+this.WriteObjects("");
+#line 27 "P:\zetbox\Zetbox.Generator\Templates\TypeChecker.cst"
+this.WriteObjects("\n");
+this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\n");
+this.WriteObjects("        : Zetbox.API.BaseImplementationTypeChecker, I",  shortName , "ImplementationTypeChecker\n");
+this.WriteObjects("    {\n");
+this.WriteObjects("        public ",  shortName , "ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)\n");
+this.WriteObjects("            : base(implTypeCheckersFactory)\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        protected override System.Reflection.Assembly GetAssembly()\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            return typeof(",  shortName , "ImplementationTypeChecker).Assembly;\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("    }\n");
 
         }
 

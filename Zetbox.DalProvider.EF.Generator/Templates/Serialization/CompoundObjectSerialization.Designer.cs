@@ -47,41 +47,43 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 22 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+this.WriteObjects("");
+#line 38 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.ToStream)
     {
 
-#line 25 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\r\n");
-#line 27 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 41 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\n");
+#line 43 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.FromStream)
     {
 
-#line 31 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                // use backing store to avoid notifications\r\n");
-this.WriteObjects("                ",  backingStoreType , " tmp = ",  streamName , ".ReadCompoundObject<",  backingStoreType , ">();\r\n");
-this.WriteObjects("                this.",  backingStoreName , " = tmp ?? new ",  backingStoreType , "(true, this, \"",  memberName , "\");\r\n");
-this.WriteObjects("                this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\r\n");
-this.WriteObjects("            }\r\n");
-#line 38 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 47 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+this.WriteObjects("            {\n");
+this.WriteObjects("                // use backing store to avoid notifications\n");
+this.WriteObjects("                ",  backingStoreType , " tmp = ",  streamName , ".ReadCompoundObject<",  backingStoreType , ">();\n");
+this.WriteObjects("                this.",  backingStoreName , " = tmp ?? new ",  backingStoreType , "(true, this, \"",  memberName , "\");\n");
+this.WriteObjects("                this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\n");
+this.WriteObjects("            }\n");
+#line 54 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.Export)
     {
 
-#line 42 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 44 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 58 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+#line 60 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.MergeImport)
     {
 
-#line 48 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
-this.WriteObjects("                XmlStreamer.FromStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
-this.WriteObjects("                break;\r\n");
-#line 52 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 64 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
+this.WriteObjects("                XmlStreamer.FromStream(this.",  backingStoreName , ", ",  streamName , ");\n");
+this.WriteObjects("                break;\n");
+#line 68 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else
     {

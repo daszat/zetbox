@@ -40,9 +40,11 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 18 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("        #region ",  this.GetType() , "\r\n");
-#line 20 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("");
+#line 34 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("        #region ",  this.GetType() , "\n");
+#line 36 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 var properties = cls.Properties.OrderBy(p => p.Name).ToList();
     var rels = cls.GetRelations()
         .OrderBy(i => i.A.RoleName).ThenBy(i => i.Verb).ThenBy(i => i.B.RoleName)
@@ -53,87 +55,87 @@ var properties = cls.Properties.OrderBy(p => p.Name).ToList();
     if (properties.Count > 0 || rels.Count > 0)
     {
 
-#line 30 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("        private static readonly object _propertiesLock = new object();\r\n");
-this.WriteObjects("        private static System.ComponentModel.PropertyDescriptor[] _properties;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            if (_properties != null) return;\r\n");
-this.WriteObjects("            lock (_propertiesLock)\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                // recheck for a lost race after aquiring the lock\r\n");
-this.WriteObjects("                if (_properties != null) return;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                _properties = new System.ComponentModel.PropertyDescriptor[] {\r\n");
-#line 43 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+#line 46 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("        private static readonly object _propertiesLock = new object();\n");
+this.WriteObjects("        private static System.ComponentModel.PropertyDescriptor[] _properties;\n");
+this.WriteObjects("\n");
+this.WriteObjects("        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            if (_properties != null) return;\n");
+this.WriteObjects("            lock (_propertiesLock)\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                // recheck for a lost race after aquiring the lock\n");
+this.WriteObjects("                if (_properties != null) return;\n");
+this.WriteObjects("\n");
+this.WriteObjects("                _properties = new System.ComponentModel.PropertyDescriptor[] {\n");
+#line 59 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 foreach(var property in properties)
         {
             string propertyName = property.Name;
             if (property.IsAssociation() && !property.IsObjectReferencePropertySingle())
             {
 
-#line 49 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
-this.WriteObjects("                        lazyCtx,\r\n");
-this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
-this.WriteObjects("                        \"",  propertyName , "\",\r\n");
-this.WriteObjects("                        null,\r\n");
-this.WriteObjects("                        obj => obj.",  propertyName , ",\r\n");
-this.WriteObjects("                        null, // lists are read-only properties\r\n");
-this.WriteObjects("                        obj => On",  propertyName , "_IsValid), \r\n");
-#line 58 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+#line 65 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\n");
+this.WriteObjects("                        lazyCtx,\n");
+this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\n");
+this.WriteObjects("                        \"",  propertyName , "\",\n");
+this.WriteObjects("                        null,\n");
+this.WriteObjects("                        obj => obj.",  propertyName , ",\n");
+this.WriteObjects("                        null, // lists are read-only properties\n");
+this.WriteObjects("                        obj => On",  propertyName , "_IsValid), \n");
+#line 74 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } else if (property is CalculatedObjectReferenceProperty) { 
-#line 59 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                    // property is CalculatedObjectReferenceProperty\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
-this.WriteObjects("                        lazyCtx,\r\n");
-this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
-this.WriteObjects("                        \"",  propertyName , "\",\r\n");
-this.WriteObjects("                        null,\r\n");
-this.WriteObjects("                        obj => obj.",  propertyName , ",\r\n");
-this.WriteObjects("                        null, // CalculatedObjectReferenceProperty is a read-only property\r\n");
-this.WriteObjects("						null), // no constraints on calculated properties \r\n");
-#line 68 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-} else { 
-#line 69 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; 
-#line 70 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                    // else\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
-this.WriteObjects("                        lazyCtx,\r\n");
-this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
-this.WriteObjects("                        \"",  propertyName , "\",\r\n");
-this.WriteObjects("                        null,\r\n");
-this.WriteObjects("                        obj => obj.",  propertyName , ",\r\n");
-#line 77 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-if(isReadonly) { 
-#line 78 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                        null, // calculated property\r\n");
-this.WriteObjects("						null), // no constraints on calculated properties\r\n");
-#line 80 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-} else { 
-#line 81 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                        (obj, val) => obj.",  propertyName , " = val,\r\n");
-this.WriteObjects("						obj => On",  propertyName , "_IsValid), \r\n");
-#line 83 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-} 
+#line 75 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                    // property is CalculatedObjectReferenceProperty\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\n");
+this.WriteObjects("                        lazyCtx,\n");
+this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\n");
+this.WriteObjects("                        \"",  propertyName , "\",\n");
+this.WriteObjects("                        null,\n");
+this.WriteObjects("                        obj => obj.",  propertyName , ",\n");
+this.WriteObjects("                        null, // CalculatedObjectReferenceProperty is a read-only property\n");
+this.WriteObjects("						null), // no constraints on calculated properties \n");
 #line 84 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-} 
-#line 85 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-} 
-#line 86 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-if ("Frozen".Equals(Settings["extrasuffix"])) 
-#line 87 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-{ 
-#line 88 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                    // skipping position columns for frozen context (not implemented)\r\n");
-#line 89 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } else { 
-#line 90 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                    // position columns\r\n");
-#line 92 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+#line 85 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; 
+#line 86 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                    // else\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  ifName , ", ",  property.GetPropertyTypeString() , ">(\n");
+this.WriteObjects("                        lazyCtx,\n");
+this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\n");
+this.WriteObjects("                        \"",  propertyName , "\",\n");
+this.WriteObjects("                        null,\n");
+this.WriteObjects("                        obj => obj.",  propertyName , ",\n");
+#line 93 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+if(isReadonly) { 
+#line 94 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                        null, // calculated property\n");
+this.WriteObjects("						null), // no constraints on calculated properties\n");
+#line 96 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+} else { 
+#line 97 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                        (obj, val) => obj.",  propertyName , " = val,\n");
+this.WriteObjects("						obj => On",  propertyName , "_IsValid), \n");
+#line 99 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+} 
+#line 100 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+} 
+#line 101 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+} 
+#line 102 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+if ("Frozen".Equals(Settings["extrasuffix"])) 
+#line 103 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+{ 
+#line 104 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                    // skipping position columns for frozen context (not implemented)\n");
+#line 105 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+} else { 
+#line 106 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                    // position columns\n");
+#line 108 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
             {
             // only show debugging if there actually is an position column
@@ -141,61 +143,61 @@ foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
                 || (rel.B.Type == cls && rel.B.HasPersistentOrder))
             {
 
-#line 99 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                    // rel: ",  rel.A.RoleName , " ",  rel.Verb , " ",  rel.B.RoleName , " (",  rel.ExportGuid , ")\r\n");
-#line 101 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+#line 115 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                    // rel: ",  rel.A.RoleName , " ",  rel.Verb , " ",  rel.B.RoleName , " (",  rel.ExportGuid , ")\n");
+#line 117 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 }
             if (rel.A.Type == cls && rel.A.HasPersistentOrder)
             {
                 var posColumnName = Construct.ListPositionPropertyName(rel.A);
 
-#line 106 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                    // rel.A.Type == cls && rel.A.HasPersistentOrder\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", int?>(\r\n");
-this.WriteObjects("                        lazyCtx,\r\n");
-this.WriteObjects("                        null,\r\n");
-this.WriteObjects("                        \"",  posColumnName , "\",\r\n");
-this.WriteObjects("                        null,\r\n");
-this.WriteObjects("                        obj => obj.",  posColumnName , ",\r\n");
-this.WriteObjects("                        (obj, val) => obj.",  posColumnName , " = val,\r\n");
-this.WriteObjects("						null),\r\n");
-#line 116 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+#line 122 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                    // rel.A.Type == cls && rel.A.HasPersistentOrder\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", int?>(\n");
+this.WriteObjects("                        lazyCtx,\n");
+this.WriteObjects("                        null,\n");
+this.WriteObjects("                        \"",  posColumnName , "\",\n");
+this.WriteObjects("                        null,\n");
+this.WriteObjects("                        obj => obj.",  posColumnName , ",\n");
+this.WriteObjects("                        (obj, val) => obj.",  posColumnName , " = val,\n");
+this.WriteObjects("						null),\n");
+#line 132 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 }
 
                 if (rel.B.Type == cls && rel.B.HasPersistentOrder)
                 {
                     var posColumnName = Construct.ListPositionPropertyName(rel.B);
 
-#line 122 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                    // rel.B.Type == cls && rel.B.HasPersistentOrder\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", int?>(\r\n");
-this.WriteObjects("                        lazyCtx,\r\n");
-this.WriteObjects("                        null,\r\n");
-this.WriteObjects("                        \"",  posColumnName , "\",\r\n");
-this.WriteObjects("                        null,\r\n");
-this.WriteObjects("                        obj => obj.",  posColumnName , ",\r\n");
-this.WriteObjects("                        (obj, val) => obj.",  posColumnName , " = val,\r\n");
-this.WriteObjects("						null),\r\n");
-#line 132 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+#line 138 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                    // rel.B.Type == cls && rel.B.HasPersistentOrder\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", int?>(\n");
+this.WriteObjects("                        lazyCtx,\n");
+this.WriteObjects("                        null,\n");
+this.WriteObjects("                        \"",  posColumnName , "\",\n");
+this.WriteObjects("                        null,\n");
+this.WriteObjects("                        obj => obj.",  posColumnName , ",\n");
+this.WriteObjects("                        (obj, val) => obj.",  posColumnName , " = val,\n");
+this.WriteObjects("						null),\n");
+#line 148 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 }
             }
         }
 
-#line 136 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("                };\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            base.CollectProperties(lazyCtx, props);\r\n");
-this.WriteObjects("            _InitializePropertyDescriptors(lazyCtx);\r\n");
-this.WriteObjects("            props.AddRange(_properties);\r\n");
-this.WriteObjects("        }\r\n");
-#line 146 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+#line 152 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("                };\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            base.CollectProperties(lazyCtx, props);\n");
+this.WriteObjects("            _InitializePropertyDescriptors(lazyCtx);\n");
+this.WriteObjects("            props.AddRange(_properties);\n");
+this.WriteObjects("        }\n");
+#line 162 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 } 
-#line 147 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
+#line 163 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("        #endregion // ",  this.GetType() , "\n");
 
         }
 

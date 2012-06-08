@@ -34,17 +34,19 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 15 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        public override void ReloadReferences()\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            // Do not reload references if the current object has been deleted.\r\n");
-this.WriteObjects("            // TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
-this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
-this.WriteObjects("            base.ReloadReferences();\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("            // fix direct object references\r\n");
-#line 25 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+this.WriteObjects("");
+#line 31 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+this.WriteObjects("\n");
+this.WriteObjects("        public override void ReloadReferences()\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            // Do not reload references if the current object has been deleted.\n");
+this.WriteObjects("            // TODO: enable when MemoryContext uses MemoryDataObjects\n");
+this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted) return;\n");
+this.WriteObjects("            base.ReloadReferences();\n");
+this.WriteObjects("\n");
+this.WriteObjects("            // fix direct object references\n");
+#line 41 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 // TODO: Use only 1 side relation ends
     foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         .Where(orp => !orp.IsList())
@@ -66,8 +68,8 @@ this.WriteObjects("            // fix direct object references\r\n");
         ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
     }
 
-#line 46 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
-this.WriteObjects("        }\r\n");
+#line 62 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+this.WriteObjects("        }\n");
 
         }
 

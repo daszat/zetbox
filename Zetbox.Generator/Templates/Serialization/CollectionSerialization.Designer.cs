@@ -45,36 +45,38 @@ namespace Zetbox.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 21 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+this.WriteObjects("");
+#line 37 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 if (ShouldSerialize())
     {
         switch(direction)
         {
             case SerializerDirection.ToStream:
 
-#line 27 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            ",  streamName , ".WriteCollectionEntries(this.",  collectionName , ");\r\n");
-#line 29 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+#line 43 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+this.WriteObjects("            ",  streamName , ".WriteCollectionEntries(this.",  collectionName , ");\n");
+#line 45 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             case SerializerDirection.FromStream:
 
-#line 32 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            ",  streamName , ".ReadCollectionEntries(this, this.",  collectionName , ");\r\n");
-#line 34 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+#line 48 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+this.WriteObjects("            ",  streamName , ".ReadCollectionEntries(this, this.",  collectionName , ");\n");
+#line 50 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 37 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ExportCollectionEntries(this.",  collectionName , "",  orderByValue ? ".OrderBy(i => i.Value)" : String.Empty , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 39 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+#line 53 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ExportCollectionEntries(this.",  collectionName , "",  orderByValue ? ".OrderBy(i => i.Value)" : String.Empty , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+#line 55 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             case SerializerDirection.MergeImport:
 
-#line 42 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
-this.WriteObjects("                XmlStreamer.MergeImportCollectionEntries(this, this.",  collectionName , ", ",  streamName , ");\r\n");
-this.WriteObjects("                break;\r\n");
-#line 46 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+#line 58 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
+this.WriteObjects("                XmlStreamer.MergeImportCollectionEntries(this, this.",  collectionName , ", ",  streamName , ");\n");
+this.WriteObjects("                break;\n");
+#line 62 "P:\zetbox\Zetbox.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             default:
                 throw new ArgumentOutOfRangeException("direction");

@@ -40,7 +40,9 @@ namespace Zetbox.Generator.Templates.Properties
         public override void Generate()
         {
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
-this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(",  isNull ? "true": "false" , ", this, \"",  propertyName , "\");\r\n");
+this.WriteObjects("");
+#line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
+this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(",  isNull ? "true": "false" , ", this, \"",  propertyName , "\");\n");
 
         }
 

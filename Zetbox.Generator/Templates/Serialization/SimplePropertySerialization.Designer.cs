@@ -43,34 +43,36 @@ namespace Zetbox.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 20 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+this.WriteObjects("");
+#line 36 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
-#line 24 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\r\n");
-#line 26 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 40 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\n");
+#line 42 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
-#line 29 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\r\n");
-#line 31 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 45 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+this.WriteObjects("            this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\n");
+#line 47 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 34 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 36 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 50 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\n");
+#line 52 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 39 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
-this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
-this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\r\n");
-this.WriteObjects("                break;\r\n");
-#line 43 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 55 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\n");
+this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\n");
+this.WriteObjects("                break;\n");
+#line 59 "P:\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

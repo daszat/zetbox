@@ -32,11 +32,13 @@ namespace Zetbox.Generator.InterfaceTemplates.Properties
 
         public override void Generate()
         {
-#line 11 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
-this.WriteObjects("\r\n");
-#line 14 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
-this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\r\n");
-this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\r\n");
+#line 17 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
+this.WriteObjects("");
+#line 27 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
+this.WriteObjects("\n");
+#line 30 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
+this.WriteObjects("        [Zetbox.API.DefinitionGuid(\"",  prop.ExportGuid , "\")]\n");
+this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\n");
 
         }
 

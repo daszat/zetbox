@@ -40,13 +40,15 @@ namespace Zetbox.Generator.Templates.Properties
         public override void Generate()
         {
 #line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\DelegatingProperty.cst"
-this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  propName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get { return ",  backingPropertyName , "; }\r\n");
-this.WriteObjects("            set { ",  backingPropertyName , " = (",  backingType , ")value; }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("        // END ",  this.GetType() , "\r\n");
+this.WriteObjects("");
+#line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\DelegatingProperty.cst"
+this.WriteObjects("        // BEGIN ",  this.GetType() , "\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  propName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get { return ",  backingPropertyName , "; }\n");
+this.WriteObjects("            set { ",  backingPropertyName , " = (",  backingType , ")value; }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("        // END ",  this.GetType() , "\n");
 
         }
 

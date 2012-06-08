@@ -40,47 +40,49 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 15 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-this.WriteObjects("        ",  GetModifiers() , " ",  referencedType , " ",  propertyName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (",  getterEventName , " == null)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    throw new NotImplementedException(\"No handler registered on calculated property ",  className , ".",  propertyName , "\");\r\n");
-this.WriteObjects("                }\r\n");
-#line 24 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-if (isCompound) { 
-#line 25 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("                var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\r\n");
-this.WriteObjects("                ",  getterEventName , "(this, e);\r\n");
-this.WriteObjects("                return e.Result;\r\n");
-#line 28 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-} else { 
-#line 29 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("                if (_",  propertyName , "_IsDirty)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\r\n");
-this.WriteObjects("                    ",  getterEventName , "(this, e);\r\n");
-this.WriteObjects("                    ",  ApplyStorageStatement("e.Result") , "\r\n");
-this.WriteObjects("                    _",  propertyName , "_IsDirty = false;\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                return ",  ApplyResultExpression() , ";\r\n");
-#line 37 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-} 
-#line 38 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+this.WriteObjects("");
+#line 31 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+this.WriteObjects("        // BEGIN ",  this.GetType() , "\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  referencedType , " ",  propertyName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (",  getterEventName , " == null)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    throw new NotImplementedException(\"No handler registered on calculated property ",  className , ".",  propertyName , "\");\n");
+this.WriteObjects("                }\n");
 #line 40 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-if (!isCompound) { 
+if (isCompound) { 
 #line 41 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("        ",  ApplyBackingStorageDefinition() , "\r\n");
-#line 42 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+this.WriteObjects("                var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\n");
+this.WriteObjects("                ",  getterEventName , "(this, e);\n");
+this.WriteObjects("                return e.Result;\n");
+#line 44 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+} else { 
+#line 45 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+this.WriteObjects("                if (_",  propertyName , "_IsDirty)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\n");
+this.WriteObjects("                    ",  getterEventName , "(this, e);\n");
+this.WriteObjects("                    ",  ApplyStorageStatement("e.Result") , "\n");
+this.WriteObjects("                    _",  propertyName , "_IsDirty = false;\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("                return ",  ApplyResultExpression() , ";\n");
+#line 53 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
 } 
-#line 43 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
-this.WriteObjects("        private bool _",  propertyName , "_IsDirty = true; // Always true as it will not be stored in the database (yet)\r\n");
-this.WriteObjects("        // END ",  this.GetType() , "\r\n");
+#line 54 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+#line 56 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+if (!isCompound) { 
+#line 57 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+this.WriteObjects("        ",  ApplyBackingStorageDefinition() , "\n");
+#line 58 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+} 
+#line 59 "P:\zetbox\Zetbox.Generator\Templates\Properties\CalculatedProperty.cst"
+this.WriteObjects("        private bool _",  propertyName , "_IsDirty = true; // Always true as it will not be stored in the database (yet)\n");
+this.WriteObjects("        // END ",  this.GetType() , "\n");
 
         }
 

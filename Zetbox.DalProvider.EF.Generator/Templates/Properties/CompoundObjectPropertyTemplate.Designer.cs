@@ -47,74 +47,76 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 21 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-this.WriteObjects("        // implement the user-visible interface\r\n");
-this.WriteObjects("        public ",  coType , " ",  propName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get { return ",  backingPropertyName , ".CompoundObject_IsNull ? null : ",  backingPropertyName , "; }\r\n");
-this.WriteObjects("            set { ",  backingPropertyName , " = (",  coImplementationType , ")value; }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\r\n");
-#line 30 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-EfScalarPropHelper.ApplyBackingStoreDefinition(this, coImplementationType, backingStoreName, backingPropertyName); 
-#line 31 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values, mapped via EF</summary>\r\n");
-this.WriteObjects("        [XmlIgnore()]\r\n");
-this.WriteObjects("        [EdmComplexProperty()]\r\n");
-this.WriteObjects("        public ",  coImplementationType , " ",  backingPropertyName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get \r\n");
-this.WriteObjects("			{ \r\n");
-this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
-this.WriteObjects("				return ",  backingStoreName , "; \r\n");
-this.WriteObjects("			}\r\n");
-this.WriteObjects("            set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 45 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-if (!isNullable) { 
+#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("");
+#line 37 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("        // BEGIN ",  this.GetType() , "\n");
+this.WriteObjects("        // implement the user-visible interface\n");
+this.WriteObjects("        public ",  coType , " ",  propName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get { return ",  backingPropertyName , ".CompoundObject_IsNull ? null : ",  backingPropertyName , "; }\n");
+this.WriteObjects("            set { ",  backingPropertyName , " = (",  coImplementationType , ")value; }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\n");
 #line 46 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("                if (value == null)\r\n");
-this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 48 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+EfScalarPropHelper.ApplyBackingStoreDefinition(this, coImplementationType, backingStoreName, backingPropertyName); 
+#line 47 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("\n");
+this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values, mapped via EF</summary>\n");
+this.WriteObjects("        [XmlIgnore()]\n");
+this.WriteObjects("        [EdmComplexProperty()]\n");
+this.WriteObjects("        public ",  coImplementationType , " ",  backingPropertyName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get \n");
+this.WriteObjects("			{ \n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\n");
+this.WriteObjects("				return ",  backingStoreName , "; \n");
+this.WriteObjects("			}\n");
+this.WriteObjects("            set\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\n");
+#line 61 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+if (!isNullable) { 
+#line 62 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("                if (value == null)\n");
+this.WriteObjects("                    throw new ArgumentNullException(\"value\");\n");
+#line 64 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 } 
-#line 49 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    var __oldValue = ",  backingStoreName , ";\r\n");
-this.WriteObjects("					var __newValue = value;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  propName , "\", __oldValue, __newValue);\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                    if (",  backingStoreName , " != null)\r\n");
-this.WriteObjects("                    {\r\n");
-this.WriteObjects("                        ",  backingStoreName , ".DetachFromObject(this, \"",  propName , "\");\r\n");
-this.WriteObjects("                    }\r\n");
-this.WriteObjects("                    if(__newValue == null)\r\n");
-this.WriteObjects("                    {\r\n");
-this.WriteObjects("                        ",  backingStoreName , " = new ",  coImplementationType , "(true, this, \"",  propName , "\");\r\n");
-this.WriteObjects("                    }\r\n");
-this.WriteObjects("                    else\r\n");
-this.WriteObjects("                    {\r\n");
-this.WriteObjects("                        ",  backingStoreName , " = (",  coImplementationType , ")__newValue.Clone();\r\n");
-this.WriteObjects("                        ",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\r\n");
-this.WriteObjects("                    }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  propName , "\", __oldValue, value);\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("				else\r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\r\n");
-this.WriteObjects("				}\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-#line 79 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 65 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    var __oldValue = ",  backingStoreName , ";\n");
+this.WriteObjects("					var __newValue = value;\n");
+this.WriteObjects("\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  propName , "\", __oldValue, __newValue);\n");
+this.WriteObjects("\n");
+this.WriteObjects("                    if (",  backingStoreName , " != null)\n");
+this.WriteObjects("                    {\n");
+this.WriteObjects("                        ",  backingStoreName , ".DetachFromObject(this, \"",  propName , "\");\n");
+this.WriteObjects("                    }\n");
+this.WriteObjects("                    if(__newValue == null)\n");
+this.WriteObjects("                    {\n");
+this.WriteObjects("                        ",  backingStoreName , " = new ",  coImplementationType , "(true, this, \"",  propName , "\");\n");
+this.WriteObjects("                    }\n");
+this.WriteObjects("                    else\n");
+this.WriteObjects("                    {\n");
+this.WriteObjects("                        ",  backingStoreName , " = (",  coImplementationType , ")__newValue.Clone();\n");
+this.WriteObjects("                        ",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\n");
+this.WriteObjects("                    }\n");
+this.WriteObjects("\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  propName , "\", __oldValue, value);\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("				else\n");
+this.WriteObjects("				{\n");
+this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\n");
+this.WriteObjects("				}\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+#line 95 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 81 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 97 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("           // END ",  this.GetType() , "");
 
         }

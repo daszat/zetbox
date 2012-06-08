@@ -47,75 +47,77 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 21 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-this.WriteObjects("        // implement the user-visible interface\r\n");
-#line 23 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); 
-#line 24 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\r\n");
-this.WriteObjects("        private ",  coImplementationType , " ",  backingStoreName , ";\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values</summary>\r\n");
-this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " ",  backingPropertyName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get \r\n");
-this.WriteObjects("			{ \r\n");
-this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
-this.WriteObjects("				return ",  backingStoreName , "; \r\n");
-this.WriteObjects("			}\r\n");
-this.WriteObjects("            set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("");
+#line 37 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("        // BEGIN ",  this.GetType() , "\n");
+this.WriteObjects("        // implement the user-visible interface\n");
 #line 39 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-if (!isNullable) { 
+DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); 
 #line 40 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("                if (value == null)\r\n");
-this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 42 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-} 
-#line 43 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("					var __oldValue = ",  backingStoreName , ";\r\n");
-this.WriteObjects("					var __newValue = value;\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("					NotifyPropertyChanging(\"",  propName , "\", __oldValue, __newValue);\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("					if (",  backingStoreName , " != null)\r\n");
-this.WriteObjects("					{ \r\n");
-this.WriteObjects("						",  backingStoreName , ".DetachFromObject(this, \"",  propName , "\");\r\n");
-this.WriteObjects("					}\r\n");
-this.WriteObjects("					if (__newValue == null)\r\n");
-this.WriteObjects("					{\r\n");
-this.WriteObjects("						",  backingStoreName , " = null;\r\n");
-#line 57 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-ApplyStoreNull(); 
+this.WriteObjects("\n");
+this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\n");
+this.WriteObjects("        private ",  coImplementationType , " ",  backingStoreName , ";\n");
+this.WriteObjects("\n");
+this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values</summary>\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " ",  backingPropertyName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get \n");
+this.WriteObjects("			{ \n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\n");
+this.WriteObjects("				return ",  backingStoreName , "; \n");
+this.WriteObjects("			}\n");
+this.WriteObjects("            set\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\n");
+#line 55 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+if (!isNullable) { 
+#line 56 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("                if (value == null)\n");
+this.WriteObjects("                    throw new ArgumentNullException(\"value\");\n");
 #line 58 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("					}\r\n");
-this.WriteObjects("                    else\r\n");
-this.WriteObjects("                    {\r\n");
-this.WriteObjects("					    __newValue = (",  coImplementationType , ")__newValue.Clone();\r\n");
-this.WriteObjects("					    ",  backingStoreName , " = __newValue;\r\n");
-this.WriteObjects("					    ",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\r\n");
-#line 64 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+} 
+#line 59 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("					var __oldValue = ",  backingStoreName , ";\n");
+this.WriteObjects("					var __newValue = value;\n");
+this.WriteObjects("\n");
+this.WriteObjects("					NotifyPropertyChanging(\"",  propName , "\", __oldValue, __newValue);\n");
+this.WriteObjects("\n");
+this.WriteObjects("					if (",  backingStoreName , " != null)\n");
+this.WriteObjects("					{ \n");
+this.WriteObjects("						",  backingStoreName , ".DetachFromObject(this, \"",  propName , "\");\n");
+this.WriteObjects("					}\n");
+this.WriteObjects("					if (__newValue == null)\n");
+this.WriteObjects("					{\n");
+this.WriteObjects("						",  backingStoreName , " = null;\n");
+#line 73 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+ApplyStoreNull(); 
+#line 74 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("					}\n");
+this.WriteObjects("                    else\n");
+this.WriteObjects("                    {\n");
+this.WriteObjects("					    __newValue = (",  coImplementationType , ")__newValue.Clone();\n");
+this.WriteObjects("					    ",  backingStoreName , " = __newValue;\n");
+this.WriteObjects("					    ",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\n");
+#line 80 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 ApplyStoreValue(); 
-#line 65 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("                    }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("					NotifyPropertyChanged(\"",  propName , "\", __oldValue, __newValue);\r\n");
-this.WriteObjects("				}\r\n");
-this.WriteObjects("				else\r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\r\n");
-this.WriteObjects("				}\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-#line 76 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 81 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("                    }\n");
+this.WriteObjects("\n");
+this.WriteObjects("					NotifyPropertyChanged(\"",  propName , "\", __oldValue, __newValue);\n");
+this.WriteObjects("				}\n");
+this.WriteObjects("				else\n");
+this.WriteObjects("				{\n");
+this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\n");
+this.WriteObjects("				}\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+#line 92 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 78 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 94 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }

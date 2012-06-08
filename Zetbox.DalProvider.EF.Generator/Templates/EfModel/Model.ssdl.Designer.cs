@@ -37,57 +37,59 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
         public override void Generate()
         {
 #line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
-this.WriteObjects("<Schema xmlns=\"http://schemas.microsoft.com/ado/2006/04/edm/ssdl\"\r\n");
-this.WriteObjects("        Namespace=\"Model.Store\"\r\n");
-this.WriteObjects("        Alias=\"Self\"\r\n");
-this.WriteObjects("        Provider=\"",  schemaProvider.AdoNetProvider , "\"\r\n");
-this.WriteObjects("        ProviderManifestToken=\"",  schemaProvider.ManifestToken , "\" >\r\n");
-this.WriteObjects("  <EntityContainer Name=\"dbo\">\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- EntitySets for all Base Classes -->\r\n");
-#line 27 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("");
+#line 33 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+this.WriteObjects("<Schema xmlns=\"http://schemas.microsoft.com/ado/2006/04/edm/ssdl\"\n");
+this.WriteObjects("        Namespace=\"Model.Store\"\n");
+this.WriteObjects("        Alias=\"Self\"\n");
+this.WriteObjects("        Provider=\"",  schemaProvider.AdoNetProvider , "\"\n");
+this.WriteObjects("        ProviderManifestToken=\"",  schemaProvider.ManifestToken , "\" >\n");
+this.WriteObjects("  <EntityContainer Name=\"dbo\">\n");
+this.WriteObjects("\n");
+this.WriteObjects("    <!-- EntitySets for all Base Classes -->\n");
+#line 43 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
 	{
 
-#line 30 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  cls.Name , "\" EntityType=\"Model.Store.",  cls.Name , "\" Schema=\"",  cls.Module.SchemaName , "\" Table=\"",  cls.TableName , "\"/>\r\n");
-#line 32 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 46 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <EntitySet Name=\"",  cls.Name , "\" EntityType=\"Model.Store.",  cls.Name , "\" Schema=\"",  cls.Module.SchemaName , "\" Table=\"",  cls.TableName , "\"/>\n");
+#line 48 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 if (cls.NeedsRightsTable())
 		{
 
-#line 35 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  Construct.SecurityRulesClassName(cls) , "\" EntityType=\"Model.Store.",  Construct.SecurityRulesClassName(cls) , "\" Schema=\"",  cls.Module.SchemaName , "\" Table=\"",  Construct.SecurityRulesTableName(cls) , "\"/>\r\n");
-this.WriteObjects("    <AssociationSet Name=\"",  Construct.SecurityRulesFKName(cls) , "\" Association=\"Model.Store.",  Construct.SecurityRulesFKName(cls) , "\">\r\n");
-this.WriteObjects("      <End Role=\"",  cls.Name , "\" EntitySet=\"",  cls.Name , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  Construct.SecurityRulesClassName(cls) , "\" EntitySet=\"",  Construct.SecurityRulesClassName(cls) , "\" />\r\n");
-this.WriteObjects("    </AssociationSet>\r\n");
-#line 41 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 51 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <EntitySet Name=\"",  Construct.SecurityRulesClassName(cls) , "\" EntityType=\"Model.Store.",  Construct.SecurityRulesClassName(cls) , "\" Schema=\"",  cls.Module.SchemaName , "\" Table=\"",  Construct.SecurityRulesTableName(cls) , "\"/>\n");
+this.WriteObjects("    <AssociationSet Name=\"",  Construct.SecurityRulesFKName(cls) , "\" Association=\"Model.Store.",  Construct.SecurityRulesFKName(cls) , "\">\n");
+this.WriteObjects("      <End Role=\"",  cls.Name , "\" EntitySet=\"",  cls.Name , "\" />\n");
+this.WriteObjects("      <End Role=\"",  Construct.SecurityRulesClassName(cls) , "\" EntitySet=\"",  Construct.SecurityRulesClassName(cls) , "\" />\n");
+this.WriteObjects("    </AssociationSet>\n");
+#line 57 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 	}
 
-#line 44 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- EntitySets for all derived classes and their inheritance AssociationSets -->\r\n");
-#line 47 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 60 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("    <!-- EntitySets for all derived classes and their inheritance AssociationSets -->\n");
+#line 63 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
 
-#line 51 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  cls.Name , "\" EntityType=\"Model.Store.",  cls.Name , "\" Schema=\"",  cls.Module.SchemaName , "\" Table=\"",  cls.TableName , "\"/>\r\n");
-this.WriteObjects("    <!-- inherits from ",  info.ParentEntitySetName , " -->\r\n");
-this.WriteObjects("    <AssociationSet Name=\"",  info.AssociationName , "\" Association=\"Model.Store.",  info.AssociationName , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  info.ParentRoleName , "\" EntitySet=\"",  info.ParentEntitySetName , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  info.ChildRoleName , "\" EntitySet=\"",  info.ChildEntitySetName , "\" />\r\n");
-this.WriteObjects("    </AssociationSet>\r\n");
-#line 58 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 67 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <EntitySet Name=\"",  cls.Name , "\" EntityType=\"Model.Store.",  cls.Name , "\" Schema=\"",  cls.Module.SchemaName , "\" Table=\"",  cls.TableName , "\"/>\n");
+this.WriteObjects("    <!-- inherits from ",  info.ParentEntitySetName , " -->\n");
+this.WriteObjects("    <AssociationSet Name=\"",  info.AssociationName , "\" Association=\"Model.Store.",  info.AssociationName , "\" >\n");
+this.WriteObjects("      <End Role=\"",  info.ParentRoleName , "\" EntitySet=\"",  info.ParentEntitySetName , "\" />\n");
+this.WriteObjects("      <End Role=\"",  info.ChildRoleName , "\" EntitySet=\"",  info.ChildEntitySetName , "\" />\n");
+this.WriteObjects("    </AssociationSet>\n");
+#line 74 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 60 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->\r\n");
-#line 63 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 76 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->\n");
+#line 79 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var rel in ctx.GetRelationsWithSeparateStorage())
 	{
 		string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
@@ -97,48 +99,48 @@ foreach(var rel in ctx.GetRelationsWithSeparateStorage())
 		string esTableName = rel.GetRelationTableName();
 		
 
-#line 72 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <!-- \r\n");
-#line 74 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 88 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <!-- \n");
+#line 90 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 RelationDebugTemplate.Call(Host, ctx, rel);
 
-#line 76 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    -->\r\n");
-this.WriteObjects("    <EntitySet Name=\"",  esName , "\" EntityType=\"Model.Store.",  esName , "\" Schema=\"",  esSchemaName , "\" Table=\"",  esTableName , "\" />\r\n");
-this.WriteObjects("    <AssociationSet Name=\"",  assocNameA , "\" Association=\"Model.Store.",  assocNameA , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.Name , "\" />\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  esName , "\" />\r\n");
-this.WriteObjects("    </AssociationSet>\r\n");
-this.WriteObjects("    <AssociationSet Name=\"",  assocNameB , "\" Association=\"Model.Store.",  assocNameB , "\" >\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  esName , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.Name , "\" />\r\n");
-this.WriteObjects("    </AssociationSet>\r\n");
-this.WriteObjects("    \r\n");
-#line 88 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 92 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    -->\n");
+this.WriteObjects("    <EntitySet Name=\"",  esName , "\" EntityType=\"Model.Store.",  esName , "\" Schema=\"",  esSchemaName , "\" Table=\"",  esTableName , "\" />\n");
+this.WriteObjects("    <AssociationSet Name=\"",  assocNameA , "\" Association=\"Model.Store.",  assocNameA , "\" >\n");
+this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.Name , "\" />\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  esName , "\" />\n");
+this.WriteObjects("    </AssociationSet>\n");
+this.WriteObjects("    <AssociationSet Name=\"",  assocNameB , "\" Association=\"Model.Store.",  assocNameB , "\" >\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  esName , "\" />\n");
+this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.Name , "\" />\n");
+this.WriteObjects("    </AssociationSet>\n");
+this.WriteObjects("    \n");
+#line 104 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 90 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->\r\n");
-#line 94 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 106 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("\n");
+this.WriteObjects("    <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->\n");
+#line 110 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
 	{
 		string assocName = rel.GetAssociationName();
 		
 
-#line 99 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.Store.",  assocName , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.Name , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.Name , "\" />\r\n");
-this.WriteObjects("    </AssociationSet>\r\n");
-#line 104 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 115 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.Store.",  assocName , "\" >\n");
+this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.Name , "\" />\n");
+this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.Name , "\" />\n");
+this.WriteObjects("    </AssociationSet>\n");
+#line 120 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 106 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->\r\n");
-#line 109 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 122 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->\n");
+#line 125 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -148,20 +150,20 @@ foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
 
-#line 118 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  esName , "\" EntityType=\"Model.Store.",  esName , "\" Schema=\"",  prop.Module.SchemaName , "\" Table=\"",  prop.GetCollectionEntryTable() , "\" />\r\n");
-this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.Store.",  assocName , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  prop.ObjectClass.Name , "\" EntitySet=\"",  prop.ObjectClass.Name , "\" />\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  esName , "\" />\r\n");
-this.WriteObjects("    </AssociationSet>\r\n");
-this.WriteObjects("    \r\n");
-#line 125 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 134 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <EntitySet Name=\"",  esName , "\" EntityType=\"Model.Store.",  esName , "\" Schema=\"",  prop.Module.SchemaName , "\" Table=\"",  prop.GetCollectionEntryTable() , "\" />\n");
+this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.Store.",  assocName , "\" >\n");
+this.WriteObjects("      <End Role=\"",  prop.ObjectClass.Name , "\" EntitySet=\"",  prop.ObjectClass.Name , "\" />\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  esName , "\" />\n");
+this.WriteObjects("    </AssociationSet>\n");
+this.WriteObjects("    \n");
+#line 141 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 127 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->\r\n");
-#line 130 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 143 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->\n");
+#line 146 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -171,157 +173,157 @@ foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
 
-#line 139 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  esName , "\" EntityType=\"Model.Store.",  esName , "\" Schema=\"",  prop.Module.SchemaName , "\" Table=\"",  prop.GetCollectionEntryTable() , "\" />\r\n");
-this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.Store.",  assocName , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  prop.ObjectClass.Name , "\" EntitySet=\"",  prop.ObjectClass.Name , "\" />\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  esName , "\" />\r\n");
-this.WriteObjects("    </AssociationSet>\r\n");
-this.WriteObjects("    \r\n");
-#line 146 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 155 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <EntitySet Name=\"",  esName , "\" EntityType=\"Model.Store.",  esName , "\" Schema=\"",  prop.Module.SchemaName , "\" Table=\"",  prop.GetCollectionEntryTable() , "\" />\n");
+this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.Store.",  assocName , "\" >\n");
+this.WriteObjects("      <End Role=\"",  prop.ObjectClass.Name , "\" EntitySet=\"",  prop.ObjectClass.Name , "\" />\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  esName , "\" />\n");
+this.WriteObjects("    </AssociationSet>\n");
+this.WriteObjects("    \n");
+#line 162 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 148 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("  </EntityContainer>\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("  <!-- EntityTypes for all classes -->\r\n");
-#line 154 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 164 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("\n");
+this.WriteObjects("  </EntityContainer>\n");
+this.WriteObjects("\n");
+this.WriteObjects("  <!-- EntityTypes for all classes -->\n");
+#line 170 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var cls in ctx.GetQuery<ObjectClass>()
 		.OrderBy(cls => cls.Name))
 	{
 
-#line 157 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("	\r\n");
-this.WriteObjects("  <EntityType Name=\"",  cls.Name , "\">\r\n");
-this.WriteObjects("    <Key>\r\n");
-this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("    </Key>\r\n");
-this.WriteObjects("    <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" ",  (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty , "/>\r\n");
-#line 164 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 173 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("	\n");
+this.WriteObjects("  <EntityType Name=\"",  cls.Name , "\">\n");
+this.WriteObjects("    <Key>\n");
+this.WriteObjects("      <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("    </Key>\n");
+this.WriteObjects("    <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" ",  (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty , "/>\n");
+#line 180 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 ApplyEntityTypeColumnDefs(cls);
 
-#line 166 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("  </EntityType>\r\n");
-#line 168 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 182 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("  </EntityType>\n");
+#line 184 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 if (cls.NeedsRightsTable())
 		{
 
-#line 171 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <EntityType Name=\"",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
-this.WriteObjects("      <Key>\r\n");
-this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("        <PropertyRef Name=\"Identity\" />\r\n");
-this.WriteObjects("      </Key>\r\n");
-this.WriteObjects("      <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" />\r\n");
-this.WriteObjects("      <Property Name=\"Identity\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" />\r\n");
-this.WriteObjects("      <Property Name=\"Right\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" />\r\n");
-this.WriteObjects("    </EntityType>\r\n");
-this.WriteObjects("    <Association Name=\"",  Construct.SecurityRulesFKName(cls) , "\">\r\n");
-this.WriteObjects("      <End Role=\"",  cls.Name , "\" Type=\"Model.Store.",  cls.Name , "\" Multiplicity=\"1\" />\r\n");
-this.WriteObjects("      <End Role=\"",  Construct.SecurityRulesClassName(cls) , "\" Type=\"Model.Store.",  Construct.SecurityRulesClassName(cls) , "\" Multiplicity=\"*\" />\r\n");
-this.WriteObjects("      <ReferentialConstraint>\r\n");
-this.WriteObjects("        <Principal Role=\"",  cls.Name , "\">\r\n");
-this.WriteObjects("          <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("        </Principal>\r\n");
-this.WriteObjects("        <Dependent Role=\"",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
-this.WriteObjects("          <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("        </Dependent>\r\n");
-this.WriteObjects("      </ReferentialConstraint>\r\n");
-this.WriteObjects("    </Association>\r\n");
-#line 193 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 187 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <EntityType Name=\"",  Construct.SecurityRulesClassName(cls) , "\">\n");
+this.WriteObjects("      <Key>\n");
+this.WriteObjects("        <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("        <PropertyRef Name=\"Identity\" />\n");
+this.WriteObjects("      </Key>\n");
+this.WriteObjects("      <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" />\n");
+this.WriteObjects("      <Property Name=\"Identity\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" />\n");
+this.WriteObjects("      <Property Name=\"Right\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" />\n");
+this.WriteObjects("    </EntityType>\n");
+this.WriteObjects("    <Association Name=\"",  Construct.SecurityRulesFKName(cls) , "\">\n");
+this.WriteObjects("      <End Role=\"",  cls.Name , "\" Type=\"Model.Store.",  cls.Name , "\" Multiplicity=\"1\" />\n");
+this.WriteObjects("      <End Role=\"",  Construct.SecurityRulesClassName(cls) , "\" Type=\"Model.Store.",  Construct.SecurityRulesClassName(cls) , "\" Multiplicity=\"*\" />\n");
+this.WriteObjects("      <ReferentialConstraint>\n");
+this.WriteObjects("        <Principal Role=\"",  cls.Name , "\">\n");
+this.WriteObjects("          <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("        </Principal>\n");
+this.WriteObjects("        <Dependent Role=\"",  Construct.SecurityRulesClassName(cls) , "\">\n");
+this.WriteObjects("          <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("        </Dependent>\n");
+this.WriteObjects("      </ReferentialConstraint>\n");
+this.WriteObjects("    </Association>\n");
+#line 209 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
 	}
 
-#line 197 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("  <!-- EntityTypes for all object-object CollectionEntrys with their associations -->\r\n");
-#line 200 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 213 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("  <!-- EntityTypes for all object-object CollectionEntrys with their associations -->\n");
+#line 216 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var rel in ctx.GetRelationsWithSeparateStorage())
 	{
 		string ceName = rel.GetRelationClassName();
 		string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
 		string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
 
-#line 205 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("	\r\n");
-this.WriteObjects("  <EntityType Name=\"",  ceName , "\">\r\n");
-this.WriteObjects("    <Key>\r\n");
-this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("    </Key>\r\n");
-this.WriteObjects("    <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\r\n");
-#line 212 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 221 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("	\n");
+this.WriteObjects("  <EntityType Name=\"",  ceName , "\">\n");
+this.WriteObjects("    <Key>\n");
+this.WriteObjects("      <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("    </Key>\n");
+this.WriteObjects("    <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\n");
+#line 228 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 
-#line 215 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("	<Property Name=\"ExportGuid\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Guid) , "\" Nullable=\"false\" />\r\n");
-#line 217 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 231 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("	<Property Name=\"ExportGuid\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Guid) , "\" Nullable=\"false\" />\n");
+#line 233 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 219 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <Property Name=\"",  fkAName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-#line 221 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 235 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <Property Name=\"",  fkAName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\n");
+#line 237 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 if (rel.NeedsPositionStorage(RelationEndRole.A))
 		{
 
-#line 224 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <Property Name=\"",  fkAName , "",  Zetbox.API.Helper.PositionSuffix , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-#line 226 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 240 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <Property Name=\"",  fkAName , "",  Zetbox.API.Helper.PositionSuffix , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\n");
+#line 242 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 228 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <Property Name=\"",  fkBName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-#line 230 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 244 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <Property Name=\"",  fkBName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\n");
+#line 246 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 if (rel.NeedsPositionStorage(RelationEndRole.B))
 		{
 
-#line 233 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <Property Name=\"",  fkBName , "",  Zetbox.API.Helper.PositionSuffix , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-#line 235 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 249 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <Property Name=\"",  fkBName , "",  Zetbox.API.Helper.PositionSuffix , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\n");
+#line 251 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 237 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("  </EntityType>\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("  <!-- A to CollectionEntry -->\r\n");
-this.WriteObjects("  <Association Name=\"",  rel.GetRelationAssociationName(RelationEndRole.A) , "\">\r\n");
-this.WriteObjects("    <End Role=\"",  rel.A.RoleName , "\" Type=\"Model.Store.",  rel.A.Type.Name , "\" Multiplicity=\"0..1\" />\r\n");
-this.WriteObjects("    <End Role=\"CollectionEntry\" Type=\"Model.Store.",  ceName , "\" Multiplicity=\"*\" />\r\n");
-this.WriteObjects("    <ReferentialConstraint>\r\n");
-this.WriteObjects("      <Principal Role=\"",  rel.A.RoleName , "\">\r\n");
-this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("      </Principal>\r\n");
-this.WriteObjects("      <Dependent Role=\"CollectionEntry\">\r\n");
-this.WriteObjects("        <PropertyRef Name=\"",  fkAName , "\" />\r\n");
-this.WriteObjects("      </Dependent>\r\n");
-this.WriteObjects("    </ReferentialConstraint>\r\n");
-this.WriteObjects("  </Association>\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("  <!-- B to CollectionEntry -->\r\n");
-this.WriteObjects("  <Association Name=\"",  rel.GetRelationAssociationName(RelationEndRole.B) , "\">\r\n");
-this.WriteObjects("    <End Role=\"",  rel.B.RoleName , "\" Type=\"Model.Store.",  rel.B.Type.Name , "\" Multiplicity=\"0..1\" />\r\n");
-this.WriteObjects("    <End Role=\"CollectionEntry\" Type=\"Model.Store.",  ceName , "\" Multiplicity=\"*\" />\r\n");
-this.WriteObjects("    <ReferentialConstraint>\r\n");
-this.WriteObjects("      <Principal Role=\"",  rel.B.RoleName , "\">\r\n");
-this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("      </Principal>\r\n");
-this.WriteObjects("      <Dependent Role=\"CollectionEntry\">\r\n");
-this.WriteObjects("        <PropertyRef Name=\"",  fkBName , "\" />\r\n");
-this.WriteObjects("      </Dependent>\r\n");
-this.WriteObjects("    </ReferentialConstraint>\r\n");
-this.WriteObjects("  </Association>\r\n");
-this.WriteObjects("\r\n");
-#line 268 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 253 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("  </EntityType>\n");
+this.WriteObjects("\n");
+this.WriteObjects("  <!-- A to CollectionEntry -->\n");
+this.WriteObjects("  <Association Name=\"",  rel.GetRelationAssociationName(RelationEndRole.A) , "\">\n");
+this.WriteObjects("    <End Role=\"",  rel.A.RoleName , "\" Type=\"Model.Store.",  rel.A.Type.Name , "\" Multiplicity=\"0..1\" />\n");
+this.WriteObjects("    <End Role=\"CollectionEntry\" Type=\"Model.Store.",  ceName , "\" Multiplicity=\"*\" />\n");
+this.WriteObjects("    <ReferentialConstraint>\n");
+this.WriteObjects("      <Principal Role=\"",  rel.A.RoleName , "\">\n");
+this.WriteObjects("        <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("      </Principal>\n");
+this.WriteObjects("      <Dependent Role=\"CollectionEntry\">\n");
+this.WriteObjects("        <PropertyRef Name=\"",  fkAName , "\" />\n");
+this.WriteObjects("      </Dependent>\n");
+this.WriteObjects("    </ReferentialConstraint>\n");
+this.WriteObjects("  </Association>\n");
+this.WriteObjects("\n");
+this.WriteObjects("  <!-- B to CollectionEntry -->\n");
+this.WriteObjects("  <Association Name=\"",  rel.GetRelationAssociationName(RelationEndRole.B) , "\">\n");
+this.WriteObjects("    <End Role=\"",  rel.B.RoleName , "\" Type=\"Model.Store.",  rel.B.Type.Name , "\" Multiplicity=\"0..1\" />\n");
+this.WriteObjects("    <End Role=\"CollectionEntry\" Type=\"Model.Store.",  ceName , "\" Multiplicity=\"*\" />\n");
+this.WriteObjects("    <ReferentialConstraint>\n");
+this.WriteObjects("      <Principal Role=\"",  rel.B.RoleName , "\">\n");
+this.WriteObjects("        <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("      </Principal>\n");
+this.WriteObjects("      <Dependent Role=\"CollectionEntry\">\n");
+this.WriteObjects("        <PropertyRef Name=\"",  fkBName , "\" />\n");
+this.WriteObjects("      </Dependent>\n");
+this.WriteObjects("    </ReferentialConstraint>\n");
+this.WriteObjects("  </Association>\n");
+this.WriteObjects("\n");
+#line 284 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 270 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("  <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->\r\n");
-#line 274 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 286 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("\n");
+this.WriteObjects("  <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->\n");
+#line 290 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
 	{
 		RelationEnd principal, dependent;
@@ -340,29 +342,29 @@ foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
 				throw new NotImplementedException();
 		}
 
-#line 292 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("  <Association Name=\"",  rel.GetAssociationName() , "\">\r\n");
-this.WriteObjects("    <End Role=\"",  principal.RoleName , "\" Type=\"Model.Store.",  principal.Type.Name , "\" Multiplicity=\"",  principal.Multiplicity.ToSsdlMultiplicity().ToXmlValue() , "\" />\r\n");
-this.WriteObjects("    <End Role=\"",  dependent.RoleName , "\" Type=\"Model.Store.",  dependent.Type.Name , "\" Multiplicity=\"*\" />\r\n");
-this.WriteObjects("    <ReferentialConstraint>\r\n");
-this.WriteObjects("      <Principal Role=\"",  principal.RoleName , "\">\r\n");
-this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("      </Principal>\r\n");
-this.WriteObjects("      <Dependent Role=\"",  dependent.RoleName , "\">\r\n");
-this.WriteObjects("        <PropertyRef Name=\"fk_",  principal.RoleName , "\" />\r\n");
-this.WriteObjects("      </Dependent>\r\n");
-this.WriteObjects("    </ReferentialConstraint>\r\n");
-this.WriteObjects("  </Association>\r\n");
-this.WriteObjects("\r\n");
-#line 307 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 308 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("  <Association Name=\"",  rel.GetAssociationName() , "\">\n");
+this.WriteObjects("    <End Role=\"",  principal.RoleName , "\" Type=\"Model.Store.",  principal.Type.Name , "\" Multiplicity=\"",  principal.Multiplicity.ToSsdlMultiplicity().ToXmlValue() , "\" />\n");
+this.WriteObjects("    <End Role=\"",  dependent.RoleName , "\" Type=\"Model.Store.",  dependent.Type.Name , "\" Multiplicity=\"*\" />\n");
+this.WriteObjects("    <ReferentialConstraint>\n");
+this.WriteObjects("      <Principal Role=\"",  principal.RoleName , "\">\n");
+this.WriteObjects("        <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("      </Principal>\n");
+this.WriteObjects("      <Dependent Role=\"",  dependent.RoleName , "\">\n");
+this.WriteObjects("        <PropertyRef Name=\"fk_",  principal.RoleName , "\" />\n");
+this.WriteObjects("      </Dependent>\n");
+this.WriteObjects("    </ReferentialConstraint>\n");
+this.WriteObjects("  </Association>\n");
+this.WriteObjects("\n");
+#line 323 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 309 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("  <!-- derived->base ObjectClass references -->\r\n");
-#line 313 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 325 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("\n");
+this.WriteObjects("  <!-- derived->base ObjectClass references -->\n");
+#line 329 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
 	{
 		var parentType = cls.BaseObjectClass;
@@ -371,27 +373,27 @@ foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
 		string parentRoleName = Construct.AssociationParentRoleName(parentType);
 		string childRoleName = Construct.AssociationChildRoleName(childType);
 
-#line 321 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("  <Association Name=\"",  Construct.InheritanceAssociationName(parentType, childType) , "\">\r\n");
-this.WriteObjects("    <End Role=\"",  parentRoleName , "\" Type=\"Model.Store.",  parentType.Name , "\" Multiplicity=\"1\" />\r\n");
-this.WriteObjects("    <End Role=\"",  childRoleName , "\" Type=\"Model.Store.",  childType.Name , "\" Multiplicity=\"0..1\" />\r\n");
-this.WriteObjects("    <ReferentialConstraint>\r\n");
-this.WriteObjects("      <Principal Role=\"",  parentRoleName , "\">\r\n");
-this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("      </Principal>\r\n");
-this.WriteObjects("      <Dependent Role=\"",  childRoleName , "\">\r\n");
-this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("      </Dependent>\r\n");
-this.WriteObjects("    </ReferentialConstraint>\r\n");
-this.WriteObjects("  </Association>\r\n");
-#line 333 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 337 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("  <Association Name=\"",  Construct.InheritanceAssociationName(parentType, childType) , "\">\n");
+this.WriteObjects("    <End Role=\"",  parentRoleName , "\" Type=\"Model.Store.",  parentType.Name , "\" Multiplicity=\"1\" />\n");
+this.WriteObjects("    <End Role=\"",  childRoleName , "\" Type=\"Model.Store.",  childType.Name , "\" Multiplicity=\"0..1\" />\n");
+this.WriteObjects("    <ReferentialConstraint>\n");
+this.WriteObjects("      <Principal Role=\"",  parentRoleName , "\">\n");
+this.WriteObjects("        <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("      </Principal>\n");
+this.WriteObjects("      <Dependent Role=\"",  childRoleName , "\">\n");
+this.WriteObjects("        <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("      </Dependent>\n");
+this.WriteObjects("    </ReferentialConstraint>\n");
+this.WriteObjects("  </Association>\n");
+#line 349 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 335 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- EntityTypes and Associations for all object-value CollectionEntrys -->\r\n");
-#line 339 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 351 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("\n");
+this.WriteObjects("    <!-- EntityTypes and Associations for all object-value CollectionEntrys -->\n");
+#line 355 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -418,48 +420,48 @@ foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		}
 
 
-#line 365 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <EntityType Name=\"",  entryTypeName , "\" >\r\n");
-this.WriteObjects("      <Key>\r\n");
-this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("      </Key>\r\n");
-this.WriteObjects("      <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\r\n");
-this.WriteObjects("      <Property Name=\"fk_",  containerTypeName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-this.WriteObjects("      <Property Name=\"",  prop.Name , "\" Type=\"",  itemTypeName , "\" ",  constraint , "/>\r\n");
-#line 373 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 381 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <EntityType Name=\"",  entryTypeName , "\" >\n");
+this.WriteObjects("      <Key>\n");
+this.WriteObjects("        <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("      </Key>\n");
+this.WriteObjects("      <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\n");
+this.WriteObjects("      <Property Name=\"fk_",  containerTypeName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\n");
+this.WriteObjects("      <Property Name=\"",  prop.Name , "\" Type=\"",  itemTypeName , "\" ",  constraint , "/>\n");
+#line 389 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 if (prop.HasPersistentOrder)
 		{
 
-#line 376 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <Property Name=\"",  prop.Name , "Index\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-#line 378 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 392 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <Property Name=\"",  prop.Name , "Index\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\n");
+#line 394 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 380 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    </EntityType>\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("    <Association Name=\"",  prop.GetAssociationName() , "\">\r\n");
-this.WriteObjects("      <End Role=\"",  containerTypeName , "\" Type=\"Model.Store.",  containerTypeName , "\" Multiplicity=\"0..1\">\r\n");
-this.WriteObjects("        <OnDelete Action=\"Cascade\" />\r\n");
-this.WriteObjects("      </End>\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" Type=\"Model.Store.",  entryTypeName , "\" Multiplicity=\"*\" />\r\n");
-this.WriteObjects("      <ReferentialConstraint>\r\n");
-this.WriteObjects("        <Principal Role=\"",  containerTypeName , "\">\r\n");
-this.WriteObjects("          <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("        </Principal>\r\n");
-this.WriteObjects("        <Dependent Role=\"CollectionEntry\">\r\n");
-this.WriteObjects("          <PropertyRef Name=\"fk_",  containerTypeName , "\" />\r\n");
-this.WriteObjects("        </Dependent>\r\n");
-this.WriteObjects("      </ReferentialConstraint>\r\n");
-this.WriteObjects("    </Association>\r\n");
-this.WriteObjects("\r\n");
-#line 398 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 396 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    </EntityType>\n");
+this.WriteObjects("\n");
+this.WriteObjects("    <Association Name=\"",  prop.GetAssociationName() , "\">\n");
+this.WriteObjects("      <End Role=\"",  containerTypeName , "\" Type=\"Model.Store.",  containerTypeName , "\" Multiplicity=\"0..1\">\n");
+this.WriteObjects("        <OnDelete Action=\"Cascade\" />\n");
+this.WriteObjects("      </End>\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" Type=\"Model.Store.",  entryTypeName , "\" Multiplicity=\"*\" />\n");
+this.WriteObjects("      <ReferentialConstraint>\n");
+this.WriteObjects("        <Principal Role=\"",  containerTypeName , "\">\n");
+this.WriteObjects("          <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("        </Principal>\n");
+this.WriteObjects("        <Dependent Role=\"CollectionEntry\">\n");
+this.WriteObjects("          <PropertyRef Name=\"fk_",  containerTypeName , "\" />\n");
+this.WriteObjects("        </Dependent>\n");
+this.WriteObjects("      </ReferentialConstraint>\n");
+this.WriteObjects("    </Association>\n");
+this.WriteObjects("\n");
+#line 414 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 400 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->\r\n");
-#line 403 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 416 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("\n");
+this.WriteObjects("    <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->\n");
+#line 419 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -473,55 +475,55 @@ foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		// the name of the CollectionEntry class
 		string entryTypeName = prop.GetCollectionEntryClassName();
 
-#line 416 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <EntityType Name=\"",  entryTypeName , "\" >\r\n");
-this.WriteObjects("      <Key>\r\n");
-this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("      </Key>\r\n");
-this.WriteObjects("      <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\r\n");
-this.WriteObjects("      <Property Name=\"fk_",  containerTypeName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-#line 423 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 432 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <EntityType Name=\"",  entryTypeName , "\" >\n");
+this.WriteObjects("      <Key>\n");
+this.WriteObjects("        <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("      </Key>\n");
+this.WriteObjects("      <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\n");
+this.WriteObjects("      <Property Name=\"fk_",  containerTypeName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\n");
+#line 439 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 ApplyEntityTypeColumnDefs(prop);
 
-#line 426 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 442 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 if (prop.HasPersistentOrder)
 		{
 
-#line 429 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <Property Name=\"",  prop.Name , "Index\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-#line 431 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 445 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    <Property Name=\"",  prop.Name , "Index\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\n");
+#line 447 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 433 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("    </EntityType>\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("    <Association Name=\"",  prop.GetAssociationName() , "\">\r\n");
-this.WriteObjects("      <End Role=\"",  containerTypeName , "\" Type=\"Model.Store.",  containerTypeName , "\" Multiplicity=\"0..1\">\r\n");
-this.WriteObjects("        <OnDelete Action=\"Cascade\" />\r\n");
-this.WriteObjects("      </End>\r\n");
-this.WriteObjects("      <End Role=\"CollectionEntry\" Type=\"Model.Store.",  entryTypeName , "\" Multiplicity=\"*\" />\r\n");
-this.WriteObjects("      <ReferentialConstraint>\r\n");
-this.WriteObjects("        <Principal Role=\"",  containerTypeName , "\">\r\n");
-this.WriteObjects("          <PropertyRef Name=\"ID\" />\r\n");
-this.WriteObjects("        </Principal>\r\n");
-this.WriteObjects("        <Dependent Role=\"CollectionEntry\">\r\n");
-this.WriteObjects("          <PropertyRef Name=\"fk_",  containerTypeName , "\" />\r\n");
-this.WriteObjects("        </Dependent>\r\n");
-this.WriteObjects("      </ReferentialConstraint>\r\n");
-this.WriteObjects("    </Association>\r\n");
-this.WriteObjects("\r\n");
-#line 451 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+#line 449 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("    </EntityType>\n");
+this.WriteObjects("\n");
+this.WriteObjects("    <Association Name=\"",  prop.GetAssociationName() , "\">\n");
+this.WriteObjects("      <End Role=\"",  containerTypeName , "\" Type=\"Model.Store.",  containerTypeName , "\" Multiplicity=\"0..1\">\n");
+this.WriteObjects("        <OnDelete Action=\"Cascade\" />\n");
+this.WriteObjects("      </End>\n");
+this.WriteObjects("      <End Role=\"CollectionEntry\" Type=\"Model.Store.",  entryTypeName , "\" Multiplicity=\"*\" />\n");
+this.WriteObjects("      <ReferentialConstraint>\n");
+this.WriteObjects("        <Principal Role=\"",  containerTypeName , "\">\n");
+this.WriteObjects("          <PropertyRef Name=\"ID\" />\n");
+this.WriteObjects("        </Principal>\n");
+this.WriteObjects("        <Dependent Role=\"CollectionEntry\">\n");
+this.WriteObjects("          <PropertyRef Name=\"fk_",  containerTypeName , "\" />\n");
+this.WriteObjects("        </Dependent>\n");
+this.WriteObjects("      </ReferentialConstraint>\n");
+this.WriteObjects("    </Association>\n");
+this.WriteObjects("\n");
+#line 467 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 }
 
-#line 453 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-this.WriteObjects("	<Function Name=\"GetContinuousSequenceNumber\" Aggregate=\"false\" BuiltIn=\"false\" NiladicFunction=\"false\" IsComposable=\"false\" ParameterTypeSemantics=\"AllowImplicitConversion\" Schema=\"dbo\">\r\n");
-this.WriteObjects("          <Parameter Name=\"seqNumber\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Guid) , "\" Mode=\"In\" />\r\n");
-this.WriteObjects("		  <Parameter Name=\"result\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Mode=\"Out\" />\r\n");
-this.WriteObjects("    </Function>\r\n");
-this.WriteObjects("    <Function Name=\"GetSequenceNumber\" Aggregate=\"false\" BuiltIn=\"false\" NiladicFunction=\"false\" IsComposable=\"false\" ParameterTypeSemantics=\"AllowImplicitConversion\" Schema=\"dbo\">\r\n");
-this.WriteObjects("        <Parameter Name=\"seqNumber\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Guid) , "\" Mode=\"In\" />\r\n");
-this.WriteObjects("		<Parameter Name=\"result\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Mode=\"Out\" />\r\n");
-this.WriteObjects("    </Function>\r\n");
+#line 469 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
+this.WriteObjects("	<Function Name=\"GetContinuousSequenceNumber\" Aggregate=\"false\" BuiltIn=\"false\" NiladicFunction=\"false\" IsComposable=\"false\" ParameterTypeSemantics=\"AllowImplicitConversion\" Schema=\"dbo\">\n");
+this.WriteObjects("          <Parameter Name=\"seqNumber\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Guid) , "\" Mode=\"In\" />\n");
+this.WriteObjects("		  <Parameter Name=\"result\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Mode=\"Out\" />\n");
+this.WriteObjects("    </Function>\n");
+this.WriteObjects("    <Function Name=\"GetSequenceNumber\" Aggregate=\"false\" BuiltIn=\"false\" NiladicFunction=\"false\" IsComposable=\"false\" ParameterTypeSemantics=\"AllowImplicitConversion\" Schema=\"dbo\">\n");
+this.WriteObjects("        <Parameter Name=\"seqNumber\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Guid) , "\" Mode=\"In\" />\n");
+this.WriteObjects("		<Parameter Name=\"result\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Mode=\"Out\" />\n");
+this.WriteObjects("    </Function>\n");
 this.WriteObjects("</Schema>");
 
         }

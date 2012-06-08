@@ -62,49 +62,51 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 29 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
-this.WriteObjects("\r\n");
-#line 31 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+this.WriteObjects("");
+#line 45 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+this.WriteObjects("\n");
+#line 47 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 var eventName = "On" + name + "_PostSetter";
 
-#line 33 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
-this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-#line 34 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 49 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+this.WriteObjects("        // BEGIN ",  this.GetType() , "\n");
+#line 50 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName); 
-#line 35 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
-this.WriteObjects("        ",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (",  backingName , " == null)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  backingName , " = new ",  backingCollectionType , "(\r\n");
-this.WriteObjects("                            this.Context,\r\n");
-this.WriteObjects("                            this,\r\n");
-this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
-this.WriteObjects("                            ",  underlyingCollectionName , ");\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                return ",  backingName , ";\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        private ProjectedCollection<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntryImpl , "> ",  underlyingCollectionName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get {\r\n");
-this.WriteObjects("                if (",  underlyingCollectionBackingName , " == null)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  underlyingCollectionBackingName , " = new ProjectedCollection<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntryImpl , ">(\r\n");
-this.WriteObjects("                        () => this.Proxy.",  name , ",\r\n");
-this.WriteObjects("                        p => (",  referencedCollectionEntryImpl , ")OurContext.AttachAndWrap(p),\r\n");
-this.WriteObjects("                        d => (",  referencedCollectionEntryProxy , ")((NHibernatePersistenceObject)d).NHibernateProxy);\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                return ",  underlyingCollectionBackingName , ";\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        private ",  backingCollectionType , " ",  backingName , ";\r\n");
-this.WriteObjects("        private ProjectedCollection<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntryImpl , "> ",  underlyingCollectionBackingName , ";\r\n");
-this.WriteObjects("        // END ",  this.GetType() , "\r\n");
+#line 51 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+this.WriteObjects("        ",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get\n");
+this.WriteObjects("            {\n");
+this.WriteObjects("                if (",  backingName , " == null)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    ",  backingName , " = new ",  backingCollectionType , "(\n");
+this.WriteObjects("                            this.Context,\n");
+this.WriteObjects("                            this,\n");
+this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\n");
+this.WriteObjects("                            ",  underlyingCollectionName , ");\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("                return ",  backingName , ";\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        private ProjectedCollection<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntryImpl , "> ",  underlyingCollectionName , "\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            get {\n");
+this.WriteObjects("                if (",  underlyingCollectionBackingName , " == null)\n");
+this.WriteObjects("                {\n");
+this.WriteObjects("                    ",  underlyingCollectionBackingName , " = new ProjectedCollection<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntryImpl , ">(\n");
+this.WriteObjects("                        () => this.Proxy.",  name , ",\n");
+this.WriteObjects("                        p => (",  referencedCollectionEntryImpl , ")OurContext.AttachAndWrap(p),\n");
+this.WriteObjects("                        d => (",  referencedCollectionEntryProxy , ")((NHibernatePersistenceObject)d).NHibernateProxy);\n");
+this.WriteObjects("                }\n");
+this.WriteObjects("                return ",  underlyingCollectionBackingName , ";\n");
+this.WriteObjects("            }\n");
+this.WriteObjects("        }\n");
+this.WriteObjects("\n");
+this.WriteObjects("        private ",  backingCollectionType , " ",  backingName , ";\n");
+this.WriteObjects("        private ProjectedCollection<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntryImpl , "> ",  underlyingCollectionBackingName , ";\n");
+this.WriteObjects("        // END ",  this.GetType() , "\n");
 
         }
 

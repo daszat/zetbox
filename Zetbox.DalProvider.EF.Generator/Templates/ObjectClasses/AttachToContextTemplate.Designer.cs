@@ -33,32 +33,34 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 14 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        public override void AttachToContext(IZetboxContext ctx)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            base.AttachToContext(ctx);\r\n");
-#line 19 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 17 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+this.WriteObjects("");
+#line 30 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+this.WriteObjects("\n");
+this.WriteObjects("        public override void AttachToContext(IZetboxContext ctx)\n");
+this.WriteObjects("        {\n");
+this.WriteObjects("            base.AttachToContext(ctx);\n");
+#line 35 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
             {
 
-#line 22 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
-this.WriteObjects("                ",  prop.Name , "Impl.ForEach<IPersistenceObject>(i => ctx.Attach(i));\r\n");
-#line 25 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 38 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+this.WriteObjects("            if (_",  prop.Name , " != null)\n");
+this.WriteObjects("                ",  prop.Name , "Impl.ForEach<IPersistenceObject>(i => ctx.Attach(i));\n");
+#line 41 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 }
 
             foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
             {
 
-#line 30 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
-this.WriteObjects("                ",  prop.Name , "Impl.ForEach<IPersistenceObject>(i => ctx.Attach(i));\r\n");
-#line 33 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+#line 46 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+this.WriteObjects("            if (_",  prop.Name , " != null)\n");
+this.WriteObjects("                ",  prop.Name , "Impl.ForEach<IPersistenceObject>(i => ctx.Attach(i));\n");
+#line 49 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 }
 
-#line 35 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("        }\r\n");
+#line 51 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+this.WriteObjects("        }\n");
 
         }
 

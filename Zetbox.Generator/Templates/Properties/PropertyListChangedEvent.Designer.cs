@@ -30,8 +30,10 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 10 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst"
-this.WriteObjects("",  GetModifiers() , " event PropertyListChangedHandler<",  objType , "> ",  eventName , ";\r\n");
+#line 17 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst"
+this.WriteObjects("");
+#line 26 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyListChangedEvent.cst"
+this.WriteObjects("",  GetModifiers() , " event PropertyListChangedHandler<",  objType , "> ",  eventName , ";\n");
 
         }
 

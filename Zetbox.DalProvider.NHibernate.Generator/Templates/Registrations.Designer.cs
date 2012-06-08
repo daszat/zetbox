@@ -26,40 +26,42 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 
         public override void Generate()
         {
-#line 9 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
-this.WriteObjects("\r\n");
-#line 10 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 17 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+this.WriteObjects("");
+#line 25 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+this.WriteObjects("\n");
+#line 26 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
 base.Generate(); 
-#line 11 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("            builder\r\n");
-this.WriteObjects("                .Register<ISessionFactory>(\r\n");
-this.WriteObjects("                    c => {\r\n");
-this.WriteObjects("                        var zetboxConfig = c.Resolve<ZetboxConfig>();\r\n");
-this.WriteObjects("                        var result = new Configuration();\r\n");
-this.WriteObjects("                        var connectionString = zetboxConfig.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);\r\n");
-this.WriteObjects("                        result.Properties[\"dialect\"] = connectionString.DatabaseProvider;\r\n");
-this.WriteObjects("                        result.Properties[\"connection.connection_string\"] = connectionString.ConnectionString;\r\n");
-this.WriteObjects("                        result.Properties[\"max_fetch_depth\"] = \"1\"; // keep SQL statements small\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("                        return result\r\n");
-this.WriteObjects("                            .AddAssembly(typeof(NHibernateModule).Assembly)\r\n");
-this.WriteObjects("                            .BuildSessionFactory();\r\n");
-this.WriteObjects("                    })\r\n");
-this.WriteObjects("                .SingleInstance();\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("            builder\r\n");
-this.WriteObjects("                .Register<ISession>(\r\n");
-this.WriteObjects("                    (c, p) => {\r\n");
-this.WriteObjects("                        var result = c.Resolve<ISessionFactory>().OpenSession(c.Resolve<IInterceptor>());\r\n");
-this.WriteObjects("                        Logging.Log.DebugFormat(\"Created ISession: {0}\", result.GetHashCode());\r\n");
-this.WriteObjects("                        return result;\r\n");
-this.WriteObjects("                    })\r\n");
-this.WriteObjects("                .OnRelease(s => Logging.Log.DebugFormat(\"Disposed ISession: {0}\", s.GetHashCode()))\r\n");
-this.WriteObjects("                // TODO: reconsider this configuration\r\n");
-this.WriteObjects("                //       using IPD makes it safer, but requires passing the session manually\r\n");
-this.WriteObjects("                //       on the other hand, the session should never escape the data context\r\n");
-this.WriteObjects("                .InstancePerDependency();\r\n");
+#line 27 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+this.WriteObjects("\n");
+this.WriteObjects("            builder\n");
+this.WriteObjects("                .Register<ISessionFactory>(\n");
+this.WriteObjects("                    c => {\n");
+this.WriteObjects("                        var zetboxConfig = c.Resolve<ZetboxConfig>();\n");
+this.WriteObjects("                        var result = new Configuration();\n");
+this.WriteObjects("                        var connectionString = zetboxConfig.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);\n");
+this.WriteObjects("                        result.Properties[\"dialect\"] = connectionString.DatabaseProvider;\n");
+this.WriteObjects("                        result.Properties[\"connection.connection_string\"] = connectionString.ConnectionString;\n");
+this.WriteObjects("                        result.Properties[\"max_fetch_depth\"] = \"1\"; // keep SQL statements small\n");
+this.WriteObjects("\n");
+this.WriteObjects("                        return result\n");
+this.WriteObjects("                            .AddAssembly(typeof(NHibernateModule).Assembly)\n");
+this.WriteObjects("                            .BuildSessionFactory();\n");
+this.WriteObjects("                    })\n");
+this.WriteObjects("                .SingleInstance();\n");
+this.WriteObjects("\n");
+this.WriteObjects("            builder\n");
+this.WriteObjects("                .Register<ISession>(\n");
+this.WriteObjects("                    (c, p) => {\n");
+this.WriteObjects("                        var result = c.Resolve<ISessionFactory>().OpenSession(c.Resolve<IInterceptor>());\n");
+this.WriteObjects("                        Logging.Log.DebugFormat(\"Created ISession: {0}\", result.GetHashCode());\n");
+this.WriteObjects("                        return result;\n");
+this.WriteObjects("                    })\n");
+this.WriteObjects("                .OnRelease(s => Logging.Log.DebugFormat(\"Disposed ISession: {0}\", s.GetHashCode()))\n");
+this.WriteObjects("                // TODO: reconsider this configuration\n");
+this.WriteObjects("                //       using IPD makes it safer, but requires passing the session manually\n");
+this.WriteObjects("                //       on the other hand, the session should never escape the data context\n");
+this.WriteObjects("                .InstancePerDependency();\n");
 
         }
 
