@@ -1,16 +1,16 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class NotNullableConstraintActions
     {
         [Invocation]
-        public static void ToString(NotNullableConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void ToString(NotNullableConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             if (obj.ConstrainedProperty == null)
             {

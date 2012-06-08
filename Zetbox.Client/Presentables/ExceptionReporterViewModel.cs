@@ -1,27 +1,27 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 using System.Drawing;
-using Kistl.Client.Models;
-using Kistl.Client.Presentables.ValueViewModels;
+using Zetbox.Client.Models;
+using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class ExceptionReporterViewModel
         : WindowViewModel
     {
-        public new delegate ExceptionReporterViewModel Factory(IKistlContext dataCtx, ViewModel parent, Exception ex, Bitmap screenShot);
+        public new delegate ExceptionReporterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Exception ex, Bitmap screenShot);
 
         private readonly Exception exception;
         private readonly Bitmap screenShot;
         private readonly IProblemReporter problemReporter;
 
         public ExceptionReporterViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Exception ex, Bitmap screenShot, IProblemReporter problemReporter)
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Exception ex, Bitmap screenShot, IProblemReporter problemReporter)
             : base(appCtx, dataCtx, parent)
         {
             if (problemReporter == null) throw new ArgumentNullException("problemReporter");
@@ -132,7 +132,7 @@ using Kistl.Client.Presentables.ValueViewModels;
                         ExceptionReporterViewModelResources.Report,
                         ExceptionReporterViewModelResources.Report_Tooltip,
                         Report, null, null);
-                    _ReportCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.todo_png.Find(FrozenContext);
+                    _ReportCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.todo_png.Find(FrozenContext);
                 }
                 return _ReportCommand;
             }
@@ -161,7 +161,7 @@ using Kistl.Client.Presentables.ValueViewModels;
                         ExceptionReporterViewModelResources.Cancel,
                         ExceptionReporterViewModelResources.Cancel_Tooltip,
                         Cancel, null, null);
-                    _CancelCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.no_png.Find(FrozenContext);
+                    _CancelCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.no_png.Find(FrozenContext);
                 }
                 return _CancelCommand;
             }

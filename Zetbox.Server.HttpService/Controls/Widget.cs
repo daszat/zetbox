@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.ComponentModel;
 
-namespace Kistl.Server.HttpService.Controls
+namespace Zetbox.Server.HttpService.Controls
 {
     public class Widget : Control
     {

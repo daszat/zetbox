@@ -1,22 +1,22 @@
 
-namespace Kistl.Client.Mocks
+namespace Zetbox.Client.Mocks
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
-using Kistl.API.Client.PerfCounter;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
+using Zetbox.API.Client.PerfCounter;
 
     class TestViewModelFactory
         : ViewModelFactory
     {
         public TestViewModelFactory(Autofac.ILifetimeScope container,
             IFrozenContext frozenCtx,
-            KistlConfig cfg, IPerfCounter perfCounter)
+            ZetboxConfig cfg, IPerfCounter perfCounter)
             : base(container, frozenCtx, cfg, perfCounter)
         {
         }

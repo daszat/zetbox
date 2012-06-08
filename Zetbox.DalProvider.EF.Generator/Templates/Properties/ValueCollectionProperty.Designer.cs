@@ -1,32 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
-using Kistl.App.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
+using Zetbox.App.Extensions;
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
+namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst")]
-    public partial class ValueCollectionProperty : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst")]
+    public partial class ValueCollectionProperty : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
-		protected Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList;
+		protected IZetboxContext ctx;
+		protected Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList;
 		protected Property prop;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, Property prop)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, Property prop)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Properties.ValueCollectionProperty", ctx, serializationList, prop);
         }
 
-        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, Property prop)
+        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, Property prop)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -37,7 +37,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 19 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 19 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
 Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList);
 	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
 
@@ -57,7 +57,7 @@ Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((Co
 	// which generic interface to use for the collection
 	string exposedListType = hasPersistentOrder ? "IList" : "ICollection";
 
-	// which Kistl interface this is 
+	// which Zetbox interface this is 
 	string thisInterface = prop.ObjectClass.Name;
 	// which type this list contains
 	string referencedType = prop.GetElementTypeString();
@@ -67,7 +67,7 @@ Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((Co
     AddSerialization(serializationList, efName);
 	var eventName = "On" + name + "_PostSetter";
 
-#line 48 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 48 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");

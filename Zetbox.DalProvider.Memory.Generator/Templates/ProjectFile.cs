@@ -1,18 +1,18 @@
 
-namespace Kistl.DalProvider.Memory.Generator.Templates
+namespace Zetbox.DalProvider.Memory.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API.Server;
+    using Templates = Zetbox.Generator.Templates;
 
     public class ProjectFile
         : Templates.ProjectFile
     {
 
-        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
+        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
             : base(_host, ctx, projectGuid, fileNames, schemaProviders)
         {
         }
@@ -32,9 +32,9 @@ namespace Kistl.DalProvider.Memory.Generator.Templates
             this.WriteLine(@"    </Reference>");
 
             // DAL Provider
-            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Memory"">");
+            this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Memory"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Memory.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Memory.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }

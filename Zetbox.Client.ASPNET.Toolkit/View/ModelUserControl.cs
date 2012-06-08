@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
-using Kistl.API;
-using Kistl.Client.Presentables;
+using Zetbox.API;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.ASPNET.Toolkit.View
+namespace Zetbox.Client.ASPNET.Toolkit.View
 {
     public abstract class ModelUserControl<T> : System.Web.UI.UserControl, IView
         where T : class
@@ -31,7 +31,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         public ViewModel GetModel()
         {
-            if (KistlContextManagerModule.ViewModelFactory == null) return null; // Designmode
+            if (ZetboxContextManagerModule.ViewModelFactory == null) return null; // Designmode
             if (_Model == null && !string.IsNullOrEmpty(ModelPath))
             {
                 // Search in Parent

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Styles.Simple
+namespace Zetbox.Client.WPF.Styles.Simple
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.Client.WPF.Styles.Simple
     using System.Text;
     using Autofac;
     using System.Windows;
-    using Kistl.Client.WPF.Toolkit;
+    using Zetbox.Client.WPF.Toolkit;
     using System.Windows.Markup;
 
     public class Module : Autofac.Module
@@ -17,10 +17,10 @@ namespace Kistl.Client.WPF.Styles.Simple
             base.Load(moduleBuilder);            
             
             //moduleBuilder
-            //    .RegisterInstance<ResourceDictionary>((ResourceDictionary)Application.LoadComponent(new Uri("/Kistl.Client.WPF;component/Styles/Simple/Styles.xaml", UriKind.Relative)))
+            //    .RegisterInstance<ResourceDictionary>((ResourceDictionary)Application.LoadComponent(new Uri("/Zetbox.Client.WPF;component/Styles/Simple/Styles.xaml", UriKind.Relative)))
             //    .WithMetadata(WPFHelper.RESOURCE_DICTIONARY_KIND, WPFHelper.RESOURCE_DICTIONARY_STYLE);
             //moduleBuilder
-            //    .RegisterInstance<ResourceDictionary>((ResourceDictionary)Application.LoadComponent(new Uri("/Kistl.Client.WPF;component/Styles/Simple/Views.xaml", UriKind.Relative)))
+            //    .RegisterInstance<ResourceDictionary>((ResourceDictionary)Application.LoadComponent(new Uri("/Zetbox.Client.WPF;component/Styles/Simple/Views.xaml", UriKind.Relative)))
             //    .WithMetadata(WPFHelper.RESOURCE_DICTIONARY_KIND, WPFHelper.RESOURCE_DICTIONARY_VIEW);
         }
     }

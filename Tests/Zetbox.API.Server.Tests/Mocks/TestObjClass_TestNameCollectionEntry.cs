@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using Kistl.DalProvider.Base.RelationWrappers;
+using Zetbox.DalProvider.Base.RelationWrappers;
 
-namespace Kistl.API.Server.Mocks
+namespace Zetbox.API.Server.Mocks
 {
 
     public class TestNameCollectionWrapper
         : ValueCollectionWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntryImpl, List<TestObjClass_TestNameCollectionEntryImpl>>
     {
-        public TestNameCollectionWrapper(IKistlContext ctx, TestObjClassImpl parent, List<TestObjClass_TestNameCollectionEntryImpl> baselist)
+        public TestNameCollectionWrapper(IZetboxContext ctx, TestObjClassImpl parent, List<TestObjClass_TestNameCollectionEntryImpl> baselist)
             : base(ctx, parent, null, baselist)
         {
         }
@@ -49,13 +49,13 @@ namespace Kistl.API.Server.Mocks
         public override bool IsAttached { get { return _IsAttached; } }
         private bool _IsAttached = false;
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
             _IsAttached = true;
         }
 
-        public override void DetachFromContext(IKistlContext ctx)
+        public override void DetachFromContext(IZetboxContext ctx)
         {
             base.DetachFromContext(ctx);
             _IsAttached = false;
@@ -71,13 +71,13 @@ namespace Kistl.API.Server.Mocks
 
         #endregion
 
-        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             sw.Write(Value);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
             Value = sr.ReadString();

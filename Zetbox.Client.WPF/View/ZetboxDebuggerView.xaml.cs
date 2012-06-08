@@ -11,17 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.WPF.View
+namespace Zetbox.Client.WPF.View
 {
     /// <summary>
-    /// Interaction logic for KistlDebuggerView.xaml
+    /// Interaction logic for ZetboxDebuggerView.xaml
     /// </summary>
-    public partial class KistlDebuggerView : Window
+    public partial class ZetboxDebuggerView : Window
     {
-        public KistlDebuggerView()
+        public ZetboxDebuggerView()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();

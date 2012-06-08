@@ -1,15 +1,15 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client;
-    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client;
+    using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation

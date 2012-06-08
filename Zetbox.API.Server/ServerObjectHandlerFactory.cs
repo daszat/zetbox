@@ -1,11 +1,11 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// Default-Factory for loading ServerObjectHandlers from types containing
@@ -14,7 +14,7 @@ namespace Kistl.API.Server
     public abstract class ServerObjectHandlerFactory
         : IServerObjectHandlerFactory
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server");
 
         protected ServerObjectHandlerFactory()
         {
@@ -75,7 +75,7 @@ namespace Kistl.API.Server
         #region IServerObjectHandlerFactory Members
 
         /// <inheritdoc/>
-        public abstract IServerCollectionHandler GetServerCollectionHandler(IKistlContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
+        public abstract IServerCollectionHandler GetServerCollectionHandler(IZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
 
         /// <inheritdoc/>
         public abstract IServerObjectHandler GetServerObjectHandler(InterfaceType type);

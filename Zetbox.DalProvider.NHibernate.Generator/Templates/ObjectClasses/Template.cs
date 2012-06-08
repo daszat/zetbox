@@ -1,21 +1,21 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public class Template
         : Templates.ObjectClasses.Template
     {
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Kistl.App.Base.ObjectClass cls)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, Zetbox.App.Base.ObjectClass cls)
             : base(_host, ctx, cls)
         {
         }
@@ -60,15 +60,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             if (NeedsRightsTable())
             {
                 this.WriteLine();
-                this.WriteLine("        private Kistl.API.AccessRights? __currentAccessRights;");
-                this.WriteLine("        public override Kistl.API.AccessRights CurrentAccessRights");
+                this.WriteLine("        private Zetbox.API.AccessRights? __currentAccessRights;");
+                this.WriteLine("        public override Zetbox.API.AccessRights CurrentAccessRights");
                 this.WriteLine("        {");
                 this.WriteLine("           get { ");
-                this.WriteLine("             if(Context == null) return Kistl.API.AccessRights.Full;");
+                this.WriteLine("             if(Context == null) return Zetbox.API.AccessRights.Full;");
                 this.WriteLine("             if(__currentAccessRights == null) { ");
                 this.WriteLine("                 __currentAccessRights = base.CurrentAccessRights; ");
                 this.WriteLine("                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault(i => i.Identity == Context.Internals().IdentityID) : null;");
-                this.WriteLine("                 __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None; ");
+                this.WriteLine("                 __currentAccessRights |= secRight != null ? (Zetbox.API.AccessRights)secRight.Right : Zetbox.API.AccessRights.None; ");
                 this.WriteLine("             } ");
                 this.WriteLine("             return __currentAccessRights.Value; }");
                 this.WriteLine("        }");
@@ -118,7 +118,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Where(relEnd => relEnd.Type == this.ObjectClass)
                 .ToList()
                 .Where(relEnd => relEnd.Parent.NeedsPositionStorage(relEnd.GetRole()))
-                .Select(relEnd => new KeyValuePair<string, string>("int?", relEnd.RoleName + Kistl.API.Helper.PositionSuffix));
+                .Select(relEnd => new KeyValuePair<string, string>("int?", relEnd.RoleName + Zetbox.API.Helper.PositionSuffix));
 
             // Look for relations where we have no navigator where the storage should be
             // there we need to create navigators to map them with NHibernate
@@ -135,19 +135,19 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Properties
                 .OfType<ValueTypeProperty>()
                 .Where(p => p.IsList)
-                .Select(p => new KeyValuePair<string, string>("int?", p.Name + Kistl.API.Helper.PositionSuffix));
+                .Select(p => new KeyValuePair<string, string>("int?", p.Name + Zetbox.API.Helper.PositionSuffix));
 
             var compoundPosProperties = this.ObjectClass
                 .Properties
                 .OfType<CompoundObjectProperty>()
                 .Where(p => p.IsList)
-                .Select(p => new KeyValuePair<string, string>("int?", p.Name + Kistl.API.Helper.PositionSuffix));
+                .Select(p => new KeyValuePair<string, string>("int?", p.Name + Zetbox.API.Helper.PositionSuffix));
 
             var enumPosProperties = this.ObjectClass
                 .Properties
                 .OfType<EnumerationProperty>()
                 .Where(p => p.IsList)
-                .Select(p => new KeyValuePair<string, string>("int?", p.Name + Kistl.API.Helper.PositionSuffix));
+                .Select(p => new KeyValuePair<string, string>("int?", p.Name + Zetbox.API.Helper.PositionSuffix));
 
             var securityProperties = NeedsRightsTable()
                 ? new[] { new KeyValuePair<string, string>("ICollection<" + Construct.SecurityRulesClassName(this.ObjectClass as ObjectClass) + ImplementationSuffix + ">", "SecurityRightsCollectionImpl") }

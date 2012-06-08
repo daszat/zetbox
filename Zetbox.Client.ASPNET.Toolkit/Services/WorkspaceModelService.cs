@@ -5,24 +5,24 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ObjectBrowser;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ObjectBrowser;
 
-namespace Kistl.Client.ASPNET.Toolkit
+namespace Zetbox.Client.ASPNET.Toolkit
 {
-    [ServiceContract(Namespace = "Kistl.Client.ASPNET")] // Client side namespace
+    [ServiceContract(Namespace = "Zetbox.Client.ASPNET")] // Client side namespace
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class WorkspaceModelService
     {
         [OperationContract]
         public List<JavaScriptObjectMoniker> GetModules()
         {
-            var workspace = KistlContextManagerModule.ViewModelFactory
-                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext, null);
+            var workspace = ZetboxContextManagerModule.ViewModelFactory
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ZetboxContextManagerModule.ZetboxContext, null);
 
             return workspace.Modules.Select(i => new JavaScriptObjectMoniker(i)).ToList();
         }
@@ -30,8 +30,8 @@ namespace Kistl.Client.ASPNET.Toolkit
         [OperationContract]
         public List<JavaScriptObjectMoniker> GetObjectClasses(int moduleID)
         {
-            var workspace = KistlContextManagerModule.ViewModelFactory
-                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext, null);
+            var workspace = ZetboxContextManagerModule.ViewModelFactory
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ZetboxContextManagerModule.ZetboxContext, null);
 
             return workspace.Modules.Single(m => m.ID == moduleID).ObjectClasses
                 .Select(i => new JavaScriptObjectMoniker(i.DataTypeViewModel)).ToList();
@@ -42,9 +42,9 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             throw new NotImplementedException();
         //    // Dont use model - directly selecting is faster
-        //    var objClass = KistlContextManagerModule.KistlContext.Find<ObjectClass>(objectClassID);
-        //    return KistlContextManagerModule.KistlContext.GetQuery(objClass.GetDescribedInterfaceType())
-        //            .Select(i => new JavaScriptObjectMoniker(KistlContextManagerModule.KistlContext, i)).ToList();
+        //    var objClass = ZetboxContextManagerModule.ZetboxContext.Find<ObjectClass>(objectClassID);
+        //    return ZetboxContextManagerModule.ZetboxContext.GetQuery(objClass.GetDescribedInterfaceType())
+        //            .Select(i => new JavaScriptObjectMoniker(ZetboxContextManagerModule.ZetboxContext, i)).ToList();
         }
     }
 }

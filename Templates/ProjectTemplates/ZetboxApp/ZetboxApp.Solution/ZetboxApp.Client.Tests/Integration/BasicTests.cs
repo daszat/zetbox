@@ -1,14 +1,14 @@
 
-namespace KistlApp.Solution.KistlApp.Client.Tests.Integration
+namespace ZetboxApp.Solution.ZetboxApp.Client.Tests.Integration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
     using NUnit.Framework;
 
-    public class BasicTests : Kistl.API.AbstractConsumerTests.AbstractTestFixture
+    public class BasicTests : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
     {
         [Test]
         public void ConnectionTest()

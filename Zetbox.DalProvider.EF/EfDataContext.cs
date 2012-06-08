@@ -1,6 +1,6 @@
 //#define EAGERLOADING
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections;
@@ -11,20 +11,20 @@ namespace Kistl.DalProvider.Ef
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.API.Server.PerfCounter;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.API.Server.PerfCounter;
 
     /// <summary>
-    /// Entityframework IKistlContext implementation
+    /// Entityframework IZetboxContext implementation
     /// </summary>
     public sealed class EfDataContext
-        : BaseKistlDataContext, IKistlContext, IDisposable
+        : BaseZetboxDataContext, IZetboxContext, IDisposable
     {
         private static readonly object _lock = new object();
 
@@ -68,7 +68,7 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter)
+        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
@@ -156,7 +156,7 @@ namespace Kistl.DalProvider.Ef
                 foreach (var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => p.EagerLoading))
                 {
                     if (prop.GetIsList()) continue;
-                    lst.Add(prop.Name + Kistl.API.Helper.ImplementationSuffix);
+                    lst.Add(prop.Name + Zetbox.API.Helper.ImplementationSuffix);
                 }
             }
         }
@@ -436,7 +436,7 @@ namespace Kistl.DalProvider.Ef
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
-            if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Ef.Attach"); }
+            if (obj.Context != null && obj.Context != this) { throw new WrongZetboxContextException("Ef.Attach"); }
 
             // already attached?
             if (obj.Context == this) return obj;
@@ -458,7 +458,7 @@ namespace Kistl.DalProvider.Ef
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
-            if (obj.Context != null) { throw new WrongKistlContextException("Ef.Attach"); }
+            if (obj.Context != null) { throw new WrongZetboxContextException("Ef.Attach"); }
 
             var serverObj = (BaseServerPersistenceObject)obj;
             string entityName = GetEntityName(GetInterfaceType(obj));
@@ -500,8 +500,8 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <param baseDir="ifType">Object Type of the Object to find.</param>
@@ -524,8 +524,8 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// </summary>
         /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
         /// <param baseDir="ID">ID of the Object to find.</param>
@@ -563,8 +563,8 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <param baseDir="ifType">Object Type of the Object to find.</param>
@@ -587,8 +587,8 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// </summary>
         /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
         /// <param baseDir="ID">ID of the Object to find.</param>
@@ -658,7 +658,7 @@ namespace Kistl.DalProvider.Ef
             if (result == null)
             {
                 // TODO: Case #1174
-                var tmp = GetPersistenceObjectQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+                var tmp = GetPersistenceObjectQuery<Zetbox.App.Base.ObjectClass>().FirstOrDefault();
                 string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(iftFactory(typeof(T))));
                 result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
             }
@@ -751,7 +751,7 @@ namespace Kistl.DalProvider.Ef
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             CheckDisposed();
-            return _implTypeFactory(Type.GetType(t.Type.FullName + "Ef" + Kistl.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly));
+            return _implTypeFactory(Type.GetType(t.Type.FullName + "Ef" + Zetbox.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly));
         }
 
         public override ImplementationType GetImplementationType(Type t)

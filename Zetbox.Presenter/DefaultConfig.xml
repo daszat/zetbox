@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <Address></Address>
   <ConfigName>Presenter Configuration</ConfigName>
   <Server StartServer="true">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
-    <DocumentStore>Kistl\DocumentStore\Server</DocumentStore>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Zetbox;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <DocumentStore>Zetbox\DocumentStore\Server</DocumentStore>
   </Server>
   <Client StartClient="true">
-    <DocumentStore>Kistl\DocumentStore\Client</DocumentStore>
+    <DocumentStore>Zetbox\DocumentStore\Client</DocumentStore>
   </Client>
   <SourceFileLocation>
-    <string>Kistl</string>
+    <string>Zetbox</string>
   </SourceFileLocation>
-</KistlConfig>
+</ZetboxConfig>

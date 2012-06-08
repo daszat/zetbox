@@ -1,13 +1,13 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
+namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
 
     public partial class ModelSsdlEntityTypeColumns
     {

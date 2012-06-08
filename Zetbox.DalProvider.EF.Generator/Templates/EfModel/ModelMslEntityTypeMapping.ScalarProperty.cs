@@ -2,28 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.Generator;
+using Zetbox.API;
+using Zetbox.App.Base;
+using Zetbox.Generator;
 using Arebis.CodeGeneration;
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
+namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 {
-    public class ModelMslEntityTypeMappingScalarProperty : Kistl.Generator.ResourceTemplate
+    public class ModelMslEntityTypeMappingScalarProperty : Zetbox.Generator.ResourceTemplate
     {
-        protected IKistlContext ctx;
+        protected IZetboxContext ctx;
         protected Property prop;
         protected string propertyName;
         protected string parentName;
 
-        public static void Call(IGenerationHost host, IKistlContext ctx, Property prop, string propertyName, string parentName)
+        public static void Call(IGenerationHost host, IZetboxContext ctx, Property prop, string propertyName, string parentName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("EfModel.ModelMslEntityTypeMappingScalarProperty", ctx, prop, propertyName, parentName);
         }
 
-        public ModelMslEntityTypeMappingScalarProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop, string propertyName, string parentName)
+        public ModelMslEntityTypeMappingScalarProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Property prop, string propertyName, string parentName)
             : base(_host)
         {
             this.ctx = ctx;

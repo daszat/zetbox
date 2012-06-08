@@ -1,17 +1,17 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Templates = Zetbox.Generator.Templates;
 
     public class Module
         : Templates.Module
     {
-        public Module(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
+        public Module(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string shortName)
             : base(_host, ctx, shortName)
         {
         }
@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
         {
             return base.GetAdditionalImports()
                 .Concat(new string[]{
-                    "Kistl.API.Configuration",
+                    "Zetbox.API.Configuration",
                     "global::NHibernate",
                     "global::NHibernate.Cfg",
                 });

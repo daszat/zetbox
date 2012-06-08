@@ -1,4 +1,4 @@
-namespace Kistl.Client
+namespace Zetbox.Client
 {
     using System;
     using System.Collections.Generic;
@@ -7,15 +7,15 @@ namespace Kistl.Client
     using System.Security.Principal;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Common;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Common;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Utils;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -124,7 +124,7 @@ namespace Kistl.Client
 
                             var pwd = new ClassValueModel<string>(CredentialsResolverResources.PasswordLabel, "", false, false);
                             var pwdvm = _vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, pwd);
-                            pwdvm.RequestedKind = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_PasswordKind.Find(_frozenCtx);
+                            pwdvm.RequestedKind = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(_frozenCtx);
                             valueModels.Add(pwdvm);
 
                             var dlgOK = false;
@@ -190,7 +190,7 @@ namespace Kistl.Client
     {
         private readonly BasicAuthCredentialsResolver _credentialResolver;
 
-        public BasicAuthIdentityResolver(Func<IReadOnlyKistlContext> resolverCtxFactory, BasicAuthCredentialsResolver credentialResolver)
+        public BasicAuthIdentityResolver(Func<IReadOnlyZetboxContext> resolverCtxFactory, BasicAuthCredentialsResolver credentialResolver)
             : base(resolverCtxFactory)
         {
             if (credentialResolver == null) throw new ArgumentNullException("credentialResolver");

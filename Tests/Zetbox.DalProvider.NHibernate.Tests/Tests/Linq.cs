@@ -1,4 +1,4 @@
-namespace Kistl.DalProvider.NHibernate.Tests
+namespace Zetbox.DalProvider.NHibernate.Tests
 {
     using System;
     using System.Collections;
@@ -7,7 +7,7 @@ namespace Kistl.DalProvider.NHibernate.Tests
     using System.Linq;
     using System.Text;
 
-    using Kistl.API.AbstractConsumerTests;
+    using Zetbox.API.AbstractConsumerTests;
 
     using NUnit.Framework;
     

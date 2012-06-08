@@ -35,7 +35,7 @@ The directory structure on the deployment server should look like this:
   	  	  	\begin{itemize}
   	  	  	  \item { Client
   	  	  	  	\begin{itemize}
-  	  	  	  	  \item App.ZBox
+  	  	  	  	  \item App.Zetbox
   	  	  	  	  \item Core
   	  	  	  	  \item Core.Generated
   	  	  	  	  \item WPF
@@ -44,29 +44,29 @@ The directory structure on the deployment server should look like this:
   	  	  	  }
   	  	  	  \item { Common
   	  	  	  	\begin{itemize}
-  	  	  	  	  \item App.ZBox
+  	  	  	  	  \item App.Zetbox
   	  	  	  	  \item Core
   	  	  	  	  \item Core.Generated
   	  	  	  	 \end{itemize}
   	  	  	  }
-  	  	  	  \item Kistl.Client.WPF.exe
-  	  	  	  \item Kistl.Client.WPF.exe.config
-  	  	  	  \item Kistl.Client.Forms.exe
-  	  	  	  \item Kistl.Client.Forms.exe.config
+  	  	  	  \item Zetbox.Client.WPF.exe
+  	  	  	  \item Zetbox.Client.WPF.exe.config
+  	  	  	  \item Zetbox.Client.Forms.exe
+  	  	  	  \item Zetbox.Client.Forms.exe.config
   	  	  	\end{itemize}  
   	  	  }
   	  	  \item {Server
   	  	  	\begin{itemize}
   	  	  	  \item { Common
   	  	  	  	\begin{itemize}
-  	  	  	  	  \item App.ZBox
+  	  	  	  	  \item App.Zetbox
   	  	  	  	  \item Core
   	  	  	  	  \item Core.Generated
   	  	  	  	 \end{itemize}
   	  	  	  }
   	  	  	  \item { Server
   	  	  	  	\begin{itemize}
-  	  	  	  	  \item App.ZBox
+  	  	  	  	  \item App.Zetbox
   	  	  	  	  \item Core
   	  	  	  	  \item Core.Generated
   	  	  	  	  \item EF
@@ -75,8 +75,8 @@ The directory structure on the deployment server should look like this:
   	  	  	  	  \item NH.Generated
   	  	  	  	 \end{itemize}
   	  	  	  }
-  	  	  	  \item Kistl.Server.Service.exe
-  	  	  	  \item Kistl.Server.Service.exe.config
+  	  	  	  \item Zetbox.Server.Service.exe
+  	  	  	  \item Zetbox.Server.Service.exe.config
   	  	  	\end{itemize}  
   		}
   	  	\end{itemize}
@@ -92,14 +92,14 @@ The directory structure on the deployment server should look like this:
   	  	  \item Bootstrapper
   	  	  \item { Common
   	  	  	\begin{itemize}
-  	  	  	  \item App.ZBox
+  	  	  	  \item App.Zetbox
   	  	  	  \item Core
   	  	  	  \item Core.Generated
   	  	  	 \end{itemize}
   	  	  }
   	  	  \item { Server
   	  	  	\begin{itemize}
-  	  	  	  \item App.ZBox
+  	  	  	  \item App.Zetbox
   	  	  	  \item Core
   	  	  	  \item Core.Generated
   	  	  	  \item EF
@@ -127,8 +127,8 @@ structure and fetching all assemblies and configuration templates
 
 \subsubsection{AppConfigs}
 This directory contains all app configuration files needed by the executing
-assemblies. E.g. in the \emph{Kistl.Server.Service.exe.config} all WCF Service
-stuff can be configured. In \emph{Kistl.Client.WPF.exe.config} all WCF Proxy
+assemblies. E.g. in the \emph{Zetbox.Server.Service.exe.config} all WCF Service
+stuff can be configured. In \emph{Zetbox.Client.WPF.exe.config} all WCF Proxy
 stuff can be configured.
 
 The fetch script will copy those configuration files into the desired
@@ -151,7 +151,7 @@ future
 \end{note}
 
 \subsubsection{Configs}
-This directory contains all ZBox configuration files. They are located by the
+This directory contains all Zetbox configuration files. They are located by the
 executalable by probing 
 \begin{itemize}
   \item the given command line parameter
@@ -163,19 +163,19 @@ executalable by probing
 \end{itemize}
 
 \subsubsection{bin}
-The bin directory contains all assemblies used by ZBox, divided by theire use
+The bin directory contains all assemblies used by Zetbox, divided by theire use
 (Bootstrapper, Client or Server). The \emph{Client} and \emph{Server}
 directories contains sub directories to split Client/Server and Common parts.
-Those directories have for each Application (=ZBox Module) and Modules (not ZBox
+Those directories have for each Application (=Zetbox Module) and Modules (not Zetbox
 Modules!) a individual sub directory.
 
-The naming of Application (=ZBox Module) should be:
+The naming of Application (=Zetbox Module) should be:
 
 \begin{center}
 App.\textless ModuleName\textgreater  
 \end{center}
 
-\emph{Core} contains all core assemblies like Kistl.API and all other
+\emph{Core} contains all core assemblies like Zetbox.API and all other
 assemblies that are referenced by default (log4net e.g.).
 
 \emph{Core.Generated} contains all genereated code. Code Generation is done by

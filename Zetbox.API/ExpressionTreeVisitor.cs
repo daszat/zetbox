@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
     /// Baseclass for a Expressiontree Visitor. This Visitor does _not_ translate the Expression Tree.

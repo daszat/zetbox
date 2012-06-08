@@ -11,12 +11,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 using System.ComponentModel;
 using System.Windows.Markup;
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     /// <summary>
     /// Interaction logic for LabeledView.xaml

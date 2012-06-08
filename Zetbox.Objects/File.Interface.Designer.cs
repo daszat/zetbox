@@ -5,20 +5,20 @@ namespace at.dasz.DocumentManagement
     using System;
     using System.Collections.Generic;
 
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// Abstract Baseclass for File Types
     /// </summary>
-    [Kistl.API.DefinitionGuid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6")]
-    public interface File : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
+    [Zetbox.API.DefinitionGuid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6")]
+    public interface File : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable 
     {
 
         /// <summary>
         /// Current File Content
         /// </summary>
-        [Kistl.API.DefinitionGuid("ef5addda-340f-4a87-83c9-3ee419519343")]
-        Kistl.App.Base.Blob Blob {
+        [Zetbox.API.DefinitionGuid("ef5addda-340f-4a87-83c9-3ee419519343")]
+        Zetbox.App.Base.Blob Blob {
             get;
             set;
         }
@@ -26,7 +26,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Filename
         /// </summary>
-        [Kistl.API.DefinitionGuid("1c5f2bea-9915-4634-8ff9-5fd6f0871704")]
+        [Zetbox.API.DefinitionGuid("1c5f2bea-9915-4634-8ff9-5fd6f0871704")]
         string Name {
             get;
             set;
@@ -35,7 +35,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
-        Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob);
+        Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob);
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt

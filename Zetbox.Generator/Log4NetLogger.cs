@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Kistl.Generator
     public sealed class Log4NetLogger
         : ILogger
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.MSBuild");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.MSBuild");
 
         public void Initialize(IEventSource eventSource)
         {

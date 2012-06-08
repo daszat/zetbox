@@ -1,13 +1,13 @@
 
 
-namespace Kistl.Client.Models
+namespace Zetbox.Client.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
-    using Kistl.API;
+    using Zetbox.App.Base;
+    using Zetbox.API;
 
     public class FilterValueSource : IFilterValueSource
     {

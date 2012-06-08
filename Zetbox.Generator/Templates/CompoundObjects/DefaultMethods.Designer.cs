@@ -1,29 +1,29 @@
 using System;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.CompoundObjects
+namespace Zetbox.Generator.Templates.CompoundObjects
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\CompoundObjects\DefaultMethods.cst")]
-    public partial class DefaultMethods : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst")]
+    public partial class DefaultMethods : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected DataType dt;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, DataType dt)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("CompoundObjects.DefaultMethods", ctx, dt);
         }
 
-        public DefaultMethods(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt)
+        public DefaultMethods(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, DataType dt)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -33,7 +33,7 @@ namespace Kistl.Generator.Templates.CompoundObjects
 
         public override void Generate()
         {
-#line 14 "P:\Kistl\Kistl.Generator\Templates\CompoundObjects\DefaultMethods.cst"
+#line 14 "P:\Zetbox\Zetbox.Generator\Templates\CompoundObjects\DefaultMethods.cst"
 this.WriteObjects("        #region ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerHidden()]\r\n");

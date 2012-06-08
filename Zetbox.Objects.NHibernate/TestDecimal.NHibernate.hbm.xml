@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.TestDecimalNHibernateImpl+TestDecimalProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.TestDecimalNHibernateImpl+TestDecimalProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.TestDecimalNHibernateImpl+TestDecimalProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.TestDecimalNHibernateImpl+TestDecimalProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`TestDecimals`"
            abstract="false"

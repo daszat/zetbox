@@ -1,28 +1,28 @@
-namespace Kistl.Client.Presentables.GUI
+namespace Zetbox.Client.Presentables.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.GUI;
-    using Kistl.App.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.FilterViewModels;
-    using Kistl.Client.Presentables.DtoViewModels;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.Client.Presentables.DtoViewModels;
 
     [ViewModelDescriptor]
     public abstract class NavigationReportScreenViewModel : NavigationScreenViewModel
     {
-        public new delegate NavigationReportScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
+        public new delegate NavigationReportScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
         private readonly IViewModelDependencies _appCtx;
         private readonly IFileOpener _fileOpener;
         private readonly ITempFileService _tmpService;
 
         public NavigationReportScreenViewModel(IViewModelDependencies appCtx,
-            IKistlContext dataCtx, ViewModel parent, NavigationScreen screen, IFileOpener fileOpener, ITempFileService tmpService)
+            IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen, IFileOpener fileOpener, ITempFileService tmpService)
             : base(appCtx, dataCtx, parent, screen)
         {
             _appCtx = appCtx;

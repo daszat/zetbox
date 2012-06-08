@@ -1,18 +1,18 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public partial class CompoundObjectPropertyInitialisation
     {
-        public static void Call(IGenerationHost _host, IKistlContext ctx, IEnumerable<CompoundObjectProperty> properties, string implementationSuffix, string implementationPropertySuffix)
+        public static void Call(IGenerationHost _host, IZetboxContext ctx, IEnumerable<CompoundObjectProperty> properties, string implementationSuffix, string implementationPropertySuffix)
         {
             foreach (var p in properties.Where(p => !p.IsList).OrderBy(p => p.Name))
             {
@@ -20,7 +20,7 @@ namespace Kistl.Generator.Templates.Properties
             }
         }
 
-        public static void Call(IGenerationHost _host, IKistlContext ctx, CompoundObjectProperty property, string implementationSuffix, string implementationPropertySuffix)
+        public static void Call(IGenerationHost _host, IZetboxContext ctx, CompoundObjectProperty property, string implementationSuffix, string implementationPropertySuffix)
         {
             string propertyName = property.Name;
             string backingStoreName = propertyName + implementationPropertySuffix;

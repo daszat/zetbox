@@ -1,16 +1,16 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class PropertiesHbm
     {
@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
         {
             this.WriteLine("<!-- ObjectReferenceProperty -->");
 
-            var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
+            var rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
             var otherEnd = rel.GetOtherEnd(relEnd);
 
@@ -110,7 +110,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string tableName = rel.GetRelationTableName();
             string tableAttr = String.Format("table=\"`{0}`\"", tableName);
 
-            string relationEntryClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Kistl.Objects.NHibernateImpl\"",
+            string relationEntryClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Zetbox.Objects.NHibernateImpl\"",
                 rel.Module.Namespace,
                 rel.GetRelationClassName(),
                 ImplementationSuffix);

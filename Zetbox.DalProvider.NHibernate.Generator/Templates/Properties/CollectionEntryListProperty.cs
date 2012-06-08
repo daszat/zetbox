@@ -1,21 +1,21 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public partial class CollectionEntryListProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Templates.Serialization.SerializationMembersList serializationList,
             Relation rel, RelationEndRole endRole)
         {
@@ -30,7 +30,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Templates.Serialization.SerializationMembersList serializationList,
             Relation rel, RelationEndRole endRole, string backingCollectionType)
         {
@@ -48,7 +48,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
             string aSideType = rel.A.Type.GetDataTypeString();
             string bSideType = rel.B.Type.GetDataTypeString();
-            string entryType = rel.GetRelationFullName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+            string entryType = rel.GetRelationFullName() + host.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix;
             string providerCollectionType = (rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList<" : "ICollection<")
                 + entryType + ">";
 

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -7,13 +7,13 @@ namespace Kistl.Client.Presentables
     using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public class AsyncListFactory
     {
         public static ImmutableAsyncList<TAsync, TUi> UiCreateImmutable<TAsync, TUi>(
             IViewModelDependencies appCtx,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Func<IEnumerable<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform)
         {
@@ -22,7 +22,7 @@ namespace Kistl.Client.Presentables
 
         public static AsyncList<TAsync, TUi> UiCreateMutable<TAsync, TUi>(
             IViewModelDependencies appCtx,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Func<INotifyCollectionChanged> asyncNotifier,
             Func<IList<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform,
@@ -46,11 +46,11 @@ namespace Kistl.Client.Presentables
 
         protected IThreadManager UI { get { return _appCtx.UiThread; } }
         protected IThreadManager Async { get { return _appCtx.AsyncThread; } }
-        protected IKistlContext DataContext { get; private set; }
+        protected IZetboxContext DataContext { get; private set; }
 
         internal ImmutableAsyncList(
             IViewModelDependencies appCtx,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Func<IEnumerable<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform)
         {
@@ -120,11 +120,11 @@ namespace Kistl.Client.Presentables
 
         protected IThreadManager UI { get { return _appCtx.UiThread; } }
         protected IThreadManager Async { get { return _appCtx.AsyncThread; } }
-        protected IKistlContext DataContext { get; private set; }
+        protected IZetboxContext DataContext { get; private set; }
 
         internal AsyncList(
             IViewModelDependencies appCtx,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Func<INotifyCollectionChanged> asyncNotifier,
             Func<IList<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform,

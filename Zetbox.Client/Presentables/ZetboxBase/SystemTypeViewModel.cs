@@ -1,13 +1,13 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
     
     /// <summary>
     /// Models a <see cref="System.Type"/>. Contains references to the Assembly and the respective TypeRef.
@@ -15,12 +15,12 @@ namespace Kistl.Client.Presentables.KistlBase
     public class SystemTypeViewModel
         : ViewModel
     {
-        public new delegate SystemTypeViewModel Factory(IKistlContext dataCtx, ViewModel parent, Type type);
+        public new delegate SystemTypeViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Type type);
 
         private Type _type;
 
         public SystemTypeViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             Type type)
             : base(appCtx, dataCtx, parent)
         {

@@ -1,29 +1,29 @@
 using System;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst")]
-    public partial class DefaultMethods : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst")]
+    public partial class DefaultMethods : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected DataType dt;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, DataType dt)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("ObjectClasses.DefaultMethods", ctx, dt);
         }
 
-        public DefaultMethods(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt)
+        public DefaultMethods(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, DataType dt)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -33,11 +33,11 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 14 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 14 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        #region ",  this.GetType() , "\r\n");
-#line 15 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 15 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyRequisites(); 
-#line 16 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 16 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerHidden()]\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnToString_",  dt.Name , "\")]\r\n");
@@ -72,56 +72,56 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnNotifyPreSave_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyPreSave()\r\n");
 this.WriteObjects("        {\r\n");
-#line 50 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 50 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPrePreSaveTemplate(); 
-#line 51 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 51 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyPreSave();\r\n");
 this.WriteObjects("            if (OnNotifyPreSave_",  dt.Name , " != null) OnNotifyPreSave_",  dt.Name , "(this);\r\n");
-#line 53 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 53 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostPreSaveTemplate(); 
-#line 54 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 54 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyPreSave_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnNotifyPostSave_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyPostSave()\r\n");
 this.WriteObjects("        {\r\n");
-#line 60 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 60 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPrePostSaveTemplate(); 
-#line 61 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 61 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyPostSave();\r\n");
 this.WriteObjects("            if (OnNotifyPostSave_",  dt.Name , " != null) OnNotifyPostSave_",  dt.Name , "(this);\r\n");
-#line 63 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 63 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostPostSaveTemplate(); 
-#line 64 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 64 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyPostSave_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnNotifyCreated_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyCreated()\r\n");
 this.WriteObjects("        {\r\n");
-#line 70 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 70 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPreCreatedTemplate(); 
-#line 71 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 71 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyCreated();\r\n");
 this.WriteObjects("            if (OnNotifyCreated_",  dt.Name , " != null) OnNotifyCreated_",  dt.Name , "(this);\r\n");
-#line 73 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 73 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostCreatedTemplate(); 
-#line 74 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 74 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyCreated_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnNotifyDeleting_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyDeleting()\r\n");
 this.WriteObjects("        {\r\n");
-#line 80 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 80 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPreDeletingTemplate(); 
-#line 81 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 81 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyDeleting();\r\n");
 this.WriteObjects("            if (OnNotifyDeleting_",  dt.Name , " != null) OnNotifyDeleting_",  dt.Name , "(this);\r\n");
-#line 83 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 83 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostDeletingTemplate(); 
-#line 84 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 84 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyDeleting_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");

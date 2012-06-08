@@ -13,16 +13,16 @@ function save-mkdir($path) {
 
 "Fetching new Version" | Out-Host
 
-$CCNET_REPO="F:\CruiseControl.NET\Projects\ZBox-EF"
+$CCNET_REPO="F:\CruiseControl.NET\Projects\Zetbox-EF"
 
 $SOURCEDIR="$CCNET_REPO-artifacts\LatestBinaries\Debug"
 $SOURCEHTTPDIR="$CCNET_REPO-artifacts\LatestHttpService"
-$SOURCEHTTPFILESDIR="$CCNET_REPO\Kistl.Server.HttpService"
+$SOURCEHTTPFILESDIR="$CCNET_REPO\Zetbox.Server.HttpService"
 
-$DESTDIR="C:\zbox_prod"
+$DESTDIR="C:\zetbox_prod"
 
-$MODULES="App.Ini50", "App.ZBox", "Core", "Core.Generated", "EF", "EF.Generated", "WPF"
-$EXE = @{"Server"="Kistl.Server.Service.exe"; "Client" = "Kistl.Client.WPF.exe" }
+$MODULES="App.Ini50", "App.Zetbox", "Core", "Core.Generated", "EF", "EF.Generated", "WPF"
+$EXE = @{"Server"="Zetbox.Server.Service.exe"; "Client" = "Zetbox.Client.WPF.exe" }
 
 # Create path structure
 save-rm $DESTDIR\bin, $DESTDIR\inetpub\bin

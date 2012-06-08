@@ -4,15 +4,15 @@ namespace $rootnamespace$
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.Client.Presentables;
-    using Kistl.API;
+    using Zetbox.Client.Presentables;
+    using Zetbox.API;
 
     [ViewModelDescriptor]
     public class $safeitemname$ : ViewModel
     {
-        public new delegate $safeitemname$ Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate $safeitemname$ Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public $safeitemname$(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public $safeitemname$(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
         }

@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates
+namespace Zetbox.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Kistl.Generator.Templates
         {
             return RequiredNamespaces
                 .Concat(new string[]{
-                    "Kistl.App.Extensions"
+                    "Zetbox.App.Extensions"
                 });
         }
 

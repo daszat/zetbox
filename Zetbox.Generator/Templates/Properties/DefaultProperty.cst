@@ -1,10 +1,10 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.DefaultProperty"
-    ClassName="Kistl.Generator.Templates.Properties.DefaultProperty"
-    Inherits="Kistl.Generator.MemberTemplate" %>
+    ClassName="Zetbox.Generator.Templates.Properties.DefaultProperty"
+    Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="propName" Type="string" %>
 <%@ Parameter Name="presentedType" Type="string" %>
         // BEGIN <%= this.GetType() %>

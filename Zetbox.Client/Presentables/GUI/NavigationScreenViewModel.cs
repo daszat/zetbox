@@ -1,25 +1,25 @@
 
-namespace Kistl.Client.Presentables.GUI
+namespace Zetbox.Client.Presentables.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.App.GUI;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.KistlBase;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.App.GUI;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.App.Base;
 
     [ViewModelDescriptor]
     public class NavigationScreenViewModel
         : NavigationEntryViewModel
     {
-        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
+        public new delegate NavigationScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, NavigationEntry screen)
+        public NavigationScreenViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationEntry screen)
             : base(dependencies, dataCtx, parent, screen)
         {
         }

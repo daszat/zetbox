@@ -5,15 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Mocks;
+using Zetbox.API.Mocks;
 
 using NUnit.Framework;
 
-namespace Kistl.API.Tests.BinarySerializers
+namespace Zetbox.API.Tests.BinarySerializers
 {
     [TestFixture]
     public sealed class should_work_with_MockedCompoundObjects
-        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<TestCompoundObjectImpl>
+        : Zetbox.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<TestCompoundObjectImpl>
     {
     }
 }

@@ -5,9 +5,9 @@
 // Javascript Functions for the ObjectListControl
 //----------------------------------------------------------------
 
-Type.registerNamespace("Kistl.Client.ASPNET");
+Type.registerNamespace("Zetbox.Client.ASPNET");
 
-Kistl.Client.ASPNET.ObjectListControl = function(element) {
+Zetbox.Client.ASPNET.ObjectListControl = function(element) {
     // Private Fields
     this._list = null;
     this._items = null;
@@ -23,13 +23,13 @@ Kistl.Client.ASPNET.ObjectListControl = function(element) {
     this._onLnkNewClickHandler = null;
     this._onItemAddHandler = null;
    
-    Kistl.Client.ASPNET.ObjectListControl.initializeBase(this, [element]);
+    Zetbox.Client.ASPNET.ObjectListControl.initializeBase(this, [element]);
 }
 
-Kistl.Client.ASPNET.ObjectListControl.prototype = {
+Zetbox.Client.ASPNET.ObjectListControl.prototype = {
     // Inititalize Control
     initialize: function() {
-        Kistl.Client.ASPNET.ObjectListControl.callBaseMethod(this, 'initialize');
+        Zetbox.Client.ASPNET.ObjectListControl.callBaseMethod(this, 'initialize');
 
         // List Events        
         this._onOnItemDataBoundHandler = Function.createDelegate(this, this._onItemDataBound);
@@ -57,7 +57,7 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
     },
     // Dispose
     dispose: function() {        
-        Kistl.Client.ASPNET.ObjectListControl.callBaseMethod(this, 'dispose');
+        Zetbox.Client.ASPNET.ObjectListControl.callBaseMethod(this, 'dispose');
     },
     // public Properties
     get_List: function() {
@@ -104,7 +104,7 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         {
             var data = item.get_dataItem();
             var txtText = item.findControl('text');
-            Kistl.Client.ASPNET.JavascriptRenderer.setText(txtText, data.Text);
+            Zetbox.Client.ASPNET.JavascriptRenderer.setText(txtText, data.Text);
         }
     },
     _onItemDeleteCommand: function (sender, e) {
@@ -117,15 +117,15 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
         if(e.get_commandName() == "item") 
         {
             var data = e.get_item().get_dataItem();
-            Kistl.JavascriptRenderer.showObject(data);
+            Zetbox.JavascriptRenderer.showObject(data);
         }
     },
     _onLnkAddClick: function() {
-        Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject(this._type, this._onItemAddHandler);
+        Zetbox.Client.ASPNET.ChooseObjectDialog.ChooseObject(this._type, this._onItemAddHandler);
     },
     _onLnkNewClick: function() {
-        var obj = Kistl.JavascriptRenderer.newObject(this._type);
-        Kistl.JavascriptRenderer.showObject(obj);
+        var obj = Zetbox.JavascriptRenderer.newObject(this._type);
+        Zetbox.JavascriptRenderer.showObject(obj);
     },
     _onItemAdd: function(item) {
         var data = this._list.get_dataSource();
@@ -138,5 +138,5 @@ Kistl.Client.ASPNET.ObjectListControl.prototype = {
     }
 }
 
-Kistl.Client.ASPNET.ObjectListControl.registerClass('Kistl.Client.ASPNET.ObjectListControl', Sys.UI.Control);
+Zetbox.Client.ASPNET.ObjectListControl.registerClass('Zetbox.Client.ASPNET.ObjectListControl', Sys.UI.Control);
 if (typeof(Sys) !== 'undefined') Sys.Application.notifyScriptLoaded();

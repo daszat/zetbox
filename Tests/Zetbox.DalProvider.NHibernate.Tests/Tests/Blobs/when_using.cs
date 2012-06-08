@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.DalProvider.NHibernate.Tests.Blobs
+namespace Zetbox.DalProvider.NHibernate.Tests.Blobs
 {
     [TestFixture]
     [Ignore("This test suite does not support custom actions")]
     public class when_using
-            : Kistl.API.AbstractConsumerTests.Blobs.when_using
+            : Zetbox.API.AbstractConsumerTests.Blobs.when_using
     {
     }
 }

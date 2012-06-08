@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client
+namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections.Generic;
@@ -7,12 +7,12 @@ namespace Kistl.DalProvider.Client
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.API.Client.PerfCounter;
-    using Kistl.API.Common;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Common;
 
     public interface IClientActionsManager : ICustomActionsManager { }
 
@@ -28,11 +28,11 @@ namespace Kistl.DalProvider.Client
                     var ilp = p.FirstOrDefault() as TypedParameter;
                     var il = ilp != null ? (ClientIsolationLevel)ilp.Value : ClientIsolationLevel.PrefereClientData;
                     
-                    return new KistlContextImpl(
+                    return new ZetboxContextImpl(
                         il,
-                        c.Resolve<KistlConfig>(),
+                        c.Resolve<ZetboxConfig>(),
                         c.Resolve<IProxy>(),
-                        "Kistl.Objects.ClientImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf",
+                        "Zetbox.Objects.ClientImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf",
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<ClientImplementationType.ClientFactory>(),
@@ -40,8 +40,8 @@ namespace Kistl.DalProvider.Client
                         c.Resolve<IIdentityResolver>());
                 })
                 .AsSelf()
-                .As<IKistlContext>()
-                .As<IReadOnlyKistlContext>()
+                .As<IZetboxContext>()
+                .As<IReadOnlyZetboxContext>()
                 .OnActivated(args =>
                 {
                     var manager = args.Context.Resolve<IClientActionsManager>();

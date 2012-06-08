@@ -1,15 +1,15 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client;
-    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client;
+    using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -21,15 +21,15 @@ namespace Kistl.App.Base
     public static class CompoundObjectPropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Kistl.App.Base.CompoundObjectProperty obj)
+        public static void NotifyCreated(Zetbox.App.Base.CompoundObjectProperty obj)
         {
-            obj.ValueModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(obj.Context);
+            obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(obj.Context);
         }
 
         [Invocation]
         public static void postSet_CompoundObjectDefinition(CompoundObjectProperty obj, PropertyPostSetterEventArgs<CompoundObject> e)
         {
-            var def = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(obj.Context);
+            var def = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(obj.Context);
             if (obj.ValueModelDescriptor == def && e.OldValue == null && e.NewValue != null && e.NewValue.DefaultPropertyViewModelDescriptor != null)
             {
                 // Only once, during initialize

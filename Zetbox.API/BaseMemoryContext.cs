@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -10,13 +10,13 @@ namespace Kistl.API
     using System.Reflection;
     using System.Text;
 
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// A temporary data context without permanent backing store.
     /// </summary>
     public abstract class BaseMemoryContext
-        : IKistlContext, IZBoxContextInternals
+        : IZetboxContext, IZetboxContextInternals
     {
         protected readonly ContextCache<int> objects;
         protected readonly FuncCache<Type, InterfaceType> iftFactoryCache;
@@ -46,7 +46,7 @@ namespace Kistl.API
             this.objects = new ContextCache<int>(this, item => item.ID);
             this.iftFactoryCache = new FuncCache<Type, InterfaceType>(t => iftFactory(t));
             this._iftFactory = t => iftFactoryCache.Invoke(t);
-            KistlContextDebuggerSingleton.Created(this);
+            ZetboxContextDebuggerSingleton.Created(this);
         }
 
         /// <inheritdoc />
@@ -84,7 +84,7 @@ namespace Kistl.API
         }
 
         /// <inheritdoc />
-        void IZBoxContextInternals.AttachAsNew(IPersistenceObject obj)
+        void IZetboxContextInternals.AttachAsNew(IPersistenceObject obj)
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
@@ -195,13 +195,13 @@ namespace Kistl.API
         }
 
         /// <summary>Not implemented.</summary>
-        List<T> IReadOnlyKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
+        List<T> IReadOnlyZetboxContext.GetListOf<T>(IDataObject obj, string propertyName)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Only implemented for the parent==null case.</summary>
-        IList<T> IReadOnlyKistlContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
+        IList<T> IReadOnlyZetboxContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
             if (parent == null)
             {
@@ -446,7 +446,7 @@ namespace Kistl.API
         public event GenericEventHandler<IPersistenceObject> ObjectDeleted;
 
         /// <inheritdoc />
-        public event GenericEventHandler<IKistlContext> Changed;
+        public event GenericEventHandler<IZetboxContext> Changed;
 
 
         /// <summary>
@@ -475,50 +475,50 @@ namespace Kistl.API
 
         protected virtual void OnChanged()
         {
-            GenericEventHandler<IKistlContext> temp = Changed;
+            GenericEventHandler<IZetboxContext> temp = Changed;
             if (temp != null)
             {
-                temp(this, new GenericEventArgs<IKistlContext>() { Data = this });
+                temp(this, new GenericEventArgs<IZetboxContext>() { Data = this });
             }
         }
 
         /// <summary>
         /// Fired when the Context is beeing disposed.
         /// </summary>
-        public event GenericEventHandler<IReadOnlyKistlContext> Disposing;
+        public event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
 
         /// <inheritdoc />
         public virtual void Dispose()
         {
-            GenericEventHandler<IReadOnlyKistlContext> temp = Disposing;
+            GenericEventHandler<IReadOnlyZetboxContext> temp = Disposing;
             if (temp != null)
             {
-                temp(this, new GenericEventArgs<IReadOnlyKistlContext>() { Data = this });
+                temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
             }
             // nothing to dispose
             IsDisposed = true;
         }
 
         /// <summary>Not implemented.</summary>
-        int IKistlContext.CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        int IZetboxContext.CreateBlob(System.IO.Stream s, string filename, string mimetype)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>Not implemented.</summary>
-        int IKistlContext.CreateBlob(System.IO.FileInfo fi, string mimetype)
+        int IZetboxContext.CreateBlob(System.IO.FileInfo fi, string mimetype)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>Not implemented.</summary>
-        System.IO.Stream IReadOnlyKistlContext.GetStream(int ID)
+        System.IO.Stream IReadOnlyZetboxContext.GetStream(int ID)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>Not implemented.</summary>
-        System.IO.FileInfo IReadOnlyKistlContext.GetFileInfo(int ID)
+        System.IO.FileInfo IReadOnlyZetboxContext.GetFileInfo(int ID)
         {
             throw new NotSupportedException();
         }
@@ -559,7 +559,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// Indicates that the Zetbox Context has some modified, added or deleted items
         /// </summary>
         public bool IsModified { get; private set; }
 
@@ -568,11 +568,11 @@ namespace Kistl.API
         /// </summary>
         public event EventHandler IsModifiedChanged;
 
-        #region IZBoxContextInternals Members
+        #region IZetboxContextInternals Members
 
-        int IZBoxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
+        int IZetboxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
 
-        void IZBoxContextInternals.SetModified(IPersistenceObject obj)
+        void IZetboxContextInternals.SetModified(IPersistenceObject obj)
         {
             if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
             {
@@ -585,7 +585,7 @@ namespace Kistl.API
             }
         }
 
-        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename)
+        string IZetboxContextInternals.StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
             // No supprt, but do not throw an exception
             // A memory context could be loaded from a file
@@ -595,7 +595,7 @@ namespace Kistl.API
 
         #endregion
 
-        #region IKistlContext Members
+        #region IZetboxContext Members
 
 
         public int GetSequenceNumber(Guid sequenceGuid)

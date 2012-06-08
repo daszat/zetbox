@@ -1,16 +1,16 @@
 
-namespace Kistl.DalProvider.Ef.Tests
+namespace Zetbox.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections.Generic;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Configuration;
-    using Kistl.App.Base;
-    using Kistl.App.Projekte;
-    using Kistl.DalProvider.Ef.Mocks;
-    using Kistl.Server;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Base;
+    using Zetbox.App.Projekte;
+    using Zetbox.DalProvider.Ef.Mocks;
+    using Zetbox.Server;
     using NUnit.Framework;
 
     [SetUpFixture]
@@ -21,15 +21,15 @@ namespace Kistl.DalProvider.Ef.Tests
         protected override void SetupBuilder(ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
-            builder.RegisterModule(new Kistl.API.ApiModule());
-            builder.RegisterModule(new Kistl.API.Common.ApiCommonModule());
-            builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
-            builder.RegisterModule(new Kistl.Server.ServerModule());
-            builder.RegisterModule(new Kistl.DalProvider.Ef.EfProvider());
-            builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
-            builder.RegisterModule(new Kistl.Objects.InterfaceModule());
-            builder.RegisterModule(new Kistl.Objects.EfModule());
-            builder.RegisterModule(new Kistl.Objects.MemoryModule());
+            builder.RegisterModule(new Zetbox.API.ApiModule());
+            builder.RegisterModule(new Zetbox.API.Common.ApiCommonModule());
+            builder.RegisterModule(new Zetbox.API.Server.ServerApiModule());
+            builder.RegisterModule(new Zetbox.Server.ServerModule());
+            builder.RegisterModule(new Zetbox.DalProvider.Ef.EfProvider());
+            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Zetbox.Objects.InterfaceModule());
+            builder.RegisterModule(new Zetbox.Objects.EfModule());
+            builder.RegisterModule(new Zetbox.Objects.MemoryModule());
 
             // load DB Utility from config
         }
@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.Ef.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.DalProvider.Ef.Tests.xml";
+            return "Zetbox.DalProvider.Ef.Tests.xml";
         }
 
         protected override HostType GetHostType()

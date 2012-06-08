@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Kistl.App.Test;
+using Zetbox.App.Test;
 
-namespace Kistl.API.AbstractConsumerTests.CompoundObjects
+namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
 {
     public abstract class when_changing : CompoundObjectFixture
     {

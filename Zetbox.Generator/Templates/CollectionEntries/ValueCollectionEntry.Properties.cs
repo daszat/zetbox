@@ -1,13 +1,13 @@
 
-namespace Kistl.Generator.Templates.CollectionEntries
+namespace Zetbox.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.App.Base;
-    using Kistl.Generator.Extensions;
+    using Zetbox.App.Base;
+    using Zetbox.Generator.Extensions;
 
     public partial class ValueCollectionEntry
     {
@@ -20,7 +20,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
             Properties.DelegatingProperty.Call(
                 Host, ctx,
-                "ParentObject", "Kistl.API.IDataObject",
+                "ParentObject", "Zetbox.API.IDataObject",
                 "Parent", interfaceType + ImplementationSuffix);
         }
 

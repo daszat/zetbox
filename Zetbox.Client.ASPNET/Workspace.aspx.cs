@@ -10,11 +10,11 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using Kistl.Client;
-using Kistl.Client.ASPNET.Toolkit;
-using Kistl.Client.Presentables;
+using Zetbox.Client;
+using Zetbox.Client.ASPNET.Toolkit;
+using Zetbox.Client.Presentables;
 
-public partial class Workspace : Kistl.Client.ASPNET.Toolkit.Pages.WorkspacePage
+public partial class Workspace : Zetbox.Client.ASPNET.Toolkit.Pages.WorkspacePage
 {
     protected override Control ctrlMainContent
     {

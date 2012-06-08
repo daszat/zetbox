@@ -1,21 +1,21 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public class ValueCollectionEntry
         : Templates.CollectionEntries.ValueCollectionEntry
     {
-        public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
+        public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Property prop)
             : base(_host, ctx, prop)
         {
         }
@@ -58,7 +58,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
             Templates.Properties.DelegatingProperty.Call(
                 Host, ctx,
-                "ParentObject", "Kistl.API.IDataObject",
+                "ParentObject", "Zetbox.API.IDataObject",
                 "Parent", referencedImplementation);
         }
 
@@ -93,7 +93,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyBIndexPropertyTemplate()
         {
-            Templates.Properties.DelegatingProperty.Call(Host, ctx, "Index", "int?", "this.Proxy.Value" + Kistl.API.Helper.PositionSuffix, "int?");
+            Templates.Properties.DelegatingProperty.Call(Host, ctx, "Index", "int?", "this.Proxy.Value" + Zetbox.API.Helper.PositionSuffix, "int?");
         }
 
         protected override void ApplyClassTailTemplate()
@@ -114,7 +114,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
             if (IsOrdered())
             {
-                typeAndNameList.Add(new KeyValuePair<string, string>("int?", "Value" + Kistl.API.Helper.PositionSuffix));
+                typeAndNameList.Add(new KeyValuePair<string, string>("int?", "Value" + Zetbox.API.Helper.PositionSuffix));
             }
 
             // Even exportable value collection entries do not have an 

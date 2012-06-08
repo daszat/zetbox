@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     // TODO: Make that easier
     public interface IMultipleInstancesManager

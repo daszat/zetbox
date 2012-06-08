@@ -1,13 +1,13 @@
 
-namespace Kistl.DalProvider.Client
+namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.DalProvider.Base;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.DalProvider.Base;
     using System.IO;
 
     public abstract class DataObjectClientImpl
@@ -40,8 +40,8 @@ namespace Kistl.DalProvider.Client
         /// Reflects the current access rights by the current Identity. 
         /// Base implementations returnes always Full
         /// </summary>
-        private Kistl.API.AccessRights _currentAccessRights = Kistl.API.AccessRights.Full;
-        public override Kistl.API.AccessRights CurrentAccessRights
+        private Zetbox.API.AccessRights _currentAccessRights = Zetbox.API.AccessRights.Full;
+        public override Zetbox.API.AccessRights CurrentAccessRights
         {
             get
             {

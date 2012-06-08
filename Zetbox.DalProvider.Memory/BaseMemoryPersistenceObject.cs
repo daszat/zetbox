@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.Memory
+namespace Zetbox.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public abstract class BaseMemoryPersistenceObject
         : BasePersistenceObject
@@ -55,13 +55,13 @@ namespace Kistl.DalProvider.Memory
             _objectState = DataObjectState.Modified;
         }
 
-        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             sw.Write((int)ObjectState);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
             sr.ReadConverter(i => _objectState = (DataObjectState)i);

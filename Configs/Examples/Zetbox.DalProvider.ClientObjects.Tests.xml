@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>ClientObjects DalProvider Test Configuration</ConfigName>  
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
     <Modules>
       <!-- has to be loaded dynamically -->
-      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
+      <Module>Zetbox.Objects.ClientModule, Zetbox.Objects.ClientImpl</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>
@@ -14,7 +14,7 @@
     <string>..\Common\Core.Fallback</string>
     <string>..\Client\Core</string>
     <string>..\Client\Core.Generated</string>
-    <string>..\Common\App.ZBox</string>
-    <string>..\Client\App.ZBox</string>
+    <string>..\Common\App.Zetbox</string>
+    <string>..\Client\App.Zetbox</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>

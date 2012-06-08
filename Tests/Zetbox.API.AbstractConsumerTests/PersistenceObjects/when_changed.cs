@@ -4,11 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
+using Zetbox.API;
 
 using NUnit.Framework;
 
-namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
+namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
 {
     
     public abstract class when_changed

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`One_to_N_relations_Ones`"
            abstract="false"
@@ -25,7 +25,7 @@
 <!-- ObjectReferenceProperty -->
         <set name="NSide" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_OneSide`" />
-            <one-to-many class="Kistl.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 

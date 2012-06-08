@@ -11,11 +11,11 @@ namespace at.dasz.DocumentManagement
     using System.Xml;
     using System.Xml.Serialization;
 
-    using Kistl.API;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Kistl.API.Server;
-    using Kistl.DalProvider.Ef;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
 
@@ -24,7 +24,7 @@ namespace at.dasz.DocumentManagement
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="File")]
     [System.Diagnostics.DebuggerDisplay("File")]
-    public abstract class FileEfImpl : BaseServerDataObject_EntityFramework, File, Kistl.API.IExportableInternal
+    public abstract class FileEfImpl : BaseServerDataObject_EntityFramework, File, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -50,9 +50,9 @@ namespace at.dasz.DocumentManagement
     Preferred Storage: MergeIntoA
     */
         // object reference property
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
         // fkBackingName=_fk_Blob; fkGuidBackingName=_fk_guid_Blob;
-        // referencedInterface=Kistl.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -60,10 +60,10 @@ namespace at.dasz.DocumentManagement
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Blob Blob
+        public Zetbox.App.Base.Blob Blob
         {
             get { return BlobImpl; }
-            set { BlobImpl = (Kistl.App.Base.BlobEfImpl)value; }
+            set { BlobImpl = (Zetbox.App.Base.BlobEfImpl)value; }
         }
 
         private int? _fk_Blob;
@@ -72,14 +72,14 @@ namespace at.dasz.DocumentManagement
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_File_has_Blob", "Blob")]
-        public Kistl.App.Base.BlobEfImpl BlobImpl
+        public Zetbox.App.Base.BlobEfImpl BlobImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.BlobEfImpl __value;
-                EntityReference<Kistl.App.Base.BlobEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BlobEfImpl>(
+                Zetbox.App.Base.BlobEfImpl __value;
+                EntityReference<Zetbox.App.Base.BlobEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.BlobEfImpl>(
                         "Model.FK_File_has_Blob",
                         "Blob");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -91,19 +91,19 @@ namespace at.dasz.DocumentManagement
                 __value = r.Value;
                 if (OnBlob_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Kistl.App.Base.Blob>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Blob>(__value);
                     OnBlob_Getter(this, e);
-                    __value = (Kistl.App.Base.BlobEfImpl)e.Result;
+                    __value = (Zetbox.App.Base.BlobEfImpl)e.Result;
                 }
                 return __value;
             }
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.BlobEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BlobEfImpl>(
+                EntityReference<Zetbox.App.Base.BlobEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.BlobEfImpl>(
                         "Model.FK_File_has_Blob",
                         "Blob");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -111,24 +111,24 @@ namespace at.dasz.DocumentManagement
                 {
                     r.Load();
                 }
-                Kistl.App.Base.BlobEfImpl __oldValue = (Kistl.App.Base.BlobEfImpl)r.Value;
-                Kistl.App.Base.BlobEfImpl __newValue = (Kistl.App.Base.BlobEfImpl)value;
+                Zetbox.App.Base.BlobEfImpl __oldValue = (Zetbox.App.Base.BlobEfImpl)r.Value;
+                Zetbox.App.Base.BlobEfImpl __newValue = (Zetbox.App.Base.BlobEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Blob", __oldValue, __newValue);
 
                 if (OnBlob_PreSetter != null)
                 {
-                    var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Blob>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Blob>(__oldValue, __newValue);
                     OnBlob_PreSetter(this, e);
-                    __newValue = (Kistl.App.Base.BlobEfImpl)e.Result;
+                    __newValue = (Zetbox.App.Base.BlobEfImpl)e.Result;
                 }
 
-                r.Value = (Kistl.App.Base.BlobEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.BlobEfImpl)__newValue;
 
                 if (OnBlob_PostSetter != null)
                 {
-                    var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Blob>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Blob>(__oldValue, __newValue);
                     OnBlob_PostSetter(this, e);
                 }
 
@@ -137,10 +137,10 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
-		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_Getter;
-		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PreSetter;
-		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PostSetter;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnBlob_IsValid;
 
@@ -154,9 +154,9 @@ namespace at.dasz.DocumentManagement
     Preferred Storage: MergeIntoA
     */
         // object reference property
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
-        // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -164,10 +164,10 @@ namespace at.dasz.DocumentManagement
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Identity ChangedBy
+        public Zetbox.App.Base.Identity ChangedBy
         {
             get { return ChangedByImpl; }
-            set { ChangedByImpl = (Kistl.App.Base.IdentityEfImpl)value; }
+            set { ChangedByImpl = (Zetbox.App.Base.IdentityEfImpl)value; }
         }
 
         private int? _fk_ChangedBy;
@@ -175,14 +175,14 @@ namespace at.dasz.DocumentManagement
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_File_was_ChangedBy", "ChangedBy")]
-        public Kistl.App.Base.IdentityEfImpl ChangedByImpl
+        public Zetbox.App.Base.IdentityEfImpl ChangedByImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.IdentityEfImpl __value;
-                EntityReference<Kistl.App.Base.IdentityEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
+                Zetbox.App.Base.IdentityEfImpl __value;
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
                         "Model.FK_File_was_ChangedBy",
                         "ChangedBy");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -194,19 +194,19 @@ namespace at.dasz.DocumentManagement
                 __value = r.Value;
                 if (OnChangedBy_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Kistl.App.Base.Identity>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
                     OnChangedBy_Getter(this, e);
-                    __value = (Kistl.App.Base.IdentityEfImpl)e.Result;
+                    __value = (Zetbox.App.Base.IdentityEfImpl)e.Result;
                 }
                 return __value;
             }
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.IdentityEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
                         "Model.FK_File_was_ChangedBy",
                         "ChangedBy");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -214,24 +214,24 @@ namespace at.dasz.DocumentManagement
                 {
                     r.Load();
                 }
-                Kistl.App.Base.IdentityEfImpl __oldValue = (Kistl.App.Base.IdentityEfImpl)r.Value;
-                Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
+                Zetbox.App.Base.IdentityEfImpl __oldValue = (Zetbox.App.Base.IdentityEfImpl)r.Value;
+                Zetbox.App.Base.IdentityEfImpl __newValue = (Zetbox.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
 
                 if (OnChangedBy_PreSetter != null)
                 {
-                    var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PreSetter(this, e);
-                    __newValue = (Kistl.App.Base.IdentityEfImpl)e.Result;
+                    __newValue = (Zetbox.App.Base.IdentityEfImpl)e.Result;
                 }
 
-                r.Value = (Kistl.App.Base.IdentityEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.IdentityEfImpl)__newValue;
 
                 if (OnChangedBy_PostSetter != null)
                 {
-                    var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PostSetter(this, e);
                 }
 
@@ -240,10 +240,10 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
-		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnChangedBy_IsValid;
 
@@ -251,7 +251,7 @@ namespace at.dasz.DocumentManagement
         /// Date and time where this object was changed
         /// </summary>
         // value type property
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -264,14 +264,14 @@ namespace at.dasz.DocumentManagement
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
                 if (!_isChangedOnSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c144678d-632d-4a83-8041-280d674f4453"));
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("c144678d-632d-4a83-8041-280d674f4453"));
                     if (__p != null) {
                         _isChangedOnSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._ChangedOn = (DateTime)__tmp_value;
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'File.ChangedOn'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'File.ChangedOn'");
                     }
                 }
                 if (OnChangedOn_Getter != null)
@@ -322,7 +322,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         private bool _isChangedOnSet = false;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_PostSetter;
@@ -339,9 +339,9 @@ namespace at.dasz.DocumentManagement
     Preferred Storage: MergeIntoA
     */
         // object reference property
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
-        // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -349,10 +349,10 @@ namespace at.dasz.DocumentManagement
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Identity CreatedBy
+        public Zetbox.App.Base.Identity CreatedBy
         {
             get { return CreatedByImpl; }
-            set { CreatedByImpl = (Kistl.App.Base.IdentityEfImpl)value; }
+            set { CreatedByImpl = (Zetbox.App.Base.IdentityEfImpl)value; }
         }
 
         private int? _fk_CreatedBy;
@@ -360,14 +360,14 @@ namespace at.dasz.DocumentManagement
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_File_was_CreatedBy", "CreatedBy")]
-        public Kistl.App.Base.IdentityEfImpl CreatedByImpl
+        public Zetbox.App.Base.IdentityEfImpl CreatedByImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.IdentityEfImpl __value;
-                EntityReference<Kistl.App.Base.IdentityEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
+                Zetbox.App.Base.IdentityEfImpl __value;
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
                         "Model.FK_File_was_CreatedBy",
                         "CreatedBy");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -379,19 +379,19 @@ namespace at.dasz.DocumentManagement
                 __value = r.Value;
                 if (OnCreatedBy_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Kistl.App.Base.Identity>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
                     OnCreatedBy_Getter(this, e);
-                    __value = (Kistl.App.Base.IdentityEfImpl)e.Result;
+                    __value = (Zetbox.App.Base.IdentityEfImpl)e.Result;
                 }
                 return __value;
             }
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.IdentityEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
                         "Model.FK_File_was_CreatedBy",
                         "CreatedBy");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -399,24 +399,24 @@ namespace at.dasz.DocumentManagement
                 {
                     r.Load();
                 }
-                Kistl.App.Base.IdentityEfImpl __oldValue = (Kistl.App.Base.IdentityEfImpl)r.Value;
-                Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
+                Zetbox.App.Base.IdentityEfImpl __oldValue = (Zetbox.App.Base.IdentityEfImpl)r.Value;
+                Zetbox.App.Base.IdentityEfImpl __newValue = (Zetbox.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
 
                 if (OnCreatedBy_PreSetter != null)
                 {
-                    var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PreSetter(this, e);
-                    __newValue = (Kistl.App.Base.IdentityEfImpl)e.Result;
+                    __newValue = (Zetbox.App.Base.IdentityEfImpl)e.Result;
                 }
 
-                r.Value = (Kistl.App.Base.IdentityEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.IdentityEfImpl)__newValue;
 
                 if (OnCreatedBy_PostSetter != null)
                 {
-                    var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PostSetter(this, e);
                 }
 
@@ -425,10 +425,10 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
-		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedBy_IsValid;
 
@@ -436,7 +436,7 @@ namespace at.dasz.DocumentManagement
         /// Date and time where this object was created
         /// </summary>
         // value type property
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -449,14 +449,14 @@ namespace at.dasz.DocumentManagement
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
                 if (!_isCreatedOnSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e1892507-375b-4b52-ab20-16095dfc3514"));
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("e1892507-375b-4b52-ab20-16095dfc3514"));
                     if (__p != null) {
                         _isCreatedOnSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._CreatedOn = (DateTime)__tmp_value;
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'File.CreatedOn'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'File.CreatedOn'");
                     }
                 }
                 if (OnCreatedOn_Getter != null)
@@ -507,7 +507,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         private bool _isCreatedOnSet = false;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PostSetter;
@@ -518,7 +518,7 @@ namespace at.dasz.DocumentManagement
         /// Export Guid
         /// </summary>
         // value type property
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -531,14 +531,14 @@ namespace at.dasz.DocumentManagement
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("91566b41-879d-4e72-b48b-9677cc156649"));
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("91566b41-879d-4e72-b48b-9677cc156649"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this._ExportGuid = (Guid)__tmp_value;
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'File.ExportGuid'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'File.ExportGuid'");
                     }
                 }
                 if (OnExportGuid_Getter != null)
@@ -589,7 +589,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         private bool _isExportGuidSet = false;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_PostSetter;
@@ -600,7 +600,7 @@ namespace at.dasz.DocumentManagement
         /// Filename
         /// </summary>
         // value type property
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -658,7 +658,7 @@ namespace at.dasz.DocumentManagement
                 ReportEfPropertyChanged("Name");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PostSetter;
@@ -668,11 +668,11 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_File")]
-        public virtual Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+        public virtual Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
-            var e = new MethodReturnEventArgs<Kistl.App.Base.Blob>();
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_File != null)
             {
                 OnHandleBlobChange_File(this, e, oldBlob, newBlob);
@@ -683,9 +683,9 @@ namespace at.dasz.DocumentManagement
             }
             return e.Result;
         }
-        public delegate void HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Blob> ret, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob);
+        public delegate void HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> ret, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob);
         public static event HandleBlobChange_Handler<File> OnHandleBlobChange_File;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnHandleBlobChange_File_CanExec;
 
@@ -727,12 +727,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_File")]
         public virtual void Open()
         {
@@ -748,7 +748,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void Open_Handler<T>(T obj);
         public static event Open_Handler<File> OnOpen_File;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnOpen_File_CanExec;
 
@@ -790,12 +790,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_File")]
         public virtual void Upload()
         {
@@ -811,7 +811,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void Upload_Handler<T>(T obj);
         public static event Upload_Handler<File> OnUpload_File;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnUpload_File_CanExec;
 
@@ -853,7 +853,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -876,7 +876,7 @@ namespace at.dasz.DocumentManagement
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
         }
@@ -884,7 +884,7 @@ namespace at.dasz.DocumentManagement
         {
             base.SetNew();
         }
-        #region Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+        #region Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
@@ -904,7 +904,7 @@ namespace at.dasz.DocumentManagement
                     break;
             }
         }
-        #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+        #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -916,24 +916,24 @@ namespace at.dasz.DocumentManagement
             // fix direct object references
 
             if (_fk_guid_Blob.HasValue)
-                BlobImpl = (Kistl.App.Base.BlobEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_Blob.Value);
+                BlobImpl = (Zetbox.App.Base.BlobEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value);
             else
             if (_fk_Blob.HasValue)
-                BlobImpl = (Kistl.App.Base.BlobEfImpl)Context.Find<Kistl.App.Base.Blob>(_fk_Blob.Value);
+                BlobImpl = (Zetbox.App.Base.BlobEfImpl)Context.Find<Zetbox.App.Base.Blob>(_fk_Blob.Value);
             else
                 BlobImpl = null;
 
             if (_fk_ChangedBy.HasValue)
-                ChangedByImpl = (Kistl.App.Base.IdentityEfImpl)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
+                ChangedByImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
             else
                 ChangedByImpl = null;
 
             if (_fk_CreatedBy.HasValue)
-                CreatedByImpl = (Kistl.App.Base.IdentityEfImpl)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
+                CreatedByImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
                 CreatedByImpl = null;
         }
-        #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
         private static System.ComponentModel.PropertyDescriptor[] _properties;
 
@@ -947,7 +947,7 @@ namespace at.dasz.DocumentManagement
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<File, Kistl.App.Base.Blob>(
+                    new PropertyDescriptorEfImpl<File, Zetbox.App.Base.Blob>(
                         lazyCtx,
                         new Guid("ef5addda-340f-4a87-83c9-3ee419519343"),
                         "Blob",
@@ -956,7 +956,7 @@ namespace at.dasz.DocumentManagement
                         (obj, val) => obj.Blob = val,
 						obj => OnBlob_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<File, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<File, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c22516f3-b897-4827-a025-27d1515aadcd"),
                         "ChangedBy",
@@ -974,7 +974,7 @@ namespace at.dasz.DocumentManagement
                         (obj, val) => obj.ChangedOn = val,
 						obj => OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<File, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorEfImpl<File, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("dc8da15a-a432-43fd-b93f-9b3530ce3144"),
                         "CreatedBy",
@@ -1020,8 +1020,8 @@ namespace at.dasz.DocumentManagement
             _InitializePropertyDescriptors(lazyCtx);
             props.AddRange(_properties);
         }
-        #endregion // Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #region Kistl.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnToString_File")]
@@ -1091,8 +1091,8 @@ namespace at.dasz.DocumentManagement
         }
         public static event ObjectEventHandler<File> OnNotifyDeleting_File;
 
-        #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -1122,25 +1122,25 @@ namespace at.dasz.DocumentManagement
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.BlobEfImpl>("Model.FK_File_has_Blob", "Blob").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.BlobEfImpl>("Model.FK_File_has_Blob", "Blob").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             if (auxObjects != null) {
                 auxObjects.Add(Blob);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_File_was_ChangedBy", "ChangedBy").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_File_was_ChangedBy", "ChangedBy").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._isChangedOnSet);
@@ -1148,7 +1148,7 @@ namespace at.dasz.DocumentManagement
                 binStream.Write(this._ChangedOn);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_File_was_CreatedBy", "CreatedBy").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_File_was_CreatedBy", "CreatedBy").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._isCreatedOnSet);
@@ -1162,12 +1162,12 @@ namespace at.dasz.DocumentManagement
             binStream.Write(this._Name);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_Blob);
             binStream.Read(out this._fk_ChangedBy);
             this._isChangedOnSet = binStream.ReadBoolean();
@@ -1184,7 +1184,7 @@ namespace at.dasz.DocumentManagement
                 this._ExportGuid = binStream.ReadGuid();
             }
             this._Name = binStream.ReadString();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null

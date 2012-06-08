@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -10,22 +10,22 @@ namespace Kistl.Client.Presentables
     using System.Text;
     using System.Threading;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Client.PerfCounter;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
     /// used by the rendering infrastructure to create ViewModels and Views.
     /// </summary>
-    public abstract class ViewModelFactory : Kistl.Client.Presentables.IViewModelFactory
+    public abstract class ViewModelFactory : Zetbox.Client.Presentables.IViewModelFactory
     {
         /// <summary>
         /// Gets the Toolkit of the implementation. A constant.
@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables
 
         protected readonly Autofac.ILifetimeScope Container;
         protected readonly IFrozenContext FrozenContext;
-        protected readonly KistlConfig Configuration;
+        protected readonly ZetboxConfig Configuration;
 
         private struct VMCacheKey
         {
@@ -68,7 +68,7 @@ namespace Kistl.Client.Presentables
 
         private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
 
-        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
+        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
         {
             if (container == null) throw new ArgumentNullException("container");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
@@ -77,7 +77,7 @@ namespace Kistl.Client.Presentables
             this.Container = container;
             this.FrozenContext = frozenCtx;
             this.Configuration = cfg;
-            this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();
+            this.Managers = new Dictionary<IZetboxContext, IMultipleInstancesManager>();
             this._viewModelFactoryCache = new Dictionary<VMCacheKey, object>();
             this.PerfCounter = perfCounter;
         }
@@ -465,7 +465,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public ViewModel GetWorkspace(IKistlContext ctx)
+        public ViewModel GetWorkspace(IZetboxContext ctx)
         {
             if (Managers.ContainsKey(ctx))
             {
@@ -499,7 +499,7 @@ namespace Kistl.Client.Presentables
             ShowDialog(mdl, null);
         }
 
-        public void ShowDialog(ViewModel mdl, Kistl.App.GUI.ControlKind kind)
+        public void ShowDialog(ViewModel mdl, Zetbox.App.GUI.ControlKind kind)
         {
             if (mdl == null)
                 throw new ArgumentNullException("mdl");
@@ -520,13 +520,13 @@ namespace Kistl.Client.Presentables
 
         #region Workspace Management
 
-        protected Dictionary<IKistlContext, IMultipleInstancesManager> Managers { get; private set; }
+        protected Dictionary<IZetboxContext, IMultipleInstancesManager> Managers { get; private set; }
 
-        public virtual void OnIMultipleInstancesManagerCreated(IKistlContext ctx, IMultipleInstancesManager workspace)
+        public virtual void OnIMultipleInstancesManagerCreated(IZetboxContext ctx, IMultipleInstancesManager workspace)
         {
             this.Managers[ctx] = workspace;
         }
-        public virtual void OnIMultipleInstancesManagerDisposed(IKistlContext ctx, IMultipleInstancesManager workspace)
+        public virtual void OnIMultipleInstancesManagerDisposed(IZetboxContext ctx, IMultipleInstancesManager workspace)
         {
             this.Managers.Remove(ctx);
         }

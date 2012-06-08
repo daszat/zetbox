@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.API.Server {
+namespace Zetbox.API.Server {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.API.Server {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.API.Server.ApiServerResources", typeof(ApiServerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.API.Server.ApiServerResources", typeof(ApiServerResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

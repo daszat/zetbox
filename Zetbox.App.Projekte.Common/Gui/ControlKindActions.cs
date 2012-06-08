@@ -1,12 +1,12 @@
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// The collected default actions for ControlKind

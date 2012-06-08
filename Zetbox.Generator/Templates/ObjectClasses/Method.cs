@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
     using System;
     using System.CodeDom;
@@ -7,11 +7,11 @@ namespace Kistl.Generator.Templates.ObjectClasses
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class Method
     {
@@ -21,7 +21,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
             throw new NotSupportedException("this constructor only exists to allow overrinding in a CST");
         }
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, DataType implementor, Kistl.App.Base.Method m, int index)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, DataType implementor, Zetbox.App.Base.Method m, int index)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
             string indexSuffix = index == 0 ? String.Empty : index.ToString();

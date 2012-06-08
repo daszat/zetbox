@@ -1,16 +1,16 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class AccessControlActions
     {
         [Invocation]
-        public static void ToString(Kistl.App.Base.AccessControl obj, MethodReturnEventArgs<string> e)
+        public static void ToString(Zetbox.App.Base.AccessControl obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0} ({1}) {2}",
                 obj.Name ?? string.Empty,

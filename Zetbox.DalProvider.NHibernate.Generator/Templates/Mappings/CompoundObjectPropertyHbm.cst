@@ -1,13 +1,13 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="Mappings.CompoundObjectPropertyHbm"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.CompoundObjectPropertyHbm" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings.CompoundObjectPropertyHbm" 
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="prefix" Type="string" %>
 <%@ Parameter Name="propName" Type="string" %>
 <%@ Parameter Name="columnName" Type="string" %>

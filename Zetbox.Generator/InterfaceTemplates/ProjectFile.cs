@@ -1,16 +1,16 @@
 
-namespace Kistl.Generator.InterfaceTemplates
+namespace Zetbox.Generator.InterfaceTemplates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
+    using Zetbox.API.Server;
 
     public class ProjectFile
         : Templates.ProjectFile
     {
-        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
+        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
             : base(_host, ctx, projectGuid, fileNames, schemaProviders)
         {
         }
@@ -18,7 +18,7 @@ namespace Kistl.Generator.InterfaceTemplates
         protected override string GetAssemblyName()
         {
             // hardcode interface assembly name
-            return "Kistl.Objects";
+            return "Zetbox.Objects";
         }
 
         protected override void ApplyAdditionalReferences()

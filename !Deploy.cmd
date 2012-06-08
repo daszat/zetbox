@@ -5,7 +5,7 @@ echo Changes to the object model are generated.
 echo Use this to apply upstream changes.
 echo ********************************************************************************
 
-set config=Configs\%zenv%\Kistl.Server.Service.xml
+set config=Configs\%zenv%\Zetbox.Server.Service.xml
 
 if .%1. == .. GOTO GOON
 
@@ -13,7 +13,7 @@ set config=%1
 
 :GOON
 
-bin\debug\Kistl.Server.Service.exe %config% -deploy-update -generate
+bin\debug\Zetbox.Server.Service.exe %config% -deploy-update -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

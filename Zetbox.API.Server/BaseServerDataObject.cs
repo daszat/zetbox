@@ -1,6 +1,6 @@
 //#define TRACE_OBJECT_CREATION
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Kistl.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
 
     /// <summary>
     /// Abstract Base Class for a PersistenceObject on the Server Side
@@ -117,7 +117,7 @@ namespace Kistl.API.Server
             SetObjectState(DataObjectState.Modified);
         }
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             // avoid double-attaches
             if (this.Context != null && this.Context == ctx)
@@ -126,7 +126,7 @@ namespace Kistl.API.Server
             }
             else if (this.Context != null && this.Context != ctx)
             {
-                throw new WrongKistlContextException("Object cannot be attached to a new Context while attached to another Context.");
+                throw new WrongZetboxContextException("Object cannot be attached to a new Context while attached to another Context.");
             }
 
             if (!ObjectState.In(DataObjectState.Detached, DataObjectState.New))
@@ -140,14 +140,14 @@ namespace Kistl.API.Server
             base.AttachToContext(ctx);
         }
 
-        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             sw.Write((int)ObjectState);
             sw.Write((int)CurrentAccessRights);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
             sr.ReadConverter(i => ClientObjectState = (DataObjectState)i);
@@ -166,7 +166,7 @@ namespace Kistl.API.Server
                 foreach (var msg in AuditLog.Values)
                 {
                     var entry = Context.CreateCompoundObject<AuditEntry>();
-                    entry.Identity = GetIdentity(Context as IKistlServerContext);
+                    entry.Identity = GetIdentity(Context as IZetboxServerContext);
                     entry.MessageFormat = "{0} geändert von '{1}' auf '{2}'";
                     entry.PropertyName = msg.property;
                     entry.OldValue = msg.oldValue == null ? String.Empty : msg.oldValue.ToString();
@@ -178,7 +178,7 @@ namespace Kistl.API.Server
             else if (this.ObjectState == DataObjectState.New)
             {
                 var entry = Context.CreateCompoundObject<AuditEntry>();
-                entry.Identity = GetIdentity(Context as IKistlServerContext);
+                entry.Identity = GetIdentity(Context as IZetboxServerContext);
                 entry.MessageFormat = ApiServerResources.ObjectCreated;
                 entry.PropertyName = String.Empty;
                 entry.OldValue = String.Empty;
@@ -187,7 +187,7 @@ namespace Kistl.API.Server
             }
         }
 
-        private static string GetIdentity(IKistlServerContext serverCtx)
+        private static string GetIdentity(IZetboxServerContext serverCtx)
         {
             return serverCtx != null && serverCtx.Identity != null
                 ? string.IsNullOrEmpty(serverCtx.Identity.DisplayName)

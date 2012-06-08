@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     using System;
     using System.Collections.Generic;
@@ -9,15 +9,15 @@ namespace Kistl.Server
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.App.Packaging;
-    using Kistl.Generator;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.App.Packaging;
+    using Zetbox.Generator;
 
     /// <summary>
     /// Central Server Object
@@ -25,7 +25,7 @@ namespace Kistl.Server
     internal sealed class Server
         : IDisposable, IServer
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server");
 
         public Server(ILifetimeScope container)
         {
@@ -42,7 +42,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCall("AnalyzeDatabase", connectionName))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                var config = subContainer.Resolve<KistlConfig>();
+                var config = subContainer.Resolve<ZetboxConfig>();
                 var connectionString = config.Server.GetConnectionString(connectionName);
                 var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
                 schemaProvider.Open(connectionString.ConnectionString);
@@ -79,7 +79,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("Export", "file=[{0}],schemaModules=[{1}],ownerModules=[{2}]", file, string.Join(";", schemaModules ?? new string[] { }), string.Join(";", ownerModules ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Exporter.ExportFromContext(subContainer.Resolve<IKistlServerContext>(), file, schemaModules, ownerModules);
+                Exporter.ExportFromContext(subContainer.Resolve<IZetboxServerContext>(), file, schemaModules, ownerModules);
             }
         }
 
@@ -88,7 +88,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("Import", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlServerContext ctx = subContainer.Resolve<IKistlServerContext>();
+                IZetboxServerContext ctx = subContainer.Resolve<IZetboxServerContext>();
                 Importer.LoadFromXml(ctx, files);
                 Log.Info("Submitting changes");
                 ctx.SubmitRestore();
@@ -100,7 +100,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("Publish", "file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Exporter.PublishFromContext(subContainer.Resolve<IKistlServerContext>(), file, namespaces);
+                Exporter.PublishFromContext(subContainer.Resolve<IZetboxServerContext>(), file, namespaces);
             }
         }
 
@@ -124,7 +124,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("Deploy", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                var ctx = subContainer.Resolve<IKistlServerContext>();
+                var ctx = subContainer.Resolve<IZetboxServerContext>();
                 Importer.Deploy(ctx, files);
                 Log.Info("Submitting changes");
                 ctx.SubmitRestore();
@@ -136,7 +136,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("CheckSchemaFromCurrentMetaData", "withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                var ctx = subContainer.Resolve<IKistlServerContext>();
+                var ctx = subContainer.Resolve<IZetboxServerContext>();
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.CheckSchema(withRepair);
             }
@@ -147,9 +147,9 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("CheckSchema", "withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
-                KistlConfig cfg = subContainer.Resolve<KistlConfig>();
-                var connectionString = cfg.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                IZetboxContext ctx = subContainer.Resolve<BaseMemoryContext>();
+                ZetboxConfig cfg = subContainer.Resolve<ZetboxConfig>();
+                var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
                 ISchemaProvider schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
                 schemaProvider.Open(connectionString.ConnectionString);
                 SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
@@ -164,7 +164,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("CheckSchema", "files=[{0}],withRepair=[{1}]", string.Join(", ", files), withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
+                IZetboxContext ctx = subContainer.Resolve<BaseMemoryContext>();
                 Importer.LoadFromXml(ctx, files);
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.CheckSchema(withRepair);
@@ -176,8 +176,8 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCall("UpdateSchema"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
-                IKistlContext dbctx = subContainer.Resolve<IKistlServerContext>();
+                IZetboxContext ctx = subContainer.Resolve<BaseMemoryContext>();
+                IZetboxContext dbctx = subContainer.Resolve<IZetboxServerContext>();
 
                 // load database contents into local cache
                 // to be independent of the database when managing
@@ -199,7 +199,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("UpdateSchema", "files=[{0}]", string.Join(", ", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
+                IZetboxContext ctx = subContainer.Resolve<BaseMemoryContext>();
                 Importer.LoadFromXml(ctx, files);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
@@ -212,17 +212,17 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCall("SyncIdentities"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<IKistlContext>();
+                IZetboxContext ctx = subContainer.Resolve<IZetboxContext>();
                 var userList = subContainer.Resolve<IIdentitySource>().GetAllIdentities();
 
-                var identities = ctx.GetQuery<Kistl.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());
-                var everyone = Kistl.NamedObjects.Base.Groups.Everyone.Find(ctx);
+                var identities = ctx.GetQuery<Zetbox.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());
+                var everyone = Zetbox.NamedObjects.Base.Groups.Everyone.Find(ctx);
 
                 foreach (var user in userList)
                 {
                     if (!identities.Contains(user.UserName.ToUpper()))
                     {
-                        var id = ctx.Create<Kistl.App.Base.Identity>();
+                        var id = ctx.Create<Zetbox.App.Base.Identity>();
                         id.UserName = user.UserName;
                         id.DisplayName = user.DisplayName;
                         id.Groups.Add(everyone);
@@ -241,9 +241,9 @@ namespace Kistl.Server
             {
                 //Log.Info("Currently no fixes to do");
 
-                var ctx = subContainer.Resolve<IKistlServerContext>();
+                var ctx = subContainer.Resolve<IZetboxServerContext>();
 
-                //foreach (var prj in ctx.GetQuery<ZBox.App.SchemaMigration.MigrationProject>())
+                //foreach (var prj in ctx.GetQuery<Zetbox.App.SchemaMigration.MigrationProject>())
                 //{
                 //    prj.UpdateFromSourceSchema();
                 //}
@@ -287,7 +287,7 @@ namespace Kistl.Server
                 //    }
                 //}
 
-                //var tr = typeof(Kistl.App.Base.ObjectClass).ToRef(ctx);
+                //var tr = typeof(Zetbox.App.Base.ObjectClass).ToRef(ctx);
                 //Console.WriteLine(tr.ToString());
 
                 //using (var s = new MemoryStream())
@@ -304,15 +304,15 @@ namespace Kistl.Server
         {
             using (var subContainer = container.BeginLifetimeScope())
             {
-                var config = subContainer.Resolve<KistlConfig>();
-                var connectionString = config.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                var config = subContainer.Resolve<ZetboxConfig>();
+                var connectionString = config.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
                 var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
                 schemaProvider.Open(connectionString.ConnectionString);
                 schemaProvider.DropAllObjects();
             }
         }
 
-        public List<IDataObject> GetParcelHack<T>(IKistlServerContext ctx, int lastID, int count)
+        public List<IDataObject> GetParcelHack<T>(IZetboxServerContext ctx, int lastID, int count)
             where T : class, IDataObject
         {
             // The query translator cannot properly handle the IDataObject cast:
@@ -326,9 +326,9 @@ namespace Kistl.Server
             return result;
         }
 
-        private List<IDataObject> GetParcel(Type t, IKistlServerContext ctx, int lastID, int count)
+        private List<IDataObject> GetParcel(Type t, IZetboxServerContext ctx, int lastID, int count)
         {
-            var mi = this.GetType().FindGenericMethod("GetParcelHack", new[] { t }, new Type[] { typeof(IKistlServerContext), typeof(int), typeof(int) });
+            var mi = this.GetType().FindGenericMethod("GetParcelHack", new[] { t }, new Type[] { typeof(IZetboxServerContext), typeof(int), typeof(int) });
             return (List<IDataObject>)mi.Invoke(this, new object[] { ctx, lastID, count });
         }
 
@@ -336,12 +336,12 @@ namespace Kistl.Server
         {
             using (Log.InfoTraceMethodCallFormat("RecalculateProperties", "properties.Length=[{0}]", properties == null ? "ALL" : properties.Length.ToString()))
             using (var propertyContainer = container.BeginLifetimeScope())
-            using (var propertyCtx = propertyContainer.Resolve<IKistlServerContext>())
+            using (var propertyCtx = propertyContainer.Resolve<IZetboxServerContext>())
             {
                 var subContainer = container.BeginLifetimeScope();
                 try
                 {
-                    var ctx = subContainer.Resolve<IKistlServerContext>();
+                    var ctx = subContainer.Resolve<IZetboxServerContext>();
                     if (properties == null)
                     {
                         properties = propertyCtx.GetQuery<ValueTypeProperty>().Where(p => p.IsCalculated).ToArray();
@@ -372,7 +372,7 @@ namespace Kistl.Server
                                 ctx.SubmitChanges();
                                 subContainer.Dispose();
                                 subContainer = container.BeginLifetimeScope();
-                                ctx = subContainer.Resolve<IKistlServerContext>();
+                                ctx = subContainer.Resolve<IZetboxServerContext>();
                             } while (parcel != null && parcel.Count > 0);
                         }
                         else if (clsGroup.Key is CompoundObject)
@@ -401,8 +401,8 @@ namespace Kistl.Server
         //{
         //    using (Log.InfoTraceMethodCall())
         //        using (var subContainer = container.CreateInnerContainer()) {
-        //        var ctx = subContainer.Resolve<IKistlServerContext>();
-        //        var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
+        //        var ctx = subContainer.Resolve<IZetboxServerContext>();
+        //        var list = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().ToList();
         //        ctx.SubmitChanges();
         //        Log.InfoFormat("Loaded [{0}] objects", ctx.AttachedObjects.Count());
         //    }
@@ -413,8 +413,8 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCall("FetchModules"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                var ctx = subContainer.Resolve<IKistlServerContext>();
-                var list = ctx.GetQuery<Kistl.App.Base.Module>().ToList();
+                var ctx = subContainer.Resolve<IZetboxServerContext>();
+                var list = ctx.GetQuery<Zetbox.App.Base.Module>().ToList();
                 ctx.SubmitChanges();
                 Log.InfoFormat("Fetched [{0}] modules; loaded [{1}] objects", list.Count, ctx.AttachedObjects.Count());
             }

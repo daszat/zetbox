@@ -133,7 +133,7 @@
     <value>Initialisiere grafische Oberfläche</value>
   </data>
   <data name="Startup_Message" xml:space="preserve">
-    <value>ZBox wird gestartet ...</value>
+    <value>Zetbox wird gestartet ...</value>
   </data>
   <data name="Startup_NoServerStart" xml:space="preserve">
     <value>Kein Server start erforderlich</value>

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
 
-    public static class KistlContextDebuggerSingleton
+    public static class ZetboxContextDebuggerSingleton
     {
         private readonly static object _lock = new object();
 
-        private static IKistlContextDebugger _Current;
+        private static IZetboxContextDebugger _Current;
 
-        public static void SetDebugger(IKistlContextDebugger debugger)
+        public static void SetDebugger(IZetboxContextDebugger debugger)
         {
             lock (_lock)
             {
@@ -21,12 +21,12 @@ namespace Kistl.API
         }
 
         // TODO: Replace by central ServiceDiscoveryService
-        public static IKistlContextDebugger GetDebugger()
+        public static IZetboxContextDebugger GetDebugger()
         {
             return _Current;
         }
 
-        public static void Created(IKistlContext ctx)
+        public static void Created(IZetboxContext ctx)
         {
             lock (_lock)
             {

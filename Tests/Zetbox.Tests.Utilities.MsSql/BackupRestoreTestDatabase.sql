@@ -1,9 +1,9 @@
 -- Backup Database
-BACKUP DATABASE zbox TO DISK = 'c:\temp\zbox.bak' WITH FORMAT
+BACKUP DATABASE zetbox TO DISK = 'c:\temp\zetbox.bak' WITH FORMAT
 GO
 -- Kill existing users
 DECLARE @dbname varchar(40)
-select @dbname = 'zbox_test'
+select @dbname = 'zetbox_test'
 DECLARE @strSQL varchar(255)
 
 CREATE table #tmpUsers(
@@ -48,19 +48,19 @@ GO
 -- Restore database
 declare @dbfile nvarchar(500)
 declare @logfile nvarchar(500)
-SELECT @dbfile = filename FROM zbox_test.sys.sysfiles where filename like '%.mdf'
-SELECT @logfile = filename FROM zbox_test.sys.sysfiles where filename like '%.ldf'
+SELECT @dbfile = filename FROM zetbox_test.sys.sysfiles where filename like '%.mdf'
+SELECT @logfile = filename FROM zetbox_test.sys.sysfiles where filename like '%.ldf'
 
-RESTORE DATABASE zbox_test FROM DISK = 'c:\temp\zbox.bak' 
+RESTORE DATABASE zetbox_test FROM DISK = 'c:\temp\zetbox.bak' 
 	WITH RECOVERY, REPLACE, 
-	MOVE 'zbox' to @dbfile,
-	MOVE 'zbox_log' to @logfile
+	MOVE 'zetbox' to @dbfile,
+	MOVE 'zetbox_log' to @logfile
 	
 -- for example:
--- SELECT filename FROM zbox.sys.sysfiles where filename like '%.mdf'
--- SELECT  filename FROM zbox.sys.sysfiles where filename like '%.ldf'
+-- SELECT filename FROM zetbox.sys.sysfiles where filename like '%.mdf'
+-- SELECT  filename FROM zetbox.sys.sysfiles where filename like '%.ldf'
 
--- RESTORE DATABASE zbox_test FROM DISK = 'c:\temp\kistl.bak' 
+-- RESTORE DATABASE zetbox_test FROM DISK = 'c:\temp\zetbox.bak' 
 -- 	WITH RECOVERY, REPLACE, 
--- 	MOVE 'zbox' to 'C:\ProgramData\MSSQL10.SQLEXPRESS\MSSQL\DATA\zbox_test.mdf',
--- 	MOVE 'zbox_log' to 'C:\ProgramData\MSSQL10.SQLEXPRESS\MSSQL\DATA\zbox_test_log.ldf'
+-- 	MOVE 'zetbox' to 'C:\ProgramData\MSSQL10.SQLEXPRESS\MSSQL\DATA\zetbox_test.mdf',
+-- 	MOVE 'zetbox_log' to 'C:\ProgramData\MSSQL10.SQLEXPRESS\MSSQL\DATA\zetbox_test_log.ldf'

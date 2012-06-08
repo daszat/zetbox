@@ -6,13 +6,13 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Kistl.API.Tests.Skeletons
+namespace Zetbox.API.Tests.Skeletons
 {
     public abstract class IPersistenceObjectTests<T>
         : IStreamableTests<T>
         where T : IPersistenceObject, new()
     {
-        protected IKistlContext ctx;
+        protected IZetboxContext ctx;
 
         public override void SetUp()
         {

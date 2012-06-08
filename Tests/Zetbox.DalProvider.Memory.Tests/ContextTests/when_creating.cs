@@ -1,13 +1,13 @@
 
-namespace Kistl.DalProvider.Memory.Tests.ContextTests
+namespace Zetbox.DalProvider.Memory.Tests.ContextTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
     using NUnit.Framework;
 
     [TestFixture]

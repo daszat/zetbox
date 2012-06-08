@@ -1,20 +1,20 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables.KistlBase;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     public class DataObjectSelectionTaskViewModel
         : WindowViewModel, IRefreshCommandListener
     {
-        public new delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent,
+        public new delegate DataObjectSelectionTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry,
             Action<IEnumerable<DataObjectViewModel>> callback,
@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables
         /// <param name="callback"></param>
         /// <param name="additionalActions"></param>
         public DataObjectSelectionTaskViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry,
             Action<IEnumerable<DataObjectViewModel>> callback,

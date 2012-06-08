@@ -1,17 +1,17 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="ObjectClasses.Method"
-    ClassName="Kistl.Generator.Templates.ObjectClasses.Method"
-    Inherits="Kistl.Generator.MemberTemplate" %>
+    ClassName="Zetbox.Generator.Templates.ObjectClasses.Method"
+    Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="dt" Type="Kistl.App.Base.DataType" %>
-<%@ Parameter Name="m" Type="Kistl.App.Base.Method" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
+<%@ Parameter Name="dt" Type="Zetbox.App.Base.DataType" %>
+<%@ Parameter Name="m" Type="Zetbox.App.Base.Method" %>
 <%@ Parameter Name="index" Type="int" %>
 <%@ Parameter Name="indexSuffix" Type="string" %>
 <%@ Parameter Name="eventName" Type="string" %>

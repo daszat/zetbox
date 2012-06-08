@@ -1,16 +1,16 @@
 ﻿<%@ CodeTemplate Language="C#"    
     Name="Properties.ObjectListProperty"
-    ClassName="Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty"    
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty"    
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
+<%@ Parameter Name="serializationList" Type="Zetbox.Generator.Templates.Serialization.SerializationMembersList" %>
 <%@ Parameter Name="name" Type="string" %>
 <%@ Parameter Name="wrapperName" Type="string" %>
 <%@ Parameter Name="wrapperClass" Type="string" %>
@@ -33,7 +33,7 @@
     string assocName = rel.GetAssociationName() + (relEnd.Multiplicity.UpperBound() > 1 ? "_" + relEnd.GetRole().ToString() : String.Empty);
     string targetRoleName = otherEnd.RoleName;
 
-    // which Kistl interface this is    
+    // which Zetbox interface this is    
     string thisInterface = relEnd.Type.GetDataTypeString();
     // the actual implementation class of the list's elements
     string referencedImplementation = referencedInterface + ImplementationSuffix;
@@ -99,7 +99,7 @@
 <%
         if (serializationList != null)
         {
-            serializationList.Add("Serialization.EagerLoadingSerialization", Kistl.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true, false, null);
+            serializationList.Add("Serialization.EagerLoadingSerialization", Zetbox.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true, false, null);
         }
     }
 %>

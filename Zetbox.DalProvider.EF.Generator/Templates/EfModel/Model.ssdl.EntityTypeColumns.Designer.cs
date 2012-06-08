@@ -2,33 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
+namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst")]
-    public partial class ModelSsdlEntityTypeColumns : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst")]
+    public partial class ModelSsdlEntityTypeColumns : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected IEnumerable<Property> properties;
 		protected string prefix;
 		protected ISchemaProvider schemaProvider;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<Property> properties, string prefix, ISchemaProvider schemaProvider)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, IEnumerable<Property> properties, string prefix, ISchemaProvider schemaProvider)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("EfModel.ModelSsdlEntityTypeColumns", ctx, properties, prefix, schemaProvider);
         }
 
-        public ModelSsdlEntityTypeColumns(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<Property> properties, string prefix, ISchemaProvider schemaProvider)
+        public ModelSsdlEntityTypeColumns(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, IEnumerable<Property> properties, string prefix, ISchemaProvider schemaProvider)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -40,7 +40,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 
         public override void Generate()
         {
-#line 21 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 21 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 /*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
 	 */
@@ -52,10 +52,10 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 		if (p is CompoundObjectProperty)
 		{
 
-#line 31 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 31 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("		\r\n");
 this.WriteObjects("    <Property Name=\"",  Construct.NestedColumnName(p, prefix) , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Boolean) , "\" Nullable=\"false\" />\r\n");
-#line 34 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 34 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
 				Construct.NestedColumnName(p, prefix),
@@ -96,9 +96,9 @@ ApplyEntityTypeColumnDefs(
 				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
 			}
 
-#line 74 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 74 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\r\n");
-#line 76 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 76 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 	}
 

@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Ef.Tests
+namespace Zetbox.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,11 +7,11 @@ namespace Kistl.DalProvider.Ef.Tests
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Tests.Skeletons;
-    using Kistl.App.Test;
-    using Kistl.DalProvider.Ef;
-    using Kistl.DalProvider.Ef.Mocks;
+    using Zetbox.API;
+    using Zetbox.API.Tests.Skeletons;
+    using Zetbox.App.Test;
+    using Zetbox.DalProvider.Ef;
+    using Zetbox.DalProvider.Ef.Mocks;
     using NUnit.Framework;
 
     [TestFixture]

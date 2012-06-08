@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Common\App.$safesolutionname$\</OutputPath>
-    <KistlOutputPath>..\bin\Debug\</KistlOutputPath>
+    <ZetboxOutputPath>..\bin\Debug\</ZetboxOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\bin\Release\Common\App.$safesolutionname$\</OutputPath>
-    <KistlOutputPath>..\bin\Release\</KistlOutputPath>
+    <ZetboxOutputPath>..\bin\Release\</ZetboxOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -37,30 +37,30 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\Common\App.$safesolutionname$\</OutputPath>
-    <KistlOutputPath>..\bin\Debug\</KistlOutputPath>
+    <ZetboxOutputPath>..\bin\Debug\</ZetboxOutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\Libs\Kistl\Common\Core\Autofac.dll</HintPath>
+      <HintPath>..\Libs\Zetbox\Common\Core\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.API">
-      <HintPath>..\Libs\Kistl\Common\Core\Kistl.API.dll</HintPath>
+    <Reference Include="Zetbox.API">
+      <HintPath>..\Libs\Zetbox\Common\Core\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.API.Common">
-      <HintPath>..\Libs\Kistl\Common\Core\Kistl.API.Common.dll</HintPath>
+    <Reference Include="Zetbox.API.Common">
+      <HintPath>..\Libs\Zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.Objects">
-      <HintPath>..\bin\Debug\Common\Core.Generated\Kistl.Objects.dll</HintPath>
+    <Reference Include="Zetbox.Objects">
+      <HintPath>..\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\Libs\Kistl\Common\Core\log4net.dll</HintPath>
+      <HintPath>..\Libs\Zetbox\Common\Core\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System"/>
@@ -76,9 +76,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <KistlFiles Include="..\Libs\Kistl\**\*.*">
+    <ZetboxFiles Include="..\Libs\Zetbox\**\*.*">
       <InProject>false</InProject>
-    </KistlFiles>
+    </ZetboxFiles>
     <Configs Include="..\Configs\**\*.*">
       <InProject>false</InProject>
     </Configs>
@@ -94,17 +94,17 @@
        Other similar extension points exist, see Microsoft.Common.targets.  -->
   <Target Name="BeforeBuild">
     <Copy
-      SourceFiles="@(KistlFiles)"
-      DestinationFiles="@(KistlFiles->'$(KistlOutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+      SourceFiles="@(ZetboxFiles)"
+      DestinationFiles="@(ZetboxFiles->'$(ZetboxOutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy
       SourceFiles="@(Configs)"
-      DestinationFiles="@(Configs->'$(KistlOutputPath)\Configs\%(RecursiveDir)%(Filename)%(Extension)')" />
+      DestinationFiles="@(Configs->'$(ZetboxOutputPath)\Configs\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy
       SourceFiles="@(MyModules)"
-      DestinationFiles="@(MyModules->'$(KistlOutputPath)\Modules\%(RecursiveDir)%(Filename)%(Extension)')" />
+      DestinationFiles="@(MyModules->'$(ZetboxOutputPath)\Modules\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy
       SourceFiles="@(MyData)"
-      DestinationFiles="@(MyData->'$(KistlOutputPath)\Data\%(RecursiveDir)%(Filename)%(Extension)')" />
+      DestinationFiles="@(MyData->'$(ZetboxOutputPath)\Data\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <!--<Target Name="AfterBuild">
   </Target>-->

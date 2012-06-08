@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaManagement.NpgsqlProvider
+namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 {
     using System;
     using System.Collections.Generic;
@@ -9,21 +9,21 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
     using Npgsql;
 
     public class Postgresql
         : AdoNetSchemaProvider<NpgsqlConnection, NpgsqlTransaction, NpgsqlCommand>
     {
-        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger("Kistl.Server.Schema.Npgsql");
+        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Npgsql");
         protected override log4net.ILog Log { get { return _log; } }
-        private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Kistl.Server.Schema.Npgsql.Queries");
+        private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Npgsql.Queries");
         protected override log4net.ILog QueryLog { get { return _queryLog; } }
 
-        private readonly static log4net.ILog _copyLog = log4net.LogManager.GetLogger("Kistl.Server.Schema.Npgsql.COPY");
+        private readonly static log4net.ILog _copyLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Npgsql.COPY");
 
         #region Meta data
 
@@ -914,7 +914,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         #endregion
 
-        #region ZBox Schema Handling
+        #region Zetbox Schema Handling
 
         protected override string GetSchemaInsertStatement()
         {
@@ -928,7 +928,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         #endregion
 
-        #region zBox Accelerators
+        #region zetbox Accelerators
 
         protected override bool CallRepairPositionColumn(bool repair, TableRef tblName, string indexName)
         {
@@ -1206,13 +1206,13 @@ LANGUAGE 'plpgsql' VOLATILE",
         public override void ExecRefreshAllRightsProcedure()
         {
             Log.DebugFormat("Refreshing all rights");
-            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
         public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetProcedureName("dbo", Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
             sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("PERFORM {0}(refreshID);", FormatSchemaName(i))).ToArray()));
             sb.AppendLine();
@@ -1237,7 +1237,7 @@ LANGUAGE 'plpgsql' VOLATILE",
                 }
             }
 
-            ExecuteSqlResource(this.GetType(), String.Format(@"Kistl.Server.SchemaManagement.NpgsqlProvider.Scripts.{0}.sql", procName));
+            ExecuteSqlResource(this.GetType(), String.Format(@"Zetbox.Server.SchemaManagement.NpgsqlProvider.Scripts.{0}.sql", procName));
 
             var createTableProcQuery = new StringBuilder();
             createTableProcQuery.AppendFormat("CREATE OR REPLACE FUNCTION \"dbo\".\"{0}\" (repair boolean, tblName text, colName text) RETURNS boolean AS $BODY$", tableProcName);
@@ -1251,7 +1251,7 @@ LANGUAGE 'plpgsql' VOLATILE",
                 createTableProcQuery.Append("\t");
                 foreach (var refSpec in tbl)
                 {
-                    createTableProcQuery.AppendFormat("IF colName IS NULL OR colName = '{0}{1}' THEN", refSpec.Value, Kistl.API.Helper.PositionSuffix);
+                    createTableProcQuery.AppendFormat("IF colName IS NULL OR colName = '{0}{1}' THEN", refSpec.Value, Zetbox.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendFormat(
                         // TODO: use named parameters with 9.0: "\t\tresult := \"RepairPositionColumnValidity\"(repair := repair, tblName := '{0}', refTblName := '{1}', fkColumnName := '{2}', fkPositionName := '{2}{3}');",
@@ -1259,7 +1259,7 @@ LANGUAGE 'plpgsql' VOLATILE",
                         FormatSchemaName(tbl.Key),
                         FormatSchemaName(refSpec.Key),
                         refSpec.Value,
-                        Kistl.API.Helper.PositionSuffix);
+                        Zetbox.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendLine("\t\tIF NOT repair AND result THEN RETURN true; END IF;");
                     createTableProcQuery.AppendFormat("\tELS");

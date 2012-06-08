@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Converter
+namespace Zetbox.Client.WPF.Converter
 {
     using System;
     using System.Collections.Generic;

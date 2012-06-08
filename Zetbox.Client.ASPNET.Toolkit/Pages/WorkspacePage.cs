@@ -10,16 +10,16 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.Client;
-using Kistl.Client.ASPNET.Toolkit;
-using Kistl.Client.ASPNET.Toolkit.View;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ObjectBrowser;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.Client;
+using Zetbox.Client.ASPNET.Toolkit;
+using Zetbox.Client.ASPNET.Toolkit.View;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ObjectBrowser;
 
-namespace Kistl.Client.ASPNET.Toolkit.Pages
+namespace Zetbox.Client.ASPNET.Toolkit.Pages
 {
     public abstract class WorkspacePage : System.Web.UI.Page
     {
@@ -32,10 +32,10 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
 
         void WorkspacePage_Init(object sender, EventArgs e)
         {
-            var mdl = KistlContextManagerModule.ViewModelFactory
-                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext, null);
+            var mdl = ZetboxContextManagerModule.ViewModelFactory
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ZetboxContextManagerModule.ZetboxContext, null);
 
-            KistlContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, ctrlMainContent);
+            ZetboxContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, ctrlMainContent);
         }
 
         protected override void OnPreRender(EventArgs e)

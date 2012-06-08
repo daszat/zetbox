@@ -1,22 +1,22 @@
 
-namespace Kistl.Client.Presentables.FilterViewModels
+namespace Zetbox.Client.Presentables.FilterViewModels
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
     using System.Collections.ObjectModel;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Models;
     using System.ComponentModel;
 
     [ViewModelDescriptor]
     public class DateRangeFilterViewModel : FilterViewModel
     {
-        public new delegate DateRangeFilterViewModel Factory(IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl);
+        public new delegate DateRangeFilterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IUIFilterModel mdl);
 
-        public DateRangeFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+        public DateRangeFilterViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IUIFilterModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
             this.RangeFilter = (DateRangeFilterModel)mdl;

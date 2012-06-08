@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.App.Projekte
+namespace Zetbox.App.Projekte
 {
     /// <summary>
     /// Server implementation

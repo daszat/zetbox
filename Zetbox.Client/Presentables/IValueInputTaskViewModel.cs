@@ -1,7 +1,7 @@
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Presentables.ValueViewModels;
     using System.Linq;
     using System.Collections.Generic;
 

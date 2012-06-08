@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Microsoft {
+namespace Zetbox.Microsoft {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.Microsoft {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Microsoft.OutlookMailSenderResources", typeof(OutlookMailSenderResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Microsoft.OutlookMailSenderResources", typeof(OutlookMailSenderResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

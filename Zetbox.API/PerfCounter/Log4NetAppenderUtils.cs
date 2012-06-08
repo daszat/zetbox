@@ -1,5 +1,5 @@
 
-namespace Kistl.API.PerfCounter
+namespace Zetbox.API.PerfCounter
 {
     using System;
     using System.Collections.Generic;
@@ -9,8 +9,8 @@ namespace Kistl.API.PerfCounter
 
     public class Log4NetAppenderUtils
     {
-        private readonly static ILog _mainLogger = LogManager.GetLogger("Kistl.PerfCounter.Main");
-        private readonly static ILog _objectsLogger = LogManager.GetLogger("Kistl.PerfCounter.Objects");
+        private readonly static ILog _mainLogger = LogManager.GetLogger("Zetbox.PerfCounter.Main");
+        private readonly static ILog _objectsLogger = LogManager.GetLogger("Zetbox.PerfCounter.Objects");
 
         private static bool firstObjectWrite = true;
         private static object firstObjectWriteLock = new object();

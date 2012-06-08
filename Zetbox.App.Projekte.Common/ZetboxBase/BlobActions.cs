@@ -1,16 +1,16 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class BlobActions
     {
         [Invocation]
-        public static void ToString(Kistl.App.Base.Blob obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(Zetbox.App.Base.Blob obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.OriginalName;
 
@@ -18,7 +18,7 @@ namespace Kistl.App.Base
         }
 
         [Invocation]
-        public static void GetStream(Kistl.App.Base.Blob obj, MethodReturnEventArgs<System.IO.Stream> e)
+        public static void GetStream(Zetbox.App.Base.Blob obj, MethodReturnEventArgs<System.IO.Stream> e)
         {
             e.Result = obj.Context.GetStream(obj.ID);
         }

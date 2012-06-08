@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     using System;
     using System.Collections.Generic;

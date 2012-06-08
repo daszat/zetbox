@@ -11,18 +11,18 @@ namespace at.dasz.DocumentManagement
     using System.Xml;
     using System.Xml.Serialization;
 
-    using Kistl.API;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Kistl.API.Utils;
-    using Kistl.DalProvider.Base;
-    using Kistl.DalProvider.NHibernate;
+    using Zetbox.API.Utils;
+    using Zetbox.DalProvider.Base;
+    using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
     /// Abstract Baseclass for File Types
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("File")]
-    public abstract class FileNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, File, Kistl.API.IExportableInternal
+    public abstract class FileNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, File, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -54,26 +54,26 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Current File Content
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
         // fkBackingName=this.Proxy.Blob; fkGuidBackingName=_fk_guid_Blob;
-        // referencedInterface=Kistl.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Blob Blob
+        public Zetbox.App.Base.Blob Blob
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.BlobNHibernateImpl __value = (Kistl.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Blob);
+                Zetbox.App.Base.BlobNHibernateImpl __value = (Zetbox.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Blob);
 
                 if (OnBlob_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Kistl.App.Base.Blob>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Blob>(__value);
                     OnBlob_Getter(this, e);
-                    __value = (Kistl.App.Base.BlobNHibernateImpl)e.Result;
+                    __value = (Zetbox.App.Base.BlobNHibernateImpl)e.Result;
                 }
 
                 return __value;
@@ -81,7 +81,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Blob == null)
@@ -91,8 +91,8 @@ namespace at.dasz.DocumentManagement
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Blob);
-                var __newValue = (Kistl.App.Base.BlobNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Blob);
+                var __newValue = (Zetbox.App.Base.BlobNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -107,9 +107,9 @@ namespace at.dasz.DocumentManagement
 
                 if (OnBlob_PreSetter != null && IsAttached)
                 {
-                    var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Blob>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Blob>(__oldValue, __newValue);
                     OnBlob_PreSetter(this, e);
-                    __newValue = (Kistl.App.Base.BlobNHibernateImpl)e.Result;
+                    __newValue = (Zetbox.App.Base.BlobNHibernateImpl)e.Result;
                 }
 
                 // next, set the local reference
@@ -127,7 +127,7 @@ namespace at.dasz.DocumentManagement
 
                 if (OnBlob_PostSetter != null && IsAttached)
                 {
-                    var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Blob>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Blob>(__oldValue, __newValue);
                     OnBlob_PostSetter(this, e);
                 }
             }
@@ -139,36 +139,36 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for Blob's guid, used on import only</summary>
         private Guid? _fk_guid_Blob = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
-		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_Getter;
-		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PreSetter;
-		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PostSetter;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnBlob_IsValid;
 
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
-        // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Identity ChangedBy
+        public Zetbox.App.Base.Identity ChangedBy
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
+                Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Kistl.App.Base.Identity>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
                     OnChangedBy_Getter(this, e);
-                    __value = (Kistl.App.Base.IdentityNHibernateImpl)e.Result;
+                    __value = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
                 }
 
                 return __value;
@@ -176,7 +176,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.ChangedBy == null)
@@ -186,8 +186,8 @@ namespace at.dasz.DocumentManagement
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
+                var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -202,9 +202,9 @@ namespace at.dasz.DocumentManagement
 
                 if (OnChangedBy_PreSetter != null && IsAttached)
                 {
-                    var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PreSetter(this, e);
-                    __newValue = (Kistl.App.Base.IdentityNHibernateImpl)e.Result;
+                    __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
                 }
 
                 // next, set the local reference
@@ -222,7 +222,7 @@ namespace at.dasz.DocumentManagement
 
                 if (OnChangedBy_PostSetter != null && IsAttached)
                 {
-                    var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnChangedBy_PostSetter(this, e);
                 }
             }
@@ -232,10 +232,10 @@ namespace at.dasz.DocumentManagement
         private int? _fk_ChangedBy = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
-		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnChangedBy_IsValid;
 
@@ -243,7 +243,7 @@ namespace at.dasz.DocumentManagement
         /// Date and time where this object was changed
         /// </summary>
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public DateTime ChangedOn
         {
             get
@@ -296,21 +296,21 @@ namespace at.dasz.DocumentManagement
         {
             var __result = Proxy.ChangedOn;
                 if (!_isChangedOnSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c144678d-632d-4a83-8041-280d674f4453"));
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("c144678d-632d-4a83-8041-280d674f4453"));
                     if (__p != null) {
                         _isChangedOnSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this.Proxy.ChangedOn = (DateTime)__tmp_value;
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'at.dasz.DocumentManagement.File.ChangedOn'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'at.dasz.DocumentManagement.File.ChangedOn'");
                     }
                 }
             return __result;
         }
 
         private bool _isChangedOnSet = false;
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnChangedOn_PostSetter;
@@ -320,26 +320,26 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Identity which created this object
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
-        // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Identity CreatedBy
+        public Zetbox.App.Base.Identity CreatedBy
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
+                Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Kistl.App.Base.Identity>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Identity>(__value);
                     OnCreatedBy_Getter(this, e);
-                    __value = (Kistl.App.Base.IdentityNHibernateImpl)e.Result;
+                    __value = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
                 }
 
                 return __value;
@@ -347,7 +347,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.CreatedBy == null)
@@ -357,8 +357,8 @@ namespace at.dasz.DocumentManagement
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
+                var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -373,9 +373,9 @@ namespace at.dasz.DocumentManagement
 
                 if (OnCreatedBy_PreSetter != null && IsAttached)
                 {
-                    var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PreSetter(this, e);
-                    __newValue = (Kistl.App.Base.IdentityNHibernateImpl)e.Result;
+                    __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)e.Result;
                 }
 
                 // next, set the local reference
@@ -393,7 +393,7 @@ namespace at.dasz.DocumentManagement
 
                 if (OnCreatedBy_PostSetter != null && IsAttached)
                 {
-                    var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Identity>(__oldValue, __newValue);
                     OnCreatedBy_PostSetter(this, e);
                 }
             }
@@ -403,10 +403,10 @@ namespace at.dasz.DocumentManagement
         private int? _fk_CreatedBy = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
-		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedBy_IsValid;
 
@@ -414,7 +414,7 @@ namespace at.dasz.DocumentManagement
         /// Date and time where this object was created
         /// </summary>
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public DateTime CreatedOn
         {
             get
@@ -467,21 +467,21 @@ namespace at.dasz.DocumentManagement
         {
             var __result = Proxy.CreatedOn;
                 if (!_isCreatedOnSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e1892507-375b-4b52-ab20-16095dfc3514"));
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("e1892507-375b-4b52-ab20-16095dfc3514"));
                     if (__p != null) {
                         _isCreatedOnSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this.Proxy.CreatedOn = (DateTime)__tmp_value;
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'at.dasz.DocumentManagement.File.CreatedOn'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'at.dasz.DocumentManagement.File.CreatedOn'");
                     }
                 }
             return __result;
         }
 
         private bool _isCreatedOnSet = false;
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PostSetter;
@@ -492,7 +492,7 @@ namespace at.dasz.DocumentManagement
         /// Export Guid
         /// </summary>
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public Guid ExportGuid
         {
             get
@@ -545,21 +545,21 @@ namespace at.dasz.DocumentManagement
         {
             var __result = Proxy.ExportGuid;
                 if (!_isExportGuidSet && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("91566b41-879d-4e72-b48b-9677cc156649"));
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("91566b41-879d-4e72-b48b-9677cc156649"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this.Proxy.ExportGuid = (Guid)__tmp_value;
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'at.dasz.DocumentManagement.File.ExportGuid'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'at.dasz.DocumentManagement.File.ExportGuid'");
                     }
                 }
             return __result;
         }
 
         private bool _isExportGuidSet = false;
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, Guid> OnExportGuid_PostSetter;
@@ -570,7 +570,7 @@ namespace at.dasz.DocumentManagement
         /// Filename
         /// </summary>
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public string Name
         {
             get
@@ -617,7 +617,7 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PostSetter;
@@ -627,11 +627,11 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_File")]
-        public virtual Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+        public virtual Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
-            var e = new MethodReturnEventArgs<Kistl.App.Base.Blob>();
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_File != null)
             {
                 OnHandleBlobChange_File(this, e, oldBlob, newBlob);
@@ -642,9 +642,9 @@ namespace at.dasz.DocumentManagement
             }
             return e.Result;
         }
-        public delegate void HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Blob> ret, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob);
+        public delegate void HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> ret, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob);
         public static event HandleBlobChange_Handler<File> OnHandleBlobChange_File;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnHandleBlobChange_File_CanExec;
 
@@ -686,12 +686,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_File")]
         public virtual void Open()
         {
@@ -707,7 +707,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void Open_Handler<T>(T obj);
         public static event Open_Handler<File> OnOpen_File;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnOpen_File_CanExec;
 
@@ -749,12 +749,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_File")]
         public virtual void Upload()
         {
@@ -770,7 +770,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void Upload_Handler<T>(T obj);
         public static event Upload_Handler<File> OnUpload_File;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<File> OnUpload_File_CanExec;
 
@@ -812,7 +812,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -835,7 +835,7 @@ namespace at.dasz.DocumentManagement
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
         }
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
             var nhCtx = (NHibernateContext)ctx;
@@ -851,8 +851,8 @@ namespace at.dasz.DocumentManagement
             {
                 case "Blob":
                     {
-                        var __oldValue = (Kistl.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Blob);
-                        var __newValue = (Kistl.App.Base.BlobNHibernateImpl)parentObj;
+                        var __oldValue = (Zetbox.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Blob);
+                        var __newValue = (Zetbox.App.Base.BlobNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Blob", __oldValue, __newValue);
                         this.Proxy.Blob = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Blob", __oldValue, __newValue);
@@ -860,8 +860,8 @@ namespace at.dasz.DocumentManagement
                     break;
                 case "ChangedBy":
                     {
-                        var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
+                        var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
+                        var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
                         this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -869,8 +869,8 @@ namespace at.dasz.DocumentManagement
                     break;
                 case "CreatedBy":
                     {
-                        var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
+                        var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
+                        var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -881,7 +881,7 @@ namespace at.dasz.DocumentManagement
                     break;
             }
         }
-        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #region Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
@@ -901,7 +901,7 @@ namespace at.dasz.DocumentManagement
                     break;
             }
         }
-        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -913,24 +913,24 @@ namespace at.dasz.DocumentManagement
             // fix direct object references
 
             if (_fk_guid_Blob.HasValue)
-                this.Blob = ((Kistl.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_Blob.Value));
+                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_Blob.Value));
             else
             if (_fk_Blob.HasValue)
-                this.Blob = ((Kistl.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_Blob.Value));
+                this.Blob = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_Blob.Value));
             else
                 this.Blob = null;
 
             if (_fk_ChangedBy.HasValue)
-                this.ChangedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_ChangedBy.Value));
+                this.ChangedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value));
             else
                 this.ChangedBy = null;
 
             if (_fk_CreatedBy.HasValue)
-                this.CreatedBy = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_CreatedBy.Value));
+                this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 this.CreatedBy = null;
         }
-        #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
         private static System.ComponentModel.PropertyDescriptor[] _properties;
 
@@ -944,7 +944,7 @@ namespace at.dasz.DocumentManagement
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<File, Kistl.App.Base.Blob>(
+                    new PropertyDescriptorNHibernateImpl<File, Zetbox.App.Base.Blob>(
                         lazyCtx,
                         new Guid("ef5addda-340f-4a87-83c9-3ee419519343"),
                         "Blob",
@@ -953,7 +953,7 @@ namespace at.dasz.DocumentManagement
                         (obj, val) => obj.Blob = val,
 						obj => OnBlob_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<File, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<File, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c22516f3-b897-4827-a025-27d1515aadcd"),
                         "ChangedBy",
@@ -971,7 +971,7 @@ namespace at.dasz.DocumentManagement
                         (obj, val) => obj.ChangedOn = val,
 						obj => OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<File, Kistl.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<File, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("dc8da15a-a432-43fd-b93f-9b3530ce3144"),
                         "CreatedBy",
@@ -1017,8 +1017,8 @@ namespace at.dasz.DocumentManagement
             _InitializePropertyDescriptors(lazyCtx);
             props.AddRange(_properties);
         }
-        #endregion // Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #region Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnToString_File")]
@@ -1108,7 +1108,7 @@ namespace at.dasz.DocumentManagement
         }
         public static event ObjectEventHandler<File> OnNotifyDeleting_File;
 
-        #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         public class FileProxy
             : IProxyObject, ISortKey<int>
@@ -1119,16 +1119,16 @@ namespace at.dasz.DocumentManagement
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(FileNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(FileProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(FileNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(FileProxy); } }
 
-            public virtual Kistl.App.Base.BlobNHibernateImpl.BlobProxy Blob { get; set; }
+            public virtual Zetbox.App.Base.BlobNHibernateImpl.BlobProxy Blob { get; set; }
 
-            public virtual Kistl.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
+            public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
 
             public virtual DateTime ChangedOn { get; set; }
 
-            public virtual Kistl.App.Base.IdentityNHibernateImpl.IdentityProxy CreatedBy { get; set; }
+            public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy CreatedBy { get; set; }
 
             public virtual DateTime CreatedOn { get; set; }
 
@@ -1143,7 +1143,7 @@ namespace at.dasz.DocumentManagement
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -1166,12 +1166,12 @@ namespace at.dasz.DocumentManagement
             binStream.Write(this.Proxy.Name);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_Blob);
             binStream.Read(out this._fk_ChangedBy);
             this._isChangedOnSet = binStream.ReadBoolean();
@@ -1188,7 +1188,7 @@ namespace at.dasz.DocumentManagement
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             this.Proxy.Name = binStream.ReadString();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null

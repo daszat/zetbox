@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.App.Base;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables.GUI;
-using Kistl.Client.Presentables.ModuleEditor;
+using Zetbox.App.Base;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.GUI;
+using Zetbox.Client.Presentables.ModuleEditor;
 
-namespace Kistl.Client.WPF.View.ModuleEditor
+namespace Zetbox.Client.WPF.View.ModuleEditor
 {
     /// <summary>
     /// Interaction logic for DiagramDisplay.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class NavigationScreenHierarchyDisplay : UserControl, IHasViewModel<NavigationScreenHierarchyViewModel>
     {
         public NavigationScreenHierarchyDisplay()

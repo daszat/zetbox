@@ -1,15 +1,15 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.API.Utils;
 
     public class NHibernateServerCollectionHandler<TA, TB, TParent, TChild>
         : IServerCollectionHandler
@@ -21,12 +21,12 @@ namespace Kistl.DalProvider.NHibernate
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
             Guid version,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
 
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             //var relEnd = rel.GetEndFromRole(endRole);

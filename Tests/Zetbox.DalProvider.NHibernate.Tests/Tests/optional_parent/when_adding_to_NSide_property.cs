@@ -1,18 +1,18 @@
 
-namespace Kistl.DalProvider.NHibernate.Tests.optional_parent
+namespace Zetbox.DalProvider.NHibernate.Tests.optional_parent
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
 
     public class when_adding_to_NSide_property
-        : Kistl.API.AbstractConsumerTests.optional_parent.when_adding_to_NSide_property
+        : Zetbox.API.AbstractConsumerTests.optional_parent.when_adding_to_NSide_property
     {
         public class after_reloading
             : when_adding_to_NSide_property

@@ -1,15 +1,15 @@
 
-namespace Kistl.DalProvider.NHibernate.Tests.N_to_M_relations
+namespace Zetbox.DalProvider.NHibernate.Tests.N_to_M_relations
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Test;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.App.Test;
+    using Zetbox.DalProvider.Base.RelationWrappers;
     using NUnit.Framework;
-    using Base = Kistl.API.AbstractConsumerTests.N_to_M_relations;
+    using Base = Zetbox.API.AbstractConsumerTests.N_to_M_relations;
 
     public static class when_adding
     {

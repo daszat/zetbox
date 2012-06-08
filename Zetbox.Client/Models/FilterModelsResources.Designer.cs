@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Models {
+namespace Zetbox.Client.Models {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.Client.Models {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Models.FilterModelsResources", typeof(FilterModelsResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Models.FilterModelsResources", typeof(FilterModelsResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

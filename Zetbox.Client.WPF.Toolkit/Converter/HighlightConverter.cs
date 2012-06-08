@@ -1,12 +1,12 @@
 
-namespace Kistl.Client.WPF.Converter
+namespace Zetbox.Client.WPF.Converter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Windows.Data;
-    using Kistl.Client.Presentables;
+    using Zetbox.Client.Presentables;
     using System.Windows;
 
     [ValueConversion(typeof(Highlight), typeof(object))]

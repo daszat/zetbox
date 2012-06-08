@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Client.Tests
+namespace Zetbox.API.Client.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@ namespace Kistl.API.Client.Tests
     using System.Text;
 
     using Autofac;
-    using Kistl.API.Client.Mocks;
-    using Kistl.API.Configuration;
+    using Zetbox.API.Client.Mocks;
+    using Zetbox.API.Configuration;
     using NUnit.Framework;
 
     [SetUpFixture]
@@ -18,15 +18,15 @@ namespace Kistl.API.Client.Tests
         {
             base.SetupBuilder(builder);
 
-            builder.RegisterModule(new Kistl.API.ApiModule());
-            builder.RegisterModule(new Kistl.API.Client.ClientApiModule());
-            builder.RegisterModule(new Kistl.API.Client.HttpClientModule());
-            builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Zetbox.API.ApiModule());
+            builder.RegisterModule(new Zetbox.API.Client.ClientApiModule());
+            builder.RegisterModule(new Zetbox.API.Client.HttpClientModule());
+            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
         }
 
         protected override string GetConfigFile()
         {
-            return "Kistl.API.Client.Tests.xml";
+            return "Zetbox.API.Client.Tests.xml";
         }
 
         protected override HostType GetHostType()

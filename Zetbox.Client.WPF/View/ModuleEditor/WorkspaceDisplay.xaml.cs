@@ -11,11 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables.ModuleEditor;
-using Kistl.Client.WPF.CustomControls;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.ModuleEditor;
+using Zetbox.Client.WPF.CustomControls;
 
-namespace Kistl.Client.WPF.View.ModuleEditor
+namespace Zetbox.Client.WPF.View.ModuleEditor
 {
     /// <summary>
     /// Interaction logic for Workspace.xaml
@@ -30,7 +30,7 @@ namespace Kistl.Client.WPF.View.ModuleEditor
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var item = NavTree.SelectedItem as Kistl.Client.Presentables.ViewModel;
+            var item = NavTree.SelectedItem as Zetbox.Client.Presentables.ViewModel;
             if (item != null)
             {
                 this.ViewModel.SelectedItem = item;

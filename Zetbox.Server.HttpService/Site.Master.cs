@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Kistl.Server.HttpService
+namespace Zetbox.Server.HttpService
 {
     public partial class Site : System.Web.UI.MasterPage
     {

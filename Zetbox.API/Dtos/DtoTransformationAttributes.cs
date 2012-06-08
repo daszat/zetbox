@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Dtos
+namespace Zetbox.API.Dtos
 {
     using System;
     using System.Collections.Generic;

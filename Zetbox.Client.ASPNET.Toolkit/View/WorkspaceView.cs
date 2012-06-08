@@ -7,16 +7,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using Kistl.API;
-using Kistl.Client.ASPNET.Toolkit.Pages;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.API;
+using Zetbox.Client.ASPNET.Toolkit.Pages;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 using System.Web.UI.HtmlControls;
-using Kistl.Client.Presentables.ObjectEditor;
+using Zetbox.Client.Presentables.ObjectEditor;
 
-[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")]
+[assembly: WebResource("Zetbox.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")]
 
-namespace Kistl.Client.ASPNET.Toolkit.View
+namespace Zetbox.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/WorkspaceView.ascx")]
     public abstract class WorkspaceView : ModelUserControl<WorkspaceViewModel>, IScriptControl
@@ -43,7 +43,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
             foreach (var item in Objects)
             {
-                KistlContextManagerModule.ViewModelFactory.ShowModel(item, false);
+                ZetboxContextManagerModule.ViewModelFactory.ShowModel(item, false);
             }
 
             if (!IsPostBack)
@@ -69,7 +69,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                     container.Attributes.Add("display", "node");
                     containerObjectsCtrl.Controls.Add(container);
 
-                    KistlContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, container);
+                    ZetboxContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, container);
                     _controlsAdded.Add(container);
                 }
             }
@@ -117,10 +117,10 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                         var type = Request["type"];
                         var id = Convert.ToInt32(Request["id"]);
 
-                        InterfaceType ifType = KistlContextManagerModule.IftFactory(Type.GetType(type));
-                        IDataObject obj = (IDataObject)KistlContextManagerModule.KistlContext.Find(ifType, id);
+                        InterfaceType ifType = ZetboxContextManagerModule.IftFactory(Type.GetType(type));
+                        IDataObject obj = (IDataObject)ZetboxContextManagerModule.ZetboxContext.Find(ifType, id);
 
-                        var mdl = DataObjectViewModel.Fetch(KistlContextManagerModule.ViewModelFactory, KistlContextManagerModule.KistlContext, null, obj);
+                        var mdl = DataObjectViewModel.Fetch(ZetboxContextManagerModule.ViewModelFactory, ZetboxContextManagerModule.ZetboxContext, null, obj);
                         if (mdl == null) throw new InvalidOperationException(string.Format("Unable to create model for {0}({1})", type, id));
                         _Objects.Add(mdl);
                     }
@@ -128,7 +128,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                     {
                         // We are to early! So we need to parse the Request Variable directly
                         // If anyone knows a better way -> pls. get in touch with me.
-                        _Objects = Request[hdObjectsControl.UniqueID].FromJSONArray(KistlContextManagerModule.KistlContext)
+                        _Objects = Request[hdObjectsControl.UniqueID].FromJSONArray(ZetboxContextManagerModule.ZetboxContext)
                                         .ToList();
                     }
                 }
@@ -170,7 +170,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            var desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.View.WorkspaceView", containerCtrl.ClientID);
+            var desc = new ScriptControlDescriptor("Zetbox.Client.ASPNET.View.WorkspaceView", containerCtrl.ClientID);
             desc.AddProperty("ListObjects", _controlsAdded.Select(i => i.ClientID).ToList());
             desc.AddElementProperty("CurrentIndexCtrl", _currentIndexCtrl.ClientID);
             yield return desc;
@@ -179,7 +179,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         public IEnumerable<ScriptReference> GetScriptReferences()
         {
             yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
-                typeof(WorkspaceView), "Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js"));
+                typeof(WorkspaceView), "Zetbox.Client.ASPNET.Toolkit.View.WorkspaceView.js"));
         }
 
         #endregion

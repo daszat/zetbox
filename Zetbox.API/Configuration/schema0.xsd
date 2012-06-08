@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://dasz.at/Kistl/" elementFormDefault="qualified" targetNamespace="http://dasz.at/Kistl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://dasz.at/Zetbox/" elementFormDefault="qualified" targetNamespace="http://dasz.at/Zetbox/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://microsoft.com/wsdl/types/" />
-  <xs:element name="KistlConfig" nillable="true" type="tns:KistlConfig" />
-  <xs:complexType name="KistlConfig">
+  <xs:element name="ZetboxConfig" nillable="true" type="tns:ZetboxConfig" />
+  <xs:complexType name="ZetboxConfig">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="ConfigName" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="Server" type="tns:ServerConfig" />

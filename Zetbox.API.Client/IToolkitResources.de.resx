@@ -121,6 +121,6 @@
 		<value>Der aktuelle Vorgang könnte einige Zeit dauern</value>
 	</data>
 	<data name="WaitDialog_Message" xml:space="preserve">
-		<value>ZBox arbeitet</value>
+		<value>Zetbox arbeitet</value>
 	</data>
 </root>

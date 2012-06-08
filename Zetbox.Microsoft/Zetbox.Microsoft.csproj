@@ -8,8 +8,8 @@
     <ProjectGuid>{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Microsoft</RootNamespace>
-    <AssemblyName>Kistl.Microsoft</AssemblyName>
+    <RootNamespace>Zetbox.Microsoft</RootNamespace>
+    <AssemblyName>Zetbox.Microsoft</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
@@ -70,19 +70,19 @@
     <Compile Include="ScreenshotTool.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
+    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Kistl.API.Client</Name>
+      <Name>Zetbox.API.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Client\Kistl.Client.csproj">
+    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
-      <Name>Kistl.Client</Name>
+      <Name>Zetbox.Client</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

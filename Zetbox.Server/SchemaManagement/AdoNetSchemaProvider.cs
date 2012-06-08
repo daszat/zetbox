@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaManagement
+namespace Zetbox.Server.SchemaManagement
 {
     using System;
     using System.Collections;
@@ -9,8 +9,8 @@ namespace Kistl.Server.SchemaManagement
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
 
     public abstract class AdoNetSchemaProvider<TConnection, TTransaction, TCommand>
         : ISchemaProvider
@@ -500,7 +500,7 @@ namespace Kistl.Server.SchemaManagement
 
         #endregion
 
-        #region ZBox Schema Handling
+        #region Zetbox Schema Handling
 
         public string GetSavedSchema()
         {
@@ -552,7 +552,7 @@ namespace Kistl.Server.SchemaManagement
 
         #endregion
 
-        #region zBox Accelerators
+        #region zetbox Accelerators
 
         public virtual bool CheckPositionColumnValidity(TableRef tblName, string posName)
         {

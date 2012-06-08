@@ -14,16 +14,16 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <OutputPath>.\Kistl.API Documentation\</OutputPath>
+    <OutputPath>.\Zetbox.API Documentation\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <FrameworkVersion>3.5</FrameworkVersion>
-    <HelpTitle>Kistl API Reference</HelpTitle>
+    <HelpTitle>Zetbox API Reference</HelpTitle>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Kistl.API.Client\Kistl.API.Client.csproj" />
-      <DocumentationSource sourceFile="..\Kistl.API\Kistl.API.csproj" />
-      <DocumentationSource sourceFile="..\Kistl.API.Server\Kistl.API.Server.csproj" />
-      <DocumentationSource sourceFile="..\bin\Debug\bin\Server\Fallback\Kistl.Objects.dll" />
-      <DocumentationSource sourceFile="..\bin\Debug\bin\Server\Fallback\Kistl.Objects.xml" />
+      <DocumentationSource sourceFile="..\Zetbox.API.Client\Zetbox.API.Client.csproj" />
+      <DocumentationSource sourceFile="..\Zetbox.API\Zetbox.API.csproj" />
+      <DocumentationSource sourceFile="..\Zetbox.API.Server\Zetbox.API.Server.csproj" />
+      <DocumentationSource sourceFile="..\bin\Debug\bin\Server\Fallback\Zetbox.Objects.dll" />
+      <DocumentationSource sourceFile="..\bin\Debug\bin\Server\Fallback\Zetbox.Objects.xml" />
     </DocumentationSources>
     <HelpFileFormat>HtmlHelp1, Website</HelpFileFormat>
     <ApiFilter>

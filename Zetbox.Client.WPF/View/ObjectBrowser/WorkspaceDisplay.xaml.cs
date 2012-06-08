@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.ObjectBrowser
+namespace Zetbox.Client.WPF.View.ObjectBrowser
 {
     using System;
     using System.Collections.Generic;
@@ -15,14 +15,14 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Kistl.API.Client;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ObjectBrowser;
-    using Kistl.Client.WPF.CustomControls;
+    using Zetbox.API.Client;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ObjectBrowser;
+    using Zetbox.Client.WPF.CustomControls;
 
     /// <summary>
-    /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModel"/>.
+    /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Zetbox.Client.Presentables.ObjectBrowser.WorkspaceViewModel"/>.
     /// </summary>
     public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>
     {
@@ -37,7 +37,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
 
         private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var item = ObjectTree.SelectedItem as Kistl.Client.Presentables.ViewModel;
+            var item = ObjectTree.SelectedItem as Zetbox.Client.Presentables.ViewModel;
             if (item != null)
             {
                 this.ViewModel.SelectedItem = item;

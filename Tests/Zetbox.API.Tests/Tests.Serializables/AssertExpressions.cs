@@ -8,7 +8,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Kistl.API.Tests.Serializables
+namespace Zetbox.API.Tests.Serializables
 {
     /// <summary>
     /// Helper function to check Expressions

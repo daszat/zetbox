@@ -1,6 +1,6 @@
 
-// TODO: move to Kistl.DalProvider.Base.RelationWrappers namespace
-namespace Kistl.DalProvider.Base
+// TODO: move to Zetbox.DalProvider.Base.RelationWrappers namespace
+namespace Zetbox.DalProvider.Base
 {
     using System;
     using System.Collections.Generic;
@@ -8,9 +8,9 @@ namespace Kistl.DalProvider.Base
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
     public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryImpl, TEntryCollection>
         : ValueCollectionWrapper<TParent, TValue, TEntryImpl, TEntryCollection>, IRelationListSync<TEntry>, INotifyCollectionChanged
@@ -19,7 +19,7 @@ namespace Kistl.DalProvider.Base
         where TEntryImpl : class, TEntry
         where TEntryCollection : ICollection<TEntryImpl>
     {
-        public ClientValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+        public ClientValueCollectionWrapper(IZetboxContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
         {
             if (collection == null) throw new ArgumentNullException("collection");
@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.Base
                 notifier.CollectionChanged += (sender, e) => this.NotifyOwner();
         }
 
-        public ClientValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        public ClientValueCollectionWrapper(IZetboxContext ctx, TParent parent, TEntryCollection collection)
             : this(ctx, parent, null, collection)
         {
         }
@@ -92,7 +92,7 @@ namespace Kistl.DalProvider.Base
         where TEntryImpl : class, TEntry
         where TEntryCollection : ICollection<TEntryImpl>, IList<TEntryImpl>
     {
-        public ClientValueCollectionAsListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+        public ClientValueCollectionAsListWrapper(IZetboxContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
         {
             if (collection == null) throw new ArgumentNullException("collection");
@@ -102,7 +102,7 @@ namespace Kistl.DalProvider.Base
                 notifier.CollectionChanged += (sender, e) => this.NotifyOwner();
         }
 
-        public ClientValueCollectionAsListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        public ClientValueCollectionAsListWrapper(IZetboxContext ctx, TParent parent, TEntryCollection collection)
             : this(ctx, parent, null, collection)
         {
         }
@@ -279,12 +279,12 @@ namespace Kistl.DalProvider.Base
         where TEntryImpl : class, TEntry
         where TEntryCollection : ICollection<TEntryImpl>
     {
-        public ClientValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+        public ClientValueListWrapper(IZetboxContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
         {
         }
 
-        public ClientValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        public ClientValueListWrapper(IZetboxContext ctx, TParent parent, TEntryCollection collection)
             : base(ctx, parent, null, collection)
         {
         }

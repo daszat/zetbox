@@ -7,12 +7,12 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Kistl.Objects.NHibernateImpl</RootNamespace>
-    <AssemblyName>Kistl.Objects.NHibernateImpl</AssemblyName>
+    <RootNamespace>Zetbox.Objects.NHibernateImpl</RootNamespace>
+    <AssemblyName>Zetbox.Objects.NHibernateImpl</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
     <RelativeOutputPath>Server\NH</RelativeOutputPath>
   </PropertyGroup>
@@ -28,8 +28,8 @@
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\NH.Fallback\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\NH.Generated\</OutputPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Debug\</KistlAPIPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,8 +42,8 @@
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Server\NH.Fallback\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\NH.Generated\</OutputPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Release\</KistlAPIPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,8 +58,8 @@
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\NH.Fallback\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\NH.Generated\</OutputPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Debug\</KistlAPIPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
   <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
@@ -73,36 +73,36 @@
     <Reference Include="System.Xml" />
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\log4net.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.API">
+    <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\Autofac.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <!-- local reference to newly generated code -->
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <Reference Include="Kistl.DalProvider.Base">
+    <Reference Include="Zetbox.DalProvider.Base">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Base.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.API.Common">
+    <Reference Include="Zetbox.API.Common">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.Common.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Data.Linq">
@@ -111,24 +111,24 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Kistl.API.Server">
+    <Reference Include="Zetbox.API.Server">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Server\Core\Kistl.API.Server.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Server\Core\Zetbox.API.Server.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.DalProvider.NHibernate">
+    <Reference Include="Zetbox.DalProvider.NHibernate">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Server\NH\Kistl.DalProvider.NHibernate.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Server\NH\Zetbox.DalProvider.NHibernate.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Server\NH\NHibernate.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Server\NH\NHibernate.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.DalProvider.Base">
+    <Reference Include="Zetbox.DalProvider.Base">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Base.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -275,7 +275,7 @@
     <Compile Include="Module.NHibernate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.Objects.snk" />
+    <None Include="Zetbox.Objects.snk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="*.hbm.xml" />

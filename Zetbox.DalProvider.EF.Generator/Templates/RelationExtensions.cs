@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates
+namespace Zetbox.DalProvider.Ef.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +7,9 @@ namespace Kistl.DalProvider.Ef.Generator.Templates
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public static class RelationExtensions
     {

@@ -1,21 +1,21 @@
 
-namespace Kistl.Server.Tests.SchemaTests.SchemaProviders
+namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
+    using Zetbox.API.Server;
     using NUnit.Framework;
 
     public abstract class SchemaProviderFixture<TProvider>
         where TProvider : class, ISchemaProvider
     {
         // TODO: move to config file
-        public static readonly string PostgresqlTestDatabase = "zbox_test";
-        public static readonly string PostgresqlTestConnection = "Server=localhost;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS";
-        public static readonly string SqlServerTestDatabase = "zbox_test";
-        public static readonly string SqlServerTestConnection = "Data Source=.\\SQLEXPRESS;Initial Catalog=zbox_test;Integrated Security=True;MultipleActiveResultSets=true;";
+        public static readonly string PostgresqlTestDatabase = "zetbox_test";
+        public static readonly string PostgresqlTestConnection = "Server=localhost;Database=zetbox_test;User Id=zetbox;Password=b-cXqMyXEYea2kkjUhkS";
+        public static readonly string SqlServerTestDatabase = "zetbox_test";
+        public static readonly string SqlServerTestConnection = "Data Source=.\\SQLEXPRESS;Initial Catalog=zetbox_test;Integrated Security=True;MultipleActiveResultSets=true;";
 
         protected TProvider Provider;
 

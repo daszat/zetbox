@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`SequenceData`"
            abstract="false"
@@ -23,7 +23,7 @@
                   column="`CurrentNumber`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Sequence" column="`fk_Sequence`" class="Kistl.App.Base.SequenceNHibernateImpl+SequenceProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="Sequence" column="`fk_Sequence`" class="Zetbox.App.Base.SequenceNHibernateImpl+SequenceProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
 
         <!-- define the subclasses -->

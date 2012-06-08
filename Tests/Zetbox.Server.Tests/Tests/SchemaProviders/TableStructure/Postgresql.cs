@@ -1,11 +1,11 @@
 
-namespace Kistl.Server.Tests.SchemaTests.SchemaProviders.TableStructure
+namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders.TableStructure
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.Server.SchemaManagement.NpgsqlProvider;
+    using Zetbox.Server.SchemaManagement.NpgsqlProvider;
 
     public sealed class Npgsql
         : Fixture<Postgresql>

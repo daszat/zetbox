@@ -5,16 +5,16 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.Test;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.Test;
 using NUnit.Framework;
 
-namespace Kistl.IntegrationTests.CompoundObjects
+namespace Zetbox.IntegrationTests.CompoundObjects
 {
     [TestFixture]
     public class when_changing_a_CompoundObject_list
-        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_CompoundObject_list
+        : Zetbox.API.AbstractConsumerTests.CompoundObjects.when_changing_a_CompoundObject_list
     {
     }
 }

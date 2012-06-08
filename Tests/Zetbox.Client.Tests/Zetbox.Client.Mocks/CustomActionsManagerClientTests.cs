@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.Client.Mocks
+namespace Zetbox.Client.Mocks
 {
     internal class CustomActionsManagerClientTests : ICustomActionsManager
     {
         #region ICustomActionsManager Members
 
-        public void Init(IReadOnlyKistlContext ctx)
+        public void Init(IReadOnlyZetboxContext ctx)
         {
             // ignore
         }

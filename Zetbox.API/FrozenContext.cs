@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.API
     using System.Runtime.Serialization;
     using System.Text;
 
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// This exception is thrown when someone tries to modify a read only context.

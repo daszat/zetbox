@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections;
@@ -9,7 +9,7 @@ namespace Kistl.DalProvider.Ef
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// Wraps 1:N Relation, which EF provides via a EntityCollection
@@ -19,14 +19,14 @@ namespace Kistl.DalProvider.Ef
         where TImpl : class, IEntityWithRelationships, TInterface, IDataObject
     {
         protected readonly EntityCollection<TImpl> underlyingCollection;
-        protected readonly IKistlContext ctx;
+        protected readonly IZetboxContext ctx;
         private readonly Action _changingNotifier;
         private readonly Action _changedNotifier;
 
         private readonly Action<TImpl> _itemChangingNotifier;
         private readonly Action<TImpl> _itemChangedNotifier;
 
-        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier)
+        public EntityCollectionWrapper(IZetboxContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier)
             : this(ctx, ec, changingNotifier, changedNotifier, null, null)
         {
         }
@@ -40,7 +40,7 @@ namespace Kistl.DalProvider.Ef
         /// <param baseDir="changedNotifier">an action called to notify the owner of this collection after a change has happened</param>
         /// <param baseDir="itemChangingNotifier">an action called to notify the modified item before a change happens</param>
         /// <param baseDir="itemChangedNotifier">an action called to notify the modified item after a change has happened</param>
-        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, Action<TImpl> itemChangingNotifier, Action<TImpl> itemChangedNotifier)
+        public EntityCollectionWrapper(IZetboxContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, Action<TImpl> itemChangingNotifier, Action<TImpl> itemChangedNotifier)
         {
             // TODO: when can the ctx be legally null? 
             // if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -96,7 +96,7 @@ namespace Kistl.DalProvider.Ef
                 return;
             }
 
-            if (ctx != item.Context) { throw new WrongKistlContextException(); }
+            if (ctx != item.Context) { throw new WrongZetboxContextException(); }
 
             var impl = item as TImpl;
 
@@ -127,7 +127,7 @@ namespace Kistl.DalProvider.Ef
                 return underlyingCollection.Contains(null);
             }
 
-            if (ctx != item.Context) { throw new WrongKistlContextException(); }
+            if (ctx != item.Context) { throw new WrongZetboxContextException(); }
 
             return underlyingCollection.Contains((TImpl)item);
         }
@@ -175,7 +175,7 @@ namespace Kistl.DalProvider.Ef
                 return nullResult;
             }
 
-            if (ctx != item.Context) { throw new WrongKistlContextException(); }
+            if (ctx != item.Context) { throw new WrongZetboxContextException(); }
 
             var impl = item as TImpl;
             if (impl == null) { throw new ArgumentOutOfRangeException("item", String.Format("item is of wrong type: [{0}] instead of [{1}]", item.GetType().AssemblyQualifiedName, typeof(TImpl).AssemblyQualifiedName)); }
@@ -234,12 +234,12 @@ namespace Kistl.DalProvider.Ef
         private readonly string _positionProperty;
         private List<TImpl> _orderedItems;
 
-        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, string pointerProperty, string positionProperty)
+        public EntityListWrapper(IZetboxContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, string pointerProperty, string positionProperty)
             : this(ctx, ec, changingNotifier, changedNotifier, null, null, pointerProperty, positionProperty)
         {
         }
 
-        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, Action<TImpl> itemChangingNotifier, Action<TImpl> itemChangedNotifier, string pointerProperty, string positionProperty)
+        public EntityListWrapper(IZetboxContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, Action<TImpl> itemChangingNotifier, Action<TImpl> itemChangedNotifier, string pointerProperty, string positionProperty)
             : base(ctx, ec, changingNotifier, changedNotifier, itemChangingNotifier, itemChangedNotifier)
         {
             if (String.IsNullOrEmpty(pointerProperty)) { throw new ArgumentOutOfRangeException("pointerProperty"); }
@@ -252,7 +252,7 @@ namespace Kistl.DalProvider.Ef
 
         private void ResetOrderedItems()
         {
-            _orderedItems = new List<TImpl>(underlyingCollection.OrderBy(item => GetIndexProperty(item) ?? Kistl.API.Helper.LASTINDEXPOSITION));
+            _orderedItems = new List<TImpl>(underlyingCollection.OrderBy(item => GetIndexProperty(item) ?? Zetbox.API.Helper.LASTINDEXPOSITION));
             FixIndices();
         }
 
@@ -261,7 +261,7 @@ namespace Kistl.DalProvider.Ef
         /// </summary>
         private void FixIndices()
         {
-            Kistl.API.Helper.FixIndices<TImpl>(_orderedItems, GetIndexProperty, (item, i) => UpdateIndexProperty(item, i));
+            Zetbox.API.Helper.FixIndices<TImpl>(_orderedItems, GetIndexProperty, (item, i) => UpdateIndexProperty(item, i));
         }
 
         #region Index Management

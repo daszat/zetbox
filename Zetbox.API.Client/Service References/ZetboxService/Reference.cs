@@ -8,74 +8,74 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.API.Client.KistlService {
+namespace Zetbox.API.Client.ZetboxService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://dasz.at/ZBox/", ConfigurationName="KistlService.IKistlService", SessionMode=System.ServiceModel.SessionMode.NotAllowed)]
-    public interface IKistlService {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://dasz.at/Zetbox/", ConfigurationName="ZetboxService.IZetboxService", SessionMode=System.ServiceModel.SessionMode.NotAllowed)]
+    public interface IZetboxService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/SetObjects", ReplyAction="http://dasz.at/ZBox/IKistlService/SetObjectsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/SetObjectsExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Kistl.API.InvalidKistlGeneratedVersionException), Action="http://dasz.at/ZBox/IKistlService/SetObjectsInvalidKistlGeneratedVersionException" +
-            "Fault", Name="InvalidKistlGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Kistl.API")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Kistl.API.ConcurrencyException), Action="http://dasz.at/ZBox/IKistlService/SetObjectsConcurrencyExceptionFault", Name="ConcurrencyException", Namespace="http://schemas.datacontract.org/2004/07/Kistl.API")]
-        byte[] SetObjects(System.Guid version, byte[] msg, Kistl.API.ObjectNotificationRequest[] notificationRequests);
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/SetObjects", ReplyAction="http://dasz.at/Zetbox/IZetboxService/SetObjectsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsInvalidZetboxGeneratedVersionException" +
+            "Fault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.ConcurrencyException), Action="http://dasz.at/Zetbox/IZetboxService/SetObjectsConcurrencyExceptionFault", Name="ConcurrencyException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        byte[] SetObjects(System.Guid version, byte[] msg, Zetbox.API.ObjectNotificationRequest[] notificationRequests);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/GetList", ReplyAction="http://dasz.at/ZBox/IKistlService/GetListResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/GetListExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Kistl.API.InvalidKistlGeneratedVersionException), Action="http://dasz.at/ZBox/IKistlService/GetListInvalidKistlGeneratedVersionExceptionFau" +
-            "lt", Name="InvalidKistlGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Kistl.API")]
-        byte[] GetList(System.Guid version, Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.OrderByContract[] orderBy);
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/GetList", ReplyAction="http://dasz.at/Zetbox/IZetboxService/GetListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/GetListExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/GetListInvalidZetboxGeneratedVersionExceptionFau" +
+            "lt", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        byte[] GetList(System.Guid version, Zetbox.API.SerializableType type, int maxListCount, bool eagerLoadLists, Zetbox.API.SerializableExpression[] filter, Zetbox.API.OrderByContract[] orderBy);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/GetListOf", ReplyAction="http://dasz.at/ZBox/IKistlService/GetListOfResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Kistl.API.InvalidKistlGeneratedVersionException), Action="http://dasz.at/ZBox/IKistlService/GetListOfInvalidKistlGeneratedVersionExceptionF" +
-            "ault", Name="InvalidKistlGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Kistl.API")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/GetListOfExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        byte[] GetListOf(System.Guid version, Kistl.API.SerializableType type, int ID, string property);
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/GetListOf", ReplyAction="http://dasz.at/Zetbox/IZetboxService/GetListOfResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/GetListOfInvalidZetboxGeneratedVersionExceptionF" +
+            "ault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/GetListOfExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        byte[] GetListOf(System.Guid version, Zetbox.API.SerializableType type, int ID, string property);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/FetchRelation", ReplyAction="http://dasz.at/ZBox/IKistlService/FetchRelationResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Kistl.API.InvalidKistlGeneratedVersionException), Action="http://dasz.at/ZBox/IKistlService/FetchRelationInvalidKistlGeneratedVersionExcept" +
-            "ionFault", Name="InvalidKistlGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Kistl.API")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/FetchRelationExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/FetchRelation", ReplyAction="http://dasz.at/Zetbox/IZetboxService/FetchRelationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/FetchRelationInvalidZetboxGeneratedVersionExcept" +
+            "ionFault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/FetchRelationExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         byte[] FetchRelation(System.Guid version, System.Guid relId, int role, int ID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/GetBlobStream", ReplyAction="http://dasz.at/ZBox/IKistlService/GetBlobStreamResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Kistl.API.InvalidKistlGeneratedVersionException), Action="http://dasz.at/ZBox/IKistlService/GetBlobStreamInvalidKistlGeneratedVersionExcept" +
-            "ionFault", Name="InvalidKistlGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Kistl.API")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/GetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStream", ReplyAction="http://dasz.at/Zetbox/IZetboxService/GetBlobStreamResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStreamInvalidZetboxGeneratedVersionExcept" +
+            "ionFault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         System.IO.Stream GetBlobStream(System.Guid version, int ID);
         
         // CODEGEN: Generating message contract since the wrapper name (BlobMessage) of message BlobMessage does not match the default value (SetBlobStream)
-        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/SetBlobStream", ReplyAction="http://dasz.at/ZBox/IKistlService/SetBlobStreamResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Kistl.API.InvalidKistlGeneratedVersionException), Action="http://dasz.at/ZBox/IKistlService/SetBlobStreamInvalidKistlGeneratedVersionExcept" +
-            "ionFault", Name="InvalidKistlGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Kistl.API")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/SetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        Kistl.API.Client.KistlService.BlobResponse SetBlobStream(Kistl.API.Client.KistlService.BlobMessage request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStream", ReplyAction="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamInvalidZetboxGeneratedVersionExcept" +
+            "ionFault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        Zetbox.API.Client.ZetboxService.BlobResponse SetBlobStream(Zetbox.API.Client.ZetboxService.BlobMessage request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethod", ReplyAction="http://dasz.at/ZBox/IKistlService/InvokeServerMethodResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Kistl.API.InvalidKistlGeneratedVersionException), Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethodInvalidKistlGeneratedVersionE" +
-            "xceptionFault", Name="InvalidKistlGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Kistl.API")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethodExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        byte[] InvokeServerMethod(out byte[] retChangedObjects, System.Guid version, Kistl.API.SerializableType type, int ID, string method, Kistl.API.SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, Kistl.API.ObjectNotificationRequest[] notificationRequests);
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethod", ReplyAction="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodInvalidZetboxGeneratedVersionE" +
+            "xceptionFault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        byte[] InvokeServerMethod(out byte[] retChangedObjects, System.Guid version, Zetbox.API.SerializableType type, int ID, string method, Zetbox.API.SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, Zetbox.API.ObjectNotificationRequest[] notificationRequests);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="BlobMessage", WrapperNamespace="http://dasz.at/ZBox/", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="BlobMessage", WrapperNamespace="http://dasz.at/Zetbox/", IsWrapped=true)]
     public partial class BlobMessage {
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://dasz.at/ZBox/")]
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://dasz.at/Zetbox/")]
         public string FileName;
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://dasz.at/ZBox/")]
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://dasz.at/Zetbox/")]
         public string MimeType;
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://dasz.at/ZBox/")]
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://dasz.at/Zetbox/")]
         public System.Guid Version;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dasz.at/ZBox/", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dasz.at/Zetbox/", Order=0)]
         public System.IO.Stream Stream;
         
         public BlobMessage() {
@@ -92,13 +92,13 @@ namespace Kistl.API.Client.KistlService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="BlobResponse", WrapperNamespace="http://dasz.at/ZBox/", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="BlobResponse", WrapperNamespace="http://dasz.at/Zetbox/", IsWrapped=true)]
     public partial class BlobResponse {
         
-        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://dasz.at/ZBox/")]
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://dasz.at/Zetbox/")]
         public int ID;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dasz.at/ZBox/", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://dasz.at/Zetbox/", Order=0)]
         public System.IO.Stream BlobInstance;
         
         public BlobResponse() {
@@ -111,41 +111,41 @@ namespace Kistl.API.Client.KistlService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IKistlServiceChannel : Kistl.API.Client.KistlService.IKistlService, System.ServiceModel.IClientChannel {
+    public interface IZetboxServiceChannel : Zetbox.API.Client.ZetboxService.IZetboxService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class KistlServiceClient : System.ServiceModel.ClientBase<Kistl.API.Client.KistlService.IKistlService>, Kistl.API.Client.KistlService.IKistlService {
+    public partial class ZetboxServiceClient : System.ServiceModel.ClientBase<Zetbox.API.Client.ZetboxService.IZetboxService>, Zetbox.API.Client.ZetboxService.IZetboxService {
         
-        public KistlServiceClient() {
+        public ZetboxServiceClient() {
         }
         
-        public KistlServiceClient(string endpointConfigurationName) : 
+        public ZetboxServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public KistlServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public ZetboxServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public KistlServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ZetboxServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public KistlServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ZetboxServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public byte[] SetObjects(System.Guid version, byte[] msg, Kistl.API.ObjectNotificationRequest[] notificationRequests) {
+        public byte[] SetObjects(System.Guid version, byte[] msg, Zetbox.API.ObjectNotificationRequest[] notificationRequests) {
             return base.Channel.SetObjects(version, msg, notificationRequests);
         }
         
-        public byte[] GetList(System.Guid version, Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.OrderByContract[] orderBy) {
+        public byte[] GetList(System.Guid version, Zetbox.API.SerializableType type, int maxListCount, bool eagerLoadLists, Zetbox.API.SerializableExpression[] filter, Zetbox.API.OrderByContract[] orderBy) {
             return base.Channel.GetList(version, type, maxListCount, eagerLoadLists, filter, orderBy);
         }
         
-        public byte[] GetListOf(System.Guid version, Kistl.API.SerializableType type, int ID, string property) {
+        public byte[] GetListOf(System.Guid version, Zetbox.API.SerializableType type, int ID, string property) {
             return base.Channel.GetListOf(version, type, ID, property);
         }
         
@@ -158,22 +158,22 @@ namespace Kistl.API.Client.KistlService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Kistl.API.Client.KistlService.BlobResponse Kistl.API.Client.KistlService.IKistlService.SetBlobStream(Kistl.API.Client.KistlService.BlobMessage request) {
+        Zetbox.API.Client.ZetboxService.BlobResponse Zetbox.API.Client.ZetboxService.IZetboxService.SetBlobStream(Zetbox.API.Client.ZetboxService.BlobMessage request) {
             return base.Channel.SetBlobStream(request);
         }
         
         public int SetBlobStream(string FileName, string MimeType, System.Guid Version, System.IO.Stream Stream, out System.IO.Stream BlobInstance) {
-            Kistl.API.Client.KistlService.BlobMessage inValue = new Kistl.API.Client.KistlService.BlobMessage();
+            Zetbox.API.Client.ZetboxService.BlobMessage inValue = new Zetbox.API.Client.ZetboxService.BlobMessage();
             inValue.FileName = FileName;
             inValue.MimeType = MimeType;
             inValue.Version = Version;
             inValue.Stream = Stream;
-            Kistl.API.Client.KistlService.BlobResponse retVal = ((Kistl.API.Client.KistlService.IKistlService)(this)).SetBlobStream(inValue);
+            Zetbox.API.Client.ZetboxService.BlobResponse retVal = ((Zetbox.API.Client.ZetboxService.IZetboxService)(this)).SetBlobStream(inValue);
             BlobInstance = retVal.BlobInstance;
             return retVal.ID;
         }
         
-        public byte[] InvokeServerMethod(out byte[] retChangedObjects, System.Guid version, Kistl.API.SerializableType type, int ID, string method, Kistl.API.SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, Kistl.API.ObjectNotificationRequest[] notificationRequests) {
+        public byte[] InvokeServerMethod(out byte[] retChangedObjects, System.Guid version, Zetbox.API.SerializableType type, int ID, string method, Zetbox.API.SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, Zetbox.API.ObjectNotificationRequest[] notificationRequests) {
             return base.Channel.InvokeServerMethod(out retChangedObjects, version, type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests);
         }
     }

@@ -1,8 +1,8 @@
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.IO;
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
 
     public interface IServer
     {

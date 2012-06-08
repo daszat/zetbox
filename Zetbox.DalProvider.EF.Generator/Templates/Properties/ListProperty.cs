@@ -1,20 +1,20 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
+namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public class ListProperty
         : Templates.Properties.ListProperty
     {
-        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Templates.Serialization.SerializationMembersList list, DataType containingType, String name, Property property)
+        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, Templates.Serialization.SerializationMembersList list, DataType containingType, String name, Property property)
             : base(_host, ctx, list, containingType, name, property)
         {
         }
@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
                 // this is 1:N stuff
 
                 var orp = (ObjectReferenceProperty)this.property;
-                var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, orp);
+                var rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, orp);
                 var relEnd = rel.GetEnd(orp);
                 var assocName = rel.GetAssociationName();
 

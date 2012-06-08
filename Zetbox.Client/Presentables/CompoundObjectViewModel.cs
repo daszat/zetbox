@@ -1,31 +1,31 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
     
     public class CompoundObjectViewModel 
         : ViewModel
     {
-        public new delegate CompoundObjectViewModel Factory(IKistlContext dataCtx, ViewModel parent, ICompoundObject obj);
+        public new delegate CompoundObjectViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ICompoundObject obj);
 
-        public static CompoundObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, ICompoundObject obj)
+        public static CompoundObjectViewModel Fetch(IViewModelFactory f, IZetboxContext dataCtx, ViewModel parent, ICompoundObject obj)
         {
             return (CompoundObjectViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(obj, () => f.CreateViewModel<CompoundObjectViewModel.Factory>(obj).Invoke(dataCtx, parent, obj));
         }
 
         public CompoundObjectViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             ICompoundObject obj)
             : base(appCtx, dataCtx, parent)
         {

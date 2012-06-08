@@ -1,13 +1,13 @@
 
-namespace Kistl.Client.Mocks
+namespace Zetbox.Client.Mocks
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Security.Principal;
     using System.Text;
-    using Kistl.API.Common;
-    using Kistl.App.Base;
+    using Zetbox.API.Common;
+    using Zetbox.App.Base;
 
     public sealed class NullIdentityResolver : IIdentityResolver
     {

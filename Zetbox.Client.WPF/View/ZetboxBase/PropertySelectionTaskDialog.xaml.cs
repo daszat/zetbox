@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View
+namespace Zetbox.Client.WPF.View
 {
     using System;
     using System.Collections.Generic;
@@ -14,14 +14,14 @@ namespace Kistl.Client.WPF.View
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Shapes;
-    using Kistl.Client.GUI;
-    using Kistl.Client.WPF.CustomControls;
-    using Kistl.Client.Presentables.KistlBase;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     /// <summary>
     /// Interaction logic for SelectDestinationPropertyDialog.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class PropertySelectionTaskDialog : WindowView, IHasViewModel<PropertySelectionTaskViewModel>
     {
         public PropertySelectionTaskDialog()

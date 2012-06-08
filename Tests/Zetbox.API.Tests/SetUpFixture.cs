@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -19,14 +19,14 @@ namespace Kistl.API
             builder.RegisterModule(new ApiModule());
 
             builder
-                .RegisterType<Mocks.TestKistlContext>()
-                .As<IKistlContext>()
+                .RegisterType<Mocks.TestZetboxContext>()
+                .As<IZetboxContext>()
                 .InstancePerDependency();
         }
 
         protected override string GetConfigFile()
         {
-            return "Kistl.API.Tests.xml";
+            return "Zetbox.API.Tests.xml";
         }
 
         protected override HostType GetHostType()

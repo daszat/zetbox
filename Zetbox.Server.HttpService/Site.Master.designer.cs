@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Server.HttpService {
+namespace Zetbox.Server.HttpService {
     
     
     public partial class Site {

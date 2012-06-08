@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Kistl.Client.Bootstrapper
+namespace Zetbox.Client.Bootstrapper
 {
     static class Program
     {

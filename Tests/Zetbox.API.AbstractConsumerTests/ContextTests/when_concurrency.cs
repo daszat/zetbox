@@ -1,17 +1,17 @@
 
-namespace Kistl.API.AbstractConsumerTests.ContextTests
+namespace Zetbox.API.AbstractConsumerTests.ContextTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
-    using Kistl.App.Projekte;
+    using Zetbox.App.Projekte;
 
     public abstract class when_concurrency
         : AbstractTestFixture
@@ -20,14 +20,14 @@ namespace Kistl.API.AbstractConsumerTests.ContextTests
         {
             base.SetUp();
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
                 ProjectDataFixture.DeleteData(ctx);
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 ProjectDataFixture.CreateTestData(ctx);
                 var newObj = ctx.Create<TestObjClass>();

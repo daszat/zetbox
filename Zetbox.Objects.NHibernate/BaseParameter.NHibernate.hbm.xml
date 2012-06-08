@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`BaseParameters`"
            abstract="true"
@@ -19,14 +19,14 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
                   optimistic-lock="true"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
@@ -57,7 +57,7 @@
                   column="`Label`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Method" column="`fk_Method`" class="Kistl.App.Base.MethodNHibernateImpl+MethodProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Method" column="`fk_Method`" class="Zetbox.App.Base.MethodNHibernateImpl+MethodProxy, Zetbox.Objects.NHibernateImpl" />
         <property name="Parameter_pos" column="`fk_Method_pos`" />
 
         <!-- ValueTypeProperty isValue -->
@@ -66,8 +66,8 @@
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
-        <joined-subclass name="Kistl.App.Base.BoolParameterNHibernateImpl+BoolParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.BoolParameterNHibernateImpl+BoolParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.BoolParameterNHibernateImpl+BoolParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.BoolParameterNHibernateImpl+BoolParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`BoolParameters`"
                          dynamic-update="true">
@@ -80,8 +80,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.CLRObjectParameterNHibernateImpl+CLRObjectParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.CLRObjectParameterNHibernateImpl+CLRObjectParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.CLRObjectParameterNHibernateImpl+CLRObjectParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.CLRObjectParameterNHibernateImpl+CLRObjectParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`CLRObjectParameters`"
                          dynamic-update="true">
@@ -91,14 +91,14 @@
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Type" column="`fk_Type`" class="Kistl.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Type" column="`fk_Type`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.CompoundObjectParameterNHibernateImpl+CompoundObjectParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.CompoundObjectParameterNHibernateImpl+CompoundObjectParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.CompoundObjectParameterNHibernateImpl+CompoundObjectParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.CompoundObjectParameterNHibernateImpl+CompoundObjectParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`CompoundObjectParameters`"
                          dynamic-update="true">
@@ -108,14 +108,14 @@
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CompoundObject" column="`fk_CompoundObject`" class="Kistl.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CompoundObject" column="`fk_CompoundObject`" class="Zetbox.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.DateTimeParameterNHibernateImpl+DateTimeParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.DateTimeParameterNHibernateImpl+DateTimeParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.DateTimeParameterNHibernateImpl+DateTimeParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.DateTimeParameterNHibernateImpl+DateTimeParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`DateTimeParameters`"
                          dynamic-update="true">
@@ -132,8 +132,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.DecimalParameterNHibernateImpl+DecimalParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.DecimalParameterNHibernateImpl+DecimalParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.DecimalParameterNHibernateImpl+DecimalParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.DecimalParameterNHibernateImpl+DecimalParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`DecimalParameters`"
                          dynamic-update="true">
@@ -146,8 +146,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.DoubleParameterNHibernateImpl+DoubleParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.DoubleParameterNHibernateImpl+DoubleParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.DoubleParameterNHibernateImpl+DoubleParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.DoubleParameterNHibernateImpl+DoubleParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`DoubleParameters`"
                          dynamic-update="true">
@@ -160,8 +160,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.EnumParameterNHibernateImpl+EnumParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.EnumParameterNHibernateImpl+EnumParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.EnumParameterNHibernateImpl+EnumParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.EnumParameterNHibernateImpl+EnumParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`EnumParameters`"
                          dynamic-update="true">
@@ -171,14 +171,14 @@
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Enumeration" column="`fk_Enumeration`" class="Kistl.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Enumeration" column="`fk_Enumeration`" class="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.IntParameterNHibernateImpl+IntParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.IntParameterNHibernateImpl+IntParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.IntParameterNHibernateImpl+IntParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.IntParameterNHibernateImpl+IntParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`IntParameters`"
                          dynamic-update="true">
@@ -191,8 +191,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.ObjectReferenceParameterNHibernateImpl+ObjectReferenceParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.ObjectReferenceParameterNHibernateImpl+ObjectReferenceParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.ObjectReferenceParameterNHibernateImpl+ObjectReferenceParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.ObjectReferenceParameterNHibernateImpl+ObjectReferenceParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`ObjectParameters`"
                          dynamic-update="true">
@@ -202,14 +202,14 @@
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.StringParameterNHibernateImpl+StringParameterProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.StringParameterNHibernateImpl+StringParameterProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.StringParameterNHibernateImpl+StringParameterProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.StringParameterNHibernateImpl+StringParameterProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`StringParameters`"
                          dynamic-update="true">

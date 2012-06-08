@@ -1,15 +1,15 @@
 
-namespace Kistl.DalProvider.NHibernate.Tests
+namespace Zetbox.DalProvider.NHibernate.Tests
 {
     using System;
     using System.Collections.Generic;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Configuration;
-    using Kistl.App.Base;
-    using Kistl.App.Projekte;
-    using Kistl.Server;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Base;
+    using Zetbox.App.Projekte;
+    using Zetbox.Server;
     using Npgsql;
     using NUnit.Framework;
 
@@ -21,15 +21,15 @@ namespace Kistl.DalProvider.NHibernate.Tests
         protected override void SetupBuilder(ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
-            builder.RegisterModule(new Kistl.API.ApiModule());
-            builder.RegisterModule(new Kistl.API.Common.ApiCommonModule());
-            builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
-            builder.RegisterModule(new Kistl.Server.ServerModule());
-            builder.RegisterModule(new Kistl.Objects.InterfaceModule());
-            builder.RegisterModule(new Kistl.Objects.NHibernateModule());
-            builder.RegisterModule(new Kistl.Objects.MemoryModule());
-            builder.RegisterModule(new Kistl.DalProvider.NHibernate.NHibernateProvider());
-            builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Zetbox.API.ApiModule());
+            builder.RegisterModule(new Zetbox.API.Common.ApiCommonModule());
+            builder.RegisterModule(new Zetbox.API.Server.ServerApiModule());
+            builder.RegisterModule(new Zetbox.Server.ServerModule());
+            builder.RegisterModule(new Zetbox.Objects.InterfaceModule());
+            builder.RegisterModule(new Zetbox.Objects.NHibernateModule());
+            builder.RegisterModule(new Zetbox.Objects.MemoryModule());
+            builder.RegisterModule(new Zetbox.DalProvider.NHibernate.NHibernateProvider());
+            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
 
             // load DB Utility from config
         }
@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.NHibernate.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.DalProvider.NHibernate.Tests.xml";
+            return "Zetbox.DalProvider.NHibernate.Tests.xml";
         }
 
         protected override HostType GetHostType()

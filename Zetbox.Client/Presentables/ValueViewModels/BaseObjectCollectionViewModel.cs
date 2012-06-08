@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.ValueViewModels
+namespace Zetbox.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections;
@@ -11,13 +11,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.Linq.Dynamic;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Models;
-    using Kistl.App.GUI;
-    using Kistl.API.Client;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Models;
+    using Zetbox.App.GUI;
+    using Zetbox.API.Client;
 
     /// <summary>
     /// </summary>
@@ -25,10 +25,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
         : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>
         where TModelCollection : ICollection<IDataObject>
     {
-        public new delegate BaseObjectCollectionViewModel<TModelCollection> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate BaseObjectCollectionViewModel<TModelCollection> Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public BaseObjectCollectionViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             IObjectCollectionValueModel<TModelCollection> mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
@@ -310,7 +310,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         () => CreateNewItem(),
                         () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _CreateNewCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.new_png.Find(FrozenContext);
+                    _CreateNewCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
                 }
                 return _CreateNewCommand;
             }
@@ -331,7 +331,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         () => AddExistingItem(),
                         () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _AddExistingCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.search_png.Find(FrozenContext);
+                    _AddExistingCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext);
                 }
                 return _AddExistingCommand;
             }
@@ -372,7 +372,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _DeleteCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.delete_png.Find(FrozenContext);
+                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
                 }
                 return _DeleteCommand;
             }

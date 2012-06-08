@@ -1,4 +1,4 @@
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -188,19 +188,19 @@ namespace Kistl.API
     public interface IStreamable
     {
         /// <summary>
-        /// Serialize this Object to a KistlStreamWriter
+        /// Serialize this Object to a ZetboxStreamWriter
         /// </summary>
-        /// <param name="sw">KistlStreamWriter to serialize to</param>
+        /// <param name="sw">ZetboxStreamWriter to serialize to</param>
         /// <param name="auxObjects">pass a HashSet here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
         /// <param name="eagerLoadLists">True is lists should be eager loaded</param>
-        void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists);
+        void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists);
 
         /// <summary>
-        /// Deserialize this Object from a KistlStreamReader
+        /// Deserialize this Object from a ZetboxStreamReader
         /// </summary>
-        /// <param name="sr">KistlStreamReader to deserialize from.</param>
+        /// <param name="sr">ZetboxStreamReader to deserialize from.</param>
         /// <returns>Returns a list of objects that were in-place serialized. This ensures that they can be processed like everything else in the stream. May return null to indicate absence of additional objects.</returns>
-        IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr);
+        IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr);
 
         /// <summary>
         /// Serialize this Object to a XmlWriter
@@ -239,14 +239,14 @@ namespace Kistl.API
         DataObjectState ObjectState { get; }
 
         /// <summary>
-        /// Gets the <see cref="IKistlContext"/> containing this object.
+        /// Gets the <see cref="IZetboxContext"/> containing this object.
         /// </summary>
-        IKistlContext Context { get; }
+        IZetboxContext Context { get; }
 
         /// <summary>
-        /// Gets the <see cref="IReadOnlyKistlContext"/> containing this object.
+        /// Gets the <see cref="IReadOnlyZetboxContext"/> containing this object.
         /// </summary>
-        IReadOnlyKistlContext ReadOnlyContext { get; }
+        IReadOnlyZetboxContext ReadOnlyContext { get; }
 
         /// <summary>
         /// Gets a value indicating whether or not this object is attached to a context.
@@ -286,13 +286,13 @@ namespace Kistl.API
         /// Attach this object to a context. This method is called by the context.
         /// </summary>
         /// <param name="ctx">Context to attach this object to.</param>
-        void AttachToContext(IKistlContext ctx);
+        void AttachToContext(IZetboxContext ctx);
 
         /// <summary>
         /// Detach this Object from a Context. This method is called by the context.
         /// </summary>
         /// <param name="ctx">Context to detach this object from.</param>
-        void DetachFromContext(IKistlContext ctx);
+        void DetachFromContext(IZetboxContext ctx);
 
         /// <summary>
         /// Applies changes from another IPersistenceObject of the same interface type.

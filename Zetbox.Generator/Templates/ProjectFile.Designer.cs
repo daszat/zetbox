@@ -1,26 +1,26 @@
 using System.Collections.Generic;
-using Kistl.API.Server;
+using Zetbox.API.Server;
 
 
-namespace Kistl.Generator.Templates
+namespace Zetbox.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst")]
-    public partial class ProjectFile : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst")]
+    public partial class ProjectFile : Zetbox.Generator.ResourceTemplate
     {
-		protected Kistl.API.IKistlContext ctx;
+		protected Zetbox.API.IZetboxContext ctx;
 		protected string projectGuid;
 		protected List<string> fileNames;
 		protected IEnumerable<ISchemaProvider> schemaProviders;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("ProjectFile", ctx, projectGuid, fileNames, schemaProviders);
         }
 
-        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
+        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -32,7 +32,7 @@ namespace Kistl.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 11 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
 this.WriteObjects("<Project ToolsVersion=\"4.0\" DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
@@ -47,7 +47,7 @@ this.WriteObjects("    <AssemblyName>",  GetAssemblyName() , "</AssemblyName>\r\
 this.WriteObjects("    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>\r\n");
 this.WriteObjects("    <FileAlignment>512</FileAlignment>\r\n");
 this.WriteObjects("    <SignAssembly>true</SignAssembly>\r\n");
-this.WriteObjects("    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>\r\n");
+this.WriteObjects("    <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>\r\n");
 this.WriteObjects("    <!-- this is referenced by the generator to put the results in their right place -->\r\n");
 this.WriteObjects("    <RelativeOutputPath>",  GetRelativeOutputPath() , "</RelativeOutputPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
@@ -63,8 +63,8 @@ this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n")
 this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Debug\\",  GetRelativeOutputPath() , ".Fallback\\</OutputPath>\r\n");
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath() , ".Generated\\</OutputPath>\r\n");
-this.WriteObjects("    <KistlAPIPath Condition=\" '$(KistlAPIPathOverride)' == '' \">..\\bin\\Debug\\</KistlAPIPath>\r\n");
-this.WriteObjects("    <KistlAPIPath Condition=\" '$(KistlAPIPathOverride)' != '' \">$(KistlAPIPathOverride)</KistlAPIPath>\r\n");
+this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Debug\\</ZetboxAPIPath>\r\n");
+this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">\r\n");
 this.WriteObjects("    <DebugType>pdbonly</DebugType>\r\n");
@@ -77,8 +77,8 @@ this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n")
 this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Release\\",  GetRelativeOutputPath() , ".Fallback\\</OutputPath>\r\n");
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath() , ".Generated\\</OutputPath>\r\n");
-this.WriteObjects("    <KistlAPIPath Condition=\" '$(KistlAPIPathOverride)' == '' \">..\\bin\\Release\\</KistlAPIPath>\r\n");
-this.WriteObjects("    <KistlAPIPath Condition=\" '$(KistlAPIPathOverride)' != '' \">$(KistlAPIPathOverride)</KistlAPIPath>\r\n");
+this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Release\\</ZetboxAPIPath>\r\n");
+this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' \">\r\n");
 this.WriteObjects("    <DebugSymbols>true</DebugSymbols>\r\n");
@@ -93,14 +93,14 @@ this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n")
 this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Debug\\",  GetRelativeOutputPath() , ".Fallback\\</OutputPath>\r\n");
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath() , ".Generated\\</OutputPath>\r\n");
-this.WriteObjects("    <KistlAPIPath Condition=\" '$(KistlAPIPathOverride)' == '' \">..\\bin\\Debug\\</KistlAPIPath>\r\n");
-this.WriteObjects("    <KistlAPIPath Condition=\" '$(KistlAPIPathOverride)' != '' \">$(KistlAPIPathOverride)</KistlAPIPath>\r\n");
+this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Debug\\</ZetboxAPIPath>\r\n");
+this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
-#line 76 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 76 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalProperties(); 
-#line 77 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 77 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <AdditionalReferencePath Include=\"$(OutputPath)\" />\r\n");
@@ -111,41 +111,41 @@ this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("    <Reference Include=\"System.Xml\" />\r\n");
 this.WriteObjects("    <Reference Include=\"log4net\">\r\n");
 this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
-this.WriteObjects("      <HintPath>$(KistlAPIPath)\\Common\\Core\\log4net.dll</HintPath>\r\n");
+this.WriteObjects("      <HintPath>$(ZetboxAPIPath)\\Common\\Core\\log4net.dll</HintPath>\r\n");
 this.WriteObjects("      <Private>False</Private>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-this.WriteObjects("    <Reference Include=\"Kistl.API\">\r\n");
+this.WriteObjects("    <Reference Include=\"Zetbox.API\">\r\n");
 this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
-this.WriteObjects("      <HintPath>$(KistlAPIPath)\\Common\\Core\\Kistl.API.dll</HintPath>\r\n");
+this.WriteObjects("      <HintPath>$(ZetboxAPIPath)\\Common\\Core\\Zetbox.API.dll</HintPath>\r\n");
 this.WriteObjects("      <Private>False</Private>\r\n");
 this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("    <Reference Include=\"Autofac\">\r\n");
 this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
-this.WriteObjects("      <HintPath>$(KistlAPIPath)\\Common\\Core\\Autofac.dll</HintPath>\r\n");
+this.WriteObjects("      <HintPath>$(ZetboxAPIPath)\\Common\\Core\\Autofac.dll</HintPath>\r\n");
 this.WriteObjects("      <Private>False</Private>\r\n");
 this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("    <Reference Include=\"WindowsBase\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-#line 103 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 103 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalReferences(); 
-#line 104 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 104 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 106 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 106 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 foreach (var name in fileNames) { 
-#line 107 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 107 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
-#line 108 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 108 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 } 
-#line 109 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 109 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-this.WriteObjects("    <None Include=\"Kistl.Objects.snk\" />\r\n");
+this.WriteObjects("    <None Include=\"Zetbox.Objects.snk\" />\r\n");
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 113 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 113 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalItemGroups(); 
-#line 114 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 114 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
@@ -154,9 +154,9 @@ this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  -->\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
-#line 122 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 122 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalPropertyGroups(); 
-#line 123 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 123 "P:\Zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("</Project>\r\n");
 
         }

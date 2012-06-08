@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using System.IO;
-using Kistl.App.Base;
+using Zetbox.App.Base;
 
-namespace Kistl.API.AbstractConsumerTests.Blobs
+namespace Zetbox.API.AbstractConsumerTests.Blobs
 {
     public abstract class BlobFixture : AbstractTestFixture
     {
-        protected IKistlContext ctx;
+        protected IZetboxContext ctx;
         protected MemoryStream data;
         protected static readonly string txt_data = "Hello Blob!\nI'm a test file";
         protected int blob_id;
@@ -29,12 +29,12 @@ namespace Kistl.API.AbstractConsumerTests.Blobs
 
         protected virtual void DeleteTestData()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 ctx.GetQuery<at.dasz.DocumentManagement.Document>().ForEach(obj => obj.Revisions.Clear());
                 ctx.GetQuery<at.dasz.DocumentManagement.File>().ForEach(obj => ctx.Delete(obj));
                 // Can't delete all blobs - icons are using them
-                // ctx.GetQuery<Kistl.App.Base.Blob>().ForEach(obj => ctx.Delete(obj));
+                // ctx.GetQuery<Zetbox.App.Base.Blob>().ForEach(obj => ctx.Delete(obj));
                 ctx.SubmitChanges();
             }
         }
@@ -45,7 +45,7 @@ namespace Kistl.API.AbstractConsumerTests.Blobs
             var sw = new StreamWriter(data);
             sw.Write(txt_data);
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var blob = ctx.Find<Blob>(ctx.CreateBlob(data, filename, mimetype));
                 ctx.SubmitChanges();

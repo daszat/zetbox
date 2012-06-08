@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.Extensions;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.Extensions;
 
 using NUnit.Framework;
 
-namespace Kistl.IntegrationTests.TypeRefs
+namespace Zetbox.IntegrationTests.TypeRefs
 {
     [TestFixture]
     public class should_convert_types_correctly : AbstractIntegrationTestFixture

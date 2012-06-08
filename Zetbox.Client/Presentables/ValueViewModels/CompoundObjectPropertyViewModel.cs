@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.ValueViewModels
+namespace Zetbox.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -7,19 +7,19 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel, ICompoundObject>, IValueViewModel<CompoundObjectViewModel>
     {
-        public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate CompoundObjectPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public CompoundObjectPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             IValueModel mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {

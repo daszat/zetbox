@@ -8,12 +8,12 @@
     <ProjectGuid>{04656394-60EA-4675-95EE-3DA6D07BAB89}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Client.ASPNET.Toolkit</RootNamespace>
-    <AssemblyName>Kistl.Client.ASPNET.Toolkit</AssemblyName>
+    <RootNamespace>Zetbox.Client.ASPNET.Toolkit</RootNamespace>
+    <AssemblyName>Zetbox.Client.ASPNET.Toolkit</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -26,7 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\ASP.NET\Kistl.Client.ASPNET.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\ASP.NET\Zetbox.Client.ASPNET.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\Client\ASP.NET\Kistl.Client.ASPNET.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Client\ASP.NET\Zetbox.Client.ASPNET.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
@@ -47,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\ASP.NET\Kistl.Client.ASPNET.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\ASP.NET\Zetbox.Client.ASPNET.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
@@ -102,7 +102,7 @@
     </Compile>
     <Compile Include="JavaScriptObjectMoniker.cs" />
     <Compile Include="JavascriptRenderer.cs" />
-    <Compile Include="KistlContextManagerModule.cs" />
+    <Compile Include="ZetboxContextManagerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
@@ -153,29 +153,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
+    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Kistl.API.Client</Name>
+      <Name>Zetbox.API.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Client\Kistl.Client.csproj">
+    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
-      <Name>Kistl.Client</Name>
+      <Name>Zetbox.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
@@ -198,7 +198,7 @@
     <EmbeddedResource Include="View\LauncherView.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.GridCells
+namespace Zetbox.Client.WPF.View.GridCells
 {
     using System;
     using System.Collections.Generic;

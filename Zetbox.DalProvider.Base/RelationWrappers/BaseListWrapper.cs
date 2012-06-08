@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.Base.RelationWrappers
+namespace Zetbox.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// A wrapper around a List of CollectionEntrys to present one "side" as normal list.
@@ -90,7 +90,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             list.Remove(newEntry);
             list.Insert(index, newEntry);
 
-            Kistl.API.Helper.FixIndices(list, IndexFromEntry, SetIndex);
+            Zetbox.API.Helper.FixIndices(list, IndexFromEntry, SetIndex);
 
             OnEntryAdding(newEntry);
             Collection.Add(newEntry);

@@ -8,19 +8,19 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Linq;
 
-using Kistl.API;
-using Kistl.DalProvider.Base.RelationWrappers;
-using Kistl.API.Server;
-using Kistl.DalProvider.Ef;
+using Zetbox.API;
+using Zetbox.DalProvider.Base.RelationWrappers;
+using Zetbox.API.Server;
+using Zetbox.DalProvider.Ef;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl")]
-    public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl, Kistl.App.Base.Property, Kistl.App.Base.PropertyEfImpl>, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyEfImpl>, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl()
@@ -32,7 +32,7 @@ namespace Kistl.App.Base
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -62,8 +62,8 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -107,7 +107,7 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e");
@@ -122,7 +122,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.CalculatedObjectReferenceProperty)value;
+                A = (Zetbox.App.Base.CalculatedObjectReferenceProperty)value;
             }
         }
 
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Property)value;
+                B = (Zetbox.App.Base.Property)value;
             }
         }
 
@@ -145,9 +145,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.CalculatedObjectReferenceProperty; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.CalculatedObjectReferenceProperty; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -155,10 +155,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.CalculatedObjectReferenceProperty A
+        public Zetbox.App.Base.CalculatedObjectReferenceProperty A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl)value; }
+            set { AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -167,14 +167,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_CalculatedReference_dependsOn_InputProperties_A", "CalculatedReference")]
-        public Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl AImpl
+        public Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl __value;
-                EntityReference<Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl>(
+                Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl __value;
+                EntityReference<Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl>(
                         "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
                         "CalculatedReference");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -189,10 +189,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl>(
+                EntityReference<Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl>(
                         "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
                         "CalculatedReference");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -200,27 +200,27 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl __oldValue = (Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl)r.Value;
-                Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl __newValue = (Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl)value;
+                Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl __oldValue = (Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl)r.Value;
+                Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl __newValue = (Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Property; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -228,10 +228,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Property B
+        public Zetbox.App.Base.Property B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.PropertyEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.PropertyEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -240,14 +240,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_CalculatedReference_dependsOn_InputProperties_B", "InputProperties")]
-        public Kistl.App.Base.PropertyEfImpl BImpl
+        public Zetbox.App.Base.PropertyEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.PropertyEfImpl __value;
-                EntityReference<Kistl.App.Base.PropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(
+                Zetbox.App.Base.PropertyEfImpl __value;
+                EntityReference<Zetbox.App.Base.PropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(
                         "Model.FK_CalculatedReference_dependsOn_InputProperties_B",
                         "InputProperties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -262,10 +262,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.PropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(
+                EntityReference<Zetbox.App.Base.PropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(
                         "Model.FK_CalculatedReference_dependsOn_InputProperties_B",
                         "InputProperties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -273,53 +273,53 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.PropertyEfImpl __oldValue = (Kistl.App.Base.PropertyEfImpl)r.Value;
-                Kistl.App.Base.PropertyEfImpl __newValue = (Kistl.App.Base.PropertyEfImpl)value;
+                Zetbox.App.Base.PropertyEfImpl __oldValue = (Zetbox.App.Base.PropertyEfImpl)r.Value;
+                Zetbox.App.Base.PropertyEfImpl __newValue = (Zetbox.App.Base.PropertyEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.PropertyEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.PropertyEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl>("Model.FK_CalculatedReference_dependsOn_InputProperties_A", "CalculatedReference").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl>("Model.FK_CalculatedReference_dependsOn_InputProperties_A", "CalculatedReference").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             if (auxObjects != null) {
                 auxObjects.Add(A);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>("Model.FK_CalculatedReference_dependsOn_InputProperties_B", "InputProperties").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_CalculatedReference_dependsOn_InputProperties_B", "InputProperties").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -332,8 +332,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -344,10 +344,10 @@ namespace Kistl.App.Base
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -378,18 +378,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl)Context.FindPersistenceObject<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl)Context.Find<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl)Context.Find<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.PropertyEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.PropertyEfImpl)Context.Find<Kistl.App.Base.Property>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyEfImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -430,15 +430,15 @@ namespace Kistl.App.Base
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="DataType_implements_Interface_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("DataType_implements_Interface_RelationEntryEfImpl")]
-    public class DataType_implements_Interface_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.DataType, Kistl.App.Base.DataTypeEfImpl, Kistl.App.Base.Interface, Kistl.App.Base.InterfaceEfImpl>, DataType_implements_Interface_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    public class DataType_implements_Interface_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.DataType, Zetbox.App.Base.DataTypeEfImpl, Zetbox.App.Base.Interface, Zetbox.App.Base.InterfaceEfImpl>, DataType_implements_Interface_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public DataType_implements_Interface_RelationEntryEfImpl()
@@ -450,7 +450,7 @@ namespace Kistl.App.Base
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -480,8 +480,8 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -525,7 +525,7 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3");
@@ -540,7 +540,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.DataType)value;
+                A = (Zetbox.App.Base.DataType)value;
             }
         }
 
@@ -553,7 +553,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Interface)value;
+                B = (Zetbox.App.Base.Interface)value;
             }
         }
 
@@ -563,9 +563,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.DataType; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -573,10 +573,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.DataType A
+        public Zetbox.App.Base.DataType A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.DataTypeEfImpl)value; }
+            set { AImpl = (Zetbox.App.Base.DataTypeEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -585,14 +585,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_implements_ImplementedInterfaces_A", "DataType")]
-        public Kistl.App.Base.DataTypeEfImpl AImpl
+        public Zetbox.App.Base.DataTypeEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.DataTypeEfImpl __value;
-                EntityReference<Kistl.App.Base.DataTypeEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>(
+                Zetbox.App.Base.DataTypeEfImpl __value;
+                EntityReference<Zetbox.App.Base.DataTypeEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.DataTypeEfImpl>(
                         "Model.FK_DataType_implements_ImplementedInterfaces_A",
                         "DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -607,10 +607,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.DataTypeEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>(
+                EntityReference<Zetbox.App.Base.DataTypeEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.DataTypeEfImpl>(
                         "Model.FK_DataType_implements_ImplementedInterfaces_A",
                         "DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -618,27 +618,27 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.DataTypeEfImpl __oldValue = (Kistl.App.Base.DataTypeEfImpl)r.Value;
-                Kistl.App.Base.DataTypeEfImpl __newValue = (Kistl.App.Base.DataTypeEfImpl)value;
+                Zetbox.App.Base.DataTypeEfImpl __oldValue = (Zetbox.App.Base.DataTypeEfImpl)r.Value;
+                Zetbox.App.Base.DataTypeEfImpl __newValue = (Zetbox.App.Base.DataTypeEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.DataTypeEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.DataTypeEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Interface; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -646,10 +646,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Interface B
+        public Zetbox.App.Base.Interface B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.InterfaceEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.InterfaceEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -658,14 +658,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_implements_ImplementedInterfaces_B", "ImplementedInterfaces")]
-        public Kistl.App.Base.InterfaceEfImpl BImpl
+        public Zetbox.App.Base.InterfaceEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.InterfaceEfImpl __value;
-                EntityReference<Kistl.App.Base.InterfaceEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>(
+                Zetbox.App.Base.InterfaceEfImpl __value;
+                EntityReference<Zetbox.App.Base.InterfaceEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.InterfaceEfImpl>(
                         "Model.FK_DataType_implements_ImplementedInterfaces_B",
                         "ImplementedInterfaces");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -680,10 +680,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.InterfaceEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>(
+                EntityReference<Zetbox.App.Base.InterfaceEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.InterfaceEfImpl>(
                         "Model.FK_DataType_implements_ImplementedInterfaces_B",
                         "ImplementedInterfaces");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -691,50 +691,50 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.InterfaceEfImpl __oldValue = (Kistl.App.Base.InterfaceEfImpl)r.Value;
-                Kistl.App.Base.InterfaceEfImpl __newValue = (Kistl.App.Base.InterfaceEfImpl)value;
+                Zetbox.App.Base.InterfaceEfImpl __oldValue = (Zetbox.App.Base.InterfaceEfImpl)r.Value;
+                Zetbox.App.Base.InterfaceEfImpl __newValue = (Zetbox.App.Base.InterfaceEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.InterfaceEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.InterfaceEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_A", "DataType").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.DataTypeEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_A", "DataType").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_B", "ImplementedInterfaces").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.InterfaceEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_B", "ImplementedInterfaces").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -747,8 +747,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -759,10 +759,10 @@ namespace Kistl.App.Base
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -793,18 +793,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Base.DataTypeEfImpl)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.DataTypeEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.DataTypeEfImpl)Context.Find<Kistl.App.Base.DataType>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.DataTypeEfImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.InterfaceEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.InterfaceEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Interface>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.InterfaceEfImpl)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.InterfaceEfImpl)Context.Find<Zetbox.App.Base.Interface>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -845,15 +845,15 @@ namespace Kistl.App.Base
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
 namespace at.dasz.DocumentManagement
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="Document_has_Blob_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryEfImpl")]
-    public class Document_has_Blob_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentEfImpl, Kistl.App.Base.Blob, Kistl.App.Base.BlobEfImpl>, Document_has_Blob_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    public class Document_has_Blob_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentEfImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobEfImpl>, Document_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public Document_has_Blob_RelationEntryEfImpl()
@@ -865,7 +865,7 @@ namespace at.dasz.DocumentManagement
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -895,8 +895,8 @@ namespace at.dasz.DocumentManagement
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -940,7 +940,7 @@ namespace at.dasz.DocumentManagement
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad");
@@ -968,7 +968,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Blob)value;
+                B = (Zetbox.App.Base.Blob)value;
             }
         }
 
@@ -978,7 +978,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=at.dasz.DocumentManagement.Document; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
@@ -1022,7 +1022,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 EntityReference<at.dasz.DocumentManagement.DocumentEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.DocumentEfImpl>(
@@ -1046,7 +1046,7 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -1087,15 +1087,15 @@ namespace at.dasz.DocumentManagement
                 ReportEfPropertyChanged("A_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable
@@ -1103,10 +1103,10 @@ namespace at.dasz.DocumentManagement
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Blob B
+        public Zetbox.App.Base.Blob B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.BlobEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.BlobEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -1115,14 +1115,14 @@ namespace at.dasz.DocumentManagement
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Document_has_Revisions_B", "Revisions")]
-        public Kistl.App.Base.BlobEfImpl BImpl
+        public Zetbox.App.Base.BlobEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.BlobEfImpl __value;
-                EntityReference<Kistl.App.Base.BlobEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BlobEfImpl>(
+                Zetbox.App.Base.BlobEfImpl __value;
+                EntityReference<Zetbox.App.Base.BlobEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.BlobEfImpl>(
                         "Model.FK_Document_has_Revisions_B",
                         "Revisions");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1137,10 +1137,10 @@ namespace at.dasz.DocumentManagement
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.BlobEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BlobEfImpl>(
+                EntityReference<Zetbox.App.Base.BlobEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.BlobEfImpl>(
                         "Model.FK_Document_has_Revisions_B",
                         "Revisions");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1148,20 +1148,20 @@ namespace at.dasz.DocumentManagement
                 {
                     r.Load();
                 }
-                Kistl.App.Base.BlobEfImpl __oldValue = (Kistl.App.Base.BlobEfImpl)r.Value;
-                Kistl.App.Base.BlobEfImpl __newValue = (Kistl.App.Base.BlobEfImpl)value;
+                Zetbox.App.Base.BlobEfImpl __oldValue = (Zetbox.App.Base.BlobEfImpl)r.Value;
+                Zetbox.App.Base.BlobEfImpl __newValue = (Zetbox.App.Base.BlobEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.BlobEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.BlobEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -1202,8 +1202,8 @@ namespace at.dasz.DocumentManagement
                 ReportEfPropertyChanged("B_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -1218,7 +1218,7 @@ namespace at.dasz.DocumentManagement
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -1230,24 +1230,24 @@ namespace at.dasz.DocumentManagement
             }
             binStream.Write(this._A_pos);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.BlobEfImpl>("Model.FK_Document_has_Revisions_B", "Revisions").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.BlobEfImpl>("Model.FK_Document_has_Revisions_B", "Revisions").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this._B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -1324,10 +1324,10 @@ namespace at.dasz.DocumentManagement
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.BlobEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.BlobEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.BlobEfImpl)Context.Find<Kistl.App.Base.Blob>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.BlobEfImpl)Context.Find<Zetbox.App.Base.Blob>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -1368,15 +1368,15 @@ namespace at.dasz.DocumentManagement
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="Identity_memberOf_Group_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("Identity_memberOf_Group_RelationEntryEfImpl")]
-    public class Identity_memberOf_Group_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.Identity, Kistl.App.Base.IdentityEfImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupEfImpl>, Identity_memberOf_Group_RelationEntry
+    public class Identity_memberOf_Group_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityEfImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupEfImpl>, Identity_memberOf_Group_RelationEntry
     {
         [Obsolete]
         public Identity_memberOf_Group_RelationEntryEfImpl()
@@ -1388,7 +1388,7 @@ namespace Kistl.App.Base
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -1418,7 +1418,7 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743");
@@ -1433,7 +1433,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.Identity)value;
+                A = (Zetbox.App.Base.Identity)value;
             }
         }
 
@@ -1446,7 +1446,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Group)value;
+                B = (Zetbox.App.Base.Group)value;
             }
         }
 
@@ -1456,9 +1456,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -1466,10 +1466,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Identity A
+        public Zetbox.App.Base.Identity A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.IdentityEfImpl)value; }
+            set { AImpl = (Zetbox.App.Base.IdentityEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -1477,14 +1477,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Identities_memberOf_Groups_A", "Identities")]
-        public Kistl.App.Base.IdentityEfImpl AImpl
+        public Zetbox.App.Base.IdentityEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.IdentityEfImpl __value;
-                EntityReference<Kistl.App.Base.IdentityEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
+                Zetbox.App.Base.IdentityEfImpl __value;
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
                         "Model.FK_Identities_memberOf_Groups_A",
                         "Identities");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1499,10 +1499,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.IdentityEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
+                EntityReference<Zetbox.App.Base.IdentityEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
                         "Model.FK_Identities_memberOf_Groups_A",
                         "Identities");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1510,27 +1510,27 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.IdentityEfImpl __oldValue = (Kistl.App.Base.IdentityEfImpl)r.Value;
-                Kistl.App.Base.IdentityEfImpl __newValue = (Kistl.App.Base.IdentityEfImpl)value;
+                Zetbox.App.Base.IdentityEfImpl __oldValue = (Zetbox.App.Base.IdentityEfImpl)r.Value;
+                Zetbox.App.Base.IdentityEfImpl __newValue = (Zetbox.App.Base.IdentityEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.IdentityEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.IdentityEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Group; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -1538,10 +1538,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Group B
+        public Zetbox.App.Base.Group B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.GroupEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.GroupEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -1549,14 +1549,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Identities_memberOf_Groups_B", "Groups")]
-        public Kistl.App.Base.GroupEfImpl BImpl
+        public Zetbox.App.Base.GroupEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.GroupEfImpl __value;
-                EntityReference<Kistl.App.Base.GroupEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>(
+                Zetbox.App.Base.GroupEfImpl __value;
+                EntityReference<Zetbox.App.Base.GroupEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.GroupEfImpl>(
                         "Model.FK_Identities_memberOf_Groups_B",
                         "Groups");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1571,10 +1571,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.GroupEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>(
+                EntityReference<Zetbox.App.Base.GroupEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.GroupEfImpl>(
                         "Model.FK_Identities_memberOf_Groups_B",
                         "Groups");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1582,48 +1582,48 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.GroupEfImpl __oldValue = (Kistl.App.Base.GroupEfImpl)r.Value;
-                Kistl.App.Base.GroupEfImpl __newValue = (Kistl.App.Base.GroupEfImpl)value;
+                Zetbox.App.Base.GroupEfImpl __oldValue = (Zetbox.App.Base.GroupEfImpl)r.Value;
+                Zetbox.App.Base.GroupEfImpl __newValue = (Zetbox.App.Base.GroupEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.GroupEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.GroupEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Identities_memberOf_Groups_A", "Identities").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Identities_memberOf_Groups_A", "Identities").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>("Model.FK_Identities_memberOf_Groups_B", "Groups").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.GroupEfImpl>("Model.FK_Identities_memberOf_Groups_B", "Groups").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -1656,12 +1656,12 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.IdentityEfImpl)Context.Find<Kistl.App.Base.Identity>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.GroupEfImpl)Context.Find<Kistl.App.Base.Group>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.GroupEfImpl)Context.Find<Zetbox.App.Base.Group>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -1702,15 +1702,15 @@ namespace Kistl.App.Base
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="IndexConstraint_ensures_unique_on_Property_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl")]
-    public class IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.IndexConstraint, Kistl.App.Base.IndexConstraintEfImpl, Kistl.App.Base.Property, Kistl.App.Base.PropertyEfImpl>, IndexConstraint_ensures_unique_on_Property_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    public class IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.IndexConstraintEfImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyEfImpl>, IndexConstraint_ensures_unique_on_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
         public IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl()
@@ -1722,7 +1722,7 @@ namespace Kistl.App.Base
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -1752,8 +1752,8 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -1797,7 +1797,7 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28");
@@ -1812,7 +1812,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.IndexConstraint)value;
+                A = (Zetbox.App.Base.IndexConstraint)value;
             }
         }
 
@@ -1825,7 +1825,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Property)value;
+                B = (Zetbox.App.Base.Property)value;
             }
         }
 
@@ -1835,9 +1835,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.IndexConstraint; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.IndexConstraint; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -1845,10 +1845,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.IndexConstraint A
+        public Zetbox.App.Base.IndexConstraint A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.IndexConstraintEfImpl)value; }
+            set { AImpl = (Zetbox.App.Base.IndexConstraintEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -1857,14 +1857,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_UniqueContraints_ensures_unique_on_Properties_A", "UniqueContraints")]
-        public Kistl.App.Base.IndexConstraintEfImpl AImpl
+        public Zetbox.App.Base.IndexConstraintEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.IndexConstraintEfImpl __value;
-                EntityReference<Kistl.App.Base.IndexConstraintEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IndexConstraintEfImpl>(
+                Zetbox.App.Base.IndexConstraintEfImpl __value;
+                EntityReference<Zetbox.App.Base.IndexConstraintEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IndexConstraintEfImpl>(
                         "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
                         "UniqueContraints");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1879,10 +1879,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.IndexConstraintEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IndexConstraintEfImpl>(
+                EntityReference<Zetbox.App.Base.IndexConstraintEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IndexConstraintEfImpl>(
                         "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
                         "UniqueContraints");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1890,27 +1890,27 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.IndexConstraintEfImpl __oldValue = (Kistl.App.Base.IndexConstraintEfImpl)r.Value;
-                Kistl.App.Base.IndexConstraintEfImpl __newValue = (Kistl.App.Base.IndexConstraintEfImpl)value;
+                Zetbox.App.Base.IndexConstraintEfImpl __oldValue = (Zetbox.App.Base.IndexConstraintEfImpl)r.Value;
+                Zetbox.App.Base.IndexConstraintEfImpl __newValue = (Zetbox.App.Base.IndexConstraintEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.IndexConstraintEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.IndexConstraintEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Property; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -1918,10 +1918,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Property B
+        public Zetbox.App.Base.Property B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.PropertyEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.PropertyEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -1930,14 +1930,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_UniqueContraints_ensures_unique_on_Properties_B", "Properties")]
-        public Kistl.App.Base.PropertyEfImpl BImpl
+        public Zetbox.App.Base.PropertyEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.PropertyEfImpl __value;
-                EntityReference<Kistl.App.Base.PropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(
+                Zetbox.App.Base.PropertyEfImpl __value;
+                EntityReference<Zetbox.App.Base.PropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(
                         "Model.FK_UniqueContraints_ensures_unique_on_Properties_B",
                         "Properties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1952,10 +1952,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.PropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(
+                EntityReference<Zetbox.App.Base.PropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(
                         "Model.FK_UniqueContraints_ensures_unique_on_Properties_B",
                         "Properties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1963,50 +1963,50 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.PropertyEfImpl __oldValue = (Kistl.App.Base.PropertyEfImpl)r.Value;
-                Kistl.App.Base.PropertyEfImpl __newValue = (Kistl.App.Base.PropertyEfImpl)value;
+                Zetbox.App.Base.PropertyEfImpl __oldValue = (Zetbox.App.Base.PropertyEfImpl)r.Value;
+                Zetbox.App.Base.PropertyEfImpl __newValue = (Zetbox.App.Base.PropertyEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.PropertyEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.PropertyEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IndexConstraintEfImpl>("Model.FK_UniqueContraints_ensures_unique_on_Properties_A", "UniqueContraints").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IndexConstraintEfImpl>("Model.FK_UniqueContraints_ensures_unique_on_Properties_A", "UniqueContraints").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>("Model.FK_UniqueContraints_ensures_unique_on_Properties_B", "Properties").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_UniqueContraints_ensures_unique_on_Properties_B", "Properties").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -2019,8 +2019,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -2031,10 +2031,10 @@ namespace Kistl.App.Base
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -2065,18 +2065,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Base.IndexConstraintEfImpl)Context.FindPersistenceObject<Kistl.App.Base.IndexConstraint>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.IndexConstraintEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.IndexConstraint>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.IndexConstraintEfImpl)Context.Find<Kistl.App.Base.IndexConstraint>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.IndexConstraintEfImpl)Context.Find<Zetbox.App.Base.IndexConstraint>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.PropertyEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.PropertyEfImpl)Context.Find<Kistl.App.Base.Property>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyEfImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -2117,15 +2117,15 @@ namespace Kistl.App.Base
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="Muhblah_has_TestCustomObject_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("Muhblah_has_TestCustomObject_RelationEntryEfImpl")]
-    public class Muhblah_has_TestCustomObject_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Test.Muhblah, Kistl.App.Test.MuhblahEfImpl, Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObjectEfImpl>, Muhblah_has_TestCustomObject_RelationEntry
+    public class Muhblah_has_TestCustomObject_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahEfImpl, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectEfImpl>, Muhblah_has_TestCustomObject_RelationEntry
     {
         [Obsolete]
         public Muhblah_has_TestCustomObject_RelationEntryEfImpl()
@@ -2137,7 +2137,7 @@ namespace Kistl.App.Test
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -2167,7 +2167,7 @@ namespace Kistl.App.Test
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97");
@@ -2182,7 +2182,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Test.Muhblah)value;
+                A = (Zetbox.App.Test.Muhblah)value;
             }
         }
 
@@ -2195,7 +2195,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Test.TestCustomObject)value;
+                B = (Zetbox.App.Test.TestCustomObject)value;
             }
         }
 
@@ -2205,9 +2205,9 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Test.Muhblah; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -2215,10 +2215,10 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.Muhblah A
+        public Zetbox.App.Test.Muhblah A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Test.MuhblahEfImpl)value; }
+            set { AImpl = (Zetbox.App.Test.MuhblahEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -2226,14 +2226,14 @@ namespace Kistl.App.Test
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MB_Many_Role_has_TCO_ManyList_Role_A", "MB_Many_Role")]
-        public Kistl.App.Test.MuhblahEfImpl AImpl
+        public Zetbox.App.Test.MuhblahEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.MuhblahEfImpl __value;
-                EntityReference<Kistl.App.Test.MuhblahEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>(
+                Zetbox.App.Test.MuhblahEfImpl __value;
+                EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>(
                         "Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A",
                         "MB_Many_Role");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2248,10 +2248,10 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Test.MuhblahEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>(
+                EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>(
                         "Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A",
                         "MB_Many_Role");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2259,27 +2259,27 @@ namespace Kistl.App.Test
                 {
                     r.Load();
                 }
-                Kistl.App.Test.MuhblahEfImpl __oldValue = (Kistl.App.Test.MuhblahEfImpl)r.Value;
-                Kistl.App.Test.MuhblahEfImpl __newValue = (Kistl.App.Test.MuhblahEfImpl)value;
+                Zetbox.App.Test.MuhblahEfImpl __oldValue = (Zetbox.App.Test.MuhblahEfImpl)r.Value;
+                Zetbox.App.Test.MuhblahEfImpl __newValue = (Zetbox.App.Test.MuhblahEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Test.MuhblahEfImpl)__newValue;
+                r.Value = (Zetbox.App.Test.MuhblahEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Test.TestCustomObject; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -2287,10 +2287,10 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.TestCustomObject B
+        public Zetbox.App.Test.TestCustomObject B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Test.TestCustomObjectEfImpl)value; }
+            set { BImpl = (Zetbox.App.Test.TestCustomObjectEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -2298,14 +2298,14 @@ namespace Kistl.App.Test
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MB_Many_Role_has_TCO_ManyList_Role_B", "TCO_ManyList_Role")]
-        public Kistl.App.Test.TestCustomObjectEfImpl BImpl
+        public Zetbox.App.Test.TestCustomObjectEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.TestCustomObjectEfImpl __value;
-                EntityReference<Kistl.App.Test.TestCustomObjectEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>(
+                Zetbox.App.Test.TestCustomObjectEfImpl __value;
+                EntityReference<Zetbox.App.Test.TestCustomObjectEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>(
                         "Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B",
                         "TCO_ManyList_Role");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2320,10 +2320,10 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Test.TestCustomObjectEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>(
+                EntityReference<Zetbox.App.Test.TestCustomObjectEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>(
                         "Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B",
                         "TCO_ManyList_Role");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2331,48 +2331,48 @@ namespace Kistl.App.Test
                 {
                     r.Load();
                 }
-                Kistl.App.Test.TestCustomObjectEfImpl __oldValue = (Kistl.App.Test.TestCustomObjectEfImpl)r.Value;
-                Kistl.App.Test.TestCustomObjectEfImpl __newValue = (Kistl.App.Test.TestCustomObjectEfImpl)value;
+                Zetbox.App.Test.TestCustomObjectEfImpl __oldValue = (Zetbox.App.Test.TestCustomObjectEfImpl)r.Value;
+                Zetbox.App.Test.TestCustomObjectEfImpl __newValue = (Zetbox.App.Test.TestCustomObjectEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Test.TestCustomObjectEfImpl)__newValue;
+                r.Value = (Zetbox.App.Test.TestCustomObjectEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>("Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A", "MB_Many_Role").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>("Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A", "MB_Many_Role").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B", "TCO_ManyList_Role").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B", "TCO_ManyList_Role").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -2405,12 +2405,12 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Test.MuhblahEfImpl)Context.Find<Kistl.App.Test.Muhblah>(_fk_A.Value);
+                AImpl = (Zetbox.App.Test.MuhblahEfImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Test.TestCustomObjectEfImpl)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_B.Value);
+                BImpl = (Zetbox.App.Test.TestCustomObjectEfImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -2451,15 +2451,15 @@ namespace Kistl.App.Test
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl")]
-    public class N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Test.N_to_M_relations_A, Kistl.App.Test.N_to_M_relations_AEfImpl, Kistl.App.Test.N_to_M_relations_B, Kistl.App.Test.N_to_M_relations_BEfImpl>, N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry
+    public class N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_AEfImpl, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_BEfImpl>, N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry
     {
         [Obsolete]
         public N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl()
@@ -2471,7 +2471,7 @@ namespace Kistl.App.Test
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -2501,7 +2501,7 @@ namespace Kistl.App.Test
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9");
@@ -2516,7 +2516,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Test.N_to_M_relations_A)value;
+                A = (Zetbox.App.Test.N_to_M_relations_A)value;
             }
         }
 
@@ -2529,7 +2529,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Test.N_to_M_relations_B)value;
+                B = (Zetbox.App.Test.N_to_M_relations_B)value;
             }
         }
 
@@ -2539,9 +2539,9 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Test.N_to_M_relations_A; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.N_to_M_relations_A; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -2549,10 +2549,10 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.N_to_M_relations_A A
+        public Zetbox.App.Test.N_to_M_relations_A A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Test.N_to_M_relations_AEfImpl)value; }
+            set { AImpl = (Zetbox.App.Test.N_to_M_relations_AEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -2560,14 +2560,14 @@ namespace Kistl.App.Test
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ASide_connectsTo_BSide_A", "ASide")]
-        public Kistl.App.Test.N_to_M_relations_AEfImpl AImpl
+        public Zetbox.App.Test.N_to_M_relations_AEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.N_to_M_relations_AEfImpl __value;
-                EntityReference<Kistl.App.Test.N_to_M_relations_AEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.N_to_M_relations_AEfImpl>(
+                Zetbox.App.Test.N_to_M_relations_AEfImpl __value;
+                EntityReference<Zetbox.App.Test.N_to_M_relations_AEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.N_to_M_relations_AEfImpl>(
                         "Model.FK_ASide_connectsTo_BSide_A",
                         "ASide");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2582,10 +2582,10 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Test.N_to_M_relations_AEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.N_to_M_relations_AEfImpl>(
+                EntityReference<Zetbox.App.Test.N_to_M_relations_AEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.N_to_M_relations_AEfImpl>(
                         "Model.FK_ASide_connectsTo_BSide_A",
                         "ASide");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2593,27 +2593,27 @@ namespace Kistl.App.Test
                 {
                     r.Load();
                 }
-                Kistl.App.Test.N_to_M_relations_AEfImpl __oldValue = (Kistl.App.Test.N_to_M_relations_AEfImpl)r.Value;
-                Kistl.App.Test.N_to_M_relations_AEfImpl __newValue = (Kistl.App.Test.N_to_M_relations_AEfImpl)value;
+                Zetbox.App.Test.N_to_M_relations_AEfImpl __oldValue = (Zetbox.App.Test.N_to_M_relations_AEfImpl)r.Value;
+                Zetbox.App.Test.N_to_M_relations_AEfImpl __newValue = (Zetbox.App.Test.N_to_M_relations_AEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Test.N_to_M_relations_AEfImpl)__newValue;
+                r.Value = (Zetbox.App.Test.N_to_M_relations_AEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Test.N_to_M_relations_B; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.N_to_M_relations_B; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -2621,10 +2621,10 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.N_to_M_relations_B B
+        public Zetbox.App.Test.N_to_M_relations_B B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Test.N_to_M_relations_BEfImpl)value; }
+            set { BImpl = (Zetbox.App.Test.N_to_M_relations_BEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -2632,14 +2632,14 @@ namespace Kistl.App.Test
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ASide_connectsTo_BSide_B", "BSide")]
-        public Kistl.App.Test.N_to_M_relations_BEfImpl BImpl
+        public Zetbox.App.Test.N_to_M_relations_BEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.N_to_M_relations_BEfImpl __value;
-                EntityReference<Kistl.App.Test.N_to_M_relations_BEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.N_to_M_relations_BEfImpl>(
+                Zetbox.App.Test.N_to_M_relations_BEfImpl __value;
+                EntityReference<Zetbox.App.Test.N_to_M_relations_BEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.N_to_M_relations_BEfImpl>(
                         "Model.FK_ASide_connectsTo_BSide_B",
                         "BSide");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2654,10 +2654,10 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Test.N_to_M_relations_BEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.N_to_M_relations_BEfImpl>(
+                EntityReference<Zetbox.App.Test.N_to_M_relations_BEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.N_to_M_relations_BEfImpl>(
                         "Model.FK_ASide_connectsTo_BSide_B",
                         "BSide");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2665,48 +2665,48 @@ namespace Kistl.App.Test
                 {
                     r.Load();
                 }
-                Kistl.App.Test.N_to_M_relations_BEfImpl __oldValue = (Kistl.App.Test.N_to_M_relations_BEfImpl)r.Value;
-                Kistl.App.Test.N_to_M_relations_BEfImpl __newValue = (Kistl.App.Test.N_to_M_relations_BEfImpl)value;
+                Zetbox.App.Test.N_to_M_relations_BEfImpl __oldValue = (Zetbox.App.Test.N_to_M_relations_BEfImpl)r.Value;
+                Zetbox.App.Test.N_to_M_relations_BEfImpl __newValue = (Zetbox.App.Test.N_to_M_relations_BEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Test.N_to_M_relations_BEfImpl)__newValue;
+                r.Value = (Zetbox.App.Test.N_to_M_relations_BEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.N_to_M_relations_AEfImpl>("Model.FK_ASide_connectsTo_BSide_A", "ASide").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.N_to_M_relations_AEfImpl>("Model.FK_ASide_connectsTo_BSide_A", "ASide").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.N_to_M_relations_BEfImpl>("Model.FK_ASide_connectsTo_BSide_B", "BSide").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.N_to_M_relations_BEfImpl>("Model.FK_ASide_connectsTo_BSide_B", "BSide").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -2739,12 +2739,12 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Test.N_to_M_relations_AEfImpl)Context.Find<Kistl.App.Test.N_to_M_relations_A>(_fk_A.Value);
+                AImpl = (Zetbox.App.Test.N_to_M_relations_AEfImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Test.N_to_M_relations_BEfImpl)Context.Find<Kistl.App.Test.N_to_M_relations_B>(_fk_B.Value);
+                BImpl = (Zetbox.App.Test.N_to_M_relations_BEfImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -2785,15 +2785,15 @@ namespace Kistl.App.Test
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="NavigationEntry_accessed_by_Group_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryEfImpl")]
-    public class NavigationEntry_accessed_by_Group_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntryEfImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
+    public class NavigationEntry_accessed_by_Group_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryEfImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupEfImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
     {
         [Obsolete]
         public NavigationEntry_accessed_by_Group_RelationEntryEfImpl()
@@ -2805,7 +2805,7 @@ namespace Kistl.App.GUI
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -2835,8 +2835,8 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -2880,7 +2880,7 @@ namespace Kistl.App.GUI
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a");
@@ -2895,7 +2895,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.NavigationEntry)value;
+                A = (Zetbox.App.GUI.NavigationEntry)value;
             }
         }
 
@@ -2908,7 +2908,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Group)value;
+                B = (Zetbox.App.Base.Group)value;
             }
         }
 
@@ -2918,9 +2918,9 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.NavigationEntry; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.NavigationEntry; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -2928,10 +2928,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.NavigationEntry A
+        public Zetbox.App.GUI.NavigationEntry A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.GUI.NavigationEntryEfImpl)value; }
+            set { AImpl = (Zetbox.App.GUI.NavigationEntryEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -2940,14 +2940,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen")]
-        public Kistl.App.GUI.NavigationEntryEfImpl AImpl
+        public Zetbox.App.GUI.NavigationEntryEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.NavigationEntryEfImpl __value;
-                EntityReference<Kistl.App.GUI.NavigationEntryEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>(
+                Zetbox.App.GUI.NavigationEntryEfImpl __value;
+                EntityReference<Zetbox.App.GUI.NavigationEntryEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.NavigationEntryEfImpl>(
                         "Model.FK_NavigationScreen_accessed_by_Groups_A",
                         "NavigationScreen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2962,10 +2962,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.NavigationEntryEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>(
+                EntityReference<Zetbox.App.GUI.NavigationEntryEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.NavigationEntryEfImpl>(
                         "Model.FK_NavigationScreen_accessed_by_Groups_A",
                         "NavigationScreen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2973,27 +2973,27 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.NavigationEntryEfImpl __oldValue = (Kistl.App.GUI.NavigationEntryEfImpl)r.Value;
-                Kistl.App.GUI.NavigationEntryEfImpl __newValue = (Kistl.App.GUI.NavigationEntryEfImpl)value;
+                Zetbox.App.GUI.NavigationEntryEfImpl __oldValue = (Zetbox.App.GUI.NavigationEntryEfImpl)r.Value;
+                Zetbox.App.GUI.NavigationEntryEfImpl __newValue = (Zetbox.App.GUI.NavigationEntryEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.NavigationEntryEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.NavigationEntryEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Group; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -3001,10 +3001,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Group B
+        public Zetbox.App.Base.Group B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.GroupEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.GroupEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -3013,14 +3013,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_NavigationScreen_accessed_by_Groups_B", "Groups")]
-        public Kistl.App.Base.GroupEfImpl BImpl
+        public Zetbox.App.Base.GroupEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.GroupEfImpl __value;
-                EntityReference<Kistl.App.Base.GroupEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>(
+                Zetbox.App.Base.GroupEfImpl __value;
+                EntityReference<Zetbox.App.Base.GroupEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.GroupEfImpl>(
                         "Model.FK_NavigationScreen_accessed_by_Groups_B",
                         "Groups");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3035,10 +3035,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.GroupEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>(
+                EntityReference<Zetbox.App.Base.GroupEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.GroupEfImpl>(
                         "Model.FK_NavigationScreen_accessed_by_Groups_B",
                         "Groups");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3046,53 +3046,53 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.Base.GroupEfImpl __oldValue = (Kistl.App.Base.GroupEfImpl)r.Value;
-                Kistl.App.Base.GroupEfImpl __newValue = (Kistl.App.Base.GroupEfImpl)value;
+                Zetbox.App.Base.GroupEfImpl __oldValue = (Zetbox.App.Base.GroupEfImpl)r.Value;
+                Zetbox.App.Base.GroupEfImpl __newValue = (Zetbox.App.Base.GroupEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.GroupEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.GroupEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.NavigationEntryEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             if (auxObjects != null) {
                 auxObjects.Add(A);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_B", "Groups").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.GroupEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_B", "Groups").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -3105,8 +3105,8 @@ namespace Kistl.App.GUI
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -3117,10 +3117,10 @@ namespace Kistl.App.GUI
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.GUI|A":
+            case "Zetbox.App.GUI|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.GUI|B":
+            case "Zetbox.App.GUI|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -3151,18 +3151,18 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.GUI.NavigationEntryEfImpl)Context.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.GUI.NavigationEntryEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.NavigationEntry>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.GUI.NavigationEntryEfImpl)Context.Find<Kistl.App.GUI.NavigationEntry>(_fk_A.Value);
+                AImpl = (Zetbox.App.GUI.NavigationEntryEfImpl)Context.Find<Zetbox.App.GUI.NavigationEntry>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.GroupEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.GroupEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.GroupEfImpl)Context.Find<Kistl.App.Base.Group>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.GroupEfImpl)Context.Find<Zetbox.App.Base.Group>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -3203,15 +3203,15 @@ namespace Kistl.App.GUI
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="ObjectReferenceProperty_shows_Method_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty_shows_Method_RelationEntryEfImpl")]
-    public class ObjectReferenceProperty_shows_Method_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.ObjectReferencePropertyEfImpl, Kistl.App.Base.Method, Kistl.App.Base.MethodEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ObjectReferenceProperty_shows_Method_RelationEntry
+    public class ObjectReferenceProperty_shows_Method_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyEfImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodEfImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ObjectReferenceProperty_shows_Method_RelationEntry
     {
         [Obsolete]
         public ObjectReferenceProperty_shows_Method_RelationEntryEfImpl()
@@ -3223,7 +3223,7 @@ namespace Kistl.App.GUI
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -3253,8 +3253,8 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -3298,7 +3298,7 @@ namespace Kistl.App.GUI
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc");
@@ -3313,7 +3313,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.ObjectReferenceProperty)value;
+                A = (Zetbox.App.Base.ObjectReferenceProperty)value;
             }
         }
 
@@ -3326,7 +3326,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Method)value;
+                B = (Zetbox.App.Base.Method)value;
             }
         }
 
@@ -3336,9 +3336,9 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.Base.ObjectReferenceProperty; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -3346,10 +3346,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectReferenceProperty A
+        public Zetbox.App.Base.ObjectReferenceProperty A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.ObjectReferencePropertyEfImpl)value; }
+            set { AImpl = (Zetbox.App.Base.ObjectReferencePropertyEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -3358,14 +3358,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjRefProp_shows_Methods_A", "ObjRefProp")]
-        public Kistl.App.Base.ObjectReferencePropertyEfImpl AImpl
+        public Zetbox.App.Base.ObjectReferencePropertyEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.ObjectReferencePropertyEfImpl __value;
-                EntityReference<Kistl.App.Base.ObjectReferencePropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyEfImpl>(
+                Zetbox.App.Base.ObjectReferencePropertyEfImpl __value;
+                EntityReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl>(
                         "Model.FK_ObjRefProp_shows_Methods_A",
                         "ObjRefProp");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3380,10 +3380,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.ObjectReferencePropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyEfImpl>(
+                EntityReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl>(
                         "Model.FK_ObjRefProp_shows_Methods_A",
                         "ObjRefProp");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3391,27 +3391,27 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.Base.ObjectReferencePropertyEfImpl __oldValue = (Kistl.App.Base.ObjectReferencePropertyEfImpl)r.Value;
-                Kistl.App.Base.ObjectReferencePropertyEfImpl __newValue = (Kistl.App.Base.ObjectReferencePropertyEfImpl)value;
+                Zetbox.App.Base.ObjectReferencePropertyEfImpl __oldValue = (Zetbox.App.Base.ObjectReferencePropertyEfImpl)r.Value;
+                Zetbox.App.Base.ObjectReferencePropertyEfImpl __newValue = (Zetbox.App.Base.ObjectReferencePropertyEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.ObjectReferencePropertyEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.ObjectReferencePropertyEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.Base.Method; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -3419,10 +3419,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Method B
+        public Zetbox.App.Base.Method B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.MethodEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.MethodEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -3431,14 +3431,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjRefProp_shows_Methods_B", "Methods")]
-        public Kistl.App.Base.MethodEfImpl BImpl
+        public Zetbox.App.Base.MethodEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.MethodEfImpl __value;
-                EntityReference<Kistl.App.Base.MethodEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>(
+                Zetbox.App.Base.MethodEfImpl __value;
+                EntityReference<Zetbox.App.Base.MethodEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.MethodEfImpl>(
                         "Model.FK_ObjRefProp_shows_Methods_B",
                         "Methods");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3453,10 +3453,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.MethodEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>(
+                EntityReference<Zetbox.App.Base.MethodEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.MethodEfImpl>(
                         "Model.FK_ObjRefProp_shows_Methods_B",
                         "Methods");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3464,50 +3464,50 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.Base.MethodEfImpl __oldValue = (Kistl.App.Base.MethodEfImpl)r.Value;
-                Kistl.App.Base.MethodEfImpl __newValue = (Kistl.App.Base.MethodEfImpl)value;
+                Zetbox.App.Base.MethodEfImpl __oldValue = (Zetbox.App.Base.MethodEfImpl)r.Value;
+                Zetbox.App.Base.MethodEfImpl __newValue = (Zetbox.App.Base.MethodEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.MethodEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.MethodEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferencePropertyEfImpl>("Model.FK_ObjRefProp_shows_Methods_A", "ObjRefProp").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectReferencePropertyEfImpl>("Model.FK_ObjRefProp_shows_Methods_A", "ObjRefProp").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>("Model.FK_ObjRefProp_shows_Methods_B", "Methods").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.MethodEfImpl>("Model.FK_ObjRefProp_shows_Methods_B", "Methods").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -3520,8 +3520,8 @@ namespace Kistl.App.GUI
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -3532,10 +3532,10 @@ namespace Kistl.App.GUI
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.GUI|A":
+            case "Zetbox.App.GUI|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.GUI|B":
+            case "Zetbox.App.GUI|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -3566,18 +3566,18 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Base.ObjectReferencePropertyEfImpl)Context.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.ObjectReferencePropertyEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.ObjectReferencePropertyEfImpl)Context.Find<Kistl.App.Base.ObjectReferenceProperty>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.ObjectReferencePropertyEfImpl)Context.Find<Zetbox.App.Base.ObjectReferenceProperty>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.MethodEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.MethodEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Method>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.MethodEfImpl)Context.Find<Kistl.App.Base.Method>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.MethodEfImpl)Context.Find<Zetbox.App.Base.Method>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -3618,15 +3618,15 @@ namespace Kistl.App.GUI
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Projekte
+namespace Zetbox.App.Projekte
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="Projekt_haben_Mitarbeiter_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntryEfImpl")]
-    public class Projekt_haben_Mitarbeiter_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.ProjektEfImpl, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.MitarbeiterEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, Projekt_haben_Mitarbeiter_RelationEntry
+    public class Projekt_haben_Mitarbeiter_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektEfImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterEfImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, Projekt_haben_Mitarbeiter_RelationEntry
     {
         [Obsolete]
         public Projekt_haben_Mitarbeiter_RelationEntryEfImpl()
@@ -3638,7 +3638,7 @@ namespace Kistl.App.Projekte
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -3668,8 +3668,8 @@ namespace Kistl.App.Projekte
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -3713,7 +3713,7 @@ namespace Kistl.App.Projekte
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e");
@@ -3728,7 +3728,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Projekte.Projekt)value;
+                A = (Zetbox.App.Projekte.Projekt)value;
             }
         }
 
@@ -3741,7 +3741,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Projekte.Mitarbeiter)value;
+                B = (Zetbox.App.Projekte.Mitarbeiter)value;
             }
         }
 
@@ -3751,9 +3751,9 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
+        // referencedInterface=Zetbox.App.Projekte.Projekt; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable
@@ -3761,10 +3761,10 @@ namespace Kistl.App.Projekte
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Projekt A
+        public Zetbox.App.Projekte.Projekt A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Projekte.ProjektEfImpl)value; }
+            set { AImpl = (Zetbox.App.Projekte.ProjektEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -3773,14 +3773,14 @@ namespace Kistl.App.Projekte
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekte_haben_Mitarbeiter_A", "Projekte")]
-        public Kistl.App.Projekte.ProjektEfImpl AImpl
+        public Zetbox.App.Projekte.ProjektEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Projekte.ProjektEfImpl __value;
-                EntityReference<Kistl.App.Projekte.ProjektEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektEfImpl>(
+                Zetbox.App.Projekte.ProjektEfImpl __value;
+                EntityReference<Zetbox.App.Projekte.ProjektEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>(
                         "Model.FK_Projekte_haben_Mitarbeiter_A",
                         "Projekte");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3795,10 +3795,10 @@ namespace Kistl.App.Projekte
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Projekte.ProjektEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektEfImpl>(
+                EntityReference<Zetbox.App.Projekte.ProjektEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>(
                         "Model.FK_Projekte_haben_Mitarbeiter_A",
                         "Projekte");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3806,20 +3806,20 @@ namespace Kistl.App.Projekte
                 {
                     r.Load();
                 }
-                Kistl.App.Projekte.ProjektEfImpl __oldValue = (Kistl.App.Projekte.ProjektEfImpl)r.Value;
-                Kistl.App.Projekte.ProjektEfImpl __newValue = (Kistl.App.Projekte.ProjektEfImpl)value;
+                Zetbox.App.Projekte.ProjektEfImpl __oldValue = (Zetbox.App.Projekte.ProjektEfImpl)r.Value;
+                Zetbox.App.Projekte.ProjektEfImpl __newValue = (Zetbox.App.Projekte.ProjektEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Projekte.ProjektEfImpl)__newValue;
+                r.Value = (Zetbox.App.Projekte.ProjektEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -3860,15 +3860,15 @@ namespace Kistl.App.Projekte
                 ReportEfPropertyChanged("A_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Projekte.Mitarbeiter; moduleNamespace=Kistl.App.Projekte;
+        // referencedInterface=Zetbox.App.Projekte.Mitarbeiter; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable
@@ -3876,10 +3876,10 @@ namespace Kistl.App.Projekte
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Mitarbeiter B
+        public Zetbox.App.Projekte.Mitarbeiter B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Projekte.MitarbeiterEfImpl)value; }
+            set { BImpl = (Zetbox.App.Projekte.MitarbeiterEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -3888,14 +3888,14 @@ namespace Kistl.App.Projekte
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekte_haben_Mitarbeiter_B", "Mitarbeiter")]
-        public Kistl.App.Projekte.MitarbeiterEfImpl BImpl
+        public Zetbox.App.Projekte.MitarbeiterEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Projekte.MitarbeiterEfImpl __value;
-                EntityReference<Kistl.App.Projekte.MitarbeiterEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterEfImpl>(
+                Zetbox.App.Projekte.MitarbeiterEfImpl __value;
+                EntityReference<Zetbox.App.Projekte.MitarbeiterEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.MitarbeiterEfImpl>(
                         "Model.FK_Projekte_haben_Mitarbeiter_B",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3910,10 +3910,10 @@ namespace Kistl.App.Projekte
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Projekte.MitarbeiterEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterEfImpl>(
+                EntityReference<Zetbox.App.Projekte.MitarbeiterEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.MitarbeiterEfImpl>(
                         "Model.FK_Projekte_haben_Mitarbeiter_B",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -3921,20 +3921,20 @@ namespace Kistl.App.Projekte
                 {
                     r.Load();
                 }
-                Kistl.App.Projekte.MitarbeiterEfImpl __oldValue = (Kistl.App.Projekte.MitarbeiterEfImpl)r.Value;
-                Kistl.App.Projekte.MitarbeiterEfImpl __newValue = (Kistl.App.Projekte.MitarbeiterEfImpl)value;
+                Zetbox.App.Projekte.MitarbeiterEfImpl __oldValue = (Zetbox.App.Projekte.MitarbeiterEfImpl)r.Value;
+                Zetbox.App.Projekte.MitarbeiterEfImpl __newValue = (Zetbox.App.Projekte.MitarbeiterEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Projekte.MitarbeiterEfImpl)__newValue;
+                r.Value = (Zetbox.App.Projekte.MitarbeiterEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -3975,8 +3975,8 @@ namespace Kistl.App.Projekte
                 ReportEfPropertyChanged("B_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -3991,36 +3991,36 @@ namespace Kistl.App.Projekte
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektEfImpl>("Model.FK_Projekte_haben_Mitarbeiter_A", "Projekte").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.ProjektEfImpl>("Model.FK_Projekte_haben_Mitarbeiter_A", "Projekte").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._A_pos);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterEfImpl>("Model.FK_Projekte_haben_Mitarbeiter_B", "Mitarbeiter").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.MitarbeiterEfImpl>("Model.FK_Projekte_haben_Mitarbeiter_B", "Mitarbeiter").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this._B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -4033,10 +4033,10 @@ namespace Kistl.App.Projekte
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Projekte");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Projekte");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Zetbox.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Zetbox.App.Projekte");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -4047,16 +4047,16 @@ namespace Kistl.App.Projekte
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Projekte|A":
+            case "Zetbox.App.Projekte|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Projekte|A_pos":
+            case "Zetbox.App.Projekte|A_pos":
                 this._A_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "Kistl.App.Projekte|B":
+            case "Zetbox.App.Projekte|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Projekte|B_pos":
+            case "Zetbox.App.Projekte|B_pos":
                 this._B_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
             }
@@ -4089,18 +4089,18 @@ namespace Kistl.App.Projekte
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Projekte.ProjektEfImpl)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Projekte.ProjektEfImpl)Context.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Projekte.ProjektEfImpl)Context.Find<Kistl.App.Projekte.Projekt>(_fk_A.Value);
+                AImpl = (Zetbox.App.Projekte.ProjektEfImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Projekte.MitarbeiterEfImpl)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Projekte.MitarbeiterEfImpl)Context.FindPersistenceObject<Zetbox.App.Projekte.Mitarbeiter>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Projekte.MitarbeiterEfImpl)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
+                BImpl = (Zetbox.App.Projekte.MitarbeiterEfImpl)Context.Find<Zetbox.App.Projekte.Mitarbeiter>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -4141,15 +4141,15 @@ namespace Kistl.App.Projekte
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="RoleMembership_resolves_Relation_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("RoleMembership_resolves_Relation_RelationEntryEfImpl")]
-    public class RoleMembership_resolves_Relation_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.RoleMembership, Kistl.App.Base.RoleMembershipEfImpl, Kistl.App.Base.Relation, Kistl.App.Base.RelationEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, RoleMembership_resolves_Relation_RelationEntry
+    public class RoleMembership_resolves_Relation_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipEfImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationEfImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, RoleMembership_resolves_Relation_RelationEntry
     {
         [Obsolete]
         public RoleMembership_resolves_Relation_RelationEntryEfImpl()
@@ -4161,7 +4161,7 @@ namespace Kistl.App.Base
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -4191,8 +4191,8 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -4236,7 +4236,7 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80");
@@ -4251,7 +4251,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.RoleMembership)value;
+                A = (Zetbox.App.Base.RoleMembership)value;
             }
         }
 
@@ -4264,7 +4264,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Relation)value;
+                B = (Zetbox.App.Base.Relation)value;
             }
         }
 
@@ -4274,9 +4274,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.RoleMembership; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.RoleMembership; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable
@@ -4284,10 +4284,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.RoleMembership A
+        public Zetbox.App.Base.RoleMembership A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.RoleMembershipEfImpl)value; }
+            set { AImpl = (Zetbox.App.Base.RoleMembershipEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -4296,14 +4296,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_RoleMembership_resolves_Relations_A", "RoleMembership")]
-        public Kistl.App.Base.RoleMembershipEfImpl AImpl
+        public Zetbox.App.Base.RoleMembershipEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.RoleMembershipEfImpl __value;
-                EntityReference<Kistl.App.Base.RoleMembershipEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RoleMembershipEfImpl>(
+                Zetbox.App.Base.RoleMembershipEfImpl __value;
+                EntityReference<Zetbox.App.Base.RoleMembershipEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.RoleMembershipEfImpl>(
                         "Model.FK_RoleMembership_resolves_Relations_A",
                         "RoleMembership");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -4318,10 +4318,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.RoleMembershipEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RoleMembershipEfImpl>(
+                EntityReference<Zetbox.App.Base.RoleMembershipEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.RoleMembershipEfImpl>(
                         "Model.FK_RoleMembership_resolves_Relations_A",
                         "RoleMembership");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -4329,20 +4329,20 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.RoleMembershipEfImpl __oldValue = (Kistl.App.Base.RoleMembershipEfImpl)r.Value;
-                Kistl.App.Base.RoleMembershipEfImpl __newValue = (Kistl.App.Base.RoleMembershipEfImpl)value;
+                Zetbox.App.Base.RoleMembershipEfImpl __oldValue = (Zetbox.App.Base.RoleMembershipEfImpl)r.Value;
+                Zetbox.App.Base.RoleMembershipEfImpl __newValue = (Zetbox.App.Base.RoleMembershipEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.RoleMembershipEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.RoleMembershipEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -4383,15 +4383,15 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("A_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Relation; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Relation; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable
@@ -4399,10 +4399,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Relation B
+        public Zetbox.App.Base.Relation B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.RelationEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.RelationEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -4411,14 +4411,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_RoleMembership_resolves_Relations_B", "Relations")]
-        public Kistl.App.Base.RelationEfImpl BImpl
+        public Zetbox.App.Base.RelationEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.RelationEfImpl __value;
-                EntityReference<Kistl.App.Base.RelationEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEfImpl>(
+                Zetbox.App.Base.RelationEfImpl __value;
+                EntityReference<Zetbox.App.Base.RelationEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEfImpl>(
                         "Model.FK_RoleMembership_resolves_Relations_B",
                         "Relations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -4433,10 +4433,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.RelationEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEfImpl>(
+                EntityReference<Zetbox.App.Base.RelationEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEfImpl>(
                         "Model.FK_RoleMembership_resolves_Relations_B",
                         "Relations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -4444,20 +4444,20 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.RelationEfImpl __oldValue = (Kistl.App.Base.RelationEfImpl)r.Value;
-                Kistl.App.Base.RelationEfImpl __newValue = (Kistl.App.Base.RelationEfImpl)value;
+                Zetbox.App.Base.RelationEfImpl __oldValue = (Zetbox.App.Base.RelationEfImpl)r.Value;
+                Zetbox.App.Base.RelationEfImpl __newValue = (Zetbox.App.Base.RelationEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.RelationEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.RelationEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -4498,8 +4498,8 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("B_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -4514,36 +4514,36 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RoleMembershipEfImpl>("Model.FK_RoleMembership_resolves_Relations_A", "RoleMembership").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.RoleMembershipEfImpl>("Model.FK_RoleMembership_resolves_Relations_A", "RoleMembership").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._A_pos);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEfImpl>("Model.FK_RoleMembership_resolves_Relations_B", "Relations").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.RelationEfImpl>("Model.FK_RoleMembership_resolves_Relations_B", "Relations").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this._B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -4556,10 +4556,10 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -4570,16 +4570,16 @@ namespace Kistl.App.Base
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|A_pos":
+            case "Zetbox.App.Base|A_pos":
                 this._A_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B_pos":
+            case "Zetbox.App.Base|B_pos":
                 this._B_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
             }
@@ -4612,18 +4612,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Base.RoleMembershipEfImpl)Context.FindPersistenceObject<Kistl.App.Base.RoleMembership>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.RoleMembershipEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.RoleMembership>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.RoleMembershipEfImpl)Context.Find<Kistl.App.Base.RoleMembership>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.RoleMembershipEfImpl)Context.Find<Zetbox.App.Base.RoleMembership>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.RelationEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.RelationEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Relation>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.RelationEfImpl)Context.Find<Kistl.App.Base.Relation>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.RelationEfImpl)Context.Find<Zetbox.App.Base.Relation>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -4664,15 +4664,15 @@ namespace Kistl.App.Base
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace ZBox.App.SchemaMigration
+namespace Zetbox.App.SchemaMigration
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="SourceColumn_created_Property_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryEfImpl")]
-    public class SourceColumn_created_Property_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnEfImpl, Kistl.App.Base.Property, Kistl.App.Base.PropertyEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, SourceColumn_created_Property_RelationEntry
+    public class SourceColumn_created_Property_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnEfImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyEfImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, SourceColumn_created_Property_RelationEntry
     {
         [Obsolete]
         public SourceColumn_created_Property_RelationEntryEfImpl()
@@ -4684,7 +4684,7 @@ namespace ZBox.App.SchemaMigration
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -4714,8 +4714,8 @@ namespace ZBox.App.SchemaMigration
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -4759,7 +4759,7 @@ namespace ZBox.App.SchemaMigration
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27");
@@ -4774,7 +4774,7 @@ namespace ZBox.App.SchemaMigration
             set
             {
                 // settor will do checking for us
-                A = (ZBox.App.SchemaMigration.SourceColumn)value;
+                A = (Zetbox.App.SchemaMigration.SourceColumn)value;
             }
         }
 
@@ -4787,7 +4787,7 @@ namespace ZBox.App.SchemaMigration
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Property)value;
+                B = (Zetbox.App.Base.Property)value;
             }
         }
 
@@ -4797,9 +4797,9 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=ZBox.App.SchemaMigration.SourceColumn; moduleNamespace=ZBox.App.SchemaMigration;
+        // referencedInterface=Zetbox.App.SchemaMigration.SourceColumn; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable
@@ -4807,10 +4807,10 @@ namespace ZBox.App.SchemaMigration
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ZBox.App.SchemaMigration.SourceColumn A
+        public Zetbox.App.SchemaMigration.SourceColumn A
         {
             get { return AImpl; }
-            set { AImpl = (ZBox.App.SchemaMigration.SourceColumnEfImpl)value; }
+            set { AImpl = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -4819,14 +4819,14 @@ namespace ZBox.App.SchemaMigration
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_SourceColumn_created_Property_A", "SourceColumn")]
-        public ZBox.App.SchemaMigration.SourceColumnEfImpl AImpl
+        public Zetbox.App.SchemaMigration.SourceColumnEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                ZBox.App.SchemaMigration.SourceColumnEfImpl __value;
-                EntityReference<ZBox.App.SchemaMigration.SourceColumnEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ZBox.App.SchemaMigration.SourceColumnEfImpl>(
+                Zetbox.App.SchemaMigration.SourceColumnEfImpl __value;
+                EntityReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
                         "Model.FK_SourceColumn_created_Property_A",
                         "SourceColumn");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -4841,10 +4841,10 @@ namespace ZBox.App.SchemaMigration
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<ZBox.App.SchemaMigration.SourceColumnEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ZBox.App.SchemaMigration.SourceColumnEfImpl>(
+                EntityReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
                         "Model.FK_SourceColumn_created_Property_A",
                         "SourceColumn");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -4852,20 +4852,20 @@ namespace ZBox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                ZBox.App.SchemaMigration.SourceColumnEfImpl __oldValue = (ZBox.App.SchemaMigration.SourceColumnEfImpl)r.Value;
-                ZBox.App.SchemaMigration.SourceColumnEfImpl __newValue = (ZBox.App.SchemaMigration.SourceColumnEfImpl)value;
+                Zetbox.App.SchemaMigration.SourceColumnEfImpl __oldValue = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)r.Value;
+                Zetbox.App.SchemaMigration.SourceColumnEfImpl __newValue = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (ZBox.App.SchemaMigration.SourceColumnEfImpl)__newValue;
+                r.Value = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -4906,15 +4906,15 @@ namespace ZBox.App.SchemaMigration
                 ReportEfPropertyChanged("A_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Property; moduleNamespace=ZBox.App.SchemaMigration;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable
@@ -4922,10 +4922,10 @@ namespace ZBox.App.SchemaMigration
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Property B
+        public Zetbox.App.Base.Property B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.PropertyEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.PropertyEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -4934,14 +4934,14 @@ namespace ZBox.App.SchemaMigration
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_SourceColumn_created_Property_B", "Property")]
-        public Kistl.App.Base.PropertyEfImpl BImpl
+        public Zetbox.App.Base.PropertyEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.PropertyEfImpl __value;
-                EntityReference<Kistl.App.Base.PropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(
+                Zetbox.App.Base.PropertyEfImpl __value;
+                EntityReference<Zetbox.App.Base.PropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(
                         "Model.FK_SourceColumn_created_Property_B",
                         "Property");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -4956,10 +4956,10 @@ namespace ZBox.App.SchemaMigration
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.PropertyEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(
+                EntityReference<Zetbox.App.Base.PropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(
                         "Model.FK_SourceColumn_created_Property_B",
                         "Property");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -4967,20 +4967,20 @@ namespace ZBox.App.SchemaMigration
                 {
                     r.Load();
                 }
-                Kistl.App.Base.PropertyEfImpl __oldValue = (Kistl.App.Base.PropertyEfImpl)r.Value;
-                Kistl.App.Base.PropertyEfImpl __newValue = (Kistl.App.Base.PropertyEfImpl)value;
+                Zetbox.App.Base.PropertyEfImpl __oldValue = (Zetbox.App.Base.PropertyEfImpl)r.Value;
+                Zetbox.App.Base.PropertyEfImpl __newValue = (Zetbox.App.Base.PropertyEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.PropertyEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.PropertyEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -5021,8 +5021,8 @@ namespace ZBox.App.SchemaMigration
                 ReportEfPropertyChanged("B_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -5037,14 +5037,14 @@ namespace ZBox.App.SchemaMigration
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<ZBox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_SourceColumn_created_Property_A", "SourceColumn").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_SourceColumn_created_Property_A", "SourceColumn").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             if (auxObjects != null) {
@@ -5052,24 +5052,24 @@ namespace ZBox.App.SchemaMigration
             }
             binStream.Write(this._A_pos);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>("Model.FK_SourceColumn_created_Property_B", "Property").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_SourceColumn_created_Property_B", "Property").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this._B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -5082,10 +5082,10 @@ namespace ZBox.App.SchemaMigration
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "ZBox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "ZBox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "ZBox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "ZBox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Zetbox.App.SchemaMigration");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -5096,16 +5096,16 @@ namespace ZBox.App.SchemaMigration
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "ZBox.App.SchemaMigration|A":
+            case "Zetbox.App.SchemaMigration|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "ZBox.App.SchemaMigration|A_pos":
+            case "Zetbox.App.SchemaMigration|A_pos":
                 this._A_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "ZBox.App.SchemaMigration|B":
+            case "Zetbox.App.SchemaMigration|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "ZBox.App.SchemaMigration|B_pos":
+            case "Zetbox.App.SchemaMigration|B_pos":
                 this._B_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
             }
@@ -5138,18 +5138,18 @@ namespace ZBox.App.SchemaMigration
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (ZBox.App.SchemaMigration.SourceColumnEfImpl)Context.FindPersistenceObject<ZBox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)Context.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (ZBox.App.SchemaMigration.SourceColumnEfImpl)Context.Find<ZBox.App.SchemaMigration.SourceColumn>(_fk_A.Value);
+                AImpl = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)Context.Find<Zetbox.App.SchemaMigration.SourceColumn>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.PropertyEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.PropertyEfImpl)Context.Find<Kistl.App.Base.Property>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyEfImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -5190,15 +5190,15 @@ namespace ZBox.App.SchemaMigration
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="Template_hasMenu_Visual_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("Template_hasMenu_Visual_RelationEntryEfImpl")]
-    public class Template_hasMenu_Visual_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.GUI.Template, Kistl.App.GUI.TemplateEfImpl, Kistl.App.GUI.Visual, Kistl.App.GUI.VisualEfImpl>, Template_hasMenu_Visual_RelationEntry
+    public class Template_hasMenu_Visual_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.Template, Zetbox.App.GUI.TemplateEfImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl>, Template_hasMenu_Visual_RelationEntry
     {
         [Obsolete]
         public Template_hasMenu_Visual_RelationEntryEfImpl()
@@ -5210,7 +5210,7 @@ namespace Kistl.App.GUI
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -5240,7 +5240,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("81ff3089-57da-478c-8be5-fd23abc222a2");
@@ -5255,7 +5255,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.Template)value;
+                A = (Zetbox.App.GUI.Template)value;
             }
         }
 
@@ -5268,7 +5268,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.GUI.Visual)value;
+                B = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -5278,9 +5278,9 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.Template; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Template; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -5288,10 +5288,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Template A
+        public Zetbox.App.GUI.Template A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.GUI.TemplateEfImpl)value; }
+            set { AImpl = (Zetbox.App.GUI.TemplateEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -5299,14 +5299,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Menu_A", "Template")]
-        public Kistl.App.GUI.TemplateEfImpl AImpl
+        public Zetbox.App.GUI.TemplateEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.TemplateEfImpl __value;
-                EntityReference<Kistl.App.GUI.TemplateEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.TemplateEfImpl>(
+                Zetbox.App.GUI.TemplateEfImpl __value;
+                EntityReference<Zetbox.App.GUI.TemplateEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.TemplateEfImpl>(
                         "Model.FK_Template_hasMenu_Menu_A",
                         "Template");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -5321,10 +5321,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.TemplateEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.TemplateEfImpl>(
+                EntityReference<Zetbox.App.GUI.TemplateEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.TemplateEfImpl>(
                         "Model.FK_Template_hasMenu_Menu_A",
                         "Template");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -5332,27 +5332,27 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.TemplateEfImpl __oldValue = (Kistl.App.GUI.TemplateEfImpl)r.Value;
-                Kistl.App.GUI.TemplateEfImpl __newValue = (Kistl.App.GUI.TemplateEfImpl)value;
+                Zetbox.App.GUI.TemplateEfImpl __oldValue = (Zetbox.App.GUI.TemplateEfImpl)r.Value;
+                Zetbox.App.GUI.TemplateEfImpl __newValue = (Zetbox.App.GUI.TemplateEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.TemplateEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.TemplateEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -5360,10 +5360,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual B
+        public Zetbox.App.GUI.Visual B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.GUI.VisualEfImpl)value; }
+            set { BImpl = (Zetbox.App.GUI.VisualEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -5371,14 +5371,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Menu_B", "Menu")]
-        public Kistl.App.GUI.VisualEfImpl BImpl
+        public Zetbox.App.GUI.VisualEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualEfImpl __value;
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                Zetbox.App.GUI.VisualEfImpl __value;
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Template_hasMenu_Menu_B",
                         "Menu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -5393,10 +5393,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Template_hasMenu_Menu_B",
                         "Menu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -5404,48 +5404,48 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.VisualEfImpl __oldValue = (Kistl.App.GUI.VisualEfImpl)r.Value;
-                Kistl.App.GUI.VisualEfImpl __newValue = (Kistl.App.GUI.VisualEfImpl)value;
+                Zetbox.App.GUI.VisualEfImpl __oldValue = (Zetbox.App.GUI.VisualEfImpl)r.Value;
+                Zetbox.App.GUI.VisualEfImpl __newValue = (Zetbox.App.GUI.VisualEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.VisualEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.VisualEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.TemplateEfImpl>("Model.FK_Template_hasMenu_Menu_A", "Template").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.TemplateEfImpl>("Model.FK_Template_hasMenu_Menu_A", "Template").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Template_hasMenu_Menu_B", "Menu").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Template_hasMenu_Menu_B", "Menu").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -5478,12 +5478,12 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.GUI.TemplateEfImpl)Context.Find<Kistl.App.GUI.Template>(_fk_A.Value);
+                AImpl = (Zetbox.App.GUI.TemplateEfImpl)Context.Find<Zetbox.App.GUI.Template>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.GUI.VisualEfImpl)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+                BImpl = (Zetbox.App.GUI.VisualEfImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -5524,15 +5524,15 @@ namespace Kistl.App.GUI
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="TestStudent_füllt_aus_Fragebogen_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl")]
-    public class TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Test.TestStudent, Kistl.App.Test.TestStudentEfImpl, Kistl.App.Test.Fragebogen, Kistl.App.Test.FragebogenEfImpl>, TestStudent_füllt_aus_Fragebogen_RelationEntry
+    public class TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Test.TestStudent, Zetbox.App.Test.TestStudentEfImpl, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.FragebogenEfImpl>, TestStudent_füllt_aus_Fragebogen_RelationEntry
     {
         [Obsolete]
         public TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl()
@@ -5544,7 +5544,7 @@ namespace Kistl.App.Test
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -5574,7 +5574,7 @@ namespace Kistl.App.Test
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e");
@@ -5589,7 +5589,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Test.TestStudent)value;
+                A = (Zetbox.App.Test.TestStudent)value;
             }
         }
 
@@ -5602,7 +5602,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Test.Fragebogen)value;
+                B = (Zetbox.App.Test.Fragebogen)value;
             }
         }
 
@@ -5612,9 +5612,9 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Test.TestStudent; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.TestStudent; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -5622,10 +5622,10 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.TestStudent A
+        public Zetbox.App.Test.TestStudent A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Test.TestStudentEfImpl)value; }
+            set { AImpl = (Zetbox.App.Test.TestStudentEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -5633,14 +5633,14 @@ namespace Kistl.App.Test
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen_A", "Student")]
-        public Kistl.App.Test.TestStudentEfImpl AImpl
+        public Zetbox.App.Test.TestStudentEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.TestStudentEfImpl __value;
-                EntityReference<Kistl.App.Test.TestStudentEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestStudentEfImpl>(
+                Zetbox.App.Test.TestStudentEfImpl __value;
+                EntityReference<Zetbox.App.Test.TestStudentEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestStudentEfImpl>(
                         "Model.FK_Student_füllt_aus_Testbogen_A",
                         "Student");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -5655,10 +5655,10 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Test.TestStudentEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestStudentEfImpl>(
+                EntityReference<Zetbox.App.Test.TestStudentEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestStudentEfImpl>(
                         "Model.FK_Student_füllt_aus_Testbogen_A",
                         "Student");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -5666,27 +5666,27 @@ namespace Kistl.App.Test
                 {
                     r.Load();
                 }
-                Kistl.App.Test.TestStudentEfImpl __oldValue = (Kistl.App.Test.TestStudentEfImpl)r.Value;
-                Kistl.App.Test.TestStudentEfImpl __newValue = (Kistl.App.Test.TestStudentEfImpl)value;
+                Zetbox.App.Test.TestStudentEfImpl __oldValue = (Zetbox.App.Test.TestStudentEfImpl)r.Value;
+                Zetbox.App.Test.TestStudentEfImpl __newValue = (Zetbox.App.Test.TestStudentEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Test.TestStudentEfImpl)__newValue;
+                r.Value = (Zetbox.App.Test.TestStudentEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Test.Fragebogen; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.Fragebogen; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -5694,10 +5694,10 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.Fragebogen B
+        public Zetbox.App.Test.Fragebogen B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Test.FragebogenEfImpl)value; }
+            set { BImpl = (Zetbox.App.Test.FragebogenEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -5705,14 +5705,14 @@ namespace Kistl.App.Test
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen_B", "Testbogen")]
-        public Kistl.App.Test.FragebogenEfImpl BImpl
+        public Zetbox.App.Test.FragebogenEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.FragebogenEfImpl __value;
-                EntityReference<Kistl.App.Test.FragebogenEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.FragebogenEfImpl>(
+                Zetbox.App.Test.FragebogenEfImpl __value;
+                EntityReference<Zetbox.App.Test.FragebogenEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.FragebogenEfImpl>(
                         "Model.FK_Student_füllt_aus_Testbogen_B",
                         "Testbogen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -5727,10 +5727,10 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Test.FragebogenEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.FragebogenEfImpl>(
+                EntityReference<Zetbox.App.Test.FragebogenEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.FragebogenEfImpl>(
                         "Model.FK_Student_füllt_aus_Testbogen_B",
                         "Testbogen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -5738,48 +5738,48 @@ namespace Kistl.App.Test
                 {
                     r.Load();
                 }
-                Kistl.App.Test.FragebogenEfImpl __oldValue = (Kistl.App.Test.FragebogenEfImpl)r.Value;
-                Kistl.App.Test.FragebogenEfImpl __newValue = (Kistl.App.Test.FragebogenEfImpl)value;
+                Zetbox.App.Test.FragebogenEfImpl __oldValue = (Zetbox.App.Test.FragebogenEfImpl)r.Value;
+                Zetbox.App.Test.FragebogenEfImpl __newValue = (Zetbox.App.Test.FragebogenEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Test.FragebogenEfImpl)__newValue;
+                r.Value = (Zetbox.App.Test.FragebogenEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestStudentEfImpl>("Model.FK_Student_füllt_aus_Testbogen_A", "Student").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestStudentEfImpl>("Model.FK_Student_füllt_aus_Testbogen_A", "Student").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.FragebogenEfImpl>("Model.FK_Student_füllt_aus_Testbogen_B", "Testbogen").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.FragebogenEfImpl>("Model.FK_Student_füllt_aus_Testbogen_B", "Testbogen").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -5812,12 +5812,12 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Test.TestStudentEfImpl)Context.Find<Kistl.App.Test.TestStudent>(_fk_A.Value);
+                AImpl = (Zetbox.App.Test.TestStudentEfImpl)Context.Find<Zetbox.App.Test.TestStudent>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Test.FragebogenEfImpl)Context.Find<Kistl.App.Test.Fragebogen>(_fk_B.Value);
+                BImpl = (Zetbox.App.Test.FragebogenEfImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -5858,15 +5858,15 @@ namespace Kistl.App.Test
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl")]
-    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRefEfImpl, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRefEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, TypeRef_hasGenericArguments_TypeRef_RelationEntry
+    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, TypeRef_hasGenericArguments_TypeRef_RelationEntry
     {
         [Obsolete]
         public TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl()
@@ -5878,7 +5878,7 @@ namespace Kistl.App.Base
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -5908,8 +5908,8 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -5953,7 +5953,7 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71");
@@ -5968,7 +5968,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.TypeRef)value;
+                A = (Zetbox.App.Base.TypeRef)value;
             }
         }
 
@@ -5981,7 +5981,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.TypeRef)value;
+                B = (Zetbox.App.Base.TypeRef)value;
             }
         }
 
@@ -5991,9 +5991,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable
@@ -6001,10 +6001,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef A
+        public Zetbox.App.Base.TypeRef A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.TypeRefEfImpl)value; }
+            set { AImpl = (Zetbox.App.Base.TypeRefEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -6013,14 +6013,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_A", "TypeRef")]
-        public Kistl.App.Base.TypeRefEfImpl AImpl
+        public Zetbox.App.Base.TypeRefEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.TypeRefEfImpl __value;
-                EntityReference<Kistl.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>(
+                Zetbox.App.Base.TypeRefEfImpl __value;
+                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
                         "Model.FK_TypeRef_hasGenericArguments_GenericArguments_A",
                         "TypeRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6035,10 +6035,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>(
+                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
                         "Model.FK_TypeRef_hasGenericArguments_GenericArguments_A",
                         "TypeRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6046,20 +6046,20 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.TypeRefEfImpl __oldValue = (Kistl.App.Base.TypeRefEfImpl)r.Value;
-                Kistl.App.Base.TypeRefEfImpl __newValue = (Kistl.App.Base.TypeRefEfImpl)value;
+                Zetbox.App.Base.TypeRefEfImpl __oldValue = (Zetbox.App.Base.TypeRefEfImpl)r.Value;
+                Zetbox.App.Base.TypeRefEfImpl __newValue = (Zetbox.App.Base.TypeRefEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.TypeRefEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.TypeRefEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -6100,15 +6100,15 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("A_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable
@@ -6116,10 +6116,10 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef B
+        public Zetbox.App.Base.TypeRef B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.TypeRefEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.TypeRefEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -6128,14 +6128,14 @@ namespace Kistl.App.Base
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_B", "GenericArguments")]
-        public Kistl.App.Base.TypeRefEfImpl BImpl
+        public Zetbox.App.Base.TypeRefEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.TypeRefEfImpl __value;
-                EntityReference<Kistl.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>(
+                Zetbox.App.Base.TypeRefEfImpl __value;
+                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
                         "Model.FK_TypeRef_hasGenericArguments_GenericArguments_B",
                         "GenericArguments");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6150,10 +6150,10 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>(
+                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
                         "Model.FK_TypeRef_hasGenericArguments_GenericArguments_B",
                         "GenericArguments");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6161,20 +6161,20 @@ namespace Kistl.App.Base
                 {
                     r.Load();
                 }
-                Kistl.App.Base.TypeRefEfImpl __oldValue = (Kistl.App.Base.TypeRefEfImpl)r.Value;
-                Kistl.App.Base.TypeRefEfImpl __newValue = (Kistl.App.Base.TypeRefEfImpl)value;
+                Zetbox.App.Base.TypeRefEfImpl __oldValue = (Zetbox.App.Base.TypeRefEfImpl)r.Value;
+                Zetbox.App.Base.TypeRefEfImpl __newValue = (Zetbox.App.Base.TypeRefEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.TypeRefEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.TypeRefEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -6215,8 +6215,8 @@ namespace Kistl.App.Base
                 ReportEfPropertyChanged("B_pos");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -6231,14 +6231,14 @@ namespace Kistl.App.Base
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_A", "TypeRef").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_A", "TypeRef").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             if (auxObjects != null) {
@@ -6246,24 +6246,24 @@ namespace Kistl.App.Base
             }
             binStream.Write(this._A_pos);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_B", "GenericArguments").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_B", "GenericArguments").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this._B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -6276,10 +6276,10 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -6290,16 +6290,16 @@ namespace Kistl.App.Base
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|A_pos":
+            case "Zetbox.App.Base|A_pos":
                 this._A_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B_pos":
+            case "Zetbox.App.Base|B_pos":
                 this._B_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
             }
@@ -6332,18 +6332,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.TypeRefEfImpl)Context.Find<Kistl.App.Base.TypeRef>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.TypeRefEfImpl)Context.Find<Kistl.App.Base.TypeRef>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -6384,15 +6384,15 @@ namespace Kistl.App.Base
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="ViewDescriptor_supports_TypeRef_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryEfImpl")]
-    public class ViewDescriptor_supports_TypeRef_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ViewDescriptorEfImpl, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRefEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry
+    public class ViewDescriptor_supports_TypeRef_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorEfImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry
     {
         [Obsolete]
         public ViewDescriptor_supports_TypeRef_RelationEntryEfImpl()
@@ -6404,7 +6404,7 @@ namespace Kistl.App.GUI
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -6434,8 +6434,8 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -6479,7 +6479,7 @@ namespace Kistl.App.GUI
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("786dae2f-cb6e-454d-93fd-192541df928d");
@@ -6494,7 +6494,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.ViewDescriptor)value;
+                A = (Zetbox.App.GUI.ViewDescriptor)value;
             }
         }
 
@@ -6507,7 +6507,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.TypeRef)value;
+                B = (Zetbox.App.Base.TypeRef)value;
             }
         }
 
@@ -6517,9 +6517,9 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.ViewDescriptor; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.ViewDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -6527,10 +6527,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.ViewDescriptor A
+        public Zetbox.App.GUI.ViewDescriptor A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.GUI.ViewDescriptorEfImpl)value; }
+            set { AImpl = (Zetbox.App.GUI.ViewDescriptorEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -6539,14 +6539,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "ViewDescriptor")]
-        public Kistl.App.GUI.ViewDescriptorEfImpl AImpl
+        public Zetbox.App.GUI.ViewDescriptorEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.ViewDescriptorEfImpl __value;
-                EntityReference<Kistl.App.GUI.ViewDescriptorEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewDescriptorEfImpl>(
+                Zetbox.App.GUI.ViewDescriptorEfImpl __value;
+                EntityReference<Zetbox.App.GUI.ViewDescriptorEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewDescriptorEfImpl>(
                         "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
                         "ViewDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6561,10 +6561,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.ViewDescriptorEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewDescriptorEfImpl>(
+                EntityReference<Zetbox.App.GUI.ViewDescriptorEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewDescriptorEfImpl>(
                         "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
                         "ViewDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6572,27 +6572,27 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.ViewDescriptorEfImpl __oldValue = (Kistl.App.GUI.ViewDescriptorEfImpl)r.Value;
-                Kistl.App.GUI.ViewDescriptorEfImpl __newValue = (Kistl.App.GUI.ViewDescriptorEfImpl)value;
+                Zetbox.App.GUI.ViewDescriptorEfImpl __oldValue = (Zetbox.App.GUI.ViewDescriptorEfImpl)r.Value;
+                Zetbox.App.GUI.ViewDescriptorEfImpl __newValue = (Zetbox.App.GUI.ViewDescriptorEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.ViewDescriptorEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.ViewDescriptorEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -6600,10 +6600,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef B
+        public Zetbox.App.Base.TypeRef B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.TypeRefEfImpl)value; }
+            set { BImpl = (Zetbox.App.Base.TypeRefEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -6612,14 +6612,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_B", "ViewModelTypeRefs")]
-        public Kistl.App.Base.TypeRefEfImpl BImpl
+        public Zetbox.App.Base.TypeRefEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.TypeRefEfImpl __value;
-                EntityReference<Kistl.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>(
+                Zetbox.App.Base.TypeRefEfImpl __value;
+                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
                         "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B",
                         "ViewModelTypeRefs");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6634,10 +6634,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>(
+                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
                         "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B",
                         "ViewModelTypeRefs");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6645,53 +6645,53 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.Base.TypeRefEfImpl __oldValue = (Kistl.App.Base.TypeRefEfImpl)r.Value;
-                Kistl.App.Base.TypeRefEfImpl __newValue = (Kistl.App.Base.TypeRefEfImpl)value;
+                Zetbox.App.Base.TypeRefEfImpl __oldValue = (Zetbox.App.Base.TypeRefEfImpl)r.Value;
+                Zetbox.App.Base.TypeRefEfImpl __newValue = (Zetbox.App.Base.TypeRefEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.Base.TypeRefEfImpl)__newValue;
+                r.Value = (Zetbox.App.Base.TypeRefEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewDescriptorEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "ViewDescriptor").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewDescriptorEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "ViewDescriptor").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             if (auxObjects != null) {
                 auxObjects.Add(A);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B", "ViewModelTypeRefs").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B", "ViewModelTypeRefs").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -6704,8 +6704,8 @@ namespace Kistl.App.GUI
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -6716,10 +6716,10 @@ namespace Kistl.App.GUI
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.GUI|A":
+            case "Zetbox.App.GUI|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.GUI|B":
+            case "Zetbox.App.GUI|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -6750,18 +6750,18 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.GUI.ViewDescriptorEfImpl)Context.FindPersistenceObject<Kistl.App.GUI.ViewDescriptor>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.GUI.ViewDescriptorEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewDescriptor>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.GUI.ViewDescriptorEfImpl)Context.Find<Kistl.App.GUI.ViewDescriptor>(_fk_A.Value);
+                AImpl = (Zetbox.App.GUI.ViewDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewDescriptor>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.TypeRefEfImpl)Context.Find<Kistl.App.Base.TypeRef>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -6802,15 +6802,15 @@ namespace Kistl.App.GUI
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl")]
-    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ViewModelDescriptorEfImpl, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKindEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry
+    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorEfImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindEfImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry
     {
         [Obsolete]
         public ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl()
@@ -6822,7 +6822,7 @@ namespace Kistl.App.GUI
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -6852,8 +6852,8 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -6897,7 +6897,7 @@ namespace Kistl.App.GUI
                 ReportEfPropertyChanged("ExportGuid");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47");
@@ -6912,7 +6912,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.ViewModelDescriptor)value;
+                A = (Zetbox.App.GUI.ViewModelDescriptor)value;
             }
         }
 
@@ -6925,7 +6925,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.GUI.ControlKind)value;
+                B = (Zetbox.App.GUI.ControlKind)value;
             }
         }
 
@@ -6935,9 +6935,9 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.ViewModelDescriptor; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -6945,10 +6945,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.ViewModelDescriptor A
+        public Zetbox.App.GUI.ViewModelDescriptor A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.GUI.ViewModelDescriptorEfImpl)value; }
+            set { AImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -6957,14 +6957,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_A", "Presentable")]
-        public Kistl.App.GUI.ViewModelDescriptorEfImpl AImpl
+        public Zetbox.App.GUI.ViewModelDescriptorEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.ViewModelDescriptorEfImpl __value;
-                EntityReference<Kistl.App.GUI.ViewModelDescriptorEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>(
+                Zetbox.App.GUI.ViewModelDescriptorEfImpl __value;
+                EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>(
                         "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
                         "Presentable");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6979,10 +6979,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.ViewModelDescriptorEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>(
+                EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>(
                         "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
                         "Presentable");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -6990,27 +6990,27 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.ViewModelDescriptorEfImpl __oldValue = (Kistl.App.GUI.ViewModelDescriptorEfImpl)r.Value;
-                Kistl.App.GUI.ViewModelDescriptorEfImpl __newValue = (Kistl.App.GUI.ViewModelDescriptorEfImpl)value;
+                Zetbox.App.GUI.ViewModelDescriptorEfImpl __oldValue = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)r.Value;
+                Zetbox.App.GUI.ViewModelDescriptorEfImpl __newValue = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.ViewModelDescriptorEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -7018,10 +7018,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.ControlKind B
+        public Zetbox.App.GUI.ControlKind B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.GUI.ControlKindEfImpl)value; }
+            set { BImpl = (Zetbox.App.GUI.ControlKindEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -7030,14 +7030,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_B", "SecondaryControlKinds")]
-        public Kistl.App.GUI.ControlKindEfImpl BImpl
+        public Zetbox.App.GUI.ControlKindEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.ControlKindEfImpl __value;
-                EntityReference<Kistl.App.GUI.ControlKindEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>(
+                Zetbox.App.GUI.ControlKindEfImpl __value;
+                EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>(
                         "Model.FK_Presentable_displayedBy_SecondaryControlKinds_B",
                         "SecondaryControlKinds");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7052,10 +7052,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.ControlKindEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>(
+                EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>(
                         "Model.FK_Presentable_displayedBy_SecondaryControlKinds_B",
                         "SecondaryControlKinds");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7063,50 +7063,50 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.ControlKindEfImpl __oldValue = (Kistl.App.GUI.ControlKindEfImpl)r.Value;
-                Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
+                Zetbox.App.GUI.ControlKindEfImpl __oldValue = (Zetbox.App.GUI.ControlKindEfImpl)r.Value;
+                Zetbox.App.GUI.ControlKindEfImpl __newValue = (Zetbox.App.GUI.ControlKindEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.ControlKindEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.ControlKindEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Presentable_displayedBy_SecondaryControlKinds_A", "Presentable").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_Presentable_displayedBy_SecondaryControlKinds_A", "Presentable").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Presentable_displayedBy_SecondaryControlKinds_B", "SecondaryControlKinds").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_Presentable_displayedBy_SecondaryControlKinds_B", "SecondaryControlKinds").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -7119,8 +7119,8 @@ namespace Kistl.App.GUI
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -7131,10 +7131,10 @@ namespace Kistl.App.GUI
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.GUI|A":
+            case "Zetbox.App.GUI|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.GUI|B":
+            case "Zetbox.App.GUI|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -7165,18 +7165,18 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.GUI.ViewModelDescriptorEfImpl)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.GUI.ViewModelDescriptorEfImpl)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_A.Value);
+                AImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.GUI.ControlKindEfImpl)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.GUI.ControlKindEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.GUI.ControlKindEfImpl)Context.Find<Kistl.App.GUI.ControlKind>(_fk_B.Value);
+                BImpl = (Zetbox.App.GUI.ControlKindEfImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -7217,15 +7217,15 @@ namespace Kistl.App.GUI
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="Visual_contains_Visual_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("Visual_contains_Visual_RelationEntryEfImpl")]
-    public class Visual_contains_Visual_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.GUI.Visual, Kistl.App.GUI.VisualEfImpl, Kistl.App.GUI.Visual, Kistl.App.GUI.VisualEfImpl>, Visual_contains_Visual_RelationEntry
+    public class Visual_contains_Visual_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl>, Visual_contains_Visual_RelationEntry
     {
         [Obsolete]
         public Visual_contains_Visual_RelationEntryEfImpl()
@@ -7237,7 +7237,7 @@ namespace Kistl.App.GUI
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -7267,7 +7267,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("4d4e1ffd-f362-40e2-9fe1-0711ded83241");
@@ -7282,7 +7282,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.Visual)value;
+                A = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -7295,7 +7295,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.GUI.Visual)value;
+                B = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -7305,9 +7305,9 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -7315,10 +7315,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual A
+        public Zetbox.App.GUI.Visual A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.GUI.VisualEfImpl)value; }
+            set { AImpl = (Zetbox.App.GUI.VisualEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -7326,14 +7326,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Children_A", "Visual")]
-        public Kistl.App.GUI.VisualEfImpl AImpl
+        public Zetbox.App.GUI.VisualEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualEfImpl __value;
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                Zetbox.App.GUI.VisualEfImpl __value;
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Visual_contains_Children_A",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7348,10 +7348,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Visual_contains_Children_A",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7359,27 +7359,27 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.VisualEfImpl __oldValue = (Kistl.App.GUI.VisualEfImpl)r.Value;
-                Kistl.App.GUI.VisualEfImpl __newValue = (Kistl.App.GUI.VisualEfImpl)value;
+                Zetbox.App.GUI.VisualEfImpl __oldValue = (Zetbox.App.GUI.VisualEfImpl)r.Value;
+                Zetbox.App.GUI.VisualEfImpl __newValue = (Zetbox.App.GUI.VisualEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.VisualEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.VisualEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -7387,10 +7387,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual B
+        public Zetbox.App.GUI.Visual B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.GUI.VisualEfImpl)value; }
+            set { BImpl = (Zetbox.App.GUI.VisualEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -7398,14 +7398,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Children_B", "Children")]
-        public Kistl.App.GUI.VisualEfImpl BImpl
+        public Zetbox.App.GUI.VisualEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualEfImpl __value;
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                Zetbox.App.GUI.VisualEfImpl __value;
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Visual_contains_Children_B",
                         "Children");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7420,10 +7420,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Visual_contains_Children_B",
                         "Children");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7431,48 +7431,48 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.VisualEfImpl __oldValue = (Kistl.App.GUI.VisualEfImpl)r.Value;
-                Kistl.App.GUI.VisualEfImpl __newValue = (Kistl.App.GUI.VisualEfImpl)value;
+                Zetbox.App.GUI.VisualEfImpl __oldValue = (Zetbox.App.GUI.VisualEfImpl)r.Value;
+                Zetbox.App.GUI.VisualEfImpl __newValue = (Zetbox.App.GUI.VisualEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.VisualEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.VisualEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Visual_contains_Children_A", "Visual").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Visual_contains_Children_A", "Visual").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Visual_contains_Children_B", "Children").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Visual_contains_Children_B", "Children").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -7505,12 +7505,12 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.GUI.VisualEfImpl)Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
+                AImpl = (Zetbox.App.GUI.VisualEfImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.GUI.VisualEfImpl)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+                BImpl = (Zetbox.App.GUI.VisualEfImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -7551,15 +7551,15 @@ namespace Kistl.App.GUI
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="Visual_hasContextMenu_Visual_RelationEntry")]
     [System.Diagnostics.DebuggerDisplay("Visual_hasContextMenu_Visual_RelationEntryEfImpl")]
-    public class Visual_hasContextMenu_Visual_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.GUI.Visual, Kistl.App.GUI.VisualEfImpl, Kistl.App.GUI.Visual, Kistl.App.GUI.VisualEfImpl>, Visual_hasContextMenu_Visual_RelationEntry
+    public class Visual_hasContextMenu_Visual_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualEfImpl>, Visual_hasContextMenu_Visual_RelationEntry
     {
         [Obsolete]
         public Visual_hasContextMenu_Visual_RelationEntryEfImpl()
@@ -7571,7 +7571,7 @@ namespace Kistl.App.GUI
             : base(lazyCtx)
         {
         }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -7601,7 +7601,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("358c14b9-fef5-495d-8d44-04e84186830e");
@@ -7616,7 +7616,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.Visual)value;
+                A = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -7629,7 +7629,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.GUI.Visual)value;
+                B = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -7639,9 +7639,9 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -7649,10 +7649,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual A
+        public Zetbox.App.GUI.Visual A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.GUI.VisualEfImpl)value; }
+            set { AImpl = (Zetbox.App.GUI.VisualEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -7660,14 +7660,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_ContextMenu_A", "Visual")]
-        public Kistl.App.GUI.VisualEfImpl AImpl
+        public Zetbox.App.GUI.VisualEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualEfImpl __value;
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                Zetbox.App.GUI.VisualEfImpl __value;
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Visual_hasContextMenu_ContextMenu_A",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7682,10 +7682,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Visual_hasContextMenu_ContextMenu_A",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7693,27 +7693,27 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.VisualEfImpl __oldValue = (Kistl.App.GUI.VisualEfImpl)r.Value;
-                Kistl.App.GUI.VisualEfImpl __newValue = (Kistl.App.GUI.VisualEfImpl)value;
+                Zetbox.App.GUI.VisualEfImpl __oldValue = (Zetbox.App.GUI.VisualEfImpl)r.Value;
+                Zetbox.App.GUI.VisualEfImpl __newValue = (Zetbox.App.GUI.VisualEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.VisualEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.VisualEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -7721,10 +7721,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual B
+        public Zetbox.App.GUI.Visual B
         {
             get { return BImpl; }
-            set { BImpl = (Kistl.App.GUI.VisualEfImpl)value; }
+            set { BImpl = (Zetbox.App.GUI.VisualEfImpl)value; }
         }
 
         private int? _fk_B;
@@ -7732,14 +7732,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_ContextMenu_B", "ContextMenu")]
-        public Kistl.App.GUI.VisualEfImpl BImpl
+        public Zetbox.App.GUI.VisualEfImpl BImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualEfImpl __value;
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                Zetbox.App.GUI.VisualEfImpl __value;
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Visual_hasContextMenu_ContextMenu_B",
                         "ContextMenu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7754,10 +7754,10 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.GUI.VisualEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>(
+                EntityReference<Zetbox.App.GUI.VisualEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>(
                         "Model.FK_Visual_hasContextMenu_ContextMenu_B",
                         "ContextMenu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7765,48 +7765,48 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.VisualEfImpl __oldValue = (Kistl.App.GUI.VisualEfImpl)r.Value;
-                Kistl.App.GUI.VisualEfImpl __newValue = (Kistl.App.GUI.VisualEfImpl)value;
+                Zetbox.App.GUI.VisualEfImpl __oldValue = (Zetbox.App.GUI.VisualEfImpl)r.Value;
+                Zetbox.App.GUI.VisualEfImpl __newValue = (Zetbox.App.GUI.VisualEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.VisualEfImpl)__newValue;
+                r.Value = (Zetbox.App.GUI.VisualEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Visual_hasContextMenu_ContextMenu_A", "Visual").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Visual_hasContextMenu_ContextMenu_A", "Visual").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.VisualEfImpl>("Model.FK_Visual_hasContextMenu_ContextMenu_B", "ContextMenu").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.VisualEfImpl>("Model.FK_Visual_hasContextMenu_ContextMenu_B", "ContextMenu").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -7839,12 +7839,12 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.GUI.VisualEfImpl)Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
+                AImpl = (Zetbox.App.GUI.VisualEfImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_B.HasValue)
-                BImpl = (Kistl.App.GUI.VisualEfImpl)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+                BImpl = (Zetbox.App.GUI.VisualEfImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_B.Value);
             else
                 BImpl = null;
 
@@ -7885,15 +7885,15 @@ namespace Kistl.App.GUI
                 this.SetUnDeleted();
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Projekte
+namespace Zetbox.App.Projekte
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [EdmEntityType(NamespaceName="Model", Name="Kunde_EMails_CollectionEntry")]
     [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntryEfImpl")]
-    public class Kunde_EMails_CollectionEntryEfImpl : Kistl.DalProvider.Ef.ValueCollectionEntryEfImpl<Kistl.App.Projekte.Kunde, Kistl.App.Projekte.KundeEfImpl, string>, Kistl.API.IExportableValueCollectionEntryInternal, Kunde_EMails_CollectionEntry
+    public class Kunde_EMails_CollectionEntryEfImpl : Zetbox.DalProvider.Ef.ValueCollectionEntryEfImpl<Zetbox.App.Projekte.Kunde, Zetbox.App.Projekte.KundeEfImpl, string>, Zetbox.API.IExportableValueCollectionEntryInternal, Kunde_EMails_CollectionEntry
     {
 [Obsolete]
 public Kunde_EMails_CollectionEntryEfImpl()
@@ -7904,7 +7904,7 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
     : base(lazyCtx)
 {
 }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -7934,7 +7934,7 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         private static readonly Guid _propertyID = new Guid("1d0f6da6-4b69-48d7-9e94-bfb5466654b9");
         public override Guid PropertyID { get { return _propertyID; } }
 
@@ -7942,9 +7942,9 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=;
-        // referencedInterface=Kistl.App.Projekte.Kunde; moduleNamespace=Kistl.App.Projekte;
+        // referencedInterface=Zetbox.App.Projekte.Kunde; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=EMails; is list;
         // PositionStorage=none;
         // Target not exportable
@@ -7952,10 +7952,10 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Kunde Parent
+        public Zetbox.App.Projekte.Kunde Parent
         {
             get { return ParentImpl; }
-            set { ParentImpl = (Kistl.App.Projekte.KundeEfImpl)value; }
+            set { ParentImpl = (Zetbox.App.Projekte.KundeEfImpl)value; }
         }
 
         private int? _fk_Parent;
@@ -7963,14 +7963,14 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Kunde_value_EMails", "Kunde")]
-        public Kistl.App.Projekte.KundeEfImpl ParentImpl
+        public Zetbox.App.Projekte.KundeEfImpl ParentImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Projekte.KundeEfImpl __value;
-                EntityReference<Kistl.App.Projekte.KundeEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeEfImpl>(
+                Zetbox.App.Projekte.KundeEfImpl __value;
+                EntityReference<Zetbox.App.Projekte.KundeEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.KundeEfImpl>(
                         "Model.FK_Kunde_value_EMails",
                         "Kunde");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7985,10 +7985,10 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Projekte.KundeEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeEfImpl>(
+                EntityReference<Zetbox.App.Projekte.KundeEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.KundeEfImpl>(
                         "Model.FK_Kunde_value_EMails",
                         "Kunde");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -7996,8 +7996,8 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                 {
                     r.Load();
                 }
-                Kistl.App.Projekte.KundeEfImpl __oldValue = (Kistl.App.Projekte.KundeEfImpl)r.Value;
-                Kistl.App.Projekte.KundeEfImpl __newValue = (Kistl.App.Projekte.KundeEfImpl)value;
+                Zetbox.App.Projekte.KundeEfImpl __oldValue = (Zetbox.App.Projekte.KundeEfImpl)r.Value;
+                Zetbox.App.Projekte.KundeEfImpl __newValue = (Zetbox.App.Projekte.KundeEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Parent", __oldValue, __newValue);
@@ -8008,7 +8008,7 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                     __newValue.NotifyPropertyChanging("EMails", null, null);
                 }
 
-                r.Value = (Kistl.App.Projekte.KundeEfImpl)__newValue;
+                r.Value = (Zetbox.App.Projekte.KundeEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -8021,19 +8021,19 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
-        public Kistl.API.IDataObject ParentObject
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
         {
             get { return Parent; }
-            set { Parent = (Kistl.App.Projekte.KundeEfImpl)value; }
+            set { Parent = (Zetbox.App.Projekte.KundeEfImpl)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
@@ -8074,39 +8074,39 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                 ReportEfPropertyChanged("Value");
             }
         }
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public object ValueObject
         {
             get { return Value; }
             set { Value = (string)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeEfImpl>("Model.FK_Kunde_value_EMails", "Kunde").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Projekte.KundeEfImpl>("Model.FK_Kunde_value_EMails", "Kunde").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._Value);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
             this._Value = binStream.ReadString();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -8118,7 +8118,7 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Value, xml, "Value", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._Value, xml, "Value", "Zetbox.App.Projekte");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -8126,7 +8126,7 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.Projekte|Value":
+            case "Zetbox.App.Projekte|Value":
                 this._Value = XmlStreamer.ReadString(xml);
                 break;
             }
@@ -8157,7 +8157,7 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_Parent.HasValue)
-                Parent = (Kistl.App.Projekte.KundeEfImpl)Context.Find<Kistl.App.Projekte.Kunde>(_fk_Parent.Value);
+                Parent = (Zetbox.App.Projekte.KundeEfImpl)Context.Find<Zetbox.App.Projekte.Kunde>(_fk_Parent.Value);
             else
                 Parent = null;
 
@@ -8183,28 +8183,28 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
             }
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [EdmEntityType(NamespaceName="Model", Name="TestCustomObject_PhoneNumbersOther_CollectionEntry")]
     [System.Diagnostics.DebuggerDisplay("TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl")]
-    public class TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl : Kistl.DalProvider.Ef.CompoundCollectionEntryEfImpl<Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObjectEfImpl, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestPhoneCompoundObjectEfImpl>, TestCustomObject_PhoneNumbersOther_CollectionEntry
+    public class TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl : Zetbox.DalProvider.Ef.CompoundCollectionEntryEfImpl<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectEfImpl, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>, TestCustomObject_PhoneNumbersOther_CollectionEntry
     {
 [Obsolete]
 public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl()
 : base(null)
 {
-            _Value = new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(false, this, "Value");
+            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(false, this, "Value");
 }
 public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
     : base(lazyCtx)
 {
-            _Value = new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(false, this, "Value");
+            _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(false, this, "Value");
 }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
         {
@@ -8234,7 +8234,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             }
         }
         private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
         private static readonly Guid _propertyID = new Guid("0c0c1101-118a-4ce2-806c-d30a03b19dde");
         public override Guid PropertyID { get { return _propertyID; } }
 
@@ -8242,9 +8242,9 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=;
-        // referencedInterface=Kistl.App.Test.TestCustomObject; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=PhoneNumbersOther; is list;
         // PositionStorage=none;
         // Target not exportable
@@ -8252,10 +8252,10 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.TestCustomObject Parent
+        public Zetbox.App.Test.TestCustomObject Parent
         {
             get { return ParentImpl; }
-            set { ParentImpl = (Kistl.App.Test.TestCustomObjectEfImpl)value; }
+            set { ParentImpl = (Zetbox.App.Test.TestCustomObjectEfImpl)value; }
         }
 
         private int? _fk_Parent;
@@ -8263,14 +8263,14 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TestCustomObject_value_PhoneNumbersOther", "TestCustomObject")]
-        public Kistl.App.Test.TestCustomObjectEfImpl ParentImpl
+        public Zetbox.App.Test.TestCustomObjectEfImpl ParentImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.TestCustomObjectEfImpl __value;
-                EntityReference<Kistl.App.Test.TestCustomObjectEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>(
+                Zetbox.App.Test.TestCustomObjectEfImpl __value;
+                EntityReference<Zetbox.App.Test.TestCustomObjectEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>(
                         "Model.FK_TestCustomObject_value_PhoneNumbersOther",
                         "TestCustomObject");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -8285,10 +8285,10 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Kistl.App.Test.TestCustomObjectEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>(
+                EntityReference<Zetbox.App.Test.TestCustomObjectEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>(
                         "Model.FK_TestCustomObject_value_PhoneNumbersOther",
                         "TestCustomObject");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -8296,8 +8296,8 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
                 {
                     r.Load();
                 }
-                Kistl.App.Test.TestCustomObjectEfImpl __oldValue = (Kistl.App.Test.TestCustomObjectEfImpl)r.Value;
-                Kistl.App.Test.TestCustomObjectEfImpl __newValue = (Kistl.App.Test.TestCustomObjectEfImpl)value;
+                Zetbox.App.Test.TestCustomObjectEfImpl __oldValue = (Zetbox.App.Test.TestCustomObjectEfImpl)r.Value;
+                Zetbox.App.Test.TestCustomObjectEfImpl __newValue = (Zetbox.App.Test.TestCustomObjectEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Parent", __oldValue, __newValue);
@@ -8308,7 +8308,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
                     __newValue.NotifyPropertyChanging("PhoneNumbersOther", null, null);
                 }
 
-                r.Value = (Kistl.App.Test.TestCustomObjectEfImpl)__newValue;
+                r.Value = (Zetbox.App.Test.TestCustomObjectEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -8321,29 +8321,29 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             }
         }
 
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
-        public Kistl.API.IDataObject ParentObject
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
         {
             get { return Parent; }
-            set { Parent = (Kistl.App.Test.TestCustomObjectEfImpl)value; }
+            set { Parent = (Zetbox.App.Test.TestCustomObjectEfImpl)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
         // implement the user-visible interface
-        public Kistl.App.Test.TestPhoneCompoundObject Value
+        public Zetbox.App.Test.TestPhoneCompoundObject Value
         {
             get { return ValueImpl.CompoundObject_IsNull ? null : ValueImpl; }
-            set { ValueImpl = (Kistl.App.Test.TestPhoneCompoundObjectEfImpl)value; }
+            set { ValueImpl = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)value; }
         }
 
         /// <summary>backing store for Value</summary>
-        private Kistl.App.Test.TestPhoneCompoundObjectEfImpl _Value_store;
-        private Kistl.App.Test.TestPhoneCompoundObjectEfImpl _Value {
+        private Zetbox.App.Test.TestPhoneCompoundObjectEfImpl _Value_store;
+        private Zetbox.App.Test.TestPhoneCompoundObjectEfImpl _Value {
             get { return _Value_store; }
             set {
                 ReportEfPropertyChanging("ValueImpl");
@@ -8355,7 +8355,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
         /// <summary>backing property for Value, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
         [EdmComplexProperty()]
-        public Kistl.App.Test.TestPhoneCompoundObjectEfImpl ValueImpl
+        public Zetbox.App.Test.TestPhoneCompoundObjectEfImpl ValueImpl
         {
             get 
 			{ 
@@ -8378,11 +8378,11 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
                     }
                     if(__newValue == null)
                     {
-                        _Value = new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
+                        _Value = new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
                     }
                     else
                     {
-                        _Value = (Kistl.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
+                        _Value = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)__newValue.Clone();
                         _Value.AttachToObject(this, "Value");
                     }
 
@@ -8394,43 +8394,43 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
 				}
             }
         }
-           // END Kistl.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+           // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public object ValueObject
         {
             get { return Value; }
-            set { Value = (Kistl.App.Test.TestPhoneCompoundObjectEfImpl)value; }
+            set { Value = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>("Model.FK_TestCustomObject_value_PhoneNumbersOther", "TestCustomObject").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>("Model.FK_TestCustomObject_value_PhoneNumbersOther", "TestCustomObject").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this.Value);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
             {
                 // use backing store to avoid notifications
-                Kistl.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectEfImpl>();
-                this.ValueImpl = tmp ?? new Kistl.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
+                Zetbox.App.Test.TestPhoneCompoundObjectEfImpl tmp = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectEfImpl>();
+                this.ValueImpl = tmp ?? new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "Value");
                 this.ValueImpl.AttachToObject(this, "Value");
             }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -8453,7 +8453,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
 
             me._fk_Parent = other._fk_Parent;
             if (me.Value == null && other.Value != null) {
-                me.Value = (Kistl.App.Test.TestPhoneCompoundObject)other.Value.Clone();
+                me.Value = (Zetbox.App.Test.TestPhoneCompoundObject)other.Value.Clone();
             } else if (me.Value != null && other.Value == null) {
                 me.Value = null;
             } else if (me.Value != null && other.Value != null) {
@@ -8469,7 +8469,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_Parent.HasValue)
-                Parent = (Kistl.App.Test.TestCustomObjectEfImpl)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_Parent.Value);
+                Parent = (Zetbox.App.Test.TestCustomObjectEfImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_Parent.Value);
             else
                 Parent = null;
 
@@ -8495,5 +8495,5 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             }
         }
     }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }

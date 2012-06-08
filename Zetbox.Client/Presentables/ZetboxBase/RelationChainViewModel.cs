@@ -1,26 +1,26 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.Client.Models;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Models;
     using System.Collections.ObjectModel;
 
     [ViewModelDescriptor]
     public class RelationChainViewModel
            : ObjectListViewModel
     {
-        public new delegate RelationChainViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate RelationChainViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public RelationChainViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             IObjectCollectionValueModel<IList<IDataObject>> mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {

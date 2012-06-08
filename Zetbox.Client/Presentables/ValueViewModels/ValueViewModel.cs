@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.ValueViewModels
+namespace Zetbox.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -8,12 +8,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.GUI;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.GUI;
 
     public enum ValueViewModelState
     {
@@ -28,29 +28,29 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
-        public new delegate BaseValueViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate BaseValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, Property prop, IValueModel mdl)
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IZetboxContext dataCtx, ViewModel parent, Property prop, IValueModel mdl)
         {
             return (BaseValueViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(dataCtx, parent, mdl));
         }
 
-        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, Method m, IValueModel mdl)
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IZetboxContext dataCtx, ViewModel parent, Method m, IValueModel mdl)
         {
             return (BaseValueViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(m).Invoke(dataCtx, parent, mdl));
         }
 
-        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, ViewModelDescriptor desc, IValueModel mdl)
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IZetboxContext dataCtx, ViewModel parent, ViewModelDescriptor desc, IValueModel mdl)
         {
             return (BaseValueViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(desc).Invoke(dataCtx, parent, mdl));
         }
 
-        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, BaseParameter param, IValueModel mdl)
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IZetboxContext dataCtx, ViewModel parent, BaseParameter param, IValueModel mdl)
         {
             return (BaseValueViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(param).Invoke(dataCtx, parent, mdl));
         }
 
-        public BaseValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public BaseValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent)
         {
             this.ValueModel = mdl;
@@ -282,9 +282,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
             public TResultValue Value { get; set; }
         }
 
-        public new delegate ValueViewModel<TValue, TModel> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate ValueViewModel<TValue, TModel> Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public ValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public ValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
             this.ValueModel = (IValueModel<TModel>)mdl;
@@ -465,7 +465,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
 
         /// <summary>
-        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// Part of the ValueViewModel state machine as described in the ZetboxGuide. 
         /// This method is called everytime the model changed and handles the MC1, MC2,
         /// and MC3 events.
         /// </summary>
@@ -482,7 +482,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     // ignore notifications from model while writing to it.
                     break;
                 case ValueViewModelState.Focused_UnmodifiedValue:
-                    Kistl.API.Utils.Logging.Client.WarnFormat("Model changed while {0} has focus; ignoring.", this.GetType().FullName);
+                    Zetbox.API.Utils.Logging.Client.WarnFormat("Model changed while {0} has focus; ignoring.", this.GetType().FullName);
                     break;
                 // case F/WM
                 // MC3
@@ -496,7 +496,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         /// <summary>
-        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// Part of the ValueViewModel state machine as described in the ZetboxGuide. 
         /// This method is called everytime valid input is received and handles 
         /// the VI event.
         /// </summary>
@@ -554,7 +554,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         /// <summary>
-        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// Part of the ValueViewModel state machine as described in the ZetboxGuide. 
         /// This method is called everytime partial input is received and handles 
         /// the PI event.
         /// </summary>
@@ -598,7 +598,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         /// <summary>
-        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// Part of the ValueViewModel state machine as described in the ZetboxGuide. 
         /// This method is called everytime the control receives focus and handles 
         /// the F event.
         /// </summary>
@@ -631,7 +631,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         /// <summary>
-        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// Part of the ValueViewModel state machine as described in the ZetboxGuide. 
         /// This method is called everytime the control looses focus and handles 
         /// the B1,and B2 events.
         /// </summary>
@@ -706,9 +706,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class NullableStructValueViewModel<TValue> : ValueViewModel<Nullable<TValue>, Nullable<TValue>>
         where TValue : struct
     {
-        public new delegate NullableStructValueViewModel<TValue> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate NullableStructValueViewModel<TValue> Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableStructValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public NullableStructValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
         }
@@ -753,9 +753,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class ClassValueViewModel<TValue> : ValueViewModel<TValue, TValue>
         where TValue : class
     {
-        public new delegate ClassValueViewModel<TValue> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate ClassValueViewModel<TValue> Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public ClassValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public ClassValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
         }
@@ -791,9 +791,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public class EnumerationValueViewModel : NullableStructValueViewModel<int>
     {
-        public new delegate EnumerationValueViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate EnumerationValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public EnumerationValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public EnumerationValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
             this.EnumModel = (IEnumerationValueModel)mdl;
@@ -892,9 +892,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class MultiLineStringValueViewModel
         : ClassValueViewModel<string>
     {
-        public new delegate MultiLineStringValueViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate MultiLineStringValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public MultiLineStringValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public MultiLineStringValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
         }
@@ -974,9 +974,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public class NullableGuidPropertyViewModel : NullableStructValueViewModel<Guid>
     {
-        public new delegate NullableGuidPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate NullableGuidPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableGuidPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public NullableGuidPropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
         }
@@ -1005,9 +1005,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public class NullableDecimalPropertyViewModel : NullableStructValueViewModel<decimal>
     {
-        public new delegate NullableDecimalPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate NullableDecimalPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableDecimalPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public NullableDecimalPropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
             DecimalModel = (IDecimalValueModel)mdl;
@@ -1046,9 +1046,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
     {
         private class NullableTimePartPropertyViewModel : NullableStructValueViewModel<TimeSpan>
         {
-            public new delegate NullableTimePartPropertyViewModel Factory(IKistlContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl);
+            public new delegate NullableTimePartPropertyViewModel Factory(IZetboxContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl);
 
-            public NullableTimePartPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl)
+            public NullableTimePartPropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl)
                 : base(dependencies, dataCtx, parent, mdl)
             {
             }
@@ -1146,9 +1146,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         private class NullableDatePartPropertyViewModel : NullableStructValueViewModel<DateTime>
         {
-            public new delegate NullableDatePartPropertyViewModel Factory(IKistlContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl);
+            public new delegate NullableDatePartPropertyViewModel Factory(IZetboxContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl);
 
-            public NullableDatePartPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl)
+            public NullableDatePartPropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl)
                 : base(dependencies, dataCtx, parent, mdl)
             {
             }
@@ -1234,9 +1234,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public new delegate NullableDateTimePropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate NullableDateTimePropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableDateTimePropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public NullableDateTimePropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
             DateTimeModel = (IDateTimeValueModel)mdl;
@@ -1411,9 +1411,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public class NullableBoolPropertyViewModel : NullableStructValueViewModel<bool>
     {
-        public new delegate NullableBoolPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate NullableBoolPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableBoolPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public NullableBoolPropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
             BoolModel = (IBoolValueModel)mdl;
@@ -1538,9 +1538,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class NullableMonthPropertyViewModel
         : NullableDateTimePropertyViewModel
     {
-        public new delegate NullableMonthPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate NullableMonthPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableMonthPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+        public NullableMonthPropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
 

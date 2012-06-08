@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client
+namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.DalProvider.Client
     using System.Linq.Expressions;
     using System.Text;
 
-    using Kistl.API;
+    using Zetbox.API;
 
     internal class QueryTranslator : ExpressionTreeTranslator
     {

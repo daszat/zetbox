@@ -5,13 +5,13 @@ using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Utils;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.API.Utils;
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     internal interface IEntityStateObject : IEntityWithKey
     {
@@ -254,7 +254,7 @@ namespace Kistl.DalProvider.Ef
             if (ParentObject != null)
             {
                 ((IEntityFrameworkNotifyingObject)ParentObject)
-                    .ReportEfPropertyChanging(this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
+                    .ReportEfPropertyChanging(this.ParentProperty + Zetbox.API.Helper.ImplementationSuffix);
             }
         }
 
@@ -263,7 +263,7 @@ namespace Kistl.DalProvider.Ef
             if (ParentObject != null)
             {
                 ((IEntityFrameworkNotifyingObject)ParentObject)
-                    .ReportEfPropertyChanged(this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
+                    .ReportEfPropertyChanged(this.ParentProperty + Zetbox.API.Helper.ImplementationSuffix);
             }
         }
         #endregion

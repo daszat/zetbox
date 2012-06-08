@@ -1,13 +1,13 @@
-namespace Kistl.API.Client.PerfCounter
+namespace Zetbox.API.Client.PerfCounter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
     using System.Diagnostics;
-    using Kistl.API.Utils;
-    using Kistl.API.PerfCounter;
+    using Zetbox.API.Utils;
+    using Zetbox.API.PerfCounter;
 
     public class PerfCounterDispatcher : BasePerfCounterDispatcher, IPerfCounter
     {

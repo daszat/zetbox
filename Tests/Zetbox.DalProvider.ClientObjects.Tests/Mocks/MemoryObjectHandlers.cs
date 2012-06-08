@@ -1,22 +1,22 @@
 
-namespace Kistl.DalProvider.Client.Mocks
+namespace Zetbox.DalProvider.Client.Mocks
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.DalProvider.Memory;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.DalProvider.Memory;
 
     internal sealed class MemoryObjectHandler<T>
         : BaseServerObjectHandler<T>
         where T : class, IDataObject
     {
-        protected override T GetObjectInstance(IKistlContext ctx, int ID)
+        protected override T GetObjectInstance(IZetboxContext ctx, int ID)
         {
             return ctx.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
         }
@@ -32,12 +32,12 @@ namespace Kistl.DalProvider.Client.Mocks
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
             Guid version, 
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
 
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             //var relEnd = rel.GetEndFromRole(endRole);
@@ -63,7 +63,7 @@ namespace Kistl.DalProvider.Client.Mocks
         : BaseServerObjectSetHandler
     {
         /// <inheritdoc/>
-        public override IEnumerable<IPersistenceObject> SetObjects(Guid version, IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public override IEnumerable<IPersistenceObject> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             return base.SetObjects(version, ctx, objects, notificationRequests);
         }
@@ -72,7 +72,7 @@ namespace Kistl.DalProvider.Client.Mocks
     internal sealed class MemoryObjectHandlerFactory
         : ServerObjectHandlerFactory
     {
-        public override IServerCollectionHandler GetServerCollectionHandler(IKistlContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole)
+        public override IServerCollectionHandler GetServerCollectionHandler(IZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             return GetServerCollectionHandlerHelper(

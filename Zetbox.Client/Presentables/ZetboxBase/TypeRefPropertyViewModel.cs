@@ -1,24 +1,24 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.Client.Models;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Models;
 
     public class TypeRefPropertyViewModel
            : ObjectReferenceViewModel
     {
-        public new delegate TypeRefPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate TypeRefPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public TypeRefPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             IValueModel mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {

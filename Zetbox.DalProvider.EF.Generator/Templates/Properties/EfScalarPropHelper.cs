@@ -1,13 +1,13 @@
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
+namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
 
     public static class EfScalarPropHelper
     {
@@ -63,17 +63,17 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
         {
             if (prop is EnumerationProperty)
             {
-                return prop.Name + Kistl.API.Helper.ImplementationSuffix;
+                return prop.Name + Zetbox.API.Helper.ImplementationSuffix;
             }
             else if (prop is CompoundObjectProperty)
             {
                 if (((CompoundObjectProperty)prop).IsList)
                 {
-                    return "Value" + Kistl.API.Helper.ImplementationSuffix;
+                    return "Value" + Zetbox.API.Helper.ImplementationSuffix;
                 }
                 else
                 {
-                    return prop.Name + Kistl.API.Helper.ImplementationSuffix;
+                    return prop.Name + Zetbox.API.Helper.ImplementationSuffix;
                 }
             }
             else

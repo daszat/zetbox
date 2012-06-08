@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client
+namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections;
@@ -9,22 +9,22 @@ namespace Kistl.DalProvider.Client
     using System.Linq.Expressions;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Client.PerfCounter;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Client.PerfCounter;
 
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
-    internal class KistlContextQuery<T> : IOrderedQueryable<T>
+    internal class ZetboxContextQuery<T> : IOrderedQueryable<T>
     {
         private Expression _expression = null;
-        private KistlContextProvider _provider = null;
+        private ZetboxContextProvider _provider = null;
         private InterfaceType _type;
-        private KistlContextImpl _context;
+        private ZetboxContextImpl _context;
         private IPerfCounter _perfCounter;
 
         #region Constructor
-        public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, IProxy proxy, IPerfCounter perfCounter)
+        public ZetboxContextQuery(ZetboxContextImpl ctx, InterfaceType type, IProxy proxy, IPerfCounter perfCounter)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             // if (type == null) throw new ArgumentNullException("type");
@@ -33,10 +33,10 @@ namespace Kistl.DalProvider.Client
             _type = type;
             _context = ctx;
             _expression = System.Linq.Expressions.Expression.Constant(this);
-            _provider = new KistlContextProvider(_context, _type, proxy, _perfCounter);
+            _provider = new ZetboxContextProvider(_context, _type, proxy, _perfCounter);
         }
 
-        public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, KistlContextProvider provider, Expression expression, IPerfCounter perfCounter)
+        public ZetboxContextQuery(ZetboxContextImpl ctx, InterfaceType type, ZetboxContextProvider provider, Expression expression, IPerfCounter perfCounter)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             // if (type == null) throw new ArgumentNullException("type");

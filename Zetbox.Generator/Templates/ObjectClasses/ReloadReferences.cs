@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,8 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
     using Arebis.CodeGeneration;
 
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public partial class ReloadReferences
     {

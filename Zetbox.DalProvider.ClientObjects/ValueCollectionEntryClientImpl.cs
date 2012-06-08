@@ -1,13 +1,13 @@
 
-namespace Kistl.DalProvider.Client
+namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.DalProvider.Base;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.DalProvider.Base;
 
     public abstract class ValueCollectionEntryClientImpl<TA, TAImpl, TB>
         : CollectionEntryBaseImpl, IClientObject

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`TestCustomObjects`"
            abstract="false"
@@ -25,11 +25,11 @@
 <!-- ObjectReferenceProperty -->
         <set name="MubBlah_List_Nav" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_TCO_Role`" />
-            <one-to-many class="Kistl.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="MubBlah_Nav" column="`fk_MB_Role`" class="Kistl.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="MubBlah_Nav" column="`fk_MB_Role`" class="Zetbox.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
@@ -37,17 +37,17 @@
         <!-- relEnd=TCO_ManyList_Role otherEnd=MB_Many_Role -->
         <set name="MuhBlah_ManyList_Nav" table="`MB_Many_Role_has_TCO_ManyList_Role`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_TCO_ManyList_Role`" />
-            <one-to-many class="Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <one-to-one name="MuhBlah_One_Nav" class="Kistl.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Kistl.Objects.NHibernateImpl" constrained="false" property-ref="TestCustomObjects_One_Nav" />
+        <one-to-one name="MuhBlah_One_Nav" class="Zetbox.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="TestCustomObjects_One_Nav" />
         <!-- ValueTypeProperty isValue -->
         <property name="PersonName" 
                   column="`PersonName`" 
                   optimistic-lock="false"/>
         <!-- CompoundObjectProperty isValue -->
-        <component name="PhoneNumberMobile" class="Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl,Kistl.Objects.NHibernateImpl">
+        <component name="PhoneNumberMobile" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
             <property name="CompoundObject_IsNull"
                       column="`PhoneNumberMobile`"
                       type="bool"
@@ -62,7 +62,7 @@
                   optimistic-lock="false"/>
         </component>
         <!-- CompoundObjectProperty isValue -->
-        <component name="PhoneNumberOffice" class="Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl,Kistl.Objects.NHibernateImpl">
+        <component name="PhoneNumberOffice" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
             <property name="CompoundObject_IsNull"
                       column="`PhoneNumberOffice`"
                       type="bool"
@@ -79,7 +79,7 @@
         <!-- CompoundObjectProperty IsList -->
         <set name="PhoneNumbersOther" inverse="true" batch-size="100">
             <key column="`fk_TestCustomObject`" />
-            <one-to-many class="Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- define the subclasses -->

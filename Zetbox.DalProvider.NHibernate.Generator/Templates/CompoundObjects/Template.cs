@@ -1,20 +1,20 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.CompoundObjects
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public class Template
         : Templates.CompoundObjects.Template
     {
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, CompoundObject s)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, CompoundObject s)
             : base(_host, ctx, s)
         {
         }

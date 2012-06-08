@@ -1,4 +1,4 @@
-namespace Kistl.DalProvider.Ef.Tests
+namespace Zetbox.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections;
@@ -7,12 +7,12 @@ namespace Kistl.DalProvider.Ef.Tests
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.API.Tests.Skeletons;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.DalProvider.Ef.Mocks;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.API.Tests.Skeletons;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.DalProvider.Ef.Mocks;
     using NUnit.Framework;
 
     [TestFixture]
@@ -25,7 +25,7 @@ namespace Kistl.DalProvider.Ef.Tests
             base.SetUp();
         }
 
-        public void InitialiseObject(IKistlContext ctx, ObjectClass obj)
+        public void InitialiseObject(IZetboxContext ctx, ObjectClass obj)
         {
             ctx.Attach(obj);
             obj.BaseObjectClass = null;
@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.Ef.Tests
             obj.IsFrozenObject = false;
             obj.IsSimpleObject = false;
             obj.Methods.Clear();
-            obj.Module = ctx.GetQuery<Kistl.App.Base.Module>().First();
+            obj.Module = ctx.GetQuery<Zetbox.App.Base.Module>().First();
             obj.Properties.Clear();
             obj.SubClasses.Clear();
             obj.TableName = "testtablename";
@@ -46,7 +46,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [Ignore("Enable if Case #1359 is fixed")]
         public void should_roundtrip_ObjectClass_attributes_correctly()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 InitialiseObject(ctx, obj);
 
@@ -73,8 +73,8 @@ namespace Kistl.DalProvider.Ef.Tests
         {
             var typeMap = scope.Resolve<TypeMap>();
             using (var ms = new MemoryStream())
-            using (var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms)))
-            using (var sr = new KistlStreamReader(typeMap, new BinaryReader(ms)))
+            using (var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms)))
+            using (var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms)))
             {
                 InitialiseObject(ctx, obj);
                 obj.ToStream(sw, null, false);
@@ -92,8 +92,8 @@ namespace Kistl.DalProvider.Ef.Tests
         {
             var typeMap = scope.Resolve<TypeMap>();
             using (var ms = new MemoryStream())
-            using (var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms)))
-            using (var sr = new KistlStreamReader(typeMap, new BinaryReader(ms)))
+            using (var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms)))
+            using (var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms)))
             {
                 Assert.Ignore("need to implement mocked serialization for ObjectClass");
 
@@ -115,8 +115,8 @@ namespace Kistl.DalProvider.Ef.Tests
         {
             var typeMap = scope.Resolve<TypeMap>();
             using (var ms = new MemoryStream())
-            using (var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms)))
-            using (var sr = new KistlStreamReader(typeMap, new BinaryReader(ms)))
+            using (var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms)))
+            using (var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms)))
             {
                 obj.ToStream(sw, null, false);
 
@@ -137,7 +137,7 @@ namespace Kistl.DalProvider.Ef.Tests
         {
             var local_obj = CreateObjectInstance();
             Assert.That(local_obj.Context, Is.Null);
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 local_obj.AttachToContext(ctx);
                 Assert.That(local_obj.Context, Is.Not.Null);
@@ -146,17 +146,17 @@ namespace Kistl.DalProvider.Ef.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextException))]
+        [ExpectedException(typeof(WrongZetboxContextException))]
         public void AttachToContext_Other_fails()
         {
             var local_obj = CreateObjectInstance();
             Assert.That(local_obj.Context, Is.Null);
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 local_obj.AttachToContext(ctx);
                 Assert.That(local_obj.Context, Is.Not.Null);
                 Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
-                using (IKistlContext ctx2 = GetContext())
+                using (IZetboxContext ctx2 = GetContext())
                 {
                     local_obj.AttachToContext(ctx2);
                     Assert.That(local_obj.Context, Is.Not.Null);

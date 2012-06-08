@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.Client.Presentables.ValueViewModels
+namespace Zetbox.Client.Presentables.ValueViewModels
 {
     public class DataObjectViewModelProxy
     {

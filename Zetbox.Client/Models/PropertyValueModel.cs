@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Models
+namespace Zetbox.Client.Models
 {
     using System;
     using System.Collections;
@@ -8,14 +8,14 @@ namespace Kistl.Client.Models
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
 
-    public static class PropertyExtensionsThisShouldBeMovedToAZBoxMethod
+    public static class PropertyExtensionsThisShouldBeMovedToAZetboxMethod
     {
         public static IValueModel GetPropertyValueModel(this Property prop, INotifyingObject obj)
         {
@@ -210,7 +210,7 @@ namespace Kistl.Client.Models
 
         public Property Property { get; private set; }
         public INotifyingObject Object { get; private set; }
-        protected IKistlContext DataContext { get; private set; }
+        protected IZetboxContext DataContext { get; private set; }
 
         #region IValueModel Members
 

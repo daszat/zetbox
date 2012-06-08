@@ -11,15 +11,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables.GUI;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.GUI;
 
-namespace Kistl.Client.WPF.View.GUI
+namespace Zetbox.Client.WPF.View.GUI
 {
     /// <summary>
     /// Interaction logic for ReportScreenDisplay.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class NavigationReportScreenDisplay : UserControl, IHasViewModel<NavigationReportScreenViewModel>
     {
         public NavigationReportScreenDisplay()

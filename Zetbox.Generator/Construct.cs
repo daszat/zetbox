@@ -1,13 +1,13 @@
 
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Generator.Extensions;
 
     /// <summary>
     /// A collection of naming policies.
@@ -116,12 +116,12 @@ namespace Kistl.Generator
 
         public static string ListPositionColumnName(ValueTypeProperty prop)
         {
-            return prop.Name + Kistl.API.Helper.PositionSuffix;
+            return prop.Name + Zetbox.API.Helper.PositionSuffix;
         }
 
         public static string ListPositionColumnName(CompoundObjectProperty prop)
         {
-            return prop.Name + Kistl.API.Helper.PositionSuffix;
+            return prop.Name + Zetbox.API.Helper.PositionSuffix;
         }
 
         public static string ListPositionColumnName(RelationEnd otherEnd)
@@ -132,13 +132,13 @@ namespace Kistl.Generator
         public static string ListPositionColumnName(RelationEnd otherEnd, string parentPropName)
         {
             if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
-            return ForeignKeyColumnName(Construct.NestedColumnName(otherEnd.RoleName, parentPropName)) + Kistl.API.Helper.PositionSuffix;
+            return ForeignKeyColumnName(Construct.NestedColumnName(otherEnd.RoleName, parentPropName)) + Zetbox.API.Helper.PositionSuffix;
         }
 
         public static string ListPositionPropertyName(RelationEnd relEnd)
         {
             if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
-            return relEnd.RoleName + Kistl.API.Helper.PositionSuffix;
+            return relEnd.RoleName + Zetbox.API.Helper.PositionSuffix;
         }
         #endregion
 

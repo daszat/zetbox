@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.RequiredParentNHibernateImpl+RequiredParentProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.RequiredParentNHibernateImpl+RequiredParentProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.RequiredParentNHibernateImpl+RequiredParentProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.RequiredParentNHibernateImpl+RequiredParentProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`RequiredParents`"
            abstract="false"
@@ -21,7 +21,7 @@
 <!-- ObjectReferenceProperty -->
         <set name="Children" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Parent`" />
-            <one-to-many class="Kistl.App.Test.RequiredParentChildNHibernateImpl+RequiredParentChildProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.RequiredParentChildNHibernateImpl+RequiredParentChildProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->

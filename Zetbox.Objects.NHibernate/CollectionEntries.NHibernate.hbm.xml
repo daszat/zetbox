@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update"
-                   assembly="Kistl.Objects.NHibernateImpl">
+                   assembly="Zetbox.Objects.NHibernateImpl">
 
     <!-- RelationCollectionEntries -->
-    <class name="Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
-           proxy="Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
+    <class name="Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
+           proxy="Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
            table="`CalculatedReference_dependsOn_InputProperties`"
            schema="`base`" >
 
@@ -22,8 +22,8 @@
                      column="`fk_InputProperties`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
-           proxy="Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
+    <class name="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
+           proxy="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
            table="`DataType_implements_ImplementedInterfaces`"
            schema="`base`" >
 
@@ -62,8 +62,8 @@
                   column="`fk_Document_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
-           proxy="Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
+    <class name="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
+           proxy="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
            table="`Identities_memberOf_Groups`"
            schema="`base`" >
 
@@ -79,8 +79,8 @@
         <many-to-one name="B"
                      column="`fk_Groups`" />
     </class>
-    <class name="Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
-           proxy="Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
+    <class name="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
+           proxy="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
            table="`UniqueContraints_ensures_unique_on_Properties`"
            schema="`base`" >
 
@@ -97,8 +97,8 @@
                      column="`fk_Properties`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy"
-           proxy="Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy"
+    <class name="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy"
+           proxy="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy"
            table="`MB_Many_Role_has_TCO_ManyList_Role`"
            schema="`test`" >
 
@@ -114,8 +114,8 @@
         <many-to-one name="B"
                      column="`fk_TCO_ManyList_Role`" />
     </class>
-    <class name="Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy"
-           proxy="Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy"
+    <class name="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy"
+           proxy="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy"
            table="`ASide_connectsTo_BSide`"
            schema="`test`" >
 
@@ -131,8 +131,8 @@
         <many-to-one name="B"
                      column="`fk_BSide`" />
     </class>
-    <class name="Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
-           proxy="Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
            table="`NavigationScreen_accessed_by_Groups`"
            schema="`gui`" >
 
@@ -149,8 +149,8 @@
                      column="`fk_Groups`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
-           proxy="Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
            table="`ObjRefProp_shows_Methods`"
            schema="`gui`" >
 
@@ -167,8 +167,8 @@
                      column="`fk_Methods`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"
-           proxy="Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"
+    <class name="Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"
+           proxy="Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"
            table="`Projekte_haben_Mitarbeiter`"
            schema="`projekte`" >
 
@@ -189,8 +189,8 @@
                   column="`fk_Projekte_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
-           proxy="Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
+    <class name="Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
+           proxy="Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
            table="`RoleMembership_resolves_Relations`"
            schema="`base`" >
 
@@ -211,8 +211,8 @@
                   column="`fk_RoleMembership_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy"
-           proxy="ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy"
+    <class name="Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy"
+           proxy="Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy"
            table="`SourceColumn_created_Property`"
            schema="`migration`" >
 
@@ -233,8 +233,8 @@
                   column="`fk_SourceColumn_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy"
-           proxy="Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy"
            table="`Template_hasMenu_Menu`"
            schema="`gui`" >
 
@@ -250,8 +250,8 @@
         <many-to-one name="B"
                      column="`fk_Menu`" />
     </class>
-    <class name="Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
-           proxy="Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
+    <class name="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
+           proxy="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
            table="`Student_füllt_aus_Testbogen`"
            schema="`test`" >
 
@@ -267,8 +267,8 @@
         <many-to-one name="B"
                      column="`fk_Testbogen`" />
     </class>
-    <class name="Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy"
-           proxy="Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy"
+    <class name="Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy"
+           proxy="Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy"
            table="`TypeRef_hasGenericArguments_GenericArguments`"
            schema="`base`" >
 
@@ -289,8 +289,8 @@
                   column="`fk_TypeRef_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
-           proxy="Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
            table="`ViewDescriptor_supports_ViewModelTypeRefs`"
            schema="`gui`" >
 
@@ -307,8 +307,8 @@
                      column="`fk_ViewModelTypeRefs`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
-           proxy="Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
            table="`Presentable_displayedBy_SecondaryControlKinds`"
            schema="`gui`" >
 
@@ -325,8 +325,8 @@
                      column="`fk_SecondaryControlKinds`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy"
-           proxy="Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy"
            table="`Visual_contains_Children`"
            schema="`gui`" >
 
@@ -342,8 +342,8 @@
         <many-to-one name="B"
                      column="`fk_Children`" />
     </class>
-    <class name="Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy"
-           proxy="Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy"
            table="`Visual_hasContextMenu_ContextMenu`"
            schema="`gui`" >
 
@@ -361,8 +361,8 @@
     </class>
 
     <!-- ValueCollectionEntries are defined directly on use -->
-    <class name="Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl+Kunde_EMails_CollectionEntryProxy"
-           proxy="Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl+Kunde_EMails_CollectionEntryProxy"
+    <class name="Zetbox.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl+Kunde_EMails_CollectionEntryProxy"
+           proxy="Zetbox.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl+Kunde_EMails_CollectionEntryProxy"
            table="`Kunden_EMailsCollection`"
            schema="`projekte`" >
 
@@ -385,8 +385,8 @@
     </class>
 
     <!-- CompoundObjectCollectionEntries -->
-    <class name="Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy"
-           proxy="Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy"
+    <class name="Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy"
+           proxy="Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy"
            table="`TestCustomObjects_PhoneNumbersOtherCollection`"
            schema="`test`" >
 
@@ -400,7 +400,7 @@
         <many-to-one name="Parent"
                      column="`fk_TestCustomObject`" />
         <!-- CompoundObjectProperty isValue -->
-        <component name="Value" class="Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl,Kistl.Objects.NHibernateImpl">
+        <component name="Value" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
             <property name="CompoundObject_IsNull"
                       column="`PhoneNumbersOther`"
                       type="bool"

@@ -1,21 +1,21 @@
-namespace Kistl.Client.Presentables.Calendar
+namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Calendar;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.App.Calendar;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
 
     [ViewModelDescriptor]
     public class CalendarRuleInstanceViewModel : ViewModel, IAppointmentViewModel
     {
-        public new delegate CalendarRuleInstanceViewModel Factory(IKistlContext dataCtx, ViewModel parent, CalendarRule rule, DateTime dt);
+        public new delegate CalendarRuleInstanceViewModel Factory(IZetboxContext dataCtx, ViewModel parent, CalendarRule rule, DateTime dt);
 
-        public CalendarRuleInstanceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, CalendarRule rule, DateTime dt)
+        public CalendarRuleInstanceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, CalendarRule rule, DateTime dt)
             : base(appCtx, dataCtx, parent)
         {
             this.Rule = rule;

@@ -11,7 +11,7 @@ using NUnit.Framework;
 
 using Autofac;
 
-namespace Kistl.API.Tests.Serializables
+namespace Zetbox.API.Tests.Serializables
 {
 
     [TestFixture]

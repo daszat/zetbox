@@ -1,12 +1,12 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
-  <Config name="Debug" appbase="..\..\bin\Debug\bin\Tests" configfile="Kistl.API.Client.Tests.exe.config" binpathtype="Auto">
-    <assembly path="Kistl.API.Client.Tests.dll" />
+  <Config name="Debug" appbase="..\..\bin\Debug\bin\Tests" configfile="Zetbox.API.Client.Tests.exe.config" binpathtype="Auto">
+    <assembly path="Zetbox.API.Client.Tests.dll" />
   </Config>
-  <Config name="Release" appbase="..\..\bin\Release\bin\Tests" configfile="Kistl.API.Client.Tests.exe.config" binpathtype="Auto">
-    <assembly path="Kistl.API.Client.Tests.dll" />
+  <Config name="Release" appbase="..\..\bin\Release\bin\Tests" configfile="Zetbox.API.Client.Tests.exe.config" binpathtype="Auto">
+    <assembly path="Zetbox.API.Client.Tests.dll" />
   </Config>
-  <Config name="Studio" appbase="" configfile="Kistl.API.Client.Tests.exe.config" binpathtype="Auto">
-    <assembly path="Kistl.API.Client.Tests.dll" />
+  <Config name="Studio" appbase="" configfile="Zetbox.API.Client.Tests.exe.config" binpathtype="Auto">
+    <assembly path="Zetbox.API.Client.Tests.dll" />
   </Config>
 </NUnitProject>

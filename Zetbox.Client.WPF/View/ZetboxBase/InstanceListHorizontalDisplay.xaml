@@ -1,13 +1,13 @@
-﻿<local:InstanceListBaseDisplay x:Class="Kistl.Client.WPF.View.KistlBase.InstanceListHorizontalDisplay"
+﻿<local:InstanceListBaseDisplay x:Class="Zetbox.Client.WPF.View.ZetboxBase.InstanceListHorizontalDisplay"
                                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                               xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
-                               xmlns:client="clr-namespace:Kistl.Client.WPF.View"
-                               xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-                               xmlns:local="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-                               xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-                               xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-                               xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
+                               xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
+                               xmlns:client="clr-namespace:Zetbox.Client.WPF.View"
+                               xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                               xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                               xmlns:clientZetboxBase="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                               xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+                               xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
   <local:InstanceListBaseDisplay.Resources>
     <!-- Force all grid cells to stretch -->
@@ -41,7 +41,7 @@
         <ctrls:WorkaroundToolBar.Resources>
           <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
             <ctrls:CommandButton CommandViewModel="{Binding}"
-                                 CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListHorizontalDisplay}}}"
+                                 CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientZetboxBase:InstanceListHorizontalDisplay}}}"
                                  Style="{StaticResource ImageToolbarButton}" />
           </DataTemplate>
           <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
@@ -67,18 +67,18 @@
         </ctrls:WorkaroundToolBar.Resources>
       </ctrls:WorkaroundToolBar>
       <local:InstanceListHeader DockPanel.Dock="Top" />
-      <ctrls:ZBoxListView x:Name="lst"
+      <ctrls:ZetboxListView x:Name="lst"
                           Margin="10"
                           BorderThickness="0"
                           ItemsSource="{Binding Instances}"
                           ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
                           ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                          SelectedZBoxItems="{Binding SelectedItems}"
+                          SelectedZetboxItems="{Binding SelectedItems}"
                           SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
                           KeyboardNavigation.TabNavigation="Continue"
                           MouseDoubleClick="ItemActivatedHandler"
                           GridViewColumnHeader.Click="ListView_HeaderClick">
-      </ctrls:ZBoxListView>
+      </ctrls:ZetboxListView>
 
     </DockPanel>
 

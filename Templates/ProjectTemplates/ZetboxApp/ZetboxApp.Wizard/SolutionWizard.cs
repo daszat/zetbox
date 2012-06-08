@@ -10,7 +10,7 @@ using EnvDTE80;
 using Microsoft.VisualStudio.TemplateWizard;
 
 
-namespace KistlApp.Wizard
+namespace ZetboxApp.Wizard
 {
     public class SolutionWizard : IWizard
     {
@@ -193,7 +193,7 @@ namespace KistlApp.Wizard
             {
                 if (res.Contains(".SolutionItems."))
                 {
-                    // KistlApp.Wizard.SolutionItems.Configs.test___a.xml
+                    // ZetboxApp.Wizard.SolutionItems.Configs.test___a.xml
                     var relFilePath = res.Substring(res.IndexOf(".SolutionItems.") + ".SolutionItems.".Length);
                     // Configs.test___a.xml
                     var ext = Path.GetExtension(relFilePath);

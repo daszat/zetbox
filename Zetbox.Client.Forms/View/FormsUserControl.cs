@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel;
-using Kistl.Client.Presentables;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.Forms.View
+namespace Zetbox.Client.Forms.View
 {
     // mark as abstract, since the winforms designer cannot load the generics class anyways.
     // instead use a minimal "designer proxy" like this:

@@ -9,7 +9,7 @@
 		<!-- EnsureLocalDisposalRule: Due to Autofac this rule is useless -->
 		<rules include="*" exclude="EnsureLocalDisposalRule" from="Gendarme.Rules.Correctness.dll"/>
 		<!-- TypesWithDisposableFieldsShouldBeDisposableRule: Too many false positives with classes that have a
-		reference to an IKistlContext -->
+		reference to an IZetboxContext -->
 		<rules include="*" exclude="TypesWithDisposableFieldsShouldBeDisposableRule" from="Gendarme.Rules.Design.dll"/>
 		<!-- DoNotExposeNestedGenericSignaturesRule: not deemed a problem (yet) -->
 		<rules include="*" exclude="DoNotExposeNestedGenericSignaturesRule" from="Gendarme.Rules.Design.Generic.dll"/>
@@ -19,7 +19,7 @@
 		<rules include="*" from="Gendarme.Rules.Naming.dll"/>
 		<!--
 			PreferLiteralOverInitOnlyFieldsRule: const considered harmful (makes the value part of the API) 
-			ReviewLinqMethodRule: Crashes on Kistl.Client.dll (see https://bugzilla.novell.com/show_bug.cgi?id=656790)
+			ReviewLinqMethodRule: Crashes on Zetbox.Client.dll (see https://bugzilla.novell.com/show_bug.cgi?id=656790)
 		-->
 		<rules include="*" exclude="PreferLiteralOverInitOnlyFieldsRule | ReviewLinqMethodRule" from="Gendarme.Rules.Performance.dll" />
 		<rules include="*" from="Gendarme.Rules.Portability.dll" />

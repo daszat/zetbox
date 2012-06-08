@@ -1,12 +1,12 @@
 
-namespace Kistl.Server.Tests.SchemaTests.SchemaProviders.TableStructure
+namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders.TableStructure
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
+    using Zetbox.API.Server;
     using NUnit.Framework;
 
     public abstract class Fixture<TProvider>

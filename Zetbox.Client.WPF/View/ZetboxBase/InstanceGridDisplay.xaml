@@ -1,14 +1,14 @@
-﻿<local:InstanceGridBaseDisplay x:Class="Kistl.Client.WPF.View.KistlBase.InstanceGridDisplay"
+﻿<local:InstanceGridBaseDisplay x:Class="Zetbox.Client.WPF.View.ZetboxBase.InstanceGridDisplay"
                                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                               xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
+                               xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
                                xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
-                               xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-                               xmlns:client="clr-namespace:Kistl.Client.WPF.View"
-                               xmlns:local="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-                               xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-                               xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
-                               xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                               xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                               xmlns:client="clr-namespace:Zetbox.Client.WPF.View"
+                               xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                               xmlns:clientZetboxBase="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                               xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
+                               xmlns:viewmdl="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
   <local:InstanceGridBaseDisplay.Resources>
     <!-- implement workaround for DeferRefresh exception as described on http://stackoverflow.com/questions/3461714/wpf-datagrid-combobox-causes-invalidoperationexception -->
@@ -33,7 +33,7 @@
       <ctrls:WorkaroundToolBar.Resources>
         <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
           <ctrls:CommandButton CommandViewModel="{Binding}"
-                               CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceGridDisplay}}}"
+                               CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientZetboxBase:InstanceGridDisplay}}}"
                                Style="{StaticResource ImageToolbarButton}" />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
@@ -69,16 +69,16 @@
     </GroupBox>
 
     <local:InstanceListHeader DockPanel.Dock="Top" />
-    <ctrls:ZBoxDataGrid x:Name="lst"
+    <ctrls:ZetboxDataGrid x:Name="lst"
                         BorderThickness="0"
                         ItemsSource="{Binding Source={StaticResource itemsSource}}"
                         CanUserAddRows="{Binding AllowAddNew}"
                         CanUserDeleteRows="{Binding AllowDelete}"
                         AutoGenerateColumns="False"
-                        SelectedZBoxItems="{Binding SelectedProxies}"
+                        SelectedZetboxItems="{Binding SelectedProxies}"
                         SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
                         MouseDoubleClick="ItemActivatedHandler"
                         GridViewColumnHeader.Click="ListView_HeaderClick">
-    </ctrls:ZBoxDataGrid>
+    </ctrls:ZetboxDataGrid>
   </DockPanel>
 </local:InstanceGridBaseDisplay>

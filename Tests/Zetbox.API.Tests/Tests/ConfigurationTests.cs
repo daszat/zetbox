@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     using System;
     using System.Collections;
@@ -10,16 +10,16 @@ namespace Kistl.API.Tests
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
-    using Kistl.API.Configuration;
+    using Zetbox.API.Configuration;
     using NUnit.Framework;
 
     [TestFixture]
     public class ConfigurationTests
         : AbstractApiTestFixture
     {
-        readonly static string ConfigFile = "Kistl.API.Tests.xml";
+        readonly static string ConfigFile = "Zetbox.API.Tests.xml";
 
-        private void CheckConfig(KistlConfig cfg)
+        private void CheckConfig(ZetboxConfig cfg)
         {
             Assert.That(cfg.ConfigName, Is.Not.Empty, "ConfigName");
             Assert.That(cfg.AssemblySearchPaths, Is.Not.Null, "AssemblySearchPaths");
@@ -28,7 +28,7 @@ namespace Kistl.API.Tests
             Assert.That(cfg.Client, Is.Not.Null, "Client");
 
             Assert.That(cfg.Server, Is.Not.Null, "Server");
-            var connectionString = cfg.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+            var connectionString = cfg.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
             Assert.That(connectionString.ConnectionString, Is.Not.Empty, "ConnectionString");
             Assert.That(connectionString.SchemaProvider, Is.Not.Empty, "SchemaProvider");
             Assert.That(connectionString.DatabaseProvider, Is.Not.Empty, "DatabaseProvider");
@@ -43,7 +43,7 @@ namespace Kistl.API.Tests
             {
                 File.Copy("TestConfig.xml", defaultDest);
             }
-            var config = KistlConfig.FromFile(String.Empty, "DefaultConfig.xml");
+            var config = ZetboxConfig.FromFile(String.Empty, "DefaultConfig.xml");
 
             Assert.That(config, Is.Not.Null, "Configuration");
             Assert.That(config.ConfigFilePath, Is.Not.Empty, "ConfigFilePath");
@@ -53,7 +53,7 @@ namespace Kistl.API.Tests
         [Test]
         public void LoadFile()
         {
-            var config = KistlConfig.FromFile("TestConfig.xml", "DoesNotExist.xml");
+            var config = ZetboxConfig.FromFile("TestConfig.xml", "DoesNotExist.xml");
 
             Assert.That(config, Is.Not.Null, "Configuration");
             Assert.That(config.ConfigFilePath, Is.EqualTo("TestConfig.xml"), "ConfigFilePath");
@@ -63,14 +63,14 @@ namespace Kistl.API.Tests
         [Test]
         public void FromStream()
         {
-            var filename = KistlConfig.GetDefaultConfigName(ConfigFile);
+            var filename = ZetboxConfig.GetDefaultConfigName(ConfigFile);
             Assert.That(filename, Is.Not.Empty);
             Assert.That(File.Exists(filename), Is.True, String.Format("configfile {0} doesn't exist", filename));
 
             using (FileStream s = File.OpenRead(filename))
             {
                 
-                KistlConfig cfg = KistlConfig.FromStream(s);
+                ZetboxConfig cfg = ZetboxConfig.FromStream(s);
                 Assert.That(cfg, Is.Not.Null);
                 Assert.That(cfg.ConfigFilePath, Is.Null);
                 CheckConfig(cfg);
@@ -80,10 +80,10 @@ namespace Kistl.API.Tests
         [Test]
         public void FromTextReader()
         {
-            using (FileStream s = File.OpenRead(KistlConfig.GetDefaultConfigName(ConfigFile)))
+            using (FileStream s = File.OpenRead(ZetboxConfig.GetDefaultConfigName(ConfigFile)))
             {
                 TextReader rd = new StreamReader(s);
-                KistlConfig cfg = KistlConfig.FromStream(rd);
+                ZetboxConfig cfg = ZetboxConfig.FromStream(rd);
                 Assert.That(cfg.ConfigFilePath, Is.Null);
                 CheckConfig(cfg);
             }
@@ -97,7 +97,7 @@ namespace Kistl.API.Tests
             {
                 File.Delete(filename);
             }
-            var config = KistlConfig.FromFile(String.Empty, "DefaultConfig.xml");
+            var config = ZetboxConfig.FromFile(String.Empty, "DefaultConfig.xml");
             config.ToFile(filename);
             Assert.That(File.Exists(filename), Is.True);
             Assert.That(new FileInfo(filename).Length, Is.GreaterThan(0));
@@ -108,7 +108,7 @@ namespace Kistl.API.Tests
         public void ToStream()
         {
             MemoryStream ms = new MemoryStream();
-            var config = new KistlConfig();
+            var config = new ZetboxConfig();
             config.ToStream(ms);
             Assert.That(ms.Length, Is.GreaterThan(0));
         }

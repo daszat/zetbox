@@ -1,33 +1,33 @@
 
-namespace Kistl.Generator.Extensions
+namespace Zetbox.Generator.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public static class ContextExtensions
     {
-        public static IQueryable<ObjectClass> GetBaseClasses(this IKistlContext ctx)
+        public static IQueryable<ObjectClass> GetBaseClasses(this IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass == null);
         }
 
-        public static IQueryable<ObjectClass> GetDerivedClasses(this IKistlContext ctx)
+        public static IQueryable<ObjectClass> GetDerivedClasses(this IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass != null);
         }
 
-        public static IEnumerable<Relation> GetRelationsWithSeparateStorage(this IKistlContext ctx)
+        public static IEnumerable<Relation> GetRelationsWithSeparateStorage(this IZetboxContext ctx)
         {
             return ctx.GetQuery<Relation>()
                 .Where(r => r.Storage == StorageType.Separate)
@@ -35,7 +35,7 @@ namespace Kistl.Generator.Extensions
                 .OrderBy(r => r.GetAssociationName());
         }
 
-        public static IEnumerable<Relation> GetRelationsWithoutSeparateStorage(this IKistlContext ctx)
+        public static IEnumerable<Relation> GetRelationsWithoutSeparateStorage(this IZetboxContext ctx)
         {
             return ctx.GetQuery<Relation>()
                 .Where(r => r.Storage != StorageType.Separate)

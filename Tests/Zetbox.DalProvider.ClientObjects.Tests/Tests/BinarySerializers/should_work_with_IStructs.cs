@@ -5,17 +5,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.Test;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.Test;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.Client.Tests.BinarySerializers
+namespace Zetbox.DalProvider.Client.Tests.BinarySerializers
 {
     //[TestFixture(typeof(TestPhoneCompoundObject))]
     //public class should_work_with_ClientCompoundObject<T>
-    //    : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
+    //    : Zetbox.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
     //    where T : class, ICompoundObject, new()
     //{
     //}

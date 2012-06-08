@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Packaging
+namespace Zetbox.App.Packaging
 {
     using System;
     using System.Collections;
@@ -11,16 +11,16 @@ namespace Kistl.App.Packaging
     using System.Reflection;
     using System.Text;
     using System.Xml;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public class Exporter
     {
         private readonly static log4net.ILog Log = Logging.Exporter;
 
-        public static void PublishFromContext(IKistlContext ctx, string filename, string[] ownerModules)
+        public static void PublishFromContext(IZetboxContext ctx, string filename, string[] ownerModules)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
@@ -28,7 +28,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void PublishFromContext(IKistlContext ctx, Stream stream, string[] ownerModules, string streamDescription)
+        public static void PublishFromContext(IZetboxContext ctx, Stream stream, string[] ownerModules, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
@@ -36,20 +36,20 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void PublishFromContext(IKistlContext ctx, IPackageProvider s, string[] ownerModules)
+        public static void PublishFromContext(IZetboxContext ctx, IPackageProvider s, string[] ownerModules)
         {
             using (Log.DebugTraceMethodCall("PublishFromContext"))
             {
                 Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", ownerModules));
                 Log.Debug("Loading modulelist");
                 var moduleList = GetModules(ctx, ownerModules);
-                WriteStartDocument(s, ctx, new Kistl.App.Base.Module[] 
+                WriteStartDocument(s, ctx, new Zetbox.App.Base.Module[] 
                         { 
-                            ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Name == "KistlBase"),
-                            ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Name == "GUI"),
+                            ctx.GetQuery<Zetbox.App.Base.Module>().First(m => m.Name == "ZetboxBase"),
+                            ctx.GetQuery<Zetbox.App.Base.Module>().First(m => m.Name == "GUI"),
                         });
 
-                var propNamespaces = new string[] { "Kistl.App.Base", "Kistl.App.GUI" };
+                var propNamespaces = new string[] { "Zetbox.App.Base", "Zetbox.App.GUI" };
 
                 foreach (var module in moduleList)
                 {
@@ -78,7 +78,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IReadOnlyKistlContext ctx, string filename, string[] schemaModules, string[] ownerModules)
+        public static void ExportFromContext(IReadOnlyZetboxContext ctx, string filename, string[] schemaModules, string[] ownerModules)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
@@ -86,7 +86,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IReadOnlyKistlContext ctx, Stream stream, string[] schemaModules, string[] ownerModules, string streamDescription)
+        public static void ExportFromContext(IReadOnlyZetboxContext ctx, Stream stream, string[] schemaModules, string[] ownerModules, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
@@ -99,7 +99,7 @@ namespace Kistl.App.Packaging
         /// schema and owning module.
         /// </summary>
         /// <remarks>
-        /// <para>For example, exporting {"KistlBase", "GUI"}/{"*"} will export all schema information to recreate the
+        /// <para>For example, exporting {"ZetboxBase", "GUI"}/{"*"} will export all schema information to recreate the
         /// current database. Exporting {"Calendar"}/{"MyApplication"} will export all calendar data specific to the
         /// "MyApplication" module.
         /// </para>
@@ -112,7 +112,7 @@ namespace Kistl.App.Packaging
         /// <param name="ownerModules">A list of strings naming the data-owning modules. This selects whose data should
         /// be exported.  Specify a single asterisk (<code>"*"</code>) to select all available data, independent of
         /// module-membership. This also includes data that is not member of any module.</param>
-        public static void ExportFromContext(IReadOnlyKistlContext ctx, IPackageProvider s, string[] schemaModules, string[] ownerModules)
+        public static void ExportFromContext(IReadOnlyZetboxContext ctx, IPackageProvider s, string[] schemaModules, string[] ownerModules)
         {
             using (Log.DebugTraceMethodCall("ExportFromContext"))
             {
@@ -224,14 +224,14 @@ namespace Kistl.App.Packaging
             writer.WriteEndElement();
         }
 
-        private static void WriteStartDocument(IPackageProvider s, IReadOnlyKistlContext ctx, IEnumerable<Kistl.App.Base.Module> moduleList)
+        private static void WriteStartDocument(IPackageProvider s, IReadOnlyZetboxContext ctx, IEnumerable<Zetbox.App.Base.Module> moduleList)
         {
             XmlWriter writer = s.Writer;
             writer.WriteStartDocument();
             if (moduleList.Count() == 1)
             {
                 // use exported module as default namespace
-                writer.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
+                writer.WriteStartElement("ZetboxPackaging", "http://dasz.at/Zetbox");
                 foreach (var module in moduleList)
                 {
                     writer.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
@@ -239,7 +239,7 @@ namespace Kistl.App.Packaging
             }
             else
             {
-                writer.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
+                writer.WriteStartElement("ZetboxPackaging", "http://dasz.at/Zetbox");
                 foreach (var module in moduleList)
                 {
                     writer.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
@@ -247,35 +247,35 @@ namespace Kistl.App.Packaging
             }
 
             DateTime? lastChanged = new DateTime?[] { 
-                ctx.GetQuery<Kistl.App.Base.Assembly>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.BaseParameter>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.Constraint>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.DataType>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.DefaultPropertyValue>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.EnumerationEntry>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.Method>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.Module>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.Property>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.Relation>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.RelationEnd>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.TypeRef>().Max(d => d.ChangedOn)
+                ctx.GetQuery<Zetbox.App.Base.Assembly>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.BaseParameter>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.Constraint>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.DataType>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.DefaultPropertyValue>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.EnumerationEntry>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.Method>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.Module>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.Property>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.Relation>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.RelationEnd>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Zetbox.App.Base.TypeRef>().Max(d => d.ChangedOn)
             }.Max();
 
             writer.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));
         }
 
-        private static List<Kistl.App.Base.Module> GetModules(IReadOnlyKistlContext ctx, string[] moduleNames)
+        private static List<Zetbox.App.Base.Module> GetModules(IReadOnlyZetboxContext ctx, string[] moduleNames)
         {
-            var moduleList = new List<Kistl.App.Base.Module>();
+            var moduleList = new List<Zetbox.App.Base.Module>();
             if (moduleNames.Contains("*"))
             {
-                moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>());
+                moduleList.AddRange(ctx.GetQuery<Zetbox.App.Base.Module>());
             }
             else
             {
                 foreach (var name in moduleNames)
                 {
-                    var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == name).FirstOrDefault();
+                    var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == name).FirstOrDefault();
                     if (module == null)
                     {
                         Log.WarnFormat("Module {0} not found, skipping entry", name);

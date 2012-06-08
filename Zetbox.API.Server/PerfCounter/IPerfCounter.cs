@@ -1,7 +1,7 @@
-namespace Kistl.API.Server.PerfCounter
+namespace Zetbox.API.Server.PerfCounter
 {
     using System;
-    using Kistl.API.PerfCounter;
+    using Zetbox.API.PerfCounter;
 
     public interface IPerfCounter : IBasePerfCounter
     {

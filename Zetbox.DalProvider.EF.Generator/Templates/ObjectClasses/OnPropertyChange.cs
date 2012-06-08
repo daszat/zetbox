@@ -1,17 +1,17 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Templates = Zetbox.Generator.Templates;
 
     public class OnPropertyChange : Templates.ObjectClasses.OnPropertyChange
     {
-        public OnPropertyChange(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt)
+        public OnPropertyChange(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, DataType dt)
             : base(_host, ctx, dt)
         { }
 

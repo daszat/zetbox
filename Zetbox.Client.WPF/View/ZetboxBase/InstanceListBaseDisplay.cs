@@ -1,4 +1,4 @@
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
@@ -14,15 +14,15 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.App.Base;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.KistlBase;
-    using Kistl.Client.WPF.Toolkit;
-    using Kistl.Client.WPF.CustomControls;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.App.Base;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.Client.WPF.Toolkit;
+    using Zetbox.Client.WPF.CustomControls;
 
     public abstract class InstanceListBaseDisplay : InstanceCollectionBase
     {
@@ -41,7 +41,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         private void ApplyViewMethod()
         {
-            if (ViewModel.ViewMethod == Kistl.App.GUI.InstanceListViewMethod.Details)
+            if (ViewModel.ViewMethod == Zetbox.App.GUI.InstanceListViewMethod.Details)
             {
                 WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
                 ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;

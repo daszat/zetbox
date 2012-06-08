@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.DtoViewModels
+namespace Zetbox.Client.Presentables.DtoViewModels
 {
     using System;
     using System.Collections;
@@ -10,20 +10,20 @@ namespace Kistl.Client.Presentables.DtoViewModels
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Dtos;
-    using Kistl.API.Utils;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Dtos;
+    using Zetbox.API.Utils;
+    using Zetbox.Client.Presentables;
 
     public class DtoBuilder
     {
         // looks, sounds and smells like fetch?
-        public static DtoBaseViewModel BuildFrom(object root, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
+        public static DtoBaseViewModel BuildFrom(object root, IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             return BuildFrom(root, null, root, dependencies, dataCtx, parent, fileOpener, tmpService);
         }
 
-        private static DtoBaseViewModel BuildFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
+        private static DtoBaseViewModel BuildFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) return null;
 
@@ -114,7 +114,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             }
         }
 
-        private static DtoBaseViewModel BuildEmptyFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
+        private static DtoBaseViewModel BuildEmptyFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null)
             {
@@ -167,7 +167,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
         /// <summary>
         /// Creates a descriptive grouping of the specified object
         /// </summary>
-        public static DtoGroupedViewModel BuildGroupFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
+        public static DtoGroupedViewModel BuildGroupFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null)
             {
@@ -214,7 +214,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
         /// <summary>
         /// Creates a table out of a list of DTOs
         /// </summary>
-        public static DtoTableViewModel BuildTableFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
+        public static DtoTableViewModel BuildTableFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) return null;
 
@@ -303,7 +303,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
         /// <summary>
         /// Arranges the contained Objects in a grid. Use GridLocation to specify where
         /// </summary>
-        public static DtoTableViewModel BuildGridFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
+        public static DtoTableViewModel BuildGridFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) return null;
 
@@ -407,7 +407,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
         /// <summary>
         /// Build a tabbed interface from the specified object. Page oriented output might create new pages for each tab or similar.
         /// </summary>
-        public static DtoTabbedViewModel BuildTabbedFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
+        public static DtoTabbedViewModel BuildTabbedFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) return null;
 
@@ -465,7 +465,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             return result;
         }
 
-        private static DtoBaseViewModel FormatValue(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
+        private static DtoBaseViewModel FormatValue(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService)
         {
             if (dto == null) throw new ArgumentNullException("dto");
             if (parentProp == null) throw new ArgumentNullException("parentProp");

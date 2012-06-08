@@ -1,31 +1,31 @@
 
-namespace Kistl.Client.Presentables.ModuleEditor
+namespace Zetbox.Client.Presentables.ModuleEditor
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables.GUI;
-    using Kistl.Client.Presentables.KistlBase;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
     public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener
     {
-        public new delegate NavigationScreenHierarchyViewModel Factory(IKistlContext dataCtx, ViewModel parent, Module module);
+        public new delegate NavigationScreenHierarchyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
-        public NavigationScreenHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Module module, Func<IKistlContext> ctxFactory)
+        public NavigationScreenHierarchyViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Module module, Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent)
         {
             this.ctxFactory = ctxFactory;
             this.Module = module;
         }
 
-        protected readonly Func<IKistlContext> ctxFactory;
+        protected readonly Func<IZetboxContext> ctxFactory;
         public Module Module { get; private set; }
 
 

@@ -11,11 +11,11 @@ namespace at.dasz.DocumentManagement
     using System.Xml;
     using System.Xml.Serialization;
 
-    using Kistl.API;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Kistl.API.Server;
-    using Kistl.DalProvider.Ef;
+    using Zetbox.API.Server;
+    using Zetbox.DalProvider.Ef;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
 
@@ -50,17 +50,17 @@ namespace at.dasz.DocumentManagement
     Preferred Storage: Separate
     */
         // collection reference property
-        // Kistl.DalProvider.Ef.Generator.Templates.Properties.CollectionEntryListProperty
+        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.CollectionEntryListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public IList<Kistl.App.Base.Blob> Revisions
+        public IList<Zetbox.App.Base.Blob> Revisions
         {
             get
             {
                 if (_Revisions == null)
                 {
-                    _Revisions = new BSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>>(
+                    _Revisions = new BSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>>(
                             this,
                             RevisionsImpl);
                 }
@@ -86,18 +86,18 @@ namespace at.dasz.DocumentManagement
                 return c;
             }
         }
-        private BSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>> _Revisions;
+        private BSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>> _Revisions;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
 
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_Document")]
-        public override Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+        public override Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
-            var e = new MethodReturnEventArgs<Kistl.App.Base.Blob>();
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_Document != null)
             {
                 OnHandleBlobChange_Document(this, e, oldBlob, newBlob);
@@ -109,7 +109,7 @@ namespace at.dasz.DocumentManagement
             return e.Result;
         }
         public static event HandleBlobChange_Handler<Document> OnHandleBlobChange_Document;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Document> OnHandleBlobChange_Document_CanExec;
 
@@ -151,12 +151,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_Document")]
         public override void Open()
         {
@@ -171,7 +171,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Open_Handler<Document> OnOpen_Document;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Document> OnOpen_Document_CanExec;
 
@@ -213,12 +213,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_Document")]
         public override void Upload()
         {
@@ -233,7 +233,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Upload_Handler<Document> OnUpload_Document;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<Document> OnUpload_Document_CanExec;
 
@@ -275,7 +275,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -291,7 +291,7 @@ namespace at.dasz.DocumentManagement
 
         }
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
         }
@@ -299,7 +299,7 @@ namespace at.dasz.DocumentManagement
         {
             base.SetNew();
         }
-        #region Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+        #region Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
 
         protected override bool ShouldSetModified(string property)
@@ -312,7 +312,7 @@ namespace at.dasz.DocumentManagement
                     return base.ShouldSetModified(property);
             }
         }
-        #endregion // Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+        #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -323,7 +323,7 @@ namespace at.dasz.DocumentManagement
 
             // fix direct object references
         }
-        #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
         private static System.ComponentModel.PropertyDescriptor[] _properties;
 
@@ -337,7 +337,7 @@ namespace at.dasz.DocumentManagement
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<Document, IList<Kistl.App.Base.Blob>>(
+                    new PropertyDescriptorEfImpl<Document, IList<Zetbox.App.Base.Blob>>(
                         lazyCtx,
                         new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
                         "Revisions",
@@ -356,8 +356,8 @@ namespace at.dasz.DocumentManagement
             _InitializePropertyDescriptors(lazyCtx);
             props.AddRange(_properties);
         }
-        #endregion // Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #region Kistl.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnToString_Document")]
@@ -422,25 +422,25 @@ namespace at.dasz.DocumentManagement
         }
         public static event ObjectEventHandler<Document> OnNotifyDeleting_Document;
 
-        #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null

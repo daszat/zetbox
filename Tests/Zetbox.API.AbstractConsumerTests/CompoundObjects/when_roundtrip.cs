@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Kistl.App.Test;
+using Zetbox.App.Test;
 
-namespace Kistl.API.AbstractConsumerTests.CompoundObjects
+namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
 {
     public abstract class when_roundtrip : CompoundObjectFixture
     {
         [Test]
         public void should_getobject()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var objList = ctx.GetQuery<TestCustomObject>();
                 foreach (var obj in objList)
@@ -25,10 +25,10 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [Test]
         public void should_createobject()
         {
-            int ID = Kistl.API.Helper.INVALIDID;
-            using (Kistl.API.IKistlContext ctx = GetContext())
+            int ID = Zetbox.API.Helper.INVALIDID;
+            using (Zetbox.API.IZetboxContext ctx = GetContext())
             {
-                var obj = ctx.Create<Kistl.App.Test.TestCustomObject>();
+                var obj = ctx.Create<Zetbox.App.Test.TestCustomObject>();
                 obj.PersonName = "TestPerson " + rnd.Next();
                 obj.Birthday = DateTime.Now;
 
@@ -47,9 +47,9 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 ID = obj.ID;
             }
 
-            using (Kistl.API.IKistlContext ctx = GetContext())
+            using (Zetbox.API.IZetboxContext ctx = GetContext())
             {
-                var obj = ctx.Find<Kistl.App.Test.TestCustomObject>(ID);
+                var obj = ctx.Find<Zetbox.App.Test.TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
@@ -61,10 +61,10 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [Test]
         public void should_createobject_nullable()
         {
-            int ID = Kistl.API.Helper.INVALIDID;
-            using (Kistl.API.IKistlContext ctx = GetContext())
+            int ID = Zetbox.API.Helper.INVALIDID;
+            using (Zetbox.API.IZetboxContext ctx = GetContext())
             {
-                var obj = ctx.Create<Kistl.App.Test.TestCustomObject>();
+                var obj = ctx.Create<Zetbox.App.Test.TestCustomObject>();
                 obj.PersonName = "TestPerson " + rnd.Next();
                 obj.Birthday = DateTime.Now;
 
@@ -79,9 +79,9 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 ID = obj.ID;
             }
 
-            using (Kistl.API.IKistlContext ctx = GetContext())
+            using (Zetbox.API.IZetboxContext ctx = GetContext())
             {
-                var obj = ctx.Find<Kistl.App.Test.TestCustomObject>(ID);
+                var obj = ctx.Find<Zetbox.App.Test.TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.PhoneNumberMobile, Is.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
@@ -92,7 +92,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [Test]
         public void should_saveobject()
         {
-            int ID = Kistl.API.Helper.INVALIDID;
+            int ID = Zetbox.API.Helper.INVALIDID;
 
             using (var ctx = GetContext())
             {

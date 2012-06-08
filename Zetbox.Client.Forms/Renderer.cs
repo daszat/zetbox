@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Kistl.App.GUI;
-using Kistl.Client.Forms.View;
-using Kistl.Client.Presentables;
+using Zetbox.App.GUI;
+using Zetbox.Client.Forms.View;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.Forms
+namespace Zetbox.Client.Forms
 {
     internal class Renderer
     {

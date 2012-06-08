@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Controls.Primitives;
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     public class DropDownButton : ToggleButton
     {

@@ -4,5 +4,5 @@ echo Run the development server.
 echo ********************************************************************************
 
 cd bin\Debug
-Kistl.Server.Service.exe
+Zetbox.Server.Service.exe
 cd ..\..

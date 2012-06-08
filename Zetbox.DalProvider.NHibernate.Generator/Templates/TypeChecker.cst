@@ -1,16 +1,16 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="TypeChecker"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.TypeChecker" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.TypeChecker" 
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="shortName" Type="string" %>
 
     internal sealed class <%= shortName %>ImplementationTypeChecker
-        : Kistl.API.BaseTypeChecker, I<%= shortName %>ImplementationTypeChecker
+        : Zetbox.API.BaseTypeChecker, I<%= shortName %>ImplementationTypeChecker
     {
         public <%= shortName %>ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)
             : base(implTypeCheckersFactory)

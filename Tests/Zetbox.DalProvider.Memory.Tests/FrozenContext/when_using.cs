@@ -1,14 +1,14 @@
 
-namespace Kistl.DalProvider.Memory.Tests.FrozenContext
+namespace Zetbox.DalProvider.Memory.Tests.FrozenContext
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.App.Base;
     using NUnit.Framework;
 
     public sealed class when_using

@@ -2,33 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst")]
-    public partial class PropertiesHbm : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst")]
+    public partial class PropertiesHbm : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected string prefix;
 		protected IEnumerable<Property> properties;
 		protected bool needsConcurrency;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string prefix, IEnumerable<Property> properties, bool needsConcurrency)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string prefix, IEnumerable<Property> properties, bool needsConcurrency)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Mappings.PropertiesHbm", ctx, prefix, properties, needsConcurrency);
         }
 
-        public PropertiesHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string prefix, IEnumerable<Property> properties, bool needsConcurrency)
+        public PropertiesHbm(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string prefix, IEnumerable<Property> properties, bool needsConcurrency)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -40,10 +40,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 21 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
+#line 21 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
 /*
      * TODO: Actually, all this should die and become a bunch of polymorphic calls.
-     * See also Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdlEntityTypeFields
+     * See also Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdlEntityTypeFields
      */
 
     foreach(var p in properties.OrderBy(p => p.Name))

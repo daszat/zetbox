@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests.BaseCompoundObjects
+namespace Zetbox.API.Tests.BaseCompoundObjects
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@ namespace Kistl.API.Tests.BaseCompoundObjects
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Mocks;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Mocks;
     using NUnit.Framework;
     
     [TestFixture]

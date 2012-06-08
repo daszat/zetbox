@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
@@ -15,9 +15,9 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Kistl.Client.GUI;
-    using Kistl.Client.WPF.CustomControls;
-    using Kistl.Client.WPF.Converter;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Converter;
     
     public class StringDisplay : TextBlock // Simplyfiy, often used Control
     {

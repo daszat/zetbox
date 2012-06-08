@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Kistl.API
         /// Should load Metadata, create an Instance and cache Metadata for future use.
         /// </summary>
         /// <param name="ctx">the context to use for looking up MethodInvocations</param>
-        void Init(IReadOnlyKistlContext ctx);
+        void Init(IReadOnlyZetboxContext ctx);
     }
 
     public interface IDeploymentRestrictor

@@ -1,31 +1,31 @@
 using System;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\ListProperty.cst")]
-    public partial class ListProperty : Kistl.Generator.MemberTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst")]
+    public partial class ListProperty : Zetbox.Generator.MemberTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected Serialization.SerializationMembersList serializationList;
 		protected DataType containingType;
 		protected String name;
 		protected Property property;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, DataType containingType, String name, Property property)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, DataType containingType, String name, Property property)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Properties.ListProperty", ctx, serializationList, containingType, name, property);
         }
 
-        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, DataType containingType, String name, Property property)
+        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, DataType containingType, String name, Property property)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -38,12 +38,12 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\ListProperty.cst"
+#line 17 "P:\Zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 ApplyAttributesTemplate();
 
 	var backingName = BackingMemberFromName(name);
 
-#line 21 "P:\Kistl\Kistl.Generator\Templates\Properties\ListProperty.cst"
+#line 21 "P:\Zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -53,13 +53,13 @@ this.WriteObjects("                if (",  backingName , " == null)\r\n");
 this.WriteObjects("                    ",  backingName , " = ",  GetInitialisationExpression() , ";\r\n");
 this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
-#line 31 "P:\Kistl\Kistl.Generator\Templates\Properties\ListProperty.cst"
+#line 31 "P:\Zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 ApplySettor();
 
-#line 33 "P:\Kistl\Kistl.Generator\Templates\Properties\ListProperty.cst"
+#line 33 "P:\Zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";\r\n");
-#line 36 "P:\Kistl\Kistl.Generator\Templates\Properties\ListProperty.cst"
+#line 36 "P:\Zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 AddSerialization(serializationList, name);
 
 

@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Kistl.API
     /// Serialization Wrapper for a System.Type object
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "Type")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "Type")]
     public class SerializableType
     {
         /// <summary>

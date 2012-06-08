@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
-[assembly: AssemblyTitle("Kistl.Client.ASPNET.Toolkit")]
+[assembly: AssemblyTitle("Zetbox.Client.ASPNET.Toolkit")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl.Client.ASPNET.Toolkit")]
+[assembly: AssemblyProduct("Zetbox.Client.ASPNET.Toolkit")]
 [assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

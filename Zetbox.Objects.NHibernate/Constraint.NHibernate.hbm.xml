@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`Constraints`"
            abstract="false"
@@ -19,17 +19,17 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
                   optimistic-lock="true"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ConstrainedProperty" column="`fk_ConstrainedProperty`" class="Kistl.App.Base.PropertyNHibernateImpl+PropertyProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ConstrainedProperty" column="`fk_ConstrainedProperty`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
@@ -45,8 +45,8 @@
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
-        <joined-subclass name="Kistl.App.Base.IntegerRangeConstraintNHibernateImpl+IntegerRangeConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.IntegerRangeConstraintNHibernateImpl+IntegerRangeConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.IntegerRangeConstraintNHibernateImpl+IntegerRangeConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.IntegerRangeConstraintNHibernateImpl+IntegerRangeConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`IntegerRangeConstraints`"
                          dynamic-update="true">
@@ -67,8 +67,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.InvokingConstraintNHibernateImpl+InvokingConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.InvokingConstraintNHibernateImpl+InvokingConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.InvokingConstraintNHibernateImpl+InvokingConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.InvokingConstraintNHibernateImpl+InvokingConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`InvokingConstraints`"
                          dynamic-update="true">
@@ -78,17 +78,17 @@
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="GetErrorTextInvocation" column="`fk_GetErrorTextInvocation`" class="Kistl.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="GetErrorTextInvocation" column="`fk_GetErrorTextInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="IsValidInvocation" column="`fk_IsValidInvocation`" class="Kistl.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="IsValidInvocation" column="`fk_IsValidInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
 
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.IsValidIdentifierConstraintNHibernateImpl+IsValidIdentifierConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.IsValidIdentifierConstraintNHibernateImpl+IsValidIdentifierConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.IsValidIdentifierConstraintNHibernateImpl+IsValidIdentifierConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.IsValidIdentifierConstraintNHibernateImpl+IsValidIdentifierConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`IsValidIdentifierConstraints`"
                          dynamic-update="true">
@@ -99,8 +99,8 @@
             <!-- define the properties -->
 
             <!-- define the subclasses -->
-        <joined-subclass name="Kistl.App.Base.IsValidNamespaceConstraintNHibernateImpl+IsValidNamespaceConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.IsValidNamespaceConstraintNHibernateImpl+IsValidNamespaceConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.IsValidNamespaceConstraintNHibernateImpl+IsValidNamespaceConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.IsValidNamespaceConstraintNHibernateImpl+IsValidNamespaceConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`IsValidNamespaceConstraints`"
                          dynamic-update="true">
@@ -115,8 +115,8 @@
         </joined-subclass>
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.MethodInvocationConstraintNHibernateImpl+MethodInvocationConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.MethodInvocationConstraintNHibernateImpl+MethodInvocationConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.MethodInvocationConstraintNHibernateImpl+MethodInvocationConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.MethodInvocationConstraintNHibernateImpl+MethodInvocationConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`MethodInvocationConstraints`"
                          dynamic-update="true">
@@ -129,8 +129,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.NotNullableConstraintNHibernateImpl+NotNullableConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.NotNullableConstraintNHibernateImpl+NotNullableConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.NotNullableConstraintNHibernateImpl+NotNullableConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.NotNullableConstraintNHibernateImpl+NotNullableConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`NotNullableConstraints`"
                          dynamic-update="true">
@@ -143,8 +143,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.ReadOnlyConstraintNHibernateImpl+ReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.ReadOnlyConstraintNHibernateImpl+ReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.ReadOnlyConstraintNHibernateImpl+ReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.ReadOnlyConstraintNHibernateImpl+ReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`ReadOnlyConstraints`"
                          dynamic-update="true">
@@ -155,8 +155,8 @@
             <!-- define the properties -->
 
             <!-- define the subclasses -->
-        <joined-subclass name="Kistl.App.Base.ClientReadOnlyConstraintNHibernateImpl+ClientReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.ClientReadOnlyConstraintNHibernateImpl+ClientReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.ClientReadOnlyConstraintNHibernateImpl+ClientReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.ClientReadOnlyConstraintNHibernateImpl+ClientReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`ClientReadOnlyConstraints`"
                          dynamic-update="true">
@@ -169,8 +169,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.InitOnlyConstraintNHibernateImpl+InitOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.InitOnlyConstraintNHibernateImpl+InitOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.InitOnlyConstraintNHibernateImpl+InitOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.InitOnlyConstraintNHibernateImpl+InitOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`InitOnlyConstraints`"
                          dynamic-update="true">
@@ -183,8 +183,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.ViewReadOnlyConstraintNHibernateImpl+ViewReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.ViewReadOnlyConstraintNHibernateImpl+ViewReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.ViewReadOnlyConstraintNHibernateImpl+ViewReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.ViewReadOnlyConstraintNHibernateImpl+ViewReadOnlyConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`ViewReadOnlyConstraints`"
                          dynamic-update="true">
@@ -199,8 +199,8 @@
         </joined-subclass>
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.StringRangeConstraintNHibernateImpl+StringRangeConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.StringRangeConstraintNHibernateImpl+StringRangeConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.StringRangeConstraintNHibernateImpl+StringRangeConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.StringRangeConstraintNHibernateImpl+StringRangeConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`StringRangeConstraints`"
                          dynamic-update="true">

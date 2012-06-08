@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
@@ -7,15 +7,15 @@ namespace Kistl.Client.Presentables.KistlBase
     using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class AuditJournalViewModel : CompoundListViewModel
     {
-        public new delegate AuditJournalViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate AuditJournalViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
         private List<KeyValuePair<JournalEntryKey, string>> _journalEntries;
 
         public override string Name
@@ -24,7 +24,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         public AuditJournalViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             ICompoundCollectionValueModel mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {

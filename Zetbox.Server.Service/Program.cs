@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.Service
+namespace Zetbox.Server.Service
 {
     using System;
     using System.Collections.Generic;
@@ -10,27 +10,27 @@ namespace Kistl.Server.Service
     using Autofac;
     using Autofac.Configuration;
     using Autofac.Integration.Wcf;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Server.PerfCounter;
-    using Kistl.API.Utils;
-    using Kistl.App.Extensions;
-    using Kistl.App.Packaging;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Server.PerfCounter;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.Packaging;
 
     /// <summary>
     /// Mainprogramm
     /// </summary>
     public static class Program
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Service");
 
         public static int Main(string[] arguments)
         {
             Logging.Configure();
 
-            Log.InfoFormat("Starting Kistl Server with args [{0}]", String.Join(" ", arguments));
+            Log.InfoFormat("Starting Zetbox Server with args [{0}]", String.Join(" ", arguments));
 
             try
             {
@@ -108,9 +108,9 @@ namespace Kistl.Server.Service
             }
         }
 
-        internal static IContainer CreateMasterContainer(KistlConfig config)
+        internal static IContainer CreateMasterContainer(ZetboxConfig config)
         {
-            var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
+            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
 
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
@@ -120,7 +120,7 @@ namespace Kistl.Server.Service
             return container;
         }
 
-        private static KistlConfig ExtractConfig(ref string[] args)
+        private static ZetboxConfig ExtractConfig(ref string[] args)
         {
             string configFilePath;
             if (args.Length > 0 && File.Exists(args[0]))
@@ -133,7 +133,7 @@ namespace Kistl.Server.Service
             {
                 configFilePath = String.Empty;
             }
-            return KistlConfig.FromFile(configFilePath, "Kistl.Server.Service.xml");
+            return ZetboxConfig.FromFile(configFilePath, "Zetbox.Server.Service.xml");
         }
     }
 }

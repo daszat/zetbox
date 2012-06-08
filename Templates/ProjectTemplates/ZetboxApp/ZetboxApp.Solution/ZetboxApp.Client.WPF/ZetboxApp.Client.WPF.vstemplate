@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
-    <Name>KistlApp.Client.WPF</Name>
+    <Name>ZetboxApp.Client.WPF</Name>
     <Description>This assembly contains WPF-specific UI code.</Description>
-    <Icon>KistlApp.Client.WPF.ico</Icon>
+    <Icon>ZetboxApp.Client.WPF.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
     <SortOrder>1000</SortOrder>
     <TemplateID>2a4107b2-cff3-40cd-ad69-bbea63e05be8</TemplateID>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>KistlApp.Client.WPF</DefaultName>
+    <DefaultName>ZetboxApp.Client.WPF</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
   </TemplateData>
   <TemplateContent>
@@ -19,7 +19,7 @@
     </Project>
   </TemplateContent>
   <WizardExtension>
-    <Assembly>KistlApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
-    <FullClassName>KistlApp.Wizard.ProjectWizard</FullClassName>
+    <Assembly>ZetboxApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
+    <FullClassName>ZetboxApp.Wizard.ProjectWizard</FullClassName>
   </WizardExtension>
 </VSTemplate>

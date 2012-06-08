@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaManagement.SqlProvider
+namespace Zetbox.Server.SchemaManagement.SqlProvider
 {
     using System;
     using System.Collections.Generic;
@@ -9,18 +9,18 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Migration;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Migration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
 
     public class SqlServer
         : AdoNetSchemaProvider<SqlConnection, SqlTransaction, SqlCommand>
     {
-        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger("Kistl.Server.Schema.MSSQL");
+        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger("Zetbox.Server.Schema.MSSQL");
         protected override log4net.ILog Log { get { return _log; } }
-        private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Kistl.Server.Schema.MSSQL.Queries");
+        private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.MSSQL.Queries");
         protected override log4net.ILog QueryLog { get { return _queryLog; } }
 
         #region Meta data
@@ -836,7 +836,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         #endregion
 
-        #region ZBox Schema Handling
+        #region Zetbox Schema Handling
 
         protected override string GetSchemaInsertStatement()
         {
@@ -850,7 +850,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         #endregion
 
-        #region zBox Accelerators
+        #region zetbox Accelerators
 
         protected override bool CallRepairPositionColumn(bool repair, TableRef tblName, string indexName)
         {
@@ -1088,13 +1088,13 @@ FROM (", viewName.Schema, viewName.Name);
         public override void ExecRefreshAllRightsProcedure()
         {
             Log.DebugFormat("Refreshing all rights");
-            ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetProcedureName("dbo", Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+            ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
         public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetProcedureName("dbo", Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetProcedureName("dbo", Zetbox.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
             sb.AppendLine("SET NOCOUNT OFF");
             sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("EXEC {0} @ID", FormatSchemaName(i))).ToArray()));
@@ -1121,7 +1121,7 @@ FROM (", viewName.Schema, viewName.Name);
                 }
             }
 
-            ExecuteSqlResource(this.GetType(), String.Format(@"Kistl.Server.Database.Scripts.{0}.sql", procName));
+            ExecuteSqlResource(this.GetType(), String.Format(@"Zetbox.Server.Database.Scripts.{0}.sql", procName));
 
             var createTableProcQuery = new StringBuilder();
             createTableProcQuery.AppendFormat("CREATE PROCEDURE [{0}] (@repair BIT, @tblName NVARCHAR(255), @colName NVARCHAR(255), @result BIT OUTPUT) AS", tableProcName);
@@ -1134,14 +1134,14 @@ FROM (", viewName.Schema, viewName.Name);
                 createTableProcQuery.Append("\t");
                 foreach (var refSpec in tbl)
                 {
-                    createTableProcQuery.AppendFormat("IF @colName IS NULL OR @colName = '{0}{1}' BEGIN", refSpec.Value, Kistl.API.Helper.PositionSuffix);
+                    createTableProcQuery.AppendFormat("IF @colName IS NULL OR @colName = '{0}{1}' BEGIN", refSpec.Value, Zetbox.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendFormat(
                         "\t\tEXECUTE RepairPositionColumnValidity @repair=@repair, @tblName='{0}', @refTblName='{1}', @fkColumnName='{2}', @fkPositionName='{2}{3}', @result = @result OUTPUT",
                         FormatSchemaName(tbl.Key),
                         FormatSchemaName(refSpec.Key),
                         refSpec.Value,
-                        Kistl.API.Helper.PositionSuffix);
+                        Zetbox.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendLine("\t\tIF @repair = 0 AND @result = 1 RETURN");
                     createTableProcQuery.AppendFormat("\tEND ELSE ", tbl.Key);

@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Kistl.API;
-using Kistl.App.Base;
+using Zetbox.API;
+using Zetbox.App.Base;
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
     /// <summary>
     /// Temp. Kist Objects Extensions
     /// </summary>
     public static partial class ObjectClassExtensions
     {
-        public static ObjectClass GetObjectClass(this IDataObject obj, IReadOnlyKistlContext ctx)
+        public static ObjectClass GetObjectClass(this IDataObject obj, IReadOnlyZetboxContext ctx)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -20,7 +20,7 @@ namespace Kistl.App.Extensions
             return ctx.FindPersistenceObject<ObjectClass>(obj.ObjectClassID);
         }
 
-        public static ObjectClass GetObjectClass(this Type type, IReadOnlyKistlContext ctx)
+        public static ObjectClass GetObjectClass(this Type type, IReadOnlyZetboxContext ctx)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -53,7 +53,7 @@ namespace Kistl.App.Extensions
             return cls;
         }
 
-        public static void CollectChildClasses(this ObjectClass cls, IReadOnlyKistlContext ctx, List<ObjectClass> children, bool includeAbstract)
+        public static void CollectChildClasses(this ObjectClass cls, IReadOnlyZetboxContext ctx, List<ObjectClass> children, bool includeAbstract)
         {
             if (cls == null) throw new ArgumentNullException("cls");
             if (ctx == null) throw new ArgumentNullException("ctx");
@@ -139,14 +139,14 @@ namespace Kistl.App.Extensions
         /// <param name="cls"></param>
         /// <param name="id"></param>
         /// <returns>Returns null if not mentioned in any group membership</returns>
-        public static Kistl.API.AccessRights? GetGroupAccessRights(this ObjectClass cls, Identity id)
+        public static Zetbox.API.AccessRights? GetGroupAccessRights(this ObjectClass cls, Identity id)
         {
             if (cls == null) throw new ArgumentNullException("cls");
             if (id == null) throw new ArgumentNullException("id");
             cls = cls.GetRootClass();
             var groups = id.Groups.ToLookup(i => i.ExportGuid);
 
-            Kistl.App.Base.AccessRights? result = null;
+            Zetbox.App.Base.AccessRights? result = null;
 
             foreach (var gm in cls.AccessControlList.OfType<GroupMembership>())
             {
@@ -157,7 +157,7 @@ namespace Kistl.App.Extensions
                 }
             }
 
-            return (Kistl.API.AccessRights?)result;
+            return (Zetbox.API.AccessRights?)result;
         }
 
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
@@ -184,7 +184,7 @@ namespace Kistl.App.Extensions
             while (cls != null)
             {
                 // TODO: use named objects
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IExportable" && o.Module.Name == "KistlBase") == 1)
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IExportable" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;
@@ -204,7 +204,7 @@ namespace Kistl.App.Extensions
             while (cls != null)
             {
                 // TODO: use named objects
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IModuleMember" && o.Module.Name == "KistlBase") == 1)
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IModuleMember" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;
@@ -224,7 +224,7 @@ namespace Kistl.App.Extensions
             while (cls != null)
             {
                 // TODO: use named objects
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IChangedBy" && o.Module.Name == "KistlBase") == 1)
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IChangedBy" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;

@@ -1,21 +1,21 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public class RelationEntry
         : Templates.CollectionEntries.RelationEntry
     {
-        public RelationEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
+        public RelationEntry(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Relation rel)
             : base(_host, ctx, rel)
         {
         }
@@ -57,7 +57,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string associationName = rel.GetAssociationName();
             string targetRoleName = otherEnd.RoleName;
             string positionPropertyName = rel.NeedsPositionStorage(endRole)
-                ? name + Kistl.API.Helper.PositionSuffix
+                ? name + Zetbox.API.Helper.PositionSuffix
                 : null;
             string inverseNavigatorName = null; // do not care about inverse navigator
             bool inverseNavigatorIsList = false;
@@ -91,13 +91,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         protected override void ApplyAIndexPropertyTemplate()
         {
             // delegate interface to actual implementation
-            Templates.Properties.DelegatingProperty.Call(Host, ctx, "AIndex", "int?", "this.A" + Kistl.API.Helper.PositionSuffix, "int?");
+            Templates.Properties.DelegatingProperty.Call(Host, ctx, "AIndex", "int?", "this.A" + Zetbox.API.Helper.PositionSuffix, "int?");
         }
 
         protected override void ApplyBIndexPropertyTemplate()
         {
             // delegate interface to actual implementation
-            Templates.Properties.DelegatingProperty.Call(Host, ctx, "BIndex", "int?", "this.B" + Kistl.API.Helper.PositionSuffix, "int?");
+            Templates.Properties.DelegatingProperty.Call(Host, ctx, "BIndex", "int?", "this.B" + Zetbox.API.Helper.PositionSuffix, "int?");
         }
 
         protected override void ApplyClassTailTemplate()
@@ -113,8 +113,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
             if (IsOrdered())
             {
-                typeAndNameList.Add(new KeyValuePair<string, string>("int?", "A" + Kistl.API.Helper.PositionSuffix));
-                typeAndNameList.Add(new KeyValuePair<string, string>("int?", "B" + Kistl.API.Helper.PositionSuffix));
+                typeAndNameList.Add(new KeyValuePair<string, string>("int?", "A" + Zetbox.API.Helper.PositionSuffix));
+                typeAndNameList.Add(new KeyValuePair<string, string>("int?", "B" + Zetbox.API.Helper.PositionSuffix));
             }
 
             if (IsExportable())

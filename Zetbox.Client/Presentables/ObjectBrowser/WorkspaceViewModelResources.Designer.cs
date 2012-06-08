@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Presentables.ObjectBrowser {
+namespace Zetbox.Client.Presentables.ObjectBrowser {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModelResources", typeof(WorkspaceViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.ObjectBrowser.WorkspaceViewModelResources", typeof(WorkspaceViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

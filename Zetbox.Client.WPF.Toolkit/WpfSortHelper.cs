@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Toolkit
+namespace Zetbox.Client.WPF.Toolkit
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.Client.WPF.Toolkit
     using System.Text;
     using System.Windows;
     using System.ComponentModel;
-    using Kistl.Client.Presentables;
+    using Zetbox.Client.Presentables;
 
     public class WpfSortHelper : DependencyObject
     {

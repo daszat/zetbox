@@ -1,10 +1,10 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class EnumParameterActions
@@ -13,7 +13,7 @@ namespace Kistl.App.Base
         public static void GetParameterType(EnumParameter obj, MethodReturnEventArgs<Type> e)
         {
             var cls = obj.Enumeration;
-            e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             BaseParameterActions.DecorateParameterType(obj, e, true);
         }
 

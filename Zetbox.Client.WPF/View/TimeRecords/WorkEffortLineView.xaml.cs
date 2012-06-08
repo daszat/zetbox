@@ -1,6 +1,6 @@
 
 
-namespace Kistl.Client.WPF.View.TimeRecords
+namespace Zetbox.Client.WPF.View.TimeRecords
 {
     using System;
     using System.Collections.Generic;

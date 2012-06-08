@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.DalProvider.Ef.Mocks;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.DalProvider.Ef.Mocks;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.Ef.Tests
+namespace Zetbox.DalProvider.Ef.Tests
 {
     [TestFixture]
     public class QueryTranslatorTests : AbstractEFTestFixture
@@ -52,7 +52,7 @@ namespace Kistl.DalProvider.Ef.Tests
 
         private DataType dt;
         [Test]
-        public void test_against_kistl_object()
+        public void test_against_zetbox_object()
         {
             dt = ctx.GetQuery<DataType>().First();
             var q = ctx.GetQuery<ObjectReferenceProperty>().Where(orp => orp.ID == dt.ID);
@@ -79,9 +79,9 @@ namespace Kistl.DalProvider.Ef.Tests
         [Test]
         public void query_with_objectfilter()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var module = ctx.GetQuery<Module>().Where(m => m.Name == "KistlBase").First();
+                var module = ctx.GetQuery<Module>().Where(m => m.Name == "ZetboxBase").First();
                 Assert.That(module, Is.Not.Null);
                 var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).ToList();
                 Assert.That(result, Is.Not.Null);

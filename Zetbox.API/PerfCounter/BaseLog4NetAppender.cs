@@ -1,21 +1,21 @@
-namespace Kistl.API.PerfCounter
+namespace Zetbox.API.PerfCounter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
     using System.Diagnostics;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
     using Autofac;
-    using Kistl.API.Configuration;
+    using Zetbox.API.Configuration;
     using log4net;
 
     public abstract class BaseLog4NetAppender : IBasePerfCounterAppender
     {
         protected static readonly object sync = new object();
-        private readonly static ILog _mainLogger = LogManager.GetLogger("Kistl.PerfCounter.Main");
-        private readonly static ILog _objectsLogger = LogManager.GetLogger("Kistl.PerfCounter.Objects");
+        private readonly static ILog _mainLogger = LogManager.GetLogger("Zetbox.PerfCounter.Main");
+        private readonly static ILog _objectsLogger = LogManager.GetLogger("Zetbox.PerfCounter.Objects");
         private int dumpCounter = 0;
         private const int DUMPCOUNTERMAX = 100;
         private const long TICKS_TO_MILLIS = 10000;

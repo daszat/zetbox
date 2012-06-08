@@ -1,21 +1,21 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     public class NotifyingDataProperty
         : NotifyingValueProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
+            IZetboxContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
@@ -25,7 +25,7 @@ namespace Kistl.Generator.Templates.Properties
 
         private Property _prop;
 
-        public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
+        public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
             : base(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name, prop.IsCalculated())
         {
             _prop = prop;

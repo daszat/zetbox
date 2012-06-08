@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Forms.Properties {
+namespace Zetbox.Client.Forms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

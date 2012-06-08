@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.Base.RelationWrappers
+namespace Zetbox.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public class ASideListWrapper<TA, TB, TEntry, TBaseCollection>
         : BaseListWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>
@@ -41,8 +41,8 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         {
             entry.B = ParentObject;
             entry.A = item;
-            entry.AIndex = Kistl.API.Helper.LASTINDEXPOSITION;
-            entry.BIndex = Kistl.API.Helper.LASTINDEXPOSITION;
+            entry.AIndex = Zetbox.API.Helper.LASTINDEXPOSITION;
+            entry.BIndex = Zetbox.API.Helper.LASTINDEXPOSITION;
             return entry;
         }
 
@@ -53,9 +53,9 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         protected override void OnEntryAdded(TEntry entry)
         {
             base.OnEntryAdded(entry);
-            if (!entry.AIndex.HasValue || entry.AIndex == Kistl.API.Helper.LASTINDEXPOSITION)
+            if (!entry.AIndex.HasValue || entry.AIndex == Zetbox.API.Helper.LASTINDEXPOSITION)
             {
-                Kistl.API.Helper.FixIndices(GetSortedEntries().ToList(), IndexFromEntry, SetIndex);
+                Zetbox.API.Helper.FixIndices(GetSortedEntries().ToList(), IndexFromEntry, SetIndex);
             }
         }
 
@@ -108,8 +108,8 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         {
             entry.A = ParentObject;
             entry.B = item;
-            entry.AIndex = Kistl.API.Helper.LASTINDEXPOSITION;
-            entry.BIndex = Kistl.API.Helper.LASTINDEXPOSITION;
+            entry.AIndex = Zetbox.API.Helper.LASTINDEXPOSITION;
+            entry.BIndex = Zetbox.API.Helper.LASTINDEXPOSITION;
             return entry;
         }
 
@@ -120,9 +120,9 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         protected override void OnEntryAdded(TEntry entry)
         {
             base.OnEntryAdded(entry);
-            if (!entry.BIndex.HasValue || entry.BIndex == Kistl.API.Helper.LASTINDEXPOSITION)
+            if (!entry.BIndex.HasValue || entry.BIndex == Zetbox.API.Helper.LASTINDEXPOSITION)
             {
-                Kistl.API.Helper.FixIndices(GetSortedEntries().ToList(), IndexFromEntry, SetIndex);
+                Zetbox.API.Helper.FixIndices(GetSortedEntries().ToList(), IndexFromEntry, SetIndex);
             }
         }
 

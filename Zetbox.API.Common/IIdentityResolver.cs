@@ -1,13 +1,13 @@
 
-namespace Kistl.API.Common
+namespace Zetbox.API.Common
 {
     using System.Security.Principal;
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
     using System;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     public interface IIdentityResolver
     {
@@ -41,18 +41,18 @@ namespace Kistl.API.Common
 
     public abstract class BaseIdentityResolver : IIdentityResolver
     {
-        private readonly Func<IReadOnlyKistlContext> resolverCtxFactory;
-        private IReadOnlyKistlContext _resolverCtx;
+        private readonly Func<IReadOnlyZetboxContext> resolverCtxFactory;
+        private IReadOnlyZetboxContext _resolverCtx;
         protected readonly Dictionary<string, Identity> cache;
 
-        protected BaseIdentityResolver(Func<IReadOnlyKistlContext> resolverCtxFactory)
+        protected BaseIdentityResolver(Func<IReadOnlyZetboxContext> resolverCtxFactory)
         {
             if (resolverCtxFactory == null) throw new ArgumentNullException("resolverCtxFactory");
             this.resolverCtxFactory = resolverCtxFactory;
             cache = new Dictionary<string, Identity>();
         }
 
-        protected IReadOnlyKistlContext ResolverCtx
+        protected IReadOnlyZetboxContext ResolverCtx
         {
             get
             {

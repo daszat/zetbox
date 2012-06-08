@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.Client.WPF.Toolkit")]
+[assembly: AssemblyTitle("Zetbox.Client.WPF.Toolkit")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Kistl.Client.WPF.Toolkit")]
+[assembly: AssemblyProduct("Zetbox.Client.WPF.Toolkit")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

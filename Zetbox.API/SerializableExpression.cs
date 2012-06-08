@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Kistl.API
     using System.Runtime.Serialization;
     using System.Text;
 
-    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/")]
     [KnownType(typeof(SerializableConstructorInfo))]
     [Serializable]
     public class SerializableMemberInfo
@@ -38,7 +38,7 @@ namespace Kistl.API
             return this.Type.GetSystemType().GetMember(Name).SingleOrDefault();
         }
 
-        public virtual void ToStream(KistlStreamWriter binStream)
+        public virtual void ToStream(ZetboxStreamWriter binStream)
         {
             if (binStream == null) throw new ArgumentNullException("binStream");
 
@@ -47,7 +47,7 @@ namespace Kistl.API
             binStream.Write(Type);
         }
 
-        internal static SerializableMemberInfo FromStream(KistlStreamReader binReader)
+        internal static SerializableMemberInfo FromStream(ZetboxStreamReader binReader)
         {
             var type = binReader.ReadByte();
             switch (type)
@@ -71,7 +71,7 @@ namespace Kistl.API
         }
     }
 
-    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/")]
     [Serializable]
     public class SerializableConstructorInfo : SerializableMemberInfo
     {
@@ -97,7 +97,7 @@ namespace Kistl.API
             return this.Type.GetSystemType().GetConstructor(this.ParameterTypes.Select(i => i.GetSystemType()).ToArray());
         }
 
-        public override void ToStream(KistlStreamWriter binStream)
+        public override void ToStream(ZetboxStreamWriter binStream)
         {
             if (binStream == null) throw new ArgumentNullException("binStream");
 
@@ -125,7 +125,7 @@ namespace Kistl.API
     /// Abstract Base Class for a serializable Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "Expression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "Expression")]
     [KnownType(typeof(SerializableType))]
     [KnownType(typeof(SerializableBinaryExpression))]
     [KnownType(typeof(SerializableConditionalExpression))]
@@ -311,7 +311,7 @@ namespace Kistl.API
         /// Writes this SerializableExpression to the specified stream.
         /// </summary>
         /// <param name="binStream"></param>
-        public void ToStream(KistlStreamWriter binStream)
+        public void ToStream(ZetboxStreamWriter binStream)
         {
             if (binStream == null) throw new ArgumentNullException("binStream");
 
@@ -320,7 +320,7 @@ namespace Kistl.API
             ToStream(binStream, ctx);
         }
 
-        internal SerializableExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
         {
             this.iftFactory = iftFactory;
 
@@ -336,19 +336,19 @@ namespace Kistl.API
         /// <remarks>
         /// Inheriting classes need to first write their SerializableExpressionType as byte to the stream, then call this method to write out basic infromation. Afterwards they are free to implement their own members.
         /// </remarks>
-        internal virtual void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal virtual void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write(this.SerializableType);
             binStream.Write(this.NodeType);
         }
 
-        public static SerializableExpression FromStream(KistlStreamReader binStream, InterfaceType.Factory iftFactory)
+        public static SerializableExpression FromStream(ZetboxStreamReader binStream, InterfaceType.Factory iftFactory)
         {
             StreamSerializationContext ctx = new StreamSerializationContext();
             return FromStream(binStream, ctx, iftFactory);
         }
 
-        internal static SerializableExpression FromStream(KistlStreamReader binStream, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal static SerializableExpression FromStream(ZetboxStreamReader binStream, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
         {
             var type = (SerializableExpressionType)binStream.ReadByte();
             switch (type)
@@ -385,13 +385,13 @@ namespace Kistl.API
         }
 
         // TODO: inline this
-        internal static SerializableType[] ReadTypeArray(KistlStreamReader binReader)
+        internal static SerializableType[] ReadTypeArray(ZetboxStreamReader binReader)
         {
             return binReader.ReadSerializableTypeArray();
         }
 
         // TODO: inline this
-        internal static void WriteTypeArray(KistlStreamWriter binStream, SerializableType[] types)
+        internal static void WriteTypeArray(ZetboxStreamWriter binStream, SerializableType[] types)
         {
             binStream.Write(types);
         }
@@ -402,7 +402,7 @@ namespace Kistl.API
     /// Serializable Compound Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "CompoundExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "CompoundExpression")]
     public abstract class SerializableCompoundExpression : SerializableExpression
     {
         internal SerializableCompoundExpression(Expression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -411,7 +411,7 @@ namespace Kistl.API
             this.Children = new SerializableExpression[] { };
         }
 
-        internal SerializableCompoundExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableCompoundExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             var children = new List<SerializableExpression>();
@@ -428,7 +428,7 @@ namespace Kistl.API
         [DataMember(Name = "Children")]
         public SerializableExpression[] Children { get; set; }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             // do net render SerializableExpressionType for abstract, intermediate class
             base.ToStream(binStream, ctx);
@@ -447,7 +447,7 @@ namespace Kistl.API
     /// Serializable Binary Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "BinaryExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "BinaryExpression")]
     public class SerializableBinaryExpression : SerializableCompoundExpression
     {
         internal SerializableBinaryExpression(BinaryExpression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -456,7 +456,7 @@ namespace Kistl.API
             Children = new[] { SerializableExpression.FromExpression(e.Left, ctx, iftFactory), SerializableExpression.FromExpression(e.Right, ctx, iftFactory) };
         }
 
-        internal SerializableBinaryExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableBinaryExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
         }
@@ -466,7 +466,7 @@ namespace Kistl.API
             return Expression.MakeBinary((ExpressionType)NodeType, Children[0].ToExpressionInternal(ctx), Children[1].ToExpressionInternal(ctx));
         }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Binary);
             base.ToStream(binStream, ctx);
@@ -479,7 +479,7 @@ namespace Kistl.API
     /// Serializable Unary Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "UnaryExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "UnaryExpression")]
     public class SerializableUnaryExpression : SerializableCompoundExpression
     {
         internal SerializableUnaryExpression(UnaryExpression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -488,7 +488,7 @@ namespace Kistl.API
             Children = new[] { SerializableExpression.FromExpression(e.Operand, ctx, iftFactory) };
         }
 
-        internal SerializableUnaryExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableUnaryExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
         }
@@ -498,7 +498,7 @@ namespace Kistl.API
             return Expression.MakeUnary((ExpressionType)NodeType, Children[0].ToExpressionInternal(ctx), Type);
         }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Unary);
             base.ToStream(binStream, ctx);
@@ -511,7 +511,7 @@ namespace Kistl.API
     /// Serializable Constant Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "ConstantExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "ConstantExpression")]
     public class SerializableConstantExpression : SerializableExpression
     {
         internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -528,7 +528,7 @@ namespace Kistl.API
             }
         }
 
-        internal SerializableConstantExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableConstantExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             object val;
@@ -559,7 +559,7 @@ namespace Kistl.API
         [DataMember(Name = "Value")]
         public object Value { get; set; }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Constant);
             base.ToStream(binStream, ctx);
@@ -574,7 +574,7 @@ namespace Kistl.API
     /// Serializable Member Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "MemberExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "MemberExpression")]
     public class SerializableMemberExpression : SerializableCompoundExpression
     {
         internal SerializableMemberExpression(MemberExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -584,7 +584,7 @@ namespace Kistl.API
             Children = new[] { SerializableExpression.FromExpression(e.Expression, ctx, iftFactory) };
         }
 
-        internal SerializableMemberExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableMemberExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             MemberName = binReader.ReadString();
@@ -603,7 +603,7 @@ namespace Kistl.API
         [DataMember(Name = "MemberName")]
         public string MemberName { get; set; }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Member);
             base.ToStream(binStream, ctx);
@@ -617,7 +617,7 @@ namespace Kistl.API
     /// Serializable MethodCall Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "MethodCallExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "MethodCallExpression")]
     public class SerializableMethodCallExpression : SerializableCompoundExpression
     {
         internal SerializableMethodCallExpression(MethodCallExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -636,7 +636,7 @@ namespace Kistl.API
             }
         }
 
-        internal SerializableMethodCallExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableMethodCallExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             var hasObject = binReader.ReadBoolean();
@@ -758,7 +758,7 @@ namespace Kistl.API
                 Children.Select(e => e.ToExpressionInternal(ctx)));
         }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.MethodCall);
             base.ToStream(binStream, ctx);
@@ -784,7 +784,7 @@ namespace Kistl.API
     /// Serializable Lambda Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "LambdaExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "LambdaExpression")]
     public class SerializableLambdaExpression : SerializableCompoundExpression
     {
         internal SerializableLambdaExpression(LambdaExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -794,7 +794,7 @@ namespace Kistl.API
                 .Union(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx, iftFactory))).ToArray();
         }
 
-        internal SerializableLambdaExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableLambdaExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
         }
@@ -808,7 +808,7 @@ namespace Kistl.API
             return Expression.Lambda(Children[0].ToExpressionInternal(ctx), parameters.ToArray());
         }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Lambda);
             base.ToStream(binStream, ctx);
@@ -821,7 +821,7 @@ namespace Kistl.API
     /// Serializable Parameter Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "ParameterExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "ParameterExpression")]
     public class SerializableParameterExpression : SerializableExpression
     {
         internal SerializableParameterExpression(ParameterExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -839,7 +839,7 @@ namespace Kistl.API
             }
         }
 
-        internal SerializableParameterExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory, Guid parameterGuid)
+        internal SerializableParameterExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory, Guid parameterGuid)
             : base(binReader, ctx, iftFactory)
         {
             this.Name = binReader.ReadString();
@@ -867,7 +867,7 @@ namespace Kistl.API
             return ctx.Parameter[Guid];
         }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Parameter);
             binStream.Write(this.Guid.ToString());
@@ -889,7 +889,7 @@ namespace Kistl.API
     /// Serializable New Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "NewExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "NewExpression")]
     public class SerializableNewExpression : SerializableCompoundExpression
     {
         [DataMember(Name = "Constructor")]
@@ -910,7 +910,7 @@ namespace Kistl.API
             Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToArray();
         }
 
-        internal SerializableNewExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableNewExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             Constructor = (SerializableConstructorInfo)SerializableMemberInfo.FromStream(binReader);
@@ -937,7 +937,7 @@ namespace Kistl.API
             }
         }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.New);
             base.ToStream(binStream, ctx);
@@ -957,7 +957,7 @@ namespace Kistl.API
     /// Serializable ConditionalExpression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "ConditionalExpression")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "ConditionalExpression")]
     public class SerializableConditionalExpression : SerializableExpression
     {
         [DataMember(Name = "Test")]
@@ -975,7 +975,7 @@ namespace Kistl.API
             IfFalse = SerializableExpression.FromExpression(source.IfFalse, ctx, iftFactory);
         }
 
-        internal SerializableConditionalExpression(KistlStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableConditionalExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
             Test = SerializableExpression.FromStream(binReader, ctx, iftFactory);
@@ -990,7 +990,7 @@ namespace Kistl.API
                 IfFalse.ToExpressionInternal(ctx));
         }
 
-        internal override void ToStream(KistlStreamWriter binStream, StreamSerializationContext ctx)
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
             binStream.Write((byte)SerializableExpressionType.Conditional);
             base.ToStream(binStream, ctx);

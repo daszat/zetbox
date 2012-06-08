@@ -1,10 +1,10 @@
 using System;
 
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst")]
-    public partial class IdGeneratorHbm : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst")]
+    public partial class IdGeneratorHbm : Zetbox.Generator.ResourceTemplate
     {
 		protected string idType;
 		protected string schemaName;
@@ -29,35 +29,35 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 9 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 9 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 switch(idType) {                                                             
-#line 10 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 10 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 case "id":                                                              
-#line 11 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 11 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 this.WriteObjects("        <id name=\"ID\" column=\"`ID`\" type=\"Int32\" unsaved-value=\"0\">\r\n");
 this.WriteObjects("            <generator class=\"native\">\r\n");
 this.WriteObjects("                <param name=\"schema\">`",  schemaName , "`</param>\r\n");
 this.WriteObjects("                <param name=\"sequence\">`",  tableName , "_ID_seq`</param>\r\n");
 this.WriteObjects("            </generator>\r\n");
 this.WriteObjects("        </id>\r\n");
-#line 17 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 17 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 break;                                                              
-#line 18 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 18 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 case "collection-id":                                                   
-#line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 19 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 this.WriteObjects("        <collection-id column=\"`ID`\" type=\"Int32\" unsaved-value=\"0\">\r\n");
 this.WriteObjects("            <generator class=\"native\">\r\n");
 this.WriteObjects("                <param name=\"schema\">`",  schemaName , "`</param>\r\n");
 this.WriteObjects("                <param name=\"sequence\">`",  tableName , "_ID_seq`</param>\r\n");
 this.WriteObjects("            </generator>\r\n");
 this.WriteObjects("        </id>\r\n");
-#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 25 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 break;                                                              
-#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 26 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 default:                                                                
-#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 27 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 throw new ArgumentOutOfRangeException("idType");                    
-#line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
+#line 28 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\IdGeneratorHbm.cst"
 }                                                                           
 
         }

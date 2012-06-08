@@ -6,15 +6,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.API.Tests.Skeletons;
-using Kistl.App.Projekte;
-using Kistl.DalProvider.Ef.Mocks;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.API.Tests.Skeletons;
+using Zetbox.App.Projekte;
+using Zetbox.DalProvider.Ef.Mocks;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.Ef.Tests
+namespace Zetbox.DalProvider.Ef.Tests
 {
     [TestFixture]
     public class ServerCollectionEntry_EF

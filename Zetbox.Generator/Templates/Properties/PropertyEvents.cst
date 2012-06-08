@@ -1,10 +1,10 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Properties.PropertyEvents"
-	ClassName="Kistl.Generator.Templates.Properties.PropertyEvents" 
-	Inherits="Kistl.Generator.MemberTemplate" %>
+	ClassName="Zetbox.Generator.Templates.Properties.PropertyEvents" 
+	Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="eventName" Type="string" %>
 <%@ Parameter Name="propType" Type="string" %>
 <%@ Parameter Name="objType" Type="string" %>

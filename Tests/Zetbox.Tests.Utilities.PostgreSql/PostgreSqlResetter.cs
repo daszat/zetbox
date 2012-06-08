@@ -1,5 +1,5 @@
 
-namespace Kistl.Tests.Utilities.PostgreSql
+namespace Zetbox.Tests.Utilities.PostgreSql
 {
     using System;
     using System.Collections.Generic;
@@ -9,20 +9,20 @@ namespace Kistl.Tests.Utilities.PostgreSql
     using System.Text;
     using System.Text.RegularExpressions;
     using Autofac;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
     using Npgsql;
     using NUnit.Framework;
-    using Kistl.API;
+    using Zetbox.API;
 
     public sealed class PostgreSqlResetter
         : IDatabaseResetter
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.PostgreSqlUtils");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.PostgreSqlUtils");
 
-        private readonly KistlConfig config;
+        private readonly ZetboxConfig config;
         private readonly ISchemaProvider schemaManager;
         private readonly ITempFileService tmpService;
 
@@ -31,7 +31,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
         /// </summary>
         private const int RESET_TIMEOUT = 4 * 60;
 
-        public PostgreSqlResetter(KistlConfig config, ISchemaProvider schemaManager, ITempFileService tmpService)
+        public PostgreSqlResetter(ZetboxConfig config, ISchemaProvider schemaManager, ITempFileService tmpService)
         {
             this.config = config;
             this.schemaManager = schemaManager;
@@ -53,7 +53,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
         {
             using (Log.InfoTraceMethodCall("ResetDatabase"))
             {
-                var connectionString = config.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                var connectionString = config.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
                 Assert.That(connectionString.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 
                 Log.InfoFormat("Current Directory=[{0}]", Environment.CurrentDirectory);
@@ -67,7 +67,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
                     var destDB = cb.Database;
                     var userCmdString = "--username=sa --no-password";
-                    var dumpFile = tmpService.CreateWithExtension(".zbox.backup");
+                    var dumpFile = tmpService.CreateWithExtension(".zetbox.backup");
 
                     try
                     {

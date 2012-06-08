@@ -4,11 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using Kistl.API.Utils;
-using Kistl.Client.Presentables;
-using Kistl.Client.WPF.Toolkit;
+using Zetbox.API.Utils;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.WPF.Toolkit;
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     public class WindowView : Window
     {

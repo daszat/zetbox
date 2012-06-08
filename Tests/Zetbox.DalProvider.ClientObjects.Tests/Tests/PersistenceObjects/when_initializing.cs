@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
+using Zetbox.API;
+using Zetbox.API.Client;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.Client.Tests.PersistenceObjects
+namespace Zetbox.DalProvider.Client.Tests.PersistenceObjects
 {
     [TestFixture]
     public class when_initializing
-        : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_initializing
+        : Zetbox.API.AbstractConsumerTests.PersistenceObjects.when_initializing
     {
     }
 

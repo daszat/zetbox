@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Client
+namespace Zetbox.API.Client
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Kistl.API.Client
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// A simple decorator to log all calls to the decorated proxy
@@ -22,7 +22,7 @@ namespace Kistl.API.Client
             _implementor = implementor;
         }
 
-        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IZetboxContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetList", "Type=[{0}]", ifType.ToString()))
             {
@@ -38,7 +38,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetListOf(IZetboxContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetListOf", "{0} [{1}].{2}", ifType, ID, property))
             {
@@ -54,7 +54,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             using (Logging.Facade.InfoTraceMethodCall("SetObjects"))
             {
@@ -70,7 +70,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public object InvokeServerMethod(IZetboxContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod", "ID=[{0}]", ID))
             {
@@ -86,7 +86,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationEntry
+        public IEnumerable<T> FetchRelation<T>(IZetboxContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationEntry
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("FetchRelation", "Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
             {
@@ -118,7 +118,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype)
+        public App.Base.Blob SetBlobStream(IZetboxContext ctx, Stream stream, string filename, string mimetype)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("SetBlobStream", "filename=[{0}]", filename))
             {

@@ -10,9 +10,9 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog.js", "text/javascript")] 
+[assembly: WebResource("Zetbox.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog.js", "text/javascript")] 
 
-namespace Kistl.Client.ASPNET.Toolkit.Dialogs
+namespace Zetbox.Client.ASPNET.Toolkit.Dialogs
 {
     public abstract class ChooseObjectDialog : System.Web.UI.UserControl, IScriptControl
     {
@@ -20,7 +20,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Dialogs
 
         public System.Collections.Generic.IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            yield return new ScriptControlDescriptor("Kistl.Client.ASPNET.ChooseObjectDialog", 
+            yield return new ScriptControlDescriptor("Zetbox.Client.ASPNET.ChooseObjectDialog", 
                 PanelChooseObjectControl.ClientID);
         }
 
@@ -31,7 +31,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Dialogs
             // this.GetType() wont return a Type, where Assembly is set to this Assembly
             // -> use typeof(thisclass) instead
             yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
-                typeof(ChooseObjectDialog), "Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog.js"));
+                typeof(ChooseObjectDialog), "Zetbox.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog.js"));
         }
 
         protected override void OnPreRender(EventArgs e)

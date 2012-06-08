@@ -1,13 +1,13 @@
 
-namespace Kistl.App.Projekte.Server
+namespace Zetbox.App.Projekte.Server
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Server;
+    using Zetbox.API;
+    using Zetbox.API.Server;
 
     public class CustomServerActionsModule : Module
     {
@@ -15,7 +15,7 @@ namespace Kistl.App.Projekte.Server
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterZBoxImplementors(typeof(CustomServerActionsModule).Assembly);
+            moduleBuilder.RegisterZetboxImplementors(typeof(CustomServerActionsModule).Assembly);
 
             // Register explicit overrides here
         }

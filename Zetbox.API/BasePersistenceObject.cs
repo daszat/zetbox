@@ -1,4 +1,4 @@
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Kistl.API
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// Implement basic functionality needed by all persistent objects.
@@ -65,39 +65,39 @@ namespace Kistl.API
         /// Reflects the current access rights by the current Identity. 
         /// Base implementations returnes always Full
         /// </summary>
-        private Kistl.API.AccessRights? __currentAccessRights;
-        public virtual Kistl.API.AccessRights CurrentAccessRights
+        private Zetbox.API.AccessRights? __currentAccessRights;
+        public virtual Zetbox.API.AccessRights CurrentAccessRights
         {
             get
             {
-                if (Context == null) return Kistl.API.AccessRights.Full;
+                if (Context == null) return Zetbox.API.AccessRights.Full;
                 if (__currentAccessRights == null)
                 {
                     if (ObjectState == DataObjectState.New)
                     {
                         // Newly created objects get full rights
-                        __currentAccessRights = Kistl.API.AccessRights.Full;
+                        __currentAccessRights = Zetbox.API.AccessRights.Full;
                     }
                     else
                     {
                         __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
                     }
-                    __currentAccessRights &= ~Kistl.API.AccessRights.Create; // exclude create rights - not instance specific
+                    __currentAccessRights &= ~Zetbox.API.AccessRights.Create; // exclude create rights - not instance specific
                 }
                 return __currentAccessRights.Value;
             }
         }
 
         /// <summary>
-        /// Gets the <see cref="IKistlContext"/> containing this object.
+        /// Gets the <see cref="IZetboxContext"/> containing this object.
         /// </summary>
         [XmlIgnore]
-        public IKistlContext Context { get; private set; }
+        public IZetboxContext Context { get; private set; }
         /// <summary>
-        /// Gets the <see cref="IReadOnlyKistlContext"/> containing this object.
+        /// Gets the <see cref="IReadOnlyZetboxContext"/> containing this object.
         /// </summary>
         [XmlIgnore]
-        public IReadOnlyKistlContext ReadOnlyContext { get { return Context; } }
+        public IReadOnlyZetboxContext ReadOnlyContext { get { return Context; } }
 
         /// <summary>
         /// Gets a value indicating whether or not this object is attached to a context.
@@ -119,10 +119,10 @@ namespace Kistl.API
         /// Attach this Object to a Context. This Method is called by the Context.
         /// </summary>
         /// <param name="ctx">Context to attach this Object to.</param>
-        public virtual void AttachToContext(IKistlContext ctx)
+        public virtual void AttachToContext(IZetboxContext ctx)
         {
             if (this.Context != null && this.Context != ctx)
-                throw new WrongKistlContextException("Object cannot be attached to a new Context while attached to another Context.");
+                throw new WrongZetboxContextException("Object cannot be attached to a new Context while attached to another Context.");
 
             this.Context = ctx;
         }
@@ -131,10 +131,10 @@ namespace Kistl.API
         /// Detach this Object from a Context. This Method is called by the Context.
         /// </summary>
         /// <param name="ctx">Context to detach this Object from.</param>
-        public virtual void DetachFromContext(IKistlContext ctx)
+        public virtual void DetachFromContext(IZetboxContext ctx)
         {
             if (this.Context != ctx)
-                throw new WrongKistlContextException("Object is not attached to the given context.");
+                throw new WrongZetboxContextException("Object is not attached to the given context.");
 
             this.Context = null;
         }
@@ -241,7 +241,7 @@ namespace Kistl.API
         /// <param name="sw">Stream to serialize to</param>
         /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
         /// <param name="eagerLoadLists">True if Lists should be eager loaded.</param>
-        public virtual void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public virtual void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
@@ -254,7 +254,7 @@ namespace Kistl.API
         /// Base method for deserializing this Object.
         /// </summary>
         /// <param name="sr">Stream to serialize from</param>
-        public virtual IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public virtual IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");

@@ -1,35 +1,35 @@
 
-namespace ZBox.App.SchemaMigration
+namespace Zetbox.App.SchemaMigration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Extensions;
-    using ZBox.App.SchemaMigration;
-    using Kistl.API.Configuration;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.SchemaMigration;
+    using Zetbox.API.Configuration;
 
     [Implementor]
     public class MigrationProjectActions
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("ZBox.SchemaMigration");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.SchemaMigration");
 
         // TODO: fix this, as it is currently only working by accident
         private static ILifetimeScope _scope;
-        private static KistlConfig _cfg;
+        private static ZetboxConfig _cfg;
 
-        public MigrationProjectActions(ILifetimeScope scope, KistlConfig cfg)
+        public MigrationProjectActions(ILifetimeScope scope, ZetboxConfig cfg)
         {
             _scope = scope;
             _cfg = cfg;
         }
 
         [Invocation]
-        public static void UpdateFromSourceSchema(ZBox.App.SchemaMigration.MigrationProject obj)
+        public static void UpdateFromSourceSchema(Zetbox.App.SchemaMigration.MigrationProject obj)
         {
             foreach (var s in obj.StagingDatabases)
             {

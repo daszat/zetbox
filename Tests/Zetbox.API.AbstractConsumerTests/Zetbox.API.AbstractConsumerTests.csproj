@@ -8,12 +8,12 @@
     <ProjectGuid>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.API.AbstractConsumerTests</RootNamespace>
-    <AssemblyName>Kistl.API.AbstractConsumerTests</AssemblyName>
+    <RootNamespace>Zetbox.API.AbstractConsumerTests</RootNamespace>
+    <AssemblyName>Zetbox.API.AbstractConsumerTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -128,24 +128,24 @@
     <Compile Include="required_parent\when_parent_not_set.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Server\Kistl.Server.csproj">
+    <ProjectReference Include="..\..\Zetbox.Server\Zetbox.Server.csproj">
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
-      <Name>Kistl.Server</Name>
+      <Name>Zetbox.Server</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

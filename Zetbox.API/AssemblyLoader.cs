@@ -6,15 +6,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
+using Zetbox.API.Configuration;
+using Zetbox.API.Utils;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
     /// This is the Assembly Loader. Assemblies are obtained by you configurated Assembly sources.
     /// Assemblies are copied to your WorkingFolder\bin directory. 
-    /// eg. C:\Users\Arthur\AppData\Local\dasz\Kistl\Arthur's Configuration\Kistl.Client.exe\bin.
+    /// eg. C:\Users\Arthur\AppData\Local\dasz\Zetbox\Arthur's Configuration\Zetbox.Client.exe\bin.
     /// </summary>
     // This does not seem to be the best solution. But it works.
     // See http://blogs.msdn.com/suzcook/archive/2003/05/29/57143.aspx
@@ -22,20 +22,20 @@ namespace Kistl.API
     // or Mono.Addins; or push all Assemblies to the GAC to avoid this mess.
     public static class AssemblyLoader
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.AssemblyLoader");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.AssemblyLoader");
         private readonly static object _lock = new object();
 
         /// <summary>
         /// Initializes the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path.
         /// </summary>
-        public static void Bootstrap(AppDomain domain, KistlConfig config)
+        public static void Bootstrap(AppDomain domain, ZetboxConfig config)
         {
             if (domain == null) { throw new ArgumentNullException("domain"); }
             if (config == null) { throw new ArgumentNullException("config"); }
 
             var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
-                "Kistl.API",
-                "Kistl.API.AssemblyLoaderInitializer");
+                "Zetbox.API",
+                "Zetbox.API.AssemblyLoaderInitializer");
 
             init.Init(config);
         }
@@ -45,8 +45,8 @@ namespace Kistl.API
             if (domain == null) { throw new ArgumentNullException("domain"); }
 
             var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
-                "Kistl.API",
-                "Kistl.API.AssemblyLoaderInitializer");
+                "Zetbox.API",
+                "Zetbox.API.AssemblyLoaderInitializer");
 
             init.Unload();
         }
@@ -62,7 +62,7 @@ namespace Kistl.API
         }
 
         private static bool _isInitialised = false;
-        public static void EnsureInitialisation(KistlConfig config)
+        public static void EnsureInitialisation(ZetboxConfig config)
         {
             if (config == null) { throw new ArgumentNullException("config"); }
 
@@ -101,7 +101,7 @@ namespace Kistl.API
         }
 
         /// <param name="config">must not be null</param>
-        private static void InitialiseTargetAssemblyFolder(KistlConfig config)
+        private static void InitialiseTargetAssemblyFolder(ZetboxConfig config)
         {
             EnableShadowCopy = config.AssemblySearchPaths == null ? false : config.AssemblySearchPaths.EnableShadowCopy;
             if (EnableShadowCopy)
@@ -337,7 +337,7 @@ namespace Kistl.API
 
     public class AssemblyLoaderInitializer : MarshalByRefObject
     {
-        public void Init(KistlConfig config)
+        public void Init(ZetboxConfig config)
         {
             AssemblyLoader.EnsureInitialisation(config);
         }

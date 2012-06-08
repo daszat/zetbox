@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.GUI.NavigationReportScreenDisplay"
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.GUI.NavigationReportScreenDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-             xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
   <DockPanel Grid.Row="1">
@@ -12,7 +12,7 @@
                 Margin="10">
 
       <ContentPresenter Content="{Binding Range}"
-                        tk:VisualTypeTemplateSelector.RequestedKind="Kistl.App.GUI.DateRangeButtonsKind"
+                        tk:VisualTypeTemplateSelector.RequestedKind="Zetbox.App.GUI.DateRangeButtonsKind"
                         ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
       <ItemsControl ItemsSource="{Binding AdditionalCommands}">
         <ItemsControl.ItemsPanel>

@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -11,9 +11,9 @@ namespace Kistl.App.Extensions
     using System.Text;
     using Autofac;
     using Autofac.Core.Registration;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
@@ -21,7 +21,7 @@ namespace Kistl.App.Extensions
     public abstract class BaseCustomActionsManager
         : ICustomActionsManager
     {
-        protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Common.BaseCustomActionsManager");
+        protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Common.BaseCustomActionsManager");
         private readonly static object _initLock = new object();
         private readonly static Dictionary<Type, Type> _initImpls = new Dictionary<Type, Type>();
 
@@ -86,7 +86,7 @@ namespace Kistl.App.Extensions
         /// Initializes this CustomActionsManager. This method is thread-safe and won't do
         /// anything if the ActionsManager is already initialized.
         /// </summary>
-        public virtual void Init(IReadOnlyKistlContext ctx)
+        public virtual void Init(IReadOnlyZetboxContext ctx)
         {
             lock (_initLock)
             {
@@ -114,12 +114,12 @@ namespace Kistl.App.Extensions
             }
         }
 
-        private void ReflectMethods(IReadOnlyKistlContext metaCtx)
+        private void ReflectMethods(IReadOnlyZetboxContext metaCtx)
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
             // Load all Implementor Types and Invocations
-            foreach (var assembly in metaCtx.GetQuery<Kistl.App.Base.Assembly>())
+            foreach (var assembly in metaCtx.GetQuery<Zetbox.App.Base.Assembly>())
             {
                 try
                 {
@@ -157,7 +157,7 @@ namespace Kistl.App.Extensions
                                         _reflectedMethods[key] = new List<MethodInfo>() { m };
                                     }
                                 }
-                                else if (m.GetCustomAttributes(typeof(Kistl.API.Constraint), false).Length != 0)
+                                else if (m.GetCustomAttributes(typeof(Zetbox.API.Constraint), false).Length != 0)
                                 {
                                     // TODO: Check if Invoking Constraint is valid
                                 }
@@ -193,7 +193,7 @@ namespace Kistl.App.Extensions
         /// Initializes caches for the provider of the given Context
         /// </summary>
         /// <param name="metaCtx">the context used to access the meta data</param>
-        private void CreateInvokeInfosForObjectClasses(IReadOnlyKistlContext metaCtx)
+        private void CreateInvokeInfosForObjectClasses(IReadOnlyZetboxContext metaCtx)
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 

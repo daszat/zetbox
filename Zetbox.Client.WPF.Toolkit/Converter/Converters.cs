@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Kistl.Client.WPF.Converter
+namespace Zetbox.Client.WPF.Converter
 {
     /// <summary>
     /// This converter does nothing

@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client
+namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections;
@@ -9,16 +9,16 @@ namespace Kistl.DalProvider.Client
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Client.PerfCounter;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.DalProvider.Base;
-    using Kistl.API.Common;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.DalProvider.Base;
+    using Zetbox.API.Common;
+    using Zetbox.App.Extensions;
 
-    public interface IZBoxClientContextInternals
+    public interface IZetboxClientContextInternals
     {
         object InvokeServerMethod<T>(T obj, string name, Type retValType, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject;
     }
@@ -26,22 +26,22 @@ namespace Kistl.DalProvider.Client
     /// <summary>
     /// TODO: Remove that class when Case #1763 is solved
     /// </summary>
-    public static class ZBoxClientContextExtensions
+    public static class ZetboxClientContextExtensions
     {
-        public static IZBoxClientContextInternals ClientInternals(this IKistlContext ctx)
+        public static IZetboxClientContextInternals ClientInternals(this IZetboxContext ctx)
         {
-            return (IZBoxClientContextInternals)ctx;
+            return (IZetboxClientContextInternals)ctx;
         }
     }
 
     /// <summary>
-    /// Linq to Kistl Context Implementation
+    /// Linq to Zetbox Context Implementation
     /// </summary>
-    internal class KistlContextImpl
-        : IDebuggingKistlContext, IZBoxContextInternals, IZBoxClientContextInternals, IDisposable
+    internal class ZetboxContextImpl
+        : IDebuggingZetboxContext, IZetboxContextInternals, IZetboxClientContextInternals, IDisposable
     {
         private readonly static object _lock = new object();
-        private readonly KistlConfig config;
+        private readonly ZetboxConfig config;
         private readonly IProxy proxy;
         private readonly string _ClientImplementationAssembly;
         private readonly Func<IFrozenContext> _lazyCtx;
@@ -62,7 +62,7 @@ namespace Kistl.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public KistlContextImpl(ClientIsolationLevel il, KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
+        public ZetboxContextImpl(ClientIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             this._clientIsolationLevel = il;
@@ -77,10 +77,10 @@ namespace Kistl.DalProvider.Client
             this._identityResolver = identityResolver;
 
             CreatedAt = new StackTrace(true);
-            KistlContextDebuggerSingleton.Created(this);
+            ZetboxContextDebuggerSingleton.Created(this);
         }
 
-        public event GenericEventHandler<IReadOnlyKistlContext> Disposing;
+        public event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
 
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Clarifies intent of variable")]
         private bool disposed = false;
@@ -89,10 +89,10 @@ namespace Kistl.DalProvider.Client
         /// </summary>
         public void Dispose()
         {
-            GenericEventHandler<IReadOnlyKistlContext> temp = Disposing;
+            GenericEventHandler<IReadOnlyZetboxContext> temp = Disposing;
             if (temp != null)
             {
-                temp(this, new GenericEventArgs<IReadOnlyKistlContext>() { Data = this });
+                temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
             }
 
             lock (_lock)
@@ -132,7 +132,7 @@ namespace Kistl.DalProvider.Client
         {
             if (disposed)
             {
-                throw new KistlContextDisposedException();
+                throw new ZetboxContextDisposedException();
             }
         }
 
@@ -173,7 +173,7 @@ namespace Kistl.DalProvider.Client
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            return new KistlContextQuery<IDataObject>(this, ifType, proxy, _perfCounter);
+            return new ZetboxContextQuery<IDataObject>(this, ifType, proxy, _perfCounter);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Kistl.DalProvider.Client
         public IQueryable<T> GetQuery<T>() where T : class, IDataObject
         {
             CheckDisposed();
-            return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy, _perfCounter);
+            return new ZetboxContextQuery<T>(this, _iftFactory(typeof(T)), proxy, _perfCounter);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Kistl.DalProvider.Client
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
             CheckDisposed();
-            return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy, _perfCounter);
+            return new ZetboxContextQuery<T>(this, _iftFactory(typeof(T)), proxy, _perfCounter);
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace Kistl.DalProvider.Client
         public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            return new KistlContextQuery<IPersistenceObject>(this, ifType, proxy, _perfCounter);
+            return new ZetboxContextQuery<IPersistenceObject>(this, ifType, proxy, _perfCounter);
         }
 
         /// <summary>
@@ -222,8 +222,8 @@ namespace Kistl.DalProvider.Client
         {
             CheckDisposed();
             if (obj.CurrentAccessRights.HasNoRights()) return new List<T>();
-            KistlContextQuery<T> query = new KistlContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
-            return ((KistlContextProvider)query.Provider).GetListOfCall(obj.ID, propertyName).Cast<T>().ToList();
+            ZetboxContextQuery<T> query = new ZetboxContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
+            return ((ZetboxContextProvider)query.Provider).GetListOfCall(obj.ID, propertyName).Cast<T>().ToList();
         }
 
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
@@ -324,7 +324,7 @@ namespace Kistl.DalProvider.Client
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType.Type == typeof(Kistl.App.Base.Blob))
+            if (ifType.Type == typeof(Zetbox.App.Base.Blob))
                 throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
             IPersistenceObject obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
@@ -521,7 +521,7 @@ namespace Kistl.DalProvider.Client
 
         private abstract class ExchangeObjectsHandler
         {
-            public int ExchangeObjects(KistlContextImpl ctx)
+            public int ExchangeObjects(ZetboxContextImpl ctx)
             {
                 var objectsToSubmit = new List<IPersistenceObject>();
                 var objectsToAdd = new List<IPersistenceObject>();
@@ -622,13 +622,13 @@ namespace Kistl.DalProvider.Client
                 return objectsToSubmit.Count;
             }
 
-            protected abstract IEnumerable<IPersistenceObject> ExecuteServerCall(KistlContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests);
-            protected abstract void UpdateModifiedState(KistlContextImpl ctx);
+            protected abstract IEnumerable<IPersistenceObject> ExecuteServerCall(ZetboxContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests);
+            protected abstract void UpdateModifiedState(ZetboxContextImpl ctx);
         }
 
         private class SubmitChangesHandler : ExchangeObjectsHandler
         {
-            protected override IEnumerable<IPersistenceObject> ExecuteServerCall(KistlContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests)
+            protected override IEnumerable<IPersistenceObject> ExecuteServerCall(ZetboxContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests)
             {
                 return ctx.proxy.SetObjects(
                     ctx,
@@ -636,7 +636,7 @@ namespace Kistl.DalProvider.Client
                     notificationRequests);
             }
 
-            protected override void UpdateModifiedState(KistlContextImpl ctx)
+            protected override void UpdateModifiedState(ZetboxContextImpl ctx)
             {
                 // Before Notifications & PostSave events. They could change data
                 ctx.IsModified = false;
@@ -670,8 +670,8 @@ namespace Kistl.DalProvider.Client
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// </summary>
         /// <param name="ifType">Interface Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
@@ -702,8 +702,8 @@ namespace Kistl.DalProvider.Client
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
@@ -791,7 +791,7 @@ namespace Kistl.DalProvider.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            return GetPersistenceObjectQuery<T>().Single(o => ((Kistl.App.Base.IExportable)o).ExportGuid == exportGuid);
+            return GetPersistenceObjectQuery<T>().Single(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid);
         }
 
         /// <summary>
@@ -821,17 +821,17 @@ namespace Kistl.DalProvider.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
         {
-            return GetPersistenceObjectQuery<T>().Where(o => exportGuids.Contains(((Kistl.App.Base.IExportable)o).ExportGuid));
+            return GetPersistenceObjectQuery<T>().Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid));
         }
 
         /// <inheritdoc />
-        public event GenericEventHandler<IKistlContext> Changed;
+        public event GenericEventHandler<IZetboxContext> Changed;
         protected virtual void OnChanged()
         {
-            GenericEventHandler<IKistlContext> temp = Changed;
+            GenericEventHandler<IZetboxContext> temp = Changed;
             if (temp != null)
             {
-                temp(this, new GenericEventArgs<IKistlContext>() { Data = this });
+                temp(this, new GenericEventArgs<IZetboxContext>() { Data = this });
             }
         }
 
@@ -885,7 +885,7 @@ namespace Kistl.DalProvider.Client
 
         public FileInfo GetFileInfo(int ID)
         {
-            var blob = this.Find<Kistl.App.Base.Blob>(ID);
+            var blob = this.Find<Zetbox.App.Base.Blob>(ID);
 
             string path = Path.Combine(DocumentCache, blob.StoragePath);
             if (path.Length >= 256)
@@ -916,7 +916,7 @@ namespace Kistl.DalProvider.Client
             return new FileInfo(path);
         }
 
-        #region IDebuggingKistlContext Members
+        #region IDebuggingZetboxContext Members
 
         public StackTrace CreatedAt { get; private set; }
 
@@ -924,7 +924,7 @@ namespace Kistl.DalProvider.Client
 
         #endregion
 
-        #region IReadOnlyKistlContext Members
+        #region IReadOnlyZetboxContext Members
 
         public InterfaceType GetInterfaceType(Type t)
         {
@@ -933,7 +933,7 @@ namespace Kistl.DalProvider.Client
 
         public InterfaceType GetInterfaceType(string typeName)
         {
-            return _iftFactory(Type.GetType(typeName + "," + typeof(Kistl.App.Base.ObjectClass).Assembly.FullName, true));
+            return _iftFactory(Type.GetType(typeName + "," + typeof(Zetbox.App.Base.ObjectClass).Assembly.FullName, true));
         }
 
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
@@ -948,7 +948,7 @@ namespace Kistl.DalProvider.Client
 
         public ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.FullName + "Client" + Kistl.API.Helper.ImplementationSuffix + "," + _ClientImplementationAssembly, true));
+            return GetImplementationType(Type.GetType(t.Type.FullName + "Client" + Zetbox.API.Helper.ImplementationSuffix + "," + _ClientImplementationAssembly, true));
         }
 
         public ImplementationType GetImplementationType(Type t)
@@ -973,7 +973,7 @@ namespace Kistl.DalProvider.Client
         #endregion
 
         /// <summary>
-        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// Indicates that the Zetbox Context has some modified, added or deleted items
         /// </summary>
         private bool _isModified = false;
         public bool IsModified
@@ -999,27 +999,27 @@ namespace Kistl.DalProvider.Client
         /// </summary>
         public event EventHandler IsModifiedChanged;
 
-        #region IZBoxContextInternals Members
+        #region IZetboxContextInternals Members
         /// <summary>
         /// TODO: Not supported yet
         /// </summary>
-        int IZBoxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
+        int IZetboxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
 
-        void IZBoxContextInternals.SetModified(IPersistenceObject obj)
+        void IZetboxContextInternals.SetModified(IPersistenceObject obj)
         {
             if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
             {
                 IsModified = true;
             }
         }
-        string IZBoxContextInternals.StoreBlobStream(Stream s, Guid exportGuid, DateTime timestamp, string filename)
+        string IZetboxContextInternals.StoreBlobStream(Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
             throw new NotImplementedException();
         }
 
         #endregion
 
-        #region IZBoxClientContextInternals Members
+        #region IZetboxClientContextInternals Members
 
         private class InvokeServerMethodHandler<T> : ExchangeObjectsHandler where T : class, IDataObject
         {
@@ -1038,7 +1038,7 @@ namespace Kistl.DalProvider.Client
             private readonly IEnumerable<Type> parameterTypes;
             private readonly object[] parameter;
 
-            protected override IEnumerable<IPersistenceObject> ExecuteServerCall(KistlContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests)
+            protected override IEnumerable<IPersistenceObject> ExecuteServerCall(ZetboxContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests)
             {
                 IEnumerable<IPersistenceObject> changedObjects;
                 List<IStreamable> auxObjects;
@@ -1081,7 +1081,7 @@ namespace Kistl.DalProvider.Client
 
             public object Result { get; private set; }
 
-            protected override void UpdateModifiedState(KistlContextImpl ctx)
+            protected override void UpdateModifiedState(ZetboxContextImpl ctx)
             {
                 // Do nothing!
             }

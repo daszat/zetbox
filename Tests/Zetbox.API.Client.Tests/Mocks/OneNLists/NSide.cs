@@ -1,11 +1,11 @@
 
-namespace Kistl.API.Client.Mocks.OneNLists
+namespace Zetbox.API.Client.Mocks.OneNLists
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.DalProvider.Base;
+    using Zetbox.DalProvider.Base;
 
     public class NSide
         : DataObjectBaseImpl, INSide

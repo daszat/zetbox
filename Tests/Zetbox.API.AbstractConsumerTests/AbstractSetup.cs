@@ -1,5 +1,5 @@
 
-namespace Kistl.API.AbstractConsumerTests
+namespace Zetbox.API.AbstractConsumerTests
 {
     using System;
     using System.Collections.Generic;
@@ -7,13 +7,13 @@ namespace Kistl.API.AbstractConsumerTests
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
     using NUnit.Framework;
 
     public abstract class AbstractSetUpFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.AbstractSetup");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.AbstractSetup");
 
         static AbstractSetUpFixture()
         {
@@ -31,7 +31,7 @@ namespace Kistl.API.AbstractConsumerTests
         protected abstract HostType GetHostType();
 
         /// <summary>
-        /// This method is called first for early setup tasks before any Kistl stuff is touched.
+        /// This method is called first for early setup tasks before any Zetbox stuff is touched.
         /// </summary>
         protected virtual void EarlySetup()
         {
@@ -46,7 +46,7 @@ namespace Kistl.API.AbstractConsumerTests
             }
             using (Log.InfoTraceMethodCall("Starting up"))
             {
-                var config = KistlConfig.FromFile(null, GetConfigFile());
+                var config = ZetboxConfig.FromFile(null, GetConfigFile());
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
@@ -55,15 +55,15 @@ namespace Kistl.API.AbstractConsumerTests
                 {
                     case HostType.Server:
                         Log.Info("Adding Server Modules");
-                        builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
+                        builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
                         break;
                     case HostType.Client:
                         Log.Info("Adding Client Modules");
-                        builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+                        builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
                         break;
                     case HostType.None:
                         Log.Info("Adding no Modules");
-                        builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config);
+                        builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config);
                         break;
                     default:
                         throw new InvalidOperationException("GetHostType() returned an unknown type");
@@ -71,7 +71,7 @@ namespace Kistl.API.AbstractConsumerTests
 
                 // TODO: totally replace this with test mocks?
                 Log.Info("Adding Interface Module");
-                builder.RegisterModule<Kistl.Objects.InterfaceModule>();
+                builder.RegisterModule<Zetbox.Objects.InterfaceModule>();
                 builder.RegisterInstance<TypeMapAssembly>(new TypeMapAssembly(this.GetType().Assembly));
                 SetupBuilder(builder);
                 container = builder.Build();
@@ -86,7 +86,7 @@ namespace Kistl.API.AbstractConsumerTests
 
         protected virtual void SetUp(IContainer container)
         {
-            var config = container.Resolve<KistlConfig>();
+            var config = container.Resolve<ZetboxConfig>();
             if (config.Server != null)
             {
                 config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());

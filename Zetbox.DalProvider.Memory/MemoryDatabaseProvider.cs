@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Memory
+namespace Zetbox.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
@@ -9,16 +9,16 @@ namespace Kistl.DalProvider.Memory
     using System.Text;
     using Autofac;
     using Autofac.Core;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Extensions;
-    using Kistl.App.Packaging;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.Packaging;
 
     public sealed class MemoryDatabaseProvider
         : Autofac.Module
     {
-        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
+        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.DalProvider.Memory");
         private readonly static object _lock = new object();
 
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -39,12 +39,12 @@ namespace Kistl.DalProvider.Memory
                         return result;
                     }
                 })
-                .As<IReadOnlyKistlContext>()
-                .As<IKistlContext>()
+                .As<IReadOnlyZetboxContext>()
+                .As<IZetboxContext>()
                 .OnActivated(args =>
                 {
-                    var config = args.Context.Resolve<KistlConfig>();
-                    var connectionString = config.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+                    var config = args.Context.Resolve<ZetboxConfig>();
+                    var connectionString = config.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
                     Importer.LoadFromXml(args.Instance, connectionString.ConnectionString);
 
                     var manager = args.Context.Resolve<IMemoryActionsManager>();

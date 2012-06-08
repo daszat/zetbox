@@ -1,20 +1,20 @@
 
-namespace Kistl.API.AbstractConsumerTests.optional_parent.with_persistent_order
+namespace Zetbox.API.AbstractConsumerTests.optional_parent.with_persistent_order
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
 
     public abstract class OrderedOneNFixture
         : AbstractTestFixture
     {
-        protected IKistlContext ctx;
+        protected IZetboxContext ctx;
         protected OrderedOneEnd oneSide1;
         protected OrderedOneEnd oneSide2;
         protected OrderedOneEnd oneSide3;

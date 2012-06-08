@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -7,19 +7,19 @@ namespace Kistl.Client.Presentables
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Client.Presentables.KistlBase;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
     public class SimpleDataObjectEditorTaskViewModel
         : WindowViewModel
     {
-        public new delegate SimpleDataObjectEditorTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent,
+        public new delegate SimpleDataObjectEditorTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent,
             ViewModel obj);
 
         public SimpleDataObjectEditorTaskViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             ViewModel obj)
             : base(appCtx, dataCtx, parent)
         {

@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.WPF.View.TimeRecords
+namespace Zetbox.Client.WPF.View.TimeRecords
 {
     /// <summary>
     /// Interaction logic for WorkEffortRecorderView.xaml

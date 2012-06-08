@@ -1,12 +1,12 @@
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.GUI;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.GUI;
 
     [Implementor]
     public class NavigationSearchScreenActions
@@ -19,7 +19,7 @@ namespace Kistl.App.GUI
         }
 
         [Invocation]
-        public static void GetDefaultViewModel(Kistl.App.GUI.NavigationSearchScreen obj, MethodReturnEventArgs<object> e, Kistl.API.IKistlContext dataCtx, System.Object parent)
+        public static void GetDefaultViewModel(Zetbox.App.GUI.NavigationSearchScreen obj, MethodReturnEventArgs<object> e, Zetbox.API.IZetboxContext dataCtx, System.Object parent)
         {
             e.Result = _modelFactory.CreateViewModel<NavigationSearchScreenViewModel.Factory>().Invoke(dataCtx, (ViewModel)parent, obj);
         }

@@ -1,11 +1,11 @@
-namespace Kistl.API.Client.PerfCounter
+namespace Zetbox.API.Client.PerfCounter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.PerfCounter;
+    using Zetbox.API.PerfCounter;
 
     public class MemoryAppender : BaseMemoryAppender, IPerfCounterAppender
     {

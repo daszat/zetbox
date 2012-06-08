@@ -8,15 +8,15 @@
     <ProjectGuid>{2C899579-BF78-442B-8810-8C7E7A2CA212}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Client.WPF</RootNamespace>
-    <AssemblyName>Kistl.Client.WPF</AssemblyName>
+    <RootNamespace>Zetbox.Client.WPF</RootNamespace>
+    <AssemblyName>Zetbox.Client.WPF</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -43,7 +43,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Kistl.Client.WPF.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Zetbox.Client.WPF.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,7 +55,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\Kistl.Client.WPF.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Zetbox.Client.WPF.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
@@ -66,7 +66,7 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Kistl.Client.WPF.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Zetbox.Client.WPF.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -204,23 +204,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\AccessDeniedDisplay.xaml">
+    <Page Include="View\ZetboxBase\AccessDeniedDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\KistlBase\FilterListDisplay.xaml">
+    <Page Include="View\ZetboxBase\FilterListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\KistlBase\FilterListEntryDisplay.xaml">
+    <Page Include="View\ZetboxBase\FilterListEntryDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\KistlBase\InstanceListHeader.xaml">
+    <Page Include="View\ZetboxBase\InstanceListHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\KistlBase\PropertySelectionTaskDialog.xaml">
+    <Page Include="View\ZetboxBase\PropertySelectionTaskDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -286,145 +286,145 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\ActionDisplay.xaml">
+    <Page Include="View\ZetboxBase\ActionDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\AuditJournalDisplay.xaml">
+    <Page Include="View\ZetboxBase\AuditJournalDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\KistlBase\CompoundObjectPropertyEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\CommandDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\CommandLinkDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\CompoundListGridEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\SingleLineDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\ObjectReferenceListGridEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\ObjectReferenceCollectionGridEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\InstanceGridHorizontalDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\InstanceGridDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\NullablePasswordTextBoxView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\ObjectReferenceDropdownEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\InstanceListHorizontalDisplay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\NullableDateTimeValueEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\KistlBase\NullableMonthValueEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\NullableBoolValueDropdownView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\ObjectReferenceCollectionEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\NullablePropertyMultiLineTextBoxView.xaml">
+    <Page Include="View\ZetboxBase\CompoundObjectPropertyEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\ObjectReferenceListEditor.xaml">
+    <Page Include="View\ZetboxBase\CommandDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\CommandLinkDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\CompoundListGridEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\SingleLineDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\ObjectReferenceListGridEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\ObjectReferenceCollectionGridEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\InstanceGridHorizontalDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\InstanceGridDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\NullablePasswordTextBoxView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\ObjectReferenceDropdownEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\InstanceListHorizontalDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\NullableDateTimeValueEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\NullableMonthValueEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\NullableBoolValueDropdownView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\DataObjectLineDisplay.xaml">
+    <Page Include="View\ZetboxBase\ObjectReferenceCollectionEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\EnumSelectionView.xaml">
+    <Page Include="View\ZetboxBase\NullablePropertyMultiLineTextBoxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\ObjectReferenceListEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\NullableBoolValueView.xaml">
+    <Page Include="View\ZetboxBase\DataObjectLineDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\NullablePropertyTextBoxView.xaml">
+    <Page Include="View\ZetboxBase\EnumSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\ObjectReferenceEditor.xaml">
+    <Page Include="View\ZetboxBase\NullableBoolValueView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\ParameterInputTaskDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\KistlBase\PropertyGroupBoxView.xaml">
+    <Page Include="View\ZetboxBase\NullablePropertyTextBoxView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\StringListView.xaml">
+    <Page Include="View\ZetboxBase\ObjectReferenceEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\TextValueSelectionView.xaml">
+    <Page Include="View\ZetboxBase\ParameterInputTaskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\PropertyGroupBoxView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\StringListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\TextValueSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -444,7 +444,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\InstanceListDisplay.xaml">
+    <Page Include="View\ZetboxBase\InstanceListDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -474,7 +474,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlDebuggerView.xaml">
+    <Page Include="View\ZetboxDebuggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -604,23 +604,23 @@
     <Compile Include="View\GUI\NavigationSearchScreenDisplay.xaml.cs">
       <DependentUpon>NavigationSearchScreenDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\AccessDeniedDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\AccessDeniedDisplay.xaml.cs">
       <DependentUpon>AccessDeniedDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\FilterListDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\FilterListDisplay.xaml.cs">
       <DependentUpon>FilterListDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\FilterListEntryDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\FilterListEntryDisplay.xaml.cs">
       <DependentUpon>FilterListEntryDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\InstanceCollectionBase.cs" />
-    <Compile Include="View\KistlBase\InstanceListHeader.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceCollectionBase.cs" />
+    <Compile Include="View\ZetboxBase\InstanceListHeader.xaml.cs">
       <DependentUpon>InstanceListHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\PropertySelectionTaskDialog.xaml.cs">
+    <Compile Include="View\ZetboxBase\PropertySelectionTaskDialog.xaml.cs">
       <DependentUpon>PropertySelectionTaskDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\StringDisplay.cs" />
+    <Compile Include="View\ZetboxBase\StringDisplay.cs" />
     <Compile Include="WpfToolkitResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -674,94 +674,94 @@
     <Compile Include="View\GUI\NavigatorDisplay.xaml.cs">
       <DependentUpon>NavigatorDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ActionDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\ActionDisplay.xaml.cs">
       <DependentUpon>ActionDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\AuditJournalDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\AuditJournalDisplay.xaml.cs">
       <DependentUpon>AuditJournalDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\CompoundObjectPropertyEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\CommandDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\CommandDisplay.xaml.cs">
       <DependentUpon>CommandDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\CommandLinkDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\CommandLinkDisplay.xaml.cs">
       <DependentUpon>CommandLinkDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\CompoundListGridEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\CompoundListGridEditor.xaml.cs">
       <DependentUpon>CompoundListGridEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\SingleLineDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\SingleLineDisplay.xaml.cs">
       <DependentUpon>SingleLineDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ObjectReferenceListGridEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\ObjectReferenceListGridEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListGridEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ObjectReferenceCollectionGridEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\ObjectReferenceCollectionGridEditor.xaml.cs">
       <DependentUpon>ObjectReferenceCollectionGridEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\InstanceGridHorizontalDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceGridHorizontalDisplay.xaml.cs">
       <DependentUpon>InstanceGridHorizontalDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\InstanceGridBaseDisplay.cs" />
-    <Compile Include="View\KistlBase\InstanceGridDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceGridBaseDisplay.cs" />
+    <Compile Include="View\ZetboxBase\InstanceGridDisplay.xaml.cs">
       <DependentUpon>InstanceGridDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\NullablePasswordTextBoxView.xaml.cs">
+    <Compile Include="View\ZetboxBase\NullablePasswordTextBoxView.xaml.cs">
       <DependentUpon>NullablePasswordTextBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ObjectReferenceDropdownEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\ObjectReferenceDropdownEditor.xaml.cs">
       <DependentUpon>ObjectReferenceDropdownEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\InstanceListBaseDisplay.cs" />
-    <Compile Include="View\KistlBase\InstanceListHorizontalDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceListBaseDisplay.cs" />
+    <Compile Include="View\ZetboxBase\InstanceListHorizontalDisplay.xaml.cs">
       <DependentUpon>InstanceListHorizontalDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\NullableDateTimeValueEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\NullableDateTimeValueEditor.xaml.cs">
       <DependentUpon>NullableDateTimeValueEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\NullableMonthValueEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\NullableMonthValueEditor.xaml.cs">
       <DependentUpon>NullableMonthValueEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\IObjectReferenceViewModel.cs" />
-    <Compile Include="View\KistlBase\NullableBoolValueDropdownView.xaml.cs">
+    <Compile Include="View\ZetboxBase\IObjectReferenceViewModel.cs" />
+    <Compile Include="View\ZetboxBase\NullableBoolValueDropdownView.xaml.cs">
       <DependentUpon>NullableBoolValueDropdownView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ObjectReferenceCollectionEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\ObjectReferenceCollectionEditor.xaml.cs">
       <DependentUpon>ObjectReferenceCollectionEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\NullablePropertyMultiLineTextBoxView.xaml.cs">
+    <Compile Include="View\ZetboxBase\NullablePropertyMultiLineTextBoxView.xaml.cs">
       <DependentUpon>NullablePropertyMultiLineTextBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ObjectReferenceListEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\ObjectReferenceListEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\DataObjectLineDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\DataObjectLineDisplay.xaml.cs">
       <DependentUpon>DataObjectLineDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\EnumSelectionView.xaml.cs">
+    <Compile Include="View\ZetboxBase\EnumSelectionView.xaml.cs">
       <DependentUpon>EnumSelectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\NullableBoolValueView.xaml.cs">
+    <Compile Include="View\ZetboxBase\NullableBoolValueView.xaml.cs">
       <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\NullablePropertyTextBoxView.xaml.cs">
+    <Compile Include="View\ZetboxBase\NullablePropertyTextBoxView.xaml.cs">
       <DependentUpon>NullablePropertyTextBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ObjectReferenceEditor.xaml.cs">
+    <Compile Include="View\ZetboxBase\ObjectReferenceEditor.xaml.cs">
       <DependentUpon>ObjectReferenceEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ParameterInputTaskDialog.xaml.cs">
+    <Compile Include="View\ZetboxBase\ParameterInputTaskDialog.xaml.cs">
       <DependentUpon>ParameterInputTaskDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\PropertyGroupBoxView.xaml.cs">
+    <Compile Include="View\ZetboxBase\PropertyGroupBoxView.xaml.cs">
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\StringListView.xaml.cs">
+    <Compile Include="View\ZetboxBase\StringListView.xaml.cs">
       <DependentUpon>StringListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\TextValueSelectionView.xaml.cs">
+    <Compile Include="View\ZetboxBase\TextValueSelectionView.xaml.cs">
       <DependentUpon>TextValueSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModuleEditor\ControlKindHierarchyDisplay.xaml.cs">
@@ -773,7 +773,7 @@
     <Compile Include="View\ModuleEditor\WorkspaceDisplay.xaml.cs">
       <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\InstanceListDisplay.xaml.cs">
+    <Compile Include="View\ZetboxBase\InstanceListDisplay.xaml.cs">
       <DependentUpon>InstanceListDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GridCells\ReferenceEditor.xaml.cs">
@@ -785,8 +785,8 @@
     <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
       <DependentUpon>DashboardDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlDebuggerView.xaml.cs">
-      <DependentUpon>KistlDebuggerView.xaml</DependentUpon>
+    <Compile Include="View\ZetboxDebuggerView.xaml.cs">
+      <DependentUpon>ZetboxDebuggerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="View\ObjectEditor\DataObjectEditor.xaml.cs">
@@ -841,34 +841,34 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
+    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Kistl.API.Client</Name>
+      <Name>Zetbox.API.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Client.WPF.Toolkit\Kistl.Client.WPF.Toolkit.csproj">
+    <ProjectReference Include="..\Zetbox.Client.WPF.Toolkit\Zetbox.Client.WPF.Toolkit.csproj">
       <Project>{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}</Project>
-      <Name>Kistl.Client.WPF.Toolkit</Name>
+      <Name>Zetbox.Client.WPF.Toolkit</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Client\Kistl.Client.csproj">
+    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
-      <Name>Kistl.Client</Name>
+      <Name>Zetbox.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WPFLibrary\WPFSamplesLib.csproj">
@@ -881,7 +881,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

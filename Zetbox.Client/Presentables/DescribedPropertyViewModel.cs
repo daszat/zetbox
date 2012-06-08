@@ -1,21 +1,21 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Base;
 
     public class DescribedPropertyViewModel 
         : DataObjectViewModel
     {
-        public new delegate DescribedPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, Property prop);
+        public new delegate DescribedPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Property prop);
 
         public DescribedPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             Property prop)
             : base(appCtx, dataCtx, parent, prop)
         {

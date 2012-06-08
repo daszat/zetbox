@@ -1,21 +1,21 @@
 
-namespace Kistl.Client.Mocks
+namespace Zetbox.Client.Mocks
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
 
     using Moq;
-    using Kistl.Client.Presentables;
+    using Zetbox.Client.Presentables;
 
-    public class KistlMockFactory
+    public class ZetboxMockFactory
     {
-        public KistlMockFactory(InterfaceType.Factory iftFactory)
+        public ZetboxMockFactory(InterfaceType.Factory iftFactory)
         {
         }
 
@@ -41,9 +41,9 @@ namespace Kistl.Client.Mocks
             return result;
         }
 
-        public static Mock<IKistlContext> CreateContext()
+        public static Mock<IZetboxContext> CreateContext()
         {
-            var result = new Mock<IKistlContext>();
+            var result = new Mock<IZetboxContext>();
             return result;
         }
 
@@ -51,7 +51,7 @@ namespace Kistl.Client.Mocks
         {
             var result = new Mock<IViewModelFactory>();
             // TODO: ????
-            //result.Setup(mf => mf.CreateDefaultModel(It.IsAny<IKistlContext>(), It.IsAny<IDataObject>(), It.Is<object>(o => o == null))).Returns((IKistlContext ctx, IDataObject obj, object nothing) =>
+            //result.Setup(mf => mf.CreateDefaultModel(It.IsAny<IZetboxContext>(), It.IsAny<IDataObject>(), It.Is<object>(o => o == null))).Returns((IZetboxContext ctx, IDataObject obj, object nothing) =>
             //{
             //    if (backingStore.ContainsKey(obj))
             //    {

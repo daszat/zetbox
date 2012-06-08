@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
     using System;
     using System.Collections;
@@ -15,10 +15,10 @@ namespace Kistl.API.Utils
     {
         private Dictionary<InterfaceType, Dictionary<TKey, IPersistenceObject>> _objects = new Dictionary<InterfaceType, Dictionary<TKey, IPersistenceObject>>();
         private Dictionary<Guid, IPersistenceObject> _exportableobjects = new Dictionary<Guid, IPersistenceObject>();
-        private readonly IKistlContext ctx;
+        private readonly IZetboxContext ctx;
         private readonly Func<IPersistenceObject, TKey> keyFromItem;
 
-        public ContextCache(IKistlContext parent, Func<IPersistenceObject, TKey> keyFromItem)
+        public ContextCache(IZetboxContext parent, Func<IPersistenceObject, TKey> keyFromItem)
         {
             this.ctx = parent;
             this.keyFromItem = keyFromItem;

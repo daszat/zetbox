@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests.BinarySerializers
+namespace Zetbox.API.Tests.BinarySerializers
 {
     using System;
     using System.Collections.Generic;
@@ -13,18 +13,18 @@ namespace Kistl.API.Tests.BinarySerializers
     [TestFixture]
     public class when_cross_platform_serializing : AbstractApiTestFixture
     {
-        private KistlStreamReader.Factory readerFactory;
-        private KistlStreamWriter.Factory writerFactory;
+        private ZetboxStreamReader.Factory readerFactory;
+        private ZetboxStreamWriter.Factory writerFactory;
 
         private MemoryStream stream;
-        private KistlStreamReader reader;
-        private KistlStreamWriter writer;
+        private ZetboxStreamReader reader;
+        private ZetboxStreamWriter writer;
 
         public override void SetUp()
         {
             base.SetUp();
-            readerFactory = scope.Resolve<KistlStreamReader.Factory>();
-            writerFactory = scope.Resolve<KistlStreamWriter.Factory>();
+            readerFactory = scope.Resolve<ZetboxStreamReader.Factory>();
+            writerFactory = scope.Resolve<ZetboxStreamWriter.Factory>();
 
             stream = new MemoryStream();
             reader = readerFactory.Invoke(new BinaryReader(stream));

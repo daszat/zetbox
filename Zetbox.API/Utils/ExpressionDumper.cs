@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Diagnostics;
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
     public class ExpressionDumper
         : ExpressionVisitor<bool>

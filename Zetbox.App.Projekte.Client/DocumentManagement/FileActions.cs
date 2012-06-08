@@ -4,8 +4,8 @@ namespace at.dasz.DocumentManagement
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables;
     
     /// <summary>
     /// Client implementation
@@ -39,7 +39,7 @@ namespace at.dasz.DocumentManagement
             {
                 var fi = new System.IO.FileInfo(path);
                 int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
-                obj.Blob = obj.Context.Find<Kistl.App.Base.Blob>(id);
+                obj.Blob = obj.Context.Find<Zetbox.App.Base.Blob>(id);
                 obj.Name = obj.Blob.OriginalName;
             }
         }

@@ -1,8 +1,8 @@
 <PartCoverSettings>
-  <Target>P:\Kistl\Kistl.Client.WPF\bin\Debug\Kistl.Client.WPF.exe</Target>
-  <TargetWorkDir>P:\Kistl\Kistl.Client.WPF\bin\Debug</TargetWorkDir>
+  <Target>P:\Zetbox\Zetbox.Client.WPF\bin\Debug\Zetbox.Client.WPF.exe</Target>
+  <TargetWorkDir>P:\Zetbox\Zetbox.Client.WPF\bin\Debug</TargetWorkDir>
   <TargetArgs>
   </TargetArgs>
-  <Rule>+[Kistl.Client]*</Rule>
-  <Rule>+[Kistl.Client.WPF]*</Rule>
+  <Rule>+[Zetbox.Client]*</Rule>
+  <Rule>+[Zetbox.Client.WPF]*</Rule>
 </PartCoverSettings>

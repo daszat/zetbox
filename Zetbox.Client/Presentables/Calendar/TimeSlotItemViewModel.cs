@@ -1,4 +1,4 @@
-namespace Kistl.Client.Presentables.Calendar
+namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;

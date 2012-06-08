@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Kistl.Client.Presentables.ViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ViewModel" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="10" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gEAAAAAAEAAAIAAAIAAAAAQAgAQAAAAAAAAABCAAEAA=</HashCode>
@@ -8,35 +8,35 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.DataObjectViewModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.DataObjectViewModel" Collapsed="true">
     <Position X="6" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>VBAAABQAIAUEgBEgAAEAAEQAkAEAACAAgiYERgCAACA=</HashCode>
       <FileName>Presentables\DataObjectViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.DataTypeViewModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.DataTypeViewModel" Collapsed="true">
     <Position X="3.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EBAAAQAAAAYAgAQAAAAACAAAAARCABAAQIAAAgAAAAA=</HashCode>
       <FileName>Presentables\DataTypeViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.ModuleModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ModuleModel" Collapsed="true">
     <Position X="6" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAACgA=</HashCode>
       <FileName>Presentables\ModuleModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.MethodResultModel&lt;TValue&gt;" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.MethodResultModel&lt;TValue&gt;" Collapsed="true">
     <Position X="9.5" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAgAAAgAAwQAAAAAAAAAEAgBAAAEAA=</HashCode>
       <FileName>Presentables\MethodResultModels.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.NullableResultModel&lt;TValue&gt;" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.NullableResultModel&lt;TValue&gt;" Collapsed="true">
     <Position X="8.25" Y="6.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAAAAAAABAAAAAAIAAAgAAAAAAA=</HashCode>
@@ -44,7 +44,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.ObjectResultModel&lt;TValue&gt;" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ObjectResultModel&lt;TValue&gt;" Collapsed="true">
     <Position X="9.75" Y="8" Width="2.25" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAAAAAAABAAAAAAIAAAgAAAAAAA=</HashCode>
@@ -52,16 +52,16 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.KistlBase.MethodInvocationViewModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ZetboxBase.MethodInvocationViewModel" Collapsed="true">
     <Position X="8.25" Y="3.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAQAAAEAAAAAAAAAAAAAAICAAAAAAA=</HashCode>
-      <FileName>Presentables\KistlBase\MethodInvocationViewModel.cs</FileName>
+      <FileName>Presentables\ZetboxBase\MethodInvocationViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.PropertyGroupViewModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.PropertyGroupViewModel" Collapsed="true">
     <Position X="0.75" Y="2" Width="1.75" />
-    <InheritanceLine Type="Kistl.Client.Presentables.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <InheritanceLine Type="Zetbox.Client.Presentables.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="10" Y="0.938" />
         <Point X="2.678" Y="0.938" />
@@ -74,16 +74,16 @@
       <FileName>Presentables\PropertyGroupViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.ObjectClassViewModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ObjectClassViewModel" Collapsed="true">
     <Position X="3.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAgAAAAAAAAAAAAAACAAAAAAAAAAAAABA=</HashCode>
       <FileName>Presentables\ObjectClassViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.ActionViewModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ActionViewModel" Collapsed="true">
     <Position X="0.75" Y="3.25" Width="1.5" />
-    <InheritanceLine Type="Kistl.Client.Presentables.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <InheritanceLine Type="Zetbox.Client.Presentables.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="10" Y="0.938" />
         <Point X="2.719" Y="0.938" />
@@ -96,9 +96,9 @@
       <FileName>Presentables\ActionViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.WorkspaceModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.WorkspaceModel" Collapsed="true">
     <Position X="0.75" Y="0.75" Width="1.5" />
-    <InheritanceLine Type="Kistl.Client.Presentables.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <InheritanceLine Type="Zetbox.Client.Presentables.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="10" Y="0.938" />
         <Point X="9.211" Y="0.938" />
@@ -111,7 +111,7 @@
       <FileName>Presentables\WorkspaceModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.PropertyModel&lt;TValue&gt;" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.PropertyModel&lt;TValue&gt;" Collapsed="true">
     <Position X="16.25" Y="2.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAABAAAEAEAAQAgiAAABCwAAAAAAAEAAAAAAQAAAAA=</HashCode>
@@ -119,7 +119,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.NullableValuePropertyModel&lt;TValue&gt;" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.NullableValuePropertyModel&lt;TValue&gt;" Collapsed="true">
     <Position X="12.5" Y="3.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAABAAAAAAAABAAAAEBAAAQAEIAAAgAgAAAAA=</HashCode>
@@ -127,7 +127,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.ReferencePropertyModel&lt;TValue&gt;" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ReferencePropertyModel&lt;TValue&gt;" Collapsed="true">
     <Position X="17.5" Y="5.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAABAAAAEBAAAAAEIAAAgAAAAAAA=</HashCode>
@@ -135,28 +135,28 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.ChooseReferencePropertyModel&lt;TValue&gt;" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ChooseReferencePropertyModel&lt;TValue&gt;" Collapsed="true">
     <Position X="17.25" Y="7" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Presentables\ValuePropertyModels.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.EnumerationPropertyModel&lt;TValue&gt;" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.EnumerationPropertyModel&lt;TValue&gt;" Collapsed="true">
     <Position X="13" Y="6.25" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Presentables\ValuePropertyModels.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.EnumerationPropertyModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.EnumerationPropertyModel" Collapsed="true">
     <Position X="11.75" Y="5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIABAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>Presentables\ValuePropertyModels.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.ObjectListModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ObjectListModel" Collapsed="true">
     <Position X="15.5" Y="4.5" Width="3" />
     <TypeIdentifier>
       <HashCode>gAAAAICAAAAAAAAAAQAAAAAghQAAAAFMABAhAAgAAAA=</HashCode>
@@ -164,7 +164,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.ObjectReferenceModel" Collapsed="true">
+  <Class Name="Zetbox.Client.Presentables.ObjectReferenceModel" Collapsed="true">
     <Position X="19.25" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>gAAEAAKAAABAAAAAAABgQAQEBAAAAAEIAQAgEAAASAg=</HashCode>

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     using System;
     using System.Collections.Generic;
@@ -10,9 +10,9 @@ namespace Kistl.Client.WPF.CustomControls
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Media;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.WPF.Converter;
-    using Kistl.Client.WPF.Toolkit;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.WPF.Converter;
+    using Zetbox.Client.WPF.Toolkit;
 
     public class CommandButton
         : Button

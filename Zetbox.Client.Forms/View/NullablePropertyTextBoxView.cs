@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Kistl.App.Base;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ValueViewModels;
+using Zetbox.App.Base;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ValueViewModels;
 
-namespace Kistl.Client.Forms.View
+namespace Zetbox.Client.Forms.View
 {
     public partial class NullablePropertyTextBoxView : NullablePropertyTextBoxViewDesignerProxy
     {

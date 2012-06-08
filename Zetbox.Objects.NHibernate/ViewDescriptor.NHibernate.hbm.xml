@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.GUI.ViewDescriptorNHibernateImpl+ViewDescriptorProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.GUI.ViewDescriptorNHibernateImpl+ViewDescriptorProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.GUI.ViewDescriptorNHibernateImpl+ViewDescriptorProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.GUI.ViewDescriptorNHibernateImpl+ViewDescriptorProxy, Zetbox.Objects.NHibernateImpl"
            schema="`gui`"
            table="`ViewDescriptors`"
            abstract="false"
@@ -19,17 +19,17 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ControlKind" column="`fk_ControlKind`" class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ControlKind" column="`fk_ControlKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ControlRef" column="`fk_ControlRef`" class="Kistl.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ControlRef" column="`fk_ControlRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
@@ -37,7 +37,7 @@
         <!-- relEnd=ViewDescriptor otherEnd=ViewModelTypeRefs -->
         <set name="SupportedViewModels" table="`ViewDescriptor_supports_ViewModelTypeRefs`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_ViewDescriptor`" />
-            <one-to-many class="Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->

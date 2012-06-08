@@ -8,13 +8,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 
-using Kistl.API;
-using Kistl.Client.ASPNET.Toolkit.Pages;
-using Kistl.Client.Presentables;
+using Zetbox.API;
+using Zetbox.Client.ASPNET.Toolkit.Pages;
+using Zetbox.Client.Presentables;
 
-[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.JavascriptRenderer.js", "text/javascript")] 
+[assembly: WebResource("Zetbox.Client.ASPNET.Toolkit.JavascriptRenderer.js", "text/javascript")] 
 
-namespace Kistl.Client.ASPNET.Toolkit
+namespace Zetbox.Client.ASPNET.Toolkit
 {
     [ToolboxData("<{0}:JavascriptRenderer runat=server></{0}:JavascriptRenderer>")]
     public class JavascriptRenderer : Control, IScriptControl, IPostBackEventHandler
@@ -38,13 +38,13 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            yield return new ScriptControlDescriptor("Kistl.Client.ASPNET.JavascriptRenderer", ClientID);
+            yield return new ScriptControlDescriptor("Zetbox.Client.ASPNET.JavascriptRenderer", ClientID);
         }
 
         public IEnumerable<ScriptReference> GetScriptReferences()
         {
             yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
-                typeof(JavascriptRenderer), "Kistl.Client.ASPNET.Toolkit.JavascriptRenderer.js"));
+                typeof(JavascriptRenderer), "Zetbox.Client.ASPNET.Toolkit.JavascriptRenderer.js"));
         }
 
         protected override void OnPreRender(EventArgs e)
@@ -87,8 +87,8 @@ namespace Kistl.Client.ASPNET.Toolkit
             {
                 case actionShowObject:
                     {
-                        DataObjectViewModel obj = hdArgument.FromJSON(KistlContextManagerModule.KistlContext);
-                        KistlContextManagerModule.ViewModelFactory.ShowModel(obj, true);
+                        DataObjectViewModel obj = hdArgument.FromJSON(ZetboxContextManagerModule.ZetboxContext);
+                        ZetboxContextManagerModule.ViewModelFactory.ShowModel(obj, true);
                         //if (HttpContext.Current.CurrentHandler is IWorkspaceView)
                         //{
                         //    IWorkspaceView page = (IWorkspaceView)HttpContext.Current.CurrentHandler;

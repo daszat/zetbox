@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
     /// This object represents an Illegal Linq Expression which was send to the server.

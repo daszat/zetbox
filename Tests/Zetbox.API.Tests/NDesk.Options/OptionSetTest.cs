@@ -34,7 +34,7 @@ using System.IO;
 
 using NUnit.Framework;
 
-namespace Kistl.API.Utils.Tests
+namespace Zetbox.API.Utils.Tests
 {
 
     class FooConverter : TypeConverter

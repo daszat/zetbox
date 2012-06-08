@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-using Kistl.Client.Presentables;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.Forms
+namespace Zetbox.Client.Forms
 {
     internal interface IFormsView
     {

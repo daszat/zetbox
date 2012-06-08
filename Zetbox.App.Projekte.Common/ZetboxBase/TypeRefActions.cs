@@ -1,11 +1,11 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Extensions;
 
     [Implementor]
     public static class TypeRefActions
@@ -20,7 +20,7 @@ namespace Kistl.App.Base
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
         [Invocation]
-        public static void UpdateToStringCache(Kistl.App.Base.TypeRef obj)
+        public static void UpdateToStringCache(Zetbox.App.Base.TypeRef obj)
         {
             //obj.ToStringCache = String.Format("{0}{1}, {2}",
             //    obj.FullName,
@@ -31,19 +31,19 @@ namespace Kistl.App.Base
         }
 
         [Invocation]
-        public static void postSet_FullName(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<System.String> e)
+        public static void postSet_FullName(Zetbox.App.Base.TypeRef obj, PropertyPostSetterEventArgs<System.String> e)
         {
             obj.UpdateToStringCache();
         }
 
         [Invocation]
-        public static void postSet_Assembly(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<Kistl.App.Base.Assembly> e)
+        public static void postSet_Assembly(Zetbox.App.Base.TypeRef obj, PropertyPostSetterEventArgs<Zetbox.App.Base.Assembly> e)
         {
             obj.UpdateToStringCache();
         }
 
         // Not supported yet
-        //public static void OnGenericArguments_PostSetter_TypeRef(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<Kistl.App.Base.TypeRef> e)
+        //public static void OnGenericArguments_PostSetter_TypeRef(Zetbox.App.Base.TypeRef obj, PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef> e)
         //{
         //    obj.UpdateToStringCache();
         //}

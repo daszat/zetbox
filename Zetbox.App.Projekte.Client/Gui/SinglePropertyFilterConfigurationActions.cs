@@ -1,15 +1,15 @@
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Client;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Client;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -18,7 +18,7 @@ namespace Kistl.App.GUI
     public static class SinglePropertyFilterConfigurationActions
     {
         [Invocation]
-        public static void CreateFilterModel(Kistl.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
+        public static void CreateFilterModel(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
         {
             var mdl = new SingleValueFilterModel();
             mdl.Label = obj.GetLabel();
@@ -45,9 +45,9 @@ namespace Kistl.App.GUI
         }
 
         [Invocation]
-        public static void NotifyCreated(Kistl.App.GUI.SinglePropertyFilterConfiguration obj)
+        public static void NotifyCreated(Zetbox.App.GUI.SinglePropertyFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(obj.Context);
+            obj.ViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(obj.Context);
         }
     }
 }

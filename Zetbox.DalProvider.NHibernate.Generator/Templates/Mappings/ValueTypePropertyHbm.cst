@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="Mappings.ValueTypePropertyHbm"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.ValueTypePropertyHbm" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings.ValueTypePropertyHbm" 
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>

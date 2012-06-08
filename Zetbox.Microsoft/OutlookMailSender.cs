@@ -1,5 +1,5 @@
 
-namespace Kistl.Microsoft
+namespace Zetbox.Microsoft
 {
     using System;
     using System.Collections.Generic;
@@ -7,12 +7,12 @@ namespace Kistl.Microsoft
     using System.Net.Mail;
     using System.Text;
     using Autofac;
-    using Kistl.API;
+    using Zetbox.API;
     using Outlook = global::Microsoft.Office.Interop.Outlook;
     using System.IO;
     using System.Runtime.InteropServices;
-using Kistl.Client.Presentables;
-    using Kistl.API.Utils;
+using Zetbox.Client.Presentables;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// Sends MailMessages using Outlook

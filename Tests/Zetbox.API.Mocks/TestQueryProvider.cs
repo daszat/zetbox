@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Collections;
 
-namespace Kistl.API.Mocks
+namespace Zetbox.API.Mocks
 {
     [Serializable]
     public class TestQuery<T> : IOrderedQueryable<T>
@@ -63,7 +63,7 @@ namespace Kistl.API.Mocks
     }
 
     [Serializable]
-    public class TestQueryProvider<T> : Kistl.API.ExpressionTreeVisitor, IQueryProvider
+    public class TestQueryProvider<T> : Zetbox.API.ExpressionTreeVisitor, IQueryProvider
     {
         #region IQueryProvider Members
 

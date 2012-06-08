@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Client;
+using Zetbox.API.Client;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using Kistl.App.Base;
+using Zetbox.App.Base;
 
-namespace Kistl.IntegrationTests
+namespace Zetbox.IntegrationTests
 {
     [TestFixture]
     public class RelationDefinitionTests : AbstractIntegrationTestFixture

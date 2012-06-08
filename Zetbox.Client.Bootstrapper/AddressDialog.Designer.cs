@@ -1,4 +1,4 @@
-namespace Kistl.Client.Bootstrapper
+namespace Zetbox.Client.Bootstrapper
 {
     partial class AddressDialog
     {

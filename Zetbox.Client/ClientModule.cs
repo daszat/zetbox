@@ -1,17 +1,17 @@
 
-namespace Kistl.Client
+namespace Zetbox.Client
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Configuration;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables;
-    using Kistl.API.Common;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables;
+    using Zetbox.API.Common;
 
     public sealed class ClientModule : Module
     {
@@ -80,7 +80,7 @@ namespace Kistl.Client
                 .As<IViewModelDependencies>();
 
             moduleBuilder
-                .Register<ThreadPrincipalResolver>(c=> new ThreadPrincipalResolver(c.Resolve<Func<IReadOnlyKistlContext>>()))
+                .Register<ThreadPrincipalResolver>(c=> new ThreadPrincipalResolver(c.Resolve<Func<IReadOnlyZetboxContext>>()))
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 

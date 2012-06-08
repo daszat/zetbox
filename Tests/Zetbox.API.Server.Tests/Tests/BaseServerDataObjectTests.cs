@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server.Tests
+namespace Zetbox.API.Server.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,16 +7,16 @@ namespace Kistl.API.Server.Tests
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Mocks;
-    using Kistl.API.Server.Mocks;
-    using Kistl.API.Utils;
+    using Zetbox.API.Mocks;
+    using Zetbox.API.Server.Mocks;
+    using Zetbox.API.Utils;
     using NUnit.Framework;
 
     [TestFixture]
     public class BaseServerDataObjectTests : AbstractApiServerTestFixture
     {
         private TestObjClassImpl obj;
-        private IKistlContext ctx;
+        private IZetboxContext ctx;
         private InterfaceType.Factory _iftFactory;
 
         public override void SetUp()
@@ -84,7 +84,7 @@ namespace Kistl.API.Server.Tests
         [Test]
         public void ToStream_to_null_fails()
         {
-            Assert.That(() => obj.ToStream((KistlStreamWriter)null, null, false), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => obj.ToStream((ZetboxStreamWriter)null, null, false), Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]
@@ -92,8 +92,8 @@ namespace Kistl.API.Server.Tests
         {
             var typeMap = scope.Resolve<TypeMap>();
             var ms = new MemoryStream();
-            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
-            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
+            var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms));
 
             InitialiseObject(obj);
             obj.ToStream(sw, null, false);
@@ -109,8 +109,8 @@ namespace Kistl.API.Server.Tests
         {
             var typeMap = scope.Resolve<TypeMap>();
             var ms = new MemoryStream();
-            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
-            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
+            var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms));
 
             TestObjClassSerializationMock.ToStream<TestObjClass, TestEnum>(sw, _iftFactory);
             sw.Flush();
@@ -132,7 +132,7 @@ namespace Kistl.API.Server.Tests
         public void FromStream_Null_StreamReader_fails()
         {
             TestObjClass result = new TestObjClassImpl();
-            Assert.That(() => result.FromStream((KistlStreamReader)null), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => result.FromStream((ZetboxStreamReader)null), Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]
@@ -140,8 +140,8 @@ namespace Kistl.API.Server.Tests
         {
             var typeMap = scope.Resolve<TypeMap>();
             var ms = new MemoryStream();
-            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
-            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
+            var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms));
 
             obj.ToStream(sw, null, false);
 
@@ -160,8 +160,8 @@ namespace Kistl.API.Server.Tests
         {
             var typeMap = scope.Resolve<TypeMap>();
             var ms = new MemoryStream();
-            var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms));
-            var sr = new KistlStreamReader(typeMap, new BinaryReader(ms));
+            var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms));
+            var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms));
 
             obj.ToStream(sw, null, false);
             ms.Seek(0, SeekOrigin.Begin);

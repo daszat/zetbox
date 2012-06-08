@@ -1,14 +1,14 @@
 
-namespace Kistl.API.Client.Tests
+namespace Zetbox.API.Client.Tests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client.Mocks.OneNLists;
-    using Kistl.API.Tests;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.API.Client.Mocks.OneNLists;
+    using Zetbox.API.Tests;
+    using Zetbox.DalProvider.Base.RelationWrappers;
     using NUnit.Framework;
 
     [TestFixture(0)]

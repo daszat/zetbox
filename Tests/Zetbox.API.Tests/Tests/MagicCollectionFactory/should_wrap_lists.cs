@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests.MagicCollectionFactory
+namespace Zetbox.API.Tests.MagicCollectionFactory
 {
     using System;
     using System.Collections.Generic;

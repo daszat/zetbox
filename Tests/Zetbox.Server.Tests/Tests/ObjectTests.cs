@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.Tests
+namespace Zetbox.Server.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -8,10 +8,10 @@ namespace Kistl.Server.Tests
 
     using Autofac;
 
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Projekte;
-    using Kistl.Server;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Projekte;
+    using Zetbox.Server;
 
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
@@ -19,7 +19,7 @@ namespace Kistl.Server.Tests
     [TestFixture]
     public class ObjectTests : AbstractServerTestFixture
     {
-        private IKistlContext ctx;
+        private IZetboxContext ctx;
 
         public override void SetUp()
         {
@@ -69,17 +69,17 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetObject()
         {
-            var obj = ctx.GetQuery<Kistl.App.Projekte.Projekt>().First(o => o.Name == "blubb");
+            var obj = ctx.GetQuery<Zetbox.App.Projekte.Projekt>().First(o => o.Name == "blubb");
             Assert.That(obj.Name, Is.EqualTo("blubb"));
         }
 
         [Test]
         public void GetObject_Twice()
         {
-            var obj1 = ctx.GetQuery<Kistl.App.Projekte.Projekt>().First(o => o.Name == "blubb");
+            var obj1 = ctx.GetQuery<Zetbox.App.Projekte.Projekt>().First(o => o.Name == "blubb");
             Assert.That(obj1.Name, Is.EqualTo("blubb"));
 
-            var obj2 = ctx.GetQuery<Kistl.App.Projekte.Projekt>().First(o => o.Name == "blubb");
+            var obj2 = ctx.GetQuery<Zetbox.App.Projekte.Projekt>().First(o => o.Name == "blubb");
             Assert.That(obj2.Name, Is.EqualTo("blubb"));
 
             Assert.That(object.ReferenceEquals(obj1, obj2), "Obj1 & Obj2 are different Objects");
@@ -88,9 +88,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetListOf()
         {
-            var list = ctx.GetQuery<Kistl.App.Projekte.Projekt>();
+            var list = ctx.GetQuery<Zetbox.App.Projekte.Projekt>();
             int count = 0;
-            foreach (Kistl.App.Projekte.Projekt prj in list)
+            foreach (Zetbox.App.Projekte.Projekt prj in list)
             {
                 count += prj.Tasks.Count;
             }
@@ -100,9 +100,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetListOf_List()
         {
-            var list = ctx.GetQuery<Kistl.App.Projekte.Mitarbeiter>();
+            var list = ctx.GetQuery<Zetbox.App.Projekte.Mitarbeiter>();
             int count = 0;
-            foreach (Kistl.App.Projekte.Mitarbeiter ma in list)
+            foreach (Zetbox.App.Projekte.Mitarbeiter ma in list)
             {
                 count += ma.Projekte.Count;
             }
@@ -114,7 +114,7 @@ namespace Kistl.Server.Tests
         {
             double aufwand;
             int ID;
-            var list = ctx.GetQuery<Kistl.App.Projekte.Task>().ToList();
+            var list = ctx.GetQuery<Zetbox.App.Projekte.Task>().ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
             var obj = list[0];
 
@@ -125,8 +125,8 @@ namespace Kistl.Server.Tests
 
             ctx.SubmitChanges();
 
-            IKistlContext checkctx = GetContext();
-            var checkObj = checkctx.GetQuery<Kistl.App.Projekte.Task>().First(o => o.ID == ID);
+            IZetboxContext checkctx = GetContext();
+            var checkObj = checkctx.GetQuery<Zetbox.App.Projekte.Task>().First(o => o.ID == ID);
             Assert.That(checkObj, Is.Not.Null);
             Assert.That(checkObj.Aufwand, Is.EqualTo(aufwand));
         }
@@ -137,9 +137,9 @@ namespace Kistl.Server.Tests
             int ID;
             double aufwand = 1.0;
             DateTime datum = DateTime.Now;
-            Kistl.App.Projekte.Projekt p;
-            p = ctx.GetQuery<Kistl.App.Projekte.Projekt>().ToList()[0];
-            var obj = ctx.Create<Kistl.App.Projekte.Task>();
+            Zetbox.App.Projekte.Projekt p;
+            p = ctx.GetQuery<Zetbox.App.Projekte.Projekt>().ToList()[0];
+            var obj = ctx.Create<Zetbox.App.Projekte.Task>();
 
             obj.Name = "NUnit Test Task";
             obj.Aufwand = aufwand;
@@ -149,10 +149,10 @@ namespace Kistl.Server.Tests
 
             ctx.SubmitChanges();
             ID = obj.ID;
-            Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
+            Assert.That(ID, Is.Not.EqualTo(Zetbox.API.Helper.INVALIDID));
 
-            IKistlContext checkctx = GetContext();
-            var checkObj = checkctx.GetQuery<Kistl.App.Projekte.Task>().First(o => o.ID == ID);
+            IZetboxContext checkctx = GetContext();
+            var checkObj = checkctx.GetQuery<Zetbox.App.Projekte.Task>().First(o => o.ID == ID);
             Assert.That(checkObj, Is.Not.Null);
             Assert.That(checkObj.Aufwand, Is.EqualTo(aufwand));
             Assert.That(checkObj.Projekt.ID, Is.EqualTo(p.ID));

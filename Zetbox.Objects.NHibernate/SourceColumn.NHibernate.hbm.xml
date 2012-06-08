@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="ZBox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Kistl.Objects.NHibernateImpl"
-           proxy="ZBox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl"
            schema="`migration`"
            table="`SourceColumns`"
            abstract="false"
@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
@@ -34,7 +34,7 @@
                   column="`CompareNulls`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
@@ -54,13 +54,13 @@
         <!-- relEnd=SourceColumn otherEnd=Property -->
         <set name="DestinationProperty" table="`SourceColumn_created_Property`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_SourceColumn`" />
-            <one-to-many class="ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
         <set name="EnumEntries" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_SourceColumn`" />
-            <one-to-many class="ZBox.App.SchemaMigration.SourceEnumNHibernateImpl+SourceEnumProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceEnumNHibernateImpl+SourceEnumProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -76,12 +76,12 @@
                   column="`Name`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="References" column="`fk_PK_Column`" class="ZBox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="References" column="`fk_PK_Column`" class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
         <set name="Referers" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_PK_Column`" />
-            <one-to-many class="ZBox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -89,7 +89,7 @@
                   column="`Size`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="SourceTable" column="`fk_SourceTable`" class="ZBox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="SourceTable" column="`fk_SourceTable`" class="Zetbox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Status" 

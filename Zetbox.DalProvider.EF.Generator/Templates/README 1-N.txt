@@ -37,7 +37,7 @@ rel.Storage = StorageType.Right; // See Case 765, why this is just bollocks.
 rel.LeftPart = assemblies;
 rel.RightPart = module;
 
-# Kistl.Objects Interface
+# Zetbox.Objects Interface
 
 	interface Assembly {
 		Module Module { get; set; }
@@ -70,11 +70,11 @@ of name-clashes.
 	{
 
 		// implement the interface
-		public Kistl.App.Base.Module Module { get; set; }
+		public Zetbox.App.Base.Module Module { get; set; }
 
 		// this is the actual property which is seen by EF
 		[EdmRelationshipNavigationPropertyAttribute("Model", "FK_Assembly_Module_Module", "A_Module")]
-		public Kistl.App.Base.ModuleImpl ModuleImpl { get; set; }
+		public Zetbox.App.Base.ModuleImpl ModuleImpl { get; set; }
 
 	}
 

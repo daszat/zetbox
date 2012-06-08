@@ -1,5 +1,5 @@
 
-namespace Kistl.IntegrationTests.optional_parent.with_persistent_order
+namespace Zetbox.IntegrationTests.optional_parent.with_persistent_order
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Kistl.IntegrationTests.optional_parent.with_persistent_order
     using NUnit.Framework;
 
     public class when_setting_via_index
-        : Kistl.API.AbstractConsumerTests.optional_parent.with_persistent_order.when_setting_via_index
+        : Zetbox.API.AbstractConsumerTests.optional_parent.with_persistent_order.when_setting_via_index
     {
         public class after_reloading
           : when_setting_via_index

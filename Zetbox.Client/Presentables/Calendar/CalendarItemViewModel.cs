@@ -1,4 +1,4 @@
-namespace Kistl.Client.Presentables.Calendar
+namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
@@ -6,14 +6,14 @@ namespace Kistl.Client.Presentables.Calendar
     using System.Drawing;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables;
 
     public class CalendarItemViewModel : ViewModel
     {
-        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, ViewModel parent, IAppointmentViewModel obj);
+        public new delegate CalendarItemViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IAppointmentViewModel obj);
 
-        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IAppointmentViewModel obj)
+        public CalendarItemViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IAppointmentViewModel obj)
             : base(dependencies, dataCtx, parent)
         {
             if (obj == null) throw new ArgumentNullException("obj");

@@ -1,30 +1,30 @@
 
-namespace Kistl.Client
+namespace Zetbox.Client
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Client.PerfCounter;
-    using Kistl.API.Configuration;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.KistlBase;
-    using Kistl.Client.Presentables.ObjectBrowser;
-    using Kistl.API.Utils;
-    using Kistl.API.Common;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.Client.Presentables.ObjectBrowser;
+    using Zetbox.API.Utils;
+    using Zetbox.API.Common;
 
     public class Launcher
     {
-        private readonly Func<ClientIsolationLevel, IKistlContext> ctxFactory;
+        private readonly Func<ClientIsolationLevel, IZetboxContext> ctxFactory;
         private readonly IViewModelFactory mdlFactory;
         private readonly IFrozenContext frozenCtx;
-        private readonly KistlConfig cfg;
+        private readonly ZetboxConfig cfg;
         private readonly IPerfCounter perfCounter;
 
-        public Launcher(Func<ClientIsolationLevel, IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
+        public Launcher(Func<ClientIsolationLevel, IZetboxContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
         {
             this.frozenCtx = frozenCtx;
             this.ctxFactory = ctxFactory;
@@ -57,12 +57,12 @@ namespace Kistl.Client
             else
             {
                 var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory(ClientIsolationLevel.MergeServerData), null);
-                ControlKind launcher = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_LauncherKind.Find(frozenCtx);
+                ControlKind launcher = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_LauncherKind.Find(frozenCtx);
                 mdlFactory.ShowModel(ws, launcher, true);
             }
 
 
-            //var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsViewModel.Factory>().Invoke(ctxFactory());
+            //var ctxDebugger = mdlFactory.CreateViewModel<ZetboxDebuggerAsViewModel.Factory>().Invoke(ctxFactory());
             //mdlFactory.ShowModel(ctxDebugger, true);
 
             //var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
@@ -71,7 +71,7 @@ namespace Kistl.Client
 
         private void LaunchApplication(Guid appGuid)
         {
-            var app = frozenCtx.FindPersistenceObject<Kistl.App.GUI.Application>(appGuid);
+            var app = frozenCtx.FindPersistenceObject<Zetbox.App.GUI.Application>(appGuid);
             var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory(ClientIsolationLevel.MergeServerData), null, app);
             appMdl.OpenApplication(appMdl);
         }

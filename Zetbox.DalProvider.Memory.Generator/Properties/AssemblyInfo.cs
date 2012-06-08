@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.DalProvider.Memory.Generator")]
+[assembly: AssemblyTitle("Zetbox.DalProvider.Memory.Generator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Kistl.DalProvider.Memory.Generator")]
+[assembly: AssemblyProduct("Zetbox.DalProvider.Memory.Generator")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

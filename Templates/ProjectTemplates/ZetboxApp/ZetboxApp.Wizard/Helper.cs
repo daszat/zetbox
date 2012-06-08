@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace KistlApp.Wizard
+namespace ZetboxApp.Wizard
 {
     public static class Helper
     {

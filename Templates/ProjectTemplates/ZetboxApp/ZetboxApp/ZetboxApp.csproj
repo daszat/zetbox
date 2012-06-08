@@ -8,8 +8,8 @@
     <ProjectGuid>{ABC19424-E9EB-4D9A-8C3A-10064A0317E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KistlApp</RootNamespace>
-    <AssemblyName>KistlApp</AssemblyName>
+    <RootNamespace>ZetboxApp</RootNamespace>
+    <AssemblyName>ZetboxApp</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
@@ -23,7 +23,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\KistlApp.output\</OutputPath>
+    <OutputPath>..\..\ZetboxApp.output\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -49,17 +49,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KistlApp.Solution\KistlApp.Solution.csproj">
+    <ProjectReference Include="..\ZetboxApp.Solution\ZetboxApp.Solution.csproj">
       <Project>{21AE7B50-2093-4437-BD14-648BEED8A54C}</Project>
-      <Name>KistlApp.Solution</Name>
+      <Name>ZetboxApp.Solution</Name>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <TemplateType>Project</TemplateType>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>
     </ProjectReference>
-    <ProjectReference Include="..\KistlApp.Wizard\KistlApp.Wizard.csproj">
+    <ProjectReference Include="..\ZetboxApp.Wizard\ZetboxApp.Wizard.csproj">
       <Project>{D22A24E6-48CE-47F9-9987-68385E8C5AC7}</Project>
-      <Name>KistlApp.Wizard</Name>
+      <Name>ZetboxApp.Wizard</Name>
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>

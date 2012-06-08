@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Configuration;
+using Zetbox.API.Configuration;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
 
     /// <summary>

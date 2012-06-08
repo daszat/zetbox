@@ -1,11 +1,11 @@
 
-namespace Kistl.Generator.Templates.CollectionEntries
+namespace Zetbox.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
 
     public abstract partial class CollectionEntryTemplate
     {

@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaManagement
+namespace Zetbox.Server.SchemaManagement
 {
     using System;
     using System.Collections;
@@ -7,8 +7,8 @@ namespace Kistl.Server.SchemaManagement
     using System.Data;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
 
     public class LoggingSchemaProviderAdapter
         : ISchemaProvider
@@ -21,7 +21,7 @@ namespace Kistl.Server.SchemaManagement
             if (provider == null)
                 throw new ArgumentNullException("provider");
             _provider = provider;
-            Log = log4net.LogManager.GetLogger("Kistl.Server.Schema." + provider.ConfigName);
+            Log = log4net.LogManager.GetLogger("Zetbox.Server.Schema." + provider.ConfigName);
         }
 
         public string ConfigName

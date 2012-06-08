@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <EnvConfig Version="1.0">
-  <BinarySource>Libs\Kistl</BinarySource>
+  <BinarySource>Libs\Zetbox</BinarySource>
   <BinaryTarget>bin\Debug</BinaryTarget>
 
   <DatabaseSource Schema="EMPTY" />

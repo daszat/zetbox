@@ -6,7 +6,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Kistl.API.Mocks
+namespace Zetbox.API.Mocks
 {
     public interface TestObjClass<LOCALINTERFACE, ENUMTYPE>
         : IDataObject
@@ -51,7 +51,7 @@ namespace Kistl.API.Mocks
         /// Serializes a test TestObjClass to the stream sw.
         /// </summary>
         /// <param name="sw"></param>
-        public static void ToStream<LOCALINTERFACE, ENUMTYPE>(KistlStreamWriter sw, InterfaceType.Factory iftFactory)
+        public static void ToStream<LOCALINTERFACE, ENUMTYPE>(ZetboxStreamWriter sw, InterfaceType.Factory iftFactory)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
@@ -98,7 +98,7 @@ namespace Kistl.API.Mocks
             sw.Write(false);
         }
 
-        public static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(KistlStreamReader sr, InterfaceType.Factory iftFactory)
+        public static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(ZetboxStreamReader sr, InterfaceType.Factory iftFactory)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {

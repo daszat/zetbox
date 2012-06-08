@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-using Kistl.API.Mocks;
+using Zetbox.API.Mocks;
 
-namespace Kistl.API.Server.Mocks
+namespace Zetbox.API.Server.Mocks
 {
 
     public class TestObjClassImpl : BaseServerDataObject, TestObjClass
@@ -146,7 +146,7 @@ namespace Kistl.API.Server.Mocks
             };
         }
 
-        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             int? id = this.BaseTestObjClass == null ? (int?)null : this.BaseTestObjClass.ID;
@@ -156,7 +156,7 @@ namespace Kistl.API.Server.Mocks
             sw.WriteCollectionEntries(this.TestNamesImpl);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
             var result = new List<IPersistenceObject>();
@@ -183,13 +183,13 @@ namespace Kistl.API.Server.Mocks
         public override bool IsAttached { get { return _IsAttached; } }
         private bool _IsAttached = false;
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
             _IsAttached = true;
         }
 
-        public override void DetachFromContext(IKistlContext ctx)
+        public override void DetachFromContext(IZetboxContext ctx)
         {
             base.DetachFromContext(ctx);
             _IsAttached = false;

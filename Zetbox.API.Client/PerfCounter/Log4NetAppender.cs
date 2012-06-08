@@ -1,4 +1,4 @@
-namespace Kistl.API.Client.PerfCounter
+namespace Zetbox.API.Client.PerfCounter
 {
     using System;
     using System.Collections.Generic;
@@ -6,9 +6,9 @@ namespace Kistl.API.Client.PerfCounter
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.PerfCounter;
+    using Zetbox.API.PerfCounter;
 
-    // client-side clone of Kistl.API.Server.PerfCounter.Log4NetAppender
+    // client-side clone of Zetbox.API.Server.PerfCounter.Log4NetAppender
     public class Log4NetAppender : MemoryAppender
     {
         #region Autofac Module

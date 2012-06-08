@@ -5,12 +5,12 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.App.Test;
+using Zetbox.API;
+using Zetbox.App.Test;
 
 using NUnit.Framework;
 
-namespace Kistl.API.AbstractConsumerTests.CompoundObjects
+namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
 {
     public abstract class when_changing_a_CompoundObject_member
         : CompoundObjectFixture

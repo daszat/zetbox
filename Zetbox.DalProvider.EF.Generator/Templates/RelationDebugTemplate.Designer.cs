@@ -1,28 +1,28 @@
 using System;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator.Extensions;
-using Kistl.App.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator.Extensions;
+using Zetbox.App.Extensions;
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates
+namespace Zetbox.DalProvider.Ef.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\RelationDebugTemplate.cst")]
-    public partial class RelationDebugTemplate : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\RelationDebugTemplate.cst")]
+    public partial class RelationDebugTemplate : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected Relation rel;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Relation rel)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("RelationDebugTemplate", ctx, rel);
         }
 
-        public RelationDebugTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
+        public RelationDebugTemplate(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Relation rel)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -32,7 +32,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates
 
         public override void Generate()
         {
-#line 13 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\RelationDebugTemplate.cst"
+#line 13 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\RelationDebugTemplate.cst"
 this.WriteObjects("    Relation: ",  rel.GetAssociationName() , "\r\n");
 this.WriteObjects("    A: ",  rel.A.Multiplicity , " ",  rel.A.Type.Name , " as ",  rel.A.RoleName , "\r\n");
 this.WriteObjects("    B: ",  rel.B.Multiplicity , " ",  rel.B.Type.Name , " as ",  rel.B.RoleName , "\r\n");

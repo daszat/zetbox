@@ -7,9 +7,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
-using Kistl.API.Utils;
+using Zetbox.API.Utils;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
     /// Global Helpermethods
@@ -39,7 +39,7 @@ namespace Kistl.API
         /// <summary>
         /// Interface Assembly
         /// </summary>
-        public static readonly string InterfaceAssembly = "Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        public static readonly string InterfaceAssembly = "Zetbox.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
 
         /// <summary>
         /// Default length if StringRangeConstraint is missing
@@ -47,9 +47,9 @@ namespace Kistl.API
         public static readonly int DefaultStringPropertyLength = 1000;
 
         /// <summary>
-        /// Keyname for the Kistl connection string
+        /// Keyname for the Zetbox connection string
         /// </summary>
-        public static readonly string KistlConnectionStringKey = "Kistl";
+        public static readonly string ZetboxConnectionStringKey = "Zetbox";
 
         /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
@@ -127,7 +127,7 @@ namespace Kistl.API
             {
                 var item = orderedItems[i];
                 int? idx = getIndex(item);
-                if (!idx.HasValue || idx <= maxIdx || idx == Kistl.API.Helper.LASTINDEXPOSITION)
+                if (!idx.HasValue || idx <= maxIdx || idx == Zetbox.API.Helper.LASTINDEXPOSITION)
                 {
                     // TODO: try to space out items better
                     idx = maxIdx + 1;

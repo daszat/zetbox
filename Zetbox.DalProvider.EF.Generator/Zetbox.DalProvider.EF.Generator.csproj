@@ -8,12 +8,12 @@
     <ProjectGuid>{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DalProvider.EF.Generator</RootNamespace>
-    <AssemblyName>Kistl.DalProvider.EF.Generator</AssemblyName>
+    <RootNamespace>Zetbox.DalProvider.EF.Generator</RootNamespace>
+    <AssemblyName>Zetbox.DalProvider.EF.Generator</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -26,7 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Server\EF\Kistl.DalProvider.EF.Generator.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\EF\Zetbox.DalProvider.EF.Generator.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -37,7 +37,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\Server\EF\Kistl.DalProvider.EF.Generator.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Server\EF\Zetbox.DalProvider.EF.Generator.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
@@ -48,7 +48,7 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Server\EF\Kistl.DalProvider.EF.Generator.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\EF\Zetbox.DalProvider.EF.Generator.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -333,7 +333,7 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>RelationDebugTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
     <None Include="Templates\Serialization\CompoundObjectSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
@@ -349,29 +349,29 @@
     <Content Include="Templates\README N-M.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
+    <ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
-      <Name>Kistl.API.Server</Name>
+      <Name>Zetbox.API.Server</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Generator\Kistl.Generator.csproj">
+    <ProjectReference Include="..\Zetbox.Generator\Zetbox.Generator.csproj">
       <Project>{4992171F-DA41-401C-8869-63594ACF2D93}</Project>
-      <Name>Kistl.Generator</Name>
+      <Name>Zetbox.Generator</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

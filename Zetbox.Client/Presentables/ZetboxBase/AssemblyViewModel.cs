@@ -1,25 +1,25 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
     
     public class AssemblyViewModel
         : DataObjectViewModel
     {
-        public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, ViewModel parent, Assembly obj);
+        public new delegate DataObjectViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Assembly obj);
 
         private Assembly _assembly;
 
         public AssemblyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             Assembly obj)
             : base(appCtx, dataCtx, parent, obj)
         {

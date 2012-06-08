@@ -7,15 +7,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using Kistl.API;
-using Kistl.Client.ASPNET.Toolkit.Pages;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ObjectBrowser;
+using Zetbox.API;
+using Zetbox.Client.ASPNET.Toolkit.Pages;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ObjectBrowser;
 
-[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.LauncherView.js", "text/javascript")] 
+[assembly: WebResource("Zetbox.Client.ASPNET.Toolkit.View.LauncherView.js", "text/javascript")] 
 
-namespace Kistl.Client.ASPNET.Toolkit.View
+namespace Zetbox.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/LauncherView.ascx")]
     public abstract class LauchnerView : ModelUserControl<WorkspaceViewModel>, IScriptControl
@@ -50,7 +50,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            var desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.View.LauncherView", containerCtrl.ClientID);
+            var desc = new ScriptControlDescriptor("Zetbox.Client.ASPNET.View.LauncherView", containerCtrl.ClientID);
             desc.AddComponentProperty("ListModules", listModulesCtrl.ClientID);
             desc.AddComponentProperty("ListObjectClasses", listObjectClassesCtrl.ClientID);
             desc.AddComponentProperty("ListInstances", listInstancesCtrl.ClientID);
@@ -60,7 +60,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         public IEnumerable<ScriptReference> GetScriptReferences()
         {
             yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
-                typeof(WorkspaceView), "Kistl.Client.ASPNET.Toolkit.View.LauncherView.js"));
+                typeof(WorkspaceView), "Zetbox.Client.ASPNET.Toolkit.View.LauncherView.js"));
         }
 
         #endregion

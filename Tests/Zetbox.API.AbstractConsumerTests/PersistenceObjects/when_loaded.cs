@@ -1,12 +1,12 @@
 
-namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
+namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
+    using Zetbox.API;
 
     using NUnit.Framework;
 

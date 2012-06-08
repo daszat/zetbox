@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.Client.Presentables;
+using Zetbox.Client.Presentables;
 
 using NUnit.Framework;
 
-namespace Kistl.Client.Mocks
+namespace Zetbox.Client.Mocks
 {
     /// <summary>
     /// executes task synchronously, but checks that all Verify() asserts hold

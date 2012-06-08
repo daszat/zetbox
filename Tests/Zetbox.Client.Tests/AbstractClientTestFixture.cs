@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl
+namespace Zetbox
 {
-    public class AbstractClientTestFixture : Kistl.API.AbstractConsumerTests.AbstractTestFixture
+    public class AbstractClientTestFixture : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
     {
     }
 }

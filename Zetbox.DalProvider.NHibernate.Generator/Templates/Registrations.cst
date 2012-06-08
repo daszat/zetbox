@@ -1,20 +1,20 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="Registrations"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Registrations" 
-    Inherits="Kistl.Generator.Templates.Registrations" %>
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Registrations" 
+    Inherits="Zetbox.Generator.Templates.Registrations" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Zetbox.API" %>
 
 <% base.Generate(); %>
 
             builder
                 .Register<ISessionFactory>(
                     c => {
-                        var kistlConfig = c.Resolve<KistlConfig>();
+                        var zetboxConfig = c.Resolve<ZetboxConfig>();
                         var result = new Configuration();
-                        var connectionString = kistlConfig.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                        var connectionString = zetboxConfig.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
                         result.Properties["dialect"] = connectionString.DatabaseProvider;
                         result.Properties["connection.connection_string"] = connectionString.ConnectionString;
                         result.Properties["max_fetch_depth"] = "1"; // keep SQL statements small

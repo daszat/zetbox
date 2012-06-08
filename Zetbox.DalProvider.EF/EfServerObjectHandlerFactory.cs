@@ -1,12 +1,12 @@
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
+    using Zetbox.API;
+    using Zetbox.API.Server;
 
     public sealed class EfServerObjectHandlerFactory
         : ServerObjectHandlerFactory
@@ -14,7 +14,7 @@ namespace Kistl.DalProvider.Ef
         public EfServerObjectHandlerFactory() { }
 
         public override IServerCollectionHandler GetServerCollectionHandler(
-            IKistlContext ctx, 
+            IZetboxContext ctx, 
             InterfaceType aType,
             InterfaceType bType,
             RelationEndRole endRole)

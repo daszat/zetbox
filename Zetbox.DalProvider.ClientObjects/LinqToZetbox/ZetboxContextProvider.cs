@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client
+namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections;
@@ -9,15 +9,15 @@ namespace Kistl.DalProvider.Client
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Client.PerfCounter;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Utils;
 
     /// <summary>
-    /// Provider for Kistl Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
+    /// Provider for Zetbox Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
     /// </summary>
-    public class KistlContextProvider : ExpressionTreeVisitor, IKistlQueryProvider
+    public class ZetboxContextProvider : ExpressionTreeVisitor, IZetboxQueryProvider
     {
         /// <summary>
         /// The result type of this provider
@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.Client
         /// <summary>
         /// 
         /// </summary>
-        private KistlContextImpl _context;
+        private ZetboxContextImpl _context;
 
         /// <summary>
         /// 
@@ -50,7 +50,7 @@ namespace Kistl.DalProvider.Client
         private IProxy _proxy;
         private readonly IPerfCounter perfCounter;
 
-        internal KistlContextProvider(KistlContextImpl ctx, InterfaceType ifType, IProxy proxy, IPerfCounter perfCounter)
+        internal ZetboxContextProvider(ZetboxContextImpl ctx, InterfaceType ifType, IProxy proxy, IPerfCounter perfCounter)
         {
             _context = ctx;
             _type = ifType;
@@ -245,7 +245,7 @@ namespace Kistl.DalProvider.Client
         #region Local Object handling
         private IList QueryFromLocalObjectsHack(InterfaceType ifType)
         {
-            MethodInfo mi = typeof(KistlContextProvider).GetMethod("QueryFromLocalObjects", BindingFlags.Instance | BindingFlags.NonPublic)
+            MethodInfo mi = typeof(ZetboxContextProvider).GetMethod("QueryFromLocalObjects", BindingFlags.Instance | BindingFlags.NonPublic)
                 .MakeGenericMethod(ifType.Type);
             return (IList)mi.Invoke(this, new object[] { });
         }
@@ -266,7 +266,7 @@ namespace Kistl.DalProvider.Client
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            return (IQueryable<TElement>)new KistlContextQuery<TElement>(_context, _type, this, expression, perfCounter);
+            return (IQueryable<TElement>)new ZetboxContextQuery<TElement>(_context, _type, this, expression, perfCounter);
         }
 
         public IQueryable CreateQuery(Expression expression)
@@ -274,7 +274,7 @@ namespace Kistl.DalProvider.Client
             if (expression == null) { throw new ArgumentNullException("expression"); }
 
             Type elementType = expression.Type.FindElementTypes().Single(t => t != typeof(object));
-            return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
+            return (IQueryable)Activator.CreateInstance(typeof(ZetboxContextQuery<>)
                 .MakeGenericType(elementType), new object[] { _context, _type, this, expression, perfCounter });
         }
 
@@ -335,7 +335,7 @@ namespace Kistl.DalProvider.Client
                 else
                     base.Visit(m.Arguments[0]);
             }
-            else if (m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextQueryableExtensions)))
+            else if (m.IsMethodCallExpression("WithEagerLoading", typeof(ZetboxContextQueryableExtensions)))
             {
                 _eagerLoadLists = true;
             }

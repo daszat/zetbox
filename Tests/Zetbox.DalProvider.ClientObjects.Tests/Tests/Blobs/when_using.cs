@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 using NUnit.Framework;
-using Kistl.API.Client;
+using Zetbox.API.Client;
 
-namespace Kistl.DalProvider.Client.Tests.Blobs
+namespace Zetbox.DalProvider.Client.Tests.Blobs
 {
     [TestFixture]
-    [Ignore("Needs mocked IKistlService and IKistlServiceStreams")]
+    [Ignore("Needs mocked IZetboxService and IZetboxServiceStreams")]
     public class when_using
-        : Kistl.API.AbstractConsumerTests.Blobs.when_using
+        : Zetbox.API.AbstractConsumerTests.Blobs.when_using
     {
     }
 }

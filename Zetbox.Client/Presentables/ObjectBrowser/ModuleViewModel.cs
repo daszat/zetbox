@@ -4,14 +4,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Client.Presentables.KistlBase;
+using Zetbox.API;
+using Zetbox.API.Configuration;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Client.Presentables.ZetboxBase;
 using System.Collections;
 
-namespace Kistl.Client.Presentables.ObjectBrowser
+namespace Zetbox.Client.Presentables.ObjectBrowser
 {
     public class ModuleViewModel : DataObjectViewModel
     {
@@ -27,12 +27,12 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             public IEnumerable Children { get; set; }
         }
 
-        public new delegate ModuleViewModel Factory(IKistlContext dataCtx, ViewModel parent, Module mdl);
+        public new delegate ModuleViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module mdl);
 
-        private Func<IKistlContext> _ctxFactory;
+        private Func<IZetboxContext> _ctxFactory;
 
         public ModuleViewModel(
-            IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory, IZetboxContext dataCtx, ViewModel parent,
             Module mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
@@ -95,7 +95,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 var mdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, _ctxFactory, cls, null);
                 mdl.AllowAddNew = true;
                 mdl.AllowDelete = true;
-                mdl.ViewMethod = Kistl.App.GUI.InstanceListViewMethod.Details;
+                mdl.ViewMethod = Zetbox.App.GUI.InstanceListViewMethod.Details;
                 mdl.Commands.Add(ViewModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, this, cls));
                 result.Add(mdl);
             }

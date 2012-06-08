@@ -143,7 +143,7 @@ using System.Linq;
 using NDesk.Options;
 #endif
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
 
     public class OptionValueCollection : IList, IList<string>

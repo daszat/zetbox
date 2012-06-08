@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaManagement.OleDbProvider
+namespace Zetbox.Server.SchemaManagement.OleDbProvider
 {
     using System;
     using System.Collections.Generic;
@@ -9,14 +9,14 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Kistl.API;
-    using Kistl.API.Server;
+    using Zetbox.API;
+    using Zetbox.API.Server;
 
     public class OleDb
         : ISchemaProvider
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema.OLEDB");
-        private readonly static log4net.ILog QueryLog = log4net.LogManager.GetLogger("Kistl.Server.Schema.OLEDB.Queries");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Schema.OLEDB");
+        private readonly static log4net.ILog QueryLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.OLEDB.Queries");
 
         private string currentConnectionString;
 

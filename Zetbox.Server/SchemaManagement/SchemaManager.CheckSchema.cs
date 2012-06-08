@@ -1,17 +1,17 @@
 
-namespace Kistl.Server.SchemaManagement
+namespace Zetbox.Server.SchemaManagement
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class SchemaManager
     {
@@ -22,7 +22,7 @@ namespace Kistl.Server.SchemaManagement
                 this.repair = withRepair;
                 WriteReportHeader(withRepair ? "Check Schema Report with repair" : "Check Schema Report");
 
-                if (schema.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
+                if (schema.GetQuery<Zetbox.App.Base.ObjectClass>().Count() == 0)
                 {
                     Log.Error("Current Schema is empty, aborting");
                 }
@@ -60,7 +60,7 @@ namespace Kistl.Server.SchemaManagement
                 this.repair = withRepair;
                 WriteReportHeader(withRepair ? "Check Base-Schema Report with repair" : "Check Base-Schema Report");
 
-                if (schema.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
+                if (schema.GetQuery<Zetbox.App.Base.ObjectClass>().Count() == 0)
                 {
                     Log.Error("Current Schema is empty, aborting");
                 }
@@ -70,7 +70,7 @@ namespace Kistl.Server.SchemaManagement
                     Log.Debug("-------------------------");
 
                     // Checking Tables
-                    foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.Module.Name == "KistlBase" || o.Module.Name == "GUI").OrderBy(o => o.Name))
+                    foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.Module.Name == "ZetboxBase" || o.Module.Name == "GUI").OrderBy(o => o.Name))
                     {
                         Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
@@ -92,7 +92,7 @@ namespace Kistl.Server.SchemaManagement
 
                     Log.Info("Checking Relations");
                     Log.Debug("------------------");
-                    foreach (Relation rel in schema.GetQuery<Relation>().Where(r => r.Module.Name == "KistlBase" || r.Module.Name == "GUI"))
+                    foreach (Relation rel in schema.GetQuery<Relation>().Where(r => r.Module.Name == "ZetboxBase" || r.Module.Name == "GUI"))
                     {
                         string assocName = rel.GetAssociationName();
                         Log.DebugFormat("Relation: \"{0}\" \"{1} - {2}\"", assocName, rel.A.Type.Name, rel.B.Type.Name);
@@ -453,8 +453,8 @@ namespace Kistl.Server.SchemaManagement
             string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
             string assocAName = rel.GetRelationAssociationName(RelationEndRole.A);
             string assocBName = rel.GetRelationAssociationName(RelationEndRole.B);
-            string fkAIndex = fkAName + Kistl.API.Helper.PositionSuffix;
-            string fkBIndex = fkBName + Kistl.API.Helper.PositionSuffix;
+            string fkAIndex = fkAName + Zetbox.API.Helper.PositionSuffix;
+            string fkBIndex = fkBName + Zetbox.API.Helper.PositionSuffix;
 
             Log.DebugFormat("Checking [{0}]", assocName);
 

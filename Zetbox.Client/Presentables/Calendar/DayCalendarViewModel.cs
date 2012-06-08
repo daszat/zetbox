@@ -1,17 +1,17 @@
-namespace Kistl.Client.Presentables.Calendar
+namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables;
 
-    public class DayCalendarViewModel : Kistl.Client.Presentables.ViewModel
+    public class DayCalendarViewModel : Zetbox.Client.Presentables.ViewModel
     {
-        public new delegate DayCalendarViewModel Factory(IKistlContext dataCtx, WeekCalendarViewModel parent, DateTime day);
+        public new delegate DayCalendarViewModel Factory(IZetboxContext dataCtx, WeekCalendarViewModel parent, DateTime day);
 
-        public DayCalendarViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, WeekCalendarViewModel parent, DateTime day)
+        public DayCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, WeekCalendarViewModel parent, DateTime day)
             : base(dependencies, dataCtx, parent)
         {
             this.Day = day;

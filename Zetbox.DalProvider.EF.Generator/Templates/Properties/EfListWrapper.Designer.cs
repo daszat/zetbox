@@ -1,31 +1,31 @@
 using System;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
+namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst")]
-    public partial class EfListWrapper : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst")]
+    public partial class EfListWrapper : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected String name;
 		protected String associationName;
 		protected String roleName;
 		protected String referencedCollectionEntry;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String roleName, String referencedCollectionEntry)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, String name, String associationName, String roleName, String referencedCollectionEntry)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Properties.EfListWrapper", ctx, name, associationName, roleName, referencedCollectionEntry);
         }
 
-        public EfListWrapper(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String roleName, String referencedCollectionEntry)
+        public EfListWrapper(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, String name, String associationName, String roleName, String referencedCollectionEntry)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -38,7 +38,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst"
+#line 16 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        [EdmRelationshipNavigationPropertyAttribute(\"Model\", \"",  associationName , "\", \"",  roleName , "\")]\r\n");
 this.WriteObjects("        public EntityCollection<",  referencedCollectionEntry , "> ",  name , "\r\n");

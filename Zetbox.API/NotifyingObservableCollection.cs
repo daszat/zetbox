@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
     /// A ObservableCollection implementation, that reports changes to a parent Object.

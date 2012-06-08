@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     using System;
     using System.Collections;
@@ -10,7 +10,7 @@ namespace Kistl.API.Tests
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using Kistl.API.Mocks;
+    using Zetbox.API.Mocks;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
 
@@ -30,7 +30,7 @@ namespace Kistl.API.Tests
         {
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(true));
             ((TestDataObjectImpl)obj).ID = 1;
-            obj.AttachToContext(scope.Resolve<IKistlContext>());
+            obj.AttachToContext(scope.Resolve<IZetboxContext>());
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(false));
         }
 
@@ -39,7 +39,7 @@ namespace Kistl.API.Tests
         {
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(false));
             ((TestDataObjectImpl)obj).ID = 1;
-            obj.AttachToContext(scope.Resolve<IKistlContext>());
+            obj.AttachToContext(scope.Resolve<IZetboxContext>());
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(true));
         }
 

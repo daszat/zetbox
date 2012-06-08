@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     using System;
     using System.Collections.Generic;

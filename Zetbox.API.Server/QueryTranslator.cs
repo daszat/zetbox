@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections;
@@ -8,7 +8,7 @@ namespace Kistl.API.Server
     using System.Linq.Expressions;
     using System.Text;
 
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
     
     // http://msdn.microsoft.com/en-us/library/bb549414.aspx
     // The Execute method executes queries that return a single value 

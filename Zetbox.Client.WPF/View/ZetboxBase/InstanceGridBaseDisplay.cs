@@ -1,4 +1,4 @@
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
@@ -14,22 +14,22 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.App.Base;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.KistlBase;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.App.Base;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ZetboxBase;
     using Microsoft.Windows.Controls;
-    using Kistl.Client.WPF.Toolkit;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.WPF.CustomControls;
     using Microsoft.Windows.Controls.Primitives;
 
     public abstract class InstanceGridBaseDisplay : InstanceCollectionBase
     {
-        public abstract ZBoxDataGrid DataGrid { get; }
+        public abstract ZetboxDataGrid DataGrid { get; }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {

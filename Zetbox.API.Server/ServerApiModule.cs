@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +7,9 @@ namespace Kistl.API.Server
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server.PerfCounter;
-    using Kistl.API.Utils;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server.PerfCounter;
+    using Zetbox.API.Utils;
 
     public sealed class ServerApiModule
         : Autofac.Module
@@ -86,7 +86,7 @@ namespace Kistl.API.Server
                 .RegisterCmdLineAction("export=", "export the database to the specified xml file. Select the exported data with -schemamodules and -ownermodules",
                 (scope, arg) =>
                 {
-                    var config = scope.Resolve<KistlConfig>();
+                    var config = scope.Resolve<ZetboxConfig>();
                     string[] schemaModulesArray;
                     string[] ownerModulesArray;
                     ParseModules(config, out schemaModulesArray, out ownerModulesArray);
@@ -100,7 +100,7 @@ namespace Kistl.API.Server
                 .RegisterCmdLineAction("publish=", "publish the specified modules to this xml file. Select the exported data with -ownermodules",
                 (scope, arg) =>
                 {
-                    var config = scope.Resolve<KistlConfig>();
+                    var config = scope.Resolve<ZetboxConfig>();
                     string[] schemaModulesArray;
                     string[] ownerModulesArray;
                     ParseModules(config, out schemaModulesArray, out ownerModulesArray);
@@ -152,7 +152,7 @@ namespace Kistl.API.Server
                });
 
             builder
-                .RegisterCmdLineAction("syncidentities", "synchronices local and domain users with Kistl Identities",
+                .RegisterCmdLineAction("syncidentities", "synchronices local and domain users with Zetbox Identities",
                 scope =>
                 {
                     scope.Resolve<IServer>().SyncIdentities();
@@ -211,7 +211,7 @@ namespace Kistl.API.Server
                      }
                      else
                      {
-                         var ctx = scope.Resolve<IKistlServerContext>();
+                         var ctx = scope.Resolve<IZetboxServerContext>();
                          var properties = ParseProperties(args, ctx);
                          scope.Resolve<IServer>().RecalculateProperties(properties.ToArray());
                      }
@@ -219,7 +219,7 @@ namespace Kistl.API.Server
 
         }
 
-        private static List<App.Base.Property> ParseProperties(string[] args, IKistlServerContext ctx)
+        private static List<App.Base.Property> ParseProperties(string[] args, IZetboxServerContext ctx)
         {
             var properties = new List<App.Base.Property>();
             foreach (var prop in args)
@@ -247,7 +247,7 @@ namespace Kistl.API.Server
             return properties;
         }
 
-        private static void ParseModules(KistlConfig config, out string[] schemaModulesArray, out string[] ownerModulesArray)
+        private static void ParseModules(ZetboxConfig config, out string[] schemaModulesArray, out string[] ownerModulesArray)
         {
             List<string> schemaModules;
             if (config.AdditionalCommandlineOptions.TryGetValue(SchemaModulesKey, out schemaModules))

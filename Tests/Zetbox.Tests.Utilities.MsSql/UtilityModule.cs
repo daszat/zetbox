@@ -1,12 +1,12 @@
 
-namespace Kistl.Tests.Utilities.MsSql
+namespace Zetbox.Tests.Utilities.MsSql
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Server;
+    using Zetbox.API.Server;
 
     public sealed class UtilityModule
         : Module

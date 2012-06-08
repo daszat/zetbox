@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_PropertyGroupBoxView : Kistl.Client.ASPNET.Toolkit.View.PropertyGroupBoxView
+public partial class View_PropertyGroupBoxView : Zetbox.Client.ASPNET.Toolkit.View.PropertyGroupBoxView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

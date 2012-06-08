@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Models
+namespace Zetbox.Client.Models
 {
     using System;
     using System.Collections;
@@ -8,13 +8,13 @@ namespace Kistl.Client.Models
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
 
-    public static class BaseParameterExtensionsThisShouldBeMovedToAZBoxMethod
+    public static class BaseParameterExtensionsThisShouldBeMovedToAZetboxMethod
     {
         public static IValueModel GetValueModel(this BaseParameter parameter, bool allowNullInput)
         {

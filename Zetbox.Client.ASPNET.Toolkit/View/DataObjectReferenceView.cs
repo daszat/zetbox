@@ -2,19 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.GUI;
 using System.Web.UI;
-using Kistl.API;
-using Kistl.App.Extensions;
+using Zetbox.API;
+using Zetbox.App.Extensions;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using Kistl.Client.Presentables.ValueViewModels;
+using Zetbox.Client.Presentables.ValueViewModels;
 
-[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView.js", "text/javascript")] 
+[assembly: WebResource("Zetbox.Client.ASPNET.Toolkit.View.DataObjectReferenceView.js", "text/javascript")] 
 
 
-namespace Kistl.Client.ASPNET.Toolkit.View
+namespace Zetbox.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectReferenceView.ascx")]
     public abstract class DataObjectReferenceView : ModelUserControl<ObjectReferenceViewModel>, IScriptControl
@@ -41,7 +41,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         public System.Collections.Generic.IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            ScriptControlDescriptor desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.ObjectReferencePropertyControl",
+            ScriptControlDescriptor desc = new ScriptControlDescriptor("Zetbox.Client.ASPNET.ObjectReferencePropertyControl",
                 containerCtrl.ClientID);
             desc.AddElementProperty("LnkOpen", btnOpenCtrl.ClientID);
             desc.AddElementProperty("ValueCtrl", _valueCtrl.ClientID);
@@ -56,10 +56,10 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             // this.GetType() wont return a Type, where Assembly is set to this Assembly
             // -> use typeof(thisclass) instead
             yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
-                typeof(DataObjectReferenceView), "Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView.js"));
+                typeof(DataObjectReferenceView), "Zetbox.Client.ASPNET.Toolkit.View.DataObjectReferenceView.js"));
         }
 
-        public Kistl.API.IDataObject Value
+        public Zetbox.API.IDataObject Value
         {
             get
             {
@@ -70,8 +70,8 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 }
                 else
                 {
-                    return (IDataObject)KistlContextManagerModule.KistlContext.Find(Model.ReferencedClass.GetDescribedInterfaceType(),
-                        moniker.FromJSON(KistlContextManagerModule.KistlContext).ID);
+                    return (IDataObject)ZetboxContextManagerModule.ZetboxContext.Find(Model.ReferencedClass.GetDescribedInterfaceType(),
+                        moniker.FromJSON(ZetboxContextManagerModule.ZetboxContext).ID);
                 }
             }            
         }
@@ -82,7 +82,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
             lbItemCtrl.Text = Model.Value != null ? Model.Value.LongName : String.Empty;
 
-            btnNewCtrl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject(Kistl.JavascriptRenderer.newObject({0}));",
+            btnNewCtrl.Attributes.Add("onclick", string.Format("javascript: Zetbox.JavascriptRenderer.showObject(Zetbox.JavascriptRenderer.newObject({0}));",
                 Model.ReferencedClass.GetDescribedInterfaceType().ToJSON()));
 
             _valueCtrl.Value = Model.Value != null ? Model.Value.ToJSON() : String.Empty;

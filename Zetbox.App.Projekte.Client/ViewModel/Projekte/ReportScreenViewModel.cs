@@ -1,23 +1,23 @@
 
-namespace Kistl.App.Projekte.Client.ViewModel.Projekte
+namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.Client.Presentables.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.API;
-    using Kistl.App.GUI;
-    using Kistl.API.Dtos;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.App.GUI;
+    using Zetbox.API.Dtos;
 
     [ViewModelDescriptor]
     public class ReportScreenViewModel : NavigationReportScreenViewModel
     {
-        public new delegate ReportScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
+        public new delegate ReportScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
         public ReportScreenViewModel(IViewModelDependencies appCtx, 
-            IKistlContext dataCtx, ViewModel parent, NavigationScreen screen, IFileOpener fileOpener, ITempFileService tmpService)
+            IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen, IFileOpener fileOpener, ITempFileService tmpService)
             : base(appCtx, dataCtx, parent, screen, fileOpener, tmpService)
         {
         }

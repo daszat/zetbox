@@ -1,4 +1,4 @@
-namespace Kistl.Client.WPF
+namespace Zetbox.Client.WPF
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Kistl.Client.WPF
     using System.Windows.Media.Imaging;
     using System.Windows.Shapes;
     using System.Windows.Threading;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// Interaction logic for SplashScreen.xaml
@@ -34,7 +34,7 @@ namespace Kistl.Client.WPF
             Log.Debug("Initialization complete");
         }
 
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Client.WPF.SplashScreen");
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Client.WPF.SplashScreen");
         private static readonly object _lock = new object();
         private static StartupScreen _current = null;
         private static Thread _thread = null;
@@ -185,7 +185,7 @@ namespace Kistl.Client.WPF
             {
                 get
                 {
-                    return Kistl.Client.Properties.Resources.ExitButton;
+                    return Zetbox.Client.Properties.Resources.ExitButton;
                 }
             }
         }

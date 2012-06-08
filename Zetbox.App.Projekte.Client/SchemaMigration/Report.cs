@@ -1,4 +1,4 @@
-namespace ZBox.App.SchemaMigration
+namespace Zetbox.App.SchemaMigration
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,14 @@ namespace ZBox.App.SchemaMigration
     using System.Text;
     using System.Xml;
 
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.App.Base;
-    using Kistl.App.Projekte.Client.Helper;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.App.Base;
+    using Zetbox.App.Projekte.Client.Helper;
+    using Zetbox.App.Extensions;
     using MigraDoc.DocumentObjectModel;
-    using Kistl.Client.Presentables;
-    using ZBox.App.SchemaMigration;
+    using Zetbox.Client.Presentables;
+    using Zetbox.App.SchemaMigration;
 
     internal class ReportHelper
     {
@@ -57,9 +57,9 @@ namespace ZBox.App.SchemaMigration
             Document.Info.Subject = "Migration report table mapping";
         }
 
-        private ZBox.App.SchemaMigration.SourceTable _obj = null;
+        private Zetbox.App.SchemaMigration.SourceTable _obj = null;
 
-        public void CreateReport(ZBox.App.SchemaMigration.SourceTable obj)
+        public void CreateReport(Zetbox.App.SchemaMigration.SourceTable obj)
         {
             this._obj = obj;
 
@@ -245,9 +245,9 @@ namespace ZBox.App.SchemaMigration
             Document.Info.Subject = "Migration report";
         }
 
-        private ZBox.App.SchemaMigration.MigrationProject _obj = null;
+        private Zetbox.App.SchemaMigration.MigrationProject _obj = null;
 
-        public void CreateReport(ZBox.App.SchemaMigration.MigrationProject obj)
+        public void CreateReport(Zetbox.App.SchemaMigration.MigrationProject obj)
         {
             this._obj = obj;
 
@@ -273,7 +273,7 @@ namespace ZBox.App.SchemaMigration
             }
         }
 
-        private void RenderTableMappings(ZBox.App.SchemaMigration.StagingDatabase s)
+        private void RenderTableMappings(Zetbox.App.SchemaMigration.StagingDatabase s)
         {
             var p = Section.AddParagraph(s.Description);
             var t = NewTable();

@@ -1,19 +1,19 @@
 using System;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
+namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst")]
-    public partial class SecurityRulesProperties : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst")]
+    public partial class SecurityRulesProperties : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected ObjectClass cls;
 		protected string assocName;
 		protected string targetRoleName;
@@ -21,14 +21,14 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected string efNameRightsPropertyName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation, string efNameRightsPropertyName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation, string efNameRightsPropertyName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Properties.SecurityRulesProperties", ctx, cls, assocName, targetRoleName, referencedImplementation, efNameRightsPropertyName);
         }
 
-        public SecurityRulesProperties(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation, string efNameRightsPropertyName)
+        public SecurityRulesProperties(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation, string efNameRightsPropertyName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -42,19 +42,19 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 19 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
+#line 19 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("        private Kistl.API.AccessRights? __currentAccessRights;\r\n");
-this.WriteObjects("        public override Kistl.API.AccessRights CurrentAccessRights\r\n");
+this.WriteObjects("        private Zetbox.API.AccessRights? __currentAccessRights;\r\n");
+this.WriteObjects("        public override Zetbox.API.AccessRights CurrentAccessRights\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("				if(Context == null) return Kistl.API.AccessRights.Full;\r\n");
+this.WriteObjects("				if(Context == null) return Zetbox.API.AccessRights.Full;\r\n");
 this.WriteObjects("                if (__currentAccessRights == null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					__currentAccessRights = base.CurrentAccessRights;\r\n");
 this.WriteObjects("					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(i => i.Identity == Context.Internals().IdentityID); // TODO: should be SingleOrDefault() instead of FirstOrDefault()\r\n");
-this.WriteObjects("                    __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None;\r\n");
+this.WriteObjects("                    __currentAccessRights |= secRight != null ? (Zetbox.API.AccessRights)secRight.Right : Zetbox.API.AccessRights.None;\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return __currentAccessRights.Value;\r\n");
 this.WriteObjects("            }\r\n");

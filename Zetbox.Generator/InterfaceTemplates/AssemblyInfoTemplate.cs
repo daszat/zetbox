@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.InterfaceTemplates
+namespace Zetbox.Generator.InterfaceTemplates
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Kistl.Generator.InterfaceTemplates
     public class AssemblyInfoTemplate
         : Templates.AssemblyInfoTemplate
     {
-        public AssemblyInfoTemplate(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx)
+        public AssemblyInfoTemplate(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx)
             : base(_host, ctx)
         {
         }
@@ -18,7 +18,7 @@ namespace Kistl.Generator.InterfaceTemplates
         {
             base.ApplyAdditionalAssemblyInfo();
             this.WriteLine("[assembly: System.CLSCompliantAttribute(true)]");
-            this.WriteLine("[assembly: Kistl.API.KistlGeneratedVersion(\"" + Guid.NewGuid() + "\")]");
+            this.WriteLine("[assembly: Zetbox.API.ZetboxGeneratedVersion(\"" + Guid.NewGuid() + "\")]");
         }
     }
 }

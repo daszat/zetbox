@@ -3,7 +3,7 @@ del *.toc
 del *.aux
 del *.log
 del *.out
-del KistlGuide.lof
+del ZetboxGuide.lof
 
 rem VIM backup files
 del *~

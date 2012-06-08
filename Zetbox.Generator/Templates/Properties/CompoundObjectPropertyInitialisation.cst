@@ -1,15 +1,15 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.CompoundObjectPropertyInitialisation"
-    ClassName="Kistl.Generator.Templates.Properties.CompoundObjectPropertyInitialisation"
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.Generator.Templates.Properties.CompoundObjectPropertyInitialisation"
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="implementationTypeName" Type="string" %>
 <%@ Parameter Name="propertyName" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>

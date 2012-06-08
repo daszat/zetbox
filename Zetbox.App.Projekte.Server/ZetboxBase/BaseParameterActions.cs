@@ -1,10 +1,10 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// Server implementation
@@ -13,7 +13,7 @@ namespace Kistl.App.Base
     public static class BaseParameterActions
     {
         [Invocation]
-        public static void NotifyPreSave(Kistl.App.Base.BaseParameter obj)
+        public static void NotifyPreSave(Zetbox.App.Base.BaseParameter obj)
         {
             if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.Name))
             {

@@ -11,12 +11,12 @@ namespace at.dasz.DocumentManagement
     using System.Xml;
     using System.Xml.Serialization;
 
-    using Kistl.API;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Kistl.API.Utils;
-    using Kistl.DalProvider.Base;
-    using Kistl.DalProvider.NHibernate;
+    using Zetbox.API.Utils;
+    using Zetbox.DalProvider.Base;
+    using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
     /// File with changeable content
@@ -51,11 +51,11 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_DynamicFile")]
-        public override Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+        public override Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
-            var e = new MethodReturnEventArgs<Kistl.App.Base.Blob>();
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_DynamicFile != null)
             {
                 OnHandleBlobChange_DynamicFile(this, e, oldBlob, newBlob);
@@ -67,7 +67,7 @@ namespace at.dasz.DocumentManagement
             return e.Result;
         }
         public static event HandleBlobChange_Handler<DynamicFile> OnHandleBlobChange_DynamicFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DynamicFile> OnHandleBlobChange_DynamicFile_CanExec;
 
@@ -109,12 +109,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_DynamicFile")]
         public override void Open()
         {
@@ -129,7 +129,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Open_Handler<DynamicFile> OnOpen_DynamicFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DynamicFile> OnOpen_DynamicFile_CanExec;
 
@@ -171,12 +171,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_DynamicFile")]
         public override void Upload()
         {
@@ -191,7 +191,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Upload_Handler<DynamicFile> OnUpload_DynamicFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<DynamicFile> OnUpload_DynamicFile_CanExec;
 
@@ -233,7 +233,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -249,7 +249,7 @@ namespace at.dasz.DocumentManagement
 
         }
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
             var nhCtx = (NHibernateContext)ctx;
@@ -259,9 +259,9 @@ namespace at.dasz.DocumentManagement
             base.SetNew();
         }
 
-        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #region Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -272,9 +272,9 @@ namespace at.dasz.DocumentManagement
 
             // fix direct object references
         }
-        #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #endregion // Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #region Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnToString_DynamicFile")]
@@ -340,7 +340,7 @@ namespace at.dasz.DocumentManagement
         }
         public static event ObjectEventHandler<DynamicFile> OnNotifyDeleting_DynamicFile;
 
-        #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         public class DynamicFileProxy
             : at.dasz.DocumentManagement.FileNHibernateImpl.FileProxy
@@ -349,29 +349,29 @@ namespace at.dasz.DocumentManagement
             {
             }
 
-            public override Type ZBoxWrapper { get { return typeof(DynamicFileNHibernateImpl); } }
+            public override Type ZetboxWrapper { get { return typeof(DynamicFileNHibernateImpl); } }
 
-            public override Type ZBoxProxy { get { return typeof(DynamicFileProxy); } }
+            public override Type ZetboxProxy { get { return typeof(DynamicFileProxy); } }
 
         }
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
-    /// Interface fo an ZBox Custom Service
+    /// Interface fo an Zetbox Custom Service
     /// </summary>
     public interface IService
     {

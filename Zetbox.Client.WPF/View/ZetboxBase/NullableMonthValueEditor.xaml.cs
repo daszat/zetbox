@@ -12,18 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ValueViewModels;
-using Kistl.Client.WPF.CustomControls;
-using Kistl.Client.WPF.View.KistlBase;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ValueViewModels;
+using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.View.ZetboxBase;
 
-namespace Kistl.Client.WPF.View
+namespace Zetbox.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for NullableMonthValueEditor.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class NullableMonthValueEditor : PropertyEditor, IHasViewModel<NullableMonthPropertyViewModel>
     {
         public NullableMonthValueEditor()

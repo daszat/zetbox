@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     [Serializable]
     public class ExpressionTreeTranslator

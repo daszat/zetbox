@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
+using Zetbox.API;
+using Zetbox.API.Client;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.Client.Tests.PersistenceObjects
+namespace Zetbox.DalProvider.Client.Tests.PersistenceObjects
 {
     [TestFixture]
     public class navigator_context_checks 
-        : Kistl.API.AbstractConsumerTests.PersistenceObjects.navigator_context_checks
+        : Zetbox.API.AbstractConsumerTests.PersistenceObjects.navigator_context_checks
     {
     }
 }

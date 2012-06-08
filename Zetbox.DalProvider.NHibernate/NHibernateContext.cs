@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
@@ -9,16 +9,16 @@ namespace Kistl.DalProvider.NHibernate
     using System.Text;
     using global::NHibernate;
     using global::NHibernate.Linq;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Server.PerfCounter;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Server.PerfCounter;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     public sealed class NHibernateContext
-        : BaseKistlDataContext, IKistlServerContext
+        : BaseZetboxDataContext, IZetboxServerContext
     {
         private readonly NHibernateImplementationType.Factory _implTypeFactory;
         private readonly global::NHibernate.ISession _nhSession;
@@ -38,7 +38,7 @@ namespace Kistl.DalProvider.NHibernate
         internal NHibernateContext(
             IMetaDataResolver metaDataResolver,
             Identity identity,
-            KistlConfig config,
+            ZetboxConfig config,
             Func<IFrozenContext> lazyCtx,
             InterfaceType.Factory iftFactory,
             NHibernateImplementationType.Factory implTypeFactory,
@@ -82,7 +82,7 @@ namespace Kistl.DalProvider.NHibernate
         public override IPersistenceObject Attach(IPersistenceObject obj)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
-            if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Nh.Attach"); }
+            if (obj.Context != null && obj.Context != this) { throw new WrongZetboxContextException("Nh.Attach"); }
             if (obj.ID == Helper.INVALIDID) { throw new ArgumentException("NHibernate: cannot attach object without valid ID", "obj"); }
 
             // already attached?
@@ -111,7 +111,7 @@ namespace Kistl.DalProvider.NHibernate
         protected override void AttachAsNew(IPersistenceObject obj)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
-            if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Nh.Attach"); }
+            if (obj.Context != null && obj.Context != this) { throw new WrongZetboxContextException("Nh.Attach"); }
             if (obj.ID > Helper.INVALIDID) { throw new ArgumentException(String.Format("cannot attach object as new with valid ID ({0}#{1})", obj.GetType().FullName, obj.ID), "obj"); }
 
             // Handle created Objects
@@ -482,7 +482,7 @@ namespace Kistl.DalProvider.NHibernate
 
         private IProxyObject NhFindById(ImplementationType implType, int ID)
         {
-            if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID", ID, "Cannot ask NHibernate for INVALIDID"); }
+            if (ID <= Zetbox.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID", ID, "Cannot ask NHibernate for INVALIDID"); }
 
             return (IProxyObject)_nhSession
                         .CreateCriteria(ToProxyType(implType))
@@ -567,7 +567,7 @@ namespace Kistl.DalProvider.NHibernate
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             CheckDisposed();
-            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1},{2}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, NHibernateProvider.ServerAssembly), true));
+            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1},{2}", t.Type.FullName, Zetbox.API.Helper.ImplementationSuffix, NHibernateProvider.ServerAssembly), true));
         }
 
         internal Type ToProxyType(ImplementationType implType)
@@ -663,21 +663,21 @@ namespace Kistl.DalProvider.NHibernate
             {
                 // re-load proxy to avoid aliasing issues from unloaded proxies, but only if there is the possibility, that this might be a _different_ sub-class
 
-                if (proxy.ID > Kistl.API.Helper.INVALIDID)
+                if (proxy.ID > Zetbox.API.Helper.INVALIDID)
                 {
                     var objClass = metaDataResolver.GetObjectClass(ift);
                     if (objClass != null && metaDataResolver.GetObjectClass(ift).SubClasses.Count > 0)
                     {
-                        proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
+                        proxy = (IProxyObject)_nhSession.Load(proxy.ZetboxProxy, proxy.ID);
                         item = (NHibernatePersistenceObject)ContainsObject(ift, proxy.ID);
                     }
                 }
 
                 if (item == null)
                 {
-                    item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, lazyCtx, proxy);
+                    item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZetboxWrapper, lazyCtx, proxy);
 
-                    if (proxy.ID == Kistl.API.Helper.INVALIDID)
+                    if (proxy.ID == Zetbox.API.Helper.INVALIDID)
                     {
                         AttachAsNew(item);
                     }
@@ -700,7 +700,7 @@ namespace Kistl.DalProvider.NHibernate
             if (proxy == null) throw new ArgumentNullException("proxy");
 
             // existing object
-            if (proxy.ID > Kistl.API.Helper.INVALIDID)
+            if (proxy.ID > Zetbox.API.Helper.INVALIDID)
                 return proxy.ID;
 
             // new object
@@ -710,7 +710,7 @@ namespace Kistl.DalProvider.NHibernate
             if (item == null)
             {
                 // ... without wrapper
-                item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, lazyCtx, proxy);
+                item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZetboxWrapper, lazyCtx, proxy);
                 AttachAsNew(item);
             }
             return item.ID;

@@ -1,22 +1,22 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public partial class ObjectListProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Templates.Serialization.SerializationMembersList serializationList,
             ObjectReferenceProperty prop)
         {

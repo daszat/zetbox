@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KistlApp", "KistlApp\KistlApp.csproj", "{ABC19424-E9EB-4D9A-8C3A-10064A0317E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetboxApp", "ZetboxApp\ZetboxApp.csproj", "{ABC19424-E9EB-4D9A-8C3A-10064A0317E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KistlApp.Solution", "KistlApp.Solution\KistlApp.Solution.csproj", "{21AE7B50-2093-4437-BD14-648BEED8A54C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetboxApp.Solution", "ZetboxApp.Solution\ZetboxApp.Solution.csproj", "{21AE7B50-2093-4437-BD14-648BEED8A54C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KistlApp.Wizard", "KistlApp.Wizard\KistlApp.Wizard.csproj", "{D22A24E6-48CE-47F9-9987-68385E8C5AC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetboxApp.Wizard", "ZetboxApp.Wizard\ZetboxApp.Wizard.csproj", "{D22A24E6-48CE-47F9-9987-68385E8C5AC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

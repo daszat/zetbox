@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>Memory DalProvider Test Configuration</ConfigName>  
   <SourceFileLocation>
     <!-- default probe path -->
@@ -7,4 +7,4 @@
     <!-- common libaries -->
     <string>..\Common</string>
   </SourceFileLocation>
-</KistlConfig>
+</ZetboxConfig>

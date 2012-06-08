@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     /// <summary>
     /// Interaction logic for DataObjectLineDisplay.xaml

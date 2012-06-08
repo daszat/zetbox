@@ -1,3 +1,3 @@
 @echo off
 cd ..
-start bin\debug\Kistl.Client.WPF.exe
+start bin\debug\Zetbox.Client.WPF.exe

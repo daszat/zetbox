@@ -1,16 +1,16 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
     using System.IO;
-    using Kistl.Client.GUI;
-    using Kistl.App.Extensions;
+    using Zetbox.Client.GUI;
+    using Zetbox.App.Extensions;
 
     /// <summary>
     /// Client implementation
@@ -55,7 +55,7 @@ namespace Kistl.App.Base
 
                     if (newDescriptors.Count > 0)
                     {
-                        var workSpace = _mdlFactory.CreateViewModel<Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
+                        var workSpace = _mdlFactory.CreateViewModel<Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
                         foreach (IDataObject i in newDescriptors)
                         {
                             workSpace.AddItem(DataObjectViewModel.Fetch(_mdlFactory, ctx, workSpace, i));
@@ -78,7 +78,7 @@ namespace Kistl.App.Base
             }
         }
 
-        private static void CreateViewModelDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
+        private static void CreateViewModelDescriptors(IZetboxContext ctx, Dictionary<int, TypeRef> newTypes)
         {
             using (Logging.Log.InfoTraceMethodCallFormat("CreateViewModelDescriptors", "Creating ViewModelDescriptors"))
             {
@@ -112,7 +112,7 @@ namespace Kistl.App.Base
             }
         }
 
-        private static void CreateViewDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
+        private static void CreateViewDescriptors(IZetboxContext ctx, Dictionary<int, TypeRef> newTypes)
         {
             using (Logging.Log.InfoTraceMethodCallFormat("CreateViewDescriptors", "Creating ViewDescriptors"))
             {
@@ -161,7 +161,7 @@ namespace Kistl.App.Base
             }
         }
 
-        private static void MarkOldTypesAsDeleted(IKistlContext ctx, ILookup<string, TypeRef> oldTypes, Dictionary<int, TypeRef> newTypes)
+        private static void MarkOldTypesAsDeleted(IZetboxContext ctx, ILookup<string, TypeRef> oldTypes, Dictionary<int, TypeRef> newTypes)
         {
             using (Logging.Log.InfoTraceMethodCallFormat("MarkOldTypesAsDeleted", "Updating refs"))
             {
@@ -190,7 +190,7 @@ namespace Kistl.App.Base
             }
         }
 
-        private static Dictionary<int, TypeRef> LoadAndCreateTypes(Assembly assembly, IKistlContext ctx)
+        private static Dictionary<int, TypeRef> LoadAndCreateTypes(Assembly assembly, IZetboxContext ctx)
         {
             using (Logging.Log.InfoTraceMethodCall("Loading new types"))
             {

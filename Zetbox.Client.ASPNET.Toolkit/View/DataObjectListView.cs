@@ -6,15 +6,15 @@ using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using Kistl.API;
-using Kistl.App.Extensions;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ValueViewModels;
+using Zetbox.API;
+using Zetbox.App.Extensions;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ValueViewModels;
 
-[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.DataObjectListView.js", "text/javascript")] 
+[assembly: WebResource("Zetbox.Client.ASPNET.Toolkit.View.DataObjectListView.js", "text/javascript")] 
 
-namespace Kistl.Client.ASPNET.Toolkit.View
+namespace Zetbox.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectListView.ascx")]
     public abstract class DataObjectListView : ModelUserControl<ObjectListViewModel>, IScriptControl
@@ -36,7 +36,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             // if the value is empty -> the Object is been displayed the first time
             if (!string.IsNullOrEmpty(HdItemsControl.Value))
             {
-                var postedData = HdItemsControl.Value.FromJSONArray(KistlContextManagerModule.KistlContext).ToList();
+                var postedData = HdItemsControl.Value.FromJSONArray(ZetboxContextManagerModule.ZetboxContext).ToList();
 
                 var added = postedData.Except(Model.Value).ToList();
                 var deleted = Model.Value.Except(postedData).ToList();
@@ -76,7 +76,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         public System.Collections.Generic.IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            ScriptControlDescriptor desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.ObjectListControl",
+            ScriptControlDescriptor desc = new ScriptControlDescriptor("Zetbox.Client.ASPNET.ObjectListControl",
                 ContainerControl.ClientID);
             desc.AddComponentProperty("List", LstItemsControl.ClientID);
             desc.AddElementProperty("Items", HdItemsControl.ClientID);
@@ -93,7 +93,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             // this.GetType() wont return a Type, where Assembly is set to this Assembly
             // -> use typeof(thisclass) instead
             yield return new ScriptReference(this.Page.ClientScript.GetWebResourceUrl(
-                typeof(DataObjectListView), "Kistl.Client.ASPNET.Toolkit.View.DataObjectListView.js"));
+                typeof(DataObjectListView), "Zetbox.Client.ASPNET.Toolkit.View.DataObjectListView.js"));
         }        
     }
 }

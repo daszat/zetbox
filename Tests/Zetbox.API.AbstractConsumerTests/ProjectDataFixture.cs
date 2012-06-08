@@ -1,14 +1,14 @@
 
-namespace Kistl.API.AbstractConsumerTests
+namespace Zetbox.API.AbstractConsumerTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Projekte;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Projekte;
 
     using NUnit.Framework;
 
@@ -23,7 +23,7 @@ namespace Kistl.API.AbstractConsumerTests
         /// Creates a few new test objects
         /// </summary>
         /// <param name="ctx">this context is used to create the objects</param>
-        public static void CreateTestData(IKistlContext ctx)
+        public static void CreateTestData(IZetboxContext ctx)
         {
             var kunde = ctx.Create<Kunde>();
             kunde.EMails.Add("office@example.com");
@@ -49,7 +49,7 @@ namespace Kistl.API.AbstractConsumerTests
             kunde.PLZ = "4444";
 
             var prj = ctx.Create<Projekt>();
-            prj.Name = "Kistl";
+            prj.Name = "Zetbox";
 
             var task1 = ctx.Create<Task>();
             task1.Name = "task1";
@@ -83,7 +83,7 @@ namespace Kistl.API.AbstractConsumerTests
         /// Deletes all remaining test objects.
         /// </summary>
         /// <param name="ctx">this context is used to delete the objects</param>
-        public static void DeleteData(IKistlContext ctx)
+        public static void DeleteData(IZetboxContext ctx)
         {
             ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
             ctx.GetQuery<Auftrag>().ForEach(obj => ctx.Delete(obj));

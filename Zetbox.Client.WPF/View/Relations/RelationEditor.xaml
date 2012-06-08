@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.Relations.RelationEditor"
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.Relations.RelationEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-             xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
-             xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-             xmlns:viewKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-             xmlns:rels="clr-namespace:Kistl.Client.WPF.View.Relations">
+             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+             xmlns:viewZetboxBase="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+             xmlns:rels="clr-namespace:Zetbox.Client.WPF.View.Relations">
 
     <DockPanel>
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"

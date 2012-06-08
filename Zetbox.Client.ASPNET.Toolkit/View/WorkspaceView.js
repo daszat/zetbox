@@ -5,26 +5,26 @@
 // Javascript Functions for the WorkspaceView
 //----------------------------------------------------------------
 
-Type.registerNamespace("Kistl.Client.ASPNET.View");
+Type.registerNamespace("Zetbox.Client.ASPNET.View");
 
-Kistl.Client.ASPNET.View.WorkspaceView = function(element) {
+Zetbox.Client.ASPNET.View.WorkspaceView = function(element) {
     // Private Fields
     this._listObjects = null;
     this._currentIndex = null;
 
-    Kistl.Client.ASPNET.View.WorkspaceView.initializeBase(this, [element]);
+    Zetbox.Client.ASPNET.View.WorkspaceView.initializeBase(this, [element]);
 }
 
-Kistl.Client.ASPNET.View.WorkspaceView.prototype = {
+Zetbox.Client.ASPNET.View.WorkspaceView.prototype = {
     // Inititalize Control
     initialize: function() {
-        Kistl.Client.ASPNET.View.WorkspaceView.callBaseMethod(this, 'initialize');
+        Zetbox.Client.ASPNET.View.WorkspaceView.callBaseMethod(this, 'initialize');
 
         this.SetObjectVisible(this.get_CurrentIndex());
     },
     // Dispose
     dispose: function() {
-        Kistl.Client.ASPNET.View.WorkspaceView.callBaseMethod(this, 'dispose');
+        Zetbox.Client.ASPNET.View.WorkspaceView.callBaseMethod(this, 'dispose');
     },
     // public Properties
     get_ListObjects: function() {
@@ -59,5 +59,5 @@ Kistl.Client.ASPNET.View.WorkspaceView.prototype = {
     }
 }
 
-Kistl.Client.ASPNET.View.WorkspaceView.registerClass('Kistl.Client.ASPNET.View.WorkspaceView', Sys.UI.Control);
+Zetbox.Client.ASPNET.View.WorkspaceView.registerClass('Zetbox.Client.ASPNET.View.WorkspaceView', Sys.UI.Control);
 if (typeof (Sys) !== 'undefined') Sys.Application.notifyScriptLoaded();

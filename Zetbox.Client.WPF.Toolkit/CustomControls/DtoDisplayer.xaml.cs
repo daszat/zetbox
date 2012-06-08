@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Kistl.Client.WPF.CustomControls
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Kistl.Client.Presentables.DtoViewModels;
+    using Zetbox.Client.Presentables.DtoViewModels;
 
     /// <summary>
     /// Interaction logic for DtoDisplayer.xaml

@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
@@ -7,19 +7,19 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public partial class ReloadOneReference
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectReferenceProperty prop)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, ObjectReferenceProperty prop)
         {
             if (_host == null) { throw new ArgumentNullException("_host"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            Relation rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
+            Relation rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
             RelationEnd relEnd = rel.GetEnd(prop);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 

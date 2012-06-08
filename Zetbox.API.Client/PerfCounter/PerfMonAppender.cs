@@ -1,4 +1,4 @@
-namespace Kistl.API.Client.PerfCounter
+namespace Zetbox.API.Client.PerfCounter
 {
     using System;
     using System.Collections.Generic;
@@ -6,9 +6,9 @@ namespace Kistl.API.Client.PerfCounter
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.PerfCounter;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.PerfCounter;
+    using Zetbox.API.Utils;
 
     public class PerfMonAppender : BasePerfMonAppender, IPerfCounterAppender
     {
@@ -25,9 +25,9 @@ namespace Kistl.API.Client.PerfCounter
             }
         }
 
-        public override string Category { get { return "Kistl Client"; } }
+        public override string Category { get { return "Zetbox Client"; } }
 
-        public PerfMonAppender(Configuration.KistlConfig cfg)
+        public PerfMonAppender(Configuration.ZetboxConfig cfg)
             : base(cfg)
         {
         }

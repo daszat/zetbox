@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
@@ -7,18 +7,18 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public class Template
         : Templates.ObjectClasses.Template
     {
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Kistl.App.Base.ObjectClass cls)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, Zetbox.App.Base.ObjectClass cls)
             : base(_host, ctx, cls)
         {
         }
@@ -74,7 +74,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         protected override void ApplyObjectReferencePropertyTemplate(ObjectReferenceProperty prop)
         {
-            var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
+            var rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
 
             // Navigator can be NULL
             // Debug.Assert(rel.A.Navigator.ID == prop.ID || rel.B.Navigator.ID == prop.ID);
@@ -102,7 +102,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
         {
             // TODO: move debugging output into Templates
             this.WriteLine("    /*");
-            RelationDebugTemplate.Call(Host, ctx, Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop));
+            RelationDebugTemplate.Call(Host, ctx, Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop));
             this.WriteLine("    */");
 
             var rel = RelationExtensions.Lookup(ctx, prop);

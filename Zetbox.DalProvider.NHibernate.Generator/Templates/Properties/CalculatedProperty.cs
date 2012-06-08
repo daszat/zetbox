@@ -1,17 +1,17 @@
 
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Serialization = Kistl.Generator.Templates.Serialization;
+    using Zetbox.API;
+    using Serialization = Zetbox.Generator.Templates.Serialization;
 
-    public class CalculatedProperty : Kistl.Generator.Templates.Properties.CalculatedProperty
+    public class CalculatedProperty : Zetbox.Generator.Templates.Properties.CalculatedProperty
     {
-        public CalculatedProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, string modulenamespace, string className, string referencedType, string propertyName, string getterEventName, bool isCompound)
+        public CalculatedProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, string modulenamespace, string className, string referencedType, string propertyName, string getterEventName, bool isCompound)
             : base(_host, ctx, serializationList, modulenamespace, className, referencedType, propertyName, getterEventName, isCompound)
         {
         }

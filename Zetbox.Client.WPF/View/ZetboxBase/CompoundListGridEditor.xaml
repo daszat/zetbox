@@ -1,11 +1,11 @@
-﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.CompoundListGridEditor"
+﻿<ctrls:PropertyEditor x:Class="Zetbox.Client.WPF.View.ZetboxBase.CompoundListGridEditor"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
-                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-                     xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                     xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                     xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                      VerticalContentAlignment="Stretch">
   <ctrls:PropertyEditor.Resources>
     <!-- implement workaround for DeferRefresh exception as described on http://stackoverflow.com/questions/3461714/wpf-datagrid-combobox-causes-invalidoperationexception -->
@@ -30,7 +30,7 @@
         </ctrls:WorkaroundToolBar>
 
         <!-- configured from code, see RefreshGridView() -->
-        <ctrls:ZBoxDataGrid x:Name="lst"
+        <ctrls:ZetboxDataGrid x:Name="lst"
                             BorderThickness="0"
                             ItemsSource="{Binding Source={StaticResource itemsSource}}"
                             MinHeight="50"
@@ -38,11 +38,11 @@
                             CanUserAddRows="{Binding AllowInlineAddNew}"
                             CanUserDeleteRows="{Binding AllowInlineDelete}"
                             AutoGenerateColumns="False"
-                            SelectedZBoxItems="{Binding SelectedProxies}">
-            <ctrls:ZBoxDataGrid.ContextMenu>
+                            SelectedZetboxItems="{Binding SelectedProxies}">
+            <ctrls:ZetboxDataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}"
                              ItemContainerStyle="{StaticResource CommandMenuItem}"/>                    
-            </ctrls:ZBoxDataGrid.ContextMenu>
-        </ctrls:ZBoxDataGrid>
+            </ctrls:ZetboxDataGrid.ContextMenu>
+        </ctrls:ZetboxDataGrid>
     </DockPanel>
 </ctrls:PropertyEditor>

@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 using System.Collections;
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     public class Record
     {

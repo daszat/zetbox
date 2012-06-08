@@ -11,12 +11,12 @@ namespace at.dasz.DocumentManagement
     using System.Xml;
     using System.Xml.Serialization;
 
-    using Kistl.API;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
-    using Kistl.API.Utils;
-    using Kistl.DalProvider.Base;
-    using Kistl.DalProvider.NHibernate;
+    using Zetbox.API.Utils;
+    using Zetbox.DalProvider.Base;
+    using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
     /// Files beeing imported by the import service.
@@ -51,11 +51,11 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnHandleBlobChange_ImportedFile")]
-        public override Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+        public override Zetbox.App.Base.Blob HandleBlobChange(Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
-            var e = new MethodReturnEventArgs<Kistl.App.Base.Blob>();
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Blob>();
             if (OnHandleBlobChange_ImportedFile != null)
             {
                 OnHandleBlobChange_ImportedFile(this, e, oldBlob, newBlob);
@@ -67,7 +67,7 @@ namespace at.dasz.DocumentManagement
             return e.Result;
         }
         public static event HandleBlobChange_Handler<ImportedFile> OnHandleBlobChange_ImportedFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnHandleBlobChange_ImportedFile_CanExec;
 
@@ -109,12 +109,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Converts the imported file to a document
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnMakeDocument_ImportedFile")]
         public virtual at.dasz.DocumentManagement.Document MakeDocument()
         {
@@ -131,7 +131,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeDocument_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.Document> ret);
         public static event MakeDocument_Handler<ImportedFile> OnMakeDocument_ImportedFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnMakeDocument_ImportedFile_CanExec;
 
@@ -173,12 +173,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnMakeDynamicFile_ImportedFile")]
         public virtual at.dasz.DocumentManagement.DynamicFile MakeDynamicFile()
         {
@@ -195,7 +195,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeDynamicFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.DynamicFile> ret);
         public static event MakeDynamicFile_Handler<ImportedFile> OnMakeDynamicFile_ImportedFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnMakeDynamicFile_ImportedFile_CanExec;
 
@@ -237,12 +237,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnMakeStaticFile_ImportedFile")]
         public virtual at.dasz.DocumentManagement.StaticFile MakeStaticFile()
         {
@@ -259,7 +259,7 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeStaticFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.StaticFile> ret);
         public static event MakeStaticFile_Handler<ImportedFile> OnMakeStaticFile_ImportedFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnMakeStaticFile_ImportedFile_CanExec;
 
@@ -301,12 +301,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Öffnet das Dokument schreibgeschützt
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_ImportedFile")]
         public override void Open()
         {
@@ -321,7 +321,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Open_Handler<ImportedFile> OnOpen_ImportedFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnOpen_ImportedFile_CanExec;
 
@@ -363,12 +363,12 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Uploads a new Content
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnUpload_ImportedFile")]
         public override void Upload()
         {
@@ -383,7 +383,7 @@ namespace at.dasz.DocumentManagement
             }
         }
         public static event Upload_Handler<ImportedFile> OnUpload_ImportedFile;
-        // BEGIN Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
 		public static event CanExecMethodEventHandler<ImportedFile> OnUpload_ImportedFile_CanExec;
 
@@ -425,7 +425,7 @@ namespace at.dasz.DocumentManagement
 				return e.Result;
 			}
         }
-        // END Kistl.Generator.Templates.ObjectClasses.MethodCanExec
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         public override Type GetImplementedInterface()
         {
@@ -441,7 +441,7 @@ namespace at.dasz.DocumentManagement
 
         }
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
             var nhCtx = (NHibernateContext)ctx;
@@ -451,9 +451,9 @@ namespace at.dasz.DocumentManagement
             base.SetNew();
         }
 
-        #region Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #region Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        #endregion // Kistl.Generator.Templates.ObjectClasses.OnPropertyChange
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -464,9 +464,9 @@ namespace at.dasz.DocumentManagement
 
             // fix direct object references
         }
-        #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #endregion // Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        #region Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
+        #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnToString_ImportedFile")]
@@ -532,7 +532,7 @@ namespace at.dasz.DocumentManagement
         }
         public static event ObjectEventHandler<ImportedFile> OnNotifyDeleting_ImportedFile;
 
-        #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
+        #endregion // Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         public class ImportedFileProxy
             : at.dasz.DocumentManagement.FileNHibernateImpl.FileProxy
@@ -541,29 +541,29 @@ namespace at.dasz.DocumentManagement
             {
             }
 
-            public override Type ZBoxWrapper { get { return typeof(ImportedFileNHibernateImpl); } }
+            public override Type ZetboxWrapper { get { return typeof(ImportedFileNHibernateImpl); } }
 
-            public override Type ZBoxProxy { get { return typeof(ImportedFileProxy); } }
+            public override Type ZetboxProxy { get { return typeof(ImportedFileProxy); } }
 
         }
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null

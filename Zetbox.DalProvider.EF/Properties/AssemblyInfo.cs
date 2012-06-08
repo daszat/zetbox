@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.DalProvider.Ef")]
+[assembly: AssemblyTitle("Zetbox.DalProvider.Ef")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl.DalProvider.Ef")]
+[assembly: AssemblyProduct("Zetbox.DalProvider.Ef")]
 [assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

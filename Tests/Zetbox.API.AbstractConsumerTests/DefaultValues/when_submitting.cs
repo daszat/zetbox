@@ -1,11 +1,11 @@
 
-namespace Kistl.API.AbstractConsumerTests.DefaultValues
+namespace Zetbox.API.AbstractConsumerTests.DefaultValues
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
     using NUnit.Framework;
 
     public abstract class when_submitting_without_read

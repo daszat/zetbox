@@ -1,7 +1,7 @@
 ﻿<Page x:Class="WPFPresenter.Slides._05Slide"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:kistl="clr-namespace:Kistl.Client;assembly=Kistl.Client"
+    xmlns:zetbox="clr-namespace:Zetbox.Client;assembly=Zetbox.Client"
     Title="Kurze Präsentation" Width="1000" Height="600">
     <Grid Name="RootPanel">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Name="WaitPanel">

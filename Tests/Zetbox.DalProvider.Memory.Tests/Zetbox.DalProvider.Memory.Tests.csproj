@@ -8,8 +8,8 @@
     <ProjectGuid>{CF5E170F-DC31-4AAE-AFFC-8BECA0B366EF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DalProvider.Memory.Tests</RootNamespace>
-    <AssemblyName>Kistl.DalProvider.Memory.Tests</AssemblyName>
+    <RootNamespace>Zetbox.DalProvider.Memory.Tests</RootNamespace>
+    <AssemblyName>Zetbox.DalProvider.Memory.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NoWarn>1591</NoWarn>
@@ -80,38 +80,38 @@
     <Compile Include="TestDeploymentRestrictor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.App.Projekte.Common\Kistl.App.Projekte.Common.csproj">
+    <ProjectReference Include="..\..\Zetbox.App.Projekte.Common\Zetbox.App.Projekte.Common.csproj">
       <Project>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</Project>
-      <Name>Kistl.App.Projekte.Common</Name>
+      <Name>Zetbox.App.Projekte.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.App.Projekte.Server\Kistl.App.Projekte.Server.csproj">
+    <ProjectReference Include="..\..\Zetbox.App.Projekte.Server\Zetbox.App.Projekte.Server.csproj">
       <Project>{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}</Project>
-      <Name>Kistl.App.Projekte.Server</Name>
+      <Name>Zetbox.App.Projekte.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.DalProvider.Memory\Kistl.DalProvider.Memory.csproj">
+    <ProjectReference Include="..\..\Zetbox.DalProvider.Memory\Zetbox.DalProvider.Memory.csproj">
       <Project>{7E3CE048-00C1-4357-BE27-801AB5B75FE3}</Project>
-      <Name>Kistl.DalProvider.Memory</Name>
+      <Name>Zetbox.DalProvider.Memory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects.Memory\Kistl.Objects.Memory.csproj">
+    <ProjectReference Include="..\..\Zetbox.Objects.Memory\Zetbox.Objects.Memory.csproj">
       <Project>{01E60FD5-CD96-466A-83B1-8EFC7452B47C}</Project>
-      <Name>Kistl.Objects.Memory</Name>
+      <Name>Zetbox.Objects.Memory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
+    <ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj">
       <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
-      <Name>Kistl.API.AbstractConsumerTests</Name>
+      <Name>Zetbox.API.AbstractConsumerTests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Kistl.DalProvider.Memory.Tests.nunit" />
+    <None Include="Zetbox.DalProvider.Memory.Tests.nunit" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

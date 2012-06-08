@@ -1,12 +1,12 @@
 
-namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
+namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Test;
     using NUnit.Framework;
 
     public abstract class when_initializing

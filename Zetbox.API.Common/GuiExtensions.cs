@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -7,10 +7,10 @@ namespace Kistl.App.Extensions
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// A set of extension methods for the GUI module.
@@ -259,7 +259,7 @@ namespace Kistl.App.Extensions
         }
 
 
-        private static void PrimeCaches(Toolkit? tk, IReadOnlyKistlContext ctx)
+        private static void PrimeCaches(Toolkit? tk, IReadOnlyZetboxContext ctx)
         {
             if (_pmdCache == null)
             {
@@ -314,7 +314,7 @@ namespace Kistl.App.Extensions
 
             private static readonly ReadOnlyCollection<ViewDescriptor> EmptyList = new ReadOnlyCollection<ViewDescriptor>(new List<ViewDescriptor>(0));
 
-            public static Content CreateCache(Toolkit tk, IReadOnlyKistlContext ctx)
+            public static Content CreateCache(Toolkit tk, IReadOnlyZetboxContext ctx)
             {
                 var result = new Content();
                 
@@ -417,9 +417,9 @@ namespace Kistl.App.Extensions
     internal class ViewModelDescriptorCache : Cache
     {
         private Dictionary<Guid, ViewModelDescriptor> _cache = null;
-        private IReadOnlyKistlContext _context = null;
+        private IReadOnlyZetboxContext _context = null;
 
-        public ViewModelDescriptorCache(IReadOnlyKistlContext ctx)
+        public ViewModelDescriptorCache(IReadOnlyZetboxContext ctx)
         {
             _context = ctx;
             FillCache();

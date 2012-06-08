@@ -1,23 +1,23 @@
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     [Implementor]
     public static class CompoundObjectParameterActions
     {
         [Invocation]
-        public static void GetParameterType(Kistl.App.Base.CompoundObjectParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        public static void GetParameterType(Zetbox.App.Base.CompoundObjectParameter obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
         {
             var cls = obj.CompoundObject;
-            e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             BaseParameterActions.DecorateParameterType(obj, e, false);
         }
 

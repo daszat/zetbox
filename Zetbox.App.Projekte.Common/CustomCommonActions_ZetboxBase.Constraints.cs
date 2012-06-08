@@ -1,15 +1,15 @@
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Extensions;
 
-    public static partial class CustomCommonActions_KistlBase
+    public static partial class CustomCommonActions_ZetboxBase
     {
         #region Relation_Storage Constraint
 

@@ -11,9 +11,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Security;
-using Kistl.API.Utils;
+using Zetbox.API.Utils;
 
-namespace Kistl.Client.WPF.View.DocumentManagement
+namespace Zetbox.Client.WPF.View.DocumentManagement
 {
     class PreviewersManager : IDisposable
     {

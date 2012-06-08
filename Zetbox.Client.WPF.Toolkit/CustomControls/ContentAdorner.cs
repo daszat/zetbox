@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     using System;
     using System.Collections.Generic;

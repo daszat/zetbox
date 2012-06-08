@@ -1,20 +1,20 @@
 
-namespace Kistl.Client.Presentables.GUI
+namespace Zetbox.Client.Presentables.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables.KistlBase;
+    using Zetbox.API;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
     public class NavigatorViewModel
         : WindowViewModel
     {
-        public new delegate NavigatorViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen root);
+        public new delegate NavigatorViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen root);
 
         private readonly NavigationEntryViewModel _root;
         private NavigationEntryViewModel _current;
@@ -24,7 +24,7 @@ namespace Kistl.Client.Presentables.GUI
         private readonly ObservableCollection<NavigationEntryViewModel> _location;
         private readonly ReadOnlyObservableCollection<NavigationEntryViewModel> _locationRO;
 
-        public NavigatorViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, NavigationScreen root)
+        public NavigatorViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationScreen root)
             : base(dependencies, dataCtx, parent)
         {
             _current = _root = NavigationEntryViewModel.Fetch(ViewModelFactory, dataCtx, parent, root);

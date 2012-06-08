@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     using System;
     using System.Collections;
@@ -9,13 +9,13 @@ namespace Kistl.Client.WPF.CustomControls
     using System.Text;
     using System.Windows;
     using System.Windows.Data;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.Client.WPF.Toolkit;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.Client.WPF.Toolkit;
 
-    public class ZBoxDataGrid : Microsoft.Windows.Controls.DataGrid
+    public class ZetboxDataGrid : Microsoft.Windows.Controls.DataGrid
     {
-        public ZBoxDataGrid()
+        public ZetboxDataGrid()
         {
             this.ItemContainerStyle = Application.Current.Resources["DataGridItemContainerStyle"] as Style;
         }
@@ -93,33 +93,33 @@ namespace Kistl.Client.WPF.CustomControls
         #endregion
 
         #region SelectionChanged
-        public object SelectedZBoxItems
+        public object SelectedZetboxItems
         {
-            get { return (object)GetValue(SelectedZBoxItemsProperty); }
-            set { SetValue(SelectedZBoxItemsProperty, value); }
+            get { return (object)GetValue(SelectedZetboxItemsProperty); }
+            set { SetValue(SelectedZetboxItemsProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SelectedZBoxItems.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedZBoxItemsProperty =
-            DependencyProperty.Register("SelectedZBoxItems", typeof(object), typeof(ZBoxDataGrid), new UIPropertyMetadata(null, new PropertyChangedCallback(OnSelectedZBoxItemsChanged)));
+        // Using a DependencyProperty as the backing store for SelectedZetboxItems.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedZetboxItemsProperty =
+            DependencyProperty.Register("SelectedZetboxItems", typeof(object), typeof(ZetboxDataGrid), new UIPropertyMetadata(null, new PropertyChangedCallback(OnSelectedZetboxItemsChanged)));
 
-        public static void OnSelectedZBoxItemsChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        public static void OnSelectedZetboxItemsChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            if (obj is ZBoxDataGrid)
+            if (obj is ZetboxDataGrid)
             {
-                ((ZBoxDataGrid)obj).AttachSelectedZBoxItemsCollectionChanged();
+                ((ZetboxDataGrid)obj).AttachSelectedZetboxItemsCollectionChanged();
             }
         }
 
-        private void AttachSelectedZBoxItemsCollectionChanged()
+        private void AttachSelectedZetboxItemsCollectionChanged()
         {
-            if (SelectedZBoxItems is INotifyCollectionChanged)
+            if (SelectedZetboxItems is INotifyCollectionChanged)
             {
-                ((INotifyCollectionChanged)SelectedZBoxItems).CollectionChanged += new NotifyCollectionChangedEventHandler(ZBoxDataGrid_CollectionChanged);
+                ((INotifyCollectionChanged)SelectedZetboxItems).CollectionChanged += new NotifyCollectionChangedEventHandler(ZetboxDataGrid_CollectionChanged);
                 try
                 {
                     _selectedItemsChangedByViewModel = true;
-                    ((IEnumerable)SelectedZBoxItems).ForEach<object>(i => this.SelectedItems.Add(i));
+                    ((IEnumerable)SelectedZetboxItems).ForEach<object>(i => this.SelectedItems.Add(i));
                 }
                 finally
                 {
@@ -132,7 +132,7 @@ namespace Kistl.Client.WPF.CustomControls
         private bool _selectedItemsChangedByViewModel = false;
         private bool _selectedItemsChangedByList = false;
 
-        private void ZBoxDataGrid_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void ZetboxDataGrid_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (_selectedItemsChangedByList) return;
 
@@ -188,15 +188,15 @@ namespace Kistl.Client.WPF.CustomControls
                 if (e.OriginalSource == this)
                 {
                     e.Handled = true;
-                    if (SelectedZBoxItems is IList)
+                    if (SelectedZetboxItems is IList)
                     {
-                        var lst = (IList)SelectedZBoxItems;
+                        var lst = (IList)SelectedZetboxItems;
                         e.RemovedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Remove(i));
                         e.AddedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Add(i));
                     }
-                    else if (SelectedZBoxItems is ICollection)
+                    else if (SelectedZetboxItems is ICollection)
                     {
-                        var lst = (ICollection)SelectedZBoxItems;
+                        var lst = (ICollection)SelectedZetboxItems;
                         e.RemovedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Remove(i));
                         e.AddedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Add(i, true));
                     }

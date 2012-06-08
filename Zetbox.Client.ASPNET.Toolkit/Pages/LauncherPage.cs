@@ -10,17 +10,17 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.GUI;
-using Kistl.Client;
-using Kistl.Client.ASPNET.Toolkit;
-using Kistl.Client.ASPNET.Toolkit.View;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ObjectBrowser;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.GUI;
+using Zetbox.Client;
+using Zetbox.Client.ASPNET.Toolkit;
+using Zetbox.Client.ASPNET.Toolkit.View;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ObjectBrowser;
 
-namespace Kistl.Client.ASPNET.Toolkit.Pages
+namespace Zetbox.Client.ASPNET.Toolkit.Pages
 {
     public abstract class LauncherPage : System.Web.UI.Page
     {
@@ -33,10 +33,10 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
 
         void LauncherPage_Init(object sender, EventArgs e)
         {
-            var mdl = KistlContextManagerModule.ViewModelFactory
-                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext, null);
-            ControlKind launcher = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_LauncherKind.Find(KistlContextManagerModule.KistlContext);
-            KistlContextManagerModule.ViewModelFactory.CreateSpecificView(mdl, launcher, ctrlMainContent);
+            var mdl = ZetboxContextManagerModule.ViewModelFactory
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ZetboxContextManagerModule.ZetboxContext, null);
+            ControlKind launcher = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_LauncherKind.Find(ZetboxContextManagerModule.ZetboxContext);
+            ZetboxContextManagerModule.ViewModelFactory.CreateSpecificView(mdl, launcher, ctrlMainContent);
         }
     }
 }

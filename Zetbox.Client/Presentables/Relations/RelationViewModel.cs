@@ -1,25 +1,25 @@
 
-namespace Kistl.Client.Presentables.Relations
+namespace Zetbox.Client.Presentables.Relations
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     public class RelationViewModel
         : DataObjectViewModel
     {
-        public new delegate RelationViewModel Factory(IKistlContext dataCtx, ViewModel parent, Relation rel);
+        public new delegate RelationViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Relation rel);
 
         private Relation _relation;
 
         public RelationViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             Relation rel)
             : base(appCtx, dataCtx, parent, rel)
         {

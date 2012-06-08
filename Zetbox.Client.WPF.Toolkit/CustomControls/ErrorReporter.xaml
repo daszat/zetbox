@@ -4,10 +4,10 @@
     x:Name=CurrentErrorReporter here or use TemplateBindings where possible.
 -->
 <UserControl x:Name="CurrentErrorReporter"
-             x:Class="Kistl.Client.WPF.CustomControls.ErrorReporter"
+             x:Class="Zetbox.Client.WPF.CustomControls.ErrorReporter"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:self="clr-namespace:Kistl.Client.WPF.CustomControls">
+             xmlns:self="clr-namespace:Zetbox.Client.WPF.CustomControls">
     <UserControl.Template>
         <ControlTemplate TargetType="{x:Type self:ErrorReporter}">
             <Border Background="{TemplateBinding Background}"

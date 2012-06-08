@@ -5,9 +5,9 @@
 // Javascript Functions for the ObjectListControl
 //----------------------------------------------------------------
 
-Type.registerNamespace("Kistl.Client.ASPNET");
+Type.registerNamespace("Zetbox.Client.ASPNET");
 
-Kistl.Client.ASPNET.ObjectReferencePropertyControl = function(element) {
+Zetbox.Client.ASPNET.ObjectReferencePropertyControl = function(element) {
     // Private Fields
     this._lnkOpen = null;
     this._valueCtrl = null;
@@ -16,13 +16,13 @@ Kistl.Client.ASPNET.ObjectReferencePropertyControl = function(element) {
     // Handler
     this._onLnkOpenClickHandler = null;
 
-    Kistl.Client.ASPNET.ObjectReferencePropertyControl.initializeBase(this, [element]);
+    Zetbox.Client.ASPNET.ObjectReferencePropertyControl.initializeBase(this, [element]);
 }
 
-Kistl.Client.ASPNET.ObjectReferencePropertyControl.prototype = {
+Zetbox.Client.ASPNET.ObjectReferencePropertyControl.prototype = {
     // Inititalize Control
     initialize: function() {
-        Kistl.Client.ASPNET.ObjectReferencePropertyControl.callBaseMethod(this, 'initialize');
+        Zetbox.Client.ASPNET.ObjectReferencePropertyControl.callBaseMethod(this, 'initialize');
 
         this._onLnkOpenClickHandler = Function.createDelegate(this, this._onLnkOpenClick);
         $addHandler(this._lnkOpen, "click", this._onLnkOpenClickHandler);
@@ -30,7 +30,7 @@ Kistl.Client.ASPNET.ObjectReferencePropertyControl.prototype = {
     },
     // Dispose
     dispose: function() {
-        Kistl.Client.ASPNET.ObjectReferencePropertyControl.callBaseMethod(this, 'dispose');
+        Zetbox.Client.ASPNET.ObjectReferencePropertyControl.callBaseMethod(this, 'dispose');
     },
     // public Properties
     get_LnkOpen: function() {
@@ -66,9 +66,9 @@ Kistl.Client.ASPNET.ObjectReferencePropertyControl.prototype = {
     _onLnkOpenClick: function() {
         var obj = this.get_Value();
         if (obj == null) return;
-        Kistl.JavascriptRenderer.showObject(obj);
+        Zetbox.JavascriptRenderer.showObject(obj);
     }
 }
 
-Kistl.Client.ASPNET.ObjectReferencePropertyControl.registerClass('Kistl.Client.ASPNET.ObjectReferencePropertyControl', Sys.UI.Control);
+Zetbox.Client.ASPNET.ObjectReferencePropertyControl.registerClass('Zetbox.Client.ASPNET.ObjectReferencePropertyControl', Sys.UI.Control);
 if (typeof (Sys) !== 'undefined') Sys.Application.notifyScriptLoaded();

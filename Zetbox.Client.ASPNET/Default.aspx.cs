@@ -10,13 +10,13 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.Client;
-using Kistl.Client.Presentables;
-using Kistl.Client.ASPNET.Toolkit;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.Client;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.ASPNET.Toolkit;
 
-public partial class _Default : Kistl.Client.ASPNET.Toolkit.Pages.LauncherPage
+public partial class _Default : Zetbox.Client.ASPNET.Toolkit.Pages.LauncherPage
 {
     protected override Control ctrlMainContent
     {

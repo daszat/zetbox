@@ -1,11 +1,11 @@
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
+    using Zetbox.API.Server;
 
     public class OutputStream : IDisposable
     {

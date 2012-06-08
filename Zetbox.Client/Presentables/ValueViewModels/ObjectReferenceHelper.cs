@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
-using Kistl.API;
-using Kistl.App.Base;
+using Zetbox.API;
+using Zetbox.App.Base;
 using System.Collections;
 
-namespace Kistl.Client.Presentables.ValueViewModels
+namespace Zetbox.Client.Presentables.ValueViewModels
 {
     public static class ObjectReferenceHelper
     {

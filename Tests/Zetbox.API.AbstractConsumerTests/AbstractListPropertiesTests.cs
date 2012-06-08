@@ -1,14 +1,14 @@
 
-namespace Kistl.API.AbstractConsumerTests
+namespace Zetbox.API.AbstractConsumerTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
 
@@ -18,7 +18,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void navigating_a_fk_list_property_should_yield_related_objects()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var cls = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").First();
                 var navigatedList = cls.Properties;
@@ -34,7 +34,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Ignore("Needs N:M relation between frozen objects with navigators in both directions")]
         public void navigating_a_nm_list_property_should_yield_related_objects()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var cls = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").First();
                 var navigatedList = cls.ImplementsInterfaces;
@@ -49,7 +49,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void retrieving_a_fk_list_twice_should_yield_same_list()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").ToList().Single();
                 var list1 = prj1.Properties;
@@ -65,7 +65,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void retrieving_a_nm_list_twice_should_yield_same_list()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").ToList().Single();
                 var list1 = prj1.ImplementsInterfaces;
@@ -111,7 +111,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void list_should_be_sorted_correctly()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 ObjectClass cls = ctx.GetQuery<ObjectClass>().Where(c => c.Name == "Constraint").ToList().Single();
                 Method isValid = cls.Methods.Where(m => m.Name == "IsValid").ToList().Single();
@@ -139,9 +139,9 @@ namespace Kistl.API.AbstractConsumerTests
     //    [Test]
     //    public void AddStringListPropertyContent()
     //    {
-    //        int ID = Kistl.API.Helper.INVALIDID;
+    //        int ID = Zetbox.API.Helper.INVALIDID;
     //        string mail = String.Empty;
-    //        using (IKistlContext ctx = GetContext())
+    //        using (IZetboxContext ctx = GetContext())
     //        {
     //            var k = ctx.GetQuery<Kunde>().First();
     //            Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
@@ -153,7 +153,7 @@ namespace Kistl.API.AbstractConsumerTests
     //            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
     //        }
 
-    //        using (IKistlContext ctx = GetContext())
+    //        using (IZetboxContext ctx = GetContext())
     //        {
     //            var kunde = ctx.Find<Kunde>(ID);
     //            Assert.That(kunde, Is.Not.Null);
@@ -166,9 +166,9 @@ namespace Kistl.API.AbstractConsumerTests
     //    [Test]
     //    public void UpdateStringListPropertyContent()
     //    {
-    //        int ID = Kistl.API.Helper.INVALIDID;
+    //        int ID = Zetbox.API.Helper.INVALIDID;
     //        string mail = String.Empty;
-    //        using (IKistlContext ctx = GetContext())
+    //        using (IZetboxContext ctx = GetContext())
     //        {
     //            var list = ctx.GetQuery<Kunde>();
     //            bool set = false;
@@ -193,7 +193,7 @@ namespace Kistl.API.AbstractConsumerTests
     //            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
     //        }
 
-    //        using (IKistlContext ctx = GetContext())
+    //        using (IZetboxContext ctx = GetContext())
     //        {
     //            var kunde = ctx.Find<Kunde>(ID);
     //            Assert.That(kunde, Is.Not.Null);
@@ -206,10 +206,10 @@ namespace Kistl.API.AbstractConsumerTests
     //    [Test]
     //    public void DeleteStringListPropertyContent()
     //    {
-    //        int ID = Kistl.API.Helper.INVALIDID;
+    //        int ID = Zetbox.API.Helper.INVALIDID;
     //        int mailCount = 0;
     //        string mail = String.Empty;
-    //        using (IKistlContext ctx = GetContext())
+    //        using (IZetboxContext ctx = GetContext())
     //        {
     //            var list = ctx.GetQuery<Kunde>();
     //            foreach (Kunde k in list)
@@ -228,7 +228,7 @@ namespace Kistl.API.AbstractConsumerTests
     //            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
     //        }
 
-    //        using (IKistlContext ctx = GetContext())
+    //        using (IZetboxContext ctx = GetContext())
     //        {
     //            var kunde = ctx.Find<Kunde>(ID);
     //            Assert.That(kunde, Is.Not.Null);

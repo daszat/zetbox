@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Commands
+namespace Zetbox.Client.WPF.Commands
 {
     using System;
     using System.Collections.Generic;
@@ -9,17 +9,17 @@ namespace Kistl.Client.WPF.Commands
     using System.Windows.Input;
 
     /// <summary>
-    /// Wrap a Kistl <see cref="Kistl.Client.Presentables.ICommandViewModel"/> into a SmartRoutedUICommand.
+    /// Wrap a Zetbox <see cref="Zetbox.Client.Presentables.ICommandViewModel"/> into a SmartRoutedUICommand.
     /// </summary>
-    public class WrappedKistlCommand
+    public class WrappedZetboxCommand
         : SmartRoutedUICommand
     {
         /// <summary>
-        /// Initializes a new instance of the WrappedKistlCommand class.
+        /// Initializes a new instance of the WrappedZetboxCommand class.
         /// </summary>
         /// <param name="cmd">the command to wrap</param>
-        public WrappedKistlCommand(Kistl.Client.Presentables.ICommandViewModel cmd)
-            : base(cmd == null ? String.Empty : cmd.Label, typeof(WrappedKistlCommand))
+        public WrappedZetboxCommand(Zetbox.Client.Presentables.ICommandViewModel cmd)
+            : base(cmd == null ? String.Empty : cmd.Label, typeof(WrappedZetboxCommand))
         {
             if (cmd == null) { throw new ArgumentNullException("cmd", "No command to wrap"); }
 
@@ -30,7 +30,7 @@ namespace Kistl.Client.WPF.Commands
         /// <summary>
         /// The wrapped command.
         /// </summary>
-        private Kistl.Client.Presentables.ICommandViewModel _command;
+        private Zetbox.Client.Presentables.ICommandViewModel _command;
 
         /// <inheritdoc/>
         protected override bool CanExecuteCore(object parameter)

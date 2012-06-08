@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Kistl.Client.WPF.View.Calendar
+namespace Zetbox.Client.WPF.View.Calendar
 {
     /// <summary>
     /// Interaction logic for CalendarDayHeader.xaml

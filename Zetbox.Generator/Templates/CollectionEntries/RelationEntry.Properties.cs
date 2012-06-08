@@ -1,15 +1,15 @@
 
-namespace Kistl.Generator.Templates.CollectionEntries
+namespace Zetbox.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public partial class RelationEntry
     {
@@ -51,7 +51,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
             string associationName = rel.GetAssociationName();
             string targetRoleName = otherEnd.RoleName;
             string positionPropertyName = rel.NeedsPositionStorage(endRole)
-                ? name + Kistl.API.Helper.PositionSuffix
+                ? name + Zetbox.API.Helper.PositionSuffix
                 : null;
             string inverseNavigatorName = null;
             bool inverseNavigatorIsList = false;
@@ -87,13 +87,13 @@ namespace Kistl.Generator.Templates.CollectionEntries
             if (rel.NeedsPositionStorage(endRole))
             {
                 // provided by ObjectReferencePropertyTemplate
-                string posBackingStore = "_" + endRole + Kistl.API.Helper.PositionSuffix;
+                string posBackingStore = "_" + endRole + Zetbox.API.Helper.PositionSuffix;
 
                 // is serialized by the ObjectReferenceProperty
                 //this.MembersToSerialize.Add(
                 //    Serialization.SerializerType.All,
                 //    relEnd.Type.Module.Namespace,
-                //    endRole + Kistl.API.Helper.PositionSuffix,
+                //    endRole + Zetbox.API.Helper.PositionSuffix,
                 //    posBackingStore);
 
                 this.WriteObjects("        public int? ", endRole, "Index { get { return ",

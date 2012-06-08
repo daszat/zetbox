@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Toolkit
+namespace Zetbox.Client.WPF.Toolkit
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@ namespace Kistl.Client.WPF.Toolkit
     using System.Text;
     using System.Threading;
     using System.Windows.Threading;
-    using Kistl.API.Client;
-    using Kistl.Client.Presentables;
+    using Zetbox.API.Client;
+    using Zetbox.Client.Presentables;
 
     /// <summary>
     /// Implements a delayed task using the WPF Dispatcher for the current Thread.

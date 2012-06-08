@@ -1,32 +1,32 @@
-namespace Kistl.Client.Presentables.DocumentManagement
+namespace Zetbox.Client.Presentables.DocumentManagement
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.GUI;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.App.GUI;
     using at.dasz.DocumentManagement;
 
     [ViewModelDescriptor]
     public class ImportedFileNavigationSearchScreenViewModel : NavigationSearchScreenViewModel
     {
-        public new delegate ImportedFileNavigationSearchScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
+        public new delegate ImportedFileNavigationSearchScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        private readonly Func<IKistlContext> _ctxFactory;
+        private readonly Func<IZetboxContext> _ctxFactory;
 
-        public ImportedFileNavigationSearchScreenViewModel(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, ViewModel parent, NavigationScreen screen)
+        public ImportedFileNavigationSearchScreenViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+            IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(appCtx, dataCtx, ctxFactory, parent, screen)
         {
             _ctxFactory = ctxFactory;
             base.Type = typeof(ImportedFile).GetObjectClass(FrozenContext);
         }
 
-        protected override void InitializeListViewModel(KistlBase.InstanceListViewModel mdl)
+        protected override void InitializeListViewModel(ZetboxBase.InstanceListViewModel mdl)
         {
             base.InitializeListViewModel(mdl);
 
@@ -46,7 +46,7 @@ namespace Kistl.Client.Presentables.DocumentManagement
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Label,
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Tooltip,
                         OpenAll, null, null);
-                    _OpenAllCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.fileopen_png.Find(FrozenContext);
+                    _OpenAllCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
                 }
                 return _OpenAllCommand;
             }

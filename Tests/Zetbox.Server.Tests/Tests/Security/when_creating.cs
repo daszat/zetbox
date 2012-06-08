@@ -1,12 +1,12 @@
 
-namespace Kistl.Server.Tests.Security
+namespace Zetbox.Server.Tests.Security
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.App.Projekte;
+    using Zetbox.App.Projekte;
 
     using NUnit.Framework;
 

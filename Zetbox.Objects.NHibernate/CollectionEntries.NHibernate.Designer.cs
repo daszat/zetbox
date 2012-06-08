@@ -8,17 +8,17 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Linq;
 
-using Kistl.API;
-using Kistl.DalProvider.Base.RelationWrappers;
-using Kistl.API.Utils;
-using Kistl.DalProvider.Base;
-using Kistl.DalProvider.NHibernate;
+using Zetbox.API;
+using Zetbox.DalProvider.Base.RelationWrappers;
+using Zetbox.API.Utils;
+using Zetbox.DalProvider.Base;
+using Zetbox.DalProvider.NHibernate;
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl")]
-    public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl, Kistl.App.Base.Property, Kistl.App.Base.PropertyNHibernateImpl>, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyNHibernateImpl>, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl()
             : this(null)
@@ -41,7 +41,7 @@ namespace Kistl.App.Base
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -74,7 +74,7 @@ namespace Kistl.App.Base
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e");
@@ -89,7 +89,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.CalculatedObjectReferenceProperty)value;
+                A = (Zetbox.App.Base.CalculatedObjectReferenceProperty)value;
             }
         }
 
@@ -102,7 +102,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Property)value;
+                B = (Zetbox.App.Base.Property)value;
             }
         }
 
@@ -112,20 +112,20 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.CalculatedObjectReferenceProperty; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.CalculatedObjectReferenceProperty; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.CalculatedObjectReferenceProperty A
+        public Zetbox.App.Base.CalculatedObjectReferenceProperty A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl __value = (Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl __value = (Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -133,7 +133,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -143,8 +143,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -179,25 +179,25 @@ namespace Kistl.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Property; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Property B
+        public Zetbox.App.Base.Property B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.PropertyNHibernateImpl __value = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -205,7 +205,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -215,8 +215,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.PropertyNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.PropertyNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -251,12 +251,12 @@ namespace Kistl.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -266,16 +266,16 @@ namespace Kistl.App.Base
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -288,8 +288,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -297,13 +297,13 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.Base|ExportGuid":
+            case "Zetbox.App.Base|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -334,18 +334,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -410,12 +410,12 @@ namespace Kistl.App.Base
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl.CalculatedObjectReferencePropertyProxy A { get; set; }
+            public virtual Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl.CalculatedObjectReferencePropertyProxy A { get; set; }
 
-            public virtual Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy B { get; set; }
+            public virtual Zetbox.App.Base.PropertyNHibernateImpl.PropertyProxy B { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
@@ -423,14 +423,14 @@ namespace Kistl.App.Base
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("DataType_implements_Interface_RelationEntryNHibernateImpl")]
-    public class DataType_implements_Interface_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.DataType, Kistl.App.Base.DataTypeNHibernateImpl, Kistl.App.Base.Interface, Kistl.App.Base.InterfaceNHibernateImpl>, DataType_implements_Interface_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    public class DataType_implements_Interface_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.DataType, Zetbox.App.Base.DataTypeNHibernateImpl, Zetbox.App.Base.Interface, Zetbox.App.Base.InterfaceNHibernateImpl>, DataType_implements_Interface_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public DataType_implements_Interface_RelationEntryNHibernateImpl()
             : this(null)
@@ -453,7 +453,7 @@ namespace Kistl.App.Base
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly DataType_implements_Interface_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -486,7 +486,7 @@ namespace Kistl.App.Base
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3");
@@ -501,7 +501,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.DataType)value;
+                A = (Zetbox.App.Base.DataType)value;
             }
         }
 
@@ -514,7 +514,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Interface)value;
+                B = (Zetbox.App.Base.Interface)value;
             }
         }
 
@@ -524,20 +524,20 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.DataType; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.DataType A
+        public Zetbox.App.Base.DataType A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.DataTypeNHibernateImpl __value = (Kistl.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Base.DataTypeNHibernateImpl __value = (Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -545,7 +545,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -555,8 +555,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Base.DataTypeNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Base.DataTypeNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -591,25 +591,25 @@ namespace Kistl.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Interface; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Interface B
+        public Zetbox.App.Base.Interface B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.InterfaceNHibernateImpl __value = (Kistl.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.InterfaceNHibernateImpl __value = (Zetbox.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -617,7 +617,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -627,8 +627,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.InterfaceNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.InterfaceNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -663,12 +663,12 @@ namespace Kistl.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -678,16 +678,16 @@ namespace Kistl.App.Base
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -700,8 +700,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -709,13 +709,13 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.Base|ExportGuid":
+            case "Zetbox.App.Base|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -746,18 +746,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.DataType>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Interface>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Interface>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -822,12 +822,12 @@ namespace Kistl.App.Base
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(DataType_implements_Interface_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(DataType_implements_Interface_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(DataType_implements_Interface_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(DataType_implements_Interface_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Base.DataTypeNHibernateImpl.DataTypeProxy A { get; set; }
+            public virtual Zetbox.App.Base.DataTypeNHibernateImpl.DataTypeProxy A { get; set; }
 
-            public virtual Kistl.App.Base.InterfaceNHibernateImpl.InterfaceProxy B { get; set; }
+            public virtual Zetbox.App.Base.InterfaceNHibernateImpl.InterfaceProxy B { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
@@ -835,14 +835,14 @@ namespace Kistl.App.Base
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
 namespace at.dasz.DocumentManagement
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryNHibernateImpl")]
-    public class Document_has_Blob_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentNHibernateImpl, Kistl.App.Base.Blob, Kistl.App.Base.BlobNHibernateImpl>, Document_has_Blob_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    public class Document_has_Blob_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentNHibernateImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobNHibernateImpl>, Document_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public Document_has_Blob_RelationEntryNHibernateImpl()
             : this(null)
@@ -865,7 +865,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly Document_has_Blob_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -898,7 +898,7 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad");
@@ -926,7 +926,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Blob)value;
+                B = (Zetbox.App.Base.Blob)value;
             }
         }
 
@@ -936,7 +936,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=at.dasz.DocumentManagement.Document; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
@@ -957,7 +957,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -1003,7 +1003,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -1032,26 +1032,26 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Blob B
+        public Zetbox.App.Base.Blob B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.BlobNHibernateImpl __value = (Kistl.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.BlobNHibernateImpl __value = (Zetbox.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -1059,7 +1059,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -1069,8 +1069,8 @@ namespace at.dasz.DocumentManagement
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.BlobNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.BlobNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -1105,7 +1105,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -1134,35 +1134,35 @@ namespace at.dasz.DocumentManagement
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? AIndex
         {
             get { return this.A_pos; }
             set { this.A_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? BIndex
         {
             get { return this.B_pos; }
             set { this.B_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -1174,18 +1174,18 @@ namespace at.dasz.DocumentManagement
             binStream.Write(this.Proxy.B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this.Proxy.B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -1262,10 +1262,10 @@ namespace at.dasz.DocumentManagement
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.BlobNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Blob>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -1330,12 +1330,12 @@ namespace at.dasz.DocumentManagement
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(Document_has_Blob_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(Document_has_Blob_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(Document_has_Blob_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Document_has_Blob_RelationEntryProxy); } }
 
             public virtual at.dasz.DocumentManagement.DocumentNHibernateImpl.DocumentProxy A { get; set; }
 
-            public virtual Kistl.App.Base.BlobNHibernateImpl.BlobProxy B { get; set; }
+            public virtual Zetbox.App.Base.BlobNHibernateImpl.BlobProxy B { get; set; }
 
             public virtual int? A_pos { get; set; }
 
@@ -1347,14 +1347,14 @@ namespace at.dasz.DocumentManagement
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Identity_memberOf_Group_RelationEntryNHibernateImpl")]
-    public class Identity_memberOf_Group_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.Identity, Kistl.App.Base.IdentityNHibernateImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupNHibernateImpl>, Identity_memberOf_Group_RelationEntry
+    public class Identity_memberOf_Group_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityNHibernateImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupNHibernateImpl>, Identity_memberOf_Group_RelationEntry
     {
         public Identity_memberOf_Group_RelationEntryNHibernateImpl()
             : this(null)
@@ -1390,7 +1390,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.Identity)value;
+                A = (Zetbox.App.Base.Identity)value;
             }
         }
 
@@ -1403,7 +1403,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Group)value;
+                B = (Zetbox.App.Base.Group)value;
             }
         }
 
@@ -1413,20 +1413,20 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.Identity; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Identity A
+        public Zetbox.App.Base.Identity A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -1434,7 +1434,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -1444,8 +1444,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Base.IdentityNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -1478,25 +1478,25 @@ namespace Kistl.App.Base
         private int? _fk_A = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Group; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Group B
+        public Zetbox.App.Base.Group B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.GroupNHibernateImpl __value = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.GroupNHibernateImpl __value = (Zetbox.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -1504,7 +1504,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -1514,8 +1514,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.GroupNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.GroupNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -1548,12 +1548,12 @@ namespace Kistl.App.Base
         private int? _fk_B = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -1562,15 +1562,15 @@ namespace Kistl.App.Base
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -1603,12 +1603,12 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -1673,25 +1673,25 @@ namespace Kistl.App.Base
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(Identity_memberOf_Group_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(Identity_memberOf_Group_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(Identity_memberOf_Group_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Identity_memberOf_Group_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Base.IdentityNHibernateImpl.IdentityProxy A { get; set; }
+            public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy A { get; set; }
 
-            public virtual Kistl.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
+            public virtual Zetbox.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
 
         }
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl")]
-    public class IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.IndexConstraint, Kistl.App.Base.IndexConstraintNHibernateImpl, Kistl.App.Base.Property, Kistl.App.Base.PropertyNHibernateImpl>, IndexConstraint_ensures_unique_on_Property_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    public class IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.IndexConstraintNHibernateImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyNHibernateImpl>, IndexConstraint_ensures_unique_on_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         public IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl()
             : this(null)
@@ -1714,7 +1714,7 @@ namespace Kistl.App.Base
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly IndexConstraint_ensures_unique_on_Property_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -1747,7 +1747,7 @@ namespace Kistl.App.Base
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28");
@@ -1762,7 +1762,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.IndexConstraint)value;
+                A = (Zetbox.App.Base.IndexConstraint)value;
             }
         }
 
@@ -1775,7 +1775,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Property)value;
+                B = (Zetbox.App.Base.Property)value;
             }
         }
 
@@ -1785,20 +1785,20 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.IndexConstraint; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.IndexConstraint; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.IndexConstraint A
+        public Zetbox.App.Base.IndexConstraint A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.IndexConstraintNHibernateImpl __value = (Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Base.IndexConstraintNHibernateImpl __value = (Zetbox.App.Base.IndexConstraintNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -1806,7 +1806,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -1816,8 +1816,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Base.IndexConstraintNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.IndexConstraintNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Base.IndexConstraintNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -1852,25 +1852,25 @@ namespace Kistl.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Property; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Property B
+        public Zetbox.App.Base.Property B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.PropertyNHibernateImpl __value = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -1878,7 +1878,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -1888,8 +1888,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.PropertyNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.PropertyNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -1924,12 +1924,12 @@ namespace Kistl.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -1939,16 +1939,16 @@ namespace Kistl.App.Base
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -1961,8 +1961,8 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1970,13 +1970,13 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.Base|ExportGuid":
+            case "Zetbox.App.Base|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -2007,18 +2007,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.IndexConstraint>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.IndexConstraint>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.IndexConstraint>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.IndexConstraintNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.IndexConstraint>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -2083,12 +2083,12 @@ namespace Kistl.App.Base
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(IndexConstraint_ensures_unique_on_Property_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(IndexConstraint_ensures_unique_on_Property_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Base.IndexConstraintNHibernateImpl.IndexConstraintProxy A { get; set; }
+            public virtual Zetbox.App.Base.IndexConstraintNHibernateImpl.IndexConstraintProxy A { get; set; }
 
-            public virtual Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy B { get; set; }
+            public virtual Zetbox.App.Base.PropertyNHibernateImpl.PropertyProxy B { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
@@ -2096,14 +2096,14 @@ namespace Kistl.App.Base
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl")]
-    public class Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Test.Muhblah, Kistl.App.Test.MuhblahNHibernateImpl, Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObjectNHibernateImpl>, Muhblah_has_TestCustomObject_RelationEntry
+    public class Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahNHibernateImpl, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectNHibernateImpl>, Muhblah_has_TestCustomObject_RelationEntry
     {
         public Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl()
             : this(null)
@@ -2139,7 +2139,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Test.Muhblah)value;
+                A = (Zetbox.App.Test.Muhblah)value;
             }
         }
 
@@ -2152,7 +2152,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Test.TestCustomObject)value;
+                B = (Zetbox.App.Test.TestCustomObject)value;
             }
         }
 
@@ -2162,20 +2162,20 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Test.Muhblah; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.Muhblah A
+        public Zetbox.App.Test.Muhblah A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.MuhblahNHibernateImpl __value = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Test.MuhblahNHibernateImpl __value = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -2183,7 +2183,7 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -2193,8 +2193,8 @@ namespace Kistl.App.Test
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Test.MuhblahNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Test.MuhblahNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -2227,25 +2227,25 @@ namespace Kistl.App.Test
         private int? _fk_A = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Test.TestCustomObject; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.TestCustomObject B
+        public Zetbox.App.Test.TestCustomObject B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.TestCustomObjectNHibernateImpl __value = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Test.TestCustomObjectNHibernateImpl __value = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -2253,7 +2253,7 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -2263,8 +2263,8 @@ namespace Kistl.App.Test
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -2297,12 +2297,12 @@ namespace Kistl.App.Test
         private int? _fk_B = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -2311,15 +2311,15 @@ namespace Kistl.App.Test
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -2352,12 +2352,12 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_A.Value));
+                this.A = ((Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.Muhblah>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_B.Value));
+                this.B = ((Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.TestCustomObject>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -2422,25 +2422,25 @@ namespace Kistl.App.Test
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(Muhblah_has_TestCustomObject_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Muhblah_has_TestCustomObject_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Test.MuhblahNHibernateImpl.MuhblahProxy A { get; set; }
+            public virtual Zetbox.App.Test.MuhblahNHibernateImpl.MuhblahProxy A { get; set; }
 
-            public virtual Kistl.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy B { get; set; }
+            public virtual Zetbox.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy B { get; set; }
 
         }
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl")]
-    public class N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Test.N_to_M_relations_A, Kistl.App.Test.N_to_M_relations_ANHibernateImpl, Kistl.App.Test.N_to_M_relations_B, Kistl.App.Test.N_to_M_relations_BNHibernateImpl>, N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry
+    public class N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_ANHibernateImpl, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_BNHibernateImpl>, N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry
     {
         public N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl()
             : this(null)
@@ -2476,7 +2476,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Test.N_to_M_relations_A)value;
+                A = (Zetbox.App.Test.N_to_M_relations_A)value;
             }
         }
 
@@ -2489,7 +2489,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Test.N_to_M_relations_B)value;
+                B = (Zetbox.App.Test.N_to_M_relations_B)value;
             }
         }
 
@@ -2499,20 +2499,20 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Test.N_to_M_relations_A; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.N_to_M_relations_A; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.N_to_M_relations_A A
+        public Zetbox.App.Test.N_to_M_relations_A A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.N_to_M_relations_ANHibernateImpl __value = (Kistl.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Test.N_to_M_relations_ANHibernateImpl __value = (Zetbox.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -2520,7 +2520,7 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -2530,8 +2530,8 @@ namespace Kistl.App.Test
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Test.N_to_M_relations_ANHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Test.N_to_M_relations_ANHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -2564,25 +2564,25 @@ namespace Kistl.App.Test
         private int? _fk_A = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Test.N_to_M_relations_B; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.N_to_M_relations_B; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.N_to_M_relations_B B
+        public Zetbox.App.Test.N_to_M_relations_B B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.N_to_M_relations_BNHibernateImpl __value = (Kistl.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Test.N_to_M_relations_BNHibernateImpl __value = (Zetbox.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -2590,7 +2590,7 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -2600,8 +2600,8 @@ namespace Kistl.App.Test
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Test.N_to_M_relations_BNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Test.N_to_M_relations_BNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -2634,12 +2634,12 @@ namespace Kistl.App.Test
         private int? _fk_B = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -2648,15 +2648,15 @@ namespace Kistl.App.Test
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -2689,12 +2689,12 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.N_to_M_relations_A>(_fk_A.Value));
+                this.A = ((Zetbox.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.N_to_M_relations_B>(_fk_B.Value));
+                this.B = ((Zetbox.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -2759,25 +2759,25 @@ namespace Kistl.App.Test
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Test.N_to_M_relations_ANHibernateImpl.N_to_M_relations_AProxy A { get; set; }
+            public virtual Zetbox.App.Test.N_to_M_relations_ANHibernateImpl.N_to_M_relations_AProxy A { get; set; }
 
-            public virtual Kistl.App.Test.N_to_M_relations_BNHibernateImpl.N_to_M_relations_BProxy B { get; set; }
+            public virtual Zetbox.App.Test.N_to_M_relations_BNHibernateImpl.N_to_M_relations_BProxy B { get; set; }
 
         }
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl")]
-    public class NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntryNHibernateImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
+    public class NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryNHibernateImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
     {
         public NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl()
             : this(null)
@@ -2800,7 +2800,7 @@ namespace Kistl.App.GUI
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly NavigationEntry_accessed_by_Group_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -2833,7 +2833,7 @@ namespace Kistl.App.GUI
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a");
@@ -2848,7 +2848,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.NavigationEntry)value;
+                A = (Zetbox.App.GUI.NavigationEntry)value;
             }
         }
 
@@ -2861,7 +2861,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Group)value;
+                B = (Zetbox.App.Base.Group)value;
             }
         }
 
@@ -2871,20 +2871,20 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.NavigationEntry; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.NavigationEntry; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.NavigationEntry A
+        public Zetbox.App.GUI.NavigationEntry A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.NavigationEntryNHibernateImpl __value = (Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.GUI.NavigationEntryNHibernateImpl __value = (Zetbox.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -2892,7 +2892,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -2902,8 +2902,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.GUI.NavigationEntryNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -2938,25 +2938,25 @@ namespace Kistl.App.GUI
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Group; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Group B
+        public Zetbox.App.Base.Group B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.GroupNHibernateImpl __value = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.GroupNHibernateImpl __value = (Zetbox.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -2964,7 +2964,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -2974,8 +2974,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.GroupNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.GroupNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -3010,12 +3010,12 @@ namespace Kistl.App.GUI
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -3025,16 +3025,16 @@ namespace Kistl.App.GUI
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -3047,8 +3047,8 @@ namespace Kistl.App.GUI
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -3056,13 +3056,13 @@ namespace Kistl.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.GUI|ExportGuid":
+            case "Zetbox.App.GUI|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.GUI|A":
+            case "Zetbox.App.GUI|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.GUI|B":
+            case "Zetbox.App.GUI|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -3093,18 +3093,18 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.NavigationEntry>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_A.Value));
+                this.A = ((Zetbox.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.NavigationEntry>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Group>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.GroupNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Group>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -3169,12 +3169,12 @@ namespace Kistl.App.GUI
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(NavigationEntry_accessed_by_Group_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(NavigationEntry_accessed_by_Group_RelationEntryProxy); } }
 
-            public virtual Kistl.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy A { get; set; }
+            public virtual Zetbox.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy A { get; set; }
 
-            public virtual Kistl.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
+            public virtual Zetbox.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
@@ -3182,14 +3182,14 @@ namespace Kistl.App.GUI
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl")]
-    public class ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.ObjectReferencePropertyNHibernateImpl, Kistl.App.Base.Method, Kistl.App.Base.MethodNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ObjectReferenceProperty_shows_Method_RelationEntry
+    public class ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ObjectReferenceProperty_shows_Method_RelationEntry
     {
         public ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl()
             : this(null)
@@ -3212,7 +3212,7 @@ namespace Kistl.App.GUI
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly ObjectReferenceProperty_shows_Method_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -3245,7 +3245,7 @@ namespace Kistl.App.GUI
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc");
@@ -3260,7 +3260,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.ObjectReferenceProperty)value;
+                A = (Zetbox.App.Base.ObjectReferenceProperty)value;
             }
         }
 
@@ -3273,7 +3273,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Method)value;
+                B = (Zetbox.App.Base.Method)value;
             }
         }
 
@@ -3283,20 +3283,20 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.ObjectReferenceProperty; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.Base.ObjectReferenceProperty; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectReferenceProperty A
+        public Zetbox.App.Base.ObjectReferenceProperty A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.ObjectReferencePropertyNHibernateImpl __value = (Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl __value = (Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -3304,7 +3304,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -3314,8 +3314,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -3350,25 +3350,25 @@ namespace Kistl.App.GUI
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Method; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.Base.Method; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Method B
+        public Zetbox.App.Base.Method B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.MethodNHibernateImpl __value = (Kistl.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.MethodNHibernateImpl __value = (Zetbox.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -3376,7 +3376,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -3386,8 +3386,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.MethodNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.MethodNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -3422,12 +3422,12 @@ namespace Kistl.App.GUI
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -3437,16 +3437,16 @@ namespace Kistl.App.GUI
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -3459,8 +3459,8 @@ namespace Kistl.App.GUI
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -3468,13 +3468,13 @@ namespace Kistl.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.GUI|ExportGuid":
+            case "Zetbox.App.GUI|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.GUI|A":
+            case "Zetbox.App.GUI|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.GUI|B":
+            case "Zetbox.App.GUI|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -3505,18 +3505,18 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectReferenceProperty>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.ObjectReferenceProperty>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Method>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Method>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.MethodNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Method>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -3581,12 +3581,12 @@ namespace Kistl.App.GUI
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(ObjectReferenceProperty_shows_Method_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(ObjectReferenceProperty_shows_Method_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Base.ObjectReferencePropertyNHibernateImpl.ObjectReferencePropertyProxy A { get; set; }
+            public virtual Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl.ObjectReferencePropertyProxy A { get; set; }
 
-            public virtual Kistl.App.Base.MethodNHibernateImpl.MethodProxy B { get; set; }
+            public virtual Zetbox.App.Base.MethodNHibernateImpl.MethodProxy B { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
@@ -3594,14 +3594,14 @@ namespace Kistl.App.GUI
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Projekte
+namespace Zetbox.App.Projekte
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl")]
-    public class Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.ProjektNHibernateImpl, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.MitarbeiterNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, Projekt_haben_Mitarbeiter_RelationEntry
+    public class Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektNHibernateImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, Projekt_haben_Mitarbeiter_RelationEntry
     {
         public Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl()
             : this(null)
@@ -3624,7 +3624,7 @@ namespace Kistl.App.Projekte
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly Projekt_haben_Mitarbeiter_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -3657,7 +3657,7 @@ namespace Kistl.App.Projekte
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e");
@@ -3672,7 +3672,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Projekte.Projekt)value;
+                A = (Zetbox.App.Projekte.Projekt)value;
             }
         }
 
@@ -3685,7 +3685,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Projekte.Mitarbeiter)value;
+                B = (Zetbox.App.Projekte.Mitarbeiter)value;
             }
         }
 
@@ -3695,20 +3695,20 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
+        // referencedInterface=Zetbox.App.Projekte.Projekt; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Projekt A
+        public Zetbox.App.Projekte.Projekt A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Projekte.ProjektNHibernateImpl __value = (Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Projekte.ProjektNHibernateImpl __value = (Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -3716,7 +3716,7 @@ namespace Kistl.App.Projekte
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -3726,8 +3726,8 @@ namespace Kistl.App.Projekte
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Projekte.ProjektNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Projekte.ProjektNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -3762,7 +3762,7 @@ namespace Kistl.App.Projekte
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -3791,26 +3791,26 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Projekte.Mitarbeiter; moduleNamespace=Kistl.App.Projekte;
+        // referencedInterface=Zetbox.App.Projekte.Mitarbeiter; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Mitarbeiter B
+        public Zetbox.App.Projekte.Mitarbeiter B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Projekte.MitarbeiterNHibernateImpl __value = (Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Projekte.MitarbeiterNHibernateImpl __value = (Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -3818,7 +3818,7 @@ namespace Kistl.App.Projekte
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -3828,8 +3828,8 @@ namespace Kistl.App.Projekte
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Projekte.MitarbeiterNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Projekte.MitarbeiterNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -3864,7 +3864,7 @@ namespace Kistl.App.Projekte
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -3893,35 +3893,35 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? AIndex
         {
             get { return this.A_pos; }
             set { this.A_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? BIndex
         {
             get { return this.B_pos; }
             set { this.B_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -3933,18 +3933,18 @@ namespace Kistl.App.Projekte
             binStream.Write(this.Proxy.B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this.Proxy.B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -3957,10 +3957,10 @@ namespace Kistl.App.Projekte
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Projekte");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Kistl.App.Projekte");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Projekte");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Zetbox.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Zetbox.App.Projekte");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -3968,19 +3968,19 @@ namespace Kistl.App.Projekte
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.Projekte|ExportGuid":
+            case "Zetbox.App.Projekte|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Projekte|A":
+            case "Zetbox.App.Projekte|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Projekte|A_pos":
+            case "Zetbox.App.Projekte|A_pos":
                 this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "Kistl.App.Projekte|B":
+            case "Zetbox.App.Projekte|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Projekte|B_pos":
+            case "Zetbox.App.Projekte|B_pos":
                 this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
             }
@@ -4013,18 +4013,18 @@ namespace Kistl.App.Projekte
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_A.Value));
+                this.A = ((Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Projekt>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Mitarbeiter>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value));
+                this.B = ((Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Mitarbeiter>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -4089,12 +4089,12 @@ namespace Kistl.App.Projekte
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(Projekt_haben_Mitarbeiter_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Projekt_haben_Mitarbeiter_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Projekte.ProjektNHibernateImpl.ProjektProxy A { get; set; }
+            public virtual Zetbox.App.Projekte.ProjektNHibernateImpl.ProjektProxy A { get; set; }
 
-            public virtual Kistl.App.Projekte.MitarbeiterNHibernateImpl.MitarbeiterProxy B { get; set; }
+            public virtual Zetbox.App.Projekte.MitarbeiterNHibernateImpl.MitarbeiterProxy B { get; set; }
 
             public virtual int? A_pos { get; set; }
 
@@ -4106,14 +4106,14 @@ namespace Kistl.App.Projekte
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("RoleMembership_resolves_Relation_RelationEntryNHibernateImpl")]
-    public class RoleMembership_resolves_Relation_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.RoleMembership, Kistl.App.Base.RoleMembershipNHibernateImpl, Kistl.App.Base.Relation, Kistl.App.Base.RelationNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, RoleMembership_resolves_Relation_RelationEntry
+    public class RoleMembership_resolves_Relation_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipNHibernateImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, RoleMembership_resolves_Relation_RelationEntry
     {
         public RoleMembership_resolves_Relation_RelationEntryNHibernateImpl()
             : this(null)
@@ -4136,7 +4136,7 @@ namespace Kistl.App.Base
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly RoleMembership_resolves_Relation_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -4169,7 +4169,7 @@ namespace Kistl.App.Base
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80");
@@ -4184,7 +4184,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.RoleMembership)value;
+                A = (Zetbox.App.Base.RoleMembership)value;
             }
         }
 
@@ -4197,7 +4197,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Relation)value;
+                B = (Zetbox.App.Base.Relation)value;
             }
         }
 
@@ -4207,20 +4207,20 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.RoleMembership; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.RoleMembership; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.RoleMembership A
+        public Zetbox.App.Base.RoleMembership A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.RoleMembershipNHibernateImpl __value = (Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Base.RoleMembershipNHibernateImpl __value = (Zetbox.App.Base.RoleMembershipNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -4228,7 +4228,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -4238,8 +4238,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Base.RoleMembershipNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.RoleMembershipNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Base.RoleMembershipNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -4274,7 +4274,7 @@ namespace Kistl.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -4303,26 +4303,26 @@ namespace Kistl.App.Base
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Relation; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.Relation; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Relation B
+        public Zetbox.App.Base.Relation B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.RelationNHibernateImpl __value = (Kistl.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.RelationNHibernateImpl __value = (Zetbox.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -4330,7 +4330,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -4340,8 +4340,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.RelationNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.RelationNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -4376,7 +4376,7 @@ namespace Kistl.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -4405,35 +4405,35 @@ namespace Kistl.App.Base
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? AIndex
         {
             get { return this.A_pos; }
             set { this.A_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? BIndex
         {
             get { return this.B_pos; }
             set { this.B_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -4445,18 +4445,18 @@ namespace Kistl.App.Base
             binStream.Write(this.Proxy.B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this.Proxy.B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -4469,10 +4469,10 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -4480,19 +4480,19 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.Base|ExportGuid":
+            case "Zetbox.App.Base|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|A_pos":
+            case "Zetbox.App.Base|A_pos":
                 this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B_pos":
+            case "Zetbox.App.Base|B_pos":
                 this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
             }
@@ -4525,18 +4525,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RoleMembership>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RoleMembership>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.RoleMembership>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.RoleMembershipNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.RoleMembership>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.RelationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.RelationNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Relation>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.RelationNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.RelationNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Relation>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -4601,12 +4601,12 @@ namespace Kistl.App.Base
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(RoleMembership_resolves_Relation_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(RoleMembership_resolves_Relation_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(RoleMembership_resolves_Relation_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(RoleMembership_resolves_Relation_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Base.RoleMembershipNHibernateImpl.RoleMembershipProxy A { get; set; }
+            public virtual Zetbox.App.Base.RoleMembershipNHibernateImpl.RoleMembershipProxy A { get; set; }
 
-            public virtual Kistl.App.Base.RelationNHibernateImpl.RelationProxy B { get; set; }
+            public virtual Zetbox.App.Base.RelationNHibernateImpl.RelationProxy B { get; set; }
 
             public virtual int? A_pos { get; set; }
 
@@ -4618,14 +4618,14 @@ namespace Kistl.App.Base
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace ZBox.App.SchemaMigration
+namespace Zetbox.App.SchemaMigration
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryNHibernateImpl")]
-    public class SourceColumn_created_Property_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnNHibernateImpl, Kistl.App.Base.Property, Kistl.App.Base.PropertyNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, SourceColumn_created_Property_RelationEntry
+    public class SourceColumn_created_Property_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, SourceColumn_created_Property_RelationEntry
     {
         public SourceColumn_created_Property_RelationEntryNHibernateImpl()
             : this(null)
@@ -4648,7 +4648,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly SourceColumn_created_Property_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -4681,7 +4681,7 @@ namespace ZBox.App.SchemaMigration
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27");
@@ -4696,7 +4696,7 @@ namespace ZBox.App.SchemaMigration
             set
             {
                 // settor will do checking for us
-                A = (ZBox.App.SchemaMigration.SourceColumn)value;
+                A = (Zetbox.App.SchemaMigration.SourceColumn)value;
             }
         }
 
@@ -4709,7 +4709,7 @@ namespace ZBox.App.SchemaMigration
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.Property)value;
+                B = (Zetbox.App.Base.Property)value;
             }
         }
 
@@ -4719,20 +4719,20 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=ZBox.App.SchemaMigration.SourceColumn; moduleNamespace=ZBox.App.SchemaMigration;
+        // referencedInterface=Zetbox.App.SchemaMigration.SourceColumn; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ZBox.App.SchemaMigration.SourceColumn A
+        public Zetbox.App.SchemaMigration.SourceColumn A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                ZBox.App.SchemaMigration.SourceColumnNHibernateImpl __value = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl __value = (Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -4740,7 +4740,7 @@ namespace ZBox.App.SchemaMigration
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -4750,8 +4750,8 @@ namespace ZBox.App.SchemaMigration
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -4786,7 +4786,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -4815,26 +4815,26 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Property; moduleNamespace=ZBox.App.SchemaMigration;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Property B
+        public Zetbox.App.Base.Property B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.PropertyNHibernateImpl __value = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -4842,7 +4842,7 @@ namespace ZBox.App.SchemaMigration
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -4852,8 +4852,8 @@ namespace ZBox.App.SchemaMigration
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.PropertyNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.PropertyNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -4888,7 +4888,7 @@ namespace ZBox.App.SchemaMigration
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -4917,35 +4917,35 @@ namespace ZBox.App.SchemaMigration
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? AIndex
         {
             get { return this.A_pos; }
             set { this.A_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? BIndex
         {
             get { return this.B_pos; }
             set { this.B_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -4957,18 +4957,18 @@ namespace ZBox.App.SchemaMigration
             binStream.Write(this.Proxy.B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this.Proxy.B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -4981,10 +4981,10 @@ namespace ZBox.App.SchemaMigration
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "ZBox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "ZBox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "ZBox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "ZBox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Zetbox.App.SchemaMigration");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -4992,19 +4992,19 @@ namespace ZBox.App.SchemaMigration
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "ZBox.App.SchemaMigration|ExportGuid":
+            case "Zetbox.App.SchemaMigration|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "ZBox.App.SchemaMigration|A":
+            case "Zetbox.App.SchemaMigration|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "ZBox.App.SchemaMigration|A_pos":
+            case "Zetbox.App.SchemaMigration|A_pos":
                 this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "ZBox.App.SchemaMigration|B":
+            case "Zetbox.App.SchemaMigration|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "ZBox.App.SchemaMigration|B_pos":
+            case "Zetbox.App.SchemaMigration|B_pos":
                 this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
             }
@@ -5037,18 +5037,18 @@ namespace ZBox.App.SchemaMigration
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<ZBox.App.SchemaMigration.SourceColumn>(_fk_A.Value));
+                this.A = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Property>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -5113,12 +5113,12 @@ namespace ZBox.App.SchemaMigration
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(SourceColumn_created_Property_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(SourceColumn_created_Property_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(SourceColumn_created_Property_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(SourceColumn_created_Property_RelationEntryProxy); } }
 
-            public virtual ZBox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy A { get; set; }
+            public virtual Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy A { get; set; }
 
-            public virtual Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy B { get; set; }
+            public virtual Zetbox.App.Base.PropertyNHibernateImpl.PropertyProxy B { get; set; }
 
             public virtual int? A_pos { get; set; }
 
@@ -5130,14 +5130,14 @@ namespace ZBox.App.SchemaMigration
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Template_hasMenu_Visual_RelationEntryNHibernateImpl")]
-    public class Template_hasMenu_Visual_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.Template, Kistl.App.GUI.TemplateNHibernateImpl, Kistl.App.GUI.Visual, Kistl.App.GUI.VisualNHibernateImpl>, Template_hasMenu_Visual_RelationEntry
+    public class Template_hasMenu_Visual_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.Template, Zetbox.App.GUI.TemplateNHibernateImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualNHibernateImpl>, Template_hasMenu_Visual_RelationEntry
     {
         public Template_hasMenu_Visual_RelationEntryNHibernateImpl()
             : this(null)
@@ -5173,7 +5173,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.Template)value;
+                A = (Zetbox.App.GUI.Template)value;
             }
         }
 
@@ -5186,7 +5186,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.GUI.Visual)value;
+                B = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -5196,20 +5196,20 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.Template; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Template; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Template A
+        public Zetbox.App.GUI.Template A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.TemplateNHibernateImpl __value = (Kistl.App.GUI.TemplateNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.GUI.TemplateNHibernateImpl __value = (Zetbox.App.GUI.TemplateNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -5217,7 +5217,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -5227,8 +5227,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.TemplateNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.GUI.TemplateNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.TemplateNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.GUI.TemplateNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -5261,25 +5261,25 @@ namespace Kistl.App.GUI
         private int? _fk_A = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual B
+        public Zetbox.App.GUI.Visual B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -5287,7 +5287,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -5297,8 +5297,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.GUI.VisualNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.GUI.VisualNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -5331,12 +5331,12 @@ namespace Kistl.App.GUI
         private int? _fk_B = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -5345,15 +5345,15 @@ namespace Kistl.App.GUI
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -5386,12 +5386,12 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.GUI.TemplateNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Template>(_fk_A.Value));
+                this.A = ((Zetbox.App.GUI.TemplateNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Template>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value));
+                this.B = ((Zetbox.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Visual>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -5456,25 +5456,25 @@ namespace Kistl.App.GUI
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(Template_hasMenu_Visual_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(Template_hasMenu_Visual_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(Template_hasMenu_Visual_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Template_hasMenu_Visual_RelationEntryProxy); } }
 
-            public virtual Kistl.App.GUI.TemplateNHibernateImpl.TemplateProxy A { get; set; }
+            public virtual Zetbox.App.GUI.TemplateNHibernateImpl.TemplateProxy A { get; set; }
 
-            public virtual Kistl.App.GUI.VisualNHibernateImpl.VisualProxy B { get; set; }
+            public virtual Zetbox.App.GUI.VisualNHibernateImpl.VisualProxy B { get; set; }
 
         }
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl")]
-    public class TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Test.TestStudent, Kistl.App.Test.TestStudentNHibernateImpl, Kistl.App.Test.Fragebogen, Kistl.App.Test.FragebogenNHibernateImpl>, TestStudent_füllt_aus_Fragebogen_RelationEntry
+    public class TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Test.TestStudent, Zetbox.App.Test.TestStudentNHibernateImpl, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.FragebogenNHibernateImpl>, TestStudent_füllt_aus_Fragebogen_RelationEntry
     {
         public TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl()
             : this(null)
@@ -5510,7 +5510,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Test.TestStudent)value;
+                A = (Zetbox.App.Test.TestStudent)value;
             }
         }
 
@@ -5523,7 +5523,7 @@ namespace Kistl.App.Test
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Test.Fragebogen)value;
+                B = (Zetbox.App.Test.Fragebogen)value;
             }
         }
 
@@ -5533,20 +5533,20 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Test.TestStudent; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.TestStudent; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.TestStudent A
+        public Zetbox.App.Test.TestStudent A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.TestStudentNHibernateImpl __value = (Kistl.App.Test.TestStudentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Test.TestStudentNHibernateImpl __value = (Zetbox.App.Test.TestStudentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -5554,7 +5554,7 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -5564,8 +5564,8 @@ namespace Kistl.App.Test
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Test.TestStudentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Test.TestStudentNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Test.TestStudentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Test.TestStudentNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -5598,25 +5598,25 @@ namespace Kistl.App.Test
         private int? _fk_A = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Test.Fragebogen; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.Fragebogen; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.Fragebogen B
+        public Zetbox.App.Test.Fragebogen B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.FragebogenNHibernateImpl __value = (Kistl.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Test.FragebogenNHibernateImpl __value = (Zetbox.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -5624,7 +5624,7 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -5634,8 +5634,8 @@ namespace Kistl.App.Test
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Test.FragebogenNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Test.FragebogenNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -5668,12 +5668,12 @@ namespace Kistl.App.Test
         private int? _fk_B = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -5682,15 +5682,15 @@ namespace Kistl.App.Test
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -5723,12 +5723,12 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Test.TestStudentNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestStudent>(_fk_A.Value));
+                this.A = ((Zetbox.App.Test.TestStudentNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.TestStudent>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Test.FragebogenNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_B.Value));
+                this.B = ((Zetbox.App.Test.FragebogenNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.Fragebogen>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -5793,25 +5793,25 @@ namespace Kistl.App.Test
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(TestStudent_füllt_aus_Fragebogen_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(TestStudent_füllt_aus_Fragebogen_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Test.TestStudentNHibernateImpl.TestStudentProxy A { get; set; }
+            public virtual Zetbox.App.Test.TestStudentNHibernateImpl.TestStudentProxy A { get; set; }
 
-            public virtual Kistl.App.Test.FragebogenNHibernateImpl.FragebogenProxy B { get; set; }
+            public virtual Zetbox.App.Test.FragebogenNHibernateImpl.FragebogenProxy B { get; set; }
 
         }
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl")]
-    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRefNHibernateImpl, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRefNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, TypeRef_hasGenericArguments_TypeRef_RelationEntry
+    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, TypeRef_hasGenericArguments_TypeRef_RelationEntry
     {
         public TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl()
             : this(null)
@@ -5834,7 +5834,7 @@ namespace Kistl.App.Base
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -5867,7 +5867,7 @@ namespace Kistl.App.Base
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71");
@@ -5882,7 +5882,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.Base.TypeRef)value;
+                A = (Zetbox.App.Base.TypeRef)value;
             }
         }
 
@@ -5895,7 +5895,7 @@ namespace Kistl.App.Base
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.TypeRef)value;
+                B = (Zetbox.App.Base.TypeRef)value;
             }
         }
 
@@ -5905,20 +5905,20 @@ namespace Kistl.App.Base
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef A
+        public Zetbox.App.Base.TypeRef A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.TypeRefNHibernateImpl __value = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -5926,7 +5926,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -5936,8 +5936,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Base.TypeRefNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -5972,7 +5972,7 @@ namespace Kistl.App.Base
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -6001,26 +6001,26 @@ namespace Kistl.App.Base
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.Base;
+        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef B
+        public Zetbox.App.Base.TypeRef B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.TypeRefNHibernateImpl __value = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -6028,7 +6028,7 @@ namespace Kistl.App.Base
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -6038,8 +6038,8 @@ namespace Kistl.App.Base
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.TypeRefNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -6074,7 +6074,7 @@ namespace Kistl.App.Base
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -6103,35 +6103,35 @@ namespace Kistl.App.Base
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         /// <summary>
         /// Index into the A-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? AIndex
         {
             get { return this.A_pos; }
             set { this.A_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public int? BIndex
         {
             get { return this.B_pos; }
             set { this.B_pos = (int?)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -6143,18 +6143,18 @@ namespace Kistl.App.Base
             binStream.Write(this.Proxy.B_pos);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this.Proxy.A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
             this.Proxy.B_pos = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -6167,10 +6167,10 @@ namespace Kistl.App.Base
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -6178,19 +6178,19 @@ namespace Kistl.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.Base|ExportGuid":
+            case "Zetbox.App.Base|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.Base|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|A_pos":
+            case "Zetbox.App.Base|A_pos":
                 this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
-            case "Kistl.App.Base|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.Base|B_pos":
+            case "Zetbox.App.Base|B_pos":
                 this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
                 break;
             }
@@ -6223,18 +6223,18 @@ namespace Kistl.App.Base
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_A.Value));
+                this.A = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -6299,12 +6299,12 @@ namespace Kistl.App.Base
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy); } }
 
-            public virtual Kistl.App.Base.TypeRefNHibernateImpl.TypeRefProxy A { get; set; }
+            public virtual Zetbox.App.Base.TypeRefNHibernateImpl.TypeRefProxy A { get; set; }
 
-            public virtual Kistl.App.Base.TypeRefNHibernateImpl.TypeRefProxy B { get; set; }
+            public virtual Zetbox.App.Base.TypeRefNHibernateImpl.TypeRefProxy B { get; set; }
 
             public virtual int? A_pos { get; set; }
 
@@ -6316,14 +6316,14 @@ namespace Kistl.App.Base
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl")]
-    public class ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ViewDescriptorNHibernateImpl, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRefNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry
+    public class ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorNHibernateImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry
     {
         public ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl()
             : this(null)
@@ -6346,7 +6346,7 @@ namespace Kistl.App.GUI
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly ViewDescriptor_supports_TypeRef_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -6379,7 +6379,7 @@ namespace Kistl.App.GUI
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("786dae2f-cb6e-454d-93fd-192541df928d");
@@ -6394,7 +6394,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.ViewDescriptor)value;
+                A = (Zetbox.App.GUI.ViewDescriptor)value;
             }
         }
 
@@ -6407,7 +6407,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.Base.TypeRef)value;
+                B = (Zetbox.App.Base.TypeRef)value;
             }
         }
 
@@ -6417,20 +6417,20 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.ViewDescriptor; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.ViewDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.ViewDescriptor A
+        public Zetbox.App.GUI.ViewDescriptor A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.ViewDescriptorNHibernateImpl __value = (Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.GUI.ViewDescriptorNHibernateImpl __value = (Zetbox.App.GUI.ViewDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -6438,7 +6438,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -6448,8 +6448,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.GUI.ViewDescriptorNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.ViewDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.GUI.ViewDescriptorNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -6484,25 +6484,25 @@ namespace Kistl.App.GUI
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.TypeRef; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef B
+        public Zetbox.App.Base.TypeRef B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.TypeRefNHibernateImpl __value = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -6510,7 +6510,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -6520,8 +6520,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.TypeRefNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -6556,12 +6556,12 @@ namespace Kistl.App.GUI
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -6571,16 +6571,16 @@ namespace Kistl.App.GUI
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -6593,8 +6593,8 @@ namespace Kistl.App.GUI
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -6602,13 +6602,13 @@ namespace Kistl.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.GUI|ExportGuid":
+            case "Zetbox.App.GUI|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.GUI|A":
+            case "Zetbox.App.GUI|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.GUI|B":
+            case "Zetbox.App.GUI|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -6639,18 +6639,18 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewDescriptor>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.GUI.ViewDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewDescriptor>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewDescriptor>(_fk_A.Value));
+                this.A = ((Zetbox.App.GUI.ViewDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewDescriptor>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_B.Value));
+                this.B = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -6715,12 +6715,12 @@ namespace Kistl.App.GUI
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(ViewDescriptor_supports_TypeRef_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(ViewDescriptor_supports_TypeRef_RelationEntryProxy); } }
 
-            public virtual Kistl.App.GUI.ViewDescriptorNHibernateImpl.ViewDescriptorProxy A { get; set; }
+            public virtual Zetbox.App.GUI.ViewDescriptorNHibernateImpl.ViewDescriptorProxy A { get; set; }
 
-            public virtual Kistl.App.Base.TypeRefNHibernateImpl.TypeRefProxy B { get; set; }
+            public virtual Zetbox.App.Base.TypeRefNHibernateImpl.TypeRefProxy B { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
@@ -6728,14 +6728,14 @@ namespace Kistl.App.GUI
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl")]
-    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ViewModelDescriptorNHibernateImpl, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKindNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry
+    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindNHibernateImpl>, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry
     {
         public ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl()
             : this(null)
@@ -6758,7 +6758,7 @@ namespace Kistl.App.GUI
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy Proxy;
 
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
         {
             get
@@ -6791,7 +6791,7 @@ namespace Kistl.App.GUI
             }
         }
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47");
@@ -6806,7 +6806,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.ViewModelDescriptor)value;
+                A = (Zetbox.App.GUI.ViewModelDescriptor)value;
             }
         }
 
@@ -6819,7 +6819,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.GUI.ControlKind)value;
+                B = (Zetbox.App.GUI.ControlKind)value;
             }
         }
 
@@ -6829,20 +6829,20 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.ViewModelDescriptor; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.ViewModelDescriptor A
+        public Zetbox.App.GUI.ViewModelDescriptor A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -6850,7 +6850,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -6860,8 +6860,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -6896,25 +6896,25 @@ namespace Kistl.App.GUI
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.ControlKind B
+        public Zetbox.App.GUI.ControlKind B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.GUI.ControlKindNHibernateImpl __value = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -6922,7 +6922,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -6932,8 +6932,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.GUI.ControlKindNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -6968,12 +6968,12 @@ namespace Kistl.App.GUI
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -6983,16 +6983,16 @@ namespace Kistl.App.GUI
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -7005,8 +7005,8 @@ namespace Kistl.App.GUI
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -7014,13 +7014,13 @@ namespace Kistl.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.GUI|ExportGuid":
+            case "Zetbox.App.GUI|ExportGuid":
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Kistl.App.GUI|A":
+            case "Zetbox.App.GUI|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Kistl.App.GUI|B":
+            case "Zetbox.App.GUI|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -7051,18 +7051,18 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_A.Value));
+                this.A = ((Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_guid_B.HasValue)
-                this.B = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_B.Value));
+                this.B = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_B.Value));
             else
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_B.Value));
+                this.B = ((Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -7127,12 +7127,12 @@ namespace Kistl.App.GUI
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy); } }
 
-            public virtual Kistl.App.GUI.ViewModelDescriptorNHibernateImpl.ViewModelDescriptorProxy A { get; set; }
+            public virtual Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl.ViewModelDescriptorProxy A { get; set; }
 
-            public virtual Kistl.App.GUI.ControlKindNHibernateImpl.ControlKindProxy B { get; set; }
+            public virtual Zetbox.App.GUI.ControlKindNHibernateImpl.ControlKindProxy B { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
@@ -7140,14 +7140,14 @@ namespace Kistl.App.GUI
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Visual_contains_Visual_RelationEntryNHibernateImpl")]
-    public class Visual_contains_Visual_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.Visual, Kistl.App.GUI.VisualNHibernateImpl, Kistl.App.GUI.Visual, Kistl.App.GUI.VisualNHibernateImpl>, Visual_contains_Visual_RelationEntry
+    public class Visual_contains_Visual_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualNHibernateImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualNHibernateImpl>, Visual_contains_Visual_RelationEntry
     {
         public Visual_contains_Visual_RelationEntryNHibernateImpl()
             : this(null)
@@ -7183,7 +7183,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.Visual)value;
+                A = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -7196,7 +7196,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.GUI.Visual)value;
+                B = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -7206,20 +7206,20 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual A
+        public Zetbox.App.GUI.Visual A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -7227,7 +7227,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -7237,8 +7237,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.GUI.VisualNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.GUI.VisualNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -7271,25 +7271,25 @@ namespace Kistl.App.GUI
         private int? _fk_A = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual B
+        public Zetbox.App.GUI.Visual B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -7297,7 +7297,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -7307,8 +7307,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.GUI.VisualNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.GUI.VisualNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -7341,12 +7341,12 @@ namespace Kistl.App.GUI
         private int? _fk_B = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -7355,15 +7355,15 @@ namespace Kistl.App.GUI
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -7396,12 +7396,12 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_A.Value));
+                this.A = ((Zetbox.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Visual>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value));
+                this.B = ((Zetbox.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Visual>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -7466,25 +7466,25 @@ namespace Kistl.App.GUI
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(Visual_contains_Visual_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(Visual_contains_Visual_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(Visual_contains_Visual_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Visual_contains_Visual_RelationEntryProxy); } }
 
-            public virtual Kistl.App.GUI.VisualNHibernateImpl.VisualProxy A { get; set; }
+            public virtual Zetbox.App.GUI.VisualNHibernateImpl.VisualProxy A { get; set; }
 
-            public virtual Kistl.App.GUI.VisualNHibernateImpl.VisualProxy B { get; set; }
+            public virtual Zetbox.App.GUI.VisualNHibernateImpl.VisualProxy B { get; set; }
 
         }
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl")]
-    public class Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.Visual, Kistl.App.GUI.VisualNHibernateImpl, Kistl.App.GUI.Visual, Kistl.App.GUI.VisualNHibernateImpl>, Visual_hasContextMenu_Visual_RelationEntry
+    public class Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualNHibernateImpl, Zetbox.App.GUI.Visual, Zetbox.App.GUI.VisualNHibernateImpl>, Visual_hasContextMenu_Visual_RelationEntry
     {
         public Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl()
             : this(null)
@@ -7520,7 +7520,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.Visual)value;
+                A = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -7533,7 +7533,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Kistl.App.GUI.Visual)value;
+                B = (Zetbox.App.GUI.Visual)value;
             }
         }
 
@@ -7543,20 +7543,20 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual A
+        public Zetbox.App.GUI.Visual A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -7564,7 +7564,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.A == null)
@@ -7574,8 +7574,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.GUI.VisualNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.GUI.VisualNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -7608,25 +7608,25 @@ namespace Kistl.App.GUI
         private int? _fk_A = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.GUI.Visual; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.Visual B
+        public Zetbox.App.GUI.Visual B
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
                 return __value;
@@ -7634,7 +7634,7 @@ namespace Kistl.App.GUI
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.B == null)
@@ -7644,8 +7644,8 @@ namespace Kistl.App.GUI
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.GUI.VisualNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.GUI.VisualNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -7678,12 +7678,12 @@ namespace Kistl.App.GUI
         private int? _fk_B = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -7692,15 +7692,15 @@ namespace Kistl.App.GUI
             binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -7733,12 +7733,12 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_A.Value));
+                this.A = ((Zetbox.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Visual>(_fk_A.Value));
             else
                 this.A = null;
 
             if (_fk_B.HasValue)
-                this.B = ((Kistl.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_B.Value));
+                this.B = ((Zetbox.App.GUI.VisualNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.GUI.Visual>(_fk_B.Value));
             else
                 this.B = null;
 
@@ -7803,25 +7803,25 @@ namespace Kistl.App.GUI
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(Visual_hasContextMenu_Visual_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Visual_hasContextMenu_Visual_RelationEntryProxy); } }
 
-            public virtual Kistl.App.GUI.VisualNHibernateImpl.VisualProxy A { get; set; }
+            public virtual Zetbox.App.GUI.VisualNHibernateImpl.VisualProxy A { get; set; }
 
-            public virtual Kistl.App.GUI.VisualNHibernateImpl.VisualProxy B { get; set; }
+            public virtual Zetbox.App.GUI.VisualNHibernateImpl.VisualProxy B { get; set; }
 
         }
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Kistl.App.Projekte
+namespace Zetbox.App.Projekte
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntryNHibernateImpl")]
-    public class Kunde_EMails_CollectionEntryNHibernateImpl : Kistl.DalProvider.NHibernate.ValueCollectionEntryNHibernateImpl<Kistl.App.Projekte.Kunde, Kistl.App.Projekte.KundeNHibernateImpl, string>, Kistl.API.IExportableValueCollectionEntryInternal, Kunde_EMails_CollectionEntry
+    public class Kunde_EMails_CollectionEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.ValueCollectionEntryNHibernateImpl<Zetbox.App.Projekte.Kunde, Zetbox.App.Projekte.KundeNHibernateImpl, string>, Zetbox.API.IExportableValueCollectionEntryInternal, Kunde_EMails_CollectionEntry
     {
         public Kunde_EMails_CollectionEntryNHibernateImpl()
             : this(null)
@@ -7850,20 +7850,20 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=this.Proxy.Parent; fkGuidBackingName=unused;
-        // referencedInterface=Kistl.App.Projekte.Kunde; moduleNamespace=Kistl.App.Projekte;
+        // referencedInterface=Zetbox.App.Projekte.Kunde; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=EMails; is list;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Kunde Parent
+        public Zetbox.App.Projekte.Kunde Parent
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Projekte.KundeNHibernateImpl __value = (Kistl.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                Zetbox.App.Projekte.KundeNHibernateImpl __value = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
 
                 return __value;
@@ -7871,7 +7871,7 @@ namespace Kistl.App.Projekte
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Parent == null)
@@ -7881,8 +7881,8 @@ namespace Kistl.App.Projekte
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
-                var __newValue = (Kistl.App.Projekte.KundeNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                var __newValue = (Zetbox.App.Projekte.KundeNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -7938,19 +7938,19 @@ namespace Kistl.App.Projekte
         private int? _fk_Parent = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
-        public Kistl.API.IDataObject ParentObject
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
         {
             get { return Parent; }
-            set { Parent = (Kistl.App.Projekte.KundeNHibernateImpl)value; }
+            set { Parent = (Zetbox.App.Projekte.KundeNHibernateImpl)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual string Value
         {
             get
@@ -7979,19 +7979,19 @@ namespace Kistl.App.Projekte
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public object ValueObject
         {
             get { return Value; }
             set { Value = (string)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -8000,15 +8000,15 @@ namespace Kistl.App.Projekte
             binStream.Write(this.Proxy.Value);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
             this.Proxy.Value = binStream.ReadString();
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -8020,7 +8020,7 @@ namespace Kistl.App.Projekte
         {
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Value, xml, "Value", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Value, xml, "Value", "Zetbox.App.Projekte");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -8028,7 +8028,7 @@ namespace Kistl.App.Projekte
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Kistl.App.Projekte|Value":
+            case "Zetbox.App.Projekte|Value":
                 this.Proxy.Value = XmlStreamer.ReadString(xml);
                 break;
             }
@@ -8059,7 +8059,7 @@ namespace Kistl.App.Projekte
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_Parent.HasValue)
-                this.Parent = ((Kistl.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_Parent.Value));
+                this.Parent = ((Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Projekte.Kunde>(_fk_Parent.Value));
             else
                 this.Parent = null;
 
@@ -8072,8 +8072,8 @@ namespace Kistl.App.Projekte
             {
                 case "Parent":
                     {
-                        var __oldValue = (Kistl.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
-                        var __newValue = (Kistl.App.Projekte.KundeNHibernateImpl)parentObj;
+                        var __oldValue = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                        var __newValue = (Zetbox.App.Projekte.KundeNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Parent", __oldValue, __newValue);
                         this.Proxy.Parent = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -8111,10 +8111,10 @@ namespace Kistl.App.Projekte
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(Kunde_EMails_CollectionEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(Kunde_EMails_CollectionEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(Kunde_EMails_CollectionEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(Kunde_EMails_CollectionEntryProxy); } }
 
-            public virtual Kistl.App.Projekte.KundeNHibernateImpl.KundeProxy Parent { get; set; }
+            public virtual Zetbox.App.Projekte.KundeNHibernateImpl.KundeProxy Parent { get; set; }
 
             public virtual bool ValueIsNull { get; set; }
 
@@ -8124,14 +8124,14 @@ namespace Kistl.App.Projekte
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [System.Diagnostics.DebuggerDisplay("TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl")]
-    public class TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl : Kistl.DalProvider.NHibernate.CompoundCollectionEntryNHibernateImpl<Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObjectNHibernateImpl, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>, TestCustomObject_PhoneNumbersOther_CollectionEntry
+    public class TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.CompoundCollectionEntryNHibernateImpl<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectNHibernateImpl, Zetbox.App.Test.TestPhoneCompoundObject, Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl>, TestCustomObject_PhoneNumbersOther_CollectionEntry
     {
         public TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl()
             : this(null)
@@ -8151,7 +8151,7 @@ namespace Kistl.App.Test
             this.Proxy = proxy;
             if (this.Proxy.Value == null)
             {
-                this.Proxy.Value = new Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null) { CompoundObject_IsNull = true };
+                this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null) { CompoundObject_IsNull = true };
             }
             else
             {
@@ -8171,20 +8171,20 @@ namespace Kistl.App.Test
         /// <summary>
         /// the A-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=this.Proxy.Parent; fkGuidBackingName=unused;
-        // referencedInterface=Kistl.App.Test.TestCustomObject; moduleNamespace=Kistl.App.Test;
+        // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=PhoneNumbersOther; is list;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.TestCustomObject Parent
+        public Zetbox.App.Test.TestCustomObject Parent
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Test.TestCustomObjectNHibernateImpl __value = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                Zetbox.App.Test.TestCustomObjectNHibernateImpl __value = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
 
                 return __value;
@@ -8192,7 +8192,7 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noop with nulls
                 if (value == null && this.Proxy.Parent == null)
@@ -8202,8 +8202,8 @@ namespace Kistl.App.Test
 				}
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
-                var __newValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                var __newValue = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -8259,28 +8259,28 @@ namespace Kistl.App.Test
         private int? _fk_Parent = null;
 
 
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
-        public Kistl.API.IDataObject ParentObject
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.API.IDataObject ParentObject
         {
             get { return Parent; }
-            set { Parent = (Kistl.App.Test.TestCustomObjectNHibernateImpl)value; }
+            set { Parent = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
         // implement the user-visible interface
-        public Kistl.App.Test.TestPhoneCompoundObject Value
+        public Zetbox.App.Test.TestPhoneCompoundObject Value
         {
             get { return ValueImpl.CompoundObject_IsNull ? null : ValueImpl; }
-            set { ValueImpl = (Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl)value; }
+            set { ValueImpl = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)value; }
         }
 
         /// <summary>backing property for Value, takes care of attaching/detaching the values</summary>
-        public Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl ValueImpl
+        public Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl ValueImpl
         {
             get 
 			{ 
@@ -8303,11 +8303,11 @@ namespace Kistl.App.Test
 					}
 					if (__newValue == null)
 					{
-						this.Proxy.Value = new Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null) { CompoundObject_IsNull = true };
+						this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null) { CompoundObject_IsNull = true };
 					}
                     else
                     {
-					    __newValue = (Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
+					    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
 					    this.Proxy.Value = __newValue;
                         this.Proxy.Value.CompoundObject_IsNull = false;
 					    this.Proxy.Value.AttachToObject(this, "Value");
@@ -8321,18 +8321,18 @@ namespace Kistl.App.Test
 				}
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public object ValueObject
         {
             get { return Value; }
-            set { Value = (Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl)value; }
+            set { Value = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)value; }
         }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
         #region Serializer
 
 
-        public override void ToStream(Kistl.API.KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
@@ -8341,20 +8341,20 @@ namespace Kistl.App.Test
             binStream.Write(this.Value);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(Kistl.API.KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_Parent);
             {
                 // use backing store to avoid notifications
-                this.ValueImpl = binStream.ReadCompoundObject<Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
+                this.ValueImpl = binStream.ReadCompoundObject<Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl>();
                 if (this.ValueImpl != null)
                     this.ValueImpl.AttachToObject(this, "Value");
             }
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
@@ -8377,7 +8377,7 @@ namespace Kistl.App.Test
 
             me._fk_Parent = other._fk_Parent;
             if (me.Value == null && other.Value != null) {
-                me.Value = (Kistl.App.Test.TestPhoneCompoundObject)other.Value.Clone();
+                me.Value = (Zetbox.App.Test.TestPhoneCompoundObject)other.Value.Clone();
             } else if (me.Value != null && other.Value == null) {
                 me.Value = null;
             } else if (me.Value != null && other.Value != null) {
@@ -8393,7 +8393,7 @@ namespace Kistl.App.Test
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_Parent.HasValue)
-                this.Parent = ((Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_Parent.Value));
+                this.Parent = ((Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Test.TestCustomObject>(_fk_Parent.Value));
             else
                 this.Parent = null;
 
@@ -8406,8 +8406,8 @@ namespace Kistl.App.Test
             {
                 case "Parent":
                     {
-                        var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
-                        var __newValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)parentObj;
+                        var __oldValue = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                        var __newValue = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Parent", __oldValue, __newValue);
                         this.Proxy.Parent = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -8445,18 +8445,18 @@ namespace Kistl.App.Test
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(TestCustomObject_PhoneNumbersOther_CollectionEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(TestCustomObject_PhoneNumbersOther_CollectionEntryProxy); } }
 
-            public virtual Kistl.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy Parent { get; set; }
+            public virtual Zetbox.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy Parent { get; set; }
 
             public virtual bool ValueIsNull { get; set; }
 
-            public virtual Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl Value { get; set; }
+            public virtual Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl Value { get; set; }
 
         }
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
 }

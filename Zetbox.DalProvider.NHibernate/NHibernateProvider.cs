@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
@@ -7,18 +7,18 @@ namespace Kistl.DalProvider.NHibernate
     using System.Text;
     using Autofac;
     using Autofac.Core;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Server.PerfCounter;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Server.PerfCounter;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     public class NHibernateProvider
         : Autofac.Module
     {
-        public static readonly string ServerAssembly = "Kistl.Objects.NHibernateImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        public static readonly string ServerAssembly = "Zetbox.Objects.NHibernateImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
         private static readonly object _initLock = new object();
         private static bool _initQueryDone = false;
 
@@ -36,10 +36,10 @@ namespace Kistl.DalProvider.NHibernate
                     .As<ImplementationType>()
                     .InstancePerDependency();
 
-            RegisterContext<IKistlServerContext>(moduleBuilder)
+            RegisterContext<IZetboxServerContext>(moduleBuilder)
                 .InstancePerDependency();
 
-            RegisterContext<IReadOnlyKistlContext>(moduleBuilder)
+            RegisterContext<IReadOnlyZetboxContext>(moduleBuilder)
                 .InstancePerLifetimeScope();
 
             moduleBuilder
@@ -48,8 +48,8 @@ namespace Kistl.DalProvider.NHibernate
                     var param = p.OfType<ConstantParameter>().FirstOrDefault();
                     return new NHibernateContext(
                         c.Resolve<IMetaDataResolver>(),
-                        param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
-                        c.Resolve<KistlConfig>(),
+                        param != null ? (Zetbox.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
+                        c.Resolve<ZetboxConfig>(),
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
@@ -58,7 +58,7 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<IPerfCounter>()
                         );
                 })
-                .As<IKistlContext>()
+                .As<IZetboxContext>()
                 .OnActivated(args =>
                 {
                     var manager = args.Context.Resolve<INHibernateActionsManager>();
@@ -95,7 +95,7 @@ namespace Kistl.DalProvider.NHibernate
         }
 
         private static Autofac.Builder.IRegistrationBuilder<NHibernateContext, Autofac.Builder.SimpleActivatorData, Autofac.Builder.SingleRegistrationStyle> RegisterContext<TInterface>(ContainerBuilder moduleBuilder)
-            where TInterface : IReadOnlyKistlContext
+            where TInterface : IReadOnlyZetboxContext
         {
             return moduleBuilder
                 .Register(c =>
@@ -103,7 +103,7 @@ namespace Kistl.DalProvider.NHibernate
                     return new NHibernateContext(
                         c.Resolve<IMetaDataResolver>(),
                         null,
-                        c.Resolve<KistlConfig>(),
+                        c.Resolve<ZetboxConfig>(),
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),

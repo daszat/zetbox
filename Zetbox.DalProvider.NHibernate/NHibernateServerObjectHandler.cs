@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
+    using Zetbox.API;
+    using Zetbox.API.Server;
 
     public class NHibernateServerObjectHandler<T>
        : BaseServerObjectHandler<T>
@@ -18,12 +18,12 @@ namespace Kistl.DalProvider.NHibernate
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        protected override T GetObjectInstance(IKistlContext ctx, int ID)
+        protected override T GetObjectInstance(IZetboxContext ctx, int ID)
         {
-            if (ID < Kistl.API.Helper.INVALIDID)
+            if (ID < Zetbox.API.Helper.INVALIDID)
             {
                 //// new object -> look in current context
-                //ObjectContext efCtx = ((KistlDataContext)ctx).ObjectContext;
+                //ObjectContext efCtx = ((ZetboxDataContext)ctx).ObjectContext;
                 //return (T)efCtx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
                 //    .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
                 throw new NotImplementedException();

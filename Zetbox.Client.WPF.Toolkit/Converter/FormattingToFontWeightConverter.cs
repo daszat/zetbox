@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Converter
+namespace Zetbox.Client.WPF.Converter
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.Client.WPF.Converter
     using System.Text;
     using System.Windows;
     using System.Windows.Data;
-    using Kistl.API.Dtos;
+    using Zetbox.API.Dtos;
 
     [ValueConversion(typeof(string), typeof(Visibility))]
     public sealed class FormattingToFontWeightConverter : IValueConverter

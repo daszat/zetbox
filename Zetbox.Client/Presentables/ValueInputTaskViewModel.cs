@@ -5,24 +5,24 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-using Kistl.Client.Models;
-using Kistl.Client.Presentables.ValueViewModels;
+using Zetbox.API;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.API.Configuration;
+using Zetbox.API.Utils;
+using Zetbox.Client.Models;
+using Zetbox.Client.Presentables.ValueViewModels;
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     [ViewModelDescriptor]
     public class ValueInputTaskViewModel
-        : WindowViewModel, Kistl.Client.Presentables.IValueInputTaskViewModel
+        : WindowViewModel, Zetbox.Client.Presentables.IValueInputTaskViewModel
     {
-        public new delegate ValueInputTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback);
+        public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback);
 
         public ValueInputTaskViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback)
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback)
             : base(appCtx, dataCtx, parent)
         {
             if (callback == null) throw new ArgumentNullException("callback");

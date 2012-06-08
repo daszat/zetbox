@@ -1,13 +1,13 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.App.GUI;
 
     public interface ILabeledViewModel
         : INotifyPropertyChanged
@@ -23,9 +23,9 @@ namespace Kistl.Client.Presentables
     public class LabeledViewContainerViewModel
         : ViewModel, ILabeledViewModel
     {
-        public new delegate LabeledViewContainerViewModel Factory(IKistlContext dataCtx, ViewModel parent, string label, string toolTip, ViewModel mdl);
+        public new delegate LabeledViewContainerViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string label, string toolTip, ViewModel mdl);
 
-        public LabeledViewContainerViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, string label, string toolTip, ViewModel mdl)
+        public LabeledViewContainerViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string label, string toolTip, ViewModel mdl)
             : base(dependencies, dataCtx, parent)
         {
             this._Label = label;

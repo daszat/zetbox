@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.DtoViewModels
+namespace Zetbox.Client.Presentables.DtoViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -7,15 +7,15 @@ namespace Kistl.Client.Presentables.DtoViewModels
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Dtos;
+    using Zetbox.API;
+    using Zetbox.API.Dtos;
 
-    public abstract class DtoBaseViewModel : Kistl.Client.Presentables.ViewModel
+    public abstract class DtoBaseViewModel : Zetbox.Client.Presentables.ViewModel
     {
         private readonly IFileOpener _fileOpener;
         private readonly ITempFileService _tmpService;
 
-        public DtoBaseViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService, object debugInfo)
+        public DtoBaseViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IFileOpener fileOpener, ITempFileService tmpService, object debugInfo)
             : base(dependencies, dataCtx, parent)
         {
             var dtoParent = parent as DtoBaseViewModel;

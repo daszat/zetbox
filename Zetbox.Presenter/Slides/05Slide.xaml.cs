@@ -35,18 +35,18 @@ namespace WPFPresenter.Slides
             SetupControl();
         }
 
-        private Kistl.Client.MainWindowCtrl kistl;
+        private Zetbox.Client.MainWindowCtrl zetbox;
 
         private void SetupControl()
         {
-            if (kistl != null) return;
-            if (App.KistlStarted)
+            if (zetbox != null) return;
+            if (App.ZetboxStarted)
             {
-                kistl = new Kistl.Client.MainWindowCtrl();
-                kistl.Width = 640;
-                kistl.Height = 480;
+                zetbox = new Zetbox.Client.MainWindowCtrl();
+                zetbox.Width = 640;
+                zetbox.Height = 480;
                 RootPanel.Children.Clear();
-                RootPanel.Children.Add(kistl);
+                RootPanel.Children.Add(zetbox);
             }
             else
             {

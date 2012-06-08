@@ -29,7 +29,7 @@
 using System;
 using NUnit.Framework;
 
-namespace Kistl.API.Utils.Tests
+namespace Zetbox.API.Utils.Tests
 {
     static class Utils
     {

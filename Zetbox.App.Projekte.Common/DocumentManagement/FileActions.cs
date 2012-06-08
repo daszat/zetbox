@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 
 namespace at.dasz.DocumentManagement
 {
@@ -10,7 +10,7 @@ namespace at.dasz.DocumentManagement
     public static class FileActions
     {
         [Invocation]
-        public static void preSet_Blob(at.dasz.DocumentManagement.File obj, PropertyPreSetterEventArgs<Kistl.App.Base.Blob> e)
+        public static void preSet_Blob(at.dasz.DocumentManagement.File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
             e.Result = obj.HandleBlobChange(e.OldValue, e.NewValue);
         }

@@ -41,31 +41,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\Libs\Kistl\Common\Core\Autofac.dll</HintPath>
+      <HintPath>..\Libs\Zetbox\Common\Core\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.API">
-      <HintPath>..\Libs\Kistl\Common\Core\Kistl.API.dll</HintPath>
+    <Reference Include="Zetbox.API">
+      <HintPath>..\Libs\Zetbox\Common\Core\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.API.Client">
-      <HintPath>..\Libs\Kistl\Client\Core\Kistl.API.Client.dll</HintPath>
+    <Reference Include="Zetbox.API.Client">
+      <HintPath>..\Libs\Zetbox\Client\Core\Zetbox.API.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.API.Common">
-      <HintPath>..\Libs\Kistl\Common\Core\Kistl.API.Common.dll</HintPath>
+    <Reference Include="Zetbox.API.Common">
+      <HintPath>..\Libs\Zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.Client">
-      <HintPath>..\Libs\Kistl\Client\Core\Kistl.Client.dll</HintPath>
+    <Reference Include="Zetbox.Client">
+      <HintPath>..\Libs\Zetbox\Client\Core\Zetbox.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.Objects">
-      <HintPath>..\bin\Debug\Common\Core.Generated\Kistl.Objects.dll</HintPath>
+    <Reference Include="Zetbox.Objects">
+      <HintPath>..\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\Libs\Kistl\Common\Core\log4net.dll</HintPath>
+      <HintPath>..\Libs\Zetbox\Common\Core\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System"/>

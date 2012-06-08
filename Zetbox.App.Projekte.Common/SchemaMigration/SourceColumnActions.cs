@@ -1,24 +1,24 @@
-namespace ZBox.App.SchemaMigration
+namespace Zetbox.App.SchemaMigration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     [Implementor]
     public static class SourceColumnActions
     {
         [Invocation]
-        public static void ToString(ZBox.App.SchemaMigration.SourceColumn obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(Zetbox.App.SchemaMigration.SourceColumn obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = (obj.SourceTable != null ? obj.SourceTable.Name : null) ?? string.Empty;
             e.Result += "." + (!string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Column");
         }
 
         [Invocation]
-        public static void CreateProperty(ZBox.App.SchemaMigration.SourceColumn obj)
+        public static void CreateProperty(Zetbox.App.SchemaMigration.SourceColumn obj)
         {
             if (obj.SourceTable == null) throw new InvalidOperationException("Not attached to a source table");
             if (obj.SourceTable.DestinationObjectClass == null) throw new InvalidOperationException("Source table has no destination object class");

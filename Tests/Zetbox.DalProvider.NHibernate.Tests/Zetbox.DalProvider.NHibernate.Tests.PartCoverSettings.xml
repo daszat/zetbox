@@ -1,6 +1,6 @@
 <PartCoverSettings>
   <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
-  <TargetWorkDir>P:\Kistl\Tests\Kistl.DalProvider.NHibernate.Tests</TargetWorkDir>
-  <TargetArgs>Kistl.DalProvider.NHibernate.Tests.nunit</TargetArgs>
-  <Rule>+[Kistl.DalProvider.*]*</Rule>
+  <TargetWorkDir>P:\Zetbox\Tests\Zetbox.DalProvider.NHibernate.Tests</TargetWorkDir>
+  <TargetArgs>Zetbox.DalProvider.NHibernate.Tests.nunit</TargetArgs>
+  <Rule>+[Zetbox.DalProvider.*]*</Rule>
 </PartCoverSettings>

@@ -1,18 +1,18 @@
 
-namespace Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Memory.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Templates = Zetbox.Generator.Templates;
 
     public class CollectionEntries
         : Templates.ObjectClasses.CollectionEntries
     {
-        public CollectionEntries(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
+        public CollectionEntries(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx)
             : base(_host, ctx)
         {
         }
@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses
         protected override IEnumerable<string> GetAdditionalImports()
         {
             return base.GetAdditionalImports().Concat(new string[]{
-                "Kistl.DalProvider.Memory",
+                "Zetbox.DalProvider.Memory",
             });
         }
     }

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -8,20 +8,20 @@ namespace Kistl.Client.Presentables
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
-    public class KistlDebuggerAsViewModel
-        : ViewModel, IKistlContextDebugger
+    public class ZetboxDebuggerAsViewModel
+        : ViewModel, IZetboxContextDebugger
     {
-        public new delegate KistlDebuggerAsViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate ZetboxDebuggerAsViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public KistlDebuggerAsViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public ZetboxDebuggerAsViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
-            KistlContextDebuggerSingleton.SetDebugger(this);
+            ZetboxContextDebuggerSingleton.SetDebugger(this);
         }
 
-        public KistlDebuggerAsViewModel(bool designMode)
+        public ZetboxDebuggerAsViewModel(bool designMode)
             : base(designMode)
         {
         }
@@ -33,58 +33,58 @@ namespace Kistl.Client.Presentables
 
         #region Public Interface
 
-        private ObservableCollection<KistlContextModel> _activeCtxCache = new ObservableCollection<KistlContextModel>();
-        private ObservableCollection<KistlContextModel> _disposedCtxCache = new ObservableCollection<KistlContextModel>();
-        private ReadOnlyObservableCollection<KistlContextModel> _activeCtxView;
-        private ReadOnlyObservableCollection<KistlContextModel> _disposedCtxView;
+        private ObservableCollection<ZetboxContextModel> _activeCtxCache = new ObservableCollection<ZetboxContextModel>();
+        private ObservableCollection<ZetboxContextModel> _disposedCtxCache = new ObservableCollection<ZetboxContextModel>();
+        private ReadOnlyObservableCollection<ZetboxContextModel> _activeCtxView;
+        private ReadOnlyObservableCollection<ZetboxContextModel> _disposedCtxView;
 
-        public ReadOnlyObservableCollection<KistlContextModel> ActiveContexts
+        public ReadOnlyObservableCollection<ZetboxContextModel> ActiveContexts
         {
             get
             {
                 if (_activeCtxView == null)
                 {
-                    _activeCtxView = new ReadOnlyObservableCollection<KistlContextModel>(_activeCtxCache);
+                    _activeCtxView = new ReadOnlyObservableCollection<ZetboxContextModel>(_activeCtxCache);
                 }
                 return _activeCtxView;
             }
         }
 
-        public ReadOnlyObservableCollection<KistlContextModel> DisposedContexts
+        public ReadOnlyObservableCollection<ZetboxContextModel> DisposedContexts
         {
             get
             {
                 if (_disposedCtxView == null)
                 {
-                    _disposedCtxView = new ReadOnlyObservableCollection<KistlContextModel>(_disposedCtxCache);
+                    _disposedCtxView = new ReadOnlyObservableCollection<ZetboxContextModel>(_disposedCtxCache);
                 }
                 return _disposedCtxView;
             }
         }
         #endregion
 
-        #region IKistlContextDebugger Members
+        #region IZetboxContextDebugger Members
 
-        private KistlContextModel GetModel(IKistlContext ctx)
+        private ZetboxContextModel GetModel(IZetboxContext ctx)
         {
-            return new KistlContextModel(ctx);
+            return new ZetboxContextModel(ctx);
         }
 
-        void IKistlContextDebugger.Created(IKistlContext ctx)
+        void IZetboxContextDebugger.Created(IZetboxContext ctx)
         {
             _activeCtxCache.Add(GetModel(ctx));
             ctx.Disposing += Disposing;
             ctx.Changed += Changed;
         }
 
-        void Disposing(object sender, GenericEventArgs<IReadOnlyKistlContext> e)
+        void Disposing(object sender, GenericEventArgs<IReadOnlyZetboxContext> e)
         {
-            var mdl = GetModel((IKistlContext)e.Data);
+            var mdl = GetModel((IZetboxContext)e.Data);
             _activeCtxCache.Remove(mdl);
             _disposedCtxCache.Add(mdl);
         }
 
-        void Changed(object sender, GenericEventArgs<IKistlContext> e)
+        void Changed(object sender, GenericEventArgs<IZetboxContext> e)
         {
             var mdl = GetModel(e.Data);
             mdl.OnContextChanged();
@@ -95,7 +95,7 @@ namespace Kistl.Client.Presentables
     /// <summary>
     /// Cant be a regular view model -> recursion when creating
     /// </summary>
-    public class KistlContextModel : INotifyPropertyChanged
+    public class ZetboxContextModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Members
 
@@ -124,9 +124,9 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        protected IKistlContext DebuggingContext { get; private set; }
+        protected IZetboxContext DebuggingContext { get; private set; }
 
-        public KistlContextModel(IKistlContext dataCtx)
+        public ZetboxContextModel(IZetboxContext dataCtx)
         {
             DebuggingContext = dataCtx;
         }
@@ -163,9 +163,9 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                if (DebuggingContext is IDebuggingKistlContext)
+                if (DebuggingContext is IDebuggingZetboxContext)
                 {
-                    return String.Join(String.Empty, ((IDebuggingKistlContext)DebuggingContext).CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+                    return String.Join(String.Empty, ((IDebuggingZetboxContext)DebuggingContext).CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
                 }
                 else
                 {
@@ -178,7 +178,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                IDebuggingKistlContext dbgCtx = DebuggingContext as IDebuggingKistlContext;
+                IDebuggingZetboxContext dbgCtx = DebuggingContext as IDebuggingZetboxContext;
                 if (dbgCtx != null)
                 {
                     if (dbgCtx.DisposedAt == null)
@@ -204,7 +204,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Update the model's state when the context is changed
         /// </summary>
-        /// is only called by the <see cref="KistlDebuggerAsViewModel"/>
+        /// is only called by the <see cref="ZetboxDebuggerAsViewModel"/>
         internal void OnContextChanged()
         {
             var objs = DebuggingContext.AttachedObjects.OfType<IDataObject>().ToArray();
@@ -222,7 +222,7 @@ namespace Kistl.Client.Presentables
 
         public string Name
         {
-            get { return "KistlContext"; }
+            get { return "ZetboxContext"; }
         }
     }
 }

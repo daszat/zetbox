@@ -4,7 +4,7 @@ echo '**************************************************************************
 echo 'Reset the database to what is defined in the database.xml'
 echo '********************************************************************************'
 
-mono --debug bin/Debug/Kistl.Server.Service.exe Configs/$zenv/Kistl.Server.Service.xml \
+mono --debug bin/Debug/Zetbox.Server.Service.exe Configs/$zenv/Zetbox.Server.Service.xml \
 	-wipe \
 	-deploy-update \
 	-generate

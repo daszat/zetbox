@@ -8,12 +8,12 @@
     <ProjectGuid>{F81E2AB4-0622-40A3-B7E3-9FAC0EE4A31B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DalProvider.Client.Generator</RootNamespace>
-    <AssemblyName>Kistl.DalProvider.Client.Generator</AssemblyName>
+    <RootNamespace>Zetbox.DalProvider.Client.Generator</RootNamespace>
+    <AssemblyName>Zetbox.DalProvider.Client.Generator</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -26,7 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Server\Core\Kistl.DalProvider.Client.Generator.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\Core\Zetbox.DalProvider.Client.Generator.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -37,7 +37,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\Server\Core\Kistl.DalProvider.Client.Generator.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Server\Core\Zetbox.DalProvider.Client.Generator.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
@@ -48,7 +48,7 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Server\Core\Kistl.DalProvider.Client.Generator.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\Core\Zetbox.DalProvider.Client.Generator.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -100,29 +100,29 @@
     <Compile Include="Templates\Serialization\CollectionSerialization.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
+    <ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
-      <Name>Kistl.API.Server</Name>
+      <Name>Zetbox.API.Server</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Generator\Kistl.Generator.csproj">
+    <ProjectReference Include="..\Zetbox.Generator\Zetbox.Generator.csproj">
       <Project>{4992171F-DA41-401C-8869-63594ACF2D93}</Project>
-      <Name>Kistl.Generator</Name>
+      <Name>Zetbox.Generator</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
     <None Include="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ApplyChangesFromMethod.Designer.cs</LastGenOutput>

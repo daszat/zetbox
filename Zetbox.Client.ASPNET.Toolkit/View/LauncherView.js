@@ -5,9 +5,9 @@
 // Javascript Functions for the LauncherView
 //----------------------------------------------------------------
 
-Type.registerNamespace("Kistl.Client.ASPNET.View");
+Type.registerNamespace("Zetbox.Client.ASPNET.View");
 
-Kistl.Client.ASPNET.View.LauncherView = function(element) {
+Zetbox.Client.ASPNET.View.LauncherView = function(element) {
     // Private Fields
     this._listModules = null;
     this._listObjectClasses = null;
@@ -27,13 +27,13 @@ Kistl.Client.ASPNET.View.LauncherView = function(element) {
     this._onOnItemCommand_ListModulesHandler = null;
     this._onOnItemCommand_ListObjectClassesHandler = null;
 
-    Kistl.Client.ASPNET.View.LauncherView.initializeBase(this, [element]);
+    Zetbox.Client.ASPNET.View.LauncherView.initializeBase(this, [element]);
 }
 
-Kistl.Client.ASPNET.View.LauncherView.prototype = {
+Zetbox.Client.ASPNET.View.LauncherView.prototype = {
     // Inititalize Control
     initialize: function() {
-        Kistl.Client.ASPNET.View.LauncherView.callBaseMethod(this, 'initialize');
+        Zetbox.Client.ASPNET.View.LauncherView.callBaseMethod(this, 'initialize');
 
         // Item BoundHandler
         this._onOnItemDataBoundHandler = Function.createDelegate(this, this._onItemDataBound);
@@ -58,7 +58,7 @@ Kistl.Client.ASPNET.View.LauncherView.prototype = {
     },
     // Dispose
     dispose: function() {
-        Kistl.Client.ASPNET.View.LauncherView.callBaseMethod(this, 'dispose');
+        Zetbox.Client.ASPNET.View.LauncherView.callBaseMethod(this, 'dispose');
     },
     // public Properties
     get_ListModules: function() {
@@ -82,7 +82,7 @@ Kistl.Client.ASPNET.View.LauncherView.prototype = {
     // Methods
     BindModules: function() {
         $get("divLoadingModules").style.display = "block";
-        Kistl.Client.ASPNET.WorkspaceModelService.GetModules(this._onServiceCompleted_GetModulesHandler);
+        Zetbox.Client.ASPNET.WorkspaceModelService.GetModules(this._onServiceCompleted_GetModulesHandler);
     },
     // DataBound EventHandler
     _onItemDataBound: function(sender, e) {
@@ -91,7 +91,7 @@ Kistl.Client.ASPNET.View.LauncherView.prototype = {
         if (item.get_isDataItemType()) {
             var data = item.get_dataItem();
             var txtText = item.findControl('text');
-            Kistl.Client.ASPNET.JavascriptRenderer.setText(txtText, data.Text);
+            Zetbox.Client.ASPNET.JavascriptRenderer.setText(txtText, data.Text);
         }
     },
     _listInstances_onItemDataBound: function(sender, e) {
@@ -101,7 +101,7 @@ Kistl.Client.ASPNET.View.LauncherView.prototype = {
             var data = item.get_dataItem();
             var txtText = item.findControl('text');
             var lnk = item.findControl('lnk');
-            Kistl.Client.ASPNET.JavascriptRenderer.setText(txtText, data.Text);
+            Zetbox.Client.ASPNET.JavascriptRenderer.setText(txtText, data.Text);
             lnk.href = 'Workspace.aspx?type=' + data.Type.TypeName + '&ID=' + data.ID;
         }
     },
@@ -129,16 +129,16 @@ Kistl.Client.ASPNET.View.LauncherView.prototype = {
         this._listInstances.set_dataSource(null);
         this._listInstances.dataBind();
         var data = e.get_item().get_dataItem();
-        Kistl.Client.ASPNET.WorkspaceModelService.GetObjectClasses(data.ID, this._onServiceCompleted_GetObjectClassesHandler);
+        Zetbox.Client.ASPNET.WorkspaceModelService.GetObjectClasses(data.ID, this._onServiceCompleted_GetObjectClassesHandler);
     },
     _onOnItemCommand_ListObjectClasses: function(sender, e) {
         $get("divLoadingInstances").style.display = "block";
         this._listInstances.set_dataSource(null);
         this._listInstances.dataBind();
         var data = e.get_item().get_dataItem();
-        Kistl.Client.ASPNET.WorkspaceModelService.GetInstances(data.ID, this._onServiceCompleted_GetInstancesHandler);
+        Zetbox.Client.ASPNET.WorkspaceModelService.GetInstances(data.ID, this._onServiceCompleted_GetInstancesHandler);
     }
 }
 
-Kistl.Client.ASPNET.View.LauncherView.registerClass('Kistl.Client.ASPNET.View.LauncherView', Sys.UI.Control);
+Zetbox.Client.ASPNET.View.LauncherView.registerClass('Zetbox.Client.ASPNET.View.LauncherView', Sys.UI.Control);
 if (typeof (Sys) !== 'undefined') Sys.Application.notifyScriptLoaded();

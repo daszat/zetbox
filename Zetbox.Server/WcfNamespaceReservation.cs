@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     using System;
     using System.Collections.Generic;

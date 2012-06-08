@@ -6,12 +6,12 @@
 		</Unrecognized>
 		-->
 		<Recognized>
-			<Word>Kistl</Word>
+			<Word>Zetbox</Word>
 			<Word>Utils</Word>
 			<Word>Presentables</Word>
 			<Word>Dal</Word><!-- abbrevation for Data Access Layer -->
 			<Word>EF</Word><!-- abbrevation for Entity Framework -->
-			<Word>ctx</Word><!-- default variable name for IKistlContexts -->
+			<Word>ctx</Word><!-- default variable name for IZetboxContexts -->
 			<Word>OnToString</Word> <!-- many false positives on "OnToString" -->
 		</Recognized>
 		<Deprecated>

@@ -8,12 +8,12 @@
     <ProjectGuid>{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Client.WPF.Toolkit</RootNamespace>
-    <AssemblyName>Kistl.Client.WPF.Toolkit</AssemblyName>
+    <RootNamespace>Zetbox.Client.WPF.Toolkit</RootNamespace>
+    <AssemblyName>Zetbox.Client.WPF.Toolkit</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -26,7 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\WPF\Kistl.Client.WPF.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\WPF\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\WPF\Kistl.Client.WPF.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\WPF\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
@@ -47,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Client\WPF\Kistl.Client.WPF.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\WPF\Zetbox.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
@@ -98,7 +98,7 @@
     <Compile Include="Commands\Converter.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\SmartRoutedUICommand.cs" />
-    <Compile Include="Commands\WrappedKistlCommand.cs" />
+    <Compile Include="Commands\WrappedZetboxCommand.cs" />
     <Compile Include="Converter\ContentAlignmentConverters.cs" />
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\EmptyCountToCollapsedConverter.cs" />
@@ -121,7 +121,7 @@
     <Compile Include="TypeNameTemplateSelector.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
     <Compile Include="CustomControls\PropertyEditor.cs" />
-    <Compile Include="CustomControls\ZBoxDataGrid.cs" />
+    <Compile Include="CustomControls\ZetboxDataGrid.cs" />
     <Compile Include="CustomControls\DropDownButton.cs" />
     <Compile Include="CustomControls\LabeledContainer.xaml.cs">
       <DependentUpon>LabeledContainer.xaml</DependentUpon>
@@ -134,7 +134,7 @@
     </Compile>
     <Compile Include="CustomControls\WindowView.cs" />
     <Compile Include="CustomControls\WorkaroundToolBar.cs" />
-    <Compile Include="CustomControls\ZBoxListView.cs" />
+    <Compile Include="CustomControls\ZetboxListView.cs" />
     <Compile Include="WPFHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
@@ -146,34 +146,34 @@
     <Compile Include="WpfSortHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
+    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Kistl.API.Client</Name>
+      <Name>Zetbox.API.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Client\Kistl.Client.csproj">
+    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
-      <Name>Kistl.Client</Name>
+      <Name>Zetbox.Client</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="CustomControls\DtoDisplayer.xaml">

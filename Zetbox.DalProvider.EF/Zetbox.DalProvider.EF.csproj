@@ -8,12 +8,12 @@
     <ProjectGuid>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DalProvider.Ef</RootNamespace>
-    <AssemblyName>Kistl.DalProvider.Ef</AssemblyName>
+    <RootNamespace>Zetbox.DalProvider.Ef</RootNamespace>
+    <AssemblyName>Zetbox.DalProvider.Ef</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -26,7 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Server\EF\Kistl.DalProvider.Ef.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\EF\Zetbox.DalProvider.Ef.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -37,7 +37,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\Server\EF\Kistl.DalProvider.Ef.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Server\EF\Zetbox.DalProvider.Ef.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
@@ -48,7 +48,7 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Server\EF\Kistl.DalProvider.Ef.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\EF\Zetbox.DalProvider.Ef.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -100,33 +100,33 @@
     <Compile Include="ServerObjectHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
+    <ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
-      <Name>Kistl.API.Server</Name>
+      <Name>Zetbox.API.Server</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.DalProvider.Base\Kistl.DalProvider.Base.csproj">
+    <ProjectReference Include="..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj">
       <Project>{A242A751-9F97-4F1C-ABE5-57B28133DEF4}</Project>
-      <Name>Kistl.DalProvider.Base</Name>
+      <Name>Zetbox.DalProvider.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Server\Kistl.Server.csproj">
+    <ProjectReference Include="..\Zetbox.Server\Zetbox.Server.csproj">
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
-      <Name>Kistl.Server</Name>
+      <Name>Zetbox.Server</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
@@ -135,7 +135,7 @@
     <Compile Include="EfQueryTranslatorProvider.cs" />
     <Compile Include="EfServerObjectHandlerFactory.cs" />
     <Compile Include="EFImplementationTypeChecker.cs" />
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

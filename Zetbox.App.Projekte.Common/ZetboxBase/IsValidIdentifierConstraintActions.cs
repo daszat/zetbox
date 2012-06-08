@@ -1,16 +1,16 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class IsValidIdentifierConstraintActions
     {
         [Invocation]
-        public static void ToString(IsValidIdentifierConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void ToString(IsValidIdentifierConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "Method names, property names, enum names etc. must be valid names.";
         }

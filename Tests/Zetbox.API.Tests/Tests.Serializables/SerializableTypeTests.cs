@@ -1,12 +1,12 @@
 
-namespace Kistl.API.Tests.Serializables
+namespace Zetbox.API.Tests.Serializables
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Mocks;
+    using Zetbox.API.Mocks;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
 

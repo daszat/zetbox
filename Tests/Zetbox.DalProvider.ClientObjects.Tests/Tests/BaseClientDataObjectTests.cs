@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client.Tests
+namespace Zetbox.DalProvider.Client.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,14 @@ namespace Kistl.DalProvider.Client.Tests
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.DalProvider.Client.Mocks;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.DalProvider.Client.Mocks;
     using NUnit.Framework;
-    using Kistl.App.Test;
+    using Zetbox.App.Test;
 
     [TestFixture]
-    public class BaseClientDataObjectTests : Kistl.API.AbstractConsumerTests.AbstractTestFixture
+    public class BaseClientDataObjectTests : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
     {
         private BaseClientDataObjectMockImpl obj;
         private bool PropertyChangedCalled = false;
@@ -102,7 +102,7 @@ namespace Kistl.DalProvider.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_Null()
         {
-            obj.ToStream((KistlStreamWriter)null, null, false);
+            obj.ToStream((ZetboxStreamWriter)null, null, false);
         }
 
         [Test]
@@ -110,8 +110,8 @@ namespace Kistl.DalProvider.Client.Tests
         {
             var typeMap = scope.Resolve<TypeMap>();
             using (var ms = new MemoryStream())
-            using (var sw = new KistlStreamWriter(typeMap, new BinaryWriter(ms)))
-            using (var sr = new KistlStreamReader(typeMap, new BinaryReader(ms)))
+            using (var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms)))
+            using (var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms)))
             {
                 var ctx = GetContext();
 
@@ -138,10 +138,10 @@ namespace Kistl.DalProvider.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
-                result.FromStream((KistlStreamReader)null);
+                result.FromStream((ZetboxStreamReader)null);
             }
         }
 
@@ -150,7 +150,7 @@ namespace Kistl.DalProvider.Client.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -163,7 +163,7 @@ namespace Kistl.DalProvider.Client.Tests
         public void AttachToContext_New()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 obj.SetPrivatePropertyValue<int>("ID", -1);
                 obj.AttachToContext(ctx);
@@ -178,7 +178,7 @@ namespace Kistl.DalProvider.Client.Tests
         public void AttachToContext_New_InvalidID()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 obj.SetPrivatePropertyValue<int>("ID", Helper.INVALIDID);
                 obj.AttachToContext(ctx);
@@ -193,7 +193,7 @@ namespace Kistl.DalProvider.Client.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -209,7 +209,7 @@ namespace Kistl.DalProvider.Client.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -222,12 +222,12 @@ namespace Kistl.DalProvider.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextException))]
+        [ExpectedException(typeof(WrongZetboxContextException))]
         public void DetachFromContext_NotAttached()
         {
             Assert.That(obj.Context, Is.Null);
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 obj.DetachFromContext(ctx);
                 Assert.That(obj.Context, Is.Null);

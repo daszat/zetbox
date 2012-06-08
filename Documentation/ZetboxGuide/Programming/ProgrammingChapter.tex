@@ -1,22 +1,22 @@
 \chapter{Programming}
 
-This chapter describes the various ways and pieces the ZBox system is
+This chapter describes the various ways and pieces the Zetbox system is
 programmed and customized.
 
 \section{Objects}
 
 \subsection{ObjectClass}
 
-ZBox knows four kinds of Types, all derived from \emph{DataType}:
+Zetbox knows four kinds of Types, all derived from \emph{DataType}:
 \begin{description}
-\item[ObjectClass] { Type for ZBox Object Classes }
-\item[Interface] { Type for ZBox Interfaces }
-\item[Enumeration] { Type for ZBox Enumerations }
-\item[CompoundObject] { Type for ZBox Object Classes }
+\item[ObjectClass] { Type for Zetbox Object Classes }
+\item[Interface] { Type for Zetbox Interfaces }
+\item[Enumeration] { Type for Zetbox Enumerations }
+\item[CompoundObject] { Type for Zetbox Object Classes }
 \end{description}
 
 \subsubsection{DataType}
-This is the abstract base class for all ZBox Types. It provides the necessary
+This is the abstract base class for all Zetbox Types. It provides the necessary
 infrastructure to describe a Type.
 
 \begin{CS}
@@ -50,7 +50,7 @@ any constraint throws an error nothing will be committed. }
 \end{description}
 
 \subsubsection{ObjectClass}
-\emph{ObjectClass} is \emph{the} defining class for ZBox Objects.
+\emph{ObjectClass} is \emph{the} defining class for Zetbox Objects.
 
 \begin{CS}
 public interface ObjectClass : DataType 
@@ -198,7 +198,7 @@ p.Tel.Number = "18273645"; // changes p.Tel.Number but does not change n.Number
 n.Number = "87654321"; // changes n.Number but does not change p.Tel.Number
 \end{CS}
 
-\section{Enhancing Kistl's inner workings}
+\section{Enhancing Zetbox's inner workings}
 
 \subsection{Database Providers}
 
@@ -206,17 +206,17 @@ n.Number = "87654321"; // changes n.Number but does not change p.Tel.Number
 
 
 \section{Concurrency}
-Kistl supports optimistic concurrency. It's enabled, when a \emph{ObjectClass}
+Zetbox supports optimistic concurrency. It's enabled, when a \emph{ObjectClass}
 implements the \emph{IChangedBy} interface. The versioning column is
 \emph{ChangedOn}.
 
-\section{Core Kistl Development Environment}
+\section{Core Zetbox Development Environment}
 
 \subsection{Preparing a clean local build}
 
 First, it is necessary to have a clean build environment. Use
 \emph{subst} to create a drive \emph{P:} where your checkout
-resides in a directory called \emph{Kistl}.
+resides in a directory called \emph{Zetbox}.
 
 The \emph{!FullReset.cmd} will bring the database and the bootstrapping
 code up to the current \emph{Database.xml}'s content.

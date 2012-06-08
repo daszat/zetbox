@@ -1,20 +1,20 @@
 ﻿/// <reference name="MicrosoftAjax.js"/>
 
-Type.registerNamespace("Kistl.Client.ASPNET");
+Type.registerNamespace("Zetbox.Client.ASPNET");
 
-Kistl.Client.ASPNET.JavascriptRenderer = function() {
-    Kistl.Client.ASPNET.JavascriptRenderer.initializeBase(this);
+Zetbox.Client.ASPNET.JavascriptRenderer = function() {
+    Zetbox.Client.ASPNET.JavascriptRenderer.initializeBase(this);
 }
 
-Kistl.Client.ASPNET.JavascriptRenderer.prototype = {
+Zetbox.Client.ASPNET.JavascriptRenderer.prototype = {
     initialize: function() {
-        Kistl.Client.ASPNET.JavascriptRenderer.callBaseMethod(this, 'initialize');
+        Zetbox.Client.ASPNET.JavascriptRenderer.callBaseMethod(this, 'initialize');
         
         // Benutzerdefinierte Initialisierung hier hinzufügen
     },
     dispose: function() {        
         //Benutzerdefinierte Löschaktionen hier einfügen
-        Kistl.Client.ASPNET.JavascriptRenderer.callBaseMethod(this, 'dispose');
+        Zetbox.Client.ASPNET.JavascriptRenderer.callBaseMethod(this, 'dispose');
     },
     doPostBack: function(action, argument) {
         $get('__JavascriptRenderer_Action').value = action;
@@ -31,17 +31,17 @@ Kistl.Client.ASPNET.JavascriptRenderer.prototype = {
         return {'ID': 0, 'Text': '', 'Type': type};
     }
 }
-Kistl.Client.ASPNET.JavascriptRenderer.registerClass('Kistl.Client.ASPNET.JavascriptRenderer', Sys.Component);
+Zetbox.Client.ASPNET.JavascriptRenderer.registerClass('Zetbox.Client.ASPNET.JavascriptRenderer', Sys.Component);
 
-Kistl.JavascriptRenderer = new Kistl.Client.ASPNET.JavascriptRenderer();
+Zetbox.JavascriptRenderer = new Zetbox.Client.ASPNET.JavascriptRenderer();
 
 if (typeof(Sys) !== 'undefined') Sys.Application.notifyScriptLoaded();
 
 
 //----------------------------------------------------------------
-// Commom Kistl Javascript Functions
+// Commom Zetbox Javascript Functions
 //----------------------------------------------------------------
-Kistl.Client.ASPNET.JavascriptRenderer.setText = function (element, text)
+Zetbox.Client.ASPNET.JavascriptRenderer.setText = function (element, text)
 {
     if (typeof element.innerText != 'undefined')
     {

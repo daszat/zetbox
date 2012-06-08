@@ -1,24 +1,24 @@
-namespace ZBox.App.SchemaMigration
+namespace Zetbox.App.SchemaMigration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     [Implementor]
     public static class SourceTableActions
     {
         [Invocation]
-        public static void ToString(ZBox.App.SchemaMigration.SourceTable obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(Zetbox.App.SchemaMigration.SourceTable obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = "[" + ((obj.StagingDatabase != null ? obj.StagingDatabase.Description : null) ?? string.Empty) + "]";
             e.Result += "." + (!string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Table");
         }
 
         [Invocation]
-        public static void CreateObjectClass(ZBox.App.SchemaMigration.SourceTable obj)
+        public static void CreateObjectClass(Zetbox.App.SchemaMigration.SourceTable obj)
         {
             if (obj.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
             if (obj.StagingDatabase.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");

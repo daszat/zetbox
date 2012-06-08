@@ -5,7 +5,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Kistl.API.Tests.MagicCollectionFactory
+namespace Zetbox.API.Tests.MagicCollectionFactory
 {
     [TestFixture]
     public class should_wrap_collections : AbstractApiTestFixture

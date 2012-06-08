@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     using System;
     using System.Collections.Generic;
@@ -9,11 +9,11 @@ namespace Kistl.Server
     using System.Text;
     using Autofac;
     using Autofac.Integration.Wcf;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.App.Extensions;
 
     public class ServerModule : Module
     {
@@ -26,16 +26,16 @@ namespace Kistl.Server
             builder
                 .Register((c, p) =>
                 {
-                    KistlConfig cfg = c.Resolve<KistlConfig>();
-                    IKistlContext ctx = c.Resolve<BaseMemoryContext>();
-                    var connectionString = cfg.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                    ZetboxConfig cfg = c.Resolve<ZetboxConfig>();
+                    IZetboxContext ctx = c.Resolve<BaseMemoryContext>();
+                    var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
                     ISchemaProvider schemaProvider = c.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
                     schemaProvider.Open(connectionString.ConnectionString);
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
                     return new SchemaManagement.SchemaManager(
                         schemaProvider,
-                        p.Named<IKistlContext>("newSchema"),
+                        p.Named<IZetboxContext>("newSchema"),
                         ctx,
                         cfg);
                 })
@@ -65,9 +65,9 @@ namespace Kistl.Server
                 .SingleInstance();
 
             builder
-                .RegisterType<KistlService>()
-                .As<KistlService>() // registration for WCF
-                .As<IKistlService>() // registration for KistlServiceFacade
+                .RegisterType<ZetboxService>()
+                .As<ZetboxService>() // registration for WCF
+                .As<IZetboxService>() // registration for ZetboxServiceFacade
                 .InstancePerLifetimeScope();
 
             builder

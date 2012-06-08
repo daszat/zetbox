@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client.Tests
+namespace Zetbox.DalProvider.Client.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -10,12 +10,12 @@ namespace Kistl.DalProvider.Client.Tests
 
     using Autofac;
 
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Client;
-    using Kistl.API.Configuration;
-    using Kistl.App.Extensions;
-    using Kistl.DalProvider.Client.Mocks;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Client;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Extensions;
+    using Zetbox.DalProvider.Client.Mocks;
 
     using NUnit.Framework;
 
@@ -27,14 +27,14 @@ namespace Kistl.DalProvider.Client.Tests
         protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
-            builder.RegisterModule(new Kistl.API.ApiModule());
-            builder.RegisterModule(new Kistl.API.Client.ClientApiModule());
-            builder.RegisterModule(new Kistl.API.Client.HttpClientModule());
-            builder.RegisterModule(new Kistl.Client.ClientModule());
-            builder.RegisterModule(new Kistl.DalProvider.Client.ClientProvider());
-            builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
-            builder.RegisterModule(new Kistl.Objects.InterfaceModule());
-            builder.RegisterModule(new Kistl.Objects.MemoryModule());
+            builder.RegisterModule(new Zetbox.API.ApiModule());
+            builder.RegisterModule(new Zetbox.API.Client.ClientApiModule());
+            builder.RegisterModule(new Zetbox.API.Client.HttpClientModule());
+            builder.RegisterModule(new Zetbox.Client.ClientModule());
+            builder.RegisterModule(new Zetbox.DalProvider.Client.ClientProvider());
+            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Zetbox.Objects.InterfaceModule());
+            builder.RegisterModule(new Zetbox.Objects.MemoryModule());
 
             builder
                 .RegisterType<ProxyMock>()
@@ -44,12 +44,12 @@ namespace Kistl.DalProvider.Client.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.DalProvider.ClientObjects.Tests.xml";
+            return "Zetbox.DalProvider.ClientObjects.Tests.xml";
         }
 
-        protected override Kistl.API.HostType GetHostType()
+        protected override Zetbox.API.HostType GetHostType()
         {
-            return Kistl.API.HostType.Client;
+            return Zetbox.API.HostType.Client;
         }
 
     }

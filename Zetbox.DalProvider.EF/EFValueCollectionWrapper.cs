@@ -1,14 +1,14 @@
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
     public class EfValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
@@ -16,11 +16,11 @@ namespace Kistl.DalProvider.Ef
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
     {
-        public EfValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+        public EfValueCollectionWrapper(IZetboxContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
         {
         }
-        public EfValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        public EfValueCollectionWrapper(IZetboxContext ctx, TParent parent, TEntryCollection collection)
             : base(ctx, parent, null, collection)
         {
         }
@@ -32,11 +32,11 @@ namespace Kistl.DalProvider.Ef
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
     {
-        public EfValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+        public EfValueListWrapper(IZetboxContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
         {
         }
-        public EfValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        public EfValueListWrapper(IZetboxContext ctx, TParent parent, TEntryCollection collection)
             : base(ctx, parent, null, collection)
         {
         }

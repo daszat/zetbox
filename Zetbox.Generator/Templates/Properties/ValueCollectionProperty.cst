@@ -1,17 +1,17 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Properties.ValueCollectionProperty"
-	ClassName="Kistl.Generator.Templates.Properties.ValueCollectionProperty" 
-	Inherits="Kistl.Generator.MemberTemplate" %>
+	ClassName="Zetbox.Generator.Templates.Properties.ValueCollectionProperty" 
+	Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Diagnostics" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
+<%@ Parameter Name="serializationList" Type="Zetbox.Generator.Templates.Serialization.SerializationMembersList" %>
 <%@ Parameter Name="name" Type="string" %>
 <%@ Parameter Name="backingName" Type="string" %>
 <%@ Parameter Name="backingCollectionType" Type="string" %>

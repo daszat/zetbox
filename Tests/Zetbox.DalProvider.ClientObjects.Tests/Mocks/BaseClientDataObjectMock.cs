@@ -1,14 +1,14 @@
 
-namespace Kistl.DalProvider.Client.Mocks
+namespace Zetbox.DalProvider.Client.Mocks
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.App.Test;
-    using Kistl.DalProvider.Base;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.App.Test;
+    using Zetbox.DalProvider.Base;
 
     public class BaseClientDataObjectMockImpl
         : DataObjectBaseImpl, ANewObjectClass, IClientObject

@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Client
+namespace Zetbox.API.Client
 {
     using System;
     using System.Collections.Generic;
@@ -11,11 +11,11 @@ namespace Kistl.API.Client
     using System.Text;
 
     public sealed class HttpServiceClient
-        : Kistl.API.Client.KistlService.IKistlService
+        : Zetbox.API.Client.ZetboxService.IZetboxService
     {
         private const int MAX_RETRY_COUNT = 2;
 
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Client.HttpServiceClient");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Client.HttpServiceClient");
 
         private readonly Uri SetObjectsUri;
         private readonly Uri GetListUri;
@@ -25,10 +25,10 @@ namespace Kistl.API.Client
         private readonly Uri SetBlobStreamUri;
         private readonly Uri InvokeServerMethodUri;
         private readonly ICredentialsResolver _credentialsResolver;
-        private readonly KistlStreamReader.Factory _readerFactory;
-        private readonly KistlStreamWriter.Factory _writerFactory;
+        private readonly ZetboxStreamReader.Factory _readerFactory;
+        private readonly ZetboxStreamWriter.Factory _writerFactory;
 
-        public HttpServiceClient(ICredentialsResolver credentialsResolver, KistlStreamReader.Factory readerFactory, KistlStreamWriter.Factory writerFactory)
+        public HttpServiceClient(ICredentialsResolver credentialsResolver, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory)
         {
             if (credentialsResolver == null) throw new ArgumentNullException("credentialsResolver");
             if (readerFactory == null) throw new ArgumentNullException("readerFactory");
@@ -47,7 +47,7 @@ namespace Kistl.API.Client
             _writerFactory = writerFactory;
         }
 
-        private byte[] MakeRequest(Uri destination, Action<KistlStreamWriter> sendRequest)
+        private byte[] MakeRequest(Uri destination, Action<ZetboxStreamWriter> sendRequest)
         {
             do
             {
@@ -84,7 +84,7 @@ namespace Kistl.API.Client
                         }
                         else if (httpResponse.StatusCode == HttpStatusCode.PreconditionFailed)
                         {
-                            throw new InvalidKistlGeneratedVersionException();
+                            throw new InvalidZetboxGeneratedVersionException();
                         }
 
                         Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
@@ -206,7 +206,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public KistlService.BlobResponse SetBlobStream(KistlService.BlobMessage request)
+        public ZetboxService.BlobResponse SetBlobStream(ZetboxService.BlobMessage request)
         {
             if (request == null) throw new ArgumentNullException("request");
 
@@ -234,7 +234,7 @@ namespace Kistl.API.Client
                     byte[] data;
                     reader.Read(out data);
 
-                    return new KistlService.BlobResponse()
+                    return new ZetboxService.BlobResponse()
                     {
                         ID = id,
                         BlobInstance = new MemoryStream(data)

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Base.MethodNHibernateImpl+MethodProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Base.MethodNHibernateImpl+MethodProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Base.MethodNHibernateImpl+MethodProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Base.MethodNHibernateImpl+MethodProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`Methods`"
            abstract="false"
@@ -23,7 +23,7 @@
                   column="`CategoryTags`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
@@ -35,7 +35,7 @@
                   column="`CodeTemplate`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
@@ -50,7 +50,7 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Icon" column="`fk_Icon`" class="Kistl.App.GUI.IconNHibernateImpl+IconProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Icon" column="`fk_Icon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="InvokeOnServer" 
@@ -65,19 +65,19 @@
                   column="`Label`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Kistl.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
         <set name="Parameter" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Method`" />
-            <one-to-many class="Kistl.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.BaseParameterNHibernateImpl+BaseParameterProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
@@ -86,7 +86,7 @@
         <!-- relEnd=Methods otherEnd=ObjRefProp -->
         <set name="ShowByProperties" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Methods`" />
-            <one-to-many class="Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 

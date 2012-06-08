@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.GUI.IconNHibernateImpl+IconProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.GUI.IconNHibernateImpl+IconProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl"
            schema="`gui`"
            table="`Icons`"
            abstract="false"
@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Blob" column="`fk_Blob`" class="Kistl.App.Base.BlobNHibernateImpl+BlobProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="Blob" column="`fk_Blob`" class="Zetbox.App.Base.BlobNHibernateImpl+BlobProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
@@ -30,7 +30,7 @@
                   column="`IconFile`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
 
         <!-- define the subclasses -->

@@ -1,11 +1,11 @@
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables;
 
     /// <summary>
     /// Client implementation
@@ -21,7 +21,7 @@ namespace Kistl.App.GUI
         }
 
         [Invocation]
-        public static void Upload(Kistl.App.GUI.Icon obj)
+        public static void Upload(Zetbox.App.GUI.Icon obj)
         {
             // UI Code in Custom Actions!
             // ASP.NET would have a big Problem with that function
@@ -30,13 +30,13 @@ namespace Kistl.App.GUI
             {
                 var fi = new System.IO.FileInfo(path);
                 int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
-                obj.Blob = obj.Context.Find<Kistl.App.Base.Blob>(id);
+                obj.Blob = obj.Context.Find<Zetbox.App.Base.Blob>(id);
                 obj.IconFile = obj.Blob.OriginalName;
             }
         }
 
         [Invocation]
-        public static void Open(Kistl.App.GUI.Icon obj)
+        public static void Open(Zetbox.App.GUI.Icon obj)
         {
             if (obj.Blob != null)
             {

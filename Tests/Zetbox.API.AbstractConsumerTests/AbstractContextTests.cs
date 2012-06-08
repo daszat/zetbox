@@ -1,14 +1,14 @@
 
-namespace Kistl.API.AbstractConsumerTests
+namespace Zetbox.API.AbstractConsumerTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
     using NUnit.Framework;
 
     public abstract class AbstractContextTests
@@ -26,14 +26,14 @@ namespace Kistl.API.AbstractConsumerTests
             base.SetUp();
             iftFactory = scope.Resolve<InterfaceType.Factory>();
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
                 ProjectDataFixture.DeleteData(ctx);
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var list = new List<TestObjClass>();
                 while (list.Count < 2)
@@ -137,7 +137,7 @@ namespace Kistl.API.AbstractConsumerTests
                 while (objCount-- > 0)
                 {
                     var obj = ctx.Create<TestObjClass>();
-                    Assert.That(obj.ID, Is.LessThan(Kistl.API.Helper.INVALIDID));
+                    Assert.That(obj.ID, Is.LessThan(Zetbox.API.Helper.INVALIDID));
                     obj.StringProp = "Muh " + objCount; // avoid not null constraint
                     objs.Add(obj);
                 }
@@ -145,7 +145,7 @@ namespace Kistl.API.AbstractConsumerTests
 
                 foreach (var obj in objs)
                 {
-                    Assert.That(obj.ID, Is.GreaterThan(Kistl.API.Helper.INVALIDID));
+                    Assert.That(obj.ID, Is.GreaterThan(Zetbox.API.Helper.INVALIDID));
                 }
             }
         }
@@ -215,7 +215,7 @@ namespace Kistl.API.AbstractConsumerTests
             }
         }
 
-        private TestObjClass CreateTestObjClass(IKistlContext ctx)
+        private TestObjClass CreateTestObjClass(IZetboxContext ctx)
         {
             var result = ctx.Create<TestObjClass>();
             result.MyIntProperty = 1;
@@ -359,7 +359,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void GetContext_returns_a_context()
         {
-            IKistlContext ctx = GetContext();
+            IZetboxContext ctx = GetContext();
             Assert.That(ctx, Is.Not.Null);
         }
 
@@ -367,7 +367,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void GetQuery()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var result = ctx.GetQuery<TestObjClass>();
                 Assert.That(result, Is.Not.Null);
@@ -377,7 +377,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void Find_T_returns_right_object()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
@@ -390,16 +390,16 @@ namespace Kistl.API.AbstractConsumerTests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_T_fails_on_invalid_ID()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                ctx.Find<TestObjClass>(Kistl.API.Helper.INVALIDID);
+                ctx.Find<TestObjClass>(Zetbox.API.Helper.INVALIDID);
             }
         }
 
         [Test]
         public void Find_ObjectType_returns_right_object()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = (TestObjClass)ctx.Find(iftFactory(typeof(TestObjClass)), firstId);
                 Assert.That(obj, Is.Not.Null);
@@ -412,16 +412,16 @@ namespace Kistl.API.AbstractConsumerTests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_ObjectType_fails_on_invalid_ID()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                ctx.Find(iftFactory(typeof(TestObjClass)), Kistl.API.Helper.INVALIDID);
+                ctx.Find(iftFactory(typeof(TestObjClass)), Zetbox.API.Helper.INVALIDID);
             }
         }
 
         [Test]
         public void GetListOf_T_SubClasses_returns_a_non_empty_list_on_class_DataType()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
                 List<ObjectClass> result = ctx.GetListOf<ObjectClass>(obj, "SubClasses").ToList();
@@ -434,7 +434,7 @@ namespace Kistl.API.AbstractConsumerTests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetListOf_T_WrongPropertyName_fails()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == firstId);
                 ctx.GetListOf<TestObjClass>(obj, "NotAProperty");
@@ -445,7 +445,7 @@ namespace Kistl.API.AbstractConsumerTests
         [ExpectedException(typeof(InvalidCastException))]
         public void GetListOf_T_WrongItemType_fails()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
                 ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList();
@@ -455,7 +455,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void UpdateSomeData_SubmitChanges()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
@@ -465,7 +465,7 @@ namespace Kistl.API.AbstractConsumerTests
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
@@ -477,7 +477,7 @@ namespace Kistl.API.AbstractConsumerTests
         //[Ignore("Implement IsSorted on TestObjClass.TestName")]
         //public void UpdateLists_SubmitChanges()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
         //        Assert.That(obj.TestNames.Count, Is.EqualTo(2));
@@ -487,7 +487,7 @@ namespace Kistl.API.AbstractConsumerTests
         //        ctx.SubmitChanges();
         //    }
 
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
         //        Assert.That(obj.TestNames.Count, Is.EqualTo(2));
@@ -501,7 +501,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void Create_Generic()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 bool hasCreated = false;
                 GenericEventHandler<IPersistenceObject> createdHandler = new GenericEventHandler<IPersistenceObject>(delegate(object obj, GenericEventArgs<IPersistenceObject> e) { hasCreated = true; });
@@ -519,7 +519,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void Create_Type()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass newObj = ctx.Create(iftFactory(typeof(TestObjClass))) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
@@ -530,7 +530,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void Create_ObjectType()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass newObj = ctx.Create(iftFactory(typeof(TestObjClass))) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
@@ -542,7 +542,7 @@ namespace Kistl.API.AbstractConsumerTests
         [Test]
         public void Delete_triggers_ObjectDeleted()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 bool hasDeleted = false;
                 GenericEventHandler<IPersistenceObject> deletedHandler = new GenericEventHandler<IPersistenceObject>(
@@ -569,7 +569,7 @@ namespace Kistl.API.AbstractConsumerTests
         public void Delete_deletes_objects()
         {
             Delete_triggers_ObjectDeleted();
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 Assert.That(ctx.GetQuery<TestObjClass>().Count(), Is.EqualTo(0));
             }
@@ -579,7 +579,7 @@ namespace Kistl.API.AbstractConsumerTests
         //[Test]
         //public void Delete_ICollectionEntry()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        var result = ctx.GetQuery<TestObjClass>();
         //        Assert.That(result.ToList().Count, Is.EqualTo(4));

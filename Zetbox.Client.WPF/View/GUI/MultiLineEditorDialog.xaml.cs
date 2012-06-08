@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.GUI
+namespace Zetbox.Client.WPF.View.GUI
 {
     using System;
     using System.Collections.Generic;
@@ -14,15 +14,15 @@ namespace Kistl.Client.WPF.View.GUI
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Shapes;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.GUI;
-    using Kistl.Client.WPF.CustomControls;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class MultiLineEditorDialog : WindowView, IHasViewModel<MultiLineEditorDialogViewModel>
     {
         public MultiLineEditorDialog()

@@ -1,19 +1,19 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 {
     using System;
     using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Templates = Zetbox.Generator.Templates;
 
     public class NotifyingValueProperty
         : Templates.Properties.NotifyingValueProperty
     {
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializationMembersList serializationList, string type, string name, string modulenamespace, string backingName, bool isCalculated)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Templates.Serialization.SerializationMembersList serializationList, string type, string name, string modulenamespace, string backingName, bool isCalculated)
             : base(_host, ctx, serializationList, type, name, modulenamespace, "Proxy." + name, isCalculated)
         {
         }

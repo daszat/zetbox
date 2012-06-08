@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Base
+namespace Zetbox.DalProvider.Base
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Kistl.DalProvider.Base
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public abstract class DataObjectBaseImpl : PersistenceObjectBaseImpl, IDataObject
     {

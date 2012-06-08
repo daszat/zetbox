@@ -1,17 +1,17 @@
 
-namespace Kistl.DalProvider.Memory.Generator
+namespace Zetbox.DalProvider.Memory.Generator
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
 
     public class MemoryGenerator
         : AbstractBaseGenerator
@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.Memory.Generator
         // TODO: #1569 Why not using const Suffix?
         public override string ExtraSuffix { get { return "Memory"; } }
         public override string Description { get { return ExtraSuffix; } }
-        public override string TargetNameSpace { get { return "Kistl.Objects." + ExtraSuffix; } }
+        public override string TargetNameSpace { get { return "Zetbox.Objects." + ExtraSuffix; } }
         public override string BaseName { get { return ExtraSuffix; } }
         public override string ProjectGuid { get { return "{01E60FD5-CD96-466A-83B1-8EFC7452B47C}"; } }
         public override int CompileOrder { get { return COMPILE_ORDER_Implementation; } }
@@ -37,12 +37,12 @@ namespace Kistl.DalProvider.Memory.Generator
             get
             {
                 return new string[] {
-                    "Kistl.DalProvider.Base", "Kistl.DalProvider.Memory",
+                    "Zetbox.DalProvider.Base", "Zetbox.DalProvider.Memory",
                 };
             }
         }
 
-        protected override IEnumerable<string> Generate_Other(IKistlContext ctx)
+        protected override IEnumerable<string> Generate_Other(IZetboxContext ctx)
         {
             var files = base.Generate_Other(ctx);
 

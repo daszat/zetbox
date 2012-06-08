@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections;
@@ -9,13 +9,13 @@ namespace Kistl.API
     using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
-    public class KistlStreamReader : IDisposable
+    public class ZetboxStreamReader : IDisposable
     {
-        public delegate KistlStreamReader Factory(BinaryReader source);
+        public delegate ZetboxStreamReader Factory(BinaryReader source);
 
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Serialization");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Serialization");
 
         private readonly TypeMap _typeMap;
         private readonly BinaryReader _source;
@@ -87,7 +87,7 @@ namespace Kistl.API
             }
         }
 
-        public KistlStreamReader(TypeMap map, BinaryReader source)
+        public ZetboxStreamReader(TypeMap map, BinaryReader source)
         {
             if (map == null) throw new ArgumentNullException("map");
             if (source == null) throw new ArgumentNullException("source");

@@ -1,23 +1,23 @@
-namespace Kistl.App.Projekte.Client.ViewModel.Projekte
+namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.GUI;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.App.GUI;
 
     [ViewModelDescriptor]
     public class ShowCalendarNavigationActionViewModel : NavigationActionViewModel
     {
-        public new delegate ShowCalendarNavigationActionViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationAction screen);
+        public new delegate ShowCalendarNavigationActionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationAction screen);
 
-        private readonly Func<IKistlContext> _ctxFactory;
+        private readonly Func<IZetboxContext> _ctxFactory;
 
-        public ShowCalendarNavigationActionViewModel(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, ViewModel parent, NavigationAction screen)
+        public ShowCalendarNavigationActionViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+            IZetboxContext dataCtx, ViewModel parent, NavigationAction screen)
             : base(appCtx, dataCtx, parent, screen)
         {
             _ctxFactory = ctxFactory;

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.Client.Presentables.GUI
+namespace Zetbox.Client.Presentables.GUI
 {
     [ViewModelDescriptor]
     public class MultiLineEditorDialogViewModel
@@ -12,12 +12,12 @@ namespace Kistl.Client.Presentables.GUI
     {
         private Action<string> _callback;
 
-        public new delegate MultiLineEditorDialogViewModel Factory(IKistlContext dataCtx, ViewModel parent,
+        public new delegate MultiLineEditorDialogViewModel Factory(IZetboxContext dataCtx, ViewModel parent,
             string value,
             Action<string> callback);
 
         public MultiLineEditorDialogViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             string value,
             Action<string> callback)
             : base(appCtx, dataCtx, parent)

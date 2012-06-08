@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
-    public class AbstractEFTestFixture : Kistl.API.AbstractConsumerTests.AbstractTestFixture
+    public class AbstractEFTestFixture : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
     {
-        protected IKistlContext ctx;
+        protected IZetboxContext ctx;
 
         public override void SetUp()
         {

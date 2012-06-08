@@ -6,10 +6,10 @@ using System.Windows.Data;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace Kistl.Client.WPF.Converter
+namespace Zetbox.Client.WPF.Converter
 {
     /// <summary>
-    /// Converts an ZBox.Icon (ObjectClass, IDataObject, etc) to an Image Control
+    /// Converts an Zetbox.Icon (ObjectClass, IDataObject, etc) to an Image Control
     /// </summary>
     /// <remarks>
     /// Used for bind Icons to MenuItems throug a Style. See:

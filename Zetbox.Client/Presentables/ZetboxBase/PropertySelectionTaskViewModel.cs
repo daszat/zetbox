@@ -1,29 +1,29 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using ZBox.App.SchemaMigration;
-    using Kistl.API.Configuration;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.SchemaMigration;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Utils;
 
     [ViewModelDescriptor]
     public class PropertySelectionTaskViewModel : WindowViewModel
     {
-        public new delegate PropertySelectionTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent, ObjectClass objClass, Action<IEnumerable<Property>> callback);
+        public new delegate PropertySelectionTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass objClass, Action<IEnumerable<Property>> callback);
 
         private readonly Action<IEnumerable<Property>> _callback;
         private readonly ObjectClass _objClass;
 
         public PropertySelectionTaskViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             ObjectClass objClass,
             Action<IEnumerable<Property>> callback)
             : base(appCtx, dataCtx, parent)
@@ -282,13 +282,13 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class SelectedPropertyViewModel : DataObjectViewModel
     {
-        public new delegate SelectedPropertyViewModel Factory(IKistlContext dataCtx, PropertySelectionTaskViewModel parent, Property obj, SelectedPropertyViewModel parentProp);
+        public new delegate SelectedPropertyViewModel Factory(IZetboxContext dataCtx, PropertySelectionTaskViewModel parent, Property obj, SelectedPropertyViewModel parentProp);
 
         private readonly Property _prop;
         private readonly SelectedPropertyViewModel _parent;
 
         public SelectedPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, PropertySelectionTaskViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, PropertySelectionTaskViewModel parent,
             Property obj, SelectedPropertyViewModel parentProp)
             : base(appCtx, dataCtx, parent, obj)
         {

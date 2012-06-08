@@ -5,78 +5,78 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     [Serializable]
-    public class KistlContextException
+    public class ZetboxContextException
         : Exception
     {
-        public KistlContextException()
+        public ZetboxContextException()
             : base()
         {
         }
 
-        public KistlContextException(string message)
+        public ZetboxContextException(string message)
             : base(message)
         {
         }
 
-        public KistlContextException(string message, Exception inner)
+        public ZetboxContextException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
-        protected KistlContextException(SerializationInfo info, StreamingContext context)
+        protected ZetboxContextException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
     }
 
     [Serializable]
-    public class KistlContextDisposedException
-        : KistlContextException
+    public class ZetboxContextDisposedException
+        : ZetboxContextException
     {
-        public KistlContextDisposedException()
+        public ZetboxContextDisposedException()
             : base("Context has been disposed. Reusing is not allowed.")
         {
         }
 
-        public KistlContextDisposedException(string message)
+        public ZetboxContextDisposedException(string message)
             : base(message)
         {
         }
 
-        public KistlContextDisposedException(string message, Exception inner)
+        public ZetboxContextDisposedException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
-        protected KistlContextDisposedException(SerializationInfo info, StreamingContext context)
+        protected ZetboxContextDisposedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
     }
 
     [Serializable]
-    public class WrongKistlContextException
-        : KistlContextException
+    public class WrongZetboxContextException
+        : ZetboxContextException
     {
-        public WrongKistlContextException()
+        public WrongZetboxContextException()
             : base("Operation on a Context, where the IPersistanceObject does not belong to is not allowed")
         {
         }
 
-        public WrongKistlContextException(string message)
+        public WrongZetboxContextException(string message)
             : base(message)
         {
         }
 
-        public WrongKistlContextException(string message, Exception inner)
+        public WrongZetboxContextException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
-        protected WrongKistlContextException(SerializationInfo info, StreamingContext context)
+        protected WrongZetboxContextException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
@@ -84,7 +84,7 @@ namespace Kistl.API
 
     [Serializable]
     public class ConcurrencyException
-        : KistlContextException
+        : ZetboxContextException
     {
         private const string DEFAULT_MESSAGE = "At least one object has changed between fetch and submit changes";
 
@@ -130,12 +130,12 @@ namespace Kistl.API
         }
     }
 
-    public interface IKistlContextDebugger
+    public interface IZetboxContextDebugger
     {
-        void Created(IKistlContext ctx);
+        void Created(IZetboxContext ctx);
     }
 
-    public interface IReadOnlyKistlContext
+    public interface IReadOnlyZetboxContext
         : IDisposable
     {
         InterfaceType GetInterfaceType(Type t);
@@ -145,12 +145,12 @@ namespace Kistl.API
         ImplementationType GetImplementationType(Type t);
         ImplementationType ToImplementationType(InterfaceType t);
 
-        Kistl.API.AccessRights GetGroupAccessRights(InterfaceType ifType);
+        Zetbox.API.AccessRights GetGroupAccessRights(InterfaceType ifType);
 
         /// <summary>
         /// Fired when the Context is beeing disposed.
         /// </summary>
-        event GenericEventHandler<IReadOnlyKistlContext> Disposing;
+        event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
 
         /// <summary>
         /// Returns a Query by T
@@ -161,7 +161,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Returns the List referenced by the given Name.
-        /// TODO: Move to IZBoxContextInternals interface
+        /// TODO: Move to IZetboxContextInternals interface
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
         /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
@@ -174,7 +174,7 @@ namespace Kistl.API
         /// Fetches all collection entries of a given Relation (specified by <paramref name="relationId"/>)
         /// which reference the given <paramref name="container"/> on the side <paramref name="role"/>
         /// of the relation. Mostly for internal use.
-        /// TODO: Move to IZBoxContextInternals interface
+        /// TODO: Move to IZetboxContextInternals interface
         /// </summary>
         /// <typeparam name="T">Type of the IRelationEntry element</typeparam>
         /// <param name="relationId">Specifies which relation to fetch</param>
@@ -200,8 +200,8 @@ namespace Kistl.API
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// </summary>
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
@@ -209,8 +209,8 @@ namespace Kistl.API
         IDataObject Find(InterfaceType ifType, int ID);
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
@@ -219,7 +219,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Find the Persistence Object of the given type by ID
-        /// TODO: Move to IZBoxContextInternals interface
+        /// TODO: Move to IZetboxContextInternals interface
         /// </summary>
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
@@ -228,7 +228,7 @@ namespace Kistl.API
         IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID);
         /// <summary>
         /// Find the Persistence Object of the given type by ID
-        /// TODO: Move to IZBoxContextInternals interface
+        /// TODO: Move to IZetboxContextInternals interface
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
@@ -238,7 +238,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Find the Persistence Object of the given type by an ExportGuid
-        /// TODO: Move to IZBoxContextInternals interface
+        /// TODO: Move to IZetboxContextInternals interface
         /// </summary>
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="exportGuid">ExportGuid of the Object to find.</param>
@@ -247,7 +247,7 @@ namespace Kistl.API
         IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid);
         /// <summary>
         /// Find the Persistence Object of the given type by an ExportGuid
-        /// TODO: Move to IZBoxContextInternals interface
+        /// TODO: Move to IZetboxContextInternals interface
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="exportGuid">ExportGuid of the Object to find.</param>
@@ -257,7 +257,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Find Persistence Objects of the given type by ExportGuids
-        /// TODO: Move to IZBoxContextInternals interface
+        /// TODO: Move to IZetboxContextInternals interface
         /// </summary>
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
@@ -266,7 +266,7 @@ namespace Kistl.API
         IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids);
         /// <summary>
         /// Find Persistence Objects of the given type by ExportGuids
-        /// TODO: Move to IZBoxContextInternals interface
+        /// TODO: Move to IZetboxContextInternals interface
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
@@ -278,7 +278,7 @@ namespace Kistl.API
         System.IO.FileInfo GetFileInfo(int ID);
 
         /// <summary>
-        /// IsDisposed can be used to detect whether this IKistlContext was aborted with Dispose()
+        /// IsDisposed can be used to detect whether this IZetboxContext was aborted with Dispose()
         /// </summary>
         bool IsDisposed { get; }
 
@@ -293,15 +293,15 @@ namespace Kistl.API
     /// A marker interface to denote the context that has all "Frozen" objects in memory.
     /// </summary>
     public interface IFrozenContext
-        : IReadOnlyKistlContext
+        : IReadOnlyZetboxContext
     {
     }
 
     /// <summary>
     /// Interface for a LinqToNNN Context.
     /// </summary>
-    public interface IKistlContext
-        : IReadOnlyKistlContext
+    public interface IZetboxContext
+        : IReadOnlyZetboxContext
     {
         /// <summary>
         /// Attach an IPersistenceObject. This Method checks, if the Object is already in that Context. 
@@ -376,10 +376,10 @@ namespace Kistl.API
         /// <summary>
         /// Fired when the AttachedObject collection has been changed.
         /// </summary>
-        event GenericEventHandler<IKistlContext> Changed;
+        event GenericEventHandler<IZetboxContext> Changed;
 
         /// <summary>
-        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// Indicates that the Zetbox Context has some modified, added or deleted items
         /// </summary>
         bool IsModified { get; }
 
@@ -483,7 +483,7 @@ namespace Kistl.API
         event EventHandler IsElevatedModeChanged;
     }
 
-    public interface IZBoxContextInternals
+    public interface IZetboxContextInternals
     {
         void SetModified(IPersistenceObject obj);
 
@@ -564,36 +564,36 @@ namespace Kistl.API
         int IdentityID { get; }
     }
 
-    public interface IDebuggingKistlContext : IKistlContext
+    public interface IDebuggingZetboxContext : IZetboxContext
     {
         StackTrace CreatedAt { get; }
         StackTrace DisposedAt { get; }
     }
 
-    public interface IKistlQueryProvider : IQueryProvider
+    public interface IZetboxQueryProvider : IQueryProvider
     {
     }
 
     /// <summary>
     /// TODO: Remove that class when Case #1763 is solved
     /// </summary>
-    public static class ZBoxContextExtensions
+    public static class ZetboxContextExtensions
     {
-        public static IZBoxContextInternals Internals(this IReadOnlyKistlContext ctx)
+        public static IZetboxContextInternals Internals(this IReadOnlyZetboxContext ctx)
         {
-            return (IZBoxContextInternals)ctx;
+            return (IZetboxContextInternals)ctx;
         }
     }
 
-    public static class KistlContextQueryableExtensions
+    public static class ZetboxContextQueryableExtensions
     {
         public static IQueryable<T> WithEagerLoading<T>(this IQueryable<T> query)
         {
             if (query == null) throw new ArgumentNullException("query");
-            if (query.Provider is IKistlQueryProvider)
+            if (query.Provider is IZetboxQueryProvider)
             {
                 return query.Provider.CreateQuery<T>(
-                    System.Linq.Expressions.Expression.Call(typeof(KistlContextQueryableExtensions), "WithEagerLoading", new Type[] { typeof(T) }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithEagerLoading", new Type[] { typeof(T) }, query.Expression));
             }
             else
             {
@@ -604,7 +604,7 @@ namespace Kistl.API
 
     public static class ContextTransientStateExtensions
     {
-        public static TCacheItem TransientState<TCacheItem, TKey>(this IReadOnlyKistlContext ctx, string transientCacheKey, TKey key, Func<TCacheItem> getter)
+        public static TCacheItem TransientState<TCacheItem, TKey>(this IReadOnlyZetboxContext ctx, string transientCacheKey, TKey key, Func<TCacheItem> getter)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (string.IsNullOrEmpty(transientCacheKey)) throw new ArgumentNullException("transientCacheKey");
@@ -633,7 +633,7 @@ namespace Kistl.API
             }
         }
 
-        public static TCacheItem TransientState<TCacheItem>(this IReadOnlyKistlContext ctx, string transientCacheKey, Func<TCacheItem> getter)
+        public static TCacheItem TransientState<TCacheItem>(this IReadOnlyZetboxContext ctx, string transientCacheKey, Func<TCacheItem> getter)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (string.IsNullOrEmpty(transientCacheKey)) throw new ArgumentNullException("transientCacheKey");

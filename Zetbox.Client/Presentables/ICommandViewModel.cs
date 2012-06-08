@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections;
@@ -8,7 +8,7 @@ namespace Kistl.Client.Presentables
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// This interface describes common operations and properties of action which can be taken by the user.
@@ -59,7 +59,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Gets an optional Icon for the Command
         /// </summary>
-        Kistl.App.GUI.Icon Icon { get; set; }
+        Zetbox.App.GUI.Icon Icon { get; set; }
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ namespace Kistl.Client.Presentables
         /// <param name="parent">a ViewModel which should be notified while this command is executing</param>
         /// <param name="label">a label for this command</param>
         /// <param name="tooltip">a tooltip for this command</param>
-        protected CommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip)
+        protected CommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip)
             : base(appCtx, dataCtx, parent)
         {
             if (label == null)
@@ -325,13 +325,13 @@ namespace Kistl.Client.Presentables
         /// <param name="canExecute">A function to determinante if the action can be executed. If null, true is assumed.</param>
         /// <param name="getReason">A function to receive a reason why the action cannot be executed. Can be null. If a function is provided, the tooltip will be overridden in case of can execute == false. Thus a simple string can always be returned.</param>
         /// <returns></returns>
-        public new delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason);
+        public new delegate SimpleCommandViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason);
 
         private readonly Action execute;
         private readonly Func<bool> canExecute;
         private readonly Func<string> getReason;
 
-        public SimpleCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason)
+        public SimpleCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (execute == null) throw new ArgumentNullException("execute");
@@ -364,12 +364,12 @@ namespace Kistl.Client.Presentables
 
     public sealed class SimpleParameterCommandViewModel<T> : CommandViewModel
     {
-        public new delegate SimpleParameterCommandViewModel<T> Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute);
+        public new delegate SimpleParameterCommandViewModel<T> Factory(IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute);
 
         private readonly Action<T> execute;
         private readonly Func<T, bool> canExecute;
 
-        public SimpleParameterCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute)
+        public SimpleParameterCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (execute == null) throw new ArgumentNullException("execute");
@@ -405,7 +405,7 @@ namespace Kistl.Client.Presentables
 
     public abstract class ItemCommandViewModel<T> : CommandViewModel
     {
-        public ItemCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip)
+        public ItemCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel progressDisplayer, string label, string tooltip)
             : base(appCtx, dataCtx, progressDisplayer, label, tooltip)
         {
         }
@@ -448,11 +448,11 @@ namespace Kistl.Client.Presentables
 
     public sealed class SimpleItemCommandViewModel<T> : ItemCommandViewModel<T>
     {
-        public new delegate SimpleItemCommandViewModel<T> Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action<IEnumerable<T>> execute);
+        public new delegate SimpleItemCommandViewModel<T> Factory(IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action<IEnumerable<T>> execute);
 
         private readonly Action<IEnumerable<T>> execute;
 
-        public SimpleItemCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action<IEnumerable<T>> execute)
+        public SimpleItemCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, Action<IEnumerable<T>> execute)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             this.execute = execute;
@@ -466,10 +466,10 @@ namespace Kistl.Client.Presentables
 
     public class ContainerCommand : CommandViewModel
     {
-        public new delegate ContainerCommand Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, params ICommandViewModel[] children);
+        public new delegate ContainerCommand Factory(IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, params ICommandViewModel[] children);
 
         private readonly List<ICommandViewModel> _children;
-        public ContainerCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, params ICommandViewModel[] children)
+        public ContainerCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, params ICommandViewModel[] children)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (children != null)

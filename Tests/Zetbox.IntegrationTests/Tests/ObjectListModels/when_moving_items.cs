@@ -1,15 +1,15 @@
 
-namespace Kistl.IntegrationTests.ObjectListModels
+namespace Zetbox.IntegrationTests.ObjectListModels
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
     using NUnit.Framework;
 
     public class when_moving_items : AbstractIntegrationTestFixture

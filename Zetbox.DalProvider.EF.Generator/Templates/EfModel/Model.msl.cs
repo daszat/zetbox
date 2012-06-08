@@ -1,13 +1,13 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
+namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.App.Base;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.App.Base;
+    using Templates = Zetbox.Generator.Templates;
 
     public partial class ModelMsl
     {

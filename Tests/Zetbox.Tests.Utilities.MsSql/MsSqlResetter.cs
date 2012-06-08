@@ -1,5 +1,5 @@
 
-namespace Kistl.Tests.Utilities.MsSql
+namespace Zetbox.Tests.Utilities.MsSql
 {
     using System;
     using System.Collections.Generic;
@@ -8,19 +8,19 @@ namespace Kistl.Tests.Utilities.MsSql
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
     using NUnit.Framework;
 
     public sealed class MsSqlResetter
         : IDatabaseResetter
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.MsSqlUtils");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.MsSqlUtils");
 
-        private readonly KistlConfig config;
+        private readonly ZetboxConfig config;
 
-        public MsSqlResetter(KistlConfig config)
+        public MsSqlResetter(ZetboxConfig config)
         {
             this.config = config;
         }
@@ -40,7 +40,7 @@ namespace Kistl.Tests.Utilities.MsSql
         {
             using (Log.InfoTraceMethodCall("ResetDatabase"))
             {
-                var connectionString = config.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                var connectionString = config.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
                 Assert.That(connectionString.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 
                 try
@@ -49,7 +49,7 @@ namespace Kistl.Tests.Utilities.MsSql
                     var cb = new SqlConnectionStringBuilder(connectionString.ConnectionString);
                     cb.InitialCatalog = "master";
                     Log.InfoFormat("executing on database [{0}]", cb.ToString());
-                    ExecuteScript(cb.ToString(), "Kistl.Tests.Utilities.MsSql.BackupRestoreTestDatabase.sql");
+                    ExecuteScript(cb.ToString(), "Zetbox.Tests.Utilities.MsSql.BackupRestoreTestDatabase.sql");
                     Log.Info("Done restoring Database");
 
                     // After recreating the database, all connection pools should be cleard

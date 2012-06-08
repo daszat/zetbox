@@ -1,22 +1,22 @@
 
 
-namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
     
     public partial class InvokeServerMethod
     {
-        public InvokeServerMethod(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dt, Kistl.App.Base.Method m, int index, string indexSuffix, string eventName)
+        public InvokeServerMethod(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.App.Base.DataType dt, Zetbox.App.Base.Method m, int index, string indexSuffix, string eventName)
             : base(_host, ctx, dt, m, index, indexSuffix, eventName)
         {
         }
 
-        public static new void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, DataType implementor, Kistl.App.Base.Method m, int index)
+        public static new void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, DataType implementor, Zetbox.App.Base.Method m, int index)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
             string indexSuffix = index == 0 ? String.Empty : index.ToString();

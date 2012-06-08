@@ -1,14 +1,14 @@
 
-namespace Kistl.IntegrationTests
+namespace Zetbox.IntegrationTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.App.Test;
     using NUnit.Framework;
 
     [Category("Smoke Tests")]
@@ -18,7 +18,7 @@ namespace Kistl.IntegrationTests
         [SetUp]
         public void CleanTestDB()
         {
-            var deleteCtx = scope.Resolve<IKistlContext>();
+            var deleteCtx = scope.Resolve<IZetboxContext>();
             foreach (var obj in deleteCtx.GetQuery<ANewObjectClass>())
             {
                 deleteCtx.Delete(obj);
@@ -38,14 +38,14 @@ namespace Kistl.IntegrationTests
         public void CanWorkWithObjects()
         {
             {
-                var ctx = scope.Resolve<IKistlContext>();
+                var ctx = scope.Resolve<IZetboxContext>();
                 var item = ctx.Create<ANewObjectClass>();
                 item.TestString = "TestName";
                 ctx.SubmitChanges();
             }
 
             {
-                var checkCtx = scope.Resolve<IKistlContext>();
+                var checkCtx = scope.Resolve<IZetboxContext>();
                 var result = checkCtx.GetQuery<ANewObjectClass>().Single();
                 Assert.That(result.TestString, Is.EqualTo("TestName"));
             }
@@ -55,7 +55,7 @@ namespace Kistl.IntegrationTests
         public void CanWorkWithLists()
         {
             {
-                var ctx = scope.Resolve<IKistlContext>();
+                var ctx = scope.Resolve<IZetboxContext>();
                 var item = ctx.Create<Muhblah>();
                 var member1 = ctx.Create<TestCustomObject>();
                 member1.PersonName = "Person1";
@@ -70,7 +70,7 @@ namespace Kistl.IntegrationTests
             }
 
             {
-                var checkCtx = scope.Resolve<IKistlContext>();
+                var checkCtx = scope.Resolve<IZetboxContext>();
                 var result = checkCtx.GetQuery<Muhblah>().Single();
                 Assert.That(result.TestCustomObjects_List_Nav, Has.Count.EqualTo(3));
             }
@@ -80,7 +80,7 @@ namespace Kistl.IntegrationTests
         public void CanWorkWithCompounds()
         {
             {
-                var ctx = scope.Resolve<IKistlContext>();
+                var ctx = scope.Resolve<IZetboxContext>();
                 var item = ctx.Create<TestCustomObject>();
                 item.PersonName = "Person1";
                 item.PhoneNumberMobile = ctx.CreateCompoundObject<TestPhoneCompoundObject>();
@@ -90,7 +90,7 @@ namespace Kistl.IntegrationTests
             }
 
             {
-                var checkCtx = scope.Resolve<IKistlContext>();
+                var checkCtx = scope.Resolve<IZetboxContext>();
                 var result = checkCtx.GetQuery<TestCustomObject>().Single();
                 Assert.That(result.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(result.PhoneNumberMobile.Number, Is.EqualTo("664"));
@@ -101,7 +101,7 @@ namespace Kistl.IntegrationTests
         public void CanWorkWithCompoundLists()
         {
             {
-                var ctx = scope.Resolve<IKistlContext>();
+                var ctx = scope.Resolve<IZetboxContext>();
                 var item = ctx.Create<TestCustomObject>();
                 item.PersonName = "Person1";
                 {
@@ -120,7 +120,7 @@ namespace Kistl.IntegrationTests
             }
 
             {
-                var checkCtx = scope.Resolve<IKistlContext>();
+                var checkCtx = scope.Resolve<IZetboxContext>();
                 var result = checkCtx.GetQuery<TestCustomObject>().Single();
                 Assert.That(result.PhoneNumbersOther, Is.Not.Null);
                 Assert.That(result.PhoneNumbersOther, Has.Count.EqualTo(2));

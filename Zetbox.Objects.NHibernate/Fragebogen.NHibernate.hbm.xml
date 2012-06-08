@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`Frageboegen`"
            abstract="false"
@@ -21,7 +21,7 @@
 <!-- ObjectReferenceProperty -->
         <set name="Antworten" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Ein_Fragebogen`" />
-            <one-to-many class="Kistl.App.Test.AntwortNHibernateImpl+AntwortProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.AntwortNHibernateImpl+AntwortProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -34,7 +34,7 @@
         <!-- relEnd=Testbogen otherEnd=Student -->
         <set name="Student" table="`Student_füllt_aus_Testbogen`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Testbogen`" />
-            <one-to-many class="Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 

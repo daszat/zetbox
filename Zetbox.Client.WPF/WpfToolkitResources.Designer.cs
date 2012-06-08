@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.WPF {
+namespace Zetbox.Client.WPF {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.Client.WPF {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.WPF.WpfToolkitResources", typeof(WpfToolkitResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.WPF.WpfToolkitResources", typeof(WpfToolkitResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -414,18 +414,18 @@ namespace Kistl.Client.WPF {
         /// <summary>
         ///   Looks up a localized string similar to Your Client Version is different from the Server version. No further request will be accepted. Please close your client and start again..
         /// </summary>
-        internal static string InvalidKistlGeneratedVersionException_Message {
+        internal static string InvalidZetboxGeneratedVersionException_Message {
             get {
-                return ResourceManager.GetString("InvalidKistlGeneratedVersionException_Message", resourceCulture);
+                return ResourceManager.GetString("InvalidZetboxGeneratedVersionException_Message", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Invalid Version.
         /// </summary>
-        internal static string InvalidKistlGeneratedVersionException_Title {
+        internal static string InvalidZetboxGeneratedVersionException_Title {
             get {
-                return ResourceManager.GetString("InvalidKistlGeneratedVersionException_Title", resourceCulture);
+                return ResourceManager.GetString("InvalidZetboxGeneratedVersionException_Title", resourceCulture);
             }
         }
         

@@ -1,17 +1,17 @@
 
-namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public partial class ApplyChangesFromMethod
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, string otherInterface, DataType dataType, string implName)
+        public static void Call(IGenerationHost host, IZetboxContext ctx, string otherInterface, DataType dataType, string implName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
             if (dataType == null) { throw new ArgumentNullException("dataType"); }
@@ -21,7 +21,7 @@ namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
             Call(host, ctx, otherInterface, dataType, clsName, implName);
         }
 
-        public static void Call(IGenerationHost host, IKistlContext ctx, DataType dataType, string implName)
+        public static void Call(IGenerationHost host, IZetboxContext ctx, DataType dataType, string implName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
             if (dataType == null) { throw new ArgumentNullException("dataType"); }

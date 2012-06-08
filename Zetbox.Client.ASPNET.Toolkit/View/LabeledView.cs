@@ -5,10 +5,10 @@ using System.Text;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.GUI;
 
-namespace Kistl.Client.ASPNET.Toolkit.View
+namespace Zetbox.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/LabeledView.ascx")]
     public abstract class LabeledView : ModelUserControl<ILabeledViewModel>
@@ -37,7 +37,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             if (!_initialized && Model != null)
             {
-                KistlContextManagerModule.ViewModelFactory.CreateSpecificView(Model.Model, Model.RequestedKind, containerCtrl);
+                ZetboxContextManagerModule.ViewModelFactory.CreateSpecificView(Model.Model, Model.RequestedKind, containerCtrl);
                 _initialized = true;
             }
         }

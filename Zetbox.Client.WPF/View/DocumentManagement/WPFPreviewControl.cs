@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace Kistl.Client.WPF.View.DocumentManagement
+namespace Zetbox.Client.WPF.View.DocumentManagement
 {
     public class WPFPreviewControl : ContentPresenter
     {

@@ -1,6 +1,6 @@
 #define USE_STREAMS
 
-namespace Kistl.API.Client
+namespace Zetbox.API.Client
 {
     using System;
     using System.Collections;
@@ -12,28 +12,28 @@ namespace Kistl.API.Client
     using System.Runtime.Serialization.Formatters.Binary;
     using System.ServiceModel;
     using System.Text;
-    using Kistl.API.Client.KistlService;
-    using Kistl.API.Client.PerfCounter;
-    using Kistl.API.Utils;
+    using Zetbox.API.Client.ZetboxService;
+    using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Utils;
 
     /// <summary>
-    /// Proxy Interface for IKistlService
+    /// Proxy Interface for IZetboxService
     /// </summary>
     public interface IProxy
         : IDisposable
     {
-        IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects);
-        IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetList(IZetboxContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetListOf(IZetboxContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
-        IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
+        IEnumerable<IPersistenceObject> SetObjects(IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
-        object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects);
+        object InvokeServerMethod(IZetboxContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects);
 
-        IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+        IEnumerable<T> FetchRelation<T>(IZetboxContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry;
 
         Stream GetBlobStream(int ID);
-        Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype);
+        Zetbox.App.Base.Blob SetBlobStream(IZetboxContext ctx, Stream stream, string filename, string mimetype);
     }
 
     /// <summary>
@@ -45,12 +45,12 @@ namespace Kistl.API.Client
         private const int MAX_RETRY_COUNT = 2;
 
         private InterfaceType.Factory _iftFactory;
-        private KistlService.IKistlService _service;
+        private ZetboxService.IZetboxService _service;
         private readonly IPerfCounter _perfCounter;
-        private readonly KistlStreamReader.Factory _readerFactory;
-        private readonly KistlStreamWriter.Factory _writerFactory;
+        private readonly ZetboxStreamReader.Factory _readerFactory;
+        private readonly ZetboxStreamWriter.Factory _writerFactory;
 
-        public ProxyImplementation(InterfaceType.Factory iftFactory, Kistl.API.Client.KistlService.IKistlService service, IPerfCounter perfCounter, KistlStreamReader.Factory readerFactory, KistlStreamWriter.Factory writerFactory)
+        public ProxyImplementation(InterfaceType.Factory iftFactory, Zetbox.API.Client.ZetboxService.IZetboxService service, IPerfCounter perfCounter, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (readerFactory == null) throw new ArgumentNullException("readerFactory");
@@ -78,7 +78,7 @@ namespace Kistl.API.Client
                 {
                     throw cex.Detail;
                 }
-                catch (FaultException<InvalidKistlGeneratedVersionException> vex)
+                catch (FaultException<InvalidZetboxGeneratedVersionException> vex)
                 {
                     throw vex.Detail;
                 }
@@ -90,7 +90,7 @@ namespace Kistl.API.Client
                 {
                     throw;
                 }
-                catch (InvalidKistlGeneratedVersionException)
+                catch (InvalidZetboxGeneratedVersionException)
                 {
                     throw;
                 }
@@ -104,7 +104,7 @@ namespace Kistl.API.Client
             if (fault != null) throw new IOException("Error when accessing server", fault);
         }
 
-        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IZetboxContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             int resultCount = 0;
             List<IStreamable> tmpAuxObjects = null;
@@ -119,7 +119,7 @@ namespace Kistl.API.Client
                 MakeRequest(() =>
                 {
                     bytes = _service.GetList(
-                        KistlGeneratedVersionAttribute.Current,
+                        ZetboxGeneratedVersionAttribute.Current,
                         _ifType,
                         maxListCount,
                         eagerLoadLists,
@@ -144,7 +144,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetListOf(IZetboxContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
             int resultCount = 0;
@@ -156,7 +156,7 @@ namespace Kistl.API.Client
 
                 MakeRequest(() =>
                 {
-                    bytes = _service.GetListOf(KistlGeneratedVersionAttribute.Current, _ifType, ID, property);
+                    bytes = _service.GetListOf(ZetboxGeneratedVersionAttribute.Current, _ifType, ID, property);
                 });
 
                 IEnumerable<IDataObject> result = null;
@@ -175,7 +175,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
             var ticks = _perfCounter.IncrementSetObjects();
             try
@@ -192,7 +192,7 @@ namespace Kistl.API.Client
 
                     MakeRequest(() =>
                     {
-                        bytes = _service.SetObjects(KistlGeneratedVersionAttribute.Current, _ms, _nReq);
+                        bytes = _service.SetObjects(ZetboxGeneratedVersionAttribute.Current, _ms, _nReq);
                     });
 
                     using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
@@ -212,7 +212,7 @@ namespace Kistl.API.Client
             }
         }
 
-        private static void SendObjects(IEnumerable<IPersistenceObject> objects, KistlStreamWriter sw)
+        private static void SendObjects(IEnumerable<IPersistenceObject> objects, ZetboxStreamWriter sw)
         {
             foreach (var obj in objects)
             {
@@ -222,7 +222,7 @@ namespace Kistl.API.Client
             sw.Write(false);
         }
 
-        private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, KistlStreamReader sr, out List<IStreamable> auxObjects)
+        private IEnumerable<IStreamable> ReceiveObjects(IZetboxContext ctx, ZetboxStreamReader sr, out List<IStreamable> auxObjects)
         {
             var result = ReceiveObjectList(ctx, sr);
             auxObjects = ReceiveObjectList(ctx, sr);
@@ -230,7 +230,7 @@ namespace Kistl.API.Client
             return result;
         }
 
-        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, KistlStreamReader sr)
+        private List<IStreamable> ReceiveObjectList(IZetboxContext ctx, ZetboxStreamReader sr)
         {
             List<IStreamable> result = new List<IStreamable>();
             bool cont = sr.ReadBoolean();
@@ -254,7 +254,7 @@ namespace Kistl.API.Client
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+        public IEnumerable<T> FetchRelation<T>(IZetboxContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry
         {
             var ifType = ctx.GetInterfaceType(parent);
@@ -275,7 +275,7 @@ namespace Kistl.API.Client
 
                 MakeRequest(() =>
                 {
-                    bytes = _service.FetchRelation(KistlGeneratedVersionAttribute.Current, relationId, (int)role, parent.ID);
+                    bytes = _service.FetchRelation(ZetboxGeneratedVersionAttribute.Current, relationId, (int)role, parent.ID);
                 });
                 using (MemoryStream s = new MemoryStream(bytes))
                 using (var sr = _readerFactory(new BinaryReader(s)))
@@ -298,16 +298,16 @@ namespace Kistl.API.Client
             Stream result = null;
             MakeRequest(() =>
             {
-                result = _service.GetBlobStream(KistlGeneratedVersionAttribute.Current, ID);
+                result = _service.GetBlobStream(ZetboxGeneratedVersionAttribute.Current, ID);
             });
             return result;
         }
 
-        public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype)
+        public Zetbox.App.Base.Blob SetBlobStream(IZetboxContext ctx, Stream stream, string filename, string mimetype)
         {
-            Kistl.App.Base.Blob result = null;
+            Zetbox.App.Base.Blob result = null;
             BlobResponse response = null;
-            BlobMessage msg = new BlobMessage() { Version = KistlGeneratedVersionAttribute.Current, FileName = filename, MimeType = mimetype, Stream = stream };
+            BlobMessage msg = new BlobMessage() { Version = ZetboxGeneratedVersionAttribute.Current, FileName = filename, MimeType = mimetype, Stream = stream };
 
             MakeRequest(() =>
             {
@@ -320,12 +320,12 @@ namespace Kistl.API.Client
             using (var sr = _readerFactory(new BinaryReader(response.BlobInstance)))
             {
                 // ignore auxObjects for blobs, which should not have them
-                result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
+                result = ReceiveObjectList(ctx, sr).Cast<Zetbox.App.Base.Blob>().Single();
             }
             return result;
         }
 
-        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public object InvokeServerMethod(IZetboxContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
         {
             _perfCounter.IncrementServerMethodInvocation();
 
@@ -358,7 +358,7 @@ namespace Kistl.API.Client
                     {
                         bytes = _service.InvokeServerMethod(
                              out retChangedObjectsArray,
-                             KistlGeneratedVersionAttribute.Current,
+                             ZetboxGeneratedVersionAttribute.Current,
                              _ifType,
                              ID,
                              method,

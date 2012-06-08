@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`InstanceConstraint`"
            abstract="false"
@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Constrained" column="`fk_Constrained`" class="Kistl.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Constrained" column="`fk_Constrained`" class="Zetbox.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
@@ -31,8 +31,8 @@
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
-        <joined-subclass name="Kistl.App.Base.IndexConstraintNHibernateImpl+IndexConstraintProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.IndexConstraintNHibernateImpl+IndexConstraintProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.IndexConstraintNHibernateImpl+IndexConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.IndexConstraintNHibernateImpl+IndexConstraintProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`IndexConstraints`"
                          dynamic-update="false">
@@ -51,7 +51,7 @@
         <!-- relEnd=UniqueContraints otherEnd=Properties -->
         <set name="Properties" table="`UniqueContraints_ensures_unique_on_Properties`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_UniqueContraints`" />
-            <one-to-many class="Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 

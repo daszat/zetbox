@@ -1,20 +1,20 @@
 <PartCoverSettings>
   <Target>C:\Program Files\NUnit 2.5\bin\net-2.0\nunit-console.exe</Target>
-  <TargetWorkDir>P:\Kistl\Tests\CompleteTests</TargetWorkDir>
+  <TargetWorkDir>P:\Zetbox\Tests\CompleteTests</TargetWorkDir>
   <TargetArgs>/process:Single /domain:Multiple CompleteTests.nunit</TargetArgs>
-  <Rule>+[Kistl.API]*</Rule>
-  <Rule>+[Kistl.API.Client]*</Rule>
-  <Rule>+[Kistl.API.Server]*</Rule>
-  <Rule>+[Kistl.Client]*</Rule>
-  <Rule>+[Kistl.Client.WPF]*</Rule>
-  <Rule>+[Kistl.Server]*</Rule>
-  <Rule>+[Kistl.DalProvider.ClientObjects]*</Rule>
-  <Rule>+[Kistl.DalProvider.Ef]*</Rule>
-  <Rule>+[Kistl.DalProvider.Memory]*</Rule>
-  <Rule>+[Kistl.DalProvider.ClientObjects.Generator]*</Rule>
-  <Rule>+[Kistl.DalProvider.Ef.Generator]*</Rule>
-  <Rule>+[Kistl.DalProvider.Memory.Generator]*</Rule>
-  <Rule>+[Kistl.Objects.Client]*</Rule>
-  <Rule>+[Kistl.Objects.Memory]*</Rule>
-  <Rule>+[Kistl.Objects.Server]*</Rule>
+  <Rule>+[Zetbox.API]*</Rule>
+  <Rule>+[Zetbox.API.Client]*</Rule>
+  <Rule>+[Zetbox.API.Server]*</Rule>
+  <Rule>+[Zetbox.Client]*</Rule>
+  <Rule>+[Zetbox.Client.WPF]*</Rule>
+  <Rule>+[Zetbox.Server]*</Rule>
+  <Rule>+[Zetbox.DalProvider.ClientObjects]*</Rule>
+  <Rule>+[Zetbox.DalProvider.Ef]*</Rule>
+  <Rule>+[Zetbox.DalProvider.Memory]*</Rule>
+  <Rule>+[Zetbox.DalProvider.ClientObjects.Generator]*</Rule>
+  <Rule>+[Zetbox.DalProvider.Ef.Generator]*</Rule>
+  <Rule>+[Zetbox.DalProvider.Memory.Generator]*</Rule>
+  <Rule>+[Zetbox.Objects.Client]*</Rule>
+  <Rule>+[Zetbox.Objects.Memory]*</Rule>
+  <Rule>+[Zetbox.Objects.Server]*</Rule>
 </PartCoverSettings>

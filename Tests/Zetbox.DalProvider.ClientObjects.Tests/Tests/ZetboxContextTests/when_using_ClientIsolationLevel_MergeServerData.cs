@@ -1,29 +1,29 @@
 
-namespace Kistl.DalProvider.Client.Tests.KistlContextTests
+namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Utils;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Test;
     using NUnit.Framework;
 
     [TestFixture]
-    public class when_using_ClientIsolationLevel_MergeServerData : Kistl.API.AbstractConsumerTests.AbstractTestFixture
+    public class when_using_ClientIsolationLevel_MergeServerData : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
     {
-        private IKistlContext ctx;
+        private IZetboxContext ctx;
 
         public override void SetUp()
         {
             base.SetUp();
 
-            Logging.Log.Info("KistlContextTests.SetUp() is called");
+            Logging.Log.Info("ZetboxContextTests.SetUp() is called");
 
-            ctx = scope.Resolve<Func<ClientIsolationLevel, IKistlContext>>().Invoke(ClientIsolationLevel.MergeServerData);
+            ctx = scope.Resolve<Func<ClientIsolationLevel, IZetboxContext>>().Invoke(ClientIsolationLevel.MergeServerData);
         }
 
         [Test]

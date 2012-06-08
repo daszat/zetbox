@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.Tests.Security
+namespace Zetbox.Server.Tests.Security
 {
     using System;
     using System.Collections.Generic;
@@ -7,16 +7,16 @@ namespace Kistl.Server.Tests.Security
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Projekte;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Projekte;
     using NUnit.Framework;
 
     public abstract class SecurityDataFixture : AbstractServerTestFixture
     {
-        protected KistlConfig config;
+        protected ZetboxConfig config;
 
         protected Identity admin;
         protected Identity identity1;
@@ -33,10 +33,10 @@ namespace Kistl.Server.Tests.Security
 
         int prj1ID, prjCommonID, prj2ID;
 
-        protected IKistlServerContext srvCtx;
-        protected IKistlContext id1Ctx;
-        protected IKistlContext id2Ctx;
-        protected IKistlContext id3Ctx_low;
+        protected IZetboxServerContext srvCtx;
+        protected IZetboxContext id1Ctx;
+        protected IZetboxContext id2Ctx;
+        protected IZetboxContext id3Ctx_low;
 
         protected static readonly int id1ProjectCount = 2;
         protected static readonly int id2ProjectCount = 2;
@@ -49,10 +49,10 @@ namespace Kistl.Server.Tests.Security
         private void CreateTestData()
         {
             {
-                srvCtx = scope.Resolve<IKistlServerContext>();
+                srvCtx = scope.Resolve<IZetboxServerContext>();
 
-                var grpAdmin = Kistl.NamedObjects.Base.Groups.Administrator.Find(srvCtx);
-                var grpEveryOne = Kistl.NamedObjects.Base.Groups.Everyone.Find(srvCtx);
+                var grpAdmin = Zetbox.NamedObjects.Base.Groups.Administrator.Find(srvCtx);
+                var grpEveryOne = Zetbox.NamedObjects.Base.Groups.Everyone.Find(srvCtx);
 
                 // Create Identities
                 admin = srvCtx.Create<Identity>();
@@ -93,7 +93,7 @@ namespace Kistl.Server.Tests.Security
 
             {
                 // Create 3 identity context
-                var ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity1);
+                var ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity1);
 
                 // Create TestData with Identity 1
                 prj1 = ctx.Create<Projekt>();
@@ -115,7 +115,7 @@ namespace Kistl.Server.Tests.Security
             }
 
             {
-                var ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity2);
+                var ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity2);
 
                 // Create TestData with Identity 2
                 prj2 = ctx.Create<Projekt>();
@@ -127,9 +127,9 @@ namespace Kistl.Server.Tests.Security
                 prj2ID = prj2.ID;
             }
 
-            id1Ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity1);
-            id2Ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity2);
-            id3Ctx_low = scope.Resolve<ServerKistlContextFactory>().Invoke(identity3_low);
+            id1Ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity1);
+            id2Ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity2);
+            id3Ctx_low = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity3_low);
 
             prj1 = id1Ctx.Find<Projekt>(prj1ID);
             prjCommon = id1Ctx.Find<Projekt>(prjCommonID);
@@ -138,7 +138,7 @@ namespace Kistl.Server.Tests.Security
 
             // Fix security tables
             // Own test checks if this works during object modifications too
-            var connectionString = config.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+            var connectionString = config.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
             using (var db = scope.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider))
             {
                 db.Open(connectionString.ConnectionString);
@@ -148,7 +148,7 @@ namespace Kistl.Server.Tests.Security
             }
         }
 
-        private void CreateTasks(IKistlContext ctx, Projekt p)
+        private void CreateTasks(IZetboxContext ctx, Projekt p)
         {
             for (int i = 0; i < task_projectCount; i++)
             {
@@ -160,7 +160,7 @@ namespace Kistl.Server.Tests.Security
 
         public void DeleteData()
         {
-            using (var ctx = scope.Resolve<IKistlServerContext>())
+            using (var ctx = scope.Resolve<IZetboxServerContext>())
             {
                 ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
                 ctx.SubmitChanges();
@@ -190,7 +190,7 @@ namespace Kistl.Server.Tests.Security
         public override void SetUp()
         {
             base.SetUp();
-            config = scope.Resolve<KistlConfig>();
+            config = scope.Resolve<ZetboxConfig>();
             DeleteData();
             CreateTestData();
         }

@@ -12,16 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.App.Base;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables.ModuleEditor;
+using Zetbox.App.Base;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.ModuleEditor;
 
-namespace Kistl.Client.WPF.View.ModuleEditor
+namespace Zetbox.Client.WPF.View.ModuleEditor
 {
     /// <summary>
     /// Interaction logic for DiagramDisplay.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class ControlKindHierarchyDisplay : UserControl, IHasViewModel<ControlKindHierarchyViewModel>
     {
         public ControlKindHierarchyDisplay()
@@ -37,7 +37,7 @@ namespace Kistl.Client.WPF.View.ModuleEditor
 
         private void NavTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var item = NavTree.SelectedItem as Kistl.Client.Presentables.ViewModel;
+            var item = NavTree.SelectedItem as Zetbox.Client.Presentables.ViewModel;
             if (item != null)
             {
                 this.ViewModel.SelectedItem = item;

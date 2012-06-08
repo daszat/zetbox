@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     public interface IContextViewModel
     {

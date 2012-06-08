@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.NHibernate.Tests.PersistenceObjects
+namespace Zetbox.DalProvider.NHibernate.Tests.PersistenceObjects
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,14 @@ namespace Kistl.DalProvider.NHibernate.Tests.PersistenceObjects
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
+    using Zetbox.API;
+    using Zetbox.API.Server;
 
     using NUnit.Framework;
 
     [TestFixture]
     public class when_changed
-        : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_changed
+        : Zetbox.API.AbstractConsumerTests.PersistenceObjects.when_changed
     {
     }
 }

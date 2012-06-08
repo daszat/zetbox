@@ -15,19 +15,19 @@ set config=%1
 
 cd bin\Debug
 
-Kistl.Server.Service.exe %config% -generate -updatedeployedschema -repairschema
+Zetbox.Server.Service.exe %config% -generate -updatedeployedschema -repairschema
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem publish schema data for $safesolutionname$ project
-Kistl.Server.Service.exe %config% -publish Modules\$safesolutionname$.xml -ownermodules $safesolutionname$;$safesolutionname$.Config
+Zetbox.Server.Service.exe %config% -publish Modules\$safesolutionname$.xml -ownermodules $safesolutionname$;$safesolutionname$.Config
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem export $safesolutionname$.Config data
-rem Kistl.Server.Service.exe %config% -export Data\$safesolutionname$.Config.xml -schemamodules $safesolutionname$.Config
+rem Zetbox.Server.Service.exe %config% -export Data\$safesolutionname$.Config.xml -schemamodules $safesolutionname$.Config
 rem IF ERRORLEVEL 1 GOTO FAIL
 
 rem export $safesolutionname$.Data data
-rem Kistl.Server.Service.exe %config% -export Data\$safesolutionname$.Data.xml -schemamodules $safesolutionname$ -ownermodules $safesolutionname$
+rem Zetbox.Server.Service.exe %config% -export Data\$safesolutionname$.Data.xml -schemamodules $safesolutionname$ -ownermodules $safesolutionname$
 rem IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

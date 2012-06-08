@@ -1,22 +1,22 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
+namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public partial class RelationEntry
         : Templates.CollectionEntries.RelationEntry
     {
 
-        public RelationEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
+        public RelationEntry(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Relation rel)
             : base(_host, ctx, rel)
         {
         }
@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string moduleNamespace = rel.Module.Namespace;
-            string implName = propertyName + Kistl.API.Helper.ImplementationSuffix;
+            string implName = propertyName + Zetbox.API.Helper.ImplementationSuffix;
             string eventName = "On" + propertyName;
 
             string fkBackingName = "_fk_" + propertyName;
@@ -44,12 +44,12 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
 
             string referencedInterface = relEnd.Type.GetDataTypeString();
             string referencedImplementation = referencedInterface
-                + Host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+                + Host.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix;
             string associationName = rel.GetAssociationName() + "_" + endRole.ToString();
             string targetRoleName = relEnd.RoleName;
 
             string positionPropertyName = rel.NeedsPositionStorage(endRole)
-                ? propertyName + Kistl.API.Helper.PositionSuffix
+                ? propertyName + Zetbox.API.Helper.PositionSuffix
                 : null;
 
             string inverseNavigatorName = null;

@@ -133,7 +133,7 @@
     <value>Initializing Launcher</value>
   </data>
   <data name="Startup_Message" xml:space="preserve">
-    <value>ZBox is starting...</value>
+    <value>Zetbox is starting...</value>
   </data>
   <data name="Startup_NoServerStart" xml:space="preserve">
     <value>No server start required</value>

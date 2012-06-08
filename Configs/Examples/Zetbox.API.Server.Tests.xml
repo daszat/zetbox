@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>Server.API's Test Configuration</ConfigName>
   <Server StartServer="false">
     <ConnectionStrings>
-      <Database Name="Kistl" Schema="SQLCE" Provider="System.Data.SqlServerCe.3.5"></Database>
+      <Database Name="Zetbox" Schema="SQLCE" Provider="System.Data.SqlServerCe.3.5"></Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
@@ -20,4 +20,4 @@
     <!-- All other assemblies -->
     <string>..\Server</string>
   </SourceFileLocation>
-</KistlConfig>
+</ZetboxConfig>

@@ -10,7 +10,7 @@ using System.IO;
 using EnvDTE80;
 
 
-namespace KistlApp.Wizard
+namespace ZetboxApp.Wizard
 {
     public class ProjectWizard : IWizard
     {

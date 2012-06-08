@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.API
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     public sealed class ApiModule
         : Autofac.Module
@@ -54,12 +54,12 @@ namespace Kistl.API
                 .SingleInstance();
 
             builder
-                .RegisterType<KistlStreamReader>()
+                .RegisterType<ZetboxStreamReader>()
                 .AsSelf()
                 .InstancePerDependency();
 
             builder
-                .RegisterType<KistlStreamWriter>()
+                .RegisterType<ZetboxStreamWriter>()
                 .AsSelf()
                 .InstancePerDependency();
 

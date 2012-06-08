@@ -48,13 +48,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kistl.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Zetbox.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Kistl\Kistl.API.dll</HintPath>
+      <HintPath>Zetbox\Zetbox.API.dll</HintPath>
     </Reference>
-    <Reference Include="Kistl.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Zetbox.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Kistl\Kistl.Client.exe</HintPath>
+      <HintPath>Zetbox\Zetbox.Client.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -71,7 +71,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TraceListener, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Kistl\TraceListener.dll</HintPath>
+      <HintPath>Zetbox\TraceListener.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -266,8 +266,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Kistl\Database\KistlDatabase.sql" />
-    <None Include="Kistl\GetLatestVersion.cmd" />
+    <None Include="Zetbox\Database\ZetboxDatabase.sql" />
+    <None Include="Zetbox\GetLatestVersion.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="DefaultConfig.xml" />
@@ -326,8 +326,8 @@
     <Resource Include="Slides\Slides.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Kistl\DocumentStore\Client\" />
-    <Folder Include="Kistl\DocumentStore\Server\" />
+    <Folder Include="Zetbox\DocumentStore\Client\" />
+    <Folder Include="Zetbox\DocumentStore\Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.ObjectEditor
+namespace Zetbox.Client.Presentables.ObjectEditor
 {
     using System;
     using System.Collections.Generic;
@@ -8,18 +8,18 @@ namespace Kistl.Client.Presentables.ObjectEditor
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.KistlBase;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDisposable
     {
-        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
             dataCtx.IsModifiedChanged += dataCtx_IsModifiedChanged;
@@ -453,7 +453,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// <param name="dataObject"></param>
         /// <param name="requestedKind"></param>
         /// <returns></returns>
-        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject, Kistl.App.GUI.ControlKind requestedKind)
+        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject, Zetbox.App.GUI.ControlKind requestedKind)
         {
             if (dataObject == null || dataObject.Object == null)
                 return null;

@@ -1,4 +1,4 @@
-namespace Kistl.Client.Presentables.Calendar
+namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,16 @@ namespace Kistl.Client.Presentables.Calendar
     using System.Linq;
     using System.Text;
     using System.Windows.Media;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.Client.Presentables;
 
     [ViewModelDescriptor]
-    public class WeekCalendarViewModel : Kistl.Client.Presentables.ViewModel
+    public class WeekCalendarViewModel : Zetbox.Client.Presentables.ViewModel
     {
-        public new delegate WeekCalendarViewModel Factory(IKistlContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source);
+        public new delegate WeekCalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source);
 
-        public WeekCalendarViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source)
+        public WeekCalendarViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source)
             : base(dependencies, dataCtx, parent)
         {
             this._Source = source;

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.DalProvider.EF's Test PostgreSQL Configuration</ConfigName>
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>Zetbox.DalProvider.EF's Test PostgreSQL Configuration</ConfigName>
   <Server StartServer="true">
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Kistl.Tests.Utilities.MsSql.UtilityModule, Kistl.Tests.Utilities.MsSql</Module>
-      <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
-      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <Module>Zetbox.Tests.Utilities.MsSql.UtilityModule, Zetbox.Tests.Utilities.MsSql</Module>
+      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
+      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
@@ -20,7 +20,7 @@
     <string>Server\EF</string>
     <string>Server\EF.Generated</string>
     <string>Server\EF.Fallback</string>
-    <string>Common\App.ZBox</string>
-    <string>Server\App.ZBox</string>
+    <string>Common\App.Zetbox</string>
+    <string>Server\App.Zetbox</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>

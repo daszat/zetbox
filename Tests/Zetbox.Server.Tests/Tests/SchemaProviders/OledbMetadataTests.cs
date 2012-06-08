@@ -1,12 +1,12 @@
 
-namespace Kistl.Server.Tests.SchemaTests.SchemaProviders
+namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using NUnit.Framework;
-    using Kistl.Server.SchemaManagement.OleDbProvider;
+    using Zetbox.Server.SchemaManagement.OleDbProvider;
 
     public class OledbMetadataTests
         : SchemaProviderFixture<OleDb>

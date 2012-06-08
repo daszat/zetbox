@@ -1,14 +1,14 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="ObjectClasses.InvokeServerMethod"
-    ClassName="Kistl.DalProvider.Client.Generator.Templates.ObjectClasses.InvokeServerMethod"
-    Inherits="Kistl.Generator.Templates.ObjectClasses.Method" %>
+    ClassName="Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses.InvokeServerMethod"
+    Inherits="Zetbox.Generator.Templates.ObjectClasses.Method" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
         // BEGIN <%= this.GetType() %>
 
         <%= GetModifiers() %> <%= GetReturnType() %> <%= m.Name %>(<%= GetParameterDefinitions() %>)
@@ -46,7 +46,7 @@
 
 if(index == 0) {
 	// Only for first overload
-	Kistl.Generator.Templates.ObjectClasses.MethodCanExec.Call(Host, ctx, dt, m, eventName);
+	Zetbox.Generator.Templates.ObjectClasses.MethodCanExec.Call(Host, ctx, dt, m, eventName);
 }
 %>
         // END <%= this.GetType() %>

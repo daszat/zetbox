@@ -8,12 +8,12 @@
     <ProjectGuid>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.API.Client</RootNamespace>
-    <AssemblyName>Kistl.API.Client</AssemblyName>
+    <RootNamespace>Zetbox.API.Client</RootNamespace>
+    <AssemblyName>Zetbox.API.Client</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -27,7 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <DocumentationFile>..\bin\Debug\Client\Core\Kistl.API.Client.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\Core\Zetbox.API.Client.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -38,7 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\Client\Core\Kistl.API.Client.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Client\Core\Zetbox.API.Client.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
@@ -50,7 +50,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <DocumentationFile>..\bin\Debug\Client\Core\Kistl.API.Client.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\Core\Zetbox.API.Client.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -117,21 +117,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Proxy.cs" />
-    <Compile Include="Service References\KistlService\Reference.cs">
+    <Compile Include="Service References\ZetboxService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
@@ -140,44 +140,44 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\KistlService\KistlService.wsdl" />
-    <None Include="Service References\KistlService\KistlService1.wsdl" />
-    <None Include="Service References\KistlService\KistlService1.xsd">
+    <None Include="Service References\ZetboxService\ZetboxService.wsdl" />
+    <None Include="Service References\ZetboxService\ZetboxService1.wsdl" />
+    <None Include="Service References\ZetboxService\ZetboxService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\KistlService\KistlService2.xsd">
+    <None Include="Service References\ZetboxService\ZetboxService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\KistlService\KistlService3.xsd">
+    <None Include="Service References\ZetboxService\ZetboxService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\KistlService\KistlService4.xsd">
+    <None Include="Service References\ZetboxService\ZetboxService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\KistlService\KistlService8.xsd">
+    <None Include="Service References\ZetboxService\ZetboxService8.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\KistlService\KistlService9.xsd">
+    <None Include="Service References\ZetboxService\ZetboxService9.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.Kistl.API.Client.cd" />
+    <None Include="ClassDiagram.Zetbox.API.Client.cd" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\KistlService\" />
+    <WCFMetadataStorage Include="Service References\ZetboxService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\KistlService\configuration91.svcinfo" />
+    <None Include="Service References\ZetboxService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\KistlService\configuration.svcinfo" />
+    <None Include="Service References\ZetboxService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\KistlService\Reference.svcmap">
+    <None Include="Service References\ZetboxService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
       <SubType>Designer</SubType>

@@ -1,10 +1,10 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="ProjectFile"
-    ClassName="Kistl.Generator.Templates.ProjectFile" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.Generator.Templates.ProjectFile" 
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System.Collections.Generic" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Parameter Name="ctx" Type="Zetbox.API.IZetboxContext" %>
 <%@ Parameter Name="projectGuid" Type="string" %>
 <%@ Parameter Name="fileNames" Type="List<string>" %>
 <%@ Parameter Name="schemaProviders" Type="IEnumerable<ISchemaProvider>" %>
@@ -22,7 +22,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
     <!-- this is referenced by the generator to put the results in their right place -->
     <RelativeOutputPath><%= GetRelativeOutputPath() %></RelativeOutputPath>
   </PropertyGroup>
@@ -38,8 +38,8 @@
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath() %>.Fallback\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>.Generated\</OutputPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Debug\</KistlAPIPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,8 +52,8 @@
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\<%= GetRelativeOutputPath() %>.Fallback\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>.Generated\</OutputPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Release\</KistlAPIPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,8 +68,8 @@
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath() %>.Fallback\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath() %>.Generated\</OutputPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Debug\</KistlAPIPath>
-    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
   </PropertyGroup>
   <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
@@ -84,17 +84,17 @@
     <Reference Include="System.Xml" />
     <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\log4net.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Kistl.API">
+    <Reference Include="Zetbox.API">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\Core\Autofac.dll</HintPath>
+      <HintPath>$(ZetboxAPIPath)\Common\Core\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">
@@ -108,7 +108,7 @@
 <% } %>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.Objects.snk" />
+    <None Include="Zetbox.Objects.snk" />
   </ItemGroup>
 <% ApplyAdditionalItemGroups(); %>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

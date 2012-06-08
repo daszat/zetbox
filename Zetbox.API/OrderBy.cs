@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     public enum OrderByType
     {

@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
+namespace Zetbox.DalProvider.EF.Generator.Implementation.ObjectClasses
 {
     public class CollectionEntries
-        : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntries
+        : Zetbox.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntries
     {
-        public CollectionEntries(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
+        public CollectionEntries(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx)
             : base(_host,ctx)
         {
         }
@@ -17,8 +17,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         protected override IEnumerable<string> GetAdditionalImports()
         {
             return base.GetAdditionalImports().Concat(new string[]{
-                "Kistl.API.Server",
-                "Kistl.DalProvider.EF",
+                "Zetbox.API.Server",
+                "Zetbox.DalProvider.EF",
                 "System.Data.Objects",
                 "System.Data.Objects.DataClasses"
             });

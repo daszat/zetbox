@@ -1,19 +1,19 @@
 using System;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst")]
-    public partial class CompoundObjectPropertyTemplate : Kistl.Generator.MemberTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst")]
+    public partial class CompoundObjectPropertyTemplate : Zetbox.Generator.MemberTemplate
     {
-		protected IKistlContext ctx;
-		protected Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList;
+		protected IZetboxContext ctx;
+		protected Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList;
 		protected string xmlNamespace;
 		protected string propName;
 		protected string backingPropertyName;
@@ -23,14 +23,14 @@ namespace Kistl.Generator.Templates.Properties
 		protected bool isNullable;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string xmlNamespace, string propName, string backingPropertyName, string backingStoreName, string coType, string coImplementationType, bool isNullable)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string xmlNamespace, string propName, string backingPropertyName, string backingStoreName, string coType, string coImplementationType, bool isNullable)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Properties.CompoundObjectPropertyTemplate", ctx, serializationList, xmlNamespace, propName, backingPropertyName, backingStoreName, coType, coImplementationType, isNullable);
         }
 
-        public CompoundObjectPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string xmlNamespace, string propName, string backingPropertyName, string backingStoreName, string coType, string coImplementationType, bool isNullable)
+        public CompoundObjectPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string xmlNamespace, string propName, string backingPropertyName, string backingStoreName, string coType, string coImplementationType, bool isNullable)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -47,12 +47,12 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 21 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 21 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
-#line 23 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 23 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); 
-#line 24 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 24 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\r\n");
 this.WriteObjects("        private ",  coImplementationType , " ",  backingStoreName , ";\r\n");
@@ -68,14 +68,14 @@ this.WriteObjects("			}\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 39 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 39 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 if (!isNullable) { 
-#line 40 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 40 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 42 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 42 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 } 
-#line 43 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 43 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var __oldValue = ",  backingStoreName , ";\r\n");
@@ -90,18 +90,18 @@ this.WriteObjects("					}\r\n");
 this.WriteObjects("					if (__newValue == null)\r\n");
 this.WriteObjects("					{\r\n");
 this.WriteObjects("						",  backingStoreName , " = null;\r\n");
-#line 57 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 57 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 ApplyStoreNull(); 
-#line 58 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 58 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("					}\r\n");
 this.WriteObjects("                    else\r\n");
 this.WriteObjects("                    {\r\n");
 this.WriteObjects("					    __newValue = (",  coImplementationType , ")__newValue.Clone();\r\n");
 this.WriteObjects("					    ",  backingStoreName , " = __newValue;\r\n");
 this.WriteObjects("					    ",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\r\n");
-#line 64 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 64 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 ApplyStoreValue(); 
-#line 65 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 65 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                    }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("					NotifyPropertyChanged(\"",  propName , "\", __oldValue, __newValue);\r\n");
@@ -112,10 +112,10 @@ this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 76 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 76 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 78 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 78 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }

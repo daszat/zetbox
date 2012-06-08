@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API.Common;
-using Kistl.API.Configuration;
-using Kistl.API.Server.Tests;
-using Kistl.App.Base;
+using Zetbox.API.Common;
+using Zetbox.API.Configuration;
+using Zetbox.API.Server.Tests;
+using Zetbox.App.Base;
 
-namespace Kistl.API.Server.Mocks
+namespace Zetbox.API.Server.Mocks
 {
-    public class KistlContextMock : BaseKistlDataContext, IFrozenContext
+    public class ZetboxContextMock : BaseZetboxDataContext, IFrozenContext
     {
         public Dictionary<int, TestObjClassImpl> TestObjClasses = new Dictionary<int, TestObjClassImpl>();
-        public KistlContextMock(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
+        public ZetboxContextMock(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             TestObjClasses[1] = new TestObjClassImpl() { ID = 1 };
@@ -27,18 +27,18 @@ namespace Kistl.API.Server.Mocks
             TestObjClasses[1].StringProp = "some value (ID=1)";
             TestObjClasses[1].SubClasses.Add(TestObjClasses[3]);
             TestObjClasses[1].SubClasses.Add(TestObjClasses[22]);
-            TestObjClasses[1].TestEnumProp = Kistl.API.Mocks.TestEnum.X;
+            TestObjClasses[1].TestEnumProp = Zetbox.API.Mocks.TestEnum.X;
             TestObjClasses[1].TestNames.Add("some name (ID=1,1)");
 
             TestObjClasses[3].BaseTestObjClass = TestObjClasses[1];
             TestObjClasses[3].StringProp = "some other value (ID=3)";
-            TestObjClasses[3].TestEnumProp = Kistl.API.Mocks.TestEnum.Y;
+            TestObjClasses[3].TestEnumProp = Zetbox.API.Mocks.TestEnum.Y;
             TestObjClasses[3].TestNames.Add("some other name (ID=3,1)");
             TestObjClasses[3].TestNames.Add("some other name (ID=3,1)");
 
             TestObjClasses[22].BaseTestObjClass = TestObjClasses[1];
             TestObjClasses[22].StringProp = "some test value (ID=22)";
-            TestObjClasses[22].TestEnumProp = Kistl.API.Mocks.TestEnum.Y;
+            TestObjClasses[22].TestEnumProp = Zetbox.API.Mocks.TestEnum.Y;
             TestObjClasses[22].TestNames.Add("some test name (ID=22,1)");
             TestObjClasses[22].TestNames.Add("some test name (ID=22,2)");
 
@@ -143,7 +143,7 @@ namespace Kistl.API.Server.Mocks
 
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + typeof(KistlContextMock).Assembly.FullName));
+            return GetImplementationType(Type.GetType(t.Type.FullName + Zetbox.API.Helper.ImplementationSuffix + "," + typeof(ZetboxContextMock).Assembly.FullName));
         }
 
         public override ImplementationType GetImplementationType(Type t)

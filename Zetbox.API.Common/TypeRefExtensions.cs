@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.App.Base;
+using Zetbox.API;
+using Zetbox.App.Base;
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
     public static class TypeRefExtensions
     {
-        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.TypeRef");
+        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.TypeRef");
         private const string transientCacheKey = "__TypeRefExtensionsCache__";
 
         public static object Create(this TypeRef t, params object[] parameter)
@@ -20,8 +20,8 @@ namespace Kistl.App.Extensions
             return Activator.CreateInstance(t.AsType(true), parameter);
         }
 
-        /// <returns>a Kistl TypeRef for a given System.Type</returns>
-        public static TypeRef ToRef(this Type t, IReadOnlyKistlContext ctx)
+        /// <returns>a Zetbox TypeRef for a given System.Type</returns>
+        public static TypeRef ToRef(this Type t, IReadOnlyZetboxContext ctx)
         {
             if (t == null) { throw new ArgumentNullException("t"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -38,8 +38,8 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        /// <returns>a Kistl TypeRef for a given System.Type</returns>
-        public static TypeRef ToRef(this Type t, IKistlContext ctx)
+        /// <returns>a Zetbox TypeRef for a given System.Type</returns>
+        public static TypeRef ToRef(this Type t, IZetboxContext ctx)
         {
             if (t == null) { throw new ArgumentNullException("t"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -59,7 +59,7 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        private static TypeRef CreateTypeRef(Type t, IKistlContext ctx)
+        private static TypeRef CreateTypeRef(Type t, IZetboxContext ctx)
         {
             var result = ctx.Create<TypeRef>();
             var a = t.Assembly.ToRef(ctx);
@@ -87,7 +87,7 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        private static TypeRef LookupByType(IReadOnlyKistlContext ctx, IQueryable<TypeRef> source, Type t)
+        private static TypeRef LookupByType(IReadOnlyZetboxContext ctx, IQueryable<TypeRef> source, Type t)
         {
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");
@@ -125,9 +125,9 @@ namespace Kistl.App.Extensions
         }
 
         /// <summary>
-        /// returns a kistl Assembly for a given CLR-Assembly or null if it is not stored
+        /// returns a zetbox Assembly for a given CLR-Assembly or null if it is not stored
         /// </summary>
-        public static Assembly ToRefOrDefault(this System.Reflection.Assembly ass, IKistlContext ctx)
+        public static Assembly ToRefOrDefault(this System.Reflection.Assembly ass, IZetboxContext ctx)
         {
             if (ass == null) { throw new ArgumentNullException("ass"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -137,9 +137,9 @@ namespace Kistl.App.Extensions
         }
 
         /// <summary>
-        /// returns a kistl Assembly for a given CLR-Assembly, creating it if necessary
+        /// returns a zetbox Assembly for a given CLR-Assembly, creating it if necessary
         /// </summary>
-        public static Assembly ToRef(this System.Reflection.Assembly ass, IKistlContext ctx)
+        public static Assembly ToRef(this System.Reflection.Assembly ass, IZetboxContext ctx)
         {
             if (ass == null) { throw new ArgumentNullException("ass"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -150,14 +150,14 @@ namespace Kistl.App.Extensions
                 result = ctx.Create<Assembly>();
                 result.Name = ass.FullName;
                 // Leave module empty. Must be set external
-                // result.Module = ctx.GetQuery<Module>().Single(m => m.Name == "KistlBase");
+                // result.Module = ctx.GetQuery<Module>().Single(m => m.Name == "ZetboxBase");
                 result.DeploymentRestrictions = DeploymentRestriction.ClientOnly;
             }
             return result;
         }
 
         #region Cache Part
-        private static TypeRef GetFromCache(Type t, IReadOnlyKistlContext ctx)
+        private static TypeRef GetFromCache(Type t, IReadOnlyZetboxContext ctx)
         {
             if (!ctx.TransientState.ContainsKey(transientCacheKey))
             {
@@ -168,7 +168,7 @@ namespace Kistl.App.Extensions
             return null;
         }
 
-        private static void AddToCache(Type t, TypeRef tr, IReadOnlyKistlContext ctx)
+        private static void AddToCache(Type t, TypeRef tr, IReadOnlyZetboxContext ctx)
         {
             if (!ctx.TransientState.ContainsKey(transientCacheKey))
             {

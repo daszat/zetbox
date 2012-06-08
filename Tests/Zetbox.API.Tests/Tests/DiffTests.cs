@@ -1,16 +1,16 @@
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
     using NUnit.Framework;
 
     public class DiffTests
     {
-        // copied from Kistl.API/Utils/Diff.cs
+        // copied from Zetbox.API/Utils/Diff.cs
         // see license there
         [Test]
         public void Test()

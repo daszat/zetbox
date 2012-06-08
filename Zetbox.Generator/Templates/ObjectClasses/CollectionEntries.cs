@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;

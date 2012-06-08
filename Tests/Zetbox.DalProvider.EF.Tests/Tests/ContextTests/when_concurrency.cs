@@ -1,19 +1,19 @@
 
-namespace Kistl.DalProvider.Ef.Tests.ContextTests
+namespace Zetbox.DalProvider.Ef.Tests.ContextTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
 
     public class when_concurrency
-        : Kistl.API.AbstractConsumerTests.ContextTests.when_concurrency
+        : Zetbox.API.AbstractConsumerTests.ContextTests.when_concurrency
     {
     }
 }

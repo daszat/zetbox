@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 
 namespace at.dasz.DocumentManagement
 {
@@ -10,7 +10,7 @@ namespace at.dasz.DocumentManagement
     public static class DocumentActions
     {
         [Invocation]
-        public static void HandleBlobChange(at.dasz.DocumentManagement.Document obj, MethodReturnEventArgs<Kistl.App.Base.Blob> e, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+        public static void HandleBlobChange(at.dasz.DocumentManagement.Document obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             if (oldBlob != null && !obj.Revisions.Contains(oldBlob))
             {

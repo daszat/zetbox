@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.CompanyNHibernateImpl+CompanyProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.CompanyNHibernateImpl+CompanyProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.CompanyNHibernateImpl+CompanyProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.CompanyNHibernateImpl+CompanyProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`Companies`"
            abstract="false"

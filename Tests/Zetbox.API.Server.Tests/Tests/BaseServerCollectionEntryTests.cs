@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Tests.Skeletons;
-using Kistl.API.Server.Mocks;
+using Zetbox.API.Tests.Skeletons;
+using Zetbox.API.Server.Mocks;
 
 using NUnit.Framework;
 
-namespace Kistl.API.Server.Tests
+namespace Zetbox.API.Server.Tests
 {
 
     [TestFixture]

@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Kistl.Server
     using System.ServiceModel;
     using System.ServiceModel.Web;
     using System.Text;
-    using Kistl.API.Configuration;
+    using Zetbox.API.Configuration;
     using System.Text.RegularExpressions;
 
     public enum FileType
@@ -19,7 +19,7 @@ namespace Kistl.Server
         AppConfig = 3,
     }
 
-    [DataContract(Namespace = "http://dasz.at/ZBox/Bootstrapper")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
     public class FileInfo
     {
         [DataMember(Name = "Name")]
@@ -34,7 +34,7 @@ namespace Kistl.Server
         public FileType Type { get; set; }
     }
 
-    [ServiceContract(SessionMode = SessionMode.NotAllowed, Namespace = "http://dasz.at/ZBox/Bootstrapper")]
+    [ServiceContract(SessionMode = SessionMode.NotAllowed, Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
     public interface IBootstrapperService
     {
         [OperationContract]
@@ -49,15 +49,15 @@ namespace Kistl.Server
     /// <summary>
     /// Bootstrapper service
     /// </summary>
-    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/ZBox/Bootstrapper")]
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
     public class BootstrapperService
         : IBootstrapperService
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.BootstrapperService");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.BootstrapperService");
 
-        private readonly KistlConfig config;
+        private readonly ZetboxConfig config;
 
-        public BootstrapperService(KistlConfig config)
+        public BootstrapperService(ZetboxConfig config)
         {
             if (config == null) throw new ArgumentNullException("config");
 
@@ -155,9 +155,9 @@ namespace Kistl.Server
         {
             switch (fi.Name.ToLower())
             {
-                case "kistl.client.wpf.exe":
+                case "zetbox.client.wpf.exe":
                     return FileType.Exec;
-                case "kistl.client.wpf.exe.config":
+                case "zetbox.client.wpf.exe.config":
                     return FileType.AppConfig;
                 default:
                     return FileType.File;

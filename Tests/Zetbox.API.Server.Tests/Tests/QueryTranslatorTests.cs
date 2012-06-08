@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server.Tests
+namespace Zetbox.API.Server.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,18 +7,18 @@ namespace Kistl.API.Server.Tests
     using System.Linq.Expressions;
     using System.Text;
     using Autofac;
-    using Kistl.API.Common;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server.Mocks;
-    using Kistl.API.Server.PerfCounter;
-    using Kistl.App.Base;
+    using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server.Mocks;
+    using Zetbox.API.Server.PerfCounter;
+    using Zetbox.App.Base;
     using NUnit.Framework;
 
     internal class TestQueryTranslatorProvider<T> : QueryTranslatorProvider<T>
     {
         private readonly InterfaceType.Factory _iftFactory;
 
-        internal TestQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+        internal TestQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
             : base(metaDataResolver, identity, source, ctx, iftFactory, perfCounter)
         {
             _iftFactory = iftFactory;
@@ -31,19 +31,19 @@ namespace Kistl.API.Server.Tests
 
         protected override string ImplementationSuffix
         {
-            get { return Kistl.API.Helper.ImplementationSuffix; }
+            get { return Zetbox.API.Helper.ImplementationSuffix; }
         }
     }
 
     [TestFixture]
     public class QueryTranslatorTests : AbstractApiServerTestFixture
     {
-        IKistlContext ctx;
+        IZetboxContext ctx;
 
         public override void SetUp()
         {
             base.SetUp();
-            ctx = new KistlContextMock(scope.Resolve<IMetaDataResolver>(), null, scope.Resolve<KistlConfig>(), scope.Resolve<Func<IFrozenContext>>(), scope.Resolve<InterfaceType.Factory>());
+            ctx = new ZetboxContextMock(scope.Resolve<IMetaDataResolver>(), null, scope.Resolve<ZetboxConfig>(), scope.Resolve<Func<IFrozenContext>>(), scope.Resolve<InterfaceType.Factory>());
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Kistl.API.Server.Tests
 
             var obj = Expression.MakeBinary(
                 ExpressionType.Equal,
-                Expression.Convert(Expression.Constant(Kistl.API.Mocks.TestEnum.X), typeof(int)),
+                Expression.Convert(Expression.Constant(Zetbox.API.Mocks.TestEnum.X), typeof(int)),
                 Expression.Constant(23));
 
             Assert.That(() => { subject.Visit(obj); }, Throws.Nothing);

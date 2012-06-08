@@ -1,20 +1,20 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// A top-level working space. This is the user's "Unit of Work".
     /// </summary>
     public abstract class WindowViewModel : ViewModel
     {
-        public new delegate WindowViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate WindowViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public WindowViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public WindowViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
         }

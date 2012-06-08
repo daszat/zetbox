@@ -1,5 +1,5 @@
 
-namespace Kistl.IntegrationTests
+namespace Zetbox.IntegrationTests
 {
     using System;
     using System.Collections.Generic;
@@ -8,20 +8,20 @@ namespace Kistl.IntegrationTests
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
 
     [SetUpFixture]
     public class SetUpFixture : AbstractSetUpFixture, IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Integration.SetUp");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Integration.SetUp");
 
         private ServerDomainManager manager;
 
@@ -32,16 +32,16 @@ namespace Kistl.IntegrationTests
                 base.SetUp(container);
                 ResetDatabase(container);
 
-                var config = container.Resolve<KistlConfig>();
+                var config = container.Resolve<ZetboxConfig>();
 
                 manager = new ServerDomainManager();
                 manager.Start(config);
 
-                using (var initCtx = container.Resolve<IKistlContext>())
+                using (var initCtx = container.Resolve<IZetboxContext>())
                 {
                     // load up all infrastructure from the DalProvider
                     // TODO: remove ToList() call!
-                    Console.WriteLine(initCtx.GetQuery<Kistl.App.Base.ObjectClass>().ToList().Count());
+                    Console.WriteLine(initCtx.GetQuery<Zetbox.App.Base.ObjectClass>().ToList().Count());
                 }
             }
             catch (Exception error)
@@ -68,7 +68,7 @@ namespace Kistl.IntegrationTests
                 {
                     manager.Stop();
                     manager = null;
-                    Log.Info("Shutting down Kistl finished");
+                    Log.Info("Shutting down Zetbox finished");
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace Kistl.IntegrationTests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.IntegrationTests.xml";
+            return "Zetbox.IntegrationTests.xml";
         }
 
         protected override HostType GetHostType()

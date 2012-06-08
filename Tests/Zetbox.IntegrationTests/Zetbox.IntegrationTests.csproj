@@ -8,15 +8,15 @@
     <ProjectGuid>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.IntegrationTests</RootNamespace>
-    <AssemblyName>Kistl.IntegrationTests</AssemblyName>
+    <RootNamespace>Zetbox.IntegrationTests</RootNamespace>
+    <AssemblyName>Zetbox.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
     <StartAction>Program</StartAction>
     <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
-    <StartArguments>Kistl.IntegrationTests.nunit /config:Studio</StartArguments>
+    <StartArguments>Zetbox.IntegrationTests.nunit /config:Studio</StartArguments>
     <StartWorkingDirectory>..\..\bin\Debug\Tests</StartWorkingDirectory>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
@@ -117,75 +117,75 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Kistl.IntegrationTests.nunit">
+    <None Include="Zetbox.IntegrationTests.nunit">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Kistl.IntegrationTests.PartCoverSettings.xml" />
+    <Content Include="Zetbox.IntegrationTests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kistl.API.Client\Kistl.API.Client.csproj">
+    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
-      <Name>Kistl.API.Client</Name>
+      <Name>Zetbox.API.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.App.Projekte.Client\Kistl.App.Projekte.Client.csproj">
+    <ProjectReference Include="..\..\Zetbox.App.Projekte.Client\Zetbox.App.Projekte.Client.csproj">
       <Project>{379A67E8-388E-47B6-A591-5D4C05DAFBDB}</Project>
-      <Name>Kistl.App.Projekte.Client</Name>
+      <Name>Zetbox.App.Projekte.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.App.Projekte.Common\Kistl.App.Projekte.Common.csproj">
+    <ProjectReference Include="..\..\Zetbox.App.Projekte.Common\Zetbox.App.Projekte.Common.csproj">
       <Project>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</Project>
-      <Name>Kistl.App.Projekte.Common</Name>
+      <Name>Zetbox.App.Projekte.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.App.Projekte.Server\Kistl.App.Projekte.Server.csproj">
+    <ProjectReference Include="..\..\Zetbox.App.Projekte.Server\Zetbox.App.Projekte.Server.csproj">
       <Project>{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}</Project>
-      <Name>Kistl.App.Projekte.Server</Name>
+      <Name>Zetbox.App.Projekte.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Client.WPF\Kistl.Client.WPF.csproj">
+    <ProjectReference Include="..\..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj">
       <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
-      <Name>Kistl.Client.WPF</Name>
+      <Name>Zetbox.Client.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Client\Kistl.Client.csproj">
+    <ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
-      <Name>Kistl.Client</Name>
+      <Name>Zetbox.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.DalProvider.Base\Kistl.DalProvider.Base.csproj">
+    <ProjectReference Include="..\..\Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj">
       <Project>{A242A751-9F97-4F1C-ABE5-57B28133DEF4}</Project>
-      <Name>Kistl.DalProvider.Base</Name>
+      <Name>Zetbox.DalProvider.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.DalProvider.ClientObjects\Kistl.DalProvider.ClientObjects.csproj">
+    <ProjectReference Include="..\..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj">
       <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
-      <Name>Kistl.DalProvider.ClientObjects</Name>
+      <Name>Zetbox.DalProvider.ClientObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.DalProvider.NHibernate\Kistl.DalProvider.NHibernate.csproj">
+    <ProjectReference Include="..\..\Zetbox.DalProvider.NHibernate\Zetbox.DalProvider.NHibernate.csproj">
       <Project>{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}</Project>
-      <Name>Kistl.DalProvider.NHibernate</Name>
+      <Name>Zetbox.DalProvider.NHibernate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Server\Kistl.Server.csproj">
+    <ProjectReference Include="..\..\Zetbox.Server\Zetbox.Server.csproj">
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
-      <Name>Kistl.Server</Name>
+      <Name>Zetbox.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
+    <ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj">
       <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
-      <Name>Kistl.API.AbstractConsumerTests</Name>
+      <Name>Zetbox.API.AbstractConsumerTests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Tests\Kistl.API.Tests.csproj">
+    <ProjectReference Include="..\Zetbox.API.Tests\Zetbox.API.Tests.csproj">
       <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
-      <Name>Kistl.API.Tests</Name>
+      <Name>Zetbox.API.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

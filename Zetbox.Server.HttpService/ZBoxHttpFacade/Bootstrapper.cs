@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.HttpService
+namespace Zetbox.Server.HttpService
 {
     using System;
     using System.Collections.Generic;
@@ -9,19 +9,19 @@ namespace Kistl.Server.HttpService
     using System.Xml.Serialization;
     using Autofac;
     using Autofac.Integration.Web;
-    using Kistl.API;
-    using Kistl.API.Configuration;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
 
-    [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/ZBox/Bootstrapper")]
+    [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
     public class FileInfoArray
     {
         [XmlElement("FileInfo")]
-        public Kistl.Server.FileInfo[] Files { get; set; }
+        public Zetbox.Server.FileInfo[] Files { get; set; }
     }
 
     public class BootstrapperFacade : IHttpHandler
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service.BootstrapperFacade");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Service.BootstrapperFacade");
 
         public bool IsReusable
         {

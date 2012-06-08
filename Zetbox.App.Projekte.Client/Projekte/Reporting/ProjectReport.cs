@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Projekte.Client.Projekte.Reporting
+namespace Zetbox.App.Projekte.Client.Projekte.Reporting
 {
     using System;
     using System.Collections.Generic;

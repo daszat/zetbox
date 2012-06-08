@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
     using System;
     using System.Collections;
@@ -73,7 +73,7 @@ namespace Kistl.API.Utils
     /// 2007.09.23 UpVector and DownVector optimization by Jan Stoklasa ().
     /// 2008.05.31 Adjusted the testing code that failed because of the Optimize method (not a bug in the diff algorithm).
     /// 2008.10.08 Fixing a test case and adding a new test case.
-    /// 2011.10.07 adapted for Kistl usage
+    /// 2011.10.07 adapted for Zetbox usage
     /// </summary>
 
     public class Diff

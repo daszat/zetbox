@@ -1,12 +1,12 @@
-namespace ZBox.App.SchemaMigration
+namespace Zetbox.App.SchemaMigration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Client.Presentables;
     using System.IO;
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace ZBox.App.SchemaMigration
 
         }
         [Invocation]
-        public static void CreateMappingReport(ZBox.App.SchemaMigration.SourceTable obj)
+        public static void CreateMappingReport(Zetbox.App.SchemaMigration.SourceTable obj)
         {
             var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Report " + obj.Name + ".pdf", "PDF|*.pdf");
             if (!string.IsNullOrEmpty(fileName))

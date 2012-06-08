@@ -6,7 +6,7 @@ using System.Threading;
 using System.Windows.Threading;
 using System.Diagnostics;
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
 
     /// <summary>

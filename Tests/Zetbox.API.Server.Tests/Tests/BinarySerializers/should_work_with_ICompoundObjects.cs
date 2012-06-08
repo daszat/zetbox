@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server.Tests.BinarySerializers
+namespace Zetbox.API.Server.Tests.BinarySerializers
 {
     using System;
     using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace Kistl.API.Server.Tests.BinarySerializers
 
     [TestFixture]
     public class should_work_with_BaseServerCompoundObjects
-        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<CompoundObjectMockImpl>
+        : Zetbox.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<CompoundObjectMockImpl>
     {
     }
 }

@@ -1,12 +1,12 @@
 
-// TODO: move to Kistl.DalProvider.Base project
-namespace Kistl.DalProvider.Base.RelationWrappers
+// TODO: move to Zetbox.DalProvider.Base project
+namespace Zetbox.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public interface IRelationListSync<T>
         where T : IPersistenceObject

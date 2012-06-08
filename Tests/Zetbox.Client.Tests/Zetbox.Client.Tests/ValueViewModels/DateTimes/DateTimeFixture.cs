@@ -1,16 +1,16 @@
 
-namespace Kistl.Client.Tests.ValueViewModels.DateTimes
+namespace Zetbox.Client.Tests.ValueViewModels.DateTimes
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
     using Moq;
     using NUnit.Framework;
 

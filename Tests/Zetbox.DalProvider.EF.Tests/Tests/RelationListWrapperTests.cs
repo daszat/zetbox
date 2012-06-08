@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Ef.Tests
+namespace Zetbox.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -9,10 +9,10 @@ namespace Kistl.DalProvider.Ef.Tests
 
     using Autofac;
 
-    using Kistl.API;
-    using Kistl.API.Tests;
-    using Kistl.App.Projekte;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.API.Tests;
+    using Zetbox.App.Projekte;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
     using NUnit.Framework;
 

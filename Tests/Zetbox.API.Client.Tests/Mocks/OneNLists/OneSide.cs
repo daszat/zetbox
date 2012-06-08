@@ -1,12 +1,12 @@
 
-namespace Kistl.API.Client.Mocks.OneNLists
+namespace Zetbox.API.Client.Mocks.OneNLists
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
     class OneSide : IOneSide
     {
@@ -50,12 +50,12 @@ namespace Kistl.API.Client.Mocks.OneNLists
             get { return _id; }
         }
 
-        public IKistlContext Context
+        public IZetboxContext Context
         {
             get { return null; }
         }
 
-        public IReadOnlyKistlContext ReadOnlyContext
+        public IReadOnlyZetboxContext ReadOnlyContext
         {
             get { return null; }
         }
@@ -140,12 +140,12 @@ namespace Kistl.API.Client.Mocks.OneNLists
             throw new NotImplementedException();
         }
 
-        public void AttachToContext(IKistlContext ctx)
+        public void AttachToContext(IZetboxContext ctx)
         {
             throw new NotImplementedException();
         }
 
-        public void DetachFromContext(IKistlContext ctx)
+        public void DetachFromContext(IZetboxContext ctx)
         {
             throw new NotImplementedException();
         }
@@ -190,12 +190,12 @@ namespace Kistl.API.Client.Mocks.OneNLists
 
         #region IStreamable Members
 
-        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             throw new NotImplementedException();
         }

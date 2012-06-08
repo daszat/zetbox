@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.Serialization
+namespace Zetbox.Generator.Templates.Serialization
 {
     using System;
     using System.Collections.Generic;

@@ -1,6 +1,6 @@
 
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     using System;
     using System.Collections.Generic;
@@ -14,8 +14,8 @@ namespace Kistl.Client.WPF.CustomControls
 
     using System.Windows.Media;
     using System.Windows.Input;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.WPF.Converter;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.WPF.Converter;
 
     /// <summary>
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties

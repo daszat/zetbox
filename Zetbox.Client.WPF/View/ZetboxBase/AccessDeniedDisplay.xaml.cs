@@ -11,15 +11,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     /// <summary>
     /// Interaction logic for AccessDeniedDisplay.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class AccessDeniedDisplay : UserControl, IHasViewModel<DataObjectViewModel>
     {
         public AccessDeniedDisplay()

@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_EnumSelectionView : Kistl.Client.ASPNET.Toolkit.View.EnumSelectionView
+public partial class View_EnumSelectionView : Zetbox.Client.ASPNET.Toolkit.View.EnumSelectionView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

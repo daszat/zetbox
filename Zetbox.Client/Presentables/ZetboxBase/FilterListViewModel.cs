@@ -1,28 +1,28 @@
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.Client.Presentables;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.FilterViewModels;
-    using Kistl.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.Client.Models;
     using System.Collections.Specialized;
     using System.Collections.ObjectModel;
-    using Kistl.App.GUI;
+    using Zetbox.App.GUI;
 
     [ViewModelDescriptor]
     public class FilterListViewModel : ViewModel
     {
-        public new delegate FilterListViewModel Factory(IKistlContext dataCtx, ViewModel parent, ObjectClass type);
+        public new delegate FilterListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type);
 
         private ObjectClass _type;
 
-        public FilterListViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, ObjectClass type)
+        public FilterListViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type)
             : base(appCtx, dataCtx, parent)
         {
             _type = type;
@@ -315,7 +315,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         AddFilter,
                         () => ShowFilter && AllowUserFilter, 
                         null);
-                    _AddFilterCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.new_png.Find(FrozenContext);
+                    _AddFilterCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
                 }
                 return _AddFilterCommand;
             }

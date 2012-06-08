@@ -1,6 +1,6 @@
 #define INI50
 
-namespace Kistl.Client.Bootstrapper
+namespace Zetbox.Client.Bootstrapper
 {
     using System;
     using System.Collections.Generic;
@@ -72,7 +72,7 @@ namespace Kistl.Client.Bootstrapper
                 CleanupUnusedFiles(files);
 
                 SetStatus(Properties.Resources.StartingZToolbox);
-                StartZBox();
+                StartZetbox();
 
                 CloseBootstrapper();
             }
@@ -165,7 +165,7 @@ namespace Kistl.Client.Bootstrapper
         {
             var targetDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             targetDir = Path.Combine(targetDir, "dasz");
-            targetDir = Path.Combine(targetDir, "ZBox");
+            targetDir = Path.Combine(targetDir, "Zetbox");
             targetDir = Path.Combine(targetDir, "BootStrapper");
             targetDir = Path.Combine(targetDir, new Uri(address).Authority.GetLegalFileName());
 
@@ -221,7 +221,7 @@ namespace Kistl.Client.Bootstrapper
             }
         }
 
-        private void StartZBox()
+        private void StartZetbox()
         {
             ProcessStartInfo pi = new ProcessStartInfo();
             pi.FileName = startExec;

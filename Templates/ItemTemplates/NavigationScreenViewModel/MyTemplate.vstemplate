@@ -2,7 +2,7 @@
   <TemplateData>
     <DefaultName>NavigationScreenViewModel.cs</DefaultName>
     <Name>NavigationScreenViewModel</Name>
-    <Description>ZBox NavigationScreen ViewModel</Description>
+    <Description>Zetbox NavigationScreen ViewModel</Description>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>10</SortOrder>
     <Icon>__TemplateIcon.ico</Icon>

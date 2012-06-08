@@ -13,10 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.WPF.View.ObjectEditor
+namespace Zetbox.Client.WPF.View.ObjectEditor
 {
     /// <summary>
     /// Interaction logic for DataObjectFullView.xaml

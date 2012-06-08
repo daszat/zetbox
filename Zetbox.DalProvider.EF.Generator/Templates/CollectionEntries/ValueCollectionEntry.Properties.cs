@@ -1,16 +1,16 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
+namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
+    using Templates = Zetbox.Generator.Templates;
 
     public partial class ValueCollectionEntry
     {
@@ -44,7 +44,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
 
             Templates.Properties.DelegatingProperty.Call(
                 Host, ctx,
-                "ParentObject", "Kistl.API.IDataObject",
+                "ParentObject", "Zetbox.API.IDataObject",
                 "Parent", implementationType);
         }
     }

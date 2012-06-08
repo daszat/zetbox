@@ -5,9 +5,9 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Text;
 
-using Kistl.App.Base;
+using Zetbox.App.Base;
 
-namespace Kistl.Server.SchemaManagement
+namespace Zetbox.Server.SchemaManagement
 {
     [Serializable]
     public class DBTypeNotFoundException : Exception

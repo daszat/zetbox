@@ -7,14 +7,14 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-using Kistl.API.Utils;
+using Zetbox.API.Utils;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
 using Autofac;
 
-namespace Kistl.API.Tests.Serializables
+namespace Zetbox.API.Tests.Serializables
 {
 
     [TestFixture]

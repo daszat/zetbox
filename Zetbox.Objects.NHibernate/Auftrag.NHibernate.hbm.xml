@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Zetbox.Objects.NHibernateImpl"
            schema="`projekte`"
            table="`Auftraege`"
            abstract="false"
@@ -27,14 +27,14 @@
                   column="`Auftragswert`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
                   optimistic-lock="true"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
@@ -45,13 +45,13 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Kunde" column="`fk_Kunde`" class="Kistl.App.Projekte.KundeNHibernateImpl+KundeProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Kunde" column="`fk_Kunde`" class="Zetbox.App.Projekte.KundeNHibernateImpl+KundeProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Mitarbeiter" column="`fk_Mitarbeiter`" class="Kistl.App.Projekte.MitarbeiterNHibernateImpl+MitarbeiterProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Mitarbeiter" column="`fk_Mitarbeiter`" class="Zetbox.App.Projekte.MitarbeiterNHibernateImpl+MitarbeiterProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Projekt" column="`fk_Projekt`" class="Kistl.App.Projekte.ProjektNHibernateImpl+ProjektProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Projekt" column="`fk_Projekt`" class="Zetbox.App.Projekte.ProjektNHibernateImpl+ProjektProxy, Zetbox.Objects.NHibernateImpl" />
 
 
         <!-- map rights -->
@@ -62,7 +62,7 @@
              fetch="select" 
              batch-size="100" >
             <key column="`ID`" />
-            <composite-element class="Kistl.App.Projekte.Auftrag_RightsNHibernateImpl, Kistl.Objects.NHibernateImpl">
+            <composite-element class="Zetbox.App.Projekte.Auftrag_RightsNHibernateImpl, Zetbox.Objects.NHibernateImpl">
                 <property name="Identity" column="`Identity`" />
                 <property name="Right" column="`Right`" />
             </composite-element>

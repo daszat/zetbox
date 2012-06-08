@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="Mappings.IdGeneratorHbm"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.IdGeneratorHbm" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings.IdGeneratorHbm" 
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Parameter Name="idType" Type="string" %>
 <%@ Parameter Name="schemaName" Type="string" %>

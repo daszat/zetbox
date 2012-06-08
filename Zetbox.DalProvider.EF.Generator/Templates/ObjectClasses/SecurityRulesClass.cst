@@ -1,16 +1,16 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="ObjectClasses.SecurityRulesClass"
-	ClassName="Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.SecurityRulesClass" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+	ClassName="Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.SecurityRulesClass" 
+	Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%@ Parameter Name="assocName" Type="string" %>
 <%@ Parameter Name="targetRoleName" Type="string" %>

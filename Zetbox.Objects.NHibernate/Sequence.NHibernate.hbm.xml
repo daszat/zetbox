@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Base.SequenceNHibernateImpl+SequenceProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Base.SequenceNHibernateImpl+SequenceProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Base.SequenceNHibernateImpl+SequenceProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Base.SequenceNHibernateImpl+SequenceProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`Sequences`"
            abstract="false"
@@ -19,21 +19,21 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
                   optimistic-lock="true"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <one-to-one name="Data" class="Kistl.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Kistl.Objects.NHibernateImpl" constrained="false" property-ref="Sequence" />
+        <one-to-one name="Data" class="Zetbox.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Sequence" />
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
@@ -47,7 +47,7 @@
                   column="`IsContinuous`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 

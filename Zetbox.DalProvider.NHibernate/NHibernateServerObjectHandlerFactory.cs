@@ -1,13 +1,13 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
+    using Zetbox.API;
+    using Zetbox.API.Server;
 
     public sealed class NHibernateServerObjectHandlerFactory
         : ServerObjectHandlerFactory
@@ -15,7 +15,7 @@ namespace Kistl.DalProvider.NHibernate
         public NHibernateServerObjectHandlerFactory() { }
 
         public override IServerCollectionHandler GetServerCollectionHandler(
-            IKistlContext ctx, 
+            IZetboxContext ctx, 
             InterfaceType aType,
             InterfaceType bType,
             RelationEndRole endRole)

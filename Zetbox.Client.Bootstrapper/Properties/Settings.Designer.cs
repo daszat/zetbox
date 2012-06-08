@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Bootstrapper.Properties {
+namespace Zetbox.Client.Bootstrapper.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

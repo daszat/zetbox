@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
     public class NHibernateASideCollectionWrapper<TA, TB, TEntry>
         : ASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>

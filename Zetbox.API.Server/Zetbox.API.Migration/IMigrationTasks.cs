@@ -1,13 +1,13 @@
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
-    using ZBox.App.SchemaMigration;
+    using Zetbox.API.Server;
+    using Zetbox.App.SchemaMigration;
 
     public delegate IMigrationTasks TaskFactory(ISchemaProvider src, ISchemaProvider dst);
 

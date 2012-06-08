@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.Collections.Generic;
@@ -9,27 +9,27 @@ namespace Kistl.Generator
     using System.Text;
     using System.Threading;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
     using Microsoft.Build.BuildEngine;
     using Microsoft.Build.Framework;
 
     public abstract class Compiler
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.Compiler");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.Compiler");
 
         private readonly ILifetimeScope _container;
         private readonly IEnumerable<AbstractBaseGenerator> _generatorProviders;
-        private readonly KistlConfig _config;
+        private readonly ZetboxConfig _config;
 
         public Compiler(ILifetimeScope container, IEnumerable<AbstractBaseGenerator> generatorProviders)
         {
             _container = container;
             _generatorProviders = generatorProviders;
-            _config = _container.Resolve<KistlConfig>();
+            _config = _container.Resolve<ZetboxConfig>();
         }
 
         protected abstract void RegisterConsoleLogger(Engine engine, string workingPath);
@@ -107,11 +107,11 @@ namespace Kistl.Generator
             Log.InfoFormat("Generating Code to [{0}]", workingPath);
             // TODO: use TaskExecutor to optimally use multicores
             // nhibernate on mono triggers a runtime fault with 2.10.x
-            if (Environment.GetEnvironmentVariable("ZBOX_SERIALIZE_COMPILATION") == "yes")
+            if (Environment.GetEnvironmentVariable("ZETBOX_SERIALIZE_COMPILATION") == "yes")
             {
                 Log.Warn("Serializing generation threads.");
 
-                var ctx = _container.Resolve<IKistlContext>();
+                var ctx = _container.Resolve<IZetboxContext>();
                 foreach (var gen in _generatorProviders)
                 {
                     gen.Generate(ctx, workingPath);
@@ -138,7 +138,7 @@ namespace Kistl.Generator
                     {
                         using (var innerContainer = _container.BeginLifetimeScope())
                         {
-                            generator.Generate(innerContainer.Resolve<IKistlContext>(), workingPath);
+                            generator.Generate(innerContainer.Resolve<IZetboxContext>(), workingPath);
                         }
                     }
                     catch (Exception ex)
@@ -180,9 +180,9 @@ namespace Kistl.Generator
         {
             using (Log.DebugTraceMethodCall("CompileCode", "Compile Code on STA thread to " + workingPath))
             {
-                var kistlApiPath = GetApiPath();
+                var zetboxApiPath = GetApiPath();
 
-                Log.DebugFormat("kistlApiPath = [{0}]", kistlApiPath);
+                Log.DebugFormat("zetboxApiPath = [{0}]", zetboxApiPath);
 
                 // TODO: move MsBuild logging to log4net
                 if (File.Exists("TemplateCodegenLog.txt"))
@@ -200,7 +200,7 @@ namespace Kistl.Generator
 
                 engine.GlobalProperties.SetProperty("Configuration", GetConfiguration());
                 engine.GlobalProperties.SetProperty("OutputPathOverride", binPath);
-                engine.GlobalProperties.SetProperty("KistlAPIPathOverride", kistlApiPath);
+                engine.GlobalProperties.SetProperty("ZetboxAPIPathOverride", zetboxApiPath);
 
                 Log.Info("Dumping engine Properties");
                 foreach (BuildProperty prop in engine.GlobalProperties)
@@ -336,14 +336,14 @@ namespace Kistl.Generator
 
         #region GetLists
 
-        public static IQueryable<ObjectClass> GetObjectClassList(IKistlContext ctx)
+        public static IQueryable<ObjectClass> GetObjectClassList(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             return ctx.GetQuery<ObjectClass>();
         }
 
-        public static IQueryable<Interface> GetInterfaceList(IKistlContext ctx)
+        public static IQueryable<Interface> GetInterfaceList(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
@@ -351,7 +351,7 @@ namespace Kistl.Generator
                    select i;
         }
 
-        public static IQueryable<Enumeration> GetEnumList(IKistlContext ctx)
+        public static IQueryable<Enumeration> GetEnumList(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
@@ -359,7 +359,7 @@ namespace Kistl.Generator
                    select e;
         }
 
-        public static IQueryable<CompoundObject> GetCompoundObjectList(IKistlContext ctx)
+        public static IQueryable<CompoundObject> GetCompoundObjectList(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 

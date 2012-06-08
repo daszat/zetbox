@@ -3,38 +3,38 @@
 # external code
 M: System.Type System.Linq.Dynamic.ClassFactory::CreateDynamicClass(System.Linq.Dynamic.DynamicProperty[])
 M: System.String System.Linq.Dynamic.ExpressionParser::GetTypeName(System.Type)
-M: System.Boolean Kistl.API.Utils.OptionSet::ParseBundledValue(System.String,System.String,Kistl.API.Utils.OptionContext)
-M: System.String Kistl.API.Utils.OptionSet::GetArgumentName(System.Int32,System.Int32,System.String)
+M: System.Boolean Zetbox.API.Utils.OptionSet::ParseBundledValue(System.String,System.String,Zetbox.API.Utils.OptionContext)
+M: System.String Zetbox.API.Utils.OptionSet::GetArgumentName(System.Int32,System.Int32,System.String)
 
 R: Gendarme.Rules.Performance.AvoidRepetitiveCallsToPropertiesRule
 # This method calls several times into the same properties. This is expensive for virtual properties or when the property cannot be inlined.
 # should be fixed upstream in MigraDoc
-M: System.Void ZBox.App.SchemaMigration.SourceTableMappingReport::RenderColumnMappings()
+M: System.Void Zetbox.App.SchemaMigration.SourceTableMappingReport::RenderColumnMappings()
 # external code
-M: System.Boolean Kistl.API.Utils.OptionSet::GetOptionParts(System.String,System.String&,System.String&,System.String&,System.String&)
+M: System.Boolean Zetbox.API.Utils.OptionSet::GetOptionParts(System.String,System.String&,System.String&,System.String&,System.String&)
 # false positive, the referenced object changes beneath the access
-M: System.Collections.ObjectModel.ReadOnlyObservableCollection`1<Kistl.Client.Presentables.ViewModel> Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel::get_TreeItems()
-M: System.Void ZBox.App.SchemaMigration.MigrationProjectMappingReport::RenderFirstPage()
+M: System.Collections.ObjectModel.ReadOnlyObservableCollection`1<Zetbox.Client.Presentables.ViewModel> Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::get_TreeItems()
+M: System.Void Zetbox.App.SchemaMigration.MigrationProjectMappingReport::RenderFirstPage()
 # meh
-M: System.Void Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
-M: System.Void Kistl.Client.Presentables.GUI.NavigationSearchScreenViewModel::InitializeListViewModel(Kistl.Client.Presentables.KistlBase.InstanceListViewModel)
-M: Kistl.Client.Presentables.DtoViewModels.DtoTableViewModel Kistl.Client.Presentables.DtoViewModels.DtoBuilder::BuildTableFrom(System.Object,System.Reflection.PropertyInfo,System.Object,Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,Kistl.Client.Presentables.ViewModel)
+M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
+M: System.Void Zetbox.Client.Presentables.GUI.NavigationSearchScreenViewModel::InitializeListViewModel(Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel)
+M: Zetbox.Client.Presentables.DtoViewModels.DtoTableViewModel Zetbox.Client.Presentables.DtoViewModels.DtoBuilder::BuildTableFrom(System.Object,System.Reflection.PropertyInfo,System.Object,Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel)
 
 R: Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule
 # This method has a parameter whose type is more specialized than necessary. This can make it difficult to reuse the method in other contexts.
-T: Kistl.Server.WcfServer
+T: Zetbox.Server.WcfServer
 # Inner classes designed to work only with their parent
-M: System.Void Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel/NullableTimePartPropertyViewModel::.ctor(Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel,Kistl.Client.Models.IValueModel)
-M: System.Void Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel/NullableDatePartPropertyViewModel::.ctor(Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel,Kistl.Client.Models.IValueModel)
+M: System.Void Zetbox.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel/NullableTimePartPropertyViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel,Zetbox.Client.Models.IValueModel)
+M: System.Void Zetbox.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel/NullableDatePartPropertyViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel,Zetbox.Client.Models.IValueModel)
 
 R: Gendarme.Rules.Correctness.DisposableFieldsShouldBeDisposedRule
 # these classes have special disposal strategies since they need to hold disposable parts with lifecycles beyond themselves
-T: Kistl.Server.SchemaManagement.Cases
-T: Kistl.Server.SchemaManagement.SchemaManager
-T: Kistl.API.Migration.OutputStream
-T: Kistl.API.StreamPackageProvider
+T: Zetbox.Server.SchemaManagement.Cases
+T: Zetbox.Server.SchemaManagement.SchemaManager
+T: Zetbox.API.Migration.OutputStream
+T: Zetbox.API.StreamPackageProvider
 # False positive
-T: Kistl.Client.WPF.View.DocumentManagement.PreviewersManager
+T: Zetbox.Client.WPF.View.DocumentManagement.PreviewersManager
 
 # Floating point values should not be directly compared for equality (e.g. == or !=).
 R: Gendarme.Rules.Correctness.AvoidFloatingPointEqualityRule
@@ -42,196 +42,196 @@ R: Gendarme.Rules.Correctness.AvoidFloatingPointEqualityRule
 
 R: Gendarme.Rules.Serialization.MarkAllNonSerializableFieldsRule
 # automatically generated code
-T: Kistl.API.Client.KistlService.InternalCache
-T: Kistl.API.Client.KistlService.InternalCacheItem
+T: Zetbox.API.Client.ZetboxService.InternalCache
+T: Zetbox.API.Client.ZetboxService.InternalCacheItem
 
 R: Gendarme.Rules.Design.Linq.AvoidExtensionMethodOnSystemObjectRule
 # These infrastructure methods are only helpers intended for a very small audience
 # so I don't care much about VB.Net in these cases
-T: Kistl.API.GetSetHasValueExtensions
-T: Kistl.API.ExtensionHelpers
+T: Zetbox.API.GetSetHasValueExtensions
+T: Zetbox.API.ExtensionHelpers
 
 # A constructor calls an unsealed virtual method.
 R: Gendarme.Rules.BadPractice.ConstructorShouldNotCallVirtualMethodsRule
 # private type where the brittle-ness doesn't matter
-T: Kistl.API.Utils.Logging/TraceMethodCallContext
+T: Zetbox.API.Utils.Logging/TraceMethodCallContext
 # false positive
-T: Kistl.Client.Presentables.DataObjectSelectionTaskViewModel
+T: Zetbox.Client.Presentables.DataObjectSelectionTaskViewModel
 
 R: Gendarme.Rules.BadPractice.AvoidCallingProblematicMethodsRule
 # automatically generated code
 T: System.Delegate XamlGeneratedNamespace.GeneratedInternalTypeHelper
 # infrastructure helper method intended for a very small audience
-T: System.Void Kistl.API.GetSetHasValueExtensions
+T: System.Void Zetbox.API.GetSetHasValueExtensions
 
 R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
 # This method is flagged with a ConditionalAttribute
-M: System.Void Kistl.API.BinarySerializer::SerializerTrace(System.String,System.Object[])
+M: System.Void Zetbox.API.BinarySerializer::SerializerTrace(System.String,System.Object[])
 # Helper method which is only called by reflection from AddNewLocalObjects
-M: System.Void Kistl.DalProvider.Client.KistlContextProvider::AddNewLocalObjectsGeneric(System.Collections.IList)
+M: System.Void Zetbox.DalProvider.Client.ZetboxContextProvider::AddNewLocalObjectsGeneric(System.Collections.IList)
 # Helper method which is only called by reflection from GetCollectionEntries
-M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationEntry> Kistl.DalProvider.Ef.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
-M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationEntry> Kistl.DalProvider.NHibernate.NHibernateServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
+M: System.Collections.Generic.IEnumerable`1<Zetbox.API.IRelationEntry> Zetbox.DalProvider.Ef.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Zetbox.App.Base.Relation,Zetbox.API.RelationEndRole)
+M: System.Collections.Generic.IEnumerable`1<Zetbox.API.IRelationEntry> Zetbox.DalProvider.NHibernate.NHibernateServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Zetbox.App.Base.Relation,Zetbox.API.RelationEndRole)
 # Helper method which is only called by reflection from GetPersistenceObjectQuery
-M: System.Linq.IQueryable`1<Kistl.API.IPersistenceObject> Kistl.DalProvider.NHibernate.NHibernateContext::PrepareQueryable()
+M: System.Linq.IQueryable`1<Zetbox.API.IPersistenceObject> Zetbox.DalProvider.NHibernate.NHibernateContext::PrepareQueryable()
 # Helper method which is only called by reflection from GetUntypedQuery
-M: System.Linq.IQueryable Kistl.Client.Presentables.ValueViewModels.ObjectReferenceViewModel::GetUntypedQueryHack()
+M: System.Linq.IQueryable Zetbox.Client.Presentables.ValueViewModels.ObjectReferenceViewModel::GetUntypedQueryHack()
 # Helper method which is only called by reflection from GetAll
-M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.BaseMemoryContext::GetAllHack()
-M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.Server.BaseKistlDataContext::GetAllHack()
+M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.BaseMemoryContext::GetAllHack()
+M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.Server.BaseZetboxDataContext::GetAllHack()
 # Helper method which is only called by reflection from GetParcel
-M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.Server.Server::GetParcelHack(Kistl.API.Server.IKistlServerContext,System.Int32,System.Int32)
+M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.Server.Server::GetParcelHack(Zetbox.API.Server.IZetboxServerContext,System.Int32,System.Int32)
 
 # generated code (wpf)
-M: System.Delegate Kistl.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.Calendar.WeekCalendar::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.EnumSelectionView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.GridCells.MultilineStringValue::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ActionDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.CommandDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridHorizontalDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionGridEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceDropdownEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceListGridEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.StringDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.LabeledView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.DiagramDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.ObjectClassInstanceList::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueDropdownView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullableDateTimeValueEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullableMonthValueEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullablePasswordTextBoxView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullablePropertyMultiLineTextBoxView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullablePropertyTextBoxView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ObjectBrowser.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.DataObjectEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEndEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.SchemaMigration.DestinationPropertyEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.SelectionDialog::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.TimeRecords.WorkEffortRecorderView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.Calendar.WeekCalendar::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.EnumSelectionView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.GridCells.MultilineStringValue::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ActionDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.CommandDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceGridDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceGridHorizontalDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceCollectionEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceCollectionGridEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceDropdownEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceListEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.ObjectReferenceListGridEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.StringDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ZetboxBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.LabeledView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ModuleEditor.DiagramDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ModuleEditor.ObjectClassInstanceList::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ModuleEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.NullableBoolValueDropdownView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.NullableBoolValueView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.NullableDateTimeValueEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.NullableMonthValueEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.NullablePasswordTextBoxView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.NullablePropertyMultiLineTextBoxView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.NullablePropertyTextBoxView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ObjectBrowser.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ObjectEditor.DataObjectEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.ObjectEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.Relations.RelationEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.Relations.RelationEndEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.SchemaMigration.DestinationPropertyEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.SelectionDialog::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Zetbox.Client.WPF.View.TimeRecords.WorkEffortRecorderView::_CreateDelegate(System.Type,System.String)
 
 # Called by a lambda
 M: System.Boolean System.Linq.Dynamic.ExpressionParser::IsBetterThan(System.Linq.Expressions.Expression[],System.Linq.Dynamic.ExpressionParser/MethodData,System.Linq.Dynamic.ExpressionParser/MethodData)
 
 R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
 # MethodInvocation implementors should not have to check for thisobj==null => too many false positives
-A: Kistl.App.Projekte.Common
-A: Kistl.App.Projekte.Client
-A: Kistl.App.Projekte.Server
+A: Zetbox.App.Projekte.Common
+A: Zetbox.App.Projekte.Client
+A: Zetbox.App.Projekte.Server
 # False positives
-M: System.Void Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Add(TInterface)
-M: System.Boolean Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Contains(TInterface)
-M: System.Boolean Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Remove(TInterface)
-M: System.Void Kistl.DalProvider.Ef.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
-M: System.Void Kistl.DalProvider.Ef.EntityListWrapper`2::Insert(System.Int32,TInterface)
-M: System.Void Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,Kistl.Client.Presentables.ViewModel,System.Func`2<Kistl.API.Client.ClientIsolationLevel,Kistl.API.IKistlContext>)
+M: System.Void Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Add(TInterface)
+M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Contains(TInterface)
+M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Remove(TInterface)
+M: System.Void Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
+M: System.Void Zetbox.DalProvider.Ef.EntityListWrapper`2::Insert(System.Int32,TInterface)
+M: System.Void Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel,System.Func`2<Zetbox.API.Client.ClientIsolationLevel,Zetbox.API.IZetboxContext>)
 
 R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
 # Package URIs are FS-independent
-M: System.Void Kistl.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocument)
+M: System.Void Zetbox.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocument)
 
 R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
 # exclude known not-implemented parts: WPF, Ef, OleDB (partial)
-A: Kistl.Client.WPF
-A: Kistl.DalProvider.Ef
-T: Kistl.Server.SchemaManagement.OleDbProvider.OleDb
-T: Kistl.Server.SchemaManagement.SqlProvider.SqlServer
-T: Kistl.Server.ActiveDirectoryIdentitySource
-M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableNames>d__0::MoveNext()
-M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetViewNames>d__8::MoveNext()
-M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumns>d__31::MoveNext()
-M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumnNames>d__3c::MoveNext()
+A: Zetbox.Client.WPF
+A: Zetbox.DalProvider.Ef
+T: Zetbox.Server.SchemaManagement.OleDbProvider.OleDb
+T: Zetbox.Server.SchemaManagement.SqlProvider.SqlServer
+T: Zetbox.Server.ActiveDirectoryIdentitySource
+M: System.Boolean Zetbox.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableNames>d__0::MoveNext()
+M: System.Boolean Zetbox.Server.SchemaManagement.OleDbProvider.OleDb/<GetViewNames>d__8::MoveNext()
+M: System.Boolean Zetbox.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumns>d__31::MoveNext()
+M: System.Boolean Zetbox.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumnNames>d__3c::MoveNext()
 # this should be replaced in time for a linux-release, ignore for now
-M: System.Boolean Kistl.Server.Generators.Generator::CompileCode(System.String)
-M: System.Void Kistl.Server.Server::ReadUsers(System.String,System.Collections.Generic.Dictionary`2<System.String,System.String>)
+M: System.Boolean Zetbox.Server.Generators.Generator::CompileCode(System.String)
+M: System.Void Zetbox.Server.Server::ReadUsers(System.String,System.Collections.Generic.Dictionary`2<System.String,System.String>)
 
 R: Gendarme.Rules.Correctness.EnsureLocalDisposalRule
 # false positives when returning an IEnumerator from GetEnumerator
-M: System.Collections.IEnumerator Kistl.API.BaseRelationCollectionWrapper`6::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.BaseRelationshipFilterCollection`1::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.Utils.ReadOnlyProjectedCollection`2::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.Utils.ContextCache::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.Utils.GenericCastingCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.Utils.SortListFromCollection`2::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.Utils.LookupDictionary`3::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.ValueCollectionWrapper`4::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.API.BaseRelationCollectionWrapper`6::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.API.BaseRelationshipFilterCollection`1::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.API.Utils.ReadOnlyProjectedCollection`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.API.Utils.ContextCache::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.API.Utils.GenericCastingCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.API.Utils.SortListFromCollection`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.API.Utils.LookupDictionary`3::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.API.ValueCollectionWrapper`4::System.Collections.IEnumerable.GetEnumerator()
 # the following are compiler generated stuff, sometimes these may change in the d__X part :-/
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptReferences>d__4::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.LauchnerView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.LauchnerView/<GetScriptReferences>d__4::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.JavascriptRenderer/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.JavascriptRenderer/<GetScriptReferences>d__3::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog/<GetScriptReferences>d__3::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView/<GetScriptDescriptors>d__2::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView/<GetScriptReferences>d__6::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptDescriptors>d__4::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptReferences>d__8::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.DalProvider.Ef.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SqlProvider.SqlServer/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SqlProvider.SqlServer/<GetFKConstraintNames>d__9::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SqlProvider.SqlServer/<GetTableColumnNames>d__11::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptReferences>d__4::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.View.LauchnerView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.View.LauchnerView/<GetScriptReferences>d__4::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.JavascriptRenderer/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.JavascriptRenderer/<GetScriptReferences>d__3::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog/<GetScriptReferences>d__3::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.View.WorkspaceView/<GetScriptDescriptors>d__2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.View.WorkspaceView/<GetScriptReferences>d__6::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptDescriptors>d__4::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptReferences>d__8::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Server.SchemaManagement.SqlProvider.SqlServer/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Server.SchemaManagement.SqlProvider.SqlServer/<GetFKConstraintNames>d__9::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Zetbox.Server.SchemaManagement.SqlProvider.SqlServer/<GetTableColumnNames>d__11::System.Collections.IEnumerable.GetEnumerator()
 # false positives when working with ASP.Net's ScriptManager
-M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView::OnPreRender(System.EventArgs)
-M: System.Void Kistl.Client.ASPNET.Toolkit.View.LauchnerView::OnPreRender(System.EventArgs)
-M: System.Void Kistl.Client.ASPNET.Toolkit.JavascriptRenderer::OnPreRender(System.EventArgs)
-M: System.Void Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog::OnPreRender(System.EventArgs)
-M: System.Void Kistl.Client.ASPNET.Toolkit.View.WorkspaceView::OnPreRender(System.EventArgs)
-M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectListView::OnPreRender(System.EventArgs)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.View.DataObjectReferenceView::OnPreRender(System.EventArgs)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.View.LauchnerView::OnPreRender(System.EventArgs)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.JavascriptRenderer::OnPreRender(System.EventArgs)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog::OnPreRender(System.EventArgs)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.View.WorkspaceView::OnPreRender(System.EventArgs)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.View.DataObjectListView::OnPreRender(System.EventArgs)
 # factory method to create this object and pass it on
-M: System.Void Kistl.Client.Presentables.ObjectBrowser.CreateNewInstanceExternallyCommand::DoExecute(System.Object)
-M: System.Void Kistl.Client.Presentables.KistlBase.OpenApplicatonCommand::DoExecute(System.Object)
-M: System.Void Kistl.Client.ASPNET.Toolkit.KistlContextManagerModule::context_BeginRequest(System.Object,System.EventArgs)
-M: System.Void Kistl.Client.ASPNET.Toolkit.View.WorkspaceView::RecentObjects_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
-M: System.Object Kistl.Client.ASPNET.Toolkit.AspnetModelFactoryExtensions::AddControl(System.Web.UI.Control,System.Object)
-M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectFullView::repProperties_OnItemDataBound(System.Object,System.Web.UI.WebControls.RepeaterItemEventArgs)
-M: System.Void Kistl.Client.Forms.FormsModelFactory::CreateWorkspace(Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModel,System.Boolean)
-M: System.Void Kistl.Client.Forms.View.DataObjectFullView::SyncProperties()
+M: System.Void Zetbox.Client.Presentables.ObjectBrowser.CreateNewInstanceExternallyCommand::DoExecute(System.Object)
+M: System.Void Zetbox.Client.Presentables.ZetboxBase.OpenApplicatonCommand::DoExecute(System.Object)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.ZetboxContextManagerModule::context_BeginRequest(System.Object,System.EventArgs)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.View.WorkspaceView::RecentObjects_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+M: System.Object Zetbox.Client.ASPNET.Toolkit.AspnetModelFactoryExtensions::AddControl(System.Web.UI.Control,System.Object)
+M: System.Void Zetbox.Client.ASPNET.Toolkit.View.DataObjectFullView::repProperties_OnItemDataBound(System.Object,System.Web.UI.WebControls.RepeaterItemEventArgs)
+M: System.Void Zetbox.Client.Forms.FormsModelFactory::CreateWorkspace(Zetbox.Client.Presentables.ObjectBrowser.WorkspaceViewModel,System.Boolean)
+M: System.Void Zetbox.Client.Forms.View.DataObjectFullView::SyncProperties()
 # object is "bound" to the process' life cycle, no disposal necessary
-M: System.Void Kistl.Server.WcfServer::Init(Kistl.API.Configuration.KistlConfig)
-M: System.Void Kistl.Server.Service.Program::XmlFallbackInitialisation(System.String)
-M: Kistl.API.Configuration.KistlConfig Kistl.Server.Service.Program::InitApplicationContext(System.String[])
-M: System.Void Kistl.Server.Service.ServerManager::Start(Kistl.API.Configuration.KistlConfig)
+M: System.Void Zetbox.Server.WcfServer::Init(Zetbox.API.Configuration.ZetboxConfig)
+M: System.Void Zetbox.Server.Service.Program::XmlFallbackInitialisation(System.String)
+M: Zetbox.API.Configuration.ZetboxConfig Zetbox.Server.Service.Program::InitApplicationContext(System.String[])
+M: System.Void Zetbox.Server.Service.ServerManager::Start(Zetbox.API.Configuration.ZetboxConfig)
 
 R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
 # false positives on helper functions
-M: System.Void Kistl.API.BaseMemoryContext::CheckInterfaceAssembly(System.String,System.Type)
-M: System.Void Kistl.API.BaseMemoryContext::CheckImplementationAssembly(System.String,System.Type)
+M: System.Void Zetbox.API.BaseMemoryContext::CheckInterfaceAssembly(System.String,System.Type)
+M: System.Void Zetbox.API.BaseMemoryContext::CheckImplementationAssembly(System.String,System.Type)
 # see https://bugzilla.novell.com/show_bug.cgi?id=567995 , should be fixed in gendarme 2.8
-M: TItem Kistl.API.BaseRelationListWrapper`6::get_Item(System.Int32)
-M: System.Void Kistl.API.BaseRelationListWrapper`6::set_Item(System.Int32,TItem)
-M: TValue Kistl.API.Utils.LookupDictionary`3::get_Item(TKey)
-M: TValue Kistl.API.ValueListWrapper`4::get_Item(System.Int32)
-M: System.Void Kistl.API.ValueListWrapper`4::set_Item(System.Int32,TValue)
-M: TInterface Kistl.DalProvider.Ef.EntityListWrapper`2::get_Item(System.Int32)
-M: System.Void Kistl.DalProvider.Ef.EntityListWrapper`2::set_Item(System.Int32,TInterface)
-M: System.Collections.IEnumerable Kistl.API.Utils.ContextCache::get_Item(Kistl.API.InterfaceType)
-M: Kistl.Client.Presentables.ViewModel Kistl.Client.Presentables.ValueViewModels.CalculatedProperties::get_Item(System.String)
+M: TItem Zetbox.API.BaseRelationListWrapper`6::get_Item(System.Int32)
+M: System.Void Zetbox.API.BaseRelationListWrapper`6::set_Item(System.Int32,TItem)
+M: TValue Zetbox.API.Utils.LookupDictionary`3::get_Item(TKey)
+M: TValue Zetbox.API.ValueListWrapper`4::get_Item(System.Int32)
+M: System.Void Zetbox.API.ValueListWrapper`4::set_Item(System.Int32,TValue)
+M: TInterface Zetbox.DalProvider.Ef.EntityListWrapper`2::get_Item(System.Int32)
+M: System.Void Zetbox.DalProvider.Ef.EntityListWrapper`2::set_Item(System.Int32,TInterface)
+M: System.Collections.IEnumerable Zetbox.API.Utils.ContextCache::get_Item(Zetbox.API.InterfaceType)
+M: Zetbox.Client.Presentables.ViewModel Zetbox.Client.Presentables.ValueViewModels.CalculatedProperties::get_Item(System.String)
 
 R: Gendarme.Rules.Correctness.ProvideCorrectArgumentsToFormattingMethodsRule
 # Format string built during runtime
-M: System.Void Kistl.Server.SchemaManagement.SqlProvider.SqlServer::CreateUpdateRightsTrigger(System.String,Kistl.API.Server.TableRef,System.Collections.Generic.List`1<Kistl.API.Server.RightsTrigger>)
-M: System.Void Kistl.Server.SchemaManagement.NpgsqlProvider.Postgresql::CreateUpdateRightsTrigger(System.String,Kistl.API.Server.TableRef,System.Collections.Generic.List`1<Kistl.API.Server.RightsTrigger>)
+M: System.Void Zetbox.Server.SchemaManagement.SqlProvider.SqlServer::CreateUpdateRightsTrigger(System.String,Zetbox.API.Server.TableRef,System.Collections.Generic.List`1<Zetbox.API.Server.RightsTrigger>)
+M: System.Void Zetbox.Server.SchemaManagement.NpgsqlProvider.Postgresql::CreateUpdateRightsTrigger(System.String,Zetbox.API.Server.TableRef,System.Collections.Generic.List`1<Zetbox.API.Server.RightsTrigger>)
 
 R: Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule
 # The internal type is not instantiated by code within the assembly.
-T: Kistl.API.Server.ServerAssemblyConfiguration
+T: Zetbox.API.Server.ServerAssemblyConfiguration
 
 R: Gendarme.Rules.Correctness.ReviewInconsistentIdentityRule
 # The type does not manage identity consistently in its Equals, relational operator, CompareTo, GetHashCode, and Clone methods.
@@ -239,7 +239,7 @@ T: System.Linq.Dynamic.Signature
 
 R: Gendarme.Rules.Design.ImplementIComparableCorrectlyRule
 # This type implements IComparable so it should override Equals(object) and overload the ==, !=, &lt; and &gt; operators.
-T: Kistl.API.Server.BaseServerDataObject
-T: Kistl.DalProvider.Memory.DataObjectMemoryImpl
-T: Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl
-T: Kistl.API.BaseCompoundObject
+T: Zetbox.API.Server.BaseServerDataObject
+T: Zetbox.DalProvider.Memory.DataObjectMemoryImpl
+T: Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl
+T: Zetbox.API.BaseCompoundObject

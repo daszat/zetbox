@@ -1,13 +1,13 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator
+namespace Zetbox.DalProvider.NHibernate.Generator
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.Generator;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.Generator;
     using System.Collections.Specialized;
 
     public class NHibernateGenerator
@@ -21,7 +21,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
         // TODO: #1569 Why not using const Suffix?
         public override string ExtraSuffix { get { return "NHibernate"; } }
         public override string Description { get { return "NHibernate"; } }
-        public override string TargetNameSpace { get { return "Kistl.Objects.NHibernate"; } }
+        public override string TargetNameSpace { get { return "Zetbox.Objects.NHibernate"; } }
         public override string BaseName { get { return "NHibernate"; } }
         public override string ProjectGuid { get { return "{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}"; } }
         public override int CompileOrder { get { return COMPILE_ORDER_Implementation; } }
@@ -31,12 +31,12 @@ namespace Kistl.DalProvider.NHibernate.Generator
             get
             {
                 return new string[] {
-                   "Kistl.API.Utils", "Kistl.DalProvider.Base", "Kistl.DalProvider.NHibernate",
+                   "Zetbox.API.Utils", "Zetbox.DalProvider.Base", "Zetbox.DalProvider.NHibernate",
                 };
             }
         }
 
-        protected override IEnumerable<string> Generate_Other(Kistl.API.IKistlContext ctx)
+        protected override IEnumerable<string> Generate_Other(Zetbox.API.IZetboxContext ctx)
         {
             using (log4net.NDC.Push("NhGenerateOther"))
             {
@@ -48,7 +48,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
             }
         }
 
-        private List<string> CreateMappings(Kistl.API.IKistlContext ctx)
+        private List<string> CreateMappings(Zetbox.API.IZetboxContext ctx)
         {
             this.RunTemplateWithExtension(ctx, "Mappings.CollectionEntriesHbm", "CollectionEntries", "hbm.xml");
             foreach (var oc in ctx.GetQuery<ObjectClass>().Where(i => i.BaseObjectClass == null))

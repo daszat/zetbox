@@ -6,9 +6,9 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using Kistl.API.Utils;
+using Zetbox.API.Utils;
 
-namespace Kistl.API.Configuration
+namespace Zetbox.API.Configuration
 {
     [Serializable]
     public class ConfigurationException
@@ -33,16 +33,16 @@ namespace Kistl.API.Configuration
     }
 
     /// <summary>
-    /// Configuration of Kistl
+    /// Configuration of Zetbox
     /// </summary>
-    [XmlRoot("KistlConfig", Namespace = "http://dasz.at/Kistl/")]
+    [XmlRoot("ZetboxConfig", Namespace = "http://dasz.at/Zetbox/")]
     [Serializable]
-    public class KistlConfig
+    public class ZetboxConfig
     {
         /// <summary>
         /// Create an empty configuration
         /// </summary>
-        public KistlConfig()
+        public ZetboxConfig()
         {
             this.AdditionalCommandlineOptions = new Dictionary<object, List<string>>();
             this.AdditionalCommandlineActions = new List<Action<Autofac.ILifetimeScope>>();
@@ -290,7 +290,7 @@ namespace Kistl.API.Configuration
         /// <summary>
         /// Serializer
         /// </summary>
-        private static XmlSerializer xml = new XmlSerializer(typeof(KistlConfig));
+        private static XmlSerializer xml = new XmlSerializer(typeof(ZetboxConfig));
 
         /// <summary>
         /// Serialize this Object to a Stream
@@ -318,9 +318,9 @@ namespace Kistl.API.Configuration
         /// </summary>
         /// <param name="s">Stream with XML</param>
         /// <returns>Current Configuration</returns>
-        public static KistlConfig FromStream(Stream s)
+        public static ZetboxConfig FromStream(Stream s)
         {
-            return (KistlConfig)xml.Deserialize(s);
+            return (ZetboxConfig)xml.Deserialize(s);
         }
 
         /// <summary>
@@ -328,9 +328,9 @@ namespace Kistl.API.Configuration
         /// </summary>
         /// <param name="s">Stream with XML</param>
         /// <returns>Current Configuration</returns>
-        public static KistlConfig FromStream(TextReader s)
+        public static ZetboxConfig FromStream(TextReader s)
         {
-            return (KistlConfig)xml.Deserialize(s);
+            return (ZetboxConfig)xml.Deserialize(s);
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace Kistl.API.Configuration
         /// <param name="filename">configuration file w/ or w/o path</param>
         /// <param name="fallbackBaseName">A configuration name to search in the %zenv% environmentvariable, if none is specified in the first parameter</param>
         /// <returns>Current Configuration</returns>
-        public static KistlConfig FromFile(string filename, string fallbackBaseName)
+        public static ZetboxConfig FromFile(string filename, string fallbackBaseName)
         {
             filename = String.IsNullOrEmpty(filename) ? GetDefaultConfigName(fallbackBaseName) : filename;
 
@@ -348,7 +348,7 @@ namespace Kistl.API.Configuration
 
             using (var r = new XmlTextReader(filename))
             {
-                KistlConfig result = (KistlConfig)xml.Deserialize(r);
+                ZetboxConfig result = (ZetboxConfig)xml.Deserialize(r);
                 result.ConfigFilePath = filename;
                 return result;
             }
@@ -405,7 +405,7 @@ namespace Kistl.API.Configuration
         /// The Path is [TEMPPATH]\zetbox\[Current Configuration Name]\[AppDomain.FriendlyName]\
         /// </summary>
         /// <remarks>
-        /// eg.: C:\Temp\zetbox\Arthur's Configuration\Kistl.Client.exe\
+        /// eg.: C:\Temp\zetbox\Arthur's Configuration\Zetbox.Client.exe\
         /// </remarks>
         [XmlIgnore]
         public string TempFolder

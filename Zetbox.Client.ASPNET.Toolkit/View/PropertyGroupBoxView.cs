@@ -7,12 +7,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using Kistl.API;
-using Kistl.Client.ASPNET.Toolkit.Pages;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.API;
+using Zetbox.Client.ASPNET.Toolkit.Pages;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.ASPNET.Toolkit.View
+namespace Zetbox.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/PropertyGroupBoxView.ascx")]
     public abstract class PropertyGroupBoxView : ModelUserControl<PropertyGroupViewModel>

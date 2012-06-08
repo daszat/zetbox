@@ -4,12 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
+using Zetbox.API;
+using Zetbox.API.Client;
 using System.Reflection;
-using Kistl.App.Test;
+using Zetbox.App.Test;
 
-namespace Kistl.Client.Mocks
+namespace Zetbox.Client.Mocks
 {
     public class TestProxy 
         : IProxy
@@ -21,7 +21,7 @@ namespace Kistl.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IZetboxContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
@@ -66,7 +66,7 @@ namespace Kistl.Client.Mocks
             return result.Cast<IDataObject>();
         }
 
-        public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetListOf(IZetboxContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
             auxObjects = new List<IStreamable>();
@@ -88,7 +88,7 @@ namespace Kistl.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             var result = new List<IPersistenceObject>();
             foreach (var obj in objects)
@@ -137,7 +137,7 @@ namespace Kistl.Client.Mocks
             fi.SetValue(obj, val);
         }
 
-        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationEntry
+        public IEnumerable<T> FetchRelation<T>(IZetboxContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationEntry
         {
             auxObjects = new List<IStreamable>();
             return new List<T>();
@@ -152,12 +152,12 @@ namespace Kistl.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, System.IO.Stream stream, string filename, string mimetype)
+        public Zetbox.App.Base.Blob SetBlobStream(IZetboxContext ctx, System.IO.Stream stream, string filename, string mimetype)
         {
             throw new NotImplementedException();
         }
 
-        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public object InvokeServerMethod(IZetboxContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
         {
             throw new NotImplementedException();
         }

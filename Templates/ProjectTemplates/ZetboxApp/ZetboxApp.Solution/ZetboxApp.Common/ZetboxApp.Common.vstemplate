@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
   <TemplateData>
-    <Name>KistlApp.Common</Name>
+    <Name>ZetboxApp.Common</Name>
     <Description>This assembly contains business logic that can run on the server as well as on the client.</Description>
-    <Icon>KistlApp.Common.ico</Icon>
+    <Icon>ZetboxApp.Common.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <RequiredFrameworkVersion>3.5</RequiredFrameworkVersion>
     <SortOrder>1000</SortOrder>
     <TemplateID>e22105d3-c469-4e53-ae50-1e0e5497c6eb</TemplateID>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>KistlApp.Common</DefaultName>
+    <DefaultName>ZetboxApp.Common</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
   </TemplateData>
   <TemplateContent>
@@ -19,7 +19,7 @@
     </Project>
   </TemplateContent>
   <WizardExtension>
-    <Assembly>KistlApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
-    <FullClassName>KistlApp.Wizard.ProjectWizard</FullClassName>
+    <Assembly>ZetboxApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
+    <FullClassName>ZetboxApp.Wizard.ProjectWizard</FullClassName>
   </WizardExtension>
 </VSTemplate>

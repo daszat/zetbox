@@ -1,18 +1,18 @@
 
-namespace Kistl.API.Server.Mocks
+namespace Zetbox.API.Server.Mocks
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.App.Base;
+    using Zetbox.App.Base;
 
     public sealed class ServerImplementationTypeMock
         : ImplementationType
     {
         public ServerImplementationTypeMock(Type t, InterfaceType.Factory iftFactory)
-            : base(t, iftFactory, new Kistl.API.Mocks.MockImplementationTypeChecker())
+            : base(t, iftFactory, new Zetbox.API.Mocks.MockImplementationTypeChecker())
         {
         }
 

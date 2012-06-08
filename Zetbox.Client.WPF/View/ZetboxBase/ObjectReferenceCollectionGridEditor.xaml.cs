@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
@@ -15,21 +15,21 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Kistl.API;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.Client.WPF.Commands;
+    using Zetbox.API;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.WPF.Commands;
     using Microsoft.Windows.Controls;
-    using Kistl.Client.WPF.Toolkit;
-    using Kistl.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
+    using Zetbox.Client.WPF.CustomControls;
     using Microsoft.Windows.Controls.Primitives;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class ObjectReferenceCollectionGridEditor
         : PropertyEditor, IHasViewModel<ObjectCollectionViewModel>
     {

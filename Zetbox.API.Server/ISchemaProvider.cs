@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections;
@@ -559,7 +559,7 @@ namespace Kistl.API.Server
         string AdoNetProvider { get; }
         string ManifestToken { get; }
         /// <summary>
-        /// Returns true if this ISchemaProvider implementation can be used as ZBox Storage provider.
+        /// Returns true if this ISchemaProvider implementation can be used as Zetbox Storage provider.
         /// Currently only SqlServer and Postgres are supported. OleDb is only capable of providing functionality
         /// for Data/Schema migration.
         /// </summary>
@@ -719,14 +719,14 @@ namespace Kistl.API.Server
 
         #endregion
 
-        #region ZBox Schema Handling
+        #region Zetbox Schema Handling
 
         string GetSavedSchema();
         void SaveSchema(string schema);
 
         #endregion
 
-        #region zBox Accelerators
+        #region zetbox Accelerators
 
         bool CheckPositionColumnValidity(TableRef tblName, string positionColumnName);
         bool RepairPositionColumn(TableRef tblName, string positionColumnName);

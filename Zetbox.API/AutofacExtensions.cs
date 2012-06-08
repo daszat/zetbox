@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -8,12 +8,12 @@ namespace Kistl.API
     using System.Text;
     using Autofac;
     using Autofac.Builder;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
 
     public static class AutofacExtensions
     {
-        public static void RegisterZBoxImplementors(this ContainerBuilder builder, Assembly source)
+        public static void RegisterZetboxImplementors(this ContainerBuilder builder, Assembly source)
         {
             if (builder == null) { throw new ArgumentNullException("builder"); }
             if (source == null) { throw new ArgumentNullException("source"); }
@@ -32,7 +32,7 @@ namespace Kistl.API
         public static void RegisterCmdLineDataOption(this ContainerBuilder builder, string prototype, string description, object dataKey)
         {
             builder
-               .Register<CmdLineData>(c => new SimpleCmdLineData(c.Resolve<KistlConfig>(), prototype, description, dataKey))
+               .Register<CmdLineData>(c => new SimpleCmdLineData(c.Resolve<ZetboxConfig>(), prototype, description, dataKey))
                .As<Option>()
                .Named<CmdLineData>(prototype)
                .SingleInstance();
@@ -41,7 +41,7 @@ namespace Kistl.API
         public static void RegisterCmdLineFlag(this ContainerBuilder builder, string prototype, string description, object dataKey)
         {
             builder
-               .Register<CmdLineData>(c => new SimpleCmdLineFlag(c.Resolve<KistlConfig>(), prototype, description, dataKey))
+               .Register<CmdLineData>(c => new SimpleCmdLineFlag(c.Resolve<ZetboxConfig>(), prototype, description, dataKey))
                .As<Option>()
                .Named<CmdLineData>(prototype)
                .SingleInstance();
@@ -50,7 +50,7 @@ namespace Kistl.API
         public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope> action)
         {
             builder
-               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<KistlConfig>(), prototype, description, action))
+               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<ZetboxConfig>(), prototype, description, action))
                .As<Option>()
                .Named<CmdLineAction>(prototype)
                .SingleInstance();
@@ -59,7 +59,7 @@ namespace Kistl.API
         public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string> action)
         {
             builder
-               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<KistlConfig>(), prototype, description, action))
+               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<ZetboxConfig>(), prototype, description, action))
                .As<Option>()
                .Named<CmdLineAction>(prototype)
                .SingleInstance();
@@ -68,7 +68,7 @@ namespace Kistl.API
         public static void RegisterCmdLineListAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string[]> listAction)
         {
             builder
-               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<KistlConfig>(), prototype, description, listAction))
+               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<ZetboxConfig>(), prototype, description, listAction))
                .As<Option>()
                .Named<CmdLineAction>(prototype)
                .SingleInstance();

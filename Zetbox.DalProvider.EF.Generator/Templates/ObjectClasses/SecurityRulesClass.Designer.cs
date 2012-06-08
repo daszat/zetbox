@@ -1,33 +1,33 @@
 using System;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst")]
-    public partial class SecurityRulesClass : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst")]
+    public partial class SecurityRulesClass : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected ObjectClass cls;
 		protected string assocName;
 		protected string targetRoleName;
 		protected string referencedImplementation;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("ObjectClasses.SecurityRulesClass", ctx, cls, assocName, targetRoleName, referencedImplementation);
         }
 
-        public SecurityRulesClass(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation)
+        public SecurityRulesClass(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -40,7 +40,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
+#line 18 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    [System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName=\"Model\", Name=\"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("    public class ",  referencedImplementation , " : System.Data.Objects.DataClasses.EntityObject\r\n");

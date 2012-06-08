@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- This config is used as test for the alternate config file loading code path -->
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>Test Configuration File</ConfigName>
   <Server StartServer="false">
     <DocumentStore>DocumentStore/Server/</DocumentStore>
@@ -9,19 +9,19 @@
     <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
     </Modules>
   </Server>
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore/Client/</DocumentStore>
     <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>
     <!-- default probe path -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
+    <string>/srv/CCNet/Projects/zetbox/repo/bin/CodeGen/bin/Debug</string>
     <!-- common libaries -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Common</string>
+    <string>/srv/CCNet/Projects/zetbox/repo/bin/Debug/bin/Common</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>

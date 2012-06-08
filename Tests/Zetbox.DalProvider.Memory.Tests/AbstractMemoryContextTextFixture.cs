@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Memory
+namespace Zetbox.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
@@ -7,12 +7,12 @@ namespace Kistl.DalProvider.Memory
     using System.Text;
 
     using Autofac;
-    using Kistl.API;
+    using Zetbox.API;
 
     public class AbstractMemoryContextTextFixture 
-        : Kistl.API.AbstractConsumerTests.AbstractTestFixture
+        : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
     {
-        protected IKistlContext GetMemoryContext()
+        protected IZetboxContext GetMemoryContext()
         {
             return scope.Resolve<BaseMemoryContext>();
         }

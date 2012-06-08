@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Tests
+namespace Zetbox.Client.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,19 +7,19 @@ namespace Kistl.Client.Tests
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Mocks;
-    using Kistl.App.Base;
-    using Kistl.Client.Mocks;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Mocks;
+    using Zetbox.App.Base;
+    using Zetbox.Client.Mocks;
+    using Zetbox.Client.Presentables;
 
     using Moq;
     using NUnit.Framework;
     using System.ComponentModel;
 
     using Autofac;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.Models;
 
     [TestFixture]
     [Ignore("Mocks not implemented")]
@@ -38,17 +38,17 @@ namespace Kistl.Client.Tests
             base.SetUp();
             // setup an ObjectListModel
             models = new Dictionary<IDataObject, ViewModel>();
-            facMock = KistlMockFactory.CreateFactory(models);
+            facMock = ZetboxMockFactory.CreateFactory(models);
             appCtxMock = new Mock<IViewModelDependencies>();
             appCtxMock.Setup(ac => ac.Factory).Returns(facMock.Object);
 
-            objMock = scope.Resolve<KistlMockFactory>().CreateTestObject();
+            objMock = scope.Resolve<ZetboxMockFactory>().CreateTestObject();
 
             list = new ObservableCollection<TestObject>();
             objMock.Setup(obj => obj.TestCollection).Returns(list);
             objMock.Setup(obj => obj.GetProperties()).Returns(new PropertyDescriptorCollection(new PropertyDescriptor[] { }));
 
-            orpMock = scope.Resolve<KistlMockFactory>().CreateObjectReferenceProperty("TestCollection", true);
+            orpMock = scope.Resolve<ZetboxMockFactory>().CreateObjectReferenceProperty("TestCollection", true);
 
             olm = new ObjectListViewModel(appCtxMock.Object, null, null, (IObjectCollectionValueModel<IList<IDataObject>>)orpMock.Object.GetPropertyValueModel(objMock.Object));
 
@@ -56,7 +56,7 @@ namespace Kistl.Client.Tests
 
         private DataObjectViewModel CreateNewDataObjectViewModel()
         {
-            var newMock = scope.Resolve<KistlMockFactory>().CreateTestObject();
+            var newMock = scope.Resolve<ZetboxMockFactory>().CreateTestObject();
             var dom = new DataObjectViewModel(null, GetContext(), null, newMock.Object);
             models[objMock.Object] = dom;
             return dom;

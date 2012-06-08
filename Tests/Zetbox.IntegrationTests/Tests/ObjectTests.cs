@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.Base;
-using Kistl.App.Projekte;
-using Kistl.Client;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.Base;
+using Zetbox.App.Projekte;
+using Zetbox.Client;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Kistl.IntegrationTests
+namespace Zetbox.IntegrationTests
 {
     [TestFixture]
     public class ObjectTests : AbstractIntegrationTestFixture
@@ -31,7 +31,7 @@ namespace Kistl.IntegrationTests
             base.SetUp();
             DeleteObjects();
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 Projekt prj1 = ctx.Create<Projekt>();
                 prj1.Name = ProjectName1;
@@ -57,7 +57,7 @@ namespace Kistl.IntegrationTests
             }
         }
 
-        private void SetUpCreateTask(IKistlContext ctx, Projekt prj, int i)
+        private void SetUpCreateTask(IZetboxContext ctx, Projekt prj, int i)
         {
             Task t = ctx.Create<Task>();
             t.Name = prj.Name + " - Task " + (i + 1);
@@ -76,7 +76,7 @@ namespace Kistl.IntegrationTests
 
         private void DeleteObjects()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 // TODO: remove obj.Mitarbeiter.Clear() after fixing Case 1369 and marking the Mitarbeiter RelationEnd properly
                 ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); ctx.Delete(obj); });
@@ -88,7 +88,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetOneObject()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
                 Assert.That(obj.Name, Is.EqualTo(ProjectName1));
@@ -98,7 +98,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetObject_Twice()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var obj1a = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
                 Assert.That(obj1a.Name, Is.EqualTo(ProjectName1));
@@ -118,7 +118,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListOf()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<Projekt>();
                 int count = 0;
@@ -135,7 +135,7 @@ namespace Kistl.IntegrationTests
         {
             double aufwand;
             int ID;
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<Task>().ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -149,7 +149,7 @@ namespace Kistl.IntegrationTests
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext checkctx = GetContext())
+            using (IZetboxContext checkctx = GetContext())
             {
                 var obj = checkctx.GetQuery<Task>().Single(o => o.ID == ID);
                 Assert.That(obj, Is.Not.Null);
@@ -164,7 +164,7 @@ namespace Kistl.IntegrationTests
             double aufwand = 1.0;
             DateTime datum = DateTime.Now;
             Projekt p;
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 p = ctx.GetQuery<Projekt>().First(prj => prj.Name == ProjectName1);
                 var obj = ctx.Create<Task>();
@@ -177,10 +177,10 @@ namespace Kistl.IntegrationTests
 
                 ctx.SubmitChanges();
                 ID = obj.ID;
-                Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
+                Assert.That(ID, Is.Not.EqualTo(Zetbox.API.Helper.INVALIDID));
             }
 
-            using (IKistlContext checkctx = GetContext())
+            using (IZetboxContext checkctx = GetContext())
             {
                 var obj = checkctx.GetQuery<Task>().Single(o => o.ID == ID);
                 Assert.That(obj, Is.Not.Null);

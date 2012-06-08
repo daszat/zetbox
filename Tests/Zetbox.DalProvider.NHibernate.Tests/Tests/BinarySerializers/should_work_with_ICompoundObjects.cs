@@ -4,14 +4,14 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Test;
-using Kistl.DalProvider.Base;
-using Kistl.DalProvider.NHibernate;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Test;
+using Zetbox.DalProvider.Base;
+using Zetbox.DalProvider.NHibernate;
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.NHibernate.Tests.BinarySerializers
+namespace Zetbox.DalProvider.NHibernate.Tests.BinarySerializers
 {
     public interface CompoundObjectMock : ICompoundObject
     {
@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.NHibernate.Tests.BinarySerializers
     [TestFixture(typeof(CompoundObjectMockImpl))]
     [TestFixture(typeof(TestPhoneCompoundObjectNHibernateImpl))]
     public class should_work_with_NHibernateCompoundObjects<T>
-        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
+        : Zetbox.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
         where T : class, ICompoundObject, new()
     {
     }

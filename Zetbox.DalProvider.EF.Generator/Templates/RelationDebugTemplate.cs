@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Arebis.CodeGeneration;
-using Kistl.API;
-using Kistl.App.Base;
+using Zetbox.API;
+using Zetbox.App.Base;
 
-namespace Kistl.DalProvider.Ef.Generator.Templates
+namespace Zetbox.DalProvider.Ef.Generator.Templates
 {
     public partial class RelationDebugTemplate
     {

@@ -1,18 +1,18 @@
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     public abstract class AbstractBaseGenerator
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator");
 
         private readonly IEnumerable<ISchemaProvider> _schemaProviders;
         protected IEnumerable<ISchemaProvider> SchemaProviders
@@ -28,7 +28,7 @@ namespace Kistl.Generator
         // Case #1382?
         protected string CodeBasePath { get; private set; }
 
-        public virtual void Generate(Kistl.API.IKistlContext ctx, string basePath)
+        public virtual void Generate(Zetbox.API.IZetboxContext ctx, string basePath)
         {
             using (Log.InfoTraceMethodCall("Generate", "Generating " + this.BaseName))
             {
@@ -56,8 +56,8 @@ namespace Kistl.Generator
         protected virtual void SaveKeyFile()
         {
             // Save KeyFile
-            using (var snkSrc = typeof(AbstractBaseGenerator).Assembly.GetManifestResourceStream("Kistl.Generator.Kistl.Objects.snk"))
-            using (var snkDest = File.Open(Path.Combine(CodeBasePath, "Kistl.Objects.snk"), FileMode.Create))
+            using (var snkSrc = typeof(AbstractBaseGenerator).Assembly.GetManifestResourceStream("Zetbox.Generator.Zetbox.Objects.snk"))
+            using (var snkDest = File.Open(Path.Combine(CodeBasePath, "Zetbox.Objects.snk"), FileMode.Create))
             {
                 snkDest.SetLength(0);
                 snkSrc.CopyTo(snkDest);
@@ -131,7 +131,7 @@ namespace Kistl.Generator
         /// <summary>
         /// The type name of the custom PropertyDescriptor.
         /// </summary>
-        public virtual string CustomPropertyDescriptorName { get { return "PropertyDescriptor" + ExtraSuffix + Kistl.API.Helper.ImplementationSuffix; } }
+        public virtual string CustomPropertyDescriptorName { get { return "PropertyDescriptor" + ExtraSuffix + Zetbox.API.Helper.ImplementationSuffix; } }
 
         /// <summary>
         /// List of aditional build targets, executed after all default targets has been build
@@ -143,20 +143,20 @@ namespace Kistl.Generator
         /// </summary>
         public abstract IEnumerable<string> RequiredNamespaces { get; }
 
-        protected virtual string RunTemplateWithExtension(IKistlContext ctx, string templateName, string baseFilename, string extension, params object[] args)
+        protected virtual string RunTemplateWithExtension(IZetboxContext ctx, string templateName, string baseFilename, string extension, params object[] args)
         {
             string filename = String.Join(".", new string[] { baseFilename, BaseName, extension });
             return RunTemplate(ctx, templateName, filename, args);
         }
 
-        protected virtual string RunTemplate(IKistlContext ctx, string templateName, string filename, params object[] args)
+        protected virtual string RunTemplate(IZetboxContext ctx, string templateName, string filename, params object[] args)
         {
             try
             {
                 filename = Unidecode(filename);
                 var gen = new TemplateExecutor();
 
-                gen.Settings.Add("basetemplatepath", "Kistl.Generator.Templates");
+                gen.Settings.Add("basetemplatepath", "Zetbox.Generator.Templates");
                 gen.Settings.Add("providertemplatenamespace", TemplateProviderNamespace);
                 gen.Settings.Add("providertemplateassembly", TemplateProviderAssembly);
 
@@ -168,7 +168,7 @@ namespace Kistl.Generator
 
                 gen.Settings.Add("extrasuffix", ExtraSuffix);
                 gen.Settings.Add("namespaces", String.Join(",", RequiredNamespaces.ToArray()));
-                gen.Settings.Add("implementationnamespace", "Kistl.DalProvider." + BaseName);
+                gen.Settings.Add("implementationnamespace", "Zetbox.DalProvider." + BaseName);
 
                 gen.Settings.Add("propertydescriptorname", CustomPropertyDescriptorName);
 
@@ -209,39 +209,39 @@ namespace Kistl.Generator
             return Encoding.ASCII.GetString(Encoding.GetEncoding("Cyrillic").GetBytes(filename));
         }
 
-        protected virtual string Generate_AssemblyInfo(IKistlContext ctx)
+        protected virtual string Generate_AssemblyInfo(IZetboxContext ctx)
         {
             return RunTemplateWithExtension(ctx, "AssemblyInfoTemplate", "AssemblyInfo", "cs");
         }
 
-        protected virtual string Generate_ObjectClass(IKistlContext ctx, ObjectClass objClass)
+        protected virtual string Generate_ObjectClass(IZetboxContext ctx, ObjectClass objClass)
         {
             return RunTemplateWithExtension(ctx, "ObjectClasses.Template", objClass.Name, "Designer.cs", objClass);
         }
 
-        protected virtual string Generate_CollectionEntries(IKistlContext ctx)
+        protected virtual string Generate_CollectionEntries(IZetboxContext ctx)
         {
             return RunTemplateWithExtension(ctx, "ObjectClasses.CollectionEntries", "CollectionEntries", "Designer.cs");
         }
 
-        protected virtual string Generate_Enumeration(IKistlContext ctx, Enumeration e)
+        protected virtual string Generate_Enumeration(IZetboxContext ctx, Enumeration e)
         {
             // only used on interface
             return null;
         }
 
-        protected virtual string Generate_CompoundObject(IKistlContext ctx, CompoundObject s)
+        protected virtual string Generate_CompoundObject(IZetboxContext ctx, CompoundObject s)
         {
             return RunTemplateWithExtension(ctx, "CompoundObjects.Template", s.Name, "Designer.cs", s);
         }
 
-        protected virtual string Generate_Interface(IKistlContext ctx, Interface i)
+        protected virtual string Generate_Interface(IZetboxContext ctx, Interface i)
         {
             // only used on interface
             return null;
         }
 
-        protected virtual IEnumerable<string> Generate_Other(IKistlContext ctx)
+        protected virtual IEnumerable<string> Generate_Other(IZetboxContext ctx)
         {
             return new List<string>()
             {
@@ -249,7 +249,7 @@ namespace Kistl.Generator
             };
         }
 
-        protected virtual string Generate_ProjectFile(IKistlContext ctx, string projectGuid, List<string> generatedFileNames, IEnumerable<ISchemaProvider> schemaProviders)
+        protected virtual string Generate_ProjectFile(IZetboxContext ctx, string projectGuid, List<string> generatedFileNames, IEnumerable<ISchemaProvider> schemaProviders)
         {
             return RunTemplate(ctx, "ProjectFile",
                 ProjectFileName,
@@ -258,7 +258,7 @@ namespace Kistl.Generator
                 schemaProviders);
         }
 
-        protected virtual List<string> Generate_Objects(Kistl.API.IKistlContext ctx)
+        protected virtual List<string> Generate_Objects(Zetbox.API.IZetboxContext ctx)
         {
             var generatedFileNames = new List<string>();
 

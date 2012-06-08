@@ -1,20 +1,20 @@
 
-namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
+namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     public partial class ObjectCollectionEntry
         : Template
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Relation rel)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, Relation rel)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
@@ -29,7 +29,7 @@ namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
             return rel.Module;
         }
 
-        public ObjectCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
+        public ObjectCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Relation rel)
             : base(_host, ctx, CheckNullOrReturnRelationModule(rel))
         {
             this.rel = rel;

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.API.Mocks")]
+[assembly: AssemblyTitle("Zetbox.API.Mocks")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl.API.Mocks")]
+[assembly: AssemblyProduct("Zetbox.API.Mocks")]
 [assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

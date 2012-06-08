@@ -2,19 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
+using Zetbox.API;
+using Zetbox.App.Base;
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
-    public static class KistlContextExtensions
+    public static class ZetboxContextExtensions
     {
-        public static Interface GetIExportableInterface(this IReadOnlyKistlContext ctx)
+        public static Interface GetIExportableInterface(this IReadOnlyZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             // TODO: use named objects
-            return ctx.GetQuery<Kistl.App.Base.Interface>().First(o => o.Name == "IExportable" && o.Module.Name == "KistlBase"); 
+            return ctx.GetQuery<Zetbox.App.Base.Interface>().First(o => o.Name == "IExportable" && o.Module.Name == "ZetboxBase"); 
         }
     }
 }

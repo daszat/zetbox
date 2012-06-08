@@ -1,15 +1,15 @@
 
-namespace Kistl.Generator.Templates.CollectionEntries
+namespace Zetbox.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     /// <summary>
     /// Client-side template for Object-Object CollectionEntries. Since the 
@@ -19,7 +19,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
     public partial class RelationEntry
         : CollectionEntryTemplate
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Relation rel)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, Relation rel)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
@@ -28,7 +28,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected Relation rel { get; private set; }
 
-        public RelationEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
+        public RelationEntry(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Relation rel)
             : base(_host, ctx)
         {
             this.rel = rel;
@@ -57,7 +57,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
         {
             if (IsExportable())
             {
-                return new string[] { "Kistl.API.IExportableInternal", "Kistl.App.Base.IExportable" };
+                return new string[] { "Zetbox.API.IExportableInternal", "Zetbox.App.Base.IExportable" };
             }
             else
             {

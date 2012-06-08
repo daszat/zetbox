@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_NullablePropertyTextBoxView : Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxView
+public partial class View_NullablePropertyTextBoxView : Zetbox.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

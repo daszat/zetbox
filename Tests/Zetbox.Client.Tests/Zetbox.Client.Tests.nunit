@@ -1,12 +1,12 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Debug" appbase="P:\Kistl" />
-  <Config name="Debug" configfile="Kistl.Client.Tests.dll.config" binpath="bin\Debug\Tests">
-    <assembly path="bin\Debug\Tests\Kistl.Client.Tests.dll" />
+  <Settings activeconfig="Debug" appbase="P:\Zetbox" />
+  <Config name="Debug" configfile="Zetbox.Client.Tests.dll.config" binpath="bin\Debug\Tests">
+    <assembly path="bin\Debug\Tests\Zetbox.Client.Tests.dll" />
   </Config>
-  <Config name="Release" appbase="P:\Kistl\..\..\bin\Release\Tests" configfile="Kistl.Client.Tests.dll.config" binpathtype="Auto">
-    <assembly path="..\..\..\..\..\Tests\Kistl.Client.Tests\..\..\bin\Release\Tests\Kistl.Client.Tests.dll" />
+  <Config name="Release" appbase="P:\Zetbox\..\..\bin\Release\Tests" configfile="Zetbox.Client.Tests.dll.config" binpathtype="Auto">
+    <assembly path="..\..\..\..\..\Tests\Zetbox.Client.Tests\..\..\bin\Release\Tests\Zetbox.Client.Tests.dll" />
   </Config>
-  <Config name="Studio" appbase="" configfile="Kistl.Client.Tests.dll.config" binpathtype="Auto">
-    <assembly path="Tests\Kistl.Client.Tests\Kistl.Client.Tests.dll" />
+  <Config name="Studio" appbase="" configfile="Zetbox.Client.Tests.dll.config" binpathtype="Auto">
+    <assembly path="Tests\Zetbox.Client.Tests\Zetbox.Client.Tests.dll" />
   </Config>
 </NUnitProject>

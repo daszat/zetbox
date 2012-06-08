@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.HttpService
+namespace Zetbox.Server.HttpService
 {
     using System;
     using System.Collections.Generic;

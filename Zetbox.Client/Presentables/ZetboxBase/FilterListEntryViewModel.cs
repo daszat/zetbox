@@ -1,25 +1,25 @@
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.Client.Presentables;
-    using Kistl.API;
-    using Kistl.Client.Presentables.FilterViewModels;
-    using Kistl.App.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.App.GUI;
 
     [ViewModelDescriptor]
     public class FilterListEntryViewModel : ViewModel
     {
-        public new delegate FilterListEntryViewModel Factory(IKistlContext dataCtx, FilterListViewModel parent, FilterViewModel vmdl);
+        public new delegate FilterListEntryViewModel Factory(IZetboxContext dataCtx, FilterListViewModel parent, FilterViewModel vmdl);
 
-        public static FilterListEntryViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, FilterListViewModel parent, FilterViewModel vmdl)
+        public static FilterListEntryViewModel Fetch(IViewModelFactory f, IZetboxContext dataCtx, FilterListViewModel parent, FilterViewModel vmdl)
         {
             return (FilterListEntryViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(vmdl, () => f.CreateViewModel<FilterListEntryViewModel.Factory>().Invoke(dataCtx, parent, vmdl));
         }
 
-        public FilterListEntryViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, FilterListViewModel parent, FilterViewModel vmdl)
+        public FilterListEntryViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, FilterListViewModel parent, FilterViewModel vmdl)
             : base(appCtx, dataCtx, parent)
         {
             this.FilterViewModel = vmdl;
@@ -68,7 +68,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         FilterListEntryViewModelResources.RemoveCommand, 
                         FilterListEntryViewModelResources.RemoveCommand_Tooltip,
                         Remove, () => IsUserFilter, null);
-                    _RemoveCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.delete_png.Find(FrozenContext);
+                    _RemoveCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
                 }
                 return _RemoveCommand;
             }

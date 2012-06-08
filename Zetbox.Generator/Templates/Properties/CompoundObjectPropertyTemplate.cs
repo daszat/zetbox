@@ -1,19 +1,19 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public partial class CompoundObjectPropertyTemplate
     {
         public static void Call(
-            Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx,
+            Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList,
             CompoundObjectProperty prop)
         {
@@ -25,14 +25,14 @@ namespace Kistl.Generator.Templates.Properties
             Call(host, ctx, serializationList, prop, propName, prop.IsList, prop.HasPersistentOrder);
         }
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, CompoundObjectProperty prop, string overridePropName, bool isList, bool hasPersistentOrder)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, CompoundObjectProperty prop, string overridePropName, bool isList, bool hasPersistentOrder)
         {
             string xmlNamespace = prop.Module.Namespace;
-            string backingPropertyName = overridePropName + Kistl.API.Helper.ImplementationSuffix;
+            string backingPropertyName = overridePropName + Zetbox.API.Helper.ImplementationSuffix;
             string backingStoreName = "_" + overridePropName;
 
             string coType = prop.GetElementTypeString();
-            string coImplementationType = coType + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+            string coImplementationType = coType + host.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix;
 
             if (isList && hasPersistentOrder)
             {

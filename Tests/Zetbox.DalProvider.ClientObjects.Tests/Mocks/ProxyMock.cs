@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client.Mocks
+namespace Zetbox.DalProvider.Client.Mocks
 {
     using System;
     using System.Collections;
@@ -9,14 +9,14 @@ namespace Kistl.DalProvider.Client.Mocks
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Server;
-    using Kistl.App.Packaging;
-    using Kistl.App.Test;
-    using Kistl.DalProvider.Memory;
-    using Kistl.App.Base;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Server;
+    using Zetbox.App.Packaging;
+    using Zetbox.App.Test;
+    using Zetbox.DalProvider.Memory;
+    using Zetbox.App.Base;
+    using Zetbox.API.Utils;
 
     public class ProxyMock
         : IProxy
@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.Client.Mocks
             _map = map;
 
             var generatedAssembly = System.Reflection.Assembly.Load(MemoryProvider.GeneratedAssemblyName);
-            Importer.LoadFromXml(_backingStore, generatedAssembly.GetManifestResourceStream("Kistl.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenObjects.xml from assembly");
+            Importer.LoadFromXml(_backingStore, generatedAssembly.GetManifestResourceStream("Zetbox.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenObjects.xml from assembly");
 
             // create default test data
 
@@ -56,21 +56,21 @@ namespace Kistl.DalProvider.Client.Mocks
             _backingStore.SubmitChanges();
         }
 
-        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IZetboxContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
 
             var handler = _memoryFactory.GetServerObjectHandler(ifType);
             var objects = handler.GetList(
-                KistlGeneratedVersionAttribute.Current,
+                ZetboxGeneratedVersionAttribute.Current,
                 _backingStore,
                 maxListCount,
                 filter != null ? filter.ToList() : null,
                 orderBy != null ? orderBy.ToList() : null);
             var bytes = SendObjects(objects, eagerLoadLists).ToArray();
 
-            using (var sr = new KistlStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
+            using (var sr = new ZetboxStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
             {
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
             }
@@ -78,16 +78,16 @@ namespace Kistl.DalProvider.Client.Mocks
             return result;
         }
 
-        public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetListOf(IZetboxContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
 
             var handler = _memoryFactory.GetServerObjectHandler(ifType);
-            var objects = handler.GetListOf(KistlGeneratedVersionAttribute.Current, _backingStore, ID, property);
+            var objects = handler.GetListOf(ZetboxGeneratedVersionAttribute.Current, _backingStore, ID, property);
             var bytes = SendObjects(objects, true).ToArray();
 
-            using (var sr = new KistlStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
+            using (var sr = new ZetboxStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
             {
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
             }
@@ -96,23 +96,23 @@ namespace Kistl.DalProvider.Client.Mocks
             return result;
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
             IEnumerable<IPersistenceObject> result = null;
 
             // Serialize
             using (var ms = new MemoryStream())
-            using (var sw = new KistlStreamWriter(_map, new BinaryWriter(ms)))
+            using (var sw = new ZetboxStreamWriter(_map, new BinaryWriter(ms)))
             {
                 SendObjects(objects, sw);
 
                 var handler = _memoryFactory.GetServerObjectSetHandler();
                 var changedObjects = handler
-                    .SetObjects(KistlGeneratedVersionAttribute.Current, _backingStore, objects, notficationRequests ?? new ObjectNotificationRequest[0])
+                    .SetObjects(ZetboxGeneratedVersionAttribute.Current, _backingStore, objects, notficationRequests ?? new ObjectNotificationRequest[0])
                     .Cast<IStreamable>();
                 var bytes = SendObjects(changedObjects, true).ToArray();
 
-                using (var sr = new KistlStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
+                using (var sr = new ZetboxStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
                 {
                     // merge auxiliary objects into primary set objects result
                     List<IStreamable> auxObjects;
@@ -124,7 +124,7 @@ namespace Kistl.DalProvider.Client.Mocks
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+        public IEnumerable<T> FetchRelation<T>(IZetboxContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry
         {
             // TODO: could be implemented in generated properties
@@ -146,12 +146,12 @@ namespace Kistl.DalProvider.Client.Mocks
                     _iftFactory(rel.B.Type.GetDataType()),
                     role);
             var objects = handler
-                .GetCollectionEntries(KistlGeneratedVersionAttribute.Current, _backingStore, relationId, role, parent.ID)
+                .GetCollectionEntries(ZetboxGeneratedVersionAttribute.Current, _backingStore, relationId, role, parent.ID)
                 .Cast<IStreamable>();
             var bytes = SendObjects(objects, true).ToArray();
 
             using (MemoryStream s = new MemoryStream(bytes))
-            using (var sr = new KistlStreamReader(_map, new BinaryReader(s)))
+            using (var sr = new ZetboxStreamReader(_map, new BinaryReader(s)))
             {
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
             }
@@ -164,28 +164,28 @@ namespace Kistl.DalProvider.Client.Mocks
         {
             Stream result = null;
             var handler = _memoryFactory.GetServerDocumentHandler();
-            result = handler.GetBlobStream(KistlGeneratedVersionAttribute.Current, _backingStore, ID);
+            result = handler.GetBlobStream(ZetboxGeneratedVersionAttribute.Current, _backingStore, ID);
             return result;
         }
 
-        public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype)
+        public Zetbox.App.Base.Blob SetBlobStream(IZetboxContext ctx, Stream stream, string filename, string mimetype)
         {
-            Kistl.App.Base.Blob result = null;
+            Zetbox.App.Base.Blob result = null;
             var handler = _memoryFactory.GetServerDocumentHandler();
-            var serverBlob = handler.SetBlobStream(KistlGeneratedVersionAttribute.Current, _backingStore, stream, filename, mimetype);
+            var serverBlob = handler.SetBlobStream(ZetboxGeneratedVersionAttribute.Current, _backingStore, stream, filename, mimetype);
 
             BlobResponse resp = new BlobResponse();
             resp.ID = serverBlob.ID;
             resp.BlobInstance = SendObjects(new IDataObject[] { serverBlob }, true);
 
-            using (var sr = new KistlStreamReader(_map, new BinaryReader(resp.BlobInstance)))
+            using (var sr = new ZetboxStreamReader(_map, new BinaryReader(resp.BlobInstance)))
             {
-                result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
+                result = ReceiveObjectList(ctx, sr).Cast<Zetbox.App.Base.Blob>().Single();
             }
             return result;
         }
 
-        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
+        public object InvokeServerMethod(IZetboxContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
         {
             throw new NotImplementedException();
         }
@@ -194,7 +194,7 @@ namespace Kistl.DalProvider.Client.Mocks
         {
         }
 
-        private static void SendObjects(IEnumerable<IPersistenceObject> objects, KistlStreamWriter sw)
+        private static void SendObjects(IEnumerable<IPersistenceObject> objects, ZetboxStreamWriter sw)
         {
             foreach (var obj in objects)
             {
@@ -216,7 +216,7 @@ namespace Kistl.DalProvider.Client.Mocks
             HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
 
             MemoryStream result = new MemoryStream();
-            KistlStreamWriter sw = new KistlStreamWriter(_map, new BinaryWriter(result));
+            ZetboxStreamWriter sw = new ZetboxStreamWriter(_map, new BinaryWriter(result));
             foreach (IStreamable obj in lst)
             {
                 sw.Write(true);
@@ -244,7 +244,7 @@ namespace Kistl.DalProvider.Client.Mocks
         /// <param name="auxObjects">a set of objects to send; will not be modified by this call</param>
         /// <param name="sentObjects">a set objects already sent; receives all newly sent objects too</param>
         /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
-        private static void SendAuxiliaryObjects(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
+        private static void SendAuxiliaryObjects(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
         {
             // clone auxObjects to avoid modification
             auxObjects = new HashSet<IStreamable>(auxObjects);
@@ -267,14 +267,14 @@ namespace Kistl.DalProvider.Client.Mocks
             sw.Write(false);
         }
 
-        private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, KistlStreamReader sr, out List<IStreamable> auxObjects)
+        private IEnumerable<IStreamable> ReceiveObjects(IZetboxContext ctx, ZetboxStreamReader sr, out List<IStreamable> auxObjects)
         {
             var result = ReceiveObjectList(ctx, sr);
             auxObjects = ReceiveObjectList(ctx, sr);
             return result;
         }
 
-        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, KistlStreamReader sr)
+        private List<IStreamable> ReceiveObjectList(IZetboxContext ctx, ZetboxStreamReader sr)
         {
             List<IStreamable> result = new List<IStreamable>();
             var cont = sr.ReadBoolean();

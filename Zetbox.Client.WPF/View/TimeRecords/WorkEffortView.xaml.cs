@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Kistl.Client.WPF.View.TimeRecords
+namespace Zetbox.Client.WPF.View.TimeRecords
 {
     /// <summary>
     /// Interaction logic for WorkEffortView.xaml

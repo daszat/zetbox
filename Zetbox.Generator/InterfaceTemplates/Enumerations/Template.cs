@@ -1,16 +1,16 @@
 
-namespace Kistl.Generator.InterfaceTemplates.Enumerations
+namespace Zetbox.Generator.InterfaceTemplates.Enumerations
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class Template
     {

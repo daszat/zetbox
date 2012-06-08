@@ -1,29 +1,29 @@
 
-namespace Kistl.Server.SchemaManagement
+namespace Zetbox.Server.SchemaManagement
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     internal class Cases
         : IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema.Cases");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Cases");
 
         #region Fields
-        private readonly IKistlContext schema;
+        private readonly IZetboxContext schema;
         private readonly ISchemaProvider db;
 
-        private readonly IKistlContext _savedSchema;
-        public IKistlContext savedSchema
+        private readonly IZetboxContext _savedSchema;
+        public IZetboxContext savedSchema
         {
             get
             {
@@ -41,7 +41,7 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        internal Cases(IKistlContext schema, ISchemaProvider db, IKistlContext savedSchema)
+        internal Cases(IZetboxContext schema, ISchemaProvider db, IZetboxContext savedSchema)
         {
             this.schema = schema;
             this.db = db;
@@ -1347,7 +1347,7 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var fkName = rel.GetRelationFkColumnName(role);
 
-            db.CreateColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
+            db.CreateColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
         }
         #endregion
 
@@ -1366,8 +1366,8 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var fkName = rel.GetRelationFkColumnName(role);
 
-            if (db.CheckColumnExists(tblName, fkName + Kistl.API.Helper.PositionSuffix))
-                db.DropColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix);
+            if (db.CheckColumnExists(tblName, fkName + Zetbox.API.Helper.PositionSuffix))
+                db.DropColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix);
         }
         #endregion
 
@@ -1418,13 +1418,13 @@ namespace Kistl.Server.SchemaManagement
             db.CreateColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
-                db.CreateColumn(tblName, fkAName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
+                db.CreateColumn(tblName, fkAName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
             }
 
             db.CreateColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
-                db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
+                db.CreateColumn(tblName, fkBName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
             }
 
             if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
@@ -1785,7 +1785,7 @@ namespace Kistl.Server.SchemaManagement
 
                 var viewAcl = new ACL();
                 viewAcls.Add(viewAcl);
-                viewAcl.Right = (Kistl.API.AccessRights)ac.Rights;
+                viewAcl.Right = (Zetbox.API.AccessRights)ac.Rights;
                 try
                 {
                     viewAcl.Relations.AddRange(SchemaManager.CreateJoinList(db, objClass, ac.Relations));
@@ -1840,7 +1840,7 @@ namespace Kistl.Server.SchemaManagement
                         {
                             rt.Relations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations, rel));
                         }
-                        catch (Kistl.Server.SchemaManagement.SchemaManager.JoinListException ex)
+                        catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
                         {
                             Log.Warn("Unable to create UpdateRightsTrigger on " + objClass, ex);
                             return;
@@ -1888,7 +1888,7 @@ namespace Kistl.Server.SchemaManagement
                             var joinList = SchemaManager.CreateJoinList(db, dep, ac.Relations, rel);
                             rt.Relations.AddRange(joinList.Take(joinList.Count - 1));
                         }
-                        catch (Kistl.Server.SchemaManagement.SchemaManager.JoinListException ex)
+                        catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
                         {
                             Log.Warn("Unable to create UpdateRightsTrigger on " + rel, ex);
                             return;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.API.Mocks
+namespace Zetbox.API.Mocks
 {
     public class MockImplementationTypeChecker
         : IImplementationTypeChecker
@@ -28,15 +28,15 @@ namespace Kistl.API.Mocks
         }
     }
 
-    public class TestKistlContext : IKistlContext, IZBoxContextInternals
+    public class TestZetboxContext : IZetboxContext, IZetboxContextInternals
     {
         private readonly InterfaceType.Factory _iftFactory;
-        public TestKistlContext(InterfaceType.Factory iftFactory)
+        public TestZetboxContext(InterfaceType.Factory iftFactory)
         {
             _iftFactory = iftFactory;
         }
 
-        #region IKistlContext Members
+        #region IZetboxContext Members
 
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
@@ -199,13 +199,13 @@ namespace Kistl.API.Mocks
         }
 
         /// <inheritdoc />
-        public event GenericEventHandler<IKistlContext> Changed;
+        public event GenericEventHandler<IZetboxContext> Changed;
         protected virtual void OnChanged()
         {
-            GenericEventHandler<IKistlContext> temp = Changed;
+            GenericEventHandler<IZetboxContext> temp = Changed;
             if (temp != null)
             {
-                temp(this, new GenericEventArgs<IKistlContext>() { Data = this });
+                temp(this, new GenericEventArgs<IZetboxContext>() { Data = this });
             }
         }
 
@@ -216,20 +216,20 @@ namespace Kistl.API.Mocks
         #endregion
 
         #region IDisposable Members
-        public event GenericEventHandler<IReadOnlyKistlContext> Disposing;
+        public event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
 
         public void Dispose()
         {
-            GenericEventHandler<IReadOnlyKistlContext> temp = Disposing;
+            GenericEventHandler<IReadOnlyZetboxContext> temp = Disposing;
             if (temp != null)
             {
-                temp(this, new GenericEventArgs<IReadOnlyKistlContext>() { Data = this });
+                temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
             }
         }
 
         #endregion
 
-        #region IKistlContext Members
+        #region IZetboxContext Members
 
 
         public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
@@ -244,7 +244,7 @@ namespace Kistl.API.Mocks
 
         #endregion
 
-        #region IReadOnlyKistlContext Members
+        #region IReadOnlyZetboxContext Members
 
 
         public System.IO.Stream GetStream(int ID)
@@ -264,7 +264,7 @@ namespace Kistl.API.Mocks
 
         public InterfaceType GetInterfaceType(string typeName)
         {
-            return _iftFactory(Type.GetType(typeName + ",Kistl.Objects", true));
+            return _iftFactory(Type.GetType(typeName + ",Zetbox.Objects", true));
         }
 
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
@@ -297,7 +297,7 @@ namespace Kistl.API.Mocks
 
         public ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + typeof(TestKistlContext).Assembly.FullName, true));
+            return GetImplementationType(Type.GetType(t.Type.FullName + Zetbox.API.Helper.ImplementationSuffix + "," + typeof(TestZetboxContext).Assembly.FullName, true));
         }
         private IDictionary<object, object> _TransientState = null;
         /// <inheritdoc />
@@ -315,7 +315,7 @@ namespace Kistl.API.Mocks
         #endregion
 
         /// <summary>
-        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// Indicates that the Zetbox Context has some modified, added or deleted items
         /// </summary>
         public bool IsModified { get; private set; }
 
@@ -324,10 +324,10 @@ namespace Kistl.API.Mocks
         /// </summary>
         public event EventHandler IsModifiedChanged;
 
-        #region IZBoxContextInternals Members
-        int IZBoxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
+        #region IZetboxContextInternals Members
+        int IZetboxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
 
-        void IZBoxContextInternals.SetModified(IPersistenceObject obj)
+        void IZetboxContextInternals.SetModified(IPersistenceObject obj)
         {
             if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
             {
@@ -339,7 +339,7 @@ namespace Kistl.API.Mocks
                 }
             }
         }
-        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename)
+        string IZetboxContextInternals.StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
             throw new NotImplementedException();
         }
@@ -347,7 +347,7 @@ namespace Kistl.API.Mocks
         #endregion
 
 
-        #region IKistlContext Members
+        #region IZetboxContext Members
 
 
         public int GetSequenceNumber(Guid sequenceGuid)

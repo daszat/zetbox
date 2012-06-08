@@ -1,5 +1,5 @@
 
-namespace Kistl.API.AbstractConsumerTests
+namespace Zetbox.API.AbstractConsumerTests
 {
     using System;
     using System.Collections;
@@ -8,9 +8,9 @@ namespace Kistl.API.AbstractConsumerTests
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
     
@@ -18,12 +18,12 @@ namespace Kistl.API.AbstractConsumerTests
     public abstract class AbstractLinqTests
         : AbstractTestFixture
     {
-        IKistlContext ctx;
+        IZetboxContext ctx;
 
         [SetUp]
         public void Init()
         {
-            using (IKistlContext localCtx = GetContext())
+            using (IZetboxContext localCtx = GetContext())
             {
                 var result = localCtx.GetQuery<TestObjClass>();
                 var list = result.ToList();

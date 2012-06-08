@@ -3,6 +3,6 @@ echo ***************************************************************************
 echo Run the development server.
 echo ********************************************************************************
 
-bin\Debug\Kistl.Server.Service.exe
+bin\Debug\Zetbox.Server.Service.exe
 
 pause

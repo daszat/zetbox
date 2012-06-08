@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Base.ExceptionLogEntryNHibernateImpl+ExceptionLogEntryProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Base.ExceptionLogEntryNHibernateImpl+ExceptionLogEntryProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Base.ExceptionLogEntryNHibernateImpl+ExceptionLogEntryProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Base.ExceptionLogEntryNHibernateImpl+ExceptionLogEntryProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`ExceptionLog`"
            abstract="false"

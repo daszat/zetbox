@@ -1,32 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst")]
-    public partial class Constructors : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst")]
+    public partial class Constructors : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected string className;
 		protected IEnumerable<CompoundObjectProperty> compoundObjectProperties;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("ObjectClasses.Constructors", ctx, className, compoundObjectProperties);
         }
 
-        public Constructors(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties)
+        public Constructors(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -37,22 +37,22 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 17 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        [Obsolete]\r\n");
 this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : base(null)\r\n");
 this.WriteObjects("        {\r\n");
-#line 21 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 21 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 22 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 22 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\r\n");
 this.WriteObjects("            : base(lazyCtx)\r\n");
 this.WriteObjects("        {\r\n");
-#line 27 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 27 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 28 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 28 "P:\Zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 
         }

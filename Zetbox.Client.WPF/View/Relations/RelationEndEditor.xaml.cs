@@ -13,11 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.Relations;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.Relations;
 
-namespace Kistl.Client.WPF.View.Relations
+namespace Zetbox.Client.WPF.View.Relations
 {
     /// <summary>
     /// Interaction logic for RelationEndEditor.xaml

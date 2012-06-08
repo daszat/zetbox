@@ -1,16 +1,16 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Serialization.SerializerTemplate"
-    ClassName="Kistl.Generator.Templates.Serialization.SerializerTemplate"
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.Generator.Templates.Serialization.SerializerTemplate"
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="System.Collections.Generic" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="direction" Type="SerializerDirection" %>
 <%@ Parameter Name="fields" Type="SerializationMembersList" %>
 <%@ Parameter Name="overrideAndCallBase" Type="bool" %>
@@ -27,7 +27,7 @@
     switch(direction)
     {
         case SerializerDirection.ToStream:
-            argType = "Kistl.API.KistlStreamWriter";
+            argType = "Zetbox.API.ZetboxStreamWriter";
             argName = "binStream";
             methodName = "ToStream";
             serType = SerializerType.Binary;
@@ -35,7 +35,7 @@
             callBaseWithAdditionalArgs = ", auxObjects, eagerLoadLists";
             break;
         case SerializerDirection.FromStream:
-            argType = "Kistl.API.KistlStreamReader";
+            argType = "Zetbox.API.ZetboxStreamReader";
             argName = "binStream";
             methodName = "FromStream";
             serType = SerializerType.Binary;
@@ -113,12 +113,12 @@
             var result = new List<IPersistenceObject>();
 <% }                                                                                %>
             // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
 <%            foreach(var serMember in fieldList)    %>
 <%            {                                                                                        %>
 <%                ApplySerializer(direction, serMember, argName);                                        %>
 <%            }                                                                                        %>
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null

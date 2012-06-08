@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections;
@@ -7,8 +7,8 @@ namespace Kistl.API.Server
     using System.Linq;
     using System.Linq.Expressions;
 
-    using Kistl.API;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
     using System.IO;
 
     /// <summary>
@@ -20,25 +20,25 @@ namespace Kistl.API.Server
         /// <summary>
         /// Return a list of objects matching the specified parameters.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="ctx">the server context to use for loading the objects</param>
         /// <param name="maxListCount">how many objects to load at most</param>
         /// <param name="filter">a Linq filter to apply</param>
         /// <param name="orderBy">a number of linq expressions to order by</param>
         /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
-        IEnumerable<IStreamable> GetList(Guid version, IKistlContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy);
+        IEnumerable<IStreamable> GetList(Guid version, IZetboxContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="ctx">the server context to use for loading the objects</param>
         /// <param name="ID">the ID of the referencing object</param>
         /// <param name="property">the name of the referencing property</param>
         /// <returns>the list of objects</returns>
-        IEnumerable<IStreamable> GetListOf(Guid version, IKistlContext ctx, int ID, string property);
+        IEnumerable<IStreamable> GetListOf(Guid version, IZetboxContext ctx, int ID, string property);
 
-        object InvokeServerMethod(Guid version, IKistlContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
+        object InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
     }
 
     public interface IServerObjectSetHandler
@@ -46,18 +46,18 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        IEnumerable<IPersistenceObject> SetObjects(Guid version, IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
+        IEnumerable<IPersistenceObject> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
     }
 
     public interface IServerCollectionHandler
     {
-        IEnumerable<IRelationEntry> GetCollectionEntries(Guid version, IKistlContext ctx, Guid relId, RelationEndRole endRole, int parentId);
+        IEnumerable<IRelationEntry> GetCollectionEntries(Guid version, IZetboxContext ctx, Guid relId, RelationEndRole endRole, int parentId);
     }
 
     public interface IServerDocumentHandler
     {
-        Stream GetBlobStream(Guid version, IKistlContext ctx, int ID);
-        Kistl.App.Base.Blob SetBlobStream(Guid version, IKistlContext ctx, Stream blob, string filename, string mimetype);
+        Stream GetBlobStream(Guid version, IZetboxContext ctx, int ID);
+        Zetbox.App.Base.Blob SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype);
     }
 
     /// <summary>
@@ -77,14 +77,14 @@ namespace Kistl.API.Server
         {
         }
 
-        public IEnumerable<IStreamable> GetList(Guid version, IKistlContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy)
+        public IEnumerable<IStreamable> GetList(Guid version, IZetboxContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
 
-            if (maxListCount > Kistl.API.Helper.MAXLISTCOUNT)
+            if (maxListCount > Zetbox.API.Helper.MAXLISTCOUNT)
             {
-                maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
+                maxListCount = Zetbox.API.Helper.MAXLISTCOUNT;
             }
 
             var result = ctx.GetQuery<T>();
@@ -129,10 +129,10 @@ namespace Kistl.API.Server
         /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
         /// <returns>the list of values in the property</returns>
-        public IEnumerable<IStreamable> GetListOf(Guid version, IKistlContext ctx, int ID, string property)
+        public IEnumerable<IStreamable> GetListOf(Guid version, IZetboxContext ctx, int ID, string property)
         {
             if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
 
             T obj = GetObjectInstance(ctx, ID);
             if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
@@ -145,14 +145,14 @@ namespace Kistl.API.Server
         /// Gibt eine typisierte Objektinstanz zurück.
         /// </summary>
         /// <returns>a typed object</returns>
-        protected abstract T GetObjectInstance(IKistlContext ctx, int ID);
+        protected abstract T GetObjectInstance(IZetboxContext ctx, int ID);
 
-        public object InvokeServerMethod(Guid version, IKistlContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        public object InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (objects == null) { throw new ArgumentNullException("objects"); }
             if (notificationRequests == null) { throw new ArgumentNullException("notificationRequests"); }
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
 
             var objList = objects.Cast<BaseServerPersistenceObject>().ToList();
             var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
@@ -183,14 +183,14 @@ namespace Kistl.API.Server
         /// </summary>
         public virtual IEnumerable<IPersistenceObject> SetObjects(
             Guid version, 
-            IKistlContext ctx,
+            IZetboxContext ctx,
             IEnumerable<IPersistenceObject> objList,
             IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (objList == null) { throw new ArgumentNullException("objList"); }
             if (notificationRequests == null) { throw new ArgumentNullException("notificationRequests"); }
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
 
             var objects = objList.Cast<BaseServerPersistenceObject>().ToList();
             var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
@@ -203,7 +203,7 @@ namespace Kistl.API.Server
             return entityObjects.Values.Concat(requestedObjects);
         }
 
-        internal static IEnumerable<IPersistenceObject> GetRequestedObjects(IKistlContext ctx, IEnumerable<ObjectNotificationRequest> notificationRequests, Dictionary<IPersistenceObject, IPersistenceObject> entityObjects)
+        internal static IEnumerable<IPersistenceObject> GetRequestedObjects(IZetboxContext ctx, IEnumerable<ObjectNotificationRequest> notificationRequests, Dictionary<IPersistenceObject, IPersistenceObject> entityObjects)
         {
             // Send all objects that were modified + those the client wants to be notified about, but each only once
             var requestLookup = notificationRequests.ToLookup(r => r.Type.TypeName, r => r.IDs.ToLookup(i => i));
@@ -223,7 +223,7 @@ namespace Kistl.API.Server
             return requestedObjects;
         }
 
-        internal static void ApplyObjectChanges(IKistlContext ctx, IEnumerable<ObjectNotificationRequest> notificationRequests, List<BaseServerPersistenceObject> objects, Dictionary<IPersistenceObject, IPersistenceObject> entityObjects)
+        internal static void ApplyObjectChanges(IZetboxContext ctx, IEnumerable<ObjectNotificationRequest> notificationRequests, List<BaseServerPersistenceObject> objects, Dictionary<IPersistenceObject, IPersistenceObject> entityObjects)
         {
             Logging.Log.InfoFormat(
                 "ApplyObjectChanges for {0} objects and {1} notification requests called.",
@@ -244,10 +244,10 @@ namespace Kistl.API.Server
                 var ctxObj = ctx.FindPersistenceObject(ctx.GetInterfaceType(obj), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 // optimistic concurrency
-                if (obj is Kistl.App.Base.IChangedBy)
+                if (obj is Zetbox.App.Base.IChangedBy)
                 {
-                    var orig = (Kistl.App.Base.IChangedBy)ctxObj;
-                    var send = (Kistl.App.Base.IChangedBy)obj;
+                    var orig = (Zetbox.App.Base.IChangedBy)ctxObj;
+                    var send = (Zetbox.App.Base.IChangedBy)obj;
                     if (Math.Abs((orig.ChangedOn - send.ChangedOn).Ticks) > 15) // postgres is only accurate down to µs (1/1000th ms), but DateTime is accurate down to 1/10th µs. Rounding errors cause invalid concurrency failures.
                     {
                         concurrencyFailed.Add((IDataObject)obj);
@@ -288,21 +288,21 @@ namespace Kistl.API.Server
 
     public class ServerDocumentHandler : IServerDocumentHandler
     {
-        public Stream GetBlobStream(Guid version, IKistlContext ctx, int ID)
+        public Stream GetBlobStream(Guid version, IZetboxContext ctx, int ID)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
             return ctx.GetStream(ID);
         }
 
-        public Kistl.App.Base.Blob SetBlobStream(Guid version, IKistlContext ctx, Stream blob, string filename, string mimetype)
+        public Zetbox.App.Base.Blob SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (blob == null) { throw new ArgumentNullException("blob"); }
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
 
             var id = ctx.CreateBlob(blob, filename, mimetype);
-            var obj = ctx.Find<Kistl.App.Base.Blob>(id);
+            var obj = ctx.Find<Zetbox.App.Base.Blob>(id);
             ctx.SubmitChanges();
             return obj;
         }

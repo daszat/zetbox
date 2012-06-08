@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="LUvYOtoDqq/AFWPBCguT9507Cgo=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="wsHttpBinding" name="KistlService_Endpoint">
+    <bindingConfiguration bindingType="wsHttpBinding" name="ZetboxService_Endpoint">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>KistlService_Endpoint</serializedValue>
+          <serializedValue>ZetboxService_Endpoint</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>00:01:00</serializedValue>
@@ -127,10 +127,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="KistlService_Endpoint" contract="KistlService.IKistlService" bindingType="wsHttpBinding" address="http://localhost:6666/KistlService" bindingConfiguration="KistlService_Endpoint">
+    <endpoint name="ZetboxService_Endpoint" contract="ZetboxService.IZetboxService" bindingType="wsHttpBinding" address="http://localhost:6666/ZetboxService" bindingConfiguration="ZetboxService_Endpoint">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:6666/KistlService</serializedValue>
+          <serializedValue>http://localhost:6666/ZetboxService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -139,10 +139,10 @@
           <serializedValue>wsHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>KistlService_Endpoint</serializedValue>
+          <serializedValue>ZetboxService_Endpoint</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>KistlService.IKistlService</serializedValue>
+          <serializedValue>ZetboxService.IZetboxService</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -202,7 +202,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>KistlService_Endpoint</serializedValue>
+          <serializedValue>ZetboxService_Endpoint</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

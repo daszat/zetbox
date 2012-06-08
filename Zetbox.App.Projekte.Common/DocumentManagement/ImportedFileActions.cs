@@ -5,14 +5,14 @@ namespace at.dasz.DocumentManagement
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     [Implementor]
     public static class ImportedFileActions
     {
         [Invocation]
-        public static void HandleBlobChange(ImportedFile obj, MethodReturnEventArgs<Kistl.App.Base.Blob> e, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
+        public static void HandleBlobChange(ImportedFile obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             if (oldBlob != null && newBlob != oldBlob)
             {
@@ -21,7 +21,7 @@ namespace at.dasz.DocumentManagement
             e.Result = newBlob;
         }
 
-        private static void MakeInternal(IKistlContext ctx, ImportedFile obj, File doc)
+        private static void MakeInternal(IZetboxContext ctx, ImportedFile obj, File doc)
         {
             // Clone blob, so it could be deleted
             doc.Blob = ctx.Find<Blob>(ctx.CreateBlob(ctx.GetFileInfo(obj.Blob.ID), obj.Blob.MimeType));

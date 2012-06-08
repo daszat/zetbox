@@ -1,18 +1,18 @@
 
-namespace Kistl.Client.Forms
+namespace Zetbox.Client.Forms
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Windows.Forms;
-    using Kistl.API;
-    using Kistl.Client.Forms.View;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ObjectBrowser;
-    using Kistl.API.Configuration;
-    using Kistl.API.Client.PerfCounter;
+    using Zetbox.API;
+    using Zetbox.Client.Forms.View;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ObjectBrowser;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Client.PerfCounter;
 
     public class FormsModelFactory
         : ViewModelFactory
@@ -20,14 +20,14 @@ namespace Kistl.Client.Forms
 
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();
 
-        public FormsModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, KistlConfig cfg, IPerfCounter perfCounter)
+        public FormsModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
             : base(container, metaCtx, cfg, perfCounter)
         {
         }
 
-        public override Kistl.App.GUI.Toolkit Toolkit
+        public override Zetbox.App.GUI.Toolkit Toolkit
         {
-            get { return Kistl.App.GUI.Toolkit.WinForms; }
+            get { return Zetbox.App.GUI.Toolkit.WinForms; }
         }
 
         protected void CreateWorkspace(WorkspaceViewModel mdl, bool activate)

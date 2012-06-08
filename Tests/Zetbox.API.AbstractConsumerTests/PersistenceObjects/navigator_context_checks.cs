@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
+using Zetbox.API;
 
 using NUnit.Framework;
-using Kistl.App.Test;
+using Zetbox.App.Test;
 
-namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
+namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
 {
     public abstract class navigator_context_checks : ObjectLoadFixture
     {
@@ -21,7 +21,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextException))]
+        [ExpectedException(typeof(WrongZetboxContextException))]
         public void set_1_N_wrong_context()
         {
             var otherCtx = GetContext();
@@ -40,7 +40,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextException))]
+        [ExpectedException(typeof(WrongZetboxContextException))]
         public void set_N_1_wrong_context()
         {
             var otherCtx = GetContext();
@@ -59,7 +59,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextException))]
+        [ExpectedException(typeof(WrongZetboxContextException))]
         public void set_N_M_wrong_context()
         {
             var otherCtx = GetContext();
@@ -78,7 +78,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextException))]
+        [ExpectedException(typeof(WrongZetboxContextException))]
         public void set_1_1_wrong_context()
         {
             var otherCtx = GetContext();

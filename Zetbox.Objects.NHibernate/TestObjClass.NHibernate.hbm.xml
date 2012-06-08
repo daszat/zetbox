@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.TestObjClassNHibernateImpl+TestObjClassProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.TestObjClassNHibernateImpl+TestObjClassProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.TestObjClassNHibernateImpl+TestObjClassProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.TestObjClassNHibernateImpl+TestObjClassProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`TestObjClasses`"
            abstract="false"
@@ -23,7 +23,7 @@
                   column="`MyIntProperty`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ObjectProp" column="`fk_ObjectProp`" class="Kistl.App.Projekte.KundeNHibernateImpl+KundeProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ObjectProp" column="`fk_ObjectProp`" class="Zetbox.App.Projekte.KundeNHibernateImpl+KundeProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="StringProp" 

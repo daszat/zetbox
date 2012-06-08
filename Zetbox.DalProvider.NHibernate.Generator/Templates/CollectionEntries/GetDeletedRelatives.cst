@@ -1,16 +1,16 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="CollectionEntries.GetDeletedRelatives"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.GetDeletedRelatives" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.GetDeletedRelatives" 
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
 <%@ Parameter Name="aName" Type="string" %>
 <%@ Parameter Name="bName" Type="string" %>
 

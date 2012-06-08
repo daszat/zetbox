@@ -1,33 +1,33 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.SecurityRulesProperties"
-    ClassName="Kistl.DalProvider.Ef.Generator.Templates.Properties.SecurityRulesProperties"
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.Ef.Generator.Templates.Properties.SecurityRulesProperties"
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%@ Parameter Name="assocName" Type="string" %>
 <%@ Parameter Name="targetRoleName" Type="string" %>
 <%@ Parameter Name="referencedImplementation" Type="string" %>
 <%@ Parameter Name="efNameRightsPropertyName" Type="string" %>
 
-        private Kistl.API.AccessRights? __currentAccessRights;
-        public override Kistl.API.AccessRights CurrentAccessRights
+        private Zetbox.API.AccessRights? __currentAccessRights;
+        public override Zetbox.API.AccessRights CurrentAccessRights
         {
             get
             {
-				if(Context == null) return Kistl.API.AccessRights.Full;
+				if(Context == null) return Zetbox.API.AccessRights.Full;
                 if (__currentAccessRights == null)
                 {
 					__currentAccessRights = base.CurrentAccessRights;
 					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(i => i.Identity == Context.Internals().IdentityID); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
-                    __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None;
+                    __currentAccessRights |= secRight != null ? (Zetbox.API.AccessRights)secRight.Right : Zetbox.API.AccessRights.None;
                 }
                 return __currentAccessRights.Value;
             }

@@ -1,5 +1,5 @@
 @echo off
-texify --pdf KistlGuide.tex
+texify --pdf ZetboxGuide.tex
 pause
 call makeclean.cmd
-start KistlGuide.pdf
+start ZetboxGuide.pdf

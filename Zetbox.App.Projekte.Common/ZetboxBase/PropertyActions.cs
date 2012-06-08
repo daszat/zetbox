@@ -1,11 +1,11 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Extensions;
 
     [Implementor]
     public static class PropertyActions
@@ -52,7 +52,7 @@ namespace Kistl.App.Base
         }
         
         [Invocation]
-        public static void GetLabel(Kistl.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
+        public static void GetLabel(Zetbox.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
         }
@@ -75,13 +75,13 @@ namespace Kistl.App.Base
         }
 
         [Invocation]
-        public static void GetPropertyType(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        public static void GetPropertyType(Zetbox.App.Base.Property obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
         {
             throw new NotImplementedException();
         }
 
         [Invocation]
-        public static void GetPropertyTypeString(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void GetPropertyTypeString(Zetbox.App.Base.Property obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "<Invalid Datatype, please implement Property.GetPropertyTypeString()>";
         }

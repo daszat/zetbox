@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.Memory
+namespace Zetbox.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
+    using Zetbox.API;
     
     public abstract class ValueCollectionEntryMemoryImpl<TA, TAImpl, TB>
         : BaseMemoryPersistenceObject

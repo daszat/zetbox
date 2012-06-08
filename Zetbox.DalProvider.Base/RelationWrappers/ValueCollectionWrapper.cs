@@ -1,13 +1,13 @@
 
-// TODO: move to Kistl.DalProvider.Base project
-namespace Kistl.DalProvider.Base.RelationWrappers
+// TODO: move to Zetbox.DalProvider.Base project
+namespace Zetbox.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         : ICollection<TValue>
@@ -18,11 +18,11 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         protected readonly TParent parent;
         protected readonly Action parentNotifier;
         protected readonly TEntryCollection collection;
-        protected readonly IKistlContext ctx;
+        protected readonly IZetboxContext ctx;
         protected readonly ImplementationType tEntryImplementation;
         protected readonly InterfaceType tEntryInterface;
 
-        protected ValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+        protected ValueCollectionWrapper(IZetboxContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (parent == null) { throw new ArgumentNullException("parent"); }
@@ -199,7 +199,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
     {
-        protected ValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+        protected ValueListWrapper(IZetboxContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
         {
         }
@@ -220,11 +220,11 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         protected void RepairIndexes()
         {
             int i = 0;
-            foreach (var entry in collection.OrderBy(e => e.Index ?? Kistl.API.Helper.LASTINDEXPOSITION))
+            foreach (var entry in collection.OrderBy(e => e.Index ?? Zetbox.API.Helper.LASTINDEXPOSITION))
             {
                 entry.Index = i++;
             }
-            Kistl.API.Utils.Logging.Log.Warn("RepairIndexes");
+            Zetbox.API.Utils.Logging.Log.Warn("RepairIndexes");
         }
 
         protected override void OnEntryAdded(TEntry entry)
@@ -244,7 +244,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
                 return -1;
 
             int? result = entry.Index;
-            if (result == null || result.Value == Kistl.API.Helper.LASTINDEXPOSITION)
+            if (result == null || result.Value == Zetbox.API.Helper.LASTINDEXPOSITION)
                 throw new InvalidOperationException("Collection is not sorted");
 
             return result.Value;
@@ -262,7 +262,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             // TODO: Optimize
             foreach (TEntry entry in collection)
             {
-                int idx = entry.Index ?? Kistl.API.Helper.LASTINDEXPOSITION;
+                int idx = entry.Index ?? Zetbox.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
                 {
                     entry.Index = idx + 1;
@@ -294,7 +294,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             // Position updating
             foreach (TEntry entry in collection)
             {
-                int idx = entry.Index ?? Kistl.API.Helper.LASTINDEXPOSITION;
+                int idx = entry.Index ?? Zetbox.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
                 {
                     entry.Index = idx - 1;

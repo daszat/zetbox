@@ -1,25 +1,25 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.KistlBase;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
     public class RoleMembershipViewModel : DataObjectViewModel
     {
-        public new delegate RoleMembershipViewModel Factory(IKistlContext dataCtx, ViewModel parent, RoleMembership roleMembership);
+        public new delegate RoleMembershipViewModel Factory(IZetboxContext dataCtx, ViewModel parent, RoleMembership roleMembership);
 
         public RoleMembershipViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             RoleMembership roleMembership)
             : base(appCtx, dataCtx, parent, roleMembership)
         {

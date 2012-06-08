@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Kistl.Client.Forms.View
+namespace Zetbox.Client.Forms.View
 {
     public partial class FormsValueControl : UserControl
     {

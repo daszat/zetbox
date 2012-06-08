@@ -8,17 +8,17 @@
     <ProjectGuid>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.API</RootNamespace>
-    <AssemblyName>Kistl.API.Tests</AssemblyName>
+    <RootNamespace>Zetbox.API</RootNamespace>
+    <AssemblyName>Zetbox.API.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
     <StartAction>Program</StartAction>
     <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
-    <StartArguments>Kistl.API.Tests.nunit /config:Studio</StartArguments>
+    <StartArguments>Zetbox.API.Tests.nunit /config:Studio</StartArguments>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -132,31 +132,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Kistl.API.Tests.PartCoverSettings.xml" />
+    <None Include="Zetbox.API.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
+    <ProjectReference Include="..\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj">
       <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
-      <Name>Kistl.API.AbstractConsumerTests</Name>
+      <Name>Zetbox.API.AbstractConsumerTests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Mocks\Kistl.API.Mocks.csproj">
+    <ProjectReference Include="..\Zetbox.API.Mocks\Zetbox.API.Mocks.csproj">
       <Project>{95E39A40-35BC-4214-86E5-EE451C138EE1}</Project>
-      <Name>Kistl.API.Mocks</Name>
+      <Name>Zetbox.API.Mocks</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.API.Tests.nunit">
+    <None Include="Zetbox.API.Tests.nunit">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestConfig.xml">

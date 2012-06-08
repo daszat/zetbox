@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -7,16 +7,16 @@ namespace Kistl.Client.Presentables
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public class ActionViewModel
         : CommandViewModel
     {
-        public new delegate ActionViewModel Factory(IKistlContext dataCtx, ViewModel parent, IDataObject obj, Method m);
+        public new delegate ActionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IDataObject obj, Method m);
 
         public ActionViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, 
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, 
             IDataObject obj, Method m)
             : base(appCtx, dataCtx, parent, string.Empty, string.Empty)
         {

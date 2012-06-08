@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace Kistl.Client.Bootstrapper
+namespace Zetbox.Client.Bootstrapper
 {
     public static class Helper
     {

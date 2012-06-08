@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>Default WinFormsClient Configuration</ConfigName>
   <Client StartClient="false" ThrowErrors="false">
     <DocumentStore>..\..\..\..\DocumentStore\Client\</DocumentStore>
@@ -8,6 +8,6 @@
     <!-- default probe path -->
     <string>..\..\..\CodeGen\bin\Debug</string>
     <!-- common libaries -->
-    <string>P:\Kistl\bin\Debug\bin\Common</string>
+    <string>P:\Zetbox\bin\Debug\bin\Common</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>

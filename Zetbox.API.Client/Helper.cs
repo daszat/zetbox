@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.API.Client
+namespace Zetbox.API.Client
 {
     public static class ClientExtensionHelper
     {

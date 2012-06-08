@@ -5,10 +5,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ValueViewModels;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ValueViewModels;
 
-namespace Kistl.Client.Forms.View
+namespace Zetbox.Client.Forms.View
 {
     public partial class DataObjectReferenceView : DataObjectReferenceViewDesignerProxy
     {

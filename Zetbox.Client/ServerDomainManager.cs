@@ -1,5 +1,5 @@
 
-namespace Kistl.Client
+namespace Zetbox.Client
 {
     using System;
     using System.Collections.Generic;
@@ -7,24 +7,24 @@ namespace Kistl.Client
     using System.Runtime.Remoting.Lifetime;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
 
     /// <summary>
-    /// Delegates the <see cref="IKistlAppDomain"/> interface into a new AppDomain.
+    /// Delegates the <see cref="IZetboxAppDomain"/> interface into a new AppDomain.
     /// </summary>
     public sealed class ServerDomainManager
-        : IKistlAppDomain, IDisposable
+        : IZetboxAppDomain, IDisposable
     {
         private readonly static object _lock = new object();
 
-        private IKistlAppDomain serverManager = null;
+        private IZetboxAppDomain serverManager = null;
         private AppDomain serverDomain = null;
         private ClientSponsor clientSponsor;
 
-        public void Start(KistlConfig config)
+        public void Start(ZetboxConfig config)
         {
             using (Logging.Log.DebugTraceMethodCall("Start", "Starting AppDomain for Server"))
             {
@@ -34,9 +34,9 @@ namespace Kistl.Client
 
                 AssemblyLoader.Bootstrap(serverDomain, config);
 
-                serverManager = (IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap(
-                    "Kistl.Server.Service",
-                    "Kistl.Server.Service.ServerManager");
+                serverManager = (IZetboxAppDomain)serverDomain.CreateInstanceAndUnwrap(
+                    "Zetbox.Server.Service",
+                    "Zetbox.Server.Service.ServerManager");
                 serverManager.Start(config);
 
                 if (clientSponsor == null)

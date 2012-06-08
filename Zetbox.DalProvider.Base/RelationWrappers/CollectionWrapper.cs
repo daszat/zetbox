@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.Base.RelationWrappers
+namespace Zetbox.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public class ASideCollectionWrapper<TA, TB, TEntry, TBaseCollection>
         : BaseCollectionWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>

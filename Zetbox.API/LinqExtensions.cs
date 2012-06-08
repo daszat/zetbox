@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections;
@@ -399,7 +399,7 @@ namespace Kistl.API
             if (sb == null) { throw new ArgumentNullException("sb"); }
 
             Type t = e.GetType();
-            string indentString = Kistl.API.Helper.Indent(indent);
+            string indentString = Zetbox.API.Helper.Indent(indent);
             sb.Append(indentString);
             sb.AppendLine(t.FullName);
 
@@ -423,7 +423,7 @@ namespace Kistl.API
 
         private static void TraceExpressionAttributes(object obj, PropertyInfo pInfo, StringBuilder sb, int indent)
         {
-            string indentString = Kistl.API.Helper.Indent(indent);
+            string indentString = Zetbox.API.Helper.Indent(indent);
             sb.Append(indentString);
             sb.AppendFormat("[{0}] {1}: ", pInfo.PropertyType.Name, pInfo.Name);
 

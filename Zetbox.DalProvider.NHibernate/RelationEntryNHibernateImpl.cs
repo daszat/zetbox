@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
+    using Zetbox.API;
     
     public abstract class RelationEntryNHibernateImpl<TA, TAImpl, TB, TBImpl>
         : NHibernatePersistenceObject

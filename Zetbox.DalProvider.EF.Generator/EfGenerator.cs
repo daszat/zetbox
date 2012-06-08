@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.Ef.Generator
+namespace Zetbox.DalProvider.Ef.Generator
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
-    using Kistl.Generator;
+    using Zetbox.API.Server;
+    using Zetbox.Generator;
 
     public class EntityFrameworkGenerator
         : AbstractBaseGenerator
@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.Ef.Generator
 
         public override string ExtraSuffix { get { return "Ef"; } }
         public override string Description { get { return "Ef"; } }
-        public override string TargetNameSpace { get { return "Kistl.Objects.Ef"; } }
+        public override string TargetNameSpace { get { return "Zetbox.Objects.Ef"; } }
         public override string BaseName { get { return "Ef"; } }
         public override string ProjectGuid { get { return "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}"; } }
         public override int CompileOrder { get { return COMPILE_ORDER_Implementation; } }
@@ -28,15 +28,15 @@ namespace Kistl.DalProvider.Ef.Generator
             get
             {
                 return new string[]{
-                   "Kistl.API.Server",
-                   "Kistl.DalProvider.Ef",
+                   "Zetbox.API.Server",
+                   "Zetbox.DalProvider.Ef",
                    "System.Data.Objects",
                    "System.Data.Objects.DataClasses" 
                 };
             }
         }
 
-        protected override IEnumerable<string> Generate_Other(Kistl.API.IKistlContext ctx)
+        protected override IEnumerable<string> Generate_Other(Zetbox.API.IZetboxContext ctx)
         {
             using (log4net.NDC.Push("EfGenerateOther"))
             {

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.ASPNET.Toolkit
+namespace Zetbox.Client.ASPNET.Toolkit
 {
     using System;
     using System.Collections.Generic;
@@ -8,13 +8,13 @@ namespace Kistl.Client.ASPNET.Toolkit
     using System.Web;
     using System.Web.UI;
 
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Client.PerfCounter;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Client.PerfCounter;
 
     [AttributeUsage(AttributeTargets.Class)]
     public class ControlLocation : Attribute
@@ -40,7 +40,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         : ViewModelFactory
     {
 
-        public AspnetModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, KistlConfig cfg, IPerfCounter perfCounter)
+        public AspnetModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
             : base(container, metaCtx, cfg, perfCounter)
         {
 

@@ -4,13 +4,13 @@ echo Pull the binaries and scripts from a specified location.
 echo Use this to update your local environment to a locally compiled copy.
 echo ********************************************************************************
 
-set source=P:\Kistl
+set source=P:\Zetbox
 
 if .%1. == .. GOTO NO_SOURCE
 set source=%1
 :NO_SOURCE
 
-set destination=.\Libs\Kistl
+set destination=.\Libs\Zetbox
 if .%2. == .. GOTO NO_DESTINATION
 set destination=%2
 :NO_DESTINATION

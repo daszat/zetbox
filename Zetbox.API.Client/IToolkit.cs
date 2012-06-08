@@ -1,10 +1,10 @@
-namespace Kistl.API.Client
+namespace Zetbox.API.Client
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.GUI;
+    using Zetbox.App.GUI;
 
     public interface IToolkit
     {

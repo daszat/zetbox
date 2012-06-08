@@ -1,15 +1,15 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-using Kistl.API.Server.PerfCounter;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+using Zetbox.API.Server.PerfCounter;
 
     internal sealed class NHibernateQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
@@ -42,7 +42,7 @@ using Kistl.API.Server.PerfCounter;
 
         protected override string ImplementationSuffix
         {
-            get { return "NHibernate" + Kistl.API.Helper.ImplementationSuffix; }
+            get { return "NHibernate" + Zetbox.API.Helper.ImplementationSuffix; }
         }
 
         protected override Type TranslateType(Type type)

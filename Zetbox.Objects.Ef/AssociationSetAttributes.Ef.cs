@@ -3,8 +3,8 @@ using System.Data.Objects.DataClasses;
 using System.Xml;
 using System.Xml.Serialization;
 
-using Kistl.API;
-using Kistl.DalProvider.Ef;
+using Zetbox.API;
+using Zetbox.DalProvider.Ef;
 
 
 	/*
@@ -17,8 +17,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_AbstractModuleMember_has_Module",
-    "AbstractModuleMember", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AbstractModuleMemberEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "AbstractModuleMember", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AbstractModuleMemberEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -32,8 +32,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_AbstractModuleMember_was_ChangedBy",
-    "AbstractModuleMember", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AbstractModuleMemberEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "AbstractModuleMember", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AbstractModuleMemberEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -47,8 +47,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_AbstractModuleMember_was_CreatedBy",
-    "AbstractModuleMember", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AbstractModuleMemberEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "AbstractModuleMember", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AbstractModuleMemberEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -62,8 +62,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_AccessControl_has_Module",
-    "AccessControl", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AccessControlEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "AccessControl", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AccessControlEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -77,8 +77,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_AccessControl_was_ChangedBy",
-    "AccessControl", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AccessControlEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "AccessControl", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AccessControlEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -92,8 +92,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_AccessControl_was_CreatedBy",
-    "AccessControl", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AccessControlEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "AccessControl", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AccessControlEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -107,8 +107,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Application_has_Module",
-    "Application", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ApplicationEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "Application", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ApplicationEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -122,8 +122,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Application_has_RootScreen",
-    "Application", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ApplicationEfImpl),
-    "RootScreen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.NavigationScreenEfImpl)
+    "Application", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ApplicationEfImpl),
+    "RootScreen", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.NavigationScreenEfImpl)
     )]
 
 
@@ -137,8 +137,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Application_opens_a_WorkspaceViewModel",
-    "Application", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ApplicationEfImpl),
-    "WorkspaceViewModel", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl)
+    "Application", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ApplicationEfImpl),
+    "WorkspaceViewModel", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
     )]
 
 
@@ -152,8 +152,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Application_was_ChangedBy",
-    "Application", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ApplicationEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Application", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ApplicationEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -167,8 +167,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Application_was_CreatedBy",
-    "Application", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ApplicationEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Application", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ApplicationEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -181,13 +181,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ASide_connectsTo_BSide_A",
-    "ASide", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.N_to_M_relations_AEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl)
+    "ASide", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.N_to_M_relations_AEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ASide_connectsTo_BSide_B",
-    "BSide", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.N_to_M_relations_BEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl)
+    "BSide", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.N_to_M_relations_BEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl)
     )]
 
 	/*
@@ -200,8 +200,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Assembly_was_ChangedBy",
-    "Assembly", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AssemblyEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Assembly", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AssemblyEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -215,8 +215,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Assembly_was_CreatedBy",
-    "Assembly", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AssemblyEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Assembly", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AssemblyEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -230,8 +230,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Auftrag_ChangedBy_ChangedBy",
-    "Auftrag", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.AuftragEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Auftrag", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.AuftragEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -245,8 +245,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Auftrag_CreatedBy_CreatedBy",
-    "Auftrag", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.AuftragEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Auftrag", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.AuftragEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -260,8 +260,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Auftrag_has_Kunde",
-    "Auftrag", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.AuftragEfImpl),
-    "Kunde", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.KundeEfImpl)
+    "Auftrag", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.AuftragEfImpl),
+    "Kunde", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.KundeEfImpl)
     )]
 
 
@@ -275,8 +275,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Auftrag_has_Mitarbeiter",
-    "Auftrag", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.AuftragEfImpl),
-    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.MitarbeiterEfImpl)
+    "Auftrag", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.AuftragEfImpl),
+    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.MitarbeiterEfImpl)
     )]
 
 
@@ -290,8 +290,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_BaseCalendar_has_ChildCalendar",
-    "BaseCalendar", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Calendar.CalendarEfImpl),
-    "ChildCalendar", RelationshipMultiplicity.Many, typeof(Kistl.App.Calendar.CalendarEfImpl)
+    "BaseCalendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "ChildCalendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl)
     )]
 
 
@@ -305,8 +305,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_BaseObjectClass_has_SubClasses",
-    "BaseObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl),
-    "SubClasses", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClassEfImpl)
+    "BaseObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl),
+    "SubClasses", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ObjectClassEfImpl)
     )]
 
 
@@ -320,8 +320,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_BaseParameter_was_ChangedBy",
-    "BaseParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameterEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "BaseParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.BaseParameterEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -335,8 +335,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_BaseParameter_was_CreatedBy",
-    "BaseParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameterEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "BaseParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.BaseParameterEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -350,8 +350,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_BaseProperty_has_Module",
-    "BaseProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "BaseProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -365,8 +365,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_BoolProperty_has_FalseIcon",
-    "BoolProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BoolPropertyEfImpl),
-    "FalseIcon", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.IconEfImpl)
+    "BoolProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.BoolPropertyEfImpl),
+    "FalseIcon", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.IconEfImpl)
     )]
 
 
@@ -380,8 +380,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_BoolProperty_has_NullIcon",
-    "BoolProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BoolPropertyEfImpl),
-    "NullIcon", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.IconEfImpl)
+    "BoolProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.BoolPropertyEfImpl),
+    "NullIcon", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.IconEfImpl)
     )]
 
 
@@ -395,8 +395,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_BoolProperty_has_TrueIcon",
-    "BoolProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BoolPropertyEfImpl),
-    "TrueIcon", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.IconEfImpl)
+    "BoolProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.BoolPropertyEfImpl),
+    "TrueIcon", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.IconEfImpl)
     )]
 
 
@@ -409,13 +409,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_CalculatedReference_dependsOn_InputProperties_A",
-    "CalculatedReference", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl)
+    "CalculatedReference", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_CalculatedReference_dependsOn_InputProperties_B",
-    "InputProperties", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.PropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl)
+    "InputProperties", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl)
     )]
 
 	/*
@@ -428,8 +428,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_CalculatedReference_references_ReferencedClass",
-    "CalculatedReference", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferencePropertyEfImpl),
-    "ReferencedClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl)
+    "CalculatedReference", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl),
+    "ReferencedClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
     )]
 
 
@@ -443,8 +443,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Calendar_has_CalendarRules",
-    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Calendar.CalendarEfImpl),
-    "CalendarRules", RelationshipMultiplicity.Many, typeof(Kistl.App.Calendar.CalendarRuleEfImpl)
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "CalendarRules", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarRuleEfImpl)
     )]
 
 
@@ -458,8 +458,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Calendar_has_Module",
-    "Calendar", RelationshipMultiplicity.Many, typeof(Kistl.App.Calendar.CalendarEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -473,8 +473,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Calendar_was_ChangedBy",
-    "Calendar", RelationshipMultiplicity.Many, typeof(Kistl.App.Calendar.CalendarEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -488,8 +488,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Calendar_was_CreatedBy",
-    "Calendar", RelationshipMultiplicity.Many, typeof(Kistl.App.Calendar.CalendarEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -503,8 +503,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_CalendarRule_has_Module",
-    "CalendarRule", RelationshipMultiplicity.Many, typeof(Kistl.App.Calendar.CalendarRuleEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "CalendarRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarRuleEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -518,8 +518,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_CalendarRule_was_ChangedBy",
-    "CalendarRule", RelationshipMultiplicity.Many, typeof(Kistl.App.Calendar.CalendarRuleEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "CalendarRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarRuleEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -533,8 +533,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_CalendarRule_was_CreatedBy",
-    "CalendarRule", RelationshipMultiplicity.Many, typeof(Kistl.App.Calendar.CalendarRuleEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "CalendarRule", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarRuleEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -548,8 +548,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Child_has_Parent",
-    "Child", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRefEfImpl),
-    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl)
+    "Child", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -563,8 +563,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ChildControlKinds_have_a_Parent",
-    "ChildControlKinds", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlKindEfImpl),
-    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "ChildControlKinds", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ControlKindEfImpl),
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -578,8 +578,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ClrObjectParameter_isOf_Type",
-    "ClrObjectParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CLRObjectParameterEfImpl),
-    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl)
+    "ClrObjectParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CLRObjectParameterEfImpl),
+    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -593,8 +593,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_CompoundObjectProperty_has_CompoundObjectDefinition",
-    "CompoundObjectProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CompoundObjectPropertyEfImpl),
-    "CompoundObjectDefinition", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.CompoundObjectEfImpl)
+    "CompoundObjectProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CompoundObjectPropertyEfImpl),
+    "CompoundObjectDefinition", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.CompoundObjectEfImpl)
     )]
 
 
@@ -609,7 +609,7 @@ using Kistl.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_Configuration_of_Identity",
     "Configuration", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileImportConfigurationEfImpl),
-    "Identity", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Identity", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -623,8 +623,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ConstrainedProperty_has_Constraints",
-    "ConstrainedProperty", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.PropertyEfImpl),
-    "Constraints", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ConstraintEfImpl)
+    "ConstrainedProperty", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "Constraints", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ConstraintEfImpl)
     )]
 
 
@@ -638,8 +638,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Constraint_invokes_GetErrorTextInvocation",
-    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.InvokingConstraintEfImpl),
-    "GetErrorTextInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ConstraintInvocationEfImpl)
+    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.InvokingConstraintEfImpl),
+    "GetErrorTextInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl)
     )]
 
 
@@ -653,8 +653,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Constraint_invokes_IsValidInvocation",
-    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.InvokingConstraintEfImpl),
-    "IsValidInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ConstraintInvocationEfImpl)
+    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.InvokingConstraintEfImpl),
+    "IsValidInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl)
     )]
 
 
@@ -668,8 +668,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Constraint_on_Constrained",
-    "Constraint", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.InstanceConstraintEfImpl),
-    "Constrained", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataTypeEfImpl)
+    "Constraint", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.InstanceConstraintEfImpl),
+    "Constrained", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.DataTypeEfImpl)
     )]
 
 
@@ -683,8 +683,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Constraint_was_ChangedBy",
-    "Constraint", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ConstraintEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Constraint", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ConstraintEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -698,8 +698,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Constraint_was_CreatedBy",
-    "Constraint", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ConstraintEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Constraint", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ConstraintEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -713,8 +713,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ConstraintInvocation_has_TypeRef",
-    "ConstraintInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ConstraintInvocationEfImpl),
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl)
+    "ConstraintInvocation", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl),
+    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -728,8 +728,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ControlKind_has_Module",
-    "ControlKind", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlKindEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "ControlKind", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ControlKindEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -743,8 +743,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_CPParameter_has_CompoundObject",
-    "CPParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CompoundObjectParameterEfImpl),
-    "CompoundObject", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.CompoundObjectEfImpl)
+    "CPParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CompoundObjectParameterEfImpl),
+    "CompoundObject", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.CompoundObjectEfImpl)
     )]
 
 
@@ -758,8 +758,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_DataType_has_DefaultIcon",
-    "DataType", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataTypeEfImpl),
-    "DefaultIcon", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.IconEfImpl)
+    "DataType", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataTypeEfImpl),
+    "DefaultIcon", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.IconEfImpl)
     )]
 
 
@@ -772,13 +772,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_DataType_implements_ImplementedInterfaces_A",
-    "DataType", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataTypeEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl)
+    "DataType", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.DataTypeEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_DataType_implements_ImplementedInterfaces_B",
-    "ImplementedInterfaces", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.InterfaceEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl)
+    "ImplementedInterfaces", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.InterfaceEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl)
     )]
 
 	/*
@@ -791,8 +791,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_DataType_may_request_ControlKind",
-    "DataType", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataTypeEfImpl),
-    "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "DataType", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataTypeEfImpl),
+    "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -806,8 +806,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_DataType_was_ChangedBy",
-    "DataType", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataTypeEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "DataType", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataTypeEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -821,8 +821,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_DataType_was_CreatedBy",
-    "DataType", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataTypeEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "DataType", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataTypeEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -836,8 +836,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_DefaultPropertyValue_was_ChangedBy",
-    "DefaultPropertyValue", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DefaultPropertyValueEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "DefaultPropertyValue", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DefaultPropertyValueEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -851,8 +851,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_DefaultPropertyValue_was_CreatedBy",
-    "DefaultPropertyValue", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DefaultPropertyValueEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "DefaultPropertyValue", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DefaultPropertyValueEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -866,8 +866,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Descriptor_has_ViewModelRef",
-    "Descriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl),
-    "ViewModelRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl)
+    "Descriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
+    "ViewModelRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -885,7 +885,7 @@ using Kistl.DalProvider.Ef;
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Document_has_Revisions_B",
-    "Revisions", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BlobEfImpl),
+    "Revisions", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.BlobEfImpl),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl)
     )]
 
@@ -899,8 +899,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Document_was_ChangedBy",
-    "Document", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BlobEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Document", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.BlobEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -914,8 +914,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Document_was_CreatedBy",
-    "Document", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BlobEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Document", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.BlobEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -929,8 +929,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Ein_Fragebogen_enthaelt_gute_Antworten",
-    "Ein_Fragebogen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.FragebogenEfImpl),
-    "gute_Antworten", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.AntwortEfImpl)
+    "Ein_Fragebogen", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.FragebogenEfImpl),
+    "gute_Antworten", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.AntwortEfImpl)
     )]
 
 
@@ -944,8 +944,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_EnumDefaultValue_defaults_to_EnumValue",
-    "EnumDefaultValue", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumDefaultValueEfImpl),
-    "EnumValue", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.EnumerationEntryEfImpl)
+    "EnumDefaultValue", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.EnumDefaultValueEfImpl),
+    "EnumValue", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.EnumerationEntryEfImpl)
     )]
 
 
@@ -959,8 +959,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Enumeration_has_EnumerationEntries",
-    "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.EnumerationEfImpl),
-    "EnumerationEntries", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationEntryEfImpl)
+    "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.EnumerationEfImpl),
+    "EnumerationEntries", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.EnumerationEntryEfImpl)
     )]
 
 
@@ -974,8 +974,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_EnumerationEntry_was_ChangedBy",
-    "EnumerationEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationEntryEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "EnumerationEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.EnumerationEntryEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -989,8 +989,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_EnumerationEntry_was_CreatedBy",
-    "EnumerationEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationEntryEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "EnumerationEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.EnumerationEntryEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1004,8 +1004,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_EnumerationProperty_has_Enumeration",
-    "EnumerationProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationPropertyEfImpl),
-    "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.EnumerationEfImpl)
+    "EnumerationProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.EnumerationPropertyEfImpl),
+    "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.EnumerationEfImpl)
     )]
 
 
@@ -1019,8 +1019,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_EnumParameter_has_Enumeration",
-    "EnumParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumParameterEfImpl),
-    "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.EnumerationEfImpl)
+    "EnumParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.EnumParameterEfImpl),
+    "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.EnumerationEfImpl)
     )]
 
 
@@ -1035,7 +1035,7 @@ using Kistl.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_File_has_Blob",
     "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileEfImpl),
-    "Blob", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BlobEfImpl)
+    "Blob", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.BlobEfImpl)
     )]
 
 
@@ -1050,7 +1050,7 @@ using Kistl.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_File_was_ChangedBy",
     "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1065,7 +1065,7 @@ using Kistl.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_File_was_CreatedBy",
     "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1080,7 +1080,7 @@ using Kistl.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_FileImportConfiguration_was_ChangedBy",
     "FileImportConfiguration", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileImportConfigurationEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1095,7 +1095,7 @@ using Kistl.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_FileImportConfiguration_was_CreatedBy",
     "FileImportConfiguration", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileImportConfigurationEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1109,8 +1109,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_FilterConfiguration_has_Module",
-    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfigurationEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.FilterConfigurationEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -1124,8 +1124,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_FilterConfiguration_has_RequestedKind",
-    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfigurationEfImpl),
-    "RequestedKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.FilterConfigurationEfImpl),
+    "RequestedKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -1139,8 +1139,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_FilterConfiguration_has_ViewModelDescriptor",
-    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfigurationEfImpl),
-    "ViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl)
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.FilterConfigurationEfImpl),
+    "ViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
     )]
 
 
@@ -1154,8 +1154,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_FilterConfiguration_was_ChangedBy",
-    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfigurationEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.FilterConfigurationEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1169,8 +1169,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_FilterConfiguration_was_CreatedBy",
-    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfigurationEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.FilterConfigurationEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1184,8 +1184,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_FK_Column_references_PK_Column",
-    "FK_Column", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceColumnEfImpl),
-    "PK_Column", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceColumnEfImpl)
+    "FK_Column", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "PK_Column", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl)
     )]
 
 
@@ -1199,8 +1199,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Group_has_Module",
-    "Group", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.GroupEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "Group", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.GroupEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -1214,8 +1214,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_GroupMembership_has_Group",
-    "GroupMembership", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.GroupMembershipEfImpl),
-    "Group", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.GroupEfImpl)
+    "GroupMembership", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.GroupMembershipEfImpl),
+    "Group", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl)
     )]
 
 
@@ -1229,8 +1229,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Icon_has_Blob",
-    "Icon", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.IconEfImpl),
-    "Blob", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BlobEfImpl)
+    "Icon", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.IconEfImpl),
+    "Blob", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.BlobEfImpl)
     )]
 
 
@@ -1244,8 +1244,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Icon_has_Module",
-    "Icon", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.IconEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "Icon", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.IconEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -1258,13 +1258,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Identities_memberOf_Groups_A",
-    "Identities", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Identity_memberOf_Group_RelationEntryEfImpl)
+    "Identities", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Identities_memberOf_Groups_B",
-    "Groups", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.GroupEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Identity_memberOf_Group_RelationEntryEfImpl)
+    "Groups", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1277,8 +1277,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Kunde_was_ChangedBy",
-    "Kunde", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.KundeEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Kunde", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.KundeEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1292,8 +1292,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Kunde_was_CreatedBy",
-    "Kunde", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.KundeEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Kunde", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.KundeEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1307,8 +1307,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_MB_Lst_Role_hasOther_TCO_Role",
-    "MB_Lst_Role", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.MuhblahEfImpl),
-    "TCO_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestCustomObjectEfImpl)
+    "MB_Lst_Role", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.MuhblahEfImpl),
+    "TCO_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.TestCustomObjectEfImpl)
     )]
 
 
@@ -1321,13 +1321,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_MB_Many_Role_has_TCO_ManyList_Role_A",
-    "MB_Many_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.MuhblahEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl)
+    "MB_Many_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.MuhblahEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_MB_Many_Role_has_TCO_ManyList_Role_B",
-    "TCO_ManyList_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestCustomObjectEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl)
+    "TCO_ManyList_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.TestCustomObjectEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1340,8 +1340,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_MB_One_Role_loves_TCO_One_Role",
-    "MB_One_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.MuhblahEfImpl),
-    "TCO_One_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestCustomObjectEfImpl)
+    "MB_One_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.MuhblahEfImpl),
+    "TCO_One_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.TestCustomObjectEfImpl)
     )]
 
 
@@ -1355,8 +1355,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_MB_Role_has_TCO_Lst_Role",
-    "MB_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.MuhblahEfImpl),
-    "TCO_Lst_Role", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestCustomObjectEfImpl)
+    "MB_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.MuhblahEfImpl),
+    "TCO_Lst_Role", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TestCustomObjectEfImpl)
     )]
 
 
@@ -1370,8 +1370,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Method_has_Icon",
-    "Method", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodEfImpl),
-    "Icon", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.IconEfImpl)
+    "Method", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.MethodEfImpl),
+    "Icon", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.IconEfImpl)
     )]
 
 
@@ -1385,8 +1385,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Method_has_Module",
-    "Method", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "Method", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.MethodEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -1400,8 +1400,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Method_has_Parameter",
-    "Method", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodEfImpl),
-    "Parameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameterEfImpl)
+    "Method", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.MethodEfImpl),
+    "Parameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.BaseParameterEfImpl)
     )]
 
 
@@ -1415,8 +1415,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Method_was_ChangedBy",
-    "Method", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Method", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.MethodEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1430,8 +1430,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Method_was_CreatedBy",
-    "Method", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Method", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.MethodEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1445,8 +1445,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_MigrationProject_migrates_to_Module",
-    "MigrationProject", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.MigrationProjectEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "MigrationProject", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.MigrationProjectEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -1460,8 +1460,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_MigrationProject_reads_from_StagingDatabases",
-    "MigrationProject", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.MigrationProjectEfImpl),
-    "StagingDatabases", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.StagingDatabaseEfImpl)
+    "MigrationProject", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.MigrationProjectEfImpl),
+    "StagingDatabases", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.StagingDatabaseEfImpl)
     )]
 
 
@@ -1475,8 +1475,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_MigrationProject_was_ChangedBy",
-    "MigrationProject", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.MigrationProjectEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "MigrationProject", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.MigrationProjectEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1490,8 +1490,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_MigrationProject_was_CreatedBy",
-    "MigrationProject", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.MigrationProjectEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "MigrationProject", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.MigrationProjectEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1505,8 +1505,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Mitarbeiter_is_a_Identity",
-    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.MitarbeiterEfImpl),
-    "Identity", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.MitarbeiterEfImpl),
+    "Identity", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1520,8 +1520,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Mitarbeiter_was_ChangedBy",
-    "Mitarbeiter", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.MitarbeiterEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Mitarbeiter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.MitarbeiterEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1535,8 +1535,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Mitarbeiter_was_CreatedBy",
-    "Mitarbeiter", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.MitarbeiterEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Mitarbeiter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.MitarbeiterEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1550,8 +1550,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Module_contains_Assemblies",
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl),
-    "Assemblies", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AssemblyEfImpl)
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl),
+    "Assemblies", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AssemblyEfImpl)
     )]
 
 
@@ -1565,8 +1565,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Module_contains_DataTypes",
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl),
-    "DataTypes", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataTypeEfImpl)
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl),
+    "DataTypes", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataTypeEfImpl)
     )]
 
 
@@ -1580,8 +1580,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Module_has_Relation",
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl),
-    "Relation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEfImpl)
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl),
+    "Relation", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RelationEfImpl)
     )]
 
 
@@ -1595,8 +1595,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Module_was_ChangedBy",
-    "Module", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ModuleEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Module", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ModuleEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1610,8 +1610,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Module_was_CreatedBy",
-    "Module", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ModuleEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Module", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ModuleEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1624,13 +1624,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_NavigationScreen_accessed_by_Groups_A",
-    "NavigationScreen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)
+    "NavigationScreen", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.NavigationEntryEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_NavigationScreen_accessed_by_Groups_B",
-    "Groups", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.GroupEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)
+    "Groups", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1643,8 +1643,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_NavigationScreen_has_Module",
-    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntryEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -1658,8 +1658,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_NavigationScreen_was_ChangedBy",
-    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntryEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1673,8 +1673,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_NavigationScreen_was_CreatedBy",
-    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntryEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1688,8 +1688,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ObjectClass_has_AccessControlList",
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl),
-    "AccessControlList", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AccessControlEfImpl)
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl),
+    "AccessControlList", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.AccessControlEfImpl)
     )]
 
 
@@ -1703,8 +1703,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ObjectClass_Has_FilterConfigurations",
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl),
-    "FilterConfigurations", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ObjectClassFilterConfigurationEfImpl)
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl),
+    "FilterConfigurations", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl)
     )]
 
 
@@ -1718,8 +1718,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ObjectClass_has_Methods",
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataTypeEfImpl),
-    "Methods", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodEfImpl)
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.DataTypeEfImpl),
+    "Methods", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.MethodEfImpl)
     )]
 
 
@@ -1733,8 +1733,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ObjectClass_has_Properties",
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataTypeEfImpl),
-    "Properties", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyEfImpl)
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.DataTypeEfImpl),
+    "Properties", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.PropertyEfImpl)
     )]
 
 
@@ -1748,8 +1748,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ObjectParameter_has_ObjectClass",
-    "ObjectParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceParameterEfImpl),
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl)
+    "ObjectParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ObjectReferenceParameterEfImpl),
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
     )]
 
 
@@ -1763,8 +1763,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass",
-    "ObjectReferencePlaceholderProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferencePlaceholderPropertyEfImpl),
-    "ReferencedObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl)
+    "ObjectReferencePlaceholderProperty", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ObjectReferencePlaceholderPropertyEfImpl),
+    "ReferencedObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
     )]
 
 
@@ -1777,13 +1777,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ObjRefProp_shows_Methods_A",
-    "ObjRefProp", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferencePropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
+    "ObjRefProp", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectReferencePropertyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ObjRefProp_shows_Methods_B",
-    "Methods", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
+    "Methods", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.MethodEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1796,8 +1796,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_OneEnd_hasMany_NEnds",
-    "OneEnd", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.OrderedOneEndEfImpl),
-    "NEnds", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.OrderedNEndEfImpl)
+    "OneEnd", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.OrderedOneEndEfImpl),
+    "NEnds", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.OrderedNEndEfImpl)
     )]
 
 
@@ -1811,8 +1811,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_OneSide_connectsTo_NSide",
-    "OneSide", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.One_to_N_relations_OneEfImpl),
-    "NSide", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.One_to_N_relations_NEfImpl)
+    "OneSide", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.One_to_N_relations_OneEfImpl),
+    "NSide", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.One_to_N_relations_NEfImpl)
     )]
 
 
@@ -1826,8 +1826,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Parent_has_Children",
-    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.MethodTestEfImpl),
-    "Children", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.MethodTestEfImpl)
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.MethodTestEfImpl),
+    "Children", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.MethodTestEfImpl)
     )]
 
 
@@ -1841,8 +1841,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Parent_navigates_to_Children",
-    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
-    "Children", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl)
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.NavigationEntryEfImpl),
+    "Children", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntryEfImpl)
     )]
 
 
@@ -1856,8 +1856,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Parent_of_Children",
-    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.RequiredParentEfImpl),
-    "Children", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.RequiredParentChildEfImpl)
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.RequiredParentEfImpl),
+    "Children", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.RequiredParentChildEfImpl)
     )]
 
 
@@ -1870,13 +1870,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_A",
-    "Presentable", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl)
+    "Presentable", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_B",
-    "SecondaryControlKinds", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl)
+    "SecondaryControlKinds", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1889,8 +1889,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Presentable_has_DefaultKind",
-    "Presentable", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl),
-    "DefaultKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "Presentable", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
+    "DefaultKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -1904,8 +1904,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Presentable_has_DefaultViewModelDescriptor",
-    "Presentable", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClassEfImpl),
-    "DefaultViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl)
+    "Presentable", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ObjectClassEfImpl),
+    "DefaultViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
     )]
 
 
@@ -1919,8 +1919,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Presentable_may_has_DefaultPropViewModelDescriptor",
-    "Presentable", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CompoundObjectEfImpl),
-    "DefaultPropViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl)
+    "Presentable", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CompoundObjectEfImpl),
+    "DefaultPropViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
     )]
 
 
@@ -1934,8 +1934,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Projekt_has_Auftraege",
-    "Projekt", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.ProjektEfImpl),
-    "Auftraege", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.AuftragEfImpl)
+    "Projekt", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.ProjektEfImpl),
+    "Auftraege", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.AuftragEfImpl)
     )]
 
 
@@ -1949,8 +1949,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Projekt_has_Tasks",
-    "Projekt", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.ProjektEfImpl),
-    "Tasks", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.TaskEfImpl)
+    "Projekt", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.ProjektEfImpl),
+    "Tasks", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.TaskEfImpl)
     )]
 
 
@@ -1964,8 +1964,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Projekt_was_ChangedBy",
-    "Projekt", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.ProjektEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Projekt", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.ProjektEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1979,8 +1979,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Projekt_was_CreatedBy",
-    "Projekt", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.ProjektEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Projekt", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.ProjektEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -1993,13 +1993,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Projekte_haben_Mitarbeiter_A",
-    "Projekte", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.ProjektEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl)
+    "Projekte", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.ProjektEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Projekte_haben_Mitarbeiter_B",
-    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.MitarbeiterEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl)
+    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.MitarbeiterEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2012,8 +2012,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Property_has_DefaultValue",
-    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.PropertyEfImpl),
-    "DefaultValue", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DefaultPropertyValueEfImpl)
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "DefaultValue", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.DefaultPropertyValueEfImpl)
     )]
 
 
@@ -2027,8 +2027,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Property_Has_PropertyFilterConfiguration",
-    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.PropertyEfImpl),
-    "PropertyFilterConfiguration", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.PropertyFilterConfigurationEfImpl)
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "PropertyFilterConfiguration", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.PropertyFilterConfigurationEfImpl)
     )]
 
 
@@ -2042,8 +2042,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Property_has_ValueModelDescriptor",
-    "Property", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyEfImpl),
-    "ValueModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl)
+    "Property", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "ValueModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
     )]
 
 
@@ -2057,8 +2057,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Property_may_request_ControlKind",
-    "Property", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyEfImpl),
-    "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "Property", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -2072,8 +2072,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Property_was_ChangedBy",
-    "Property", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Property", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2087,8 +2087,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Property_was_CreatedBy",
-    "Property", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Property", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2102,8 +2102,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Relation_hasA_A",
-    "Relation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEfImpl),
-    "A", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEndEfImpl)
+    "Relation", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RelationEfImpl),
+    "A", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RelationEndEfImpl)
     )]
 
 
@@ -2117,8 +2117,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Relation_hasB_B",
-    "Relation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEfImpl),
-    "B", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEndEfImpl)
+    "Relation", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RelationEfImpl),
+    "B", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RelationEndEfImpl)
     )]
 
 
@@ -2132,8 +2132,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Relation_was_ChangedBy",
-    "Relation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Relation", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RelationEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2147,8 +2147,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Relation_was_CreatedBy",
-    "Relation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Relation", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RelationEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2162,8 +2162,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_RelationEnd_has_Navigator",
-    "RelationEnd", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEndEfImpl),
-    "Navigator", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferencePropertyEfImpl)
+    "RelationEnd", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RelationEndEfImpl),
+    "Navigator", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectReferencePropertyEfImpl)
     )]
 
 
@@ -2177,8 +2177,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_RelationEnd_has_Type",
-    "RelationEnd", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEndEfImpl),
-    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl)
+    "RelationEnd", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RelationEndEfImpl),
+    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
     )]
 
 
@@ -2192,8 +2192,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_RelationEnd_was_ChangedBy",
-    "RelationEnd", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEndEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "RelationEnd", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RelationEndEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2207,8 +2207,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_RelationEnd_was_CreatedBy",
-    "RelationEnd", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEndEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "RelationEnd", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RelationEndEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2221,13 +2221,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_RoleMembership_resolves_Relations_A",
-    "RoleMembership", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RoleMembershipEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl)
+    "RoleMembership", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RoleMembershipEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_RoleMembership_resolves_Relations_B",
-    "Relations", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl)
+    "Relations", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RelationEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2240,8 +2240,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Screen_modeled_by_ViewModelDescriptor",
-    "Screen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
-    "ViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl)
+    "Screen", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntryEfImpl),
+    "ViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
     )]
 
 
@@ -2255,8 +2255,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Search_has_RequestedEditorKind",
-    "Search", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationSearchScreenEfImpl),
-    "RequestedEditorKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "Search", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationSearchScreenEfImpl),
+    "RequestedEditorKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -2270,8 +2270,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Search_has_RequestedWorkspaceKind",
-    "Search", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationSearchScreenEfImpl),
-    "RequestedWorkspaceKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "Search", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationSearchScreenEfImpl),
+    "RequestedWorkspaceKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -2285,8 +2285,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SearchScreen_of_Type",
-    "SearchScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationSearchScreenEfImpl),
-    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl)
+    "SearchScreen", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationSearchScreenEfImpl),
+    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
     )]
 
 
@@ -2300,8 +2300,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Sequence_has_Data",
-    "Sequence", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.SequenceEfImpl),
-    "Data", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.SequenceDataEfImpl)
+    "Sequence", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.SequenceEfImpl),
+    "Data", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.SequenceDataEfImpl)
     )]
 
 
@@ -2315,8 +2315,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Sequence_has_Module",
-    "Sequence", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.SequenceEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "Sequence", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.SequenceEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -2330,8 +2330,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Sequence_was_ChangedBy",
-    "Sequence", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.SequenceEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Sequence", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.SequenceEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2345,8 +2345,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Sequence_was_CreatedBy",
-    "Sequence", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.SequenceEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Sequence", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.SequenceEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2360,8 +2360,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ServiceDescriptor_describes_a_TypeRef",
-    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ServiceDescriptorEfImpl),
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl)
+    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ServiceDescriptorEfImpl),
+    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -2375,8 +2375,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ServiceDescriptor_has_Module",
-    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ServiceDescriptorEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ServiceDescriptorEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -2390,8 +2390,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ServiceDescriptor_was_ChangedBy",
-    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ServiceDescriptorEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ServiceDescriptorEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2405,8 +2405,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ServiceDescriptor_was_CreatedBy",
-    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ServiceDescriptorEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ServiceDescriptorEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2420,8 +2420,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceColumn_belongs_to_SourceTable",
-    "SourceColumn", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceColumnEfImpl),
-    "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceTableEfImpl)
+    "SourceColumn", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl)
     )]
 
 
@@ -2434,13 +2434,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_SourceColumn_created_Property_A",
-    "SourceColumn", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceColumnEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl)
+    "SourceColumn", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_SourceColumn_created_Property_B",
-    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.PropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl)
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2453,8 +2453,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceColumn_may_have_EnumEntries",
-    "SourceColumn", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceColumnEfImpl),
-    "EnumEntries", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceEnumEfImpl)
+    "SourceColumn", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "EnumEntries", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceEnumEfImpl)
     )]
 
 
@@ -2468,8 +2468,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceColumn_was_ChangedBy",
-    "SourceColumn", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceColumnEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "SourceColumn", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2483,8 +2483,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceColumn_was_CreatedBy",
-    "SourceColumn", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceColumnEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "SourceColumn", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2498,8 +2498,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceEnum_mapps_to_DestinationValue",
-    "SourceEnum", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceEnumEfImpl),
-    "DestinationValue", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.EnumerationEntryEfImpl)
+    "SourceEnum", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceEnumEfImpl),
+    "DestinationValue", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.EnumerationEntryEfImpl)
     )]
 
 
@@ -2513,8 +2513,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceEnum_was_ChangedBy",
-    "SourceEnum", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceEnumEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "SourceEnum", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceEnumEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2528,8 +2528,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceEnum_was_CreatedBy",
-    "SourceEnum", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceEnumEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "SourceEnum", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceEnumEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2543,8 +2543,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceTable_created_ObjectClass",
-    "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceTableEfImpl),
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl)
+    "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl),
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
     )]
 
 
@@ -2558,8 +2558,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceTable_was_ChangedBy",
-    "SourceTable", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceTableEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "SourceTable", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2573,8 +2573,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceTable_was_CreatedBy",
-    "SourceTable", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceTableEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "SourceTable", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2588,8 +2588,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_SourceTables_are_contained_in_StagingDatabase",
-    "SourceTables", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceTableEfImpl),
-    "StagingDatabase", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.StagingDatabaseEfImpl)
+    "SourceTables", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl),
+    "StagingDatabase", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.StagingDatabaseEfImpl)
     )]
 
 
@@ -2603,8 +2603,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_StagingDatabase_was_ChangedBy",
-    "StagingDatabase", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.StagingDatabaseEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "StagingDatabase", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.StagingDatabaseEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2618,8 +2618,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_StagingDatabase_was_CreatedBy",
-    "StagingDatabase", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.StagingDatabaseEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "StagingDatabase", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.StagingDatabaseEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2632,13 +2632,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Student_füllt_aus_Testbogen_A",
-    "Student", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestStudentEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl)
+    "Student", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.TestStudentEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Student_füllt_aus_Testbogen_B",
-    "Testbogen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.FragebogenEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl)
+    "Testbogen", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.FragebogenEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2651,8 +2651,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Task_was_ChangedBy",
-    "Task", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.TaskEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Task", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.TaskEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2666,8 +2666,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Task_was_CreatedBy",
-    "Task", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.TaskEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "Task", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.TaskEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2681,8 +2681,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Template_has_DisplayedTypeAssembly",
-    "Template", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.TemplateEfImpl),
-    "DisplayedTypeAssembly", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.AssemblyEfImpl)
+    "Template", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.TemplateEfImpl),
+    "DisplayedTypeAssembly", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.AssemblyEfImpl)
     )]
 
 
@@ -2696,8 +2696,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Template_has_VisualTree",
-    "Template", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.TemplateEfImpl),
-    "VisualTree", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualEfImpl)
+    "Template", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.TemplateEfImpl),
+    "VisualTree", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl)
     )]
 
 
@@ -2710,13 +2710,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Template_hasMenu_Menu_A",
-    "Template", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.TemplateEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl)
+    "Template", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.TemplateEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Template_hasMenu_Menu_B",
-    "Menu", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl)
+    "Menu", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2729,8 +2729,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_TestObjClass_has_ObjectProp",
-    "TestObjClass", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestObjClassEfImpl),
-    "ObjectProp", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.KundeEfImpl)
+    "TestObjClass", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TestObjClassEfImpl),
+    "ObjectProp", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.KundeEfImpl)
     )]
 
 
@@ -2744,8 +2744,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_TypeRef_has_Assembly",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRefEfImpl),
-    "Assembly", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.AssemblyEfImpl)
+    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
+    "Assembly", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.AssemblyEfImpl)
     )]
 
 
@@ -2758,13 +2758,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_A",
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)
+    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_B",
-    "GenericArguments", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)
+    "GenericArguments", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2777,8 +2777,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_TypeRef_was_ChangedBy",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRefEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2792,8 +2792,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_TypeRef_was_CreatedBy",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRefEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -2806,13 +2806,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_UniqueContraints_ensures_unique_on_Properties_A",
-    "UniqueContraints", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IndexConstraintEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)
+    "UniqueContraints", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IndexConstraintEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_UniqueContraints_ensures_unique_on_Properties_B",
-    "Properties", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.PropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)
+    "Properties", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2825,8 +2825,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_View_has_ControlRef",
-    "View", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptorEfImpl),
-    "ControlRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl)
+    "View", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
+    "ControlRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -2840,8 +2840,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ViewDescriptor_has_Module",
-    "ViewDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptorEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "ViewDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -2855,8 +2855,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ViewDescriptor_is_a_ControlKind",
-    "ViewDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptorEfImpl),
-    "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "ViewDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
+    "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -2869,13 +2869,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
-    "ViewDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewDescriptorEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)
+    "ViewDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_B",
-    "ViewModelTypeRefs", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)
+    "ViewModelTypeRefs", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2888,8 +2888,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ViewModel_displayed_by_DefaultDisplayKind",
-    "ViewModel", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl),
-    "DefaultDisplayKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "ViewModel", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
+    "DefaultDisplayKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -2903,8 +2903,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ViewModel_displayed_by_DefaultGridCellEditorKind",
-    "ViewModel", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl),
-    "DefaultGridCellEditorKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "ViewModel", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
+    "DefaultGridCellEditorKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -2918,8 +2918,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ViewModel_displayed_by_DefaultGridDisplayKind",
-    "ViewModel", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl),
-    "DefaultGridDisplayKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "ViewModel", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
+    "DefaultGridDisplayKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -2933,8 +2933,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind",
-    "ViewModelDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl),
-    "DefaultGridCellKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    "ViewModelDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
+    "DefaultGridCellKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
 
@@ -2948,8 +2948,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ViewModelDescriptor_has_Module",
-    "ViewModelDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
+    "ViewModelDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
 
@@ -2962,13 +2962,13 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Visual_contains_Children_A",
-    "Visual", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_contains_Visual_RelationEntryEfImpl)
+    "Visual", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Visual_contains_Children_B",
-    "Children", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_contains_Visual_RelationEntryEfImpl)
+    "Children", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2981,8 +2981,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Visual_has_Method",
-    "Visual", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.VisualEfImpl),
-    "Method", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodEfImpl)
+    "Visual", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.VisualEfImpl),
+    "Method", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.MethodEfImpl)
     )]
 
 
@@ -2996,8 +2996,8 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Visual_has_Property",
-    "Visual", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.VisualEfImpl),
-    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.PropertyEfImpl)
+    "Visual", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.VisualEfImpl),
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl)
     )]
 
 
@@ -3010,21 +3010,21 @@ using Kistl.DalProvider.Ef;
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Visual_hasContextMenu_ContextMenu_A",
-    "Visual", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl)
+    "Visual", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Visual_hasContextMenu_ContextMenu_B",
-    "ContextMenu", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl)
+    "ContextMenu", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl)
     )]
 
 
 // object-value association
 [assembly: EdmRelationship(
     "Model", "FK_Kunde_value_EMails",
-    "Kunde", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.KundeEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl)
+    "Kunde", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Projekte.KundeEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl)
     )]
 
 
@@ -3032,29 +3032,29 @@ using Kistl.DalProvider.Ef;
 // object-struct association
 [assembly: EdmRelationship(
     "Model", "FK_TestCustomObject_value_PhoneNumbersOther",
-    "TestCustomObject", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestCustomObjectEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl)
+    "TestCustomObject", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.TestCustomObjectEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl)
     )]
 
 
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftraege_Rights", 
 	"Auftrag", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
-	typeof(Kistl.App.Projekte.AuftragEfImpl), 
+	typeof(Zetbox.App.Projekte.AuftragEfImpl), 
 	"Auftrag_Rights", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
-	typeof(Kistl.App.Projekte.Auftrag_RightsEfImpl))]
+	typeof(Zetbox.App.Projekte.Auftrag_RightsEfImpl))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Projekte_Rights", 
 	"Projekt", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
-	typeof(Kistl.App.Projekte.ProjektEfImpl), 
+	typeof(Zetbox.App.Projekte.ProjektEfImpl), 
 	"Projekt_Rights", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
-	typeof(Kistl.App.Projekte.Projekt_RightsEfImpl))]
+	typeof(Zetbox.App.Projekte.Projekt_RightsEfImpl))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Tasks_Rights", 
 	"Task", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
-	typeof(Kistl.App.Projekte.TaskEfImpl), 
+	typeof(Zetbox.App.Projekte.TaskEfImpl), 
 	"Task_Rights", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
-	typeof(Kistl.App.Projekte.Task_RightsEfImpl))]
+	typeof(Zetbox.App.Projekte.Task_RightsEfImpl))]

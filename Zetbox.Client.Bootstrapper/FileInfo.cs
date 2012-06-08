@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace Kistl.Client.Bootstrapper
+namespace Zetbox.Client.Bootstrapper
 {
     public enum FileType
     {
@@ -14,7 +14,7 @@ namespace Kistl.Client.Bootstrapper
         AppConfig = 3,
     }
 
-    [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/ZBox/Bootstrapper")]
+    [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/Zetbox/Bootstrapper")]
     public class FileInfoArray
     {
         [XmlElement("FileInfo")]

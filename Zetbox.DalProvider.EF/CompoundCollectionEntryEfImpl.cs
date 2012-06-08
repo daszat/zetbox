@@ -1,11 +1,11 @@
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public abstract class CompoundCollectionEntryEfImpl<TA, TAImpl, TB, TBImpl>
         : BaseServerCollectionEntry_EntityFramework

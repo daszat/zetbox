@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Mocks
+namespace Zetbox.API.Mocks
 {
     using System;
     using System.Collections.Generic;
@@ -33,7 +33,7 @@ namespace Kistl.API.Mocks
 
         private int PrivateIntProperty { get; set; }
 
-        public Kistl.API.AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
+        public Zetbox.API.AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
 
         public string TestField;
 
@@ -64,7 +64,7 @@ namespace Kistl.API.Mocks
             }
         }
 
-        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             sw.Write(ReadOnlyContext.GetInterfaceType(this).ToSerializableType());
             sw.Write(ID);
@@ -73,7 +73,7 @@ namespace Kistl.API.Mocks
             sw.Write(BoolProperty);
         }
 
-        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             sr.Read(out _ID);
             sr.Read(out _StringProperty);
@@ -133,9 +133,9 @@ namespace Kistl.API.Mocks
                 PropertyChangingWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
-        private IKistlContext _context = null;
+        private IZetboxContext _context = null;
         [XmlIgnore]
-        public IKistlContext Context
+        public IZetboxContext Context
         {
             get
             {
@@ -143,19 +143,19 @@ namespace Kistl.API.Mocks
             }
         }
         [XmlIgnore]
-        public IReadOnlyKistlContext ReadOnlyContext
+        public IReadOnlyZetboxContext ReadOnlyContext
         {
             get
             {
                 return _context;
             }
         }
-        public void AttachToContext(IKistlContext ctx)
+        public void AttachToContext(IZetboxContext ctx)
         {
             _context = ctx;
         }
 
-        public void DetachFromContext(IKistlContext ctx)
+        public void DetachFromContext(IZetboxContext ctx)
         {
             throw new NotImplementedException();
         }

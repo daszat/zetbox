@@ -1,21 +1,21 @@
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.API.Server.PerfCounter;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.API.Server.PerfCounter;
 
     internal sealed class EfQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
     {
-        internal EfQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+        internal EfQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
             : base(metaDataResolver, identity, source, ctx, iftFactory, perfCounter)
         {
         }
@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.Ef
 
         protected override string ImplementationSuffix
         {
-            get { return "Ef" + Kistl.API.Helper.ImplementationSuffix; }
+            get { return "Ef" + Zetbox.API.Helper.ImplementationSuffix; }
         }
 
         protected override System.Linq.Expressions.Expression VisitConstant(System.Linq.Expressions.ConstantExpression c)

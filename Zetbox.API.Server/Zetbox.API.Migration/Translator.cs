@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,14 @@ namespace Kistl.API.Migration
     using System.Globalization;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using ZBox.App.SchemaMigration;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.SchemaMigration;
 
     internal sealed class Translator
         : IDataReader
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Migration.Translator");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Migration.Translator");
 
         //private readonly SourceTable _tbl;
         private readonly IDataReader _source;
@@ -228,7 +228,7 @@ namespace Kistl.API.Migration
                 else
                 {
                     // Try to autoresolve
-                    var enumProp = (Kistl.App.Base.EnumerationProperty)col.DestinationProperty.Last();
+                    var enumProp = (Zetbox.App.Base.EnumerationProperty)col.DestinationProperty.Last();
                     // Lookup by name
                     var destEnumEntry = enumProp.Enumeration.EnumerationEntries.FirstOrDefault(e => e.Name == src_val.ToString());
                     if (destEnumEntry != null)

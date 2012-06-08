@@ -1,18 +1,18 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
     using System;
     using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.Generator.Extensions;
 
     public partial class NotifyingValueProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx, Serialization.SerializationMembersList serializationList,
+            IZetboxContext ctx, Serialization.SerializationMembersList serializationList,
             string type, string name, string modulenamespace, bool isCalculated)
         {
             if (host == null) { throw new ArgumentNullException("host"); }

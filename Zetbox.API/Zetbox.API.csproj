@@ -8,12 +8,12 @@
     <ProjectGuid>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.API</RootNamespace>
-    <AssemblyName>Kistl.API</AssemblyName>
+    <RootNamespace>Zetbox.API</RootNamespace>
+    <AssemblyName>Zetbox.API</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -26,7 +26,7 @@
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Common\Core\Kistl.API.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Common\Core\Zetbox.API.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\Common\Core\Kistl.API.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Common\Core\Zetbox.API.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
@@ -47,7 +47,7 @@
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Common\Core\Kistl.API.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Common\Core\Zetbox.API.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
@@ -72,7 +72,7 @@
     <Compile Include="AutofacExtensions.cs" />
     <Compile Include="CmdLineAction.cs" />
     <Compile Include="CollectionEntries.cs" />
-    <Compile Include="Configuration\KistlConfig.cs" />
+    <Compile Include="Configuration\ZetboxConfig.cs" />
     <Compile Include="DefinitionGuidAttribute.cs" />
     <Compile Include="Dtos\DtoTransformationAttributes.cs" />
     <Compile Include="ExpressionFilter.cs" />
@@ -85,16 +85,16 @@
     <Compile Include="IDataObject.cs" />
     <Compile Include="IFileOpener.cs" />
     <Compile Include="IFilterModel.cs" />
-    <Compile Include="IKistlAppDomain.cs" />
-    <Compile Include="IKistlContext.cs" />
-    <Compile Include="IKistlService.cs" />
+    <Compile Include="IZetboxAppDomain.cs" />
+    <Compile Include="IZetboxContext.cs" />
+    <Compile Include="IZetboxService.cs" />
     <Compile Include="IPackageProvider.cs" />
     <Compile Include="IService.cs" />
-    <Compile Include="KistlStreamWriter.cs" />
-    <Compile Include="KistlStreamReader.cs" />
+    <Compile Include="ZetboxStreamWriter.cs" />
+    <Compile Include="ZetboxStreamReader.cs" />
     <Compile Include="ServiceControlManager.cs" />
-    <Compile Include="KistlContextDebugger.cs" />
-    <Compile Include="KistlGeneratedVersion.cs" />
+    <Compile Include="ZetboxContextDebugger.cs" />
+    <Compile Include="ZetboxGeneratedVersion.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="MailSender.cs" />
     <Compile Include="ModuleRepositoryAttribute.cs" />
@@ -108,7 +108,7 @@
     <Compile Include="PerfCounter\Log4NetAppenderUtils.cs" />
     <Compile Include="ProblemReporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="KistlSourceRevision.cs" />
+    <Compile Include="ZetboxSourceRevision.cs" />
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\SampleConfig.xml" />
-    <None Include="ClassDiagram.Kistl.API.cd" />
+    <None Include="ClassDiagram.Zetbox.API.cd" />
     <None Include="Configuration\CreateSchema.cmd" />
     <None Include="Configuration\schema0.xsd">
       <SubType>Designer</SubType>
@@ -139,7 +139,7 @@
     <None Include="Configuration\schema1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
     <Compile Include="ApiModule.cs" />
     <Compile Include="BaseMemoryContext.cs" />
     <Compile Include="BaseNotifyingObject.cs" />

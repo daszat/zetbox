@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.API.Server.Mocks
+namespace Zetbox.API.Server.Mocks
 {
     public class CustomActionsManagerAPITest : ICustomActionsManager
     {
@@ -13,7 +13,7 @@ namespace Kistl.API.Server.Mocks
         {
         }
 
-        public void Init(IReadOnlyKistlContext ctx)
+        public void Init(IReadOnlyZetboxContext ctx)
         {
             Reset();
         }

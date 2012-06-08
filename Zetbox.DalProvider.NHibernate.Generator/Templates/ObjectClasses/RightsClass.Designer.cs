@@ -1,31 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst")]
-    public partial class RightsClass : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst")]
+    public partial class RightsClass : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected string className;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string className)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("ObjectClasses.RightsClass", ctx, className);
         }
 
-        public RightsClass(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className)
+        public RightsClass(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string className)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
+#line 16 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public class ",  className , "",  ImplementationSuffix , "\r\n");
 this.WriteObjects("        {\r\n");

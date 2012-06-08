@@ -1,26 +1,26 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.App.Extensions;
-    using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
-    using Kistl.API.Client;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.App.Extensions;
+    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+    using Zetbox.API.Client;
+    using Zetbox.API.Utils;
 
     public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
-        public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
+        public new delegate OpenDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
 
-        protected readonly Func<IKistlContext> ctxFactory;
+        protected readonly Func<IZetboxContext> ctxFactory;
 
-        public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind
+        public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+            IZetboxContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind
             )
             : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
         {
@@ -84,17 +84,17 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class DeleteDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
-        public new delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges);
+        public new delegate DeleteDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges);
 
         protected IRefreshCommandListener Listener { get; private set; }
         protected bool SubmitChanges { get; private set; }
 
-        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges)
+        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
             this.Listener = listener;
             this.SubmitChanges = submitChanges;
-            this.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.delete_png.Find(FrozenContext);
+            this.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
         }
 
         protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
@@ -116,14 +116,14 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class NewDataObjectCommand : CommandViewModel
     {
-        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
+        public new delegate NewDataObjectCommand Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
 
-        protected readonly Func<IKistlContext> ctxFactory;
+        protected readonly Func<IZetboxContext> ctxFactory;
         protected ObjectClass Type { get; private set; }
         protected IRefreshCommandListener Listener { get; private set; }
 
-        public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
+        public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+            IZetboxContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
             this.Type = type;
@@ -241,14 +241,14 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class EditDataObjectClassCommand : CommandViewModel
     {
-        public new delegate EditDataObjectClassCommand Factory(IKistlContext dataCtx, ViewModel parent, DataType type);
+        public new delegate EditDataObjectClassCommand Factory(IZetboxContext dataCtx, ViewModel parent, DataType type);
 
-        protected readonly Func<IKistlContext> ctxFactory;
+        protected readonly Func<IZetboxContext> ctxFactory;
         protected DataType Type { get; private set; }
 
         public EditDataObjectClassCommand(IViewModelDependencies appCtx,
-            IKistlContext dataCtx, ViewModel parent, DataType type,
-            Func<IKistlContext> ctxFactory)
+            IZetboxContext dataCtx, ViewModel parent, DataType type,
+            Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.EditDataObjectClassCommand_Name, CommonCommandsResources.EditDataObjectClassCommand_Tooltip)
         {
             this.Type = type;
@@ -277,11 +277,11 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class RefreshCommand : CommandViewModel
     {
-        public new delegate RefreshCommand Factory(IKistlContext dataCtx, ViewModel parent, IRefreshCommandListener listener);
+        public new delegate RefreshCommand Factory(IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener);
 
         protected IRefreshCommandListener Listener { get; private set; }
 
-        public RefreshCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, IRefreshCommandListener listener)
+        public RefreshCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IRefreshCommandListener listener)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.RefreshCommand_Name, CommonCommandsResources.RefreshCommand_Tooltip)
         {
             this.Listener = listener;
@@ -304,12 +304,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class ReportProblemCommand : CommandViewModel
     {
-        public new delegate ReportProblemCommand Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate ReportProblemCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
         private readonly IProblemReporter _reporter;
         private readonly IScreenshotTool _screenShot;
 
-        public ReportProblemCommand(IViewModelDependencies appCtx, IProblemReporter reporter, IScreenshotTool screenShot, IKistlContext dataCtx, ViewModel parent)
+        public ReportProblemCommand(IViewModelDependencies appCtx, IProblemReporter reporter, IScreenshotTool screenShot, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.ReportProblemCommand_Name, CommonCommandsResources.ReportProblemCommand_Tooltip)
         {
             if (reporter == null) throw new ArgumentNullException("reporter");
@@ -358,9 +358,9 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class ElevatedModeCommand : CommandViewModel
     {
-        public new delegate ElevatedModeCommand Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate ElevatedModeCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public ElevatedModeCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public ElevatedModeCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.ElevatedModeCommand_Name, CommonCommandsResources.ElevatedModeCommand_Tooltip)
         {
             
@@ -370,7 +370,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                return base.Icon ?? NamedObjects.Gui.Icons.KistlBase.otheroptions_ico.Find(FrozenContext);
+                return base.Icon ?? NamedObjects.Gui.Icons.ZetboxBase.otheroptions_ico.Find(FrozenContext);
             }
             set
             {

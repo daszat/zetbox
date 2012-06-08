@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
@@ -14,10 +14,10 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Kistl.App.GUI;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables.KistlBase;
-    using Kistl.Client.WPF.CustomControls;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for AuditJournalView.xaml

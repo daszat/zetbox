@@ -11,15 +11,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables.KistlBase;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.ZetboxBase;
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Zetbox.Client.WPF.View.ZetboxBase
 {
     /// <summary>
     /// Interaction logic for FilterListDisplay.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class FilterListDisplay : UserControl, IHasViewModel<FilterListViewModel>
     {
         public FilterListDisplay()

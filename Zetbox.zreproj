@@ -38,196 +38,196 @@
     <globalSetting name="CreateNewFileForm.newLanguageComboBox.SelectedIndex">118</globalSetting>
     <globalSetting name="CreateNewFileForm.copyTextsCheckBox.Checked">False</globalSetting>
     <globalSetting name="CreateNewFileForm.automaticallyTranslateCheckBox.Checked">False</globalSetting>
-    <userSetting name="arthur@DASZ.filesInitialDir">P:\Kistl\Kistl.Client\Presentables\FilterViewModels</userSetting>
+    <userSetting name="arthur@DASZ.filesInitialDir">P:\Zetbox\Zetbox.Client\Presentables\FilterViewModels</userSetting>
     <userSetting name="arthur@DASZ.FindText">
     </userSetting>
-    <userSetting name="arthur@DASZ.RecentFiles">P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.de.resx;P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.de.resx;P:\Kistl\Kistl.Client\Properties\Resources.resx;P:\Kistl\Kistl.Client\Properties\Resources.de.resx;P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx</userSetting>
+    <userSetting name="arthur@DASZ.RecentFiles">P:\Zetbox\Zetbox.Client\Presentables\ActionViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ActionViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\ApplicationViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\ApplicationViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\CacheDebuggerViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\CacheDebuggerViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\CommonCommandsResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\CommonCommandsResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ErrorListViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ErrorListViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\FilterViewModels\FilterViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\InstanceListViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\InstanceListViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\GUI\NavigatorViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\GUI\NavigatorViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ParameterInputTaskViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ParameterInputTaskViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\RelationChainViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\RelationChainViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Properties\Resources.resx;P:\Zetbox\Zetbox.Client\Properties\Resources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ValueInputTaskViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ValueInputTaskViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\ValueViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx;P:\Zetbox\Zetbox.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx;P:\Zetbox\Zetbox.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx</userSetting>
     <description>
     </description>
   </configuration>
   <fileGroups>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="76ab6010-e84a-4b23-817b-0e748225216e">
-      <file filePath="Kistl.Client\Presentables\ActionViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.resx" uniqueID="91841af9-64ba-4c94-9522-7ffc497f3018" />
-      <file filePath="Kistl.Client\Presentables\ActionViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.de.resx" uniqueID="4f4ba3ab-d4fe-4223-925f-224ca7e96f79" />
+      <file filePath="Zetbox.Client\Presentables\ActionViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ActionViewModelResources.resx" uniqueID="91841af9-64ba-4c94-9522-7ffc497f3018" />
+      <file filePath="Zetbox.Client\Presentables\ActionViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ActionViewModelResources.de.resx" uniqueID="4f4ba3ab-d4fe-4223-925f-224ca7e96f79" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="a2ef6876-d2ad-42e0-a52d-1e041d3736e1" orderPosition="0" uniqueID="bf1b7807-5c49-45fb-a01f-c4eee3ae6224">
-      <file filePath="Kistl.Client.Bootstrapper\AddressDialog.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Bootstrapper\AddressDialog.resx" uniqueID="5d8b7f35-de54-4c8a-97b8-d1dc012b17aa" />
+      <file filePath="Zetbox.Client.Bootstrapper\AddressDialog.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Bootstrapper\AddressDialog.resx" uniqueID="5d8b7f35-de54-4c8a-97b8-d1dc012b17aa" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="9e3ea0b9-b9f6-4eb0-869c-8b9f4fcbfbbb">
-      <file filePath="Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.resx" uniqueID="d84f2bf6-c6ce-4a82-bc50-f08119d56336" />
-      <file filePath="Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.de.resx" uniqueID="7027e0b8-8dcc-4d73-84a5-9f0b85eaa5db" />
+      <file filePath="Zetbox.Client\Presentables\ZetboxBase\ApplicationViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\ApplicationViewModelResources.resx" uniqueID="d84f2bf6-c6ce-4a82-bc50-f08119d56336" />
+      <file filePath="Zetbox.Client\Presentables\ZetboxBase\ApplicationViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\ApplicationViewModelResources.de.resx" uniqueID="7027e0b8-8dcc-4d73-84a5-9f0b85eaa5db" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="1f48663a-9640-4bbf-9403-40f19554be07">
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx" uniqueID="d3be025c-6322-43cd-b9d6-7af703481f86" />
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx" uniqueID="f0c7af9d-89ee-4118-8180-f784425e2b24" />
+      <file filePath="Zetbox.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx" uniqueID="d3be025c-6322-43cd-b9d6-7af703481f86" />
+      <file filePath="Zetbox.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx" uniqueID="f0c7af9d-89ee-4118-8180-f784425e2b24" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="a2ef6876-d2ad-42e0-a52d-1e041d3736e1" orderPosition="0" uniqueID="3451077b-e21d-48b4-931a-3d299ba77709">
-      <file filePath="Kistl.Client.Bootstrapper\Bootstrapper.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Bootstrapper\Bootstrapper.resx" uniqueID="ae4f101b-281e-4dcd-89d5-edf3015bdeb7" />
+      <file filePath="Zetbox.Client.Bootstrapper\Bootstrapper.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Bootstrapper\Bootstrapper.resx" uniqueID="ae4f101b-281e-4dcd-89d5-edf3015bdeb7" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="5b8a9757-d7e0-4397-a9ff-f9227a7eb195">
-      <file filePath="Kistl.Client\Presentables\CacheDebuggerViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.resx" uniqueID="e022342a-8475-43ec-9f2a-1ed541f569b8" />
-      <file filePath="Kistl.Client\Presentables\CacheDebuggerViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.de.resx" uniqueID="bd45f615-d45d-4af1-9d2f-8291d6087514" />
+      <file filePath="Zetbox.Client\Presentables\CacheDebuggerViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\CacheDebuggerViewModelResources.resx" uniqueID="e022342a-8475-43ec-9f2a-1ed541f569b8" />
+      <file filePath="Zetbox.Client\Presentables\CacheDebuggerViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\CacheDebuggerViewModelResources.de.resx" uniqueID="bd45f615-d45d-4af1-9d2f-8291d6087514" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="5e67b9c9-d0a4-4caa-b3c8-19b0c414e9e7">
-      <file filePath="Kistl.Client\Presentables\KistlBase\CommonCommandsResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.resx" uniqueID="63316b72-5790-4513-b5b1-dd2ce5d7306a" />
-      <file filePath="Kistl.Client\Presentables\KistlBase\CommonCommandsResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.de.resx" uniqueID="12fd9dcd-16f4-4ea1-a672-467748151a98" />
+      <file filePath="Zetbox.Client\Presentables\ZetboxBase\CommonCommandsResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\CommonCommandsResources.resx" uniqueID="63316b72-5790-4513-b5b1-dd2ce5d7306a" />
+      <file filePath="Zetbox.Client\Presentables\ZetboxBase\CommonCommandsResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\CommonCommandsResources.de.resx" uniqueID="12fd9dcd-16f4-4ea1-a672-467748151a98" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" orderPosition="0" uniqueID="aa155531-6863-44a9-9052-6e9b007529f3">
-      <file filePath="Kistl.Client.Forms\View\DataObjectFullView.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Forms\View\DataObjectFullView.resx" uniqueID="60f8530b-837e-4bb7-9cbe-dab1f4498d2e" />
+      <file filePath="Zetbox.Client.Forms\View\DataObjectFullView.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Forms\View\DataObjectFullView.resx" uniqueID="60f8530b-837e-4bb7-9cbe-dab1f4498d2e" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" orderPosition="0" uniqueID="650bd3c1-3313-47f6-8aff-78262dd4326e">
-      <file filePath="Kistl.Client.Forms\View\DataObjectListView.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Forms\View\DataObjectListView.resx" uniqueID="bdabc7f8-6b82-4fe3-a82b-01b256363d83" />
+      <file filePath="Zetbox.Client.Forms\View\DataObjectListView.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Forms\View\DataObjectListView.resx" uniqueID="bdabc7f8-6b82-4fe3-a82b-01b256363d83" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" orderPosition="0" uniqueID="9cca65a8-f929-4063-b6ca-7a4fb7dbbe6b">
-      <file filePath="Kistl.Client.Forms\View\DataObjectReferenceView.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Forms\View\DataObjectReferenceView.resx" uniqueID="b5737093-ef49-4bc1-96b5-a377bd94d39d" />
+      <file filePath="Zetbox.Client.Forms\View\DataObjectReferenceView.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Forms\View\DataObjectReferenceView.resx" uniqueID="b5737093-ef49-4bc1-96b5-a377bd94d39d" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="6eb3ff0d-4686-4c39-85a6-4c2cf062991b">
-      <file filePath="Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx" uniqueID="9f8dd86c-737f-418e-8fe8-915541e6cfce" />
-      <file filePath="Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx" uniqueID="ea7cfecc-71d4-4ef2-93aa-3e2c5a56dc7c" />
+      <file filePath="Zetbox.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx" uniqueID="9f8dd86c-737f-418e-8fe8-915541e6cfce" />
+      <file filePath="Zetbox.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx" uniqueID="ea7cfecc-71d4-4ef2-93aa-3e2c5a56dc7c" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="d62904dc-7a9f-4aae-b488-96710cc3c5ec">
-      <file filePath="Kistl.Client\Presentables\ErrorListViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.resx" uniqueID="566d5bae-f770-4ef3-8659-4aa7def8a989" />
-      <file filePath="Kistl.Client\Presentables\ErrorListViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.de.resx" uniqueID="fa7a6f31-448a-410e-a513-3e29e4ae5d8a" />
+      <file filePath="Zetbox.Client\Presentables\ErrorListViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ErrorListViewModelResources.resx" uniqueID="566d5bae-f770-4ef3-8659-4aa7def8a989" />
+      <file filePath="Zetbox.Client\Presentables\ErrorListViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ErrorListViewModelResources.de.resx" uniqueID="fa7a6f31-448a-410e-a513-3e29e4ae5d8a" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="3baf1af8-e5c5-4d08-93d8-88afe423718d">
-      <file filePath="Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.resx" uniqueID="38166bc2-9494-41a4-8af6-d61f868d77bc" />
-      <file filePath="Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx" uniqueID="cb640759-498e-408f-8e16-5931a0cbbb66" />
+      <file filePath="Zetbox.Client\Presentables\FilterViewModels\FilterViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\FilterViewModels\FilterViewModelResources.resx" uniqueID="38166bc2-9494-41a4-8af6-d61f868d77bc" />
+      <file filePath="Zetbox.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx" uniqueID="cb640759-498e-408f-8e16-5931a0cbbb66" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="6a4a5f48-af11-4d7b-87c2-80b51bdcb09f" orderPosition="0" uniqueID="8a23aaae-f090-4609-a092-06df3c1bbdca">
-      <file filePath="Ini50.App.Client\Images\Images.resx" absoluteFilePath="P:\Kistl\Ini50.App.Client\Images\Images.resx" uniqueID="cbd63d65-88ab-42f1-b90e-e36b5c199159" />
+      <file filePath="Ini50.App.Client\Images\Images.resx" absoluteFilePath="P:\Zetbox\Ini50.App.Client\Images\Images.resx" uniqueID="cbd63d65-88ab-42f1-b90e-e36b5c199159" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="bb4ca179-1ac8-4bc7-9b35-94c11c719ae5">
-      <file filePath="Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.resx" uniqueID="cacbfbc0-e3eb-465b-b0ec-a04436e307ee" />
-      <file filePath="Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.de.resx" uniqueID="78c7e0f6-171d-48de-9d68-b1b2e39230e1" />
+      <file filePath="Zetbox.Client\Presentables\ZetboxBase\InstanceListViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\InstanceListViewModelResources.resx" uniqueID="cacbfbc0-e3eb-465b-b0ec-a04436e307ee" />
+      <file filePath="Zetbox.Client\Presentables\ZetboxBase\InstanceListViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\InstanceListViewModelResources.de.resx" uniqueID="78c7e0f6-171d-48de-9d68-b1b2e39230e1" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="93fe4641-7977-4e0a-87f4-84bf6605d3b3" orderPosition="0" uniqueID="e016ced3-9fd3-48ea-8bc5-ad937aa64ce1">
-      <file filePath="Kistl.API.Client\IToolkitResources.resx" absoluteFilePath="P:\Kistl\Kistl.API.Client\IToolkitResources.resx" uniqueID="959414ce-ffe6-4930-bf66-b5332e2bb93e" />
-      <file filePath="Kistl.API.Client\IToolkitResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.API.Client\IToolkitResources.de.resx" uniqueID="af116c86-ee96-40a6-abd7-4c8ae02a11bd" />
+      <file filePath="Zetbox.API.Client\IToolkitResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.API.Client\IToolkitResources.resx" uniqueID="959414ce-ffe6-4930-bf66-b5332e2bb93e" />
+      <file filePath="Zetbox.API.Client\IToolkitResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.API.Client\IToolkitResources.de.resx" uniqueID="af116c86-ee96-40a6-abd7-4c8ae02a11bd" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="a2ef6876-d2ad-42e0-a52d-1e041d3736e1" orderPosition="0" uniqueID="34d62a5c-a71a-480b-8a32-67b4c087871c">
-      <file filePath="Kistl.Client.Bootstrapper\Properties\Resources.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Bootstrapper\Properties\Resources.resx" uniqueID="c8323727-4c0b-4601-b02e-5b6f3e686f7a" />
+      <file filePath="Zetbox.Client.Bootstrapper\Properties\Resources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Bootstrapper\Properties\Resources.resx" uniqueID="c8323727-4c0b-4601-b02e-5b6f3e686f7a" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" orderPosition="0" uniqueID="4979d9ba-12c9-492e-9efb-bc424635427a">
-      <file filePath="Kistl.Client.Forms\Properties\Resources.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Forms\Properties\Resources.resx" uniqueID="25c003b1-85e9-4ebc-af06-2b7eb6c550c3" />
+      <file filePath="Zetbox.Client.Forms\Properties\Resources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Forms\Properties\Resources.resx" uniqueID="25c003b1-85e9-4ebc-af06-2b7eb6c550c3" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="2360a6dc-6db1-4e51-b6ce-c54853cb733f" orderPosition="0" uniqueID="02651349-40d8-44b8-8f58-7583e4e47a92">
-      <file filePath="Kistl.Client.WPF\Properties\Resources.resx" absoluteFilePath="P:\Kistl\Kistl.Client.WPF\Properties\Resources.resx" uniqueID="50705c08-6e6e-4b9d-8ddd-2fb43a2c0908" />
+      <file filePath="Zetbox.Client.WPF\Properties\Resources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.WPF\Properties\Resources.resx" uniqueID="50705c08-6e6e-4b9d-8ddd-2fb43a2c0908" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="7cf10392-4474-4c3a-bce4-f6332bcc9881">
-      <file filePath="Kistl.Client\Properties\Resources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Properties\Resources.resx" uniqueID="e0fc74c4-44e7-44d9-8bdc-ed6ddb364882" />
-      <file filePath="Kistl.Client\Properties\Resources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Properties\Resources.de.resx" uniqueID="04856680-f158-496d-a0cf-75c7d34e5978" />
+      <file filePath="Zetbox.Client\Properties\Resources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Properties\Resources.resx" uniqueID="e0fc74c4-44e7-44d9-8bdc-ed6ddb364882" />
+      <file filePath="Zetbox.Client\Properties\Resources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Properties\Resources.de.resx" uniqueID="04856680-f158-496d-a0cf-75c7d34e5978" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="4d8f5518-3845-4351-9624-01697fe65826">
-      <file filePath="Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx" uniqueID="1eb6f64a-5e26-4c32-9c0e-91cd0b8f09a2" />
-      <file filePath="Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx" uniqueID="2df98e4c-1fa1-4bfd-9ed8-782ca303b016" />
+      <file filePath="Zetbox.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx" uniqueID="1eb6f64a-5e26-4c32-9c0e-91cd0b8f09a2" />
+      <file filePath="Zetbox.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx" uniqueID="2df98e4c-1fa1-4bfd-9ed8-782ca303b016" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="544d215f-6405-4b70-a060-817b3de1cc17">
-      <file filePath="Kistl.Client\Presentables\GUI\NavigatorViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.resx" uniqueID="f2147481-95cd-4b8d-9c6d-d458507e7c9d" />
-      <file filePath="Kistl.Client\Presentables\GUI\NavigatorViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.de.resx" uniqueID="29fc2124-81c2-4e1d-bc7e-b37fd7ed2198" />
+      <file filePath="Zetbox.Client\Presentables\GUI\NavigatorViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\GUI\NavigatorViewModelResources.resx" uniqueID="f2147481-95cd-4b8d-9c6d-d458507e7c9d" />
+      <file filePath="Zetbox.Client\Presentables\GUI\NavigatorViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\GUI\NavigatorViewModelResources.de.resx" uniqueID="29fc2124-81c2-4e1d-bc7e-b37fd7ed2198" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" orderPosition="0" uniqueID="d5803771-4f2e-480d-bfc9-848bf92fa045">
-      <file filePath="Kistl.Client.Forms\View\NullablePropertyTextBoxView.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Forms\View\NullablePropertyTextBoxView.resx" uniqueID="daecfa1b-8efa-4b01-a4d0-c4590b79859f" />
+      <file filePath="Zetbox.Client.Forms\View\NullablePropertyTextBoxView.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Forms\View\NullablePropertyTextBoxView.resx" uniqueID="daecfa1b-8efa-4b01-a4d0-c4590b79859f" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="aa1f1ed5-365b-487a-bcb5-3aedf4c2cb36">
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx" uniqueID="eedd50bd-0391-43cd-bd0f-bc78c081c953" />
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx" uniqueID="a5ab9c57-5c42-4d07-8c48-dbb9fa74a5f4" />
+      <file filePath="Zetbox.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx" uniqueID="eedd50bd-0391-43cd-bd0f-bc78c081c953" />
+      <file filePath="Zetbox.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx" uniqueID="a5ab9c57-5c42-4d07-8c48-dbb9fa74a5f4" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="f7177f30-2e9e-466c-9025-d396cd5fa5ba">
-      <file filePath="Kistl.Client\Presentables\ParameterInputTaskViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.resx" uniqueID="0112a6ee-5c04-4cd1-ba23-710dd5f5b108" />
-      <file filePath="Kistl.Client\Presentables\ParameterInputTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.de.resx" uniqueID="8837b411-274a-4049-8f7a-d11c0bee1232" />
+      <file filePath="Zetbox.Client\Presentables\ParameterInputTaskViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ParameterInputTaskViewModelResources.resx" uniqueID="0112a6ee-5c04-4cd1-ba23-710dd5f5b108" />
+      <file filePath="Zetbox.Client\Presentables\ParameterInputTaskViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ParameterInputTaskViewModelResources.de.resx" uniqueID="8837b411-274a-4049-8f7a-d11c0bee1232" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="a2ef6876-d2ad-42e0-a52d-1e041d3736e1" orderPosition="0" uniqueID="48ea8e93-9fa8-4c9e-8bb3-dbd806c1a4c7">
-      <file filePath="Kistl.Client.Bootstrapper\PasswordDialog.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Bootstrapper\PasswordDialog.resx" uniqueID="3b291db0-0f2c-4b65-9687-ca307b7b5b35" />
+      <file filePath="Zetbox.Client.Bootstrapper\PasswordDialog.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Bootstrapper\PasswordDialog.resx" uniqueID="3b291db0-0f2c-4b65-9687-ca307b7b5b35" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" orderPosition="0" uniqueID="2ad2a59a-83de-4bdf-af75-dd1696ef7aee">
-      <file filePath="Kistl.Client.Forms\View\PropertyTextBoxView.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Forms\View\PropertyTextBoxView.resx" uniqueID="580a5b35-8b12-4c04-8bcf-ed0954e54f2a" />
+      <file filePath="Zetbox.Client.Forms\View\PropertyTextBoxView.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Forms\View\PropertyTextBoxView.resx" uniqueID="580a5b35-8b12-4c04-8bcf-ed0954e54f2a" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="26e658a8-ebe5-4f51-a400-ee43de3026ee">
-      <file filePath="Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.resx" uniqueID="a4b6cdef-c559-4ccc-b753-9d7d16aa8360" />
-      <file filePath="Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.de.resx" uniqueID="033acf87-08f8-4a39-bc70-298ba7fe1c5d" />
+      <file filePath="Zetbox.Client\Presentables\ZetboxBase\RelationChainViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\RelationChainViewModelResources.resx" uniqueID="a4b6cdef-c559-4ccc-b753-9d7d16aa8360" />
+      <file filePath="Zetbox.Client\Presentables\ZetboxBase\RelationChainViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ZetboxBase\RelationChainViewModelResources.de.resx" uniqueID="033acf87-08f8-4a39-bc70-298ba7fe1c5d" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="b7197b72-22a9-47ed-b16b-983ec1965f5a">
-      <file filePath="Kistl.Client\Presentables\ValueInputTaskViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.resx" uniqueID="cb0f7125-c243-4b51-a762-0a8924808dee" />
-      <file filePath="Kistl.Client\Presentables\ValueInputTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.de.resx" uniqueID="1434a000-2e6c-4167-b8f2-2e79c52b58bd" />
+      <file filePath="Zetbox.Client\Presentables\ValueInputTaskViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ValueInputTaskViewModelResources.resx" uniqueID="cb0f7125-c243-4b51-a762-0a8924808dee" />
+      <file filePath="Zetbox.Client\Presentables\ValueInputTaskViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ValueInputTaskViewModelResources.de.resx" uniqueID="1434a000-2e6c-4167-b8f2-2e79c52b58bd" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="09b7c944-af61-4ad1-a575-20cdfa64268a">
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.resx" uniqueID="02a8104c-5dd9-4163-97c9-7f5c913a0659" />
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx" uniqueID="16759a88-d6d0-4a3b-a967-a9bc989f9bc7" />
+      <file filePath="Zetbox.Client\Presentables\ValueViewModels\ValueViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\ValueViewModelResources.resx" uniqueID="02a8104c-5dd9-4163-97c9-7f5c913a0659" />
+      <file filePath="Zetbox.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx" uniqueID="16759a88-d6d0-4a3b-a967-a9bc989f9bc7" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" orderPosition="0" uniqueID="e8252497-d928-4634-8cb4-aa6d04786840">
-      <file filePath="Kistl.Client.Forms\View\WorkspaceView.resx" absoluteFilePath="P:\Kistl\Kistl.Client.Forms\View\WorkspaceView.resx" uniqueID="08ed23e1-8d73-474b-90e6-faf8028c1de4" />
+      <file filePath="Zetbox.Client.Forms\View\WorkspaceView.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client.Forms\View\WorkspaceView.resx" uniqueID="08ed23e1-8d73-474b-90e6-faf8028c1de4" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="f9c9961e-f79d-4cdb-bb6f-73b1d7db6754">
-      <file filePath="Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx" uniqueID="814102ca-5875-45cd-91bb-0a51e25f0a1f" />
-      <file filePath="Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx" uniqueID="a90c3efc-a0c4-4746-8c8b-466a616ccb8a" />
+      <file filePath="Zetbox.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx" uniqueID="814102ca-5875-45cd-91bb-0a51e25f0a1f" />
+      <file filePath="Zetbox.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx" uniqueID="a90c3efc-a0c4-4746-8c8b-466a616ccb8a" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="d1a76731-2254-4bc3-9d51-510757e3eecb">
-      <file filePath="Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx" uniqueID="3bb48a41-17d5-465a-bc02-a3020d3af730" />
-      <file filePath="Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx" uniqueID="dec21523-6f3d-4625-a74d-306d9ad4c958" />
+      <file filePath="Zetbox.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx" uniqueID="3bb48a41-17d5-465a-bc02-a3020d3af730" />
+      <file filePath="Zetbox.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx" absoluteFilePath="P:\Zetbox\Zetbox.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx" uniqueID="dec21523-6f3d-4625-a74d-306d9ad4c958" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -258,222 +258,222 @@
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="2c87b27c-263c-4448-a73c-4f76cc639cde" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.API" orderPosition="0">
+    <projectFolder uniqueID="2c87b27c-263c-4448-a73c-4f76cc639cde" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.API" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="b1d31d5d-0492-4072-8956-a3517d355a76" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.API.AbstractConsumerTests" orderPosition="0">
+    <projectFolder uniqueID="b1d31d5d-0492-4072-8956-a3517d355a76" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.API.AbstractConsumerTests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="93fe4641-7977-4e0a-87f4-84bf6605d3b3" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.API.Client" orderPosition="0">
+    <projectFolder uniqueID="93fe4641-7977-4e0a-87f4-84bf6605d3b3" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.API.Client" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="d89ef1e7-0b58-4b63-9576-0db60a46b9f6" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.API.Client.Tests" orderPosition="0">
+    <projectFolder uniqueID="d89ef1e7-0b58-4b63-9576-0db60a46b9f6" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.API.Client.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="59b9e9b0-4a24-4d2a-bbe4-0b0f1b1d892c" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.API.Mocks" orderPosition="0">
+    <projectFolder uniqueID="59b9e9b0-4a24-4d2a-bbe4-0b0f1b1d892c" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.API.Mocks" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="14f61ba6-5089-49c8-8010-4bbfa825a471" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.API.Server" orderPosition="0">
+    <projectFolder uniqueID="14f61ba6-5089-49c8-8010-4bbfa825a471" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.API.Server" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="68fe58ba-d30a-4c53-8240-dabcb23add59" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.API.Server.Tests" orderPosition="0">
+    <projectFolder uniqueID="68fe58ba-d30a-4c53-8240-dabcb23add59" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.API.Server.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="efff35e5-400f-4175-a11c-1eb4d635e3d8" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.API.Tests" orderPosition="0">
+    <projectFolder uniqueID="efff35e5-400f-4175-a11c-1eb4d635e3d8" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.API.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="fd9e6176-fde6-42e5-a21f-6a2ecd7728cd" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.App.Projekte.Client" orderPosition="0">
+    <projectFolder uniqueID="fd9e6176-fde6-42e5-a21f-6a2ecd7728cd" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.App.Projekte.Client" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="2102aa11-f819-4c1d-b09e-78f5d04465c3" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.App.Projekte.Common" orderPosition="0">
+    <projectFolder uniqueID="2102aa11-f819-4c1d-b09e-78f5d04465c3" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.App.Projekte.Common" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="a052a363-b464-480f-b633-14b9ede6dfc8" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.App.Projekte.Server" orderPosition="0">
+    <projectFolder uniqueID="a052a363-b464-480f-b633-14b9ede6dfc8" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.App.Projekte.Server" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Client" orderPosition="0">
+    <projectFolder uniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Client" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="884c9c39-daa9-426c-921a-ab7a5ee6a580" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Client.ASPNET.Toolkit" orderPosition="0">
+    <projectFolder uniqueID="884c9c39-daa9-426c-921a-ab7a5ee6a580" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Client.ASPNET.Toolkit" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="a2ef6876-d2ad-42e0-a52d-1e041d3736e1" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Client.Bootstrapper" orderPosition="0">
+    <projectFolder uniqueID="a2ef6876-d2ad-42e0-a52d-1e041d3736e1" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Client.Bootstrapper" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Client.Forms" orderPosition="0">
+    <projectFolder uniqueID="0dc1c11a-288c-4fbf-a126-7631cb25dc9c" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Client.Forms" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="aa98fa30-5b62-4561-ac8e-1a8c6fe25d8e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Client.Tests" orderPosition="0">
+    <projectFolder uniqueID="aa98fa30-5b62-4561-ac8e-1a8c6fe25d8e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Client.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="2360a6dc-6db1-4e51-b6ce-c54853cb733f" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Client.WPF" orderPosition="0">
+    <projectFolder uniqueID="2360a6dc-6db1-4e51-b6ce-c54853cb733f" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Client.WPF" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="a6dfe777-8c40-4f0a-ba79-eac2281e29e4" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Client.WPF.Toolkit" orderPosition="0">
+    <projectFolder uniqueID="a6dfe777-8c40-4f0a-ba79-eac2281e29e4" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Client.WPF.Toolkit" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="5482beef-62a3-4a79-bcd3-d43148015fd8" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.Base" orderPosition="0">
+    <projectFolder uniqueID="5482beef-62a3-4a79-bcd3-d43148015fd8" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.Base" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="062f41c5-51a2-4301-9b64-50849cc24e8d" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.Client.Generator" orderPosition="0">
+    <projectFolder uniqueID="062f41c5-51a2-4301-9b64-50849cc24e8d" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.Client.Generator" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="a6f9fb26-1037-4d1e-bbc7-0b400381cf0d" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.ClientObjects" orderPosition="0">
+    <projectFolder uniqueID="a6f9fb26-1037-4d1e-bbc7-0b400381cf0d" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.ClientObjects" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="f2341939-dfa1-4a4a-89fb-01ef2b02c87d" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.ClientObjects.Tests" orderPosition="0">
+    <projectFolder uniqueID="f2341939-dfa1-4a4a-89fb-01ef2b02c87d" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.ClientObjects.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="fc23d002-7bea-4164-9125-ab854b3fcd9b" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.EF" orderPosition="0">
+    <projectFolder uniqueID="fc23d002-7bea-4164-9125-ab854b3fcd9b" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.EF" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="e8618cb1-c32b-4c0f-a185-b1567324c06a" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.EF.Generator" orderPosition="0">
+    <projectFolder uniqueID="e8618cb1-c32b-4c0f-a185-b1567324c06a" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.EF.Generator" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="c0f03cde-9f4e-468a-b12a-705e5985bd9b" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.EF.Tests" orderPosition="0">
+    <projectFolder uniqueID="c0f03cde-9f4e-468a-b12a-705e5985bd9b" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.EF.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="e33dc80d-67aa-4fac-9f58-716674b5ba87" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.Memory" orderPosition="0">
+    <projectFolder uniqueID="e33dc80d-67aa-4fac-9f58-716674b5ba87" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.Memory" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="ce8980bd-8c45-4f05-b402-db61aedf052e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.Memory.Generator" orderPosition="0">
+    <projectFolder uniqueID="ce8980bd-8c45-4f05-b402-db61aedf052e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.Memory.Generator" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="7e8cfdb4-f3ed-473b-9c5b-b5ccca751624" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.Memory.Tests" orderPosition="0">
+    <projectFolder uniqueID="7e8cfdb4-f3ed-473b-9c5b-b5ccca751624" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.Memory.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="834b2e48-7c01-4da0-866a-d338c2cd03aa" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.NHibernate" orderPosition="0">
+    <projectFolder uniqueID="834b2e48-7c01-4da0-866a-d338c2cd03aa" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.NHibernate" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="78b2aa36-8757-495a-854d-bcd1c2884d34" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.NHibernate.Generator" orderPosition="0">
+    <projectFolder uniqueID="78b2aa36-8757-495a-854d-bcd1c2884d34" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.NHibernate.Generator" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="e4e9c03f-c053-4fe6-9561-d0b3a7f6616d" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.DalProvider.NHibernate.Tests" orderPosition="0">
+    <projectFolder uniqueID="e4e9c03f-c053-4fe6-9561-d0b3a7f6616d" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.DalProvider.NHibernate.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="c6dc830d-e790-4021-a80e-261874c2ec5e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Generator" orderPosition="0">
+    <projectFolder uniqueID="c6dc830d-e790-4021-a80e-261874c2ec5e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Generator" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="cf6d2d21-8301-47d2-a4a0-f9e2a662b604" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Generator.ClickOnce" orderPosition="0">
+    <projectFolder uniqueID="cf6d2d21-8301-47d2-a4a0-f9e2a662b604" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Generator.ClickOnce" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="776567b0-d67f-4d97-8d90-c34fe1674ddf" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.IntegrationTests" orderPosition="0">
+    <projectFolder uniqueID="776567b0-d67f-4d97-8d90-c34fe1674ddf" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.IntegrationTests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="d23cc19d-c27e-4530-860e-896228e2e5b7" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Objects" orderPosition="0">
+    <projectFolder uniqueID="d23cc19d-c27e-4530-860e-896228e2e5b7" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Objects" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="b9d037c8-e9c6-4377-b951-d79c555bc9ec" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Objects.Ef" orderPosition="0">
+    <projectFolder uniqueID="b9d037c8-e9c6-4377-b951-d79c555bc9ec" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Objects.Ef" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="dfb5907c-b57e-48d1-b7f9-8b89b5b99539" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Objects.Memory" orderPosition="0">
+    <projectFolder uniqueID="dfb5907c-b57e-48d1-b7f9-8b89b5b99539" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Objects.Memory" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="0885ac5f-52eb-4992-a7a7-d10597010441" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Objects.NHibernate" orderPosition="0">
+    <projectFolder uniqueID="0885ac5f-52eb-4992-a7a7-d10597010441" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Objects.NHibernate" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="b1435d16-68b5-40ff-b7fd-34fa31d11c77" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Server" orderPosition="0">
+    <projectFolder uniqueID="b1435d16-68b5-40ff-b7fd-34fa31d11c77" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Server" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="81f05d4a-387b-45cf-9c5f-f6e84775f536" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Server.Service" orderPosition="0">
+    <projectFolder uniqueID="81f05d4a-387b-45cf-9c5f-f6e84775f536" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Server.Service" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="ad99d9b5-709e-44db-bc46-86876c865a7e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Server.Service32" orderPosition="0">
+    <projectFolder uniqueID="ad99d9b5-709e-44db-bc46-86876c865a7e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Server.Service32" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="d257d4bb-0677-44d5-9568-7ecde204a012" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Server.Tests" orderPosition="0">
+    <projectFolder uniqueID="d257d4bb-0677-44d5-9568-7ecde204a012" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Server.Tests" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="35a393f0-e24c-441f-b10a-322f134e3ff7" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Tests.Utilities.MsSql" orderPosition="0">
+    <projectFolder uniqueID="35a393f0-e24c-441f-b10a-322f134e3ff7" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Tests.Utilities.MsSql" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />
     </projectFolder>
-    <projectFolder uniqueID="575ba071-fcb0-4f7e-9e0c-44c1e9553741" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Kistl.Tests.Utilities.PostgreSql" orderPosition="0">
+    <projectFolder uniqueID="575ba071-fcb0-4f7e-9e0c-44c1e9553741" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Zetbox.Tests.Utilities.PostgreSql" orderPosition="0">
       <remarks>
       </remarks>
       <dynSettings />

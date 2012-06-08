@@ -1,15 +1,15 @@
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.API.Utils;
 
     [Implementor]
     public static class RelationActions
@@ -166,7 +166,7 @@ namespace Kistl.App.Base
         }
 
         [Invocation]
-        public static void SwapRelationEnds(Kistl.App.Base.Relation obj)
+        public static void SwapRelationEnds(Zetbox.App.Base.Relation obj)
         {
             var tmp = obj.A;
             obj.A = obj.B;

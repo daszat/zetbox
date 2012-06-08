@@ -2,9 +2,9 @@
 /Configs/Local
 /DocumentStore
 /$safesolutionname$.Client.Tests/bin
-/Libs/Kistl/*.csv
-/Libs/Kistl/*.log
-/Libs/Kistl/*.log.*
+/Libs/Zetbox/*.csv
+/Libs/Zetbox/*.log
+/Libs/Zetbox/*.log.*
 /Libs/LinqCube/bin
 *.suo
 *.csproj.user

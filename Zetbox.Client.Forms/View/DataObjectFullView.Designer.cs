@@ -1,4 +1,4 @@
-namespace Kistl.Client.Forms.View
+namespace Zetbox.Client.Forms.View
 {
     partial class DataObjectFullView
     {

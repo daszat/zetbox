@@ -1,17 +1,17 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="EfModel.ModelCsdl"
-    ClassName="Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdl" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdl" 
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
   <EntityContainer Name="Entities">
@@ -216,7 +216,7 @@
         if (rel.NeedsPositionStorage(RelationEndRole.A))
         {
 %>
-    <Property Name="A<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+    <Property Name="A<%= Zetbox.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
 <%
         }
 %>
@@ -230,7 +230,7 @@
         if (rel.NeedsPositionStorage(RelationEndRole.B))
         {
 %>
-    <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+    <Property Name="B<%= Zetbox.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
 <%
         }
 %>
@@ -285,7 +285,7 @@
         if (prop.HasPersistentOrder)
         {
 %>
-    <Property Name="Value<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+    <Property Name="Value<%= Zetbox.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
 <%
         }
 %>
@@ -332,7 +332,7 @@
         if (prop.HasPersistentOrder)
         {
 %>
-    <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+    <Property Name="B<%= Zetbox.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
 <%
         }
 %>

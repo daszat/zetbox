@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Memory
+namespace Zetbox.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
@@ -8,18 +8,18 @@ namespace Kistl.DalProvider.Memory
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Extensions;
-    using Kistl.App.Packaging;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.Packaging;
 
     public class MemoryProvider
         : Autofac.Module
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.DalProvider.Memory");
 
-        public static readonly string ContextClassName = "Kistl.Objects.Memory.MemoryContext";
-        public static readonly string GeneratedAssemblyName = "Kistl.Objects.MemoryImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        public static readonly string ContextClassName = "Zetbox.Objects.Memory.MemoryContext";
+        public static readonly string GeneratedAssemblyName = "Zetbox.Objects.MemoryImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
 
         protected override void Load(ContainerBuilder moduleBuilder)
         {
@@ -53,7 +53,7 @@ namespace Kistl.DalProvider.Memory
                             c.Resolve<InterfaceType.Factory>(),
                             () => memCtx,
                             c.Resolve<MemoryImplementationType.MemoryFactory>());
-                        Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Kistl.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenContext XML from Assembly");
+                        Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Zetbox.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenContext XML from Assembly");
                         memCtx.Seal();
                         return memCtx;
                     })

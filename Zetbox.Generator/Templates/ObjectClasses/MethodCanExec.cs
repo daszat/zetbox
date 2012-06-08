@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
     using System;
     using System.CodeDom;
@@ -7,11 +7,11 @@ namespace Kistl.Generator.Templates.ObjectClasses
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class MethodCanExec
     {

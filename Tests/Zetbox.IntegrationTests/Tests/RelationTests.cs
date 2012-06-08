@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.AbstractConsumerTests;
-using Kistl.API.Client;
-using Kistl.App.Base;
-using Kistl.App.Projekte;
+using Zetbox.API;
+using Zetbox.API.AbstractConsumerTests;
+using Zetbox.API.Client;
+using Zetbox.App.Base;
+using Zetbox.App.Projekte;
 
 using NUnit.Framework;
 
-namespace Kistl.IntegrationTests
+namespace Zetbox.IntegrationTests
 {
     [TestFixture]
     public class RelationTests
@@ -23,12 +23,12 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Relation_1_1_Set_Left()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prop = ctx.Create<Kistl.App.Base.IntProperty>();
+                var prop = ctx.Create<Zetbox.App.Base.IntProperty>();
                 Assert.That(prop.DefaultValue, Is.Null);
 
-                var dv = ctx.Create<Kistl.App.Base.NewGuidDefaultValue>();
+                var dv = ctx.Create<Zetbox.App.Base.NewGuidDefaultValue>();
                 Assert.That(dv.Property, Is.Null);
 
                 prop.DefaultValue = dv;
@@ -41,12 +41,12 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Relation_1_1_Set_Right()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prop = ctx.Create<Kistl.App.Base.IntProperty>();
+                var prop = ctx.Create<Zetbox.App.Base.IntProperty>();
                 Assert.That(prop.DefaultValue, Is.Null);
 
-                var dv = ctx.Create<Kistl.App.Base.NewGuidDefaultValue>();
+                var dv = ctx.Create<Zetbox.App.Base.NewGuidDefaultValue>();
                 Assert.That(dv.Property, Is.Null);
 
                 dv.Property = prop;
@@ -65,11 +65,11 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_n_With_Remove()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-                var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+                var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
+                var ma2 = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
                 prj.Mitarbeiter.Add(ma);
 
@@ -92,11 +92,11 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_n_With_Clear()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-                var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+                var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
+                var ma2 = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
                 prj.Mitarbeiter.Add(ma);
 
@@ -119,11 +119,11 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_n_By_Index()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-                var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+                var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
+                var ma2 = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
                 prj.Mitarbeiter.Add(ma);
 
@@ -145,11 +145,11 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_m_With_Remove()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+                var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var prj2 = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
                 ma.Projekte.Add(prj);
 
@@ -171,11 +171,11 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_m_With_Clear()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+                var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var prj2 = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
                 ma.Projekte.Add(prj);
 
@@ -197,11 +197,11 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_m_By_Index()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+                var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var prj2 = ctx.Create<Zetbox.App.Projekte.Projekt>();
+                var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
                 ma.Projekte.Add(prj);
 
@@ -233,15 +233,15 @@ namespace Kistl.IntegrationTests
         public void Sort_Relation_n_m_n()
         {
             int prjID = 0;
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prj = ctx.GetQuery<Kistl.App.Projekte.Projekt>().ToList()
+                var prj = ctx.GetQuery<Zetbox.App.Projekte.Projekt>().ToList()
                     .OrderByDescending(p => p.Mitarbeiter.Count).First();
                 prjID = prj.ID;
 
                 var tmpMitarbeiter = prj.Mitarbeiter.ToList();
                 prj.Mitarbeiter.Clear();
-                foreach (Kistl.App.Projekte.Mitarbeiter m in tmpMitarbeiter
+                foreach (Zetbox.App.Projekte.Mitarbeiter m in tmpMitarbeiter
                     .OrderBy(m => m.Name))
                 {
                     prj.Mitarbeiter.Add(m);
@@ -250,13 +250,13 @@ namespace Kistl.IntegrationTests
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var prj = ctx.Find<Kistl.App.Projekte.Projekt>(prjID);
+                var prj = ctx.Find<Zetbox.App.Projekte.Projekt>(prjID);
 
                 var tmpMitarbeiter = prj.Mitarbeiter.ToList();
                 int i = 0;
-                foreach (Kistl.App.Projekte.Mitarbeiter m in tmpMitarbeiter
+                foreach (Zetbox.App.Projekte.Mitarbeiter m in tmpMitarbeiter
                     .OrderBy(m => m.Name))
                 {
                     Assert.That(m, Is.EqualTo(tmpMitarbeiter[i++]));
@@ -269,15 +269,15 @@ namespace Kistl.IntegrationTests
         public void Sort_Relation_n_m_m()
         {
             int maID = 0;
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var ma = ctx.GetQuery<Kistl.App.Projekte.Mitarbeiter>().ToList()
+                var ma = ctx.GetQuery<Zetbox.App.Projekte.Mitarbeiter>().ToList()
                     .OrderByDescending(p => p.Projekte.Count).First();
                 maID = ma.ID;
 
                 var tmpProjekte = ma.Projekte.ToList();
                 ma.Projekte.Clear();
-                foreach (Kistl.App.Projekte.Projekt prj in tmpProjekte
+                foreach (Zetbox.App.Projekte.Projekt prj in tmpProjekte
                     .OrderBy(p => p.Name))
                 {
                     ma.Projekte.Add(prj);
@@ -286,13 +286,13 @@ namespace Kistl.IntegrationTests
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
-                var ma = ctx.Find<Kistl.App.Projekte.Mitarbeiter>(maID);
+                var ma = ctx.Find<Zetbox.App.Projekte.Mitarbeiter>(maID);
 
                 var tmpProjekte = ma.Projekte.ToList();
                 int i = 0;
-                foreach (Kistl.App.Projekte.Projekt prj in tmpProjekte
+                foreach (Zetbox.App.Projekte.Projekt prj in tmpProjekte
                     .OrderBy(p => p.Name))
                 {
                     Assert.That(prj, Is.EqualTo(tmpProjekte[i++]));

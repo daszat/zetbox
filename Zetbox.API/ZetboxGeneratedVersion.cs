@@ -4,25 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
     /// Identifies the generated code by a GUID
     /// </summary>
     /// <remarks>
-    /// [assembly: Kistl.API.KistlGeneratedVersion("")]
+    /// [assembly: Zetbox.API.ZetboxGeneratedVersion("")]
     /// </remarks>
     [AttributeUsage(AttributeTargets.Assembly)]
-    public class KistlGeneratedVersionAttribute : Attribute
+    public class ZetboxGeneratedVersionAttribute : Attribute
     {
         private static readonly object _lock = new object();
 
         private readonly Guid _version;
-        public KistlGeneratedVersionAttribute(Guid version)
+        public ZetboxGeneratedVersionAttribute(Guid version)
         {
             _version = version;
         }
-        public KistlGeneratedVersionAttribute(string version)
+        public ZetboxGeneratedVersionAttribute(string version)
         {
             _version = new Guid(version);
         }
@@ -38,9 +38,9 @@ namespace Kistl.API
                 {
                     if (_current == null)
                     {
-                        var attr = (KistlGeneratedVersionAttribute)Assembly
+                        var attr = (ZetboxGeneratedVersionAttribute)Assembly
                                     .Load(Helper.InterfaceAssembly)
-                                    .GetCustomAttributes(typeof(KistlGeneratedVersionAttribute), false)
+                                    .GetCustomAttributes(typeof(ZetboxGeneratedVersionAttribute), false)
                                     .Single();
                         _current = attr.Version;
                     }
@@ -52,17 +52,17 @@ namespace Kistl.API
         public static void Check(Guid versionToCheck)
         {
             if (Current != versionToCheck)
-                throw new InvalidKistlGeneratedVersionException(string.Format("Invalid Kistl Generated Version. Current: {0}, to check: {1}", Current, versionToCheck));
+                throw new InvalidZetboxGeneratedVersionException(string.Format("Invalid Zetbox Generated Version. Current: {0}, to check: {1}", Current, versionToCheck));
         }
     }
 
     [Serializable]
-    public class InvalidKistlGeneratedVersionException : Exception
+    public class InvalidZetboxGeneratedVersionException : Exception
     {
-        public InvalidKistlGeneratedVersionException() : this("Invalid Kistl Generated Version") { }
-        public InvalidKistlGeneratedVersionException(string message) : base(message) { }
-        public InvalidKistlGeneratedVersionException(string message, Exception inner) : base(message, inner) { }
-        protected InvalidKistlGeneratedVersionException(
+        public InvalidZetboxGeneratedVersionException() : this("Invalid Zetbox Generated Version") { }
+        public InvalidZetboxGeneratedVersionException(string message) : base(message) { }
+        public InvalidZetboxGeneratedVersionException(string message, Exception inner) : base(message, inner) { }
+        protected InvalidZetboxGeneratedVersionException(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context)
             : base(info, context) { }

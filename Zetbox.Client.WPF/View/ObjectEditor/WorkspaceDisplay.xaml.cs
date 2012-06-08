@@ -11,14 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Kistl.App.GUI;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ObjectEditor;
-using Kistl.Client.WPF.CustomControls;
-using Kistl.Client.WPF.Toolkit;
+using Zetbox.App.GUI;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ObjectEditor;
+using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
-namespace Kistl.Client.WPF.View.ObjectEditor
+namespace Zetbox.Client.WPF.View.ObjectEditor
 {
     /// <summary>
     /// Interaction logic for DesktopView.xaml

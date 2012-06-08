@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Common
+namespace Zetbox.API.Common
 {
     using System;
     using System.Collections.Generic;
@@ -8,13 +8,13 @@ namespace Kistl.API.Common
     using System.Text;
     using System.Threading;
 
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public sealed class ThreadPrincipalResolver
         : BaseIdentityResolver
     {
-        public ThreadPrincipalResolver(Func<IReadOnlyKistlContext> resolverCtxFactory)
+        public ThreadPrincipalResolver(Func<IReadOnlyZetboxContext> resolverCtxFactory)
             : base(resolverCtxFactory)
         {
         }

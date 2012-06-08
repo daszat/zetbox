@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.CollectionEntries
+namespace Zetbox.Generator.Templates.CollectionEntries
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ManageObjectState.cst")]
-    public partial class ManageObjectState : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\ManageObjectState.cst")]
+    public partial class ManageObjectState : Zetbox.Generator.ResourceTemplate
     {
 
 
@@ -29,7 +29,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 12 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ManageObjectState.cst"
+#line 12 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\ManageObjectState.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        protected override void OnPropertyChanged(string property, object oldValue, object newValue)\r\n");
 this.WriteObjects("        {\r\n");

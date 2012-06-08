@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,14 @@ namespace Kistl.Generator.Templates.Properties
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Generator.Extensions;
 
     public partial class ValueCollectionProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList,
             CompoundObjectProperty prop,
             string collectionWrapperClass,
@@ -26,7 +26,7 @@ namespace Kistl.Generator.Templates.Properties
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList,
             ValueTypeProperty prop,
             string collectionWrapperClass,
@@ -38,7 +38,7 @@ namespace Kistl.Generator.Templates.Properties
         }
 
         private static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList,
             Property prop, bool hasPersistentOrder, bool isList,
             string collectionWrapperClass,
@@ -56,7 +56,7 @@ namespace Kistl.Generator.Templates.Properties
             string thisInterface = prop.ObjectClass.Name;
             string referencedType = prop.GetElementTypeString();
             string referencedCollectionEntry = prop.GetCollectionEntryFullName();
-            string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+            string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix;
 
             string providerCollectionType = "ObservableCollection<" + referencedCollectionEntryImpl + ">";
             string underlyingCollectionName = "_" + name + "Collection";
@@ -82,7 +82,7 @@ namespace Kistl.Generator.Templates.Properties
         ///// <param name="backingName">the name of the private backing store for the conversion wrapper list</param>
         ///// <param name="backingCollectionType">the name of the wrapper class for wrapping the CollectionEntries</param>
         ///// <param name="exposedCollectionInterface">which generic interface to use for the collection</param>
-        ///// <param name="thisInterface">which Kistl interface this is</param>
+        ///// <param name="thisInterface">which Zetbox interface this is</param>
         ///// <param name="referencedType">which type this list contains</param>
         ///// <param name="entryType">collection entries in this list</param>
         ///// <param name="providerCollectionType">the provider type of this collection</param>
@@ -91,7 +91,7 @@ namespace Kistl.Generator.Templates.Properties
         ///// <param name="moduleNamespace">the xml namespace of the module</param>
         //public static void Call(
         //    Arebis.CodeGeneration.IGenerationHost host,
-        //    IKistlContext ctx,
+        //    IZetboxContext ctx,
         //    Serialization.SerializationMembersList serializationList,
         //    string name, string backingName, string backingCollectionType, string exposedCollectionInterface,
         //    string thisInterface, string referencedType, string entryType,

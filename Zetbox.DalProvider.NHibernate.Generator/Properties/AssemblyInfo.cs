@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.DalProvider.NHibernate.Generator")]
+[assembly: AssemblyTitle("Zetbox.DalProvider.NHibernate.Generator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl.DalProvider.NHibernate.Generator")]
+[assembly: AssemblyProduct("Zetbox.DalProvider.NHibernate.Generator")]
 [assembly: AssemblyCopyright("Copyright © dasz.at OG 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.Server")]
-[assembly: AssemblyDescription("Contains the Server components of Kistl")]
+[assembly: AssemblyTitle("Zetbox.Server")]
+[assembly: AssemblyDescription("Contains the Server components of Zetbox")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl.Server")]
+[assembly: AssemblyProduct("Zetbox.Server")]
 [assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
 //[assembly: AssemblyTrademark("")]
 //[assembly: AssemblyCulture("")]

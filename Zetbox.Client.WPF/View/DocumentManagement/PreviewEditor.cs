@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows;
-using Kistl.Client.Presentables.DocumentManagement;
-using Kistl.Client.GUI;
-using Kistl.API.Utils;
+using Zetbox.Client.Presentables.DocumentManagement;
+using Zetbox.Client.GUI;
+using Zetbox.API.Utils;
 
-namespace Kistl.Client.WPF.View.DocumentManagement
+namespace Zetbox.Client.WPF.View.DocumentManagement
 {
     public abstract class PreviewEditor : UserControl, IHasViewModel<FileViewModel>
     {

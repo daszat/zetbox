@@ -6,11 +6,11 @@ using System;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.API")]
+[assembly: AssemblyTitle("Zetbox.API")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl.API")]
+[assembly: AssemblyProduct("Zetbox.API")]
 [assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

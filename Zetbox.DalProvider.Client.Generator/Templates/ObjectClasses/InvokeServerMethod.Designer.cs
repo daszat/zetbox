@@ -1,16 +1,16 @@
 using System;
 using System.Linq;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst")]
-    public partial class InvokeServerMethod : Kistl.Generator.Templates.ObjectClasses.Method
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst")]
+    public partial class InvokeServerMethod : Zetbox.Generator.Templates.ObjectClasses.Method
     {
 
 
@@ -29,11 +29,11 @@ namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 12 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 12 "P:\Zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  GetReturnType() , " ",  m.Name , "(",  GetParameterDefinitions() , ")\r\n");
-#line 16 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 16 "P:\Zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
     string argumentDefs = m.GetArguments();
@@ -51,28 +51,28 @@ var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnPar
     if (returnParam == null)
     {
 
-#line 33 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 33 "P:\Zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", typeof(",  GetReturnType() , "), ",  argumentTypes, "",  argumentDefs , ");\r\n");
 this.WriteObjects("        }\r\n");
-#line 37 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 37 "P:\Zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 }
     else
     {
 
-#line 41 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 41 "P:\Zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            return (",  GetReturnType() , ")Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", typeof(",  GetReturnType() , "), ",  argumentTypes , "",  argumentDefs , ");\r\n");
 this.WriteObjects("        }\r\n");
-#line 45 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 45 "P:\Zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 }
 
 if(index == 0) {
 	// Only for first overload
-	Kistl.Generator.Templates.ObjectClasses.MethodCanExec.Call(Host, ctx, dt, m, eventName);
+	Zetbox.Generator.Templates.ObjectClasses.MethodCanExec.Call(Host, ctx, dt, m, eventName);
 }
 
-#line 52 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 52 "P:\Zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

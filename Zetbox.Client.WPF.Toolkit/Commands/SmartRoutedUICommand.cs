@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Commands
+namespace Zetbox.Client.WPF.Commands
 {
     using System;
     using System.Collections.Generic;

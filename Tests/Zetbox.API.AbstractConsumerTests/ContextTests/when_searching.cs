@@ -1,13 +1,13 @@
 
-namespace Kistl.API.AbstractConsumerTests.ContextTests
+namespace Zetbox.API.AbstractConsumerTests.ContextTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
     using NUnit.Framework;
 
     public class when_searching

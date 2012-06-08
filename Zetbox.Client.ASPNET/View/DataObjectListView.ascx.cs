@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_DataObjectListView : Kistl.Client.ASPNET.Toolkit.View.DataObjectListView
+public partial class View_DataObjectListView : Zetbox.Client.ASPNET.Toolkit.View.DataObjectListView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

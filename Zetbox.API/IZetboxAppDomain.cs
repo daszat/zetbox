@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Configuration;
+using Zetbox.API.Configuration;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
     /// App Domain Interface for Client &amp; Server Hosts.
     /// </summary>
-    public interface IKistlAppDomain
+    public interface IZetboxAppDomain
     {
         /// <summary>
         /// Start the Host.
         /// </summary>
-        void Start(KistlConfig config);
+        void Start(ZetboxConfig config);
         /// <summary>
         /// Stop the Host.
         /// </summary>

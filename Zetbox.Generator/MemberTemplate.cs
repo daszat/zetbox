@@ -1,12 +1,12 @@
 
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.Generator.Extensions;
+    using Zetbox.Generator.Extensions;
 
     public class MemberTemplate
         : ResourceTemplate

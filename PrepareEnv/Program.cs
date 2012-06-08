@@ -177,7 +177,7 @@ namespace PrepareEnv
             switch (Environment.OSVersion.Platform)
             {
                 case PlatformID.Unix:
-                    LogAction("deploying Npgsql for Kistl.Server.Service.exe");
+                    LogAction("deploying Npgsql for Zetbox.Server.Service.exe");
                     File.Copy(
                         Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "Server"), "Npgsql.Mono"), "Npgsql.dll"),
                         Path.Combine(envConfig.BinaryTarget, "Npgsql.dll"),
@@ -264,32 +264,32 @@ namespace PrepareEnv
 
                 // create prefix<->namespace mappings (if any)
                 var nsMgr = new XmlNamespaceManager(doc.NameTable);
-                nsMgr.AddNamespace("k", "http://dasz.at/Kistl/");
+                nsMgr.AddNamespace("k", "http://dasz.at/Zetbox/");
 
-                // check whether this is a KistlConfig
-                var configSet = doc.SelectNodes("/k:KistlConfig", nsMgr);
+                // check whether this is a ZetboxConfig
+                var configSet = doc.SelectNodes("/k:ZetboxConfig", nsMgr);
                 if (configSet.Count == 0)
                     continue; // nope, ignore!
 
-                var serverNode = doc.SelectSingleNode("/k:KistlConfig/k:Server[@StartServer='true']", nsMgr);
+                var serverNode = doc.SelectSingleNode("/k:ZetboxConfig/k:Server[@StartServer='true']", nsMgr);
                 if (serverNode == null)
                     continue; // no startable server, ignore!
 
-                // Select a database called "Kistl"
-                var databaseNode = doc.SelectSingleNode("/k:KistlConfig/k:Server[@StartServer=true]/k:ConnectionStrings/k:Database[@Name=Kistl]", nsMgr);
+                // Select a database called "Zetbox"
+                var databaseNode = doc.SelectSingleNode("/k:ZetboxConfig/k:Server[@StartServer=true]/k:ConnectionStrings/k:Database[@Name=Zetbox]", nsMgr);
                 if (databaseNode == null)
                 {
-                    databaseNode = doc.CreateElement("Database", "http://dasz.at/Kistl/");
-                    var connectionStringsNode = doc.SelectSingleNode("/k:KistlConfig/k:Server[@StartServer=true]/k:ConnectionStrings", nsMgr);
+                    databaseNode = doc.CreateElement("Database", "http://dasz.at/Zetbox/");
+                    var connectionStringsNode = doc.SelectSingleNode("/k:ZetboxConfig/k:Server[@StartServer=true]/k:ConnectionStrings", nsMgr);
                     if (connectionStringsNode == null)
                     {
-                        connectionStringsNode = doc.CreateElement("ConnectionStrings", "http://dasz.at/Kistl/");
+                        connectionStringsNode = doc.CreateElement("ConnectionStrings", "http://dasz.at/Zetbox/");
                         serverNode.PrependChild(connectionStringsNode);
                     }
                     connectionStringsNode.PrependChild(databaseNode);
                 }
                 EnsureAttribute(doc, databaseNode, "Name");
-                databaseNode.Attributes["Name"].Value = "Kistl";
+                databaseNode.Attributes["Name"].Value = "Zetbox";
                 EnsureAttribute(doc, databaseNode, "Schema");
                 databaseNode.Attributes["Schema"].Value = envConfig.DatabaseTarget.Schema;
                 EnsureAttribute(doc, databaseNode, "Provider");

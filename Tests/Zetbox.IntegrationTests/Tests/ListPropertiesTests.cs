@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.AbstractConsumerTests;
+using Zetbox.API.AbstractConsumerTests;
 
 using NUnit.Framework;
 
-namespace Kistl.IntegrationTests
+namespace Zetbox.IntegrationTests
 {
     [TestFixture]
     public class ListPropertiesTests

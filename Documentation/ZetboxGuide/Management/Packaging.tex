@@ -1,5 +1,5 @@
 \section{\label{Packaging}Packaging}
-This chapter describes the way how modules (packages) are transferred between Kistl installations.
+This chapter describes the way how modules (packages) are transferred between Zetbox installations.
 
 \subsection{\label{Packaging_Content_of_a_package}Content of a package}
 
@@ -76,7 +76,7 @@ Currently all objects of a specific module are exported.
 
 Command line for exporting objects:
 \begin{CS}
-Kistl.Server <configfile.xml> -export <destfile.xml> <namespace> [<namespace> ...]
+Zetbox.Server <configfile.xml> -export <destfile.xml> <namespace> [<namespace> ...]
 \end{CS}
 
 The namespace is used to identify a module. \emph{TODO: Work in progress. This is not the best solution!}
@@ -84,17 +84,17 @@ The namespace is used to identify a module. \emph{TODO: Work in progress. This i
 
 This example will export all objects of the project management module:
 \begin{CS}
-Kistl.Server -export Export.xml Kistl.App.Projekte
+Zetbox.Server -export Export.xml Zetbox.App.Projekte
 \end{CS}
 
 This example will export \emph{all} meta data of \emph{all} modules:
 \begin{CS}
-Kistl.Server -export Export.xml Kistl.App.Base Kistl.App.GUI
+Zetbox.Server -export Export.xml Zetbox.App.Base Zetbox.App.GUI
 \end{CS}
 
 This example will export the whole database:
 \begin{CS}
-Kistl.Server -export Export.xml *
+Zetbox.Server -export Export.xml *
 \end{CS}
 
 \subsubsection{\label{Packaging_Import}Import}
@@ -109,17 +109,17 @@ Importing is the inverse process of exporting \ref{Packaging_Export}. Objects ar
 
 Command line for importing objects:
 \begin{CS}
-Kistl.Server <configfile.xml> -import <sourcefile.xml>
+Zetbox.Server <configfile.xml> -import <sourcefile.xml>
 \end{CS}
 
 \subsubsection{\label{Packaging_Publish}Publish}
 
 Publishing is a special case of exporting \ref{Packaging_Export}. Only meta data \ref{Packaging_Meta} of a given module will be exported. 
-Additionally only properties of the Kistl.App.Base and Kistl.App.GUI module are published.
+Additionally only properties of the Zetbox.App.Base and Zetbox.App.GUI module are published.
 
 Command line for publishing modules:
 \begin{CS}
-Kistl.Server <configfile.xml> -publish <destfile.xml> <namespace> [<namespace> ...]
+Zetbox.Server <configfile.xml> -publish <destfile.xml> <namespace> [<namespace> ...]
 \end{CS}
 
 The namespace is used to identify a module. \emph{TODO: Work in progress. This is not the best solution!}
@@ -127,12 +127,12 @@ The namespace is used to identify a module. \emph{TODO: Work in progress. This i
 
 This example will publish the project management module:
 \begin{CS}
-Kistl.Server -publish Meta.xml Kistl.App.Projekte
+Zetbox.Server -publish Meta.xml Zetbox.App.Projekte
 \end{CS}
 
 This example will publish all modules:
 \begin{CS}
-Kistl.Server -publish Meta.xml *
+Zetbox.Server -publish Meta.xml *
 \end{CS}
 
 
@@ -143,14 +143,14 @@ These Rules are:
 
 \begin{enumerate}
  \item If an imported object already exists in the target database then the object will be overridden
- \item Only properties of the the Kistl.App.Base and Kistl.App.GUI module are overriden.
+ \item Only properties of the the Zetbox.App.Base and Zetbox.App.GUI module are overriden.
  \item New objects are added
  \item Any object that is not contained in the packed will be deleted
 \end{enumerate}
 
 Command line for importing objects:
 \begin{CS}
-Kistl.Server <configfile.xml> -deploy <sourcefile.xml>
+Zetbox.Server <configfile.xml> -deploy <sourcefile.xml>
 \end{CS}
 
 The database schema is not updated. Also no code is generated. This has to be done in an extra step.

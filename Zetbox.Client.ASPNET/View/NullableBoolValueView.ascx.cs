@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_NullableBoolValueView : Kistl.Client.ASPNET.Toolkit.View.NullableBoolValueView
+public partial class View_NullableBoolValueView : Zetbox.Client.ASPNET.Toolkit.View.NullableBoolValueView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

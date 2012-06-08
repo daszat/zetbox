@@ -1,24 +1,24 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="EfModel.ModelCsdlEntityTypeFields"
-	ClassName="Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdlEntityTypeFields" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+	ClassName="Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdlEntityTypeFields" 
+	Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
 <%
 
 	/*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
-     * See also Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.PropertiesHbm
+     * See also Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings.PropertiesHbm
 	 */
 
 	foreach(var p in properties.OrderBy(p => p.Name))
@@ -27,7 +27,7 @@
 		if (p is ObjectReferenceProperty)
 		{
 		    var prop = p as ObjectReferenceProperty;
-		    var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
+		    var rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
 			var relEnd = rel.GetEnd(prop);
 			var otherEnd = rel.GetOtherEnd(relEnd);
 			

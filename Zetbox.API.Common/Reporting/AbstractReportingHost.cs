@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Common.Reporting
+namespace Zetbox.API.Common.Reporting
 {
     using System;
     using System.Collections.Generic;
@@ -11,15 +11,15 @@ namespace Kistl.API.Common.Reporting
     using System.Text;
     using Arebis.CodeGeneration;
     using Arebis.CodeGenerator.Templated;
-    using Kistl.API;
+    using Zetbox.API;
     using MigraDoc.DocumentObjectModel;
     using MigraDoc.DocumentObjectModel.IO;
     using MigraDoc.Rendering;
     using MigraDoc.RtfRendering;
-    using ControlKinds = Kistl.NamedObjects.Gui.ControlKinds;
+    using ControlKinds = Zetbox.NamedObjects.Gui.ControlKinds;
     using PdfSharp.Pdf;
     using PdfSharp.Pdf.IO;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// a <see cref="IGenerationHost"/> to use the pre-compiled Templates from the given assembly
@@ -267,7 +267,7 @@ namespace Kistl.API.Common.Reporting
         {
             if (ex != null)
             {
-                Kistl.API.Utils.Logging.Log.Error("Exception during report creation", ex);
+                Zetbox.API.Utils.Logging.Log.Error("Exception during report creation", ex);
             }
 
             if (errors != null)
@@ -277,13 +277,13 @@ namespace Kistl.API.Common.Reporting
                     switch (e.ErrorLevel)
                     {
                         case DdlErrorLevel.Error:
-                            Kistl.API.Utils.Logging.Log.Error(e.ToString());
+                            Zetbox.API.Utils.Logging.Log.Error(e.ToString());
                             break;
                         case DdlErrorLevel.Warning:
-                            Kistl.API.Utils.Logging.Log.Warn(e.ToString());
+                            Zetbox.API.Utils.Logging.Log.Warn(e.ToString());
                             break;
                         default:
-                            Kistl.API.Utils.Logging.Log.Info(e.ToString());
+                            Zetbox.API.Utils.Logging.Log.Info(e.ToString());
                             break;
                     }
                 }

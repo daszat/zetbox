@@ -1,15 +1,15 @@
 
-namespace Kistl.Client.Tests.ValueViewModels
+namespace Zetbox.Client.Tests.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
     using Moq;
     using NUnit.Framework;
 

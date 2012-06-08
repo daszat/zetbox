@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Properties {
+namespace Zetbox.Client.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.Client.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -106,7 +106,7 @@ namespace Kistl.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ZBox is starting....
+        ///   Looks up a localized string similar to Zetbox is starting....
         /// </summary>
         public static string Startup_Message {
             get {

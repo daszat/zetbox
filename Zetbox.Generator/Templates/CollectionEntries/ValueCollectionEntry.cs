@@ -1,27 +1,27 @@
 
-namespace Kistl.Generator.Templates.CollectionEntries
+namespace Zetbox.Generator.Templates.CollectionEntries
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     public partial class ValueCollectionEntry
         : CollectionEntryTemplate
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ValueTypeProperty prop)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, ValueTypeProperty prop)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("CollectionEntries.ValueCollectionEntry", ctx, prop);
         }
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, CompoundObjectProperty prop)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, CompoundObjectProperty prop)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
@@ -30,7 +30,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected Property prop { get; private set; }
 
-        public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
+        public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Property prop)
             : base(_host, ctx)
         {
             if (!(prop is ValueTypeProperty || prop is CompoundObjectProperty))
@@ -76,7 +76,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
         {
             if (IsExportable())
             {
-                return new string[] { "Kistl.API.IExportableValueCollectionEntryInternal" };
+                return new string[] { "Zetbox.API.IExportableValueCollectionEntryInternal" };
             }
             else
             {

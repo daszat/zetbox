@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections;
@@ -12,10 +12,10 @@ namespace Kistl.DalProvider.Ef
     using System.Reflection;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public class ServerObjectHandler<T>
         : BaseServerObjectHandler<T>
@@ -27,9 +27,9 @@ namespace Kistl.DalProvider.Ef
         /// <param baseDir="ctx"></param>
         /// <param baseDir="ID"></param>
         /// <returns></returns>
-        protected override T GetObjectInstance(IKistlContext ctx, int ID)
+        protected override T GetObjectInstance(IZetboxContext ctx, int ID)
         {
-            if (ID < Kistl.API.Helper.INVALIDID)
+            if (ID < Zetbox.API.Helper.INVALIDID)
             {
                 // new object -> look in current context
                 ObjectContext efCtx = ((EfDataContext)ctx).ObjectContext;
@@ -47,7 +47,7 @@ namespace Kistl.DalProvider.Ef
         : BaseServerObjectSetHandler
     {
         /// <inheritdoc/>
-        public override IEnumerable<IPersistenceObject> SetObjects(Guid version, IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public override IEnumerable<IPersistenceObject> SetObjects(Guid version, IZetboxContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             return base.SetObjects(version, ctx, objects, notificationRequests);
         }
@@ -63,12 +63,12 @@ namespace Kistl.DalProvider.Ef
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
             Guid version, 
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            KistlGeneratedVersionAttribute.Check(version);
+            ZetboxGeneratedVersionAttribute.Check(version);
 
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             var relEnd = rel.GetEndFromRole(endRole);

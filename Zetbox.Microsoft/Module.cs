@@ -1,12 +1,12 @@
 
-namespace Kistl.Microsoft
+namespace Zetbox.Microsoft
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Client;
+    using Zetbox.API.Client;
 
     public class Module : Autofac.Module
     {

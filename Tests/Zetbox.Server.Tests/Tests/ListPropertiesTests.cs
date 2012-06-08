@@ -5,13 +5,13 @@ using System.Text;
 
 using Autofac;
 
-using Kistl.API;
-using Kistl.API.AbstractConsumerTests;
-using Kistl.API.Server;
+using Zetbox.API;
+using Zetbox.API.AbstractConsumerTests;
+using Zetbox.API.Server;
 
 using NUnit.Framework;
 
-namespace Kistl.Server.Tests
+namespace Zetbox.Server.Tests
 {
     [TestFixture]
     public class ListPropertiesTests

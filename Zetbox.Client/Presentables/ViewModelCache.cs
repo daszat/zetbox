@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.API.Client.PerfCounter;
+using Zetbox.API;
+using Zetbox.API.Client.PerfCounter;
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     public class ViewModelCache
     {
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables
     {
         private const String CacheKey = "__ViewModelCache__";
 
-        public static ViewModelCache GetViewModelCache(this IKistlContext ctx, IPerfCounter perfCounter)
+        public static ViewModelCache GetViewModelCache(this IZetboxContext ctx, IPerfCounter perfCounter)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
 

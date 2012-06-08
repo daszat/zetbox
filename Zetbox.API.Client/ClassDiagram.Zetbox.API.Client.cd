@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Kistl.API.Client.BaseClientPersistenceObject" Collapsed="true">
+  <Class Name="Zetbox.API.Client.BaseClientPersistenceObject" Collapsed="true">
     <Position X="1.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAhoAAAAAAAAAAiAAAIAAABABAAADAAQA=</HashCode>
@@ -8,7 +8,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.API.Client.BaseClientDataObject" Collapsed="true">
+  <Class Name="Zetbox.API.Client.BaseClientDataObject" Collapsed="true">
     <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAQAAAAAAAAAAAAAIAAAAQBAAAAAIJA=</HashCode>
@@ -16,7 +16,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.API.Client.BaseClientCollectionEntry" Collapsed="true">
+  <Class Name="Zetbox.API.Client.BaseClientCollectionEntry" Collapsed="true">
     <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAABAAAAAIBA=</HashCode>
@@ -24,59 +24,59 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.API.Client.CacheController&lt;T&gt;" Collapsed="true">
+  <Class Name="Zetbox.API.Client.CacheController&lt;T&gt;" Collapsed="true">
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAABABAAACAAAAAAAAAAAAAAAAABABAAAA=</HashCode>
       <FileName>CacheController.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.Client.ClientExtensionHelper" Collapsed="true">
+  <Class Name="Zetbox.API.Client.ClientExtensionHelper" Collapsed="true">
     <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Helper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.Client.KistlContext" Collapsed="true">
+  <Class Name="Zetbox.API.Client.ZetboxContext" Collapsed="true">
     <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
-      <FileName>LinqToKistl\KistlContext.cs</FileName>
+      <FileName>LinqToZetbox\ZetboxContext.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.Client.KistlContextImpl" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Zetbox.API.Client.ZetboxContextImpl" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAASAAAAIAAAAIAAAAAIEIAEAAAAEAAAAAQCA=</HashCode>
-      <FileName>LinqToKistl\KistlContext.cs</FileName>
+      <FileName>LinqToZetbox\ZetboxContext.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Kistl.API.Client.KistlContextProvider&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Zetbox.API.Client.ZetboxContextProvider&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="6" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAAghEQAAAIAAACQAACAAIAgABEAAAAAAAA=</HashCode>
-      <FileName>LinqToKistl\KistlContextProvider.cs</FileName>
+      <FileName>LinqToZetbox\ZetboxContextProvider.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Kistl.API.Client.KistlContextQuery&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Zetbox.API.Client.ZetboxContextQuery&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACBAAAAAAEBBQAAAAAAAAAAAAAAAAUAAAAgAAAAAA=</HashCode>
-      <FileName>LinqToKistl\KistlContextQuery.cs</FileName>
+      <FileName>LinqToZetbox\ZetboxContextQuery.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Kistl.API.Client.Proxy" Collapsed="true">
+  <Class Name="Zetbox.API.Client.Proxy" Collapsed="true">
     <Position X="6" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAACAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Proxy.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.Client.ProxyImplementation" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Zetbox.API.Client.ProxyImplementation" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="7.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAIAAAAgAAAAIEAAAAAAAAAEEAAGIAAAI=</HashCode>
@@ -84,55 +84,55 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Kistl.API.Client.KistlService.KistlServiceClient" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Zetbox.API.Client.ZetboxService.ZetboxServiceClient" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAGAAAAI=</HashCode>
-      <FileName>Service References\KistlService\Reference.cs</FileName>
+      <FileName>Service References\ZetboxService\Reference.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Zetbox.API.Client.ZetboxServiceStreams.ZetboxServiceStreamsClient" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAAAAAAI=</HashCode>
-      <FileName>Service References\KistlServiceStreams\Reference.cs</FileName>
+      <FileName>Service References\ZetboxServiceStreams\Reference.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Interface Name="Kistl.API.Client.IProxy" Collapsed="true">
+  <Interface Name="Zetbox.API.Client.IProxy" Collapsed="true">
     <Position X="6" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAGAAAAI=</HashCode>
       <FileName>Proxy.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.Client.KistlService.IKistlService" Collapsed="true">
+  <Interface Name="Zetbox.API.Client.ZetboxService.IZetboxService" Collapsed="true">
     <Position X="3.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAGAAAAI=</HashCode>
-      <FileName>Service References\KistlService\Reference.cs</FileName>
+      <FileName>Service References\ZetboxService\Reference.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.Client.KistlService.IKistlServiceChannel" Collapsed="true">
+  <Interface Name="Zetbox.API.Client.ZetboxService.IZetboxServiceChannel" Collapsed="true">
     <Position X="3.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Service References\KistlService\Reference.cs</FileName>
+      <FileName>Service References\ZetboxService\Reference.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.Client.KistlServiceStreams.IKistlServiceStreams" Collapsed="true">
+  <Interface Name="Zetbox.API.Client.ZetboxServiceStreams.IZetboxServiceStreams" Collapsed="true">
     <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAEAAAAAAAI=</HashCode>
-      <FileName>Service References\KistlServiceStreams\Reference.cs</FileName>
+      <FileName>Service References\ZetboxServiceStreams\Reference.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.Client.KistlServiceStreams.IKistlServiceStreamsChannel" Collapsed="true">
+  <Interface Name="Zetbox.API.Client.ZetboxServiceStreams.IZetboxServiceStreamsChannel" Collapsed="true">
     <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Service References\KistlServiceStreams\Reference.cs</FileName>
+      <FileName>Service References\ZetboxServiceStreams\Reference.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

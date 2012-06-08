@@ -5,15 +5,15 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Utils;
-using Kistl.Client.Presentables;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.API.Utils;
+using Zetbox.Client.Presentables;
 using Autofac;
 
-namespace Kistl.Client
+namespace Zetbox.Client
 {
     public static class ClientExtensions
     {

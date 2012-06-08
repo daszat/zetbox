@@ -12,33 +12,33 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Diagnostics;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     /// <summary>
     /// Kist Stream Service Contract
     /// TODO: Add FaultContracts
     /// TODO: Remove GetListOf
     /// </summary>
-    [ServiceContract(SessionMode=SessionMode.NotAllowed, Namespace="http://dasz.at/ZBox/")]
-    public interface IKistlService
+    [ServiceContract(SessionMode=SessionMode.NotAllowed, Namespace="http://dasz.at/Zetbox/")]
+    public interface IZetboxService
     {
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(ConcurrencyException))]
-        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
         /// Returns a list of objects from the datastore, matching the specified filters.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="type">Type of Objects</param>
         /// <param name="maxListCount">Max. ammount of objects</param>
         /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
@@ -47,13 +47,13 @@ namespace Kistl.API
         /// <returns>the found objects</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
 
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="type">Type of Object</param>
         /// <param name="ID">Object id</param>
         /// <param name="property">Property</param>
@@ -61,7 +61,7 @@ namespace Kistl.API
         //[Obsolete("Use a properly filtered GetList instead")]
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         byte[] GetListOf(Guid version, SerializableType type, int ID, string property);
 
         /// <summary>
@@ -69,25 +69,25 @@ namespace Kistl.API
         /// <paramref name="relId"/> which are owned by the object with the 
         /// ID <paramref name="ID"/> in the role <paramref name="role"/>.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="relId">the requested Relation</param>
         /// <param name="role">the parent role (1 == A, 2 == B)</param>
         /// <param name="ID">the ID of the parent object</param>
         /// <returns>the requested collection entries</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         byte[] FetchRelation(Guid version, Guid relId, int role, int ID);
 
         /// <summary>
         /// Gets the content stream of the given Blob instance ID
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="ID">ID of an valid Blob instance</param>
         /// <returns>Stream containing the Blob content</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         Stream GetBlobStream(Guid version, int ID);
 
         /// <summary>
@@ -97,14 +97,14 @@ namespace Kistl.API
         /// <returns>the newly created Blob instance</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         BlobResponse SetBlobStream(BlobMessage blob);
 
 
         /// <summary>
         /// Invokes a server side method
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="type">Type of the object to invoke method</param>
         /// <param name="ID">ID of the object</param>
         /// <param name="method">Method name</param>
@@ -116,7 +116,7 @@ namespace Kistl.API
         /// <returns></returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         byte[] InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects);
     }
 
@@ -143,7 +143,7 @@ namespace Kistl.API
     }
 
 
-    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/")]
     [Serializable]
     [DebuggerDisplay("{IDs.Length} reqs for {Type.TypeName}")]
     [KnownType(typeof(SerializableType))]
@@ -156,7 +156,7 @@ namespace Kistl.API
         public int[] IDs { get; set; }
     }
 
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name="OrderBy")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name="OrderBy")]
     [Serializable]
     [KnownType(typeof(SerializableType))]
     [KnownType(typeof(SerializableBinaryExpression))]

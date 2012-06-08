@@ -2,18 +2,18 @@
 //     Copyright (C) 2009 dasz.at OG. All rights reserved.
 // </copyright>
 
-namespace Kistl.Client.WPF
+namespace Zetbox.Client.WPF
 {
     using System;
     using System.Linq;
 
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
     using System.Windows;
-    using Kistl.App.GUI;
+    using Zetbox.App.GUI;
 
     /// <content>Contains various and temporary fixes needed to clean the database</content>
     public partial class App
@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF
         ///// <summary>
         ///// Fix broken TypeRefs.
         ///// </summary>
-        //private static void FixupTypeRefParents(IKistlContext ctx)
+        //private static void FixupTypeRefParents(IZetboxContext ctx)
         //{
         //    if (ctx == null) throw new ArgumentNullException("ctx");
         //    using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
@@ -45,7 +45,7 @@ namespace Kistl.Client.WPF
         ///// </summary>
         ///// <param name="ctx">the context to use</param>
         ///// <param name="tr">the <see cref="TypeRef"/> to fix</param>
-        //private static void UpdateParent(IKistlContext ctx, TypeRef tr)
+        //private static void UpdateParent(IZetboxContext ctx, TypeRef tr)
         //{
         //    var type = tr.AsType(false);
         //    if (type != null
@@ -66,7 +66,7 @@ namespace Kistl.Client.WPF
         //        Console.WriteLine("---------------------------------------------------------------");
         //        Console.WriteLine();
         //        Console.WriteLine("graph A{");
-        //        using (IKistlContext ctx = GetContext())
+        //        using (IZetboxContext ctx = GetContext())
         //        {
         //            var relations = ctx.GetQuery<Relation>();
 
@@ -90,18 +90,18 @@ namespace Kistl.Client.WPF
         //private static void CreateTestFragebögen()
         //{
         //    using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
-        //        ctx.GetQuery<Kistl.App.Test.Antwort>().ForEach(a => ctx.Delete(a));
-        //        ctx.GetQuery<Kistl.App.Test.Fragebogen>().ForEach(a => ctx.Delete(a));
+        //        ctx.GetQuery<Zetbox.App.Test.Antwort>().ForEach(a => ctx.Delete(a));
+        //        ctx.GetQuery<Zetbox.App.Test.Fragebogen>().ForEach(a => ctx.Delete(a));
 
-        //        var fb1 = ctx.Create<Kistl.App.Test.Fragebogen>();
+        //        var fb1 = ctx.Create<Zetbox.App.Test.Fragebogen>();
         //        fb1.BogenNummer = 1;
-        //        fb1.Antworten.Add(ctx.Create<Kistl.App.Test.Antwort>());
+        //        fb1.Antworten.Add(ctx.Create<Zetbox.App.Test.Antwort>());
         //        fb1.Antworten[0].Frage = "Erste Frage";
         //        fb1.Antworten[0].FragenNummer = 1;
         //        fb1.Antworten[0].GegebeneAntwort = 2;
-        //        fb1.Antworten.Add(ctx.Create<Kistl.App.Test.Antwort>());
+        //        fb1.Antworten.Add(ctx.Create<Zetbox.App.Test.Antwort>());
         //        fb1.Antworten[1].Frage = "Zweite Frage";
         //        fb1.Antworten[1].FragenNummer = 2;
         //        fb1.Antworten[1].GegebeneAntwort = 4;
@@ -112,7 +112,7 @@ namespace Kistl.Client.WPF
 
         //private static void PrintControlKindTypes()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        foreach (var ck in ctx.GetQuery<ControlKind>())
         //        {
@@ -123,7 +123,7 @@ namespace Kistl.Client.WPF
         /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
-        internal static void FixupDatabase(Func<IKistlContext> ctxFactory)
+        internal static void FixupDatabase(Func<IZetboxContext> ctxFactory)
         {
             //ImportIcons(ctxFactory());
             //FixIcons(ctxFactory());
@@ -135,18 +135,18 @@ namespace Kistl.Client.WPF
             //RegenerateTypeRefs(ctxFactory());
         }
 
-        //private static void ImportIcons(IKistlContext ctx)
+        //private static void ImportIcons(IZetboxContext ctx)
         //{
         //    if (ctx == null) throw new ArgumentNullException("ctx");
 
-        //    var kistlBase = ctx.FindPersistenceObject<Module>(NamedObjects.Module_KistlBase);
+        //    var zetboxBase = ctx.FindPersistenceObject<Module>(NamedObjects.Module_ZetboxBase);
 
         //    foreach (var f in System.IO.Directory.GetFiles("C:\\temp\\Icons"))
         //    {
         //        var fi = new System.IO.FileInfo(f);
         //        var icon = ctx.Create<Icon>();
         //        icon.IconFile = System.IO.Path.GetFileName(f);
-        //        icon.Module = kistlBase;
+        //        icon.Module = zetboxBase;
         //        icon.Blob = ctx.Find<Blob>(ctx.CreateBlob(fi, fi.GetMimeType()));
         //    }
         //    ctx.SubmitChanges();
@@ -154,14 +154,14 @@ namespace Kistl.Client.WPF
 
         //private static string GetIconPath(string name)
         //{
-        //    string result = @"P:\Kistl\DocumentStore\Client"
+        //    string result = @"P:\Zetbox\DocumentStore\Client"
         //        + @"\GUI.Icons\"
         //        + name;
         //    result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
         //    return result;
         //}
 
-        //private static void FixIcons(IKistlContext ctx)
+        //private static void FixIcons(IZetboxContext ctx)
         //{
         //    foreach(var i in ctx.GetQuery<Icon>().Where(i => i.Blob == null))
         //    {
@@ -171,7 +171,7 @@ namespace Kistl.Client.WPF
         //    ctx.SubmitChanges();
         //}
 
-        //private static void RegenerateTypeRefs(IKistlContext ctx)
+        //private static void RegenerateTypeRefs(IZetboxContext ctx)
         //{
         //    foreach (var a in ctx.GetQuery<Assembly>())
         //    {
@@ -180,7 +180,7 @@ namespace Kistl.Client.WPF
         //    }
         //}
 
-        //private static void FixupCallImplementInterfaces(Func<IKistlContext> ctxFactory)
+        //private static void FixupCallImplementInterfaces(Func<IZetboxContext> ctxFactory)
         //{
         //    foreach (var objClass in ctx.GetQuery<ObjectClass>())
         //    {

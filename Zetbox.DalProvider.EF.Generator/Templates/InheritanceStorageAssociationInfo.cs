@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
-namespace Kistl.DalProvider.Ef.Generator.Templates
+namespace Zetbox.DalProvider.Ef.Generator.Templates
 {
     internal class InheritanceStorageAssociationInfo
     {

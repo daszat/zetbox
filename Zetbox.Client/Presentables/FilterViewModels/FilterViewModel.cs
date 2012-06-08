@@ -1,14 +1,14 @@
 
-namespace Kistl.Client.Presentables.FilterViewModels
+namespace Zetbox.Client.Presentables.FilterViewModels
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Not a real view model
@@ -81,14 +81,14 @@ namespace Kistl.Client.Presentables.FilterViewModels
 
     public abstract class FilterViewModel : ViewModel
     {
-        public new delegate FilterViewModel Factory(IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl);
+        public new delegate FilterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IUIFilterModel mdl);
 
-        public static FilterViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+        public static FilterViewModel Fetch(IViewModelFactory f, IZetboxContext dataCtx, ViewModel parent, IUIFilterModel mdl)
         {
             return (FilterViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<FilterViewModel.Factory>(mdl.ViewModelType).Invoke(dataCtx, parent, mdl));
         }
 
-        public FilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+        public FilterViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IUIFilterModel mdl)
             : base(dependencies, dataCtx, parent)
         {
             this.Filter = mdl;

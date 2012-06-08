@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Kistl.API.NoopActionsManager" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Zetbox.API.NoopActionsManager" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="23" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
@@ -8,210 +8,210 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Kistl.API.AssemblyLoader" Collapsed="true">
+  <Class Name="Zetbox.API.AssemblyLoader" Collapsed="true">
     <Position X="19.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAEggCQAAAAAAAsAAAAAAAAABAAIAAAgABABAAAICA=</HashCode>
       <FileName>AssemblyLoader.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.BinarySerializer" Collapsed="true">
+  <Class Name="Zetbox.API.BinarySerializer" Collapsed="true">
     <Position X="21.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAIAAAAAAAAAAAAAAAAAAAAAIAAAAIBAAAAAACA=</HashCode>
       <FileName>BinarySerializer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.IllegalExpression" Collapsed="true">
+  <Class Name="Zetbox.API.IllegalExpression" Collapsed="true">
     <Position X="23" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ExpressionFilter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.ExpressionFilter" Collapsed="true">
+  <Class Name="Zetbox.API.ExpressionFilter" Collapsed="true">
     <Position X="23" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ExpressionFilter.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.ExpressionTreeVisitor" Collapsed="true">
+  <Class Name="Zetbox.API.ExpressionTreeVisitor" Collapsed="true">
     <Position X="24.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IEAABACAAAYwBAQAAAAAISDAAAAEAgACAFAAAAgEQAA=</HashCode>
       <FileName>ExpressionTreeVisitor.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.Helper" Collapsed="true">
+  <Class Name="Zetbox.API.Helper" Collapsed="true">
     <Position X="21.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACACCAAAgECCIEAAIAAAAAAAAAAAAAAAAAAAEAIAA=</HashCode>
       <FileName>Helper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.ExtensionHelpers" Collapsed="true">
+  <Class Name="Zetbox.API.ExtensionHelpers" Collapsed="true">
     <Position X="19.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAACEAAQAiAAAAIIAAAADAAAgQAAQAACAAAAAAAAKA=</HashCode>
       <FileName>Helper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.MethodReturnEventArgs&lt;T&gt;" Collapsed="true">
+  <Class Name="Zetbox.API.MethodReturnEventArgs&lt;T&gt;" Collapsed="true">
     <Position X="21.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IDataObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.LinqExtensions" Collapsed="true">
+  <Class Name="Zetbox.API.LinqExtensions" Collapsed="true">
     <Position X="19.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAABAAAQBAIAEAAIAABAAAAAAABAwAAAAAAAIAAg=</HashCode>
       <FileName>LinqExtensions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.NotifyingObservableCollection&lt;T&gt;" Collapsed="true">
+  <Class Name="Zetbox.API.NotifyingObservableCollection&lt;T&gt;" Collapsed="true">
     <Position X="24.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAJAKAAABAAAAAAAAEQAQAAQABIEAAAEAAAQAAA=</HashCode>
       <FileName>NotifyingObservableCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableType" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableType" Collapsed="true">
     <Position X="19.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAABACAAAAAAAAEgIAACAAAAAAAAJAAQCAAAAAAAAA=</HashCode>
       <FileName>SerializableType.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableExpression" Collapsed="true">
     <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAICAAAAAAAAAAAAAIAAAAIAAABAAAAQAAAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableCompoundExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableCompoundExpression" Collapsed="true">
     <Position X="6.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableBinaryExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableBinaryExpression" Collapsed="true">
     <Position X="3.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableUnaryExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableUnaryExpression" Collapsed="true">
     <Position X="8" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableConstantExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableConstantExpression" Collapsed="true">
     <Position X="17" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAgAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableMemberExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableMemberExpression" Collapsed="true">
     <Position X="10.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableMethodCallExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableMethodCallExpression" Collapsed="true">
     <Position X="12.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAIIAAAAAIAAAAAAAAAAAABAAgAAACAAAAIgA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableLambdaExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableLambdaExpression" Collapsed="true">
     <Position X="1.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableParameterExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableParameterExpression" Collapsed="true">
     <Position X="14.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.SerializableNewExpression" Collapsed="true">
+  <Class Name="Zetbox.API.SerializableNewExpression" Collapsed="true">
     <Position X="5.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAABAAAAAAEAAAAAAA=</HashCode>
       <FileName>SerializableExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.API.Configuration.KistlConfig" Collapsed="true">
+  <Class Name="Zetbox.API.Configuration.ZetboxConfig" Collapsed="true">
     <Position X="24.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACACAAgAAAAAAAAAAAAAAgAAIECEAABAAgAIAAQ=</HashCode>
-      <FileName>Configuration\KistlConfig.cs</FileName>
+      <FileName>Configuration\ZetboxConfig.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="Kistl.API.ICustomActionsManager" Collapsed="true">
+  <Interface Name="Zetbox.API.ICustomActionsManager" Collapsed="true">
     <Position X="19.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
       <FileName>ICustomActions.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.IPersistenceObject" Collapsed="true">
+  <Interface Name="Zetbox.API.IPersistenceObject" Collapsed="true">
     <Position X="0.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAgAAgoAAAAAAEAAABAAAAAAAAAAAAADAAwA=</HashCode>
       <FileName>IDataObject.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.IDataObject" Collapsed="true">
+  <Interface Name="Zetbox.API.IDataObject" Collapsed="true">
     <Position X="0.5" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIBAAAAAAIA=</HashCode>
       <FileName>IDataObject.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.IKistlAppDomain" Collapsed="true">
+  <Interface Name="Zetbox.API.IZetboxAppDomain" Collapsed="true">
     <Position X="21.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
-      <FileName>IKistlAppDomain.cs</FileName>
+      <FileName>IZetboxAppDomain.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.IKistlContext" Collapsed="true">
+  <Interface Name="Zetbox.API.IZetboxContext" Collapsed="true">
     <Position X="23" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAAEAAAIAACAIEAAAAIEAAEAAAAAAAABACAQ=</HashCode>
-      <FileName>IKistlContext.cs</FileName>
+      <FileName>IZetboxContext.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.IKistlService" Collapsed="true">
+  <Interface Name="Zetbox.API.IZetboxService" Collapsed="true">
     <Position X="24.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAIAAAAAAAAAAAAAQAAABAAAAAAEAAAAAAAI=</HashCode>
-      <FileName>IKistlService.cs</FileName>
+      <FileName>IZetboxService.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.INotifyingObject" Collapsed="true">
+  <Interface Name="Zetbox.API.INotifyingObject" Collapsed="true">
     <Position X="0.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAIAAAAA=</HashCode>
       <FileName>BaseNotifyingObject.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Kistl.API.IStreamable" Collapsed="true">
+  <Interface Name="Zetbox.API.IStreamable" Collapsed="true">
     <Position X="3.5" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIABAAAAAAAA=</HashCode>
@@ -230,21 +230,21 @@
     <Position X="3.5" Y="7.75" Width="1.5" />
     <TypeIdentifier />
   </Interface>
-  <Enum Name="Kistl.API.DataObjectState" Collapsed="true">
+  <Enum Name="Zetbox.API.DataObjectState" Collapsed="true">
     <Position X="19.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAACAAABAAEAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IDataObject.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Delegate Name="Kistl.API.ToStringHandler&lt;T&gt;" Collapsed="true">
+  <Delegate Name="Zetbox.API.ToStringHandler&lt;T&gt;" Collapsed="true">
     <Position X="21.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IDataObject.cs</FileName>
     </TypeIdentifier>
   </Delegate>
-  <Delegate Name="Kistl.API.ObjectEventHandler&lt;T&gt;" Collapsed="true">
+  <Delegate Name="Zetbox.API.ObjectEventHandler&lt;T&gt;" Collapsed="true">
     <Position X="19.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

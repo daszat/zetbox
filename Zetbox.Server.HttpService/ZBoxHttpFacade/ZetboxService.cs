@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.HttpService
+namespace Zetbox.Server.HttpService
 {
     using System;
     using System.Collections.Generic;
@@ -11,22 +11,22 @@ namespace Kistl.Server.HttpService
     using System.Web;
     using Autofac;
     using Autofac.Integration.Web;
-    using Kistl.API;
-    using Kistl.API.Common;
+    using Zetbox.API;
+    using Zetbox.API.Common;
 
     /// <summary>
-    /// trivial HTTP-based facade implementation of the IKistlService for hosting in non-WCF environments (like apache+mono)
+    /// trivial HTTP-based facade implementation of the IZetboxService for hosting in non-WCF environments (like apache+mono)
     /// </summary>
-    public sealed class KistlServiceFacade : IHttpHandler
+    public sealed class ZetboxServiceFacade : IHttpHandler
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service.KistlServiceFacade");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Service.ZetboxServiceFacade");
 
         private readonly BinaryFormatter _formatter = new BinaryFormatter();
 
         /// <summary>
         /// This class is instantiated by ASP.NET and thus needs an empty constructor.
         /// </summary>
-        public KistlServiceFacade() { }
+        public ZetboxServiceFacade() { }
 
         public bool IsReusable
         {
@@ -72,10 +72,10 @@ namespace Kistl.Server.HttpService
             {
                 cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
                 var scope = cpa.ContainerProvider.RequestLifetime;
-                var readerFactory = scope.Resolve<KistlStreamReader.Factory>();
-                var writerFactory = scope.Resolve<KistlStreamWriter.Factory>();
+                var readerFactory = scope.Resolve<ZetboxStreamReader.Factory>();
+                var writerFactory = scope.Resolve<ZetboxStreamWriter.Factory>();
 
-                var service = scope.Resolve<IKistlService>();
+                var service = scope.Resolve<IZetboxService>();
                 string username;
                 try
                 {
@@ -236,10 +236,10 @@ namespace Kistl.Server.HttpService
                 context.Response.StatusCode = (int)HttpStatusCode.Conflict;
                 Log.Info("Concurrency error while processing request", cex);
             }
-            catch (FaultException<InvalidKistlGeneratedVersionException> vex)
+            catch (FaultException<InvalidZetboxGeneratedVersionException> vex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.PreconditionFailed;
-                Log.Info("InvalidKistlGeneratedVersion error while processing request", vex);
+                Log.Info("InvalidZetboxGeneratedVersion error while processing request", vex);
             }
             catch (Exception ex)
             {
@@ -255,7 +255,7 @@ namespace Kistl.Server.HttpService
             }
         }
 
-        private void SendByteArray(HttpContext context, byte[] result, KistlStreamWriter.Factory writerFactory)
+        private void SendByteArray(HttpContext context, byte[] result, ZetboxStreamWriter.Factory writerFactory)
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "application/octet-stream";

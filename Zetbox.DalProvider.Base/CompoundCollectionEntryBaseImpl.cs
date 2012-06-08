@@ -1,11 +1,11 @@
 
-namespace Kistl.DalProvider.Base
+namespace Zetbox.DalProvider.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public abstract class CompoundCollectionEntryBaseImpl<AType, AImplType, BType, BImplType>
         : CollectionEntryBaseImpl //, IValueCollectionEntry, IValueCollectionEntry<AType, BType>
@@ -37,7 +37,7 @@ namespace Kistl.DalProvider.Base
         //        if (((IPersistenceObject)this).IsReadonly)
         //            throw new ReadOnlyObjectException();
         //        if (value != null && value.Context != this.Context)
-        //            throw new WrongKistlContextException();
+        //            throw new WrongZetboxContextException();
 
         //        // only accept "our" types
         //        AImpl = (AImplType)value;
@@ -93,7 +93,7 @@ namespace Kistl.DalProvider.Base
         //        if (((IPersistenceObject)this).IsReadonly)
         //            throw new ReadOnlyObjectException();
         //        //if (value != null && value.Context != this.Context)
-        //        //    throw new WrongKistlContextException();
+        //        //    throw new WrongZetboxContextException();
 
         //        // only accept "our" types
         //        BImpl = (BImplType)value;

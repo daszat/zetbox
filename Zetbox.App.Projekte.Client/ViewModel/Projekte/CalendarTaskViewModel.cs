@@ -1,22 +1,22 @@
-namespace Kistl.App.Projekte.Client.ViewModel.Projekte
+namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.Calendar;
-    using ControlKinds = Kistl.NamedObjects.Gui.ControlKinds;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.Calendar;
+    using ControlKinds = Zetbox.NamedObjects.Gui.ControlKinds;
 
     [ViewModelDescriptor]
     public class CalendarTaskViewModel : WeekCalendarViewModel
     {
-        public new delegate CalendarTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate CalendarTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public CalendarTaskViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public CalendarTaskViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, null)
         {
             base.Source = GetData;
@@ -59,7 +59,7 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
 
         private void FetchOffDays(DateTime from, DateTime to, List<IAppointmentViewModel> result)
         {
-            var rules = DataContext.GetQuery<Kistl.App.Calendar.YearlyCalendarRule>().Where(r => r.IsWorkingDay == false)
+            var rules = DataContext.GetQuery<Zetbox.App.Calendar.YearlyCalendarRule>().Where(r => r.IsWorkingDay == false)
                 .ToList();
             var dt = from;
             while (dt <= to)

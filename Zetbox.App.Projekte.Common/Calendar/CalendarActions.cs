@@ -1,12 +1,12 @@
-namespace Kistl.App.Calendar
+namespace Zetbox.App.Calendar
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
 
     [Implementor]
     public static class CalendarActions

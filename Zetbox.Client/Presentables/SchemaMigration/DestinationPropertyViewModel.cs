@@ -2,22 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.Client.Models;
-using Kistl.App.Base;
+using Zetbox.API;
+using Zetbox.Client.Models;
+using Zetbox.App.Base;
 using System.Collections.ObjectModel;
-using ZBox.App.SchemaMigration;
-using Kistl.Client.Presentables.KistlBase;
+using Zetbox.App.SchemaMigration;
+using Zetbox.Client.Presentables.ZetboxBase;
 
-namespace Kistl.Client.Presentables.SchemaMigration
+namespace Zetbox.Client.Presentables.SchemaMigration
 {
     [ViewModelDescriptor]
-    public class DestinationPropertyViewModel : Kistl.Client.Presentables.ValueViewModels.ObjectListViewModel
+    public class DestinationPropertyViewModel : Zetbox.Client.Presentables.ValueViewModels.ObjectListViewModel
     {
-        public new delegate DestinationPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate DestinationPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public DestinationPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             IObjectCollectionValueModel<IList<IDataObject>> mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {

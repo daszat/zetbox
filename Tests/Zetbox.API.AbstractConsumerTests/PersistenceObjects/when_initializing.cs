@@ -1,19 +1,19 @@
 
-namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
+namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
     using NUnit.Framework;
 
     public abstract class when_initializing
         : AbstractTestFixture
     {
-        private IKistlContext ctx;
+        private IZetboxContext ctx;
 
         [SetUp]
         public new void SetUp()

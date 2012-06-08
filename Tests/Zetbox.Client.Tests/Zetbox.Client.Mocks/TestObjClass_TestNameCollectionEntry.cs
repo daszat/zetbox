@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Client.Tests
+namespace Zetbox.API.Client.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@ namespace Kistl.API.Client.Tests
     using System.Text;
     using System.Xml.Serialization;
     
-    using Kistl.App.Test;
-    using Kistl.DalProvider.Base;
+    using Zetbox.App.Test;
+    using Zetbox.DalProvider.Base;
 
     public class TestObjClass_TestNameCollectionEntry
         : CollectionEntryBaseImpl, IValueCollectionEntry<TestObjClass, string>
@@ -62,14 +62,14 @@ namespace Kistl.API.Client.Tests
             }
         }
 
-        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             sw.Write(this.Value);
             sw.Write(this.fk_Parent);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
             sr.Read(out this._Value);

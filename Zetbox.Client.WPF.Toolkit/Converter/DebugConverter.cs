@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Data;
 
-namespace Kistl.Client.WPF.Converter
+namespace Zetbox.Client.WPF.Converter
 {
     [ValueConversion(typeof(object), typeof(object))]
     public class DebugConverter : IValueConverter

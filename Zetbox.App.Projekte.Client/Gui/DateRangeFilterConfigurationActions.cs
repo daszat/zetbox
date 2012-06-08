@@ -1,15 +1,15 @@
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Client;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Client;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -25,7 +25,7 @@ namespace Kistl.App.GUI
         }
 
         [Invocation]
-        public static void CreateFilterModel(Kistl.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
+        public static void CreateFilterModel(Zetbox.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
         {
             e.Result = DateRangeFilterModel.Create(
                 FrozenContext,
@@ -38,9 +38,9 @@ namespace Kistl.App.GUI
         }
 
         [Invocation]
-        public static void NotifyCreated(Kistl.App.GUI.DateRangeFilterConfiguration obj)
+        public static void NotifyCreated(Zetbox.App.GUI.DateRangeFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_DateRangeFilterViewModel
+            obj.ViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_DateRangeFilterViewModel
                .Find(obj.Context);
         }
     }

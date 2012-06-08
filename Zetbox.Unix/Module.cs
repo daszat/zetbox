@@ -1,5 +1,5 @@
 
-namespace Kistl.Unix
+namespace Zetbox.Unix
 {
     using System;
     using System.Collections.Generic;

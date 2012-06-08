@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.N_to_M_relations_BNHibernateImpl+N_to_M_relations_BProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.N_to_M_relations_BNHibernateImpl+N_to_M_relations_BProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.N_to_M_relations_BNHibernateImpl+N_to_M_relations_BProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.N_to_M_relations_BNHibernateImpl+N_to_M_relations_BProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`N_to_M_relations_Bs`"
            abstract="false"
@@ -24,7 +24,7 @@
         <!-- relEnd=BSide otherEnd=ASide -->
         <set name="ASide" table="`ASide_connectsTo_BSide`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_BSide`" />
-            <one-to-many class="Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->

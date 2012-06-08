@@ -1,20 +1,20 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     public partial class ObjectListProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList,
             ObjectReferenceProperty prop)
         {
@@ -47,7 +47,7 @@ namespace Kistl.Generator.Templates.Properties
         /// <param name="endRole"></param>
         /// <param name="positionPropertyName">the name of the position property for this list</param>
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList,
             string name,
             string wrapperClass,
@@ -71,7 +71,7 @@ namespace Kistl.Generator.Templates.Properties
         }
 
         public ObjectListProperty(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList,
             Relation rel,
             RelationEndRole endRole)

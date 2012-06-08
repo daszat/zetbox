@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Test
+namespace Zetbox.App.Test
 {
     using System;
     using System.Collections.Generic;
@@ -9,9 +9,9 @@ namespace Kistl.App.Test
     using System.Text;
     using System.Xml.Serialization;
 
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.DalProvider.Base;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.DalProvider.Base;
 
     public class TestObjClassImpl
         : DataObjectBaseImpl, TestObjClass
@@ -25,7 +25,7 @@ namespace Kistl.App.Test
         /// test
         /// </summary>
         // value type property
-        // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
+        // Zetbox.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual int? MyIntProperty
         {
             get
@@ -66,32 +66,32 @@ namespace Kistl.App.Test
             }
         }
         private int? _MyIntProperty;
-        public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_Getter;
-        public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PreSetter;
-        public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PostSetter;
+        public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, int?> OnMyIntProperty_Getter;
+        public static event PropertyPreSetterHandler<Zetbox.App.Test.TestObjClass, int?> OnMyIntProperty_PreSetter;
+        public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, int?> OnMyIntProperty_PostSetter;
 
         /// <summary>
         /// testtest
         /// </summary>
         // object reference property
-        // BEGIN Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ObjectProp
+        // BEGIN Zetbox.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ObjectProp
         // rel(A): TestObjClass has ObjectProp
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Projekte.Kunde ObjectProp
+        public Zetbox.App.Projekte.Kunde ObjectProp
         {
             get
             {
-                Kistl.App.Projekte.Kunde __value;
+                Zetbox.App.Projekte.Kunde __value;
                 if (_fk_ObjectProp.HasValue)
-                    __value = Context.Find<Kistl.App.Projekte.Kunde>(_fk_ObjectProp.Value);
+                    __value = Context.Find<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
                 else
                     __value = null;
 
                 if (OnObjectProp_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Kistl.App.Projekte.Kunde>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Projekte.Kunde>(__value);
                     OnObjectProp_Getter(this, e);
                     __value = e.Result;
                 }
@@ -101,7 +101,7 @@ namespace Kistl.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if (value == null && _fk_ObjectProp == null)
@@ -118,7 +118,7 @@ namespace Kistl.App.Test
 
                 if (OnObjectProp_PreSetter != null)
                 {
-                    var e = new PropertyPreSetterEventArgs<Kistl.App.Projekte.Kunde>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Projekte.Kunde>(__oldValue, __newValue);
                     OnObjectProp_PreSetter(this, e);
                     __newValue = e.Result;
                 }
@@ -131,7 +131,7 @@ namespace Kistl.App.Test
 
                 if (OnObjectProp_PostSetter != null)
                 {
-                    var e = new PropertyPostSetterEventArgs<Kistl.App.Projekte.Kunde>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Projekte.Kunde>(__oldValue, __newValue);
                     OnObjectProp_PostSetter(this, e);
                 }
 
@@ -139,16 +139,16 @@ namespace Kistl.App.Test
         }
 
         internal int? _fk_ObjectProp;
-        // END Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ObjectProp
-        public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_Getter;
-        public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PreSetter;
-        public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PostSetter;
+        // END Zetbox.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ObjectProp
+        public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Projekte.Kunde> OnObjectProp_Getter;
+        public static event PropertyPreSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Projekte.Kunde> OnObjectProp_PreSetter;
+        public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Projekte.Kunde> OnObjectProp_PostSetter;
 
         /// <summary>
         /// String Property
         /// </summary>
         // value type property
-        // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
+        // Zetbox.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string StringProp
         {
             get
@@ -189,16 +189,16 @@ namespace Kistl.App.Test
             }
         }
         private string _StringProp;
-        public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_Getter;
-        public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PreSetter;
-        public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PostSetter;
+        public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, string> OnStringProp_Getter;
+        public static event PropertyPreSetterHandler<Zetbox.App.Test.TestObjClass, string> OnStringProp_PreSetter;
+        public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, string> OnStringProp_PostSetter;
 
         /// <summary>
         /// Test Enumeration Property
         /// </summary>
         // enumeration property
-        // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual Kistl.App.Test.TestEnum TestEnumProp
+        // Zetbox.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual Zetbox.App.Test.TestEnum TestEnumProp
         {
             get
             {
@@ -207,7 +207,7 @@ namespace Kistl.App.Test
                 var __result = _TestEnumProp;
                 if (OnTestEnumProp_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<Kistl.App.Test.TestEnum>(__result);
+                    var __e = new PropertyGetterEventArgs<Zetbox.App.Test.TestEnum>(__result);
                     OnTestEnumProp_Getter(this, __e);
                     __result = __e.Result;
                 }
@@ -222,7 +222,7 @@ namespace Kistl.App.Test
                     var __newValue = value;
                     if (OnTestEnumProp_PreSetter != null)
                     {
-                        var __e = new PropertyPreSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
+                        var __e = new PropertyPreSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
                         OnTestEnumProp_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
@@ -231,16 +231,16 @@ namespace Kistl.App.Test
                     NotifyPropertyChanged("TestEnumProp", __oldValue, __newValue);
                     if (OnTestEnumProp_PostSetter != null)
                     {
-                        var __e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
+                        var __e = new PropertyPostSetterEventArgs<Zetbox.App.Test.TestEnum>(__oldValue, __newValue);
                         OnTestEnumProp_PostSetter(this, __e);
                     }
                 }
             }
         }
-        private Kistl.App.Test.TestEnum _TestEnumProp;
-        public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_Getter;
-        public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PreSetter;
-        public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PostSetter;
+        private Zetbox.App.Test.TestEnum _TestEnumProp;
+        public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumProp_Getter;
+        public static event PropertyPreSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumProp_PreSetter;
+        public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Test.TestEnum> OnTestEnumProp_PostSetter;
 
         /// <summary>
         /// testmethod
@@ -281,13 +281,13 @@ namespace Kistl.App.Test
             this._fk_ObjectProp = otherImpl._fk_ObjectProp;
         }
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
         }
 
         // tail template
-        // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
+        // Zetbox.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         [EventBasedMethod("OnToString_TestObjClass")]
@@ -362,7 +362,7 @@ namespace Kistl.App.Test
         #region Serializer
 
 
-        public override void ToStream(KistlStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             binStream.Write(this._MyIntProperty);
@@ -371,7 +371,7 @@ namespace Kistl.App.Test
             binStream.Write((int?)((TestObjClass)this).TestEnumProp);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader binStream)
         {
             var baseResult = base.FromStream(binStream);
             binStream.Read(out this._MyIntProperty);
@@ -380,7 +380,7 @@ namespace Kistl.App.Test
             {
                 int? baseValue;
                 binStream.Read(out baseValue);
-                ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)baseValue;
+                ((TestObjClass)this).TestEnumProp = (Zetbox.App.Test.TestEnum)baseValue;
             }
             return baseResult;
         }
@@ -389,10 +389,10 @@ namespace Kistl.App.Test
         {
 
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");
-            XmlStreamer.ToStream((int?)this.TestEnumProp, xml, "TestEnumProp", "Kistl.App.Test");
+            XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Zetbox.App.Test");
+            XmlStreamer.ToStream(this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Zetbox");
+            XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Zetbox.App.Test");
+            XmlStreamer.ToStream((int?)this.TestEnumProp, xml, "TestEnumProp", "Zetbox.App.Test");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -400,17 +400,17 @@ namespace Kistl.App.Test
             var baseResult = base.FromStream(xml);
             switch (xml.NamespaceURI + "|" + xml.LocalName)
             {
-                case "Kistl.App.Test|MyIntProperty":
+                case "Zetbox.App.Test|MyIntProperty":
                     this._MyIntProperty = XmlStreamer.ReadNullableInt32(xml);
                     break;
-                case "http://dasz.at/Kistl|ObjectProp":
+                case "http://dasz.at/Zetbox|ObjectProp":
                     this._fk_ObjectProp = XmlStreamer.ReadNullableInt32(xml);
                     break;
-                case "Kistl.App.Test|StringProp":
+                case "Zetbox.App.Test|StringProp":
                     this._StringProp = XmlStreamer.ReadString(xml);
                     break;
-                case "Kistl.App.Test|TestEnumProp":
-                    this.TestEnumProp = (Kistl.App.Test.TestEnum)XmlStreamer.ReadInt32(xml);
+                case "Zetbox.App.Test|TestEnumProp":
+                    this.TestEnumProp = (Zetbox.App.Test.TestEnum)XmlStreamer.ReadInt32(xml);
                     break;
             }
             return baseResult;

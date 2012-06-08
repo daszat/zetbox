@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Kistl.App.GUI;
-using Kistl.Client.Presentables;
+using Zetbox.App.GUI;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.Forms.View
+namespace Zetbox.Client.Forms.View
 {
     public partial class DataObjectFullView : DataObjectFullViewDesignerProxy
     {

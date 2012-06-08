@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     using System;
     using System.Collections;

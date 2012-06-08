@@ -1,17 +1,17 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API.Server;
+    using Templates = Zetbox.Generator.Templates;
 
     public class ProjectFile
         : Templates.ProjectFile
     {
-        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
+        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
             : base(_host, ctx, projectGuid, fileNames, schemaProviders)
         {
         }
@@ -31,30 +31,30 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
             this.WriteLine(@"    </Reference>");
 
             // Server API
-            this.WriteLine(@"    <Reference Include=""Kistl.API.Server"">");
+            this.WriteLine(@"    <Reference Include=""Zetbox.API.Server"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Core\Kistl.API.Server.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\Core\Zetbox.API.Server.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // DAL Provider
-            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.NHibernate"">");
+            this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.NHibernate"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\NH\Kistl.DalProvider.NHibernate.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\NH\Zetbox.DalProvider.NHibernate.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // NHibernate
             this.WriteLine(@"    <Reference Include=""NHibernate"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\NH\NHibernate.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\NH\NHibernate.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // Base Provider
-            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Base"">");
+            this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Base"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Base.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }

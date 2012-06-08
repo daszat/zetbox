@@ -1,51 +1,51 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build">
     <Message Importance="high" Text="clean temp output" />
-    <RemoveDir Directories="bin;Kistl.Server.HttpService\Common;Kistl.Server.HttpService\Bootstrapper;Kistl.Server.HttpService\Client;Kistl.Server.HttpService\Server" />
+    <RemoveDir Directories="bin;Zetbox.Server.HttpService\Common;Zetbox.Server.HttpService\Bootstrapper;Zetbox.Server.HttpService\Client;Zetbox.Server.HttpService\Server" />
     <MakeDir Directories="bin" />
 
     <Message Importance="high" Text="Create temp dir for database backup" />
     <MakeDir Directories="c:\temp" />
 
     <Message Importance="high" Text="cleaning solution" />
-    <MSBuild Projects="Kistl.Complete.sln" Targets="Clean" />
+    <MSBuild Projects="Zetbox.Complete.sln" Targets="Clean" />
 
     <Message Importance="high" Text="rebuild entire solution" />
-    <MSBuild Projects="Kistl.Complete.sln" Targets="Rebuild" />
+    <MSBuild Projects="Zetbox.Complete.sln" Targets="Rebuild" />
 
 	<!-- reset and generate -->
-    <Exec Command="!ResetDatabase Configs\$(zenv)\Kistl.Server.Service.xml" />
+    <Exec Command="!ResetDatabase Configs\$(zenv)\Zetbox.Server.Service.xml" />
 
     <Message Importance="high" Text="Backup and remove old generated code" />
     <ItemGroup>
-      <OldKistlObjectsSources Include="Kistl.Objects\*.*" />
-      <OldKistlObjectsEfSources Include="Kistl.Objects.Ef\*.*" />
-      <OldKistlObjectsNHibernateSources Include="Kistl.Objects.NHibernate\*.*" />
-      <OldKistlObjectsMemorySources Include="Kistl.Objects.Memory\*.*" />
+      <OldZetboxObjectsSources Include="Zetbox.Objects\*.*" />
+      <OldZetboxObjectsEfSources Include="Zetbox.Objects.Ef\*.*" />
+      <OldZetboxObjectsNHibernateSources Include="Zetbox.Objects.NHibernate\*.*" />
+      <OldZetboxObjectsMemorySources Include="Zetbox.Objects.Memory\*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(OldKistlObjectsSources)" DestinationFolder="Backup\Kistl.Objects\" />
-    <Copy SourceFiles="@(OldKistlObjectsEfSources)" DestinationFolder="Backup\Kistl.Objects.Ef\" />
-    <Copy SourceFiles="@(OldKistlObjectsNHibernateSources)" DestinationFolder="Backup\Kistl.Objects.NHibernate\" />
-    <Copy SourceFiles="@(OldKistlObjectsMemorySources)" DestinationFolder="Backup\Kistl.Objects.Memory\" />
-    <Delete Files="@(OldKistlObjectsSources);@(OldKistlObjectsEfSources);@(OldKistlObjectsNHibernateSources);@(OldKistlObjectsMemorySources)" />
-    <RemoveDir Directories="Kistl.Objects\bin;Kistl.Objects.Ef\bin;Kistl.Objects.NHibernate\bin;Kistl.Objects.Memory\bin" />
-    <RemoveDir Directories="Kistl.Objects\obj;Kistl.Objects.Ef\obj;Kistl.Objects.NHibernate\obj;Kistl.Objects.Memory\obj" />
+    <Copy SourceFiles="@(OldZetboxObjectsSources)" DestinationFolder="Backup\Zetbox.Objects\" />
+    <Copy SourceFiles="@(OldZetboxObjectsEfSources)" DestinationFolder="Backup\Zetbox.Objects.Ef\" />
+    <Copy SourceFiles="@(OldZetboxObjectsNHibernateSources)" DestinationFolder="Backup\Zetbox.Objects.NHibernate\" />
+    <Copy SourceFiles="@(OldZetboxObjectsMemorySources)" DestinationFolder="Backup\Zetbox.Objects.Memory\" />
+    <Delete Files="@(OldZetboxObjectsSources);@(OldZetboxObjectsEfSources);@(OldZetboxObjectsNHibernateSources);@(OldZetboxObjectsMemorySources)" />
+    <RemoveDir Directories="Zetbox.Objects\bin;Zetbox.Objects.Ef\bin;Zetbox.Objects.NHibernate\bin;Zetbox.Objects.Memory\bin" />
+    <RemoveDir Directories="Zetbox.Objects\obj;Zetbox.Objects.Ef\obj;Zetbox.Objects.NHibernate\obj;Zetbox.Objects.Memory\obj" />
 
     <Message Importance="high" Text="deploy generated code" />
     <ItemGroup>
-      <KistlObjectsSources Include="bin\CodeGen\Kistl.Objects\*.*" />
-      <KistlObjectsEfSources Include="bin\CodeGen\Kistl.Objects.Ef\*.*" />
-      <KistlObjectsNHibernateSources Include="bin\CodeGen\Kistl.Objects.NHibernate\*.*" />
-      <KistlObjectsMemorySources Include="bin\CodeGen\Kistl.Objects.Memory\*.*" />
+      <ZetboxObjectsSources Include="bin\CodeGen\Zetbox.Objects\*.*" />
+      <ZetboxObjectsEfSources Include="bin\CodeGen\Zetbox.Objects.Ef\*.*" />
+      <ZetboxObjectsNHibernateSources Include="bin\CodeGen\Zetbox.Objects.NHibernate\*.*" />
+      <ZetboxObjectsMemorySources Include="bin\CodeGen\Zetbox.Objects.Memory\*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(KistlObjectsSources)" DestinationFolder="Kistl.Objects\" />
-    <Copy SourceFiles="@(KistlObjectsEfSources)" DestinationFolder="Kistl.Objects.Ef\" />
-    <Copy SourceFiles="@(KistlObjectsNHibernateSources)" DestinationFolder="Kistl.Objects.NHibernate\" />
-    <Copy SourceFiles="@(KistlObjectsMemorySources)" DestinationFolder="Kistl.Objects.Memory\" />
+    <Copy SourceFiles="@(ZetboxObjectsSources)" DestinationFolder="Zetbox.Objects\" />
+    <Copy SourceFiles="@(ZetboxObjectsEfSources)" DestinationFolder="Zetbox.Objects.Ef\" />
+    <Copy SourceFiles="@(ZetboxObjectsNHibernateSources)" DestinationFolder="Zetbox.Objects.NHibernate\" />
+    <Copy SourceFiles="@(ZetboxObjectsMemorySources)" DestinationFolder="Zetbox.Objects.Memory\" />
 
     <!-- re-test building the solution with new code -->
     <Message Importance="high" Text="Clean, then rebuild entire solution" />
-    <MSBuild Projects="Kistl.Complete.sln" Targets="Clean;Rebuild" />
+    <MSBuild Projects="Zetbox.Complete.sln" Targets="Clean;Rebuild" />
 
   </Target>
 </Project>

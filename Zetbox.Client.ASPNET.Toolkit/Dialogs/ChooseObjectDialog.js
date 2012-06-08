@@ -1,8 +1,8 @@
 ﻿/// <reference name="MicrosoftAjax.js"/>
 
-Type.registerNamespace("Kistl.Client.ASPNET");
+Type.registerNamespace("Zetbox.Client.ASPNET");
 
-Kistl.Client.ASPNET.ChooseObjectDialog = function(element) {
+Zetbox.Client.ASPNET.ChooseObjectDialog = function(element) {
     // Private Fields
     this._Callback = null;
     this._dlg = null;
@@ -12,26 +12,26 @@ Kistl.Client.ASPNET.ChooseObjectDialog = function(element) {
     this._onOKHandler = null;
     this._onServiceCompleted_GetListHandler = null;
     
-    Kistl.Client.ASPNET.ChooseObjectDialog.initializeBase(this, [element]);
+    Zetbox.Client.ASPNET.ChooseObjectDialog.initializeBase(this, [element]);
 }
 
 // Singel instance of Choose Object Dialog
-Kistl.Client.ASPNET.ChooseObjectDialog.instance = null;
+Zetbox.Client.ASPNET.ChooseObjectDialog.instance = null;
 
 // Public static ChooseObject method
 // TODO: do not pass the type a string - convert to object
-Kistl.Client.ASPNET.ChooseObjectDialog.ChooseObject = function(type, callback) {
-    Kistl.Client.ASPNET.ChooseObjectDialog.instance.ChooseObject(type, callback);
+Zetbox.Client.ASPNET.ChooseObjectDialog.ChooseObject = function(type, callback) {
+    Zetbox.Client.ASPNET.ChooseObjectDialog.instance.ChooseObject(type, callback);
 }
 
-Kistl.Client.ASPNET.ChooseObjectDialog.prototype = {
+Zetbox.Client.ASPNET.ChooseObjectDialog.prototype = {
     // Inititalize Control
     initialize: function() {
-        Kistl.Client.ASPNET.ChooseObjectDialog.callBaseMethod(this, 'initialize');
+        Zetbox.Client.ASPNET.ChooseObjectDialog.callBaseMethod(this, 'initialize');
         
         // initialize singelton
         // TODO: Add check for single instance!
-        Kistl.Client.ASPNET.ChooseObjectDialog.instance = this;
+        Zetbox.Client.ASPNET.ChooseObjectDialog.instance = this;
         
         this._dlg = $find('chooseObjectBehavior');
         this._lst = $get('panelChooseObject_lst', this._dlg._popupElement);
@@ -43,7 +43,7 @@ Kistl.Client.ASPNET.ChooseObjectDialog.prototype = {
     },
     // Dispose
     dispose: function() {        
-        Kistl.Client.ASPNET.ChooseObjectDialog.callBaseMethod(this, 'dispose');
+        Zetbox.Client.ASPNET.ChooseObjectDialog.callBaseMethod(this, 'dispose');
     },    
     // Public ChooseObject method
     ChooseObject: function(type, callback) {
@@ -53,7 +53,7 @@ Kistl.Client.ASPNET.ChooseObjectDialog.prototype = {
         this._lst.options.length = 0;
         
         // Call WCF Service
-        Kistl.Client.ASPNET.AJAXService.GetList(type, this._onServiceCompleted_GetListHandler);
+        Zetbox.Client.ASPNET.AJAXService.GetList(type, this._onServiceCompleted_GetListHandler);
         
         // In the meantime, show the dialog
         this._dlg.show();
@@ -73,5 +73,5 @@ Kistl.Client.ASPNET.ChooseObjectDialog.prototype = {
     }
 }
 
-Kistl.Client.ASPNET.ChooseObjectDialog.registerClass('Kistl.Client.ASPNET.ChooseObjectDialog', Sys.UI.Control);
+Zetbox.Client.ASPNET.ChooseObjectDialog.registerClass('Zetbox.Client.ASPNET.ChooseObjectDialog', Sys.UI.Control);
 if (typeof(Sys) !== 'undefined') Sys.Application.notifyScriptLoaded();

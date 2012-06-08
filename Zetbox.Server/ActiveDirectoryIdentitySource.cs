@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.DirectoryServices;
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     public class ActiveDirectoryIdentitySource : IIdentitySource
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server");
 
         public IEnumerable<IdentitySourceItem> GetAllIdentities()
         {

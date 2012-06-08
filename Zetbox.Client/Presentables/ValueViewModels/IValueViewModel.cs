@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.ValueViewModels
+namespace Zetbox.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
     
     public interface IValueViewModel : INotifyPropertyChanged
     {

@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Projekte.DocumentManagement
+namespace Zetbox.App.Projekte.DocumentManagement
 {
     using System;
     using System.Collections.Generic;
@@ -8,9 +8,9 @@ namespace Kistl.App.Projekte.DocumentManagement
     using System.Threading;
     using at.dasz.DocumentManagement;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     public class FileImportService : IService
     {
@@ -30,13 +30,13 @@ namespace Kistl.App.Projekte.DocumentManagement
 
         private object _lock = new object();
         private List<FileSystemWatcher> _watcher = new List<FileSystemWatcher>();
-        private Func<IKistlContext> _ctxFactory;
+        private Func<IZetboxContext> _ctxFactory;
         private Queue<string> _fileQueue = new Queue<string>();
         private Thread _workerThread;
         private bool _isRunning = true;
         private AutoResetEvent _fileEvent;
 
-        public FileImportService(Func<IKistlContext> ctxFactory)
+        public FileImportService(Func<IZetboxContext> ctxFactory)
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
 

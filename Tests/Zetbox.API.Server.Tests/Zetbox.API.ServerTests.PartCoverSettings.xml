@@ -1,6 +1,6 @@
 <PartCoverSettings>
   <Target>C:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
-  <TargetWorkDir>D:\Programmierung\Kistl\Tests\Kistl.API.Server.Tests</TargetWorkDir>
-  <TargetArgs>Kistl.API.ServerTests.nunit</TargetArgs>
-  <Rule>+[Kistl.API.Server]*</Rule>
+  <TargetWorkDir>D:\Programmierung\Zetbox\Tests\Zetbox.API.Server.Tests</TargetWorkDir>
+  <TargetArgs>Zetbox.API.ServerTests.nunit</TargetArgs>
+  <Rule>+[Zetbox.API.Server]*</Rule>
 </PartCoverSettings>

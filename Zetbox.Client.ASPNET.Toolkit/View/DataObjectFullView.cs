@@ -5,10 +5,10 @@ using System.Text;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.GUI;
 
-namespace Kistl.Client.ASPNET.Toolkit.View
+namespace Zetbox.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectFullView.ascx")]
     public abstract class DataObjectFullView : ModelUserControl<DataObjectViewModel>
@@ -34,7 +34,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             ViewModel mdl = (ViewModel)e.Item.DataItem;
             Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
 
-            KistlContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, divPlaceHolder);
+            ZetboxContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, divPlaceHolder);
         }
     }
 }

@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.Server.Tests' PostgreSQL Configuration</ConfigName>
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>Zetbox.Server.Tests' PostgreSQL Configuration</ConfigName>
   <Server StartServer="false">
     <ConnectionStrings>
-      <Database Name="Kistl" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
+      <Database Name="Zetbox" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=zetbox_test;User Id=zetbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Kistl.Objects.EfModule, Kistl.Objects.EfImpl</Module>
-      <Module>Kistl.DalProvider.Ef.EfProvider, Kistl.DalProvider.Ef</Module>
-      <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
+      <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
+      <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
+      <Module>Zetbox.Tests.Utilities.PostgreSql.UtilityModule, Zetbox.Tests.Utilities.PostgreSql</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
@@ -23,7 +23,7 @@
     <string>Server\EF</string>
     <string>Server\EF.Generated</string>
     <string>Server\EF.Fallback</string>
-    <string>Common\App.ZBox</string>
-    <string>Server\App.ZBox</string>
+    <string>Common\App.Zetbox</string>
+    <string>Server\App.Zetbox</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>

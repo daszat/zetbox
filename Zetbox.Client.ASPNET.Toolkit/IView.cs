@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.Client.Presentables;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.ASPNET.Toolkit
+namespace Zetbox.Client.ASPNET.Toolkit
 {
     public interface IView
     {

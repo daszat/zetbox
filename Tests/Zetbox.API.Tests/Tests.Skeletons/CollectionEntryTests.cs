@@ -6,7 +6,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Kistl.API.Tests.Skeletons
+namespace Zetbox.API.Tests.Skeletons
 {
 
     public abstract class CollectionEntryTests<T>

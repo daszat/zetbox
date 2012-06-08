@@ -1,19 +1,19 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
-    /// The required information to map from a proxy object to its ZBox wrapper
+    /// The required information to map from a proxy object to its Zetbox wrapper
     /// </summary>
     public interface IProxyObject
     {
         int ID { get; set; }
-        Type ZBoxWrapper { get; }
-        Type ZBoxProxy { get; }
+        Type ZetboxWrapper { get; }
+        Type ZetboxProxy { get; }
     }
 }

@@ -1,20 +1,20 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
 
     public class CacheDebuggerViewModel
         : ViewModel
     {
-        public new delegate CacheDebuggerViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate CacheDebuggerViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public CacheDebuggerViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public CacheDebuggerViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
             Cache.CachesCollectionChanged += new EventHandler(Cache_CachesCollectionChanged);

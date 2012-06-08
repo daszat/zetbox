@@ -1,50 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.IntegrationTests' EF/PostgreSQL Configuration</ConfigName>
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>Zetbox.IntegrationTests' EF/PostgreSQL Configuration</ConfigName>
   <Server StartServer="false">
     <ConnectionStrings>
-      <Database Name="Kistl" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
+      <Database Name="Zetbox" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=zetbox_test;User Id=zetbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
-      <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
-      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
-      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.EfModule, Kistl.Objects.EfImpl</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
-      <Module>Kistl.DalProvider.Ef.EfProvider, Kistl.DalProvider.Ef</Module>
-      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
-      <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
-      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+      <Module>Zetbox.API.Server.ServerApiModule, Zetbox.API.Server</Module>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
+      <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
+      <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
+      <Module>Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl</Module>
+      <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
+      <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
+      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
+      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
 
       <!-- Development/Master Server modules -->
-      <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
-      <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
-      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
-      <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
+      <Module>Zetbox.Generator.GeneratorModule, Zetbox.Generator</Module>
+      <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
+      <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
+      <Module>Zetbox.DalProvider.Ef.Generator.EfGeneratorProvider, Zetbox.DalProvider.Ef.Generator</Module>
     </Modules>
   </Server>
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
     <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
-      <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
-      <Module>Kistl.API.Client.WcfClientModule, Kistl.API.Client</Module>
-      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
-      <Module>Kistl.Client.WPF.WPFModule, Kistl.Client.WPF</Module>
-      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
-      <Module>Kistl.DalProvider.Client.ClientProvider, Kistl.DalProvider.ClientObjects</Module>
-      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
-      <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
-      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+      <Module>Zetbox.API.Client.ClientApiModule, Zetbox.API.Client</Module>
+      <Module>Zetbox.API.Client.WcfClientModule, Zetbox.API.Client</Module>
+      <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
+      <Module>Zetbox.Client.WPF.WPFModule, Zetbox.Client.WPF</Module>
+      <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
+      <Module>Zetbox.Objects.ClientModule, Zetbox.Objects.ClientImpl</Module>
+      <Module>Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl</Module>
+      <Module>Zetbox.DalProvider.Client.ClientProvider, Zetbox.DalProvider.ClientObjects</Module>
+      <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
+      <Module>Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client</Module>
+      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
       <!-- since the test are driven from the client app domain, we need to reset the database from here -->
-      <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
+      <Module>Zetbox.Tests.Utilities.PostgreSql.UtilityModule, Zetbox.Tests.Utilities.PostgreSql</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>
@@ -55,7 +55,7 @@
     <string>Server\EF</string>
     <string>Server\EF.Generated</string>
     <string>Server\EF.Fallback</string>
-    <string>Common\App.ZBox</string>
-    <string>Server\App.ZBox</string>
+    <string>Common\App.Zetbox</string>
+    <string>Server\App.Zetbox</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>

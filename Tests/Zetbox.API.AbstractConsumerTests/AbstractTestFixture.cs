@@ -1,5 +1,5 @@
 
-namespace Kistl.API.AbstractConsumerTests
+namespace Zetbox.API.AbstractConsumerTests
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@ namespace Kistl.API.AbstractConsumerTests
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
     using NUnit.Framework;
 
     public abstract class AbstractTestFixture
@@ -28,9 +28,9 @@ namespace Kistl.API.AbstractConsumerTests
                 scope.Dispose();
         }
 
-        protected virtual IKistlContext GetContext()
+        protected virtual IZetboxContext GetContext()
         {
-            return scope.Resolve<IKistlContext>();
+            return scope.Resolve<IZetboxContext>();
         }
 
         protected void TestChangeNotification<TNOTIFIER>(TNOTIFIER notifier, string expectedPropertyName, Action doChange, Action changingAsserts, Action changedAsserts)

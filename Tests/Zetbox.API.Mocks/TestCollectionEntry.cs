@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Mocks
+namespace Zetbox.API.Mocks
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Kistl.API.Mocks
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
         /// </summary>
-        public AccessRights CurrentAccessRights { get { return Kistl.API.AccessRights.Full; } }
+        public AccessRights CurrentAccessRights { get { return Zetbox.API.AccessRights.Full; } }
 
         public Guid RelationID { get { return Guid.NewGuid(); } }
         public IDataObject AObject { get; set; }
@@ -53,14 +53,14 @@ namespace Kistl.API.Mocks
             ((TestCollectionEntry)obj).TestName = this.TestName;
         }
 
-        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             sr.Read(out _ID);
             sr.Read(out _TestName);
             return null;
         }
 
-        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             sw.Write(ReadOnlyContext.GetInterfaceType(this).ToSerializableType());
             sw.Write(ID);
@@ -113,22 +113,22 @@ namespace Kistl.API.Mocks
                 PropertyChangingWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
-        public void AttachToContext(IKistlContext ctx)
+        public void AttachToContext(IZetboxContext ctx)
         {
             Context = ctx;
         }
 
-        public IKistlContext Context
+        public IZetboxContext Context
         {
             get;
             private set;
         }
-        public IReadOnlyKistlContext ReadOnlyContext
+        public IReadOnlyZetboxContext ReadOnlyContext
         {
             get { return Context; }
         }
 
-        public void DetachFromContext(IKistlContext ctx)
+        public void DetachFromContext(IZetboxContext ctx)
         {
             ctx = null;
         }

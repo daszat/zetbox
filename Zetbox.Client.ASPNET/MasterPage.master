@@ -23,7 +23,7 @@
         </ProgressTemplate>
     </asp:UpdateProgress>
     <uc:ChooseObjectDialog ID="ChooseObjectDialog1" runat="server" />
-    <kistl:JavascriptRenderer ID="JavascriptRenderer" runat="server" />
+    <zetbox:JavascriptRenderer ID="JavascriptRenderer" runat="server" />
     <div id="Header">
         <div id="Logo">
             <asp:HyperLink runat="server" NavigateUrl="~/Default.aspx">
@@ -33,7 +33,7 @@
         </div>
         <div id="Caption">
             <h1>
-                Kistl ASP.NET Prototype</h1>
+                Zetbox ASP.NET Prototype</h1>
         </div>
         <div id="MainMenu">
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx" CssClass="MainMenuItem">Workbench</asp:HyperLink>

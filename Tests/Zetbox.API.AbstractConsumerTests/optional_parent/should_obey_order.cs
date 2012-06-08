@@ -1,13 +1,13 @@
 
-namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
+namespace Zetbox.API.AbstractConsumerTests.one_to_N_relations
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     using NUnit.Framework;
 
@@ -24,7 +24,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         {
             int methodID = Helper.INVALIDID;
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var method = ctx.GetQuery<Method>().ToList().Where(m => m.Module.Name == "Projekte")
                     .OrderByDescending(m => m.Parameter.Count).First();
@@ -47,7 +47,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
                 Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
             }
 
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 var method = ctx.Find<Method>(methodID);
 

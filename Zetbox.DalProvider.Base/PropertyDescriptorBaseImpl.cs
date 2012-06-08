@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.Base
+namespace Zetbox.DalProvider.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public class PropertyDescriptorBaseImpl<TComponent, TProperty>
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.Base
 
             if (propertyGuid.HasValue)
             {
-                _property = lazyCtx().FindPersistenceObject<Kistl.App.Base.Property>(propertyGuid.Value);
+                _property = lazyCtx().FindPersistenceObject<Zetbox.App.Base.Property>(propertyGuid.Value);
             }
             else
             {

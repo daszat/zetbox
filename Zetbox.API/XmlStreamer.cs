@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Collections;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     public class XmlStreamer
     {

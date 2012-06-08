@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -10,11 +10,11 @@ namespace Kistl.API.Tests
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Configuration;
-    using Kistl.API.Mocks;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Mocks;
+    using Zetbox.API.Utils;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
 
@@ -252,7 +252,7 @@ namespace Kistl.API.Tests
 
             private SerializableExpression CreateExpression()
             {
-                // Cannot use another KistlObject because in this tests we do not do any type transformations
+                // Cannot use another ZetboxObject because in this tests we do not do any type transformations
                 //TestDataObject obj = new TestDataObjectImpl();
                 TestObj obj2 = new TestObj();
                 TestQuery<TestDataObject> ctx = new TestQuery<TestDataObject>();
@@ -271,7 +271,7 @@ namespace Kistl.API.Tests
                                o.IntProperty,
                                o.BoolProperty
                            };
-                return Kistl.API.SerializableExpression.FromExpression(list.Expression, iftFactory);
+                return Zetbox.API.SerializableExpression.FromExpression(list.Expression, iftFactory);
             }
         }
 

@@ -1,10 +1,10 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class ObjectReferencePlaceholderPropertyActions
@@ -13,7 +13,7 @@ namespace Kistl.App.Base
         public static void GetPropertyType(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<Type> e)
         {
             var def = obj.ReferencedObjectClass;
-            e.Result = Type.GetType(def.Module.Namespace + "." + def.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            e.Result = Type.GetType(def.Module.Namespace + "." + def.Name + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
             PropertyActions.DecorateParameterType(obj, e, false, obj.IsList, obj.HasPersistentOrder);
         }
 

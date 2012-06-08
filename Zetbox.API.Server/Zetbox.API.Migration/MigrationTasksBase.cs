@@ -1,25 +1,25 @@
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using ZBox.App.SchemaMigration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.SchemaMigration;
 
     public class MigrationTasksBase
         : IMigrationTasks
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Migration");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Migration");
 
         private readonly ISchemaProvider _src;
         private readonly ISchemaProvider _dst;
-        private readonly IKistlContext _logCtx;
+        private readonly IZetboxContext _logCtx;
 
-        public MigrationTasksBase(IKistlContext logCtx, ISchemaProvider src, ISchemaProvider dst)
+        public MigrationTasksBase(IZetboxContext logCtx, ISchemaProvider src, ISchemaProvider dst)
         {
             if (src == null)
                 throw new ArgumentNullException("src");

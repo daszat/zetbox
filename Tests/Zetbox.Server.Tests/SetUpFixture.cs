@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.Tests
+namespace Zetbox.Server.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -9,30 +9,30 @@ namespace Kistl.Server.Tests
     using System.Text;
     using Autofac;
     using Autofac.Integration.Wcf;
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.GUI;
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
 
     [SetUpFixture]
     public class SetUpFixture : AbstractSetUpFixture, IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.SetUp");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Server.SetUp");
 
-        private IKistlAppDomain manager;
+        private IZetboxAppDomain manager;
 
         protected override void SetupBuilder(ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
-            builder.RegisterModule(new Kistl.API.ApiModule());
-            builder.RegisterModule(new Kistl.API.Common.ApiCommonModule());
-            builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
-            builder.RegisterModule(new Kistl.Server.ServerModule());
-            builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
-            builder.RegisterModule(new Kistl.Objects.MemoryModule());
+            builder.RegisterModule(new Zetbox.API.ApiModule());
+            builder.RegisterModule(new Zetbox.API.Common.ApiCommonModule());
+            builder.RegisterModule(new Zetbox.API.Server.ServerApiModule());
+            builder.RegisterModule(new Zetbox.Server.ServerModule());
+            builder.RegisterModule(new Zetbox.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Zetbox.Objects.MemoryModule());
 
             // load DB Utility from config
         }
@@ -44,11 +44,11 @@ namespace Kistl.Server.Tests
 
             AutofacServiceHostFactory.Container = container;
 
-            var config = container.Resolve<KistlConfig>();
+            var config = container.Resolve<ZetboxConfig>();
 
             using (Log.InfoTraceMethodCall("Starting server domain"))
             {
-                manager = container.Resolve<IKistlAppDomain>();
+                manager = container.Resolve<IZetboxAppDomain>();
                 manager.Start(config);
             }
         }
@@ -79,7 +79,7 @@ namespace Kistl.Server.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.Server.Tests.xml";
+            return "Zetbox.Server.Tests.xml";
         }
 
         protected override HostType GetHostType()

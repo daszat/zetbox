@@ -5,21 +5,21 @@ using System.Text;
 using NUnit.Framework;
 
 using Autofac;
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.Client.Mocks;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.Client.Mocks;
 
-namespace Kistl
+namespace Zetbox
 {
     [SetUpFixture]
-    public class SetUpFixture : Kistl.API.AbstractConsumerTests.AbstractSetUpFixture
+    public class SetUpFixture : Zetbox.API.AbstractConsumerTests.AbstractSetUpFixture
     {
         protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
 
-            builder.RegisterType<KistlMockFactory>()
-                .As<Kistl.Client.Mocks.KistlMockFactory>()
+            builder.RegisterType<ZetboxMockFactory>()
+                .As<Zetbox.Client.Mocks.ZetboxMockFactory>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<TestViewModelFactory>()
@@ -39,12 +39,12 @@ namespace Kistl
 
         protected override string GetConfigFile()
         {
-            return "Kistl.Client.Tests.xml";
+            return "Zetbox.Client.Tests.xml";
         }
 
-        protected override Kistl.API.HostType GetHostType()
+        protected override Zetbox.API.HostType GetHostType()
         {
-            return Kistl.API.HostType.Client;
+            return Zetbox.API.HostType.Client;
         }
     }
 }

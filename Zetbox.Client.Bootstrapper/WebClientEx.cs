@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 
-namespace Kistl.Client.Bootstrapper
+namespace Zetbox.Client.Bootstrapper
 {
     public class WebClientEx : WebClient
     {

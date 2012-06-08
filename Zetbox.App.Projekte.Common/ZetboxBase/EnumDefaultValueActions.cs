@@ -1,22 +1,22 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class EnumDefaultValueActions
     {
         [Invocation]
-        public static void GetDefaultValue(Kistl.App.Base.EnumDefaultValue obj, MethodReturnEventArgs<object> e)
+        public static void GetDefaultValue(Zetbox.App.Base.EnumDefaultValue obj, MethodReturnEventArgs<object> e)
         {
             e.Result = obj.EnumValue.Value;
         }
 
         [Invocation]
-        public static void ToString(Kistl.App.Base.EnumDefaultValue obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(Zetbox.App.Base.EnumDefaultValue obj, MethodReturnEventArgs<System.String> e)
         {
             if (obj.Property != null)
             {

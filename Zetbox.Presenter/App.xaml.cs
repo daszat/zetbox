@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
-using Kistl.Client;
+using Zetbox.Client;
 
 namespace WPFPresenter
 {
@@ -33,19 +33,19 @@ namespace WPFPresenter
             }
         }
 
-        public static bool KistlStarted = false;
+        public static bool ZetboxStarted = false;
 
-        private void StartKistl(object state)
+        private void StartZetbox(object state)
         {
             try
             {
-                Kistl.API.APIInit init = new Kistl.API.APIInit();
+                Zetbox.API.APIInit init = new Zetbox.API.APIInit();
                 init.Init();
 
                 client = new Client();
                 client.Start();
 
-                KistlStarted = true;
+                ZetboxStarted = true;
             }
             catch
             {
@@ -55,7 +55,7 @@ namespace WPFPresenter
 
         void App_Startup(object sender, StartupEventArgs e)
         {
-            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(StartKistl));
+            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(StartZetbox));
         }
     }
 }

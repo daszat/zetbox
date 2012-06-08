@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Kistl.API.Server.Mocks
+namespace Zetbox.API.Server.Mocks
 {
-    public interface TestObjClass : Kistl.API.Mocks.TestObjClass<TestObjClass, Kistl.API.Mocks.TestEnum>
+    public interface TestObjClass : Zetbox.API.Mocks.TestObjClass<TestObjClass, Zetbox.API.Mocks.TestEnum>
     {
     }
 }

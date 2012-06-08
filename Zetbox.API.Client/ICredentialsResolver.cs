@@ -5,7 +5,7 @@ using System.Text;
 using System.ServiceModel.Description;
 using System.Net;
 
-namespace Kistl.API.Client
+namespace Zetbox.API.Client
 {
     public interface ICredentialsResolver
     {

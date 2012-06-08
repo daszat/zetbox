@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_LabeledView : Kistl.Client.ASPNET.Toolkit.View.LabeledView
+public partial class View_LabeledView : Zetbox.Client.ASPNET.Toolkit.View.LabeledView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

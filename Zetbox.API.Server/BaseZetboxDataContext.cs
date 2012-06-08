@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections;
@@ -9,33 +9,33 @@ namespace Kistl.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Common;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
-    public delegate IKistlContext ServerKistlContextFactory(Identity identity);
+    public delegate IZetboxContext ServerZetboxContextFactory(Identity identity);
 
-    public abstract class BaseKistlDataContext
-        : IKistlServerContext, IZBoxContextInternals, IDisposable
+    public abstract class BaseZetboxDataContext
+        : IZetboxServerContext, IZetboxContextInternals, IDisposable
     {
         protected readonly Identity identityStore;
         protected readonly IMetaDataResolver metaDataResolver;
         protected readonly FuncCache<Type, InterfaceType> iftFactoryCache;
         protected readonly InterfaceType.Factory iftFactory;
         protected readonly Func<IFrozenContext> lazyCtx;
-        protected readonly KistlConfig config;
+        protected readonly ZetboxConfig config;
 
         /// <summary>
-        /// Initializes a new instance of the BaseKistlDataContext class using the specified <see cref="Identity"/>.
+        /// Initializes a new instance of the BaseZetboxDataContext class using the specified <see cref="Identity"/>.
         /// </summary>
         /// <param name="metaDataResolver">the IMetaDataResolver for this context.</param>
         /// <param name="identity">the identity of this context. if this is null, the context does no security checks</param>
         /// <param name="config"></param>
         /// <param name="lazyCtx"></param>
         /// <param name="iftFactory"></param>
-        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
+        protected BaseZetboxDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (config == null) { throw new ArgumentNullException("config"); }
@@ -52,15 +52,15 @@ namespace Kistl.API.Server
         /// <summary>
         /// Fired when the Context is beeing disposed.
         /// </summary>
-        public event GenericEventHandler<IReadOnlyKistlContext> Disposing;
+        public event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
 
         // TODO: implement proper IDisposable pattern
         public virtual void Dispose()
         {
-            GenericEventHandler<IReadOnlyKistlContext> temp = Disposing;
+            GenericEventHandler<IReadOnlyZetboxContext> temp = Disposing;
             if (temp != null)
             {
-                temp(this, new GenericEventArgs<IReadOnlyKistlContext>() { Data = this });
+                temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
             }
             GC.SuppressFinalize(this);
             IsDisposed = true;
@@ -81,24 +81,24 @@ namespace Kistl.API.Server
 
         public bool IsReadonly { get { return false; } }
 
-        int IZBoxContextInternals.IdentityID { get { return Identity != null ? Identity.ID : Helper.INVALIDID; } }
+        int IZetboxContextInternals.IdentityID { get { return Identity != null ? Identity.ID : Helper.INVALIDID; } }
 
-        public Kistl.API.AccessRights GetGroupAccessRights(InterfaceType ifType)
+        public Zetbox.API.AccessRights GetGroupAccessRights(InterfaceType ifType)
         {
-            if (Identity == null || !ifType.Type.IsIDataObject()) return Kistl.API.AccessRights.Full;
+            if (Identity == null || !ifType.Type.IsIDataObject()) return Zetbox.API.AccessRights.Full;
 
             // Identity is a Administrator - is allowed to do everything
-            if (Identity.IsAdmininistrator()) return Kistl.API.AccessRights.Full;
+            if (Identity.IsAdmininistrator()) return Zetbox.API.AccessRights.Full;
 
             // Case #1363: May return NULL during initialization
             var objClass = metaDataResolver.GetObjectClass(ifType);
-            if (objClass == null) return Kistl.API.AccessRights.Full;
+            if (objClass == null) return Zetbox.API.AccessRights.Full;
 
             // Only ACL's on Root classes are allowed
             var rootClass = objClass.GetRootClass();
 
             // No AccessControlList - full rights
-            if (!rootClass.HasAccessControlList()) return Kistl.API.AccessRights.Full;
+            if (!rootClass.HasAccessControlList()) return Zetbox.API.AccessRights.Full;
 
             var rights = rootClass.GetGroupAccessRights(Identity);
             if (rights.HasValue)
@@ -107,7 +107,7 @@ namespace Kistl.API.Server
             }
             else
             {
-                return rootClass.NeedsRightsTable() ? Kistl.API.AccessRights.None : Kistl.API.AccessRights.Full;
+                return rootClass.NeedsRightsTable() ? Zetbox.API.AccessRights.None : Zetbox.API.AccessRights.Full;
             }
         }
 
@@ -135,7 +135,7 @@ namespace Kistl.API.Server
             return obj;
         }
 
-        void IZBoxContextInternals.AttachAsNew(IPersistenceObject obj)
+        void IZetboxContextInternals.AttachAsNew(IPersistenceObject obj)
         {
             // delegate to protected virtual method below
             this.AttachAsNew(obj);
@@ -167,7 +167,7 @@ namespace Kistl.API.Server
 
         private void CheckCreateRights(IPersistenceObject obj)
         {
-            // Do not only check in IKistlContext.Create for creation rights, also here
+            // Do not only check in IZetboxContext.Create for creation rights, also here
             // Object might be created by SerializableType
             if (obj is IDataObject && obj.ObjectState == DataObjectState.New)
             {
@@ -331,9 +331,9 @@ namespace Kistl.API.Server
                 var rights = obj.CurrentAccessRights;
 
                 // Blob check
-                if (obj is Kistl.App.Base.Blob && state == DataObjectState.Modified)
+                if (obj is Zetbox.App.Base.Blob && state == DataObjectState.Modified)
                 {
-                    throw new InvalidOperationException("Modifying a Kistl.App.Base.Blob is not allowed. Upload a new Blob instead.");
+                    throw new InvalidOperationException("Modifying a Zetbox.App.Base.Blob is not allowed. Upload a new Blob instead.");
                 }
 
                 // last rights check
@@ -351,9 +351,9 @@ namespace Kistl.API.Server
                 }
 
                 // Update IChangedBy 
-                if (obj is Kistl.App.Base.IChangedBy && state != DataObjectState.Deleted)
+                if (obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {
-                    var cb = (Kistl.App.Base.IChangedBy)obj;
+                    var cb = (Zetbox.App.Base.IChangedBy)obj;
                     if (obj.ObjectState == DataObjectState.New)
                     {
                         cb.CreatedOn = now;
@@ -416,7 +416,7 @@ namespace Kistl.API.Server
         public virtual IDataObject Create(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType.Type == typeof(Kistl.App.Base.Blob))
+            if (ifType.Type == typeof(Zetbox.App.Base.Blob))
                 throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
             ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
@@ -521,8 +521,8 @@ namespace Kistl.API.Server
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <param name="ifType">Object Type of the Object to find.</param>
@@ -532,8 +532,8 @@ namespace Kistl.API.Server
 
         /// <summary>
         /// Find the Object of the given type by ID
-        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
-        /// This could be moved to a common abstract IKistlContextBase
+        /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
+        /// This could be moved to a common abstract IZetboxContextBase
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
@@ -601,7 +601,7 @@ namespace Kistl.API.Server
             if (string.IsNullOrEmpty(mimetype))
                 throw new ArgumentNullException("mimetype");
 
-            var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)));
+            var blob = (Zetbox.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Zetbox.App.Base.Blob)));
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
             blob.StoragePath = this.Internals().StoreBlobStream(s, blob.ExportGuid, DateTime.Today /* but should be blob.CreatedOn. Around midnight the path may differ */, filename);
@@ -609,7 +609,7 @@ namespace Kistl.API.Server
             return blob.ID;
         }
 
-        string IZBoxContextInternals.StoreBlobStream(Stream s, Guid exportGuid, DateTime timestamp, string filename)
+        string IZetboxContextInternals.StoreBlobStream(Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
             if (exportGuid == Guid.Empty) throw new ArgumentOutOfRangeException("exportGuid", "exportGuid cannot be empty");
             if (timestamp == DateTime.MinValue) throw new ArgumentOutOfRangeException("timestamp", "timestamp cannot be empty");
@@ -659,20 +659,20 @@ namespace Kistl.API.Server
         public FileInfo GetFileInfo(int ID)
         {
             CheckDisposed();
-            var blob = this.Find<Kistl.App.Base.Blob>(ID);
+            var blob = this.Find<Zetbox.App.Base.Blob>(ID);
             var storagePath = BuildStoragePath(blob.ExportGuid, blob.CreatedOn, blob.OriginalName);
             string path = Path.Combine(config.Server.DocumentStore, storagePath);
             return new FileInfo(path);
         }
 
         /// <inheritdoc />
-        public event GenericEventHandler<IKistlContext> Changed;
+        public event GenericEventHandler<IZetboxContext> Changed;
         protected virtual void OnChanged()
         {
-            GenericEventHandler<IKistlContext> temp = Changed;
+            GenericEventHandler<IZetboxContext> temp = Changed;
             if (temp != null)
             {
-                temp(this, new GenericEventArgs<IKistlContext>() { Data = this });
+                temp(this, new GenericEventArgs<IZetboxContext>() { Data = this });
             }
         }
 
@@ -739,7 +739,7 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// Indicates that the Zetbox Context has some modified, added or deleted items
         /// </summary>
         public bool IsModified { get; private set; }
 
@@ -748,9 +748,9 @@ namespace Kistl.API.Server
         /// </summary>
         public event EventHandler IsModifiedChanged;
 
-        #region IZBoxContextInternals Members
+        #region IZetboxContextInternals Members
 
-        void IZBoxContextInternals.SetModified(IPersistenceObject obj)
+        void IZetboxContextInternals.SetModified(IPersistenceObject obj)
         {
             CheckDisposed();
             if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))

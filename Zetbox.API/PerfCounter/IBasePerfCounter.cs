@@ -1,30 +1,30 @@
-namespace Kistl.API.PerfCounter
+namespace Zetbox.API.PerfCounter
 {
     using System;
 
     public interface IBasePerfCounter
     {
-        long IncrementQuery(Kistl.API.InterfaceType ifType);
-        void DecrementQuery(Kistl.API.InterfaceType ifType, int objectCount, long startTicks);
+        long IncrementQuery(Zetbox.API.InterfaceType ifType);
+        void DecrementQuery(Zetbox.API.InterfaceType ifType, int objectCount, long startTicks);
 
         long IncrementSubmitChanges();
         void DecrementSubmitChanges(int objectCount, long startTicks);
 
-        long IncrementGetList(Kistl.API.InterfaceType ifType);
-        void DecrementGetList(Kistl.API.InterfaceType ifType, int resultSize, long startTicks);
+        long IncrementGetList(Zetbox.API.InterfaceType ifType);
+        void DecrementGetList(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks);
 
-        long IncrementGetListOf(Kistl.API.InterfaceType ifType);
-        void DecrementGetListOf(Kistl.API.InterfaceType ifType, int resultSize, long startTicks);
+        long IncrementGetListOf(Zetbox.API.InterfaceType ifType);
+        void DecrementGetListOf(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks);
 
-        long IncrementFetchRelation(Kistl.API.InterfaceType ifType);
-        void DecrementFetchRelation(Kistl.API.InterfaceType ifType, int resultSize, long startTicks);
+        long IncrementFetchRelation(Zetbox.API.InterfaceType ifType);
+        void DecrementFetchRelation(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks);
 
         long IncrementSetObjects();
         void DecrementSetObjects(int objectCount, long startTicks);
 
         void IncrementServerMethodInvocation();
         
-        void Initialize(Kistl.API.IFrozenContext frozenCtx);
+        void Initialize(Zetbox.API.IFrozenContext frozenCtx);
         void Install();
         void Uninstall();
         void Dump();
@@ -32,17 +32,17 @@ namespace Kistl.API.PerfCounter
 
     public interface IBasePerfCounterAppender
     {
-        void IncrementFetchRelation(Kistl.API.InterfaceType ifType);
-        void DecrementFetchRelation(Kistl.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
+        void IncrementFetchRelation(Zetbox.API.InterfaceType ifType);
+        void DecrementFetchRelation(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
 
-        void IncrementGetList(Kistl.API.InterfaceType ifType);
-        void DecrementGetList(Kistl.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
+        void IncrementGetList(Zetbox.API.InterfaceType ifType);
+        void DecrementGetList(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
 
-        void IncrementGetListOf(Kistl.API.InterfaceType ifType);
-        void DecrementGetListOf(Kistl.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
+        void IncrementGetListOf(Zetbox.API.InterfaceType ifType);
+        void DecrementGetListOf(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
 
-        void IncrementQuery(Kistl.API.InterfaceType ifType);
-        void DecrementQuery(Kistl.API.InterfaceType ifType, int objectCount, long startTicks, long endTicks);
+        void IncrementQuery(Zetbox.API.InterfaceType ifType);
+        void DecrementQuery(Zetbox.API.InterfaceType ifType, int objectCount, long startTicks, long endTicks);
 
         void IncrementSetObjects();
         void DecrementSetObjects(int objectCount, long startTicks, long endTicks);
@@ -52,7 +52,7 @@ namespace Kistl.API.PerfCounter
 
         void IncrementServerMethodInvocation();
         
-        void Initialize(Kistl.API.IFrozenContext frozenCtx);
+        void Initialize(Zetbox.API.IFrozenContext frozenCtx);
         void Install();
         void Uninstall();
         void Dump(bool force);

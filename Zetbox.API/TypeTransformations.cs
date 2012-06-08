@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Kistl.API
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     public interface IInterfaceTypeChecker
     {
@@ -120,7 +120,7 @@ namespace Kistl.API
             //if (type.Assembly != GetAssembly()
             //    && !ImplTypeCheckers.Any(checker => checker.IsImplementationType(type)))
             //{
-            //    Kistl.API.Utils.Logging.Log.WarnFormat("Allowing non-generated type [{0}] as implementation type", type.AssemblyQualifiedName);
+            //    Zetbox.API.Utils.Logging.Log.WarnFormat("Allowing non-generated type [{0}] as implementation type", type.AssemblyQualifiedName);
             //    return true;
             //}
 
@@ -141,7 +141,7 @@ namespace Kistl.API
         {
             lock (_lock)
             {
-                if (type == null) return new InterfaceType(); // Possible, because a Type could be loaded from an XML File which does not exists in this ZBox instance
+                if (type == null) return new InterfaceType(); // Possible, because a Type could be loaded from an XML File which does not exists in this Zetbox instance
                 if (_cache.ContainsKey(type)) return _cache[type];
                 var ift = new InterfaceType(type, typeChecker);
                 _cache[type] = ift;

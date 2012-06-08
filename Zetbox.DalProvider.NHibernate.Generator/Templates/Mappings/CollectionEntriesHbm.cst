@@ -1,21 +1,21 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="Mappings.CollectionEntriesHbm"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.CollectionEntriesHbm" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    ClassName="Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings.CollectionEntriesHbm" 
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update"
-                   assembly="Kistl.Objects.NHibernateImpl">
+                   assembly="Zetbox.Objects.NHibernateImpl">
 
     <!-- RelationCollectionEntries -->
 <%
@@ -42,11 +42,11 @@
         <many-to-one name="B"
                      column="`<%= rel.GetRelationFkColumnName(RelationEndRole.B) %>`" />
 <% if (rel.NeedsPositionStorage(RelationEndRole.A)) { %>
-        <property name="A<%= Kistl.API.Helper.PositionSuffix %>"
+        <property name="A<%= Zetbox.API.Helper.PositionSuffix %>"
                     column="`<%= Construct.ListPositionColumnName(rel.B) %>`" />
 <% } %>
 <% if (rel.NeedsPositionStorage(RelationEndRole.B)) { %>
-        <property name="B<%= Kistl.API.Helper.PositionSuffix %>"
+        <property name="B<%= Zetbox.API.Helper.PositionSuffix %>"
                   column="`<%= Construct.ListPositionColumnName(rel.A) %>`" />
 <% } %>
 <% if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable()) { %>

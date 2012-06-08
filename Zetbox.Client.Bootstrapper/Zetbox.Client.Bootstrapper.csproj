@@ -8,8 +8,8 @@
     <ProjectGuid>{8D980F88-514B-44F0-A9B3-B9195FAD33FD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.Client.Bootstrapper</RootNamespace>
-    <AssemblyName>Kistl.Client.Bootstrapper</AssemblyName>
+    <RootNamespace>Zetbox.Client.Bootstrapper</RootNamespace>
+    <AssemblyName>Zetbox.Client.Bootstrapper</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NoWarn>1591</NoWarn>

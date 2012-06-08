@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
     public sealed class FuncCache<T, TResult>
     {

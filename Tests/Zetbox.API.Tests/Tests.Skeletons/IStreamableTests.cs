@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests.Skeletons
+namespace Zetbox.API.Tests.Skeletons
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@ namespace Kistl.API.Tests.Skeletons
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Utils;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Utils;
     using NUnit.Framework;
 
     public class IStreamableTests<T> : SerializerTestFixture
@@ -31,14 +31,14 @@ namespace Kistl.API.Tests.Skeletons
         [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_to_null_stream()
         {
-            obj.ToStream((KistlStreamWriter)null, null, false);
+            obj.ToStream((ZetboxStreamWriter)null, null, false);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_from_null_stream()
         {
-            obj.FromStream((KistlStreamReader)null);
+            obj.FromStream((ZetboxStreamReader)null);
         }
 
         [Test]

@@ -1,15 +1,15 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class InvokingConstraintActions
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Common.CustomActions");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Common.CustomActions");
 
         private static readonly Type[] ObjectObject = new Type[] { typeof(object), typeof(object) };
         

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.Filters.SingleValueFilterEditor"
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.Filters.SingleValueFilterEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-             xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
-             xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
              ToolTip="{Binding ToolTip}">
   <ctrls:LabeledContainer Label="{Binding Label}"

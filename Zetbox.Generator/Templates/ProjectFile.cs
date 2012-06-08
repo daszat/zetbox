@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates
+namespace Zetbox.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Kistl.Generator.Templates
     {
         protected virtual string GetAssemblyName()
         {
-            return "Kistl.Objects." + ImplementationSuffix;
+            return "Zetbox.Objects." + ImplementationSuffix;
         }
 
         /// <summary>
@@ -26,29 +26,29 @@ namespace Kistl.Generator.Templates
         protected virtual void ApplyAdditionalReferences()
         {
             this.WriteLine("    <!-- local reference to newly generated code -->");
-            this.WriteLine("    <ProjectReference Include=\"..\\Kistl.Objects\\Kistl.Objects.csproj\">");
+            this.WriteLine("    <ProjectReference Include=\"..\\Zetbox.Objects\\Zetbox.Objects.csproj\">");
             this.WriteLine("      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>");
-            this.WriteLine("      <Name>Kistl.Objects</Name>");
+            this.WriteLine("      <Name>Zetbox.Objects</Name>");
             this.WriteLine("      <Private>False</Private>");
             this.WriteLine("    </ProjectReference>");
 
             // DAL Provider Base
-            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Base"">");
+            this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Base"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.DalProvider.Base.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // common functionality for all
-            this.WriteLine(@"    <Reference Include=""Kistl.API.Common"">");
+            this.WriteLine(@"    <Reference Include=""Zetbox.API.Common"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.Common.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Common\Core\Zetbox.API.Common.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
 
         /// <summary>
-        /// Returns the output path relative to the KistlAPIPath. This is only relevant for projects which are 
+        /// Returns the output path relative to the ZetboxAPIPath. This is only relevant for projects which are 
         /// compiled in the IDE, as the generator will override the values here.
         /// </summary>
         protected virtual string GetRelativeOutputPath()

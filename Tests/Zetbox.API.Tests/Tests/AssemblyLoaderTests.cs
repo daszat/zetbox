@@ -5,12 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-using Kistl.API.Mocks;
+using Zetbox.API.Mocks;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     [TestFixture]
     public class AssemblyLoaderTests : AbstractApiTestFixture
@@ -20,14 +20,14 @@ namespace Kistl.API.Tests
         //[Test]
         //public void Load()
         //{
-        //    Assembly a = AssemblyLoader.Load("Kistl.API");
+        //    Assembly a = AssemblyLoader.Load("Zetbox.API");
         //    Assert.That(a, Is.Not.Null);
         //}
 
         //[Test]
         //public void ReflectionOnlyLoadFrom()
         //{
-        //    Assembly a = AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.API");
+        //    Assembly a = AssemblyLoader.ReflectionOnlyLoadFrom("Zetbox.API");
         //    Assert.That(a, Is.Not.Null);
         //}
 

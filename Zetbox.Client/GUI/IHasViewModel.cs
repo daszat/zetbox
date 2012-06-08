@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.Client.GUI
+namespace Zetbox.Client.GUI
 {
     /// <summary>
     /// Marker interface for the expected ViewModel of the marked Control

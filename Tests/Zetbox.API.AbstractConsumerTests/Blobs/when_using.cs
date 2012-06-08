@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Kistl.App.Base;
+using Zetbox.App.Base;
 using System.IO;
 
-namespace Kistl.API.AbstractConsumerTests.Blobs
+namespace Zetbox.API.AbstractConsumerTests.Blobs
 {
     public abstract class when_using : BlobFixture
     {

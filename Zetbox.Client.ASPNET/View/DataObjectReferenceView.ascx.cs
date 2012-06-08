@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_DataObjectReferenceView : Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView
+public partial class View_DataObjectReferenceView : Zetbox.Client.ASPNET.Toolkit.View.DataObjectReferenceView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

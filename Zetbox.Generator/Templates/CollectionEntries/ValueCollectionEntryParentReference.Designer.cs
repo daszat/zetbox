@@ -1,32 +1,32 @@
 using System;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.CollectionEntries
+namespace Zetbox.Generator.Templates.CollectionEntries
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst")]
-    public partial class ValueCollectionEntryParentReference : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst")]
+    public partial class ValueCollectionEntryParentReference : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
-		protected Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList;
+		protected IZetboxContext ctx;
+		protected Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList;
 		protected string referencedInterface;
 		protected string propertyName;
 		protected string moduleNamespace;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("CollectionEntries.ValueCollectionEntryParentReference", ctx, serializationList, referencedInterface, propertyName, moduleNamespace);
         }
 
-        public ValueCollectionEntryParentReference(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace)
+        public ValueCollectionEntryParentReference(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -39,12 +39,12 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 18 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 string cacheName = "_" + propertyName + "Cache";
     string fkName = "fk_" + propertyName;
     string backingName = "_" + fkName;
 
-#line 22 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 22 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 this.WriteObjects("        public ",  referencedInterface , " ",  propertyName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -95,7 +95,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
-#line 73 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 73 "P:\Zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
         serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, "int?", backingName); // TODO: XML Namespace
 

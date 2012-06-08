@@ -1,32 +1,32 @@
 
-namespace Kistl.DalProvider.Client.Tests.KistlContextTests
+namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Test;
     using NUnit.Framework;
-    using Kistl.API.Client;
+    using Zetbox.API.Client;
 
     [TestFixture]
-    public class KistlContextTests : Kistl.API.AbstractConsumerTests.AbstractTestFixture
+    public class ZetboxContextTests : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
     {
-        private IKistlContext ctx;
+        private IZetboxContext ctx;
         private InterfaceType.Factory _iftFactory;
 
         public override void SetUp()
         {
             base.SetUp();
 
-            Logging.Log.Info("KistlContextTests.SetUp() is called");
+            Logging.Log.Info("ZetboxContextTests.SetUp() is called");
 
             this._iftFactory = scope.Resolve<InterfaceType.Factory>();
             ctx = GetContext();
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
+            //CacheController<Zetbox.API.IDataObject>.Current.Clear();
         }
 
         [Test]
@@ -239,7 +239,7 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
             Assert.That(obj1, Is.Not.EqualTo(obj2));
         }
 
-        // TODO: cannot reference Kistl.Objects.ClientImpl, but must!
+        // TODO: cannot reference Zetbox.Objects.ClientImpl, but must!
         //[Test]
         //public void Attach_IDataObject_New()
         //{

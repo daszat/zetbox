@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Kistl.Client.Presentables;
+using Zetbox.Client.Presentables;
 using System.Threading;
 
-namespace Kistl.Client.Tests
+namespace Zetbox.Client.Tests
 {
     [TestFixture]
     public class SynchronousThreadManagerTests

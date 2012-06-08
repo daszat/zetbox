@@ -1,17 +1,17 @@
 
-namespace Kistl.Generator.InterfaceTemplates.Interfaces
+namespace Zetbox.Generator.InterfaceTemplates.Interfaces
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class Template
     {
@@ -20,9 +20,9 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
         {
             string[] interfaces = dataType.ImplementsInterfaces.Select(i => i.Module.Namespace + "." + i.Name).ToArray();
 
-            if (dataType is Kistl.App.Base.ObjectClass)
+            if (dataType is Zetbox.App.Base.ObjectClass)
             {
-                var baseClass = (dataType as Kistl.App.Base.ObjectClass).BaseObjectClass;
+                var baseClass = (dataType as Zetbox.App.Base.ObjectClass).BaseObjectClass;
                 if (baseClass != null)
                 {
                     return new string[] { baseClass.Module.Namespace + "." + baseClass.Name }.Concat(interfaces).ToArray();
@@ -36,7 +36,7 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
             {
                 return new string[] { "ICompoundObject" };
             }
-            else if (dataType is Kistl.App.Base.Interface)
+            else if (dataType is Zetbox.App.Base.Interface)
             {
                 return interfaces;
             }
@@ -110,9 +110,9 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
         /// </summary>
         /// <param name="method">Method to check</param>
         /// <returns>true if found in ImplementsInterface Collection</returns>
-        protected bool IsDeclaredInImplementsInterface(Kistl.App.Base.Method method)
+        protected bool IsDeclaredInImplementsInterface(Zetbox.App.Base.Method method)
         {
-            List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
+            List<Zetbox.App.Base.Method> methods = new List<Zetbox.App.Base.Method>();
             foreach (var c in method.ObjectClass.ImplementsInterfaces)
             {
                 methods.AddRange(c.Methods.Where(m => m.Name == method.Name));
@@ -141,7 +141,7 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
             return false;
         }
 
-        protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m, int index)
+        protected virtual void ApplyMethodTemplate(Zetbox.App.Base.Method m, int index)
         {
             var returnParam = m.Parameter.SingleOrDefault(p => p.IsReturnParameter);
             var returnString = returnParam == null ? "void" : returnParam.GetParameterTypeString();
@@ -154,7 +154,7 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
             this.WriteLine("        {0} {1}({2});", returnString, name, args);
         }
 
-        protected IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()
+        protected IEnumerable<Zetbox.App.Base.Method> MethodsToGenerate()
         {
             return dataType.Methods.Where(m => !m.IsDefaultMethod());
         }

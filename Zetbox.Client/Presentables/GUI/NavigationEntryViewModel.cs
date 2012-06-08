@@ -1,25 +1,25 @@
 
-namespace Kistl.Client.Presentables.GUI
+namespace Zetbox.Client.Presentables.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.App.GUI;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.KistlBase;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.App.GUI;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.API.Utils;
 
     [ViewModelDescriptor]
     public abstract class NavigationEntryViewModel
         : DataObjectViewModel
     {
-        public new delegate NavigationEntryViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationEntry screen);
+        public new delegate NavigationEntryViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationEntry screen);
 
-        public static NavigationEntryViewModel Fetch(IViewModelFactory ModelFactory, IKistlContext dataCtx, ViewModel parent, NavigationEntry screen)
+        public static NavigationEntryViewModel Fetch(IViewModelFactory ModelFactory, IZetboxContext dataCtx, ViewModel parent, NavigationEntry screen)
         {
             if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
             if (screen == null) throw new ArgumentNullException("screen");
@@ -47,7 +47,7 @@ namespace Kistl.Client.Presentables.GUI
 
         private NavigatorViewModel _displayer = null;
 
-        public NavigationEntryViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, NavigationEntry screen)
+        public NavigationEntryViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationEntry screen)
             : base(dependencies, dataCtx, parent, screen)
         {
             if (screen == null) throw new ArgumentNullException("screen");

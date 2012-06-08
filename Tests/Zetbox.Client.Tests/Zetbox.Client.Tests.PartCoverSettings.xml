@@ -1,7 +1,7 @@
 <PartCoverSettings>
   <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
-  <TargetWorkDir>P:\Kistl\Tests\Kistl.Client.Tests</TargetWorkDir>
-  <TargetArgs>Kistl.Client.Tests.nunit</TargetArgs>
-  <Rule>+[Kistl.Client]*</Rule>
-  <Rule>+[Kistl.Client.WPF]*</Rule>
+  <TargetWorkDir>P:\Zetbox\Tests\Zetbox.Client.Tests</TargetWorkDir>
+  <TargetArgs>Zetbox.Client.Tests.nunit</TargetArgs>
+  <Rule>+[Zetbox.Client]*</Rule>
+  <Rule>+[Zetbox.Client.WPF]*</Rule>
 </PartCoverSettings>

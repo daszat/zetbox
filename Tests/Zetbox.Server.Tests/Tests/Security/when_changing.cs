@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Kistl.App.Projekte;
+using Zetbox.App.Projekte;
 
-namespace Kistl.Server.Tests.Security
+namespace Zetbox.Server.Tests.Security
 {
     [TestFixture]
     public class when_changing : SecurityDataFixture

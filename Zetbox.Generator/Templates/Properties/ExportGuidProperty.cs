@@ -1,18 +1,18 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
+    using Zetbox.API;
 
     public class ExportGuidProperty
         : NotifyingValueProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-          IKistlContext ctx, Serialization.SerializationMembersList serializationList, string backingName)
+          IZetboxContext ctx, Serialization.SerializationMembersList serializationList, string backingName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
@@ -20,7 +20,7 @@ namespace Kistl.Generator.Templates.Properties
                 ctx, serializationList, backingName);
         }
 
-        public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx,
+        public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx,
             Serialization.SerializationMembersList serializationList, string backingName)
             : base(_host, ctx, serializationList, "Guid", "ExportGuid", String.Empty, backingName, false) // TODO: use proper namespace
         {

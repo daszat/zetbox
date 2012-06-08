@@ -5,7 +5,7 @@ echo Changes to the object model are generated.
 echo Use this to create a clean environment.
 echo ********************************************************************************
 
-set config=Configs\Local\Fallback\Kistl.Server.Service.xml
+set config=Configs\Local\Fallback\Zetbox.Server.Service.xml
 
 if .%1. == .. GOTO GOON
 
@@ -15,7 +15,7 @@ set config=%1
 
 cd bin\Debug
 
-Kistl.Server.Service.exe %config% -wipe
+Zetbox.Server.Service.exe %config% -wipe
 IF ERRORLEVEL 1 GOTO FAIL1
 
 cd ..\..

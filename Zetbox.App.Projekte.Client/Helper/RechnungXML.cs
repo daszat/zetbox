@@ -6,9 +6,9 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace Kistl.App.Projekte
+namespace Zetbox.App.Projekte
 {
-    [XmlRoot("Rechnung", Namespace = "http://dasz.at/Kistl/Dokumente/Rechnung/")]
+    [XmlRoot("Rechnung", Namespace = "http://dasz.at/Zetbox/Dokumente/Rechnung/")]
     public class RechnungXML
     {
         public string Kundenname { get; set; }

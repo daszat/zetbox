@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
 
@@ -13,7 +13,7 @@ namespace Kistl.API.Server
         /// <param name="bType">The type of the B-side of the Relation.</param>
         /// <param name="endRole">The "parent"-side of the collection.</param>
         /// <returns>A newly initialised <see cref="IServerCollectionHandler"/>.</returns>
-        IServerCollectionHandler GetServerCollectionHandler(IKistlContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
+        IServerCollectionHandler GetServerCollectionHandler(IZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
 
         /// <summary>
         /// Creates an <see cref="IServerObjectHandler"/> for the specified Type.

@@ -1,15 +1,15 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client;
-    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client;
+    using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -21,9 +21,9 @@ namespace Kistl.App.Base
     public static class GuidPropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Kistl.App.Base.GuidProperty obj)
+        public static void NotifyCreated(Zetbox.App.Base.GuidProperty obj)
         {
-            obj.ValueModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableGuidPropertyViewModel.Find(obj.Context);
+            obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableGuidPropertyViewModel.Find(obj.Context);
         }
     }
 }

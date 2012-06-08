@@ -1,11 +1,11 @@
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     // server implementation has to delay property lookup until validation
     // to avoid bootstrapping issues and threading failures when initialising
@@ -43,10 +43,10 @@ namespace Kistl.DalProvider.Ef
 
         public override string[] GetValidationErrors(object component)
         {
-            IReadOnlyKistlContext ctx;
+            IReadOnlyZetboxContext ctx;
             if (_lazyCtx != null && _propertyGuid != null && (ctx = _lazyCtx()) != null)
             {
-                var property = ctx.FindPersistenceObject<Kistl.App.Base.Property>(_propertyGuid.Value);
+                var property = ctx.FindPersistenceObject<Zetbox.App.Base.Property>(_propertyGuid.Value);
                 var self = (TComponent)component;
                 var val = getter(self);
                 return property

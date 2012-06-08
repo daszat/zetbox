@@ -1,13 +1,13 @@
 
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
 
     [Implementor]
     public static class DataTypeActions
@@ -25,13 +25,13 @@ namespace Kistl.App.Base
         }
 
         [Invocation]
-        public static void GetDataType(DataType obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        public static void GetDataType(DataType obj, Zetbox.API.MethodReturnEventArgs<System.Type> e)
         {
-            e.Result = Type.GetType(obj.GetDataTypeString() + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            e.Result = Type.GetType(obj.GetDataTypeString() + ", " + Zetbox.API.Helper.InterfaceAssembly, true);
         }
 
         [Invocation]
-        public static void GetDataTypeString(DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void GetDataTypeString(DataType obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             if (obj.Module == null)
             {
@@ -46,7 +46,7 @@ namespace Kistl.App.Base
         [Invocation]
         public static void ImplementInterfaces(DataType obj)
         {
-            IKistlContext ctx = obj.Context;
+            IZetboxContext ctx = obj.Context;
             if (obj.Module == null)
             {
                 throw new InvalidOperationException("ObjectClass has no Module yet");

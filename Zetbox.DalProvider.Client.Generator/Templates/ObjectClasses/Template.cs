@@ -1,16 +1,16 @@
 
-namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.App.Base;
+    using Templates = Zetbox.Generator.Templates;
 
     public class Template : Templates.ObjectClasses.Template
     {
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, ObjectClass cls)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, Zetbox.API.IZetboxContext ctx, ObjectClass cls)
             : base(_host, ctx, cls)
         {
         }

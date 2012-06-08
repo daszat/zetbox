@@ -8,8 +8,8 @@
     <ProjectGuid>{D22A24E6-48CE-47F9-9987-68385E8C5AC7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KistlApp.Wizard</RootNamespace>
-    <AssemblyName>KistlApp.Wizard</AssemblyName>
+    <RootNamespace>ZetboxApp.Wizard</RootNamespace>
+    <AssemblyName>ZetboxApp.Wizard</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -96,9 +96,9 @@
     <EmbeddedResource Include="SolutionItems\ZbResetAll.cmd" />
     <EmbeddedResource Include="SolutionItems\StartClient.cmd" />
     <EmbeddedResource Include="SolutionItems\StartServer.cmd" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Kistl___Server___Service___exe.config" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Server___Service___exe.config" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\HttpService___Web.config" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Kistl___Server___Service___exe.config" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Server___Service___exe.config" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\HttpService___Web.config" />
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
@@ -106,29 +106,29 @@
     <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Kistl___Server___Service.xml">
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Zetbox___Server___Service.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl___Server___HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Kistl___Server___Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Kistl___Server___HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Kistl___Server___Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\Kistl___Client___WPF.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Kistl___Server___HttpService.xml">
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Zetbox___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Zetbox___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Zetbox___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Zetbox___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___Client___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Zetbox___Server___HttpService.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Kistl___Server___Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Kistl___Server___HttpService.xml">
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Zetbox___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Zetbox___Server___HttpService.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Zetbox___Server___Service.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl___Client___WPF.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl___Server___HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Client___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___Service.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Data\%24safesolutionname%24.xml">
@@ -140,17 +140,17 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Kistl___Client___WPF.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Kistl___Server___HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Client___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Kistl___Client___WPF.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Kistl___Server___HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Kistl___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Zetbox___Client___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Zetbox___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\%24safesolutionname%24___Client___Tests.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\env.xml" />
     <EmbeddedResource Include="SolutionItems\.gitignore" />

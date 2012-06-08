@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Toolkit
+namespace Zetbox.Client.WPF.Toolkit
 {
     using System;
     using System.Collections.Generic;

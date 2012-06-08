@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.App.Base;
-using Kistl.API;
+using Zetbox.App.Base;
+using Zetbox.API;
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
     public static class PropertyExtensions
     {
@@ -108,7 +108,7 @@ namespace Kistl.App.Extensions
             if (prop == null) { throw new ArgumentNullException("prop"); }
             StringRangeConstraint constraint = prop.GetLengthConstraint();
             // create unconstrained maxLength if no constrain is specified
-            return constraint == null ? Kistl.API.Helper.DefaultStringPropertyLength : (constraint.MaxLength ?? int.MaxValue);
+            return constraint == null ? Zetbox.API.Helper.DefaultStringPropertyLength : (constraint.MaxLength ?? int.MaxValue);
         }
     }
 }

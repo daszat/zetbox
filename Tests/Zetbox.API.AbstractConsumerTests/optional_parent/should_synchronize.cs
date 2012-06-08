@@ -1,21 +1,21 @@
 
-namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
+namespace Zetbox.API.AbstractConsumerTests.one_to_N_relations
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
 
     public abstract class should_synchronize
         : AbstractTestFixture
     {
-        IKistlContext ctx;
+        IZetboxContext ctx;
         One_to_N_relations_One oneSide1;
         One_to_N_relations_One oneSide2;
         One_to_N_relations_One oneSide3;

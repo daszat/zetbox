@@ -1,15 +1,15 @@
 
-namespace Kistl.DalProvider.Base
+namespace Zetbox.DalProvider.Base
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
-    public abstract class PersistenceObjectBaseImpl : Kistl.API.BasePersistenceObject
+    public abstract class PersistenceObjectBaseImpl : Zetbox.API.BasePersistenceObject
     {
         private readonly IAuditable _auditable;
 
@@ -110,7 +110,7 @@ namespace Kistl.DalProvider.Base
             NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.New);
         }
 
-        public override void AttachToContext(IKistlContext ctx)
+        public override void AttachToContext(IZetboxContext ctx)
         {
             base.AttachToContext(ctx);
             if (ctx.ContainsObject(ctx.GetInterfaceType(this), this.ID) == null)
@@ -129,14 +129,14 @@ namespace Kistl.DalProvider.Base
             }
         }
 
-        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             sw.Write((int)ObjectState);
             sw.Write((int)CurrentAccessRights);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
             sr.ReadConverter(i => _ObjectState = (DataObjectState)i);
@@ -144,7 +144,7 @@ namespace Kistl.DalProvider.Base
             return baseResult;
         }
 
-        protected virtual void ApplyRightsFromStream(Kistl.API.AccessRights rights)
+        protected virtual void ApplyRightsFromStream(Zetbox.API.AccessRights rights)
         {
             // cannot handle it, but some derived classes are able to
         }

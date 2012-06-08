@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.CodeDom.Compiler;
@@ -15,7 +15,7 @@ namespace Kistl.Generator
     /// </summary>
     public class TemplateExecutor
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.Templates");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.Templates");
 
         private NameValueCollection settings = new NameValueCollection();
         private object[] templateParameters = new object[0];

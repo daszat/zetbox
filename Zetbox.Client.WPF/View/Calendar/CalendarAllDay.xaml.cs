@@ -11,10 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables.Calendar;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.Calendar;
 
-namespace Kistl.Client.WPF.View.Calendar
+namespace Zetbox.Client.WPF.View.Calendar
 {
     /// <summary>
     /// Interaction logic for CalendarAllDay.xaml

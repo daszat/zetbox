@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API.Common.Reporting;
-using Kistl.API;
+using Zetbox.API.Common.Reporting;
+using Zetbox.API;
 
-namespace Kistl.App.Projekte.Client.Projekte.Reporting
+namespace Zetbox.App.Projekte.Client.Projekte.Reporting
 {
     public class ReportingHost : AbstractReportingHost
     {

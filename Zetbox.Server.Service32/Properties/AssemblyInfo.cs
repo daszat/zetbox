@@ -6,11 +6,11 @@ using System;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.Server.Service32")]
+[assembly: AssemblyTitle("Zetbox.Server.Service32")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Kistl.Server.Service32")]
+[assembly: AssemblyProduct("Zetbox.Server.Service32")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

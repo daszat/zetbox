@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.Client's Test Configuration</ConfigName>
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>Zetbox.Client's Test Configuration</ConfigName>
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore/Client/</DocumentStore>
     <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
-      <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
-      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
-      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
-      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
-      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
-      <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
-      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+      <Module>Zetbox.API.Client.ClientApiModule, Zetbox.API.Client</Module>
+      <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
+      <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
+      <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
+      <Module>Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl</Module>
+      <Module>Zetbox.Objects.ClientModule, Zetbox.Objects.ClientImpl</Module>
+      <Module>Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client</Module>
+      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>
     <string>../Client/Core.Generated</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>

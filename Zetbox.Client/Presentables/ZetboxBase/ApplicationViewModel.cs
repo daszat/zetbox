@@ -2,25 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.GUI;
-using Kistl.Client.Presentables.GUI;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.GUI;
+using Zetbox.Client.Presentables.GUI;
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     public class ApplicationViewModel : ViewModel
     {
-        public new delegate ApplicationViewModel Factory(IKistlContext dataCtx, ViewModel parent, Application app);
+        public new delegate ApplicationViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Application app);
 
-        protected readonly Func<ClientIsolationLevel, IKistlContext> ctxFactory;
+        protected readonly Func<ClientIsolationLevel, IZetboxContext> ctxFactory;
 
         protected readonly Application app;
 
         public ApplicationViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             Application app,
-            Func<ClientIsolationLevel, IKistlContext> ctxFactory)
+            Func<ClientIsolationLevel, IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent)
         {
             if (app == null) throw new ArgumentNullException("app");

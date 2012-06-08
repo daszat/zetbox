@@ -12,11 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ValueViewModels;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ValueViewModels;
 
-namespace Kistl.Client.WPF.View.GridCells
+namespace Zetbox.Client.WPF.View.GridCells
 {
     /// <summary>
     /// Interaction logic for ReferenceEditor.xaml

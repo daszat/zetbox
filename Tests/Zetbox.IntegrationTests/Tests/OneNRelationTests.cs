@@ -1,16 +1,16 @@
 
-namespace Kistl.IntegrationTests
+namespace Zetbox.IntegrationTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Tests;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.DalProvider.Base.RelationWrappers;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Tests;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.DalProvider.Base.RelationWrappers;
     using NUnit.Framework;
 
     [Ignore("takes way too long")]
@@ -37,12 +37,12 @@ namespace Kistl.IntegrationTests
         {
             using (var initCtx = GetContext())
             {
-                _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "KistlBase").ExportGuid;
+                _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "ZetboxBase").ExportGuid;
                 _valueDescGuid = initCtx.GetQuery<ViewModelDescriptor>().First().ExportGuid;
 
                 var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items)
                     ?? initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count > items)
-                    ?? (ObjectClass)Kistl.NamedObjects.Base.Classes.Kistl.App.Test.TestObjClass.Find(initCtx);
+                    ?? (ObjectClass)Zetbox.NamedObjects.Base.Classes.Zetbox.App.Test.TestObjClass.Find(initCtx);
 
                 _fixtureGuid = fixtureOC.ExportGuid;
                 var otherClass = initCtx.GetQuery<ObjectClass>().First(oc => oc.ExportGuid != _fixtureGuid);
@@ -83,7 +83,7 @@ namespace Kistl.IntegrationTests
             return CreateProperty(ctx, NewItemNumber());
         }
 
-        private Property CreateProperty(IKistlContext ctx, int unique)
+        private Property CreateProperty(IZetboxContext ctx, int unique)
         {
             var result = ctx.Create<IntProperty>();
             result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
@@ -198,13 +198,13 @@ namespace Kistl.IntegrationTests
         {
             using (var initCtx = GetContext())
             {
-                _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "KistlBase").ExportGuid;
+                _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "ZetboxBase").ExportGuid;
                 _valueDescGuid = initCtx.GetQuery<ViewModelDescriptor>().First().ExportGuid;
 
                 var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items);
                 if (fixtureOC == null)
                 {
-                    fixtureOC = (ObjectClass)Kistl.NamedObjects.Base.Classes.Kistl.App.Test.TestObjClass.Find(initCtx);
+                    fixtureOC = (ObjectClass)Zetbox.NamedObjects.Base.Classes.Zetbox.App.Test.TestObjClass.Find(initCtx);
                 }
 
                 while (fixtureOC.Properties.Count < items)
@@ -245,7 +245,7 @@ namespace Kistl.IntegrationTests
             return CreateProperty(ctx, NewItemNumber());
         }
 
-        private Property CreateProperty(IKistlContext ctx, int unique)
+        private Property CreateProperty(IZetboxContext ctx, int unique)
         {
             var result = ctx.Create<IntProperty>();
             result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);

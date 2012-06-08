@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View
+namespace Zetbox.Client.WPF.View
 {
     using System;
     using System.Collections.Generic;
@@ -14,9 +14,9 @@ namespace Kistl.Client.WPF.View
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Shapes;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.WPF.CustomControls;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for ErrorListView.xaml

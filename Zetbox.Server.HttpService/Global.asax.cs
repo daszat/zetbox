@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.HttpService
+namespace Zetbox.Server.HttpService
 {
     using System;
     using System.Collections.Generic;
@@ -12,14 +12,14 @@ namespace Kistl.Server.HttpService
     using Autofac.Configuration;
     using Autofac.Integration.Wcf;
     using Autofac.Integration.Web;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
     using System.Text.RegularExpressions;
 
     public class Global : System.Web.HttpApplication, IContainerProviderAccessor
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Service");
 
         // Provider that holds the application container.
         static IContainerProvider _containerProvider;
@@ -31,9 +31,9 @@ namespace Kistl.Server.HttpService
             get { return _containerProvider; }
         }
 
-        void CreateMasterContainer(KistlConfig config)
+        void CreateMasterContainer(ZetboxConfig config)
         {
-            var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
+            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
 
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
@@ -56,9 +56,9 @@ namespace Kistl.Server.HttpService
             var zbBasePath = Path.Combine(appBasePath, "..");
             var configsPath = Path.Combine(zbBasePath, "Configs");
 
-            var config = KistlConfig.FromFile(
+            var config = ZetboxConfig.FromFile(
                 string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
-                KistlConfig.GetDefaultConfigName("Kistl.Server.HttpService.xml", configsPath));
+                ZetboxConfig.GetDefaultConfigName("Zetbox.Server.HttpService.xml", configsPath));
 
             // Make DocumentStore relative to HttpService
             config.Server.DocumentStore = Path.Combine(appBasePath, config.Server.DocumentStore);

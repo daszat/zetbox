@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Converter
+namespace Zetbox.Client.WPF.Converter
 {
     using System;
     using System.Collections.Generic;
@@ -7,20 +7,20 @@ namespace Kistl.Client.WPF.Converter
     using System.Text;
     using System.Windows.Data;
 
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.App.Extensions;
     using System.Windows.Media.Imaging;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     [ValueConversion(typeof(object), typeof(BitmapImage))]
     public class IconConverter : IValueConverter
     {
         private readonly IFrozenContext FrozenContext;
-        private readonly Func<IKistlContext> ctxFactroy;
+        private readonly Func<IZetboxContext> ctxFactroy;
         private readonly Dictionary<Guid, BitmapImage> _cache = new Dictionary<Guid, BitmapImage>();
 
-        public IconConverter(IFrozenContext frozenCtx, Func<IKistlContext> ctx)
+        public IconConverter(IFrozenContext frozenCtx, Func<IZetboxContext> ctx)
         {
             this.FrozenContext = frozenCtx;
             this.ctxFactroy = ctx;
@@ -32,8 +32,8 @@ namespace Kistl.Client.WPF.Converter
             _initialized = true;
         }
 
-        private IKistlContext _Context;
-        private IKistlContext Context
+        private IZetboxContext _Context;
+        private IZetboxContext Context
         {
             get
             {
@@ -50,24 +50,24 @@ namespace Kistl.Client.WPF.Converter
             if (!_initialized) return Binding.DoNothing;
             try
             {
-                Kistl.App.GUI.Icon icon = null;
-                if (value is Kistl.App.Base.ObjectClass)
+                Zetbox.App.GUI.Icon icon = null;
+                if (value is Zetbox.App.Base.ObjectClass)
                 {
-                    Kistl.App.Base.ObjectClass objClass = (Kistl.App.Base.ObjectClass)value;
+                    Zetbox.App.Base.ObjectClass objClass = (Zetbox.App.Base.ObjectClass)value;
                     icon = objClass.DefaultIcon;
                 }
-                else if (value is Kistl.App.GUI.Icon)
+                else if (value is Zetbox.App.GUI.Icon)
                 {
-                    icon = (Kistl.App.GUI.Icon)value;
+                    icon = (Zetbox.App.GUI.Icon)value;
                 }
                 else if (value is IDataObject)
                 {
                     IDataObject obj = (IDataObject)value;
                     icon = obj.GetObjectClass(FrozenContext).DefaultIcon;
                 }
-                else if (value is Kistl.Client.Presentables.ViewModel)
+                else if (value is Zetbox.Client.Presentables.ViewModel)
                 {
-                    icon = ((Kistl.Client.Presentables.ViewModel)value).Icon;
+                    icon = ((Zetbox.Client.Presentables.ViewModel)value).Icon;
                 }
 
                 if (icon == null)
@@ -82,7 +82,7 @@ namespace Kistl.Client.WPF.Converter
                     BitmapImage bmp;
                     if (!_cache.TryGetValue(icon.ExportGuid, out bmp))
                     {
-                        var realIcon = Context.FindPersistenceObject<Kistl.App.GUI.Icon>(icon.ExportGuid);
+                        var realIcon = Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(icon.ExportGuid);
                         if (realIcon.Blob == null)
                         {
                             Logging.Log.WarnFormat("Icon#{0} has no associated request", realIcon.ID);

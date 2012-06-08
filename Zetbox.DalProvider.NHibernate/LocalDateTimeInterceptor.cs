@@ -5,7 +5,7 @@ using System.Text;
 using NHibernate;
 using NHibernate.Type;
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     /// <summary>
     /// Convert all DateTimes from/to the database into local time.

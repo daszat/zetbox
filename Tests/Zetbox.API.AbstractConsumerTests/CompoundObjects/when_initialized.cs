@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.App.Test;
+using Zetbox.App.Test;
 
 using NUnit.Framework;
 
-namespace Kistl.API.AbstractConsumerTests.CompoundObjects
+namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
 {
     public abstract class when_initialized
         : CompoundObjectFixture
     {
         protected TestCustomObject newObj;
-        protected IKistlContext newCtx;
+        protected IZetboxContext newCtx;
 
         protected override void CreateTestData()
         {

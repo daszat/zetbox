@@ -7,7 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Controls;
 
-namespace Kistl.Client.WPF
+namespace Zetbox.Client.WPF
 {
     public class UndoManager
     {

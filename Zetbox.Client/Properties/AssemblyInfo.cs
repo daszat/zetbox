@@ -8,11 +8,11 @@ using System;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.Client")]
+[assembly: AssemblyTitle("Zetbox.Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl.Client")]
+[assembly: AssemblyProduct("Zetbox.Client")]
 [assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

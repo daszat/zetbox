@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.Server
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
+    using Zetbox.API;
 
     public sealed class HtpasswdIdentitySource
         : IIdentitySource

@@ -8,12 +8,12 @@
     <ProjectGuid>{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.App.Projekte.Server</RootNamespace>
-    <AssemblyName>Kistl.App.Projekte.Server</AssemblyName>
+    <RootNamespace>Zetbox.App.Projekte.Server</RootNamespace>
+    <AssemblyName>Zetbox.App.Projekte.Server</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -22,34 +22,34 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Server\App.ZBox\</OutputPath>
+    <OutputPath>..\bin\Debug\Server\App.Zetbox\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\Server\App.ZBox\Kistl.App.Projekte.Server.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\App.Zetbox\Zetbox.App.Projekte.Server.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Server\App.ZBox\</OutputPath>
+    <OutputPath>..\bin\Release\Server\App.Zetbox\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Release\Server\App.ZBox\Kistl.App.Projekte.Server.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Server\App.Zetbox\Zetbox.App.Projekte.Server.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Server\App.ZBox\</OutputPath>
+    <OutputPath>..\bin\Debug\Server\App.Zetbox\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\Server\App.ZBox\Kistl.App.Projekte.Server.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\App.Zetbox\Zetbox.App.Projekte.Server.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
@@ -76,8 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomServerActionsModule.cs" />
-    <Compile Include="KistlBase\BaseParameterActions.cs" />
-    <Compile Include="KistlBase\MethodActions.cs" />
+    <Compile Include="ZetboxBase\BaseParameterActions.cs" />
+    <Compile Include="ZetboxBase\MethodActions.cs" />
     <Compile Include="Projekte\TaskActions.cs" />
     <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
@@ -89,29 +89,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
+    <ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
-      <Name>Kistl.API.Server</Name>
+      <Name>Zetbox.API.Server</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

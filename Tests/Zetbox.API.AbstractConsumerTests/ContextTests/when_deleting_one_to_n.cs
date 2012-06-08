@@ -1,21 +1,21 @@
 
-namespace Kistl.API.AbstractConsumerTests.ContextTests
+namespace Zetbox.API.AbstractConsumerTests.ContextTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
 
     public abstract class when_deleting_one_to_n
         : AbstractTestFixture
     {
-        IKistlContext ctx;
+        IZetboxContext ctx;
         One_to_N_relations_One one;
         One_to_N_relations_N n1;
         One_to_N_relations_N n2;

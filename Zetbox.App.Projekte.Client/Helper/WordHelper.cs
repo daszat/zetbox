@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-using Kistl.API.Utils;
+using Zetbox.API.Utils;
 
-namespace Kistl.App.Projekte
+namespace Zetbox.App.Projekte
 {
     /// <summary>
     /// http://www.codeplex.com/dbe/

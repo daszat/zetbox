@@ -7,7 +7,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Kistl.API.AbstractConsumerTests.BinarySerializers
+namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
 {
     class MinimalCompoundObjectTest
         : ICompoundObject
@@ -37,12 +37,12 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 
         #region IStreamable Members
 
-        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
 
         }
 
-        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             return null;
         }

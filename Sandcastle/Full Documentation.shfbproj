@@ -19,18 +19,18 @@
     <FrameworkVersion>3.5</FrameworkVersion>
     <HelpFileFormat>HtmlHelp1x</HelpFileFormat>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Kistl.API.Client\Kistl.API.Client.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.API\Kistl.API.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.API.Server\Kistl.API.Server.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.Client.ASPNET.Toolkit\Kistl.Client.ASPNET.Toolkit.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.Client\Kistl.Client.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.Client.Forms\Kistl.Client.Forms.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.Client.WPF\Kistl.Client.WPF.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.DalProvider.ClientObjects\Kistl.DalProvider.ClientObjects.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.DalProvider.EF\Kistl.DalProvider.EF.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.DalProvider.Frozen\Kistl.DalProvider.Frozen.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.Objects\Kistl.Objects.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.Server\Kistl.Server.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.API.Client\Zetbox.API.Client.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.API\Zetbox.API.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.API.Server\Zetbox.API.Server.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.Client.ASPNET.Toolkit\Zetbox.Client.ASPNET.Toolkit.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.Client\Zetbox.Client.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.Client.Forms\Zetbox.Client.Forms.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.DalProvider.EF\Zetbox.DalProvider.EF.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.DalProvider.Frozen\Zetbox.DalProvider.Frozen.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.Objects\Zetbox.Objects.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Zetbox.Server\Zetbox.Server.csproj" xmlns="" />
     </DocumentationSources>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
   </PropertyGroup>

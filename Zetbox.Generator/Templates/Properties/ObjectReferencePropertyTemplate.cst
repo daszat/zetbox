@@ -1,15 +1,15 @@
 ﻿	<%@ CodeTemplate Language="C#"
     Name="Properties.ObjectReferencePropertyTemplate"
-    ClassName="Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
-    Inherits="Kistl.Generator.MemberTemplate" %>
+    ClassName="Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
+    Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="serializationList" Type="Serialization.SerializationMembersList" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
 <%@ Parameter Name="ownInterface" Type="string" %>
@@ -79,7 +79,7 @@
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
                 // shortcut noops
                 if ((value == null && <%= fkBackingName %> == null) || (value != null && value.ID == <%= fkBackingName %>))

@@ -1,15 +1,15 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Models;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Models;
 
     /// <summary>
     /// A intermediate helper class to provide common "load TypeRefs from various Assembly sources" functionality.
@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="tooltip">a tooltip for this command</param>
         /// <param name="parentType">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        internal LoadTypeRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, TypeRefPropertyViewModel parentType)
+        internal LoadTypeRefCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip, TypeRefPropertyViewModel parentType)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             this.ParentType = parentType;
@@ -39,21 +39,21 @@ namespace Kistl.Client.Presentables.KistlBase
         protected TypeRefPropertyViewModel ParentType { get; private set; }
 
         /// <summary>
-        /// Loads a <see cref="System.Reflection.Assembly"/> from the specified <see cref="Kistl.App.Base.Assembly"/>.
+        /// Loads a <see cref="System.Reflection.Assembly"/> from the specified <see cref="Zetbox.App.Base.Assembly"/>.
         /// </summary>
-        /// <param name="kistlAssembly">the assembly to load</param>
+        /// <param name="zetboxAssembly">the assembly to load</param>
         /// <returns>a system assembly loaded in the reflection only application context.</returns>
-        protected System.Reflection.Assembly ReflectionFromRef(Kistl.App.Base.Assembly kistlAssembly)
+        protected System.Reflection.Assembly ReflectionFromRef(Zetbox.App.Base.Assembly zetboxAssembly)
         {
-            return System.Reflection.Assembly.ReflectionOnlyLoad(kistlAssembly.Name);
+            return System.Reflection.Assembly.ReflectionOnlyLoad(zetboxAssembly.Name);
         }
 
         /// <summary>
-        /// Loads or creates a <see cref="Kistl.App.Base.Assembly"/> for the specified <see cref="System.Reflection.Assembly"/>.
+        /// Loads or creates a <see cref="Zetbox.App.Base.Assembly"/> for the specified <see cref="System.Reflection.Assembly"/>.
         /// </summary>
         /// <param name="systemAssembly">the assembly to load</param>
         /// <returns>a system assembly loaded in the reflection only application context.</returns>
-        protected Kistl.App.Base.Assembly RefFromReflection(System.Reflection.Assembly systemAssembly)
+        protected Zetbox.App.Base.Assembly RefFromReflection(System.Reflection.Assembly systemAssembly)
         {
             var assemblyDescriptor = DataContext.GetQuery<Assembly>().SingleOrDefault(a => a.Name == systemAssembly.FullName);
             if (assemblyDescriptor == null)
@@ -86,14 +86,14 @@ namespace Kistl.Client.Presentables.KistlBase
         /// Opens a dialog to let the user choose a type references from the specified assembly.
         /// </summary>
         /// <param name="assembly">the assembly to choose from</param>
-        protected void ChooseTypeRefFromAssembly(Kistl.App.Base.Assembly assembly)
+        protected void ChooseTypeRefFromAssembly(Zetbox.App.Base.Assembly assembly)
         {
             var regenerateCmd = ViewModelFactory.CreateViewModel<RegenerateTypeRefsCommand.Factory>().Invoke(DataContext, Parent, this);
             var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 Parent,
                 typeof(TypeRef).GetObjectClass(FrozenContext),
-                () => DataContext.GetQuery<Kistl.App.Base.TypeRef>(),
+                () => DataContext.GetQuery<Zetbox.App.Base.TypeRef>(),
                 (chosen) =>
                 {
                     if (chosen != null)
@@ -115,11 +115,11 @@ namespace Kistl.Client.Presentables.KistlBase
 
         private class RegenerateTypeRefsCommand : CommandViewModel
         {
-            public new delegate RegenerateTypeRefsCommand Factory(IKistlContext dataCtx, ViewModel parent, LoadTypeRefCommand outer);
+            public new delegate RegenerateTypeRefsCommand Factory(IZetboxContext dataCtx, ViewModel parent, LoadTypeRefCommand outer);
 
             public InstanceListViewModel ListModel { get; set; }
 
-            public RegenerateTypeRefsCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            public RegenerateTypeRefsCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
                 : base(appCtx, dataCtx, parent, "Regenerate TypeRefs", "Regenerate TypeRefs")
             {
             }
@@ -151,12 +151,12 @@ namespace Kistl.Client.Presentables.KistlBase
     }
 
     /// <summary>
-    /// Loads or creates a TypeRef from the result of the user browsing an assembly file (.dll or .exe). Parameter must be <code>null</code> or a <see cref="Kistl.App.Base.Assembly"/> or a <see cref="System.Reflection.Assembly"/>.
+    /// Loads or creates a TypeRef from the result of the user browsing an assembly file (.dll or .exe). Parameter must be <code>null</code> or a <see cref="Zetbox.App.Base.Assembly"/> or a <see cref="System.Reflection.Assembly"/>.
     /// </summary>
     internal class LoadTypeRefFromAssemblyFileCommand
         : LoadTypeRefCommand
     {
-        public new delegate LoadTypeRefFromAssemblyFileCommand Factory(IKistlContext dataCtx, ViewModel parent, TypeRefPropertyViewModel parentType);
+        public new delegate LoadTypeRefFromAssemblyFileCommand Factory(IZetboxContext dataCtx, ViewModel parent, TypeRefPropertyViewModel parentType);
 
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefFromAssemblyFileCommand class.
@@ -166,7 +166,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="parent">a ViewModel which should be notified while this command is executing</param>
         /// <param name="parentType">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        public LoadTypeRefFromAssemblyFileCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, TypeRefPropertyViewModel parentType)
+        public LoadTypeRefFromAssemblyFileCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, TypeRefPropertyViewModel parentType)
             : base(appCtx, dataCtx, parent, "Load TypeRef From DLL", "Loads all types from a DLL", parentType)
         {
         }
@@ -207,12 +207,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
     /// <summary>
     /// Loads or creates a TypeRef from the result of the user browsing an assembly.
-    /// Parameter must be <code>null</code> or a <see cref="Kistl.App.Base.Assembly"/>.
+    /// Parameter must be <code>null</code> or a <see cref="Zetbox.App.Base.Assembly"/>.
     /// </summary>
     internal class LoadTypeRefFromAssemblyRefCommand
         : LoadTypeRefCommand
     {
-        public new delegate LoadTypeRefFromAssemblyRefCommand Factory(IKistlContext dataCtx, ViewModel parent, TypeRefPropertyViewModel parentType);
+        public new delegate LoadTypeRefFromAssemblyRefCommand Factory(IZetboxContext dataCtx, ViewModel parent, TypeRefPropertyViewModel parentType);
 
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefFromAssemblyRefCommand class.
@@ -222,22 +222,22 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="parent">a ViewModel which should be notified while this command is executing</param>
         /// <param name="parentType">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        public LoadTypeRefFromAssemblyRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, TypeRefPropertyViewModel parentType)
+        public LoadTypeRefFromAssemblyRefCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, TypeRefPropertyViewModel parentType)
             : base(appCtx, dataCtx, parent, "Select TypeRef by Assembly", "Loads all types from an Assembly", parentType)
         {
         }
 
         /// <summary>
-        /// Checks whether the parameter is valid. The parameter must be <code>null</code> or a <see cref="Kistl.App.Base.Assembly"/>.
+        /// Checks whether the parameter is valid. The parameter must be <code>null</code> or a <see cref="Zetbox.App.Base.Assembly"/>.
         /// </summary>
-        /// <param name="data"><code>null</code> or a <see cref="Kistl.App.Base.Assembly"/></param>
+        /// <param name="data"><code>null</code> or a <see cref="Zetbox.App.Base.Assembly"/></param>
         /// <returns>true if the constraints are fulfilled</returns>
         public override bool CanExecute(object data)
         {
             if (data == null)
                 return true;
 
-            if (data is Kistl.App.Base.Assembly)
+            if (data is Zetbox.App.Base.Assembly)
                 return true;
 
             return false;
@@ -248,7 +248,7 @@ namespace Kistl.Client.Presentables.KistlBase
             if (!CanExecute(data))
                 return;
 
-            var assembly = data as Kistl.App.Base.Assembly;
+            var assembly = data as Zetbox.App.Base.Assembly;
             ChooseTypeRefFromAssembly(assembly);
         }
     }

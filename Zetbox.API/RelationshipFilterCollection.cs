@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     public abstract class BaseRelationshipFilterCollection<T> : ICollection<T>
         where T : IRelationEntry
     {
-        protected IKistlContext ctx { get; private set; }
+        protected IZetboxContext ctx { get; private set; }
         protected IDataObject Parent { get; private set; }
 
-        public BaseRelationshipFilterCollection(IKistlContext ctx, IDataObject parent)
+        public BaseRelationshipFilterCollection(IZetboxContext ctx, IDataObject parent)
         {
             this.ctx = ctx;
             this.Parent = parent;
@@ -81,7 +81,7 @@ namespace Kistl.API
     public class RelationshipFilterASideCollection<T> : BaseRelationshipFilterCollection<T>
         where T : IRelationEntry
     {
-        public RelationshipFilterASideCollection(IKistlContext ctx, IDataObject parent)
+        public RelationshipFilterASideCollection(IZetboxContext ctx, IDataObject parent)
             : base(ctx, parent)
         {
         }
@@ -95,7 +95,7 @@ namespace Kistl.API
     public class RelationshipFilterBSideCollection<T> : BaseRelationshipFilterCollection<T>
         where T : IRelationEntry
     {
-        public RelationshipFilterBSideCollection(IKistlContext ctx, IDataObject parent)
+        public RelationshipFilterBSideCollection(IZetboxContext ctx, IDataObject parent)
             : base(ctx, parent)
         {
         }

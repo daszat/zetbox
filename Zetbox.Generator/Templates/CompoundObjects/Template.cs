@@ -1,23 +1,23 @@
 
-namespace Kistl.Generator.Templates.CompoundObjects
+namespace Zetbox.Generator.Templates.CompoundObjects
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Templates = Zetbox.Generator.Templates;
 
     /// <summary>
     /// A template for "CompoundObject".
     /// </summary>
     public class Template
-        : Kistl.Generator.Templates.TypeBase
+        : Zetbox.Generator.Templates.TypeBase
     {
         protected CompoundObject CompoundObjectType { get; private set; }
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, CompoundObject cType)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, CompoundObject cType)
             : base(_host, ctx, cType)
         {
             this.CompoundObjectType = cType;

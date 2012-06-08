@@ -1,19 +1,19 @@
 
-namespace Kistl.Client.Models
+namespace Zetbox.Client.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
     using System.Collections.ObjectModel;
 
     public class ColumnDisplayModel
@@ -147,7 +147,7 @@ namespace Kistl.Client.Models
             return (categoryTags ?? String.Empty).Split(',', ' ').Contains("Summary");
         }
 
-        public void BuildColumns(Kistl.App.Base.DataType cls, IEnumerable<Property> props, IEnumerable<Method> methods, Mode mode)
+        public void BuildColumns(Zetbox.App.Base.DataType cls, IEnumerable<Property> props, IEnumerable<Method> methods, Mode mode)
         {
             if (cls == null) throw new ArgumentNullException("cls");
             if (props == null) throw new ArgumentNullException("props");
@@ -164,12 +164,12 @@ namespace Kistl.Client.Models
             );
         }
 
-        public void BuildColumns(Kistl.App.Base.CompoundObject cls, Mode mode)
+        public void BuildColumns(Zetbox.App.Base.CompoundObject cls, Mode mode)
         {
             BuildColumns(cls, cls.Properties, cls.Methods.Where(m => m.IsDisplayable), mode);
         }
 
-        public void BuildColumns(Kistl.App.Base.ObjectClass cls, Mode mode, bool showMethods)
+        public void BuildColumns(Zetbox.App.Base.ObjectClass cls, Mode mode, bool showMethods)
         {
             if (cls == null) throw new ArgumentNullException("cls");
 

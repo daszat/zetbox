@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 using System.Web.Script.Serialization;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Web;
-using Kistl.Client.Presentables;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.ASPNET.Toolkit
+namespace Zetbox.Client.ASPNET.Toolkit
 {
     [DataContract]
     [Serializable]
@@ -32,9 +32,9 @@ namespace Kistl.Client.ASPNET.Toolkit
             Init(m);
         }
         
-        public JavaScriptObjectMoniker(IKistlContext ctx, IDataObject obj)
+        public JavaScriptObjectMoniker(IZetboxContext ctx, IDataObject obj)
         {
-            DataObjectViewModel m = DataObjectViewModel.Fetch(KistlContextManagerModule.ViewModelFactory, ctx, null, obj);
+            DataObjectViewModel m = DataObjectViewModel.Fetch(ZetboxContextManagerModule.ViewModelFactory, ctx, null, obj);
             Init(m);
         }
 
@@ -45,7 +45,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             Text = m.Name;
         }
 
-        public DataObjectViewModel GetDataObject(IKistlContext ctx)
+        public DataObjectViewModel GetDataObject(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
@@ -53,15 +53,15 @@ namespace Kistl.Client.ASPNET.Toolkit
             
             if (ID <= Helper.INVALIDID)
             {
-                obj = ctx.Create(KistlContextManagerModule.IftFactory(Type.GetSystemType()));
+                obj = ctx.Create(ZetboxContextManagerModule.IftFactory(Type.GetSystemType()));
                 ID = obj.ID;
             }
             else
             {
-                obj = (IDataObject)ctx.Find(KistlContextManagerModule.IftFactory(Type.GetSystemType()), ID);
+                obj = (IDataObject)ctx.Find(ZetboxContextManagerModule.IftFactory(Type.GetSystemType()), ID);
             }
 
-            return DataObjectViewModel.Fetch(KistlContextManagerModule.ViewModelFactory, ctx, null, obj);
+            return DataObjectViewModel.Fetch(ZetboxContextManagerModule.ViewModelFactory, ctx, null, obj);
         }
     }
 
@@ -109,7 +109,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public static IEnumerable<DataObjectViewModel> FromJSONArray(this string jsonArray, IKistlContext ctx)
+        public static IEnumerable<DataObjectViewModel> FromJSONArray(this string jsonArray, IZetboxContext ctx)
         {
             if (string.IsNullOrEmpty(jsonArray)) return new List<DataObjectViewModel>();
 
@@ -128,7 +128,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public static DataObjectViewModel FromJSON(this string json, IKistlContext ctx)
+        public static DataObjectViewModel FromJSON(this string json, IZetboxContext ctx)
         {
             if (string.IsNullOrEmpty(json)) return null;
 

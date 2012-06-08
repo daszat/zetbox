@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
 {
     using System;
     using System.CodeDom;
@@ -7,16 +7,16 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Templates = Kistl.Generator.Templates;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Templates = Zetbox.Generator.Templates;
 
     public partial class ObjectReferencePropertyTemplate
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Templates.Serialization.SerializationMembersList serializationList,
             ObjectReferenceProperty prop, bool callGetterSetterEvents,
             bool updateInverseNavigator)
@@ -39,7 +39,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Templates.Serialization.SerializationMembersList serializationList,
             string ownInterface,
             string name,
@@ -59,14 +59,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string moduleNamespace = rel.Module.Namespace;
-            string implName = name + Kistl.API.Helper.ImplementationSuffix;
+            string implName = name + Zetbox.API.Helper.ImplementationSuffix;
             string eventName = "On" + name;
 
             string fkBackingName = "_fk_" + name;
             string fkGuidBackingName = "_fk_guid_" + name;
 
             string referencedImplementation = referencedInterface
-                + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+                + host.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix;
             string associationNameUnused = rel.GetAssociationName() + assocNameSuffix;
             string targetRoleNameUnused = otherEnd.RoleName;
 

@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     using System;
     using System.Collections.Generic;
@@ -8,14 +8,14 @@ namespace Kistl.API.Migration
     using System.Text;
     using Autofac;
     using Autofac.Configuration;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using ZBox.App.SchemaMigration;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.SchemaMigration;
 
     public abstract class MigrationProgram
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Migration");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Migration");
         private static bool _isInitialized = false;
 
         private readonly string _name;
@@ -27,8 +27,8 @@ namespace Kistl.API.Migration
         private OptionSet _options;
         protected OptionSet Options { get { return _options; } }
 
-        private KistlConfig _config;
-        protected KistlConfig Config { get { return _config; } }
+        private ZetboxConfig _config;
+        protected ZetboxConfig Config { get { return _config; } }
 
         private IContainer _container;
         protected IContainer Container { get { return _container; } }
@@ -101,7 +101,7 @@ namespace Kistl.API.Migration
             return new OptionSet();
         }
 
-        protected virtual KistlConfig ReadConfig(List<string> extraArguments)
+        protected virtual ZetboxConfig ReadConfig(List<string> extraArguments)
         {
             string configFilePath = null;
             if (extraArguments == null || extraArguments.Count == 0)
@@ -120,7 +120,7 @@ namespace Kistl.API.Migration
 
             try
             {
-                return KistlConfig.FromFile(configFilePath, "");
+                return ZetboxConfig.FromFile(configFilePath, "");
             }
             catch (Exception ex)
             {
@@ -133,7 +133,7 @@ namespace Kistl.API.Migration
 
         protected virtual void ValidateConfig() { }
 
-        protected virtual IContainer CreateMasterContainer(KistlConfig config)
+        protected virtual IContainer CreateMasterContainer(ZetboxConfig config)
         {
             var builder = AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
 
@@ -160,7 +160,7 @@ namespace Kistl.API.Migration
 
             using (Log.InfoTraceMethodCallFormat("Migration", "Executing migration for [{0}]", _name))
             {
-                ExecuteCore(_applicationScope.Resolve<IKistlServerContext>());
+                ExecuteCore(_applicationScope.Resolve<IZetboxServerContext>());
             }
 
             CreateReport();
@@ -168,7 +168,7 @@ namespace Kistl.API.Migration
 
         protected abstract void CreateReport();
 
-        protected abstract void ExecuteCore(IKistlServerContext ctx);
+        protected abstract void ExecuteCore(IZetboxServerContext ctx);
 
         protected void ReloadStaging(StagingDatabase stage)
         {
@@ -240,7 +240,7 @@ namespace Kistl.API.Migration
         protected void WriteLog(string srcTbl, long srcRows, string dstTbl, long dstRows)
         {
             using (var logScope = _applicationScope.BeginLifetimeScope())
-            using (var logCtx = logScope.Resolve<IKistlContext>())
+            using (var logCtx = logScope.Resolve<IZetboxContext>())
             {
                 var log = logCtx.Create<MigrationLog>();
                 log.Timestamp = DateTime.Now;

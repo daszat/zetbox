@@ -1,27 +1,27 @@
 
-namespace Kistl.Client.Presentables.ModuleEditor
+namespace Zetbox.Client.Presentables.ModuleEditor
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.KistlBase;
-    using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
     public class WorkspaceViewModel : WindowViewModel
     {
-        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        protected readonly Func<ClientIsolationLevel, IKistlContext> ctxFactory;
+        protected readonly Func<ClientIsolationLevel, IZetboxContext> ctxFactory;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Func<ClientIsolationLevel, IKistlContext> ctxFactory)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<ClientIsolationLevel, IZetboxContext> ctxFactory)
             : base(appCtx, ctxFactory(ClientIsolationLevel.MergeServerData), parent) // Use another data context, this workspace does not edit anything
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");

@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections;
@@ -9,11 +9,11 @@ namespace Kistl.API.Server
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
-    using Kistl.API.Common;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.API.Server.PerfCounter;
+    using Zetbox.API.Common;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.API.Server.PerfCounter;
 
     // http://msdn.microsoft.com/en-us/library/bb549414.aspx
     // The Execute method executes queries that return a single value 
@@ -24,12 +24,12 @@ namespace Kistl.API.Server
     // They pass it a MethodCallExpression that represents a LINQ query. 
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
     public abstract class QueryTranslatorProvider<T>
-        : ExpressionTreeTranslator, IKistlQueryProvider
+        : ExpressionTreeTranslator, IZetboxQueryProvider
     {
         protected readonly IMetaDataResolver MetaDataResolver;
         protected readonly Identity Identity;
         protected readonly IQueryable Source;
-        protected readonly IKistlContext Ctx;
+        protected readonly IZetboxContext Ctx;
         protected readonly InterfaceType.Factory IftFactory;
         protected readonly IPerfCounter perfCounter;
 
@@ -51,7 +51,7 @@ namespace Kistl.API.Server
         /// <param name="ctx"></param>
         /// <param name="iftFactory"></param>
         /// <param name="perfCounter"></param>
-        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (source == null) { throw new ArgumentNullException("source"); }
@@ -199,7 +199,7 @@ namespace Kistl.API.Server
             Expression objExp = base.Visit(m.Object);
             MethodInfo newMethod = GetMethodInfo(m.Method);
             ReadOnlyCollection<Expression> args = base.VisitExpressionList(m.Arguments);
-            if (m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextQueryableExtensions)))
+            if (m.IsMethodCallExpression("WithEagerLoading", typeof(ZetboxContextQueryableExtensions)))
             {
                 // Eager Loading is done automatically on the server - ignore and continue
                 return args.Single();
@@ -223,7 +223,7 @@ namespace Kistl.API.Server
         protected override Expression VisitUnary(UnaryExpression u)
         {
             // ignore Converts for IExportable objects
-            if (u.NodeType == ExpressionType.Convert && (typeof(Kistl.App.Base.IExportable).IsAssignableFrom(u.Type) || u.Type.IsIExportableInternal()))
+            if (u.NodeType == ExpressionType.Convert && (typeof(Zetbox.App.Base.IExportable).IsAssignableFrom(u.Type) || u.Type.IsIExportableInternal()))
             {
                 return base.Visit(u.Operand);
             }
@@ -287,9 +287,9 @@ namespace Kistl.API.Server
 
             string memberName = m.Member.Name;
             MemberExpression result;
-            if (type.GetMember(memberName).Length > 0 && type.GetMember(memberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
+            if (type.GetMember(memberName).Length > 0 && type.GetMember(memberName + Zetbox.API.Helper.ImplementationSuffix).Length > 0)
             {
-                result = Expression.PropertyOrField(e, memberName + Kistl.API.Helper.ImplementationSuffix);
+                result = Expression.PropertyOrField(e, memberName + Zetbox.API.Helper.ImplementationSuffix);
             }
             else
             {
@@ -317,9 +317,9 @@ namespace Kistl.API.Server
                 foreach (MemberInfo mi in newExpression.Members)
                 {
                     declaringType = TranslateType(mi.DeclaringType);
-                    if (declaringType.GetMember(mi.Name).Length > 0 && declaringType.GetMember(mi.Name + Kistl.API.Helper.ImplementationSuffix).Length > 0)
+                    if (declaringType.GetMember(mi.Name).Length > 0 && declaringType.GetMember(mi.Name + Zetbox.API.Helper.ImplementationSuffix).Length > 0)
                     {
-                        members.Add(declaringType.GetMember(mi.Name + Kistl.API.Helper.ImplementationSuffix)[0]);
+                        members.Add(declaringType.GetMember(mi.Name + Zetbox.API.Helper.ImplementationSuffix)[0]);
                     }
                     else
                     {
@@ -387,7 +387,7 @@ namespace Kistl.API.Server
                 var eq_identity_lambda = Expression.Lambda(eq_identity, pe_r);
 
                 // o.Projekte_Rights
-                var any_src = Expression.PropertyOrField(pe_o, "SecurityRightsCollection" + Kistl.API.Helper.ImplementationSuffix);
+                var any_src = Expression.PropertyOrField(pe_o, "SecurityRightsCollection" + Zetbox.API.Helper.ImplementationSuffix);
 
                 // o.Projekte_Rights.Any(r => r.Identity == 12)
                 var any = Expression.Call(typeof(System.Linq.Enumerable), "Any", new Type[] { rights_type },

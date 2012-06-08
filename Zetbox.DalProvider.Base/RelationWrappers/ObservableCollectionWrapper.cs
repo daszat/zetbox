@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Base.RelationWrappers
+namespace Zetbox.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
@@ -7,7 +7,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
     using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     public class ObservableASideCollectionWrapper<TA, TB, TEntry, TBaseCollection>
         : ASideCollectionWrapper<TA, TB, TEntry, TBaseCollection>, INotifyCollectionChanged

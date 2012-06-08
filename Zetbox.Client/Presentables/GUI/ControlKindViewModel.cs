@@ -1,22 +1,22 @@
 
-namespace Kistl.Client.Presentables.GUI
+namespace Zetbox.Client.Presentables.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.GUI;
 
     [ViewModelDescriptor]
     public class ControlKindViewModel
         : DataObjectViewModel
     {
-        public new delegate ControlKindViewModel Factory(IKistlContext dataCtx, ViewModel parent, ControlKind obj);
+        public new delegate ControlKindViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ControlKind obj);
 
-        public ControlKindViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, ControlKind obj)
+        public ControlKindViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, ControlKind obj)
             : base(dependencies, dataCtx, parent, obj)
         {
             Kind = obj;

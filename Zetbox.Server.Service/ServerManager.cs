@@ -4,22 +4,22 @@ using System.Linq;
 using System.Text;
 
 using Autofac;
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
+using Zetbox.API;
+using Zetbox.API.Configuration;
+using Zetbox.API.Utils;
 
-namespace Kistl.Server.Service
+namespace Zetbox.Server.Service
 {
     /// <summary>
     /// Manages starting a WCF Server in a new AppDomain which has only the AssemblyLoader initialized.
     /// </summary>
     public class ServerManager
-        : MarshalByRefObject, IKistlAppDomain, IDisposable
+        : MarshalByRefObject, IZetboxAppDomain, IDisposable
     {
         private IContainer container;
-        private IKistlAppDomain wcfServer;
+        private IZetboxAppDomain wcfServer;
 
-        public void Start(KistlConfig config)
+        public void Start(ZetboxConfig config)
         {
             if (container != null) { throw new InvalidOperationException("already started"); }
             
@@ -28,7 +28,7 @@ namespace Kistl.Server.Service
 
             container = Program.CreateMasterContainer(config);
 
-            wcfServer = container.Resolve<IKistlAppDomain>();
+            wcfServer = container.Resolve<IZetboxAppDomain>();
             wcfServer.Start(config);
         }
 

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -7,18 +7,18 @@ namespace Kistl.Client.Presentables
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
+    using Zetbox.API;
     using System.ComponentModel;
-    using Kistl.Client.Presentables.ObjectEditor;
+    using Zetbox.Client.Presentables.ObjectEditor;
 
     public class ErrorDescriptor : ViewModel
     {
-        public new delegate ErrorDescriptor Factory(IKistlContext dataCtx, ViewModel parent, DataObjectViewModel item, IList<string> errors);
+        public new delegate ErrorDescriptor Factory(IZetboxContext dataCtx, ViewModel parent, DataObjectViewModel item, IList<string> errors);
 
         private readonly DataObjectViewModel _item;
         private readonly IList<string> _errors;
 
-        public ErrorDescriptor(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, DataObjectViewModel item, IList<string> errors)
+        public ErrorDescriptor(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, DataObjectViewModel item, IList<string> errors)
             : base(dependencies, dataCtx, parent)
         {
             this._item = item;
@@ -63,9 +63,9 @@ namespace Kistl.Client.Presentables
     public class ErrorListViewModel
         : WindowViewModel
     {
-        public new delegate ErrorListViewModel Factory(IKistlContext dataCtx, WorkspaceViewModel parent);
+        public new delegate ErrorListViewModel Factory(IZetboxContext dataCtx, WorkspaceViewModel parent);
 
-        public ErrorListViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, WorkspaceViewModel parent)
+        public ErrorListViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, WorkspaceViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
             _errors = new ObservableCollection<ErrorDescriptor>();

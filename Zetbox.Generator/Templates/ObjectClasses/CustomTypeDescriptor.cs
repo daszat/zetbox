@@ -1,17 +1,17 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public partial class CustomTypeDescriptor
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ObjectClass cls, string ifName, string implName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IZetboxContext ctx, ObjectClass cls, string ifName, string implName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 

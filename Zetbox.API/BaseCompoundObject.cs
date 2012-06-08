@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -44,11 +44,11 @@ namespace Kistl.API
         }
 
         public virtual bool IsReadonly { get { return ParentObject != null ? ParentObject.IsReadonly : false; } }
-        public virtual Kistl.API.AccessRights CurrentAccessRights
+        public virtual Zetbox.API.AccessRights CurrentAccessRights
         {
             get
             {
-                return ParentObject != null ? ParentObject.CurrentAccessRights : Kistl.API.AccessRights.Full;
+                return ParentObject != null ? ParentObject.CurrentAccessRights : Zetbox.API.AccessRights.Full;
             }
         }
 
@@ -79,7 +79,7 @@ namespace Kistl.API
         /// <param name="sw">Stream to serialize to</param>
         /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
         /// <param name="eagerLoadLists">True if lists should be eager loaded</param>
-        public virtual void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public virtual void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
@@ -91,7 +91,7 @@ namespace Kistl.API
         /// using external means, e.g. by examining the position in the stream.
         /// </summary>
         /// <param name="sr">the stream to read from</param>
-        public virtual IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public virtual IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");

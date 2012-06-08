@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
     using System;
     using System.CodeDom;
@@ -8,13 +8,13 @@ namespace Kistl.Generator.Templates.Properties
     using System.Text;
 
     using Arebis.CodeGeneration;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Generator.Extensions;
 
     public partial class ListProperty
     {
-        //public static void Call(IGenerationHost host, IKistlContext ctx, Serialization.SerializationMembersList serList,
+        //public static void Call(IGenerationHost host, IZetboxContext ctx, Serialization.SerializationMembersList serList,
         //    DataType dataType, string propertyName, Property prop)
         //{
         //    if (host == null) { throw new ArgumentNullException("host"); }

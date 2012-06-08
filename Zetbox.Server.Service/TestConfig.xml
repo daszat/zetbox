@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <Address></Address>
   <ConfigName>Default Configuration</ConfigName>
   <Server StartServer="true">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
-    <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
-    <KistlDataContextType>Kistl.DalProvider.EF.KistlDataContext, Kistl.DalProvider.EF</KistlDataContextType>
-    <ServerObjectHandlerType>Kistl.DalProvider.EF.ServerObjectHandler`1, Kistl.DalProvider.EF</ServerObjectHandlerType>
-    <ServerObjectSetHandlerType>Kistl.DalProvider.EF.ServerObjectSetHandler, Kistl.DalProvider.EF</ServerObjectSetHandlerType>
-    <ServerCollectionHandlerType>Kistl.DalProvider.EF.ServerCollectionHandler`4, Kistl.DalProvider.EF</ServerCollectionHandlerType>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Zetbox_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <DocumentStore>P:\Zetbox\DocumentStore\Server\</DocumentStore>
+    <ZetboxDataContextType>Zetbox.DalProvider.EF.ZetboxDataContext, Zetbox.DalProvider.EF</ZetboxDataContextType>
+    <ServerObjectHandlerType>Zetbox.DalProvider.EF.ServerObjectHandler`1, Zetbox.DalProvider.EF</ServerObjectHandlerType>
+    <ServerObjectSetHandlerType>Zetbox.DalProvider.EF.ServerObjectSetHandler, Zetbox.DalProvider.EF</ServerObjectSetHandlerType>
+    <ServerCollectionHandlerType>Zetbox.DalProvider.EF.ServerCollectionHandler`4, Zetbox.DalProvider.EF</ServerCollectionHandlerType>
   </Server>
   <Client StartClient="false">
-    <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
+    <DocumentStore>P:\Zetbox\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
-    <string>C:\temp\KistlCodeGen\bin\Debug</string>
-    <string>P:\Kistl\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects.Frozen\bin\Debug</string>
+    <string>C:\temp\ZetboxCodeGen\bin\Debug</string>
+    <string>P:\Zetbox\bin\Debug</string>
+    <string>P:\Zetbox\Zetbox.Objects\bin\Debug</string>
+    <string>P:\Zetbox\Zetbox.Objects.Server\bin\Debug</string>
+    <string>P:\Zetbox\Zetbox.Objects.Frozen\bin\Debug</string>
   </SourceFileLocation>
-</KistlConfig>
+</ZetboxConfig>

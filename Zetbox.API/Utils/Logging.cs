@@ -6,20 +6,20 @@ using System.Reflection;
 using System.Text;
 using log4net;
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
     public static class Logging
     {
-        private readonly static ILog _logger = LogManager.GetLogger("Kistl");
-        private readonly static ILog _client = LogManager.GetLogger("Kistl.Client");
-        private readonly static ILog _server = LogManager.GetLogger("Kistl.Server");
-        private readonly static ILog _facade = LogManager.GetLogger("Kistl.Facade");
-        private readonly static ILog _linq = LogManager.GetLogger("Kistl.Linq");
-        private readonly static ILog _linqquery = LogManager.GetLogger("Kistl.Linq.Query");
-        private readonly static ILog _reflection = LogManager.GetLogger("Kistl.Reflection");
-        private readonly static ILog _methods = LogManager.GetLogger("Kistl.PerfCounter.Methods");
-        private readonly static ILog _exporter = LogManager.GetLogger("Kistl.Exporter");
-        private readonly static ILog _mails = LogManager.GetLogger("Kistl.MailNotification");
+        private readonly static ILog _logger = LogManager.GetLogger("Zetbox");
+        private readonly static ILog _client = LogManager.GetLogger("Zetbox.Client");
+        private readonly static ILog _server = LogManager.GetLogger("Zetbox.Server");
+        private readonly static ILog _facade = LogManager.GetLogger("Zetbox.Facade");
+        private readonly static ILog _linq = LogManager.GetLogger("Zetbox.Linq");
+        private readonly static ILog _linqquery = LogManager.GetLogger("Zetbox.Linq.Query");
+        private readonly static ILog _reflection = LogManager.GetLogger("Zetbox.Reflection");
+        private readonly static ILog _methods = LogManager.GetLogger("Zetbox.PerfCounter.Methods");
+        private readonly static ILog _exporter = LogManager.GetLogger("Zetbox.Exporter");
+        private readonly static ILog _mails = LogManager.GetLogger("Zetbox.MailNotification");
 
         public static ILog Log
         {

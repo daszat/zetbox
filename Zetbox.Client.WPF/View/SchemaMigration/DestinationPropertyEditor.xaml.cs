@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables.SchemaMigration;
-using Kistl.Client.WPF.CustomControls;
-using Kistl.Client.WPF.View.KistlBase;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables.SchemaMigration;
+using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.View.ZetboxBase;
 
-namespace Kistl.Client.WPF.View.SchemaMigration
+namespace Zetbox.Client.WPF.View.SchemaMigration
 {
     /// <summary>
     /// Interaction logic for DestinationPropertyEditor.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class DestinationPropertyEditor : PropertyEditor, IHasViewModel<DestinationPropertyViewModel>
     {
         public DestinationPropertyEditor()

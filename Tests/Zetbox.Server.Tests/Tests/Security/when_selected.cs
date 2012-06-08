@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Autofac;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Projekte;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Projekte;
 
-namespace Kistl.Server.Tests.Security
+namespace Zetbox.Server.Tests.Security
 {
     [TestFixture]
     public class when_selected : SecurityDataFixture

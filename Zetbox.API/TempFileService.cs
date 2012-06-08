@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
+using Zetbox.API.Configuration;
+using Zetbox.API.Utils;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     public interface ITempFileService
     {

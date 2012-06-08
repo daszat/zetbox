@@ -1,13 +1,13 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public class PropertyDescriptorNHibernateImpl<TComponent, TProperty>
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
@@ -31,10 +31,10 @@ namespace Kistl.DalProvider.NHibernate
 
         public override string[] GetValidationErrors(object component)
         {
-            IReadOnlyKistlContext ctx;
+            IReadOnlyZetboxContext ctx;
             if (_lazyCtx != null && _propertyGuid != null && (ctx = _lazyCtx()) != null)
             {
-                var property = ctx.FindPersistenceObject<Kistl.App.Base.Property>(_propertyGuid.Value);
+                var property = ctx.FindPersistenceObject<Zetbox.App.Base.Property>(_propertyGuid.Value);
                 var self = (TComponent)component;
                 var val = getter(self);
                 return property

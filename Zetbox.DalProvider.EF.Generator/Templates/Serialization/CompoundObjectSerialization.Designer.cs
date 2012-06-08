@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.Serialization
+namespace Zetbox.DalProvider.Ef.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst")]
-    public partial class CompoundObjectSerialization : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst")]
+    public partial class CompoundObjectSerialization : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
-		protected Kistl.Generator.Templates.Serialization.SerializerDirection direction;
+		protected IZetboxContext ctx;
+		protected Zetbox.Generator.Templates.Serialization.SerializerDirection direction;
 		protected string streamName;
 		protected string xmlnamespace;
 		protected string xmlname;
@@ -23,14 +23,14 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Serialization
 		protected string backingStoreName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName, string backingStoreType, string backingStoreName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName, string backingStoreType, string backingStoreName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Serialization.CompoundObjectSerialization", ctx, direction, streamName, xmlnamespace, xmlname, memberType, memberName, backingStoreType, backingStoreName);
         }
 
-        public CompoundObjectSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName, string backingStoreType, string backingStoreName)
+        public CompoundObjectSerialization(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName, string backingStoreType, string backingStoreName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -47,41 +47,41 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 22 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
-if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.ToStream)
+#line 22 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.ToStream)
     {
 
-#line 25 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 25 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\r\n");
-#line 27 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 27 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
-    else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.FromStream)
+    else if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.FromStream)
     {
 
-#line 31 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 31 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                // use backing store to avoid notifications\r\n");
 this.WriteObjects("                ",  backingStoreType , " tmp = ",  streamName , ".ReadCompoundObject<",  backingStoreType , ">();\r\n");
 this.WriteObjects("                this.",  backingStoreName , " = tmp ?? new ",  backingStoreType , "(true, this, \"",  memberName , "\");\r\n");
 this.WriteObjects("                this.",  backingStoreName , ".AttachToObject(this, \"",  memberName , "\");\r\n");
 this.WriteObjects("            }\r\n");
-#line 38 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 38 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
-    else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.Export)
+    else if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.Export)
     {
 
-#line 42 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 42 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 44 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 44 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
-    else if (direction == Kistl.Generator.Templates.Serialization.SerializerDirection.MergeImport)
+    else if (direction == Zetbox.Generator.Templates.Serialization.SerializerDirection.MergeImport)
     {
 
-#line 48 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 48 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                XmlStreamer.FromStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
 this.WriteObjects("                break;\r\n");
-#line 52 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
+#line 52 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
 }
     else
     {

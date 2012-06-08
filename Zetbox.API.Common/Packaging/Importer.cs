@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Packaging
+namespace Zetbox.App.Packaging
 {
     using System;
     using System.Collections.Generic;
@@ -10,16 +10,16 @@ namespace Kistl.App.Packaging
     using System.Xml;
     using System.Xml.XPath;
 
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     public class Importer
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Importer");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Importer");
 
         #region Public Methods
-        public static void Deploy(IKistlContext ctx, params string[] filenames)
+        public static void Deploy(IZetboxContext ctx, params string[] filenames)
         {
             var packages = new List<FileSystemPackageProvider>();
             try
@@ -39,7 +39,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void Deploy(IKistlContext ctx, params IPackageProvider[] providers)
+        public static void Deploy(IZetboxContext ctx, params IPackageProvider[] providers)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (providers == null) { throw new ArgumentNullException("providers"); }
@@ -50,7 +50,7 @@ namespace Kistl.App.Packaging
                 try
                 {
                     // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
-                    var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+                    var testObj = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().FirstOrDefault();
                     Debug.WriteLine(testObj != null ? testObj.ToString() : String.Empty);
                 }
                 catch
@@ -66,12 +66,12 @@ namespace Kistl.App.Packaging
                 foreach (var name in names)
                 {
                     Log.InfoFormat("Prefetching objects for {0}", name);
-                    var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Name == name);
+                    var module = ctx.GetQuery<Zetbox.App.Base.Module>().FirstOrDefault(m => m.Name == name);
                     if (module != null)
                     {
                         foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
                         {
-                            currentObjects[((Kistl.App.Base.IExportable)obj).ExportGuid] = obj;
+                            currentObjects[((Zetbox.App.Base.IExportable)obj).ExportGuid] = obj;
                         }
                     }
                     else
@@ -88,7 +88,7 @@ namespace Kistl.App.Packaging
                 {
                     var reader = p.Reader;
                     // Find Root Element
-                    while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "KistlPackaging" && reader.NamespaceURI != "http://dasz.at/Kistl") ;
+                    while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "ZetboxPackaging" && reader.NamespaceURI != "http://dasz.at/Zetbox") ;
 
                     // Read content
                     while (reader.Read())
@@ -121,7 +121,7 @@ namespace Kistl.App.Packaging
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="filenames"></param>
-        public static void LoadFromXml(IKistlContext ctx, params string[] filenames)
+        public static void LoadFromXml(IZetboxContext ctx, params string[] filenames)
         {
             var packages = new List<FileSystemPackageProvider>();
             try
@@ -141,7 +141,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void LoadFromXml(IKistlContext ctx, Stream stream, string streamDescription)
+        public static void LoadFromXml(IZetboxContext ctx, Stream stream, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Read, streamDescription))
             {
@@ -154,7 +154,7 @@ namespace Kistl.App.Packaging
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="providers">a stream containing a database.xml</param>
-        public static void LoadFromXml(IKistlContext ctx, params IPackageProvider[] providers)
+        public static void LoadFromXml(IZetboxContext ctx, params IPackageProvider[] providers)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (providers == null) { throw new ArgumentNullException("providers"); }
@@ -168,7 +168,7 @@ namespace Kistl.App.Packaging
                     {
                         // the entity framework needs to be initialised by executing any "plain" query first
                         // TODO: repair the ef provider so it doesn't need this special casing.
-                        var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+                        var testObj = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().FirstOrDefault();
                         Log.DebugFormat("query result: [{0}]", testObj);
                     }
                 }
@@ -191,7 +191,7 @@ namespace Kistl.App.Packaging
                         var reader = p.Reader;
 
                         // Find Root Element
-                        while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "KistlPackaging" && reader.NamespaceURI != "http://dasz.at/Kistl") ;
+                        while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "ZetboxPackaging" && reader.NamespaceURI != "http://dasz.at/Zetbox") ;
 
                         // Read content
                         while (reader.Read())
@@ -215,7 +215,7 @@ namespace Kistl.App.Packaging
         #endregion
 
         #region Implementation
-        private static void PreFetchObjects(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, Dictionary<Type, List<Guid>> guids)
+        private static void PreFetchObjects(IZetboxContext ctx, Dictionary<Guid, IPersistenceObject> objects, Dictionary<Type, List<Guid>> guids)
         {
             Log.Info("Prefetching Objects");
             foreach (Type t in guids.Keys)
@@ -234,7 +234,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        private static Dictionary<Type, List<Guid>> LoadGuids(IKistlContext ctx, IPackageProvider[] providers)
+        private static Dictionary<Type, List<Guid>> LoadGuids(IZetboxContext ctx, IPackageProvider[] providers)
         {
             Log.Info("Loading Export Guids");
 
@@ -278,9 +278,9 @@ namespace Kistl.App.Packaging
             IList<string> namespaces = new List<string>();
             XPathDocument doc = new XPathDocument(s.Reader);
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(s.Reader.NameTable);
-            nsmgr.AddNamespace("KistlBase", "Kistl.App.Base");
+            nsmgr.AddNamespace("ZetboxBase", "Zetbox.App.Base");
             XPathNavigator nav = doc.CreateNavigator();
-            XPathNodeIterator it = nav.Select("//KistlBase:Module/KistlBase:Name", nsmgr);
+            XPathNodeIterator it = nav.Select("//ZetboxBase:Module/ZetboxBase:Name", nsmgr);
 
             while (it.MoveNext())
             {
@@ -290,7 +290,7 @@ namespace Kistl.App.Packaging
             return namespaces;
         }
 
-        private static IPersistenceObject ImportElement(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, IPackageProvider s)
+        private static IPersistenceObject ImportElement(IZetboxContext ctx, Dictionary<Guid, IPersistenceObject> objects, IPackageProvider s)
         {
             Guid exportGuid = s.Reader.GetAttribute("ExportGuid").TryParseGuidValue();
             if (exportGuid != Guid.Empty)
@@ -345,14 +345,14 @@ namespace Kistl.App.Packaging
         private static string MigrateTypeNameMapping(string ifTypeName)
         {
             switch(ifTypeName) {
-                case "Kistl.App.Base.ObjectClass_implements_Interface_RelationEntry":
-                    return "Kistl.App.Base.DataType_implements_Interface_RelationEntry";
+                case "Zetbox.App.Base.ObjectClass_implements_Interface_RelationEntry":
+                    return "Zetbox.App.Base.DataType_implements_Interface_RelationEntry";
                 default:
                     return ifTypeName;
             }
         }
 
-        private static IPersistenceObject FindObject(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, Guid exportGuid, InterfaceType ifType)
+        private static IPersistenceObject FindObject(IZetboxContext ctx, Dictionary<Guid, IPersistenceObject> objects, Guid exportGuid, InterfaceType ifType)
         {
             if (!objects.ContainsKey(exportGuid))
             {
@@ -363,7 +363,7 @@ namespace Kistl.App.Packaging
                 }
                 IPersistenceObject obj = ctx.Internals().CreateUnattached(ifType);
                 objects[exportGuid] = obj;
-                ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
+                ((Zetbox.App.Base.IExportable)obj).ExportGuid = exportGuid;
                 ctx.Internals().AttachAsNew(obj);
                 return obj;
             }

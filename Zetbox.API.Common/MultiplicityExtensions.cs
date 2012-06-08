@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.App.Base;
+using Zetbox.App.Base;
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
     public static class MultiplicityExtensions
     {

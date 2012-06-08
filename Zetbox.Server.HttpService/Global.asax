@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Kistl.Server.HttpService.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Zetbox.Server.HttpService.Global" Language="C#" %>

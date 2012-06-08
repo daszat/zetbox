@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.API.Client {
+namespace Zetbox.API.Client {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.API.Client {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.API.Client.IToolkitResources", typeof(IToolkitResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.API.Client.IToolkitResources", typeof(IToolkitResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,7 +70,7 @@ namespace Kistl.API.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ZBox is busy.
+        ///   Looks up a localized string similar to Zetbox is busy.
         /// </summary>
         public static string WaitDialog_Message {
             get {

@@ -27,7 +27,7 @@ impl.IsIndexed = false;
 impl.Constraints.Add(ctx.Create<NotNullableConstraint>());
 
 
-# Kistl.Objects Interface
+# Zetbox.Objects Interface
 
 	interface ObjectClass {
 		ICollection<Interface> ImplementsInterfaces;
@@ -91,7 +91,7 @@ Interface's
 		[EdmRelationshipNavigationPropertyAttribute("Model",
 			"FK_ObjectClass_ImplementsInterfacesCollectionEntry_ObjectClass_fk_Parent",
 			"A_ObjectClass")]
-		public Kistl.App.Base.ObjectClassImpl ParentImpl { get; set; }
+		public Zetbox.App.Base.ObjectClassImpl ParentImpl { get; set; }
 
 	}
 
@@ -300,7 +300,7 @@ made to enable this.
 To create the reverse `ImplementedBy` property on the `Interface`, another 
 ObjectReferenceProperty with a Relation to the existing ORP has to be created.
 
-## Kistl.Objects Interface
+## Zetbox.Objects Interface
 
 Add a `ICollection<ObjectClass> ImplementedBy { get; }` property to the `Interface` class.
 
@@ -350,5 +350,5 @@ reverse relationship to work.
 # Hidden Details
 
 For details to the various wrapping classes and implementations of properties, 
-please look directly into the generated code or the Kistl.API.Server.
+please look directly into the generated code or the Zetbox.API.Server.
 

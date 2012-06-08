@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.ValueViewModels
+namespace Zetbox.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -9,13 +9,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
     using System.Linq.Dynamic;
     using System.Linq.Expressions;
 
@@ -23,10 +23,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class ObjectReferenceViewModel
         : ValueViewModel<DataObjectViewModel, IDataObject>
     {
-        public new delegate ObjectReferenceViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate ObjectReferenceViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public ObjectReferenceViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             IValueModel mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
@@ -214,7 +214,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         () => OpenReference(),
                         () => CanOpen,
                         null);
-                    _openReferenceCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.fileopen_png.Find(FrozenContext);
+                    _openReferenceCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
                 }
                 return _openReferenceCommand;
             }
@@ -285,7 +285,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         CreateNewItemAndSetValue,
                         () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _createNewItemAndSetValueCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.new_png.Find(FrozenContext);
+                    _createNewItemAndSetValueCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
                 }
                 return _createNewItemAndSetValueCommand;
             }
@@ -332,7 +332,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         () => SelectValue(),
                         () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly,
                         null);
-                    _SelectValueCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.search_png.Find(FrozenContext);
+                    _SelectValueCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.search_png.Find(FrozenContext);
                 }
                 return _SelectValueCommand;
             }
@@ -453,7 +453,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                             SelectValue,
                             null,
                             null);
-                        cmdMdl.RequestedKind = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_CommandLinkKind.Find(FrozenContext);
+                        cmdMdl.RequestedKind = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_CommandLinkKind.Find(FrozenContext);
                         mdlList.Add(cmdMdl);
                     }
                     _possibleValues = new ObservableCollection<ViewModel>(mdlList);

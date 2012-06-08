@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
+using Zetbox.API;
+using Zetbox.API.Client;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.Client.Tests.CompoundObjects
+namespace Zetbox.DalProvider.Client.Tests.CompoundObjects
 {
     [TestFixture]
-    [Ignore("Needs mocked IKistlService and IKistlServiceStreams")]
+    [Ignore("Needs mocked IZetboxService and IZetboxServiceStreams")]
     public class when_changing
-        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing
+        : Zetbox.API.AbstractConsumerTests.CompoundObjects.when_changing
     {
     }
 }

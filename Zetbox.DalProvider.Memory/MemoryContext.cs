@@ -1,21 +1,21 @@
 
-namespace Kistl.DalProvider.Memory
+namespace Zetbox.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     public interface IMemoryActionsManager : ICustomActionsManager { }
 
     public class MemoryContext
-        : BaseMemoryContext, IReadOnlyKistlContext
+        : BaseMemoryContext, IReadOnlyZetboxContext
     {
-        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
+        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.DalProvider.Memory");
 
         // private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
         private readonly Func<IFrozenContext> _lazyCtx;
@@ -70,12 +70,12 @@ namespace Kistl.DalProvider.Memory
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             // TODO: replace with generated switch factory
-            return GetImplementationType(Type.GetType(t.Type.FullName + "Memory" + Kistl.API.Helper.ImplementationSuffix + "," + MemoryProvider.GeneratedAssemblyName));
+            return GetImplementationType(Type.GetType(t.Type.FullName + "Memory" + Zetbox.API.Helper.ImplementationSuffix + "," + MemoryProvider.GeneratedAssemblyName));
         }
 
         public override InterfaceType GetInterfaceType(string typeName)
         {
-            return IftFactory(Type.GetType(typeName + "," + typeof(Kistl.App.Base.ObjectClass).Assembly.FullName, true));
+            return IftFactory(Type.GetType(typeName + "," + typeof(Zetbox.App.Base.ObjectClass).Assembly.FullName, true));
         }
 
         public override ImplementationType GetImplementationType(Type t)
@@ -84,7 +84,7 @@ namespace Kistl.DalProvider.Memory
         }
 
         /// <summary>Only implemented for the parent==null case.</summary>
-        IList<T> IReadOnlyKistlContext.FetchRelation<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
+        IList<T> IReadOnlyZetboxContext.FetchRelation<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
         {
             if (parent == null)
             {

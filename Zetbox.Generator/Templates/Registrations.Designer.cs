@@ -1,26 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Kistl.API;
+using Zetbox.API;
 
 
-namespace Kistl.Generator.Templates
+namespace Zetbox.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Registrations.cst")]
-    public partial class Registrations : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Registrations.cst")]
+    public partial class Registrations : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected string shortName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string shortName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Registrations", ctx, shortName);
         }
 
-        public Registrations(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
+        public Registrations(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string shortName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -30,7 +30,7 @@ namespace Kistl.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\Kistl\Kistl.Generator\Templates\Registrations.cst"
+#line 11 "P:\Zetbox\Zetbox.Generator\Templates\Registrations.cst"
 this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<",  shortName , "ImplementationTypeChecker>(\r\n");
 this.WriteObjects("                    c => new ",  shortName , "ImplementationTypeChecker(\r\n");

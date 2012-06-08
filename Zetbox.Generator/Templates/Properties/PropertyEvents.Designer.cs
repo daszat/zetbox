@@ -1,13 +1,13 @@
 using System;
-using Kistl.API;
+using Zetbox.API;
 
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst")]
-    public partial class PropertyEvents : Kistl.Generator.MemberTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst")]
+    public partial class PropertyEvents : Zetbox.Generator.MemberTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected string eventName;
 		protected string propType;
 		protected string objType;
@@ -15,14 +15,14 @@ namespace Kistl.Generator.Templates.Properties
 		protected bool hasSetters;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string eventName, string propType, string objType, bool hasGetters, bool hasSetters)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string eventName, string propType, string objType, bool hasGetters, bool hasSetters)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Properties.PropertyEvents", ctx, eventName, propType, objType, hasGetters, hasSetters);
         }
 
-        public PropertyEvents(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string eventName, string propType, string objType, bool hasGetters, bool hasSetters)
+        public PropertyEvents(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string eventName, string propType, string objType, bool hasGetters, bool hasSetters)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -36,18 +36,18 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 13 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
+#line 13 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasGetters) { 
-#line 14 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
+#line 14 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
-#line 15 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
+#line 15 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
-#line 16 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
+#line 16 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasSetters) { 
-#line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
+#line 17 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
 this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\r\n");
-#line 19 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
+#line 19 "P:\Zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 
         }

@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     using System;
     using System.Collections;
@@ -8,31 +8,31 @@ namespace Kistl.Server
     using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.ServiceModel;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.API.Server.PerfCounter;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.API.Server.PerfCounter;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     /// <summary>
     /// Implements the main service interface.
     /// </summary>
-    public class KistlService
-        : IKistlService, IDisposable
+    public class ZetboxService
+        : IZetboxService, IDisposable
     {
         private readonly IServerObjectHandlerFactory _sohFactory;
-        private readonly Func<IKistlContext> _ctxFactory;
+        private readonly Func<IZetboxContext> _ctxFactory;
         private readonly InterfaceType.Factory _iftFactory;
         private readonly IPerfCounter _perfCounter;
-        private readonly KistlStreamReader.Factory _readerFactory;
-        private readonly KistlStreamWriter.Factory _writerFactory;
+        private readonly ZetboxStreamReader.Factory _readerFactory;
+        private readonly ZetboxStreamWriter.Factory _writerFactory;
 
-        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, InterfaceType.Factory iftFactory, IPerfCounter perfCounter, KistlStreamReader.Factory readerFactory, KistlStreamWriter.Factory writerFactory)
+        public ZetboxService(IServerObjectHandlerFactory sohFactory, Func<IZetboxContext> ctxFactory, InterfaceType.Factory iftFactory, IPerfCounter perfCounter, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory)
         {
             if (readerFactory == null) throw new ArgumentNullException("readerFactory");
             if (writerFactory == null) throw new ArgumentNullException("writerFactory");
 
-            Logging.Facade.Debug("Creating new KistlService instance");
+            Logging.Facade.Debug("Creating new ZetboxService instance");
 
             _sohFactory = sohFactory;
             _ctxFactory = ctxFactory;
@@ -50,7 +50,7 @@ namespace Kistl.Server
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="msgArray">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
@@ -68,7 +68,7 @@ namespace Kistl.Server
 
                     msg.Seek(0, SeekOrigin.Begin);
 
-                    using (IKistlContext ctx = _ctxFactory())
+                    using (IZetboxContext ctx = _ctxFactory())
                     {
                         var objects = ReadObjects(msg, ctx);
 
@@ -98,7 +98,7 @@ namespace Kistl.Server
         /// <summary>
         /// Returns a list of objects from the datastore, matching the specified filters.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="type">Type of Objects</param>
         /// <param name="maxListCount">Max. ammount of objects</param>
         /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
@@ -118,7 +118,7 @@ namespace Kistl.Server
                     var ticks = _perfCounter.IncrementGetList(ifType);
                     try
                     {
-                        using (IKistlContext ctx = _ctxFactory())
+                        using (IZetboxContext ctx = _ctxFactory())
                         {
                             var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
                             IEnumerable<IStreamable> lst = _sohFactory
@@ -145,13 +145,13 @@ namespace Kistl.Server
         }
 
         /// <summary>
-        /// Sends a list of auxiliary objects to the specified KistlStreamWriter while avoiding to send objects twice.
+        /// Sends a list of auxiliary objects to the specified ZetboxStreamWriter while avoiding to send objects twice.
         /// </summary>
         /// <param name="sw">the stream to write to</param>
         /// <param name="auxObjects">a set of objects to send; will not be modified by this call</param>
         /// <param name="sentObjects">a set objects already sent; receives all newly sent objects too</param>
         /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
-        private static void SendAuxiliaryObjects(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
+        private static void SendAuxiliaryObjects(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
         {
             // clone auxObjects to avoid modification
             auxObjects = new HashSet<IStreamable>(auxObjects);
@@ -209,7 +209,7 @@ namespace Kistl.Server
             return result;
         }
 
-        private List<IPersistenceObject> ReadObjects(Stream msg, IKistlContext ctx)
+        private List<IPersistenceObject> ReadObjects(Stream msg, IZetboxContext ctx)
         {
             var objects = new List<IPersistenceObject>();
             var sr = _readerFactory(new BinaryReader(msg));
@@ -228,7 +228,7 @@ namespace Kistl.Server
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="type">Type of Object</param>
         /// <param name="ID">Object id</param>
         /// <param name="property">Property</param>
@@ -276,7 +276,7 @@ namespace Kistl.Server
         /// <paramref name="relId"/> which are owned by the object with the 
         /// ID <paramref name="parentObjID"/> in the role <paramref name="serializableRole"/>.
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="relId">the requested Relation</param>
         /// <param name="serializableRole">the parent role (1 == A, 2 == B)</param>
         /// <param name="parentObjID">the ID of the parent object</param>
@@ -289,7 +289,7 @@ namespace Kistl.Server
                 {
                     DebugLogIdentity();
 
-                    using (IKistlContext ctx = _ctxFactory())
+                    using (IZetboxContext ctx = _ctxFactory())
                     {
                         var endRole = (RelationEndRole)serializableRole;
                         // TODO: Use FrozenContext
@@ -329,7 +329,7 @@ namespace Kistl.Server
         /// <summary>
         /// Gets the content stream of the given Document instance ID
         /// </summary>
-        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="ID">ID of an valid Document instance</param>
         /// <returns>Stream containing the Document content</returns>
         public Stream GetBlobStream(Guid version, int ID)
@@ -340,7 +340,7 @@ namespace Kistl.Server
                 {
                     DebugLogIdentity();
 
-                    using (IKistlContext ctx = _ctxFactory())
+                    using (IZetboxContext ctx = _ctxFactory())
                     {
                         return _sohFactory
                             .GetServerDocumentHandler()
@@ -371,7 +371,7 @@ namespace Kistl.Server
                 {
                     DebugLogIdentity();
 
-                    using (IKistlContext ctx = _ctxFactory())
+                    using (IZetboxContext ctx = _ctxFactory())
                     {
                         var result = _sohFactory
                             .GetServerDocumentHandler()
@@ -413,7 +413,7 @@ namespace Kistl.Server
                 {
                     DebugLogIdentity();
 
-                    using (IKistlContext ctx = _ctxFactory())
+                    using (IZetboxContext ctx = _ctxFactory())
                     {
                         var parameter = new MemoryStream(parameterArray);
                         parameter.Seek(0, SeekOrigin.Begin);
@@ -466,7 +466,7 @@ namespace Kistl.Server
                         else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().Any(t => t.IsIStreamable()))
                         {
                             Logging.Facade.Debug("Serializing method result as IEnumerable<IStreamable>");
-                            var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
+                            var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Zetbox.API.Helper.MAXLISTCOUNT);
                             return SendObjects(lst, true).ToArray();
                         }
                         else if (result != null)
@@ -496,7 +496,7 @@ namespace Kistl.Server
 
         public void Dispose()
         {
-            Logging.Facade.Debug("Disposing KistlService instance");
+            Logging.Facade.Debug("Disposing ZetboxService instance");
         }
 
         #endregion

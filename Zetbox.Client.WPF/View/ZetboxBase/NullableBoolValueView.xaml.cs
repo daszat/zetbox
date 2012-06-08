@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.WPF.CustomControls;
-using Kistl.Client.WPF.View.KistlBase;
+using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.View.ZetboxBase;
 
-namespace Kistl.Client.WPF.View
+namespace Zetbox.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for NullableBoolValueView.xaml

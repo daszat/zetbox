@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -7,22 +7,22 @@ namespace Kistl.Client.Presentables
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class ParameterInputTaskViewModel
         : WindowViewModel, IValueInputTaskViewModel
     {
-        public new delegate ParameterInputTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent, Method method, Action<object[]> callback);
+        public new delegate ParameterInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Method method, Action<object[]> callback);
 
         public ParameterInputTaskViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Method method, Action<object[]> callback)
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Method method, Action<object[]> callback)
             : base(appCtx, dataCtx,  parent)
         {
             if (callback == null) throw new ArgumentNullException("callback");

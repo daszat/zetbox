@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API.Tests.Skeletons;
-using Kistl.App.Test;
+using Zetbox.API.Tests.Skeletons;
+using Zetbox.App.Test;
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.Client.Tests
+namespace Zetbox.DalProvider.Client.Tests
 {
-    // TODO: cannot reference Kistl.Objects.ClientImpl, but must!
+    // TODO: cannot reference Zetbox.Objects.ClientImpl, but must!
     //[TestFixture]
     //public class BaseClientCollectionEntryTests : CollectionEntryTests<TestCustomObject_PhoneNumbersOther_CollectionEntryImpl>
     //{

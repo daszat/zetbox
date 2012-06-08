@@ -1,26 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Kistl.API;
+using Zetbox.API;
 
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\TypeChecker.cst")]
-    public partial class TypeChecker : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\TypeChecker.cst")]
+    public partial class TypeChecker : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected string shortName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string shortName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("TypeChecker", ctx, shortName);
         }
 
-        public TypeChecker(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
+        public TypeChecker(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string shortName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -30,10 +30,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\TypeChecker.cst"
+#line 11 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\TypeChecker.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\r\n");
-this.WriteObjects("        : Kistl.API.BaseTypeChecker, I",  shortName , "ImplementationTypeChecker\r\n");
+this.WriteObjects("        : Zetbox.API.BaseTypeChecker, I",  shortName , "ImplementationTypeChecker\r\n");
 this.WriteObjects("    {\r\n");
 this.WriteObjects("        public ",  shortName , "ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)\r\n");
 this.WriteObjects("            : base(implTypeCheckersFactory)\r\n");

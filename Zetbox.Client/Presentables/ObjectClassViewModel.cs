@@ -1,24 +1,24 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.KistlBase;
-    using Kistl.Client.Models;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.Client.Models;
 
     public class ObjectClassViewModel : DataTypeViewModel
     {
-        public new delegate ObjectClassViewModel Factory(IKistlContext dataCtx, ViewModel parent, ObjectClass cls);
+        public new delegate ObjectClassViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass cls);
 
         public ObjectClassViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             ObjectClass cls)
             : base(appCtx, dataCtx, parent, cls)
         {
@@ -32,7 +32,7 @@ namespace Kistl.Client.Presentables
 
         private ObjectClass _class;
 
-        public override Kistl.App.GUI.Icon Icon
+        public override Zetbox.App.GUI.Icon Icon
         {
             get { return _class.DefaultIcon; }
         }

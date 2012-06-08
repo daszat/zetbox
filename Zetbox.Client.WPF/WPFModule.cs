@@ -1,14 +1,14 @@
 
-namespace Kistl.Client.WPF
+namespace Zetbox.Client.WPF
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.Client.Presentables;
 
     public class WPFModule : Module
     {

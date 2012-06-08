@@ -1,14 +1,14 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public class UpdateParentTemplateParams
     {
@@ -18,7 +18,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
     public partial class UpdateParentTemplate
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx,
+        public static void Call(IGenerationHost host, IZetboxContext ctx,
             DataType dataType)
         {
             if (host == null) { throw new ArgumentNullException("host"); }

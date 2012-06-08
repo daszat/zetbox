@@ -5,19 +5,19 @@ using System.Text;
 
 using Autofac;
 
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Projekte;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Projekte;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Kistl.Server.Tests
+namespace Zetbox.Server.Tests
 {
     [TestFixture]
     public class RelationTests : AbstractServerTestFixture
     {
-        private IKistlContext ctx;
+        private IZetboxContext ctx;
 
         public override void SetUp()
         {
@@ -60,11 +60,11 @@ namespace Kistl.Server.Tests
         [Test]
         public void Relation_1_n_Set_1()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
             Assert.That(prj.Tasks, Is.Not.Null);
             Assert.That(prj.Tasks.Count, Is.EqualTo(0));
 
-            var task = ctx.Create<Kistl.App.Projekte.Task>();
+            var task = ctx.Create<Zetbox.App.Projekte.Task>();
             Assert.That(task.Projekt, Is.Null);
 
             task.Projekt = prj;
@@ -77,11 +77,11 @@ namespace Kistl.Server.Tests
         [Test]
         public void Relation_1_n_Set_n()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
             Assert.That(prj.Tasks, Is.Not.Null);
             Assert.That(prj.Tasks.Count, Is.EqualTo(0));
 
-            var task = ctx.Create<Kistl.App.Projekte.Task>();
+            var task = ctx.Create<Zetbox.App.Projekte.Task>();
             Assert.That(task.Projekt, Is.Null);
 
             prj.Tasks.Add(task);
@@ -96,11 +96,11 @@ namespace Kistl.Server.Tests
         [Test]
         public void Relation_n_m_Set_n()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
             Assert.That(prj.Mitarbeiter, Is.Not.Null);
             Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
 
-            var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
             Assert.That(ma.Projekte, Is.Not.Null);
             Assert.That(ma.Projekte.Count, Is.EqualTo(0));
 
@@ -115,11 +115,11 @@ namespace Kistl.Server.Tests
         [Test]
         public void Relation_n_m_Set_m()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
             Assert.That(prj.Mitarbeiter, Is.Not.Null);
             Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
 
-            var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
             Assert.That(ma.Projekte, Is.Not.Null);
             Assert.That(ma.Projekte.Count, Is.EqualTo(0));
 
@@ -136,12 +136,12 @@ namespace Kistl.Server.Tests
         //[Test]
         //public void Relation_1_1_Set_Left()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
-        //        var rel = ctx.Create<Kistl.App.Base.Relation>();
+        //        var rel = ctx.Create<Zetbox.App.Base.Relation>();
         //        Assert.That(rel.LeftPart, Is.Null);
 
-        //        var prop = ctx.Create<Kistl.App.Base.ObjectReferenceProperty>();
+        //        var prop = ctx.Create<Zetbox.App.Base.ObjectReferenceProperty>();
         //        Assert.That(prop.LeftOf, Is.Null);
 
         //        rel.LeftPart = prop;
@@ -154,12 +154,12 @@ namespace Kistl.Server.Tests
         //[Test]
         //public void Relation_1_1_Set_Right()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
-        //        var rel = ctx.Create<Kistl.App.Base.Relation>();
+        //        var rel = ctx.Create<Zetbox.App.Base.Relation>();
         //        Assert.That(rel.LeftPart, Is.Null);
 
-        //        var prop = ctx.Create<Kistl.App.Base.ObjectReferenceProperty>();
+        //        var prop = ctx.Create<Zetbox.App.Base.ObjectReferenceProperty>();
         //        Assert.That(prop.LeftOf, Is.Null);
 
         //        prop.LeftOf = rel;
@@ -178,9 +178,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void Change_Relation_1_n_Set_1()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var task = ctx.Create<Kistl.App.Projekte.Task>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var prj2 = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var task = ctx.Create<Zetbox.App.Projekte.Task>();
 
             task.Projekt = prj;
 
@@ -199,9 +199,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void Change_Relation_1_n_Set_n_With_Remove()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var task = ctx.Create<Kistl.App.Projekte.Task>();
-            var task2 = ctx.Create<Kistl.App.Projekte.Task>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var task = ctx.Create<Zetbox.App.Projekte.Task>();
+            var task2 = ctx.Create<Zetbox.App.Projekte.Task>();
 
             prj.Tasks.Add(task);
 
@@ -221,9 +221,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void Change_Relation_1_n_Set_n_With_Clear()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var task = ctx.Create<Kistl.App.Projekte.Task>();
-            var task2 = ctx.Create<Kistl.App.Projekte.Task>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var task = ctx.Create<Zetbox.App.Projekte.Task>();
+            var task2 = ctx.Create<Zetbox.App.Projekte.Task>();
 
             prj.Tasks.Add(task);
 
@@ -242,9 +242,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void Change_Relation_1_n_Set_n_By_Index()
         {
-            var m = ctx.Create<Kistl.App.Base.Method>();
-            var p = ctx.Create<Kistl.App.Base.StringParameter>();
-            var p2 = ctx.Create<Kistl.App.Base.BoolParameter>();
+            var m = ctx.Create<Zetbox.App.Base.Method>();
+            var p = ctx.Create<Zetbox.App.Base.StringParameter>();
+            var p2 = ctx.Create<Zetbox.App.Base.BoolParameter>();
 
             m.Parameter.Add(p);
 
@@ -265,9 +265,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void Change_Relation_n_m_Set_n_With_Remove()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-            var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
+            var ma2 = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
             prj.Mitarbeiter.Add(ma);
 
@@ -289,9 +289,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void Change_Relation_n_m_Set_n_With_Clear()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-            var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
+            var ma2 = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
             prj.Mitarbeiter.Add(ma);
 
@@ -314,9 +314,9 @@ namespace Kistl.Server.Tests
         [Ignore("Case 2629: Using an index setter is currently not implemented in NHibernate")]
         public void Change_Relation_n_m_Set_n_By_Index()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-            var ma2 = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
+            var ma2 = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
             prj.Mitarbeiter.Add(ma);
 
@@ -337,9 +337,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void Change_Relation_n_m_Set_m_With_Remove()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var prj2 = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
             ma.Projekte.Add(prj);
 
@@ -360,9 +360,9 @@ namespace Kistl.Server.Tests
         [Test]
         public void Change_Relation_n_m_Set_m_With_Clear()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var prj2 = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
             ma.Projekte.Add(prj);
 
@@ -384,9 +384,9 @@ namespace Kistl.Server.Tests
         [Ignore("Case 2629: Using an index setter is currently not implemented in NHibernate")]
         public void Change_Relation_n_m_Set_m_By_Index()
         {
-            var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-            var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
+            var prj = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var prj2 = ctx.Create<Zetbox.App.Projekte.Projekt>();
+            var ma = ctx.Create<Zetbox.App.Projekte.Mitarbeiter>();
 
             ma.Projekte.Add(prj);
 
@@ -415,13 +415,13 @@ namespace Kistl.Server.Tests
         public void Sort_Relation_1_n()
         {
             int methodID = 0;
-            var method = ctx.GetQuery<Kistl.App.Base.Method>().ToList().Where(m => m.Module.Name == "Projekte")
+            var method = ctx.GetQuery<Zetbox.App.Base.Method>().ToList().Where(m => m.Module.Name == "Projekte")
                 .OrderByDescending(m => m.Parameter.Count).First();
             methodID = method.ID;
 
             var tmpParameter = method.Parameter.ToList();
             method.Parameter.Clear();
-            foreach (Kistl.App.Base.BaseParameter p in tmpParameter
+            foreach (Zetbox.App.Base.BaseParameter p in tmpParameter
                 .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.Name))
             {
                 method.Parameter.Add(p);
@@ -430,7 +430,7 @@ namespace Kistl.Server.Tests
             ctx.SubmitChanges();
 
             var checkCtx = GetContext();
-            var checkMethod = checkCtx.Find<Kistl.App.Base.Method>(methodID);
+            var checkMethod = checkCtx.Find<Zetbox.App.Base.Method>(methodID);
             var checkParameter = checkMethod.Parameter.ToList();
 
             Assert.That(
@@ -446,7 +446,7 @@ namespace Kistl.Server.Tests
         public void Sort_Relation_n_m_n()
         {
             int prjID = 0;
-            var prj = ctx.GetQuery<Kistl.App.Projekte.Projekt>().ToList()
+            var prj = ctx.GetQuery<Zetbox.App.Projekte.Projekt>().ToList()
                 .OrderByDescending(p => p.Mitarbeiter.Count).First();
             prjID = prj.ID;
 
@@ -456,7 +456,7 @@ namespace Kistl.Server.Tests
             // TODO: Workaround! EF is inserting "newly" added MA first, then it deletes the old one. This breaks the right trigger
             ctx.SubmitChanges(); 
 
-            foreach (Kistl.App.Projekte.Mitarbeiter m in tmpMitarbeiter
+            foreach (Zetbox.App.Projekte.Mitarbeiter m in tmpMitarbeiter
                 .OrderBy(m => m.Name))
             {
                 prj.Mitarbeiter.Add(m);
@@ -465,11 +465,11 @@ namespace Kistl.Server.Tests
             ctx.SubmitChanges();
 
             var checkCtx = GetContext();
-            var checkPrj = checkCtx.Find<Kistl.App.Projekte.Projekt>(prjID);
+            var checkPrj = checkCtx.Find<Zetbox.App.Projekte.Projekt>(prjID);
             var checkMitarbeiter = checkPrj.Mitarbeiter.ToList();
 
             int i = 0;
-            foreach (Kistl.App.Projekte.Mitarbeiter m in checkMitarbeiter
+            foreach (Zetbox.App.Projekte.Mitarbeiter m in checkMitarbeiter
                 .OrderBy(m => m.Name))
             {
                 Assert.That(m, Is.EqualTo(checkMitarbeiter[i++]));
@@ -480,13 +480,13 @@ namespace Kistl.Server.Tests
         public void Sort_Relation_n_m_m()
         {
             int maID = 0;
-            var ma = ctx.GetQuery<Kistl.App.Projekte.Mitarbeiter>().ToList()
+            var ma = ctx.GetQuery<Zetbox.App.Projekte.Mitarbeiter>().ToList()
                 .OrderByDescending(p => p.Projekte.Count).First();
             maID = ma.ID;
 
             var tmpProjekte = ma.Projekte.ToList();
             ma.Projekte.Clear();
-            foreach (Kistl.App.Projekte.Projekt prj in tmpProjekte
+            foreach (Zetbox.App.Projekte.Projekt prj in tmpProjekte
                 .OrderBy(p => p.Name))
             {
                 ma.Projekte.Add(prj);
@@ -495,11 +495,11 @@ namespace Kistl.Server.Tests
             ctx.SubmitChanges();
 
             var checkCtx = GetContext();
-            var checkMitarbeiter = checkCtx.Find<Kistl.App.Projekte.Mitarbeiter>(maID);
+            var checkMitarbeiter = checkCtx.Find<Zetbox.App.Projekte.Mitarbeiter>(maID);
             var checkProjekte = checkMitarbeiter.Projekte.ToList();
 
             int i = 0;
-            foreach (Kistl.App.Projekte.Projekt prj in checkProjekte
+            foreach (Zetbox.App.Projekte.Projekt prj in checkProjekte
                 .OrderBy(p => p.Name))
             {
                 Assert.That(prj, Is.EqualTo(checkProjekte[i++]));

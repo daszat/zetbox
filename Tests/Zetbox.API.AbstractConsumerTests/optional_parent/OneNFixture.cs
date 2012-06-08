@@ -1,20 +1,20 @@
 
-namespace Kistl.API.AbstractConsumerTests.optional_parent
+namespace Zetbox.API.AbstractConsumerTests.optional_parent
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
 
     public abstract class OneNFixture
         : AbstractTestFixture
     {
-        protected IKistlContext ctx;
+        protected IZetboxContext ctx;
         protected One_to_N_relations_One oneSide1;
         protected One_to_N_relations_One oneSide2;
         protected One_to_N_relations_One oneSide3;

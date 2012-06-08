@@ -5,11 +5,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.KistlBase;
-using Kistl.Client.Presentables.ObjectBrowser;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ZetboxBase;
+using Zetbox.Client.Presentables.ObjectBrowser;
 
-namespace Kistl.Client.Forms.View
+namespace Zetbox.Client.Forms.View
 {
     public partial class WorkspaceView : Form, IFormsView
     {

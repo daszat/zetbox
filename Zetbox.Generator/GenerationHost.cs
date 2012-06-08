@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Kistl.Generator
     using Arebis.CodeGeneration;
     using Arebis.CodeGenerator.Templated;
 
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// a <see cref="IGenerationHost"/> to use the pre-compiled Templates from the current assembly
@@ -25,7 +25,7 @@ namespace Kistl.Generator
     public class ResourceBasedGenerationHost
         : IGenerationHost, IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.Host");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.Host");
 
         private Dictionary<string, TemplateInfo> templates;
         private List<IFileWriter> fileWriters;

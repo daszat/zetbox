@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.DalProvider.Ef.Mocks
+namespace Zetbox.DalProvider.Ef.Mocks
 {
     public class CustomActionsManagerAPITest : ICustomActionsManager
     {
@@ -14,7 +14,7 @@ namespace Kistl.DalProvider.Ef.Mocks
         {
         }
 
-        public void Init(IReadOnlyKistlContext ctx)
+        public void Init(IReadOnlyZetboxContext ctx)
         {
             Reset();
         }

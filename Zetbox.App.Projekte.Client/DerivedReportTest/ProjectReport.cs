@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.App.Projekte.Client.DerivedReportTest
+namespace Zetbox.App.Projekte.Client.DerivedReportTest
 {
-    public class ProjectReport : Kistl.App.Projekte.Client.Projekte.Reporting.ProjectReport
+    public class ProjectReport : Zetbox.App.Projekte.Client.Projekte.Reporting.ProjectReport
     {
         public ProjectReport(Arebis.CodeGeneration.IGenerationHost _host)
             : base(_host)

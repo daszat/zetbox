@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.GUI.TemplateNHibernateImpl+TemplateProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.GUI.TemplateNHibernateImpl+TemplateProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.GUI.TemplateNHibernateImpl+TemplateProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.GUI.TemplateNHibernateImpl+TemplateProxy, Zetbox.Objects.NHibernateImpl"
            schema="`gui`"
            table="`Templates`"
            abstract="false"
@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="DisplayedTypeAssembly" column="`fk_DisplayedTypeAssembly`" class="Kistl.App.Base.AssemblyNHibernateImpl+AssemblyProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="DisplayedTypeAssembly" column="`fk_DisplayedTypeAssembly`" class="Zetbox.App.Base.AssemblyNHibernateImpl+AssemblyProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="DisplayedTypeFullName" 
@@ -35,11 +35,11 @@
         <!-- relEnd=Template otherEnd=Menu -->
         <set name="Menu" table="`Template_hasMenu_Menu`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Template`" />
-            <one-to-many class="Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="VisualTree" column="`fk_VisualTree`" class="Kistl.App.GUI.VisualNHibernateImpl+VisualProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="VisualTree" column="`fk_VisualTree`" class="Zetbox.App.GUI.VisualNHibernateImpl+VisualProxy, Zetbox.Objects.NHibernateImpl" />
 
 
         <!-- define the subclasses -->

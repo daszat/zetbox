@@ -2,37 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.App.GUI;
+using Zetbox.App.GUI;
 
-namespace Kistl.API.Server.Mocks
+namespace Zetbox.API.Server.Mocks
 {
-    public class ObjectClassMock : Kistl.App.Base.ObjectClass
+    public class ObjectClassMock : Zetbox.App.Base.ObjectClass
     {
         #region ObjectClass Members
 
-        public ICollection<Kistl.App.Base.AccessControl> AccessControlList
+        public ICollection<Zetbox.App.Base.AccessControl> AccessControlList
         {
-            get { return new List<Kistl.App.Base.AccessControl>(); }
+            get { return new List<Zetbox.App.Base.AccessControl>(); }
         }
 
-        public Kistl.App.Base.ObjectClass BaseObjectClass
+        public Zetbox.App.Base.ObjectClass BaseObjectClass
         {
             get;
             set;
         }
 
-        public ICollection<Kistl.App.Base.InstanceConstraint> Constraints
+        public ICollection<Zetbox.App.Base.InstanceConstraint> Constraints
         {
             get { throw new NotImplementedException(); }
         }
 
-        public Kistl.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
+        public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
             get;
             set;
         }
 
-        public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
+        public ICollection<Zetbox.App.Base.Interface> ImplementsInterfaces
         {
             get { throw new NotImplementedException(); }
         }
@@ -51,7 +51,7 @@ namespace Kistl.API.Server.Mocks
 
         public virtual Guid ObjectClassID { get { return Guid.Empty; } }
 
-        public ICollection<Kistl.App.Base.ObjectClass> SubClasses
+        public ICollection<Zetbox.App.Base.ObjectClass> SubClasses
         {
             get { throw new NotImplementedException(); }
         }
@@ -73,17 +73,17 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public Kistl.App.Base.Method CreateMethod()
+        public Zetbox.App.Base.Method CreateMethod()
         {
             throw new NotImplementedException();
         }
 
-        public Kistl.App.Base.Relation CreateRelation()
+        public Zetbox.App.Base.Relation CreateRelation()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Kistl.App.Base.Method> GetInheritedMethods()
+        public IEnumerable<Zetbox.App.Base.Method> GetInheritedMethods()
         {
             throw new NotImplementedException();
         }
@@ -103,7 +103,7 @@ namespace Kistl.API.Server.Mocks
             set;
         }
 
-        public Kistl.App.GUI.Icon DefaultIcon
+        public Zetbox.App.GUI.Icon DefaultIcon
         {
             get;
             set;
@@ -115,18 +115,18 @@ namespace Kistl.API.Server.Mocks
             set;
         }
 
-        public ICollection<Kistl.App.Base.Method> Methods
+        public ICollection<Zetbox.App.Base.Method> Methods
         {
             get { throw new NotImplementedException(); }
         }
 
-        public Kistl.App.Base.Module Module
+        public Zetbox.App.Base.Module Module
         {
             get;
             set;
         }
 
-        public IList<Kistl.App.Base.Property> Properties
+        public IList<Zetbox.App.Base.Property> Properties
         {
             get { throw new NotImplementedException(); }
         }
@@ -215,12 +215,12 @@ namespace Kistl.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
-        public IKistlContext Context
+        public IZetboxContext Context
         {
             get { throw new NotImplementedException(); }
         }
 
-        public IReadOnlyKistlContext ReadOnlyContext
+        public IReadOnlyZetboxContext ReadOnlyContext
         {
             get { throw new NotImplementedException(); }
         }
@@ -247,12 +247,12 @@ namespace Kistl.API.Server.Mocks
             if (PropertyChangedWithValue != null) PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
-        public void AttachToContext(IKistlContext ctx)
+        public void AttachToContext(IZetboxContext ctx)
         {
             throw new NotImplementedException();
         }
 
-        public void DetachFromContext(IKistlContext ctx)
+        public void DetachFromContext(IZetboxContext ctx)
         {
             throw new NotImplementedException();
         }
@@ -296,12 +296,12 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             throw new NotImplementedException();
         }
 
-        public void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             throw new NotImplementedException();
         }
@@ -339,7 +339,7 @@ namespace Kistl.API.Server.Mocks
 
         #region IChangedBy Members
 
-        public Kistl.App.Base.Identity ChangedBy
+        public Zetbox.App.Base.Identity ChangedBy
         {
             get;
             set;
@@ -351,7 +351,7 @@ namespace Kistl.API.Server.Mocks
             set;
         }
 
-        public Kistl.App.Base.Identity CreatedBy
+        public Zetbox.App.Base.Identity CreatedBy
         {
             get;
             set;

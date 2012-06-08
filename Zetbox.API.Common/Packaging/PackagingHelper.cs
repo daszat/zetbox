@@ -1,15 +1,15 @@
 
-namespace Kistl.App.Packaging
+namespace Zetbox.App.Packaging
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
 
     //
     //
@@ -21,7 +21,7 @@ namespace Kistl.App.Packaging
 
     internal static class PackagingHelper
     {
-        public static IList<IPersistenceObject> GetMetaObjects(IKistlContext ctx, Module module)
+        public static IList<IPersistenceObject> GetMetaObjects(IZetboxContext ctx, Module module)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (module == null) throw new ArgumentNullException("module");
@@ -38,7 +38,7 @@ namespace Kistl.App.Packaging
 
                 // export only relation entry ending on a "local" class. Since we do not have proper inter-module dependencies in place, we cannot support pushing interface implementations across modules.
                 AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<DataType_implements_Interface_RelationEntry>()
-                    // Workaround for missing Module relation on DataType_implements_Interface_RelationEntry when creating KistlBase.xml
+                    // Workaround for missing Module relation on DataType_implements_Interface_RelationEntry when creating ZetboxBase.xml
                     .Where(i => i.A != null && i.A.Module != null && i.B != null)
                     .Where(i => i.A.Module == module)
                     .ToList().OrderBy(i => i.A.Name).ThenBy(i => i.B.Name).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
@@ -64,7 +64,7 @@ namespace Kistl.App.Packaging
 
                 // TODO: Add Module to Constraint - or should that not be changable by other modules?
                 // All Property Contstraints
-                AddMetaObjects(result, () => ctx.GetQuery<Kistl.App.Base.Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
+                AddMetaObjects(result, () => ctx.GetQuery<Zetbox.App.Base.Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
                     .ToList().OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => ctx.GetInterfaceType(i).Type.Name).ThenBy(i => i.ExportGuid));
 
                 // InstanceContstraints and Property Relation entries of UniqueConstraints

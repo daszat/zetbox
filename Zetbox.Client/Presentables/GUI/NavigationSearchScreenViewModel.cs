@@ -1,25 +1,25 @@
 
-namespace Kistl.Client.Presentables.GUI
+namespace Zetbox.Client.Presentables.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.App.GUI;
-    using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.KistlBase;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.App.GUI;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.App.Base;
 
     [ViewModelDescriptor]
     public class NavigationSearchScreenViewModel
         : NavigationScreenViewModel
     {
-        public new delegate NavigationSearchScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationSearchScreen screen);
+        public new delegate NavigationSearchScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationSearchScreen screen);
 
-        public NavigationSearchScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, Func<IKistlContext> ctxFactory, ViewModel parent, NavigationScreen screen)
+        public NavigationSearchScreenViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, Func<IZetboxContext> ctxFactory, ViewModel parent, NavigationScreen screen)
             : base(dependencies, dataCtx, parent, screen)
         {
             _ctxFactory = ctxFactory;
@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables.GUI
 
         public new NavigationSearchScreen Screen { get { return (NavigationSearchScreen)base.Screen; } }
 
-        private readonly Func<IKistlContext> _ctxFactory;
+        private readonly Func<IZetboxContext> _ctxFactory;
 
         protected virtual Func<IQueryable> InitializeQueryFactory()
         {

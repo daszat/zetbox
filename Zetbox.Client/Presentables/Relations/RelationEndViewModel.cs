@@ -1,22 +1,22 @@
 
-namespace Kistl.Client.Presentables.Relations
+namespace Zetbox.Client.Presentables.Relations
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.App.Base;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.App.Base;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     public class RelationEndViewModel
         : DataObjectViewModel
     {
-        public new delegate RelationEndViewModel Factory(IKistlContext dataCtx, ViewModel parent, RelationEnd relEnd);
+        public new delegate RelationEndViewModel Factory(IZetboxContext dataCtx, ViewModel parent, RelationEnd relEnd);
 
         public RelationEndViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             RelationEnd relEnd)
             : base(appCtx, dataCtx, parent, relEnd)
         {

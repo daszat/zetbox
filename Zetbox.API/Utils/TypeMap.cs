@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
     using System;
     using System.Collections.Generic;

@@ -1,15 +1,15 @@
 
-namespace Kistl.Generator.Templates
+namespace Zetbox.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     /// <summary>
     /// The basic structural template for all complex types.
@@ -85,7 +85,7 @@ namespace Kistl.Generator.Templates
         {
             if (DataType is ObjectClass && ((ObjectClass)DataType).ImplementsIExportable(false))
             {
-                return new string[] { this.DataType.Name, "Kistl.API.IExportableInternal" };
+                return new string[] { this.DataType.Name, "Zetbox.API.IExportableInternal" };
             }
             return new string[] { this.DataType.Name };
         }
@@ -127,7 +127,7 @@ namespace Kistl.Generator.Templates
         /// A list of all methods that should be generated for this datatype. By default these are only the methods defined directly on this datatype.
         /// </summary>
         /// <returns></returns>
-        protected virtual IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()
+        protected virtual IEnumerable<Zetbox.App.Base.Method> MethodsToGenerate()
         {
             return this.DataType.Methods;
         }

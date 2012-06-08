@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Kistl.Objects.NHibernateImpl"
-           proxy="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Kistl.Objects.NHibernateImpl"
+    <class name="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"
            schema="`doc`"
            table="`Files`"
            abstract="true"
@@ -19,17 +19,17 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Blob" column="`fk_Blob`" class="Kistl.App.Base.BlobNHibernateImpl+BlobProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Blob" column="`fk_Blob`" class="Zetbox.App.Base.BlobNHibernateImpl+BlobProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
                   column="`ChangedOn`" 
                   optimistic-lock="true"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
@@ -45,8 +45,8 @@
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
-        <joined-subclass name="at.dasz.DocumentManagement.DocumentNHibernateImpl+DocumentProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="at.dasz.DocumentManagement.DocumentNHibernateImpl+DocumentProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="at.dasz.DocumentManagement.DocumentNHibernateImpl+DocumentProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="at.dasz.DocumentManagement.DocumentNHibernateImpl+DocumentProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`doc`"
                          table="`Documents`"
                          dynamic-update="true">
@@ -61,15 +61,15 @@
         <!-- relEnd=Document otherEnd=Revisions -->
         <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Document`" />
-            <one-to-many class="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="at.dasz.DocumentManagement.DynamicFileNHibernateImpl+DynamicFileProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="at.dasz.DocumentManagement.DynamicFileNHibernateImpl+DynamicFileProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="at.dasz.DocumentManagement.DynamicFileNHibernateImpl+DynamicFileProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="at.dasz.DocumentManagement.DynamicFileNHibernateImpl+DynamicFileProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`doc`"
                          table="`DynamicFiles`"
                          dynamic-update="true">
@@ -82,8 +82,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="at.dasz.DocumentManagement.ImportedFileNHibernateImpl+ImportedFileProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="at.dasz.DocumentManagement.ImportedFileNHibernateImpl+ImportedFileProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="at.dasz.DocumentManagement.ImportedFileNHibernateImpl+ImportedFileProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="at.dasz.DocumentManagement.ImportedFileNHibernateImpl+ImportedFileProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`doc`"
                          table="`ImportedFiles`"
                          dynamic-update="true">
@@ -96,8 +96,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="at.dasz.DocumentManagement.StaticFileNHibernateImpl+StaticFileProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="at.dasz.DocumentManagement.StaticFileNHibernateImpl+StaticFileProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="at.dasz.DocumentManagement.StaticFileNHibernateImpl+StaticFileProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="at.dasz.DocumentManagement.StaticFileNHibernateImpl+StaticFileProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`doc`"
                          table="`StaticFiles`"
                          dynamic-update="true">

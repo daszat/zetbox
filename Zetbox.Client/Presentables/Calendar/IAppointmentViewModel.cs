@@ -1,12 +1,12 @@
 
-namespace Kistl.Client.Presentables.Calendar
+namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.App.GUI;
+    using Zetbox.App.GUI;
 
     public interface IAppointmentViewModel : INotifyPropertyChanged
     {

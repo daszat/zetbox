@@ -1,15 +1,15 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.ComputeDefaultValue"
-    ClassName="Kistl.Generator.Templates.Properties.ComputeDefaultValue"
-    Inherits="Kistl.Generator.MemberTemplate" %>
+    ClassName="Zetbox.Generator.Templates.Properties.ComputeDefaultValue"
+    Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Import Namespace="Kistl.API.Server" %>
-<%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
-<%@ Import Namespace="Kistl.Generator" %>
-<%@ Import Namespace="Kistl.Generator.Extensions" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Import Namespace="Zetbox.API.Server" %>
+<%@ Import Namespace="Zetbox.App.Base" %>
+<%@ Import Namespace="Zetbox.App.Extensions" %>
+<%@ Import Namespace="Zetbox.Generator" %>
+<%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="propertyName" Type="string" %>
@@ -19,7 +19,7 @@
 <%@ Parameter Name="backingStoreType" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
                 if (!<%= isSetFlagName %> && ObjectState == DataObjectState.New) {
-                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("<%= propertyGuid %>"));
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("<%= propertyGuid %>"));
                     if (__p != null) {
                         <%= isSetFlagName %> = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
@@ -31,6 +31,6 @@
     <% } // Fix indent for next line %>
                         __result = this.<%= backingStoreName %> = (<%= backingStoreType.TrimEnd('?') %>)__tmp_value;
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property '<%= interfaceName %>.<%= propertyName %>'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property '<%= interfaceName %>.<%= propertyName %>'");
                     }
                 }

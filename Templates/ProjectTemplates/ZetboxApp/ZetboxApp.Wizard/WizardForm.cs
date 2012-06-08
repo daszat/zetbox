@@ -1,5 +1,5 @@
 
-namespace KistlApp.Wizard
+namespace ZetboxApp.Wizard
 {
     using System;
     using System.Collections.Generic;
@@ -53,13 +53,13 @@ namespace KistlApp.Wizard
             {
                 var cb = new SqlConnectionStringBuilder(txtConnectionString.Text);
                 DatabaseName = cb.InitialCatalog;
-                DatabaseUser = string.IsNullOrEmpty(cb.UserID) ? "zbox" : cb.UserID;
+                DatabaseUser = string.IsNullOrEmpty(cb.UserID) ? "zetbox" : cb.UserID;
             }
             else
             {
                 var cb = new NpgsqlConnectionStringBuilder(txtConnectionString.Text);
                 DatabaseName = cb.Database;
-                DatabaseUser = string.IsNullOrEmpty(cb.UserName) ? "zbox" : cb.UserName;
+                DatabaseUser = string.IsNullOrEmpty(cb.UserName) ? "zetbox" : cb.UserName;
             }
 
             this.DialogResult = DialogResult.OK;

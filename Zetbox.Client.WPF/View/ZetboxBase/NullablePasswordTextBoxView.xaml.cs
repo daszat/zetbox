@@ -12,13 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.Presentables.ValueViewModels;
-using Kistl.Client.WPF.CustomControls;
-using Kistl.Client.WPF.View.KistlBase;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ValueViewModels;
+using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.View.ZetboxBase;
 
-namespace Kistl.Client.WPF.View
+namespace Zetbox.Client.WPF.View
 {
     /// <summary>
     /// 
@@ -27,7 +27,7 @@ namespace Kistl.Client.WPF.View
     /// Password property is not a dependency property. See here (http://stackoverflow.com/questions/1483892/wpf-binding-to-the-passwordbox-in-mvvm-working-solution) why.
     /// Sadly, we rely on MVVM, so ther's no other way.
     /// </remarks>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class NullablePasswordTextBoxView : PropertyEditor, IHasViewModel<IValueViewModel<string>>, IHasViewModel<IFormattedValueViewModel>
     {
         public NullablePasswordTextBoxView()

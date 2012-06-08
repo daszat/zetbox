@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Windows.Input;
 
-namespace Kistl.Client.WPF.CustomControls
+namespace Zetbox.Client.WPF.CustomControls
 {
     /// <summary>
     /// http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/c5b6a94b-2cdc-4cfb-8ccb-0f7e680586d7

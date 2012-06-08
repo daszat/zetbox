@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF
+namespace Zetbox.Client.WPF
 {
     using System;
     using System.Collections;
@@ -14,15 +14,15 @@ namespace Kistl.Client.WPF
     using System.Windows.Threading;
     using Autofac;
     using Autofac.Features.Metadata;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.WPF.Converter;
-    using Kistl.Client.WPF.Toolkit;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.WPF.Converter;
+    using Zetbox.Client.WPF.Toolkit;
     using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
 
     /// <summary>
@@ -64,16 +64,16 @@ namespace Kistl.Client.WPF
             return result;
         }
 
-        private IContainer CreateMasterContainer(KistlConfig config)
+        private IContainer CreateMasterContainer(ZetboxConfig config)
         {
-            var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
 
             builder
                 .RegisterType<Launcher>()
                 .SingleInstance();
 
             builder
-                .Register<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector>((c, p) => new Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector(
+                .Register<Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector>((c, p) => new Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector(
                     p.Named<object>("requestedKind"),
                     c.Resolve<IFrozenContext>()))
                 .InstancePerDependency();
@@ -96,11 +96,11 @@ namespace Kistl.Client.WPF
                     string configFilePath;
                     var args = HandleCommandline(e.Args, out configFilePath);
 
-                    var config = KistlConfig.FromFile(configFilePath, "Kistl.Client.WPF.xml");
+                    var config = ZetboxConfig.FromFile(configFilePath, "Zetbox.Client.WPF.xml");
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                     InitCulture(config);
-                    StartupScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 6);
+                    StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6);
 
                     InitializeClient(args, config);
                 }
@@ -128,24 +128,24 @@ namespace Kistl.Client.WPF
             }
         }
 
-        // Move to another method to avoid loading Kistl.Objects
-        private void InitializeClient(string[] args, KistlConfig config)
+        // Move to another method to avoid loading Zetbox.Objects
+        private void InitializeClient(string[] args, ZetboxConfig config)
         {
             if (config.Server != null && config.Server.StartServer)
             {
-                StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Server);
+                StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Server);
                 serverDomain = new ServerDomainManager();
                 serverDomain.Start(config);
             }
             else
             {
-                StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_NoServerStart);
+                StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_NoServerStart);
             }
 
 
             container = CreateMasterContainer(config);
 
-            StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
+            StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 
             // Make Gendarme happy
             var resources = this.Resources;
@@ -153,20 +153,20 @@ namespace Kistl.Client.WPF
             resources.BeginInit();
 
             // Create icon converter
-            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<Func<IKistlContext>>());
+            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<Func<IZetboxContext>>());
             resources["IconConverter"] = iconConverter;
             resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
 
             // Init all Converter that are not using a Context
-            var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
+            var templateSelectorFactory = container.Resolve<Zetbox.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
             resources["defaultTemplateSelector"] = templateSelectorFactory(null);
-            resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
-            resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
+            resources["listItemTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.SingleLineKind");
+            resources["dashBoardTemplateSelector"] = templateSelectorFactory("Zetbox.App.GUI.DashboardKind");
 
             // Manually add DefaultStyles and DefaultViews
             // Otherwise converter are unknown
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) });
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
+            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) });
+            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
 
             // Load registrated dictionaries from autofac
             foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
@@ -174,7 +174,7 @@ namespace Kistl.Client.WPF
                 resources.MergedDictionaries.Add(dict);
             }
 
-            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) });
+            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Zetbox.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) });
             // Load registrated dictionaries from autofac
             foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
             {
@@ -184,10 +184,10 @@ namespace Kistl.Client.WPF
             resources.EndInit();
 
             // Init credentials explicit
-            StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_EnsuringCredentials);
+            StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
             container.Resolve<ICredentialsResolver>().EnsureCredentials();
 
-            StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
+            StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 
             // Tell icon converter that everything is initialized
             iconConverter.Initialized();
@@ -195,16 +195,16 @@ namespace Kistl.Client.WPF
             // Focus nightmare
             // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
             EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
-            EventManager.RegisterClassHandler(typeof(Kistl.Client.WPF.View.KistlBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
+            EventManager.RegisterClassHandler(typeof(Zetbox.Client.WPF.View.ZetboxBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
 
             wpfResourcesInitialized = true;
 
-            FixupDatabase(container.Resolve<Func<IKistlContext>>());
+            FixupDatabase(container.Resolve<Func<IZetboxContext>>());
 
             IServiceControlManager scm = null;
             if (container.TryResolve<IServiceControlManager>(out scm))
             {
-                Logging.Log.Info("Starting ZBox Services");
+                Logging.Log.Info("Starting Zetbox Services");
                 scm.Start();
             }
             else
@@ -214,7 +214,7 @@ namespace Kistl.Client.WPF
 
             StartupScreen.CanCloseOnWindowLoaded();
             // delegate all business logic into another class, which 
-            // allows us to load the Kistl.Objects assemblies _before_ 
+            // allows us to load the Zetbox.Objects assemblies _before_ 
             // they are needed.
             var launcher = container.Resolve<Launcher>();
             launcher.Show(args);
@@ -235,7 +235,7 @@ namespace Kistl.Client.WPF
             }), DispatcherPriority.ApplicationIdle);
         }
 
-        private static void InitCulture(KistlConfig config)
+        private static void InitCulture(ZetboxConfig config)
         {
             if (config.Client == null) return;
             if (!string.IsNullOrEmpty(config.Client.Culture))
@@ -250,7 +250,7 @@ namespace Kistl.Client.WPF
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            Logging.Log.Info("Stopping ZBox Services");
+            Logging.Log.Info("Stopping Zetbox Services");
             IServiceControlManager scm = null;
             if (container.TryResolve<IServiceControlManager>(out scm))
             {
@@ -279,7 +279,7 @@ namespace Kistl.Client.WPF
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             var inner = e.Exception.GetInnerException();
-            if (inner is Kistl.API.Common.UnresolvableIdentityException)
+            if (inner is Zetbox.API.Common.UnresolvableIdentityException)
             {
                 Environment.Exit(1);
             }
@@ -294,18 +294,18 @@ namespace Kistl.Client.WPF
         {
             var inner = ex.GetInnerException();
             Logging.Client.Error("Unhandled Exception", inner);
-            if (inner is InvalidKistlGeneratedVersionException)
+            if (inner is InvalidZetboxGeneratedVersionException)
             {
                 MessageBox.Show(
-                    WpfToolkitResources.InvalidKistlGeneratedVersionException_Message,
-                    WpfToolkitResources.InvalidKistlGeneratedVersionException_Title,
+                    WpfToolkitResources.InvalidZetboxGeneratedVersionException_Message,
+                    WpfToolkitResources.InvalidZetboxGeneratedVersionException_Title,
                     MessageBoxButton.OK,
                     MessageBoxImage.Stop);
             }
             else if (wpfResourcesInitialized && container != null)
             {
                 var vmf = container.Resolve<IViewModelFactory>();
-                var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), null, ex, container.Resolve<IScreenshotTool>().GetScreenshot());
+                var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IZetboxContext>(), null, ex, container.Resolve<IScreenshotTool>().GetScreenshot());
                 vmf.ShowDialog(mdl);
             }
             else
@@ -316,7 +316,7 @@ namespace Kistl.Client.WPF
 
 #if DONOTUSE
         private static Assembly FetchOrCreateAssembly(
-            IKistlContext ctx,
+            IZetboxContext ctx,
             Module guiModule,
             string aName)
         {

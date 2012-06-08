@@ -1,15 +1,15 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class ValueTypePropertyHbm
     {
@@ -44,7 +44,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             if (prop.IsList && !forceDefinition)
             {
                 // set the proper type for collection entries
-                ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Kistl.Objects.NHibernateImpl\"",
+                ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Zetbox.Objects.NHibernateImpl\"",
                     prop.GetCollectionEntryNamespace(),
                     prop.GetCollectionEntryClassName(),
                     implementationSuffix);

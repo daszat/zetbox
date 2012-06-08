@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     using System;
     using System.Collections;
@@ -17,8 +17,8 @@ namespace Kistl.API.Tests
 
         protected readonly int items;
 
-        private IKistlContext _ctx;
-        protected IKistlContext ctx
+        private IZetboxContext _ctx;
+        protected IZetboxContext ctx
         {
             get
             {

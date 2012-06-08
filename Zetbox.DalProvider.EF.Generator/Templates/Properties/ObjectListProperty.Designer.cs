@@ -1,19 +1,19 @@
 using System;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
+namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst")]
-    public partial class ObjectListProperty : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst")]
+    public partial class ObjectListProperty : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
-		protected Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList;
+		protected IZetboxContext ctx;
+		protected Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList;
 		protected string name;
 		protected string wrapperName;
 		protected string wrapperClass;
@@ -25,14 +25,14 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected string referencedInterface;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string wrapperName, string wrapperClass, string exposedListType, Relation rel, RelationEndRole endRole, string positionPropertyName, string otherName, string referencedInterface)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string wrapperName, string wrapperClass, string exposedListType, Relation rel, RelationEndRole endRole, string positionPropertyName, string otherName, string referencedInterface)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Properties.ObjectListProperty", ctx, serializationList, name, wrapperName, wrapperClass, exposedListType, rel, endRole, positionPropertyName, otherName, referencedInterface);
         }
 
-        public ObjectListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string wrapperName, string wrapperClass, string exposedListType, Relation rel, RelationEndRole endRole, string positionPropertyName, string otherName, string referencedInterface)
+        public ObjectListProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string wrapperName, string wrapperClass, string exposedListType, Relation rel, RelationEndRole endRole, string positionPropertyName, string otherName, string referencedInterface)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -51,7 +51,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 24 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 24 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
@@ -64,7 +64,7 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
     string assocName = rel.GetAssociationName() + (relEnd.Multiplicity.UpperBound() > 1 ? "_" + relEnd.GetRole().ToString() : String.Empty);
     string targetRoleName = otherEnd.RoleName;
 
-    // which Kistl interface this is    
+    // which Zetbox interface this is    
     string thisInterface = relEnd.Type.GetDataTypeString();
     // the actual implementation class of the list's elements
     string referencedImplementation = referencedInterface + ImplementationSuffix;
@@ -77,7 +77,7 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
 
 	var eventName = "On" + name + "_PostSetter";
 
-#line 49 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 49 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("           // ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -94,14 +94,14 @@ this.WriteObjects("                            () => this.NotifyPropertyChanging
 this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
 this.WriteObjects("                            (item) => item.NotifyPropertyChanging(\"",  otherName , "\", null, null),\r\n");
 this.WriteObjects("                            (item) => item.NotifyPropertyChanged(\"",  otherName , "\", null, null)");
-#line 65 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 65 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 // TODO: improve this!
     if (rel.NeedsPositionStorage(otherEnd.GetRole()))
     {
         this.WriteObjects(", \"", relEnd.RoleName, "\"");
     }
                             
-#line 70 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 70 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("",  positionPropertyNameArgument , ");\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");
@@ -128,19 +128,19 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 96 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 96 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading) { 
-#line 97 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 97 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 100 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 100 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (serializationList != null)
         {
-            serializationList.Add("Serialization.EagerLoadingSerialization", Kistl.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true, false, null);
+            serializationList.Add("Serialization.EagerLoadingSerialization", Zetbox.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true, false, null);
         }
     }
 
-#line 106 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 106 "P:\Zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("\r\n");
 
         }

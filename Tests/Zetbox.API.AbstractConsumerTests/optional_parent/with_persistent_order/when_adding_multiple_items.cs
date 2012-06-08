@@ -1,5 +1,5 @@
 
-namespace Kistl.API.AbstractConsumerTests.optional_parent.with_persistent_order
+namespace Zetbox.API.AbstractConsumerTests.optional_parent.with_persistent_order
 {
     using System;
     using System.Collections.Generic;

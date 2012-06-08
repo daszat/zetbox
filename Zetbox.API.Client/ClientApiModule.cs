@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Client
+namespace Zetbox.API.Client
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.API.Client
     using System.Text;
 
     using Autofac;
-    using Kistl.API.Client.PerfCounter;
+    using Zetbox.API.Client.PerfCounter;
 
     public sealed class ClientApiModule
         : Autofac.Module
@@ -19,10 +19,10 @@ namespace Kistl.API.Client
             moduleBuilder
                 .Register<ProxyImplementation>(c => new ProxyImplementation(
                     c.Resolve<InterfaceType.Factory>(),
-                    c.Resolve<Kistl.API.Client.KistlService.IKistlService>(),
+                    c.Resolve<Zetbox.API.Client.ZetboxService.IZetboxService>(),
                     c.Resolve<IPerfCounter>(),
-                    c.Resolve<KistlStreamReader.Factory>(),
-                    c.Resolve<KistlStreamWriter.Factory>()
+                    c.Resolve<ZetboxStreamReader.Factory>(),
+                    c.Resolve<ZetboxStreamWriter.Factory>()
                     ))
                 .Named<IProxy>("implementor")
                 .InstancePerDependency(); // No singleton!
@@ -67,7 +67,7 @@ namespace Kistl.API.Client
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterType<KistlService.KistlServiceClient>()
+            moduleBuilder.RegisterType<ZetboxService.ZetboxServiceClient>()
                 .AsImplementedInterfaces()
                 .OnActivated(args =>
                 {

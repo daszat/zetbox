@@ -4,9 +4,9 @@ using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
+using Zetbox.API;
 
-namespace Kistl.DalProvider.Ef
+namespace Zetbox.DalProvider.Ef
 {
     //public static class EfSerializer
     //{

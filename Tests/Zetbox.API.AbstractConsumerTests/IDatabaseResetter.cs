@@ -1,5 +1,5 @@
 
-namespace Kistl.API.AbstractConsumerTests
+namespace Zetbox.API.AbstractConsumerTests
 {
     /// <summary>
     /// This interface is used to prepare the database before starting DB-dependent tests.

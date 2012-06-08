@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Kistl.Objects.NHibernateImpl"
-           proxy="ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Zetbox.Objects.NHibernateImpl"
            schema="`migration`"
            table="`StagingDatabases`"
            abstract="false"
@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
@@ -30,7 +30,7 @@
                   column="`ConnectionStringKey`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
@@ -45,7 +45,7 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="MigrationProject" column="`fk_MigrationProject`" class="ZBox.App.SchemaMigration.MigrationProjectNHibernateImpl+MigrationProjectProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="MigrationProject" column="`fk_MigrationProject`" class="Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl+MigrationProjectProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="OriginConnectionStringKey" 
@@ -58,7 +58,7 @@
 <!-- ObjectReferenceProperty -->
         <set name="SourceTables" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_StagingDatabase`" />
-            <one-to-many class="ZBox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 

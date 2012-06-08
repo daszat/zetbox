@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.NHibernate
+namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
+    using Zetbox.API;
+    using Zetbox.API.Server;
 
     public abstract class NHibernatePersistenceObject
        : BaseServerPersistenceObject
@@ -67,12 +67,12 @@ namespace Kistl.DalProvider.NHibernate
             switch (this.ObjectState)
             {
                 case DataObjectState.New:
-                    Kistl.API.Utils.Logging.Log.DebugFormat("Save: {0}#{1}", this.GetType(), this.ID);
+                    Zetbox.API.Utils.Logging.Log.DebugFormat("Save: {0}#{1}", this.GetType(), this.ID);
                     session.Save(this.NHibernateProxy);
                     break;
                 case DataObjectState.Modified:
                 case DataObjectState.Unmodified:
-                    Kistl.API.Utils.Logging.Log.DebugFormat("SaveOrUpdate: {0}#{1}", this.GetType(), this.ID);
+                    Zetbox.API.Utils.Logging.Log.DebugFormat("SaveOrUpdate: {0}#{1}", this.GetType(), this.ID);
                     // according to NH Documentation this is not needed
                     // session.SaveOrUpdate(this.NHibernateProxy);
                     break;

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -9,8 +9,8 @@ namespace Kistl.Client.Presentables
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// Models a group of Property(Models)
@@ -18,13 +18,13 @@ namespace Kistl.Client.Presentables
     public abstract class PropertyGroupViewModel
         : ViewModel, IDataErrorInfo
     {
-        public new delegate PropertyGroupViewModel Factory(IKistlContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+        public new delegate PropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
 
         private string _title;
         protected ObservableCollection<ViewModel> properties;
 
         public PropertyGroupViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             string title,
             IEnumerable<ViewModel> obj)
             : base(appCtx, dataCtx, parent)
@@ -118,10 +118,10 @@ namespace Kistl.Client.Presentables
 
     public class SinglePropertyGroupViewModel : PropertyGroupViewModel
     {
-        public new delegate SinglePropertyGroupViewModel Factory(IKistlContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+        public new delegate SinglePropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
 
         public SinglePropertyGroupViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             string title,
             IEnumerable<ViewModel> obj)
             : base(appCtx, dataCtx, parent, title, obj)
@@ -140,10 +140,10 @@ namespace Kistl.Client.Presentables
 
     public class MultiplePropertyGroupViewModel : PropertyGroupViewModel
     {
-        public new delegate MultiplePropertyGroupViewModel Factory(IKistlContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+        public new delegate MultiplePropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
 
         public MultiplePropertyGroupViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             string title,
             IEnumerable<ViewModel> obj)
             : base(appCtx, dataCtx, parent, title, obj)

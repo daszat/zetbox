@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.Client.Presentables;
+using Zetbox.Client.Presentables;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace Kistl.Client.Forms
+namespace Zetbox.Client.Forms
 {
     internal class FormsThreadManager : IThreadManager
     {

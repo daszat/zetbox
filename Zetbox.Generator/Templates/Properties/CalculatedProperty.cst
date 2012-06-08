@@ -1,10 +1,10 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.CalculatedProperty"
-    ClassName="Kistl.Generator.Templates.Properties.CalculatedProperty"
-    Inherits="Kistl.Generator.MemberTemplate" %>
+    ClassName="Zetbox.Generator.Templates.Properties.CalculatedProperty"
+    Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
-<%@ Import Namespace="Kistl.API" %>
-<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Import Namespace="Zetbox.API" %>
+<%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="serializationList" Type="Serialization.SerializationMembersList" %>
 <%@ Parameter Name="modulenamespace" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>

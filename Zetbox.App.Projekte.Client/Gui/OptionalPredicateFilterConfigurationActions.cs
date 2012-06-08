@@ -1,15 +1,15 @@
-namespace Kistl.App.GUI
+namespace Zetbox.App.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Client;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Client;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -25,7 +25,7 @@ namespace Kistl.App.GUI
         }
 
         [Invocation]
-        public static void CreateFilterModel(Kistl.App.GUI.OptionalPredicateFilterConfiguration obj, MethodReturnEventArgs<Kistl.API.IFilterModel> e)
+        public static void CreateFilterModel(Zetbox.App.GUI.OptionalPredicateFilterConfiguration obj, MethodReturnEventArgs<Zetbox.API.IFilterModel> e)
         {
             var mdl = new OptionalPredicateFilterModel();
             mdl.Label = obj.Label;
@@ -37,15 +37,15 @@ namespace Kistl.App.GUI
 
             var valueMdl = new BoolValueModel("", "", false, false);
             valueMdl.Value = false;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(FrozenContext)));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(FrozenContext)));
 
             e.Result = mdl;
         }
 
         [Invocation]
-        public static void NotifyCreated(Kistl.App.GUI.OptionalPredicateFilterConfiguration obj)
+        public static void NotifyCreated(Zetbox.App.GUI.OptionalPredicateFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_OptionalPredicateFilterViewModel.Find(obj.Context);
+            obj.ViewModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_OptionalPredicateFilterViewModel.Find(obj.Context);
         }
     }
 }

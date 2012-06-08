@@ -1,16 +1,16 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     [Implementor]
     public static class StringRangeConstraintActions
     {
         [Invocation]
-        public static void ToString(StringRangeConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void ToString(StringRangeConstraint obj, Zetbox.API.MethodReturnEventArgs<string> e)
         {
             string maxLength = obj.MaxLength != null ? obj.MaxLength.ToString() : "unlimited";
             // Only display min if there is an actual restriction.

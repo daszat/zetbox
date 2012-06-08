@@ -1,16 +1,16 @@
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Kistl.API;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public static class RelationExtensions
     {
-        public static Relation Lookup(IKistlContext ctx, ObjectReferenceProperty prop)
+        public static Relation Lookup(IZetboxContext ctx, ObjectReferenceProperty prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             if (prop.RelationEnd == null) { return null; }

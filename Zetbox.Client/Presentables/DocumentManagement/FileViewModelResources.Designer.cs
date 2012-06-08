@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Presentables.DocumentManagement {
+namespace Zetbox.Client.Presentables.DocumentManagement {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables.DocumentManagement {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Presentables.DocumentManagement.FileViewModelResources", typeof(FileViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.DocumentManagement.FileViewModelResources", typeof(FileViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

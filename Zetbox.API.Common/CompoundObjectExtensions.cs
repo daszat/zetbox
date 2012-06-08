@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Kistl.API;
-using Kistl.App.Base;
+using Zetbox.API;
+using Zetbox.App.Base;
 
-namespace Kistl.App.Extensions
+namespace Zetbox.App.Extensions
 {
     /// <summary>
     /// Temp. Kist Objects Extensions
     /// </summary>
     public static partial class CompoundObjectExtensions
     {
-        public static CompoundObject GetCompoundObjectDefinition(this ICompoundObject obj, IReadOnlyKistlContext ctx)
+        public static CompoundObject GetCompoundObjectDefinition(this ICompoundObject obj, IReadOnlyZetboxContext ctx)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -20,7 +20,7 @@ namespace Kistl.App.Extensions
             return GetCompoundObjectDefinition(ctx.GetInterfaceType(obj), ctx);
         }
 
-        public static CompoundObject GetCompoundObjectDefinition(this InterfaceType ifType, IReadOnlyKistlContext ctx)
+        public static CompoundObject GetCompoundObjectDefinition(this InterfaceType ifType, IReadOnlyZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 

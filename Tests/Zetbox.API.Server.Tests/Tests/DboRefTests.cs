@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server.Tests
+namespace Zetbox.API.Server.Tests
 {
     using System;
     using System.Collections.Generic;

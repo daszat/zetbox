@@ -1,14 +1,14 @@
 
-namespace Kistl.API.Server.Tests
+namespace Zetbox.API.Server.Tests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Common;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server.Mocks;
+    using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server.Mocks;
     using NUnit.Framework;
     
     [SetUpFixture]
@@ -18,24 +18,24 @@ namespace Kistl.API.Server.Tests
         {
             base.SetupBuilder(builder);
 
-            builder.RegisterModule(new Kistl.API.ApiModule());
-            builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
+            builder.RegisterModule(new Zetbox.API.ApiModule());
+            builder.RegisterModule(new Zetbox.API.Server.ServerApiModule());
 
             builder
                 .RegisterType<MetaDataResolverMock>()
                 .As<IMetaDataResolver>()
                 .InstancePerDependency();
 
-            builder.Register(c => new KistlContextMock(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>(), c.Resolve<Func<IFrozenContext>>(), c.Resolve<InterfaceType.Factory>()))
-                .As<IKistlContext>()
+            builder.Register(c => new ZetboxContextMock(c.Resolve<IMetaDataResolver>(), null, c.Resolve<ZetboxConfig>(), c.Resolve<Func<IFrozenContext>>(), c.Resolve<InterfaceType.Factory>()))
+                .As<IZetboxContext>()
                 .As<IFrozenContext>()
-                .As<IReadOnlyKistlContext>()
+                .As<IReadOnlyZetboxContext>()
                 .InstancePerDependency();
         }
 
         protected override string GetConfigFile()
         {
-            return "Kistl.API.Server.Tests.xml";
+            return "Zetbox.API.Server.Tests.xml";
         }
 
         protected override HostType GetHostType()

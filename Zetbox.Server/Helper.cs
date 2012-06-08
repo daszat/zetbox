@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@ namespace Kistl.Server
     using System.ServiceModel;
     using System.Text;
 
-    using Kistl.API.Utils;
-    using Kistl.API;
+    using Zetbox.API.Utils;
+    using Zetbox.API;
 
     /// <summary>
     /// Server Helper
@@ -28,9 +28,9 @@ namespace Kistl.Server
             {
                 throw new FaultException<ConcurrencyException>((ConcurrencyException)ex);
             }
-            else if (ex is InvalidKistlGeneratedVersionException)
+            else if (ex is InvalidZetboxGeneratedVersionException)
             {
-                throw new FaultException<InvalidKistlGeneratedVersionException>((InvalidKistlGeneratedVersionException)ex);
+                throw new FaultException<InvalidZetboxGeneratedVersionException>((InvalidZetboxGeneratedVersionException)ex);
             }
             else
             {

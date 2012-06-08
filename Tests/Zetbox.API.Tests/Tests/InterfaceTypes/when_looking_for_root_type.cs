@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests.InterfaceTypes
+namespace Zetbox.API.Tests.InterfaceTypes
 {
     using System;
     using System.Collections.Generic;

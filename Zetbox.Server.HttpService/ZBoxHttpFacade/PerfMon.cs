@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.HttpService
+namespace Zetbox.Server.HttpService
 {
     using System;
     using System.Collections.Generic;
@@ -9,11 +9,11 @@ namespace Kistl.Server.HttpService
     using System.Web;
     using Autofac;
     using Autofac.Integration.Web;
-    using Kistl.API.Server.PerfCounter;
+    using Zetbox.API.Server.PerfCounter;
 
     public class PerfMonFacade : IHttpHandler
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service.PerfMonFacade");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Service.PerfMonFacade");
 
         public bool IsReusable
         {

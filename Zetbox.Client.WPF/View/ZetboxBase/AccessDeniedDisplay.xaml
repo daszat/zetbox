@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.KistlBase.AccessDeniedDisplay"
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.ZetboxBase.AccessDeniedDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +11,6 @@
                  Text="{Binding AccessDeniedText}" />
       <Image Width="128"
              Height="128"
-             Source="/Kistl.Client.WPF;component/Images/AccessDenied.png" />
+             Source="/Zetbox.Client.WPF;component/Images/AccessDenied.png" />
     </DockPanel>
 </UserControl>

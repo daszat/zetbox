@@ -4,18 +4,18 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
+using Zetbox.API;
+using Zetbox.API.Client;
 
 using NUnit.Framework;
-using Kistl.App.Test;
+using Zetbox.App.Test;
 
-namespace Kistl.IntegrationTests.PersistenceObjects
+namespace Zetbox.IntegrationTests.PersistenceObjects
 {
 
     [TestFixture]
     public class when_changed
-        : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_changed
+        : Zetbox.API.AbstractConsumerTests.PersistenceObjects.when_changed
     {
     }
 

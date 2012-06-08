@@ -1,8 +1,8 @@
-﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.CommandDisplay"
+﻿<ctrls:PropertyEditor x:Class="Zetbox.Client.WPF.View.ZetboxBase.CommandDisplay"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                      ToolTip="{Binding ToolTip}">
     <ctrls:CommandButton x:Name="cmd"
                          CommandViewModel="{Binding}" />

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Models
+namespace Zetbox.Client.Models
 {
     using System;
     using System.Collections;
@@ -8,11 +8,11 @@ namespace Kistl.Client.Models
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
 
     public interface IValueModel : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -77,13 +77,13 @@ namespace Kistl.Client.Models
 
     public interface IBoolValueModel : IValueModel<bool?>
     {
-        Kistl.App.GUI.Icon FalseIcon { get; }
+        Zetbox.App.GUI.Icon FalseIcon { get; }
         string FalseLabel { get; }
 
-        Kistl.App.GUI.Icon NullIcon { get; }
+        Zetbox.App.GUI.Icon NullIcon { get; }
         string NullLabel { get; }
 
-        Kistl.App.GUI.Icon TrueIcon { get; }
+        Zetbox.App.GUI.Icon TrueIcon { get; }
         string TrueLabel { get; }
     }
 

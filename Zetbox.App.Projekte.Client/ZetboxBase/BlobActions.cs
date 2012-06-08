@@ -1,10 +1,10 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// Client implementation
@@ -19,7 +19,7 @@ namespace Kistl.App.Base
         }
 
         [Invocation]
-        public static void Open(Kistl.App.Base.Blob obj)
+        public static void Open(Zetbox.App.Base.Blob obj)
         {
             _fileOpener.ShellExecute(obj.Context.GetFileInfo(obj.ID));
         }

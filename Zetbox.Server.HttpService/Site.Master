@@ -1,6 +1,6 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Kistl.Server.HttpService.Site" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Zetbox.Server.HttpService.Site" %>
 
-<%@ Register TagPrefix="ctrls" Namespace="Kistl.Server.HttpService.Controls" Assembly="Kistl.Server.HttpService" %>
+<%@ Register TagPrefix="ctrls" Namespace="Zetbox.Server.HttpService.Controls" Assembly="Zetbox.Server.HttpService" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -26,7 +26,7 @@
             </div>
             <div id="secondary" class="sidebar">
                 <ctrls:Widget runat="server" Title="<%$ Resources:Strings, ApplicationTitle %>">
-                    <asp:HyperLink runat="server" Text="<%$ Resources:Strings, DownloadApplication %>" NavigateUrl="~/Bootstrapper/Kistl.Client.Bootstrapper.exe" />
+                    <asp:HyperLink runat="server" Text="<%$ Resources:Strings, DownloadApplication %>" NavigateUrl="~/Bootstrapper/Zetbox.Client.Bootstrapper.exe" />
                     <br />
                     <br />
                 </ctrls:Widget>

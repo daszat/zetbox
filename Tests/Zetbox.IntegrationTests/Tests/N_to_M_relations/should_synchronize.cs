@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
+using Zetbox.API;
 
 using NUnit.Framework;
 
-namespace Kistl.IntegrationTests.N_to_M_relations
+namespace Zetbox.IntegrationTests.N_to_M_relations
 {
 
     [TestFixture]
     public class should_synchronize
-        : Kistl.API.AbstractConsumerTests.N_to_M_relations.should_synchronize
+        : Zetbox.API.AbstractConsumerTests.N_to_M_relations.should_synchronize
     {
     }
 }

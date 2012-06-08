@@ -1,18 +1,18 @@
 using System;
 using System.Linq;
 
-using Kistl.API.Client;
-using Kistl.App.Base;
-using Kistl.Client;
-using Kistl.Client.Presentables;
+using Zetbox.API.Client;
+using Zetbox.App.Base;
+using Zetbox.Client;
+using Zetbox.Client.Presentables;
 
 using NUnit.Framework;
 
 using Autofac;
-using Kistl.Client.Presentables.ValueViewModels;
-using Kistl.Client.Models;
+using Zetbox.Client.Presentables.ValueViewModels;
+using Zetbox.Client.Models;
 
-namespace Kistl.IntegrationTests.Presentables.ObjectReferenceModels
+namespace Zetbox.IntegrationTests.Presentables.ObjectReferenceModels
 {
 	[TestFixture]
 	public class should_present_underlying_property_as_value : AbstractIntegrationTestFixture

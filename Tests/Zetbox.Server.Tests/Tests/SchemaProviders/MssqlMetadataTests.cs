@@ -1,12 +1,12 @@
 
-namespace Kistl.Server.Tests.SchemaTests.SchemaProviders
+namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using NUnit.Framework;
-    using Kistl.Server.SchemaManagement.SqlProvider;
+    using Zetbox.Server.SchemaManagement.SqlProvider;
 
     public class MssqlMetadataTests
         : SchemaProviderFixture<SqlServer>

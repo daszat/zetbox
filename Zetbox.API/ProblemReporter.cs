@@ -1,10 +1,10 @@
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
     using System.IO;
     using Autofac;
     using System.Net.Mail;

@@ -1,4 +1,4 @@
-namespace Kistl.DalProvider.Ef.Tests
+namespace Zetbox.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections;
@@ -7,7 +7,7 @@ namespace Kistl.DalProvider.Ef.Tests
     using System.Linq;
     using System.Text;
 
-    using Kistl.API.AbstractConsumerTests;
+    using Zetbox.API.AbstractConsumerTests;
 
     using NUnit.Framework;
     

@@ -8,12 +8,12 @@
     <ProjectGuid>{08902397-B9CA-43DA-8C8D-27DCEC097611}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.API.Server</RootNamespace>
-    <AssemblyName>Kistl.API.Server</AssemblyName>
+    <RootNamespace>Zetbox.API.Server</RootNamespace>
+    <AssemblyName>Zetbox.API.Server</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -26,7 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Server\Core\Kistl.API.Server.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\Core\Zetbox.API.Server.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -36,7 +36,7 @@
     <OutputPath>..\bin\Release\Server\Core\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\bin\Release\Server\Core\Kistl.API.Server.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Server\Core\Zetbox.API.Server.xml</DocumentationFile>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -48,7 +48,7 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\Server\Core\Kistl.API.Server.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Server\Core\Zetbox.API.Server.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -84,21 +84,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApiServerResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="BaseKistlDataContext.cs" />
+    <Compile Include="BaseZetboxDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="DbTypeMapper.cs" />
     <Compile Include="PerfCounter\IPerfCounter.cs" />
     <Compile Include="IServer.cs" />
-    <Compile Include="Kistl.API.Migration\Extensions.cs" />
-    <Compile Include="Kistl.API.Migration\IConverter.cs" />
-    <Compile Include="Kistl.API.Migration\IMigrationTasks.cs" />
-    <Compile Include="Kistl.API.Migration\InputStream.cs" />
-    <Compile Include="Kistl.API.Migration\MigrationException.cs" />
-    <Compile Include="Kistl.API.Migration\MigrationProgram.cs" />
-    <Compile Include="Kistl.API.Migration\MigrationTasksBase.cs" />
-    <Compile Include="Kistl.API.Migration\OutputStream.cs" />
-    <Compile Include="Kistl.API.Migration\Record.cs" />
-    <Compile Include="Kistl.API.Migration\Translator.cs" />
+    <Compile Include="Zetbox.API.Migration\Extensions.cs" />
+    <Compile Include="Zetbox.API.Migration\IConverter.cs" />
+    <Compile Include="Zetbox.API.Migration\IMigrationTasks.cs" />
+    <Compile Include="Zetbox.API.Migration\InputStream.cs" />
+    <Compile Include="Zetbox.API.Migration\MigrationException.cs" />
+    <Compile Include="Zetbox.API.Migration\MigrationProgram.cs" />
+    <Compile Include="Zetbox.API.Migration\MigrationTasksBase.cs" />
+    <Compile Include="Zetbox.API.Migration\OutputStream.cs" />
+    <Compile Include="Zetbox.API.Migration\Record.cs" />
+    <Compile Include="Zetbox.API.Migration\Translator.cs" />
     <Compile Include="PerfCounter\Log4NetAppender.cs" />
     <Compile Include="PerfCounter\MemoryAppender.cs" />
     <Compile Include="PerfCounter\PerfCounter.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="PerfCounter\ResetOnReadAppender.cs" />
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
-    <Compile Include="IKistlServerContext.cs" />
+    <Compile Include="IZetboxServerContext.cs" />
     <Compile Include="ISchemaProvider.cs" />
     <Compile Include="IServerObjectHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,25 +121,25 @@
     <Compile Include="ServerObjectHandlerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.Kistl.API.Server.cd" />
-    <None Include="Kistl.snk" />
+    <None Include="ClassDiagram.Zetbox.API.Server.cd" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ApiServerResources.de.resx" />

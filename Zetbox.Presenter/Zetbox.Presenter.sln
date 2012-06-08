@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C# Express 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Presenter", "Kistl.Presenter.csproj", "{9207494C-BF4F-48CB-9661-A3BE5EF1DAD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Presenter", "Zetbox.Presenter.csproj", "{9207494C-BF4F-48CB-9661-A3BE5EF1DAD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

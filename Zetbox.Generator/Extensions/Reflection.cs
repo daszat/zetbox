@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Extensions
+namespace Zetbox.Generator.Extensions
 {
     using System;
     using System.CodeDom;
@@ -7,8 +7,8 @@ namespace Kistl.Generator.Extensions
     using System.Linq;
     using System.Text;
 
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public static class Reflection
     {

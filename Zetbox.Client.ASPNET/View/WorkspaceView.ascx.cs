@@ -10,10 +10,10 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using Kistl.Client.ASPNET.Toolkit;
-using Kistl.Client;
+using Zetbox.Client.ASPNET.Toolkit;
+using Zetbox.Client;
 
-public partial class View_WorkspaceView : Kistl.Client.ASPNET.Toolkit.View.WorkspaceView
+public partial class View_WorkspaceView : Zetbox.Client.ASPNET.Toolkit.View.WorkspaceView
 {
     protected void Page_Load(object sender, EventArgs e)
     {        

@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generated Code", "Generated
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DalProviders", "DalProviders", "{0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server", "Kistl.Server\Kistl.Server.csproj", "{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server", "Zetbox.Server\Zetbox.Server.csproj", "{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324} = {B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}
 		{7E3CE048-00C1-4357-BE27-801AB5B75FE3} = {7E3CE048-00C1-4357-BE27-801AB5B75FE3}
@@ -24,25 +24,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server", "Kistl.Serve
 		{E1275AE6-5060-4E93-88D8-BA48BA52DC7A} = {E1275AE6-5060-4E93-88D8-BA48BA52DC7A}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client", "Kistl.Client\Kistl.Client.csproj", "{A736E13F-D349-4CE5-A397-8438F58D0B9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client", "Zetbox.Client\Zetbox.Client.csproj", "{A736E13F-D349-4CE5-A397-8438F58D0B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API", "Kistl.API\Kistl.API.csproj", "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API", "Zetbox.API\Zetbox.API.csproj", "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Client", "Kistl.API.Client\Kistl.API.Client.csproj", "{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.Client", "Zetbox.API.Client\Zetbox.API.Client.csproj", "{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Server", "Kistl.API.Server\Kistl.API.Server.csproj", "{08902397-B9CA-43DA-8C8D-27DCEC097611}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.Server", "Zetbox.API.Server\Zetbox.API.Server.csproj", "{08902397-B9CA-43DA-8C8D-27DCEC097611}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.App.Projekte.Client", "Kistl.App.Projekte.Client\Kistl.App.Projekte.Client.csproj", "{379A67E8-388E-47B6-A591-5D4C05DAFBDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.App.Projekte.Client", "Zetbox.App.Projekte.Client\Zetbox.App.Projekte.Client.csproj", "{379A67E8-388E-47B6-A591-5D4C05DAFBDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.App.Projekte.Server", "Kistl.App.Projekte.Server\Kistl.App.Projekte.Server.csproj", "{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.App.Projekte.Server", "Zetbox.App.Projekte.Server\Zetbox.App.Projekte.Server.csproj", "{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Client.Tests", "Tests\Kistl.API.Client.Tests\Kistl.API.Client.Tests.csproj", "{382F1331-A177-4B38-A3E7-6D1B9A0F812B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.Client.Tests", "Tests\Zetbox.API.Client.Tests\Zetbox.API.Client.Tests.csproj", "{382F1331-A177-4B38-A3E7-6D1B9A0F812B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Server.Tests", "Tests\Kistl.API.Server.Tests\Kistl.API.Server.Tests.csproj", "{980874F0-D9C1-4EDB-8143-AD51C1E2666E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.Server.Tests", "Tests\Zetbox.API.Server.Tests\Zetbox.API.Server.Tests.csproj", "{980874F0-D9C1-4EDB-8143-AD51C1E2666E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Tests", "Tests\Kistl.API.Tests\Kistl.API.Tests.csproj", "{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.Tests", "Tests\Zetbox.API.Tests\Zetbox.API.Tests.csproj", "{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.IntegrationTests", "Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.csproj", "{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.IntegrationTests", "Tests\Zetbox.IntegrationTests\Zetbox.IntegrationTests.csproj", "{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C0992804-A195-4087-B77C-910ABEAB74B9} = {C0992804-A195-4087-B77C-910ABEAB74B9}
 		{7E3CE048-00C1-4357-BE27-801AB5B75FE3} = {7E3CE048-00C1-4357-BE27-801AB5B75FE3}
@@ -92,11 +92,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompleteTests", "Tests\Comp
 		{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711} = {52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Tests", "Tests\Kistl.Client.Tests\Kistl.Client.Tests.csproj", "{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.Tests", "Tests\Zetbox.Client.Tests\Zetbox.Client.Tests.csproj", "{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.Tests", "Tests\Kistl.Server.Tests\Kistl.Server.Tests.csproj", "{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server.Tests", "Tests\Zetbox.Server.Tests\Zetbox.Server.Tests.csproj", "{C93A48F5-8DF9-4A40-BB3B-FDE1CA9D6BA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.EF.Tests", "Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.csproj", "{980874F0-D9C1-4EDB-8143-AD51C1E2666F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.EF.Tests", "Tests\Zetbox.DalProvider.EF.Tests\Zetbox.DalProvider.EF.Tests.csproj", "{980874F0-D9C1-4EDB-8143-AD51C1E2666F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C0992804-A195-4087-B77C-910ABEAB74B9} = {C0992804-A195-4087-B77C-910ABEAB74B9}
 		{7E3CE048-00C1-4357-BE27-801AB5B75FE3} = {7E3CE048-00C1-4357-BE27-801AB5B75FE3}
@@ -104,28 +104,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.EF.Tests"
 		{01E60FD5-CD96-466A-83B1-8EFC7452B47C} = {01E60FD5-CD96-466A-83B1-8EFC7452B47C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Mocks", "Tests\Kistl.API.Mocks\Kistl.API.Mocks.csproj", "{95E39A40-35BC-4214-86E5-EE451C138EE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.Mocks", "Tests\Zetbox.API.Mocks\Zetbox.API.Mocks.csproj", "{95E39A40-35BC-4214-86E5-EE451C138EE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.AbstractConsumerTests", "Tests\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj", "{1EEA57CD-4824-4A14-9447-3BD0E57997F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.AbstractConsumerTests", "Tests\Zetbox.API.AbstractConsumerTests\Zetbox.API.AbstractConsumerTests.csproj", "{1EEA57CD-4824-4A14-9447-3BD0E57997F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.ClientObjects.Tests", "Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.csproj", "{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.ClientObjects.Tests", "Tests\Zetbox.DalProvider.ClientObjects.Tests\Zetbox.DalProvider.ClientObjects.Tests.csproj", "{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.ASPNET.Toolkit", "Kistl.Client.ASPNET.Toolkit\Kistl.Client.ASPNET.Toolkit.csproj", "{04656394-60EA-4675-95EE-3DA6D07BAB89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.ASPNET.Toolkit", "Zetbox.Client.ASPNET.Toolkit\Zetbox.Client.ASPNET.Toolkit.csproj", "{04656394-60EA-4675-95EE-3DA6D07BAB89}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Kistl.Client.ASPNET", "Kistl.Client.ASPNET\", "{CBE35A83-01BB-4F10-93E3-241784A22620}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Zetbox.Client.ASPNET", "Zetbox.Client.ASPNET\", "{CBE35A83-01BB-4F10-93E3-241784A22620}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
-		ProjectReferences = "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}|Kistl.API.dll;{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}|Kistl.API.Client.dll;{A736E13F-D349-4CE5-A397-8438F58D0B9D}|Kistl.Client.dll;{04656394-60EA-4675-95EE-3DA6D07BAB89}|Kistl.Client.ASPNET.Toolkit.dll;{0C9E6E69-309F-46F7-A936-D5762229DEB9}|Kistl.Objects.dll;{9677AE11-CB92-4F0A-A248-87A21586F0DA}|Kistl.API.Common.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/Kistl.Client.ASPNET"
-		Debug.AspNetCompiler.PhysicalPath = "Kistl.Client.ASPNET\"
-		Debug.AspNetCompiler.TargetPath = "bin\Kistl.Client.ASPNET\"
+		ProjectReferences = "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}|Zetbox.API.dll;{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}|Zetbox.API.Client.dll;{A736E13F-D349-4CE5-A397-8438F58D0B9D}|Zetbox.Client.dll;{04656394-60EA-4675-95EE-3DA6D07BAB89}|Zetbox.Client.ASPNET.Toolkit.dll;{0C9E6E69-309F-46F7-A936-D5762229DEB9}|Zetbox.Objects.dll;{9677AE11-CB92-4F0A-A248-87A21586F0DA}|Zetbox.API.Common.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/Zetbox.Client.ASPNET"
+		Debug.AspNetCompiler.PhysicalPath = "Zetbox.Client.ASPNET\"
+		Debug.AspNetCompiler.TargetPath = "bin\Zetbox.Client.ASPNET\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/Kistl.Client.ASPNET"
-		Release.AspNetCompiler.PhysicalPath = "Kistl.Client.ASPNET\"
-		Release.AspNetCompiler.TargetPath = "bin\Kistl.Client.ASPNET\"
+		Release.AspNetCompiler.VirtualPath = "/Zetbox.Client.ASPNET"
+		Release.AspNetCompiler.PhysicalPath = "Zetbox.Client.ASPNET\"
+		Release.AspNetCompiler.TargetPath = "bin\Zetbox.Client.ASPNET\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
@@ -133,7 +133,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Kistl.Client.ASPNET", "Kist
 		VWDPort = "60509"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.WPF", "Kistl.Client.WPF\Kistl.Client.WPF.csproj", "{2C899579-BF78-442B-8810-8C7E7A2CA212}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.WPF", "Zetbox.Client.WPF\Zetbox.Client.WPF.csproj", "{2C899579-BF78-442B-8810-8C7E7A2CA212}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B1AE679D-BA5A-4E70-8D21-D99C46A34F79} = {B1AE679D-BA5A-4E70-8D21-D99C46A34F79}
 		{379A67E8-388E-47B6-A591-5D4C05DAFBDB} = {379A67E8-388E-47B6-A591-5D4C05DAFBDB}
@@ -141,22 +141,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.WPF", "Kistl.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFSamplesLib", "WPFLibrary\WPFSamplesLib.csproj", "{E4BBC94F-B837-4668-A127-E36E6DE012F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects", "Kistl.Objects\Kistl.Objects.csproj", "{0C9E6E69-309F-46F7-A936-D5762229DEB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Objects", "Zetbox.Objects\Zetbox.Objects.csproj", "{0C9E6E69-309F-46F7-A936-D5762229DEB9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.EF", "Kistl.DalProvider.EF\Kistl.DalProvider.EF.csproj", "{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.EF", "Zetbox.DalProvider.EF\Zetbox.DalProvider.EF.csproj", "{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Forms", "Kistl.Client.Forms\Kistl.Client.Forms.csproj", "{C701ED04-08B2-4ABA-B2D3-33502690C8DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.Forms", "Zetbox.Client.Forms\Zetbox.Client.Forms.csproj", "{C701ED04-08B2-4ABA-B2D3-33502690C8DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Common", "Kistl.API.Common\Kistl.API.Common.csproj", "{9677AE11-CB92-4F0A-A248-87A21586F0DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.API.Common", "Zetbox.API.Common\Zetbox.API.Common.csproj", "{9677AE11-CB92-4F0A-A248-87A21586F0DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.ClientObjects", "Kistl.DalProvider.ClientObjects\Kistl.DalProvider.ClientObjects.csproj", "{3760694D-3B35-41D4-B1A3-41BB288AA19F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.ClientObjects", "Zetbox.DalProvider.ClientObjects\Zetbox.DalProvider.ClientObjects.csproj", "{3760694D-3B35-41D4-B1A3-41BB288AA19F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.App.Projekte.Common", "Kistl.App.Projekte.Common\Kistl.App.Projekte.Common.csproj", "{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.App.Projekte.Common", "Zetbox.App.Projekte.Common\Zetbox.App.Projekte.Common.csproj", "{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.Service", "Kistl.Server.Service\Kistl.Server.Service.csproj", "{4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server.Service", "Zetbox.Server.Service\Zetbox.Server.Service.csproj", "{4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A2C68E17-5B32-4F4E-B83A-DC7122623FDD} = {A2C68E17-5B32-4F4E-B83A-DC7122623FDD}
 		{4992171F-DA41-401C-8869-63594ACF2D93} = {4992171F-DA41-401C-8869-63594ACF2D93}
@@ -173,36 +173,36 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.Service", "Kis
 		{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711} = {52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Memory", "Kistl.DalProvider.Memory\Kistl.DalProvider.Memory.csproj", "{7E3CE048-00C1-4357-BE27-801AB5B75FE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Memory", "Zetbox.DalProvider.Memory\Zetbox.DalProvider.Memory.csproj", "{7E3CE048-00C1-4357-BE27-801AB5B75FE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Memory.Tests", "Tests\Kistl.DalProvider.Memory.Tests\Kistl.DalProvider.Memory.Tests.csproj", "{CF5E170F-DC31-4AAE-AFFC-8BECA0B366EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Memory.Tests", "Tests\Zetbox.DalProvider.Memory.Tests\Zetbox.DalProvider.Memory.Tests.csproj", "{CF5E170F-DC31-4AAE-AFFC-8BECA0B366EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Memory.Generator", "Kistl.DalProvider.Memory.Generator\Kistl.DalProvider.Memory.Generator.csproj", "{2CE191A7-1E73-4E7E-A8AB-545B3B33325D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Memory.Generator", "Zetbox.DalProvider.Memory.Generator\Zetbox.DalProvider.Memory.Generator.csproj", "{2CE191A7-1E73-4E7E-A8AB-545B3B33325D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7E3CE048-00C1-4357-BE27-801AB5B75FE3} = {7E3CE048-00C1-4357-BE27-801AB5B75FE3}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Memory", "Kistl.Objects.Memory\Kistl.Objects.Memory.csproj", "{01E60FD5-CD96-466A-83B1-8EFC7452B47C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Objects.Memory", "Zetbox.Objects.Memory\Zetbox.Objects.Memory.csproj", "{01E60FD5-CD96-466A-83B1-8EFC7452B47C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7E3CE048-00C1-4357-BE27-801AB5B75FE3} = {7E3CE048-00C1-4357-BE27-801AB5B75FE3}
 		{A242A751-9F97-4F1C-ABE5-57B28133DEF4} = {A242A751-9F97-4F1C-ABE5-57B28133DEF4}
 		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.Service32", "Kistl.Server.Service32\Kistl.Server.Service32.csproj", "{0CEA5784-6783-4B04-A653-F896DCD89883}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server.Service32", "Zetbox.Server.Service32\Zetbox.Server.Service32.csproj", "{0CEA5784-6783-4B04-A653-F896DCD89883}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.WPF.Toolkit", "Kistl.Client.WPF.Toolkit\Kistl.Client.WPF.Toolkit.csproj", "{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.WPF.Toolkit", "Zetbox.Client.WPF.Toolkit\Zetbox.Client.WPF.Toolkit.csproj", "{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.NHibernate", "Kistl.DalProvider.NHibernate\Kistl.DalProvider.NHibernate.csproj", "{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.NHibernate", "Zetbox.DalProvider.NHibernate\Zetbox.DalProvider.NHibernate.csproj", "{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.NHibernate.Generator", "Kistl.DalProvider.NHibernate.Generator\Kistl.DalProvider.NHibernate.Generator.csproj", "{5EEF01A2-C027-4B1E-9D7D-61DEF2042047}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.NHibernate.Generator", "Zetbox.DalProvider.NHibernate.Generator\Zetbox.DalProvider.NHibernate.Generator.csproj", "{5EEF01A2-C027-4B1E-9D7D-61DEF2042047}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324} = {B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Generator", "Kistl.Generator\Kistl.Generator.csproj", "{4992171F-DA41-401C-8869-63594ACF2D93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Generator", "Zetbox.Generator\Zetbox.Generator.csproj", "{4992171F-DA41-401C-8869-63594ACF2D93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Ef", "Kistl.Objects.Ef\Kistl.Objects.Ef.csproj", "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Objects.Ef", "Zetbox.Objects.Ef\Zetbox.Objects.Ef.csproj", "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A242A751-9F97-4F1C-ABE5-57B28133DEF4} = {A242A751-9F97-4F1C-ABE5-57B28133DEF4}
 		{08902397-B9CA-43DA-8C8D-27DCEC097611} = {08902397-B9CA-43DA-8C8D-27DCEC097611}
@@ -210,24 +210,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Ef", "Kistl.O
 		{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711} = {52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Client.Generator", "Kistl.DalProvider.Client.Generator\Kistl.DalProvider.Client.Generator.csproj", "{F81E2AB4-0622-40A3-B7E3-9FAC0EE4A31B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Client.Generator", "Zetbox.DalProvider.Client.Generator\Zetbox.DalProvider.Client.Generator.csproj", "{F81E2AB4-0622-40A3-B7E3-9FAC0EE4A31B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.EF.Generator", "Kistl.DalProvider.EF.Generator\Kistl.DalProvider.EF.Generator.csproj", "{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.EF.Generator", "Zetbox.DalProvider.EF.Generator\Zetbox.DalProvider.EF.Generator.csproj", "{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Base", "Kistl.DalProvider.Base\Kistl.DalProvider.Base.csproj", "{A242A751-9F97-4F1C-ABE5-57B28133DEF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Base", "Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj", "{A242A751-9F97-4F1C-ABE5-57B28133DEF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Tests.Utilities.MsSql", "Tests\Kistl.Tests.Utilities.MsSql\Kistl.Tests.Utilities.MsSql.csproj", "{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Tests.Utilities.MsSql", "Tests\Zetbox.Tests.Utilities.MsSql\Zetbox.Tests.Utilities.MsSql.csproj", "{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Tests.Utilities.PostgreSql", "Tests\Kistl.Tests.Utilities.PostgreSql\Kistl.Tests.Utilities.PostgreSql.csproj", "{C0992804-A195-4087-B77C-910ABEAB74B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Tests.Utilities.PostgreSql", "Tests\Zetbox.Tests.Utilities.PostgreSql\Zetbox.Tests.Utilities.PostgreSql.csproj", "{C0992804-A195-4087-B77C-910ABEAB74B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Bootstrapper", "Kistl.Client.Bootstrapper\Kistl.Client.Bootstrapper.csproj", "{8D980F88-514B-44F0-A9B3-B9195FAD33FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.Bootstrapper", "Zetbox.Client.Bootstrapper\Zetbox.Client.Bootstrapper.csproj", "{8D980F88-514B-44F0-A9B3-B9195FAD33FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.NHibernate.Tests", "Tests\Kistl.DalProvider.NHibernate.Tests\Kistl.DalProvider.NHibernate.Tests.csproj", "{A77331CC-350D-472D-8737-AAB47AF5A4D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.NHibernate.Tests", "Tests\Zetbox.DalProvider.NHibernate.Tests\Zetbox.DalProvider.NHibernate.Tests.csproj", "{A77331CC-350D-472D-8737-AAB47AF5A4D8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C0992804-A195-4087-B77C-910ABEAB74B9} = {C0992804-A195-4087-B77C-910ABEAB74B9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.NHibernate", "Kistl.Objects.NHibernate\Kistl.Objects.NHibernate.csproj", "{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Objects.NHibernate", "Zetbox.Objects.NHibernate\Zetbox.Objects.NHibernate.csproj", "{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324} = {B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}
 		{A242A751-9F97-4F1C-ABE5-57B28133DEF4} = {A242A751-9F97-4F1C-ABE5-57B28133DEF4}
@@ -235,14 +235,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.NHibernate", 
 		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Unix", "Kistl.Unix\Kistl.Unix.csproj", "{36180B60-667C-485D-8DAC-304F27EA6EFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Unix", "Zetbox.Unix\Zetbox.Unix.csproj", "{36180B60-667C-485D-8DAC-304F27EA6EFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.HttpService", "Kistl.Server.HttpService\Kistl.Server.HttpService.csproj", "{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server.HttpService", "Zetbox.Server.HttpService\Zetbox.Server.HttpService.csproj", "{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{26C035B1-A53D-44E0-BEED-CB97EC56B38E} = {26C035B1-A53D-44E0-BEED-CB97EC56B38E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Microsoft", "Kistl.Microsoft\Kistl.Microsoft.csproj", "{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Microsoft", "Zetbox.Microsoft\Zetbox.Microsoft.csproj", "{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepareEnv", "PrepareEnv\PrepareEnv.csproj", "{39C24036-DD89-40C7-8196-1E7D3A817D5E}"
 EndProject

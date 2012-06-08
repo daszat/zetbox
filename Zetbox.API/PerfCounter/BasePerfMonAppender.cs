@@ -1,11 +1,11 @@
 
-namespace Kistl.API.PerfCounter
+namespace Zetbox.API.PerfCounter
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API.Utils;
+    using Zetbox.API.Utils;
     using System.Diagnostics;
 
     public abstract class BasePerfMonAppender : IBasePerfCounterAppender
@@ -25,7 +25,7 @@ namespace Kistl.API.PerfCounter
         PerformanceCounter _ServerMethodInvocationTotal;
         #endregion
 
-        public BasePerfMonAppender(Kistl.API.Configuration.KistlConfig cfg)
+        public BasePerfMonAppender(Zetbox.API.Configuration.ZetboxConfig cfg)
         {
             if (cfg == null) throw new ArgumentNullException("cfg");
             //InstanceName = string.Format("{0} - {1}", AppDomain.CurrentDomain.FriendlyName, Process.GetCurrentProcess().Id);
@@ -136,7 +136,7 @@ namespace Kistl.API.PerfCounter
                 counters.Add(desc.Create());
             }
 
-            PerformanceCounterCategory.Create(Category, "A custom counter category that tracks Kistl executions",
+            PerformanceCounterCategory.Create(Category, "A custom counter category that tracks Zetbox executions",
                 PerformanceCounterCategoryType.MultiInstance, counters);
             Logging.Log.Info("Performance counter sucessfully installed");
         }
@@ -157,7 +157,7 @@ namespace Kistl.API.PerfCounter
             if (!PerformanceCounterCategory.Exists(Category))
             {
                 initialized = false;
-                Logging.Log.Warn("PerfCounters are not installed, execute 'sudo Kistl.*.exe -installperfcounter'");
+                Logging.Log.Warn("PerfCounters are not installed, execute 'sudo Zetbox.*.exe -installperfcounter'");
                 return;
             }
 

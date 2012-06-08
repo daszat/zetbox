@@ -1,21 +1,21 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class CompoundObjectPropertyHbm
     {
         public static void Call(
             Arebis.CodeGeneration.IGenerationHost _host,
-            IKistlContext ctx,
+            IZetboxContext ctx,
             string prefix,
             CompoundObjectProperty prop,
             string propName,
@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
             columnName = string.IsNullOrEmpty(columnName) ? propName : columnName;
-            string valueClassAttr = String.Format("class=\"{0}.{1}{2},Kistl.Objects.NHibernateImpl\"",
+            string valueClassAttr = String.Format("class=\"{0}.{1}{2},Zetbox.Objects.NHibernateImpl\"",
                 prop.CompoundObjectDefinition.Module.Namespace,
                 prop.CompoundObjectDefinition.Name,
                 implementationSuffix);
@@ -44,7 +44,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             if (prop.IsList && !forceDefinition)
             {
                 // set the proper type for collection entries
-                ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Kistl.Objects.NHibernateImpl\"",
+                ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Zetbox.Objects.NHibernateImpl\"",
                     prop.GetCollectionEntryNamespace(),
                     prop.GetCollectionEntryClassName(),
                     implementationSuffix);

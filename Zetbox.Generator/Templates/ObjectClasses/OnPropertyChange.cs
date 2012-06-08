@@ -1,12 +1,12 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     public partial class OnPropertyChange
     {

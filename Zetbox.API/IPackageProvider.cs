@@ -1,5 +1,5 @@
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Kistl.API
         : IDisposable
     {
         /// <summary>
-        /// The stream of ZBox content
+        /// The stream of Zetbox content
         /// </summary>
         Stream Data { get; }
 

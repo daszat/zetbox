@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.Serialization
+namespace Zetbox.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst")]
-    public partial class SimplePropertySerialization : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst")]
+    public partial class SimplePropertySerialization : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected SerializerDirection direction;
 		protected string streamName;
 		protected string xmlnamespace;
@@ -21,14 +21,14 @@ namespace Kistl.Generator.Templates.Serialization
 		protected string memberName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Serialization.SimplePropertySerialization", ctx, direction, streamName, xmlnamespace, xmlname, memberType, memberName);
         }
 
-        public SimplePropertySerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName)
+        public SimplePropertySerialization(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -43,34 +43,34 @@ namespace Kistl.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 20 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 20 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
-#line 24 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 24 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 this.WriteObjects("            ",  streamName , ".Write(this.",  memberName , ");\r\n");
-#line 26 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 26 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
-#line 29 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 29 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 this.WriteObjects("            this.",  memberName , " = ",  streamName , ".",  memberType.SerializerReadMethod() , "();\r\n");
-#line 31 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 31 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 34 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 34 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 36 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 36 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 39 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 39 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\r\n");
 this.WriteObjects("                break;\r\n");
-#line 43 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimplePropertySerialization.cst"
+#line 43 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

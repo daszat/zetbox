@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.API.Tests
     using System.Linq;
     using System.Text;
 
-    using Kistl.API.Mocks;
+    using Zetbox.API.Mocks;
 
     using NUnit.Framework;
 

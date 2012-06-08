@@ -2,7 +2,7 @@
   <TemplateData>
     <DefaultName>ViewModel.cs</DefaultName>
     <Name>ViewModel</Name>
-    <Description>ZBox ViewModel</Description>
+    <Description>Zetbox ViewModel</Description>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>10</SortOrder>
     <Icon>__TemplateIcon.ico</Icon>

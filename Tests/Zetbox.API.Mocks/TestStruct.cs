@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Mocks
+namespace Zetbox.API.Mocks
 {
     using System;
     using System.Collections.Generic;
@@ -19,13 +19,13 @@ namespace Kistl.API.Mocks
         {
         }
 
-        public override void ToStream(KistlStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        public override void ToStream(ZetboxStreamWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             sw.Write(TestProperty);
         }
 
-        public override IEnumerable<IPersistenceObject> FromStream(KistlStreamReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(ZetboxStreamReader sr)
         {
             var baseResult = base.FromStream(sr);
             TestProperty = sr.ReadString();

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF
+namespace Zetbox.Client.WPF
 {
     using System;
     using System.Collections.Generic;
@@ -8,13 +8,13 @@ namespace Kistl.Client.WPF
     using System.Windows;
     using System.Windows.Threading;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Client.PerfCounter;
-    using Kistl.API.Configuration;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.WPF.Toolkit;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Configuration;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.WPF.Toolkit;
     using Microsoft.Win32;
 
     public class WpfModelFactory
@@ -22,16 +22,16 @@ namespace Kistl.Client.WPF
     {
         private readonly IUiThreadManager uiThread;
 
-        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
             : base(container, frozenCtx, cfg, perfCounter)
         {
             this.uiThread = uiThread;
         }
 
         /// <inheritdoc/>
-        public override Kistl.App.GUI.Toolkit Toolkit
+        public override Zetbox.App.GUI.Toolkit Toolkit
         {
-            get { return Kistl.App.GUI.Toolkit.WPF; }
+            get { return Zetbox.App.GUI.Toolkit.WPF; }
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Kistl.Client.WPF
             return view;
         }
 
-        protected override object CreateSpecificView(ViewModel mdl, Kistl.App.GUI.ControlKind kind)
+        protected override object CreateSpecificView(ViewModel mdl, Zetbox.App.GUI.ControlKind kind)
         {
             System.Windows.Controls.Control view = (System.Windows.Controls.Control)base.CreateSpecificView(mdl, kind);
             if (view != null) view.DataContext = mdl;

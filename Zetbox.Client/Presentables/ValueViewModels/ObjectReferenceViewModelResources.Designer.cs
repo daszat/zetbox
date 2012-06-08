@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Presentables.ValueViewModels {
+namespace Zetbox.Client.Presentables.ValueViewModels {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables.ValueViewModels {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Presentables.ValueViewModels.ObjectReferenceViewModelResources", typeof(ObjectReferenceViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.ValueViewModels.ObjectReferenceViewModelResources", typeof(ObjectReferenceViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

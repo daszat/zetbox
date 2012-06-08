@@ -1,12 +1,12 @@
 
-namespace Kistl.DalProvider.Base.RelationWrappers
+namespace Zetbox.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     /// <summary>
     /// A wrapper around a Collection of CollectionEntrys to present one "side" as normal collection.

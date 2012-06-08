@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Tests.Serializables
+namespace Zetbox.API.Tests.Serializables
 {
 	using System;
 	using System.Collections.Generic;

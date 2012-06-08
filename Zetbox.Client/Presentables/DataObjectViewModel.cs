@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -10,14 +10,14 @@ namespace Kistl.Client.Presentables
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Proxies a whole IDataObject
@@ -25,15 +25,15 @@ namespace Kistl.Client.Presentables
     public class DataObjectViewModel
         : ViewModel, IDataErrorInfo
     {
-        public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, ViewModel parent, IDataObject obj);
+        public new delegate DataObjectViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IDataObject obj);
 
-        public static DataObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, IDataObject obj)
+        public static DataObjectViewModel Fetch(IViewModelFactory f, IZetboxContext dataCtx, ViewModel parent, IDataObject obj)
         {
             return (DataObjectViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(obj, () => f.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(dataCtx, parent, obj));
         }
 
         public DataObjectViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             IDataObject obj)
             : base(appCtx, dataCtx, parent)
         {
@@ -454,7 +454,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                if (Object.CurrentAccessRights.HasNoRights()) return Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_AccessDeniedDataObjectKind.Find(FrozenContext);
+                if (Object.CurrentAccessRights.HasNoRights()) return Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_AccessDeniedDataObjectKind.Find(FrozenContext);
                 return base.RequestedKind ?? _object.GetObjectClass(FrozenContext).RequestedKind;
             }
             set

@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client
+namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Kistl.DalProvider.Client
     using System.Linq.Expressions;
     using System.Text;
 
-    using Kistl.API;
+    using Zetbox.API;
 
     internal static class ConstantEvaluator
     {
@@ -53,7 +53,7 @@ namespace Kistl.DalProvider.Client
                     return e;
                 }
                 LambdaExpression lambda = Expression.Lambda(e);
-                // TODO: The following line is _the_only_ (85% of KistlContext.Find()) performance Hotspot for Linq2Kistl
+                // TODO: The following line is _the_only_ (85% of ZetboxContext.Find()) performance Hotspot for Linq2Zetbox
                 Delegate fn = lambda.Compile();
                 return Expression.Constant(fn.DynamicInvoke(null), e.Type);
             }
@@ -100,7 +100,7 @@ namespace Kistl.DalProvider.Client
             private bool CanBeEvaluatedLocally(Expression expression)
             {
                 if (expression.NodeType == ExpressionType.Parameter) return false;
-                if (expression.Type.IsGenericType && expression.Type.GetGenericTypeDefinition() == typeof(KistlContextQuery<>)) return false;
+                if (expression.Type.IsGenericType && expression.Type.GetGenericTypeDefinition() == typeof(ZetboxContextQuery<>)) return false;
                 return true;
             }
         }

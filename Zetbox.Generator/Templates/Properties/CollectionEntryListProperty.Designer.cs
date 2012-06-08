@@ -1,17 +1,17 @@
 using System;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.Properties
+namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst")]
-    public partial class CollectionEntryListProperty : Kistl.Generator.MemberTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst")]
+    public partial class CollectionEntryListProperty : Zetbox.Generator.MemberTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected Serialization.SerializationMembersList serializationList;
 		protected string name;
 		protected string exposedCollectionInterface;
@@ -27,14 +27,14 @@ namespace Kistl.Generator.Templates.Properties
 		protected bool eagerLoading;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, Guid relId, RelationEndRole role, bool eagerLoading)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, Guid relId, RelationEndRole role, bool eagerLoading)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Properties.CollectionEntryListProperty", ctx, serializationList, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, relId, role, eagerLoading);
         }
 
-        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, Guid relId, RelationEndRole role, bool eagerLoading)
+        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, Guid relId, RelationEndRole role, bool eagerLoading)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -56,7 +56,7 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 25 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 25 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
@@ -64,24 +64,24 @@ this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				if (",  backingName , " == null)\r\n");
 this.WriteObjects("				{\r\n");
-#line 33 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 33 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 // eagerly loaded relation already has the objects loaded
 	if (!eagerLoading)
 	{
 
-#line 37 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 37 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("					Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-#line 39 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 39 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
 	else
 	{
 
-#line 43 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 43 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("					if (!",  name , "_was_eagerLoaded) Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
-#line 45 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 45 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
 
-#line 47 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 47 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("					",  backingName , " \r\n");
 this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">>(\r\n");
 this.WriteObjects("							this, \r\n");
@@ -92,14 +92,14 @@ this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">> ",  backingName , ";\r\n");
-#line 58 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 58 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (eagerLoading)
 	{
 
-#line 60 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 60 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("		\r\n");
 this.WriteObjects("		private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 63 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 63 "P:\Zetbox\Zetbox.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
         AddSerialization(serializationList, name, eagerLoading);
 

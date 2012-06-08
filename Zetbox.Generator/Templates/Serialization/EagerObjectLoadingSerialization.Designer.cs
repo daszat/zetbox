@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.Generator;
-using Kistl.Generator.Extensions;
+using Zetbox.API;
+using Zetbox.API.Server;
+using Zetbox.App.Base;
+using Zetbox.Generator;
+using Zetbox.Generator.Extensions;
 
 
-namespace Kistl.Generator.Templates.Serialization
+namespace Zetbox.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst")]
-    public partial class EagerObjectLoadingSerialization : Kistl.Generator.ResourceTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst")]
+    public partial class EagerObjectLoadingSerialization : Zetbox.Generator.ResourceTemplate
     {
-		protected IKistlContext ctx;
+		protected IZetboxContext ctx;
 		protected SerializerDirection direction;
 		protected string streamName;
 		protected string xmlnamespace;
@@ -20,14 +20,14 @@ namespace Kistl.Generator.Templates.Serialization
 		protected string propertyName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string propertyName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string propertyName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
             _host.CallTemplate("Serialization.EagerObjectLoadingSerialization", ctx, direction, streamName, xmlnamespace, xmlname, propertyName);
         }
 
-        public EagerObjectLoadingSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string propertyName)
+        public EagerObjectLoadingSerialization(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string propertyName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -41,16 +41,16 @@ namespace Kistl.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 20 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
+#line 20 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
-#line 24 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
+#line 24 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 this.WriteObjects("            if (auxObjects != null) {\r\n");
 this.WriteObjects("                auxObjects.Add(",  propertyName , ");\r\n");
 this.WriteObjects("            }\r\n");
-#line 28 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
+#line 28 "P:\Zetbox\Zetbox.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 break;
         case SerializerDirection.FromStream:
             break;

@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
     using System;
     using System.Collections.Generic;
@@ -7,10 +7,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.Generator;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.Generator;
+    using Zetbox.App.Extensions;
 
     public partial class ObjectClassHbm
     {
@@ -22,9 +22,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string extraSuffix = templateSettings["extrasuffix"];
 
             return cls.Module.Namespace + "."
-                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
+                + cls.Name + extraSuffix + Zetbox.API.Helper.ImplementationSuffix
                 + "+" + cls.Name + "Proxy"
-                + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+                + ", Zetbox.Objects." + extraSuffix + Zetbox.API.Helper.ImplementationSuffix;
         }
 
         public static string GetProxyTypeReference(ObjectClass cls, NameValueCollection templateSettings)
@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string extraSuffix = templateSettings["extrasuffix"];
 
             return cls.Module.Namespace + "."
-                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
+                + cls.Name + extraSuffix + Zetbox.API.Helper.ImplementationSuffix
                 + "." + cls.Name + "Proxy";
         }
 
@@ -47,10 +47,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string extraSuffix = templateSettings["extrasuffix"];
 
             return cls.Module.Namespace + "."
-                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+                + cls.Name + extraSuffix + Zetbox.API.Helper.ImplementationSuffix;
         }
 
-        public static object[] MakeArgs(IKistlContext ctx, ObjectClass cls, NameValueCollection templateSettings)
+        public static object[] MakeArgs(IZetboxContext ctx, ObjectClass cls, NameValueCollection templateSettings)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (cls == null) { throw new ArgumentNullException("cls"); }
@@ -58,7 +58,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             string extraSuffix = templateSettings["extrasuffix"];
             string interfaceName = cls.Name;
-            string implementationName = cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+            string implementationName = cls.Name + extraSuffix + Zetbox.API.Helper.ImplementationSuffix;
             string schemaName = cls.Module.SchemaName;
             string tableName = cls.TableName;
 
@@ -72,8 +72,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             bool needsRightTable = Templates.ObjectClasses.Template.NeedsRightsTable(cls);
             string qualifiedRightsClassName =
                 cls.Module.Namespace + "."
-                + Construct.SecurityRulesClassName(cls) + extraSuffix + Kistl.API.Helper.ImplementationSuffix
-                + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+                + Construct.SecurityRulesClassName(cls) + extraSuffix + Zetbox.API.Helper.ImplementationSuffix
+                + ", Zetbox.Objects." + extraSuffix + Zetbox.API.Helper.ImplementationSuffix;
 
             bool needsConcurrency = cls.ImplementsIChangedBy(true);
 

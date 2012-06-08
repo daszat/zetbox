@@ -1,14 +1,14 @@
 
 
-namespace Kistl.Generator.InterfaceTemplates
+namespace Zetbox.Generator.InterfaceTemplates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     internal sealed class NamedObjectDescriptor
     {
@@ -22,7 +22,7 @@ namespace Kistl.Generator.InterfaceTemplates
 
     public partial class NamedObjects
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.InterfaceTemplates.NamedObjects");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.InterfaceTemplates.NamedObjects");
 
         private List<string> currentPrefix;
         private string currentPrefixString;

@@ -4,17 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Autofac;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
+using Zetbox.API.Configuration;
+using Zetbox.API.Utils;
 
-namespace Kistl.API
+namespace Zetbox.API
 {
     public abstract class CmdLineData : Option
     {
-        private readonly KistlConfig _config;
+        private readonly ZetboxConfig _config;
         private readonly object _dataKey;
 
-        public CmdLineData(KistlConfig config, string prototype, string description, object dataKey, int maxValueCount)
+        public CmdLineData(ZetboxConfig config, string prototype, string description, object dataKey, int maxValueCount)
             : base(prototype, description, maxValueCount)
         {
             _config = config;
@@ -31,7 +31,7 @@ namespace Kistl.API
 
     public sealed class SimpleCmdLineData : CmdLineData
     {
-        public SimpleCmdLineData(KistlConfig config, string prototype, string description, object dataKey)
+        public SimpleCmdLineData(ZetboxConfig config, string prototype, string description, object dataKey)
             : base(config, prototype, description, dataKey, 1)
         {
         }
@@ -39,7 +39,7 @@ namespace Kistl.API
 
     public sealed class SimpleCmdLineFlag : CmdLineData
     {
-        public SimpleCmdLineFlag(KistlConfig config, string prototype, string description, object dataKey)
+        public SimpleCmdLineFlag(ZetboxConfig config, string prototype, string description, object dataKey)
             : base(config, prototype, description, dataKey, 0)
         {
         }
@@ -47,9 +47,9 @@ namespace Kistl.API
 
     public abstract class CmdLineAction : Option
     {
-        private readonly KistlConfig _config;
+        private readonly ZetboxConfig _config;
 
-        public CmdLineAction(KistlConfig config, string prototype, string description, int maxValueCount)
+        public CmdLineAction(ZetboxConfig config, string prototype, string description, int maxValueCount)
             : base(prototype, description, maxValueCount)
         {
             _config = config;
@@ -73,13 +73,13 @@ namespace Kistl.API
 
     public sealed class SimpleCmdLineAction : CmdLineAction
     {
-        public SimpleCmdLineAction(KistlConfig config, string prototype, string description, Action<ILifetimeScope> action)
+        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Action<ILifetimeScope> action)
             : base(config, prototype, description, 0)
         {
             _listAction = (scope, args) => { action(scope); };
         }
 
-        public SimpleCmdLineAction(KistlConfig config, string prototype, string description, Action<ILifetimeScope, string> action)
+        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Action<ILifetimeScope, string> action)
             : base(config, prototype, description, 1)
         {
             _listAction = (scope, args) =>
@@ -95,7 +95,7 @@ namespace Kistl.API
             };
         }
 
-        public SimpleCmdLineAction(KistlConfig config, string prototype, string description, Action<ILifetimeScope, string[]> listAction)
+        public SimpleCmdLineAction(ZetboxConfig config, string prototype, string description, Action<ILifetimeScope, string[]> listAction)
             : base(config, prototype, description, 1)
         {
             _listAction = listAction;
@@ -116,7 +116,7 @@ namespace Kistl.API
     /// </summary>
     public class WaitAction : CmdLineAction
     {
-        public WaitAction(KistlConfig config) : base(config, "wait", "let the process wait for user input before exiting", 0) { }
+        public WaitAction(ZetboxConfig config) : base(config, "wait", "let the process wait for user input before exiting", 0) { }
         protected override void InvokeCore(Autofac.ILifetimeScope unitOfWork, string[] args)
         {
             Logging.Log.Info("Waiting for console input to shutdown");
@@ -131,7 +131,7 @@ namespace Kistl.API
     /// </summary>
     public class HelpAction : CmdLineAction
     {
-        public HelpAction(KistlConfig config) : base(config, "help", "prints this help", 0) { }
+        public HelpAction(ZetboxConfig config) : base(config, "help", "prints this help", 0) { }
         protected override void OnParseComplete(OptionContext c)
         {
             c.OptionSet.WriteOptionDescriptions(Console.Out);

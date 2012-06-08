@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`DataTypes`"
            abstract="true"
@@ -19,7 +19,7 @@
 
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ChangedOn" type="Timestamp"
@@ -28,18 +28,18 @@
 <!-- ObjectReferenceProperty -->
         <set name="Constraints" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Constrained`" />
-            <one-to-many class="Kistl.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="DefaultIcon" column="`fk_DefaultIcon`" class="Kistl.App.GUI.IconNHibernateImpl+IconProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="DefaultIcon" column="`fk_DefaultIcon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
@@ -55,17 +55,17 @@
         <!-- relEnd=DataType otherEnd=ImplementedInterfaces -->
         <set name="ImplementsInterfaces" table="`DataType_implements_ImplementedInterfaces`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_DataType`" />
-            <one-to-many class="Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
         <set name="Methods" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
-            <one-to-many class="Kistl.App.Base.MethodNHibernateImpl+MethodProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.MethodNHibernateImpl+MethodProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
@@ -74,11 +74,11 @@
 <!-- ObjectReferenceProperty -->
         <set name="Properties" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
-            <one-to-many class="Kistl.App.Base.PropertyNHibernateImpl+PropertyProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="RequestedKind" column="`fk_ControlKind`" class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="RequestedKind" column="`fk_ControlKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ShowIconInLists" 
@@ -94,8 +94,8 @@
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
-        <joined-subclass name="Kistl.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`CompoundObjects`"
                          dynamic-update="true">
@@ -105,14 +105,14 @@
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="DefaultPropertyViewModelDescriptor" column="`fk_DefaultPropViewModelDescriptor`" class="Kistl.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="DefaultPropertyViewModelDescriptor" column="`fk_DefaultPropViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`Enumerations`"
                          dynamic-update="true">
@@ -128,15 +128,15 @@
 <!-- ObjectReferenceProperty -->
         <set name="EnumerationEntries" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Enumeration`" />
-            <one-to-many class="Kistl.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.InterfaceNHibernateImpl+InterfaceProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.InterfaceNHibernateImpl+InterfaceProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.InterfaceNHibernateImpl+InterfaceProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.InterfaceNHibernateImpl+InterfaceProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`Interfaces`"
                          dynamic-update="true">
@@ -149,8 +149,8 @@
             <!-- define the subclasses -->
 
         </joined-subclass>
-        <joined-subclass name="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl"
-                         proxy="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl"
+        <joined-subclass name="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl"
+                         proxy="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl"
                          schema="`base`"
                          table="`ObjectClasses`"
                          dynamic-update="true">
@@ -162,11 +162,11 @@
 <!-- ObjectReferenceProperty -->
         <set name="AccessControlList" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
-            <one-to-many class="Kistl.App.Base.AccessControlNHibernateImpl+AccessControlProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.AccessControlNHibernateImpl+AccessControlProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="BaseObjectClass" column="`fk_BaseObjectClass`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="BaseObjectClass" column="`fk_BaseObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ValueTypeProperty CodeTemplate is calculated and persisted -->
         <!-- ValueTypeProperty isValue -->
@@ -174,12 +174,12 @@
                   column="`CodeTemplate`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Kistl.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
         <set name="FilterConfigurations" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_ObjectClass`" />
-            <one-to-many class="Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl+ObjectClassFilterConfigurationProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.ObjectClassFilterConfigurationNHibernateImpl+ObjectClassFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -197,7 +197,7 @@
 <!-- ObjectReferenceProperty -->
         <set name="SubClasses" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_BaseObjectClass`" />
-            <one-to-many class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->

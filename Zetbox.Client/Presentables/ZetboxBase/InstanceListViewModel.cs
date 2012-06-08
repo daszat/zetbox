@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.KistlBase
+namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections;
@@ -12,17 +12,17 @@ namespace Kistl.Client.Presentables.KistlBase
     using System.Linq.Dynamic;
     using System.Reflection;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Client;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables.FilterViewModels;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
+    using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using ObjectEditor = Zetbox.Client.Presentables.ObjectEditor;
 
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
@@ -31,9 +31,9 @@ namespace Kistl.Client.Presentables.KistlBase
     public class InstanceListViewModel
         : ViewModel, ILabeledViewModel, IRefreshCommandListener, ISortableViewModel
     {
-        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, ViewModel parent, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
+        public new delegate InstanceListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 
-        protected readonly Func<IKistlContext> workingCtxFactory;
+        protected readonly Func<IZetboxContext> workingCtxFactory;
         protected readonly IFileOpener fileOpener;
         protected readonly ITempFileService tmpService;
 
@@ -51,11 +51,11 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="qry">optional: the query to display. If null, Query will be constructed from type</param>
         public InstanceListViewModel(
             IViewModelDependencies appCtx,
-            KistlConfig config,
+            ZetboxConfig config,
             IFileOpener fileOpener,
             ITempFileService tmpService,
-            IKistlContext dataCtx, ViewModel parent,
-            Func<IKistlContext> workingCtxFactory,
+            IZetboxContext dataCtx, ViewModel parent,
+            Func<IZetboxContext> workingCtxFactory,
             ObjectClass type,
             Func<IQueryable> qry)
             : base(appCtx, dataCtx, parent)
@@ -260,7 +260,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         /// <param name="workingCtx"></param>
         /// <returns></returns>
-        protected bool isEmbedded(IKistlContext workingCtx)
+        protected bool isEmbedded(IZetboxContext workingCtx)
         {
             return workingCtx == DataContext;
         }
@@ -378,7 +378,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_RefreshCommand == null)
                 {
                     _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this, this);
-                    _RefreshCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.reload_png.Find(FrozenContext);
+                    _RefreshCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext);
                 }
                 return _RefreshCommand;
             }
@@ -397,7 +397,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         CommonCommandsResources.OpenDataObjectCommand_Name,
                         CommonCommandsResources.OpenDataObjectCommand_Tooltip,
                         OpenObjects);
-                    _OpenCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.fileopen_png.Find(FrozenContext);
+                    _OpenCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext);
                 }
                 return _OpenCommand;
             }
@@ -412,7 +412,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, this, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew, null);
-                    _NewCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.new_png.Find(FrozenContext);
+                    _NewCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext);
                 }
                 return _NewCommand;
             }
@@ -523,7 +523,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         CommonCommandsResources.DeleteDataObjectCommand_Name,
                         CommonCommandsResources.DeleteDataObjectCommand_Tooltip,
                         DeleteObjects);
-                    _DeleteCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.delete_png.Find(FrozenContext);
+                    _DeleteCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.delete_png.Find(FrozenContext);
                 }
                 return _DeleteCommand;
             }
@@ -631,7 +631,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         InstanceListViewModelResources.PrintCommand,
                         InstanceListViewModelResources.PrintCommand_Tooltip,
                         Print, null, null);
-                    _PrintCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.Printer_png.Find(FrozenContext);
+                    _PrintCommand.Icon = Zetbox.NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext);
                 }
                 return _PrintCommand;
             }
@@ -798,8 +798,8 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private Kistl.Client.Presentables.ObjectClassViewModel _dataTypeMdl = null;
-        public Kistl.Client.Presentables.ObjectClassViewModel DataTypeViewModel
+        private Zetbox.Client.Presentables.ObjectClassViewModel _dataTypeMdl = null;
+        public Zetbox.Client.Presentables.ObjectClassViewModel DataTypeViewModel
         {
             get
             {
@@ -1288,7 +1288,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         /// <returns>the default icon of this <see cref="DataType"/></returns>
-        public override Kistl.App.GUI.Icon Icon
+        public override Zetbox.App.GUI.Icon Icon
         {
             get
             {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.Client.Presentables;
+using Zetbox.Client.Presentables;
 
 using NUnit.Framework;
 
-namespace Kistl.Client.Tests
+namespace Zetbox.Client.Tests
 {
     //[TestFixture]
     //public class DataObjectViewModelTests

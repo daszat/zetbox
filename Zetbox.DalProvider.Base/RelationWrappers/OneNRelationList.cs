@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Base.RelationWrappers
+namespace Zetbox.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
@@ -8,7 +8,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
+    using Zetbox.API;
 
     // TODO: use delegate instead of SetPropertyValue. May be up to 300x faster.
     // TODO: take care of SELECT N+1 problem when modifying collection entries
@@ -114,14 +114,14 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             if (item == null)
                 throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
             if (_owner.Context != item.Context)
-                throw new WrongKistlContextException();
+                throw new WrongZetboxContextException();
             NotifyOwnerChanging();
             collection.Insert(index, item);
             _underlyingCollection.Add(item);
             SetPointerProperty(item);
             if (!String.IsNullOrEmpty(_posProperty))
             {
-                Kistl.API.Helper.FixIndices(collection, GetPosition, SetPosition);
+                Zetbox.API.Helper.FixIndices(collection, GetPosition, SetPosition);
             }
             OnItemAdded(item, index);
         }
@@ -199,7 +199,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             }
         }
 
-        public void AttachToContext(IKistlContext ctx)
+        public void AttachToContext(IZetboxContext ctx)
         {
             OnCollectionResetting();
             collection = new List<T>(collection.Select(i => ctx.Attach(i)).Cast<T>());

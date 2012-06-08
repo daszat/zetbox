@@ -8,12 +8,12 @@
     <ProjectGuid>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.App.Projekte.Common</RootNamespace>
-    <AssemblyName>Kistl.App.Projekte.Common</AssemblyName>
+    <RootNamespace>Zetbox.App.Projekte.Common</RootNamespace>
+    <AssemblyName>Zetbox.App.Projekte.Common</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -22,34 +22,34 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Common\App.ZBox\</OutputPath>
+    <OutputPath>..\bin\Debug\Common\App.Zetbox\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\Common\App.ZBox\Kistl.App.Projekte.Common.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Common\App.Zetbox\Zetbox.App.Projekte.Common.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Common\App.ZBox\</OutputPath>
+    <OutputPath>..\bin\Release\Common\App.Zetbox\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Release\Common\App.ZBox\Kistl.App.Projekte.Common.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Common\App.Zetbox\Zetbox.App.Projekte.Common.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Common\App.ZBox\</OutputPath>
+    <OutputPath>..\bin\Debug\Common\App.Zetbox\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\Common\App.ZBox\Kistl.App.Projekte.Common.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Common\App.Zetbox\Zetbox.App.Projekte.Common.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
@@ -85,45 +85,45 @@
     <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
-    <Compile Include="KistlBase\BaseParameterActions.cs" />
-    <Compile Include="KistlBase\AssemblyActions.cs" />
-    <Compile Include="KistlBase\BoolPropertyActions.cs" />
-    <Compile Include="KistlBase\CompoundObjectPropertyActions.cs" />
-    <Compile Include="KistlBase\ConstraintActions.cs" />
-    <Compile Include="KistlBase\BoolDefaultValueActions.cs" />
-    <Compile Include="KistlBase\CompoundObjectParameterActions.cs" />
-    <Compile Include="KistlBase\SequenceActions.cs" />
-    <Compile Include="KistlBase\DateTimeRangeActions.cs" />
-    <Compile Include="KistlBase\ValueTypePropertyActions.cs" />
-    <Compile Include="KistlBase\StringDefaultValueActions.cs" />
-    <Compile Include="KistlBase\IntDefaultValueActions.cs" />
-    <Compile Include="KistlBase\IsValidNamespaceConstraintActions.cs" />
-    <Compile Include="KistlBase\StringParameterActions.cs" />
-    <Compile Include="KistlBase\DoubleParameterActions.cs" />
-    <Compile Include="KistlBase\BoolParameterActions.cs" />
-    <Compile Include="KistlBase\IntParameterActions.cs" />
-    <Compile Include="KistlBase\DateTimeParameterActions.cs" />
-    <Compile Include="KistlBase\CLRObjectParameterActions.cs" />
-    <Compile Include="KistlBase\EnumParameterActions.cs" />
-    <Compile Include="KistlBase\ObjectReferenceParameterActions.cs" />
-    <Compile Include="KistlBase\IntPropertyActions.cs" />
-    <Compile Include="KistlBase\DecimalPropertyActions.cs" />
-    <Compile Include="KistlBase\DateTimePropertyActions.cs" />
-    <Compile Include="KistlBase\GuidPropertyActions.cs" />
-    <Compile Include="KistlBase\EnumerationPropertyActions.cs" />
-    <Compile Include="KistlBase\CalculatedObjectReferencePropertyActions.cs" />
-    <Compile Include="KistlBase\DoublePropertyActions.cs" />
-    <Compile Include="KistlBase\StringPropertyActions.cs" />
-    <Compile Include="KistlBase\ServiceDescriptorActions.cs" />
-    <Compile Include="KistlBase\IdentityActions.cs" />
-    <Compile Include="KistlBase\GroupActions.cs" />
-    <Compile Include="KistlBase\AccessControlActions.cs" />
-    <Compile Include="KistlBase\BlobActions.cs" />
-    <Compile Include="KistlBase\ModuleActions.cs" />
-    <Compile Include="KistlBase\DataTypeActions.cs" />
-    <Compile Include="KistlBase\DecimalParameterActions.cs" />
-    <Compile Include="KistlBase\ToStringHelper.cs" />
-    <Compile Include="CustomCommonActions_KistlBase.Constraints.cs" />
+    <Compile Include="ZetboxBase\BaseParameterActions.cs" />
+    <Compile Include="ZetboxBase\AssemblyActions.cs" />
+    <Compile Include="ZetboxBase\BoolPropertyActions.cs" />
+    <Compile Include="ZetboxBase\CompoundObjectPropertyActions.cs" />
+    <Compile Include="ZetboxBase\ConstraintActions.cs" />
+    <Compile Include="ZetboxBase\BoolDefaultValueActions.cs" />
+    <Compile Include="ZetboxBase\CompoundObjectParameterActions.cs" />
+    <Compile Include="ZetboxBase\SequenceActions.cs" />
+    <Compile Include="ZetboxBase\DateTimeRangeActions.cs" />
+    <Compile Include="ZetboxBase\ValueTypePropertyActions.cs" />
+    <Compile Include="ZetboxBase\StringDefaultValueActions.cs" />
+    <Compile Include="ZetboxBase\IntDefaultValueActions.cs" />
+    <Compile Include="ZetboxBase\IsValidNamespaceConstraintActions.cs" />
+    <Compile Include="ZetboxBase\StringParameterActions.cs" />
+    <Compile Include="ZetboxBase\DoubleParameterActions.cs" />
+    <Compile Include="ZetboxBase\BoolParameterActions.cs" />
+    <Compile Include="ZetboxBase\IntParameterActions.cs" />
+    <Compile Include="ZetboxBase\DateTimeParameterActions.cs" />
+    <Compile Include="ZetboxBase\CLRObjectParameterActions.cs" />
+    <Compile Include="ZetboxBase\EnumParameterActions.cs" />
+    <Compile Include="ZetboxBase\ObjectReferenceParameterActions.cs" />
+    <Compile Include="ZetboxBase\IntPropertyActions.cs" />
+    <Compile Include="ZetboxBase\DecimalPropertyActions.cs" />
+    <Compile Include="ZetboxBase\DateTimePropertyActions.cs" />
+    <Compile Include="ZetboxBase\GuidPropertyActions.cs" />
+    <Compile Include="ZetboxBase\EnumerationPropertyActions.cs" />
+    <Compile Include="ZetboxBase\CalculatedObjectReferencePropertyActions.cs" />
+    <Compile Include="ZetboxBase\DoublePropertyActions.cs" />
+    <Compile Include="ZetboxBase\StringPropertyActions.cs" />
+    <Compile Include="ZetboxBase\ServiceDescriptorActions.cs" />
+    <Compile Include="ZetboxBase\IdentityActions.cs" />
+    <Compile Include="ZetboxBase\GroupActions.cs" />
+    <Compile Include="ZetboxBase\AccessControlActions.cs" />
+    <Compile Include="ZetboxBase\BlobActions.cs" />
+    <Compile Include="ZetboxBase\ModuleActions.cs" />
+    <Compile Include="ZetboxBase\DataTypeActions.cs" />
+    <Compile Include="ZetboxBase\DecimalParameterActions.cs" />
+    <Compile Include="ZetboxBase\ToStringHelper.cs" />
+    <Compile Include="CustomCommonActions_ZetboxBase.Constraints.cs" />
     <Compile Include="CustomCommonActionsModule.cs" />
     <Compile Include="DocumentManagement\DocumentActions.cs" />
     <Compile Include="DocumentManagement\StaticFileActions.cs" />
@@ -131,30 +131,30 @@
     <Compile Include="DocumentManagement\FileActions.cs" />
     <Compile Include="Gui\ControlKindActions.cs" />
     <Compile Include="Gui\IconActions.cs" />
-    <Compile Include="KistlBase\ClientReadOnlyConstraintActions.cs" />
-    <Compile Include="KistlBase\ConstraintInvocationActions.cs" />
-    <Compile Include="KistlBase\EnumDefaultValueActions.cs" />
-    <Compile Include="KistlBase\CurrentDateTimeDefaultValueActions.cs" />
-    <Compile Include="KistlBase\NewGuidDefaultValueActions.cs" />
-    <Compile Include="KistlBase\PropertyActions.cs" />
-    <Compile Include="KistlBase\EnumerationActions.cs" />
-    <Compile Include="KistlBase\EnumerationEntryActions.cs" />
-    <Compile Include="KistlBase\TypeRefActions.cs" />
-    <Compile Include="KistlBase\ObjectReferencePlaceholderPropertyActions.cs" />
-    <Compile Include="KistlBase\MethodActions.cs" />
-    <Compile Include="KistlBase\ObjectClassActions.cs" />
-    <Compile Include="KistlBase\ReadOnlyConstraintActions.cs" />
-    <Compile Include="KistlBase\IndexConstraintActions.cs" />
-    <Compile Include="KistlBase\InvokingConstraintActions.cs" />
-    <Compile Include="KistlBase\InitOnlyConstraintActions.cs" />
-    <Compile Include="KistlBase\ViewReadOnlyConstraintActions.cs" />
-    <Compile Include="KistlBase\IsValidIdentifierConstraintActions.cs" />
-    <Compile Include="KistlBase\StringRangeConstraintActions.cs" />
-    <Compile Include="KistlBase\IntegerRangeConstraintActions.cs" />
-    <Compile Include="KistlBase\NotNullableConstraintActions.cs" />
-    <Compile Include="KistlBase\ObjectReferencePropertyActions.cs" />
-    <Compile Include="KistlBase\RelationActions.cs" />
-    <Compile Include="KistlBase\RelationEndActions.cs" />
+    <Compile Include="ZetboxBase\ClientReadOnlyConstraintActions.cs" />
+    <Compile Include="ZetboxBase\ConstraintInvocationActions.cs" />
+    <Compile Include="ZetboxBase\EnumDefaultValueActions.cs" />
+    <Compile Include="ZetboxBase\CurrentDateTimeDefaultValueActions.cs" />
+    <Compile Include="ZetboxBase\NewGuidDefaultValueActions.cs" />
+    <Compile Include="ZetboxBase\PropertyActions.cs" />
+    <Compile Include="ZetboxBase\EnumerationActions.cs" />
+    <Compile Include="ZetboxBase\EnumerationEntryActions.cs" />
+    <Compile Include="ZetboxBase\TypeRefActions.cs" />
+    <Compile Include="ZetboxBase\ObjectReferencePlaceholderPropertyActions.cs" />
+    <Compile Include="ZetboxBase\MethodActions.cs" />
+    <Compile Include="ZetboxBase\ObjectClassActions.cs" />
+    <Compile Include="ZetboxBase\ReadOnlyConstraintActions.cs" />
+    <Compile Include="ZetboxBase\IndexConstraintActions.cs" />
+    <Compile Include="ZetboxBase\InvokingConstraintActions.cs" />
+    <Compile Include="ZetboxBase\InitOnlyConstraintActions.cs" />
+    <Compile Include="ZetboxBase\ViewReadOnlyConstraintActions.cs" />
+    <Compile Include="ZetboxBase\IsValidIdentifierConstraintActions.cs" />
+    <Compile Include="ZetboxBase\StringRangeConstraintActions.cs" />
+    <Compile Include="ZetboxBase\IntegerRangeConstraintActions.cs" />
+    <Compile Include="ZetboxBase\NotNullableConstraintActions.cs" />
+    <Compile Include="ZetboxBase\ObjectReferencePropertyActions.cs" />
+    <Compile Include="ZetboxBase\RelationActions.cs" />
+    <Compile Include="ZetboxBase\RelationEndActions.cs" />
     <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="Projekte\TaskActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,24 +169,24 @@
     <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Kistl.Objects</Name>
+      <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>Kistl.API.Common</Name>
+      <Name>Zetbox.API.Common</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

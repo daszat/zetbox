@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.Toolkit
+namespace Zetbox.Client.WPF.Toolkit
 {
     using System;
     using System.Collections.Generic;
@@ -11,10 +11,10 @@ namespace Kistl.Client.WPF.Toolkit
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media;
-    using Kistl.Client.Models;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.WPF.CustomControls;
-    using Kistl.Client.WPF.Toolkit;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
     using Microsoft.Windows.Controls;
 
     public static class WPFHelper

@@ -5,7 +5,7 @@ using System.Text;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     public interface ITypeConverter
     {

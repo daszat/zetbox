@@ -1,13 +1,13 @@
 
-namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
+namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Test;
 
     using NUnit.Framework;
 
@@ -54,7 +54,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
             return ctx.GetQuery<TestCustomObject>().First();
         }
 
-        protected IKistlContext ctx { get; private set; }
+        protected IZetboxContext ctx { get; private set; }
         protected TestCustomObject obj { get; private set; }
     }
 }

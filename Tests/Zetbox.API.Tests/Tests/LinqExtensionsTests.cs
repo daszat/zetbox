@@ -5,12 +5,12 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-using Kistl.API.Mocks;
+using Zetbox.API.Mocks;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
 	[TestFixture]
     public class LinqExtensionsTests : AbstractApiTestFixture

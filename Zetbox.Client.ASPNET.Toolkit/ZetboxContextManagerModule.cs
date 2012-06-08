@@ -7,25 +7,25 @@ using System.Text;
 using System.Web;
 
 using Autofac;
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-using Kistl.App.Extensions;
-using Kistl.Client.Presentables;
+using Zetbox.API;
+using Zetbox.API.Configuration;
+using Zetbox.API.Utils;
+using Zetbox.App.Extensions;
+using Zetbox.Client.Presentables;
 
-namespace Kistl.Client.ASPNET.Toolkit
+namespace Zetbox.Client.ASPNET.Toolkit
 {
-    public class KistlContextManagerModule : IHttpModule, IDisposable
+    public class ZetboxContextManagerModule : IHttpModule, IDisposable
     {
-        public static IKistlContext KistlContext
+        public static IZetboxContext ZetboxContext
         {
             get
             {
-                return (IKistlContext)HttpContext.Current.Items["__Current_KistlContextManagerModule_KistlContext"];
+                return (IZetboxContext)HttpContext.Current.Items["__Current_ZetboxContextManagerModule_ZetboxContext"];
             }
             private set
             {
-                HttpContext.Current.Items["__Current_KistlContextManagerModule_KistlContext"] = value;
+                HttpContext.Current.Items["__Current_ZetboxContextManagerModule_ZetboxContext"] = value;
             }
         }
         public static IViewModelFactory ViewModelFactory { get; private set; }
@@ -47,10 +47,10 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         void context_EndRequest(object sender, EventArgs e)
         {
-            if (KistlContext != null)
+            if (ZetboxContext != null)
             {
-                KistlContext.Dispose();
-                KistlContext = null;
+                ZetboxContext.Dispose();
+                ZetboxContext = null;
             }
         }
 
@@ -60,17 +60,17 @@ namespace Kistl.Client.ASPNET.Toolkit
             {
                 Logging.Configure();
 
-                var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]), "AspNet.xml");
+                var config = ZetboxConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]), "AspNet.xml");
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
-                var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+                var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
                 container = builder.Build();
 
                 ViewModelFactory = container.Resolve<IViewModelFactory>();
                 IftFactory = container.Resolve<InterfaceType.Factory>();
 
             }
-            KistlContext = container.Resolve<IKistlContext>();
+            ZetboxContext = container.Resolve<IZetboxContext>();
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_Relations_RelationView : Kistl.Client.ASPNET.Toolkit.View.Relations.RelationView
+public partial class View_Relations_RelationView : Zetbox.Client.ASPNET.Toolkit.View.Relations.RelationView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

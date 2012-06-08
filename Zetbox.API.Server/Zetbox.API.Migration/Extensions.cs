@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZBox.App.SchemaMigration;
+using Zetbox.App.SchemaMigration;
 
-namespace Kistl.API.Migration
+namespace Zetbox.API.Migration
 {
     public static class Extensions
     {

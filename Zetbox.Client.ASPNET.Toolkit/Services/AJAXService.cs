@@ -6,13 +6,13 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.Client.ASPNET.Toolkit;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.Client.ASPNET.Toolkit;
 
-namespace Kistl.Client.ASPNET.Toolkit
+namespace Zetbox.Client.ASPNET.Toolkit
 {
-    [ServiceContract(Namespace = "Kistl.Client.ASPNET")] // Client side namespace
+    [ServiceContract(Namespace = "Zetbox.Client.ASPNET")] // Client side namespace
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class AJAXService
     {
@@ -24,8 +24,8 @@ namespace Kistl.Client.ASPNET.Toolkit
             throw new NotImplementedException();
             //try
             //{
-            //    return KistlContextManagerModule.KistlContext.GetQuery(KistlContextManagerModule.IftFactory(type.GetSystemType()))
-            //        .Select(i => new JavaScriptObjectMoniker(KistlContextManagerModule.KistlContext, i)).ToList();
+            //    return ZetboxContextManagerModule.ZetboxContext.GetQuery(ZetboxContextManagerModule.IftFactory(type.GetSystemType()))
+            //        .Select(i => new JavaScriptObjectMoniker(ZetboxContextManagerModule.ZetboxContext, i)).ToList();
             //}
             //catch (Exception ex)
             //{

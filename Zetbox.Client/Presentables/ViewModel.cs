@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
@@ -8,11 +8,11 @@ namespace Kistl.Client.Presentables
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     public interface IViewModelDependencies
     {
@@ -59,7 +59,7 @@ namespace Kistl.Client.Presentables
     /// </remarks>
     public abstract class ViewModel : INotifyPropertyChanged
     {
-        public delegate ViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public delegate ViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
         private readonly IViewModelDependencies _dependencies;
 
@@ -83,9 +83,9 @@ namespace Kistl.Client.Presentables
         public IViewModelFactory ViewModelFactory { get { return _dependencies.Factory; } }
 
         /// <summary>
-        /// A <see cref="IKistlContext"/> to access the current user's data
+        /// A <see cref="IZetboxContext"/> to access the current user's data
         /// </summary>
-        protected IKistlContext DataContext { get; private set; }
+        protected IZetboxContext DataContext { get; private set; }
 
         private Identity _CurrentIdentity = null;
         public Identity CurrentIdentity
@@ -101,9 +101,9 @@ namespace Kistl.Client.Presentables
         }
 
         /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
-        /// <param name="dataCtx">The <see cref="IKistlContext"/> to access the current user's data session</param>
+        /// <param name="dataCtx">The <see cref="IZetboxContext"/> to access the current user's data session</param>
         /// <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
-        protected ViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent)
+        protected ViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent)
         {
             _parent = parent;
             IsInDesignMode = false;
@@ -232,7 +232,7 @@ namespace Kistl.Client.Presentables
         /// Signifies that a model is in "design" mode or really accessing the data store.
         /// </summary>
         /// In design mode, no data store is used and only mock data is shown. 
-        /// No <see cref="IKistlContext"/>s or <see cref="IThreadManager"/>s are available.
+        /// No <see cref="IZetboxContext"/>s or <see cref="IThreadManager"/>s are available.
         public bool IsInDesignMode { get; private set; }
 
         #endregion

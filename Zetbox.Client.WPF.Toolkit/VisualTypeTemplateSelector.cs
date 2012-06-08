@@ -1,6 +1,6 @@
 #define DONT_CACHE_TEMPLATE // Avoid caching, templates will be resused. At least the Combobox gets confused.
 
-namespace Kistl.Client.WPF.Toolkit
+namespace Zetbox.Client.WPF.Toolkit
 {
     using System;
     using System.Collections.Generic;
@@ -10,13 +10,13 @@ namespace Kistl.Client.WPF.Toolkit
     using System.Windows;
     using System.Windows.Controls;
 
-    using Kistl.API;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
 
     /// <summary>
     /// A <see cref="DataTemplateSelector"/> to choose the appropriate view for a specified <see cref="ViewModel"/>.

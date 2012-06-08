@@ -1,14 +1,14 @@
 
-namespace Kistl.Tests.Utilities.PostgreSql
+namespace Zetbox.Tests.Utilities.PostgreSql
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API.Server;
-    using Kistl.API.Configuration;
-    using Kistl.API.AbstractConsumerTests;
+    using Zetbox.API.Server;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.AbstractConsumerTests;
 
     public sealed class UtilityModule
         : Module
@@ -23,7 +23,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
             //    .AsImplementedInterfaces();
 
             moduleBuilder
-                .Register<PostgreSqlResetter>(c => new PostgreSqlResetter(c.Resolve<KistlConfig>(), c.ResolveNamed<ISchemaProvider>("POSTGRESQL"), c.Resolve<Kistl.API.ITempFileService>()))
+                .Register<PostgreSqlResetter>(c => new PostgreSqlResetter(c.Resolve<ZetboxConfig>(), c.ResolveNamed<ISchemaProvider>("POSTGRESQL"), c.Resolve<Zetbox.API.ITempFileService>()))
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
         }

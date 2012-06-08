@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_LauncherView : Kistl.Client.ASPNET.Toolkit.View.LauchnerView
+public partial class View_LauncherView : Zetbox.Client.ASPNET.Toolkit.View.LauchnerView
 {
     protected void Page_Load(object sender, EventArgs e)
     {

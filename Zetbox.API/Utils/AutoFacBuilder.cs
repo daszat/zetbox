@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
     using System;
     using System.Collections.Generic;
@@ -8,16 +8,16 @@ namespace Kistl.API.Utils
 
     using Autofac;
     using Autofac.Core;
-    using Kistl.API.Configuration;
+    using Zetbox.API.Configuration;
 
     public static class AutoFacBuilder
     {
-        public static ContainerBuilder CreateContainerBuilder(KistlConfig config)
+        public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config)
         {
             return CreateContainerBuilder(config, null);
         }
 
-        public static ContainerBuilder CreateContainerBuilder(KistlConfig config, string[] modules)
+        public static ContainerBuilder CreateContainerBuilder(ZetboxConfig config, string[] modules)
         {
             if (config == null) throw new ArgumentNullException("config");
 

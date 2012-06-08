@@ -1,17 +1,17 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.App.Base;
+using Zetbox.App.Base;
 
     /// <summary>
     /// A data context without identity, which is useful for various administrative tasks.
     /// </summary>
-    public interface IKistlServerContext 
-        : IKistlContext
+    public interface IZetboxServerContext 
+        : IZetboxContext
     {
         /// <summary>
         /// The Identity of this context. May be null for administrative/system-level work.

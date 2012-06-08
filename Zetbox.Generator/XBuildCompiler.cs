@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.Collections.Generic;
@@ -7,13 +7,13 @@ namespace Kistl.Generator
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
+    using Zetbox.API;
     using Microsoft.Build.BuildEngine;
     using Microsoft.Build.Framework;
     
     public class XBuildCompiler : Compiler
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.Compiler.XBuild");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.Compiler.XBuild");
 
         public XBuildCompiler(ILifetimeScope container, IEnumerable<AbstractBaseGenerator> generatorProviders)
             : base(container, generatorProviders)

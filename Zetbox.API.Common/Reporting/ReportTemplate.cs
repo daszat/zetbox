@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Common.Reporting
+namespace Zetbox.API.Common.Reporting
 {
     using System;
     using System.Collections.Generic;
@@ -12,9 +12,9 @@ namespace Kistl.API.Common.Reporting
     using System.Text;
     using System.Text.RegularExpressions;
     using Arebis.CodeGeneration;
-    using Kistl.API;
-    using Kistl.API.Common;
-    using Kistl.App.Base;
+    using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.App.Base;
 
     public class ReportTemplate : CodeTemplate
     {

@@ -1,13 +1,13 @@
 
-namespace Kistl.API.AbstractConsumerTests.CompoundObjects
+namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Test;
     using NUnit.Framework;
 
     public abstract class CompoundObjectFixture
@@ -17,7 +17,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         protected const string TEST_MOBILE_NUMBER = "m123456";
         protected Random rnd = new Random();
         protected string testNumber;
-        protected IKistlContext ctx;
+        protected IZetboxContext ctx;
         protected TestCustomObject obj;
 
         [SetUp]
@@ -34,7 +34,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
 
         protected virtual void DeleteTestData()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 ctx.GetQuery<TestCustomObject>().ForEach(obj => ctx.Delete(obj));
                 ctx.SubmitChanges();
@@ -43,7 +43,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
 
         protected virtual void CreateTestData()
         {
-            using (IKistlContext create_ctx = GetContext())
+            using (IZetboxContext create_ctx = GetContext())
             {
                 TestCustomObject create_obj;
 
@@ -88,7 +88,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
             }
         }
 
-        private void AddPhoneNumberOther(IKistlContext create_ctx, TestCustomObject obj, int count)
+        private void AddPhoneNumberOther(IZetboxContext create_ctx, TestCustomObject obj, int count)
         {
             for (int i = 0; i < count; i++)
             {

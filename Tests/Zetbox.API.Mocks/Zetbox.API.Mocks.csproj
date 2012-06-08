@@ -8,12 +8,12 @@
     <ProjectGuid>{95E39A40-35BC-4214-86E5-EE451C138EE1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.API.Mocks</RootNamespace>
-    <AssemblyName>Kistl.API.Mocks</AssemblyName>
+    <RootNamespace>Zetbox.API.Mocks</RootNamespace>
+    <AssemblyName>Zetbox.API.Mocks</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Zetbox.snk</AssemblyOriginatorKeyFile>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -76,22 +76,22 @@
     <Compile Include="TestCollectionEntry.cs" />
     <Compile Include="TestDataObject.cs" />
     <Compile Include="TestEnum.cs" />
-    <Compile Include="TestKistlContext.cs" />
+    <Compile Include="TestZetboxContext.cs" />
     <Compile Include="TestObjClassSerializationMock.cs" />
     <Compile Include="TestQueryProvider.cs" />
     <Compile Include="TestStruct.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
-      <Name>Kistl.API</Name>
+      <Name>Zetbox.API</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.snk" />
+    <None Include="Zetbox.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

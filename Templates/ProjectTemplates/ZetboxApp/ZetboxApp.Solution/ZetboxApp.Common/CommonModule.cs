@@ -6,7 +6,7 @@ namespace $safeprojectname$
     $if$ ($targetframeworkversion$ >= 3.5)using System.Linq;
     $endif$using System.Text;
     using Autofac;
-    using Kistl.API;
+    using Zetbox.API;
 
     public class CommonModule : Module
     {
@@ -14,7 +14,7 @@ namespace $safeprojectname$
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterZBoxImplementors(typeof(CommonModule).Assembly);
+            moduleBuilder.RegisterZetboxImplementors(typeof(CommonModule).Assembly);
 
             // Register explicit overrides here
         }

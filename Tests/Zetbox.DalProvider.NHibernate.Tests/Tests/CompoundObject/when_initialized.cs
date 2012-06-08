@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Server;
+using Zetbox.API;
+using Zetbox.API.Server;
 
 using NUnit.Framework;
-using Kistl.App.Test;
+using Zetbox.App.Test;
 
-namespace Kistl.DalProvider.NHibernate.Tests.CompoundObjects
+namespace Zetbox.DalProvider.NHibernate.Tests.CompoundObjects
 {
     [TestFixture]
     public class when_initialized
-        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_initialized
+        : Zetbox.API.AbstractConsumerTests.CompoundObjects.when_initialized
     {
     }
 }

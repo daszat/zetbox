@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace Kistl.API.Utils
+namespace Zetbox.API.Utils
 {
     /// <summary>
     /// implements IComparer%lt;Expression>

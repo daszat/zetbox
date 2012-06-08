@@ -1,13 +1,13 @@
 
-namespace Kistl.API.Server
+namespace Zetbox.API.Server
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
-    using ZBox.App.SchemaMigration;
+    using Zetbox.App.Base;
+    using Zetbox.App.SchemaMigration;
 
     public static class DbTypeMapper
     {

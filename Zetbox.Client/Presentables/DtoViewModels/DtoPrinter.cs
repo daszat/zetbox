@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables.DtoViewModels
+namespace Zetbox.Client.Presentables.DtoViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Dtos;
+    using Zetbox.API;
+    using Zetbox.API.Dtos;
     using MigraDoc.DocumentObjectModel;
     using MigraDoc.DocumentObjectModel.Tables;
     using MigraDoc.Rendering;

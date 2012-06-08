@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>$safesolutionname$ Client Tests Configuration</ConfigName>
   <Server StartServer="false">
   </Server>
@@ -9,19 +9,19 @@
     <DocumentStore>.\DocumentStore\Client\</DocumentStore>
     <DevelopmentEnvironment>false</DevelopmentEnvironment>
     <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
-      <Module>Kistl.API.Common.ApiCommonModule, Kistl.API.Common</Module>
-      <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
-      <Module>Kistl.API.Client.HttpClientModule, Kistl.API.Client</Module>
-      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
-      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
-      <Module>Kistl.DalProvider.Client.ClientProvider, Kistl.DalProvider.ClientObjects</Module>
-      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
-      <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
-      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
-      <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+      <Module>Zetbox.API.Common.ApiCommonModule, Zetbox.API.Common</Module>
+      <Module>Zetbox.API.Client.ClientApiModule, Zetbox.API.Client</Module>
+      <Module>Zetbox.API.Client.HttpClientModule, Zetbox.API.Client</Module>
+      <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
+      <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
+      <Module>Zetbox.Objects.ClientModule, Zetbox.Objects.ClientImpl</Module>
+      <Module>Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl</Module>
+      <Module>Zetbox.DalProvider.Client.ClientProvider, Zetbox.DalProvider.ClientObjects</Module>
+      <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
+      <Module>Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client</Module>
+      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
+      <Module>Zetbox.Tests.Utilities.PostgreSql.UtilityModule, Zetbox.Tests.Utilities.PostgreSql</Module>
 
       <!-- application specific modules 
       <Module>$safesolutionname$.Client.CustomClientActionsModule, $safesolutionname$.Client</Module>
@@ -35,10 +35,10 @@
     <string>Common\Core</string>
     <string>Client\Core</string>
     <string>Client\WPF</string>
-    <string>Common\App.ZBox</string>
-    <string>Client\App.ZBox</string>
+    <string>Common\App.Zetbox</string>
+    <string>Client\App.Zetbox</string>
     <string>Common\Microsoft</string>
     <string>Common\App.$safesolutionname$</string>
     <string>Client\App.$safesolutionname$</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>

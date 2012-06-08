@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Ef.Tests
+namespace Zetbox.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,13 +7,13 @@ namespace Kistl.DalProvider.Ef.Tests
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
-    using Kistl.API.Server;
-    using Kistl.App.Base;
-    using Kistl.App.Projekte;
-    using Kistl.App.Test;
-    using Kistl.DalProvider.Ef.Mocks;
+    using Zetbox.API;
+    using Zetbox.API.AbstractConsumerTests;
+    using Zetbox.API.Server;
+    using Zetbox.App.Base;
+    using Zetbox.App.Projekte;
+    using Zetbox.App.Test;
+    using Zetbox.DalProvider.Ef.Mocks;
     using NUnit.Framework;
 
     [TestFixture]
@@ -22,7 +22,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [Test]
         public void Attach_IDataObject_New()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = new TestObjClassEfImpl(null);
                 Assert.That(((TestObjClassEfImpl)obj).EntityState, Is.EqualTo(EntityState.Detached));
@@ -33,7 +33,7 @@ namespace Kistl.DalProvider.Ef.Tests
         //[Test]
         //public void Attach_IDataObject_New_WithGraph()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        TestObjClass obj = new TestObjClassImpl();
         //        obj.TestNames.Add("Test");
@@ -48,7 +48,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [Test]
         public void Attach_IDataObject_Existing()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = new TestObjClassEfImpl(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClassEfImpl)obj).EntityState, Is.EqualTo(EntityState.Detached));
@@ -60,7 +60,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [Test]
         public void Attach_IDataObject_Existing_Twice()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = new TestObjClassEfImpl(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClassEfImpl)obj).EntityState, Is.EqualTo(EntityState.Detached));
@@ -75,7 +75,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Attach_IDataObject_Existing_Twice_But_Different()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj1 = new TestObjClassEfImpl(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClassEfImpl)obj1).EntityState, Is.EqualTo(EntityState.Detached));
@@ -92,7 +92,7 @@ namespace Kistl.DalProvider.Ef.Tests
         //[Test]
         //public void Attach_ICollectionEntry_New()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        TestObjClass_TestNameCollectionEntryImpl obj = new TestObjClass_TestNameCollectionEntryImpl();
         //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
@@ -104,7 +104,7 @@ namespace Kistl.DalProvider.Ef.Tests
         //[Test]
         //public void Attach_ICollectionEntry_Existing()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        TestObjClass_TestNameCollectionEntryImpl obj = new TestObjClass_TestNameCollectionEntryImpl() { ID = 15 };
         //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
@@ -116,7 +116,7 @@ namespace Kistl.DalProvider.Ef.Tests
         //[Test]
         //public void Attach_ICollectionEntry_Existing_Twice()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        TestObjClass_TestNameCollectionEntryImpl obj = new TestObjClass_TestNameCollectionEntryImpl() { ID = 3 };
         //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
@@ -131,7 +131,7 @@ namespace Kistl.DalProvider.Ef.Tests
         //[ExpectedException(typeof(InvalidOperationException))]
         //public void Attach_ICollectionEntry_Existing_Twice_But_Different()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        TestObjClass_TestNameCollectionEntryImpl obj1 = new TestObjClass_TestNameCollectionEntryImpl() { ID = 3 };
         //        Assert.That(obj1.EntityState, Is.EqualTo(EntityState.Detached));
@@ -148,7 +148,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [Test]
         public void AttachedObjects()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = new TestObjClassEfImpl(null);
                 ctx.Attach(obj);
@@ -161,7 +161,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [Test]
         public void ContainsObject()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = new TestObjClassEfImpl(null) { ID = 10 };
                 ctx.Attach(obj);
@@ -175,7 +175,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [Test]
         public void ContainsObject_Not()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = new TestObjClassEfImpl(null) { ID = 10 };
                 ctx.Create<TestObjClass>();
@@ -188,7 +188,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Detach_IDataObject_Failed()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 ctx.Detach(new TestObjClassEfImpl(null));
             }
@@ -197,7 +197,7 @@ namespace Kistl.DalProvider.Ef.Tests
         [Test]
         public void Detach_IDataObject()
         {
-            using (IKistlContext ctx = GetContext())
+            using (IZetboxContext ctx = GetContext())
             {
                 TestObjClass obj = ctx.GetQuery<TestObjClass>().First();
                 ctx.Detach(obj);
@@ -209,7 +209,7 @@ namespace Kistl.DalProvider.Ef.Tests
         //[Test]
         //public void Detach_ICollectionEntry()
         //{
-        //    using (IKistlContext ctx = GetContext())
+        //    using (IZetboxContext ctx = GetContext())
         //    {
         //        var obj = ctx.Find<TestObjClass>(1);
         //        Assert.That(obj, Is.Not.Null);

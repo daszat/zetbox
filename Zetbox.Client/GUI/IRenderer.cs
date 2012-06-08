@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.Client.GUI
+namespace Zetbox.Client.GUI
 {
     public interface IRenderer
     {

@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View
+namespace Zetbox.Client.WPF.View
 {
     using System;
     using System.Collections.Generic;
@@ -15,16 +15,16 @@ namespace Kistl.Client.WPF.View
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.Client.WPF.View.KistlBase;
-    using Kistl.Client.WPF.CustomControls;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.Client.WPF.View.ZetboxBase;
+    using Zetbox.Client.WPF.CustomControls;
     using Microsoft.Windows.Controls;
 
     /// <summary>
     /// Interaction logic for NullableDateTimeValueEditor.xaml
     /// </summary>
-    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class NullableDateTimeValueEditor : PropertyEditor, IHasViewModel<NullableDateTimePropertyViewModel>
     {
         public NullableDateTimeValueEditor()

@@ -5,17 +5,17 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-using Kistl.API.Mocks;
+using Zetbox.API.Mocks;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace Kistl.API.Tests
+namespace Zetbox.API.Tests
 {
     [TestFixture]
     public class ExpressionFilterTest : AbstractApiTestFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Api.ExpressionFilter");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Api.ExpressionFilter");
 
         TestQuery<IDataObject> ctx;
 

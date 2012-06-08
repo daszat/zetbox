@@ -4,20 +4,20 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Client.Presentables.KistlBase;
+using Zetbox.API;
+using Zetbox.API.Client;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
+using Zetbox.Client.Presentables.ZetboxBase;
 
-namespace Kistl.Client.Presentables.ObjectBrowser
+namespace Zetbox.Client.Presentables.ObjectBrowser
 {
     public class WorkspaceViewModel
         : WindowViewModel
     {
-        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
         }
@@ -53,7 +53,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 if (_applicationsCache == null)
                 {
                     _applicationsCache = new ObservableCollection<ApplicationViewModel>();
-                    foreach (var app in FrozenContext.GetQuery<Kistl.App.GUI.Application>())
+                    foreach (var app in FrozenContext.GetQuery<Zetbox.App.GUI.Application>())
                     {
                         _applicationsCache.Add(ViewModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, null, app));
                     }

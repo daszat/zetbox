@@ -1,11 +1,11 @@
 
-namespace Kistl.Server.Tests.SchemaTests.SchemaProviders.TableStructure
+namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders.TableStructure
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.Server.SchemaManagement.SqlProvider;
+    using Zetbox.Server.SchemaManagement.SqlProvider;
 
     public sealed class Mssql
         : Fixture<SqlServer>

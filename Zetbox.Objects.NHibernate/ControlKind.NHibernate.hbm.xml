@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl"
            schema="`gui`"
            table="`ControlKinds`"
            abstract="false"
@@ -21,7 +21,7 @@
 <!-- ObjectReferenceProperty -->
         <set name="ChildControlKinds" batch-size="100" cascade="none" inverse="true" >
             <key column="`fk_Parent`" />
-            <one-to-many class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -29,14 +29,14 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Parent" column="`fk_Parent`" class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
 
         <!-- define the subclasses -->

@@ -1,19 +1,19 @@
 
-//namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
+//namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 //{
 //    using System;
 //    using System.CodeDom;
 //    using System.Collections.Generic;
 //    using System.Linq;
 //    using System.Text;
-//    using Kistl.API;
-//    using Kistl.App.Base;
-//    using Templates = Kistl.Generator.Templates;
+//    using Zetbox.API;
+//    using Zetbox.App.Base;
+//    using Templates = Zetbox.Generator.Templates;
 
 //    public class Method
 //        : Templates.ObjectClasses.Method
 //    {
-//        public Method(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt, Kistl.App.Base.Method m, int index, string indexSuffix, string eventName)
+//        public Method(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, DataType dt, Zetbox.App.Base.Method m, int index, string indexSuffix, string eventName)
 //            : base(_host, ctx, dt, m, index, indexSuffix, eventName)
 //        {
 //        }

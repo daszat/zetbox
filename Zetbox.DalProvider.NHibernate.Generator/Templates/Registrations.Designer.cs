@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Kistl.API;
+using Zetbox.API;
 
 
-namespace Kistl.DalProvider.NHibernate.Generator.Templates
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst")]
-    public partial class Registrations : Kistl.Generator.Templates.Registrations
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst")]
+    public partial class Registrations : Zetbox.Generator.Templates.Registrations
     {
 
 
@@ -26,18 +26,18 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
 
         public override void Generate()
         {
-#line 9 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 9 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
 this.WriteObjects("\r\n");
-#line 10 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 10 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
 base.Generate(); 
-#line 11 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 11 "P:\Zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<ISessionFactory>(\r\n");
 this.WriteObjects("                    c => {\r\n");
-this.WriteObjects("                        var kistlConfig = c.Resolve<KistlConfig>();\r\n");
+this.WriteObjects("                        var zetboxConfig = c.Resolve<ZetboxConfig>();\r\n");
 this.WriteObjects("                        var result = new Configuration();\r\n");
-this.WriteObjects("                        var connectionString = kistlConfig.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);\r\n");
+this.WriteObjects("                        var connectionString = zetboxConfig.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);\r\n");
 this.WriteObjects("                        result.Properties[\"dialect\"] = connectionString.DatabaseProvider;\r\n");
 this.WriteObjects("                        result.Properties[\"connection.connection_string\"] = connectionString.ConnectionString;\r\n");
 this.WriteObjects("                        result.Properties[\"max_fetch_depth\"] = \"1\"; // keep SQL statements small\r\n");

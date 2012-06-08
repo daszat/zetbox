@@ -1,13 +1,13 @@
 
-namespace Kistl.Generator.Templates
+namespace Zetbox.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     public partial class TypeBase
     {
@@ -38,7 +38,7 @@ namespace Kistl.Generator.Templates
                 if (orp.IsList())
                 {
                     ApplyObjectReferenceListTemplate(orp);
-                    var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, orp);
+                    var rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, orp);
                     if (rel.GetRelationType() == API.RelationType.one_n)
                     {
                         // TODO: No idea how to implement this for n:m Relations

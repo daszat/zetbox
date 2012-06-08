@@ -7,8 +7,8 @@
     <ProjectGuid>{21AE7B50-2093-4437-BD14-648BEED8A54C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KistlApp.Solution</RootNamespace>
-    <AssemblyName>KistlApp.Solution</AssemblyName>
+    <RootNamespace>ZetboxApp.Solution</RootNamespace>
+    <AssemblyName>ZetboxApp.Solution</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
@@ -50,76 +50,76 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Client.Tests\App.config" />
-    <None Include="KistlApp.Server\AssemblyInfo.cs" />
-    <None Include="KistlApp.Server\ServerModule.cs" />
-    <None Include="KistlApp.Common\AssemblyInfo.cs" />
-    <None Include="KistlApp.Common\CommonModule.cs" />
-    <None Include="KistlApp.Client.WPF\AssemblyInfo.cs" />
-    <None Include="KistlApp.Client.WPF\ClientWPFModule.cs" />
-    <None Include="KistlApp.Client\AssemblyInfo.cs" />
-    <None Include="KistlApp.Client\ClientModule.cs" />
-    <None Include="KistlApp.Bootstrapper\AssemblyInfo.cs" />
-    <None Include="KistlApp.Bootstrapper\Bootstrapper.cs" />
-    <None Include="KistlApp.Client.Tests\AssemblyInfo.cs" />
-    <None Include="KistlApp.Client.Tests\Integration\BasicTests.cs" />
+    <None Include="ZetboxApp.Client.Tests\App.config" />
+    <None Include="ZetboxApp.Server\AssemblyInfo.cs" />
+    <None Include="ZetboxApp.Server\ServerModule.cs" />
+    <None Include="ZetboxApp.Common\AssemblyInfo.cs" />
+    <None Include="ZetboxApp.Common\CommonModule.cs" />
+    <None Include="ZetboxApp.Client.WPF\AssemblyInfo.cs" />
+    <None Include="ZetboxApp.Client.WPF\ClientWPFModule.cs" />
+    <None Include="ZetboxApp.Client\AssemblyInfo.cs" />
+    <None Include="ZetboxApp.Client\ClientModule.cs" />
+    <None Include="ZetboxApp.Bootstrapper\AssemblyInfo.cs" />
+    <None Include="ZetboxApp.Bootstrapper\Bootstrapper.cs" />
+    <None Include="ZetboxApp.Client.Tests\AssemblyInfo.cs" />
+    <None Include="ZetboxApp.Client.Tests\Integration\BasicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Solution.ico" />
+    <None Include="ZetboxApp.Solution.ico" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="KistlApp.Solution.vstemplate" />
+    <VSTemplate Include="ZetboxApp.Solution.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Server\ProjectTemplate.csproj" />
+    <None Include="ZetboxApp.Server\ProjectTemplate.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Server\KistlApp.Server.ico" />
+    <None Include="ZetboxApp.Server\ZetboxApp.Server.ico" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="KistlApp.Server\KistlApp.Server.vstemplate" />
+    <VSTemplate Include="ZetboxApp.Server\ZetboxApp.Server.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Common\ProjectTemplate.csproj" />
+    <None Include="ZetboxApp.Common\ProjectTemplate.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Common\KistlApp.Common.ico" />
+    <None Include="ZetboxApp.Common\ZetboxApp.Common.ico" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="KistlApp.Common\KistlApp.Common.vstemplate" />
+    <VSTemplate Include="ZetboxApp.Common\ZetboxApp.Common.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Client.WPF\ProjectTemplate.csproj" />
+    <None Include="ZetboxApp.Client.WPF\ProjectTemplate.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Client.WPF\KistlApp.Client.WPF.ico" />
+    <None Include="ZetboxApp.Client.WPF\ZetboxApp.Client.WPF.ico" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="KistlApp.Client.WPF\KistlApp.Client.WPF.vstemplate" />
+    <VSTemplate Include="ZetboxApp.Client.WPF\ZetboxApp.Client.WPF.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Client\ProjectTemplate.csproj" />
+    <None Include="ZetboxApp.Client\ProjectTemplate.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Client\KistlApp.Client.ico" />
+    <None Include="ZetboxApp.Client\ZetboxApp.Client.ico" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="KistlApp.Client\KistlApp.Client.vstemplate" />
+    <VSTemplate Include="ZetboxApp.Client\ZetboxApp.Client.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="KistlApp.Bootstrapper\ProjectTemplate.csproj">
+    <None Include="ZetboxApp.Bootstrapper\ProjectTemplate.csproj">
       <SubType>Designer</SubType>
     </None>
-    <VSTemplate Include="KistlApp.Bootstrapper\KistlApp.Bootstrapper.vstemplate">
+    <VSTemplate Include="ZetboxApp.Bootstrapper\ZetboxApp.Bootstrapper.vstemplate">
       <SubType>Designer</SubType>
     </VSTemplate>
-    <None Include="KistlApp.Bootstrapper\KistlApp.Bootstrapper.ico" />
+    <None Include="ZetboxApp.Bootstrapper\ZetboxApp.Bootstrapper.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="KistlApp.Client.Tests\KistlApp.Client.Tests.ico" />
-    <Content Include="KistlApp.Client.Tests\KistlApp.Client.Tests.vstemplate" />
-    <Content Include="KistlApp.Client.Tests\ProjectTemplate.csproj">
+    <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.ico" />
+    <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate" />
+    <Content Include="ZetboxApp.Client.Tests\ProjectTemplate.csproj">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

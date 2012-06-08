@@ -1,15 +1,15 @@
-namespace Kistl.App.Base
+namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.GUI;
-    using Kistl.App.Extensions;
-    using Kistl.Client;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.GUI;
+    using Zetbox.App.Extensions;
+    using Zetbox.Client;
 
     /// <summary>
     /// Client implementation
@@ -21,7 +21,7 @@ namespace Kistl.App.Base
     public static class ObjectReferencePropertyActions
     {
         [Invocation]
-        public static void NotifyCreated(Kistl.App.Base.ObjectReferenceProperty obj)
+        public static void NotifyCreated(Zetbox.App.Base.ObjectReferenceProperty obj)
         {
             // Is implemented by CreateNavigator
             // At creating time there is no way to discover if the navigator is a Reference or List

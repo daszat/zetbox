@@ -1,8 +1,8 @@
-namespace Kistl.Unix
+namespace Zetbox.Unix
 {
     using System;
     using System.Collections.Generic;
-    using Kistl.API;
+    using Zetbox.API;
     using Mono.Unix;
 
     public class PosixIdentitySource : IIdentitySource

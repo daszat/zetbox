@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Zetbox.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
@@ -7,17 +7,17 @@ namespace Kistl.Generator.Templates.ObjectClasses
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     public class Template
         : TypeBase
     {
         protected ObjectClass ObjectClass { get; private set; }
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass t)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, ObjectClass t)
             : base(_host, ctx, t)
         {
             this.ObjectClass = t;

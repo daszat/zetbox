@@ -10,12 +10,12 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using Kistl.Client.Presentables;
-using Kistl.Client.ASPNET.Toolkit;
-using Kistl.Client;
-using Kistl.Client.ASPNET.Toolkit.View;
+using Zetbox.Client.Presentables;
+using Zetbox.Client.ASPNET.Toolkit;
+using Zetbox.Client;
+using Zetbox.Client.ASPNET.Toolkit.View;
 
-public partial class View_DataObjectFullView : Kistl.Client.ASPNET.Toolkit.View.DataObjectFullView
+public partial class View_DataObjectFullView : Zetbox.Client.ASPNET.Toolkit.View.DataObjectFullView
 {
     protected override Literal litTitleCtrl { get { return litTitle; } }
     protected override Repeater repPropertiesCtrl { get { return repProperties; } }

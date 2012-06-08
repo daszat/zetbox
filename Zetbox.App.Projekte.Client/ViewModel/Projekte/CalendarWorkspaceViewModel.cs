@@ -1,20 +1,20 @@
-namespace Kistl.App.Projekte.Client.ViewModel.Projekte
+namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
+    using Zetbox.API;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
 
     [ViewModelDescriptor]
-    public class CalendarWorkspaceViewModel : Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel
+    public class CalendarWorkspaceViewModel : Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel
     {
-        public new delegate CalendarWorkspaceViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate CalendarWorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
             base.ShowModel(CalendarViewModel);

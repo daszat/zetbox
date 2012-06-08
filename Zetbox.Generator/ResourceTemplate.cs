@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator
+namespace Zetbox.Generator
 {
     using System;
     using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace Kistl.Generator
         /// </summary>
         public string ImplementationPropertySuffix
         {
-            get { return Kistl.API.Helper.ImplementationSuffix; }
+            get { return Zetbox.API.Helper.ImplementationSuffix; }
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Kistl.Generator
         /// </summary>
         public string ImplementationSuffix
         {
-            get { return this.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix; }
+            get { return this.Settings["extrasuffix"] + Zetbox.API.Helper.ImplementationSuffix; }
         }
 
         public string ImplementationNamespace

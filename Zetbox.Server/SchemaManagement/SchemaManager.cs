@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaManagement
+namespace Zetbox.Server.SchemaManagement
 {
     using System;
     using System.Collections.Generic;
@@ -8,32 +8,32 @@ namespace Kistl.Server.SchemaManagement
     using System.Runtime.Serialization;
     using System.Text;
 
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.Packaging;
-    using Kistl.Generator;
-    using Kistl.Generator.Extensions;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.App.Packaging;
+    using Zetbox.Generator;
+    using Zetbox.Generator.Extensions;
 
     public partial class SchemaManager
         : IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Schema");
 
         #region Fields
-        private IKistlContext schema;
+        private IZetboxContext schema;
         private ISchemaProvider db;
         private bool repair = false;
         private readonly Cases Case;
-        private readonly KistlConfig config;
+        private readonly ZetboxConfig config;
         #endregion
 
         #region Constructor
 
-        public SchemaManager(ISchemaProvider provider, IKistlContext schema, IKistlContext savedSchema, KistlConfig config)
+        public SchemaManager(ISchemaProvider provider, IZetboxContext schema, IZetboxContext savedSchema, ZetboxConfig config)
         {
             this.config = config;
             this.schema = schema;
@@ -58,7 +58,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void WriteReportHeader(string reportName)
         {
-            var connectionString = config.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+            var connectionString = config.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
 
             Log.InfoFormat("== {0} ==", reportName);
             Log.InfoFormat("Date: {0}", DateTime.Now);
@@ -192,22 +192,22 @@ namespace Kistl.Server.SchemaManagement
         public static DefaultConstraint GetDefaultConstraint(Property prop)
         {
             if (prop == null) throw new ArgumentNullException("prop");
-            if (prop.DefaultValue is Kistl.App.Base.NewGuidDefaultValue)
+            if (prop.DefaultValue is Zetbox.App.Base.NewGuidDefaultValue)
             {
                 return new NewGuidDefaultConstraint();
             }
-            else if (prop.DefaultValue is Kistl.App.Base.CurrentDateTimeDefaultValue)
+            else if (prop.DefaultValue is Zetbox.App.Base.CurrentDateTimeDefaultValue)
             {
                 var dtProp = (DateTimeProperty)prop;
                 return new DateTimeDefaultConstraint() { Precision = dtProp.DateTimeStyle == DateTimeStyles.Date ? DateTimeDefaultConstraintPrecision.Date : DateTimeDefaultConstraintPrecision.Time };
             }
-            else if (prop.DefaultValue is Kistl.App.Base.BoolDefaultValue)
+            else if (prop.DefaultValue is Zetbox.App.Base.BoolDefaultValue)
             {
-                return new BoolDefaultConstraint() { Value = ((Kistl.App.Base.BoolDefaultValue)prop.DefaultValue).BoolValue };
+                return new BoolDefaultConstraint() { Value = ((Zetbox.App.Base.BoolDefaultValue)prop.DefaultValue).BoolValue };
             }
-            else if (prop.DefaultValue is Kistl.App.Base.IntDefaultValue)
+            else if (prop.DefaultValue is Zetbox.App.Base.IntDefaultValue)
             {
-                return new IntDefaultConstraint() { Value = ((Kistl.App.Base.IntDefaultValue)prop.DefaultValue).IntValue };
+                return new IntDefaultConstraint() { Value = ((Zetbox.App.Base.IntDefaultValue)prop.DefaultValue).IntValue };
             }
             else
             {
@@ -218,7 +218,7 @@ namespace Kistl.Server.SchemaManagement
 
         #region SavedSchema
 
-        public static void LoadSavedSchemaInto(ISchemaProvider provider, IKistlContext targetCtx)
+        public static void LoadSavedSchemaInto(ISchemaProvider provider, IZetboxContext targetCtx)
         {
             if (provider == null) { throw new ArgumentNullException("provider"); }
             if (targetCtx == null) { throw new ArgumentNullException("targetCtx"); }
@@ -233,7 +233,7 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void SaveSchema(IKistlContext schema)
+        private void SaveSchema(IZetboxContext schema)
         {
             using (Logging.Log.DebugTraceMethodCall("SaveSchema"))
             using (var ms = new MemoryStream())

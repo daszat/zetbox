@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.Tests.CompoundObjects
+namespace Zetbox.Server.Tests.CompoundObjects
 {
     using System;
     using System.Collections.Generic;
@@ -9,14 +9,14 @@ namespace Kistl.Server.Tests.CompoundObjects
 
     using Autofac;
     
-    using Kistl.API;
-    using Kistl.App.Test;
+    using Zetbox.API;
+    using Zetbox.App.Test;
     
     using NUnit.Framework;
 
     [TestFixture]
     public class when_changing
-        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing
+        : Zetbox.API.AbstractConsumerTests.CompoundObjects.when_changing
     {
     }
 }

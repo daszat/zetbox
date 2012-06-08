@@ -1,13 +1,13 @@
 
-namespace Kistl.App.Projekte.Client
+namespace Zetbox.App.Projekte.Client
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.API;
-    using Kistl.Client;
+    using Zetbox.API;
+    using Zetbox.Client;
 
     public class CustomClientActionsModule : Module
     {
@@ -15,13 +15,13 @@ namespace Kistl.App.Projekte.Client
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterZBoxImplementors(typeof(CustomClientActionsModule).Assembly);
+            moduleBuilder.RegisterZetboxImplementors(typeof(CustomClientActionsModule).Assembly);
             moduleBuilder.RegisterViewModels(typeof(CustomClientActionsModule).Assembly);
 
             // Register explicit overrides here
             moduleBuilder
-                .Register<Kistl.App.Projekte.Client.Projekte.Reporting.ReportingHost>(c => new Kistl.App.Projekte.Client.Projekte.Reporting.ReportingHost(
-                        "Kistl.App.Projekte.Client.DerivedReportTest",
+                .Register<Zetbox.App.Projekte.Client.Projekte.Reporting.ReportingHost>(c => new Zetbox.App.Projekte.Client.Projekte.Reporting.ReportingHost(
+                        "Zetbox.App.Projekte.Client.DerivedReportTest",
                         typeof(CustomClientActionsModule).Assembly,
                         c.Resolve<IFileOpener>(),
                         c.Resolve<ITempFileService>()

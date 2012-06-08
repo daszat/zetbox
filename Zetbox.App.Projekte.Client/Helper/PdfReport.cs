@@ -7,7 +7,7 @@ using System.IO;
 using MigraDoc.Rendering;
 using MigraDoc.DocumentObjectModel.Tables;
 
-namespace Kistl.App.Projekte.Client.Helper
+namespace Zetbox.App.Projekte.Client.Helper
 {
     [CLSCompliant(false)]
     public abstract class PdfReport : IDisposable

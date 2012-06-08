@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
            table="`One_to_N_relations_Ns`"
            abstract="false"
@@ -23,7 +23,7 @@
                   column="`Name`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="OneSide" column="`fk_OneSide`" class="Kistl.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="OneSide" column="`fk_OneSide`" class="Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Zetbox.Objects.NHibernateImpl" />
 
 
         <!-- define the subclasses -->

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.WPF.Properties {
+namespace Zetbox.Client.WPF.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

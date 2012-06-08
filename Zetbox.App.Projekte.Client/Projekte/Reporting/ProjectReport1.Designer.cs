@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Kistl.App.Projekte.Client.Projekte.Reporting
+namespace Zetbox.App.Projekte.Client.Projekte.Reporting
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst")]
-    public partial class ProjectReport : Kistl.App.Projekte.Client.Projekte.Reporting.ReportTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Zetbox\Zetbox.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst")]
+    public partial class ProjectReport : Zetbox.App.Projekte.Client.Projekte.Reporting.ReportTemplate
     {
 
 
@@ -25,21 +25,21 @@ namespace Kistl.App.Projekte.Client.Projekte.Reporting
 
         public override void Generate()
         {
-#line 8 "P:\Kistl\Kistl.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
+#line 8 "P:\Zetbox\Zetbox.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\\document [\r\n");
-#line 10 "P:\Kistl\Kistl.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
+#line 10 "P:\Zetbox\Zetbox.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
 Common.DocumentInfo.Call(Host, "Invoice", null); 
-#line 11 "P:\Kistl\Kistl.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
+#line 11 "P:\Zetbox\Zetbox.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
 this.WriteObjects("] {\r\n");
-#line 12 "P:\Kistl\Kistl.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
+#line 12 "P:\Zetbox\Zetbox.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
 Common.DocumentStyles.Call(Host); 
-#line 13 "P:\Kistl\Kistl.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
+#line 13 "P:\Zetbox\Zetbox.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\\section [\r\n");
-#line 15 "P:\Kistl\Kistl.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
+#line 15 "P:\Zetbox\Zetbox.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
 PageSetup(); 
-#line 16 "P:\Kistl\Kistl.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
+#line 16 "P:\Zetbox\Zetbox.App.Projekte.Client\Projekte\Reporting\ProjectReport.cst"
 this.WriteObjects("	] {\r\n");
 this.WriteObjects("        \\paragraph [ Style = \"Title\" Format { SpaceBefore = \"2cm\" } ] {\r\n");
 this.WriteObjects("            ",  GetTitle() , "\r\n");

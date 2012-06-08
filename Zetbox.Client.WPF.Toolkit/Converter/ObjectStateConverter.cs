@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Data;
-using Kistl.API;
+using Zetbox.API;
 using System.Windows;
 
-namespace Kistl.Client.WPF.Converter
+namespace Zetbox.Client.WPF.Converter
 {
     [ValueConversion(typeof(DataObjectState), typeof(string))]
     public sealed class ObjectStateToTextConverter : IValueConverter

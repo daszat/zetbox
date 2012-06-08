@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Zetbox.Server
 {
     using System;
     using System.Collections.Generic;
@@ -10,14 +10,14 @@ namespace Kistl.Server
     using System.Text;
     using System.Threading;
     using Autofac.Integration.Wcf;
-    using Kistl.API;
-    using Kistl.API.Configuration;
-    using Kistl.API.Utils;
+    using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
 
     public class WcfServer
-        : MarshalByRefObject, IKistlAppDomain, IService, IDisposable
+        : MarshalByRefObject, IZetboxAppDomain, IService, IDisposable
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Wcf");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Wcf");
 
         /// <summary>
         /// WCF Service Host
@@ -29,7 +29,7 @@ namespace Kistl.Server
         /// </summary>
         private readonly ServiceHostBase _bootstrapperHost = null;
 
-        private readonly KistlConfig _defaultConfig = null;
+        private readonly ZetboxConfig _defaultConfig = null;
 
         /// <summary>
         /// WCF Service Thread
@@ -41,7 +41,7 @@ namespace Kistl.Server
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
-        public WcfServer(AutofacServiceHostFactory factory, AutofacWebServiceHostFactory webFactory, KistlConfig config)
+        public WcfServer(AutofacServiceHostFactory factory, AutofacWebServiceHostFactory webFactory, ZetboxConfig config)
         {
             if (factory == null) { throw new ArgumentNullException("factory"); }
             if (webFactory == null) { throw new ArgumentNullException("webFactory"); }
@@ -49,7 +49,7 @@ namespace Kistl.Server
 
             _defaultConfig = config;
 
-            _mainHost = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new Uri[] { });
+            _mainHost = factory.CreateServiceHost(typeof(ZetboxService).AssemblyQualifiedName, new Uri[] { });
             _mainHost.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
             _mainHost.Faulted += host_Faulted;
             _mainHost.Closed += host_Closed;
@@ -79,7 +79,7 @@ namespace Kistl.Server
         /// <see cref="InvalidOperationException"/> is thrown.
         /// </summary>
         /// <param name="config">the loaded configuration for the Server</param>
-        public void Start(KistlConfig config)
+        public void Start(ZetboxConfig config)
         {
             if (config == null) throw new ArgumentNullException("config");
 

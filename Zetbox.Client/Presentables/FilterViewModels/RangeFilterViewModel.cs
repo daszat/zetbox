@@ -2,19 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
+using Zetbox.API;
 using System.Collections.ObjectModel;
-using Kistl.Client.Presentables.ValueViewModels;
-using Kistl.Client.Models;
+using Zetbox.Client.Presentables.ValueViewModels;
+using Zetbox.Client.Models;
 
-namespace Kistl.Client.Presentables.FilterViewModels
+namespace Zetbox.Client.Presentables.FilterViewModels
 {
     [ViewModelDescriptor]
     public class RangeFilterViewModel : FilterViewModel
     {
-        public new delegate RangeFilterViewModel Factory(IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl);
+        public new delegate RangeFilterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IUIFilterModel mdl);
 
-        public RangeFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+        public RangeFilterViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IUIFilterModel mdl)
             : base(dependencies, dataCtx, parent, mdl)
         {
             this.RangeFilter = (RangeFilterModel)mdl;

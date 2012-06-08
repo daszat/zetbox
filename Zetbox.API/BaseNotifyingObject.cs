@@ -1,4 +1,4 @@
-namespace Kistl.API
+namespace Zetbox.API
 {
     using System;
     using System.Collections.Generic;
@@ -179,7 +179,7 @@ namespace Kistl.API
         private Dictionary<string, Notification> _auditLog;
         protected Dictionary<string, Notification> AuditLog { get { return _auditLog; } }
 
-        private static readonly log4net.ILog _auditLogger = log4net.LogManager.GetLogger("Kistl.Audits");
+        private static readonly log4net.ILog _auditLogger = log4net.LogManager.GetLogger("Zetbox.Audits");
 
         protected void LogAudits()
         {

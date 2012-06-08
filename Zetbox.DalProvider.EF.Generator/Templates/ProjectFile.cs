@@ -1,19 +1,19 @@
 
-namespace Kistl.DalProvider.Ef.Generator.Templates
+namespace Zetbox.DalProvider.Ef.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.API.Server;
-    using Kistl.Generator;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.Generator;
 
     public class ProjectFile
-        : Kistl.Generator.Templates.ProjectFile
+        : Zetbox.Generator.Templates.ProjectFile
     {
 
-        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
+        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
             : base(_host, ctx, projectGuid, fileNames, schemaProviders)
         {
         }
@@ -39,16 +39,16 @@ namespace Kistl.DalProvider.Ef.Generator.Templates
             //this.WriteLine(@"    </Reference>");
 
             // EF Provider infrastructure
-            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Ef"">");
+            this.WriteLine(@"    <Reference Include=""Zetbox.DalProvider.Ef"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\EF\Kistl.DalProvider.Ef.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\EF\Zetbox.DalProvider.Ef.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // Server API
-            this.WriteLine(@"    <Reference Include=""Kistl.API.Server"">");
+            this.WriteLine(@"    <Reference Include=""Zetbox.API.Server"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Core\Kistl.API.Server.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(ZetboxAPIPath)\Server\Core\Zetbox.API.Server.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }

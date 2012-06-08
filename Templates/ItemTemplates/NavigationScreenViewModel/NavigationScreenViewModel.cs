@@ -4,20 +4,20 @@ namespace $rootnamespace$
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.GUI;
-    using Kistl.App.GUI;
+    using Zetbox.API;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.App.GUI;
 
     [ViewModelDescriptor]
     public class $safeitemname$ : NavigationScreenViewModel
     {
-        public new delegate $safeitemname$ Factory(IKistlContext dataCtx, NavigationScreen screen);
+        public new delegate $safeitemname$ Factory(IZetboxContext dataCtx, NavigationScreen screen);
 
-        private readonly Func<IKistlContext> _ctxFactory;
+        private readonly Func<IZetboxContext> _ctxFactory;
 
-        public $safeitemname$(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, NavigationScreen screen)
+        public $safeitemname$(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+            IZetboxContext dataCtx, NavigationScreen screen)
             : base(appCtx, dataCtx, screen)
         {
             _ctxFactory = ctxFactory;

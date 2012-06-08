@@ -1,22 +1,22 @@
 
-namespace Kistl.App.Projekte.Client.ViewModel.Projekte
+namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.Calendar;
+    using Zetbox.API;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.Calendar;
 
     [ViewModelDescriptor]
     public class TaskViewModel : DataObjectViewModel, IAppointmentViewModel
     {
-        public new delegate TaskViewModel Factory(IKistlContext dataCtx, ViewModel parent, Task obj);
+        public new delegate TaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Task obj);
 
-        public TaskViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Task obj)
+        public TaskViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Task obj)
             : base(appCtx, dataCtx, parent, obj)
         {
         }
