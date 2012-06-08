@@ -5,6 +5,8 @@ echo Afterwards the basic modules are published again to see that nothing has ch
 echo Use this to get a really clean environment and verify changes to infrastructure code.
 echo ********************************************************************************
 
+IF NOT EXIST Configs\Local XCOPY /S/E Configs\Examples Configs\Local\
+
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m CCNet.msbuild /p:SourceLocation=P:\Zetbox
 IF ERRORLEVEL 1 GOTO FAIL
 
