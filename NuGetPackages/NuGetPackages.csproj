@@ -51,5 +51,4 @@
   </Target>
   <Target Name="Clean">
   </Target>
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
