@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="zetboxBasic.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="zetboxBasic-All.nuspec" />
+    <Content Include="zetboxBasic-EF.nuspec" />
+    <Content Include="zetboxBasic-NH.nuspec" />
+  </ItemGroup>
+  <Import Project="..\.nuget\nuget.targets" />
+  <Target Name="Build" Inputs="@(Content)" Outputs="%(Identity).Dummy">
+    <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)" />
+    <Exec Command="$(NuGetCommand) pack @(Content)" WorkingDirectory="$(OutputPath)" />
+  </Target>
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build">
+  </Target>
+  <Target Name="Clean">
+  </Target>
+</Project>

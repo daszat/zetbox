@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>zetboxBasic</id>
+    <version>1.0.0.0</version>
+    <title>zetbox Basic</title>
+    <authors>dasz.at OG</authors>
+    <owners>dasz.at OG</owners>
+    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+    <projectUrl>http://zetbox.at/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Basic components for the zetbox.</description>
+    <releaseNotes>First package.</releaseNotes>
+    <copyright>Copyright © 2012 dasz.at OG</copyright>
+    <tags>Platform Database ORM Applications</tags>
+  </metadata>
+  <files>
+    <file src="*.dll" target="lib/net35" />
+    <file src="*.exe" target="lib/net35" />
+    <file src="*.config" target="lib/net35" />
+    <file src="*.xml" target="lib/net35" />
+    <file src="*.cmd" target="tools" />
+    <file src="..\..\Configs\Examples\**" target="content/Configs/Examples" />
+    <file src="**\*.resources.dll" target="lib/net35" exclude="Tests\**" />
+
+    <file src="Common\**" target="lib/net35/Common" exclude="**\*.resources.dll;Common\Core.Generated\**" />
+    <file src="Client\**" target="lib/net35/Client" exclude="**\*.resources.dll;Client\Core.Generated\**" />
+    <file src="Server\**" target="lib/net35/Server" exclude="**\*.resources.dll;Server\EF*\**;Server\NH*\**" />
+    
+    <file src="Bootstrapper\**" target="lib/net35/Bootstrapper" exclude="**\*.resources.dll" />
+    <file src="HttpService\**" target="lib/net35/HttpService" exclude="**\*.resources.dll" />
+  </files>
+</package>

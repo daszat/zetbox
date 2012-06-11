@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>zetboxBasic-All</id>
+    <version>1.0.0.0</version>
+    <title>zetbox Basic</title>
+    <authors>dasz.at OG</authors>
+    <owners>dasz.at OG</owners>
+    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+    <projectUrl>http://zetbox.at/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Basic components with EF &amp; NH for the zetbox.</description>
+    <releaseNotes>First package.</releaseNotes>
+    <copyright>Copyright © 2012 dasz.at OG</copyright>
+    <tags>Platform Database ORM Applications</tags>
+    <dependencies>
+      <dependency id="zetboxBasic" version="1.0.0.0" />
+      <dependency id="zetboxBasic-EF" version="1.0.0.0" />
+      <dependency id="zetboxBasic-NH" version="1.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files />
+</package>

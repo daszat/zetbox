@@ -180,11 +180,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultFormsConfig.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
       <Name>Zetbox.API.Client</Name>
