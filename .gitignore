@@ -36,3 +36,7 @@ VersionInfo.Designer.cs
 /packages/Mono.Posix.2.0.0.0
 /packages/Mono.Security.2.0.0.0
 /packages/Npgsql.2.0.11.92
+/NuGetPackages/zetboxBasic-NH.nuspec
+/NuGetPackages/zetboxBasic.nuspec
+/NuGetPackages/zetboxBasic-All.nuspec
+/NuGetPackages/zetboxBasic-EF.nuspec
