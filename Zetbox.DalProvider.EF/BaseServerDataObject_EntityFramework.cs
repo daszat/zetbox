@@ -262,6 +262,20 @@ namespace Zetbox.DalProvider.Ef
         {
         }
 
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanging(property, oldValue, newValue);
+            if (ParentObject != null)
+                ParentObject.NotifyPropertyChanging(ParentProperty + "." + property, oldValue, newValue);
+        }
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+            if (ParentObject != null)
+                ParentObject.NotifyPropertyChanged(ParentProperty + "." + property, oldValue, newValue);
+        }
+
         #region IEntityFrameworkNotifyingObject
         public void ReportEfPropertyChanging(string efProperty)
         {
