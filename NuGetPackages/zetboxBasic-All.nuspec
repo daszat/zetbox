@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>zetboxBasic-All</id>
-    <version>1.0.0.0</version>
+    <version>1.0.4027.1</version>
     <title>zetbox Basic</title>
     <authors>dasz.at OG</authors>
     <owners>dasz.at OG</owners>
@@ -14,9 +14,9 @@
     <copyright>Copyright © 2012 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="zetboxBasic" version="1.0.0.0" />
-      <dependency id="zetboxBasic-EF" version="1.0.0.0" />
-      <dependency id="zetboxBasic-NH" version="1.0.0.0" />
+      <dependency id="zetboxBasic" version="1.0.4027.1" />
+      <dependency id="zetboxBasic-EF" version="1.0.4027.1" />
+      <dependency id="zetboxBasic-NH" version="1.0.4027.1" />
     </dependencies>
   </metadata>
   <files />
