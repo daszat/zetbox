@@ -32,6 +32,16 @@
       <DependentUpon>zetboxBasic-NH.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Init-zetboxBasic-NH.ps1">
+      <DependentUpon>Init-zetboxBasic-NH.ps1.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Init-zetboxBasic-EF.ps1">
+      <DependentUpon>Init-zetboxBasic-EF.ps1.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Init-zetboxBasic-EF.ps1.in" />
+    <None Include="Init-zetboxBasic-NH.ps1.in" />
     <None Include="Init-zetboxBasic.ps1.in" />
     <Content Include="Init-zetboxBasic.ps1">
       <DependentUpon>Init-zetboxBasic.ps1.in</DependentUpon>

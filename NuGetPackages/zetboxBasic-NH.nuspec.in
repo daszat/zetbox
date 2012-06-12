@@ -17,5 +17,9 @@
   <files>
     <file src="Server\NH\**" target="zetbox/Server/NH" />
     <file src="Server\NH.Fallback\**" target="zetbox/Server/NH.Fallback" />
+
+    <file src="nh.copy.targets" target="tools" />
+    
+    <file src="Init-zetboxBasic-NH.ps1" target="tools/Init.ps1" />
   </files>
 </package>
