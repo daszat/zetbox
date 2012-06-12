@@ -15,19 +15,27 @@
     <tags>Platform Database ORM Applications</tags>
   </metadata>
   <files>
-    <file src="*.dll" target="lib/net35" />
-    <file src="*.exe" target="lib/net35" />
-    <file src="*.config" target="lib/net35" />
-    <file src="*.xml" target="lib/net35" />
-    <file src="*.cmd" target="tools" />
-    <file src="..\..\Configs\Examples\**" target="content/Configs/Examples" />
-    <file src="**\*.resources.dll" target="lib/net35" exclude="Tests\**" />
+    <file src="*.dll" target="zetbox" />
+    <file src="*.exe" target="zetbox" />
+    <file src="*.config" target="zetbox" />
+    <file src="*.xml" target="zetbox" />
+    <file src="*.cmd" target="zetbox" />
+    <file src="..\..\Configs\Examples\**" target="Configs/Examples" />
+    <file src="**\*.resources.dll" target="zetbox" exclude="Tests\**" />
 
-    <file src="Common\**" target="lib/net35/Common" exclude="**\*.resources.dll;Common\Core.Generated\**" />
-    <file src="Client\**" target="lib/net35/Client" exclude="**\*.resources.dll;Client\Core.Generated\**" />
-    <file src="Server\**" target="lib/net35/Server" exclude="**\*.resources.dll;Server\EF*\**;Server\NH*\**" />
+    <file src="Common\**" target="zetbox/Common" exclude="**\*.resources.dll;Common\Core.Generated\**" />
+    <file src="Client\**" target="zetbox/Client" exclude="**\*.resources.dll;Client\Core.Generated\**" />
+    <file src="Server\**" target="zetbox/Server" exclude="**\*.resources.dll;Server\EF*\**;Server\NH*\**" />
     
-    <file src="Bootstrapper\**" target="lib/net35/Bootstrapper" exclude="**\*.resources.dll" />
-    <file src="HttpService\**" target="lib/net35/HttpService" exclude="**\*.resources.dll" />
+    <file src="Bootstrapper\**" target="zetbox/Bootstrapper" exclude="**\*.resources.dll" />
+    <file src="HttpService\**" target="zetbox/HttpService" exclude="**\*.resources.dll" />
+
+    <file src="client.targets" target="tools" />
+    <file src="server.targets" target="tools" />
+    <file src="common.targets" target="tools" />
+
+    <file src="zetbox.copy.targets" target="tools" />
+    
+    <file src="Init-zetboxBasic.ps1" target="tools/Init.ps1" />
   </files>
 </package>
