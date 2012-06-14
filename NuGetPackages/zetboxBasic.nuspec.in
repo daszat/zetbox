@@ -34,8 +34,8 @@
     <file src="server.targets" target="tools" />
     <file src="common.targets" target="tools" />
 
-    <file src="zetbox.copy.targets" target="tools" />
-    
     <file src="Init-zetboxBasic.ps1" target="tools/Init.ps1" />
+    <file src="Env.xml" target="tools" />
+    <file src="PrepareEnv.exe" target="tools" />
   </files>
 </package>

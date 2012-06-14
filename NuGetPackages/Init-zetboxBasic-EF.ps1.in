@@ -1,6 +1,0 @@
-﻿param($installPath, $toolsPath, $package, $project)
-
-$zetbox = [System.IO.Path]::Combine($installPath, "\..\..\.zetbox\")
-
-if (!(Test-Path -path $zetbox)) { mkdir $zetbox }
-cp "$toolsPath\*.targets" $zetbox

@@ -16,6 +16,11 @@
     <OutputPath>..\bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Env.xml.in" />
+    <Content Include="Env.xml">
+      <DependentUpon>Env.xml.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="zetboxBasic.nuspec">
       <DependentUpon>zetboxBasic.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -32,16 +37,6 @@
       <DependentUpon>zetboxBasic-NH.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Init-zetboxBasic-NH.ps1">
-      <DependentUpon>Init-zetboxBasic-NH.ps1.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Init-zetboxBasic-EF.ps1">
-      <DependentUpon>Init-zetboxBasic-EF.ps1.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Init-zetboxBasic-EF.ps1.in" />
-    <None Include="Init-zetboxBasic-NH.ps1.in" />
     <None Include="Init-zetboxBasic.ps1.in" />
     <Content Include="Init-zetboxBasic.ps1">
       <DependentUpon>Init-zetboxBasic.ps1.in</DependentUpon>
@@ -66,21 +61,6 @@
     <None Include="common.targets.in" />
     <None Include="server.targets.in" />
     <None Include="client.targets.in" />
-    <Content Include="zetbox.copy.targets">
-      <DependentUpon>zetbox.copy.targets.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ef.copy.targets">
-      <DependentUpon>ef.copy.targets.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="nh.copy.targets">
-      <DependentUpon>nh.copy.targets.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="zetbox.copy.targets.in" />
-    <None Include="ef.copy.targets.in" />
-    <None Include="nh.copy.targets.in" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

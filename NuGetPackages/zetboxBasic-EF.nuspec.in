@@ -17,9 +17,5 @@
   <files>
     <file src="Server\EF\**" target="zetbox/Server/EF" />
     <file src="Server\EF.Fallback\**" target="zetbox/Server/EF.Fallback" />
-
-    <file src="ef.copy.targets" target="tools" />
-
-    <file src="Init-zetboxBasic-EF.ps1" target="tools/Init.ps1" />
   </files>
 </package>

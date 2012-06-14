@@ -22,4 +22,7 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+  <Target Name="BeforeBuild">
+    <Exec WorkingDirectory="$(SolutionDir)" Command="$(SolutionDir)\.zetbox\PrepareEnv .zetbox" />
+  </Target>
 </Project>
