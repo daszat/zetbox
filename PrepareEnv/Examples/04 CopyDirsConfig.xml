@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EnvConfig Version="1.0">
+  <BinarySource>p:\Zetbox\Zetbox.Client*</BinarySource>
+  <BinaryTarget>bin\Debug</BinaryTarget>
+</EnvConfig>

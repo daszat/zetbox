@@ -163,10 +163,13 @@ namespace PrepareEnv
             // if source is empty or source and target are the same, binaries do not have to be copied
             if (!string.IsNullOrEmpty(envConfig.BinarySource) && envConfig.BinarySource != envConfig.BinaryTarget)
             {
-                LogAction("copying Binaries");
-                CopyFolder(envConfig.BinarySource, envConfig.BinaryTarget);
-                // Bootstrapper has to be available in the web root
-                CopyFolder(Path.Combine(envConfig.BinarySource, "Bootstrapper"), Path.Combine(Path.Combine(envConfig.BinaryTarget, "HttpService"), "Bootstrapper"));
+                foreach (var source in ExpandPath(envConfig.BinarySource))
+                {
+                    LogAction("copying Binaries");
+                    CopyFolder(source, envConfig.BinaryTarget);
+                    // Bootstrapper has to be available in the web root
+                    CopyFolder(Path.Combine(source, "Bootstrapper"), Path.Combine(Path.Combine(envConfig.BinaryTarget, "HttpService"), "Bootstrapper"));
+                }
             }
 
             var moduleTarget = Path.Combine(envConfig.BinaryTarget, "Modules");
@@ -184,6 +187,24 @@ namespace PrepareEnv
             }
 
             ReplaceNpgsql(envConfig);
+        }
+
+        private static IEnumerable<string> ExpandPath(string source)
+        {
+            List<string> result = new List<string>();
+
+            if (source.EndsWith("*"))
+            {
+                var path = Path.GetDirectoryName(source);
+                var filter = Path.GetFileName(source);
+                result.AddRange(Directory.GetDirectories(path, filter));
+            }
+            else
+            {
+                result.Add(source);
+            }
+
+            return result;
         }
 
         private static void ReplaceNpgsql(EnvConfig envConfig)
