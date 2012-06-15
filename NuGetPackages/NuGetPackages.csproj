@@ -16,65 +16,68 @@
     <OutputPath>..\bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Env.xml.in" />
-    <Content Include="Env.xml">
-      <DependentUpon>Env.xml.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zetboxBasic.nuspec">
+    <NuSpec Include="zetboxBasic.nuspec">
       <DependentUpon>zetboxBasic.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zetboxBasic-All.nuspec">
+    </NuSpec>
+    <NuSpec Include="zetboxBasic-All.nuspec">
       <DependentUpon>zetboxBasic-All.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zetboxBasic-EF.nuspec">
+    </NuSpec>
+    <NuSpec Include="zetboxBasic-EF.nuspec">
       <DependentUpon>zetboxBasic-EF.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zetboxBasic-NH.nuspec">
+    </NuSpec>
+    <NuSpec Include="zetboxBasic-NH.nuspec">
       <DependentUpon>zetboxBasic-NH.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Init-zetboxBasic.ps1.in" />
-    <Content Include="Init-zetboxBasic.ps1">
-      <DependentUpon>Init-zetboxBasic.ps1.in</DependentUpon>
+    </NuSpec>
+
+    <Content Include="Env.xml" />
+    <Content Include="Init-zetboxBasic.ps1" />
+	
+    <Targets Include="common.targets">
+      <DependentUpon>common.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Targets>
+    <Targets Include="server.targets">
+      <DependentUpon>server.targets.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Targets>
+    <Targets Include="client.targets">
+      <DependentUpon>client.targets.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Targets>
+
+    <None Include="common.targets.in" />
+    <None Include="server.targets.in" />
+    <None Include="client.targets.in" />
     <None Include="zetboxBasic.nuspec.in" />
     <None Include="zetboxBasic-All.nuspec.in" />
     <None Include="zetboxBasic-EF.nuspec.in" />
     <None Include="zetboxBasic-NH.nuspec.in" />
-    <Content Include="common.targets">
-      <DependentUpon>common.targets.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="server.targets">
-      <DependentUpon>server.targets.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="client.targets">
-      <DependentUpon>client.targets.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="common.targets.in" />
-    <None Include="server.targets.in" />
-    <None Include="client.targets.in" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MsBuildVersioning.targets" />
-  <Target Name="Build" Inputs="@(Content)" Outputs="%(Identity).Dummy">
-    <GitVersionFile TemplateFile="@(Content).in" DestinationFile="@(Content)" />
-    <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)" />
+  
+  <Target Name="GitVersionTargets" Inputs="@(Targets)" Outputs="%(Identity).Dummy">
+    <GitVersionFile TemplateFile="@(Targets).in" DestinationFile="@(Targets)" />
   </Target>
-  <ItemGroup>
-    <NuSpecs Include="$(Content)**\*.nuspec" />
-  </ItemGroup>
-  <Target Name="Package" Inputs="@(NuSpecs)" Outputs="%(Identity).Dummy" DependsOnTargets="Build">
-    <Exec WorkingDirectory="$(OutputPath)" Command="..\$(NuGetCommand) pack @(NuSpecs) -prop Configuration=$(Configuration)" />
+  <Target Name="GitVersionNuSpec" Inputs="@(NuSpec)" Outputs="%(Identity).Dummy">
+    <GitVersionFile TemplateFile="@(NuSpec).in" DestinationFile="@(NuSpec)" />
+  </Target>
+  
+  <Target Name="ContentCopy">
+    <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(NuSpec)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(Targets)" DestinationFolder="$(OutputPath)" />
+  </Target>
+  <Target Name="Build" DependsOnTargets="GitVersionTargets;GitVersionNuSpec;ContentCopy">
+  </Target>
+  <Target Name="Package" Inputs="@(NuSpec)" Outputs="%(Identity).Dummy" DependsOnTargets="Build">
+    <Exec WorkingDirectory="$(OutputPath)" Command="..\$(NuGetCommand) pack @(NuSpec) -prop Configuration=$(Configuration)" />
   </Target>
   <Target Name="Rebuild" DependsOnTargets="Clean;Build">
   </Target>

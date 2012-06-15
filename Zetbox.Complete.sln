@@ -256,6 +256,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.WPF", "Zetbox.WPF\Zetbox.WPF.csproj", "{B548883F-2042-4ECD-B5DD-6493B30C458B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackages", "NuGetPackages\NuGetPackages.csproj", "{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}"
+	ProjectSection(ProjectDependencies) = postProject
+		{39C24036-DD89-40C7-8196-1E7D3A817D5E} = {39C24036-DD89-40C7-8196-1E7D3A817D5E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
