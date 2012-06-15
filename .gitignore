@@ -41,3 +41,6 @@ VersionInfo.Designer.cs
 /NuGetPackages/zetboxBasic-All.nuspec
 /NuGetPackages/zetboxBasic-EF.nuspec
 /PrepareEnv/Examples/env.xml
+/NuGetPackages/server.targets
+/NuGetPackages/client.targets
+/NuGetPackages/common.targets
