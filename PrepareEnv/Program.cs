@@ -163,9 +163,14 @@ namespace PrepareEnv
             // if source is empty or source and target are the same, binaries do not have to be copied
             if (!string.IsNullOrEmpty(envConfig.BinarySource) && envConfig.BinarySource != envConfig.BinaryTarget)
             {
-                foreach (var source in ExpandPath(envConfig.BinarySource))
+                var sourcePaths = ExpandPath(envConfig.BinarySource);
+                var isWildcard = sourcePaths.Count() > 1;
+
+                foreach (var source in sourcePaths)
                 {
-                    LogAction("copying Binaries");
+                    LogAction("copying Binaries from " + source);
+                    if (isWildcard && !Directory.Exists(source)) continue;
+
                     CopyFolder(source, envConfig.BinaryTarget);
 
                     var bootstrapperSource = Path.Combine(source, "Bootstrapper");
@@ -198,11 +203,17 @@ namespace PrepareEnv
         {
             List<string> result = new List<string>();
 
-            if (source.EndsWith("*"))
+            if (source.Contains("*"))
             {
-                var path = Path.GetDirectoryName(source);
-                var filter = Path.GetFileName(source);
-                result.AddRange(Directory.GetDirectories(path, filter));
+                var split = source.Split('*');
+                if (split.Length != 2) throw new ArgumentOutOfRangeException("source", "only one wildcard is supported yet");
+
+                var baseSource = split[0] + "*";
+                var extented = split[1].TrimStart('\\');
+                var path = Path.GetDirectoryName(baseSource);
+                var filter = Path.GetFileName(baseSource);
+
+                result.AddRange(Directory.GetDirectories(path, filter).Select(i => Path.Combine(i, extented)));
             }
             else
             {
