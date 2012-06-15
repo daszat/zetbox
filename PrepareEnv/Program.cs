@@ -167,8 +167,13 @@ namespace PrepareEnv
                 {
                     LogAction("copying Binaries");
                     CopyFolder(source, envConfig.BinaryTarget);
-                    // Bootstrapper has to be available in the web root
-                    CopyFolder(Path.Combine(source, "Bootstrapper"), Path.Combine(Path.Combine(envConfig.BinaryTarget, "HttpService"), "Bootstrapper"));
+
+                    var bootstrapperSource = Path.Combine(source, "Bootstrapper");
+                    if (Directory.Exists(bootstrapperSource))
+                    {
+                        // Bootstrapper has to be available in the web root
+                        CopyFolder(bootstrapperSource, PathX.Combine(envConfig.BinaryTarget, "HttpService", "Bootstrapper"));
+                    }
                 }
             }
 
