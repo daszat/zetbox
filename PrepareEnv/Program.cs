@@ -213,11 +213,11 @@ namespace PrepareEnv
                 if (split.Length != 2) throw new ArgumentOutOfRangeException("source", "only one wildcard is supported yet");
 
                 var baseSource = split[0] + "*";
-                var extented = split[1].TrimStart('\\');
+                var tail = split[1].TrimStart(Path.DirectorySeparatorChar).TrimStart(Path.AltDirectorySeparatorChar);
                 var path = Path.GetDirectoryName(baseSource);
                 var filter = Path.GetFileName(baseSource);
 
-                result.AddRange(Directory.GetDirectories(path, filter).Select(i => Path.Combine(i, extented)));
+                result.AddRange(Directory.GetDirectories(path, filter).Select(i => Path.Combine(i, tail)));
             }
             else
             {
