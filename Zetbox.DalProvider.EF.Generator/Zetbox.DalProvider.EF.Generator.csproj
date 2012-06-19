@@ -53,8 +53,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Arebis.CodeGeneration">
-      <HintPath>..\packages\Arebis.CodeGenerator.1.2.0.1\lib\net35\Arebis.CodeGeneration.dll</HintPath>
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.1.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Arebis.CodeGenerator.1.2.1.0\lib\net35\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Arebis.CodeGenerator">
+      <HintPath>..\packages\Arebis.CodeGenerator.1.2.1.0\lib\net35\Arebis.CodeGenerator.dll</HintPath>
     </Reference>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.2.6.1.841\lib\NET35\Autofac.dll</HintPath>
