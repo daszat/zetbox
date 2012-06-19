@@ -109,6 +109,10 @@ namespace PrepareEnv
             {
                 envConfig.ConfigSource = envConfigDir;
             }
+            else
+            {
+                envConfig.ConfigSource = ExpandEnvVars(envConfig.ConfigSource);
+            }
 
             if (envConfig.DatabaseSource != null && !string.IsNullOrEmpty(envConfig.DatabaseSource.Value))
             {
@@ -269,7 +273,7 @@ namespace PrepareEnv
             LogTitle("Installing Configs");
             var configTargetDir = Path.Combine(envConfig.BinaryTarget, "Configs");
             // only copy the actual environment's configs, no recursion!
-            CopyTopFiles(envConfig.ConfigSource, configTargetDir);
+            CopyFolder(envConfig.ConfigSource, configTargetDir);
             // find all app.configs
             foreach (var appConfigFile in Directory.GetFiles(configTargetDir, "*.config"))
             {
