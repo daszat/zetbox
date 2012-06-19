@@ -26,11 +26,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Client">
-      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\Kistl.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\Zetbox.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Client.WPF.Toolkit">
-      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\WPF\Kistl.Client.WPF.Toolkit.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\WPF\Zetbox.Client.WPF.Toolkit.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
