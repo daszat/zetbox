@@ -26,7 +26,10 @@
     <file src="Common\**" target="zetbox/Common" exclude="**\*.resources.dll;Common\Core.Generated\**" />
     <file src="Client\**" target="zetbox/Client" exclude="**\*.resources.dll;Client\Core.Generated\**" />
     <file src="Server\**" target="zetbox/Server" exclude="**\*.resources.dll;Server\EF*\**;Server\NH*\**" />
-    
+
+    <file src="..\..\Modules\**" target="zetbox/Modules" />
+    <file src="..\..\Data\**" target="zetbox/Data" />
+
     <file src="Bootstrapper\**" target="zetbox/Bootstrapper" exclude="**\*.resources.dll" />
     <file src="HttpService\**" target="zetbox/HttpService" exclude="**\*.resources.dll" />
 
