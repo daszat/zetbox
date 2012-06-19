@@ -44,3 +44,5 @@ VersionInfo.Designer.cs
 /NuGetPackages/server.targets
 /NuGetPackages/client.targets
 /NuGetPackages/common.targets
+/Templates/ProjectTemplates/ZetboxApp/packages/Mono.Security.*
+/Templates/ProjectTemplates/ZetboxApp/packages/Npgsql.*

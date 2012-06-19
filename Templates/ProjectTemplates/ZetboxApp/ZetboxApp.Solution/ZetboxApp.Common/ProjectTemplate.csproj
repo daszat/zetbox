@@ -43,26 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\Libs\Zetbox\Common\Core\Autofac.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.API">
-      <HintPath>..\Libs\Zetbox\Common\Core\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.API.Common">
-      <HintPath>..\Libs\Zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Zetbox.Objects">
-      <HintPath>..\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\Libs\Zetbox\Common\Core\log4net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System"/>
     $if$ ($targetframeworkversion$ >= 3.5)<Reference Include="System.Core"/>
     <Reference Include="System.Xml.Linq"/>
@@ -75,37 +55,11 @@
     <Compile Include="CommonModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ZetboxFiles Include="..\Libs\Zetbox\**\*.*">
-      <InProject>false</InProject>
-    </ZetboxFiles>
-    <Configs Include="..\Configs\**\*.*">
-      <InProject>false</InProject>
-    </Configs>
-    <MyModules Include="..\Modules\**\*.*">
-      <InProject>false</InProject>
-    </MyModules>
-    <MyData Include="..\Data\**\*.*" >
-      <InProject>false</InProject>
-    </MyData>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.  -->
-  <Target Name="BeforeBuild">
-    <Copy
-      SourceFiles="@(ZetboxFiles)"
-      DestinationFiles="@(ZetboxFiles->'$(ZetboxOutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy
-      SourceFiles="@(Configs)"
-      DestinationFiles="@(Configs->'$(ZetboxOutputPath)\Configs\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy
-      SourceFiles="@(MyModules)"
-      DestinationFiles="@(MyModules->'$(ZetboxOutputPath)\Modules\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy
-      SourceFiles="@(MyData)"
-      DestinationFiles="@(MyData->'$(ZetboxOutputPath)\Data\%(RecursiveDir)%(Filename)%(Extension)')" />
+  <!--<Target Name="BeforeBuild">
   </Target>
-  <!--<Target Name="AfterBuild">
+  <Target Name="AfterBuild">
   </Target>-->
 </Project>

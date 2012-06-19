@@ -46,9 +46,13 @@
     <Reference Include="envdte90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Mono.Security">
+      <HintPath>..\packages\Mono.Security.2.0.0.0\lib\net35\Mono.Security.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql">
-      <HintPath>..\..\..\..\Libs\Npgsql2\Npgsql.dll</HintPath>
+      <HintPath>..\packages\Npgsql.2.0.11.92\lib\net35\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -84,9 +88,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\ZbPull.cmd" />
-    <EmbeddedResource Include="SolutionItems\ZbPullLocalBinaries.cmd" />
-    <EmbeddedResource Include="SolutionItems\ZbPullPrebuiltBinaries.cmd" />
     <EmbeddedResource Include="WizardForm.resx">
       <DependentUpon>WizardForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,15 +101,17 @@
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\HttpService___Web.config" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Server___Service___exe.config" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\HttpService___Web.config" />
+    <EmbeddedResource Include="SolutionItems\___nuget\nuget.Config" />
+    <EmbeddedResource Include="SolutionItems\___nuget\nuget.targets" />
+    <EmbeddedResource Include="SolutionItems\___nuget\packages.config" />
+    <EmbeddedResource Include="SolutionItems\___zetbox\client.targets" />
+    <EmbeddedResource Include="SolutionItems\___zetbox\common.targets" />
+    <EmbeddedResource Include="SolutionItems\___zetbox\server.targets" />
+    <None Include="packages.config" />
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Zetbox___Server___Service.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Zetbox___Server___HttpService.xml" />
@@ -124,11 +127,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Zetbox___Server___Service.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Client___WPF.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___Service.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Data\%24safesolutionname%24.xml">
@@ -154,6 +152,13 @@
     <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\%24safesolutionname%24___Client___Tests.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Tests\Windows\env.xml" />
     <EmbeddedResource Include="SolutionItems\.gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\___nuget\nuget.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\___zetbox\Env.xml" />
+    <EmbeddedResource Include="SolutionItems\___zetbox\PrepareEnv.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

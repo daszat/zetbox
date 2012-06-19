@@ -72,7 +72,9 @@
     <VSTemplate Include="ZetboxApp.Solution.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ZetboxApp.Server\ProjectTemplate.csproj" />
+    <None Include="ZetboxApp.Server\ProjectTemplate.csproj">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="ZetboxApp.Server\ZetboxApp.Server.ico" />
@@ -81,7 +83,9 @@
     <VSTemplate Include="ZetboxApp.Server\ZetboxApp.Server.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ZetboxApp.Common\ProjectTemplate.csproj" />
+    <None Include="ZetboxApp.Common\ProjectTemplate.csproj">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="ZetboxApp.Common\ZetboxApp.Common.ico" />
@@ -90,7 +94,9 @@
     <VSTemplate Include="ZetboxApp.Common\ZetboxApp.Common.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ZetboxApp.Client.WPF\ProjectTemplate.csproj" />
+    <None Include="ZetboxApp.Client.WPF\ProjectTemplate.csproj">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="ZetboxApp.Client.WPF\ZetboxApp.Client.WPF.ico" />
@@ -99,7 +105,9 @@
     <VSTemplate Include="ZetboxApp.Client.WPF\ZetboxApp.Client.WPF.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ZetboxApp.Client\ProjectTemplate.csproj" />
+    <None Include="ZetboxApp.Client\ProjectTemplate.csproj">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="ZetboxApp.Client\ZetboxApp.Client.ico" />

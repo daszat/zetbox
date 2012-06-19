@@ -4,5 +4,5 @@ echo Run the development client.
 echo ********************************************************************************
 
 cd bin\Debug
-start Zetbox.Client.WPF.exe
+start Zetbox.WPF.exe
 cd ..\..

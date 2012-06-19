@@ -1,3 +1,3 @@
 @echo off
-"%windir%\Microsoft.NET\Framework\v3.5\MSBuild.exe" /t:BeforeBuild .\$safesolutionname$.Common\$safesolutionname$.Common.csproj /v:minimal
+".zetbox\PrepareEnv.exe" .zetbox
 echo Done

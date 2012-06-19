@@ -81,17 +81,11 @@ namespace ZetboxApp.Wizard
             _solution = _dte.Solution;
             _solution.SaveAs((string)_solution.Properties.Item("Path").Value);
 
-            MoveProjects();
             ExtractSolutionItems();
+            MoveProjects();
             SetProjectReferences();
+            AddImportTargets();
             SetupConfigurationManager();
-
-            if (MessageBox.Show("Fetch and install ZetBox?", "Installation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                ShellExecute("ZbPullPrebuiltBinaries.cmd");
-                ShellExecute("ZbInstall.cmd"); // not needed when Zbreset uses PrepareEnv.exe
-                ShellExecute("ZbResetAll.cmd");
-            }
         }
 
         private void SetupConfigurationManager()
@@ -106,19 +100,55 @@ namespace ZetboxApp.Wizard
             }
         }
 
-        private void ShellExecute(string file)
+        private void AddImportTargets()
         {
-            if (string.IsNullOrEmpty(file)) throw new ArgumentNullException("file");
+            var msBuildEngine = new Microsoft.Build.BuildEngine.Engine();
 
-            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
-            si.UseShellExecute = true;
-            si.WorkingDirectory = _solutionFolder;
-            si.FileName = file;
-            var process = System.Diagnostics.Process.Start(si);
-            process.WaitForExit();
-            if (process.ExitCode > 0)
+            foreach (Project prj in _solution.Projects)
             {
-                MessageBox.Show("Error executing " + file, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                prj.Save();
+                var fileName = prj.FullName;
+                var prjName = prj.Name;
+
+                SolutionFolder folder = null;
+
+                if (prj.ParentProjectItem != null)
+                {
+                    folder = (SolutionFolder)prj.ParentProjectItem.ContainingProject.Object;
+                }
+                _solution.Remove(prj);
+
+                var msBuildProj = new Microsoft.Build.BuildEngine.Project(msBuildEngine);
+                msBuildProj.Load(fileName);
+
+                msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.nuget\nuget.targets", null);
+                if (prjName.EndsWith(".Common"))
+                {
+                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\common.targets", null);
+                }
+                else if (prjName.EndsWith(".Client"))
+                {
+                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\client.targets", null);
+                }
+                else if (prjName.EndsWith(".Client.WPF"))
+                {
+                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\client.targets", null);
+                }
+                else if (prjName.EndsWith(".Server"))
+                {
+                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\server.targets", null);
+                }
+
+                msBuildProj.Save(fileName);
+
+                if (folder != null)
+                {
+                    folder.AddFromFile(fileName);
+                }
+                else
+                {
+                    _solution.AddFromFile(fileName);
+                }
             }
         }
 
@@ -147,8 +177,11 @@ namespace ZetboxApp.Wizard
 
             foreach (Project prj in _solution.Projects)
             {
-                VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;
-                if (prj.Name.EndsWith(".Client"))
+                VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;      
+                if (prj.Name.EndsWith(".Common"))
+                {
+                }
+                else if (prj.Name.EndsWith(".Client"))
                 {
                     vsProj.References.AddProject(allProjects["common"]).CopyLocal = false;
                 }
@@ -272,6 +305,22 @@ namespace ZetboxApp.Wizard
             }
 
             Directory.Delete(projectDir, true);
+        }
+
+        private void ShellExecute(string file)
+        {
+            if (string.IsNullOrEmpty(file)) throw new ArgumentNullException("file");
+
+            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
+            si.UseShellExecute = true;
+            si.WorkingDirectory = _solutionFolder;
+            si.FileName = file;
+            var process = System.Diagnostics.Process.Start(si);
+            process.WaitForExit();
+            if (process.ExitCode > 0)
+            {
+                MessageBox.Show("Error executing " + file, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
