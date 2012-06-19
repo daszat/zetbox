@@ -111,22 +111,22 @@ namespace PrepareEnv
             }
             else
             {
-                envConfig.ConfigSource = ExpandEnvVars(envConfig.ConfigSource);
+                envConfig.ConfigSource = PrepareConfigPath(envConfig.ConfigSource);
             }
 
             if (envConfig.DatabaseSource != null && !string.IsNullOrEmpty(envConfig.DatabaseSource.Value))
             {
-                envConfig.DatabaseSource.Value = ExpandEnvVars(envConfig.DatabaseSource.Value);
+                envConfig.DatabaseSource.Value = PrepareConfigPath(envConfig.DatabaseSource.Value);
             }
 
             if (envConfig.DatabaseTarget != null && !string.IsNullOrEmpty(envConfig.DatabaseTarget.Value))
             {
-                envConfig.DatabaseTarget.Value = ExpandEnvVars(envConfig.DatabaseTarget.Value);
+                envConfig.DatabaseTarget.Value = PrepareConfigPath(envConfig.DatabaseTarget.Value);
             }
 
             if (envConfig.AppServer != null && !string.IsNullOrEmpty(envConfig.AppServer.Uri))
             {
-                envConfig.AppServer.Uri = ExpandEnvVars(envConfig.AppServer.Uri);
+                envConfig.AppServer.Uri = PrepareConfigPath(envConfig.AppServer.Uri);
             }
         }
 
@@ -455,7 +455,10 @@ namespace PrepareEnv
 
         private static readonly Regex EnvVar = new Regex("%([a-zA-Z0-9_]+)%");
 
-        private static string ExpandEnvVars(string input)
+        /// <summary>
+        /// Replaces %FOO% environment variable references and translates the (back-)slashes to the platform's preferred form.
+        /// </summary>
+        private static string PrepareConfigPath(string input)
         {
             var envVars = Environment.GetEnvironmentVariables().Keys.Cast<string>().ToLookup(s => s);
 
@@ -466,6 +469,10 @@ namespace PrepareEnv
             {
                 input = input.Replace(repl.str, Environment.GetEnvironmentVariable(repl.name));
             }
+
+            // canonicalize slashiness in paths from the configuration
+            input = PathX.Combine(input.Split('\\', '/'));
+
             return input;
         }
 
