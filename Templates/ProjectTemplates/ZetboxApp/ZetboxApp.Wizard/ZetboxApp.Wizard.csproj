@@ -108,6 +108,7 @@
     <EmbeddedResource Include="SolutionItems\___zetbox\common.targets" />
     <EmbeddedResource Include="SolutionItems\___zetbox\server.targets" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="SolutionItems\packages\repositories.config" />
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
   <ItemGroup>
