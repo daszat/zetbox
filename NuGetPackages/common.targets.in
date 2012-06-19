@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- PrepareEnv command -->
+    <ZetboxPath Condition=" '$(OS)' == 'Windows_NT'">$([System.IO.Path]::Combine($(SolutionDir), ".nuget"))</ZetboxPath>
+    <ZetboxPath Condition=" '$(OS)' != 'Windows_NT'">$(SolutionDir).zetbox</ZetboxPath>
+    <PrepareEnvExePath>$(ZetboxPath)\nuget.exe</PrepareEnvExePath>
+    <PrepareEnvCommand Condition=" '$(OS)' == 'Windows_NT'">"$(PrepareEnvExePath)"</PrepareEnvCommand>
+    <PrepareEnvCommand Condition=" '$(OS)' != 'Windows_NT' ">mono --runtime=v4.0.30319 $(PrepareEnvExePath)</PrepareEnvCommand>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Autofac.dll</HintPath>
@@ -23,6 +31,6 @@
     </Reference>
   </ItemGroup>
   <Target Name="BeforeBuild">
-    <Exec WorkingDirectory="$(SolutionDir)" Command="$(SolutionDir)\.zetbox\PrepareEnv .zetbox" />
+    <Exec WorkingDirectory="$(SolutionDir)" Command="$(PrepareEnvCommand) .zetbox" />
   </Target>
 </Project>
