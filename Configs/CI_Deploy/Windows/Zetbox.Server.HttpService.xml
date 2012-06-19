@@ -19,8 +19,8 @@
       <!-- application specific modules -->
     </Modules>
     <ClientFilesLocations>
-      <Location Name="Exe">..\Zetbox.Client.WPF.exe</Location>
-      <Location Name="Configs">..\Configs\Zetbox.Client.WPF.xml</Location>
+      <Location Name="Exe">..\Zetbox.WPF.exe</Location>
+      <Location Name="Configs">..\Configs\Zetbox.WPF.xml</Location>
       <Location Name="Common">..\Common</Location>
       <Location Name="Client">..\Client</Location>
     </ClientFilesLocations>

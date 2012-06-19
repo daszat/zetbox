@@ -31,8 +31,8 @@
       <Module>Zetbox.DalProvider.Ef.Generator.EfGeneratorProvider, Zetbox.DalProvider.Ef.Generator</Module>
     </Modules>
     <ClientFilesLocations>
-      <Location Name="Exe">P:\Zetbox\bin\Debug\Zetbox.Client.WPF.exe</Location>
-      <Location Name="Configs">P:\Zetbox\Configs\Examples\Zetbox.Client.WPF.xml</Location>
+      <Location Name="Exe">P:\Zetbox\bin\Debug\Zetbox.WPF.exe</Location>
+      <Location Name="Configs">P:\Zetbox\Configs\Examples\Zetbox.WPF.xml</Location>
       <Location Name="Common">P:\Zetbox\bin\Debug\Common</Location>
       <Location Name="Client">P:\Zetbox\bin\Debug\Client</Location>
     </ClientFilesLocations>
