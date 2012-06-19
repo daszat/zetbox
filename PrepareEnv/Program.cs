@@ -105,6 +105,15 @@ namespace PrepareEnv
 
         private static void PrepareEnvConfig(EnvConfig envConfig, string envConfigDir)
         {
+            if (envConfig.AppServer != null)
+            {
+                envConfig.AppServer.Type = ExpandEnvVars(envConfig.AppServer.Type);
+                envConfig.AppServer.Uri = ExpandEnvVars(envConfig.AppServer.Uri);
+            }
+
+            envConfig.BinarySource = PrepareConfigPath(envConfig.BinarySource);
+            envConfig.BinaryTarget = PrepareConfigPath(envConfig.BinaryTarget);
+
             if (string.IsNullOrEmpty(envConfig.ConfigSource))
             {
                 envConfig.ConfigSource = envConfigDir;
@@ -114,19 +123,19 @@ namespace PrepareEnv
                 envConfig.ConfigSource = PrepareConfigPath(envConfig.ConfigSource);
             }
 
-            if (envConfig.DatabaseSource != null && !string.IsNullOrEmpty(envConfig.DatabaseSource.Value))
+
+            if (envConfig.DatabaseSource != null)
             {
-                envConfig.DatabaseSource.Value = PrepareConfigPath(envConfig.DatabaseSource.Value);
+                envConfig.DatabaseSource.Provider = ExpandEnvVars(envConfig.DatabaseSource.Provider);
+                envConfig.DatabaseSource.Schema = ExpandEnvVars(envConfig.DatabaseSource.Schema);
+                envConfig.DatabaseSource.Value = ExpandEnvVars(envConfig.DatabaseSource.Value);
             }
 
-            if (envConfig.DatabaseTarget != null && !string.IsNullOrEmpty(envConfig.DatabaseTarget.Value))
+            if (envConfig.DatabaseTarget != null)
             {
-                envConfig.DatabaseTarget.Value = PrepareConfigPath(envConfig.DatabaseTarget.Value);
-            }
-
-            if (envConfig.AppServer != null && !string.IsNullOrEmpty(envConfig.AppServer.Uri))
-            {
-                envConfig.AppServer.Uri = PrepareConfigPath(envConfig.AppServer.Uri);
+                envConfig.DatabaseTarget.Provider = ExpandEnvVars(envConfig.DatabaseTarget.Provider);
+                envConfig.DatabaseTarget.Schema = ExpandEnvVars(envConfig.DatabaseTarget.Schema);
+                envConfig.DatabaseTarget.Value = ExpandEnvVars(envConfig.DatabaseTarget.Value);
             }
         }
 
@@ -460,6 +469,23 @@ namespace PrepareEnv
         /// </summary>
         private static string PrepareConfigPath(string input)
         {
+            input = ExpandEnvVars(input);
+
+            // canonicalize slashiness in paths from the configuration
+            input = PathX.Combine(input.Split('\\', '/'));
+
+            return input;
+        }
+
+        /// <summary>
+        /// Replaces %FOO% environment variable references.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private static string ExpandEnvVars(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+
             var envVars = Environment.GetEnvironmentVariables().Keys.Cast<string>().ToLookup(s => s);
 
             foreach (var repl in EnvVar.Matches(input).Cast<Match>()
@@ -469,10 +495,6 @@ namespace PrepareEnv
             {
                 input = input.Replace(repl.str, Environment.GetEnvironmentVariable(repl.name));
             }
-
-            // canonicalize slashiness in paths from the configuration
-            input = PathX.Combine(input.Split('\\', '/'));
-
             return input;
         }
 
