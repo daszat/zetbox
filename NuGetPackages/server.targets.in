@@ -14,7 +14,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Server">
-      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Zetbox.API.Server.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Server\Core\Zetbox.API.Server.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Objects">
