@@ -32,10 +32,8 @@
       <DependentUpon>zetboxBasic-NH.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </NuSpec>
-
     <Content Include="Env.xml" />
     <Content Include="Init-zetboxBasic.ps1" />
-	
     <Targets Include="common.targets">
       <DependentUpon>common.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -48,10 +46,15 @@
       <DependentUpon>client.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
-
-    <None Include="common.targets.in" />
-    <None Include="server.targets.in" />
-    <None Include="client.targets.in" />
+    <None Include="common.targets.in">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="server.targets.in">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="client.targets.in">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="zetboxBasic.nuspec.in" />
     <None Include="zetboxBasic-All.nuspec.in" />
     <None Include="zetboxBasic-EF.nuspec.in" />
@@ -61,14 +64,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MsBuildVersioning.targets" />
-  
   <Target Name="GitVersionTargets" Inputs="@(Targets)" Outputs="%(Identity).Dummy">
     <GitVersionFile TemplateFile="@(Targets).in" DestinationFile="@(Targets)" />
   </Target>
   <Target Name="GitVersionNuSpec" Inputs="@(NuSpec)" Outputs="%(Identity).Dummy">
     <GitVersionFile TemplateFile="@(NuSpec).in" DestinationFile="@(NuSpec)" />
   </Target>
-  
   <Target Name="ContentCopy">
     <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(NuSpec)" DestinationFolder="$(OutputPath)" />
