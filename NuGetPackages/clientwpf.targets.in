@@ -29,23 +29,12 @@
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\Zetbox.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Zetbox.Client.WPF.Toolkit">
+      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\WPF\Zetbox.Client.WPF.Toolkit.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\log4net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MigraDoc.DocumentObjectModel">
-      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\MigraDoc.DocumentObjectModel.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MigraDoc.Rendering">
-      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\MigraDoc.Rendering.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MigraDoc.RtfRendering">
-      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\MigraDoc.RtfRendering.dll</HintPath>
-    </Reference>
-    <Reference Include="PdfSharp">
-      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\PdfSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

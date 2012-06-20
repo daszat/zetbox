@@ -46,6 +46,14 @@
       <DependentUpon>client.targets.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
+    <Targets Include="clientwpf.targets">
+      <DependentUpon>clientwpf.targets.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Targets>
+    <Targets Include="wpf.targets">
+      <DependentUpon>wpf.targets.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Targets>
     <None Include="common.targets.in">
       <SubType>Designer</SubType>
     </None>
@@ -53,6 +61,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="client.targets.in">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="clientwpf.targets.in">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="wpf.targets.in">
       <SubType>Designer</SubType>
     </None>
     <None Include="zetboxBasic.nuspec.in" />

@@ -33,9 +33,7 @@
     <file src="Bootstrapper\**" target="zetbox/Bootstrapper" exclude="**\*.resources.dll" />
     <file src="HttpService\**" target="zetbox/HttpService" exclude="**\*.resources.dll" />
 
-    <file src="client.targets" target="tools" />
-    <file src="server.targets" target="tools" />
-    <file src="common.targets" target="tools" />
+    <file src="*.targets" target="tools" />
 
     <file src="Init-zetboxBasic.ps1" target="tools/Init.ps1" />
     <file src="Env.xml" target="tools" />
