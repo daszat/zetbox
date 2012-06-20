@@ -97,7 +97,9 @@
     <EmbeddedResource Include="SolutionItems\ZbResetAll.cmd" />
     <EmbeddedResource Include="SolutionItems\StartClient.cmd" />
     <EmbeddedResource Include="SolutionItems\StartServer.cmd" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Server___Service___exe.config" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Server___Service___exe.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\HttpService___Web.config" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Server___Service___exe.config" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Windows\HttpService___Web.config" />
@@ -136,7 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\env.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Server___Service.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\env.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI\Windows\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\env.xml" />
