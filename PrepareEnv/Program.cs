@@ -243,27 +243,27 @@ namespace PrepareEnv
                 case PlatformID.Unix:
                     LogAction("deploying Npgsql for Zetbox.Server.Service.exe");
                     File.Copy(
-                        Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "Server"), "Npgsql.Mono"), "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Mono", "Npgsql.dll"),
                         Path.Combine(envConfig.BinaryTarget, "Npgsql.dll"),
                         true);
                     File.Delete(Path.Combine(envConfig.BinaryTarget, "Mono.Security.dll"));
 
                     LogAction("deploying Npgsql for HttpService");
                     File.Copy(
-                        Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "Server"), "Npgsql.Mono"), "Npgsql.dll"),
-                        Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "HttpService"), "bin"), "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Mono", "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Npgsql.dll"),
                         true);
-                    File.Delete(Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "HttpService"), "bin"), "Mono.Security.dll"));
+                    File.Delete(PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Mono.Security.dll"));
                     break;
                 case PlatformID.Win32NT:
                     LogAction("deploying Npgsql for HttpService");
                     File.Copy(
-                        Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "Server"), "Npgsql.Microsoft"), "Npgsql.dll"),
-                        Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "HttpService"), "bin"), "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Microsoft", "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Npgsql.dll"),
                         true);
                     File.Copy(
-                        Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "Server"), "Npgsql.Microsoft"), "Mono.Security.dll"),
-                        Path.Combine(Path.Combine(Path.Combine(envConfig.BinaryTarget, "HttpService"), "bin"), "Mono.Security.dll"),
+                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Microsoft", "Mono.Security.dll"),
+                        PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Mono.Security.dll"),
                         true);
                     break;
                 default:
