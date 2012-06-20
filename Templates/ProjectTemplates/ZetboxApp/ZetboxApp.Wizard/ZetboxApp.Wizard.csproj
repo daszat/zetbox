@@ -117,7 +117,9 @@
     <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Zetbox___Server___HttpService.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Zetbox___Server___HttpService.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Zetbox___Server___Service.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Zetbox___Server___HttpService.xml" />
     <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Zetbox___Server___Service.xml" />
@@ -164,12 +166,20 @@
     <EmbeddedResource Include="SolutionItems\___zetbox\PrepareEnv.exe" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___WPF.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___WPF.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Zetbox___Server___Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___Service.xml" />
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Fallback\Zetbox___Server___Service.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___HttpService.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___Service.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

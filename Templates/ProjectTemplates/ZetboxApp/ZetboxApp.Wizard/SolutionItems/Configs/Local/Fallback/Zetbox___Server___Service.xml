@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<KistlConfig xmlns="http://dasz.at/Kistl/">
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
   <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
-      <Database Name="Kistl" Schema="$schema$" Provider="$provider$">$connectionstring$</Database>
+      <Database Name="Zetbox" Schema="$schema$" Provider="$provider$">$connectionstring$</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>..\CodeGenNext</CodeGenWorkingPath>
@@ -13,27 +13,27 @@
     </CodeGenBinaryOutputPath>
     <CodeGenArchivePath>..\Backup</CodeGenArchivePath>
     <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
-      <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
-      <Module>Kistl.API.Common.ApiCommonModule, Kistl.API.Common</Module>
-      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
-      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.$ormapperclassname$Module, Kistl.Objects.$ormapperclassname$Impl</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
-      <Module>Kistl.DalProvider.$ormapperclassname$.$ormapperclassname$Provider, Kistl.DalProvider.$ormapperclassname$</Module>
-      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
-      <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
-      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+      <Module>Zetbox.API.Server.ServerApiModule, Zetbox.API.Server</Module>
+      <Module>Zetbox.API.Common.ApiCommonModule, Zetbox.API.Common</Module>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
+      <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
+      <Module>Zetbox.Objects.$ormapperclassname$Module, Zetbox.Objects.$ormapperclassname$Impl</Module>
+      <Module>Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl</Module>
+      <Module>Zetbox.DalProvider.$ormapperclassname$.$ormapperclassname$Provider, Zetbox.DalProvider.$ormapperclassname$</Module>
+      <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
+      <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
+      <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
       <!--
-      <Module>Kistl.Unix.Module, Kistl.Unix</Module>
-      <Module>Kistl.Server.HtpasswdIdentitySource+Module, Kistl.Server</Module>
+      <Module>Zetbox.Unix.Module, Zetbox.Unix</Module>
+      <Module>Zetbox.Server.HtpasswdIdentitySource+Module, Zetbox.Server</Module>
       -->
 
       <!-- Development/Master Server modules -->
-      <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
-      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
-      <Module>Kistl.DalProvider.$ormapperclassname$.Generator.$ormapperclassname$GeneratorProvider, Kistl.DalProvider.$ormapperclassname$.Generator</Module>
-      <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
+      <Module>Zetbox.Generator.GeneratorModule, Zetbox.Generator</Module>
+      <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
+      <Module>Zetbox.DalProvider.$ormapperclassname$.Generator.$ormapperclassname$GeneratorProvider, Zetbox.DalProvider.$ormapperclassname$.Generator</Module>
+      <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
@@ -42,7 +42,7 @@
     <string>Server\Core</string>
     <string>Server\$ormappermodule$</string>
     <string>Server\$ormappermodule$.Fallback</string>
-    <string>Common\App.ZBox</string>
-    <string>Server\App.ZBox</string>
+    <string>Common\App.Zetbox</string>
+    <string>Server\App.Zetbox</string>
   </AssemblySearchPaths>
-</KistlConfig>
+</ZetboxConfig>
