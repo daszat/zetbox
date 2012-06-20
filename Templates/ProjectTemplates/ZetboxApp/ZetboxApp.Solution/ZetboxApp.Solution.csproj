@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ZetboxApp.WPF\app.config" />
     <None Include="ZetboxApp.WPF\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </None>

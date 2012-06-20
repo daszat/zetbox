@@ -14,6 +14,7 @@
   </TemplateData>
   <TemplateContent>
       <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+        <ProjectItem ReplaceParameters="true" TargetFileName="app.config">app.config</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
