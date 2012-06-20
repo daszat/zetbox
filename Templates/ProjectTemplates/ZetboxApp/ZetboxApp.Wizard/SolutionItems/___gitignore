@@ -2,10 +2,6 @@
 /Configs/Local
 /DocumentStore
 /$safesolutionname$.Client.Tests/bin
-/Libs/Zetbox/*.csv
-/Libs/Zetbox/*.log
-/Libs/Zetbox/*.log.*
-/Libs/LinqCube/bin
 *.suo
 *.csproj.user
 obj
