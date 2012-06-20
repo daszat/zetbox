@@ -472,7 +472,10 @@ namespace PrepareEnv
             input = ExpandEnvVars(input);
 
             // canonicalize slashiness in paths from the configuration
-            input = PathX.Combine(input.Split('\\', '/'));
+            if (!string.IsNullOrEmpty(input))
+            {
+                input = PathX.Combine(input.Split('\\', '/'));
+            }
 
             return input;
         }
