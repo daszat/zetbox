@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ZetboxApp.WPF\app.config" />
+    <None Include="ZetboxApp.WPF\app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ZetboxApp.WPF\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </None>
@@ -133,7 +135,9 @@
     <None Include="ZetboxApp.WPF\ProjectTemplate.csproj">
       <SubType>Designer</SubType>
     </None>
-    <VSTemplate Include="ZetboxApp.WPF\ZetboxApp.WPF.vstemplate" />
+    <VSTemplate Include="ZetboxApp.WPF\ZetboxApp.WPF.vstemplate">
+      <SubType>Designer</SubType>
+    </VSTemplate>
     <None Include="ZetboxApp.Solution.ico" />
     <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.ico" />
     <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate" />

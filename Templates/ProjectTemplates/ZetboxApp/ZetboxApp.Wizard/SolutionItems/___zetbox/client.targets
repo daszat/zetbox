@@ -2,19 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\Autofac.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Client">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Client\Core\Zetbox.API.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Client\Core\Zetbox.API.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Objects">
@@ -22,34 +22,34 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\log4net.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Client">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Client\Core\Zetbox.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Client\Core\Zetbox.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Client.WPF.Toolkit">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Client\WPF\Zetbox.Client.WPF.Toolkit.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Client\WPF\Zetbox.Client.WPF.Toolkit.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\log4net.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Client\Core\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Client\Core\MigraDoc.DocumentObjectModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MigraDoc.Rendering">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Client\Core\MigraDoc.Rendering.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Client\Core\MigraDoc.Rendering.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MigraDoc.RtfRendering">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Client\Core\MigraDoc.RtfRendering.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Client\Core\MigraDoc.RtfRendering.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Client\Core\PdfSharp.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Client\Core\PdfSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

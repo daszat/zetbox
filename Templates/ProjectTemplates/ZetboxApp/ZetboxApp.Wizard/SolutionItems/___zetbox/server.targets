@@ -2,19 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\Autofac.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\Zetbox.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Server">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Server\Core\Zetbox.API.Server.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Server\Core\Zetbox.API.Server.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Objects">
@@ -22,7 +22,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\packages\zetboxBasic.1.0.4050.0\zetbox\Common\Core\log4net.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.4071.1\zetbox\Common\Core\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
