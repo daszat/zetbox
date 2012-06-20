@@ -132,7 +132,11 @@ namespace ZetboxApp.Wizard
                 }
                 else if (prjName.EndsWith(".Client.WPF"))
                 {
-                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\client.targets", null);
+                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\clientwpf.targets", null);
+                }
+                else if (prjName.EndsWith(".WPF"))
+                {
+                    msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\wpf.targets", null);
                 }
                 else if (prjName.EndsWith(".Server"))
                 {

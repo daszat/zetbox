@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ZetboxApp.WPF\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </None>
     <None Include="ZetboxApp.Client.Tests\App.config" />
     <None Include="ZetboxApp.Server\AssemblyInfo.cs" />
     <None Include="ZetboxApp.Server\ServerModule.cs" />
@@ -63,10 +66,8 @@
     <None Include="ZetboxApp.Bootstrapper\Bootstrapper.cs" />
     <None Include="ZetboxApp.Client.Tests\AssemblyInfo.cs" />
     <None Include="ZetboxApp.Client.Tests\Integration\BasicTests.cs" />
+    <None Include="ZetboxApp.WPF\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ZetboxApp.Solution.ico" />
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="ZetboxApp.Solution.vstemplate" />
@@ -125,11 +126,25 @@
     <None Include="ZetboxApp.Bootstrapper\ZetboxApp.Bootstrapper.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ZetboxApp.WPF\ZetboxApp.WPF.ico" />
+    <None Include="ZetboxApp.WPF\AppIcon.ico" />
+    <None Include="ZetboxApp.WPF\SplashScreenImage.png" />
+    <None Include="ZetboxApp.WPF\ProjectTemplate.csproj">
+      <SubType>Designer</SubType>
+    </None>
+    <VSTemplate Include="ZetboxApp.WPF\ZetboxApp.WPF.vstemplate" />
+    <None Include="ZetboxApp.Solution.ico" />
     <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.ico" />
     <Content Include="ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate" />
     <Content Include="ZetboxApp.Client.Tests\ProjectTemplate.csproj">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ZetboxApp.WPF\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\VSSDK\Microsoft.VsSDK.targets" />

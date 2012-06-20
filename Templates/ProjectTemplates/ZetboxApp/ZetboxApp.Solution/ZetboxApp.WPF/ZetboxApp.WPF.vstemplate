@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>ZetboxApp.WPF</Name>
+    <Description>This assembly contains a WPF launcher.</Description>
+    <Icon>ZetboxApp.WPF.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>2a4107b2-cff3-40cd-ad69-bbea63e05be8</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>ZetboxApp.WPF</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+      <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.png">SplashScreenImage.png</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="AppIcon.ico">AppIcon.ico</ProjectItem>
+      </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>ZetboxApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
+    <FullClassName>ZetboxApp.Wizard.ProjectWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

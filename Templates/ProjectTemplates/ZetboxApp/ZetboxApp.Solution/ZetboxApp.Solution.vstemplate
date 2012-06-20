@@ -3,6 +3,7 @@
   <TemplateData>
     <Name>ZetboxApp</Name>
     <Description>A solution template for Zetbox Applications</Description>
+    <Icon>ZetboxApp.Solution.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>false</CreateNewFolder>
@@ -18,6 +19,7 @@
       <ProjectTemplateLink ProjectName="$safeprojectname$.Client">ZetboxApp.Client\ZetboxApp.Client.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Client.Tests">ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Client.WPF">ZetboxApp.Client.WPF\ZetboxApp.Client.WPF.vstemplate</ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$safeprojectname$.WPF">ZetboxApp.WPF\ZetboxApp.WPF.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Server">ZetboxApp.Server\ZetboxApp.Server.vstemplate</ProjectTemplateLink>
     </ProjectCollection>
   </TemplateContent>
