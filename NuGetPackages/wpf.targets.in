@@ -6,7 +6,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Zetbox.Client.WPF">
-      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\WPF\Zetbox.Client.WPF.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Zetbox.Client.WPF.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
