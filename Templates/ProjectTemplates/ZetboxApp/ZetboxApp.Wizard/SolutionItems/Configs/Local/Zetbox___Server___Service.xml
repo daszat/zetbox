@@ -36,6 +36,7 @@
       <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
 
       <!-- application specific modules -->
+      <Module>$safesolutionname$.Common.CommonModule, $safesolutionname$.Common</Module>
       <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
   </Server>

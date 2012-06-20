@@ -24,21 +24,21 @@
       <Module>Zetbox.Microsoft.Module, Zetbox.Microsoft</Module>
       <Module>Zetbox.Microsoft.OutlookMailSender+Module, Zetbox.Microsoft</Module>
       <Module>Zetbox.API.MailProblemReporter+Module, Zetbox.API</Module>
-      <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
 
       <!-- 
       <Module>Zetbox.Client.BasicAuthCredentialsResolver+Module, Zetbox.Client</Module>
       -->
       <!-- application specific modules -->
+      <Module>$safesolutionname$.Common.CommonModule, $safesolutionname$.Common</Module>
       <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
       <Module>$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
     </Modules>
   </Client>
   <AssemblySearchPaths>
-    <string>Common\Core</string>
-    <string>Common\Core.Generated</string>
-    <string>Client\Core</string>
     <string>Client\Core.Generated</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core</string>
+    <string>Client\Core</string>
     <string>Client\WPF</string>
     <string>Common\App.Zetbox</string>
     <string>Client\App.Zetbox</string>

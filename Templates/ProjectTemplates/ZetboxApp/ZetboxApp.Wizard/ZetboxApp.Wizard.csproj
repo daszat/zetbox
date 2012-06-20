@@ -104,34 +104,27 @@
     <EmbeddedResource Include="SolutionItems\___nuget\nuget.Config" />
     <EmbeddedResource Include="SolutionItems\___nuget\nuget.targets" />
     <EmbeddedResource Include="SolutionItems\___nuget\packages.config" />
-    <EmbeddedResource Include="SolutionItems\___zetbox\client.targets" />
-    <EmbeddedResource Include="SolutionItems\___zetbox\common.targets" />
-    <EmbeddedResource Include="SolutionItems\___zetbox\server.targets" />
+    <EmbeddedResource Include="SolutionItems\___zetbox\client.targets">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolutionItems\___zetbox\common.targets">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolutionItems\___zetbox\server.targets">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <EmbeddedResource Include="SolutionItems\packages\repositories.config" />
-    <EmbeddedResource Include="SolutionItems\___zetbox\clientwpf.targets" />
-    <EmbeddedResource Include="SolutionItems\___zetbox\wpf.targets" />
+    <EmbeddedResource Include="SolutionItems\___zetbox\clientwpf.targets">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolutionItems\___zetbox\wpf.targets">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="TemplateWizard.snk" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Zetbox___Server___HttpService.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\MSSQL\Zetbox___Server___Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Zetbox___Server___HttpService.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\EF\PostgreSQL\Zetbox___Server___Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___WPF.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Zetbox___Server___HttpService.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\MSSQL\Zetbox___Server___Service.xml" />
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Zetbox___Server___HttpService.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\Configs\Examples\NHibernate\PostgreSQL\Zetbox___Server___Service.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Data\%24safesolutionname%24.xml">
@@ -178,6 +171,26 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\Configs\Local\Zetbox___Server___Service.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\Fallback\Zetbox___Server___Service.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___Server___HttpService.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___Server___Service.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___WPF.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

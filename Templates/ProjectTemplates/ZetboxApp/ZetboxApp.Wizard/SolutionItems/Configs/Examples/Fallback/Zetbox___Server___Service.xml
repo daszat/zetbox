@@ -3,7 +3,7 @@
   <ConfigName>$safesolutionname$ Server Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
-      <Database Name="Zetbox" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=$databasename$;User Id=zetbox;Password=</Database>
+      <Database Name="Zetbox" Schema="$schema$" Provider="$provider$">$connectionstring$</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>..\CodeGenNext</CodeGenWorkingPath>
@@ -18,35 +18,31 @@
       <Module>Zetbox.API.Common.ApiCommonModule, Zetbox.API.Common</Module>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
       <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
-      <Module>Zetbox.Objects.EfModule, Zetbox.Objects.EfImpl</Module>
+      <Module>Zetbox.Objects.$ormapperclassname$Module, Zetbox.Objects.$ormapperclassname$Impl</Module>
       <Module>Zetbox.Objects.MemoryModule, Zetbox.Objects.MemoryImpl</Module>
-      <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
+      <Module>Zetbox.DalProvider.$ormapperclassname$.$ormapperclassname$Provider, Zetbox.DalProvider.$ormapperclassname$</Module>
       <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
       <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
+      <!--
+      <Module>Zetbox.Unix.Module, Zetbox.Unix</Module>
+      <Module>Zetbox.Server.HtpasswdIdentitySource+Module, Zetbox.Server</Module>
+      -->
 
       <!-- Development/Master Server modules -->
       <Module>Zetbox.Generator.GeneratorModule, Zetbox.Generator</Module>
       <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
-      <Module>Zetbox.DalProvider.NHibernate.Generator.NHibernateGeneratorProvider, Zetbox.DalProvider.NHibernate.Generator</Module>
+      <Module>Zetbox.DalProvider.$ormapperclassname$.Generator.$ormapperclassname$GeneratorProvider, Zetbox.DalProvider.$ormapperclassname$.Generator</Module>
       <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
-      <Module>Zetbox.DalProvider.Ef.Generator.EfGeneratorProvider, Zetbox.DalProvider.Ef.Generator</Module>
-
-      <Module>Zetbox.API.Server.PerfCounter.PerfMonAppender+Module, Zetbox.API.Server</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
     <string>Common\Core</string>
-    <string>Common\Core.Generated</string>
     <string>Common\Core.Fallback</string>
     <string>Server\Core</string>
-    <string>Server\EF</string>
-    <string>Server\EF.Generated</string>
-    <string>Server\EF.Fallback</string>
-    <string>Server\NH</string>
+    <string>Server\$ormappermodule$</string>
+    <string>Server\$ormappermodule$.Fallback</string>
     <string>Common\App.Zetbox</string>
     <string>Server\App.Zetbox</string>
-    <string>Common\App.$safesolutionname$</string>
-    <string>Server\App.$safesolutionname$</string>
   </AssemblySearchPaths>
 </ZetboxConfig>

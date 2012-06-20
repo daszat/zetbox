@@ -23,6 +23,7 @@
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
 
       <!-- application specific modules -->
+      <Module>$safesolutionname$.Common.CommonModule, $safesolutionname$.Common</Module>
       <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
   </Server>

@@ -29,6 +29,7 @@
       <Module>Zetbox.Client.BasicAuthCredentialsResolver+Module, Zetbox.Client</Module>
       -->
       <!-- application specific modules -->
+      <Module>$safesolutionname$.Common.CommonModule, $safesolutionname$.Common</Module>
       <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
       <Module>$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
     </Modules>

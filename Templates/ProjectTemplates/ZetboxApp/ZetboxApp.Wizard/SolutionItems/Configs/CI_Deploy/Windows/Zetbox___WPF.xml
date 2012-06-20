@@ -27,6 +27,7 @@
       <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
 
       <!-- application specific modules -->
+      <Module>$safesolutionname$.Common.CommonModule, $safesolutionname$.Common</Module>
       <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
       <Module>$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
     </Modules>

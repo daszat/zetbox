@@ -18,6 +18,7 @@
       <Module>Zetbox.Server.HtpasswdIdentitySource+Module, Zetbox.Server</Module>
 
       <!-- application specific modules -->
+      <Module>$safesolutionname$.Common.CommonModule, $safesolutionname$.Common</Module>
       <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
     <ClientFilesLocations>
