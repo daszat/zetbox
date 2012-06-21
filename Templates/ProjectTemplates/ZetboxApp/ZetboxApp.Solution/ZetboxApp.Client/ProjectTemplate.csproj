@@ -47,6 +47,8 @@
     $endif$$if$ ($targetframeworkversion$ >= 4.0)<Reference Include="Microsoft.CSharp"/>
     $endif$<Reference Include="System.Data"/>
     <Reference Include="System.Xml"/>
+    <Reference Include="System.Drawing" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientModule.cs" />
