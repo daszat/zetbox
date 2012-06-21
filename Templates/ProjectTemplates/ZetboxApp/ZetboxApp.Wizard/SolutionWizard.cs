@@ -83,9 +83,9 @@ namespace ZetboxApp.Wizard
 
             ExtractSolutionItems();
             MoveProjects();
-            SetProjectReferences();
             AddImportTargets();
             SetupConfigurationManager();
+            SetProjectReferences();
         }
 
         private void SetupConfigurationManager()
@@ -191,6 +191,7 @@ namespace ZetboxApp.Wizard
                 }
                 else if (prj.Name.EndsWith(".Client.WPF"))
                 {
+                    vsProj.References.AddProject(allProjects["common"]).CopyLocal = false;
                     vsProj.References.AddProject(allProjects["client"]).CopyLocal = false;
                 }
                 else if (prj.Name.EndsWith(".Server"))
