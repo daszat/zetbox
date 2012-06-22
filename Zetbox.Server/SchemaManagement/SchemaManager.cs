@@ -240,6 +240,9 @@ namespace Zetbox.Server.SchemaManagement
             string schema = provider.GetSavedSchema().TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
             if (!string.IsNullOrEmpty(schema))
             {
+                // Migration from Kist -> Zetbox
+                schema = schema.Replace("Kistl", "Zetbox");
+
                 using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(schema)))
                 {
                     Importer.LoadFromXml(targetCtx, ms, "saved schema from " + provider.GetSafeConnectionString());
