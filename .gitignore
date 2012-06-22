@@ -43,6 +43,8 @@ VersionInfo.Designer.cs
 /PrepareEnv/Examples/env.xml
 /NuGetPackages/server.targets
 /NuGetPackages/client.targets
+/NuGetPackages/clientwpf.targets
+/NuGetPackages/wpf.targets
 /NuGetPackages/common.targets
 /Templates/ProjectTemplates/ZetboxApp/packages/Mono.Security.*
 /Templates/ProjectTemplates/ZetboxApp/packages/Npgsql.*
