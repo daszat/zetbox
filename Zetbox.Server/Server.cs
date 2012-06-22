@@ -127,7 +127,7 @@ namespace Zetbox.Server
                 Logging.Server.InfoFormat("Found {0} files to deploy", files.Length);
                 // TODO: remove this as it is only a temporary workaround for introducing calculated properties
                 CheckSchema(true);
-                // TODO: Define a standard procedure
+                // TODO: Define a standard migration procedure
                 MigrateDatabase();
 
                 UpdateSchema(files);
@@ -141,13 +141,21 @@ namespace Zetbox.Server
             using (Log.InfoTraceMethodCall("Migrating Database"))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                var ctx = subContainer.Resolve<IZetboxServerContext>();
-                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(i => i.Name == "KistlBase").FirstOrDefault();
-                if(module != null)
+                try
                 {
-                    module.Name = "ZetboxBase";
+                    var ctx = subContainer.Resolve<IZetboxServerContext>();
+                    var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(i => i.Name == "KistlBase").FirstOrDefault();
+                    if (module != null)
+                    {
+                        module.Name = "ZetboxBase";
+                    }
+                    ctx.SubmitRestore();
                 }
-                ctx.SubmitRestore();
+                catch
+                {
+                    // TODO: For now - ignore any error
+                    // TODO: Define a standard migration procedure
+                }
             }
         }
 
