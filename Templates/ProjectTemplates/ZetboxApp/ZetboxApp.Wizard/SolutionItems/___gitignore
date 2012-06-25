@@ -4,5 +4,6 @@
 /$safesolutionname$.Client.Tests/bin
 *.suo
 *.csproj.user
+bin
 obj
 /packages/zetbox*
