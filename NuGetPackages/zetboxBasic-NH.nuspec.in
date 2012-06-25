@@ -13,6 +13,9 @@
     <releaseNotes>First package.</releaseNotes>
     <copyright>Copyright © 2012 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
+    <dependencies>
+      <dependency id="zetboxBasic" version="[1.0.$REVNUM$.$DIRTY$]" />
+    </dependencies>
   </metadata>
   <files>
     <file src="Server\NH\**" target="zetbox/Server/NH" />

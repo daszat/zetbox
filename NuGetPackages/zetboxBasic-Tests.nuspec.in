@@ -1,24 +1,25 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>zetboxBasic-EF</id>
+    <id>zetboxBasic-Tests</id>
     <version>1.0.$REVNUM$.$DIRTY$</version>
-    <title>zetbox Basic Entity Framework components</title>
+    <title>zetbox Basic Test assemblies</title>
     <authors>dasz.at OG</authors>
     <owners>dasz.at OG</owners>
     <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
     <projectUrl>http://zetbox.at/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Entity Framework components for the zetbox.</description>
+    <description>Unit tests for the zetbox.</description>
     <releaseNotes>First package.</releaseNotes>
     <copyright>Copyright © 2012 dasz.at OG</copyright>
-    <tags>Platform Database ORM Applications</tags>
     <dependencies>
+      <dependency id="NUnit" version="[2.6,3)" />
+      <dependency id="NUnit.Runners" version="[2.6,3)" />
       <dependency id="zetboxBasic" version="[1.0.$REVNUM$.$DIRTY$]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="Server\EF\**" target="zetbox/Server/EF" />
-    <file src="Server\EF.Fallback\**" target="zetbox/Server/EF.Fallback" />
+    <file src="Tests\Zetbox.Tests.Utilities.*.dll" target="lib\net35" />
+    <file src="Tests\Zetbox.API.AbstractConsumerTests.dll" target="lib\net35" />
   </files>
 </package>

@@ -57,6 +57,13 @@
     <None Include="common.targets.in">
       <SubType>Designer</SubType>
     </None>
+    <NuSpec Include="zetboxBasic-Tests.nuspec">
+      <DependentUpon>zetboxBasic-Tests.nuspec.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </NuSpec>
+    <None Include="zetboxBasic-Tests.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="server.targets.in">
       <SubType>Designer</SubType>
     </None>
@@ -71,8 +78,12 @@
     </None>
     <None Include="zetboxBasic.nuspec.in" />
     <None Include="zetboxBasic-All.nuspec.in" />
-    <None Include="zetboxBasic-EF.nuspec.in" />
-    <None Include="zetboxBasic-NH.nuspec.in" />
+    <None Include="zetboxBasic-EF.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="zetboxBasic-NH.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
