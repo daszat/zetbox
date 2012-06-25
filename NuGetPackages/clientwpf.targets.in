@@ -3,39 +3,39 @@
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Autofac.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Client">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\Zetbox.API.Client.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.Objects">
       <HintPath>..\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\log4net.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.Client">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\Zetbox.Client.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.Client.WPF.Toolkit">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\WPF\Zetbox.Client.WPF.Toolkit.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\log4net.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
   </ItemGroup>
 </Project>

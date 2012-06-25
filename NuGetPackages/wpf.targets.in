@@ -3,11 +3,11 @@
   <ItemGroup>
     <Reference Include="Zetbox.API">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.Client.WPF">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Zetbox.Client.WPF.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
   </ItemGroup>
 </Project>

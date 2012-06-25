@@ -3,27 +3,27 @@
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Autofac.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.API">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Zetbox.API.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Common">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\Zetbox.API.Common.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.API.Server">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Server\Core\Zetbox.API.Server.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="Zetbox.Objects">
       <HintPath>..\bin\Debug\Common\Core.Generated\Zetbox.Objects.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Common\Core\log4net.dll</HintPath>
-      <Private>False</Private>
+      <Private Condition="$(ZetboxProjectType) != 'Test'">False</Private>
     </Reference>
   </ItemGroup>
 </Project>
