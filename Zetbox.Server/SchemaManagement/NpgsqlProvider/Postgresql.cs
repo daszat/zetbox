@@ -345,7 +345,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             if (createPrimaryKey)
             {
                 // TODO: use Construct to create PK_{0}
-                sb.AppendFormat(", CONSTRAINT \"PK_{0}\" PRIMARY KEY ( \"ID\" )", tblName);
+                sb.AppendFormat(", CONSTRAINT \"PK_{0}\" PRIMARY KEY ( \"ID\" )", tblName.Name);
             }
 
             sb.AppendLine();
