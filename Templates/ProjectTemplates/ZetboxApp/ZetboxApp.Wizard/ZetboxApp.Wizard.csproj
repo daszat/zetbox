@@ -159,7 +159,7 @@
     <EmbeddedResource Include="SolutionItems\___nuget\nuget.exe" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\___zetbox\Env.xml" />
+    <EmbeddedResource Include="SolutionItems\___zetbox\env.xml" />
     <EmbeddedResource Include="SolutionItems\___zetbox\PrepareEnv.exe" />
   </ItemGroup>
   <ItemGroup>
