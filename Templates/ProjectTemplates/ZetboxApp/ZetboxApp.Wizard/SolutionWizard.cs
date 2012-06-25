@@ -93,7 +93,7 @@ namespace ZetboxApp.Wizard
             var config = _solution.SolutionBuild.SolutionConfigurations.Item("Linux.Debug");
             foreach (SolutionContext ctx in config.SolutionContexts)
             {
-                if (ctx.ProjectName.EndsWith(".Client.WPF.csproj"))
+                if (ctx.ProjectName.EndsWith(".WPF.csproj"))
                 {
                     ctx.ShouldBuild = false;
                 }
