@@ -1,3 +1,4 @@
 @echo off
-".zetbox\PrepareEnv.exe" .zetbox
+.nuget\nuget.exe install .nuget\packages.config -o packages
+.zetbox\PrepareEnv.exe .zetbox
 echo Done
