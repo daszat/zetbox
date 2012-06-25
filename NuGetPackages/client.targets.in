@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="MigraDoc.RtfRendering">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\MigraDoc.RtfRendering.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PdfSharp">
       <HintPath>..\packages\zetboxBasic.1.0.$REVNUM$.$DIRTY$\zetbox\Client\Core\PdfSharp.dll</HintPath>
