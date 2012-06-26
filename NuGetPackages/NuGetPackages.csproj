@@ -32,7 +32,7 @@
       <DependentUpon>zetboxBasic-NH.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </NuSpec>
-    <Content Include="Env.xml" />
+    <Content Include="env.xml" />
     <Content Include="Init-zetboxBasic.ps1" />
     <Targets Include="common.targets">
       <DependentUpon>common.targets.in</DependentUpon>

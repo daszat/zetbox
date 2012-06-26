@@ -3,4 +3,6 @@
   <BinarySource>P:\zetbox.Parties\packages\zetboxBasic*\zetbox</BinarySource>
   <ConfigSource>P:\zetbox.Parties\Configs</ConfigSource>
   <BinaryTarget>P:\zetbox.Parties\bin\Debug</BinaryTarget>
+  
+  <TestsTarget>P:\zetbox.Parties\bin\Debug.Tests</TestsTarget>
 </EnvConfig>

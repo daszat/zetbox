@@ -42,10 +42,16 @@ namespace PrepareEnv
                 var envConfig = (EnvConfig)new XmlSerializer(typeof(EnvConfig)).Deserialize(File.OpenRead(Path.Combine(envConfigDir, "env.xml")));
 
                 PrepareEnvConfig(envConfig, envConfigDir);
+                
                 InstallBinaries(envConfig);
                 InstallConfigs(envConfig);
+
+                InstallTestsBinaries(envConfig);
+                InstallTestsConfigs(envConfig);
+
                 EnforceConnectionString(envConfig);
                 EnforceAppServer(envConfig);
+
                 DeployDatabaseTemplate(envConfig);
 
                 return 0;
@@ -113,6 +119,7 @@ namespace PrepareEnv
 
             envConfig.BinarySource = PrepareConfigPath(envConfig.BinarySource);
             envConfig.BinaryTarget = PrepareConfigPath(envConfig.BinaryTarget);
+            envConfig.TestsTarget = PrepareConfigPath(envConfig.TestsTarget);
 
             if (string.IsNullOrEmpty(envConfig.ConfigSource))
             {
@@ -212,28 +219,46 @@ namespace PrepareEnv
             ReplaceNpgsql(envConfig);
         }
 
-        private static IEnumerable<string> ExpandPath(string source)
+        /// <summary>
+        /// Copy from envConfig.BinarySource to envConfig.TestsTarget
+        /// </summary>
+        /// <param name="envConfig"></param>
+        private static void InstallTestsBinaries(EnvConfig envConfig)
         {
-            List<string> result = new List<string>();
+            LogTitle("Installing Tests Binaries");
 
-            if (source.Contains("*"))
+            // if source is empty or source and target are the same, binaries do not have to be copied
+            if (!string.IsNullOrEmpty(envConfig.BinarySource) && envConfig.BinarySource != envConfig.TestsTarget)
             {
-                var split = source.Split('*');
-                if (split.Length != 2) throw new ArgumentOutOfRangeException("source", "only one wildcard is supported yet");
+                var sourcePaths = ExpandPath(envConfig.BinarySource);
+                var isWildcard = sourcePaths.Count() > 1;
 
-                var baseSource = split[0] + "*";
-                var tail = split[1].TrimStart(Path.DirectorySeparatorChar).TrimStart(Path.AltDirectorySeparatorChar);
-                var path = Path.GetDirectoryName(baseSource);
-                var filter = Path.GetFileName(baseSource);
+                foreach (var source in sourcePaths)
+                {
+                    LogAction("copying Binaries from " + source);
+                    if (isWildcard && !Directory.Exists(source)) continue;
 
-                result.AddRange(Directory.GetDirectories(path, filter).Select(i => Path.Combine(i, tail)));
+                    CopyFolder(source, envConfig.TestsTarget, "*.dll", CopyMode.Flat);
+                    CopyFolder(source, envConfig.TestsTarget, "*.pdb", CopyMode.Flat);
+                }
+
+                // Delete Fallback assemblies
+                foreach (var fallback in Directory.GetFiles(envConfig.TestsTarget, "Zetbox.Objects*.*"))
+                {
+                    File.Delete(fallback);
+                }
+
+                foreach (var generatedSource in new[] { "Common\\Core.Generated", "Client\\Core.Generated", "Server\\EF.Generated", "Server\\NH.Generated"})
+                {
+                    string path = PathX.Combine(envConfig.TestsTarget, "..\\Debug", generatedSource);
+                    if (Directory.Exists(path))
+                    {
+                        CopyTopFiles(path, envConfig.TestsTarget);
+                    }
+                }
             }
-            else
-            {
-                result.Add(source);
-            }
 
-            return result;
+            ReplaceTestsNpgsql(envConfig);
         }
 
         private static void ReplaceNpgsql(EnvConfig envConfig)
@@ -272,6 +297,38 @@ namespace PrepareEnv
             }
         }
 
+        private static void ReplaceTestsNpgsql(EnvConfig envConfig)
+        {
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.Unix:
+                    LogAction("deploying Npgsql for Zetbox.Server.Service.exe");
+                    File.Copy(
+                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Mono", "Npgsql.dll"),
+                        Path.Combine(envConfig.TestsTarget, "Npgsql.dll"),
+                        true);
+                    File.Copy(
+                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Mono", "Mono.Security.dll"),
+                        PathX.Combine(envConfig.TestsTarget, "Mono.Security.dll"),
+                        true);
+                    break;
+                case PlatformID.Win32NT:
+                    LogAction("deploying Npgsql for HttpService");
+                    File.Copy(
+                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Microsoft", "Npgsql.dll"),
+                        PathX.Combine(envConfig.TestsTarget, "Npgsql.dll"),
+                        true);
+                    File.Copy(
+                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Microsoft", "Mono.Security.dll"),
+                        PathX.Combine(envConfig.TestsTarget, "Mono.Security.dll"),
+                        true);
+                    break;
+                default:
+                    LogAction(string.Format("Unkown platform '{0}'", Environment.OSVersion.Platform));
+                    return;
+            }
+        }
+
         /// <summary>
         /// copy configs from envConfig.ConfigSource to envConfig.BinaryTarget\Configs;
         /// deploy app.configs to their proper resting place beside the executable
@@ -281,7 +338,7 @@ namespace PrepareEnv
         {
             LogTitle("Installing Configs");
             var configTargetDir = Path.Combine(envConfig.BinaryTarget, "Configs");
-            // only copy the actual environment's configs, no recursion!
+            // copy all configs
             CopyFolder(envConfig.ConfigSource, configTargetDir);
             // find all app.configs
             foreach (var appConfigFile in Directory.GetFiles(configTargetDir, "*.config"))
@@ -309,6 +366,19 @@ namespace PrepareEnv
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// copy configs from envConfig.ConfigSource to envConfig.BinaryTarget\Configs;
+        /// deploy app.configs to their proper resting place beside the executable
+        /// </summary>
+        /// <param name="envConfig"></param>
+        private static void InstallTestsConfigs(EnvConfig envConfig)
+        {
+            LogTitle("Installing Tests Configs");
+            var configTargetDir = Path.Combine(envConfig.TestsTarget, "Configs");
+            // copy all configs
+            CopyFolder(envConfig.ConfigSource, configTargetDir);
         }
 
         /// <summary>
@@ -404,6 +474,29 @@ namespace PrepareEnv
         }
 
         #region Utilities
+        private static IEnumerable<string> ExpandPath(string source)
+        {
+            List<string> result = new List<string>();
+
+            if (source.Contains("*"))
+            {
+                var split = source.Split('*');
+                if (split.Length != 2) throw new ArgumentOutOfRangeException("source", "only one wildcard is supported yet");
+
+                var baseSource = split[0] + "*";
+                var tail = split[1].TrimStart(Path.DirectorySeparatorChar).TrimStart(Path.AltDirectorySeparatorChar);
+                var path = Path.GetDirectoryName(baseSource);
+                var filter = Path.GetFileName(baseSource);
+
+                result.AddRange(Directory.GetDirectories(path, filter).Select(i => Path.Combine(i, tail)));
+            }
+            else
+            {
+                result.Add(source);
+            }
+
+            return result;
+        }
 
         private static void EnsureDirectory(string dir)
         {
@@ -411,20 +504,48 @@ namespace PrepareEnv
                 Directory.CreateDirectory(dir);
         }
 
+        enum CopyMode
+        {
+            RestoreHierarchie,
+            Flat,
+        }
+
         private static void CopyFolder(string sourceDir, string targetDir)
         {
-            CopyTopFiles(sourceDir, targetDir);
+            CopyFolder(sourceDir, targetDir, null, CopyMode.RestoreHierarchie);
+        }
+
+        private static void CopyFolder(string sourceDir, string targetDir, string filter, CopyMode mode)
+        {
+            CopyTopFiles(sourceDir, targetDir, filter);
             foreach (var folder in Directory.GetDirectories(sourceDir))
             {
-                var target = Path.Combine(targetDir, Path.GetFileName(folder));
-                CopyFolder(folder, target);
+                string target ;
+                switch (mode)
+                {
+                    case CopyMode.RestoreHierarchie:
+                        target = Path.Combine(targetDir, Path.GetFileName(folder));
+                        break;
+                    case CopyMode.Flat:
+                        target = targetDir;
+                        break;
+                    default:
+                        throw new NotSupportedException("CopyMode " + mode + " is not supported yet");
+                }
+                CopyFolder(folder, target, filter, mode);
             }
         }
 
         private static void CopyTopFiles(string sourceDir, string targetDir)
         {
+            CopyTopFiles(sourceDir, targetDir, null);
+        }
+
+        private static void CopyTopFiles(string sourceDir, string targetDir, string filter)
+        {
             EnsureDirectory(targetDir);
-            foreach (var file in Directory.GetFiles(sourceDir))
+            var files = string.IsNullOrEmpty(filter) ? Directory.GetFiles(sourceDir) : Directory.GetFiles(sourceDir, filter);
+            foreach (var file in files)
             {
                 var target = Path.Combine(targetDir, Path.GetFileName(file));
                 File.Copy(file, target, true);

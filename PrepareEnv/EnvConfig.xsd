@@ -6,6 +6,7 @@
         <xs:element name="ConfigSource" type="xs:string" minOccurs="0" maxOccurs="1" />
         <xs:element name="BinarySource" type="xs:string" />
         <xs:element name="BinaryTarget" type="xs:string" />
+        <xs:element name="TestsTarget" type="xs:string" minOccurs="0" maxOccurs="1" />
         <xs:element name="DatabaseSource">
           <xs:complexType>
             <xs:simpleContent>

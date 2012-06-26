@@ -14,6 +14,10 @@ namespace PrepareEnv
 
             string result = paths[0];
 
+            // Special windows case: if the first part ends with a : (drive letter) append a DirectorySeperator
+            if (result.EndsWith(":"))
+                result += System.IO.Path.DirectorySeparatorChar;
+
             for (int i = 1; i < paths.Length; i++)
             {
                 result = System.IO.Path.Combine(result, paths[i]);
