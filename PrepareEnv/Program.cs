@@ -256,9 +256,8 @@ namespace PrepareEnv
                         CopyTopFiles(path, envConfig.TestsTarget);
                     }
                 }
+                ReplaceTestsNpgsql(envConfig);
             }
-
-            ReplaceTestsNpgsql(envConfig);
         }
 
         private static void ReplaceNpgsql(EnvConfig envConfig)
