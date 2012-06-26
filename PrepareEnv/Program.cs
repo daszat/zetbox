@@ -228,7 +228,7 @@ namespace PrepareEnv
             LogTitle("Installing Tests Binaries");
 
             // if source is empty or source and target are the same, binaries do not have to be copied
-            if (!string.IsNullOrEmpty(envConfig.BinarySource) && envConfig.BinarySource != envConfig.TestsTarget)
+            if (!string.IsNullOrEmpty(envConfig.TestsTarget) && !string.IsNullOrEmpty(envConfig.BinarySource) && envConfig.BinarySource != envConfig.TestsTarget)
             {
                 var sourcePaths = ExpandPath(envConfig.BinarySource);
                 var isWildcard = sourcePaths.Count() > 1;
@@ -376,9 +376,12 @@ namespace PrepareEnv
         private static void InstallTestsConfigs(EnvConfig envConfig)
         {
             LogTitle("Installing Tests Configs");
-            var configTargetDir = Path.Combine(envConfig.TestsTarget, "Configs");
-            // copy all configs
-            CopyFolder(envConfig.ConfigSource, configTargetDir);
+            if (!string.IsNullOrEmpty(envConfig.TestsTarget))
+            {
+                var configTargetDir = Path.Combine(envConfig.TestsTarget, "Configs");
+                // copy all configs
+                CopyFolder(envConfig.ConfigSource, configTargetDir);
+            }
         }
 
         /// <summary>
