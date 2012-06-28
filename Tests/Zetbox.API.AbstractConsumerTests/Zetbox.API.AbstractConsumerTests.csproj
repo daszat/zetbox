@@ -73,8 +73,9 @@
   <ItemGroup>
     <Compile Include="AbstractContextTests.cs" />
     <Compile Include="AbstractListPropertiesTests.cs" />
-    <Compile Include="AbstractSetup.cs" />
+    <Compile Include="AbstractSetUpFixture.cs" />
     <Compile Include="AbstractTestFixture.cs" />
+    <Compile Include="AbstractUITest.cs" />
     <Compile Include="BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Blobs\BlobFixture.cs" />
     <Compile Include="Blobs\when_using.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="DefaultValues\when_submitting.cs" />
     <Compile Include="IDatabaseResetter.cs" />
     <Compile Include="AbstractLinqTests.cs" />
+    <Compile Include="MockedViewModelFactory.cs" />
     <Compile Include="MockImplementationTypeChecker.cs" />
     <Compile Include="N_to_M_relations\NMTestFixture.cs" />
     <Compile Include="N_to_M_relations\should_synchronize.cs" />
@@ -128,9 +130,19 @@
     <Compile Include="required_parent\when_parent_not_set.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj">
+      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
+      <Name>Zetbox.API.Client</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj">
+      <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
+      <Name>Zetbox.Client</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">

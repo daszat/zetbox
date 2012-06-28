@@ -21,9 +21,11 @@ namespace Zetbox.API.AbstractConsumerTests
     using System.Linq;
     using System.Text;
     using Autofac;
+    using NUnit.Framework;
+    using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using NUnit.Framework;
+    using Zetbox.Client.Presentables;
 
     public abstract class AbstractSetUpFixture
     {
@@ -95,7 +97,23 @@ namespace Zetbox.API.AbstractConsumerTests
 
         protected virtual void SetupBuilder(ContainerBuilder builder)
         {
+            builder
+                .RegisterType<MockedViewModelFactory>()
+                .As<MockedViewModelFactory>()
+                .As<IViewModelFactory>()
+                .SingleInstance();
 
+            builder
+                .RegisterType<PerfCounterDispatcher>()
+                .As<IPerfCounter>()
+                .OnActivated(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
+                .OnRelease(obj => obj.Dump())
+                .SingleInstance();
+
+            builder
+                .RegisterType<NopFileOpener>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
         }
 
         protected virtual void SetUp(IContainer container)
