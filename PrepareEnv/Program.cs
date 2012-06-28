@@ -483,7 +483,7 @@ namespace PrepareEnv
             }
             else
             {
-                return Directory.GetFiles(Path.Combine(targetDir, "Configs"), "*.config", SearchOption.AllDirectories);
+                return Directory.GetFiles(targetDir, "*.config", SearchOption.AllDirectories);
             }
         }
 
