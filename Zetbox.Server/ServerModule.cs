@@ -38,24 +38,6 @@ namespace Zetbox.Server
             base.Load(builder);
 
             builder
-                .Register((c, p) =>
-                {
-                    ZetboxConfig cfg = c.Resolve<ZetboxConfig>();
-                    IZetboxContext ctx = c.Resolve<BaseMemoryContext>();
-                    var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
-                    ISchemaProvider schemaProvider = c.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
-                    schemaProvider.Open(connectionString.ConnectionString);
-                    SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
-
-                    return new SchemaManagement.SchemaManager(
-                        schemaProvider,
-                        p.Named<IZetboxContext>("newSchema"),
-                        ctx,
-                        cfg);
-                })
-                .InstancePerDependency();
-
-            builder
                 .RegisterType<Server>()
                 .As<IServer>()
                 .SingleInstance();
@@ -93,22 +75,8 @@ namespace Zetbox.Server
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 
-            // TODO: move to separate SchemaProvider-specific assembly, since the SQL-Schema should be independent of the DalProvider
             builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.OleDbProvider.OleDb()))
-                .As<ISchemaProvider>()
-                .Named<ISchemaProvider>("OLEDB")
-                .InstancePerDependency();
-            builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.SqlProvider.SqlServer()))
-                .As<ISchemaProvider>()
-                .Named<ISchemaProvider>("MSSQL")
-                .InstancePerDependency();
-            builder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.NpgsqlProvider.Postgresql()))
-                .As<ISchemaProvider>()
-                .Named<ISchemaProvider>("POSTGRESQL")
-                .InstancePerDependency();
+                .RegisterModule(new SchemaManagement.SchemaModule());
 
 #if !MONO
             builder
