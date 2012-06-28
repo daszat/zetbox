@@ -215,7 +215,7 @@ namespace PrepareEnv
                     CopyFolder("Data", dataTarget);
                 }
 
-                ReplaceNpgsql(envConfig);
+                ReplaceNpgsql(envConfig.BinarySource, envConfig.BinaryTarget);
             }
         }
 
@@ -256,71 +256,65 @@ namespace PrepareEnv
                         CopyTopFiles(path, envConfig.TestsTarget);
                     }
                 }
-                ReplaceTestsNpgsql(envConfig);
+                ReplaceNpgsql(envConfig.BinarySource, envConfig.TestsTarget);
             }
         }
 
-        private static void ReplaceNpgsql(EnvConfig envConfig)
+        private static void ReplaceNpgsql(string sourcePath, string targetPath)
         {
+            var httpServiceExists = Directory.Exists(PathX.Combine(targetPath, "HttpService", "bin"));
+            var npgsqlMonoSource = ExpandPath(PathX.Combine(sourcePath, "Server", "Npgsql.Mono")).FirstOrDefault(p => Directory.Exists(p));
+            var npgsqlMsSource = ExpandPath(PathX.Combine(sourcePath, "Server", "Npgsql.Microsoft")).FirstOrDefault(p => Directory.Exists(p));
+
+            LogAction("deploying Npgsql");
             switch (Environment.OSVersion.Platform)
             {
                 case PlatformID.Unix:
-                    LogAction("deploying Npgsql for Zetbox.Server.Service.exe");
+                    if (string.IsNullOrEmpty(npgsqlMonoSource))
+                    {
+                        throw new InvalidOperationException(string.Format("Missing source path for Mono Npgsql: {0}/Server/Npgsql.Mono", sourcePath));
+                    }
                     File.Copy(
-                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Mono", "Npgsql.dll"),
-                        Path.Combine(envConfig.BinaryTarget, "Npgsql.dll"),
+                        Path.Combine(npgsqlMonoSource, "Npgsql.dll"),
+                        Path.Combine(targetPath, "Npgsql.dll"),
                         true);
-                    File.Delete(Path.Combine(envConfig.BinaryTarget, "Mono.Security.dll"));
+                    // installed by mono
+                    File.Delete(Path.Combine(targetPath, "Mono.Security.dll"));
 
-                    LogAction("deploying Npgsql for HttpService");
-                    File.Copy(
-                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Mono", "Npgsql.dll"),
-                        PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Npgsql.dll"),
-                        true);
-                    File.Delete(PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Mono.Security.dll"));
+                    if (httpServiceExists)
+                    {
+                        File.Copy(
+                            Path.Combine(npgsqlMonoSource, "Npgsql.dll"),
+                            PathX.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
+                            true);
+                        // installed by mono
+                        File.Delete(PathX.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"));
+                    }
                     break;
                 case PlatformID.Win32NT:
-                    LogAction("deploying Npgsql for HttpService");
+                    if (string.IsNullOrEmpty(npgsqlMonoSource))
+                    {
+                        throw new InvalidOperationException(string.Format("Missing source path for MS Npgsql: {0}/Server/Npgsql.Microsoft", sourcePath));
+                    }
                     File.Copy(
-                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Microsoft", "Npgsql.dll"),
-                        PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Npgsql.dll"),
+                        Path.Combine(npgsqlMsSource, "Npgsql.dll"),
+                        Path.Combine(targetPath, "Npgsql.dll"),
                         true);
                     File.Copy(
-                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Microsoft", "Mono.Security.dll"),
-                        PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Mono.Security.dll"),
+                        Path.Combine(npgsqlMsSource, "Mono.Security.dll"),
+                        Path.Combine(targetPath, "Mono.Security.dll"),
                         true);
-                    break;
-                default:
-                    LogAction(string.Format("Unkown platform '{0}'", Environment.OSVersion.Platform));
-                    return;
-            }
-        }
-
-        private static void ReplaceTestsNpgsql(EnvConfig envConfig)
-        {
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.Unix:
-                    LogAction("deploying Npgsql for Zetbox.Server.Service.exe");
-                    File.Copy(
-                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Mono", "Npgsql.dll"),
-                        Path.Combine(envConfig.TestsTarget, "Npgsql.dll"),
-                        true);
-                    File.Copy(
-                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Mono", "Mono.Security.dll"),
-                        PathX.Combine(envConfig.TestsTarget, "Mono.Security.dll"),
-                        true);
-                    break;
-                case PlatformID.Win32NT:
-                    LogAction("deploying Npgsql for HttpService");
-                    File.Copy(
-                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Microsoft", "Npgsql.dll"),
-                        PathX.Combine(envConfig.TestsTarget, "Npgsql.dll"),
-                        true);
-                    File.Copy(
-                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Microsoft", "Mono.Security.dll"),
-                        PathX.Combine(envConfig.TestsTarget, "Mono.Security.dll"),
-                        true);
+                    if (httpServiceExists)
+                    {
+                        File.Copy(
+                            Path.Combine(npgsqlMsSource, "Npgsql.dll"),
+                            PathX.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
+                            true);
+                        File.Copy(
+                            Path.Combine(npgsqlMsSource, "Mono.Security.dll"),
+                            PathX.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"),
+                            true);
+                    }
                     break;
                 default:
                     LogAction(string.Format("Unkown platform '{0}'", Environment.OSVersion.Platform));
