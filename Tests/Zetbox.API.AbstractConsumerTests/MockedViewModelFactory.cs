@@ -82,14 +82,11 @@ namespace Zetbox.API.AbstractConsumerTests
         {
             get { return Zetbox.App.GUI.Toolkit.TEST; }
         }
-    }
 
-    public static class MockedViewModelFactoryExtensions
-    {
-        public static T LastShownModel<T>(this MockedViewModelFactory mdlFact)
+        public T GetLastShownModel<T>()
             where T : ViewModel
         {
-            return (T)mdlFact.LastShownModel;
+            return (T)this.LastShownModel;
         }
     }
 }
