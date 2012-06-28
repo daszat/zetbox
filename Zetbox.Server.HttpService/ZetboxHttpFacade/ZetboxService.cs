@@ -255,6 +255,12 @@ namespace Zetbox.Server.HttpService
                 context.Response.StatusCode = (int)HttpStatusCode.PreconditionFailed;
                 Log.Info("InvalidZetboxGeneratedVersion error while processing request", vex);
             }
+            catch (FaultException ex)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                // Already logged in ThrowFaultException, only push to Debug here
+                Log.Debug("Error while processing request", ex);
+            }
             catch (Exception ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
