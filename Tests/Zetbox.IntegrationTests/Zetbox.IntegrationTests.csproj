@@ -79,6 +79,9 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Zetbox.Objects.ClientImpl">
+      <HintPath>..\..\bin\Debug\Client\Core.Generated\Zetbox.Objects.ClientImpl.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractIntegrationTestFixture.cs" />
@@ -112,6 +115,7 @@
     <Compile Include="Tests\RelationTests.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
+    <Compile Include="Tests\Security\when_updating_calcprop.cs" />
     <Compile Include="Tests\Simple.cs" />
     <Compile Include="Tests\TypeRefs\should_convert_types_correctly.cs" />
   </ItemGroup>
@@ -170,6 +174,10 @@
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
       <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Zetbox.Server.Service\Zetbox.Server.Service.csproj">
+      <Project>{4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545}</Project>
+      <Name>Zetbox.Server.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.Server\Zetbox.Server.csproj">
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>

@@ -11,6 +11,7 @@
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+      <Module>Zetbox.API.Common.ApiCommonModule, Zetbox.API.Common</Module>
       <Module>Zetbox.API.Server.ServerApiModule, Zetbox.API.Server</Module>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
       <Module>Zetbox.Objects.InterfaceModule, Zetbox.Objects</Module>
@@ -20,18 +21,13 @@
       <Module>Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory</Module>
       <Module>Zetbox.App.Projekte.Server.CustomServerActionsModule, Zetbox.App.Projekte.Server</Module>
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
-
-      <!-- Development/Master Server modules -->
-      <Module>Zetbox.Generator.GeneratorModule, Zetbox.Generator</Module>
-      <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
-      <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
-      <Module>Zetbox.DalProvider.Ef.Generator.EfGeneratorProvider, Zetbox.DalProvider.Ef.Generator</Module>
     </Modules>
   </Server>
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
+      <Module>Zetbox.API.Common.ApiCommonModule, Zetbox.API.Common</Module>
       <Module>Zetbox.API.Client.ClientApiModule, Zetbox.API.Client</Module>
       <Module>Zetbox.API.Client.WcfClientModule, Zetbox.API.Client</Module>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
@@ -44,6 +40,7 @@
       <Module>Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client</Module>
       <Module>Zetbox.App.Projekte.Common.CustomCommonActionsModule, Zetbox.App.Projekte.Common</Module>
       <!-- since the test are driven from the client app domain, we need to reset the database from here -->
+      <Module>Zetbox.Server.SchemaManagement.SchemaModule, Zetbox.Server</Module>
       <Module>Zetbox.Tests.Utilities.MsSql.UtilityModule, Zetbox.Tests.Utilities.MsSql</Module>
     </Modules>
   </Client>
@@ -57,5 +54,6 @@
     <string>Server\EF.Fallback</string>
     <string>Common\App.Zetbox</string>
     <string>Server\App.Zetbox</string>
+	<string>Server\Npgsql.Microsoft</string>
   </AssemblySearchPaths>
 </ZetboxConfig>
