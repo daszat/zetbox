@@ -42,7 +42,7 @@ namespace PrepareEnv
                 var envConfig = (EnvConfig)new XmlSerializer(typeof(EnvConfig)).Deserialize(File.OpenRead(Path.Combine(envConfigDir, "env.xml")));
 
                 PrepareEnvConfig(envConfig, envConfigDir);
-                
+
                 InstallBinaries(envConfig);
                 InstallConfigs(envConfig);
 
@@ -181,7 +181,7 @@ namespace PrepareEnv
             LogTitle("Installing Binaries");
 
             // if source is empty or source and target are the same, binaries do not have to be copied
-            if (!string.IsNullOrEmpty(envConfig.BinarySource) && envConfig.BinarySource != envConfig.BinaryTarget)
+            if (!string.IsNullOrEmpty(envConfig.BinarySource) && !string.IsNullOrEmpty(envConfig.BinaryTarget) && envConfig.BinarySource != envConfig.BinaryTarget)
             {
                 var sourcePaths = ExpandPath(envConfig.BinarySource);
                 var isWildcard = sourcePaths.Count() > 1;
@@ -200,23 +200,23 @@ namespace PrepareEnv
                         CopyFolder(bootstrapperSource, PathX.Combine(envConfig.BinaryTarget, "HttpService", "Bootstrapper"));
                     }
                 }
-            }
 
-            var moduleTarget = Path.Combine(envConfig.BinaryTarget, "Modules");
-            if (Directory.Exists("Modules"))
-            {
-                LogAction("copying Modules");
-                CopyFolder("Modules", moduleTarget);
-            }
+                var moduleTarget = Path.Combine(envConfig.BinaryTarget, "Modules");
+                if (Directory.Exists("Modules"))
+                {
+                    LogAction("copying Modules");
+                    CopyFolder("Modules", moduleTarget);
+                }
 
-            var dataTarget = Path.Combine(envConfig.BinaryTarget, "Data");
-            if (Directory.Exists("Data"))
-            {
-                LogAction("copying Data");
-                CopyFolder("Data", dataTarget);
-            }
+                var dataTarget = Path.Combine(envConfig.BinaryTarget, "Data");
+                if (Directory.Exists("Data"))
+                {
+                    LogAction("copying Data");
+                    CopyFolder("Data", dataTarget);
+                }
 
-            ReplaceNpgsql(envConfig);
+                ReplaceNpgsql(envConfig);
+            }
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace PrepareEnv
                     File.Delete(fallback);
                 }
 
-                foreach (var generatedSource in new[] { "Common\\Core.Generated", "Client\\Core.Generated", "Server\\EF.Generated", "Server\\NH.Generated"})
+                foreach (var generatedSource in new[] { "Common\\Core.Generated", "Client\\Core.Generated", "Server\\EF.Generated", "Server\\NH.Generated" })
                 {
                     string path = PathX.Combine(envConfig.TestsTarget, "..\\Debug", generatedSource);
                     if (Directory.Exists(path))
@@ -267,14 +267,14 @@ namespace PrepareEnv
                 case PlatformID.Unix:
                     LogAction("deploying Npgsql for Zetbox.Server.Service.exe");
                     File.Copy(
-                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Mono", "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Mono", "Npgsql.dll"),
                         Path.Combine(envConfig.BinaryTarget, "Npgsql.dll"),
                         true);
                     File.Delete(Path.Combine(envConfig.BinaryTarget, "Mono.Security.dll"));
 
                     LogAction("deploying Npgsql for HttpService");
                     File.Copy(
-                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Mono", "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Mono", "Npgsql.dll"),
                         PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Npgsql.dll"),
                         true);
                     File.Delete(PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Mono.Security.dll"));
@@ -282,11 +282,11 @@ namespace PrepareEnv
                 case PlatformID.Win32NT:
                     LogAction("deploying Npgsql for HttpService");
                     File.Copy(
-                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Microsoft", "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Microsoft", "Npgsql.dll"),
                         PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Npgsql.dll"),
                         true);
                     File.Copy(
-                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Microsoft", "Mono.Security.dll"),
+                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Microsoft", "Mono.Security.dll"),
                         PathX.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Mono.Security.dll"),
                         true);
                     break;
@@ -303,22 +303,22 @@ namespace PrepareEnv
                 case PlatformID.Unix:
                     LogAction("deploying Npgsql for Zetbox.Server.Service.exe");
                     File.Copy(
-                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Mono", "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Mono", "Npgsql.dll"),
                         Path.Combine(envConfig.TestsTarget, "Npgsql.dll"),
                         true);
                     File.Copy(
-                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Mono", "Mono.Security.dll"),
+                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Mono", "Mono.Security.dll"),
                         PathX.Combine(envConfig.TestsTarget, "Mono.Security.dll"),
                         true);
                     break;
                 case PlatformID.Win32NT:
                     LogAction("deploying Npgsql for HttpService");
                     File.Copy(
-                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Microsoft", "Npgsql.dll"),
+                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Microsoft", "Npgsql.dll"),
                         PathX.Combine(envConfig.TestsTarget, "Npgsql.dll"),
                         true);
                     File.Copy(
-                        PathX.Combine(envConfig.BinaryTarget, "Server", "Npgsql.Microsoft", "Mono.Security.dll"),
+                        PathX.Combine(envConfig.BinarySource, "Server", "Npgsql.Microsoft", "Mono.Security.dll"),
                         PathX.Combine(envConfig.TestsTarget, "Mono.Security.dll"),
                         true);
                     break;
@@ -336,10 +336,23 @@ namespace PrepareEnv
         private static void InstallConfigs(EnvConfig envConfig)
         {
             LogTitle("Installing Configs");
-            var configTargetDir = Path.Combine(envConfig.BinaryTarget, "Configs");
-            // copy all configs
-            CopyFolder(envConfig.ConfigSource, configTargetDir);
-            // find all app.configs
+            if (!string.IsNullOrEmpty(envConfig.BinaryTarget))
+            {
+                var configTargetDir = Path.Combine(envConfig.BinaryTarget, "Configs");
+                // copy all configs
+                CopyFolder(envConfig.ConfigSource, configTargetDir);
+                // find all app.configs
+                DeployConfigs(envConfig, configTargetDir);
+            }
+        }
+
+        /// <summary>
+        /// Deploys all app configs to reside by their proper binaries in the configTargetDir.
+        /// </summary>
+        /// <param name="envConfig"></param>
+        /// <param name="configTargetDir"></param>
+        private static void DeployConfigs(EnvConfig envConfig, string configTargetDir)
+        {
             foreach (var appConfigFile in Directory.GetFiles(configTargetDir, "*.config"))
             {
                 var targetAssemblyFile = Path.GetFileNameWithoutExtension(appConfigFile);
@@ -380,6 +393,7 @@ namespace PrepareEnv
                 var configTargetDir = Path.Combine(envConfig.TestsTarget, "Configs");
                 // copy all configs
                 CopyFolder(envConfig.ConfigSource, configTargetDir);
+                DeployConfigs(envConfig, configTargetDir);
             }
         }
 
@@ -393,7 +407,9 @@ namespace PrepareEnv
                 return;
 
             LogTitle("Enforcing connection string");
-            foreach (var configPath in Directory.GetFiles(Path.Combine(envConfig.BinaryTarget, "Configs"), "*.xml"))
+
+            foreach (var configPath in GetConfigFilenames(envConfig.BinaryTarget)
+                .Concat(GetConfigFilenames(envConfig.TestsTarget)))
             {
                 var doc = new XmlDocument();
                 doc.Load(configPath);
@@ -437,13 +453,49 @@ namespace PrepareEnv
             }
         }
 
+        /// <summary>
+        /// Returns all filenames of Configs in the specified target directory. If the target directory does not exist an empty list is returned.
+        /// </summary>
+        /// <param name="targetDir"></param>
+        /// <returns></returns>
+        private static IEnumerable<string> GetConfigFilenames(string targetDir)
+        {
+            if (string.IsNullOrEmpty(targetDir))
+            {
+                return Enumerable.Empty<string>();
+            }
+            else
+            {
+                return Directory.GetFiles(Path.Combine(targetDir, "Configs"), "*.xml");
+            }
+        }
+
+        /// <summary>
+        /// Returns all filenames of app-configs in the specified target directory. If the target directory does not exist an empty list is returned.
+        /// </summary>
+        /// <param name="targetDir"></param>
+        /// <returns></returns>
+        private static IEnumerable<string> GetAppconfigFilenames(string targetDir)
+        {
+            if (string.IsNullOrEmpty(targetDir))
+            {
+                return Enumerable.Empty<string>();
+            }
+            else
+            {
+                return Directory.GetFiles(Path.Combine(targetDir, "Configs"), "*.config", SearchOption.AllDirectories);
+            }
+        }
+
         private static void EnforceAppServer(EnvConfig envConfig)
         {
             if (envConfig.AppServer == null || string.IsNullOrEmpty(envConfig.AppServer.Uri))
                 return;
 
             LogTitle("Enforcing app server");
-            foreach (var configPath in Directory.GetFiles(envConfig.BinaryTarget, "*.config", SearchOption.AllDirectories))
+
+            foreach (var configPath in GetAppconfigFilenames(envConfig.BinaryTarget)
+                .Concat(GetAppconfigFilenames(envConfig.TestsTarget)))
             {
                 var doc = new XmlDocument();
                 doc.Load(configPath);
@@ -522,7 +574,7 @@ namespace PrepareEnv
             CopyTopFiles(sourceDir, targetDir, filter);
             foreach (var folder in Directory.GetDirectories(sourceDir))
             {
-                string target ;
+                string target;
                 switch (mode)
                 {
                     case CopyMode.RestoreHierarchie:
