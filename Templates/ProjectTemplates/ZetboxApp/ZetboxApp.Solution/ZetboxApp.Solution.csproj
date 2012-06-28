@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ZetboxApp.Client.Tests\SetUpFixture.cs" />
     <None Include="ZetboxApp.WPF\app.config">
       <SubType>Designer</SubType>
     </None>
