@@ -993,6 +993,41 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SecurityTestChild">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestChild)">
+	    <MappingFragment StoreEntitySet="SecurityTestChild">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="ParentName" ColumnName="ParentName" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityTestChild_Rights">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestChild_Rights)">
+        <MappingFragment StoreEntitySet="SecurityTestChild_Rights">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Identity" ColumnName="Identity" />
+          <ScalarProperty Name="Right" ColumnName="Right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_SecurityTestChildren_Rights" TypeName="Model.FK_SecurityTestChildren_Rights" StoreEntitySet="SecurityTestChild_Rights">
+      <EndProperty Name="SecurityTestChild">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <EndProperty Name="SecurityTestChild_Rights">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+        <ScalarProperty Name="Identity" ColumnName="Identity" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="SecurityTestParent">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SecurityTestParent)">
+	    <MappingFragment StoreEntitySet="SecurityTestParent">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Sequence">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Sequence)">
 	    <MappingFragment StoreEntitySet="Sequence">
@@ -2522,6 +2557,23 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Child_allow_Identity
+    A: ZeroOrMore SecurityTestChild as Child
+    B: One Identity as Identity
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Child_allow_Identity"
+                           TypeName="Model.FK_Child_allow_Identity"
+                           StoreEntitySet="SecurityTestChild" >
+      <EndProperty Name="Identity">
+        <ScalarProperty Name="ID" ColumnName="fk_Identity"/>
+      </EndProperty>
+      <EndProperty Name="Child">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Identity" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Child_has_Parent
     A: ZeroOrMore TypeRef as Child
     B: ZeroOrOne TypeRef as Parent
@@ -3856,6 +3908,23 @@
     <AssociationSetMapping Name="FK_Parent_has_Children"
                            TypeName="Model.FK_Parent_has_Children"
                            StoreEntitySet="MethodTest" >
+      <EndProperty Name="Parent">
+        <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
+      </EndProperty>
+      <EndProperty Name="Children">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Parent" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Parent_has_Children
+    A: ZeroOrOne SecurityTestParent as Parent
+    B: ZeroOrMore SecurityTestChild as Children
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Parent_has_Children"
+                           TypeName="Model.FK_Parent_has_Children"
+                           StoreEntitySet="SecurityTestChild" >
       <EndProperty Name="Parent">
         <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
       </EndProperty>

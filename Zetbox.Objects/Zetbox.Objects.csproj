@@ -199,6 +199,8 @@
     <Compile Include="RequiredParent.Interface.Designer.cs" />
     <Compile Include="RequiredParentChild.Interface.Designer.cs" />
     <Compile Include="RoleMembership.Interface.Designer.cs" />
+    <Compile Include="SecurityTestChild.Interface.Designer.cs" />
+    <Compile Include="SecurityTestParent.Interface.Designer.cs" />
     <Compile Include="Sequence.Interface.Designer.cs" />
     <Compile Include="SequenceData.Interface.Designer.cs" />
     <Compile Include="ServiceDescriptor.Interface.Designer.cs" />

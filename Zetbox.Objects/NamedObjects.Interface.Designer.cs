@@ -2900,6 +2900,14 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("3e7f2f55-ff5c-4a13-ba58-74368e9c8780"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SecurityTestChild
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("09dfa3cf-4a15-48ed-b76a-c330ac7379e0"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> SecurityTestParent
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("779f8526-3f7f-41be-8186-f22062c302a2"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> TestCustomObject
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("de155110-79cc-4dac-89d6-0916608be1fb"); }
@@ -3100,6 +3108,36 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Parent
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("09fb9f88-7a59-4dae-8cad-9fbab99f32c3"); }
+                                }
+                            }
+                            public static class SecurityTestChild_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Identity
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9119f41f-0767-47c0-ae71-5cd3f897b477"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4716ffd4-5aa2-466d-abfe-1bcb20a090fc"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Parent
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9bdf1c7f-16d1-4e92-9024-7447d3b2c9ec"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> ParentName
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ae267bd6-e435-4186-b374-ab19db6488b3"); }
+                                }
+                            }
+                            public static class SecurityTestParent_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Children
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("d4c5c1e6-1dab-4287-9a64-bd31b1c3923f"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0f8291ef-2a35-4d8e-bc17-761c0a1cfe88"); }
                                 }
                             }
                             public static class TestCustomObject_Properties

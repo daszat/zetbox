@@ -63,6 +63,13 @@
     <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
     <EntitySet Name="RequiredParent" EntityType="Model.RequiredParent" />
     <EntitySet Name="RequiredParentChild" EntityType="Model.RequiredParentChild" />
+    <EntitySet Name="SecurityTestChild" EntityType="Model.SecurityTestChild" />
+    <EntitySet Name="SecurityTestChild_Rights" EntityType="Model.SecurityTestChild_Rights" />
+    <AssociationSet Name="FK_SecurityTestChildren_Rights" Association="Model.FK_SecurityTestChildren_Rights">
+      <End Role="SecurityTestChild" EntitySet="SecurityTestChild" />
+      <End Role="SecurityTestChild_Rights" EntitySet="SecurityTestChild_Rights" />
+    </AssociationSet>
+    <EntitySet Name="SecurityTestParent" EntityType="Model.SecurityTestParent" />
     <EntitySet Name="Sequence" EntityType="Model.Sequence" />
     <EntitySet Name="SequenceData" EntityType="Model.SequenceData" />
     <EntitySet Name="ServiceDescriptor" EntityType="Model.ServiceDescriptor" />
@@ -405,6 +412,10 @@
       <End Role="CalendarRule" EntitySet="CalendarRule" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_Child_allow_Identity" Association="Model.FK_Child_allow_Identity" >
+      <End Role="Child" EntitySet="SecurityTestChild" />
+      <End Role="Identity" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Child_has_Parent" Association="Model.FK_Child_has_Parent" >
       <End Role="Child" EntitySet="TypeRef" />
       <End Role="Parent" EntitySet="TypeRef" />
@@ -720,6 +731,10 @@
     <AssociationSet Name="FK_Parent_has_Children" Association="Model.FK_Parent_has_Children" >
       <End Role="Parent" EntitySet="MethodTest" />
       <End Role="Children" EntitySet="MethodTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parent_has_Children" Association="Model.FK_Parent_has_Children" >
+      <End Role="Parent" EntitySet="SecurityTestParent" />
+      <End Role="Children" EntitySet="SecurityTestChild" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_navigates_to_Children" Association="Model.FK_Parent_navigates_to_Children" >
       <End Role="Parent" EntitySet="NavigationEntry" />
@@ -2123,6 +2138,55 @@
                         Relationship="Model.FK_Parent_of_Children"
                         FromRole="Children"
                         ToRole="Parent" />
+  </EntityType>
+  <EntityType Name="SecurityTestChild">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IdentityImpl"
+                        Relationship="Model.FK_Child_allow_Identity"
+                        FromRole="Child"
+                        ToRole="Identity" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
+    <NavigationProperty Name="ParentImpl"
+                        Relationship="Model.FK_Parent_has_Children"
+                        FromRole="Children"
+                        ToRole="Parent" />
+    <Property Name="ParentName" Type="String" Nullable="true" MaxLength="200"  />
+    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_SecurityTestChildren_Rights" FromRole="SecurityTestChild" ToRole="SecurityTestChild_Rights" />
+  </EntityType>
+  <EntityType Name="SecurityTestChild_Rights">
+    <Key>
+	  <PropertyRef Name="ID" />
+	  <PropertyRef Name="Identity" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Identity" Type="Int32" Nullable="false" />
+    <Property Name="Right" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_SecurityTestChildren_Rights">
+    <End Role="SecurityTestChild" Type="Model.SecurityTestChild" Multiplicity="1" />
+    <End Role="SecurityTestChild_Rights" Type="Model.SecurityTestChild_Rights" Multiplicity="*" />
+    <ReferentialConstraint>
+	  <Principal Role="SecurityTestChild">
+	    <PropertyRef Name="ID" />
+	  </Principal>
+	  <Dependent Role="SecurityTestChild_Rights">
+	    <PropertyRef Name="ID" />
+	  </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SecurityTestParent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChildrenImpl"
+                        Relationship="Model.FK_Parent_has_Children"
+                        FromRole="Parent"
+                        ToRole="Children" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
   </EntityType>
   <EntityType Name="Sequence">
     <Key>
@@ -4043,6 +4107,14 @@
          Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_Child_allow_Identity" >
+    <End Role="Child"
+         Type="Model.SecurityTestChild" 
+         Multiplicity="*" />
+    <End Role="Identity"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Child_has_Parent" >
     <End Role="Child"
          Type="Model.TypeRef" 
@@ -4673,6 +4745,14 @@
          Multiplicity="0..1" />
     <End Role="Children"
          Type="Model.MethodTest" 
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Parent_has_Children" >
+    <End Role="Parent"
+         Type="Model.SecurityTestParent" 
+         Multiplicity="0..1" />
+    <End Role="Children"
+         Type="Model.SecurityTestChild" 
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Parent_navigates_to_Children" >

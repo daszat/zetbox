@@ -460,6 +460,7 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for Calendar_was_Identity_RelationEntry
             // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
             // should fetch && remember parent for CalendarRule_was_Identity_RelationEntry
+            // should fetch && remember parent for SecurityTestChild_allow_Identity_RelationEntry
             // should fetch && remember parent for FileImportConfiguration_of_Identity_RelationEntry
             // should fetch && remember parent for Constraint_was_Identity_RelationEntry
             // should fetch && remember parent for Constraint_was_Identity_RelationEntry

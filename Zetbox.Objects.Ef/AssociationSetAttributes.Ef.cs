@@ -539,6 +539,21 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Child_allow_Identity
+    A: ZeroOrMore SecurityTestChild as Child
+    B: One Identity as Identity
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Child_allow_Identity",
+    "Child", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.SecurityTestChildEfImpl),
+    "Identity", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Child_has_Parent
     A: ZeroOrMore TypeRef as Child
     B: ZeroOrOne TypeRef as Parent
@@ -1832,6 +1847,21 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Parent_has_Children
+    A: ZeroOrOne SecurityTestParent as Parent
+    B: ZeroOrMore SecurityTestChild as Children
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Parent_has_Children",
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.SecurityTestParentEfImpl),
+    "Children", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.SecurityTestChildEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Parent_navigates_to_Children
     A: ZeroOrOne NavigationEntry as Parent
     B: ZeroOrMore NavigationEntry as Children
@@ -3051,6 +3081,13 @@ using Zetbox.DalProvider.Ef;
 	"Projekt_Rights", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
 	typeof(Zetbox.App.Projekte.Projekt_RightsEfImpl))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_SecurityTestChildren_Rights", 
+	"SecurityTestChild", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(Zetbox.App.Test.SecurityTestChildEfImpl), 
+	"SecurityTestChild_Rights", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(Zetbox.App.Test.SecurityTestChild_RightsEfImpl))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Tasks_Rights", 
 	"Task", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
