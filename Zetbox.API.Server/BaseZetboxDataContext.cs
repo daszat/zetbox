@@ -347,7 +347,6 @@ namespace Zetbox.API.Server
             foreach (IDataObject obj in modifiedObjects)
             {
                 var state = obj.ObjectState;
-                var rights = obj.CurrentAccessRights;
 
                 // Blob check
                 if (obj is Zetbox.App.Base.Blob && state == DataObjectState.Modified)
