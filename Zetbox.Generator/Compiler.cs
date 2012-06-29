@@ -292,7 +292,7 @@ namespace Zetbox.Generator
                 // source
                 var binaryBasePath = GetBinaryBasePath(outputPath);
                 // target
-                foreach (var binaryOutputPath in _config.Server.CodeGenBinaryOutputPath)
+                foreach (var binaryOutputPath in _config.Server.CodeGenBinaryOutputPath.Select(p => Path.GetFullPath(p)))
                 {
                     Log.InfoFormat("Deploying binaries to CodeGenBinaryOutputPath [{0}]", binaryOutputPath);
                     DirectoryCopy(binaryBasePath, binaryOutputPath);
