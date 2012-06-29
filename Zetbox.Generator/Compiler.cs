@@ -290,11 +290,11 @@ namespace Zetbox.Generator
                 }
 
                 // source
-                var binaryBasePath = GetBinaryBasePath(outputPath);
+                var binaryBasePath = Path.GetFullPath(GetBinaryBasePath(outputPath));
                 // target
                 foreach (var binaryOutputPath in _config.Server.CodeGenBinaryOutputPath.Select(p => Path.GetFullPath(p)))
                 {
-                    Log.InfoFormat("Deploying binaries to CodeGenBinaryOutputPath [{0}]", binaryOutputPath);
+                    Log.InfoFormat("Deploying binaries from [{0}] to CodeGenBinaryOutputPath [{1}]", binaryBasePath, binaryOutputPath);
                     DirectoryCopy(binaryBasePath, binaryOutputPath);
 
                     // Case #1382: Recompile to regenerate PDB's
