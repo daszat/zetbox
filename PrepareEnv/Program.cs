@@ -119,7 +119,7 @@ namespace PrepareEnv
                 {
                     var buf = new byte[stream.Length];
                     stream.Read(buf, 0, (int)stream.Length);
-                    LogAction(string.Format("Loaded {0} from resource", args.Name));
+                    LogAction("Loaded {0} from resource", args.Name);
                     return Assembly.Load(buf);
                 }
             }
@@ -283,18 +283,28 @@ namespace PrepareEnv
                 // Delete Fallback assemblies
                 foreach (var fallback in Directory.GetFiles(envConfig.TestsTarget, "Zetbox.Objects*.*"))
                 {
-                    File.Delete(fallback);
+                    Delete(fallback);
                 }
 
-                foreach (var generatedSource in new[] { Path.Combine("Common", "Core.Generated"),
-                    Path.Combine("Client", "Core.Generated"),
-                    Path.Combine("Server", "EF.Generated"),
-                    Path.Combine("Server", "NH.Generated") })
+                foreach (var generatedSource in new[] { PathX.Combine(envConfig.BinarySource,"Common", "Core.Generated"),
+                    PathX.Combine(envConfig.BinarySource, "Client", "Core.Generated"),
+                    PathX.Combine(envConfig.BinarySource, "Server", "EF.Generated"),
+                    PathX.Combine(envConfig.BinarySource, "Server", "NH.Generated") })
                 {
-                    string path = PathX.Combine(envConfig.TestsTarget, "..", "Debug", generatedSource);
-                    if (Directory.Exists(path))
+                    var generatedSourcePaths = ExpandPath(generatedSource);
+
+                    foreach (var path in generatedSourcePaths)
                     {
-                        CopyTopFiles(path, envConfig.TestsTarget);
+                        LogDetail("looking at [{0}]", path);
+                        if (Directory.Exists(path))
+                        {
+                            LogDetail("found");
+                            CopyTopFiles(path, envConfig.TestsTarget);
+                        }
+                        else
+                        {
+                            LogDetail("not found");
+                        }
                     }
                 }
                 ReplaceNpgsql(envConfig.BinarySource, envConfig.TestsTarget);
@@ -315,21 +325,21 @@ namespace PrepareEnv
                     {
                         throw new InvalidOperationException(string.Format("Missing source path for Mono Npgsql: {0}/Server/Npgsql.Mono", sourcePath));
                     }
-                    File.Copy(
+                    Copy(
                         Path.Combine(npgsqlMonoSource, "Npgsql.dll"),
                         Path.Combine(targetPath, "Npgsql.dll"),
                         true);
-                    // installed by mono
-                    File.Delete(Path.Combine(targetPath, "Mono.Security.dll"));
+                    // installed in mono's GAC
+                    Delete(Path.Combine(targetPath, "Mono.Security.dll"));
 
                     if (httpServiceExists)
                     {
-                        File.Copy(
+                        Copy(
                             Path.Combine(npgsqlMonoSource, "Npgsql.dll"),
                             PathX.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
                             true);
-                        // installed by mono
-                        File.Delete(PathX.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"));
+                        // installed in mono's GAC
+                        Delete(PathX.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"));
                     }
                     break;
                 case PlatformID.Win32NT:
@@ -337,28 +347,28 @@ namespace PrepareEnv
                     {
                         throw new InvalidOperationException(string.Format("Missing source path for MS Npgsql: {0}/Server/Npgsql.Microsoft", sourcePath));
                     }
-                    File.Copy(
+                    Copy(
                         Path.Combine(npgsqlMsSource, "Npgsql.dll"),
                         Path.Combine(targetPath, "Npgsql.dll"),
                         true);
-                    File.Copy(
+                    Copy(
                         Path.Combine(npgsqlMsSource, "Mono.Security.dll"),
                         Path.Combine(targetPath, "Mono.Security.dll"),
                         true);
                     if (httpServiceExists)
                     {
-                        File.Copy(
+                        Copy(
                             Path.Combine(npgsqlMsSource, "Npgsql.dll"),
                             PathX.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
                             true);
-                        File.Copy(
+                        Copy(
                             Path.Combine(npgsqlMsSource, "Mono.Security.dll"),
                             PathX.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"),
                             true);
                     }
                     break;
                 default:
-                    LogAction(string.Format("Unknown platform '{0}'", Environment.OSVersion.Platform));
+                    LogAction("Unknown platform '{0}'", Environment.OSVersion.Platform);
                     return;
             }
         }
@@ -398,8 +408,7 @@ namespace PrepareEnv
                     foreach (var targetWwwRootPath in FindDirs(wwwRootName, envConfig.BinaryTarget))
                     {
                         var targetFile = Path.Combine(targetWwwRootPath, "Web.config");
-                        LogAction(string.Format("copying config to {0}", targetFile));
-                        File.Copy(appConfigFile, targetFile, true);
+                        Copy(appConfigFile, targetFile, true);
                     }
                 }
                 else
@@ -408,8 +417,7 @@ namespace PrepareEnv
                     foreach (var targetAssemblyPath in FindFiles(targetAssemblyFile, envConfig.BinaryTarget))
                     {
                         var targetFile = targetAssemblyPath + ".config";
-                        LogAction(string.Format("copying config to {0}", targetFile));
-                        File.Copy(appConfigFile, targetFile, true);
+                        Copy(appConfigFile, targetFile, true);
                     }
                 }
             }
@@ -483,7 +491,7 @@ namespace PrepareEnv
                 databaseNode.Attributes["Provider"].Value = envConfig.DatabaseTarget.Provider;
                 databaseNode.InnerText = envConfig.DatabaseTarget.Value;
 
-                LogAction(string.Format("set connection string in {0}", configPath));
+                LogAction("set connection string in {0}", configPath);
                 doc.Save(configPath);
             }
         }
@@ -539,14 +547,14 @@ namespace PrepareEnv
                 foreach (XmlElement endpoint in endpoints)
                 {
                     endpoint.Attributes["address"].Value = envConfig.AppServer.Uri;
-                    LogAction(string.Format("set endpoint address in {0}", configPath));
+                    LogAction("set endpoint address in {0}", configPath);
                 }
 
                 var serviceUris = doc.SelectNodes("/configuration/appSettings/add[@key='serviceUri']");
                 foreach (XmlElement serviceUri in serviceUris)
                 {
                     serviceUri.Attributes["value"].Value = envConfig.AppServer.Uri;
-                    LogAction(string.Format("set serviceUri address in {0}", configPath));
+                    LogAction("set serviceUri address in {0}", configPath);
                 }
 
                 doc.Save(configPath);
@@ -590,7 +598,10 @@ namespace PrepareEnv
         private static void EnsureDirectory(string dir)
         {
             if (!Directory.Exists(dir))
+            {
+                LogDetail("mkdir [{0}]", dir);
                 Directory.CreateDirectory(dir);
+            }
         }
 
         enum CopyMode
@@ -637,7 +648,7 @@ namespace PrepareEnv
             foreach (var file in files)
             {
                 var target = Path.Combine(targetDir, Path.GetFileName(file));
-                File.Copy(file, target, true);
+                Copy(file, target, true);
             }
         }
 
@@ -670,6 +681,18 @@ namespace PrepareEnv
                 result.AddRange(FindFiles(fileName, Path.Combine(baseDirectory, folder)));
             }
             return result;
+        }
+
+        private static void Copy(string sourceFileName, string destFileName, bool overwrite)
+        {
+            LogDetail("copying [{0}] => [{1}]", sourceFileName, destFileName);
+            File.Copy(sourceFileName, destFileName, overwrite);
+        }
+
+        private static void Delete(string path)
+        {
+            LogDetail("deleting [{0}]", path);
+            File.Delete(path);
         }
 
         private static readonly Regex EnvVar = new Regex("%([a-zA-Z0-9_]+)%");
