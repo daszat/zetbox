@@ -75,7 +75,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -155,7 +154,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -260,7 +258,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -340,7 +337,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -422,7 +418,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -491,7 +486,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -597,7 +591,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleEfImpl __value;
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>(
@@ -677,7 +670,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -770,7 +762,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassEfImpl __value;
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>(
@@ -860,7 +851,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Base.AccessRights?);
 				var __value = _Rights;
 				if(OnRights_Getter != null)
 				{

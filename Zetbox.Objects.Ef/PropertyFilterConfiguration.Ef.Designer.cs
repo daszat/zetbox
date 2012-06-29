@@ -76,7 +76,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyEfImpl __value;
                 EntityReference<Zetbox.App.Base.PropertyEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(

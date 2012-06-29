@@ -46,7 +46,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _HasPersistentOrder;
@@ -104,7 +103,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ImplementorRoleName;
@@ -162,7 +160,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsList;
@@ -220,7 +217,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ItemRoleName;
@@ -300,7 +296,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassMemoryImpl __value;
                 if (_fk_ReferencedObjectClass.HasValue)
                     __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
@@ -371,7 +366,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Verb;

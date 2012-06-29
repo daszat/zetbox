@@ -87,7 +87,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -180,7 +179,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleMemoryImpl __value;
                 if (_fk_Module.HasValue)
                     __value = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -251,7 +249,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -331,7 +328,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_Parent.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value);

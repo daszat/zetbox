@@ -75,7 +75,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -155,7 +154,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -294,7 +292,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Color;
@@ -386,7 +383,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -466,7 +462,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -548,7 +543,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -705,7 +699,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleEfImpl __value;
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>(
@@ -809,7 +802,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.NavigationEntryEfImpl __value;
                 EntityReference<Zetbox.App.GUI.NavigationEntryEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.NavigationEntryEfImpl>(
@@ -890,7 +882,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Children_pos;
@@ -943,7 +934,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Title;
@@ -1036,7 +1026,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorEfImpl __value;
                 EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>(

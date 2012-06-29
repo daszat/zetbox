@@ -46,7 +46,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CurrentNumber;
@@ -125,7 +124,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.SequenceMemoryImpl __value;
                 if (_fk_Sequence.HasValue)
                     __value = (Zetbox.App.Base.SequenceMemoryImpl)Context.Find<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);

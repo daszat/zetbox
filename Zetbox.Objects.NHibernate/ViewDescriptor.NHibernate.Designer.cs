@@ -64,7 +64,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindNHibernateImpl __value = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ControlKind);
 
                 if (OnControlKind_Getter != null)
@@ -159,7 +158,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ControlRef);
 
                 if (OnControlRef_Getter != null)
@@ -248,7 +246,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -332,7 +329,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleNHibernateImpl __value = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -452,7 +448,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.GUI.Toolkit);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Toolkit;

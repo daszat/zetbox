@@ -76,7 +76,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.CompoundObjectEfImpl __value;
                 EntityReference<Zetbox.App.Base.CompoundObjectEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.CompoundObjectEfImpl>(

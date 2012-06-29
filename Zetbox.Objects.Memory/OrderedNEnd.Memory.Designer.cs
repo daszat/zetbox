@@ -67,7 +67,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.OrderedOneEndMemoryImpl __value;
                 if (_fk_OneEnd.HasValue)
                     __value = (Zetbox.App.Test.OrderedOneEndMemoryImpl)Context.Find<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
@@ -143,7 +142,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _NEnds_pos;
@@ -185,7 +183,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _OtherInt;

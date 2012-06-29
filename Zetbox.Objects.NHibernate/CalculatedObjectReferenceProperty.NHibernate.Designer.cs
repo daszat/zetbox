@@ -94,7 +94,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassNHibernateImpl __value = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ReferencedClass);
 
                 if (OnReferencedClass_Getter != null)

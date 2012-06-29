@@ -67,7 +67,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.AssemblyMemoryImpl __value;
                 if (_fk_DisplayedTypeAssembly.HasValue)
                     __value = (Zetbox.App.Base.AssemblyMemoryImpl)Context.Find<Zetbox.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
@@ -138,7 +137,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _DisplayedTypeFullName;
@@ -196,7 +194,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _DisplayName;
@@ -300,7 +297,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualMemoryImpl __value;
                 if (_fk_VisualTree.HasValue)
                     __value = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);

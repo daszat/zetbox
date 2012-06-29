@@ -63,7 +63,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.CompoundObjectNHibernateImpl __value = (Zetbox.App.Base.CompoundObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CompoundObject);
 
                 if (OnCompoundObject_Getter != null)

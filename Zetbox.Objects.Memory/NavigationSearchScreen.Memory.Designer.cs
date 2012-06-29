@@ -46,7 +46,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _AllowAddNew;
@@ -104,7 +103,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _AllowDelete;
@@ -162,7 +160,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _AllowSelectColumns;
@@ -220,7 +217,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _AllowUserFilter;
@@ -278,7 +274,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _EnableAutoFilter;
@@ -336,7 +331,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _InitialSort;
@@ -394,7 +388,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.GUI.ListSortDirection?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _InitialSortDirection;
@@ -452,7 +445,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsEditable;
@@ -510,7 +502,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsMultiselect;
@@ -590,7 +581,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_RequestedEditorKind.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
@@ -683,7 +673,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_RequestedWorkspaceKind.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
@@ -754,7 +743,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _RespectRequiredFilter;
@@ -812,7 +800,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowFilter;
@@ -870,7 +857,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowMasterDetail;
@@ -928,7 +914,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowOpenCommand;
@@ -986,7 +971,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowRefreshCommand;
@@ -1066,7 +1050,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassMemoryImpl __value;
                 if (_fk_Type.HasValue)
                     __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
@@ -1137,7 +1120,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.GUI.InstanceListViewMethod?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ViewMethod;

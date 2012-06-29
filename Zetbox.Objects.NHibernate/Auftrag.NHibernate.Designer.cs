@@ -60,7 +60,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Auftragsname;
@@ -118,7 +117,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(double?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Auftragswert;
@@ -182,7 +180,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -269,7 +266,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -353,7 +349,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -440,7 +435,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -518,7 +512,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -602,7 +595,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.KundeNHibernateImpl __value = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Kunde);
 
                 if (OnKunde_Getter != null)
@@ -697,7 +689,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.MitarbeiterNHibernateImpl __value = (Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Mitarbeiter);
 
                 if (OnMitarbeiter_Getter != null)
@@ -792,7 +783,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.ProjektNHibernateImpl __value = (Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Projekt);
 
                 if (OnProjekt_Getter != null)

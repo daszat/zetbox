@@ -96,7 +96,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -175,7 +174,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.MethodMemoryImpl __value;
                 if (_fk_Method.HasValue)
                     __value = (Zetbox.App.Base.MethodMemoryImpl)Context.Find<Zetbox.App.Base.Method>(_fk_Method.Value);
@@ -267,7 +265,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyMemoryImpl __value;
                 if (_fk_Property.HasValue)
                     __value = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_Property.Value);

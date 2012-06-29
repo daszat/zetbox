@@ -46,7 +46,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestBool;
@@ -191,7 +190,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectMemoryImpl __value;
                 if (_fk_TestCustomObjects_Nav.HasValue)
                     __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
@@ -299,7 +297,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectMemoryImpl __value;
                 if (_fk_TestCustomObjects_One_Nav.HasValue)
                     __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
@@ -386,7 +383,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestDateTime;
@@ -444,7 +440,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Test.TestEnum);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestEnum;
@@ -502,7 +497,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestString;

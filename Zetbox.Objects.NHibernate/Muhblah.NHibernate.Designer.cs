@@ -57,7 +57,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestBool;
@@ -187,7 +186,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectNHibernateImpl __value = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_Nav);
 
                 if (OnTestCustomObjects_Nav_Getter != null)
@@ -303,7 +301,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectNHibernateImpl __value = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_One_Nav);
 
                 if (OnTestCustomObjects_One_Nav_Getter != null)
@@ -406,7 +403,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestDateTime;
@@ -464,7 +460,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Test.TestEnum);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestEnum;
@@ -522,7 +517,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestString;

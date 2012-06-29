@@ -66,7 +66,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.RelationNHibernateImpl __value = (Zetbox.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.AParent);
 
                 if (OnAParent_Getter != null)
@@ -177,7 +176,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.RelationNHibernateImpl __value = (Zetbox.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.BParent);
 
                 if (OnBParent_Getter != null)
@@ -288,7 +286,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -375,7 +372,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -459,7 +455,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -546,7 +541,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -624,7 +618,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -702,7 +695,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.HasPersistentOrder;
@@ -760,7 +752,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Base.Multiplicity);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Multiplicity;
@@ -824,7 +815,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl __value = (Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Navigator);
 
                 if (OnNavigator_Getter != null)
@@ -957,7 +947,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.RoleName;
@@ -1021,7 +1010,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassNHibernateImpl __value = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Type);
 
                 if (OnType_Getter != null)

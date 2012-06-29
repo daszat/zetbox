@@ -75,7 +75,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -155,7 +154,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -247,7 +245,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.SecurityTestParentEfImpl __value;
                 EntityReference<Zetbox.App.Test.SecurityTestParentEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.SecurityTestParentEfImpl>(
@@ -339,7 +336,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ParentName;

@@ -52,7 +52,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Adresse;
@@ -144,7 +143,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -224,7 +222,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -329,7 +326,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -409,7 +405,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -538,7 +533,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -620,7 +614,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Kundenname;
@@ -689,7 +682,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Land;
@@ -758,7 +750,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Ort;
@@ -827,7 +818,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _PLZ;

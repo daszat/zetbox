@@ -66,7 +66,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.AssemblyNHibernateImpl __value = (Zetbox.App.Base.AssemblyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Assembly);
 
                 if (OnAssembly_Getter != null)
@@ -161,7 +160,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -248,7 +246,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -332,7 +329,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -419,7 +415,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -497,7 +492,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Deleted;
@@ -555,7 +549,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -633,7 +626,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.FullName;
@@ -728,7 +720,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
                 if (OnParent_Getter != null)
@@ -817,7 +808,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ToStringCache;

@@ -67,7 +67,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -138,7 +137,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -230,7 +228,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -301,7 +298,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -394,7 +390,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.EnumerationEntryMemoryImpl __value;
                 if (_fk_DestinationValue.HasValue)
                     __value = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.Find<Zetbox.App.Base.EnumerationEntry>(_fk_DestinationValue.Value);
@@ -465,7 +460,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -558,7 +552,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.SchemaMigration.SourceColumnMemoryImpl __value;
                 if (_fk_SourceColumn.HasValue)
                     __value = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.SourceColumn>(_fk_SourceColumn.Value);
@@ -645,7 +638,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _SourceValue;

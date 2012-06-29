@@ -46,7 +46,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -125,7 +124,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.One_to_N_relations_OneMemoryImpl __value;
                 if (_fk_OneSide.HasValue)
                     __value = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)Context.Find<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);

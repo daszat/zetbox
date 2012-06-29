@@ -66,7 +66,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -153,7 +152,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -231,7 +229,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Comment;
@@ -295,7 +292,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -382,7 +378,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -460,7 +455,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Description;
@@ -524,7 +518,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassNHibernateImpl __value = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DestinationObjectClass);
 
                 if (OnDestinationObjectClass_Getter != null)
@@ -613,7 +606,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -691,7 +683,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -790,7 +781,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl __value = (Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.StagingDatabase);
 
                 if (OnStagingDatabase_Getter != null)
@@ -902,7 +892,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.SchemaMigration.MappingStatus?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Status;

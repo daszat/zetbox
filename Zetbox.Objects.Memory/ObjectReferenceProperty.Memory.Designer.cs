@@ -46,7 +46,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _EagerLoading;
@@ -104,7 +103,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsInlineEditable;
@@ -209,7 +207,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.RelationEndMemoryImpl __value;
                 if (_fk_RelationEnd.HasValue)
                     __value = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);

@@ -46,7 +46,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -125,7 +124,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.RequiredParentMemoryImpl __value;
                 if (_fk_Parent.HasValue)
                     __value = (Zetbox.App.Test.RequiredParentMemoryImpl)Context.Find<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);

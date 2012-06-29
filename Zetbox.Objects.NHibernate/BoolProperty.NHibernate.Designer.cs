@@ -63,7 +63,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.IconNHibernateImpl __value = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FalseIcon);
 
                 if (OnFalseIcon_Getter != null)
@@ -152,7 +151,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.FalseLabel;
@@ -216,7 +214,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.IconNHibernateImpl __value = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.NullIcon);
 
                 if (OnNullIcon_Getter != null)
@@ -305,7 +302,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.NullLabel;
@@ -369,7 +365,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.IconNHibernateImpl __value = (Zetbox.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TrueIcon);
 
                 if (OnTrueIcon_Getter != null)
@@ -458,7 +453,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TrueLabel;

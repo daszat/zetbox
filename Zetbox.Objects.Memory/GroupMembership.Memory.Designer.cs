@@ -68,7 +68,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.GroupMemoryImpl __value;
                 if (_fk_Group.HasValue)
                     __value = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_Group.Value);

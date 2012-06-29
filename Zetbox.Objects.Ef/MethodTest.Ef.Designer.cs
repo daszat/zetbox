@@ -132,7 +132,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MethodTestEfImpl __value;
                 EntityReference<Zetbox.App.Test.MethodTestEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.MethodTestEfImpl>(
@@ -224,7 +223,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _StringProp;

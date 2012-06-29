@@ -52,7 +52,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestBool;
@@ -251,7 +250,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectEfImpl __value;
                 EntityReference<Zetbox.App.Test.TestCustomObjectEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>(
@@ -366,7 +364,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectEfImpl __value;
                 EntityReference<Zetbox.App.Test.TestCustomObjectEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.TestCustomObjectEfImpl>(
@@ -458,7 +455,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestDateTime;
@@ -525,7 +521,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Test.TestEnum);
 				var __value = _TestEnum;
 				if(OnTestEnum_Getter != null)
 				{
@@ -605,7 +600,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestString;

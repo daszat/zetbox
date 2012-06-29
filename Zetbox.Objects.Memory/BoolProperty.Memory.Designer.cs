@@ -68,7 +68,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.IconMemoryImpl __value;
                 if (_fk_FalseIcon.HasValue)
                     __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_FalseIcon.Value);
@@ -139,7 +138,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _FalseLabel;
@@ -219,7 +217,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.IconMemoryImpl __value;
                 if (_fk_NullIcon.HasValue)
                     __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_NullIcon.Value);
@@ -290,7 +287,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _NullLabel;
@@ -370,7 +366,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.IconMemoryImpl __value;
                 if (_fk_TrueIcon.HasValue)
                     __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
@@ -441,7 +436,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TrueLabel;

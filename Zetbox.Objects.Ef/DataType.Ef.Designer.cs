@@ -75,7 +75,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -155,7 +154,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -319,7 +317,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -399,7 +396,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -505,7 +501,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.IconEfImpl __value;
                 EntityReference<Zetbox.App.GUI.IconEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>(
@@ -585,7 +580,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -654,7 +648,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -869,7 +862,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleEfImpl __value;
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>(
@@ -949,7 +941,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -1101,7 +1092,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindEfImpl __value;
                 EntityReference<Zetbox.App.GUI.ControlKindEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>(
@@ -1181,7 +1171,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowIconInLists;
@@ -1250,7 +1239,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowIdInLists;
@@ -1319,7 +1307,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowNameInLists;

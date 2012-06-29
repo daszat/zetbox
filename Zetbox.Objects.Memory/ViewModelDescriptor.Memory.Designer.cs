@@ -68,7 +68,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_DefaultDisplayKind.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultDisplayKind.Value);
@@ -161,7 +160,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_DefaultEditorKind.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultEditorKind.Value);
@@ -254,7 +252,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_DefaultGridCellDisplayKind.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellDisplayKind.Value);
@@ -347,7 +344,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_DefaultGridCellEditorKind.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellEditorKind.Value);
@@ -440,7 +436,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_DefaultGridCellPreEditorKind.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_DefaultGridCellPreEditorKind.Value);
@@ -511,7 +506,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -569,7 +563,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -662,7 +655,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleMemoryImpl __value;
                 if (_fk_Module.HasValue)
                     __value = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -780,7 +772,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefMemoryImpl __value;
                 if (_fk_ViewModelRef.HasValue)
                     __value = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value);

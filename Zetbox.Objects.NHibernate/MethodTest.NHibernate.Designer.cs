@@ -98,7 +98,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MethodTestNHibernateImpl __value = (Zetbox.App.Test.MethodTestNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
                 if (OnParent_Getter != null)
@@ -208,7 +207,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.StringProp;

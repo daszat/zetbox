@@ -60,7 +60,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.CategoryTags;
@@ -124,7 +123,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -211,7 +209,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -289,7 +286,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCodeTemplateOrDefault();
@@ -386,7 +382,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -473,7 +468,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -557,7 +551,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.DefaultPropertyValueNHibernateImpl __value = (Zetbox.App.Base.DefaultPropertyValueNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultValue);
 
                 if (OnDefaultValue_Getter != null)
@@ -662,7 +655,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Description;
@@ -720,7 +712,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -804,7 +795,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl __value = (Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FilterConfiguration);
 
                 if (OnFilterConfiguration_Getter != null)
@@ -909,7 +899,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Label;
@@ -973,7 +962,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleNHibernateImpl __value = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -1062,7 +1050,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -1126,7 +1113,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.DataTypeNHibernateImpl __value = (Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ObjectClass);
 
                 if (OnObjectClass_Getter != null)
@@ -1227,7 +1213,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Properties_pos;
@@ -1274,7 +1259,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindNHibernateImpl __value = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedKind);
 
                 if (OnRequestedKind_Getter != null)
@@ -1369,7 +1353,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ValueModelDescriptor);
 
                 if (OnValueModelDescriptor_Getter != null)

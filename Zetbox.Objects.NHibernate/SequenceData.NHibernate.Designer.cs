@@ -57,7 +57,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.CurrentNumber;
@@ -121,7 +120,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.SequenceNHibernateImpl __value = (Zetbox.App.Base.SequenceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Sequence);
 
                 if (OnSequence_Getter != null)

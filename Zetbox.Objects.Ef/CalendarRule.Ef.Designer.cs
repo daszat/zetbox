@@ -76,7 +76,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Calendar.CalendarEfImpl __value;
                 EntityReference<Zetbox.App.Calendar.CalendarEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Calendar.CalendarEfImpl>(
@@ -191,7 +190,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -271,7 +269,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -376,7 +373,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityEfImpl __value;
                 EntityReference<Zetbox.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>(
@@ -456,7 +452,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -538,7 +533,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -620,7 +614,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsWorkingDay;
@@ -726,7 +719,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleEfImpl __value;
                 EntityReference<Zetbox.App.Base.ModuleEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>(
@@ -806,7 +798,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -875,7 +866,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ValidFrom;
@@ -944,7 +934,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ValidUntil;
@@ -1013,7 +1002,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(decimal);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _WorkingHours;

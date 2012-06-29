@@ -63,7 +63,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.GroupNHibernateImpl __value = (Zetbox.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Group);
 
                 if (OnGroup_Getter != null)

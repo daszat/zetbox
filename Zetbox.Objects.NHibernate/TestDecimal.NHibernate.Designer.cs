@@ -57,7 +57,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Large;
@@ -115,7 +114,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.NoScale;
@@ -173,7 +171,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.SmallDecimal;

@@ -95,7 +95,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(double?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchAufwandGesOrDefault();
@@ -149,7 +148,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Bis;
@@ -213,7 +211,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -300,7 +297,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -384,7 +380,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -471,7 +466,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -549,7 +543,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -627,7 +620,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.KickOffAm;
@@ -685,7 +677,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.KickOffBis;
@@ -743,7 +734,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Kundenname;
@@ -832,7 +822,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -925,7 +914,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Von;

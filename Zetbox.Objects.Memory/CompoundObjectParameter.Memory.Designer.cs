@@ -68,7 +68,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.CompoundObjectMemoryImpl __value;
                 if (_fk_CompoundObject.HasValue)
                     __value = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);

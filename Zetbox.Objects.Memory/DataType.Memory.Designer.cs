@@ -67,7 +67,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -138,7 +137,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -281,7 +279,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -352,7 +349,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -445,7 +441,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.IconMemoryImpl __value;
                 if (_fk_DefaultIcon.HasValue)
                     __value = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_DefaultIcon.Value);
@@ -516,7 +511,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -574,7 +568,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -743,7 +736,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleMemoryImpl __value;
                 if (_fk_Module.HasValue)
                     __value = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -814,7 +806,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -945,7 +936,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_RequestedKind.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
@@ -1016,7 +1006,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowIconInLists;
@@ -1074,7 +1063,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowIdInLists;
@@ -1132,7 +1120,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowNameInLists;

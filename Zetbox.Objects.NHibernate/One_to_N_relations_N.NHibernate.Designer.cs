@@ -57,7 +57,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -121,7 +120,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl __value = (Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.OneSide);
 
                 if (OnOneSide_Getter != null)

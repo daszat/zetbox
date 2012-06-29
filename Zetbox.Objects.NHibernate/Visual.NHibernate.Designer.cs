@@ -119,7 +119,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Description;
@@ -183,7 +182,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.MethodNHibernateImpl __value = (Zetbox.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Method);
 
                 if (OnMethod_Getter != null)
@@ -276,7 +274,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Property);
 
                 if (OnProperty_Getter != null)

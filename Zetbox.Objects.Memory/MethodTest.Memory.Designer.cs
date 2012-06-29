@@ -108,7 +108,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MethodTestMemoryImpl __value;
                 if (_fk_Parent.HasValue)
                     __value = (Zetbox.App.Test.MethodTestMemoryImpl)Context.Find<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
@@ -195,7 +194,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _StringProp;

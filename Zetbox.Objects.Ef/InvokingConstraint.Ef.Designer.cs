@@ -76,7 +76,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ConstraintInvocationEfImpl __value;
                 EntityReference<Zetbox.App.Base.ConstraintInvocationEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>(
@@ -180,7 +179,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ConstraintInvocationEfImpl __value;
                 EntityReference<Zetbox.App.Base.ConstraintInvocationEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>(

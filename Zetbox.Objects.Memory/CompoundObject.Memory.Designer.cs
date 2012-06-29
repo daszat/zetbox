@@ -68,7 +68,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorMemoryImpl __value;
                 if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
                     __value = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);

@@ -63,7 +63,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.OrderedOneEndNHibernateImpl __value = (Zetbox.App.Test.OrderedOneEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.OneEnd);
 
                 if (OnOneEnd_Getter != null)
@@ -162,7 +161,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.NEnds_pos;
@@ -203,7 +201,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.OtherInt;

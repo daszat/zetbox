@@ -57,7 +57,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Frage;
@@ -121,7 +120,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.FragebogenNHibernateImpl __value = (Zetbox.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Fragebogen);
 
                 if (OnFragebogen_Getter != null)
@@ -220,7 +218,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.gute_Antworten_pos;
@@ -261,7 +258,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.FragenNummer;
@@ -319,7 +315,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.GegebeneAntwort;

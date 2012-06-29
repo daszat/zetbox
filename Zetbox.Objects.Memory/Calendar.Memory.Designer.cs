@@ -68,7 +68,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Calendar.CalendarMemoryImpl __value;
                 if (_fk_BaseCalendar.HasValue)
                     __value = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.Find<Zetbox.App.Calendar.Calendar>(_fk_BaseCalendar.Value);
@@ -217,7 +216,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -288,7 +286,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -421,7 +418,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -492,7 +488,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -563,7 +558,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -656,7 +650,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleMemoryImpl __value;
                 if (_fk_Module.HasValue)
                     __value = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
@@ -727,7 +720,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;

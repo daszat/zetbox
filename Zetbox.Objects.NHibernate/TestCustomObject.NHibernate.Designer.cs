@@ -75,7 +75,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Birthday;
@@ -174,7 +173,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MuhblahNHibernateImpl __value = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MubBlah_Nav);
 
                 if (OnMubBlah_Nav_Getter != null)
@@ -321,7 +319,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MuhblahNHibernateImpl __value = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MuhBlah_One_Nav);
 
                 if (OnMuhBlah_One_Nav_Getter != null)
@@ -424,7 +421,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.PersonName;
@@ -490,7 +486,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get 
 			{ 
-                if (!CurrentAccessRights.HasReadRights()) return null;
 				return this.Proxy.PhoneNumberMobile; 
 			}
             set
@@ -547,7 +542,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get 
 			{ 
-                if (!CurrentAccessRights.HasReadRights()) return null;
 				return this.Proxy.PhoneNumberOffice; 
 			}
             set

@@ -63,7 +63,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Type);
 
                 if (OnType_Getter != null)

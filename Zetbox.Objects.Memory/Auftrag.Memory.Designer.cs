@@ -46,7 +46,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Auftragsname;
@@ -104,7 +103,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(double?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Auftragswert;
@@ -183,7 +181,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -254,7 +251,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -346,7 +342,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -417,7 +412,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -488,7 +482,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -581,7 +574,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.KundeMemoryImpl __value;
                 if (_fk_Kunde.HasValue)
                     __value = (Zetbox.App.Projekte.KundeMemoryImpl)Context.Find<Zetbox.App.Projekte.Kunde>(_fk_Kunde.Value);
@@ -674,7 +666,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.MitarbeiterMemoryImpl __value;
                 if (_fk_Mitarbeiter.HasValue)
                     __value = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)Context.Find<Zetbox.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
@@ -767,7 +758,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.ProjektMemoryImpl __value;
                 if (_fk_Projekt.HasValue)
                     __value = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);

@@ -50,7 +50,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Base.DateTimeStyles?);
 				var __value = _DateTimeStyle;
 				if(OnDateTimeStyle_Getter != null)
 				{

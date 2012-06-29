@@ -46,7 +46,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Large;
@@ -104,7 +103,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _NoScale;
@@ -162,7 +160,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _SmallDecimal;

@@ -63,7 +63,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.EnumerationEntryNHibernateImpl __value = (Zetbox.App.Base.EnumerationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.EnumValue);
 
                 if (OnEnumValue_Getter != null)

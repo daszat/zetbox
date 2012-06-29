@@ -68,7 +68,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ConstraintInvocationMemoryImpl __value;
                 if (_fk_GetErrorTextInvocation.HasValue)
                     __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)Context.Find<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
@@ -161,7 +160,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ConstraintInvocationMemoryImpl __value;
                 if (_fk_IsValidInvocation.HasValue)
                     __value = (Zetbox.App.Base.ConstraintInvocationMemoryImpl)Context.Find<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);

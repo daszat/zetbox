@@ -67,7 +67,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Calendar.CalendarNHibernateImpl __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
 
                 if (OnCalendar_Getter != null)
@@ -185,7 +184,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -272,7 +270,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -356,7 +353,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -443,7 +439,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -521,7 +516,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -599,7 +593,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchIsWorkingDayOrDefault();
@@ -683,7 +676,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleNHibernateImpl __value = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -772,7 +764,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -830,7 +821,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ValidFrom;
@@ -888,7 +878,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ValidUntil;
@@ -946,7 +935,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(decimal);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.WorkingHours;

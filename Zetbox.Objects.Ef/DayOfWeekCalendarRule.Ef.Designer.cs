@@ -50,7 +50,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Base.DayOfWeek);
 				var __value = _DayOfWeek;
 				if(OnDayOfWeek_Getter != null)
 				{

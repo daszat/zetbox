@@ -66,7 +66,6 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Calendar.CalendarNHibernateImpl __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.BaseCalendar);
 
                 if (OnBaseCalendar_Getter != null)
@@ -219,7 +218,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -306,7 +304,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -425,7 +422,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -512,7 +508,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -590,7 +585,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -674,7 +668,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ModuleNHibernateImpl __value = (Zetbox.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -763,7 +756,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnC
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;

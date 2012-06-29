@@ -63,7 +63,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultPropertyViewModelDescriptor);
 
                 if (OnDefaultPropertyViewModelDescriptor_Getter != null)

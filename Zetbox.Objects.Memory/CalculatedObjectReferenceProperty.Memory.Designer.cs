@@ -95,7 +95,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassMemoryImpl __value;
                 if (_fk_ReferencedClass.HasValue)
                     __value = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);

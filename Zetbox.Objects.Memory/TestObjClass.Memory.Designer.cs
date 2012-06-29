@@ -46,7 +46,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _MyIntProperty;
@@ -125,7 +124,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.KundeMemoryImpl __value;
                 if (_fk_ObjectProp.HasValue)
                     __value = (Zetbox.App.Projekte.KundeMemoryImpl)Context.Find<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
@@ -196,7 +194,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _StringProp;
@@ -254,7 +251,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Test.TestEnum);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestEnumProp;

@@ -64,7 +64,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -158,7 +157,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl)Context.Find<Zetbox.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value);
@@ -229,7 +227,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
@@ -456,7 +453,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -550,7 +546,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.DataTypeMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_A.Value);
@@ -621,7 +616,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.InterfaceMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.InterfaceMemoryImpl)Context.Find<Zetbox.App.Base.Interface>(_fk_B.Value);
@@ -848,7 +842,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -942,7 +935,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 at.dasz.DocumentManagement.DocumentMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (at.dasz.DocumentManagement.DocumentMemoryImpl)Context.Find<at.dasz.DocumentManagement.Document>(_fk_A.Value);
@@ -985,7 +977,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _A_pos;
@@ -1044,7 +1035,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.BlobMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.BlobMemoryImpl)Context.Find<Zetbox.App.Base.Blob>(_fk_B.Value);
@@ -1087,7 +1077,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _B_pos;
@@ -1385,7 +1374,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_A.Value);
@@ -1455,7 +1443,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.GroupMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_B.Value);
@@ -1648,7 +1635,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -1742,7 +1728,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IndexConstraintMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Base.IndexConstraintMemoryImpl)Context.Find<Zetbox.App.Base.IndexConstraint>(_fk_A.Value);
@@ -1813,7 +1798,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
@@ -2099,7 +2083,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MuhblahMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_A.Value);
@@ -2169,7 +2152,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Test.TestCustomObjectMemoryImpl)Context.Find<Zetbox.App.Test.TestCustomObject>(_fk_B.Value);
@@ -2421,7 +2403,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.N_to_M_relations_AMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value);
@@ -2491,7 +2472,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.N_to_M_relations_BMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value);
@@ -2684,7 +2664,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -2778,7 +2757,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.NavigationEntryMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.GUI.NavigationEntryMemoryImpl)Context.Find<Zetbox.App.GUI.NavigationEntry>(_fk_A.Value);
@@ -2849,7 +2827,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.GroupMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.GroupMemoryImpl)Context.Find<Zetbox.App.Base.Group>(_fk_B.Value);
@@ -3076,7 +3053,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -3170,7 +3146,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectReferencePropertyMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Base.ObjectReferencePropertyMemoryImpl)Context.Find<Zetbox.App.Base.ObjectReferenceProperty>(_fk_A.Value);
@@ -3241,7 +3216,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.MethodMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.MethodMemoryImpl)Context.Find<Zetbox.App.Base.Method>(_fk_B.Value);
@@ -3468,7 +3442,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -3562,7 +3535,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.ProjektMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_A.Value);
@@ -3605,7 +3577,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _A_pos;
@@ -3664,7 +3635,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.MitarbeiterMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Projekte.MitarbeiterMemoryImpl)Context.Find<Zetbox.App.Projekte.Mitarbeiter>(_fk_B.Value);
@@ -3707,7 +3677,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _B_pos;
@@ -3946,7 +3915,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -4040,7 +4008,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.RoleMembershipMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Base.RoleMembershipMemoryImpl)Context.Find<Zetbox.App.Base.RoleMembership>(_fk_A.Value);
@@ -4083,7 +4050,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _A_pos;
@@ -4142,7 +4108,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.RelationMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.RelationMemoryImpl)Context.Find<Zetbox.App.Base.Relation>(_fk_B.Value);
@@ -4185,7 +4150,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _B_pos;
@@ -4424,7 +4388,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -4518,7 +4481,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.SchemaMigration.SourceColumnMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.SourceColumn>(_fk_A.Value);
@@ -4561,7 +4523,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _A_pos;
@@ -4620,7 +4581,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
@@ -4663,7 +4623,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _B_pos;
@@ -4961,7 +4920,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.TemplateMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.GUI.TemplateMemoryImpl)Context.Find<Zetbox.App.GUI.Template>(_fk_A.Value);
@@ -5031,7 +4989,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_B.Value);
@@ -5283,7 +5240,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestStudentMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Test.TestStudentMemoryImpl)Context.Find<Zetbox.App.Test.TestStudent>(_fk_A.Value);
@@ -5353,7 +5309,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.FragebogenMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Test.FragebogenMemoryImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_B.Value);
@@ -5546,7 +5501,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -5640,7 +5594,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_A.Value);
@@ -5683,7 +5636,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _A_pos;
@@ -5742,7 +5694,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_B.Value);
@@ -5785,7 +5736,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _B_pos;
@@ -6024,7 +5974,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -6118,7 +6067,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewDescriptorMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.GUI.ViewDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewDescriptor>(_fk_A.Value);
@@ -6189,7 +6137,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_B.Value);
@@ -6416,7 +6363,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -6510,7 +6456,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value);
@@ -6581,7 +6526,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_B.Value);
@@ -6867,7 +6811,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_A.Value);
@@ -6937,7 +6880,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_B.Value);
@@ -7189,7 +7131,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualMemoryImpl __value;
                 if (_fk_A.HasValue)
                     __value = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_A.Value);
@@ -7259,7 +7200,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualMemoryImpl __value;
                 if (_fk_B.HasValue)
                     __value = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_B.Value);
@@ -7520,7 +7460,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Value;
@@ -7790,7 +7729,6 @@ namespace Zetbox.App.Test
         {
             get 
 			{ 
-                if (!CurrentAccessRights.HasReadRights()) return null;
 				return _Value; 
 			}
             set

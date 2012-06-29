@@ -76,7 +76,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorEfImpl __value;
                 EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>(

@@ -56,7 +56,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Birthday;
@@ -205,7 +204,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MuhblahEfImpl __value;
                 EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>(
@@ -370,7 +368,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MuhblahEfImpl __value;
                 EntityReference<Zetbox.App.Test.MuhblahEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.MuhblahEfImpl>(
@@ -462,7 +459,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _PersonName;
@@ -549,7 +545,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get 
 			{ 
-                if (!CurrentAccessRights.HasReadRights()) return null;
 				return _PhoneNumberMobile; 
 			}
             set
@@ -617,7 +612,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         {
             get 
 			{ 
-                if (!CurrentAccessRights.HasReadRights()) return null;
 				return _PhoneNumberOffice; 
 			}
             set

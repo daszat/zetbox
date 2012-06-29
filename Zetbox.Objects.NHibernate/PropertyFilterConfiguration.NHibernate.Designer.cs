@@ -63,7 +63,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Property);
 
                 if (OnProperty_Getter != null)

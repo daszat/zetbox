@@ -109,7 +109,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _SomeInt;

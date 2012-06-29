@@ -57,7 +57,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.MyIntProperty;
@@ -121,7 +120,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.KundeNHibernateImpl __value = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ObjectProp);
 
                 if (OnObjectProp_Getter != null)
@@ -208,7 +206,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.StringProp;
@@ -266,7 +263,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Zetbox.App.Test.TestEnum);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestEnumProp;

@@ -98,7 +98,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassNHibernateImpl __value = (Zetbox.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.BaseObjectClass);
 
                 if (OnBaseObjectClass_Getter != null)
@@ -210,7 +209,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCodeTemplateOrDefault();
@@ -270,7 +268,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultViewModelDescriptor);
 
                 if (OnDefaultViewModelDescriptor_Getter != null)
@@ -394,7 +391,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.IsAbstract;
@@ -452,7 +448,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.IsFrozenObject;
@@ -510,7 +505,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.IsSimpleObject;
@@ -603,7 +597,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TableName;

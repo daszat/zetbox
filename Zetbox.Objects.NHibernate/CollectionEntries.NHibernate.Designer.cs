@@ -46,7 +46,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -124,7 +123,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl __value = (Zetbox.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -196,7 +194,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -458,7 +455,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -536,7 +532,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.DataTypeNHibernateImpl __value = (Zetbox.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -608,7 +603,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.InterfaceNHibernateImpl __value = (Zetbox.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -870,7 +864,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -948,7 +941,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 at.dasz.DocumentManagement.DocumentNHibernateImpl __value = (at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -1008,7 +1000,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -1050,7 +1041,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.BlobNHibernateImpl __value = (Zetbox.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -1110,7 +1100,6 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -1425,7 +1414,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IdentityNHibernateImpl __value = (Zetbox.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -1495,7 +1483,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.GroupNHibernateImpl __value = (Zetbox.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -1719,7 +1706,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -1797,7 +1783,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.IndexConstraintNHibernateImpl __value = (Zetbox.App.Base.IndexConstraintNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -1869,7 +1854,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -2174,7 +2158,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.MuhblahNHibernateImpl __value = (Zetbox.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -2244,7 +2227,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectNHibernateImpl __value = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -2511,7 +2493,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.N_to_M_relations_ANHibernateImpl __value = (Zetbox.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -2581,7 +2562,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.N_to_M_relations_BNHibernateImpl __value = (Zetbox.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -2805,7 +2785,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -2883,7 +2862,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.NavigationEntryNHibernateImpl __value = (Zetbox.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -2955,7 +2933,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.GroupNHibernateImpl __value = (Zetbox.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -3217,7 +3194,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -3295,7 +3271,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl __value = (Zetbox.App.Base.ObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -3367,7 +3342,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.MethodNHibernateImpl __value = (Zetbox.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -3629,7 +3603,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -3707,7 +3680,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.ProjektNHibernateImpl __value = (Zetbox.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -3767,7 +3739,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -3809,7 +3780,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.MitarbeiterNHibernateImpl __value = (Zetbox.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -3869,7 +3839,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -4141,7 +4110,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -4219,7 +4187,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.RoleMembershipNHibernateImpl __value = (Zetbox.App.Base.RoleMembershipNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -4279,7 +4246,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -4321,7 +4287,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.RelationNHibernateImpl __value = (Zetbox.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -4381,7 +4346,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -4653,7 +4617,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -4731,7 +4694,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl __value = (Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -4791,7 +4753,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -4833,7 +4794,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -4893,7 +4853,6 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -5208,7 +5167,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.TemplateNHibernateImpl __value = (Zetbox.App.GUI.TemplateNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -5278,7 +5236,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -5545,7 +5502,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestStudentNHibernateImpl __value = (Zetbox.App.Test.TestStudentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -5615,7 +5571,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.FragebogenNHibernateImpl __value = (Zetbox.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -5839,7 +5794,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -5917,7 +5871,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -5977,7 +5930,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -6019,7 +5971,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -6079,7 +6030,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -6351,7 +6301,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -6429,7 +6378,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewDescriptorNHibernateImpl __value = (Zetbox.App.GUI.ViewDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -6501,7 +6449,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -6763,7 +6710,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -6841,7 +6787,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -6913,7 +6858,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ControlKindNHibernateImpl __value = (Zetbox.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -7218,7 +7162,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -7288,7 +7231,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -7555,7 +7497,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -7625,7 +7566,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -7862,7 +7802,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Projekte.KundeNHibernateImpl __value = (Zetbox.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
 
@@ -7955,7 +7894,6 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Value;
@@ -8183,7 +8121,6 @@ namespace Zetbox.App.Test
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Test.TestCustomObjectNHibernateImpl __value = (Zetbox.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
 
@@ -8284,7 +8221,6 @@ namespace Zetbox.App.Test
         {
             get 
 			{ 
-                if (!CurrentAccessRights.HasReadRights()) return null;
 				return this.Proxy.Value; 
 			}
             set

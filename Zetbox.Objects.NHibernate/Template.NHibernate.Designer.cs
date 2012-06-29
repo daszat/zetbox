@@ -63,7 +63,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.AssemblyNHibernateImpl __value = (Zetbox.App.Base.AssemblyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DisplayedTypeAssembly);
 
                 if (OnDisplayedTypeAssembly_Getter != null)
@@ -150,7 +149,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DisplayedTypeFullName;
@@ -208,7 +206,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DisplayName;
@@ -303,7 +300,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.VisualNHibernateImpl __value = (Zetbox.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.VisualTree);
 
                 if (OnVisualTree_Getter != null)

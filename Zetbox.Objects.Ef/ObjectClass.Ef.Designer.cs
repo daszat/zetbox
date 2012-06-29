@@ -133,7 +133,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ObjectClassEfImpl __value;
                 EntityReference<Zetbox.App.Base.ObjectClassEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ObjectClassEfImpl>(
@@ -225,7 +224,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CodeTemplate;
@@ -306,7 +304,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.GUI.ViewModelDescriptorEfImpl __value;
                 EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>(
@@ -443,7 +440,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsAbstract;
@@ -512,7 +508,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsFrozenObject;
@@ -581,7 +576,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsSimpleObject;
@@ -707,7 +701,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TableName;

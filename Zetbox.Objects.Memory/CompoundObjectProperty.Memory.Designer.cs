@@ -68,7 +68,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.CompoundObjectMemoryImpl __value;
                 if (_fk_CompoundObjectDefinition.HasValue)
                     __value = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
@@ -139,7 +138,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _HasPersistentOrder;
@@ -197,7 +195,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsList;

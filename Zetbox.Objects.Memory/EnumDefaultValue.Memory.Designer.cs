@@ -68,7 +68,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.EnumerationEntryMemoryImpl __value;
                 if (_fk_EnumValue.HasValue)
                     __value = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.Find<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);

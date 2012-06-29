@@ -68,7 +68,6 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.PropertyMemoryImpl __value;
                 if (_fk_Property.HasValue)
                     __value = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_Property.Value);

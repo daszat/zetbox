@@ -63,7 +63,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ConstraintInvocationNHibernateImpl __value = (Zetbox.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.GetErrorTextInvocation);
 
                 if (OnGetErrorTextInvocation_Getter != null)
@@ -158,7 +157,6 @@ namespace Zetbox.App.Base
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 Zetbox.App.Base.ConstraintInvocationNHibernateImpl __value = (Zetbox.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.IsValidInvocation);
 
                 if (OnIsValidInvocation_Getter != null)
