@@ -79,13 +79,10 @@ namespace Zetbox.IntegrationTests.Security
             ws.ShowModel(child1Vmdl);
             ws.ShowModel(child2Vmdl);
 
-            var idVmdl = child2Vmdl.PropertyModelsByName["Identity"];
-
             parent.Name = "MyParentChanged";
             ws.UpdateErrors();
 
             Assert.That(string.IsNullOrEmpty(child2Vmdl.Error), Is.True, child2Vmdl.Error);
-            Assert.That(string.IsNullOrEmpty(idVmdl.Error), Is.True, idVmdl.Error);
             Assert.That(ws.CanSave(), Is.True, string.Join("\n", ws.GetErrors().Select(e => e.Error).ToArray()));
             Assert.That(ws.GetErrors(), Is.Empty);
         }
