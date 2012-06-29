@@ -62,20 +62,19 @@ this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " "
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get \r\n");
 this.WriteObjects("			{ \r\n");
-this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
 this.WriteObjects("				return ",  backingStoreName , "; \r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 55 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 54 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 if (!isNullable) { 
-#line 56 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 55 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 58 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 57 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 } 
-#line 59 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 58 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var __oldValue = ",  backingStoreName , ";\r\n");
@@ -90,18 +89,18 @@ this.WriteObjects("					}\r\n");
 this.WriteObjects("					if (__newValue == null)\r\n");
 this.WriteObjects("					{\r\n");
 this.WriteObjects("						",  backingStoreName , " = null;\r\n");
-#line 73 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 72 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 ApplyStoreNull(); 
-#line 74 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 73 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("					}\r\n");
 this.WriteObjects("                    else\r\n");
 this.WriteObjects("                    {\r\n");
 this.WriteObjects("					    __newValue = (",  coImplementationType , ")__newValue.Clone();\r\n");
 this.WriteObjects("					    ",  backingStoreName , " = __newValue;\r\n");
 this.WriteObjects("					    ",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\r\n");
-#line 80 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 79 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 ApplyStoreValue(); 
-#line 81 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 80 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                    }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("					NotifyPropertyChanged(\"",  propName , "\", __oldValue, __newValue);\r\n");
@@ -112,10 +111,10 @@ this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 92 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 91 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 94 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 93 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }

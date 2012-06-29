@@ -65,20 +65,19 @@ this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " "
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get \r\n");
 this.WriteObjects("			{ \r\n");
-this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
 this.WriteObjects("				return ",  backingStoreName , "; \r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 59 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 58 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 if (!isNullable) { 
-#line 60 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 59 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 62 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 61 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 } 
-#line 63 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 62 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var __oldValue = ",  backingStoreName , ";\r\n");
@@ -110,10 +109,10 @@ this.WriteObjects("					SetInitializedProperty(\"",  propName , "\");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 95 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 94 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 97 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 96 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }

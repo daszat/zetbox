@@ -73,7 +73,6 @@
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 <%= referencedImplementation %> __value;
                 EntityReference<<%= referencedImplementation %>> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= referencedImplementation %>>(

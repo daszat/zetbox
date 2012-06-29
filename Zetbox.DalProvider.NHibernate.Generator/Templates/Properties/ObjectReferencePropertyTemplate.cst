@@ -57,7 +57,6 @@
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return null;
                 <%= referencedImplementation %> __value = (<%= referencedImplementation %>)OurContext.AttachAndWrap(this.Proxy.<%= name %>);
 
 <% if (callGetterSetterEvents) { %>

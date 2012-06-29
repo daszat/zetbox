@@ -46,7 +46,6 @@
         {
             get 
 			{ 
-                if (!CurrentAccessRights.HasReadRights()) return null;
 				return <%= backingStoreName %>; 
 			}
             set

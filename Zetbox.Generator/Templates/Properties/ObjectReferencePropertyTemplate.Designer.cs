@@ -102,28 +102,27 @@ this.WriteObjects("        ",  GetModifiers() , " ",  referencedImplementation ,
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
 this.WriteObjects("                ",  referencedImplementation , " __value;\r\n");
 this.WriteObjects("                if (",  fkBackingName , ".HasValue)\r\n");
 this.WriteObjects("                    __value = (",  referencedImplementation , ")Context.Find<",  referencedInterface , ">(",  fkBackingName , ".Value);\r\n");
 this.WriteObjects("                else\r\n");
 this.WriteObjects("                    __value = null;\r\n");
 this.WriteObjects("\r\n");
-#line 80 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 79 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (callGetterSetterEvents)
                 {
 
-#line 83 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 82 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (",  eventName , "_Getter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedInterface , ">(__value);\r\n");
 this.WriteObjects("                    ",  eventName , "_Getter(this, e);\r\n");
 this.WriteObjects("                    __value = (",  referencedImplementation , ")e.Result;\r\n");
 this.WriteObjects("                }\r\n");
-#line 90 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 89 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 92 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 91 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("                return __value;\r\n");
 this.WriteObjects("            }\r\n");
@@ -146,31 +145,31 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                // Changing Event fires before anything is touched\r\n");
 this.WriteObjects("                NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("\r\n");
-#line 115 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 114 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (callGetterSetterEvents)
                 {
 
-#line 118 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 117 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (",  eventName , "_PreSetter != null && IsAttached)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPreSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  eventName , "_PreSetter(this, e);\r\n");
 this.WriteObjects("                    __newValue = (",  referencedImplementation , ")e.Result;\r\n");
 this.WriteObjects("                }\r\n");
-#line 125 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 124 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 127 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 126 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("                // next, set the local reference\r\n");
 this.WriteObjects("                ",  fkBackingName , " = __newValue == null ? (int?)null : __newValue.ID;\r\n");
 this.WriteObjects("\r\n");
-#line 132 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 131 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (!String.IsNullOrEmpty(inverseNavigatorName))
     {
 
 
-#line 136 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 135 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                // now fixup redundant, inverse references\r\n");
 this.WriteObjects("                // The inverse navigator will also fire events when changed, so should\r\n");
 this.WriteObjects("                // only be touched after setting the local value above.\r\n");
@@ -178,74 +177,74 @@ this.WriteObjects("                // TODO: for complete correctness, the \"othe
 this.WriteObjects("                //       before the local value is changed\r\n");
 this.WriteObjects("                if (__oldValue != null)\r\n");
 this.WriteObjects("                {\r\n");
-#line 144 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 143 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (inverseNavigatorIsList)
         {
             // TODO: check whether __oldValue is loaded before potentially triggering a DB Call
 
-#line 148 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 147 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // remove from old list\r\n");
 this.WriteObjects("                    (__oldValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
-#line 151 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 150 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
         else
         {
 
-#line 155 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 154 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // unset old reference\r\n");
 this.WriteObjects("                    __oldValue.",  inverseNavigatorName , " = null;\r\n");
-#line 158 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 157 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 160 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 159 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                if (__newValue != null)\r\n");
 this.WriteObjects("                {\r\n");
-#line 165 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 164 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (inverseNavigatorIsList)
         {
 
-#line 168 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 167 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // add to new list\r\n");
 this.WriteObjects("                    (__newValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
-#line 171 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 170 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
         else
         {
 
-#line 175 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 174 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // set new reference\r\n");
 this.WriteObjects("                    __newValue.",  inverseNavigatorName , " = this;\r\n");
-#line 178 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 177 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 180 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 179 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                }\r\n");
-#line 182 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 181 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 184 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 183 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                // everything is done. fire the Changed event\r\n");
 this.WriteObjects("                NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("\r\n");
-#line 188 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 187 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (callGetterSetterEvents)
                 {
 
-#line 191 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 190 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (",  eventName , "_PostSetter != null && IsAttached)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  eventName , "_PostSetter(this, e);\r\n");
 this.WriteObjects("                }\r\n");
-#line 197 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 196 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 199 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 198 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 202 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 201 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
@@ -255,7 +254,7 @@ AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
             "int?", positionPropertyName, moduleNamespace, false);
     }
 
-#line 211 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 210 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , " for ",  name , "\r\n");
 
         }

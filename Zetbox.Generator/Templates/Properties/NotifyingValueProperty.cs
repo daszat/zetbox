@@ -38,7 +38,6 @@ namespace Zetbox.Generator.Templates.Properties
 
         protected virtual void ApplySecurityCheckTemplate()
         {
-            this.WriteLine("                if (!CurrentAccessRights.HasReadRights()) return default({0});", type);
         }
 
         /// <summary>

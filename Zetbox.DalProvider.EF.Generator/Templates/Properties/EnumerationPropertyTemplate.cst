@@ -48,7 +48,6 @@
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(<%= enumType %>);
 <%
 				if(callGetterSetterEvents)
 				{
