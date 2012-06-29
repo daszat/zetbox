@@ -34729,7 +34729,7 @@ public static void UpdateToStringCache(TypeRef obj)
     <ZetboxBase:CreatedOn>2010-09-27T16:43:30Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>0</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>Arebis.CodeGeneration, Version=1.2.0.1, Culture=neutral, PublicKeyToken=1012dfebee6c8abd</ZetboxBase:Name>
+    <ZetboxBase:Name>Arebis.CodeGeneration, Version=1.2.1.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="ef1ab5c1-d6f7-4406-9359-d97bbd092a47">
     <ZetboxBase:ChangedOn>2011-08-05T14:31:08.955048Z</ZetboxBase:ChangedOn>
