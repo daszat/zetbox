@@ -100,7 +100,7 @@ namespace PrepareEnv.SchemaProvider
             var pgSQLBinPath = Environment.GetEnvironmentVariable("PGSQLBinPath");
             if (string.IsNullOrEmpty(pgSQLBinPath))
             {
-                throw new InvalidOperationException("Environment Variable PGSQLBinPath is not set, unable to reset test database");
+                throw new InvalidOperationException("Environment variable PGSQLBinPath is not set, unable to locate database tools");
             }
             return pgSQLBinPath.Trim('\"');
         }
