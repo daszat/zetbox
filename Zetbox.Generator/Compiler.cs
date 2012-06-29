@@ -337,6 +337,7 @@ namespace Zetbox.Generator
             foreach (FileInfo file in files)
             {
                 string temppath = Path.Combine(destDirName, file.Name);
+                Log.InfoFormat("copying [{0}] => [{1}]", file, temppath);
                 file.CopyTo(temppath, true);
             }
 
