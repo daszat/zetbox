@@ -165,9 +165,18 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <ItemGroup>
+    <Configs Include="$(SolutionDir)\Configs\**\*.*">
+	  <Visible>false</Visible>
+	</Configs>
+  </ItemGroup>
+  <Target Name="AfterBuild">
+    <!-- deploy configs manually -->
+    <Copy SourceFiles="@(Configs)"
+          DestinationFiles="@(Configs->'$(SolutionDir)\bin\Debug\Tests\Configs\%(RecursiveDir)%(Filename)%(Extension)')"
+    />
+  </Target>
   <Import Project="..\..\packages\MSBuildVersioning.1.0.34.0\lib\net35\MSBuildVersioning.targets" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />

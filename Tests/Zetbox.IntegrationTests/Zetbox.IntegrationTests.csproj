@@ -69,12 +69,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.ServiceModel">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -146,10 +141,6 @@
       <Project>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</Project>
       <Name>Zetbox.App.Projekte.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.App.Projekte.Server\Zetbox.App.Projekte.Server.csproj">
-      <Project>{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}</Project>
-      <Name>Zetbox.App.Projekte.Server</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.Client.WPF\Zetbox.Client.WPF.csproj">
       <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
       <Name>Zetbox.Client.WPF</Name>
@@ -166,22 +157,10 @@
       <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
       <Name>Zetbox.DalProvider.ClientObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.DalProvider.NHibernate\Zetbox.DalProvider.NHibernate.csproj">
-      <Project>{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}</Project>
-      <Name>Zetbox.DalProvider.NHibernate</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>
       <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.Server.Service\Zetbox.Server.Service.csproj">
-      <Project>{4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545}</Project>
-      <Name>Zetbox.Server.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Zetbox.Server\Zetbox.Server.csproj">
-      <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
-      <Name>Zetbox.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>

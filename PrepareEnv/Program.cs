@@ -317,7 +317,7 @@ namespace PrepareEnv
                     }
                     break;
                 default:
-                    LogAction(string.Format("Unkown platform '{0}'", Environment.OSVersion.Platform));
+                    LogAction(string.Format("Unknown platform '{0}'", Environment.OSVersion.Platform));
                     return;
             }
         }

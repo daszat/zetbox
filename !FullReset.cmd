@@ -7,11 +7,19 @@ echo ***************************************************************************
 
 IF NOT EXIST Configs\Local XCOPY /S/E Configs\Examples Configs\Local\
 
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m CCNet.msbuild /p:SourceLocation=P:\Zetbox
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m CCNet.msbuild
+IF ERRORLEVEL 1 GOTO FAIL
+
+bin\Debug\Zetbox.Server.Service.exe -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem regenerate modules to prove roundtrippability
 call "!Publish.cmd"
+IF ERRORLEVEL 1 GOTO FAIL
+
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln
+IF ERRORLEVEL 1 GOTO FAIL
+
 GOTO EOF
 
 :FAIL
@@ -19,9 +27,8 @@ echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo                               Aborting FullResetDev
+pause
 rem return error without closing parent shell
 echo A | choice /c:A /n
-pause
 
 :EOF
-
