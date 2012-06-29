@@ -28,46 +28,8 @@ namespace Zetbox.IntegrationTests.Security
     using Zetbox.API.Common;
     using Zetbox.Client.Presentables;
 
-    public abstract class when_updating_calcprop : AbstractUITest
+    public abstract class when_updating_calcprop : AbstractSecurityTest
     {
-        protected Identity identity1;
-        protected Identity identity2;
-        protected IZetboxContext ctx;
-
-        protected SecurityTestParent parent;
-        protected SecurityTestChild child1;
-        protected SecurityTestChild child2;
-
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            ctx = GetContext();
-            var idResolver = scope.Resolve<IIdentityResolver>();
-
-            var currentIdentity = idResolver.GetCurrent();
-
-            Assert.That(currentIdentity, Is.Not.Null, "No current identity found - try syncidentities or setup the current identity correctly");
-
-            identity1 = ctx.Find<Identity>(currentIdentity.ID);
-            identity2 = ctx.GetQuery<Identity>().Where(i => i.ID != identity1.ID).First();
-
-            parent = ctx.Create<SecurityTestParent>();
-            parent.Name = "MyParent";
-
-            child1 = ctx.Create<SecurityTestChild>();
-            child1.Name = "Child1";
-            child1.Identity = identity1;
-            child1.Parent = parent;
-
-            child2 = ctx.Create<SecurityTestChild>();
-            child2.Name = "Child2";
-            child2.Identity = identity2;
-            child2.Parent = parent;
-
-            ctx.SubmitChanges();
-        }
-
         [Test]
         public virtual void viemodel_should_report_no_error()
         {
@@ -123,14 +85,7 @@ namespace Zetbox.IntegrationTests.Security
             public override void SetUp()
             {
                 base.SetUp();
-
-                ctx = GetContext();
-                identity1 = ctx.Find<Identity>(identity1.ID);
-                identity2 = ctx.Find<Identity>(identity2.ID);
-
-                parent = ctx.Find<SecurityTestParent>(parent.ID);
-                child1 = ctx.Find<SecurityTestChild>(child1.ID);
-                child2 = ctx.Find<SecurityTestChild>(child2.ID);
+                base.Reload();
             }
 
             [Test]

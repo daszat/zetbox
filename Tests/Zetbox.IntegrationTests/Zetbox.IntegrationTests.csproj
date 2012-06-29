@@ -110,6 +110,8 @@
     <Compile Include="Tests\RelationTests.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
+    <Compile Include="Tests\Security\AbstractSecurityTest.cs" />
+    <Compile Include="Tests\Security\when_cheating.cs" />
     <Compile Include="Tests\Security\when_updating_calcprop.cs" />
     <Compile Include="Tests\Simple.cs" />
     <Compile Include="Tests\TypeRefs\should_convert_types_correctly.cs" />
