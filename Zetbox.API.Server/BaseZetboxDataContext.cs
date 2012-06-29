@@ -355,20 +355,6 @@ namespace Zetbox.API.Server
                     throw new InvalidOperationException("Modifying a Zetbox.App.Base.Blob is not allowed. Upload a new Blob instead.");
                 }
 
-                // last rights check
-                if (state == DataObjectState.Modified && !rights.HasWriteRights())
-                {
-                    throw new System.Security.SecurityException(string.Format("The current identity has no rights to modify an Object of type '{0}'", this.GetInterfaceType(obj).Type.FullName));
-                }
-                else if (state == DataObjectState.Deleted && !rights.HasDeleteRights())
-                {
-                    throw new System.Security.SecurityException(string.Format("The current identity has no rights to delete an Object of type '{0}'", this.GetInterfaceType(obj).Type.FullName));
-                }
-                else if (state == DataObjectState.New)
-                {
-                    CheckCreateRights(obj);
-                }
-
                 // Update IChangedBy 
                 if (obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {

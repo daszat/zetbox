@@ -169,6 +169,16 @@ namespace Zetbox.API.Server
             return baseResult;
         }
 
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+
+            if (!CurrentAccessRights.HasWriteRights())
+            {
+                throw new System.Security.SecurityException(string.Format("The current identity has no rights to modify an Object of type '{0}'", obj.GetType().FullName));
+            }
+        }
+
         #region Auditing
 
         protected virtual void SaveAudits()
