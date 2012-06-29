@@ -52,9 +52,7 @@ namespace Zetbox.IntegrationTests.Security
             Reload();
         }
 
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException), UserMessage = "Inconsistent security/rights state deteced", MatchType = MessageMatch.StartsWith)]
-        public virtual void should_not_send_when_no_rights()
+        protected void base_should_not_send_when_no_rights()
         {
             child2.SetPrivateFieldValue<DataObjectState>("_ObjectState", DataObjectState.Modified);
             child2.SetPrivateFieldValue<string>("_Name", "cheating");
@@ -64,6 +62,15 @@ namespace Zetbox.IntegrationTests.Security
 
         public class in_same_context : when_cheating
         {
+            /// <summary>
+            /// Rights are cached on the client. Changes on the server will not reflect after submit.
+            /// </summary>
+            [Test]
+            [ExpectedException(typeof(FaultException), UserMessage = "The current identity has no rights to modify an Object", MatchType = MessageMatch.StartsWith)]
+            public void should_not_send_when_no_rights()
+            {
+                base.base_should_not_send_when_no_rights();
+            }
         }
 
         public class when_reloading : when_cheating
@@ -72,6 +79,13 @@ namespace Zetbox.IntegrationTests.Security
             {
                 base.SetUp();
                 base.Reload();
+            }
+
+            [Test]
+            [ExpectedException(typeof(System.Security.SecurityException), UserMessage = "Inconsistent security/rights state detected", MatchType = MessageMatch.StartsWith)]
+            public void should_not_send_when_no_rights()
+            {
+                base.base_should_not_send_when_no_rights();
             }
         }
     }
