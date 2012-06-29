@@ -248,9 +248,12 @@ namespace PrepareEnv
                     File.Delete(fallback);
                 }
 
-                foreach (var generatedSource in new[] { "Common\\Core.Generated", "Client\\Core.Generated", "Server\\EF.Generated", "Server\\NH.Generated" })
+                foreach (var generatedSource in new[] { Path.Combine("Common", "Core.Generated"),
+                    Path.Combine("Client", "Core.Generated"),
+                    Path.Combine("Server", "EF.Generated"),
+                    Path.Combine("Server", "NH.Generated") })
                 {
-                    string path = PathX.Combine(envConfig.TestsTarget, "..\\Debug", generatedSource);
+                    string path = PathX.Combine(envConfig.TestsTarget, "..", "Debug", generatedSource);
                     if (Directory.Exists(path))
                     {
                         CopyTopFiles(path, envConfig.TestsTarget);
