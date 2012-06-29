@@ -552,12 +552,14 @@ namespace Zetbox.DalProvider.Client
                 foreach (var obj in ctx._objects.OfType<PersistenceObjectBaseImpl>()
                     .Where(o => o.ObjectState == DataObjectState.Modified))
                 {
+                    if (!obj.CurrentAccessRights.HasWriteRights()) throw new System.Security.SecurityException(string.Format("Inconsistent security/rights state detected while changing {0}({1})", ctx.GetInterfaceType(obj).Type.FullName, obj.ID));
                     objectsToSubmit.Add(obj);
                 }
                 // Deleted Objects
                 foreach (var obj in ctx._objects.OfType<PersistenceObjectBaseImpl>()
                     .Where(o => o.ObjectState == DataObjectState.Deleted))
                 {
+                    if (!obj.CurrentAccessRights.HasDeleteRights()) throw new System.Security.SecurityException(string.Format("Inconsistent security/rights state detected while deleting {0}({1})", ctx.GetInterfaceType(obj).Type.FullName, obj.ID));
                     // Submit only persisted objects
                     if (Helper.IsPersistedObject(obj))
                     {
