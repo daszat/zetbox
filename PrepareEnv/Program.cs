@@ -26,19 +26,52 @@ namespace PrepareEnv
 {
     class Program
     {
+        static bool debug = false;
+
         static int Main(string[] args)
         {
             try
             {
-                if (args.Length != 1)
+                string envConfigDir;
+
+                if (args.Length == 2)
                 {
-                    LogTitle("Usge: PrepareEnv Path\\To\\Config\\Folder");
+                    if (args[0] == "--debug")
+                    {
+                        debug = true;
+                        // shift
+                        args = new[] { args[1] };
+                    }
+                    else
+                    {
+                        LogTitle("ERROR: unknown option [{0}]", args[0]);
+                        PrintUsage();
+                        return 1;
+                    }
+                }
+                // no elsif: because of shift
+                if (args.Length == 1)
+                {
+                    if (!Directory.Exists(args[0]))
+                    {
+                        LogTitle("ERROR: Cannot find directory [{0}]", args[0]);
+                        PrintUsage();
+                        return 1;
+                    }
+                    else
+                    {
+                        envConfigDir = args[0];
+                    }
+                }
+                else
+                {
+                    PrintUsage();
                     return 1;
                 }
 
                 AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
-                var envConfigDir = args[0];
+
                 var envConfig = (EnvConfig)new XmlSerializer(typeof(EnvConfig)).Deserialize(File.OpenRead(Path.Combine(envConfigDir, "env.xml")));
 
                 PrepareEnvConfig(envConfig, envConfigDir);
@@ -61,6 +94,11 @@ namespace PrepareEnv
                 LogTitle(ex.ToString());
                 return 1;
             }
+        }
+
+        private static void PrintUsage()
+        {
+            LogTitle("Usage: PrepareEnv [--debug] Path\\To\\Config\\Folder");
         }
 
         /// <summary>
@@ -673,15 +711,24 @@ namespace PrepareEnv
             return input;
         }
 
-        private static void LogTitle(string msg)
+        private static void LogTitle(string msg, params object[] args)
         {
-            Console.WriteLine(msg);
+            Console.WriteLine(msg, args);
         }
 
-        private static void LogAction(string msg)
+        private static void LogAction(string msg, params object[] args)
         {
-            Console.Write("    ");
-            Console.WriteLine(msg);
+            Console.Write("        ");
+            Console.WriteLine(msg, args);
+        }
+
+        private static void LogDetail(string msg, params object[] args)
+        {
+            if (debug)
+            {
+                Console.Write("        ");
+                Console.WriteLine(msg, args);
+            }
         }
 
         #endregion
