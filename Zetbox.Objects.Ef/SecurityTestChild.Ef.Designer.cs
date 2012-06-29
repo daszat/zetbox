@@ -216,9 +216,9 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
     /*
-    Relation: FK_Parent_has_Children
+    Relation: FK_Parent_has_Children2
     A: ZeroOrOne SecurityTestParent as Parent
-    B: ZeroOrMore SecurityTestChild as Children
+    B: ZeroOrMore SecurityTestChild as Children2
     Preferred Storage: MergeIntoB
     */
         // object reference property
@@ -242,7 +242,7 @@ namespace Zetbox.App.Test
 
 
         // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Parent_has_Children", "Parent")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Parent_has_Children2", "Parent")]
         public Zetbox.App.Test.SecurityTestParentEfImpl ParentImpl
         {
             get
@@ -251,7 +251,7 @@ namespace Zetbox.App.Test
                 Zetbox.App.Test.SecurityTestParentEfImpl __value;
                 EntityReference<Zetbox.App.Test.SecurityTestParentEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.SecurityTestParentEfImpl>(
-                        "Model.FK_Parent_has_Children",
+                        "Model.FK_Parent_has_Children2",
                         "Parent");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -275,7 +275,7 @@ namespace Zetbox.App.Test
 
                 EntityReference<Zetbox.App.Test.SecurityTestParentEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Test.SecurityTestParentEfImpl>(
-                        "Model.FK_Parent_has_Children",
+                        "Model.FK_Parent_has_Children2",
                         "Parent");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -674,7 +674,7 @@ namespace Zetbox.App.Test
             }
             binStream.Write(this._Name);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.SecurityTestParentEfImpl>("Model.FK_Parent_has_Children", "Parent").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Zetbox.App.Test.SecurityTestParentEfImpl>("Model.FK_Parent_has_Children2", "Parent").EntityKey;
                 binStream.Write(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null);
             }
             binStream.Write(this._ParentName);

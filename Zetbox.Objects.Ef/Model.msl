@@ -3917,18 +3917,18 @@
       <Condition ColumnName="fk_Parent" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Parent_has_Children
+    Relation: FK_Parent_has_Children2
     A: ZeroOrOne SecurityTestParent as Parent
-    B: ZeroOrMore SecurityTestChild as Children
+    B: ZeroOrMore SecurityTestChild as Children2
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Parent_has_Children"
-                           TypeName="Model.FK_Parent_has_Children"
+    <AssociationSetMapping Name="FK_Parent_has_Children2"
+                           TypeName="Model.FK_Parent_has_Children2"
                            StoreEntitySet="SecurityTestChild" >
       <EndProperty Name="Parent">
         <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
       </EndProperty>
-      <EndProperty Name="Children">
+      <EndProperty Name="Children2">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Parent" IsNull="false"/>

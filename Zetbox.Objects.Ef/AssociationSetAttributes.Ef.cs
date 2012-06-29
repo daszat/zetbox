@@ -1847,17 +1847,17 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_Parent_has_Children
+    Relation: FK_Parent_has_Children2
     A: ZeroOrOne SecurityTestParent as Parent
-    B: ZeroOrMore SecurityTestChild as Children
+    B: ZeroOrMore SecurityTestChild as Children2
     Preferred Storage: MergeIntoB
 	*/
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_Parent_has_Children",
+    "Model", "FK_Parent_has_Children2",
     "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.SecurityTestParentEfImpl),
-    "Children", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.SecurityTestChildEfImpl)
+    "Children2", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.SecurityTestChildEfImpl)
     )]
 
 

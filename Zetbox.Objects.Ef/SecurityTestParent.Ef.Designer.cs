@@ -44,9 +44,9 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
     /*
-    Relation: FK_Parent_has_Children
+    Relation: FK_Parent_has_Children2
     A: ZeroOrOne SecurityTestParent as Parent
-    B: ZeroOrMore SecurityTestChild as Children
+    B: ZeroOrMore SecurityTestChild as Children2
     Preferred Storage: MergeIntoB
     */
         // object list property
@@ -72,15 +72,15 @@ namespace Zetbox.App.Test
             }
         }
     
-        [EdmRelationshipNavigationProperty("Model", "FK_Parent_has_Children", "Children")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Parent_has_Children2", "Children2")]
         public EntityCollection<Zetbox.App.Test.SecurityTestChildEfImpl> ChildrenImpl
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Zetbox.App.Test.SecurityTestChildEfImpl>(
-                        "Model.FK_Parent_has_Children",
-                        "Children");
+                        "Model.FK_Parent_has_Children2",
+                        "Children2");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {

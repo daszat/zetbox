@@ -1261,9 +1261,9 @@
       <End Role="Parent" EntitySet="MethodTest" />
       <End Role="Children" EntitySet="MethodTest" />
     </AssociationSet>
-    <AssociationSet Name="FK_Parent_has_Children" Association="Model.Store.FK_Parent_has_Children" >
+    <AssociationSet Name="FK_Parent_has_Children2" Association="Model.Store.FK_Parent_has_Children2" >
       <End Role="Parent" EntitySet="SecurityTestParent" />
-      <End Role="Children" EntitySet="SecurityTestChild" />
+      <End Role="Children2" EntitySet="SecurityTestChild" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_navigates_to_Children" Association="Model.Store.FK_Parent_navigates_to_Children" >
       <End Role="Parent" EntitySet="NavigationEntry" />
@@ -5448,14 +5448,14 @@
   </Association>
 
 
-  <Association Name="FK_Parent_has_Children">
+  <Association Name="FK_Parent_has_Children2">
     <End Role="Parent" Type="Model.Store.SecurityTestParent" Multiplicity="0..1" />
-    <End Role="Children" Type="Model.Store.SecurityTestChild" Multiplicity="*" />
+    <End Role="Children2" Type="Model.Store.SecurityTestChild" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Parent">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Children">
+      <Dependent Role="Children2">
         <PropertyRef Name="fk_Parent" />
       </Dependent>
     </ReferentialConstraint>

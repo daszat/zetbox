@@ -732,9 +732,9 @@
       <End Role="Parent" EntitySet="MethodTest" />
       <End Role="Children" EntitySet="MethodTest" />
     </AssociationSet>
-    <AssociationSet Name="FK_Parent_has_Children" Association="Model.FK_Parent_has_Children" >
+    <AssociationSet Name="FK_Parent_has_Children2" Association="Model.FK_Parent_has_Children2" >
       <End Role="Parent" EntitySet="SecurityTestParent" />
-      <End Role="Children" EntitySet="SecurityTestChild" />
+      <End Role="Children2" EntitySet="SecurityTestChild" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_navigates_to_Children" Association="Model.FK_Parent_navigates_to_Children" >
       <End Role="Parent" EntitySet="NavigationEntry" />
@@ -2150,8 +2150,8 @@
                         ToRole="Identity" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="ParentImpl"
-                        Relationship="Model.FK_Parent_has_Children"
-                        FromRole="Children"
+                        Relationship="Model.FK_Parent_has_Children2"
+                        FromRole="Children2"
                         ToRole="Parent" />
     <Property Name="ParentName" Type="String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_SecurityTestChildren_Rights" FromRole="SecurityTestChild" ToRole="SecurityTestChild_Rights" />
@@ -2183,9 +2183,9 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ChildrenImpl"
-                        Relationship="Model.FK_Parent_has_Children"
+                        Relationship="Model.FK_Parent_has_Children2"
                         FromRole="Parent"
-                        ToRole="Children" />
+                        ToRole="Children2" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
   </EntityType>
   <EntityType Name="Sequence">
@@ -4747,11 +4747,11 @@
          Type="Model.MethodTest" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Parent_has_Children" >
+  <Association Name="FK_Parent_has_Children2" >
     <End Role="Parent"
          Type="Model.SecurityTestParent" 
          Multiplicity="0..1" />
-    <End Role="Children"
+    <End Role="Children2"
          Type="Model.SecurityTestChild" 
          Multiplicity="*" />
   </Association>

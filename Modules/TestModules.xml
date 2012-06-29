@@ -7242,7 +7242,7 @@ public static void isValid_Testbogen(TestStudent obj, PropertyIsValidEventArgs e
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
     <ZetboxBase:Navigator>9bdf1c7f-16d1-4e92-9024-7447d3b2c9ec</ZetboxBase:Navigator>
-    <ZetboxBase:RoleName>Children</ZetboxBase:RoleName>
+    <ZetboxBase:RoleName>Children2</ZetboxBase:RoleName>
     <ZetboxBase:Type>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="8ee41988-2526-4fc7-b0f5-ec07bd49bb15">

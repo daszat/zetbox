@@ -608,7 +608,7 @@ namespace Zetbox.App.Test
                 ((NHibernatePersistenceObject)Identity).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Identity);
             }
-            // FK_Parent_has_Children
+            // FK_Parent_has_Children2
             if (Parent != null) {
                 ((NHibernatePersistenceObject)Parent).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Parent);

@@ -308,7 +308,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
             base.NotifyDeleting();
             if (OnNotifyDeleting_SecurityTestParent != null) OnNotifyDeleting_SecurityTestParent(this);
 
-            // FK_Parent_has_Children ZeroOrMore
+            // FK_Parent_has_Children2 ZeroOrMore
             foreach(NHibernatePersistenceObject x in Children) {
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
