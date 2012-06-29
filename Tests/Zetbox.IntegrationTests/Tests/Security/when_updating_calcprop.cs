@@ -28,15 +28,15 @@ namespace Zetbox.IntegrationTests.Security
     using Zetbox.API.Common;
     using Zetbox.Client.Presentables;
 
-    public class when_updating_calcprop : AbstractUITest
+    public abstract class when_updating_calcprop : AbstractUITest
     {
-        Identity identity1;
-        Identity identity2;
-        IZetboxContext ctx;
+        protected Identity identity1;
+        protected Identity identity2;
+        protected IZetboxContext ctx;
 
-        SecurityTestParent parent;
-        SecurityTestChild child1;
-        SecurityTestChild child2;
+        protected SecurityTestParent parent;
+        protected SecurityTestChild child1;
+        protected SecurityTestChild child2;
 
         public override void SetUp()
         {
@@ -45,8 +45,11 @@ namespace Zetbox.IntegrationTests.Security
             ctx = GetContext();
             var idResolver = scope.Resolve<IIdentityResolver>();
 
+            var currentIdentity = idResolver.GetCurrent();
 
-            identity1 = ctx.Find<Identity>(idResolver.GetCurrent().ID);
+            Assert.That(currentIdentity, Is.Not.Null, "No current identity found - try syncidentities or setup the current identity correctly");
+
+            identity1 = ctx.Find<Identity>(currentIdentity.ID);
             identity2 = ctx.GetQuery<Identity>().Where(i => i.ID != identity1.ID).First();
 
             parent = ctx.Create<SecurityTestParent>();
@@ -66,16 +69,116 @@ namespace Zetbox.IntegrationTests.Security
         }
 
         [Test]
-        public void parent_should_change_name()
+        public virtual void viemodel_should_report_no_error()
         {
-            parent.Name = "MyParentChanged";
-            Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
-            Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
-            //Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.None));
+            var ws = mdlFactory.CreateViewModel<Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
+            var parentVmdl = mdlFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(ctx, null, parent);
+            var child1Vmdl = mdlFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(ctx, null, child1);
+            var child2Vmdl = mdlFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(ctx, null, child2);
+            ws.ShowModel(parentVmdl);
+            ws.ShowModel(child1Vmdl);
+            ws.ShowModel(child2Vmdl);
 
-            var vmdl = mdlFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(ctx, null, child2);
-            Assert.That(vmdl.Error, Is.Empty);
-            ctx.SubmitChanges();
+            var idVmdl = child2Vmdl.PropertyModelsByName["Identity"];
+
+            parent.Name = "MyParentChanged";
+            ws.UpdateErrors();
+
+            Assert.That(string.IsNullOrEmpty(child2Vmdl.Error), Is.True, child2Vmdl.Error);
+            Assert.That(string.IsNullOrEmpty(idVmdl.Error), Is.True, idVmdl.Error);
+            Assert.That(ws.CanSave(), Is.True, string.Join("\n", ws.GetErrors().Select(e => e.Error).ToArray()));
+            Assert.That(ws.GetErrors(), Is.Empty);
+        }
+
+        public class in_same_context : when_updating_calcprop
+        {
+            [Test]
+            public void should_have_full_rights()
+            {
+                Assert.That(parent.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
+                Assert.That(child1.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
+                Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
+            }
+
+            [Test]
+            public void parent_should_change_name()
+            {
+                parent.Name = "MyParentChanged";
+                Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
+                Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
+                Assert.That(child2.ParentName, Is.EqualTo("MyParentChanged"));
+            }
+
+            [Test]
+            public void parent_should_change_name_and_remember()
+            {
+                parent.Name = "MyParentChanged";
+                ctx.SubmitChanges();
+
+                Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
+                Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
+                Assert.That(child2.ParentName, Is.EqualTo("MyParentChanged"));
+            }
+        }
+
+        public class when_reloading : when_updating_calcprop
+        {
+            public override void SetUp()
+            {
+                base.SetUp();
+
+                ctx = GetContext();
+                identity1 = ctx.Find<Identity>(identity1.ID);
+                identity2 = ctx.Find<Identity>(identity2.ID);
+
+                parent = ctx.Find<SecurityTestParent>(parent.ID);
+                child1 = ctx.Find<SecurityTestChild>(child1.ID);
+                child2 = ctx.Find<SecurityTestChild>(child2.ID);
+            }
+
+            [Test]
+            public void should_have_correct_rights()
+            {
+                Assert.That(parent.CurrentAccessRights, Is.EqualTo(API.AccessRights.Change | API.AccessRights.Delete));
+                Assert.That(child1.CurrentAccessRights, Is.EqualTo(API.AccessRights.Full));
+                Assert.That(child2.CurrentAccessRights, Is.EqualTo(API.AccessRights.None));
+            }
+
+            [Test]
+            public void should_have_correct_rights_navigator()
+            {
+                bool foundFull = false;
+                bool foundNone = false;
+
+                foreach (var child in parent.Children)
+                {
+                    if (child.CurrentAccessRights == API.AccessRights.Full)
+                        foundFull = true;
+                    if (child.CurrentAccessRights == API.AccessRights.None)
+                        foundNone = true;
+                }
+
+                Assert.That(foundFull, Is.True, "Did not found a child object with full rights");
+                Assert.That(foundNone, Is.True, "Did not found a child object with none rights");
+            }
+
+            [Test]
+            public void parent_should_change_name()
+            {
+                parent.Name = "MyParentChanged";
+                Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
+                Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
+            }
+
+            [Test]
+            public void parent_should_change_name_and_remember()
+            {
+                parent.Name = "MyParentChanged";
+                ctx.SubmitChanges();
+
+                Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
+                Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
+            }
         }
     }
 }
