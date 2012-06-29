@@ -114,7 +114,7 @@ namespace Zetbox.IntegrationTests.Security
 
                 Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
                 Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
-                Assert.That(child2.ParentName, Is.EqualTo("MyParentChanged"));
+                Assert.That(child2.ParentName, Is.Null);
             }
         }
 
@@ -165,6 +165,7 @@ namespace Zetbox.IntegrationTests.Security
                 parent.Name = "MyParentChanged";
                 Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
                 Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
+                Assert.That(child2.ParentName, Is.Null);
             }
 
             [Test]
@@ -175,6 +176,7 @@ namespace Zetbox.IntegrationTests.Security
 
                 Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
                 Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
+                Assert.That(child2.ParentName, Is.Null);
             }
         }
     }
