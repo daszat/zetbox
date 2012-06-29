@@ -42,11 +42,12 @@ namespace Zetbox.Generator.Templates.ObjectClasses
                 .ToList();
         }
 
-        protected virtual List<ObjectReferenceProperty> GetNonModifyingProperties()
+        protected virtual List<Property> GetNonModifyingProperties()
         {
             return dt.Properties.OfType<ObjectReferenceProperty>()
                 .Where(p => !p.RelationEnd.Parent.HasStorage(p.RelationEnd.GetRole()))
                 .OrderBy(p => p.Name)
+                .Cast<Property>()
                 .ToList();
         }
 

@@ -100,11 +100,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\OnPropertyChange.cs" />
     <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
     <Compile Include="Templates\Serialization\CollectionSerialization.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>Zetbox.API.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
       <Name>Zetbox.API.Server</Name>
