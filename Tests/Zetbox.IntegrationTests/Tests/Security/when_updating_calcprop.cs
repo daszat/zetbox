@@ -76,7 +76,7 @@ namespace Zetbox.IntegrationTests.Security
 
                 Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
                 Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
-                Assert.That(child2.ParentName, Is.Null);
+                Assert.That(string.IsNullOrEmpty(child2.ParentName), Is.True, child2.ParentName);
             }
         }
 
