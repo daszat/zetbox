@@ -46,7 +46,7 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
                 obj.PersonName = "TestPerson " + rnd.Next();
                 obj.Birthday = DateTime.Now;
 
-                Assert.That(obj.PhoneNumberMobile, Is.Null);
+                Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
 
                 obj.PhoneNumberMobile = ctx.CreateCompoundObject<TestPhoneCompoundObject>();
@@ -82,7 +82,7 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
                 obj.PersonName = "TestPerson " + rnd.Next();
                 obj.Birthday = DateTime.Now;
 
-                Assert.That(obj.PhoneNumberMobile, Is.Null);
+                Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
 
                 obj.PhoneNumberOffice.AreaCode = "2";
@@ -97,7 +97,7 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
             {
                 var obj = ctx.Find<Zetbox.App.Test.TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
-                Assert.That(obj.PhoneNumberMobile, Is.Null);
+                Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(testNumber));
             }

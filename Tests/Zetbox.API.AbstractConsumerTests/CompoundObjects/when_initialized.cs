@@ -50,9 +50,11 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
         }
 
         [Test]
-        public void should_be_null()
+        public void nullable_should_have_null_values()
         {
-            Assert.That(newObj.PhoneNumberMobile, Is.Null);
+            Assert.That(newObj.PhoneNumberMobile, Is.Not.Null);
+            Assert.That(newObj.PhoneNumberMobile.AreaCode, Is.Null);
+            Assert.That(newObj.PhoneNumberMobile.Number, Is.Null);
         }
 
         [Test]
@@ -60,7 +62,7 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
         {
             Assert.That((newObj.PhoneNumberOffice as BaseCompoundObject).ParentObject, Is.SameAs(newObj));
             Assert.That((obj.PhoneNumberOffice as BaseCompoundObject).ParentObject, Is.SameAs(obj));
-            // nullable, ignore: Assert.That((obj.PhoneNumberMobile as BaseCompoundObject).ParentObject, Is.SameAs(obj));
+            Assert.That((obj.PhoneNumberMobile as BaseCompoundObject).ParentObject, Is.SameAs(obj));
         }
 
         [Test]
@@ -68,7 +70,7 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
         {
             Assert.That((newObj.PhoneNumberOffice as BaseCompoundObject).ParentProperty, Is.EqualTo("PhoneNumberOffice"));
             Assert.That((obj.PhoneNumberOffice as BaseCompoundObject).ParentProperty, Is.EqualTo("PhoneNumberOffice"));
-            // nullable, ignore: Assert.That((obj.PhoneNumberMobile as BaseCompoundObject).ParentProperty, Is.EqualTo("PhoneNumberMobile"));
+            Assert.That((obj.PhoneNumberMobile as BaseCompoundObject).ParentProperty, Is.EqualTo("PhoneNumberMobile"));
         }
     }
 }
