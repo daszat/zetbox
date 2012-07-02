@@ -609,17 +609,15 @@ namespace Zetbox.DalProvider.Client
                         underlyingObject.ApplyChangesFrom(objFromServer);
                     }
 
-                    // reset ObjectState to new truth
-                    switch (objFromServer.ObjectState)
+                    if (objFromServer.ObjectState == DataObjectState.Deleted)
                     {
-                        case DataObjectState.Unmodified:
-                            obj.SetUnmodified();
-                            break;
-                        case DataObjectState.Deleted:
-                            obj.SetDeleted();
-                            break;
-                        default:
-                            break;
+                        // deleted on server
+                        obj.SetDeleted();
+                    }
+                    else
+                    {
+                        // reset ObjectState to new truth
+                        obj.SetUnmodified();
                     }
 
                     changedObjects.Add(underlyingObject);
