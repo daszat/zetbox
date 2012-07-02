@@ -242,7 +242,7 @@ namespace Zetbox.IntegrationTests
             {
                 var test = (from m in ctx.GetQuery<Module>()
                             where
-                                m.Name.StartsWith("K")
+                                m.Name.StartsWith("Z")
                                 && m.Namespace.Length > 1
                                 && m.Name == "ZetboxBase"
                                 && m.Name.EndsWith("e")
@@ -257,6 +257,7 @@ namespace Zetbox.IntegrationTests
 
         [Test]
         [ExpectedException(typeof(System.ServiceModel.FaultException))]
+        [Ignore("Illegal Expression checking disabled for now")]
         public void GetListWithParameterIllegalAggreggation()
         {
             using (IZetboxContext ctx = GetContext())
