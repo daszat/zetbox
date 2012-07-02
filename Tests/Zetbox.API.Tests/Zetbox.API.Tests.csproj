@@ -159,9 +159,9 @@
     <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestConfig.xml">
+    <EmbeddedResource Include="TestConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

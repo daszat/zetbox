@@ -33,6 +33,28 @@ namespace Zetbox.API.Tests
     {
         readonly static string ConfigFile = "Zetbox.API.Tests.xml";
 
+        protected string defaultDest = Path.Combine("Configs", "DefaultConfig.xml");
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            using (var testFile = new StreamWriter(File.OpenWrite("TestConfig.xml"), Encoding.UTF8))
+            using (var defaultFile = new StreamWriter(File.OpenWrite(defaultDest), Encoding.UTF8))
+            using (var stream = new StreamReader(typeof(ConfigurationTests).Assembly.GetManifestResourceStream("Zetbox.API.TestConfig.xml"), Encoding.UTF8))
+            {
+                var content = stream.ReadToEnd();
+                testFile.Write(content);
+                defaultFile.Write(content);
+            }
+        }
+
+        public override void TearDown()
+        {
+            base.TearDown();
+            File.Delete("TestConfig.xml");
+            File.Delete(defaultDest);
+        }
+
         private void CheckConfig(ZetboxConfig cfg)
         {
             Assert.That(cfg.ConfigName, Is.Not.Empty, "ConfigName");
@@ -52,11 +74,6 @@ namespace Zetbox.API.Tests
         [Test]
         public void DefaultLoading()
         {
-            var defaultDest = Path.Combine("Configs", "DefaultConfig.xml");
-            if (!File.Exists(defaultDest))
-            {
-                File.Copy("TestConfig.xml", defaultDest);
-            }
             var config = ZetboxConfig.FromFile(String.Empty, "DefaultConfig.xml");
 
             Assert.That(config, Is.Not.Null, "Configuration");
@@ -83,7 +100,7 @@ namespace Zetbox.API.Tests
 
             using (FileStream s = File.OpenRead(filename))
             {
-                
+
                 ZetboxConfig cfg = ZetboxConfig.FromStream(s);
                 Assert.That(cfg, Is.Not.Null);
                 Assert.That(cfg.ConfigFilePath, Is.Null);
