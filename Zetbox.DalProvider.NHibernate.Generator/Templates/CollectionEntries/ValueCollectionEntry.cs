@@ -86,8 +86,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                         "Value",
                         "this.Proxy.Value",
                         prop.GetElementTypeString(),
-                        prop.GetElementTypeString() + ImplementationSuffix,
-                        prop.IsNullable())
+                        prop.GetElementTypeString() + ImplementationSuffix)
                 }
                 : new ObjectClasses.Constructors.CompoundInitialisationDescriptor[0];
             ObjectClasses.Constructors.Call(Host, ctx,
@@ -95,8 +94,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 new string[0],
                 GetCeInterface(),
                 GetCeClassName(),
-                null,
-                prop is CompoundObjectProperty);
+                null);
         }
 
         protected override void ApplyIdPropertyTemplate()

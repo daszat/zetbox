@@ -140,23 +140,6 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
         }
 
         [Test]
-        public void should_save_nullable()
-        {
-            Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
-            obj.PhoneNumberMobile = null;
-            Assert.That(obj.PhoneNumberMobile, Is.Null);
-            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
-            Assert.That(obj.PhoneNumberMobile, Is.Null);
-
-            using (var testCtx = GetContext())
-            {
-                var testObj = testCtx.GetQuery<TestCustomObject>().First(i => i.ID == obj.ID);
-                Assert.That(testObj.ID == obj.ID);
-                Assert.That(testObj.PhoneNumberMobile, Is.Null);
-            }
-        }
-
-        [Test]
         public void should_add_to_list()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));

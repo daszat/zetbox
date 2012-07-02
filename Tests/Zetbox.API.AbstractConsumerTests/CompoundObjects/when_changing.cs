@@ -24,19 +24,9 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
     public abstract class when_changing : CompoundObjectFixture
     {
         [Test]
-        public void should_be_set_null()
-        {
-            obj = ctx.GetQuery<TestCustomObject>().ToList().Where(o => o.PhoneNumberMobile != null).First();
-            Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
-            obj.PhoneNumberMobile = null;
-            Assert.That(obj.PhoneNumberMobile, Is.Null);
-        }
-
-        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void should_not_be_set_null()
         {
-            // NOT NULLable
             Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
             obj.PhoneNumberOffice = null;
         }

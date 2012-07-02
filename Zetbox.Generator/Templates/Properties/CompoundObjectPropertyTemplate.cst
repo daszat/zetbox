@@ -33,7 +33,6 @@
 <%@ Parameter Name="backingStoreName" Type="string" %>
 <%@ Parameter Name="coType" Type="string" %>
 <%@ Parameter Name="coImplementationType" Type="string" %>
-<%@ Parameter Name="isNullable" Type="bool" %>
         // BEGIN <%= this.GetType() %>
         // implement the user-visible interface
 <% DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); %>
@@ -51,10 +50,8 @@
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-<% if (!isNullable) { %>
                 if (value == null)
                     throw new ArgumentNullException("value");
-<% } %>
                 if (!object.Equals(<%= backingStoreName %>, value))
                 {
 					var __oldValue = <%= backingStoreName %>;
@@ -66,18 +63,9 @@
 					{ 
 						<%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
 					}
-					if (__newValue == null)
-					{
-						<%= backingStoreName %> = null;
-<% ApplyStoreNull(); %>
-					}
-                    else
-                    {
-					    __newValue = (<%= coImplementationType %>)__newValue.Clone();
-					    <%= backingStoreName %> = __newValue;
-					    <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
-<% ApplyStoreValue(); %>
-                    }
+					__newValue = (<%= coImplementationType %>)__newValue.Clone();
+					<%= backingStoreName %> = __newValue;
+					<%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
 
 					NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
 				}

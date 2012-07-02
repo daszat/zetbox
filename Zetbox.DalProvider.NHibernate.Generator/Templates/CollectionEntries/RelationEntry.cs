@@ -43,8 +43,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 new string[0],
                 GetCeInterface(),
                 GetCeClassName(),
-                null,
-                false);
+                null);
         }
 
         protected override void ApplyIdPropertyTemplate()

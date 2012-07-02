@@ -51,8 +51,6 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
             string interfaceName = DataType.Name;
             this.WriteObjects("public class ", interfaceName, "Proxy { }");
             this.WriteLine();
-            this.WriteObjects("public bool CompoundObject_IsNull { get; set; }");
-            this.WriteLine();
     }
 
         protected override string GetExportGuidBackingStoreReference()

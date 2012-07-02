@@ -8274,7 +8274,7 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
         // implement the user-visible interface
         public Zetbox.App.Test.TestPhoneCompoundObject Value
         {
-            get { return ValueImpl.CompoundObject_IsNull ? null : ValueImpl; }
+            get { return ValueImpl; }
             set { ValueImpl = (Zetbox.App.Test.TestPhoneCompoundObjectEfImpl)value; }
         }
 
@@ -8301,6 +8301,8 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
                 if (!object.Equals(_Value, value))
                 {
                     var __oldValue = _Value;

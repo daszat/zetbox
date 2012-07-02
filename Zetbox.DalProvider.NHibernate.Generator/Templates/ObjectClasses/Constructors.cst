@@ -33,7 +33,6 @@
 <%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="baseClassName" Type="string" %>
-<%@ Parameter Name="unsetValueIsNull" Type="bool" %>
         public <%= className %>()
             : this(null)
         {
@@ -56,10 +55,6 @@
             this.Proxy = proxy;
 <% ApplyCompoundObjectPropertyInitialisers(); %>
 <% ApplyDefaultValueSetFlagInitialisers(); %>
-<% if (unsetValueIsNull) { %>
-            // collection values are never null
-            this.Proxy.Value.CompoundObject_IsNull = false;
-<% } %>
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>

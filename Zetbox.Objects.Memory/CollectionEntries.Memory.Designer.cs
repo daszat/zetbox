@@ -7734,6 +7734,8 @@ namespace Zetbox.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
                 if (!object.Equals(_Value, value))
                 {
 					var __oldValue = _Value;
@@ -7747,7 +7749,7 @@ namespace Zetbox.App.Test
 					}
 					if (__newValue == null)
 					{
-						_Value = null;
+						_Value = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(this, "Value");
 					}
                     else
                     {

@@ -45,7 +45,7 @@ namespace Zetbox.App.Test
             this.Proxy = proxy;
             if (this.Proxy.PhoneNumberMobile == null)
             {
-                this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", null, null) { CompoundObject_IsNull = true };
+                this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", null, null);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace Zetbox.App.Test
 
             if (this.Proxy.PhoneNumberOffice == null)
             {
-                this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", null, null) { CompoundObject_IsNull = false };
+                this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", null, null);
             }
             else
             {
@@ -477,7 +477,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         // implement the user-visible interface
         public Zetbox.App.Test.TestPhoneCompoundObject PhoneNumberMobile
         {
-            get { return PhoneNumberMobileImpl.CompoundObject_IsNull ? null : PhoneNumberMobileImpl; }
+            get { return PhoneNumberMobileImpl; }
             set { PhoneNumberMobileImpl = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)value; }
         }
 
@@ -491,6 +491,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
                 if (!object.Equals(this.Proxy.PhoneNumberMobile, value))
                 {
 					var __oldValue = this.Proxy.PhoneNumberMobile;
@@ -504,13 +506,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 					}
 					if (__newValue == null)
 					{
-						this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", null, null) { CompoundObject_IsNull = true };
+						this.Proxy.PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberMobile", null, null);
 					}
                     else
                     {
 					    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
 					    this.Proxy.PhoneNumberMobile = __newValue;
-                        this.Proxy.PhoneNumberMobile.CompoundObject_IsNull = false;
 					    this.Proxy.PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
                     }
 
@@ -533,7 +534,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         // implement the user-visible interface
         public Zetbox.App.Test.TestPhoneCompoundObject PhoneNumberOffice
         {
-            get { return PhoneNumberOfficeImpl.CompoundObject_IsNull ? null : PhoneNumberOfficeImpl; }
+            get { return PhoneNumberOfficeImpl; }
             set { PhoneNumberOfficeImpl = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)value; }
         }
 
@@ -562,13 +563,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 					}
 					if (__newValue == null)
 					{
-						this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", null, null) { CompoundObject_IsNull = true };
+						this.Proxy.PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "PhoneNumberOffice", null, null);
 					}
                     else
                     {
 					    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
 					    this.Proxy.PhoneNumberOffice = __newValue;
-                        this.Proxy.PhoneNumberOffice.CompoundObject_IsNull = false;
 					    this.Proxy.PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
                     }
 

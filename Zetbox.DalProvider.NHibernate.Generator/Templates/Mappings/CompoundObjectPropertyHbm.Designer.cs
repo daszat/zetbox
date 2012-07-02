@@ -60,15 +60,11 @@ this.WriteObjects("        </set>\r\n");
 #line 43 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 this.WriteObjects("        <!-- CompoundObjectProperty isValue -->\r\n");
 this.WriteObjects("        <component name=\"",  propName , "\" ",  valueClassAttr , ">\r\n");
-this.WriteObjects("            <property name=\"CompoundObject_IsNull\"\r\n");
-this.WriteObjects("                      ",  isNullColumnAttr , "\r\n");
-this.WriteObjects("                      type=\"bool\"\r\n");
-this.WriteObjects("                      optimistic-lock=\"false\" />\r\n");
-#line 49 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 45 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 PropertiesHbm.Call(Host, ctx, prefix + columnName + "_", properties, false);         
-#line 50 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 46 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 this.WriteObjects("        </component>\r\n");
-#line 51 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
+#line 47 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 }                                                                                
 
         }

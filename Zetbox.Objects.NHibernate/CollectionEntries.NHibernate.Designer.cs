@@ -8089,15 +8089,13 @@ namespace Zetbox.App.Test
             this.Proxy = proxy;
             if (this.Proxy.Value == null)
             {
-                this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null) { CompoundObject_IsNull = true };
+                this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null);
             }
             else
             {
                 this.Proxy.Value.AttachToObject(this, "Value");
             }
 
-            // collection values are never null
-            this.Proxy.Value.CompoundObject_IsNull = false;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -8212,7 +8210,7 @@ namespace Zetbox.App.Test
         // implement the user-visible interface
         public Zetbox.App.Test.TestPhoneCompoundObject Value
         {
-            get { return ValueImpl.CompoundObject_IsNull ? null : ValueImpl; }
+            get { return ValueImpl; }
             set { ValueImpl = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)value; }
         }
 
@@ -8226,6 +8224,8 @@ namespace Zetbox.App.Test
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
                 if (!object.Equals(this.Proxy.Value, value))
                 {
 					var __oldValue = this.Proxy.Value;
@@ -8239,13 +8239,12 @@ namespace Zetbox.App.Test
 					}
 					if (__newValue == null)
 					{
-						this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null) { CompoundObject_IsNull = true };
+						this.Proxy.Value = new Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl(this, "Value", null, null);
 					}
                     else
                     {
 					    __newValue = (Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl)__newValue.Clone();
 					    this.Proxy.Value = __newValue;
-                        this.Proxy.Value.CompoundObject_IsNull = false;
 					    this.Proxy.Value.AttachToObject(this, "Value");
                     }
 

@@ -5287,7 +5287,6 @@
 
   <!-- ComplexTypes for all CompoundObjects -->
   <ComplexType Name="AuditEntry" >
-    <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
     <Property Name="Identity" Type="String" Nullable="true" MaxLength="1000"  />
     <Property Name="MessageFormat" Type="String" Nullable="true" MaxLength="1000"  />
     <Property Name="NewValue" Type="String" Nullable="true" MaxLength="1000"  />
@@ -5296,13 +5295,11 @@
     <Property Name="Timestamp" Type="DateTime" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="DateTimeRange" >
-    <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
     <Property Name="From" Type="DateTime" Nullable="true"  />
     <Property Name="Thru" Type="DateTime" Nullable="true"  />
     <Property Name="TotalDays" Type="Int32" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="TestPhoneCompoundObject" >
-    <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
     <Property Name="AreaCode" Type="String" Nullable="true" MaxLength="50"  />
     <Property Name="Number" Type="String" Nullable="true" MaxLength="50"  />
   </ComplexType>

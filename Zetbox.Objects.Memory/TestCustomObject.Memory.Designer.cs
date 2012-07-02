@@ -462,6 +462,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
                 if (!object.Equals(_PhoneNumberMobile, value))
                 {
 					var __oldValue = _PhoneNumberMobile;
@@ -475,7 +477,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 					}
 					if (__newValue == null)
 					{
-						_PhoneNumberMobile = null;
+						_PhoneNumberMobile = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(this, "PhoneNumberMobile");
 					}
                     else
                     {
@@ -537,7 +539,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 					}
 					if (__newValue == null)
 					{
-						_PhoneNumberOffice = null;
+						_PhoneNumberOffice = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(this, "PhoneNumberOffice");
 					}
                     else
                     {

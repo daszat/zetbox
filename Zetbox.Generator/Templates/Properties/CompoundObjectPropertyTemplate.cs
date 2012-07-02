@@ -63,8 +63,7 @@ namespace Zetbox.Generator.Templates.Properties
 
             Call(host, ctx, serializationList,
                 xmlNamespace, overridePropName, backingPropertyName, backingStoreName,
-                coType, coImplementationType,
-                isNullable);
+                coType, coImplementationType);
         }
 
         protected virtual void AddSerialization(
@@ -80,8 +79,5 @@ namespace Zetbox.Generator.Templates.Properties
                     this.xmlNamespace, xmlname, memberType, memberName, backingStoreType, backingStoreName);
             }
         }
-
-        protected virtual void ApplyStoreNull() { }
-        protected virtual void ApplyStoreValue() { }
     }
 }

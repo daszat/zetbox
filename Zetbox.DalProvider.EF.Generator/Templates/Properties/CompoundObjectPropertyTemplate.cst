@@ -33,12 +33,11 @@
 <%@ Parameter Name="backingStoreName" Type="string" %>
 <%@ Parameter Name="coType" Type="string" %>
 <%@ Parameter Name="coImplementationType" Type="string" %>
-<%@ Parameter Name="isNullable" Type="bool" %>
         // BEGIN <%= this.GetType() %>
         // implement the user-visible interface
         public <%= coType %> <%= propName %>
         {
-            get { return <%= backingPropertyName %>.CompoundObject_IsNull ? null : <%= backingPropertyName %>; }
+            get { return <%= backingPropertyName %>; }
             set { <%= backingPropertyName %> = (<%= coImplementationType %>)value; }
         }
 
@@ -57,10 +56,8 @@
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-<% if (!isNullable) { %>
                 if (value == null)
                     throw new ArgumentNullException("value");
-<% } %>
                 if (!object.Equals(<%= backingStoreName %>, value))
                 {
                     var __oldValue = <%= backingStoreName %>;
@@ -72,17 +69,11 @@
                     {
                         <%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
                     }
-                    if(__newValue == null)
-                    {
-                        <%= backingStoreName %> = new <%= coImplementationType %>(true, this, "<%= propName %>");
-                    }
-                    else
-                    {
-                        <%= backingStoreName %> = (<%= coImplementationType %>)__newValue.Clone();
-                        <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
-                    }
+					__newValue = (<%= coImplementationType %>)__newValue.Clone();
+                    <%= backingStoreName %> = __newValue;
+                    <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
 
-                    NotifyPropertyChanged("<%= propName %>", __oldValue, value);
+                    NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
                 }
 				else
 				{

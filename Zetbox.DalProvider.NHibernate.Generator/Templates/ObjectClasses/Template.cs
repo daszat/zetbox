@@ -43,8 +43,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 ObjectClass.Properties.Where(p => p.DefaultValue != null).Select(p => "_is" + p.Name + "Set"),
                 ObjectClass.Name,
                 GetTypeName(),
-                ObjectClass.BaseObjectClass == null ? null : ObjectClass.BaseObjectClass.Name,
-                false);
+                ObjectClass.BaseObjectClass == null ? null : ObjectClass.BaseObjectClass.Name);
         }
 
         protected override void ApplyClassTailTemplate()

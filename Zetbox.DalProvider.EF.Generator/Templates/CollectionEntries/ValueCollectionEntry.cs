@@ -49,7 +49,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
 
             if (this.prop is CompoundObjectProperty)
             {
-                Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, prop.GetElementTypeString() + ImplementationSuffix, "Value", "_Value", false);
+                Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, prop.GetElementTypeString() + ImplementationSuffix, "Value", "_Value");
             }
 
             this.WriteObjects("}");
@@ -64,7 +64,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
             
             if (this.prop is CompoundObjectProperty)
             {
-                Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, prop.GetElementTypeString() + ImplementationSuffix, "Value", "_Value", false);
+                Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, prop.GetElementTypeString() + ImplementationSuffix, "Value", "_Value");
             }
 
             this.WriteObjects("}");

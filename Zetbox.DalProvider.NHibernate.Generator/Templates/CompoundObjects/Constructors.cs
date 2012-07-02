@@ -32,10 +32,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CompoundObjects
             foreach (var property in compoundObjectProperties.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
             {
                 string propertyName = property.Name;
-                //string backingStoreName = propertyName + ImplementationPropertySuffix;
                 string typeName = property.GetPropertyTypeString();
                 string implementationTypeName = typeName + ImplementationSuffix;
-                //bool isNull = property.IsNullable();
 
                 this.WriteObjects("            _", propertyName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", null, null);");
                 this.WriteLine();

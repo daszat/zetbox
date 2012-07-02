@@ -32,29 +32,23 @@ namespace Zetbox.App.Test
         public TestPhoneCompoundObjectEfImpl()
             : base(null) // TODO: pass parent's lazyCtx
         {
-            CompoundObject_IsNull = false;
 
         }
         public TestPhoneCompoundObjectEfImpl(bool isNull, IPersistenceObject parent, string property)
             : base(null) // TODO: pass parent's lazyCtx
         {
             AttachToObject(parent, property);
-            CompoundObject_IsNull = isNull;
         }
         public TestPhoneCompoundObjectEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            CompoundObject_IsNull = false;
 
         }
         public TestPhoneCompoundObjectEfImpl(Func<IFrozenContext> lazyCtx, bool isNull, IPersistenceObject parent, string property)
             : base(lazyCtx)
         {
             AttachToObject(parent, property);
-            CompoundObject_IsNull = isNull;
         }
-        [EdmScalarProperty(IsNullable = false)]
-        public bool CompoundObject_IsNull { get; set; }
 
         /// <summary>
         /// Enter Area Code

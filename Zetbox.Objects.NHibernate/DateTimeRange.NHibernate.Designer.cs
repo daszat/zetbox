@@ -254,7 +254,6 @@ namespace Zetbox.App.Base
 
         #endregion // Zetbox.Generator.Templates.CompoundObjects.DefaultMethods
 public class DateTimeRangeProxy { }
-public bool CompoundObject_IsNull { get; set; }
 
         #region Serializer
 

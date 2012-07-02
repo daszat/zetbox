@@ -389,7 +389,6 @@
     {
 %>
   <ComplexType Name="<%= cls.Name %>" >
-    <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </ComplexType>
 <%    }

@@ -16,31 +16,29 @@ namespace Zetbox.Generator.Templates.Properties
 		protected string implementationTypeName;
 		protected string propertyName;
 		protected string backingStoreName;
-		protected bool isNull;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string implementationTypeName, string propertyName, string backingStoreName, bool isNull)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string implementationTypeName, string propertyName, string backingStoreName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Properties.CompoundObjectPropertyInitialisation", ctx, implementationTypeName, propertyName, backingStoreName, isNull);
+            _host.CallTemplate("Properties.CompoundObjectPropertyInitialisation", ctx, implementationTypeName, propertyName, backingStoreName);
         }
 
-        public CompoundObjectPropertyInitialisation(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string implementationTypeName, string propertyName, string backingStoreName, bool isNull)
+        public CompoundObjectPropertyInitialisation(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string implementationTypeName, string propertyName, string backingStoreName)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.implementationTypeName = implementationTypeName;
 			this.propertyName = propertyName;
 			this.backingStoreName = backingStoreName;
-			this.isNull = isNull;
 
         }
 
         public override void Generate()
         {
-#line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
-this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(",  isNull ? "true": "false" , ", this, \"",  propertyName , "\");\r\n");
+#line 32 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
+this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(this, \"",  propertyName , "\");\r\n");
 
         }
 

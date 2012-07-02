@@ -32,29 +32,23 @@ namespace Zetbox.App.Base
         public DateTimeRangeEfImpl()
             : base(null) // TODO: pass parent's lazyCtx
         {
-            CompoundObject_IsNull = false;
 
         }
         public DateTimeRangeEfImpl(bool isNull, IPersistenceObject parent, string property)
             : base(null) // TODO: pass parent's lazyCtx
         {
             AttachToObject(parent, property);
-            CompoundObject_IsNull = isNull;
         }
         public DateTimeRangeEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            CompoundObject_IsNull = false;
 
         }
         public DateTimeRangeEfImpl(Func<IFrozenContext> lazyCtx, bool isNull, IPersistenceObject parent, string property)
             : base(lazyCtx)
         {
             AttachToObject(parent, property);
-            CompoundObject_IsNull = isNull;
         }
-        [EdmScalarProperty(IsNullable = false)]
-        public bool CompoundObject_IsNull { get; set; }
 
         /// <summary>
         /// 

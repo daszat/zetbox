@@ -209,7 +209,6 @@ namespace Zetbox.App.Test
 
         #endregion // Zetbox.Generator.Templates.CompoundObjects.DefaultMethods
 public class TestPhoneCompoundObjectProxy { }
-public bool CompoundObject_IsNull { get; set; }
 
         #region Serializer
 

@@ -57,8 +57,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("        {");
             this.WriteLine();
-            this.WriteObjects("            CompoundObject_IsNull = false;");
-            this.WriteLine();
             Templates.Properties.CompoundObjectPropertyInitialisation.Call(
                 Host, ctx,
                 this.DataType
@@ -80,8 +78,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("            AttachToObject(parent, property);");
             this.WriteLine();
-            this.WriteObjects("            CompoundObject_IsNull = isNull;");
-            this.WriteLine();
             Templates.Properties.CompoundObjectPropertyInitialisation.Call(
                 Host, ctx,
                 this.DataType
@@ -99,8 +95,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteObjects("            : base(lazyCtx)");
             this.WriteLine();
             this.WriteObjects("        {");
-            this.WriteLine();
-            this.WriteObjects("            CompoundObject_IsNull = false;");
             this.WriteLine();
             Templates.Properties.CompoundObjectPropertyInitialisation.Call(
                 Host, ctx,
@@ -123,8 +117,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("            AttachToObject(parent, property);");
             this.WriteLine();
-            this.WriteObjects("            CompoundObject_IsNull = isNull;");
-            this.WriteLine();
             Templates.Properties.CompoundObjectPropertyInitialisation.Call(
                 Host, ctx,
                 this.DataType
@@ -134,11 +126,6 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                 ImplementationPropertySuffix);
 
             this.WriteObjects("        }");
-            this.WriteLine();
-
-            this.WriteObjects("        [EdmScalarProperty(IsNullable = false)]");
-            this.WriteLine();
-            this.WriteObjects("        public bool CompoundObject_IsNull { get; set; }");
             this.WriteLine();
         }
 

@@ -48,10 +48,6 @@
                   optimistic-lock="false"/>
         <!-- CompoundObjectProperty isValue -->
         <component name="PhoneNumberMobile" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
-            <property name="CompoundObject_IsNull"
-                      column="`PhoneNumberMobile`"
-                      type="bool"
-                      optimistic-lock="false" />
         <!-- ValueTypeProperty isValue -->
         <property name="AreaCode" 
                   column="`PhoneNumberMobile_AreaCode`" 
@@ -63,10 +59,6 @@
         </component>
         <!-- CompoundObjectProperty isValue -->
         <component name="PhoneNumberOffice" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
-            <property name="CompoundObject_IsNull"
-                      column="`PhoneNumberOffice`"
-                      type="bool"
-                      optimistic-lock="false" />
         <!-- ValueTypeProperty isValue -->
         <property name="AreaCode" 
                   column="`PhoneNumberOffice_AreaCode`" 

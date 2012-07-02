@@ -401,10 +401,6 @@
                      column="`fk_TestCustomObject`" />
         <!-- CompoundObjectProperty isValue -->
         <component name="Value" class="Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl,Zetbox.Objects.NHibernateImpl">
-            <property name="CompoundObject_IsNull"
-                      column="`PhoneNumbersOther`"
-                      type="bool"
-                      optimistic-lock="false" />
         <!-- ValueTypeProperty isValue -->
         <property name="AreaCode" 
                   column="`PhoneNumbersOther_AreaCode`" 

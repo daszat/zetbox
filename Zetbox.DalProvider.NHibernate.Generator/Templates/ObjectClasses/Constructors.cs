@@ -33,15 +33,13 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             public readonly string BackingStoreName;
             public readonly string TypeName;
             public readonly string ImplementationTypeName;
-            public readonly bool IsNull;
 
-            public CompoundInitialisationDescriptor(string propertyName, string backingStoreName, string typeName, string implementationTypeName, bool isNull)
+            public CompoundInitialisationDescriptor(string propertyName, string backingStoreName, string typeName, string implementationTypeName)
             {
                 this.PropertyName = propertyName;
                 this.BackingStoreName = backingStoreName;
                 this.TypeName = typeName;
                 this.ImplementationTypeName = implementationTypeName;
-                this.IsNull = isNull;
             }
 
             public static IEnumerable<CompoundInitialisationDescriptor> CreateDescriptors(IEnumerable<CompoundObjectProperty> props, string implementationSuffix)
@@ -52,9 +50,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     string backingStoreName = "this.Proxy." + propertyName;
                     string typeName = cop.GetPropertyTypeString();
                     string implementationTypeName = typeName + implementationSuffix;
-                    bool isNull = cop.IsNullable();
 
-                    return new CompoundInitialisationDescriptor(propertyName, backingStoreName, typeName, implementationTypeName, isNull);
+                    return new CompoundInitialisationDescriptor(propertyName, backingStoreName, typeName, implementationTypeName);
                 });
             }
         }
@@ -63,13 +60,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             foreach (var desc in compoundObjectInitialisers) //.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
             {
-                string isNullString = desc.IsNull ? "true" : "false"; // avoid Culture-dependence
-
                 this.WriteObjects("            if (", desc.BackingStoreName, " == null)");
                 this.WriteLine();
                 this.WriteObjects("            {");
                 this.WriteLine();
-                this.WriteObjects("                ", desc.BackingStoreName, " = new ", desc.ImplementationTypeName, "(this, \"", desc.PropertyName, "\", null, null) { CompoundObject_IsNull = ", isNullString, " };");
+                this.WriteObjects("                ", desc.BackingStoreName, " = new ", desc.ImplementationTypeName, "(this, \"", desc.PropertyName, "\", null, null);");
                 this.WriteLine();
                 this.WriteObjects("            }");
                 this.WriteLine();
