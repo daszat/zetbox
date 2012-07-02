@@ -96,7 +96,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
             // TODO: XML Namespace
             if (list != null)
             {
-                Templates.Serialization.CollectionSerialization.Add(list, ctx, moduleNamespace, name, underlyingCollectionName, orderByValue, true);
+                Templates.Serialization.CollectionSerialization.Add(list, ctx, moduleNamespace, name, underlyingCollectionName, orderByValue);
             }
         }
     }

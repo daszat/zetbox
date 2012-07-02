@@ -726,7 +726,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             } else if (me.PhoneNumberOffice != null && other.PhoneNumberOffice != null) {
                 me.PhoneNumberOffice.ApplyChangesFrom(other.PhoneNumberOffice);
             }
-            SynchronizeCollections(this.PhoneNumbersOtherImpl, otherImpl.PhoneNumbersOtherImpl);
             this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
             this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
         }
@@ -1053,7 +1052,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 this.PhoneNumberOfficeImpl = tmp ?? new Zetbox.App.Test.TestPhoneCompoundObjectEfImpl(true, this, "PhoneNumberOffice");
                 this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
             }
-            binStream.ReadCollectionEntries(this, this.PhoneNumbersOtherImpl);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.DalProvider.Client.Generator.Templates.Serialization
+namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Serialization
 {
     using System;
     using System.Collections.Generic;
@@ -25,17 +25,25 @@ namespace Zetbox.DalProvider.Client.Generator.Templates.Serialization
     public class CollectionSerialization
         : Templates.Serialization.CollectionSerialization
     {
-        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByValue)
+        public CollectionSerialization(
+            Arebis.CodeGeneration.IGenerationHost _host,
+            IZetboxContext ctx,
+            Templates.Serialization.SerializerDirection direction,
+            string streamName,
+            string xmlnamespace,
+            string xmlname,
+            string collectionName,
+            bool orderByValue)
             : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue)
         {
         }
 
         public override bool ShouldSerialize()
         {
-            // Do not serialize collection entries from client to server
-            // they will be sent by the Client ZetboxContext as separate objects
-            // from server to client they will be serialized - some kind of eager loading
-            return direction != Templates.Serialization.SerializerDirection.ToStream;
+            // Do not deserialize colletion entries from client to server
+            // they will be send by the Client ZetboxContext as seperate objects
+            // from server to client the will be serialized - some kind of eager loading
+            return direction != Templates.Serialization.SerializerDirection.FromStream;
         }
     }
 }

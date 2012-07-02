@@ -33,7 +33,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
                 bool hasPersistentOrder = prop is ValueTypeProperty
                     ? ((ValueTypeProperty)prop).HasPersistentOrder
                     : ((CompoundObjectProperty)prop).HasPersistentOrder;
-                Serialization.CollectionSerialization.Add(list, ctx, this.prop.Module.Namespace, this.prop.Name, efName, !hasPersistentOrder, true);
+                Serialization.CollectionSerialization.Add(list, ctx, this.prop.Module.Namespace, this.prop.Name, efName, !hasPersistentOrder);
             }
         }
     }

@@ -33,9 +33,8 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Serialization
             string xmlnamespace,
             string xmlname,
             string collectionName,
-            bool orderByValue,
-            bool inPlace)
-            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue, inPlace)
+            bool orderByValue)
+            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue)
         {
         }
 
@@ -44,7 +43,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Serialization
             // Do not deserialize colletion entries from client to server
             // they will be send by the Client ZetboxContext as seperate objects
             // from server to client the will be serialized - some kind of eager loading
-            return inPlace || direction != Templates.Serialization.SerializerDirection.FromStream;
+            return direction != Templates.Serialization.SerializerDirection.FromStream;
         }
     }
 }

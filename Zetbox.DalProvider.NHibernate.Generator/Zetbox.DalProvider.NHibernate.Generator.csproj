@@ -279,6 +279,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Registrations.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Serialization\CollectionSerialization.cs" />
     <Compile Include="Templates\Serialization\EagerLoadingSerialization.cs" />
     <Compile Include="Templates\Serialization\ObjectReferencePropertySerialization.Designer.cs">
       <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>

@@ -23,9 +23,9 @@ namespace Zetbox.Generator.Templates.Serialization
 
     public partial class CollectionSerialization
     {
-        public static void Add(SerializationMembersList list, IZetboxContext ctx, string xmlnamespace, string xmlname, string collectionName, bool orderByValue, bool inPlace)
+        public static void Add(SerializationMembersList list, IZetboxContext ctx, string xmlnamespace, string xmlname, string collectionName, bool orderByValue)
         {
-            list.Add("Serialization.CollectionSerialization", Serialization.SerializerType.All, xmlnamespace, xmlname, collectionName, orderByValue, inPlace);
+            list.Add("Serialization.CollectionSerialization", Serialization.SerializerType.All, xmlnamespace, xmlname, collectionName, orderByValue);
         }
 
         public virtual bool ShouldSerialize()

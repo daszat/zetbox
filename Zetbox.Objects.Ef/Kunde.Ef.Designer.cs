@@ -889,7 +889,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
             me.Adresse = other.Adresse;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
-            SynchronizeCollections(this.EMailsImpl, otherImpl.EMailsImpl);
             me.ExportGuid = other.ExportGuid;
             me.Kundenname = other.Kundenname;
             me.Land = other.Land;
@@ -1237,7 +1236,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
             if (this._isCreatedOnSet) {
                 this._CreatedOn = binStream.ReadDateTime();
             }
-            binStream.ReadCollectionEntries(this, this.EMailsImpl);
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
